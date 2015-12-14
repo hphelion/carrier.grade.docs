@@ -58,7 +58,8 @@
                         <title>Verify the downloaded signature</title>
                         <p>After downloading the installation packages, you should verify the
                                 signature of the download. You can use the GPG utility, which is
-                                already installed on the KVM Host. Signed by the signature file.</p>
+                                already installed on the lifecycle manager host. Signed by the signature file.</p>
+                        
                         <p>A set of GPG public keys are available on <xref
                                         href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
                                         format="html" scope="external">Helion Download
@@ -122,8 +123,9 @@ uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Ser
 pub   2048R/5CE2D476 2012-12-04 [expires: 2022-12-02]
 uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service)        </codeblock></li>
                                 <li>Use the following command to verify the signature:
-                                                <codeblock>gpg --verify ./hcg2_kvm_esx_ironic_vrs.tar.gz.sig ./hcg2_kvm_esx_ironic_vrs.tar.gz.sig  </codeblock><p>The
-                                                output for the command appears similar to the
+                                                <codeblock>gpg --verify ./hcg2_kvm_esx_ironic_vrs.tar.gz.sig ./hcg2_kvm_esx_ironic_vrs.tar.gz.sig  </codeblock><p>or</p><p>
+                                                <codeblock>gpg --verify ./hcg2_kvm_avs.tar.gz ./hcg2_kvm_avs.tar.gz  </codeblock>
+                                        </p><p>The output for the command appears similar to the
                                                 following. This indicates the signature is verified:
                                                   <b>Good signature from "Hewlett Packard Enterprise
                                                   Company RSA (HPE Codesigning

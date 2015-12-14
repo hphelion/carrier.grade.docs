@@ -148,6 +148,11 @@ export OS_AUTH_URL=&lt;your_os_auth_url&gt;</codeblock></li>
         <li>Execute the following commands to change to the Attis
           user:<codeblock>sudo -i
 su attis</codeblock></li>
+        <li>Execute the following command on all three controllers to copy the Attis public key to
+          the VSD <systemoutput>authorized_keys</systemoutput> file:
+          <codeblock>ssh-copy-id vsd_user@vsd_address</codeblock>The <i>vsd_address</i> can be found
+          in the <systemoutput>/etc/attis/dcn.lst</systemoutput> file:
+          <pre>cat /etc/attis/dcn.lst</pre></li>
         <li> Authenticate using export
           variables:<codeblock>export OS_TENANT_NAME=admin 
 export OS_USERNAME=admin 
