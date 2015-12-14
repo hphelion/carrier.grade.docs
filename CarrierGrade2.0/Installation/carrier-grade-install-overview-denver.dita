@@ -44,21 +44,29 @@
     </section>
 
     <section id="installation-process">
-      <title>Installation process</title>
+      <title>Installation information</title>
+      <p>Before starting the installation, review the following topics:</p>
       <p>Use the following process to install HP Helion OpenStack Carrier Grade.</p>
-      <ol>
-        <li>Review the <xref
-            href="../../CarrierGrade2.0/Installation/carrier-grade-technical-overview-denver.dita">Technical
-            Overview</xref> for information on the HP Helion OpenStack Carrier Grade environment. <ul>
+      <ul>
+        <li><xref
+            href="../../CarrierGrade2.0/Installation/carrier-grade-technical-overview-denver.dita"
+            >Technical Overview</xref> for information on the HP Helion OpenStack Carrier Grade
+          environment. <ul>
             <li>Review the Cloud Topologies to decide appropriate topology for your use case.</li>
             <li>Review the deployment architecture for different hypervisors</li>
             <li>Review the network architecture for networking needs</li>
           </ul></li>
-        <li>Review the <xref href="carrier-grade-technical-specs.dita#topic3485cgts">Technical
+        <li><xref href="carrier-grade-technical-specs.dita#topic3485cgts">Technical
             Specifications</xref> for dimensions and limits of the current versrion of HP Helion
           OpenStack Carrier Grade. </li>
-        <li>Review the <xref href="carrier-grade-support-matrix-denver.dita#topic1773cgsmd">Support
+        <li><xref href="carrier-grade-support-matrix-denver.dita#topic1773cgsmd">Support
             Matrix</xref> to make sure your environment meets the minimum requirements.</li>
+      </ul>
+      </section>
+    <section>
+      <title>Installation process</title>
+      <p>Use the following process to install HP Helion OpenStack Carrier Grade.</p>
+      <ol>
         <li> Perform any required or optional <xref
             href="../../CarrierGrade2.0/Installation/CGH-install-prereqs-denver.dita"
             >installation prerequisites</xref>. </li>
@@ -67,20 +75,15 @@
             href="../../CarrierGrade2.0/Installation/carrier-grade-install-network-prepare.dita"
             >Prepare the network for installation</xref>
         </li>
-        <li>Install the cloud topologies: <p>In this cloud topology, the standard OpenStack services
-            like Keystone, Glance, Cinder, Swift are installed in the non-KVM region first. Then the
-            KVM region is installed. </p><ul id="ul_fxd_x4c_b5">
-              <li>Install <xref href="CGH-2-install-lifecycle-denver.dita">the Lifecycle
-                Manager</xref>.</li>
-              <li>Install the <xref href="CGH-2-install-denver.dita">HPE Helion
-                OpenStack cloud</xref>. These components will be installed into what is called the
-                <i>Non-KVM region</i>.</li>
-            <li>Launch the <xref href="carrier-grade-install-launch-horizon.dita#topic10581cgilh">Helion
-                user interface</xref>.</li>
-              <li>Install the <xref href="carrier-grade-install-kvm-denver.dita">carrier grade cloud</xref>. 
-                The carrier grade cloud is deployed into what is
-              called the <i>KVM region.</i></li>
-          </ul></li>
+        <li>Install <xref href="CGH-2-install-lifecycle-denver.dita">the Lifecycle
+          Manager</xref>.</li>
+        <li>Install the <xref href="CGH-2-install-denver.dita">HPE Helion OpenStack cloud</xref>.
+          These components will be installed into what is called the <i>Non-KVM region</i>.</li>
+        <li>Launch the <xref href="carrier-grade-install-launch-horizon.dita#topic10581cgilh">Helion
+            user interface</xref>.</li>
+        <li>Install the <xref href="carrier-grade-install-kvm-denver.dita">carrier grade
+            cloud</xref>. The carrier grade cloud is deployed into what is called the <i>KVM
+            region.</i></li>
       </ol>
     </section>
 
