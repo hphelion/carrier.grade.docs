@@ -31,7 +31,7 @@
                     commands:<codeblock> virsh define vsd.xml
  virsh autostart vsd
  virsh start vsd</codeblock></li>
-                <li>Start a console session to the VSD VM from KVM Host using the following command: <p>
+            <li>Start a console session to the VSD VM from lifecycle manager host using the following command: <p>
                         <codeblock>virsh console &lt;vsdname&gt;
 Login creds  
 Login: root
@@ -50,7 +50,7 @@ GATEWAY=10.20.5.1</codeblock></p></li>
                     VSD:<codeblock>/opt/vsd/install.sh xmpp.&lt;domain_name> -ts -y</codeblock></li>
             </ol><b>Verify that VSD is installed</b>
             <ol id="ol_mgf_hgl_2t">
-                <li>Start a console session to the VSD VM from KVM Host using the following command:
+                <li>Start a console session to the VSD VM from lifecycle manager host using the following command:
                         <codeblock>virsh console &lt;vsdname&gt; </codeblock><p>Where
                             <codeph>&lt;vsdname></codeph> is the name of your VSD.</p></li>
                 <li>Execute the following command to confirm that you can access VSD.

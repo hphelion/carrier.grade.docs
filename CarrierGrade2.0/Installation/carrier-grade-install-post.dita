@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic1107cgip">
-<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Post-Installation Tasks for the
-    Denver Deployment</title>
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic1107cgipd">
+<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Post-Installation Tasks</title>
 <prolog>
   <metadata>
     <othermeta name="layout" content="default"/>
@@ -14,24 +13,60 @@
   </metadata>
 </prolog>
 <body>
+  <bodydiv id="all">
     <p>After HP Helion OpenStack Carrier Grade is fully installed and deployed, perform the tasks in
       this section. </p>
+      <section>
+        <title>Integrate HP Virtualized Services Directory (VSD)  **REQUIRED**</title>
+        <p>You must perform the following tasks to integrate HP Virtualized Services Directory
+          (VSD).</p>
+        <p>For more information, see <xref
+            href="carrier-grade-install-config-dcn.dita#topic10581cgicd">Integrate your Cloud with
+            HP Virtualized Services Directory (VSD)</xref>.</p>
+      </section>
     <section>
       <title>Verify the VSC VMs</title>
       <p>The installation process creates virtual machines for VSC. VSC VMs are installed and are
         operational. </p>
       <p>For more information, see <xref href="carrier-grade-install-verify-vsc.dita#topic10581cgivvsc"
-        />.</p>
+        >Verifying the VSC VMs</xref>.</p>
     </section>
   <section><title>Verify the VRS-G Node</title>
     <p>The installation creates a VRS-G node as part of the cloud
       deployment. Use the following command to verify that the VRS-G is active.</p>
+        <p>For more information, see <xref
+            href="carrier-grade-install-verify-vrsg.dita#topic10581cgivvrsg">Verifying the VRS-G
+            Node</xref>.</p>
   </section>
     <section id="next-step">
       <title>Verify LDAP</title>
       <p>You should verify that LDAP is functioning correctly.</p>
       <p>For more information, see <xref href="carrier-grade-install-ldap-verify.dita#topic10581cgilv"
           >Verifying the LDAP Deployment</xref></p>
+    </section>
+      <section>
+        <title>Configure SR-IOV or PCI-Passthrough</title>
+        <p>HP Helion OpenStack Carrier Grade also supports direct guest access to NICs using PCI
+          passthrough or SR-IOV. </p>
+        <p>For more information, see <xref href="CGH-2-install-sriov-pci.dita#topic10581c2isi"
+            >Configuring SR-IOV or PCI-Passthrough Networking</xref></p>
+      </section>
+  </bodydiv>
+    <section>
+      <title>Baremetal Region Best Practices</title>
+      <p>For security, when working with the baremetal region of the Sacramento deployment, review
+        the following best practices.</p>
+      <p>For more information, see <xref
+          href="../OperationsGuide/Baremetal/carrier-grade-baremetal-best-practices.dita#topic1107cgbbp"
+          >Baremetal Region Best Practices</xref>.</p>
+    </section>
+    <section>
+      <title>Provision Baremetal Nodes</title>
+      <p>After installing the <codeph>sacramento</codeph> template, follow these instructions to
+        provision baremetal nodes. </p>
+      <p>For more information, see <xref
+          href="../OperationsGuide/Baremetal/carrier-grade-provision-baremetal-nodes-import.dita#topic1107cgpbnr"
+          >Provision Baremetal Nodes for the Sacramento Deployment</xref>.</p>
     </section>
   </body>
 </topic>

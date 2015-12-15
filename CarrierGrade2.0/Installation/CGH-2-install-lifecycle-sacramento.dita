@@ -20,7 +20,7 @@
     <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
       required installation processes.</p>
     <section id="debian"><title>Update the Debain Repository Index File</title><p>HP Helion OpenStack Carrier
-        Grade maintains a local Debian repository on the KVM Host from where Debain packages are
+      Grade maintains a local Debian repository on the lifecycle manager host from where Debain packages are
         installed. Before starting the installation, make sure the Debian files you <xref
           href="carrier-grade-install-download.dita#topic7148cgid/debian">downloaded in the
           Prerequisites</xref> are present in the repository: </p>Copy the following Debian packages
@@ -112,7 +112,7 @@ upstream_ntp_servers:
           that host using Ansible playbooks.</p>
       <ol>
         <li>Execute the following command: <codeblock>ansible-playbook -i hosts setup_hlm_onBM.yml</codeblock>
-          <!-- The command will do the following:<ul><li>Copy both installation files (tar balls) to the KVM Host, decrypt, 
+          <!-- The command will do the following:<ul><li>Copy both installation files (tar balls) to the lifecycle manager host, decrypt, 
             and extract the files.</li>
             <li>Execute the <codeph>updatepackages</codeph> command.</li>
             <li>Execute the <codeph>prepareenv</codeph> command.</li><li>Execute the <codeph>Init cobbler</codeph> command.</li><li>Execute the <codeph>Importiso</codeph> command.<p>You will see a message similar to the following image when the playbook is run successful:</p></li></ul> GET WHAT THESE SCRIPTS DO AND UNCOMMENT-->
