@@ -15,7 +15,23 @@
 </prolog>
 <body>
     <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/intro"/>
-    <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/controller-0"/>
+    <section id="controller-0">
+      <title>Bring Up Controller-0 in the KVM Region</title>
+      <ol id="ol_mf2_knq_35">
+        <li>Make sure the server you will use for controller-0 is powered on and the other servers
+          to be used in KVM region are shutdown.</li>
+        <li>Launch the iLO interface for the server.</li>
+        <li>Execute the following command to use the <codeph>bootimage_avs_only.iso</codeph> to boot
+          the controller node.<codeblock>mount bootimage_avs_only.iso</codeblock></li>
+        <li>Follow the install wizard. Select the Graphics mode for the controller only. Do not
+          select <codeph>Controller+Compute</codeph>.<p>After the installation is complete, you will
+            need to reboot the server. After the reboot:</p></li>
+      </ol>
+      <ol conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/controller-0-2"
+        id="ol_xf4_rnq_35">
+        <li/>
+      </ol>
+    </section>
     <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/install-cloud"/>
   <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/unlock"/>
     <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/kvm-esx-unlock"/>

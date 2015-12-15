@@ -27,16 +27,19 @@
     </section>
     <section id="controller-0">
       <title>Bring Up Controller-0 in the KVM Region</title>
-      <ol>
+      <ol id="ol_mf2_knq_35">
         <li>Make sure the server you will use for controller-0 is powered on and the other servers
           to be used in KVM region are shutdown.</li>
         <li>Launch the iLO interface for the server.</li>
         <li>Execute the following command to use the <codeph>bootimage_full.iso</codeph> to boot the
           controller node.<codeblock>mount bootimage_full.iso</codeblock></li>
         <li>Follow the install wizard. Select the Graphics mode for the controller only. Do not
-          select <codeph>Controller+Compute</codeph>.</li>
-        <li>After the reboot, log in as user name <codeph>wrsroot</codeph> and password
-            <codeph>wrsroot</codeph>. Make sure you change the password.</li>
+          select <codeph>Controller+Compute</codeph>.<p>After the installation is complete, you will
+            need to reboot the server. After the reboot:</p></li>
+      </ol>
+      <ol id="controller-0-2">
+        <li>Log in as user name <codeph>wrsroot</codeph> and password <codeph>wrsroot</codeph>. Make
+          sure you change the password.</li>
         <li>Temporarily assign an IP address to the <codeph>PXE NIC - eth0</codeph>. Use the IP you
           have reserved for the KVM PXE.
           <codeblock>ip addr add &lt;CIDR> dev eth0
