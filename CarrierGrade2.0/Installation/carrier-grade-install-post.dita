@@ -13,10 +13,10 @@
   </metadata>
 </prolog>
 <body>
-  <bodydiv id="all">
+  
     <p>After HP Helion OpenStack Carrier Grade is fully installed and deployed, perform the tasks in
       this section. </p>
-      <section>
+      <section id="vsd">
         <title>Integrate HP Virtualized Services Directory (VSD)  **REQUIRED**</title>
         <p>You must perform the following tasks to integrate HP Virtualized Services Directory
           (VSD).</p>
@@ -24,7 +24,8 @@
             href="carrier-grade-install-config-dcn.dita#topic10581cgicd">Integrate your Cloud with
             HP Virtualized Services Directory (VSD)</xref>.</p>
       </section>
-    <section>
+  <bodydiv id="all">  
+  <section>
       <title>Verify the VSC VMs</title>
       <p>The installation process creates virtual machines for VSC. VSC VMs are installed and are
         operational. </p>
@@ -44,6 +45,7 @@
       <p>For more information, see <xref href="carrier-grade-install-ldap-verify.dita#topic10581cgilv"
           >Verifying the LDAP Deployment</xref></p>
     </section>
+  </bodydiv>
       <section>
         <title>Configure SR-IOV or PCI-Passthrough</title>
         <p>HP Helion OpenStack Carrier Grade also supports direct guest access to NICs using PCI
@@ -51,7 +53,7 @@
         <p>For more information, see <xref href="CGH-2-install-sriov-pci.dita#topic10581c2isi"
             >Configuring SR-IOV or PCI-Passthrough Networking</xref></p>
       </section>
-  </bodydiv>
+  
     <section>
       <title>Baremetal Region Best Practices</title>
       <p>For security, when working with the baremetal region of the Sacramento deployment, review
@@ -68,5 +70,6 @@
           href="../OperationsGuide/Baremetal/carrier-grade-provision-baremetal-nodes-import.dita#topic1107cgpbnr"
           >Provision Baremetal Nodes for the Sacramento Deployment</xref>.</p>
     </section>
+  
   </body>
 </topic>
