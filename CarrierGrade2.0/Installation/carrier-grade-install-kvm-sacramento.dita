@@ -26,7 +26,7 @@
         </ul></p>
     </section>
     <section id="controller-0">
-      <title>Bring Up Controller-0 in the KVM Region</title>
+      <title>Step 1: Bring Up Controller-0 in the KVM Region</title>
       <ol id="ol_mf2_knq_35">
         <li>Make sure the server you will use for controller-0 is powered on and the other servers
           to be used in KVM region are shutdown.</li>
@@ -62,7 +62,7 @@ ifconfig eth0 up</codeblock></li>
       </ol>
     </section>
     <section id="install-cloud">
-      <title>Configure the KVM region cloud</title>
+      <title>Step 2: Configure the KVM region cloud</title>
       <ol>
         <li>In the iLO web interface, launch a console session to the <codeph>controller-0</codeph>
           node.</li>
@@ -102,16 +102,16 @@ password:  &lt;random></codeblock><p>The Horizon
       </ol>
     </section>
     <section id="unlock">
-      <title>Configure and unlock the compute controllers</title>
+      <title>Step 3: Configure and unlock the compute controllers</title>
       <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
         the following commands from controller-0 to unlock each compute node in the inventory.</p>
       <ul id="ul_f1c_dk1_h5">
-        <li><xref href="#topic1107cgiks/kvm-esx-unlock" format="dita"/></li>
-        <li><xref href="#topic1107cgiks/nic-unlock" format="dita"/></li>
+        <li><xref href="#topic1107cgiks/kvm-esx-unlock" format="dita">For a Non-Bonded Environment</xref></li>
+        <li><xref href="#topic1107cgiks/nic-unlock" format="dita">For a Bonded Environment</xref></li>
       </ul>
-    </section>
-    <section id="kvm-esx-unlock">
-      <title>For a Non-Bonded Environment</title>
+    
+    <p id="kvm-esx-unlock">
+      <b>For a Non-Bonded Environment</b></p>
       <ol>
         <li>After the controller-1 and the compute nodes come up successfully after PXE boot,
           execute the following commands from controller-0 to unlock the compute nodes.<ol
@@ -138,9 +138,9 @@ system host-addr-add compute-3 vrs 10.70.5.83 24
 system host-update compute-3 vsc_controllers=10.70.5.31,10.70.5.32
 system host-unlock compute-3        </codeblock></li>
       </ol>
-    </section>
-    <section id="nic-unlock">
-      <title>For bonded NIC environments</title>
+    
+    <p id="nic-unlock">
+      <b>For bonded NIC environments</b></p>
       <p>If you are using a bonded NIC environment, after configuring and unlocking the compute
         nodes, perform these steps:</p>
       <ol id="ol_nr5_ddw_mt">
@@ -175,7 +175,7 @@ system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-poo
       </ol>
     </section>
     <section id="ssl">
-      <title>Install Required SSL Certificate</title>
+      <title>Step 5: Install Required SSL Certificate</title>
       <p>If you want to Opentsack CLIs in the KVM region from a remote client, use the following
         steps to install a required SSL certificate.</p>
       <p>
@@ -194,9 +194,9 @@ system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-poo
               <codeph>controller-1</codeph>, the standby controller.</li>
         </ol>
       </p>
-    </section>
-    <section id="script">
-      <title>SSL Certificate Script</title>
+    
+    <p id="script">
+      <b>SSL Certificate Script</b></p>
       <p>Use the following to copy and paste into a script file in your environment. Save the file
         as <codeph>wrvippem.sh</codeph> and copy to the KVM region
         <codeph>controller-0</codeph>.<codeblock>#### CUSTOMER SUPPLIED VARIABLES ####
@@ -340,6 +340,20 @@ rm -rf $ssl_rootdir
 # apply the new PEM file
 service haproxy restart
 </codeblock></p>
+    </section>
+    <section>
+      <title>Deploy the Horizon Patch</title>
+      <p>Steps to apply WR-HZN-1011 patch: </p>
+      <p>Copy the complete directory WR-HZN-1011 to /var/hlm/clouds/&lt;cloudname>/patches directory
+        on HLM </p>
+      <p>Execute following command to apply patch hlm patch -c &lt;cloud-name> -n WR-HZN-1011 -t
+        &lt;tier> ex: hlm patch -c sac36 -n WR-HZN-1011 -t BASE-CCP-T2 </p>
+      <p>Execute following command to rollback patch hlm patch -c &lt;cloudname> -n WR-HZN-1011 -t
+        &lt;tier> -r ex: hlm patch -c sac36 -n WR-HZN-1011 -t BASE-CCP-T2 -r </p>
+      <p>The &lt;tier> means the tier on which the various controllers are running. </p>
+      <p>The tier information can be fetched from
+        /var/hlm/clouds/&lt;cloudname>/desired_state/sac36/001/base/stage/ansible/hosts file as
+        well. </p>
     </section>
     <section id="next-step">
       <title>Next Steps</title>
