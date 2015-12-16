@@ -23,6 +23,7 @@
           <li><xref href="#topic1107cgiks/install-cloud" format="dita"/></li>
           <li><xref href="#topic1107cgiks/unlock" format="dita"/></li>
           <li><xref href="#topic1107cgiks/ssl" format="dita"/></li>
+          <li><xref href="#topic1107cgiks/horizon-patch" format="dita"/></li>
         </ul></p>
     </section>
     <section id="controller-0">
@@ -175,7 +176,7 @@ system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-poo
       </ol>
     </section>
     <section id="ssl">
-      <title>Step 5: Install Required SSL Certificate</title>
+      <title>Step 4: Install Required SSL Certificate</title>
       <p>If you want to Opentsack CLIs in the KVM region from a remote client, use the following
         steps to install a required SSL certificate.</p>
       <p>
@@ -341,10 +342,10 @@ rm -rf $ssl_rootdir
 service haproxy restart
 </codeblock></p>
     </section>
-    <section id="horizon-patch"><title>Deploy the Horizon Patch</title><p>Due to an API error, you
-        cannot create a PCI-Passthrough or SR-IOV interface using the Horizon UI. To correct this
-        issue, deploy the following patch. </p>You should have downloaded the following patch files
-      during the prerequisites:<ul id="ul_awq_db1_f5">
+    <section id="horizon-patch"><title>Step 5: Deploy the Horizon Patch</title><p>Due to an API
+        error, you cannot create a PCI-Passthrough or SR-IOV interface using the Horizon UI. To
+        correct this issue, deploy the following patch. </p>You should have downloaded the following
+      patch files during the prerequisites:<ul id="ul_awq_db1_f5">
         <li>WR-HZN-1011</li>
       </ul><p>The README with the patch download contains information on files changed by these
         patches.</p><p>Execute the following commands:<ol id="ol_imr_fgt_25">
