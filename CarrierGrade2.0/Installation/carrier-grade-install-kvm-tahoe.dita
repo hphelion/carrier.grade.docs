@@ -16,64 +16,39 @@
     <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/intro"/>
     <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/controller-0"/>
     <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/install-cloud"/>
-    <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/unlock"/>
-    <section id="kvm-esx-unlock">
-      <title>For a Non-Bonded Environment</title>
-      <ol id="ol_y3f_w2j_h5">
+    <section id="unlock">
+      <title>Step 3: Configure and unlock the compute controllers</title>
+      <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
+        the following commands from controller-0 to unlock each compute node in the inventory.</p>
+      <ol id="ol_ub2_dgz_35">
         <li>After the controller-1 and the compute nodes come up successfully after PXE boot,
           execute the following commands from controller-0 to unlock the compute nodes.<ol
             id="ol_p42_d35_lt">
             <li>Create the Infra interface:
               <codeblock>system host-if-add –V &lt;bls/infra VLAN ID&gt; –nt &lt;network_type> &lt;host-name or ID> &lt;interface_name> &lt;interface_type> &lt;port or interfaces></codeblock></li>
+            <li>Add an IP address to the Infra interface:
+              <codeblock>system host-addr-add &lt;host-name or ID> &lt;interface_name> &lt;ipv4/ipv6_address> &lt;prefix-length></codeblock></li>
             <li>Configure the VRS interface:
                 <codeblock>system host-if-modify &lt;host-name or ID> -n &lt;interface_name> -nt &lt;network_type> --ipv4-mode=static eth-x </codeblock><p>Where
                   <codeph>eth-x</codeph> is the interface on which untagged TUL is
               presented.</p></li>
-            <li>Configure<codeblock>system host-if-modify 3 &lt;host-name or ID> -nt data-vrs --ipv4-mode=pool --ipv4-pool=vrspool</codeblock></li>
+            <li>Add an IP address to the VRS interface:
+              <codeblock>system host-addr-add &lt;host-name or ID> vrs &lt;ipv4/ipv6_address> &lt;prefix_length></codeblock></li>
             <li>Update the host:
                 <codeblock> system host-update &lt;host-name or ID> vsc_controllers=&lt;ipv4/ipv6_address>,&lt;ipv4/ipv6_address> </codeblock><p>Enter
                 the IP address of the VSC controllers</p></li>
             <li>Unlock the host: <codeblock>system host-unlock &lt;host-name or ID></codeblock></li>
           </ol><p><b>Example
-          commands:</b></p><codeblock>system host-if-add -V 73 -nt infra 3 infra vlan pxeboot0
-system host-if-modify 3 -n vrs -nt data-vrs --ipv4-mode=static eth2
-system host-if-modify 3 vrs -nt data-vrs --ipv4-mode=pool --ipv4-pool=vrspool
-system host-update 3 vsc_controllers=10.20.6.31,10.20.6.32
-system host-unlock 3</codeblock></li>
+          commands:</b></p><codeblock>system host-if-add –V 722 –nt infra compute-3 infra vlan pxeboot0
+system host-addr-add compute-3 infra 10.70.22.81 24
+system host-if-modify compute-3 -n vrs -nt data-vrs --ipv4-mode=static eth4
+system host-addr-add compute-3 vrs 10.70.5.83 24
+system host-update compute-3 vsc_controllers=10.70.5.31,10.70.5.32
+system host-unlock compute-3        </codeblock></li>
       </ol>
     </section>
-    <section id="kvm-unlock">
-      <title>For a Non-Bonded Environment</title>
-      <ol>
-        <li>Create the Infra interface. See <xref
-            href="../OperationsGuide/HostManagement/CGH-2-User-host-management-detail-interfaces.dita#topic6151c2uhmdi"
-          /> or <i>Interfaces</i> in the Administrtor Guide.</li>
-        <li>Create a Provider Network. See <xref
-            href="../OperationsGuide/Network/CGH-2-User-network-create-provider.dita#topic3878"
-            >Creating and Deleting Provider Networks</xref> or <i>Setting Up a VXLAN Provider
-            Network</i> in the Administrator Guide.</li>
-        <li>Create VLAN Ranges on the provider network using the <b>Create Segmentation Range</b>
-          option. See <xref
-            href="../OperationsGuide/Network/CGH-2-User-.network-create-segment.dita#topic2171"
-            >Creating a Segmentation Range</xref> or <i>Setting Up a VXLAN Provider Network</i> in
-          the Administrator Guide.</li>
-        <li><xref href="carrier-grade-install-kvm-network-interface.dita#topic1107cgikni">Create
-            data interface.</xref> See <i>Configuring Endpoint IP Addresses</i> in the Administrator
-          Guide.</li>
-        <li>Optionally, change the default CPU allocations and/or the default memory allocations
-          (huge pages) on each processor, such as the NUMA (Non-Uniform Memory Access) nodes. See
-            <i>Processor</i> in the Administrator Guide.</li>
-        <li><xref
-            href="../OperationsGuide/HostManagement/CGH-2-User-host-management-host-lock.dita#topic3241c2uhmhl"
-            >Unlock the compute nodes</xref>. Compute nodes will reboot. Keep polling the status on
-          the inventory page to show <b>Available</b> and <b>Online</b>.</li>
-        <li>If you are using a bonded interface, see <xref href="#topic1107cgikt/nic-unlock"
-            format="dita">For bonded NIC environments</xref>.</li>
-      </ol>
-    </section>
-    <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/nic-unlock"
-      id="nic-unlock"/>
     <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/ssl"/>
+  <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/horizon-patch"/>
     <section id="next-step">
       <title>Next Steps</title>
       <p><xref href="carrier-grade-install-post.dita#topic1107cgipd">Post-Installation
