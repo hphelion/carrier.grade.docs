@@ -178,7 +178,7 @@ system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-poo
     <section id="ssl">
       <title>Step 4: Install Required SSL Certificate</title>
       <p>If you want to Opentsack CLIs in the KVM region from a remote client, use the following
-        steps to install a required SSL certificate.</p>
+        steps to install a required SSL certificate.<!--HCG-998--></p>
       <p>
         <ol id="ol_k5p_bys_g5">
           <li>Log into the KVM region <codeph>controller-0</codeph>, the active controller as
@@ -202,8 +202,8 @@ system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-poo
     </section>
     <section id="horizon-patch"><title>Step 5: Deploy the Horizon Patch</title><p>Due to an API
         error, you cannot create a PCI-Passthrough or SR-IOV interface using the Horizon UI. To
-        correct this issue, deploy the following patch. </p>You should have downloaded the following
-      patch files during the prerequisites:<ul id="ul_awq_db1_f5">
+        correct this issue, deploy the following patch. <!--HCG-1011/1012--></p>You should have
+      downloaded the following patch files during the prerequisites:<ul id="ul_awq_db1_f5">
         <li>WR-HZN-1011</li>
       </ul><p>The README with the patch download contains information on files changed by these
         patches.</p><p>Execute the following commands:<ol id="ol_imr_fgt_25">
@@ -215,7 +215,7 @@ system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-poo
               &lt;tier> is the tier on which the various controllers are running. </p>For example:
             <codeblock>hlm patch -c sac36 -n WR-HZN-1011 -t BASE-CCP-T2</codeblock>The tier
             information can be found in the
-              <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/sac36/001/base/stage/ansible/hosts</codeph>
+              <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
             file. </li>
         </ol></p></section>
     <section id="next-step">
