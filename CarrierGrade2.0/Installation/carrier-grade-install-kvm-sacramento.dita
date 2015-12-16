@@ -20,9 +20,9 @@
       <p>The process for installing the KVM region involves the following tasks:<ul
           id="ul_fj4_mct_g5">
           <li><xref href="#topic1107cgiks/controller-0" format="dita"/></li>
+          <li><xref href="#topic1107cgiks/kvm-custom-patch" format="dita"/></li>
           <li><xref href="#topic1107cgiks/install-cloud" format="dita"/></li>
           <li><xref href="#topic1107cgiks/unlock" format="dita"/></li>
-          <li><xref href="#topic1107cgiks/ssl" format="dita"/></li>
           <li><xref href="#topic1107cgiks/horizon-patch" format="dita"/></li>
         </ul></p>
     </section>
@@ -60,20 +60,31 @@ ifconfig eth0 up</codeblock></li>
               directory</li>
           </ul><p>These files are loaded to the lifecycle manager during the installation
             process.</p></li>
-        <li>Copy the following patch files to the <codeph>/home/wrsroot/</codeph> directory of the
-          controller-0:
-            <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
-            id="ul_ald_spz_35">
-            <li><codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph><p>You should have downloaded this
-                patch file in the Prerequisites. </p></li>
-          </ul></li>
-        <li>Apply the required patches on controller-0. Execute the following commands:
-          <pre>sudo wrs-patch upload /home/wrsroot/TS_HP_15_Custom_PATCH_0001.patch
-sudo wrs-patch apply TS_HP_15_Custom_PATCH_0001.patch</pre></li>
       </ol>
     </section>
+    <section id="kvm-custom-patch">
+      <title>Step 2: Deploy the KVM Region Custom Patch</title>
+      <p>This patch addresses a number of issues in the KVM region.</p>
+      <p>
+        <ol>
+          <li>On KVM region <codeph>controller-0</codeph>, create a directory for the
+            patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
+          <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
+              <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
+              id="ul_ald_spz_35">
+              <li><codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph><p>You should have downloaded
+                  this patch file in the Prerequisites. </p></li>
+            </ul></li>
+          <li>Execute the following commands:
+            <codeblock>sudo sw-patch upload-dir /tmp/patches
+sudo sw-patch apply --all
+sudo sw-patch install-local
+sudo reboot</codeblock></li>
+        </ol>
+      </p>
+    </section>
     <section id="install-cloud">
-      <title>Step 2: Configure the KVM region cloud</title>
+      <title>Step 3: Configure the KVM region cloud</title>
       <ol>
         <li>In the iLO web interface, launch a console session to the <codeph>controller-0</codeph>
           node.</li>
@@ -113,7 +124,7 @@ password:  &lt;random></codeblock><p>The Horizon
       </ol>
     </section>
     <section id="unlock">
-      <title>Step 3: Configure and unlock the compute controllers</title>
+      <title>Step 4: Configure and unlock the compute controllers</title>
       <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
         the following commands from controller-0 to unlock each compute node in the inventory.</p>
       <ul id="ul_f1c_dk1_h5">
@@ -184,31 +195,6 @@ system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-poo
         <li>Execute the following command to assign IP addresses to
           compute-0:<codeblock>system host-update compute-0 vsc_controllers=10.30.6.31,10.30.6.32</codeblock></li>
       </ol>
-    </section>
-    <section id="ssl">
-      <title>Step 4: Install Required SSL Certificate</title>
-      <p>If you want to Opentsack CLIs in the KVM region from a remote client, use the following
-        steps to install a required SSL certificate.<!--HCG-998--></p>
-      <p>
-        <ol id="ol_k5p_bys_g5">
-          <li>Log into the KVM region <codeph>controller-0</codeph>, the active controller as
-            root:<codeblock>sudo -i</codeblock></li>
-          <li>Change to the following directory:<codeblock>/etc/sl/private/</codeblock></li>
-          <li>Make a backup copy of the <codeph>server-cert.pem</codeph> file.</li>
-          <li>Copy the contents of the <codeph>/home/wrsroot/cakey.pem</codeph> file into the
-              <codeph>server-cert.pem</codeph> file. </li>
-          <li>Execute the following command to restart the haproxy service:
-            <codeblock>service haproxy restart</codeblock></li>
-          <li>Log into the KVM region <codeph>controller-1</codeph>, the active controller as
-            root:<codeblock>sudo -i</codeblock></li>
-          <li>Again, copy contents of <codeph>/home/wrsroot/cakey.pem</codeph> file on
-              <codeph>controller-1</codeph> into the
-              <codeph>/etc/sl/private/server-cert.pem</codeph> file on
-            <codeph>controller-1</codeph>.</li>
-          <li>Execute the following command to restart the haproxy service on
-              <codeph>controller-1</codeph>:  <codeblock>service haproxy restart</codeblock></li>
-        </ol>
-      </p>
     </section>
     <section id="horizon-patch"><title>Step 5: Deploy the Horizon Patch</title><p>Due to an API
         error, you cannot create a PCI-Passthrough or SR-IOV interface using the Horizon UI. To

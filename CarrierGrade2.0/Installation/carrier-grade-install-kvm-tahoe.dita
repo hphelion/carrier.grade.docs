@@ -13,9 +13,29 @@
   </metadata>
 </prolog>
 <body>
-    <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/intro"/>
-    <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/controller-0"/>
-    <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/install-cloud"/>
+    <section id="intro">
+      <p>After the lifecycle manager is up and running and HP Helion OpenStack is installed, use the
+        following steps to deploy the KVM region.</p>
+      <p>The process for installing the KVM region involves the following tasks:<ul
+          id="ul_fj4_mct_g5">
+          <li><xref href="#topic1107cgikt/controller0" format="dita">Step 1: Bring Up Controller-0
+              in the KVM Region</xref></li>
+          <li><xref href="#topic1107cgikt/custom-patch" format="dita">Step 2: Deploy the KVM Region
+              Custom Patch</xref></li>
+          <li><xref href="#topic1107cgikt/cloud" format="dita">Step 3: Configure the KVM region
+              cloud</xref></li>
+          <li><xref href="#topic1107cgikt/unlock" format="dita">Step 4: Configure and unlock the
+              compute controllers</xref></li>
+          <li><xref href="#topic1107cgikt/horizon-patch" format="dita">Step 6: Deploy the Horizon
+              Patch</xref></li>
+        </ul></p>
+    </section>
+    <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/controller-0"
+      id="controller0"/>
+      <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/kvm-custom-patch"
+      id="custom-patch"/>
+    <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/install-cloud"
+      id="cloud"/>
     <section id="unlock">
       <title>Step 3: Configure and unlock the compute controllers</title>
       <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
@@ -47,8 +67,8 @@ system host-update compute-3 vsc_controllers=10.70.5.31,10.70.5.32
 system host-unlock compute-3        </codeblock></li>
       </ol>
     </section>
-    <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/ssl"/>
-  <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/horizon-patch"/>
+      <section conref="carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/horizon-patch"
+      id="horizon-patch"/>
     <section id="next-step">
       <title>Next Steps</title>
       <p><xref href="carrier-grade-install-post.dita#topic1107cgipd">Post-Installation
