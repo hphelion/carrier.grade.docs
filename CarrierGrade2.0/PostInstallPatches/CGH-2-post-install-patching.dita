@@ -22,11 +22,18 @@
         >Helion Distribution Network (HDN)</xref>. You must <xref
         href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
         >obtain a user account on HDN</xref> in order to download these files.</p>
-    <p/>
-    <section>
-      <title>Deploy the SSL patch</title>
+    <p>
+      <ul id="ul_wr4_tpg_j5">
+        <li><xref href="#topic10581c2t/ssl" format="dita">SSL patch:
+            kcp-ssl-implementation.patch</xref></li>
+        <li><xref href="#topic10581c2t/kvm-custom" format="dita">KVM Region Custom Patch,
+              <codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph></xref></li>
+      </ul>
+    </p>
+    <section id="ssl">
+      <title>SSL patch</title>
       <p>If you did not deploy the <codeph>kcp-ssl-implementation.patch</codeph> during
-        installation, peform the following steps:  <!--HCG-998--></p>
+        installation, perform the following steps: <!--HCG-998--></p>
       <ol>
         <li>Log onto the KVM region <codeph>controller-0</codeph>, the active controller.</li>
         <li>Change to the following directory: <codeblock>cd /etc/ssl/private</codeblock></li>
@@ -42,8 +49,11 @@
           <codeblock>service haproxy restart</codeblock></li>
       </ol>
     </section>
-    <section>
+    <section id="kvm-custom">
       <title>KVM Region Custom Patch </title>
+      <p>If you did not deploy the KVM Region Custom Patch,
+          <codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph> during installation, perform the
+        following steps:</p>
       <p>This patch addresses a number of issues in the KVM region.</p>
       <p>The following steps assume that <codeph>controller-0</codeph> is active and
           <codeph>controller-1</codeph> is standby.</p>
