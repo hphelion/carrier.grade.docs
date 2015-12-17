@@ -45,6 +45,8 @@
     <section>
       <title>KVM Region Custom Patch </title>
       <p>This patch addresses a number of issues in the KVM region.</p>
+      <p>The following steps assume that <codeph>controller-0</codeph> is active and
+          <codeph>controller-1</codeph> is standby.</p>
       <ol>
         <li>On KVM region standby controller, create a directory for the
           patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
@@ -54,14 +56,14 @@
             <li><codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph><p>You should have downloaded this
                 patch file in the Prerequisites. </p></li>
           </ul></li>
-        <li>Execute the following commands:
-          <codeblock>source /etc/nova/openrc
-sudo sw-patch upload TS_HP_15_Custom_PATCH_0001.patch 
+        <li>Execute the following commands for the standby controller:
+          <codeblock>sudo sw-patch upload TS_HP_15_Custom_PATCH_0001.patch 
 sudo sw-patch apply TS_HP_15_Custom_PATCH_0001.patch 
+source /etc/nova/openrc
 system host-patch-reboot controller-1</codeblock></li>
         <li>Switch to the standby
           controller:<codeblock>system host-swact controller-0</codeblock></li>
-        <li>On KVM region controller-0, create a directory for the
+        <li>On KVM region active controller, create a directory for the
           patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
         <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
             <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
@@ -70,10 +72,10 @@ system host-patch-reboot controller-1</codeblock></li>
                 patch file in the Prerequisites. </p></li>
           </ul></li>
         <li>Execute the following commands:
-          <codeblock>source /etc/nova/openrc
-sudo sw-patch upload TS_HP_15_Custom_PATCH_0001.patch 
+          <codeblock>sudo sw-patch upload TS_HP_15_Custom_PATCH_0001.patch 
 sudo sw-patch apply TS_HP_15_Custom_PATCH_0001.patch 
-system host-patch-reboot controller-1</codeblock></li>
+source /etc/nova/openrc
+system host-patch-reboot controller-0</codeblock></li>
         <li>Switch to controller-0:<codeblock>system host-swact controller-1</codeblock></li>
       </ol>
     </section>
