@@ -39,7 +39,7 @@ Password: cghelion</codeblock>
         <li>Change to the home directory.<codeblock>cd ~</codeblock></li>
       </ol>
     </section>
-    <section id="ssl-patch"><title>Deploy the SSL patch</title><p/>You should have downloaded the
+    <section id="ssl-patch"><title>Deploy the SSL patch</title>You should have downloaded the
       following patch files during the prerequisites: <!--HCG-998--><ul id="ul_i42_qhz_35">
         <li>kcp-ssl-implementation.patch </li>
       </ul><p>The README with the patch download contains information on files changed by these
@@ -587,25 +587,6 @@ Saved the current configuration to mainboard device successfully.
 [FTC-R146340-5930A]quit
 &lt;FTC-R146340-5930A&gt;</codeblock>
     </section>
-    <section id="providernet-patch"><title>Deploy the Horizon Provider Network Patch</title><p>Because of
-        a configuration issue with the Ansible roles, the Provider Networks tab in the Horizon
-        interface will be hidden unless you deploy the following patch. <!--HCG-991--></p>You should
-      have downloaded the following patch files during the prerequisites:<ul id="ul_awq_db1_f5">
-        <li>providernet-tab-missing-in-horizon.patch</li>
-      </ul><p>The README with the patch download contains information on files changed by these
-        patches.</p><p>To prevent this condition, execute the following commands:<ol
-          id="ol_imr_fgt_25">
-          <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
-          <li>Change to the <codeph>kenobi-node-configuration</codeph>
-            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
-          <li>Execute the following command to install the second patch
-            <codeblock>patch -p1 &lt; providernet-tab-missing-in-horizon.patch</codeblock></li>
-          <li>Change to the  <codeph>~/cg-hlm/hlm-build</codeph> directory
-            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
-          <li>Execute the following command to integrate the changes into the
-            environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the <codeph>hlm
-              generate</codeph> command is executed, the changes will be included. </li>
-        </ol></p></section>
     <section id="conref-config-proc">
       <title>Deploy the HPE Helion OpenStack cloud</title>
       <ol id="ol_bst_mmf_zt">
