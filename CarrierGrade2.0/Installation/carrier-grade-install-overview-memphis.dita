@@ -66,28 +66,35 @@
             href="../../CarrierGrade2.0/Installation/carrier-grade-install-network-prepare.dita"
             >Prepare the network for installation</xref>
         </li>
-        <li>Install the cloud topologies: <p>In this cloud topology, the standard OpenStack services
-          like Keystone, Glance, Cinder, Swift are installed in the non-KVM region first. Then the
-          KVM region is installed. </p><ul id="ul_fxd_x4c_b5">
+        <li>Install the cloud topology: <p>In this cloud topology, the standard OpenStack services
+            like Keystone, Glance, Cinder, Swift are installed in the non-KVM region first. Then the
+            KVM region is installed. </p><ul id="ul_fxd_x4c_b5">
             <li>Install <xref href="CGH-2-install-lifecycle-memphis.dita">the Lifecycle
-              Manager</xref>.</li>
+                Manager</xref>.</li>
             <li><xref href="CGH-2-install-dcn-memphis.dita#topic10581c2vsdm">Configure the DCN
-                components</xref>.  You wi;ill configure the DCN networking.</li>
+                components</xref>. You wi;ill configure the DCN networking.</li>
             <li><xref href="CGH-2-install-esx-memphis.dita#topic10581c2esxm">Configure the ESX
                 components</xref>. You will also install the VMware ESX compute proxy.</li>
             <li>Install the <xref href="CGH-2-install-memphis.dita">HPE Helion OpenStack
                 cloud</xref>. These components will be installed into what is called the <i>non-KVM
                 region</i>.</li>
-            <li>Launch the <xref href="carrier-grade-install-launch-horizon.dita#topic10581cgilh">Helion
-              user interface</xref>.</li>
-            <li>Install the <xref href="carrier-grade-install-kvm-memphis.dita">carrier grade cloud</xref>. 
-              The carrier grade cloud is deployed into what is
-              called the <i>KVM region.</i></li>
+            <li>Launch the <xref href="carrier-grade-install-launch-horizon.dita#topic10581cgilh"
+                >Helion user interface</xref>.</li>
+            <li>Install the <xref href="carrier-grade-install-kvm-memphis.dita">carrier grade
+                cloud</xref>. The carrier grade cloud is deployed into what is called the <i>KVM
+                region.</i></li>
+            <li>Perform some required and optional <xref
+                href="carrier-grade-install-post-memphis.dita#topic1107cgimp">post-installation
+                tasks</xref>.</li>
+            <li>Integrate <xref href="carrier-grade-install-config-dcn.dita#topic10581cgicd">HP
+                Virtualized Services Directory (VSD)</xref> into the cloud.</li>
+            <li>Optionally, <xref href="CGH-2-install-sriov-pci.dita#topic10581c2isio">configure
+                SR-IOV or PCI-Passthrough networking</xref>.</li>
           </ul></li>
         <li>After the deployment is complete, do a full backup of the deployment. This will make it
           easier to recover should you encounter a problem. For more information, see <xref
             href="../OperationsGuide/Backup/CGH-2-backup-restore.dita#topic10581c2br">Backup and
-            Restore Configuration Files</xref></li>
+            Restore Configuration Files</xref>.</li>
         
       </ol>
     </section>
