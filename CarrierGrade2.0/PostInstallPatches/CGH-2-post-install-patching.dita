@@ -28,6 +28,8 @@
             kcp-ssl-implementation.patch</xref></li>
         <li><xref href="#topic10581c2t/kvm-custom" format="dita">KVM Region Custom Patch,
               <codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph></xref></li>
+        <li><xref href="#topic10581c2t" format="dita">Horizon patch:
+            <codeph>WR-HZN-1011</codeph></xref></li>
       </ul>
     </p>
     <section id="ssl">
@@ -89,6 +91,25 @@ system host-patch-reboot controller-0</codeblock></li>
         <li>Switch to controller-0:<codeblock>system host-swact controller-1</codeblock></li>
       </ol>
     </section>
-    <p> </p>
+    <section id="horizon-patch"><title>Horizon Patch</title><p>If you did not deploy the Horizon
+        Patch, <codeph>WR-HZN-1011</codeph> during installation, perform the following
+        steps:</p><p>Due to an API error, you cannot create a PCI-Passthrough or SR-IOV interface
+        using the Horizon UI. To correct this issue, deploy the following patch.
+        <!--HCG-1011/1012--></p>You should have downloaded the following patch files during the
+        prerequisites:<ul id="ul_awq_db1_f5">
+        <li>WR-HZN-1011</li>
+      </ul><p>The README with the patch download contains information on files changed by these
+        patches.</p><p>Execute the following commands:<ol id="ol_imr_fgt_25">
+          <li>Copy the WR-HZN-1011 directory to the
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on the lifecycle
+            manager. </li>
+          <li>Execute following command to apply patch
+              <codeblock>hlm patch -c &lt;cloud-name> -n WR-HZN-1011 -t &lt;tier></codeblock><p>Where:
+              &lt;tier> is the tier on which the various controllers are running. </p>For example:
+            <codeblock>hlm patch -c sac36 -n WR-HZN-1011 -t BASE-CCP-T2</codeblock>The tier
+            information can be found in the
+              <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
+            file. </li>
+        </ol></p></section>
   </body>
 </topic>
