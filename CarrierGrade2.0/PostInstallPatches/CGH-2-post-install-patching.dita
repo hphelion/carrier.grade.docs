@@ -32,34 +32,52 @@
             <codeph>WR-HZN-1011</codeph></xref></li>
       </ul>
     </p>
-    <section id="ssl">
-      <title>SSL patch</title>
-      <p>If you did not deploy the <codeph>kcp-ssl-implementation.patch</codeph> during
-        installation, perform the following steps: <!--HCG-998--></p>
-      <p>This patch addresses a number of issues. </p>
-      <p><b>Note:</b> If you can view statistics in <codeph>regionkvm</codeph>, from the
-          <b>Stats</b> tab on the <b>Resource Usage Overview</b> page, you can disregard these
-        steps. Select the <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>,
-        and <b>Resrouce Usage</b>. Click the <b>Stats</b> table.</p>
-      <ol>
-        <li>Log onto the KVM region <codeph>controller-0</codeph>, the active controller.</li>
-        <li>Change to the following directory:
-          <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud name>/001/base/stage/windriver-config</codeblock></li>
-        <li>Copy contents of <codeph>cakey.pem</codeph> file in that directory to the
-            <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph>
-          directory.</li>
-        <li>Execute the following command to restart the haproxy service:
-          <codeblock>service haproxy restart</codeblock></li>
-        <li>Log onto the KVM region <codeph>controller-1</codeph>, the standby controller.</li>
-        <li>Change to the following directory:
-          <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud name>/001/base/stage/windriver-config.</codeblock></li>
-        <li>Copy contents of <codeph>cakey.pem</codeph> file in that directory to the
-            <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph>
-          directory.</li>
-        <li>Execute the following command to restart the haproxy service:
-          <codeblock>service haproxy restart</codeblock></li>
-      </ol>
-    </section>
+    <section id="ssl"><title>SSL patch</title><p>If you did not deploy the
+          <codeph>kcp-ssl-implementation.patch</codeph> during installation, perform the following
+        steps: <!--HCG-998--></p><p>This patch addresses a number of issues. </p><p><b>Note:</b> If
+        you can view statistics in <codeph>regionkvm</codeph>, from the <b>Stats</b> tab on the
+          <b>Resource Usage Overview</b> page, you can disregard these steps. Select the
+          <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and <b>Resrouce
+          Usage</b>. Click the <b>Stats</b> table.</p>You should have downloaded the following patch
+      files during the prerequisites: <!--HCG-998--><ul id="ul_i42_qhz_35">
+        <li>kcp-ssl-implementation.patch </li>
+      </ul><p>The README with the patch download contains information on files changed by these
+        patches.</p><p>To prevent this condition, execute the following commands:<ol
+          id="ol_j42_qhz_35">
+          <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
+          <li>Change to the <codeph>kenobi-configuration-processor</codeph>
+            directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
+          <li>Execute the following command to install the second patch
+            <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
+          <li>Change to the <codeph>kenobi-node-configuration</codeph>
+            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li>Execute the following command to install the second patch
+            <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
+          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          <li>Execute the following
+            command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+          <li>Execute the following command to create haproxy, stunnel and horizon roles
+            <codeblock>hlm deploy -c &lt;cloud name> -t "FND-CLU FND-STN HZN-WEB WR-HZN" </codeblock></li>
+          <li>Log onto the KVM region <codeph>controller-0</codeph>, the active controller.</li>
+          <li>Change to the following directory:
+            <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud name>/001/base/stage/windriver-config</codeblock></li>
+          <li>Copy contents of <codeph>cakey.pem</codeph> file in that directory to the
+              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph>
+            directory.</li>
+          <li>Execute the following command to restart the haproxy service:
+            <codeblock>service haproxy restart</codeblock></li>
+          <li>Log onto the KVM region <codeph>controller-1</codeph>, the standby controller.</li>
+          <li>Change to the following directory:
+            <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud name>/001/base/stage/windriver-config.</codeblock></li>
+          <li>Copy contents of <codeph>cakey.pem</codeph> file in that directory to the
+              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph>
+            directory.</li>
+          <li>Execute the following command to restart the haproxy service:
+            <codeblock>service haproxy restart</codeblock></li>
+        </ol></p></section>
     <section id="kvm-custom">
       <title>KVM Region Custom Patch </title>
       <p>If you did not deploy the KVM Region Custom Patch,
@@ -124,6 +142,6 @@ system host-patch-reboot controller-0</codeblock></li>
             information can be found in the
               <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
             file. </li>
-        </ol></p></section>
+        </ol></p><p/></section>
   </body>
 </topic>

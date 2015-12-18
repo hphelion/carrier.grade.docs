@@ -104,13 +104,34 @@ GATEWAY=10.20.5.1</codeblock></p></li>
                     <li conref="CGH-2-conref-vsvapp4.dita#ReusableComponent_mmq_bnc_tt/2"
                         conrefend="CGH-2-conref-vsvapp4.dita#ReusableComponent_mmq_bnc_tt/14"/>
                 <li id="15">After NTP is properly synchronized, execute the following command to
-                    install VSD:<codeblock>/opt/vsd/install.sh</codeblock></li>
+                    install VSD:<codeblock>/opt/vsd/install.sh</codeblock><p>Hit the Enter key to
+                        accept all the default values.</p></li>
             </ol></section>
+        <section><title>Installing the vCenter Deployment Toolbox</title>The vCenter Deployment
+            Toolbox is bundled as a metadata plug-in. <p>To install and configure the metadata
+                plugin:</p><ol id="ol_o4m_w34_rt">
+                <li>Log into the vCenter Integration Node VM using SSH. The default username is
+                        <codeph>root</codeph> and password is <codeph>Alcateldc</codeph>.</li>
+                <li>Execute the following command to stop the JBoss application server on the
+                    vCenter Integration Node VM: <codeblock>monit stop jboss</codeblock></li>
+                <li>Edit the
+                        <codeph>/opt/vsd/jboss/standalone/configuration/metadataplugin.properties</codeph>
+                    file. Enter vCenter properties the in the fields, as
+                    follows:<codeblock>vc.host=x.x.x.x //: This is the vCenter IP address:
+vc.http.proxy.port = 80 //: This is the default port. Do not change. 
+vc.https.proxy.port = 443 //: This is the default port. Do not change. 
+vc.user = root //: vCenter username
+vc.password =vmware //: vCenter password
+vsd.api.url=https://&lt;vsd_ip&gt;:8443/nuage/api/v3_2</codeblock></li>
+                <li>Start the JBoss application server using the following
+                    command::<codeblock>monit start jboss</codeblock></li>
+            </ol><p>The <codeph>monit</codeph> metadata plugin is automatically deployed and
+                installed. The plugin will be listed as registered in vCenter.</p></section>
         <section>
             <title>Configure the HTTP\DHCP VM for the vCenter Integration Node</title>
             <p>The HPE DCN vSphere Solution requires that you install a dedicated virtual machine on
-                an ESX server for HTTP\DCHP services. You created the HTTP\DHCP VM when you
-                imported the OVA file above. </p>
+                an ESX server for HTTP\DCHP services. You created the HTTP\DHCP VM when you imported
+                the OVA file above. </p>
             <p>Perform the following step create a VM for HTTP and DHCP services.</p>
             <p>
                 <ol id="ol_v11_wh4_rt">
@@ -159,8 +180,8 @@ option routers 10.20.94.209;   ###TUL network Gateway####
 }
 ######## config file end</codeblock></li>
                     <li>Restart the DHCP service:<codeblock>service dhcpd restart</codeblock></li>
-                    <li>Copy the following VRSvApp template files to the DocumentRoot of the
-                        toolbox VM (<codeph>/var/www/html</codeph> is the default location): <ul
+                    <li>Copy the following VRSvApp template files to the DocumentRoot of the toolbox
+                        VM (<codeph>/var/www/html</codeph> is the default location): <ul
                             id="ul_dks_ndj_h5">
                             <li><codeph>VRS_3.2.4-135_10062015.ovf</codeph></li>
                             <li><codeph>VRS_3.2.4-135_10062015-disk1.vmdk</codeph>
@@ -171,26 +192,6 @@ option routers 10.20.94.209;   ###TUL network Gateway####
                 </ol>
             </p>
         </section>
-        <section><title>Installing the vCenter Deployment Toolbox</title>The vCenter Deployment
-            Toolbox is bundled as a metadata plug-in. <p>To install and configure the metadata
-                plugin:</p><ol id="ol_o4m_w34_rt">
-                <li>Log into the vCenter Integration Node VM using SSH. The default username is
-                        <codeph>root</codeph> and password is <codeph>Alcateldc</codeph>.</li>
-                <li>Execute the following command to stop the JBoss application server on the
-                    vCenter Integration Node VM: <codeblock>monit stop jboss</codeblock></li>
-                <li>Edit the
-                        <codeph>/opt/vsd/jboss/standalone/configuration/metadataplugin.properties</codeph>
-                    file. Enter vCenter properties the in the fields, as
-                    follows:<codeblock>vc.host=x.x.x.x //: This is the vCenter IP address:
-vc.http.proxy.port = 80 //: This is the default port. Do not change. 
-vc.https.proxy.port = 443 //: This is the default port. Do not change. 
-vc.user = root //: vCenter username
-vc.password =vmware //: vCenter password
-vsd.api.url=https://&lt;vsd_ip&gt;:8443/nuage/api/v3_2</codeblock></li>
-                <li>Start the JBoss application server using the following
-                    command::<codeblock>monit start jboss</codeblock></li>
-            </ol><p>The <codeph>monit</codeph> metadata plugin is automatically deployed and
-                installed. The plugin will be listed as registered in vCenter.</p></section>
         <section>
             <title>Configure the Deployment Toolbox</title>
             <p>You must perform the following tasks.</p>

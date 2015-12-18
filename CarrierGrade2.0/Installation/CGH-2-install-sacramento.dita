@@ -39,27 +39,6 @@ Password: cghelion</codeblock>
         <li>Change to the home directory.<codeblock>cd ~</codeblock></li>
       </ol>
     </section>
-    <section id="ssl-patch"><title>Deploy the SSL patch</title>You should have downloaded the
-      following patch files during the prerequisites: <!--HCG-998--><ul id="ul_i42_qhz_35">
-        <li>kcp-ssl-implementation.patch </li>
-      </ul><p>The README with the patch download contains information on files changed by these
-        patches.</p><p>To prevent this condition, execute the following commands:<ol
-          id="ol_j42_qhz_35">
-          <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
-          <li>Change to the <codeph>kenobi-configuration-processor</codeph>
-            directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
-          <li>Execute the following command to install the second patch
-            <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
-          <li>Change to the <codeph>kenobi-node-configuration</codeph>
-            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
-          <li>Execute the following command to install the second patch
-            <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
-          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
-            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
-          <li>Execute the following command to integrate the changes into the
-            environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the <codeph>hlm
-              generate</codeph> command is executed, the changes will be included. </li>
-        </ol></p></section>
     <section id="conref-provision">
       <title>Provision the new cloud</title>
       <ol id="ol_kwm_c1k_zt">
@@ -366,40 +345,6 @@ Password: cghelion</codeblock>
         Management Service (AMS) that comes with the HP servers. </p>
       <p>For more information, see <xref href="CGH-2-install-vmware-workaround.dita#topic10581c2ivw"
           >vmWare Installation Workaround</xref>.</p>
-    </section>
-    <section id="cobbler">
-      <title>Deploy the Randomize Cobbler Password Patch </title>
-      <p>Cobbler is a build and deployment system that the HP Helion OpenStack Carrier Grade
-        installation process uses. For security, you must generate a random password that will be
-        passed to the installation process, rather than entering an explicit password through the
-          <codeph>group_vars/all</codeph> file.</p>
-      <p>You downloaded the patch file, <codeph>knc-cobbler-random.patch</codeph>, during the
-        prerequisites.</p>
-      <p>
-        <ol id="ol_cqf_s4k_f5">
-          <li>Copy the patch file to the <codeph>~/</codeph> directory. </li>
-          <li>Change to the ~/cg-hlm directory: <codeblock>cd ~/cg-hlm</codeblock></li>
-          <li>Execute the following command to deploy the patch:
-            <codeblock>patch -p1 -b &lt; ../cg-hlm-cobbler-random.patch</codeblock></li>
-          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph>
-            directory:<codeblock>cd ~/cg-hlm/hlm-build </codeblock></li>
-          <li>Execute the following
-              command:<codeblock>./hlm_initcobbler.sh &lt;ip address&gt; &lt;netmask&gt; &lt;dhcp begin range&gt; &lt;dhcp end range&gt;    </codeblock><p>Where
-                <codeph>&lt;ip address></codeph> is the PXE IP of the HLM node.</p><p>For
-              example:</p><codeblock>./hlm_initcobbler.sh 192.168.100.2 255.255.255.0 192.168.100.100 192.168.100.200 </codeblock></li>
-          <li>Execute the following command: <codeblock>./hlm_importiso.sh</codeblock></li>
-          <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
-            directory:<codeblock>cd ~/kenobi-node-configuration </codeblock></li>
-          <li>Execute the following
-            command:<codeblock>patch -p1 -b &lt; ../knc-cobbler-random.patch </codeblock></li>
-          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory:
-            <codeblock>cd ~/cg-hlm/hlm-build </codeblock></li>
-          <li>Execute the following command to integrate the changes into the
-            environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
-        </ol>
-      </p>
-      <p>The root user can retrieve the randomized password in the
-          <codeph>/var/hlm/clouds/.cobbler</codeph> file.</p>
     </section>
     <section id="conref-create-cloud">
       <title>Provision the cloud nodes and bring the cloud nodes up</title>

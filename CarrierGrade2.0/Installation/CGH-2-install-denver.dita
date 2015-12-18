@@ -22,7 +22,6 @@
       uses AVS networking, follow these instructions. If you are installing a different deployment,
       disregard these instructions. </p>
     <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-hos-install"/>
-    <section conref="CGH-2-install-sacramento.dita#topic10581c2is/ssl-patch"/>
     <section id="conref-provision">
       <title>Provision the new cloud</title>
       <ol id="ol_kwm_c1k_zt">
@@ -334,29 +333,8 @@
         errors using the tool of your preference. For example, using the Python json.tool: </p>
       <codeblock>python -m json.tool &lt;filename>.json</codeblock>
     </section>
-    <section conref="CGH-2-install-sacramento.dita#topic10581c2is/cobbler"/>
     <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-create-cloud"/>
     <section conref="CGH-2-install-tahoe.dita#topic10581c2it/conref-back-end-no-esx"/>
-    <section id="providernet-patch"><title>Deploy the Horizon Provider Network
-        Patch</title><p>Because of a configuration issue with the Ansible roles, the Provider
-        Networks tab in the Horizon interface will be hidden unless you deploy the following patch.
-        <!--HCG-991--></p>You should have downloaded the following patch files during the
-        prerequisites:<ul id="ul_awq_db1_f5">
-        <li>providernet-tab-missing-in-horizon.patch</li>
-      </ul><p>The README with the patch download contains information on files changed by these
-        patches.</p><p>To prevent this condition, execute the following commands:<ol
-          id="ol_imr_fgt_25">
-          <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
-          <li>Change to the <codeph>kenobi-node-configuration</codeph>
-            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
-          <li>Execute the following command to install the second patch
-            <codeblock>patch -p1 &lt; providernet-tab-missing-in-horizon.patch</codeblock></li>
-          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
-            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
-          <li>Execute the following command to integrate the changes into the
-            environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the <codeph>hlm
-              generate</codeph> command is executed, the changes will be included. </li>
-        </ol></p></section>
     <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-config-proc"/>
     <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-hdeploy"/>
     <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-ldap-keystone" id="ldap3"/>
