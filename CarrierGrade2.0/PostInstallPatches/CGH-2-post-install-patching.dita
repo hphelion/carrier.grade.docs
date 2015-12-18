@@ -36,6 +36,11 @@
       <title>SSL patch</title>
       <p>If you did not deploy the <codeph>kcp-ssl-implementation.patch</codeph> during
         installation, perform the following steps: <!--HCG-998--></p>
+      <p>This patch addresses a number of issues. </p>
+      <p><b>Note:</b> If you can view statistics in <codeph>regionkvm</codeph>, from the
+          <b>Stats</b> tab on the <b>Resource Usage Overview</b> page, you can disregard these
+        steps. Select the <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>,
+        and <b>Resrouce Usage</b>. Click the <b>Stats</b> table.</p>
       <ol>
         <li>Log onto the KVM region <codeph>controller-0</codeph>, the active controller.</li>
         <li>Change to the following directory: <codeblock>cd /etc/ssl/private</codeblock></li>
@@ -55,7 +60,10 @@
       <title>KVM Region Custom Patch </title>
       <p>If you did not deploy the KVM Region Custom Patch,
           <codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph> during installation, perform the
-        following steps:</p>
+        following steps.</p>
+      <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
+          <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+          <b>Inventory</b>. Click the <b>Patches</b> table.</p>
       <p>This patch addresses a number of issues in the KVM region.</p>
       <p>The following steps assume that <codeph>controller-0</codeph> is active and
           <codeph>controller-1</codeph> is standby.</p>
@@ -91,12 +99,14 @@ system host-patch-reboot controller-0</codeblock></li>
         <li>Switch to controller-0:<codeblock>system host-swact controller-1</codeblock></li>
       </ol>
     </section>
-    <section id="horizon-patch"><title>Horizon Patch</title><p>If you did not deploy the Horizon
-        Patch, <codeph>WR-HZN-1011</codeph> during installation, perform the following
-        steps:</p><p>Due to an API error, you cannot create a PCI-Passthrough or SR-IOV interface
-        using the Horizon UI. To correct this issue, deploy the following patch.
-        <!--HCG-1011/1012--></p>You should have downloaded the following patch files during the
-        prerequisites:<ul id="ul_awq_db1_f5">
+    <section id="horizon-patch"><title>Horizon Patch</title><p>If you are unable to create a
+        PCI-Passthrough or SR-IOV interface using the Horizon UI, but can create those interfces
+        using CLI, you need to apply the Horizon Patch.  </p><p><b>Note:</b> If you applied the
+        Horizon Patch, <codeph>WR-HZN-1011</codeph> during installation, and can create
+        PCI-Passthrough or SR-IOV interfaces in Horizon, disregard these steps. </p><p>Due to an API
+        error, you cannot create a PCI-Passthrough or SR-IOV interface using the Horizon UI. To
+        correct this issue, deploy the following patch. <!--HCG-1011/1012--></p>You should have
+      downloaded the following patch files during the prerequisites:<ul id="ul_awq_db1_f5">
         <li>WR-HZN-1011</li>
       </ul><p>The README with the patch download contains information on files changed by these
         patches.</p><p>Execute the following commands:<ol id="ol_imr_fgt_25">
