@@ -89,36 +89,24 @@
       <p>This patch addresses a number of issues in the KVM region.</p>
       <p>The following steps assume that <codeph>controller-0</codeph> is active and
           <codeph>controller-1</codeph> is standby.</p>
-      <ol>
-        <li>On KVM region standby controller, create a directory for the
-          patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
-        <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
-            <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
-            id="ul_ald_spz_35">
-            <li><codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph><p>You should have downloaded this
-                patch file in the Prerequisites. </p></li>
-          </ul></li>
-        <li>Execute the following commands for the standby controller:
-          <codeblock>sudo sw-patch upload TS_HP_15_Custom_PATCH_0001.patch 
-sudo sw-patch apply TS_HP_15_Custom_PATCH_0001.patch 
-source /etc/nova/openrc
-system host-patch-reboot controller-1</codeblock></li>
-        <li>Switch to the standby
-          controller:<codeblock>system host-swact controller-0</codeblock></li>
-        <li>On KVM region active controller, create a directory for the
-          patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
-        <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
-            <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
-            id="ul_dmb_m1b_j5">
-            <li><codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph><p>You should have downloaded this
-                patch file in the Prerequisites. </p></li>
-          </ul></li>
-        <li>Execute the following commands:
-          <codeblock>sudo sw-patch upload TS_HP_15_Custom_PATCH_0001.patch 
-sudo sw-patch apply TS_HP_15_Custom_PATCH_0001.patch 
-source /etc/nova/openrc
-system host-patch-reboot controller-0</codeblock></li>
-        <li>Switch to controller-0:<codeblock>system host-swact controller-1</codeblock></li>
+      <ol id="ol_bcm_yg4_j5">
+        <li>Log into controller-0 </li>
+        <li>mkdir -p /tmp/patches</li>
+        <li>Copy patch file to /tmp/patches</li>
+        <li>sudo sw-patch upload /tmp/patches/&lt;patch-name&gt;.patch</li>
+        <li>sudo sw-patch apply &lt;patch-name&gt;</li>
+        <li>source /etc/nova/openrc</li>
+        <li>system host-patch-reboot controller-1 # As controller-0 was my active controller</li>
+        <li>system host-swact controller-0</li>
+        <li>Exit the ssh session and login to the newly active controller i.e., controller-1</li>
+        <li>source /etc/nova/openrc</li>
+        <li>system host-patch-reboot controller-0</li>
+        <li>system host-lock compute-0 //if this fails, perform a force lock</li>
+        <li>system host-patch-reboot compute-0</li>
+        <li>system host-unlock compute-0</li>
+        <li>system host-lock compute-1 //if this fails, perform a force lock</li>
+        <li>system host-patch-reboot compute-1</li>
+        <li>system host-unlock compute-1</li>
       </ol>
     </section>
     <section id="horizon-patch"><title>Horizon Patch</title><p>If you are unable to create a
