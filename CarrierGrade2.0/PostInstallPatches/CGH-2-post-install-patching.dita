@@ -61,22 +61,17 @@
             command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
           <li>Execute the following command to create haproxy, stunnel and horizon roles
             <codeblock>hlm deploy -c &lt;cloud name> -t "FND-CLU FND-STN HZN-WEB WR-HZN" </codeblock></li>
-          <li>Log onto the KVM region <codeph>controller-0</codeph>, the active controller.</li>
           <li>Change to the following directory:
             <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud name>/001/base/stage/windriver-config</codeblock></li>
           <li>Copy contents of <codeph>cakey.pem</codeph> file in that directory to the
-              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph>
-            directory.</li>
-          <li>Execute the following command to restart the haproxy service:
-            <codeblock>service haproxy restart</codeblock></li>
+              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph> directory on
+            KVM region <codeph>controller-0</codeph>.</li>
+          <li>Execute the following command  on KVM region <codeph>controller-0</codeph> to restart
+            the haproxy service: <codeblock>service haproxy restart</codeblock></li>
           <li>Log onto the KVM region <codeph>controller-1</codeph>, the standby controller.</li>
-          <li>Change to the following directory:
-            <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud name>/001/base/stage/windriver-config.</codeblock></li>
-          <li>Copy contents of <codeph>cakey.pem</codeph> file in that directory to the
-              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph>
-            directory.</li>
-          <li>Execute the following command to restart the haproxy service:
-            <codeblock>service haproxy restart</codeblock></li>
+          <li>Copy contents of <codeph>cakey.pem</codeph> file on the lifycycle manager to the
+              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph> directory on
+            KVM region <codeph>controller-0</codeph>.</li>
         </ol></p></section>
     <section id="kvm-custom">
       <title>KVM Region Custom Patch </title>
