@@ -22,28 +22,6 @@
         >obtain a user account on HDN</xref> in order to download these files.</p>
     
     <bodydiv id="all">
-    <section id="ssl-patch"><title>Deploy the SSL patch <!--heat/keystone patch--></title>You should
-      have downloaded the following patch files during the prerequisites: <!--HCG-998--><ul
-        id="ul_i42_qhz_35">
-        <li>kcp-ssl-implementation.patch </li>
-      </ul><p>The README with the patch download contains information on files changed by these
-        patches.</p><p>To prevent this condition, execute the following commands:<ol
-          id="ol_j42_qhz_35">
-          <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
-          <li>Change to the <codeph>kenobi-configuration-processor</codeph>
-            directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
-          <li>Execute the following command to install the second patch
-            <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
-          <li>Change to the <codeph>kenobi-node-configuration</codeph>
-            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
-          <li>Execute the following command to install the second patch
-            <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
-          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
-            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
-          <li>Execute the following command to integrate the changes into the
-            environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the <codeph>hlm
-              generate</codeph> command is executed, the changes will be included. </li>
-        </ol></p></section>
     <section id="cobbler">
       <title>Deploy the Randomize Cobbler Password Patch <!-- "security patch"--></title>
       <p>Cobbler is a build and deployment system that the HP Helion OpenStack Carrier Grade
@@ -78,6 +56,29 @@
       <p>The root user can retrieve the randomized password in the
           <codeph>/var/hlm/clouds/.cobbler</codeph> file.</p>
     </section>
+      <section id="ssl-patch"><title>Deploy the SSL patch <!--heat/keystone/ssl patch--></title>You
+        should have downloaded the following patch files during the prerequisites: <!--HCG-998--><ul
+          id="ul_i42_qhz_35">
+          <li>kcp-ssl-implementation.patch </li>
+        </ul><p>The README with the patch download contains information on files changed by these
+          patches.</p><p>To prevent this condition, execute the following commands:<ol
+            id="ol_j42_qhz_35">
+            <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
+            <li>Change to the <codeph>kenobi-configuration-processor</codeph>
+              directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
+            <li>Execute the following command to install the second patch
+              <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
+            <li>Change to the <codeph>kenobi-node-configuration</codeph>
+              directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+            <li>Execute the following command to install the second patch
+              <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
+            <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+              <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the
+                <codeph>hlm generate</codeph> command is executed, the changes will be included.
+            </li>
+          </ol></p></section>
       <section id="next-step">
         <title>Next Step</title>
         <p><xref href="CGH-2-install-dcn-sacramento.dita#topic10581c2vsd">Configuring the DCN
