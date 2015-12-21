@@ -34,195 +34,24 @@ But the CLI, REST API etc should all be same --></p>
       backups contain copies of these credentials as well, protected from snooping via backup
       encryption, but exposure of the Attis backup key could result in unauthorized exposure of
       credentials stored in backups.</p>
-    <p><b>What gets backed up</b></p>
-    <p>The following components can be backed up and restored:<ul id="ul_pzx_1b3_k5">
-        <li>Percona® XtraDB® cluster on controllers in non-kvm region</li>
-        <li>Percona® XtraDB® cluster on VSD</li>
-        <li>HLM Data [opt and root files]</li>
-        <li>System files on VSC</li>
-        <li>System files in kvm region </li>
-        <li>MySQL database and Neutron, Nova, Ironic files under /etc on the baremetal controller
-          (Sacramento deployments only)</li>
-      </ul><b>When to perform backups</b></p>
-    <p>We recommend performing regular backups, preferably hourly, and especially after changing the
-      appliances configuration and before and after updating HP Helion OpenStack Carrier Grade
-      software.</p>
-    <p>Additionally, you should create a backup from HLM VM as follows:<ul id="ul_qzx_1b3_k5">
-        <li>when the HP Helion OpenStack Carrier Grade installation is complete</li>
-        <li>when any change is made to the HP Helion OpenStack Carrier Grade components</li>
-      </ul><b>When to restore</b></p>
-    <p>You should restore the HLM VM or other appliances if there are any issues with the HP Helion
-      OpenStack Carrier Grade components, for example:<ul id="ul_rzx_1b3_k5">
-        <li>there is database corruption</li>
-        <li>when two controllers have failed. HA Services are not guaranteed to be resilient after a
-          second failure.</li>
-      </ul></p>
-    <section>
-      <title>Backup process overview</title>
-      <p><b>Setting the location for backup </b></p>
-      <p>Before you start your first backup, you must use the Attis CLI to specify where HP Helion
-        OpenStack Carrier Grade will store backup files. For information about the attis CLI, see
-        the <xref href="#_HP_Helion_OpenStack®">Backup and Restore CLI</xref>.</p>
-      <p>You can store backup files using:<ul id="ul_uzn_3b3_k5">
-          <li>SCP: A location on a remote server where the backup file is secure copied.</li>
-          <li>NFS: A location on a network file system.</li>
-          <li>FILE: A location on the cloud controller.</li>
-        </ul>HPE recommends that you use an SCP or NFS server so that backup files are automatically
-        moved to an off-appliance location in case of a catastrophic failure of the cloud
-        controllers. You can use the FILE option if you want to manually mount shared storage on all
-        three nodes of the cloud controller.</p>
-      <p>IMPORTANT: If you do not set a storage location, the backup will not succeed. In the backup
-        job list, you will see that SSH connection to the storage path failed, and the state is
-        Failed.</p>
-      <p>Perform the following steps on any cloud controller node. <ol id="ol_vzn_3b3_k5">
-          <li>Log into HLM node</li>
-          <li>SSH to any controller nodes from HLM using controller credentials (default username:
-            cghelion)</li>
-          <li>Switch to the root user by running sudo –i.</li>
-          <li>Set the type of backup storage location.
-            <ul>
-          <li>To set the backup storage location to an SCP server, run:
-                <codeblock>attis storage --use SCP</codeblock></li>
-
-            <li>To set the backup storage location to an NFS server, run:
-                <codeblock>attis storage --use NFS</codeblock></li></ul></li>
-          <li>List the storage details.
-                <codeblock>root@ma1:~# attis storage
-+--------------------------------------+------+----------+ 
-| id                                   |type  |selected  |
-+--------------------------------------+------+----------+ 
-|529cd8fb-c6a2-401d-9caf-61caeede7f81  |FILE  |False     |   
-|d6210603-01b1-4d76-9068-e3ffa44a449e  |NFS   |False     | 
-|7abb6f30-3f10-4918-9f8d-a58b157d59b9  |SCP   |True      |
-+--------------------------------------+------+----------+ </codeblock></li> 
-          <li>View the storage parameters that you will need to update by selecting the storage ID
-                of the selected type. Example:
-                <codeblock>root@ma1:~# attis storage --id 7abb6f30-3f10-4918-9f8d-a58b157d59b9
-+--------------------------------------+------+----------+ 
-| id                                   |type  |selected  |
-+--------------------------------------+------+----------+ 
-|7abb6f30-3f10-4918-9f8d-a58b157d59b9  |SCP   |True      |
-+--------------------------------------+------+----------+
-+--------------------------------+--------------------------------------+---------+ 
-|id           |storage_id        | parameter_name               | value           |
-+---------------+----------------+----------------------+-------------------------+
-| 18bb9b5e-&lt;...&gt;| 7abb6f30-&lt;...&gt; | user                 |                         | 
-| 78aaa60e-&lt;...&gt;| 7abb6f30-&lt;...&gt; | storage_path         |                         | 
-| c0a5c549-&lt;...&gt;| 7abb6f30-&lt;...&gt; | server               |                         |
-| e34ac1b2-&lt;...&gt;| 7abb6f30-&lt;...&gt; | private_key_filepath | /home/attis/.ssh/id_rsa |
-+---------------+----------------+----------------------+-------------------------+</codeblock></li>
-          <li>Set the attis configuration of the storage type you entered in step 4 by entering:
-                  <codeblock>attis storage --id &lt;storage_id from the table&gt; --update '{"parameter":"new value", "parameter":"new value"}'</codeblock><p>where
-                  parameter in an SCP configuration is:</p><ul id="ul_c14_3b3_k5">
-                  <li>user: User to SSH into the remote SCP server.</li>
-                  <li>storage_path: Path on the remote SCP server where you want to store backup
-                    files.</li>
-                  <li>server: IP address or DNS resolvable hostname of the remote server.</li>
-                  <li>private_key_filepath: Private key used to SSH to the remote SCP server. By
-                    default /home/attis/.ssh/id_rsa on the controller is prepopulated.</li>
-                </ul><p><b>SCP Example</b>
-                </p><p>To specify the details of an SCP server to use for backup file
-                    storage:</p><codeblock>attis storage --update '{"storage_path":"/mybackupDirOnRemoteMachine","private_key_filepath":"/home/attis/.ssh/id_rsa","server":"hostofscplocation","user":"remotescpuser"}' --id &lt;copy the storage_id from attis storage&gt; </codeblock><p><b>IMPORTANT:</b>
-                  If you select SCP, you must copy the public key text located at
-                  /home/attis/.ssh/id_rsa.pub from controller nodes and paste it into the
-                  authorized_keys file of the SCP
-                  server.<codeblock>sudo su attis
-ssh-copy-id &lt;remotescpuser&gt;@&lt;hostofscplocation&gt;</codeblock></p><p>If
-                  you want to generate a new key for setting up trust between attis and the SCP
-                  server, copy the private key to each controller node. Then use the attis command
-                  storage --update to update the private_key_filepath.</p><p><b>NFS Example</b>
-                </p><p>To specify the details of an NFS server to use for backup file
-                  storage:</p><p>attis storage --update '{"server":"NFS server ip",
-                  "client_mount_path": "name of storage mount on cloud controller",
-                  "storage_path":"mybackupDironRemoteMachine"}' --id &lt;copy the storage_id from
-                  attis storage&gt;</p></li>
-              <li>Restart Attis server on all three controllers if the storage option is changed to
-            NFS or FILE option: <codeblock>service attis-server restart</codeblock></li></ol></p>
+    <section id="what">
+      <title>What gets backed up</title>
+      <p>The following components can be backed up and restored:<ul id="ul_pzx_1b3_k5">
+          <li>Percona® XtraDB® cluster on controllers in non-kvm region</li>
+          <li>Percona® XtraDB® cluster on VSD</li>
+          <li>HLM Data [opt and root files]</li>
+          <li>System files on VSC</li>
+          <li>System files in kvm region </li>
+          <li>MySQL database and Neutron, Nova, Ironic files under /etc on the baremetal controller
+            (Sacramento deployments only)</li>
+        </ul></p>
     </section>
-    <section><title>Backup Process</title>To back up an HP Helion OpenStack Carrier Grade appliance
-      (for example, the lifecycle manager, controllers, the VSC, the VSD and so forth), use the
-      following steps:<ol id="ol_vxx_b23_k5">
-        <li>Log in to the controller.</li>
-        <li>Authenticate using the source stackrc command or export the variables
-          manually:<codeblock>export OS_PASSWORD=&lt;your_os_password&gt;
-export OS_USERNAME=admin
-export OS_TENANT_NAME=admin
-export OS_AUTH_URL=&lt;your_os_auth_url&gt;</codeblock></li>
-        <li>Execute the following command to start the
-          backup:<codeblock>attis backup --config-id CONFIG_ID --backup_type BACKUP_TYPE</codeblock>Where:</li>
-      </ol><ul id="ul_yxx_b23_k5">
-        <li>config-id CONFIG_ID authenticates using the ID configuration file.</li>
-        <li>backup_type BACKUP_TYPE is full or incremental. Full backup is the default.</li>
-      </ul></section>
-    <section><title>Backup of HLM</title>Attis can back up any of the following HLM data - <ul
-        id="ul_rxc_h23_k5">
-        <li>All files under the <systemoutput>/opt/</systemoutput> folder on the HLM host. This
-          backs up all the installed code/configuration and also h* installation scripts.</li>
-        <li>All files under the <systemoutput>/root/</systemoutput> folder on the HLM host. This
-          backs up all the source code, packages, hlinux netboot, infra-ansible-playbooks, SSH keys,
-          as well as cloud folders.</li>
-        <li>All files under <systemoutput>/root</systemoutput> and
-          <systemoutput>/opt</systemoutput></li>
-      </ul><p>
-        <codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_Data_Backup&gt; </codeblock>
-      </p><p><b>Note:</b> Attis implements <b>tree-structure</b> for certain backup/restore
-        configurations. For example, if you want to back up /opt and /root folders on the HLM host,
-        run:</p><p>
-        <codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_Data_Backup&gt;</codeblock>
-      </p><p>Or to only back up /opt files on HLM:</p><p>
-        <codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_opt_files_Backup&gt;</codeblock>
-      </p><p>The root config <b>HLM_Appliance_Data_Backup</b> includes children config
-          <b>HLM_Appliance_opt_files_Backup</b> and
-      <b>HLM_Appliance_root_files_Backup</b>.</p></section>
-    <section><title>Backup Cloud Controller Database</title>This section deals with the disaster
-      recovery scenarios of the three node MySQL cluster (Percona XtraDB Cluster) that runs in cloud
-      controller nodes. The HP Helion OpenStack Carrier Grade backup/restore process includes the
-      MySQL cluster.<p>If an entire cluster goes down, due to an issue (such as data corruption or
-        MySQL defect), and the cluster does not come back up, you must restore the cluster to a
-        previous well-known state (backup) and start the cluster from that point.</p><p>You should
-        take full backups of the MySQL cluster frequently, such as on a daily basis. Backing up the
-        node on any single controller will back up the full cluster.</p><p>
-        <codeblock>attis backup --config-id &lt;Config_ID_of_Cloud_Controller_Appliance_DB_Backup&gt;</codeblock>
-      </p></section>
-    <section><title>Backup VSD database</title>Before running VSD backup, you must set up trust
-      between the controllers and VSD.<ol id="ol_aqp_n23_k5">
-        <li>Execute the following command on all three controllers to copy the Attis public key to
-          the VSD authorized_keys
-            file:<codeblock>sudo su attis
-ssh-copy-id vsd_user@vsd_address</codeblock><b>Note:</b>
-          The <i>vsd_user</i> can be found by viewing the configuration
-          file:<codeblock>attis config --id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock>The
-            <i>vsd_address</i> can be found in the /etc/attis/dcn.lst
-          file:<codeblock>cat /etc/attis/dcn.lst</codeblock></li>
-        <li>Run the backup
-          command:<codeblock>attis backup --config-id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock></li>
-      </ol></section>
-    <section><title>Backup VSC system files</title>If VSC username/password is set other than
-      defaults, modify <i>vsc_user_name</i> or/and <i>vsc_user_pass</i> in the
-        <systemoutput>/etc/attis/dcn.lst</systemoutput> file before running VSC backup or
-      restore.<codeblock>attis backup --config-id &lt;Config_ID_of_ VSC_Appliance_config_files_Backup&gt;</codeblock></section>
-    <section><title>Backup WindRiver system files </title>If the KVM region controller
-      username/password is set other than defaults, use the Attis CLI to update those values in the
-      KVM region controller config.<p>
-        <codeblock>attis config --id &lt;config_id of WR_Appliance_system_files_Backup&gt; --update-parameter '{"wr_controller_backup_user":"YOUR_USER"}'</codeblock>
-      </p><codeblock>attis config --id &lt;config_id of WR_Appliance_system_files_Restore&gt; --update-parameter '{"wr_controller_backup_password":"YOUR_PASSWORD"}</codeblock><p>Then<codeblock>attis backup --config-id &lt;Config_ID_of_ WR_Appliance_system_files_Backup&gt;</codeblock></p></section>
-    <section><title>Backup Baremetal Controller database and files</title>Before backing up or
-      restoring the baremetal controller:<ol id="ol_mqc_s23_k5">
-        <li>Update the bm_controller_address field in the /etc/attis/dcn.lst
-          file:<codeblock>vi /etc/attis/dcn.lst</codeblock></li>
-        <li>Update the target_restore_nodes parameter in baremetal controller files restore
-          config:<codeblock>attis config --id &lt;Config_ID_of_BM_Controller_ironic_files_Restore&gt; --update-parameter '{"target_restore_nodes":"&lt;BM_Controller_IP&gt;:&lt;BM_Controller_IP&gt;"}'
-attis config --id &lt;Config_ID_of_BM_Controller_neutron_files_Restore&gt; --update-parameter '{"target_restore_nodes":"&lt;BM_Controller_IP&gt;:&lt;BM_Controller_IP&gt;"}'
-attis config --id &lt;Config_ID_of_BM_Controller_nova_files_Restore&gt; --update-parameter '{"target_restore_nodes":"&lt;BM_Controller_IP&gt;:&lt;BM_Controller_IP&gt;"}'</codeblock>
-          Where:
-        <ul><li>Config_ID_of_BM_Controller_ironic_files_Restore is the ID of the
-          BM_Controller_ironic_files_Restore configuration file.</li>
-          <li>BM_Controller_IP is the IP of the baremetal controller.</li></ul></li>
-        <li>Copy the Attis public key, /home/attis/.ssh/id_rsa.pub , from each of the controllers in
-          the KVM region and paste the keys into the authorized_keys file on the baremetal
-          controller, <codeph>/home/cghelion/.ssh/authorized_keys</codeph>, to setup trust between
-          controllers and the baremetal
-          controller.<codeblock>attis backup --config-id &lt;Config_ID_of_ BM_Controller_Data_Backup&gt;</codeblock></li>
-      </ol></section>
-    <p> </p></body>
+    <p>See:</p>
+    <p><xref href="CGH-2-attis-backup.dita#topic10581c2ab">Backing Up the Cloud</xref></p>
+    <p><xref href="CGH-2-attis-restore.dita#topic10581c2ar">Restoring the Cloud</xref></p>
+    <p><xref href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis CLI for Backing Up  and Restoring</xref></p>
+    <p><b>Important:</b> Before you start your first backup, you must use the Attis CLI to specify
+      where HP Helion OpenStack Carrier Grade will store backup files. For more information, see
+      <xref href="CGH-2--backup-configure.dita#topic10581c2bc">Configuring the Backup and Restore Location </xref></p>
+  </body>
 </topic>

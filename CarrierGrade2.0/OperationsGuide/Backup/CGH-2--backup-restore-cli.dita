@@ -24,8 +24,8 @@ But the CLI, REST API etc should all be same --></p>
       cloud. Attis is automatically installed on each of the controller nodes in the non-KVM region.
       Attis uses a command line interface.</p>
     <p>The following document describes the full Attis CLI for backing up and restoring. You can
-      also use the built-in Attis help system by entering <codeph>attis help</codeph> before any
-      command when working with the CLI. For example:</p>
+      also use the built-in Attis help system by entering <systemoutput>attis help</systemoutput>
+      before any command when working with the CLI. For example:</p>
     <p>
       <codeblock>attis help storage</codeblock>
     </p>
@@ -43,8 +43,9 @@ But the CLI, REST API etc should all be same --></p>
         backup encryption, but exposure of the Attis backup key could result in unauthorized
         exposure of credentials stored in backups.</p>
     </section>
-    <section/>
-    <p><b>Synopsis</b></p>
+    <section>
+      <title>Synopsis</title>
+    </section>
     <p>
       <codeblock>attis [--version] [-v] [--log-file LOG_FILE] [-q] [-h] [--debug]</codeblock>
     </p>
@@ -62,20 +63,19 @@ But the CLI, REST API etc should all be same --></p>
     </p>
     <p><b>Commands</b></p>
     <p>
-      <ul id="ul_f45_xr3_pt">
-        <li><codeph>backup</codeph> -- Triggers the backup service. </li>
-        <li><codeph>backuplog</codeph> -- Shows backup logs. </li>
-        <li><codeph>complete</codeph> -- Prints bash completion command </li>
-        <li><codeph>config</codeph> -- Shows stored configuration for Attis service. </li>
-        <li><codeph>help</codeph> -- Shows detailed help for another command. </li>
-        <li><codeph>job</codeph> -- Shows previous Attis backup/restore jobs. </li>
-        <li><codeph>queue</codeph> -- Shows dispatcher queues. </li>
-        <li><codeph>recover</codeph> -- Triggers Attis recover service. </li>
-        <li><codeph>report</codeph> -- Shows recovery reports. </li>
-        <li><codeph>restart</codeph> -- Triggers the Attis restart service. </li>
-        <li><codeph>restore</codeph> -- Triggers the Attis restore service. </li>
-        <li><codeph>storage</codeph> -- Shows storage configuration for the Attis service. </li>
-        <li><codeph>task</codeph> -- Shows previous Attis backup/restore tasks. </li>
+      <ul id="ul_at4_3m3_k5">
+        <li><systemoutput>backup</systemoutput> -- Triggers the backup service.</li>
+        <li><systemoutput>backuplog</systemoutput> -- Shows backup logs.</li>
+        <li><systemoutput>complete</systemoutput> -- Prints bash completion command</li>
+        <li><systemoutput>config</systemoutput> -- Shows stored configuration for Attis
+          service.</li>
+        <li><systemoutput>help</systemoutput> -- Shows detailed help for another command.</li>
+        <li><systemoutput>job</systemoutput> -- Shows previous Attis backup/restore jobs.</li>
+        <li><systemoutput>queue</systemoutput> -- Shows dispatcher queues.</li>
+        <li><systemoutput>restore</systemoutput> -- Triggers the Attis restore service.</li>
+        <li><systemoutput>storage</systemoutput> -- Shows storage configuration for the Attis
+          service.</li>
+        <li><systemoutput>task</systemoutput> -- Shows previous Attis backup/restore tasks.</li>
       </ul>
     </p>
     <section>
@@ -130,78 +130,6 @@ But the CLI, REST API etc should all be same --></p>
           restore </li>
         <li><codeph>--os-password PASSWORD</codeph> -- Specifies the password of the user used to
           execute the restore </li>
-        <li><codeph>--os-auth-url AUTH_URL</codeph> -- Specifies the Keystone authentication
-          URL.</li>
-      </ul>
-    </p>
-    <p><b>Recover / Resync</b></p>
-    <p>The following command triggers Attis recover service. Use <codeph>attis help recover</codeph>
-      for more information.</p>
-    <codeblock>attis recover [-h] [--config-id CONFIG_ID] [--report-id REPORT_ID]                    
-        [--os-tenant-name TENANT_NAME] [--os-username USERNAME]
-      [--os-password PASSWORD] [--os-auth-url AUTH_URL] </codeblock>
-    <p><b>Arguments</b></p>
-    <p>
-      <ul id="ul_hnd_2y3_pt">
-        <li><codeph>--config-id CONFIG_ID</codeph> -- Restores Attis using configuration id. Refer
-          to attis config </li>
-        <li><codeph>--report-id REPORT_ID</codeph> -- Runs recovery for the specified report ID </li>
-        <li><codeph>--os-tenant-name TENANT_NAME</codeph> -- Specifies the project (tenant) name of
-          the user used to execute the recover. </li>
-        <li><codeph>--os-username USERNAME</codeph> -- Specified the user name to execute the
-          recover.</li>
-        <li><codeph>--os-password PASSWORD</codeph> -- Specifies the password of the user used to
-          execute the recover.</li>
-        <li><codeph>--os-auth-url AUTH_URL</codeph> -- Specifies the Keystone authentication
-          URL.</li>
-      </ul>
-    </p>
-    <p><b>Recovery Report</b></p>
-    <p>The following command shows recovery reports. Use <codeph>attis help report</codeph> for more
-      information.</p>
-    <codeblock>attis report [-h] [--list] [--generate] [--id ID] [--name NAME]                    
-                [--config-id CONFIG_ID] [--os--tenant-name TENANT_NAME]                   
-        [--os--username USERNAME] [--os--password PASSWORD]               
-      [--os--auth-url AUTH_URL] </codeblock>
-    <p><b>Arguments</b></p>
-    <p>
-      <ul id="ul_lcj_mtl_pt">
-        <li><codeph>--list</codeph> Shows the recovery report. </li>
-        <li><codeph>--generate</codeph> Generates the recovery report. </li>
-        <li><codeph>--id ID</codeph> Shows the recovery report with specified id </li>
-        <li><codeph>--name NAME</codeph> Shows the recovery report with specified name </li>
-        <li><codeph>--config-id CONFIG_ID</codeph> Generates a recovery report using configuration
-          with id. Refer to attis config </li>
-        <li><codeph>--os-tenant-name TENANT_NAME</codeph> -- Specifies the project (tenant) name of
-          the user used to execute the recovery report. </li>
-        <li><codeph>--os-username USERNAME</codeph> -- Specified the user name to execute the
-          recovery report.</li>
-        <li><codeph>--os-password PASSWORD</codeph> -- Specifies the password of the user used to
-          execute the recovery report.</li>
-        <li><codeph>--os-auth-url AUTH_URL</codeph> -- Specifies the Keystone authentication
-          URL.</li>
-      </ul>
-    </p>
-    <p><b>Restart</b></p>
-    <p>The following command restarts the Attis service. Use <codeph>attis help restart</codeph> for
-      more information.</p>
-    <p>
-      <codeblock>attis restart [-h] [--config-id CONFIG_ID] [--os-tenant-name TENANT_NAME] 
-                [--os-username USERNAME] [--os-password PASSWORD] [--os-auth-url AUTH_URL]</codeblock>
-    </p>
-    <p><b>Arguments</b></p>
-    <p>
-      <ul id="ul_lb4_gvl_pt">
-        <li><codeph>--config-id CONFIG_ID</codeph> -- Restores using configuration with id. Refer to
-          attis config </li>
-        <li><codeph>--os-tenant-name TENANT_NAME</codeph> -- Tenant name of the user used to execute
-          the restart </li>
-        <li><codeph>--os-tenant-name TENANT_NAME</codeph> -- Specifies the project (tenant) name of
-          the user used to execute the restart. </li>
-        <li><codeph>--os-username USERNAME</codeph> -- Specified the user name to execute the
-          restart.</li>
-        <li><codeph>--os-password PASSWORD</codeph> -- Specifies the password of the user used to
-          execute the restart.</li>
         <li><codeph>--os-auth-url AUTH_URL</codeph> -- Specifies the Keystone authentication
           URL.</li>
       </ul>
@@ -324,31 +252,6 @@ But the CLI, REST API etc should all be same --></p>
             <entry>attis restore --config-id CONFIG_ID --backup-id BACKUP_ID</entry>
             <entry>executes restore job using config id CONF_ID and BACKUP_ID, which is backup_id
               from "attis backuplog"</entry>
-          </row>
-          <row>
-            <entry>attis report --list</entry>
-            <entry>shows a list of re-sync reports</entry>
-          </row>
-          <row>
-            <entry>attis report --list --name REPORT_NAME</entry>
-            <entry>shows a list of re-sync reports with name REPORT_NAME</entry>
-          </row>
-          <row>
-            <entry>attis report --id REPORT_ID</entry>
-            <entry>shows detail re-sync report of id REPORT_ID</entry>
-          </row>
-          <row>
-            <entry>attis report --generate</entry>
-            <entry>generates re-sync report and returns a report ID</entry>
-          </row>
-          <row>
-            <entry>attis recover --config-id CONFIG_ID --report-id REPORT_ID</entry>
-            <entry>executes resync job with parameters fetched from config id CONFIG_ID and
-              report-id REPORT_ID which user authorized</entry>
-          </row>
-          <row>
-            <entry>attis restart --config-id CONFIG_ID</entry>
-            <entry>would restart as using the configuration</entry>
           </row>
           <row>
             <entry>attis storage</entry>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2ab">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Backing Up the Cloud</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <!-- https://wiki.hpcloud.net/pages/viewpage.action?pageId=53513771     -->
+    <p><!--Here is the wiki link for Attis.<xref href="https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?pageId=946944841" format="html" scope="external">https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?pageId=946944841</xref> 
+The high level design needs to be adjusted to more suite with CG(It is reflecting CS in some areas)I will soon update it. 
+But the CLI, REST API etc should all be same --></p>
+    <p>HP Helion OpenStack Carrier Grade includes a backup and restore application called Attis
+      which you can use to backup and restore essential system files and databases of the running
+      cloud. Attis is automatically installed on each of the controller nodes in the non-KVM region.
+      Attis uses a command line interface. For more information, see <xref
+        href="#_HP_Helion_OpenStack®">Attis Backup and Restore CLI</xref>.</p>
+    <p><b>Important:</b> Before you start your first backup, you must use the Attis CLI to specify
+      where HP Helion OpenStack Carrier Grade will store backup files. For more information, see
+        <xref href="CGH-2--backup-configure.dita#topic10581c2bc">Configuring the Backup and Restore
+        Location </xref></p>
+    <section id="when"><title>When to perform backups</title>We recommend performing regular backups,
+      preferably hourly, and especially after changing the appliances configuration and before and
+      after updating HP Helion OpenStack Carrier Grade software.Additionally, you should create a
+      backup from HLM VM as follows:<ul id="ul_qzx_1b3_k5">
+        <li>when the HP Helion OpenStack Carrier Grade installation is complete</li>
+        <li>when any change is made to the HP Helion OpenStack Carrier Grade components</li>
+      </ul></section>
+    <section id="overview"><title>Backup process overview</title><ul id="ul_kgy_3t3_k5">
+        <li><xref href="#topic10581c2ab/hlm" format="dita"/></li>
+        <li><xref href="#topic10581c2ab/database" format="dita"/></li>
+        <li><xref href="#topic10581c2ab/vsd-database" format="dita"/></li>
+        <li><xref href="#topic10581c2ab/vsc" format="dita"/></li>
+        <li><xref href="#topic10581c2ab/kvm" format="dita"/></li>
+        <li><xref href="#topic10581c2ab/baremetal" format="dita"/></li>
+      </ul><title>Backup Process</title>To back up an HP Helion OpenStack Carrier Grade appliance
+      (for example, the lifecycle manager, controllers, the VSC, the VSD and so forth), use the
+      following steps:<ol id="ol_vxx_b23_k5">
+        <li>Log in to the controller.</li>
+        <li>Authenticate using the source stackrc command or export the variables
+          manually:<codeblock>export OS_PASSWORD=&lt;your_os_password&gt;
+export OS_USERNAME=admin
+export OS_TENANT_NAME=admin
+export OS_AUTH_URL=&lt;your_os_auth_url&gt;</codeblock></li>
+        <li>Execute the following command to start the
+          backup:<codeblock>attis backup --config-id CONFIG_ID --backup_type BACKUP_TYPE</codeblock>Where:</li>
+      </ol><ul id="ul_yxx_b23_k5">
+        <li>config-id CONFIG_ID authenticates using the ID configuration file.</li>
+        <li>backup_type BACKUP_TYPE is full or incremental. Full backup is the default.</li>
+      </ul></section>
+    <section id="hlm"><title>Backup of HLM</title>Attis can back up any of the following HLM data - <ul
+        id="ul_rxc_h23_k5">
+        <li>All files under the <systemoutput>/opt/</systemoutput> folder on the HLM host. This
+          backs up all the installed code/configuration and also h* installation scripts.</li>
+        <li>All files under the <systemoutput>/root/</systemoutput> folder on the HLM host. This
+          backs up all the source code, packages, hlinux netboot, infra-ansible-playbooks, SSH keys,
+          as well as cloud folders.</li>
+        <li>All files under <systemoutput>/root</systemoutput> and
+          <systemoutput>/opt</systemoutput></li>
+      </ul><p>
+        <codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_Data_Backup&gt; </codeblock>
+      </p><p><b>Note:</b> Attis implements <b>tree-structure</b> for certain backup/restore
+        configurations. For example, if you want to back up /opt and /root folders on the HLM host,
+        run:</p><p>
+        <codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_Data_Backup&gt;</codeblock>
+      </p><p>Or to only back up /opt files on HLM:</p><p>
+        <codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_opt_files_Backup&gt;</codeblock>
+      </p><p>The root config <b>HLM_Appliance_Data_Backup</b> includes children config
+          <b>HLM_Appliance_opt_files_Backup</b> and
+      <b>HLM_Appliance_root_files_Backup</b>.</p></section>
+    <section id="database"><title>Backup Cloud Controller Database</title>This section deals with the disaster
+      recovery scenarios of the three node MySQL cluster (Percona XtraDB Cluster) that runs in cloud
+      controller nodes. The HP Helion OpenStack Carrier Grade backup/restore process includes the
+      MySQL cluster.<p>If an entire cluster goes down, due to an issue (such as data corruption or
+        MySQL defect), and the cluster does not come back up, you must restore the cluster to a
+        previous well-known state (backup) and start the cluster from that point.</p><p>You should
+        take full backups of the MySQL cluster frequently, such as on a daily basis. Backing up the
+        node on any single controller will back up the full cluster.</p><p>
+        <codeblock>attis backup --config-id &lt;Config_ID_of_Cloud_Controller_Appliance_DB_Backup&gt;</codeblock>
+      </p></section>
+    <section id="vsd-database"><title>Backup VSD database</title>Before running VSD backup, you must set up trust
+      between the controllers and VSD.<ol id="ol_aqp_n23_k5">
+        <li>Execute the following command on all three controllers to copy the Attis public key to
+          the VSD authorized_keys
+            file:<codeblock>sudo su attis
+ssh-copy-id vsd_user@vsd_address</codeblock><b>Note:</b>
+          The <i>vsd_user</i> can be found by viewing the configuration
+          file:<codeblock>attis config --id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock>The
+            <i>vsd_address</i> can be found in the /etc/attis/dcn.lst
+          file:<codeblock>cat /etc/attis/dcn.lst</codeblock></li>
+        <li>Run the backup
+          command:<codeblock>attis backup --config-id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock></li>
+      </ol></section>
+    <section id="vsc"><title>Backup VSC system files</title>If VSC username/password is set other than
+      defaults, modify <i>vsc_user_name</i> or/and <i>vsc_user_pass</i> in the
+        <systemoutput>/etc/attis/dcn.lst</systemoutput> file before running VSC backup or
+      restore.<codeblock>attis backup --config-id &lt;Config_ID_of_ VSC_Appliance_config_files_Backup&gt;</codeblock></section>
+    <section id="kvm"><title>Backup KVM-region system files </title>If the KVM region controller
+      username/password is set other than defaults, use the Attis CLI to update those values in the
+      KVM region controller config.<p>
+        <codeblock>attis config --id &lt;config_id of WR_Appliance_system_files_Backup&gt; --update-parameter '{"wr_controller_backup_user":"YOUR_USER"}'</codeblock>
+      </p><codeblock>attis config --id &lt;config_id of WR_Appliance_system_files_Restore&gt; --update-parameter '{"wr_controller_backup_password":"YOUR_PASSWORD"}</codeblock><p>Then<codeblock>attis backup --config-id &lt;Config_ID_of_ WR_Appliance_system_files_Backup&gt;</codeblock></p></section>
+    <section id="baremetal"><title>Backup Baremetal Controller database and files</title>Before backing up or
+      restoring the baremetal controller:<ol id="ol_mqc_s23_k5">
+        <li>Update the bm_controller_address field in the /etc/attis/dcn.lst
+          file:<codeblock>vi /etc/attis/dcn.lst</codeblock></li>
+        <li>Update the target_restore_nodes parameter in baremetal controller files restore
+          config:<codeblock>attis config --id &lt;Config_ID_of_BM_Controller_ironic_files_Restore&gt; --update-parameter '{"target_restore_nodes":"&lt;BM_Controller_IP&gt;:&lt;BM_Controller_IP&gt;"}'
+attis config --id &lt;Config_ID_of_BM_Controller_neutron_files_Restore&gt; --update-parameter '{"target_restore_nodes":"&lt;BM_Controller_IP&gt;:&lt;BM_Controller_IP&gt;"}'
+attis config --id &lt;Config_ID_of_BM_Controller_nova_files_Restore&gt; --update-parameter '{"target_restore_nodes":"&lt;BM_Controller_IP&gt;:&lt;BM_Controller_IP&gt;"}'</codeblock>
+          Where:
+        <ul><li>Config_ID_of_BM_Controller_ironic_files_Restore is the ID of the
+          BM_Controller_ironic_files_Restore configuration file.</li>
+          <li>BM_Controller_IP is the IP of the baremetal controller.</li></ul></li>
+        <li>Copy the Attis public key, /home/attis/.ssh/id_rsa.pub , from each of the controllers in
+          the KVM region and paste the keys into the authorized_keys file on the baremetal
+          controller, <codeph>/home/cghelion/.ssh/authorized_keys</codeph>, to setup trust between
+          controllers and the baremetal
+          controller.<codeblock>attis backup --config-id &lt;Config_ID_of_ BM_Controller_Data_Backup&gt;</codeblock></li>
+      </ol></section></body>
+</topic>
