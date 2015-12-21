@@ -32,27 +32,67 @@
                                 <li>Click <b>Sign In</b> to log in using your account. </li>
                                 <li>After signing in, click the <b>Downloads</b> link in the menu on
                                         the left side of the page.</li>
-                                <li>Click the <b>Downloads</b> tab and locate the following
-                                        download. </li>
-                        </ol><ul id="ul_zll_rjv_g5">
-                                <li><b>Helion Carrier Grade 2.0.0 VRS</b> Installation files for the
-                                        HP Helion OpenStack Carrier Grade Tahoe, Memphis, and
-                                        Sacramento deployments. This link will download the
-                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
-                                        file. </li>
-                                <li><b>Helion Carrier Grade 2.0 VRS Checksum</b>. The SHA256
-                                        checksum for HP Helion Carrier Grade 2.0 VRS. This link will
-                                        download the
-                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz.sha256</codeph>
-                                        file.</li>
-                                <li><b>Helion Carrier Grade 2.0 VRS Signature</b>. The signature
-                                        file for HP Helion Carrier Grade 2.0 VRS. This link will
-                                        download the
-                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz.sig</codeph>
-                                        file.</li>
-                                <li><b>GPG Keys to Verify Signature Files</b> The public keys for HP
-                                        Helion Carrier Grade 2.0.</li>
-                        </ul><p><b>Note:</b> When downloading installation files, always download
+                                <li id="download-vrs">Click the <b>Downloads</b> tab and locate the
+                                        following download. <ul id="ul_zll_rjv_g5">
+                                                <li><b>Helion Carrier Grade 2.0.0 VRS</b>
+                                                  Installation files for the HP Helion OpenStack
+                                                  Carrier Grade Tahoe, Memphis, and Sacramento
+                                                  deployments. This link will download the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
+                                                  file. </li>
+                                                <li><b>Helion Carrier Grade 2.0 VRS Checksum</b>.
+                                                  The SHA256 checksum for HP Helion Carrier Grade
+                                                  2.0 VRS. This link will download the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz.sha256</codeph>
+                                                  file.</li>
+                                                <li><b>Helion Carrier Grade 2.0 VRS Signature</b>.
+                                                  The signature file for HP Helion Carrier Grade 2.0
+                                                  VRS. This link will download the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz.sig</codeph>
+                                                  file.</li>
+                                                <li><b>GPG Keys to Verify Signature Files</b> The
+                                                  public keys for HP Helion Carrier Grade 2.0.</li>
+                                        </ul></li>
+                                        <li id="download-avs">Click the <b>Downloads</b> tab and locate the following
+                                        download. <ul id="ul_erk_kwh_k5">
+                                                <li><b>Helion Carrier Grade 2.0.0 AVS</b>
+                                                  Installation files for the HP Helion OpenStack
+                                                  Carrier Grade Tahoe, Memphis, and Sacramento
+                                                  deployments. This link will download the
+                                                  <codeph>hcg2_kvm_avs.tar.gz</codeph> file. </li>
+                                                <li><b>Helion Carrier Grade 2.0 AVS Checksum</b>.
+                                                  The SHA256 checksum for HP Helion Carrier Grade
+                                                  2.0 VRS. This link will download the
+                                                  <codeph>hcg2_kvm_avs.tar.gz.sha256</codeph>
+                                                  file.</li>
+                                                <li><b>Helion Carrier Grade 2.0 AVS Signature</b>.
+                                                  The signature file for HP Helion Carrier Grade 2.0
+                                                  VRS. This link will download the
+                                                  <codeph>hcg2_kvm_avs.tar.gz.sig</codeph>
+                                                  file.</li>
+                                                <li><b>GPG Keys to Verify Signature Files</b> The
+                                                  public keys for HP Helion Carrier Grade 2.0.</li>
+                                        </ul></li>
+                                <li id="dowload-infoblox">Optionally, download the <b>Helion Carrier
+                                                Grade 2.0 Infoblox Plugin</b>. Also, download the
+                                        checksum and signature files.</li>
+                                <li id="download-patches">Download the following mandatory
+                                                patches:<ul id="ul_nbs_gvh_k5">
+                                                <li><b>Helion Carrier Grade 2.0 WR001
+                                                  Patch001</b>.This link will download the
+                                                  <codeph>HCG2.0_WR001_Patch001.tar.gz</codeph>
+                                                  file.</li>
+                                                <li><b>Helion Carrier Grade 2.0 Horizon001
+                                                  Patch002</b>. This link will download the
+                                                  <codeph>HCG2.0_Horizon001_Patch002.tar.gz</codeph>
+                                                  file.</li>
+                                                <li><b>Helion Carrier Grade 2.0 Heat001
+                                                  Patch003</b>. This link will download the
+                                                  <codeph>HCG2.0_Heat001_Patch003.tar.gz</codeph>
+                                                  file. </li>
+                                        </ul></li>
+                        </ol><p>
+                                <b>Note:</b> When downloading installation files, always download
                                 and verify the signature file before installing. </p></section>
                 <section id="verify">
                         <title>Verify the downloaded signature</title>
@@ -153,8 +193,8 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
 97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar                                                </codeblock>Note
                                         that the checksum file contains the date that the file was
                                         generated, the checksum string, and the name of the file
-                                        that was
-                                        used:<codeblock>Fri Jul 31 10:55:37 EDT 2015
+                                        that was used, similar to the
+                                        following:<codeblock>Fri Jul 31 10:55:37 EDT 2015
 97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg_1.1.0.tar</codeblock></li>
                         </ol>
                 </section>
