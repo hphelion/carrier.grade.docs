@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2br">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Backup and Restore</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <!-- https://wiki.hpcloud.net/pages/viewpage.action?pageId=53513771     -->
+    <p><!--Here is the wiki link for Attis.<xref href="https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?pageId=946944841" format="html" scope="external">https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?pageId=946944841</xref> 
+The high level design needs to be adjusted to more suite with CG(It is reflecting CS in some areas)I will soon update it. 
+But the CLI, REST API etc should all be same --></p>
+    <p>HP Helion OpenStack Carrier Grade includes a backup and restore application called Attis
+      which you can use to backup and restore essential system files and databases of the running
+      cloud. Attis is automatically installed on each of the controller nodes in the non-KVM region.
+      Attis uses a command line interface. For more information, see <xref
+        href="#_HP_Helion_OpenStack®">Attis Backup and Restore CLI</xref>.</p>
+    <p><b>Attis Administrator Responsibilities for Protecting Credentials</b></p>
+    <p>Attis performs encrypted backup and restore of system data. The key for encryption and
+      decryption is stored in the Attis configuration file on each controller node. If this key is
+      lost, your backups can not be restored. Consider storing the backup encryption key separately
+      from your cloud infrastructure, in addition to the copy stored on each controller node.</p>
+    <p>Be aware that keys and passwords for other OpenStack services are stored in configuration
+      files on cloud infrastructure nodes, protected by filesystem controls. Protect servers from
+      unauthorized access and protect against exposure of credentials in configuration files. Attis
+      backups contain copies of these credentials as well, protected from snooping via backup
+      encryption, but exposure of the Attis backup key could result in unauthorized exposure of
+      credentials stored in backups.</p>
+    <section id="what">
+      <title>What gets backed up</title>
+      <p>The following components can be backed up and restored:<ul id="ul_pzx_1b3_k5">
+          <li>Percona® XtraDB® cluster on controllers in non-kvm region</li>
+          <li>Percona® XtraDB® cluster on VSD</li>
+          <li>HLM Data [opt and root files]</li>
+          <li>System files on VSC</li>
+          <li>System files in kvm region </li>
+          <li>MySQL database and Neutron, Nova, Ironic files under /etc on the baremetal controller
+            (Sacramento deployments only)</li>
+        </ul></p>
+    </section>
+    <p>See:</p>
+    <p><xref href="CGH-2-attis-backup.dita#topic10581c2ab">Backing Up the Cloud</xref></p>
+    <p><xref href="CGH-2-attis-restore.dita#topic10581c2ar">Restoring the Cloud</xref></p>
+    <p><xref href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis CLI for Backing Up  and Restoring</xref></p>
+    <p><b>Important:</b> Before you start your first backup, you must use the Attis CLI to specify
+      where HP Helion OpenStack Carrier Grade will store backup files. For more information, see
+      <xref href="CGH-2--backup-configure.dita#topic10581c2bc">Configuring the Backup and Restore Location </xref></p>
+  </body>
+</topic>
