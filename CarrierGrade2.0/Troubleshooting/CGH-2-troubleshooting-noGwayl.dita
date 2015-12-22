@@ -15,15 +15,16 @@
     </metadata>
   </prolog>
   <body>
-    <p>
-      <codeblock>VSD managed subnets:
-
-1. Get APIKey for VSD:
-curl -k -s -u csproot:csproot -H "X-Nuage-Organization: csp" -X GET https://&lt;VSD IP>:8443/nuage/api/v3_2/me | python -mjson.tool
-
-eg.
-curl -k -s -u csproot:csproot -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/me | python -mjson.tool
-[
+        <p><!--https://jira.hpcloud.net/secure/attachment/60673/HowtoSetNoGwayForMultiNICsubnets.txt--></p>
+        <section>
+            <p> VSD managed subnets: <ol id="ol_u5b_jxp_k5">
+                    <li>Execute the following command to retreive the <codeph>APIKey</codeph> for
+                        VSD:
+                            <codeblock>curl -k -s -u csproot:csproot -H "X-Nuage-Organization: csp" -X GET https://&lt;VSD IP>:8443/nuage/api/v3_2/me | python -mjson.tool     </codeblock><p>For
+                            example:
+                            </p><codeblock>curl -k -s -u csproot:csproot -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/me | python -mjson.tool</codeblock><p>The
+                            output appears similar
+                        to:</p><codeblock>[
     {
         "APIKey": "d7126af3-b8a4-42e4-b77b-d99308c1e83b",
         "APIKeyExpiry": 1447495809143,
@@ -44,15 +45,16 @@ curl -k -s -u csproot:csproot -H "X-Nuage-Organization: csp" -X GET https://10.1
         "role": "CSPROOT",
         "userName": "csproot"
     }
-]
-
-
-2. Get the subnets:
-curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets | python -mjson.tool
-
-eg. multinic1, multinic2 and multinic3 in the following example
-
-[
+]       </codeblock></li>
+                    <li>Use the following command to retrieve the subnets:
+                            <codeblock>curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets | python -mjson.tool </codeblock><p>For
+                            example, the subnets in the following sample output are:
+                                <codeph>multinic1</codeph>, <codeph>multinic2</codeph>, and
+                                <codeph>multinic3</codeph> in the following example. The UUID for
+                            multinic2 is: <codeph>3370ba9e-17b4-4cec-86f0-6bfe63fc6989</codeph> and
+                            the UUID for multinic3 is:
+                                <codeph>176972b4-c532-4ceb-869a-a50990146bdb</codeph>
+                        </p><codeblock>[
     {
         "ID": "3194f7ca-5952-4d3e-a62b-7986586fb6bb",
         "IPType": "IPV4",
@@ -167,25 +169,22 @@ eg. multinic1, multinic2 and multinic3 in the following example
         "underlayEnabled": "DISABLED",
         "vnId": 739391
     }
-]
-
-
-multinic2 UUID: 3370ba9e-17b4-4cec-86f0-6bfe63fc6989
-multinic3 UUID: 176972b4-c532-4ceb-869a-a50990146bdb
-
-3. How to set No Gateway option on a subnet:
---------------------------------------------------
-Get the dhcp options for a specific subnet:
-
-curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/3370ba9e-17b4-4cec-86f0-6bfe63fc6989/dhcpoptions | python -mjson.tool
+]</codeblock></li>
+                </ol></p>
+        </section>
+      <section>
+          <title>Set the No Gateway Option on a Subnet</title>
+          
+          
+          <ol><li>Get the dhcp options for a specific subnet:
+                    <codeblock>curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/3370ba9e-17b4-4cec-86f0-6bfe63fc6989/dhcpoptions | python -mjson.tool
 Blank output to begin with since we haven't set any dhcpoptions yet
-
+                  
 POST - No default router (3)
---------------------------------------------------
-curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -H "Content-Type:application/json" -d '{"type":"03","length":"01", "value":"00"}' -X POST https://10.10.4.21:8443/nuage/api/v3_2/subnets/3370ba9e-17b4-4cec-86f0-6bfe63fc6989/dhcpoptions | python - mjson.tool
-
-GET command to double check that dhcpoptions are set:
-root@LR4TB1:~# curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/3370ba9e-17b4-4cec-86f0-6bfe63fc6989/dhcpoptions | python -mjson.tool
+curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -H "Content-Type:application/json" -d '{"type":"03","length":"01", "value":"00"}' -X POST https://10.10.4.21:8443/nuage/api/v3_2/subnets/3370ba9e-17b4-4cec-86f0-6bfe63fc6989/dhcpoptions | python - mjson.tool</codeblock></li>
+              
+              <li>GET command to double check that dhcpoptions are set:
+                    <codeblock>root@LR4TB1:~# curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/3370ba9e-17b4-4cec-86f0-6bfe63fc6989/dhcpoptions | python -mjson.tool
 [
     {
         "ID": "4db72abb-1f5e-438a-abb2-a98d075eb6ef",
@@ -206,12 +205,9 @@ root@LR4TB1:~# curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-
         "type": "03",
         "value": "00"
     }
-]
-
-Repeat on the multinic2
-------------------------
-
-curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/176972b4-c532-4ceb-869a-a50990146bdb/dhcpoptions | python -mjson.tool
+]                  </codeblock></li>
+              <li>Repeat on the multinic2
+                    <codeblock>curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/176972b4-c532-4ceb-869a-a50990146bdb/dhcpoptions | python -mjson.tool
 
 root@LR4TB1:~# curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -H "Content-Type:application/json" -d '{"type":"03","length":"01", "value":"00"}' -X POST https://10.10.4.21:8443/nuage/api/v3_2/subnets/176972b4-c532-4ceb-869a-a50990146bdb/dhcpoptions | python - mjson.tool
 root@LR4TB1:~# curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/176972b4-c532-4ceb-869a-a50990146bdb/dhcpoptions | python -mjson.tool
@@ -235,16 +231,15 @@ root@LR4TB1:~# curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-
         "type": "03",
         "value": "00"
     }
-]
-
-Now multinicsub3 and multinicsub3 are set to NO DEFAULT GW entry.
-
-Post this operation launch a VM with multinicsub1,multinicsub2,multinicsub3
-only multinicsub1 should get GW route entry for the VM.
-
-Assign FIP to this multinicsub1 IP.
-
-</codeblock>
-    </p>
+]                  </codeblock>
+                    Now multinicsub3 and multinicsub3 are set to NO DEFAULT GW entry.</li>
+              
+              <li>Post this operation launch a VM with multinicsub1,multinicsub2,multinicsub3
+                  only multinicsub1 should get GW route entry for the VM.</li>
+              
+              <li>Assign FIP to this multinicsub1 IP.</li>
+          </ol>
+      </section>
+              
   </body>
 </topic>
