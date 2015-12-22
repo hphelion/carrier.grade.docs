@@ -54,14 +54,14 @@
                                                   link will download the
                                                   <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
                                                   file. </li>
-                                                <li><b>Helion Carrier Grade 2.0 VRS Checksum</b>.
-                                                  The SHA256 checksum for HP Helion Carrier Grade
-                                                  2.0 VRS. This link will download the
+                                                <li><b>Helion Carrier Grade 2.0 DCN Part 1 of 1
+                                                  Checksum</b>. The SHA256 checksum for HP Helion
+                                                  Carrier Grade 2.0 VRS. This link will download the
                                                   <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz.sha256</codeph>
                                                   file.</li>
-                                                <li><b>Helion Carrier Grade 2.0 VRS Signature</b>.
-                                                  The signature file for HP Helion Carrier Grade 2.0
-                                                  VRS. This link will download the
+                                                <li><b>Helion Carrier Grade 2.0 DCN Part 1 of 1
+                                                  Signature</b>. The signature file for HP Helion
+                                                  Carrier Grade 2.0 VRS. This link will download the
                                                   <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz.sig</codeph>
                                                   file.</li>
                                                 <li><b>GPG Keys to Verify Signature Files</b> The
@@ -123,7 +123,7 @@
                                         <codeph>GPG-HPCSS-Public-Keys.tar</codeph> file. </p>
                         <ol id="ol_rzt_rrh_h5">
                                 <li>Copy the <codeph>GPG-HPCSS-Public-Keys.tar</codeph> file to the
-                                                <codeph>/root/cg/</codeph> directory. You wlll need
+                                                <codeph>/root/cg/</codeph> directory. You will need
                                         to create this
                                         directory:<codeblock>mkdir /root/cg/</codeblock></li>
                                 <li>Extract the
@@ -196,11 +196,10 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                         <p>You should also use a checksum verification tool, such as sha256sum,
                                 which should come installed with Ubuntu.</p>
                         <ol id="ol_icb_k4f_xs">
-                                <li>Run the checksum tool against the download
-                                                package:<codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
-                                        file.
+                                <li>Run the checksum tool against the download package:
                                                 <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar</codeblock><p>or
-                                                <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_avs.tar</codeblock></p></li>
+                                                <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar
+sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p></li>
                                 <li>Compare the output of the checksum tool to the
                                                 <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph> file.
                                         <codeblock>sha256sum.exe hcg2_kvm_esx_ironic_vrs.tar
@@ -209,7 +208,7 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                         generated, the checksum string, and the name of the file
                                         that was used, similar to the
                                         following:<codeblock>Fri Jul 31 10:55:37 EDT 2015
-97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg_1.1.0.tar</codeblock></li>
+97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar</codeblock></li>
                         </ol>
                 </section>
                 <section id="extract"><title>Extract and copy the HP Helion OpenStack Carrier Grade
@@ -220,8 +219,14 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                         file. The exraction creates the
                                                 <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
                                         file.</li>
-                                <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph> file. A
-                                        number of files and folders are extracted.</li>
+                                <li>Extract the
+                                                <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
+                                        file. The extraction creates the
+                                                <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
+                                        file.</li>
+                                <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph> and
+                                                <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
+                                        files. A number of files and folders are extracted.</li>
                                 <li>Copy or move the extracted files as indicated in the following
                                         tables. <table id="table_rkj_yyk_2t">
                                                 <tgroup cols="3">
@@ -339,8 +344,12 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                         <title>Extract the DCN components</title>
                         <p>HP Distributed Cloud Networking (DCN) must be fully installed and
                                 operational before installing HP Helion OpenStack Carrier Grade. The
-                                currently supported version is <b id="dcn-version">3.2R4</b>.</p>
-                        <p>Extract the downloaded files as indicated in the following table.</p>
+                                currently supported version is <b id="dcn-version">3.2R4</b>. The
+                                installation download packages contain files needed to integrate HP
+                                Helion OpenStack Carrier Grade and DCN.</p>
+                        <p>Extract the downloaded files from the <codeph>DCN-1</codeph> and
+                                        <codeph>DCN-2</codeph> directories as indicated in the
+                                following table.</p>
                         <table id="table_mlr_bcz_st">
                                 <tgroup cols="3">
                                         <colspec colnum="1" colname="col2" colwidth="1.52*"/>
@@ -465,7 +474,7 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                         </p><itemgroup conref="#topic7148cgid/patches"/></li>
                         </ol></section>
                 <section>
-                        <p><b id="debian">Debian Packages</b></p>
+                        <p><b id="debian">Obtain Required Debian Packages</b></p>
                         <p>Download the following Debian packages from a trusted source:</p>
                         <ul
                                 conref="CGH-2-install-lifecycle-sacramento.dita#topic10581c2ils/ul_wwn_13h_xt"
