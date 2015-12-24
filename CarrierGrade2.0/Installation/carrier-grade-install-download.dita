@@ -67,8 +67,8 @@
                                                 <li><b>GPG Keys to Verify Signature Files</b> The
                                                   public keys for HP Helion Carrier Grade 2.0.</li>
                                         </ul></li>
-                                        <li id="download-avs">Click the <b>Downloads</b> tab and locate the following
-                                        download. <ul id="ul_erk_kwh_k5">
+                                <li id="download-avs">Click the <b>Downloads</b> tab and locate the
+                                        following download. <ul id="ul_erk_kwh_k5">
                                                 <li><b>Helion Carrier Grade 2.0.0 AVS</b>
                                                   Installation files for the HP Helion OpenStack
                                                   Carrier Grade Tahoe, Memphis, and Sacramento
@@ -104,10 +104,36 @@
                                                   Patch003</b>. This link will download the
                                                   <codeph>HCG2.0_Heat001_Patch003.tar.gz</codeph>
                                                   file. </li>
+                                                <li><b>Helion Carrier Grade 2.0 DCN001 Patch004</b>.
+                                                  This link will downoad the <codeph>Helion Carrier
+                                                  Grade 2.0 DCN001 Patch004</codeph> file.  </li>
                                         </ul></li>
                         </ol><p>
                                 <b>Note:</b> When downloading installation files, always download
-                                and verify the signature file before installing. </p></section>
+                                and verify the signature file before installing. </p><p/></section>
+                <section>
+                        <ol>
+                                <li id="download-patches-avs">Download the following mandatory
+                                        patches: <!--Denver patches--><ul id="ul_om1_bvz_k5">
+                                                <li><b>Helion Carrier Grade 2.0 WR001
+                                                  Patch001</b>.This link will download the
+                                                  <codeph>HCG2.0_WR001_Patch001.tar.gz</codeph>
+                                                  file.</li>
+                                                <li><b>Helion Carrier Grade 2.0 Horizon001
+                                                  Patch002</b>. This link will download the
+                                                  <codeph>HCG2.0_Horizon001_Patch002.tar.gz</codeph>
+                                                  file.</li>
+                                                <li><b>Helion Carrier Grade 2.0 Heat001
+                                                  Patch003</b>. This link will download the
+                                                  <codeph>HCG2.0_Heat001_Patch003.tar.gz</codeph>
+                                                  file. </li>
+                                        </ul></li>
+                        </ol>
+                        <p>
+                                <b>Note:</b> When downloading installation files, always download
+                                and verify the signature file before installing. </p>
+                </section>
+                <section/>
                 <section id="verify">
                         <title>Verify the downloaded signature</title>
                         <p>After downloading the installation packages, you should verify the
@@ -200,8 +226,8 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                                 <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar</codeblock><p>or
                                                 <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar
 sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p></li>
-                                <li>Compare the output of the checksum tool to the
-                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph> file.
+                                <li>Compare the output of the checksum tool to the download checksum
+                                        file.
                                         <codeblock>sha256sum.exe hcg2_kvm_esx_ironic_vrs.tar
 97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar                                                </codeblock>Note
                                         that the checksum file contains the date that the file was
@@ -411,6 +437,8 @@ sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p>
                                         </tbody>
                                 </tgroup>
                         </table>
+                        <p>Also, extract the <codeph>HCG_2.0_DCN001_Patch004.tar.gz</codeph> file
+                                and copy the file to to <codeph>~/cg/dcn</codeph> directory. </p>
                 </section>
                 <section id="avs">
                         <b>Extract and copy the HP Helion OpenStack Carrier Grade installation files

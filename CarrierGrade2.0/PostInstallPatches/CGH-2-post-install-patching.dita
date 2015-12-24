@@ -159,6 +159,46 @@ source /etc/nova/openrc</codeblock></li>
             information can be found in the
               <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
             file. </li>
-        </ol></p><p/></section>
+        </ol></p></section>
+    <section><title>DCN Patch</title><p><b>Note:</b> Not required for Denver deployments.</p><p>For
+        highly-available HP Helion OpenStack Carrier Grade deployments, use the following steps. </p><p>
+        <ol id="ol_ac5_tvz_k5">
+          <li>Backup the VSC VMs admin
+            <codeblock>config scp admin@&lt;vsc ip>:/config.cfg &lt;destination directory> </codeblock></li>
+          <li>Login to DCN host </li>
+          <li>Execute the following command to remove the VSC VM:
+            <codeblock>virsh destroy vsc virsh undefine vsc</codeblock></li>
+          <li>Delete <codeph>vsc.qcow2</codeph> from <codeph>/home/images</codeph>. </li>
+          <li>Repeat the steps from 2-4 for DCN host2 </li>
+          <li>Log into lifecycle manager VM. </li>
+          <li>Replace <codeph>vsc_singledisk.qcow2</codeph> on the lifecycle manager with new
+              <codeph>vsc_singledisk.qcow2</codeph> in the <codeph>~/dcn/</codeph> directory. </li>
+          <li>Edit the Ansible hosts file to comment out every occurrence of one of the DCN hosts.
+            The Ansible hosts file is located at
+              <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/hosts</codeph>.
+            For example, here M1 is commented and M2 is available for deployment:
+            <codeblock>#BASE-CCP-T1-M1-NETPXE ansible_ssh_host=10.30.1.104 clm_hostname=BASE-CCP-T1-M1-NETCLM 
+BASE-CCP-T1-M2-NETPXE ansible_ssh_host=10.30.1.105 clm_hostname=BASE-CCP-T1-M2-NETCLM </codeblock></li>
+          <li>Execute the following command
+              <codeblock>hlm deploy -c cloud -t &lt;tier1> </codeblock><p>For example:
+              <codeblock>hlm deploy -c &lt;cloud-name> -t deploy-CCP-T1.yml </codeblock></p></li>
+          <li>Repeat steps 8 and 9 for other DCN host by uncommenting the previous DCN host and
+            commenting the deployed DCN host. </li>
+        </ol>
+      </p>For highly-available HP Helion OpenStack Carrier Grade deployments, use the following
+      steps. <ol id="ol_myd_lxz_k5">
+        <li>Backup the VSC VMs admin
+          <codeblock>config scp admin@&lt;vsc ip>:/config.cfg &lt;destination directory></codeblock></li>
+        <li>Login to DCN host </li>
+        <li>Execute the following command to remove the VSC
+          VM:<codeblock>virsh destroy vsc virsh undefine vsc</codeblock></li>
+        <li>Delete <codeph>vsc.qcow2</codeph> from <codeph>/home/images</codeph>. </li>
+        <li>Log into lifecycle manager VM. </li>
+        <li>Replace <codeph>vsc_singledisk.qcow2</codeph> on the lifecycle manager with new
+            <codeph>vsc_singledisk.qcow2</codeph> in the <codeph>~/dcn/</codeph> directory. </li>
+        <li>Execute the following command
+            <codeblock>hlm deploy -c cloud -t &lt;tier1> </codeblock><p>For example:
+            <codeblock>hlm deploy -c &lt;cloud-name> -t deploy-CCP-T1.yml </codeblock></p></li>
+      </ol></section>
   </body>
 </topic>

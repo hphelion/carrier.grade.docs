@@ -22,7 +22,7 @@
         HP Helion OpenStack Carrier Grade is not installed, use the following steps to enable
         LDAP.</p><b>Configure LDAP Before installation</b><p>
         <ol id="ol_v43_k1q_yt">
-          <li>Set up the LDAP server, before installing HP Helion OpenStack Carrier GRade. The LDAP
+          <li>Set up the LDAP server, before installing HP Helion OpenStack Carrier Grade. The LDAP
             server needs to be running, and reachable by the nodes.</li>
           <li>Create admin and service accounts. The service accounts need to have suitably named
             users and passwords created in the correct group on the LDAP server, with suitable
@@ -45,12 +45,13 @@
         LDAP.</p>Deploy LDAP support after cloud deployment</section>
     <ol id="ol_lhc_5hq_yt">
       <li>Set Variables as above</li>
-      <li>Edit the <codeph>/&lt;Cloud Name>/clouds/&lt;Cloud
-          Name>/001/stage/ansible/top_level_playbooks/commit/</codeph> to comment-out roles.</li>
-      <li>Edt the: <codeph>/&lt;Cloud Name>/clouds/&lt;Cloud Name>/001/stage/ansible/</codeph> to
+      <li>Edit the
+          <codeph>/&lt;cloudname>/clouds/&lt;cloudname>/001/stage/ansible/top_level_playbooks/commit/</codeph>
+        to comment-out roles.</li>
+      <li>Edt the: <codeph>/&lt;cloudname>/clouds/&lt;cloudname>/001/stage/ansible/</codeph> to
         comment-out roles.</li>
       <li>Edit the <codeph>build-CCP-T&lt;1-3>.yml</codeph> to comment out all roles that except
-        LDP-CCN.</li>
+          <codeph>LDP-CCN</codeph> and <codeph>Common</codeph>.</li>
       <li>Change build-CCP-CPN.yml as above</li>
       <li>Before you run, if this code has been run in the past and you are running it again due to
         a failure of some kind, you need to check the assignments database and delete any records
