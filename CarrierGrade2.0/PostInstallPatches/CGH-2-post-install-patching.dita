@@ -24,12 +24,13 @@
         >obtain a user account on HDN</xref> in order to download these files.</p>
     <p>
       <ul id="ul_wr4_tpg_j5">
-        <li><xref href="#topic10581c2t/ssl" format="dita">SSL patch:
+        <li><xref href="#topic10581pdp/ssl" format="dita">SSL patch:
             kcp-ssl-implementation.patch</xref></li>
-        <li><xref href="#topic10581c2t/kvm-custom" format="dita">KVM Region Custom Patch,
+        <li><xref href="#topic10581pdp/kvm-custom" format="dita">KVM Region Custom Patch,
               <codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph></xref></li>
-        <li><xref href="#topic10581c2t" format="dita">Horizon patch:
-            <codeph>WR-HZN-1011</codeph></xref></li>
+        <li><xref href="#topic10581pdp/horizon-patch" format="dita">Horizon patch:
+              <codeph>WR-HZN-1011</codeph></xref></li>
+        <li><xref href="#topic10581pdp/dcn" format="dita">DCN patch</xref></li>
       </ul>
     </p>
     <section id="ssl"><title>SSL patch</title><p>If you did not deploy the
@@ -160,7 +161,7 @@ source /etc/nova/openrc</codeblock></li>
               <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
             file. </li>
         </ol></p></section>
-    <section><title>DCN Patch</title><p><b>Note:</b> Not required for Denver deployments.</p><p>For
+    <section id="dcn"><title>DCN Patch</title><p><b>Note:</b> Not required for Denver deployments.</p><p>For
         highly-available HP Helion OpenStack Carrier Grade deployments, use the following steps. </p><p>
         <ol id="ol_ac5_tvz_k5">
           <li>Backup the VSC VMs admin
