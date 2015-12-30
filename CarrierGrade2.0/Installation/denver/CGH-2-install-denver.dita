@@ -16,19 +16,19 @@
   </prolog>
   <body>
     <p>After the lifecycle manager is installed, the next task in installing the <xref
-        href="carrier-grade-install-overview.dita#topic1925cgio/install-option">KVM topology</xref> is
+        href="../carrier-grade-install-overview.dita#topic1925cgio/install-option">KVM topology</xref> is
       to deploy the HP Helion OpenStack cloud.</p>
     <p>If you are installing the <codeph>denver</codeph> template, which includes the KVM region and
       uses AVS networking, follow these instructions. If you are installing a different deployment,
       disregard these instructions. </p>
-    <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-hos-install"/>
+    <section conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-hos-install"/>
     <section id="conref-provision">
       <title>Provision the new cloud</title>
       <ol id="ol_kwm_c1k_zt">
         <li>Execute the following command to provision and configure the HPE Helion OpenStack cloud.
             <codeblock>hlm define -t denver &lt;cloudname&gt;</codeblock><p>Where::
               <codeph>&lt;cloudname></codeph> is the name of the cloud to create.</p><p
-            conref="CGH-2-install-sacramento.dita#topic10581c2is/cloudname"/><p>The command creates the
+            conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/cloudname"/><p>The command creates the
               <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory, which contains several JSON
             template files. </p></li>
       </ol>
@@ -84,9 +84,9 @@
           </tgroup>
         </table></p>
       <p>Click here to see a <xref
-        href="carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample node-provision.json file</xref>. </p>
+        href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample node-provision.json file</xref>. </p>
     </section>
-    <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-pxe-boot"/>
+    <section conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-pxe-boot"/>
     <section>
       <title>Edit the ansible.json file</title>
       <p>Modify the <codeph>ansible.json</codeph> file in the /var/hlm/clouds/&lt;cloudname>
@@ -333,11 +333,11 @@
         errors using the tool of your preference. For example, using the Python json.tool: </p>
       <codeblock>python -m json.tool &lt;filename>.json</codeblock>
     </section>
-    <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-create-cloud"/>
-    <section conref="CGH-2-install-tahoe.dita#topic10581c2it/conref-back-end-no-esx"/>
-    <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-config-proc"/>
-    <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-hdeploy"/>
-    <section conref="CGH-2-install-sacramento.dita#topic10581c2is/conref-ldap-keystone" id="ldap3"/>
+    <section conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-create-cloud"/>
+    <section conref="../tahoe/CGH-2-install-tahoe.dita#topic10581c2it/conref-back-end-no-esx"/>
+    <section conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-config-proc"/>
+    <section conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-hdeploy"/>
+    <section conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-ldap-keystone" id="ldap3"/>
     
     <section id="next-step">
       <title>Next Step</title>
