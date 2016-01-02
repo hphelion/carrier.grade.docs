@@ -21,9 +21,9 @@
         virtualization through HP Distributed Cloud Networking (DCN), and deploys a carrier grade
         cloud.</p>
       <p>After installation, you can interact with the HP Helion OpenStack cloud using the <xref
-          href="../../CarrierGrade2.0/ServicesOverviews/carrier-grade-services-horizon-overview.dita"
+          href="../../../CarrierGrade2.0/ServicesOverviews/carrier-grade-services-horizon-overview.dita"
           >Horizon graphical interface</xref> or using the CLIs of the respective <xref
-          href="../../CarrierGrade2.0/Overview/carrier-grade.services-overview.dita"
+          href="../../../CarrierGrade2.0/Overview/carrier-grade.services-overview.dita"
         >services</xref>.</p>
     </section>
     <section id="install-option">
@@ -47,23 +47,23 @@
       <p>Use the following process to install HP Helion OpenStack Carrier Grade.</p>
       <ol>
         <li>Review the <xref
-            href="../../CarrierGrade2.0/Installation/carrier-grade-technical-overview-tahoe.dita">Technical
+            href="../tahoe/carrier-grade-technical-overview-tahoe.dita">Technical
             Overview</xref> for information on the HP Helion OpenStack Carrier Grade environment. <ul>
             <li>Review the Cloud Topologies to decide appropriate topology for your use case.</li>
             <li>Review the deployment architecture for different hypervisors</li>
             <li>Review the network architecture for networking needs</li>
           </ul></li>
-        <li>Review the <xref href="carrier-grade-technical-specs.dita#topic3485cgts">Technical
+        <li>Review the <xref href="../carrier-grade-technical-specs.dita#topic3485cgts">Technical
             Specifications</xref> for dimensions and limits of the current versrion of HP Helion
           OpenStack Carrier Grade. </li>
         <li>Review the <xref href="carrier-grade-support-matrix-tahoe.dita">Support
             Matrix</xref> to make sure your environment meets the minimum requirements.</li>
         <li> Perform any required or optional <xref
-            href="../../CarrierGrade2.0/Installation/CGH-install-prereqs-tahoe.dita"
+          href="../tahoe/CGH-install-prereqs-tahoe.dita"
             >installation prerequisites</xref>. </li>
         <li>
           <xref
-            href="../../CarrierGrade2.0/Installation/carrier-grade-install-network-prepare.dita"
+            href="../prereqs/carrier-grade-install-network-prepare.dita"
             >Prepare the network for installation</xref>
         </li>
         <li>Install the cloud topology: <p>In this cloud topology, the standard OpenStack services
@@ -75,7 +75,7 @@
                 components</xref>. You will configure the DCN networking.</li>
             <li>Install the <xref href="CGH-2-install-tahoe.dita">HPE Helion OpenStack cloud</xref>.
               These components will be installed into what is called the <i>non-KVM region</i>.</li>
-            <li>Launch the <xref href="carrier-grade-install-launch-horizon.dita#topic10581cgilh"
+            <li>Launch the <xref href="../carrier-grade-install-launch-horizon.dita#topic10581cgilh"
                 >Helion user interface</xref>.</li>
             <li>Install the <xref href="carrier-grade-install-kvm-tahoe.dita">carrier grade
                 cloud</xref>. The carrier grade cloud is deployed into what is called the <i>KVM
@@ -83,14 +83,14 @@
             <li>Perform some required and optional <xref
                 href="carrier-grade-install-post-tahoe.dita#topic1107cgitp">post-installation
                 tasks</xref>.</li>
-            <li>Integrate <xref href="carrier-grade-install-config-dcn.dita#topic10581cgicd">HP
+            <li>Integrate <xref href="../carrier-grade-install-config-dcn.dita#topic10581cgicd">HP
                 Virtualized Services Directory (VSD)</xref> into the cloud.</li>
-            <li>Optionally, <xref href="CGH-2-install-sriov-pci.dita#topic10581c2isio">configure
+            <li>Optionally, <xref href="../CGH-2-install-sriov-pci.dita#topic10581c2isio">configure
                 SR-IOV or PCI-Passthrough networking</xref>.</li>
           </ul></li>
         <li>After the deployment is complete, do a full backup of the deployment. This will make it
           easier to recover should you encounter a problem. For more information, see <xref
-            href="../OperationsGuide/Backup/CGH-2-backup-restore.dita#topic10581c2br">Backup and
+            href="../../OperationsGuide/Backup/CGH-2-backup-restore.dita#topic10581c2br">Backup and
             Restore Configuration Files</xref>.</li>
       </ol>
     </section>

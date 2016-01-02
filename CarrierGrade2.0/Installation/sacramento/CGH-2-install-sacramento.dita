@@ -15,9 +15,9 @@
     </metadata>
   </prolog>
   <body>
-    <p>After the <xref href="carrier-grade-install-hlm-vm.dita#topic10581cgihv">lifecycle manager VM
-        is installed</xref>, the next task in installing the <xref
-        href="carrier-grade-install-overview.dita#topic1925cgio/install-option">Sacramento
+    <p>After the lifecycle manager VM
+        is installed, the next task in installing the <xref
+        href="../carrier-grade-install-overview.dita#topic1925cgio/install-option">Sacramento
         deployment</xref> is to deploy the HP Helion OpenStack cloud.
       <!--Most sections here are shared with the other install docs; use care when editing--></p>
     <section id="conref-hos-install">
@@ -33,7 +33,7 @@
 Password: cghelion</codeblock>
           </p><p><b>Important:</b> After logging in with the default password, make sure you change
             the password for the <codeph>cghelion</codeph> user. </p><p><image
-              href="../../media/CGH-2-login-hlm.png" width="400" id="image_nnb_fyb_3t"/></p></li>
+              href="../../../media/CGH-2-login-hlm.png" width="400" id="image_nnb_fyb_3t"/></p></li>
         <li>Execute the following command to switch to the root
           user:<codeblock>sudo su -</codeblock></li>
         <li>Change to the home directory.<codeblock>cd ~</codeblock></li>
@@ -111,7 +111,7 @@ Password: cghelion</codeblock>
         <li>Save and close the file.</li>
       </ol>
     </section>
-    <p>Click here to see a <xref href="carrier-grade-install-kvm-node-json-sac.dita">sample
+    <p>Click here to see a <xref href="../json/carrier-grade-install-kvm-node-json-sac.dita">sample
         node-provision.json file</xref>.</p>
     <section id="conref-pxe-boot">
       <title>Configure PXE boot</title>
@@ -162,7 +162,7 @@ Password: cghelion</codeblock>
         </ol>
       </p>
     </section>
-    <p>Click here to see a <xref href="carrier-grade-install-kvm-def-json-sac.dita">sample
+    <p>Click here to see a <xref href="../json/carrier-grade-install-kvm-def-json-sac.dita">sample
         definition.json file</xref></p>
     <section id="conref-env-json">
       <title>Edit the environment.json file</title>
@@ -191,9 +191,9 @@ Password: cghelion</codeblock>
     </section>
     <p>To see a sample <codeph>environment.json</codeph> file, see one of the following: <ul
         id="ul_eln_vcl_25">
-        <li><xref href="carrier-grade-install-kvm-env-json-sac.dita">For an Unbonded NIC
+      <li><xref href="../json/carrier-grade-install-kvm-env-json-sac.dita">For an Unbonded NIC
             Environment</xref></li>
-        <li><xref href="carrier-grade-install-kvm-env-json-bonded-sac.dita#topic4797cgikejbs">For a Bonded
+      <li><xref href="../json/carrier-grade-install-kvm-env-json-bonded-sac.dita#topic4797cgikejbs">For a Bonded
             NIC Environment</xref></li>
       </ul></p>
     <section id="conref-ansible-json">
@@ -202,7 +202,7 @@ Password: cghelion</codeblock>
           <codeph>/var/hlm/clouds/&lt;cloudname&gt;/vars</codeph> directory of the lifecycle
         manager.</p>
     </section>
-    <p>Click here to see a <xref href="carrier-grade-install-kvm-ansible-json-sac.dita">sample
+    <p>Click here to see a <xref href="../json/carrier-grade-install-kvm-ansible-json-sac.dita">sample
         ansible.json file</xref>.</p>
     <section id="conref-esx-json">
       <title>Edit the esx.json file</title>
@@ -211,7 +211,7 @@ Password: cghelion</codeblock>
         This file is called by the script that installs the HPE Helion OpenStack cloud, later in the
         installation. </p>
     </section>
-    <p>Click here to see a <xref href="carrier-grade-install-kvm-esx-json-sac.dita">sample esx.json
+    <p>Click here to see a <xref href="../json/carrier-grade-install-kvm-esx-json-sac.dita">sample esx.json
         file</xref>.</p>
     <section id="conref-ldap-json">
       <title>Edit the ldap.json file</title>
@@ -219,7 +219,7 @@ Password: cghelion</codeblock>
           <codeph>/var/hlm/clouds/&lt;cloudname&gt;/vars</codeph> directory of the lifecycle
         manager.</p>
     </section>
-    <p>Click here to see a <xref href="carrier-grade-install-kvm-ldap-json-sac.dita">sample
+    <p>Click here to see a <xref href="../json/carrier-grade-install-kvm-ldap-json-sac.dita">sample
         ldap.json file</xref>. </p>
     <section id="conref-dcn-json">
       <title>Edit the dcn.json file</title>
@@ -254,7 +254,7 @@ Password: cghelion</codeblock>
           <codeph>/var/hlm/clouds/&lt;cloudname>/vars</codeph> directory on the lifecycle
         manager.</p>
     </section>
-    <p>Click here to see a <xref href="carrier-grade-install-kvm-wr-json-sac.dita">a sample wr.json
+    <p>Click here to see a <xref href="../json/carrier-grade-install-kvm-wr-json-sac.dita">a sample wr.json
         file</xref>. </p>
     <section id="conref-mach-json">
       <title>Edit the machine_architecture.json file</title>
@@ -263,7 +263,7 @@ Password: cghelion</codeblock>
         fit your hardware model. You have to gather the correct PCI SLOT INFO and add ports
         accordingly on the hardware slots or cards used for networking.</p>
       <p>Click here to see a  <xref
-          href="carrier-grade-install-kvm-machine-json-bonded.dita#topic4797cgikmjb">sample
+        href="../json/carrier-grade-install-kvm-machine-json-bonded.dita#topic4797cgikmjb">sample
           machine_architecture.json file</xref>.</p>
     </section>
     <section>
@@ -334,7 +334,7 @@ Password: cghelion</codeblock>
           scope="external">Helion Download Network</xref>.
         <!-- Review with Michael Duncan all JSON files and proxy re: bonded set up --></p>
       <p>For instructions on installing the ESX compute proxy, see <xref
-          href="carrier-grade-install-esx-proxy.dita#topic10581cgiep">Deploy the ESX Compute
+          href="../carrier-grade-install-esx-proxy.dita#topic10581cgiep">Deploy the ESX Compute
         Proxy</xref>.</p>
     </section>
     <section id="conref-vmware-workaround">
@@ -343,7 +343,7 @@ Password: cghelion</codeblock>
         receive a <codeph>VMK_NO_MEMORY</codeph> error. This is a known problem with HP server and
         ESXi 5.x. To prevent this issue, you need to upgrade the version of the HP Agentless
         Management Service (AMS) that comes with the HP servers. </p>
-      <p>For more information, see <xref href="CGH-2-install-vmware-workaround.dita#topic10581c2ivw"
+      <p>For more information, see <xref href="../CGH-2-install-vmware-workaround.dita#topic10581c2ivw"
           >vmWare Installation Workaround</xref>.</p>
     </section>
     <section id="conref-create-cloud">
@@ -361,12 +361,12 @@ Password: cghelion</codeblock>
             server management tool for each of the nodes to monitor the boot process. Consult your
             iLO documentation for information on how to log into iLO. </p></li>
         <li>Make sure the nodes are booted up using iLO. For example:<p><image
-              href="../../media/CGH-2-install-cobbler.png" width="600" id="image_c5k_d4b_kt"
+          href="../../../media/CGH-2-install-cobbler.png" width="600" id="image_c5k_d4b_kt"
               /></p><p><b>Note:</b> In rare situations, a node might not boot due to an issue with
             network configuration. If this happens, you need to log into that node and manually boot
             using the Retry Auto-Configuration option. The provisioning will continue as you reboot
             that node. See <xref
-              href="../Troubleshooting/CGH-2-troubleshooting-install.dita#topic10581c2ti/provision"
+              href="../../Troubleshooting/CGH-2-troubleshooting-install.dita#topic10581c2ti/provision"
               >Node fails to boot during HLM provision</xref>. </p>Once the baremetal nodes are
           provisioned, make sure the <codeph>nodes.json</codeph> file is generated to the
             <codeph>var/hlm/clouds/&lt;cloud name&gt;/</codeph> directory. The
@@ -539,7 +539,7 @@ Saved the current configuration to mainboard device successfully.
             configuration processor, a script (<codeph>hcfgproc</codeph>) that is incorporated into
             the installation environment. This command generates the necessary configuration for the
             cloud. </p><p>When the command completes without errors, you will a
-              message:</p><p><image href="../../media/CGH-2-install-proc-done.png" width="600"
+              message:</p><p><image href="../../../media/CGH-2-install-proc-done.png" width="600"
               id="image_sqd_rpb_kt"/></p></li>
         <li>Review the CloudDiagram, <codeph>hosts.hf</codeph>, and
             <codeph>/etc/network/interfaces.d/eth.cfg</codeph> files to make sure the network
@@ -549,9 +549,9 @@ Saved the current configuration to mainboard device successfully.
               <codeph>&lt;cloudname&gt;</codeph> is the name of the cloud you created.</p><p>After
             this command completes, all cloud nodes and CLM network interfaces are configured. The
             output for the command should appear similar to the following:</p><p><image
-              href="../../media/CGH-2-install-hnetinit-output.png" id="image_tft_r11_1t" width="400"
+              href="../../../media/CGH-2-install-hnetinit-output.png" id="image_tft_r11_1t" width="400"
             /></p><p>The <codeph>hlm netinit</codeph> command also runs a ping on the cloud nodes.
-              </p><p><image href="../../media/CGH-2-install-hnetinit-ping.png" width="300"
+            </p><p><image href="../../../media/CGH-2-install-hnetinit-ping.png" width="300"
               id="image_qrd_3gw_rt"/></p></li>
       </ol>
     </section>
@@ -573,7 +573,7 @@ Saved the current configuration to mainboard device successfully.
         v2 authorization. The services need to be modified to use Keystone v3. Users will not be
         able to execute OpenStack CLI commands until the specific changes are made on all three
         controller nodes in the non-KVM region. </p>
-      <p>For information, see <xref href="carrier-grade-install-config-ldap3.dita#topic10581cgicl"
+      <p>For information, see <xref href="../carrier-grade-install-config-ldap3.dita#topic10581cgicl"
           >Configuring LDAP CLI Support</xref></p>
     </section>
     <section id="conref-vsc-vm">
@@ -600,20 +600,20 @@ ping router "management" &lt;vsd IP or domain name>  </codeblock></li>
       node as part of the cloud deployment. Use the following command to verify that the VRS-G is
       active: <codeblock>show vswitch-controller vswitches  </codeblock><p>The output for the
         command should appear similar to the following image:</p>
-      <image href="../../media/CGH-2-verify-vrsg-alpha.png" width="400" id="image_ip4_jnq_nt"/>
+      <image href="../../../media/CGH-2-verify-vrsg-alpha.png" width="400" id="image_ip4_jnq_nt"/>
       <!-- <image href="../../media/CGH-install-verify-vrsg.png" id="image_x3t_jvp_vs"/> -->
       <p>Verify that the domain name and DNS server are listed in the
           <codeph>/etc/resolv.conf</codeph> file on all the cloud
         nodes.</p><codeblock>cat etc/resolv.conf          </codeblock><p/><image
-        href="../../media/CGH-install-resolv-conf.jpg" id="image_idc_5wp_vs">
+          href="../../../media/CGH-install-resolv-conf.jpg" id="image_idc_5wp_vs">
         <alt>Verify VRS-G </alt>
       </image></section>
     <section id="next-step">
       <title>Next Step</title>
-      <p><xref href="CGH-2-install-infoblox.dita#topic15959c2ii">Installing Infoblox</xref>. Infoblox is
+      <p><xref href="../CGH-2-install-infoblox.dita#topic15959c2ii">Installing Infoblox</xref>. Infoblox is
         an optional component that integrates with the OpenStack Neutron networking service, to
         provide IP Address Management (IPAM) networking services within OpenStack cloud platforms. </p>
-      <p><xref href="carrier-grade-install-launch-horizon.dita#topic10581cgilh">Launching the Horizon
+      <p><xref href="../carrier-grade-install-launch-horizon.dita#topic10581cgilh">Launching the Horizon
           Interface</xref>. Launch the Horizon interface to load a required security certificate and
         test the non-KVM deployment.
         <!--<p><xref href="carrier-grade-install-kvm-cloud.dita">Deploying the KVM Region</xref></p>-->
