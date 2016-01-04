@@ -71,13 +71,13 @@
                         IP&gt;:9443/vsphere-client</codeph>.</li>
                 <li>Import the <codeph>VSD-3.2.4_134-hp.ova</codeph> file into vCenter server.
                     Importing the OVA file creates the vCenter Integration Node VM. During the
-                    installation, you will select a network for the VM. Select the DVS Datapath
-                    (TUL) network. Select the</li>
+                    installation, you will select a network for the VM. Select the DVRS Datapath
+                    (TUL) network.</li>
                 <li>Import the <codeph>itoolbox1.ova</codeph> template file.<p>You should have <xref
-                    href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-extract"
+                            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-extract"
                             >downloaded this file during the prerequisites</xref>. Importing the OVA
                         file creates the HTTP\DHCP VM. During the installation, you will select a
-                        network for the VM. Select the DVS Datapath (TUL) network.</p><p>For
+                        network for the VM. Select the DVRS Datapath (TUL) network.</p><p>For
                         instructions, refer to the ESX documentation.</p></li>
             </ol></section>
         <section><title>Configure the vCenter Integration Node (Deployment Toolbox)</title>The HPE
@@ -229,7 +229,7 @@ option routers 10.20.94.209;   ###TUL network Gateway####
                             width="400"/></p></li>
                 <li>Add hosts to the cluster you created. Provide a name, description, the ESX Host
                     IP, vCenter user, vCenter password, select the Management, Data amd VM Network
-                    names. Select DVRS Datapath for last input<p><image
+                    names. Select DVRS Datapath in the <b>Multi Source</b> field.<p><image
                             href="../../media/CGH-2-install-vsdvm-add-hyper.png"
                             id="image_xy2_znp_wt" width="300"/></p><p>After adding all the hosts
                         vCenter appears similar to the following:</p><p><image
