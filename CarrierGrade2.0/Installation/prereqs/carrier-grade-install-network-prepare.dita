@@ -309,7 +309,7 @@ virsh net-start br-bls
 virsh net-autostart br-bls</codeph></codeblock></li>
 <li>Create the <codeph>br-pxe</codeph> network by creating an XML definition file:<p>a. Manually
                         create the XML file, using the name
-                        <codeph>br-pre.xml</codeph>:</p><codeblock><codeph>cat br-pxe.xml
+                        <codeph>br-pxe.xml</codeph>:</p><codeblock><codeph>cat br-pxe.xml
     &lt;network&gt;
         &lt;name&gt;br-pxe&lt;/name&gt;
         &lt;forward mode='bridge'/&gt;
@@ -361,7 +361,7 @@ ifup &lt;yourinterface&gt;</codeph></codeblock></li>
                     confirm the IP address of the <codeph>br-pxe</codeph>
                     network:<codeblock><codeph>ifconfig | more</codeph></codeblock></li>
 <li>Execute the following command to view the routing table. Make sure all of the networks are
-                    configured as expected.<codeblock><codeph>Route -n</codeph></codeblock></li>
+                    configured as expected.<codeblock><codeph>route -n</codeph></codeblock></li>
 
                 <li>Execute the following command to make sure the VLAN ID is as expected.
                         <codeblock>ovs-vsctl show</codeblock><p>The output should appear similar to
