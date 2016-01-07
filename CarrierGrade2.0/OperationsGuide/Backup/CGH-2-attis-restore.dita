@@ -68,12 +68,15 @@ export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
       <ol id="ol_jdk_3gd_p5">
         <li>Log into the cloud controller.</li>
         <li>Update required parameters of the configuration template you are using (default
-          location: <codeph>/etc/attis/config_template</codeph>) before you trigger restore.
-              <p><b>for NFS storage</b> edit
-              <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeph>
-            file</p><p><b>for SCP storage</b> edit the
-              <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>
-            file.</p><p>Use the <codeph>attis backuplog</codeph> command to locate the
+          location: <codeph>/etc/attis/config_template</codeph>) before you trigger restore. <ul
+            id="ul_vpr_kld_p5">
+            <li><b>for NFS storage</b> edit
+                <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeph>
+              file</li>
+            <li><b>for SCP storage</b> edit the
+                <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>
+              file.</li>
+          </ul><p>You can use the <codeph>attis backuplog</codeph> command to locate the
               <codeph>backup_base_dirpath</codeph> and <codeph>restore_to_incrementnumber</codeph>
             values in the <codeph>base_folder</codeph> and <codeph>last_incremental_ref</codeph>
             column from output of command. </p>The following is an example of

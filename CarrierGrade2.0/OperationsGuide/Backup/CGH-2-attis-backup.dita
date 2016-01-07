@@ -43,8 +43,12 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         <li><xref href="#topic10581c2ab/vsc" format="dita"/></li>
         <li><xref href="#topic10581c2ab/kvm" format="dita"/></li>
         <li><xref href="#topic10581c2ab/baremetal" format="dita"/></li>
-      </ul><title>Backing up the lifecycle manager</title>You can use Attis to back up any of the
-      following the lifecycle manager data: <ul id="ul_rxc_h23_k5">
+      </ul>
+    </section>
+      <section id="hlm">
+      <title>Backing up the lifecycle manager</title>
+      <p>You can use Attis to back up any of the following the lifecycle manager data: </p>
+      <ul id="ul_rxc_h23_k5">
         <li>All files under the <systemoutput>/opt/</systemoutput> folder on the lifecycle manager
           host. This backs up all the installed code configuration and also <codeph>h*</codeph>
           installation scripts.</li>
@@ -53,9 +57,11 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
           SSH keys, and cloud folders.</li>
         <li>All files under <systemoutput>/root</systemoutput> and
           <systemoutput>/opt</systemoutput>.</li>
-      </ul><p>Attis implements a tree-structure for certain backup/restore configurations. For
-        example, to back up the <codeph>/opt</codeph> and <codeph>/root</codeph> folders on the
-        lifecycle manager host: </p><p>
+      </ul>
+      <p>Attis implements a tree-structure for certain backup/restore configurations. For example,
+        to back up the <codeph>/opt</codeph> and <codeph>/root</codeph> folders on the lifecycle
+        manager host: </p>
+      <p>
         <ol id="ol_m4k_1yc_p5">
           <li>Log in to lifecycle manager host.</li>
           <li>Authenticate using the <codeph>source stackrc</codeph> command or export the variables
@@ -67,7 +73,8 @@ export OS_AUTH_URL=&lt;your_os_auth_url&gt;</codeblock></li>
             back up only the <codeph>/opt</codeph> files, execute the following
             command:<codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_opt_files_Backup&gt;</codeblock></li>
         </ol>
-      </p></section>
+      </p>
+    </section>
     <section id="database"><title>Backup Cloud Controller Database</title><p>You can use Attis to
         back up the three node MySQL cluster (Percona XtraDB Cluster) that runs in cloud controller
         nodes.</p>For disaster recovery, you should take full backups of the MySQL cluster
