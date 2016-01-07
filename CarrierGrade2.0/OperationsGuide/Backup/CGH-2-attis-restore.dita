@@ -19,22 +19,12 @@
 The high level design needs to be adjusted to more suite with CG(It is reflecting CS in some areas)I will soon update it. 
 But the CLI, REST API etc should all be same --></p>
     <p>HP Helion OpenStack Carrier Grade includes a backup and restore application called Attis
-      which you can use to backup and restore essential system files and databases of the running
+      which you can use to backup and restore essential system files and databases on the running
       cloud. Attis is automatically installed on each of the controller nodes in the non-KVM region.
       Attis uses a command line interface. For more information, see <xref
         href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
       CLI</xref>.</p>
-    <p><b>Attis Administrator Responsibilities for Protecting Credentials</b></p>
-    <p>Attis performs encrypted backup and restore of system data. The key for encryption and
-      decryption is stored in the Attis configuration file on each controller node. If this key is
-      lost, your backups can not be restored. Consider storing the backup encryption key separately
-      from your cloud infrastructure, in addition to the copy stored on each controller node.</p>
-    <p>Be aware that keys and passwords for other OpenStack services are stored in configuration
-      files on cloud infrastructure nodes, protected by filesystem controls. Protect servers from
-      unauthorized access and protect against exposure of credentials in configuration files. Attis
-      backups contain copies of these credentials as well, protected from snooping via backup
-      encryption, but exposure of the Attis backup key could result in unauthorized exposure of
-      credentials stored in backups.</p>
+    <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/resp"/>
     <section>
       <title>When to restore</title>
       <p>You should restore the HLM VM or other appliances if there are any issues with the HP
@@ -45,11 +35,11 @@ But the CLI, REST API etc should all be same --></p>
         </ul></p>
     </section>
     <section>
-      <title>Restore process overview</title>
-      <p>To restore an HP Helion OpenStack Carrier Grade appliance (for example, the lifecycle
-        manager, a controller, the VSC, the VSD and so forth), use the following steps:</p>
+      <title>Restoring the lifecycle manager</title>
+      <p>You can use Attis to restore an HP Helion OpenStack Carrier Grade lifecycle manager.</p>
+      <p>To restore the lifecycle manager from a previous backup.:</p>
       <ol id="ol_s2c_zk3_k5">
-        <li>Log in to the controller as cghelion user. The default password is cghelion.</li>
+        <li>Log in to lifecycle manager host.</li>
         <li>Execute the following commands to change to the Attis
           user:<codeblock>sudo -i
 su attis</codeblock></li>
@@ -58,46 +48,94 @@ su attis</codeblock></li>
 export OS_USERNAME=admin 
 export OS_PASSWORD=1234 
 export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
-          you can pass the authentication values when you execute a CLI
-          command<codeblock>--os-tenant-name "admin" --os-username "admin" --os-password "1234" --os-auth-url "http://127.0.0.1:5000/v2.0"</codeblock></li>
+          you can pass the authentication values when you execute a CLI command, for
+          example:<codeblock>--os-tenant-name "admin" --os-username "admin" --os-password "1234" --os-auth-url "http://127.0.0.1:5000/v2.0"</codeblock></li>
         <li>Execute the following command to start the
-          backup:<codeblock>attis restore --config-id CONFIG_ID --backup-id BACKUP_ID</codeblock>Where:</li>
+          restore:<codeblock>attis restore --config-id &lt;Config_ID_of_ HLM_Appliance_Data_Restore&gt; --backup-id BACKUP_ID</codeblock>Where:</li>
       </ol>
       <ul id="ul_w2c_zk3_k5">
-        <li>config-id CONFIG_ID authenticates using the ID configuration file.</li>
-        <li>backup-id BACKUP_ID is the ID of the backup from which you want to perform the restore.
-          Use the attis backuplog command to get the backup-id for the job.</li>
+        <li><codeph>CONFIG_ID</codeph> authenticates using the ID configuration file.</li>
+        <li><codeph>BACKUP_ID</codeph> is the ID of the backup from which you want to perform the
+          restore. Use the <codeph>attis backuplog</codeph> command to get the back up ID for the
+          job.</li>
       </ul>
     </section>
     <section>
-      <title>Restore of HLM</title>
+      <title>Restoring the Cloud Controller Database </title>
+      <p>You can use Attis to restore the three node MySQL cluster (Percona XtraDB Cluster) that
+        runs in cloud controller nodes.</p>
+      <p>Before performing a restore:</p>
+      <ol id="ol_jdk_3gd_p5">
+        <li>Log into the cloud controller.</li>
+        <li>Update required parameters of the configuration template you are using (default
+          location: <codeph>/etc/attis/config_template</codeph>) before you trigger restore.
+              <p><b>for NFS storage</b> edit
+              <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeph>
+            file</p><p><b>for SCP storage</b> edit the
+              <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>
+            file.</p><p>Use the <codeph>attis backuplog</codeph> command to locate the
+              <codeph>backup_base_dirpath</codeph> and <codeph>restore_to_incrementnumber</codeph>
+            values in the <codeph>base_folder</codeph> and <codeph>last_incremental_ref</codeph>
+            column from output of command. </p>The following is an example of
+            <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>:<p><image
+              href="../../../media/carrier.grade.docs/CGH-2-attis-restore.png" width="600"
+              id="image_cby_dhd_p5"/></p></li>
+        <li>Update the <codeph>Storage</codeph> parameters (SCP or NFS).</li>
+      </ol>
+      <p>To restore the cloud controller database from a previous backup.:</p>
+      <ol id="ul_hhw_ml3_k5">
+        <li>Log into the cloud controller.</li>
+        <li>Change to the Attis user: <codeblock>sudo su attis</codeblock></li>
+        <li>Perform one of the following:<p><b>for NFS
+            storage</b><codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeblock></p><b>for
+            SCP storage</b>
+          <codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeblock></li>
+        <li>After restore job is complete, ssh to the compute proxy nodes from HLM, and restart
+          nova-compute service:<codeblock>service nova-compute restart</codeblock></li>
+      </ol>
+    </section>
+    <section>
+      <title>Restoring the VSD database</title>
+      <p>You can use Attis to restore the HP DCN VSD database from a previous backup..</p>
+      <ol id="ol_l43_w3d_p5">
+        <li>Log in the VSD controller.</li>
+        <li>SSH to the VSD node from controller and stop all services on VSD.
+          <codeblock>service vsd stop</codeblock></li>
+        <li>Execute the following command:
+          <codeblock>attis restore --config-id &lt;Config_ID_of_VSD_Appliance_DB_Restore> --backup-id BACKUP_ID</codeblock></li>
+        <li>After restore job is complete, SSH to the VSD node and restart the VSD service.
+          <codeblock>service vsd restart</codeblock></li>
+      </ol>
+    </section>
+    <section>
+      <title>Restoring the VSC system files </title>
+      <p>You can use Attis to restore the HP DCN VSC system files from a previous backup..<ol>
+          <li>Log into the VSC controller.</li>
+          <li>Execute the following
+            command:<codeblock>attis restore --config-id &lt;Config_ID_of_VSC_Appliance_config_files_Restore> --backup-id BACKUP_ID </codeblock></li>
+        </ol></p>
+    </section>
+    <section>
+      <title>Restoring the KVM region system files </title>
+      <p>You can use Attis to restore the KVM region system files from a previous backup..</p>
+      
+        <ol>
+          <li>Log into the active KVM region controller.</li>
+          <li>Execute the following command to perform the back
+            up.<codeblock>attis restore --config-id &lt;Config_ID_of_WR_Appliance_system_files_Restore> --backup-id BACKUP_ID</codeblock></li>
+        </ol>
+      </section>
+    <section>
+      <title>Restoring the Baremetal Controller database and files</title>
+      <p>You can use Attis to restore the baremetal controllers in a Sacaramento deployment from a
+        previous backup.</p>
       <p>
-        <codeblock>attis restore --config-id &lt;Config_ID_of_ HLM_Appliance_Data_Restore&gt; --backup-id BACKUP_ID</codeblock>
+        <ol id="ol_h5c_zzc_p5">
+          <li>Log into the active baremetal controller.</li>
+          <li>Execute the following
+            command:<codeblock>attis restore --config-id &lt;Config_ID_of_BM_Controller_Data_Restore> --backup-id BACKUP_ID </codeblock></li>
+        </ol>
       </p>
-    </section>
-    <section>
-      <title>Restore of Cloud Controller Database </title>
-      <p>This job restores MySQL database of the Cloud Controller. Update required parameters of the
-        config template you’re using (default location: /etc/attis/config_template) before you
-        trigger restore. "backup_base_dirpath" and "restore_to_incrementnumber" values can found in
-        “base_folder” and “last_incremental_ref” column from output of command “attis backuplog”.
-        Also needs filled in are the storage parameters (SCP or NFS). Below is an example of
-        /etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json:</p>
-      <p><image href="../../../media/carrier.grade.docs/CGH-2-attis-restore.png"
-          id="image_ny2_5n3_k5" width="600"/></p>
-      <ul id="ul_hhw_ml3_k5">
-        <li><b>SCP option is selected</b>
-          <p>Edit /etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json to update
-            the
-            parameters.<codeblock>sudo su attis
-attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeblock></p></li>
-        <li><p><b>NFS option is selected</b></p>Edit
-          /etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json to update the
-          parameters.<codeblock>sudo su attis
-attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeblock></li>
-      </ul>
-      <p>After restore job is complete, ssh to the compute proxy nodes from HLM, and restart
-        nova-compute service:<codeblock>service nova-compute restart</codeblock></p>
     </section>
     <p> </p></body>
 </topic>
