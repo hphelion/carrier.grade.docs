@@ -73,7 +73,7 @@
           href="../../CarrierGrade2.0/Overview/carrier-grade.services-overview.dita">HP Helion
           OpenStack Services Overview page</xref> for a complete list of services.</p>
     </section>
-    <section>
+    <section id="dcn">
       <title>HP Distributed Cloud Networking (DCN)</title>
       <p>The Tahoe, Memphis, and Sacramento deployment models include HP DCN.</p>
       <p>The optional HP DCN is a software-Defined Networking (SDN) solution that enhances data
@@ -105,19 +105,19 @@
     </section>
     <section><title>ESX Integration</title>The Memphis, and Sacramento deployment models include
       VMWare ESX<tm tmtype="reg"/>.<p>HP Helion OpenStack Carrier Grade optionally supports VMWare
-          ESX<tm tmtype="reg"/> hypervisor using HPE Distributed Cloud Networking (aka DCN). With
-        our ESX integration, the cloud can provision and manage an ESX cluster. VMWare Compute Proxy
-        is used as a part of ESX integration. The VMware vCenter driver connects to ESX clusters
+          ESX<tm tmtype="reg"/> hypervisor using HPE Distributed Cloud Networking (DCN). With our
+        ESX integration, the cloud can provision and manage an ESX cluster. VMWare Compute Proxy is
+        used as a part of ESX integration. The VMware vCenter driver connects to ESX clusters
         through Nova Compute proxy nodes. A Compute node scheduler sees each cluster as compute and
         uses the same for scheduling new instances.</p><p>Refer to the VMWare documentation for more
         information, system requirements and installation instructions.</p><p><b>DCN/ESX
-          Integration</b></p><p>This DCN/ESX integration uses the VRSvAPP application to connect the
-        VMware vCenter™ networking to the Network Operations controller to manage workload networks.
-      </p>The ESX integration uses the OVSvApp application to connect the vCenter networking to the
-      Network Operations controller to manage workload networks. HP DCN handles virtual networking
-      between HP Helion OpenStack Carrier Grade and the ESX servers. <p>Together, HP Helion
-        OpenStack Carrier Grade, ESX, and DCN combine to provide the best features from OpenStack,
-        ESX and DCN, including:</p><ul id="ul_p44_snk_ws">
+          Integration</b></p>The ESX integration uses the OVSvApp application to connect the vCenter
+      networking to the Network Operations controller to manage workload networks. HP DCN handles
+      virtual networking between HP Helion OpenStack Carrier Grade and the ESX servers. <p>The
+        DCN/ESX integration uses a VMware vApp, called VRSvAPP,  for controlling and managing
+        virtual machines on the ESX servers. A VMware vApp is a container for virtual
+        machines.</p><p>Together, HP Helion OpenStack Carrier Grade, ESX, and DCN combine to provide
+        the best features from OpenStack, ESX and DCN, including:</p><ul id="ul_p44_snk_ws">
         <li>Support for inter-region and inter-cloud communication between different data
           centers.</li>
         <li>OpenStack features with rich services such as Keystone, Glance, Nova, Neutron, Cinder,
