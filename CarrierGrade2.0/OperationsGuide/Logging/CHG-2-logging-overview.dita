@@ -174,7 +174,7 @@ Availability</entry>
     <section id="password"><title>Changing the default Kibana password</title>Follow these steps to change the
       default password of the Kibana web interface. <p>
         <ol id="ol_jqr_4tk_f5">
-          <li>Log into one of the controller nodes.</li>
+          <li>Log into one of the controller nodes in the non-KVM region.</li>
           <li>Delete the Kibana password
             file.<codeblock>rm /etc/logstash/kibana.htpasswd</codeblock></li>
           <li>Execute the followinf command:
@@ -182,7 +182,7 @@ Availability</entry>
               &lt;new-password> is the new Kibana password</p></li>
           <li>Execute the following command to restart the apache2
             service<codeblock>service apache2 restart</codeblock></li>
-          <li>Repeat these steps on all controllers.</li>
+          <li>Repeat these steps on all controllers in the non-KVM region.</li>
         </ol>
       </p></section>
 <section id="interface"> <title>Logging into Kibana</title>
