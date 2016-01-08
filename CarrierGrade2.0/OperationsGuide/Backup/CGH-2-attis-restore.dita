@@ -24,6 +24,9 @@ But the CLI, REST API etc should all be same --></p>
       Attis uses a command line interface. For more information, see <xref
         href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
       CLI</xref>.</p>
+    <p><b>Important:</b> Before you start your first backup, make sure Attis is properly configured.
+      For more information, see <xref href="CGH-2--backup-configure.dita#topic10581c2bc">Configuring
+        the Backup and Restore Environment </xref></p>
     <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/resp"/>
     <section>
       <title>When to restore</title>
@@ -56,33 +59,10 @@ But the CLI, REST API etc should all be same --></p>
       <title>Restoring the Cloud Controller Database </title>
       <p>You can use Attis to restore the three node MySQL cluster (Percona XtraDB Cluster) that
         runs in cloud controller nodes.</p>
-      <p>Before performing a restore:</p>
-      <ol id="ol_jdk_3gd_p5">
-        <li>Log into the cloud controller as the <codeph>cghelion</codeph> user.</li>
-        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
-        <li>Update required parameters of the configuration template you are using before you
-          trigger restore.  Enter values into each of the blank fields in the file:<ul
-            id="ul_vpr_kld_p5">
-            <li><b>for NFS storage</b> edit
-                <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeph>
-              file</li>
-            <li><b>for SCP storage</b> edit the
-                <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>
-              file.</li>
-          </ul><p>You can use the <codeph>attis backuplog</codeph> command to locate the
-              <codeph>backup_base_dirpath</codeph> and <codeph>restore_to_incrementnumber</codeph>
-            values in the <codeph>base_folder</codeph> and <codeph>last_incremental_ref</codeph>
-            column from output of command. </p>The following is an example of
-            <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>:<p><image
-              href="../../../media/carrier.grade.docs/CGH-2-attis-restore.png" width="600"
-              id="image_cby_dhd_p5"/></p></li>
-        <li>Update the <codeph>Storage</codeph> parameters (SCP or NFS).</li>
-      </ol>
       <p>To restore the cloud controller database from a previous backup.:</p>
       <ol id="ul_hhw_ml3_k5">
         <li>Log into the cloud controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
-        <li>Change to the Attis user: <codeblock>sudo su attis</codeblock></li>
         <li>Perform one of the following:<p><b>for NFS
             storage</b><codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeblock></p><b>for
             SCP storage</b>
