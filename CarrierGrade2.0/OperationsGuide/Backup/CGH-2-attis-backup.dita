@@ -45,6 +45,21 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         <li><xref href="#topic10581c2ab/baremetal" format="dita"/></li>
       </ul>
     </section>
+    <section><title>Authenticate</title><p>Each Attis session, you must authenticate before executing
+        any commands </p>
+        <ol>
+          <li>Log one of the non-KVM region controllers as the <codeph>cghelion</codeph> user.</li>
+          <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+          <li id="authenticate">Authenticate using export variables:
+        
+      <codeblock>source stackrc</codeblock>or<codeblock>export OS_TENANT_NAME=&lt;The name of your project/tenant> 
+export OS_USERNAME=&lt;Your Helion OpenStack username> 
+export OS_PASSWORD=&lt;Your Helion OpenStack password> 
+export OS_AUTH_URL=&lt;The address of the Identity API served through keystone></codeblock>Optionally
+      you can pass the authentication values when you execute a CLI command, for
+      example:<codeblock>--os-tenant-name "admin" --os-username "admin" --os-password "1234" --os-auth-url "http://127.0.0.1:5000/v2.0"</codeblock>
+      </li></ol>  
+    </section>
     <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/attis-id"/>
       <section id="hlm">
       <title>Backing up the lifecycle manager</title>

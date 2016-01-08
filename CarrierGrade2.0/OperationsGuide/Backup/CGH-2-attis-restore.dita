@@ -42,16 +42,6 @@ But the CLI, REST API etc should all be same --></p>
       <ol id="ol_s2c_zk3_k5">
         <li>Log in to lifecycle manager host as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
-        <li>Execute the following commands to change to the Attis
-          user:<codeblock>sudo -i
-su attis</codeblock></li>
-        <li>Authenticate using export
-          variables:<codeblock>export OS_TENANT_NAME=admin 
-export OS_USERNAME=admin 
-export OS_PASSWORD=1234 
-export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
-          you can pass the authentication values when you execute a CLI command, for
-          example:<codeblock>--os-tenant-name "admin" --os-username "admin" --os-password "1234" --os-auth-url "http://127.0.0.1:5000/v2.0"</codeblock></li>
         <li>Execute the following command to start the
           restore:<codeblock>attis restore --config-id &lt;Config_ID_of_ HLM_Appliance_Data_Restore&gt; --backup-id BACKUP_ID</codeblock>Where:</li>
       </ol>
