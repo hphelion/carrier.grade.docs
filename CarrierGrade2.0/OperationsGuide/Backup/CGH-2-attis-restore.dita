@@ -39,7 +39,8 @@ But the CLI, REST API etc should all be same --></p>
       <p>You can use Attis to restore an HP Helion OpenStack Carrier Grade lifecycle manager.</p>
       <p>To restore the lifecycle manager from a previous backup.:</p>
       <ol id="ol_s2c_zk3_k5">
-        <li>Log in to lifecycle manager host.</li>
+        <li>Log in to lifecycle manager host as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li>Execute the following commands to change to the Attis
           user:<codeblock>sudo -i
 su attis</codeblock></li>
@@ -66,9 +67,10 @@ export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
         runs in cloud controller nodes.</p>
       <p>Before performing a restore:</p>
       <ol id="ol_jdk_3gd_p5">
-        <li>Log into the cloud controller.</li>
-        <li>Update required parameters of the configuration template you are using (default
-          location: <codeph>/etc/attis/config_template</codeph>) before you trigger restore. <ul
+        <li>Log into the cloud controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li>Update required parameters of the configuration template you are using before you
+          trigger restore.  Enter values into each of the blank fields in the file:<ul
             id="ul_vpr_kld_p5">
             <li><b>for NFS storage</b> edit
                 <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeph>
@@ -87,7 +89,8 @@ export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
       </ol>
       <p>To restore the cloud controller database from a previous backup.:</p>
       <ol id="ul_hhw_ml3_k5">
-        <li>Log into the cloud controller.</li>
+        <li>Log into the cloud controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li>Change to the Attis user: <codeblock>sudo su attis</codeblock></li>
         <li>Perform one of the following:<p><b>for NFS
             storage</b><codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeblock></p><b>for
@@ -101,7 +104,8 @@ export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
       <title>Restoring the VSD database</title>
       <p>You can use Attis to restore the HP DCN VSD database from a previous backup..</p>
       <ol id="ol_l43_w3d_p5">
-        <li>Log in the VSD controller.</li>
+        <li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li>SSH to the VSD node from controller and stop all services on VSD.
           <codeblock>service vsd stop</codeblock></li>
         <li>Execute the following command:
@@ -113,7 +117,8 @@ export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
     <section>
       <title>Restoring the VSC system files </title>
       <p>You can use Attis to restore the HP DCN VSC system files from a previous backup..<ol>
-          <li>Log into the VSC controller.</li>
+          <li>Log into the VSC controller as the <codeph>cghelion</codeph> user.</li>
+          <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
           <li>Execute the following
             command:<codeblock>attis restore --config-id &lt;Config_ID_of_VSC_Appliance_config_files_Restore> --backup-id BACKUP_ID </codeblock></li>
         </ol></p>
@@ -123,7 +128,8 @@ export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
       <p>You can use Attis to restore the KVM region system files from a previous backup..</p>
       
         <ol>
-          <li>Log into the active KVM region controller.</li>
+          <li>Log into the active KVM region controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
           <li>Execute the following command to perform the back
             up.<codeblock>attis restore --config-id &lt;Config_ID_of_WR_Appliance_system_files_Restore> --backup-id BACKUP_ID</codeblock></li>
         </ol>
@@ -134,7 +140,8 @@ export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
         previous backup.</p>
       <p>
         <ol id="ol_h5c_zzc_p5">
-          <li>Log into the active baremetal controller.</li>
+          <li>Log into the active baremetal controller as the <codeph>cghelion</codeph> user.</li>
+          <li>Change to the Attis user:<codeblock>sudo su attis</codeblock></li>
           <li>Execute the following
             command:<codeblock>attis restore --config-id &lt;Config_ID_of_BM_Controller_Data_Restore> --backup-id BACKUP_ID </codeblock></li>
         </ol>

@@ -63,14 +63,16 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         manager host: </p>
       <p>
         <ol id="ol_m4k_1yc_p5">
-          <li>Log in to lifecycle manager host.</li>
+          <li>Log in to lifecycle manager host as the <codeph>cghelion</codeph> user.</li>
+          <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
           <li>Authenticate using the <codeph>source stackrc</codeph> command or export the variables
             manually:<codeblock>export OS_PASSWORD=&lt;your_os_password&gt;
 export OS_USERNAME=admin
 export OS_TENANT_NAME=admin
 export OS_AUTH_URL=&lt;your_os_auth_url&gt;</codeblock></li>
-          <li>Execute the following command to start the backup:<codeblock>  </codeblock>To only
-            back up only the <codeph>/opt</codeph> files, execute the following
+          <li>Execute the following command to start the
+            backup:<codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_Data_Backup&gt;</codeblock>To
+            only back up only the <codeph>/opt</codeph> files, execute the following
             command:<codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_opt_files_Backup&gt;</codeblock></li>
         </ol>
       </p>
@@ -80,7 +82,9 @@ export OS_AUTH_URL=&lt;your_os_auth_url&gt;</codeblock></li>
         nodes.</p>For disaster recovery, you should take full backups of the MySQL cluster
       frequently, such as on a daily basis. Backing up the node on any single controller will back
       up the full cluster.<ol>
-        <li>Log in to one of the non-KVM region controllers.</li>
+        <li>Log in to one of the non-KVM region controllers as the <codeph>cghelion</codeph>
+          user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li>Authenticate using the <codeph>source stackrc</codeph> command or export the variables
           manually:<codeblock>export OS_PASSWORD=&lt;your_os_password&gt;
 export OS_USERNAME=admin
@@ -94,7 +98,7 @@ export OS_AUTH_URL=&lt;your_os_auth_url&gt;</codeblock></li>
     <section id="vsd-database"><title>Backup VSD database</title><p>You can use Attis to back up the
         HP DCN VSD database.</p>Before running VSD backup, you must set up trust between the
       controllers and VSD.<ol id="ol_aqp_n23_k5">
-        <li>Log in the VSD controller</li>
+        <li>Log in the VSD controller.</li>
         <li>Execute the following command on all three controllers to copy the Attis public key to
           the VSD <codeph>authorized_keys</codeph>
             file:<codeblock>sudo su attis
@@ -103,7 +107,8 @@ ssh-copy-id vsd_user@vsd_address</codeblock><b>Note:</b>
               <i>vsd_address</i> can be found in the /etc/attis/dcn.lst
           file:</p><codeblock>cat /etc/attis/dcn.lst</codeblock></li>
       </ol><p>To backup the VSD database:</p><ol id="ol_esc_pyc_p5">
-        <li>Log in the VSD controller.</li>
+        <li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li>Run the backup
           command:<codeblock>attis backup --config-id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock></li>
       </ol></section>
@@ -112,7 +117,8 @@ ssh-copy-id vsd_user@vsd_address</codeblock><b>Note:</b>
       from the default, modify <i>vsc_user_name</i> and/or <i>vsc_user_pass</i> in the
         <systemoutput>/etc/attis/dcn.lst</systemoutput> file before running VSC backup.<p>To backup
         the VSC system files.</p><ol id="ol_jlj_2zc_p5">
-        <li>Log into the VSC controller.</li>
+        <li>Log into the VSC controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li>Execute the following
           command:<codeblock>attis backup --config-id &lt;Config_ID_of_ VSC_Appliance_config_files_Backup&gt;</codeblock></li>
       </ol></section>
@@ -131,7 +137,8 @@ attis config --id &lt;config_id of WR_Appliance_system_files_Restore&gt; --updat
       </ol>
       <p>To backup the KVM region system files:</p>
       <ol id="ol_zrk_4zc_p5">
-        <li>Log into the active KVM region controller.</li>
+        <li>Log into the active KVM region controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li>Execute the following command to perform the back
           up.<codeblock>attis backup --config-id &lt;Config_ID_of_ WR_Appliance_system_files_Backup&gt;</codeblock></li>
       </ol>
@@ -158,7 +165,8 @@ attis config --id &lt;Config_ID_of_BM_Controller_nova_files_Restore&gt; --update
             <codeph>authorized_keys</codeph> file on the baremetal controller,
             <codeph>/home/cghelion/.ssh/authorized_keys</codeph>.</li>
       </ol><p>To backup the baremetal controllers: </p><ol id="ol_h5c_zzc_p5">
-        <li>Log into the active baremetal controller.</li>
+        <li>Log into the active baremetal controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li>Execute the following
           command:<codeblock>attis backup --config-id &lt;Config_ID_of_ BM_Controller_Data_Backup&gt;</codeblock></li>
       </ol></section></body>
