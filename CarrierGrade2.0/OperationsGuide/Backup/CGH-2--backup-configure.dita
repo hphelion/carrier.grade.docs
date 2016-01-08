@@ -178,13 +178,14 @@ attis config --id &lt;Config_ID_of_BM_Controller_nova_files_Restore&gt; --update
     </section>
     <section>
       <title>Copy the Attis public keys to the baremetal controller</title>
-      <p/>
+      <p>For Sacramento deployments, copy the Attis public key from each controller to the baremetal
+        controller.</p>
       <p>
         <ol>
-          <li>Copy the Attis public key,<codeph> /home/attis/.ssh/id_rsa.pub</codeph>, from each of
-            the controllers in the KVM region and paste the keys into the
-              <codeph>authorized_keys</codeph> file on the baremetal controller,
-              <codeph>/home/cghelion/.ssh/authorized_keys</codeph>.</li>
+          <li>Copy the Attis public key from each of the controllers in the KVM region. The key is
+            located in:<codeblock> /home/attis/.ssh/id_rsa.pub</codeblock></li>
+          <li>Paste the keys into the <codeph>authorized_keys</codeph> file on the baremetal
+            controller, <codeph>/home/cghelion/.ssh/authorized_keys</codeph>.</li>
         </ol>
       </p>
     </section>
