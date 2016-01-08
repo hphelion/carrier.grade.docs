@@ -147,15 +147,28 @@ Hide for alpha
             <li>FIP_NAME is the one that is retrieved from previous step.</li>
             <li>GW_NAME is the redundant gateway name.</li>
             <li>All the UPLINK info are from the core switch on their specific testbed</li>
-          </ul><codeblock># IANA has reserved 192.0.0.0/29 for DS-lite transition
+          </ul><codeblock>#!/bin/bash
+set -x
 #
-UPLINK_SUBNET="10.20.9.0"
-UPLINK_MASK="255.255.255.192"
-VRSG_IP="10.20.9.2"  #DUncan Modified :P
-UPLINK_GW="10.20.9.1"                         # ROUTER IP ON SWITCH main switch 10.1.64.21
-UPLINK_GW_MAC="bc:ea:fa:1d:b0:80"       # VLAN 1209 MAC address not VRSG is from main switch 10.1.64.21
-#UPLINK_GW_MAC="78:48:59:4f:fb:3c"       # VLAN 1209 MAC address not VRSG is from main switch 10.1.64.21
+# Starting with VSP 3.0R2, there is an officially supported way to enable FIP using
+# a VSG or VRS-G uplink port
+#
 
+# Parameters
+VLAN="107"
+VSD_IP="10.20.4.21" # add DCM VSD IP
+FIP_NAME="tb1fip" # unique name show in VSD created for external network floating ip pool
+GW_NAME="10.20.5.105" # use the TUL ip of the VRSG node created on VSD / VSC
+PORT_NAME="eth0" # pyshical nic use don VRSG node for trunk/ tagged external trafic
+
+#
+# IANA has reserved 192.0.0.0/29 for DS-lite transition
+#
+UPLINK_SUBNET="10.20.7.0"
+UPLINK_MASK="255.255.255.192"
+VRSG_IP="10.20.7.2"  #DUncan Modified :P
+UPLINK_GW="10.20.7.1"                         # ROUTER IP ON SWITCH main switch 10.1.64.21
+UPLINK_GW_MAC="bc:ea:fa:1d:b0:80"       # VLAN 1209 MAC address not VRSG is from main switch 10.1.64.21
 if [ $# -eq 1 ]; then # remote install
 echo "Performing remote install to root@'$1' (requires PermitRootLogin=yes in sshd config)..."
 ssh root@$1 'bash -s ' &lt; $0
@@ -170,7 +183,20 @@ fi
 # Install required software packages, if not already
 if [ -e /usr/bin/yum ]; then
 [[ `which jq` != "" ]] || yum install -y jq
-\
+QEMU_KVM="/usr/libexec/qemu-kvm"
+QEMU_USR="qemu:qemu"
+LIBVIRTD="libvirtd"
+else
+[[ `which jq` != "" ]] || apt-get install -y jq
+QEMU_KVM="/usr/bin/kvm"
+QEMU_USR="libvirt-qemu:kvm"
+LIBVIRTD="libvirt-bin"
+fi
+
+# Determine Domain name for the Floating IP pool ( based on pool name )
+APIKEY=`curl -ks -H "X-Nuage-Organization: csp" -H "Content-Type: application/json" -H "Authorization: XREST Y3Nwcm9vdDpjc3Byb290" https://$VSD_IP:8443/nuage/api/v3_0/me | jq -r '.[0].APIKey'`
+TOKEN=`echo -n "csproot:$APIKEY" | base64`
+ZONE_ID=`curl -ks -H "X-Nuage-Organization: CSP" -H "X-Nuage-Filter: name=='$FIP_NAME'" -H "Content-Type: application/json" -H "Authorization: XREST $TOKEN" \
  https://$VSD_IP:8443/nuage/api/v3_0/sharednetworkresources | jq -r '.[0].parentID'`
 if [ "$ZONE_ID" == "" ]; then
 echo "Error: Floating IP pool named '$FIP_NAME' not found"
@@ -180,8 +206,7 @@ fi
 # Lookup VLAN to use
 GW_ID=`curl -ks -H "X-Nuage-Filter: name=='$GW_NAME'" -H "X-Nuage-Organization: CSP" -H "Content-Type: application/json" -H "Authorization: XREST $TOKEN" \
  https://$VSD_IP:8443/nuage/api/v3_0/gateways | jq -r '.[0].ID'`
-PORT_ID=`curl -ks -H "X-Nuage-Filter: name=='$PORT_NAME'" -H "X-Nuage-Organization: CSP" -H "Content-Type: application/json" -H "Authorization: XREST $TOKEN"
- \
+PORT_ID=`curl -ks -H "X-Nuage-Filter: name=='$PORT_NAME'" -H "X-Nuage-Organization: CSP" -H "Content-Type: application/json" -H "Authorization: XREST $TOKEN" \
  https://$VSD_IP:8443/nuage/api/v3_0/gateways/$GW_ID/ports | jq -r '.[0].ID'`
 VLAN_ID=`curl -ks -H "X-Nuage-Filter: value==$VLAN" -H "X-Nuage-Organization: CSP" -H "Content-Type: application/json" -H "Authorization: XREST $TOKEN" \
  https://$VSD_IP:8443/nuage/api/v3_0/ports/$PORT_ID/vlans | jq -r '.[0].ID'`
@@ -193,15 +218,13 @@ echo "VLAN $VLAN ID: $VLAN_ID"
 
 # Get/Create uplink subnet
 SUBNET_ID=`curl -ks -H "X-Nuage-Filter: type=='UPLINK_SUBNET'" -H "X-Nuage-Organization: CSP" -H "Content-Type: application/json" \
-# Get/Create uplink subnet
-SUBNET_ID=`curl -ks -H "X-Nuage-Filter: type=='UPLINK_SUBNET'" -H "X-Nuage-Organization: CSP" -H "Content-Type: application/json" \
  -H "Authorization: XREST $TOKEN" https://$VSD_IP:8443/nuage/api/v3_0/sharednetworkresources | jq -r '.[0].ID'`
-#if [ "$SUBNET_ID" == "" ]; then
+if [ "$SUBNET_ID" == "" ]; then
 echo "Creating new FIP uplink subnet in ZONE $ZONE_ID"
 curl -ks -H "X-Nuage-Organization: CSP" -H "Content-Type: application/json" -H "Authorization: XREST $TOKEN" \
- https://$VSD_IP:8443/nuage/api/v3_0/sharednetworkresources -d "{ \
-        \"name\": \"FIP uplink subnet\", \
-    \"description\": \"uplink subnet\", \
+https://$VSD_IP:8443/nuage/api/v3_0/sharednetworkresources -d "{ \
+        \"name\": \"FIP uplink subnet2\", \
+    \"description\": \"uplink subnet2\", \
     \"address\": \"$UPLINK_SUBNET\", \
     \"netmask\": \"$UPLINK_MASK\", \
     \"gateway\": \"$VRSG_IP\", \
@@ -210,12 +233,11 @@ curl -ks -H "X-Nuage-Organization: CSP" -H "Content-Type: application/json" -H "
     \"uplinkInterfaceMAC\" : \"$UPLINK_GW_MAC\", \
     \"sharedResourceParentID\" : \"$ZONE_ID\", \
     \"uplinkGWVlanAttachmentID\" : \"$VLAN_ID\", \
-    \"uplinkVPortName\" : \"uplink vport1\" \
+    \"uplinkVPortName\" : \"uplink vport2\" \
  }"
-#else
-#echo "FIP uplink subnet already exists: $SUBNET_ID"
-#fi
-##########</codeblock></li>
+else
+echo "FIP uplink subnet already exists: $SUBNET_ID"
+fi</codeblock></li>
         <li>Save and close the script.</li>
         <li>Execute the cURL script <codeblock>bash +x &lt;script_name>.sh</codeblock><p>Where:
             &lt;script_name> is the name of the cURL script you created.</p></li>
