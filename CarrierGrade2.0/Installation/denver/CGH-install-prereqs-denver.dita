@@ -21,7 +21,35 @@
                 </metadata>
         </prolog>
         <body>
-                <bodydiv conref="../sacramento/CGH-install-prereqs-sacramento.dita#topic7148cips/prereqs"/>
+                <p>This document describes the prerequisite steps required to install HP Helion
+                        OpenStack Carrier Grade in a baremetal environment.</p>
+                <section id="hardware">
+                        <title>Hardware and software requirements</title>
+                        <p>Before you start, if you have not done so already, make sure your
+                                environment meets the hardware and software requirements. See the
+                                        <xref
+                                        href="carrier-grade-support-matrix-denver.dita#topic1773cgsmd"
+                                        >HP Helion OpenStack Support Matrix</xref>.</p>
+                </section>
+                <section id="kvm">
+                        <title>Preparing the lifecycle manager host</title>
+                        <p>Perform the following tasks on the lifecycle manager host:<ul
+                                        id="ul_tg4_3lg_q5">
+                                        <li>Install Ubuntu Server</li>
+                                        <li>Configure proxy information</li>
+                                        <li>Install Ubuntu packages</li>
+                                        <li>Configure the XRDP remote desktop display</li>
+                                        <li>Install and configure NTP</li>
+                                        <li>Configure SSH</li>
+                                        <li>Prepare the Network for Installation</li>
+                                        <li>Integrate LDAP</li>
+                                        <li>Prepare the servers</li>
+                                </ul></p>
+                     
+                </section>
+                
+                <bodydiv
+                        conref="../sacramento/CGH-install-prereqs-sacramento.dita#topic7148cips/prereqs"/>
                 <section>
                         <title>Next Step</title>
                         <p><xref href="carrier-grade-install-download-denver.dita#topic7148cgidd"

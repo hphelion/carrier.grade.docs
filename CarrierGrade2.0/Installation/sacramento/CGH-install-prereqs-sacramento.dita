@@ -21,7 +21,7 @@
                 </metadata>
         </prolog>
         <body>
-               <bodydiv id="prereqs">
+               
                 <p>This document describes the prerequisite steps required to install HP Helion
                         OpenStack Carrier Grade in a baremetal environment.</p>
                 <section id="hardware">
@@ -31,6 +31,7 @@
                                         <xref href="../carrier-grade-support-matrix2.dita#topic1773cgsm2">HP
                                         Helion OpenStack Support Matrix</xref>.</p>
                 </section>
+                       <bodydiv id="toc">
                 <section id="kvm">
                         <title>Preparing the lifecycle manager host</title>
                         <p>Perform the following tasks on the lifecycle manager host:</p>
@@ -53,6 +54,10 @@
                                 <li><xref href="#topic7148cips/vsd" format="dita"/></li>
                                 <li><xref href="#topic7148cips/prepbare" format="dita"/></li>
                         </ul>
+                </section>
+               </bodydiv>
+                <bodydiv id="prereqs">
+                       <section>
                         <title>Install Ubuntu Server 14.04.2 LTS</title>
                         <p>The lifecycle manager host must have Ubuntu Server 14.04.2 LTS installed
                                         before performing the HP Helion OpenStack Carrier Grade
@@ -250,14 +255,14 @@ StrictHostKeyChecking no </codeblock></li>
                         </ol>
                 </section>
                 <section id="network">
-                        <title>Preparing the Network for Installation</title>
+                        <title>Prepare the Network for Installation</title>
                         <p>Before installing HP Helion OpenStack Carrier Grade, you are responsible
                                 for preparing the network for all installations.</p>
                         <p>See <xref href="../prereqs/carrier-grade-install-network-prepare.dita#topic7646cginp"
                                         >Preparing the Network for Installation</xref></p>
                 </section>
                 <section id="ldap">
-                        <title>Integrating LDAP</title>
+                        <title>Integrate LDAP</title>
                         <p><b>OPTIONAL:</b> The HP Helion OpenStack Identity service can use
                                 Lightweight Directory Access Protocol (LDAP) to integrate your
                                 organization's existing directory service and user account
