@@ -364,13 +364,6 @@
             <p>Cinder Volume Backup is not working upon installation of HP Helion OpenStack Carrier
                 Grade 2.0 The <codeph>cinder.backup.driver</codeph> file is not present in
                 /etc/cinder/cinder.conf.</p>
-            <p><b>Bonding on the control interface is not supported</b></p>
-            <!-- CG-1052 -->
-            <p>Due to an issue in <codeph>config_region</codeph> script, bonding on the control
-                interface (hosts PXE, CLM, BLS, CAN networks) is not supported. A patch to support
-                this feature is actively being worked upon. </p>
-            <p>Because of this issue, the data interface on the compute node does support
-                balanced-xor bonding mode and Active/Standby modes. </p>
             <p><b>StoreVirtual Cluster VIP not available on storage network. </b></p>
             <p>If you cannot ping a specific virtual IP address on a StoreVirtual server, locate the
                 host with the associated IP and reboot that server.</p>
