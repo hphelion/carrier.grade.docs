@@ -37,7 +37,6 @@ But the CLI, REST API etc should all be same --></p>
             a second failure.</li>
         </ul></p>
     </section>
-    <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/attis-id"/>
     <section>
       <title>Restoring the lifecycle manager</title>
       <p>You can use Attis to restore an HP Helion OpenStack Carrier Grade lifecycle manager.</p>
@@ -45,14 +44,17 @@ But the CLI, REST API etc should all be same --></p>
       <ol id="ol_s2c_zk3_k5">
         <li>Log in to lifecycle manager host as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Execute the following command to start the
           restore:<codeblock>attis restore --config-id &lt;Config_ID_of_ HLM_Appliance_Data_Restore&gt; --backup-id BACKUP_ID</codeblock>Where:</li>
       </ol>
       <ul id="ul_w2c_zk3_k5">
-        <li><codeph>CONFIG_ID</codeph> authenticates using the ID configuration file.</li>
+        <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+            <codeph>attis config</codeph> command to get the configuration ID for the job. See <xref
+            href="#topic10581c2ar/id" format="dita">Obtain the configuration ID</xref> below.</li>
         <li><codeph>BACKUP_ID</codeph> is the ID of the backup from which you want to perform the
           restore. Use the <codeph>attis backuplog</codeph> command to get the back up ID for the
-          job.</li>
+          job. See <xref href="#topic10581c2ar/attis-job" format="dita"/> below.</li>
       </ul>
     </section>
     <section>
@@ -63,6 +65,7 @@ But the CLI, REST API etc should all be same --></p>
       <ol id="ul_hhw_ml3_k5">
         <li>Log into the cloud controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Perform one of the following:<p><b>for NFS
             storage</b><codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeblock></p><b>for
             SCP storage</b>
@@ -77,10 +80,20 @@ But the CLI, REST API etc should all be same --></p>
       <ol id="ol_l43_w3d_p5">
         <li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>SSH to the VSD node from controller and stop all services on VSD.
           <codeblock>service vsd stop</codeblock></li>
         <li>Execute the following command:
-          <codeblock>attis restore --config-id &lt;Config_ID_of_VSD_Appliance_DB_Restore> --backup-id BACKUP_ID</codeblock></li>
+            <codeblock>attis restore --config-id &lt;Config_ID_of_VSD_Appliance_DB_Restore> --backup-id BACKUP_ID</codeblock>Where:<ul
+            id="ul_r5z_djm_q5">
+            <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                <xref href="#topic10581c2ar/id" format="dita">Obtain the configuration ID</xref>
+              below.</li>
+            <li><codeph>BACKUP_ID</codeph> is the ID of the backup from which you want to perform
+              the restore. Use the <codeph>attis backuplog</codeph> command to get the back up ID
+              for the job. See <xref href="#topic10581c2ar/attis-job" format="dita"/> below.</li>
+          </ul></li>
         <li>After restore job is complete, SSH to the VSD node and restart the VSD service.
           <codeblock>service vsd restart</codeblock></li>
       </ol>
@@ -90,8 +103,18 @@ But the CLI, REST API etc should all be same --></p>
       <p>You can use Attis to restore the HP DCN VSC system files from a previous backup..<ol>
           <li>Log into the VSC controller as the <codeph>cghelion</codeph> user.</li>
           <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+          <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
           <li>Execute the following
-            command:<codeblock>attis restore --config-id &lt;Config_ID_of_VSC_Appliance_config_files_Restore> --backup-id BACKUP_ID </codeblock></li>
+              command:<codeblock>attis restore --config-id &lt;Config_ID_of_VSC_Appliance_config_files_Restore> --backup-id BACKUP_ID </codeblock>Where:<ul
+              id="ul_r1d_fjm_q5">
+              <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                  <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                  <xref href="#topic10581c2ar/id" format="dita">Obtain the configuration ID</xref>
+                below.</li>
+              <li><codeph>BACKUP_ID</codeph> is the ID of the backup from which you want to perform
+                the restore. Use the <codeph>attis backuplog</codeph> command to get the back up ID
+                for the job. See <xref href="#topic10581c2ar/attis-job" format="dita"/> below.</li>
+            </ul></li>
         </ol></p>
     </section>
     <section>
@@ -101,8 +124,18 @@ But the CLI, REST API etc should all be same --></p>
         <ol>
           <li>Log into the active KVM region controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
           <li>Execute the following command to perform the back
-            up.<codeblock>attis restore --config-id &lt;Config_ID_of_WR_Appliance_system_files_Restore> --backup-id BACKUP_ID</codeblock></li>
+            up.<codeblock>attis restore --config-id &lt;Config_ID_of_WR_Appliance_system_files_Restore> --backup-id BACKUP_ID</codeblock>Where:<ul
+            id="ul_yvb_gjm_q5">
+            <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                <xref href="#topic10581c2ar/id" format="dita">Obtain the configuration ID</xref>
+              below.</li>
+            <li><codeph>BACKUP_ID</codeph> is the ID of the backup from which you want to perform
+              the restore. Use the <codeph>attis backuplog</codeph> command to get the back up ID
+              for the job. See <xref href="#topic10581c2ar/attis-job" format="dita"/> below.</li>
+          </ul></li>
         </ol>
       </section>
     <section>
@@ -113,10 +146,46 @@ But the CLI, REST API etc should all be same --></p>
         <ol id="ol_h5c_zzc_p5">
           <li>Log into the active baremetal controller as the <codeph>cghelion</codeph> user.</li>
           <li>Change to the Attis user:<codeblock>sudo su attis</codeblock></li>
+          <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
           <li>Execute the following
-            command:<codeblock>attis restore --config-id &lt;Config_ID_of_BM_Controller_Data_Restore> --backup-id BACKUP_ID </codeblock></li>
+              command:<codeblock>attis restore --config-id &lt;Config_ID_of_BM_Controller_Data_Restore> --backup-id BACKUP_ID </codeblock>Where:<ul
+              id="ul_nqt_gjm_q5">
+              <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                  <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                  <xref href="#topic10581c2ar/id" format="dita">Obtain the configuration ID</xref>
+                below.</li>
+              <li><codeph>BACKUP_ID</codeph> is the ID of the backup from which you want to perform
+                the restore. Use the <codeph>attis backuplog</codeph> command to get the back up ID
+                for the job. See <xref href="#topic10581c2ar/attis-job" format="dita"/> below.</li>
+            </ul></li>
         </ol>
       </p>
+    </section>
+    <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/attis-id" id="id"/>
+    <section id="attis-job">
+      <title>Obtain the Attis backup ID</title>
+      <p>The Attis restore commands require that you specify the ID of the backup job you want to
+        restore. You can obtain the ID using the <codeph>attis job</codeph> command.</p>
+      <ol id="ol_i5h_2tl_q5">
+        <li>Log one of the non-KVM region controllers as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
+        <li>Execute the following command:<codeblock>attis job</codeblock><p>The output appears
+            similar to the
+            following:<codeblock>
++-------------------------+----------------------------------+-----------+-----------------------+---------------------+
+| id                      | name                             | state     | tenant_id             | date_modified       |
++-------------------------+----------------------------------+-----------+-----------------------+---------------------+
+| 73c874ea-9399-11e5-a5cf | hlmappliance_opt_filesbackup     | Completed | 3ec64451e82849dfb9777 | 2015-11-25 17:25:31 |
+| 763f6ea0-9343-11e5-92c3 | vsdappliancedbrestore            | Completed | 3ec64451e82849dfb9777 | 2015-11-25 07:38:37 |
+| b9b25e1c-9317-11e5-b9e7 | vsdappliancedbbackup             | Completed | 3ec64451e82849dfb9777 | 2015-11-25 02:10:18 |
+| 2f6b8504-9316-11e5-b3b0 | hlmappliance_opt_filesrestore    | Completed | 3ec64451e82849dfb9777 | 2015-11-25 01:45:41 |
+| 4e74451c-9311-11e5-9d3c | hlmappliance_opt_filesbackup     | Completed | 3ec64451e82849dfb9777 | 2015-11-25 01:10:40 |
+| 6c97634a-92b6-11e5-b3b0 | vsdappliancedbrestore            | Completed | 3ec64451e82849dfb9777 | 2015-11-24 14:52:42 |
+| 8760978a-9213-11e5-a082 | hlmappliance_opt_filesrestore    | Completed | 3ec64451e82849dfb9777 | 2015-11-23 18:54:12 |
+| b526f75c-91e3-11e5-b1cb | cloudcontrollerappliancedbbackup | Completed | 3ec64451e82849dfb9777 | 2015-11-23 13:12:10 |
++-------------------------+----------------------------------+-----------+-----------------------+---------------------+</codeblock></p></li>
+      </ol>
     </section>
     <p> </p></body>
 </topic>

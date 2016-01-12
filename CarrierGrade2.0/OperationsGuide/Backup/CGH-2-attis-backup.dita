@@ -44,7 +44,6 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         <li><xref href="#topic10581c2ab/baremetal" format="dita"/></li>
       </ul>
     </section>
-    <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/attis-id"/>
       <section id="hlm">
       <title>Backing up the lifecycle manager</title>
       <p>You can use Attis to back up any of the following the lifecycle manager data: </p>
@@ -69,7 +68,13 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
           <li>Execute the following command to start the
             backup:<codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_Data_Backup&gt;</codeblock>To
             only back up only the <codeph>/opt</codeph> files, execute the following
-            command:<codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_opt_files_Backup&gt;</codeblock></li>
+              command:<codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_opt_files_Backup&gt;</codeblock>Where:<ul
+              id="ul_ofv_5jm_q5">
+              <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                  <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                  <xref href="#topic10581c2ab/id" format="dita">Obtain the configuration ID</xref>
+                below.</li>
+            </ul></li>
         </ol>
       </p>
     </section>
@@ -83,7 +88,13 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Execute the following command to start the
-          backup:<codeblock>attis backup --config-id &lt;Config_ID_of_Cloud_Controller_Appliance_DB_Backup&gt;</codeblock></li>
+            backup:<codeblock>attis backup --config-id &lt;Config_ID_of_Cloud_Controller_Appliance_DB_Backup&gt;</codeblock>Where:<ul
+            id="ul_u4j_5jm_q5">
+            <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                <xref href="#topic10581c2ab/id" format="dita">Obtain the configuration ID</xref>
+              below.</li>
+          </ul></li>
       </ol>If an entire cluster goes down, due to an issue (such as data corruption or MySQL
       defect), and the cluster does not come back up, you can use the backup to restore the cluster
       to a previous well-known state (backup) and start the cluster from that point.</section>
@@ -96,7 +107,13 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Run the backup
-          command:<codeblock>attis backup --config-id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock></li>
+            command:<codeblock>attis backup --config-id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock>Where:<ul
+            id="ul_bq5_tjm_q5">
+            <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                <xref href="#topic10581c2ab/id" format="dita">Obtain the configuration ID</xref>
+              below.</li>
+          </ul></li>
       </ol>
     </section>
     <section id="vsc"><title>Backup VSC system files</title><p>You can use Attis to back up the HP
@@ -108,7 +125,13 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Execute the following
-          command:<codeblock>attis backup --config-id &lt;Config_ID_of_ VSC_Appliance_config_files_Backup&gt;</codeblock></li>
+            command:<codeblock>attis backup --config-id &lt;Config_ID_of_ VSC_Appliance_config_files_Backup&gt;</codeblock>Where:<ul
+            id="ul_qgg_tjm_q5">
+            <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                <xref href="#topic10581c2ab/id" format="dita">Obtain the configuration ID</xref>
+              below.</li>
+          </ul></li>
       </ol></section>
     <section id="kvm">
       <title>Backup KVM region system files </title>
@@ -119,7 +142,13 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Execute the following command to perform the back
-          up.<codeblock>attis backup --config-id &lt;Config_ID_of_ WR_Appliance_system_files_Backup&gt;</codeblock></li>
+            up.<codeblock>attis backup --config-id &lt;Config_ID_of_ WR_Appliance_system_files_Backup&gt;</codeblock>Where:<ul
+            id="ul_od4_pjm_q5">
+            <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                <xref href="#topic10581c2ab/id" format="dita">Obtain the configuration ID</xref>
+              below.</li>
+          </ul></li>
       </ol>
     </section>
     <section id="baremetal">
@@ -131,7 +160,14 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Execute the following
-          command:<codeblock>attis backup --config-id &lt;Config_ID_of_ BM_Controller_Data_Backup&gt;</codeblock></li>
+            command:<codeblock>attis backup --config-id &lt;Config_ID_of_ BM_Controller_Data_Backup&gt;</codeblock>Where:<ul
+            id="ul_nqt_gjm_q5">
+            <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
+                <codeph>attis config</codeph> command to get the configuration ID for the job. See
+                <xref href="#topic10581c2ab/id" format="dita">Obtain the configuration ID</xref>
+              below.</li>
+          </ul></li>
       </ol>
-    </section></body>
+    </section>
+    <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/attis-id" id="id"/></body>
 </topic>
