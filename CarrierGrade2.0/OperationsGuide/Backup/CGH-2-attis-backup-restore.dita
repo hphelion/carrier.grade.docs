@@ -29,13 +29,13 @@ But the CLI, REST API etc should all be same --></p>
         <xref href="CGH-2--backup-configure.dita#topic10581c2bc">Configuring the Backup and Restore
         Location </xref></p>
     <section id="resp">
-    <title>Attis Administrator Responsibilities for Protecting Credentials</title>
-    <p>Attis performs encrypted backup and restore of system data. The key for encryption and
+      <title>Attis Administrator Responsibilities for Protecting Credentials</title>
+      <p>Attis performs encrypted backup and restore of system data. The key for encryption and
         decryption is stored in the Attis configuration file on each controller node in
           <codeph>/root/crypt_key</codeph>. If this key is lost, your backups can not be restored.
         Consider storing the backup encryption key separately from your cloud infrastructure, in
         addition to the copy stored on each controller node.</p>
-    <p>Be aware that keys and passwords for other OpenStack services are stored in configuration
+      <p>Be aware that keys and passwords for other OpenStack services are stored in configuration
         files on cloud infrastructure nodes, protected by filesystem controls. Protect servers from
         unauthorized access and protect against exposure of credentials in configuration files.
         Attis backups contain copies of these credentials as well, protected using backup
@@ -54,9 +54,9 @@ But the CLI, REST API etc should all be same --></p>
             (Sacramento deployments only)</li>
         </ul></p>
     </section>
-    <section>
+    <section id="authentication">
       <title>Authenticate</title>
-      <p>Each Attis session, you must authenticate before executing any commands </p>
+      <p>Each Attis session, you must authenticate before executing most commands </p>
       <ol id="ol_lbs_sfk_p5">
         <li>Log one of the non-KVM region controllers as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
@@ -71,8 +71,8 @@ export OS_AUTH_URL=&lt;The address of the Identity API served through keystone><
     </section>
     <section id="attis-id">
       <title>Obtain the Attis config ID</title>
-      <p>Most of the Attis backup and restore commands require a config ID. You can obtain the ID
-        using the <codeph>attis config</codeph> command.</p>
+      <p>Most of the Attis backup and restore commands require a configuration file to be specified
+        by ID number. You can obtain the ID using the <codeph>attis config</codeph> command.</p>
       <ol id="ol_qsq_dtj_p5">
         <li>Log one of the non-KVM region controllers as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
@@ -116,6 +116,31 @@ export OS_AUTH_URL=&lt;The address of the Identity API served through keystone><
                 up or restoring the KVM-region system files.</li>
             </ul>
           </p></li>
+      </ol>
+    </section>
+    <section id="attis-job">
+      <title>Obtain the Attis backup ID</title>
+      <p>The Attis restore commands require that you specify the ID of the backup job you want to
+        restore. You can obtain the ID using the <codeph>attis job</codeph> command.</p>
+      <ol id="ol_i5h_2tl_q5">
+        <li>Log one of the non-KVM region controllers as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="#topic10581c2abr/authenticate"/>
+        <li>Execute the following command:<codeblock>attis job</codeblock><p>The output appears
+            similar to the
+            following:<codeblock>
++-------------------------+----------------------------------+-----------+-----------------------+---------------------+
+| id                      | name                             | state     | tenant_id             | date_modified       |
++-------------------------+----------------------------------+-----------+-----------------------+---------------------+
+| 73c874ea-9399-11e5-a5cf | hlmappliance_opt_filesbackup     | Completed | 3ec64451e82849dfb9777 | 2015-11-25 17:25:31 |
+| 763f6ea0-9343-11e5-92c3 | vsdappliancedbrestore            | Completed | 3ec64451e82849dfb9777 | 2015-11-25 07:38:37 |
+| b9b25e1c-9317-11e5-b9e7 | vsdappliancedbbackup             | Completed | 3ec64451e82849dfb9777 | 2015-11-25 02:10:18 |
+| 2f6b8504-9316-11e5-b3b0 | hlmappliance_opt_filesrestore    | Completed | 3ec64451e82849dfb9777 | 2015-11-25 01:45:41 |
+| 4e74451c-9311-11e5-9d3c | hlmappliance_opt_filesbackup     | Completed | 3ec64451e82849dfb9777 | 2015-11-25 01:10:40 |
+| 6c97634a-92b6-11e5-b3b0 | vsdappliancedbrestore            | Completed | 3ec64451e82849dfb9777 | 2015-11-24 14:52:42 |
+| 8760978a-9213-11e5-a082 | hlmappliance_opt_filesrestore    | Completed | 3ec64451e82849dfb9777 | 2015-11-23 18:54:12 |
+| b526f75c-91e3-11e5-b1cb | cloudcontrollerappliancedbbackup | Completed | 3ec64451e82849dfb9777 | 2015-11-23 13:12:10 |
++-------------------------+----------------------------------+-----------+-----------------------+---------------------+</codeblock></p></li>
       </ol>
     </section>
     <p>See:</p>

@@ -33,7 +33,7 @@ But the CLI, REST API etc should all be same --></p>
         OpenStack Carrier Grade will store backup files. For information about the attis CLI, see
         the <xref href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
           CLI</xref>.</p>
-      <p>You can store backup files using:<ul id="ul_uzn_3b3_k5">
+      <p id="type">You can store backup files using:<ul id="ul_uzn_3b3_k5">
           <li>SCP: A location on a remote server where the backup file is secure copied.</li>
           <li>NFS: A location on a network file system.</li>
           <li>FILE: A location on the cloud controller.</li>
@@ -45,18 +45,27 @@ But the CLI, REST API etc should all be same --></p>
         job list, you will see that SSH connection to the storage path failed, and the state is
         Failed.</p>
       <p>Perform the following steps on any cloud controller node. <ol id="ol_vzn_3b3_k5">
-          <li>Log into HLM node</li>
-          <li>SSH to any controller nodes from HLM using controller credentials (default username:
+          <li>Log into the lifecycle manager.</li>
+          <li>SSH to any controller nodes using controller credentials (default username:
             cghelion)</li>
-          <li>Switch to the root user by running sudo –i.</li>
+          <li>Switch to the root user:<codeblock>sudo –i</codeblock></li>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
           <li>Set the type of backup storage location. <ul id="ul_fk5_vp3_k5">
               <li>To set the backup storage location to an SCP server, run:
-                <codeblock>attis storage --use SCP</codeblock></li>
+                    <codeblock>attis storage --use SCP</codeblock><p><b>IMPORTANT:</b> If you select
+                  SCP, you must copy the public key text located at
+                    <codeph>/home/attis/.ssh/id_rsa.pub</codeph> from controller nodes and paste the
+                  key into the <codeph>authorized_keys</codeph> file of the SCP
+                  server.<codeblock>sudo su attis
+ssh-copy-id &lt;remotescpuser>@&lt;hostofscplocation></codeblock></p>If
+                you want to generate a new key for setting up trust between Attis and the SCP
+                server, copy the private key to each controller node. Then use the Attis command
+                  <codeph>storage --update</codeph> to update the private key file path.</li>
               <li>To set the backup storage location to an NFS server, run:
                 <codeblock>attis storage --use NFS</codeblock></li>
             </ul></li>
           <li>List the storage details.
-            <codeblock>root@ma1:~# attis storage
+            <codeblock>attis storage
 +--------------------------------------+------+----------+ 
 | id                                   |type  |selected  |
 +--------------------------------------+------+----------+ 
@@ -65,43 +74,49 @@ But the CLI, REST API etc should all be same --></p>
 |7abb6f30-3f10-4918-9f8d-a58b157d59b9  |SCP   |True      |
 +--------------------------------------+------+----------+ </codeblock></li>
           <li>View the storage parameters that you will need to update by selecting the storage ID
-            of the selected type. Example:
-            <codeblock>root@ma1:~# attis storage --id 7abb6f30-3f10-4918-9f8d-a58b157d59b9
+            of the selected type. For example:
+            <codeblock>attis storage --id 7abb6f30-3f10-4918-9f8d-a58b157d59b9
 +--------------------------------------+------+----------+ 
 | id                                   |type  |selected  |
 +--------------------------------------+------+----------+ 
 |7abb6f30-3f10-4918-9f8d-a58b157d59b9  |SCP   |True      |
 +--------------------------------------+------+----------+
 +--------------------------------+--------------------------------------+---------+ 
-|id           |storage_id        | parameter_name               | value           |
+|id             |storage_id      | parameter_name               | value           |
 +---------------+----------------+----------------------+-------------------------+
-| 18bb9b5e-&lt;...&gt;| 7abb6f30-&lt;...&gt; | user                 |                         | 
-| 78aaa60e-&lt;...&gt;| 7abb6f30-&lt;...&gt; | storage_path         |                         | 
-| c0a5c549-&lt;...&gt;| 7abb6f30-&lt;...&gt; | server               |                         |
+| 18bb9b5e-&lt;...&gt;| 7abb6f30-&lt;...&gt; | user                 | name                    | 
+| 78aaa60e-&lt;...&gt;| 7abb6f30-&lt;...&gt; | storage_path         | /home/attis-access      | 
+| c0a5c549-&lt;...&gt;| 7abb6f30-&lt;...&gt; | server               | HLM-NETCLM              |
 | e34ac1b2-&lt;...&gt;| 7abb6f30-&lt;...&gt; | private_key_filepath | /home/attis/.ssh/id_rsa |
 +---------------+----------------+----------------------+-------------------------+</codeblock></li>
-          <li>Set the attis configuration of the storage type you entered in step 4 by entering:
-              <codeblock>attis storage --id &lt;storage_id from the table&gt; --update '{"parameter":"new value", "parameter":"new value"}'</codeblock><p>where
-              parameter in an SCP configuration is:</p><ul id="ul_c14_3b3_k5">
-              <li>user: User to SSH into the remote SCP server.</li>
-              <li>storage_path: Path on the remote SCP server where you want to store backup
-                files.</li>
-              <li>server: IP address or DNS resolvable hostname of the remote server.</li>
-              <li>private_key_filepath: Private key used to SSH to the remote SCP server. By default
-                /home/attis/.ssh/id_rsa on the controller is prepopulated.</li>
-            </ul><p><b>SCP Example</b>
+          <li>Modify the configuration of the storage type,  either SCP or NFS:
+                <codeblock>attis storage --id &lt;storage_id from the table&gt; --update '{"parameter":"new value", "parameter":"new value"}'</codeblock><p><b>SCP
+                Example</b>
             </p><p>To specify the details of an SCP server to use for backup file
-                storage:</p><codeblock>attis storage --update '{"storage_path":"/mybackupDirOnRemoteMachine","private_key_filepath":"/home/attis/.ssh/id_rsa","server":"hostofscplocation","user":"remotescpuser"}' --id &lt;copy the storage_id from attis storage&gt; </codeblock><p><b>IMPORTANT:</b>
-              If you select SCP, you must copy the public key text located at
-              /home/attis/.ssh/id_rsa.pub from controller nodes and paste it into the
-              authorized_keys file of the SCP
-              server.<codeblock>sudo su attis
-ssh-copy-id &lt;remotescpuser&gt;@&lt;hostofscplocation&gt;</codeblock></p><p>If
-              you want to generate a new key for setting up trust between attis and the SCP server,
-              copy the private key to each controller node. Then use the attis command storage
-              --update to update the private_key_filepath.</p><p><b>NFS Example</b>
+              storage:</p><codeblock>attis storage --update '{"storage_path":"/mybackupDirOnRemoteMachine","private_key_filepath":"/home/attis/.ssh/id_rsa","server":"hostofscplocation","user":"remotescpuser"}' --id &lt;copy the storage_id from attis storage&gt; </codeblock><p>where:</p><ul
+              id="ul_c14_3b3_k5">
+              <li><codeph>storage_path</codeph>. The path on the remote SCP server for storing
+                backup files.</li>
+              <li><codeph>private_key_filepath</codeph>. Private key used to SSH to the remote SCP
+                server. By default this is <codeph>/home/attis/.ssh/id_rsa</codeph> on the
+                controller is used.</li>
+              <li><codeph>server</codeph>. The IP address or DNS resolvable hostname of the remote
+                server.</li>
+              <li><codeph>user</codeph>. The SSH user name into the remote SCP server.</li>
+              <li><codeph>--id</codeph>.  The ID of the storage configuration to modify.</li>
+            </ul><p><b>IMPORTANT:</b> If you select SCP, you must copy the public key text located
+              at <codeph>/home/attis/.ssh/id_rsa.pub</codeph> from controller nodes and paste the
+              key into the <codeph>authorized_keys</codeph> file of the SCP server.</p><p><b>NFS
+                Example</b>
             </p><p>To specify the details of an NFS server to use for backup file
-              storage:<codeblock>attis storage --update '{"server":"NFS server ip", "client_mount_path": "name of storage mount on cloud controller", "storage_path":"mybackupDironRemoteMachine"}' --id &lt;copy the storage_id from attis storage&gt;</codeblock></p></li>
+              storage:<codeblock>attis storage --update '{"server":"NFS server ip", "client_mount_path": "name of storage mount on cloud controller", "storage_path":"mybackupDironRemoteMachine"}' --id &lt;copy the storage_id from attis storage&gt;</codeblock></p><p>where:</p><ul
+              id="ul_vyh_d2m_q5">
+              <li><codeph>server</codeph>. The IP address or DNS resolvable host name of the NFS
+                server.</li>
+              <li><codeph>client_mount_path</codeph>. Specify the NFS mount path. </li>
+              <li><codeph>storage_path</codeph>. The path to the location for storing back ups.</li>
+              <li><codeph>--id</codeph>.  The ID of the storage configuration to modify.</li>
+            </ul></li>
           <li>Restart Attis server on all three controllers if the storage option is changed to NFS
             or FILE option: <codeblock>service attis-server restart</codeblock></li>
         </ol></p>
