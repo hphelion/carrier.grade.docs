@@ -26,7 +26,7 @@ But the CLI, REST API etc should all be same --></p>
       CLI</xref>.</p>
     <p><b>Important:</b> Before you start your first backup, you must use the Attis CLI to specify
       where HP Helion OpenStack Carrier Grade will store backup files. For more information, see
-        <xref href="CGH-2--backup-configure.dita#topic10581c2bc">Configuring the Backup and Restore
+      <xref href="CGH-2--backup-configure.dita#topic10581c2bc/location">Configuring the Backup and Restore
         Location </xref></p>
     <section id="resp">
       <title>Attis Administrator Responsibilities for Protecting Credentials</title>
@@ -53,6 +53,20 @@ But the CLI, REST API etc should all be same --></p>
           <li>MySQL database and Neutron, Nova, Ironic files under /etc on the baremetal controller
             (Sacramento deployments only)</li>
         </ul></p>
+    </section>
+    <section>
+      <title>Configuring the Backup and Restore Environment </title>
+      <p>Before you start your first backup, you must perform a few one-time tasks, including:</p>
+      <ul id="ul_gm5_4jk_p5">
+        <li>Configuring the Backup and Restore Location</li>
+        <li>Configuring the restore templates</li>
+        <li>Setting up trust between the controllers and the VSD</li>
+        <li>Setting the KVM Password</li>
+        <li>Configuring the baremetal controller details </li>
+        <li>Copying the Attis public keys to the baremetal controller</li>
+      </ul>
+      <p>For more information, see <xref href="CGH-2--backup-configure.dita#topic10581c2bc"
+          >Configuring the Backup and Restore Environment</xref>.</p>
     </section>
     <section><title>How to back up and restore</title>For details on how to perform back-ups and
       restores, see the following topics:<p><xref href="CGH-2-attis-backup.dita#topic10581c2ab"
