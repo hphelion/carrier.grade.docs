@@ -18,16 +18,16 @@
     <p><!--Here is the wiki link for Attis.<xref href="https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?pageId=946944841" format="html" scope="external">https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?pageId=946944841</xref> 
 The high level design needs to be adjusted to more suite with CG(It is reflecting CS in some areas)I will soon update it. 
 But the CLI, REST API etc should all be same --></p>
-    <p>HP Helion OpenStack Carrier Grade includes a backup and restore application called Attis
+    <p id="intro">HP Helion OpenStack Carrier Grade includes a backup and restore application called Attis
       which you can use to backup and restore essential system files and databases of the running
-      cloud. Attis is automatically installed on each of the controller nodes in the non-KVM region.
-      Attis uses a command line interface. For more information, see <xref
+      cloud. Attis is automatically installed on each of the controller nodes in the non-KVM region. </p>
+    <p>Attis uses a command line interface, as described in <xref
         href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
       CLI</xref>.</p>
-    <p><b>Important:</b> Before you start your first backup, you must use the Attis CLI to specify
-      where HP Helion OpenStack Carrier Grade will store backup files. For more information, see
-      <xref href="CGH-2--backup-configure.dita#topic10581c2bc/location">Configuring the Backup and Restore
-        Location </xref></p>
+    <p id="before"><b>Important:</b> Before using Attis, you perform a few one-time tasks to
+      configure the Attis environment. For more information, see <xref
+        href="CGH-2--backup-configure.dita#topic10581c2bc">Configuring the Backup and
+        Restore Environment</xref></p>
     <section id="resp">
       <title>Attis Administrator Responsibilities for Protecting Credentials</title>
       <p>Attis performs encrypted backup and restore of system data. The key for encryption and

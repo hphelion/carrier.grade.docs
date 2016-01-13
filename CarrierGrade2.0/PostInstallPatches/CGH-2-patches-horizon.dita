@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Horizon
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section id="horizon-patch">If you are unable to create a PCI-Passthrough or SR-IOV interface
+      using the Horizon UI, but can create those interfces using CLI, you need to apply the Horizon
+      Patch. <p><b>Note:</b> If you applied the Horizon Patch, <codeph>WR-HZN-1011</codeph> during
+        installation, and can create PCI-Passthrough or SR-IOV interfaces in Horizon, disregard
+        these steps. </p><p>Due to an API error, you cannot create a PCI-Passthrough or SR-IOV
+        interface using the Horizon UI. To correct this issue, deploy the following patch.
+        <!--HCG-1011/1012--></p>You should have downloaded the following patch files during the
+        prerequisites:<ul id="ul_awq_db1_f5">
+        <li>WR-HZN-1011</li>
+      </ul><p>The patch is in a compressed file called
+          <codeph>HCG2.0_Horizon001_Patch002.tar.gz</codeph>. The README with the patch download
+        contains information on files changed by these patches.</p><p>Execute the following
+          commands:<ol id="ol_imr_fgt_25">
+          <li>Copy the WR-HZN-1011 directory to the
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on the lifecycle
+            manager. </li>
+          <li>Execute following command to apply patch
+              <codeblock>hlm patch -c &lt;cloud-name> -n WR-HZN-1011 -t &lt;tier></codeblock><p>Where:
+              &lt;tier> is the tier on which the various controllers are running. </p>For example:
+            <codeblock>hlm patch -c sac36 -n WR-HZN-1011 -t BASE-CCP-T2</codeblock>The tier
+            information can be found in the
+              <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
+            file. </li>
+        </ol></p></section>
+  </body>
+</topic>

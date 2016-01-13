@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the PCI Bus
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>
+      <codeblock>This Patch fixes PCI Bus Assignment for VM Guest.
+
+This WR patch can be applied to KVM region on 2 scenarios..
+
+- Patch can be applied if the cloud is deployed and KVM region is already up.
+- Patch can be applied before config_region is run on the KVM region.
+
+This Patch tar file will have TS_HP_15_Custom_PATCH_0002.patch, Readme.txt &amp;  Usecase.txt file.
+
+TS_HP_15_Custom_PATCH_0002.patch c8a191bd08be08e5b720bc6c998e81d8
+
+
+This patch is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies
+
+===========================================================
+
+Case1: Steps for applying Patch HCG2.0_WR003_Patch007.tar.gz in an existing Cloud scenario
+==========================================================================================
+
+PreReq: WR Patch HCG2.0_WR002_Patch005.tar.gz is applied already. 
+
+1.      Log into controller-0 [active controller]
+
+2.	mkdir -p /tmp/patches
+3.	Copy patch file to /tmp/patches/
+4.	sudo sw-patch upload /tmp/patches/&lt;patch-name>.patch
+5.      sudo sw-patch query # check if the patch is Available
+6.      sudo sw-patch query-hosts  # check the Current state of all the hosts
+7.	sudo sw-patch apply &lt;patch-name>
+8.	source /etc/nova/openrc
+9.	system host-patch-reboot controller-1  # Assuming controller-0 is active controller
+        [ Wait until controller-1 node comes up after patching ]
+11.	system host-swact controller-0
+12.	Exit the ssh session and login to the newly active controller i.e., controller-1
+13.	source /etc/nova/openrc
+14.	system host-patch-reboot controller-0
+15.	system host-patch-reboot compute-0
+16.	system host-patch-reboot compute-1
+
+###################################
+
+Second Scenario
+
+####################################
+
+Case2: Steps for applying patch in fresh cloud deployment scenario and before config_region is run on KVM region
+================================================================================================================
+
+PreReq: WR Patch HCG2.0_WR002_Patch005.tar.gz is applied copied and loaded.
+
+Note: You can copy and load all the available WR patches in one go.  
+
+NEW INSTALL: software loaded onto controller-0 but the config_region script has not been executed
+
+1.	Log into controller-0 (change password when/if prompted) ==>this is run from console only
+2.	> mkdir -p /tmp/patches
+3.	Copy patch file to /tmp/patches
+4.	> sudo sw-patch upload-dir /tmp/patches
+          [Make sure all your uploaded patches are shown available]
+5.	> sudo sw-patch apply --all
+          [From the output, you will see patches are now in the repo]
+6.	> sudo sw-patch install-local
+          [Wait for the mesg stating - Patch installation is complete. This will take few minutes and user will be prompted for reboot]
+7.	> sudo reboot
+8.	Continue setting up controller-0 and the rest of the cloud as normal
+
+NOTES:
+•	The upload-dir operation registers all patches in the specific directory into the database. Once registered, you do not need to keep the files themselves around anymore; they are in the database itself.
+•	The apply --all operation tells the system to apply all registered patches to the nodes in this cluster
+•	The install-local operation tells the system to install all necessary patches on the un-configured local node
+
+
+Also you can check the below link for additional details and if you want to apply the patch from GUI
+
+http://gaf2871b9d2d13cf45c1306b35bf01764.cdn.hpcloudsvc.com/CGH-2-KVM-Admin.pdf
+</codeblock>
+    </p>
+  </body>
+</topic>
