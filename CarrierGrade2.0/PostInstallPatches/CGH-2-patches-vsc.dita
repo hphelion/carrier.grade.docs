@@ -42,7 +42,10 @@
     <section>
       <title>Install the patch</title>
       <p>The process for installing this patch is different for highly-available (HA) and non-HA
-        environments. Follow the procedure appropriate for your environment:</p>
+        environments. Follow the procedure appropriate for your environment:<ul id="ul_owx_bc5_q5">
+          <li><xref href="#topic10581pdpv/ha" format="dita"/></li>
+          <li><xref href="#topic10581pdpv/non-ha" format="dita"/></li>
+        </ul></p>
     </section>
     <section id="ha">
       <title>Deploy into a highly-available deployment</title>
@@ -100,7 +103,7 @@
             <codeph>hosts</codeph> file.<p>For example: BASE-CCP-T1-M1-NETCLM and
             BASE-CCP-T1-M2-NETCLM</p></li>
       </ol>
-      <p><b>Remove the VSC VMs</b></p>
+      <p><b>Remove the VSC VMs from DCN Host1</b></p>
       <p>Use the following steps to remove the virtual machine where the VSC is deployed.</p>
       <p><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different than the
         default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
@@ -121,7 +124,7 @@ virsh undefine vsc</codeblock></li>
                 from the hosts file previously. This has to be done in two places in the file:-
                 <codeblock>-   accelerate: 'false'
     gather_facts: 'no'
-    hosts: BASE-CCP-T1
+    hosts: BASE-CCP-T1-M1-NETCLM
     max_fail_percentage: 0
     remote_user: cghelion
     roles:
@@ -141,7 +144,7 @@ virsh undefine vsc</codeblock></li>
     - deploy-CCP-T1.yml
 -   accelerate: 'true'
     accelerate_port: '10001'
-    hosts: BASE-CCP-T1
+    hosts: BASE-CCP-T1-M1-NETCLM
     max_fail_percentage: 0
 ...</codeblock></li>
             </ol>
@@ -151,16 +154,74 @@ virsh undefine vsc</codeblock></li>
           file<codeblock>hlm deploy -c &lt;cloudname> -t deploy-CCP-T1.yml</codeblock></li>
         <li>After the deployment of VSC on DCN host1 is complete, , SSH to your VSC VM from HLM Host
           using the DCM IP. </li>
-        <li>execute the following commands to verify that the VRG, VSD, VRS are listed in the VSC as
+        <li>Execute the following commands to verify that the VRG, VSD, VRS are listed in the VSC as
             <b>Functional</b> and in <b>Available</b> status.
           <codeblock>show vswitch-controller vswitches 
 show vswitch-controller xmpp-server 
 show vswitch-controller vsd </codeblock></li>
-        <li>Repeat the steps in this section (<b>Remove the VSC VMs</b>) for DCN host2 to update the
-            <codeph>deploy-CCP-T1.yml</codeph> file with hostname of DCN host2. Make sure that
-          previously added hostname is removed and DCN host2 is added. <p>Example: <codeph>hosts:
-              BASE-CCP-T1-M2-NETCLM</codeph>
+        <li>After the VSC deployment is completed on all hosts, remove the updated
+            <codeph>deploy-CCP-T1.yml</codeph> file and restore the original file from <xref
+            href="#topic10581pdpv/ccp-yml" format="dita">backup you created in the previous
+            section</xref>. <p>Retain the new <codeph>deploy.yml</codeph> in the lifecycle manager
+            VM at
+              <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>.</p></li>
+      </ol>
+      <p><b>Remove the VSC VMs from DCN Host2</b></p>
+      <p>Use the following steps to remove the virtual machine where the VSC is deployed.</p>
+      <p><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different than the
+        default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
+          directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
+      <ol id="ol_wxp_lb5_q5">
+        <li>Log into DCN host2. Using the example in the previous step, BASE-CCP-T1-M2-NETCLM.</li>
+        <li>Execute the following commands to remove the VSC VM
+          <codeblock>virsh list --all 
+virsh destroy vsc 
+virsh undefine vsc</codeblock></li>
+        <li>Delete <codeph>vsc_singledisk.qcow2</codeph> from /home/images on DCN HOST2.</li>
+        <li>Change to the
+            <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/</codeph>
+          directory.  </li>
+        <li>Modify the <codeph>deploy-CCP-T1.yml</codeph> file as below location of the file: <p>
+            <ol id="ol_xxp_lb5_q5">
+              <li>Edit the <codeph>hosts</codeph> value in the file with the host name you retrieved
+                from the hosts file previously. This has to be done in two places in the file:-
+                <codeblock>-   accelerate: 'false'
+    gather_facts: 'no'
+    hosts: BASE-CCP-T1-M2-NETCLM
+    max_fail_percentage: 0
+    remote_user: cghelion
+    roles:
+    - accelerate-mode
+    sudo: 'yes'
+    tags:
+    - accelerate-mode
+    - Common
+    - FND-IPT
+    - NTP-SVR
+    - DNS-CLI
+    - FND-KVM
+    - DCN-BRG
+    - DCN-RQ1
+    - DCN-VSC
+    - Conclude
+    - deploy-CCP-T1.yml
+-   accelerate: 'true'
+    accelerate_port: '10001'
+    hosts: BASE-CCP-T1-M2-NETCLM
+    max_fail_percentage: 0
+...</codeblock></li>
+            </ol>
           </p></li>
+        <li>Execute the following command to deploy the VSC on one the host added in
+            <codeph>deploy-CCP-T1.yml</codeph>
+          file<codeblock>hlm deploy -c &lt;cloudname> -t deploy-CCP-T1.yml</codeblock></li>
+        <li>After the deployment of VSC on DCN host1 is complete, SSH to your VSC VM from HLM Host
+          using the DCM IP. </li>
+        <li>Execute the following commands to verify that the VRG, VSD, VRS are listed in the VSC as
+            <b>Functional</b> and in <b>Available</b> status.
+          <codeblock>show vswitch-controller vswitches 
+show vswitch-controller xmpp-server 
+show vswitch-controller vsd </codeblock></li>
         <li>After the VSC deployment is completed on all hosts, remove the updated
             <codeph>deploy-CCP-T1.yml</codeph> file and restore the original file from <xref
             href="#topic10581pdpv/ccp-yml" format="dita">backup you created in the previous
