@@ -54,25 +54,27 @@
       <ol id="ol_ozs_5jt_q5">
         <li id="a1">Execute the following command to backup the VSC configuration file:
           <codeblock>scp admin@&lt;vsc ip>:/config.cfg  &lt;destination directory></codeblock></li>
-        <li id="a2">Log into the lifecycle manager VM. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
-            HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
-            lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
-            file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+        <li id="a2">Log into the lifecycle manager VM.
+            <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where: HLM_VM_IP is the CLM IP of the
+            lifecycle manager. Locate the IP address for the lifecycle manager in the
+              <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
+              <codeph>hlm_clmstaticip</codeph> field.</p></li>
       </ol>
       <p><b>Replace the QCOW and YML files with the new files</b></p>
       <p>Use the following steps to replace the QCOW and YML files on the HLM VM with new versions
         of the files that you downloaded in the patch file.</p>
-      <p id="note"><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different than the
-        default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
-          directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
+      <p id="note"><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different
+        than the default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the
+          base directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
       <ol id="ol_dpc_14t_q5">
         <li id="1"> On the HLM VM, replace the existing <codeph>vsc_singledisk.qcow2</codeph> in the
             <codeph>~/dcn/</codeph> directory with the <codeph>vsc_singledisk.qcow2</codeph> you
           downloaded. </li>
         <li id="2">Change to the <codeph>/opt/share/hlm/1/ansibleconfig/roles/DCN-VSC/tasks</codeph>
           directory. </li>
-        <li id="3">Backup the <codeph>deploy.yml</codeph> by copying the file to a new extension that is
-          not <i>YML</i>. For example: <codeblock>cp deploy.yml deploy.yml.ORIG</codeblock></li>
+        <li id="3">Backup the <codeph>deploy.yml</codeph> by copying the file to a new extension
+          that is not <i>YML</i>. For example:
+          <codeblock>cp deploy.yml deploy.yml.ORIG</codeblock></li>
         <li id="4">Change to the
             <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>
           directory. </li>
@@ -98,13 +100,16 @@
             <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/</codeph>
           directory. </li>
         <li>Retrieve the hostnames of each of the DCN hosts from the <codeph>hosts</codeph>
-            file.<p>For example: BASE-CCP-T1-M1-NETCLM and BASE-CCP-T1-M2-NETCLM</p></li>
+            file.<p>For example (IPs masked for
+            security):<codeblock>BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.20.x.x 
+BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.20.x.x </codeblock></p></li>
       </ol>
       <p><b>Redeploy the VSC VMs on DCN Host1</b></p>
       <p>Use the following steps to redeploy the virtual machine where the VSC is deployed on
         Host1.</p>
       <ol id="ol_ezp_trt_q5">
-        <li id="b1">Log into DCN host1. Using the example in the previous step, BASE-CCP-T1-M1-NETCLM.</li>
+        <li id="b1">Log into DCN host1. Using the example in the previous step,
+          BASE-CCP-T1-M1-NETCLM.</li>
         <li id="b2">Execute the following commands to remove the VSC
           VM:<codeblock>virsh list --all 
 virsh destroy vsc 
@@ -112,11 +117,11 @@ virsh undefine vsc</codeblock></li>
         <li id="b3">Delete <codeph>vsc_singledisk.qcow2</codeph> from /home/images.</li>
         <li id="b4">Change to the
             <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/</codeph>
-          directory.  </li>
-        <li id="b5">Modify the <codeph>deploy-CCP-T1.yml</codeph> file as below location of the file.<p>Edit
-            the <codeph>hosts</codeph> value in the file with the host name you retrieved from the
-            hosts file previously. This has to be done in two places in the file, as shown (bolding
-            added for emphasis): <simpletable frame="all" relcolwidth="1.0* 1.0*"
+          directory. </li>
+        <li id="b5">Modify the <codeph>deploy-CCP-T1.yml</codeph> file as below location of the
+            file.<p>Edit the <codeph>hosts</codeph> value in the file with the host name you
+            retrieved from the hosts file previously. This has to be done in two places in the file,
+            as shown (bolding added for emphasis): <simpletable frame="all" relcolwidth="1.0* 1.0*"
               id="simpletable_fn3_y25_q5">
               <strow>
                 <stentry>Original file:</stentry>
@@ -183,8 +188,8 @@ max_fail_percentage: 0
           VSC:<codeblock>hlm deploy -c &lt;cloudname> -t deploy-CCP-T1.yml</codeblock></li>
         <li id="b7">After the deployment of VSC is complete, SSH from the lifecycle manager to the
           VSC VM using the DCM IP. </li>
-        <li id="b8">Execute the following commands to verify that the VRG, VSD, VRS are listed in the VSC as
-            <b>Functional</b> and in <b>Available</b> status.
+        <li id="b8">Execute the following commands to verify that the VRG, VSD, VRS are listed in
+          the VSC as <b>Functional</b> and in <b>Available</b> status.
           <codeblock>show vswitch-controller vswitches 
 show vswitch-controller xmpp-server 
 show vswitch-controller vsd </codeblock></li>
@@ -275,7 +280,7 @@ max_fail_percentage: 0
       </ol>
     </section>
     <section id="non-ha">
-      <title>Deploy the patch  into a non-highly-available (non-HA) deployment</title>
+      <title>Deploy the patch into a non-highly-available (non-HA) deployment</title>
       <p>A non-highly-available VSC environment (non-HA) will have only one VSC controller (no
         stand-by). For non-HA deployments:</p>
       <ol id="ol_ssv_2yt_q5">
@@ -316,8 +321,10 @@ max_fail_percentage: 0
       <ol id="ol_z5r_45t_q5">
         <li>Change to the <codeph>/var/hlm/clouds/&lt;cloud name>/desired_state</codeph> directory. </li>
         <li>Execute the following
-            command:<codeblock>dcntaskloc=$(find . -name DCN-VSC -type d| head -n 1); cd $dcntaskloc/task</codeblock><p>The
-            output will indicate the location of the the <codeph>/base/</codeph> directory.</p></li>
+            command:<codeblock>dcntaskloc=$(find . -name DCN-VSC -type d| head -n 1); cd $dcntaskloc/tasks</codeblock><p>The
+            prompt will change to the
+              /<codeph>var/hlm/clouds/tb2tahoe/desired_state/tb2tahoe/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>
+            directory.</p></li>
       </ol>
     </section>
   </body>
