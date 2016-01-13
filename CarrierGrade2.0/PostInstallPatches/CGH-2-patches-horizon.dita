@@ -35,8 +35,15 @@
         <li>Click <b>Sign In</b> to log in using your account. </li>
         <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
           page.</li>
-        <li>Click <b id="productShow_appName">Helion Carrier Grade 2.0 Horizon001 Patch002</b> and
-          download the patch.</li>
+        <li>Download the <b id="productShow_appName">Helion Carrier Grade 2.0 Horizon001
+            Patch002</b> patch and the associated checksum and signature files.</li>
+        <li>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</li>
+        <li>Extract the compressed files until the <codeph>HZN-HCG-1011</codeph> directory is
+          available.</li>
       </ol></section>
     <section>
       <title>Install the patch</title>
@@ -44,7 +51,7 @@
         <codeph>HCG2.0_Horizon001_Patch002.tar.gz</codeph>. The README with the patch download
         contains information on files changed by these patches.</p>
       <p>Execute the following commands:<ol id="ol_imr_fgt_25">
-          <li>Copy the WR-HZN-1011 directory to the
+          <li>Copy the HZN-HCG-1011 directory to the
               <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on the lifecycle
             manager. </li>
           <li>Execute following command to apply patch
