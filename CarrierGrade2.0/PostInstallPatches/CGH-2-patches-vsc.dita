@@ -188,12 +188,6 @@ max_fail_percentage: 0
           <codeblock>show vswitch-controller vswitches 
 show vswitch-controller xmpp-server 
 show vswitch-controller vsd </codeblock></li>
-        <li id="b9">After the VSC deployment is completed on all hosts, remove the updated
-            <codeph>deploy-CCP-T1.yml</codeph> file and restore the original file from <xref
-            href="#topic10581pdpv/ccp-yml" format="dita">backup you created in the previous
-            section</xref>. <p>Retain the new <codeph>deploy.yml</codeph> in the lifecycle manager
-            VM at
-              <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>.</p></li>
       </ol>
       <p><b>Redeploy the VSC VMs on DCN Host2</b></p>
       <p>Use the following steps to redeploy the virtual machine where the VSC is deployed on
@@ -272,7 +266,12 @@ max_fail_percentage: 0
         <li conref="#topic10581pdpv/b6"/>
         <li conref="#topic10581pdpv/b7"/>
         <li conref="#topic10581pdpv/b8"/>
-        <li conref="#topic10581pdpv/b9"/>
+        <li id="b9">After the VSC deployment is complete on both hosts, remove the updated
+            <codeph>deploy-CCP-T1.yml</codeph> file and restore the original file from <xref
+            href="#topic10581pdpv/ccp-yml" format="dita">backup you created in the previous
+            section</xref>. <p>Retain the new <codeph>deploy.yml</codeph> in the lifecycle manager
+            VM at
+              <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>.</p></li>
       </ol>
     </section>
     <section id="non-ha">
@@ -301,6 +300,7 @@ max_fail_percentage: 0
         <li conref="#topic10581pdpv/b2"/>
         <li conref="#topic10581pdpv/b3"/>
         <li conref="#topic10581pdpv/b4"/>
+        <li conref="#topic10581pdpv/b6"/>
         <li conref="#topic10581pdpv/b7"/>
         <li conref="#topic10581pdpv/b8"/>
       </ol>
