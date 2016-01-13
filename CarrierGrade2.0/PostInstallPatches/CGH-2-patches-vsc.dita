@@ -15,6 +15,9 @@
     </metadata>
   </prolog>
   <body>
+    <p>This patch must be applied only after the HP Helion OpenStack Carrier Grade is fully deployed
+      for the Tahoe, Memphis and Sacramento cloud topologies.</p>
+    <p><b>Note:</b> This patch is nor required for the Denver topology.</p>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
@@ -25,85 +28,99 @@
         <li>Click <b>Sign In</b> to log in using your account. </li>
         <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
           page.</li>
-        <li>Click <b id="productShow_appName">HCG_2.0_DCN002_Patch006</b> and download the
-          patch.</li>
+        <li>Download the <b id="productShow_appName">HCG_2.0_DCN002_Patch006</b> file and the
+          associated checksum and signature files.</li>
+        <li>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</li>
+        <li>Extract the compressed files until the <codeph>deploy.yml</codeph>,
+            <codeph>vsc_singledisk.qcow2</codeph> and <i>Readme-post-deploy.txt</i> files are
+          available.</li>
       </ol></section>
-   <section>
+    <section>
       <title>Install the patch</title>
-      <p>
-        <codeblock>This DCN patch can be applied only Post Cloud Deployment.
-
-This Patch will have deploy.yml, vsc_singledisk.qcow2 &amp; Readme file.
-
-6ac1876e71610243d84e8198321baf25  vsc_singledisk.qcow2
-7f0b80cbfac0d98f9b3551f9f7dff967  deploy.yml
-
-
-This patch is applicable for Tahoe, Memphis and Sacramento cloud topologies
-
-===========================================================
-
-***********************************************************
-
-Case 1:
-=======
-
-Applicable only when cloud is already deployed in HA configuration
-
-1. Backup the VSC VMs admin config 
-scp admin@&lt;vsc ip>:/config.cfg  &lt;destination directory>
-
-2. Login to HLM vm and execute step 3 to 8
-
-3. Replace the existing vsc_singledisk.qcow2 on HLM with new vsc qcow2[vsc_singledisk.qcow2] under ~/dcn/ directory **
-   Make sure your new QCOW2 checksum: 6ac1876e71610243d84e8198321baf25  
-
-
-4. Browse to location /opt/share/hlm/1/ansibleconfig/roles/DCN-VSC/tasks and take a backup of file "deploy.yml"
-   Example: cp deploy.yml to "deploy.yml.ORIG"
-   [Note: Make sure your backup file doesn't end with ".yml"]
-
-5. Browse to location /var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks and take a backup of file "deploy.yml". Check for "Additional Info:" section provided at the end of case1 if directory structure is different.
-
-   Example: cp deploy.yml to "deploy.yml.ORIG"
-   [Note: Make sure your backup file doesn't end with ".yml"]
-
-6. Replace deploy.yml file with the deploy.yml file you extracted from the patch folder.  
-   Make sure your new deploy.yml checksum: 7f0b80cbfac0d98f9b3551f9f7dff967
-
-7. Browse to directory /var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/. Check for "Additional Info:" section provided at the end of case1 if directory structure is different.
-
-8. Take a backup of the file deploy-CCP-T1.yml
-   Example. cp deploy-CCP-T1.yml deploy-CCP-T1.yml.ORIG
-   [Note: Make sure your backup file doesn't end with ".yml"]
-   
-9. Retrieve the hostnames of each of the DCN hosts from hosts file from HLM VM[/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/hosts to be used in step 12.
-
-   Example: BASE-CCP-T1-M1-NETCLM  or BASE-CCP-T1-M2-NETCLM
-
-   Check for "Additional Info:" section provided at the end of case1 if directory structure is different from default.
-
-10. Login to DCN host1 from HLM VM
-
-11. Remove the VSC vm by using the following command 
-                virsh list --all
-		virsh destroy vsc
-		virsh undefine vsc
-
-12. Delete vsc_singledisk.qcow2 from /home/images on DCN HOST1
-
-13. Change the following entries in the file deploy-CCP-T1.yml as below
-    location of the file: /var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/
-    Check for "Additional Info:" section provided at the end of case1 if directory structure is different from default.
-
- 	a. Update the file on step "hosts: BASE-CCP-T1" to "hosts: &lt;hostname of 1st DCN host retrieved from hosts file>". This has to be done at 2 places in the file. 
-  Example: 	
-	
-       hosts: BASE-CCP-T1-M1-NETCLM
-
-  Example: This is how it will be seen initially on deploy-CCP-T1.yml[before the changes]
-
--   accelerate: 'false'
+      <p>The process for installing this patch is different for highly-available (HA) and non-HA
+        environments. Follow the procedure appropriate for your environment:</p>
+    </section>
+    <section id="ha">
+      <title>Deploy into a highly-available deployment</title>
+      <p>A highly-available VSC environment will have two VSC controllers, one active and one
+        stand-by. For highly-available deployments:</p>
+      <ol id="ol_ozs_5jt_q5">
+        <li>Execute the following command to backup the VSC configuration file:
+          <codeblock>scp admin@&lt;vsc ip>:/config.cfg  &lt;destination directory></codeblock></li>
+        <li>Log into the lifecycle manager VM. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
+            HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+            lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+            file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+      </ol>
+      <p><b>Replace the QCOW and YML files with the new files</b></p>
+      <p>Use the following steps to replace the QCOW and YML files on the HLM VM with new versions
+        of the files that you downloaded in the patch file.</p>
+      <p><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different than the
+        default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
+          directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
+      <ol id="ol_dpc_14t_q5">
+        <li> On the HLM VM, replace the existing <codeph>vsc_singledisk.qcow2</codeph> in the
+            <codeph>~/dcn/</codeph> directory with the <codeph>vsc_singledisk.qcow2</codeph> you
+          downloaded. </li>
+        <li>Change to the <codeph>/opt/share/hlm/1/ansibleconfig/roles/DCN-VSC/tasks</codeph>
+          directory. </li>
+        <li>Backup the <codeph>deploy.yml</codeph> by copying the file to a new extension that is
+          not YML For example: <codeblock>cp deploy.yml deploy.yml.ORIG</codeblock></li>
+        <li>Change to the
+            <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>
+          directory. </li>
+        <li>Backup the <codeph>deploy.yml</codeph> by copying the file to a new extension that is
+          not YML For example: <codeblock>cp deploy.yml deploy.yml.ORIG</codeblock></li>
+        <li>Replace <codeph>deploy.yml</codeph> files you backed-up with the
+            <codeph>deploy.yml</codeph> file you downloaded with the patch in both locations.
+          <codeblock>/opt/share/hlm/1/ansibleconfig/roles/DCN-VSC/tasks
+/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeblock></li>
+        <li>Change to the
+            <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/</codeph>
+          directory.</li>
+        <li id="ccp-yml">Backup the <codeph>deploy-CCP-T1.yml</codeph> by copying the file to a new
+          extension that is not YML For example:
+          <codeblock>cp deploy-CCP-T1.yml deploy-CCP-T1.yml.ORIG</codeblock></li>
+      </ol>
+      <p><b>Retrieve the DCN host names</b></p>
+      <p>If you do not know the names of your DCN host systems, use the following steps to retrieve
+        the hostnames:</p>
+      <p><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different than the
+        default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
+          directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
+      <ol id="ol_fny_4nt_q5">
+        <li>Change to the
+            <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/</codeph>
+          directory. </li>
+        <li>Retrieve the hostnames of each of the DCN hosts from hosts file from the
+            <codeph>hosts</codeph> file.<p>For example: BASE-CCP-T1-M1-NETCLM and
+            BASE-CCP-T1-M2-NETCLM</p></li>
+      </ol>
+      <p><b>Remove the VSC VMs</b></p>
+      <p>Use the following steps to remove the virtual machine where the VSC is deployed.</p>
+      <p><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different than the
+        default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
+          directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
+      <ol id="ol_ezp_trt_q5">
+        <li>Login to DCN host1. Using the example in the previous step, BASE-CCP-T1-M1-NETCLM.</li>
+        <li>Execute the following commands to remove the VSC VM
+          <codeblock>virsh list --all 
+virsh destroy vsc 
+virsh undefine vsc</codeblock></li>
+        <li>Delete <codeph>vsc_singledisk.qcow2</codeph> from /home/images on DCN HOST1.</li>
+        <li>Change to the
+            <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/</codeph>
+          directory. Check for "Additional Info:" section provided at the end of case1 if directory
+          structure is different from default. </li>
+        <li>Modify the <codeph>deploy-CCP-T1.yml</codeph> file as below location of the file: <p>
+            <ol id="ol_k2j_fqt_q5">
+              <li>Edit the <codeph>hosts</codeph> value in the file with the host name you retrieved
+                from the hosts file previously. This has to be done in two places in the file:-
+                <codeblock>-   accelerate: 'false'
     gather_facts: 'no'
     hosts: BASE-CCP-T1
     max_fail_percentage: 0
@@ -127,99 +144,110 @@ scp admin@&lt;vsc ip>:/config.cfg  &lt;destination directory>
     accelerate_port: '10001'
     hosts: BASE-CCP-T1
     max_fail_percentage: 0
-...
-
-
-14. Run the command "hlm deploy -c &lt;cloudname> -t deploy-CCP-T1.yml". This deploys the VSC on one the host added in deploy-CCP-T1.yml file.
-	example:
-		hlm deploy -c &lt;cloud-name> -t deploy-CCP-T1.yml
-
-15. Once the deployment of VSC on DCN host1 is completed, check if all the VRG, VSD, VRS are listed in the VSC and if they are Functional and in available status.
-      Commands to be checked: 
-           show vswitch-controller vswitches
-           show vswitch-controller xmpp-server
-           show vswitch-controller vsd
-
-16. Repeat steps from 9 to 14 for DCN host2 and update the deploy-CCP-T1.yml file with hostname of  DCN host2. Ensure that previously added hostname is removed and DCN host2 is added.
-
-  Example: 	hosts: BASE-CCP-T1-M2-NETCLM
-
-17. Once the vsc deployment is completed on all hosts, remove the updated deploy-CCP-T1.yml file and restore the original file from backup taken from step8.
-
-18. Please retain the new deploy.yml in hlm vm [/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks]
-    Check for "Additional Info:" section provided at the end of case1 if directory structure is different from default.
-
-
-***************************************************************
-================================================================
-Additional Info: 
-   On some cases if "nickname" on definition.json file is updated other than the default "base" name during cloud deployment, the directory structure  
-   will be different.
-   You can find the directory by following the below 2 commands from hlm vm.
-
-   cd /var/hlm/clouds/&lt;cloud name>/desired_state
-   Run the below command
-   dcntaskloc=$(find . -name DCN-VSC -type d| head -n 1); cd $dcntaskloc/tasks
-
-==================================================================
-
-Case 2:
-=======
-
-Applicable only when cloud is already deployed in non-HA configuration 
-
-1. Backup the VSC VMs admin config 
-   scp admin@&lt;vsc ip>:/config.cfg  &lt;destination directory>
-
-2. Login to HLM vm and execute step 3 to 8
-
-3. Replace the existing vsc_singledisk.qcow2 on HLM with new vsc qcow2[vsc_singledisk.qcow2] under ~/dcn/ directory **
-   Make sure your new QCOW2 checksum: 6ac1876e71610243d84e8198321baf25  
-
-4. Browse to location /opt/share/hlm/1/ansibleconfig/roles/DCN-VSC/tasks and take a backup of file "deploy.yml"
-   Example: cp deploy.yml to "deploy.yml.ORIG"
-   [Note: Make sure your backup file doesn't end with ".yml"]
-
-5. Browse to location /var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks and take a backup of file "deploy.yml"
-   Example: cp deploy.yml to "deploy.yml.ORIG"
-   [Note: Make sure your backup file doesn't end with ".yml"]
-
-   Check for "Additional Info:" section provided at the end of case1 if directory structure is different from default.
-
-6. Replace deploy.yml file with the deploy.yml file you extracted from the patch folder
-   Make sure your new deploy.yml checksum: 7f0b80cbfac0d98f9b3551f9f7dff967
-
-7. Login to DCN host1 from HLM VM
-
-8. Remove the VSC vm by using the following command 
-                virsh list --all
-		virsh destroy vsc
-		virsh undefine vsc
-
-9. Delete vsc_singledisk.qcow2 from /home/images on DCN HOST1
-
-10. You don't have to change any host name in the file deploy-CCP-T1.yml
-    Location of the file: /var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/
-    
-    Check for "Additional Info:" section provided at the end of case1 if directory structure is different from default.
-
-11. Run the command "hlm deploy -c &lt;cloudname> -t deploy-CCP-T1.yml". This deploys the VSC on DCN host1
-
-	example:
-		hlm deploy -c &lt;cloud-name> -t deploy-CCP-T1.yml
-
-12. Once the deployment of VSC on DCN host1 is completed, check if all the VRG, VSD, VRS are listed in the VSC and if they are Functional and in available status.
-      Commands to be checked: 
-           show vswitch-controller vswitches
-           show vswitch-controller xmpp-server
-           show vswitch-controller vsd
-
-13. Please retain the new deploy.yml in hlm vm [/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks]
-    Check for "Additional Info:" section provided at the end of case1 if directory structure is different from default.
-
-
-</codeblock>
-      </p>
+...</codeblock></li>
+            </ol>
+          </p></li>
+        <li>Execute the following command to deploy the VSC on one the host added in
+            <codeph>deploy-CCP-T1.yml</codeph>
+          file<codeblock>hlm deploy -c &lt;cloudname> -t deploy-CCP-T1.yml</codeblock></li>
+        <li>After the deployment of VSC on DCN host1 is complete, , SSH to your VSC VM from HLM Host
+          using the DCM IP. </li>
+        <li>execute the following commads to verify that the VRG, VSD, VRS are listed in the VSC as
+            <b>Functional</b> and in <b>Available</b> status.
+          <codeblock>show vswitch-controller vswitches 
+show vswitch-controller xmpp-server 
+show vswitch-controller vsd </codeblock></li>
+        <li>Repeat the steps in this section (<b>Remove the VSC VMs</b>) for DCN host2 to update the
+            <codeph>deploy-CCP-T1.yml</codeph> file with hostname of DCN host2. Make sure that
+          previously added hostname is removed and DCN host2 is added. <p>Example: <codeph>hosts:
+              BASE-CCP-T1-M2-NETCLM</codeph>
+          </p></li>
+        <li>After the VSC deployment is completed on all hosts, remove the updated
+            <codeph>deploy-CCP-T1.yml</codeph> file and restore the original file from <xref
+            href="#topic10581pdpv/ccp-yml" format="dita">backup you created in the previous
+            section</xref>. <p>Retain the new <codeph>deploy.yml</codeph> in the lifecycle manager
+            VM at
+              <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>.</p></li>
+      </ol>
     </section>
+    <section id="non-ha">
+      <title>Deploy into a non-highly-available (non-HA) deployment</title>
+      <p>A non-highly-available VSC environment (non-HA) will have only one VSC controller (no
+        stand-by). For non-HA deployments:</p>
+      <ol id="ol_ssv_2yt_q5">
+        <li>Execute the following command to backup the VSC configuration file:
+          <codeblock>scp admin@&lt;vsc ip>:/config.cfg  &lt;destination directory></codeblock></li>
+        <li>Log into the lifecycle manager VM. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
+            HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+            lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+            file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+      </ol>
+      <p><b>Replace the QCOW and YML files with the new files</b></p>
+      <p>Use the following steps to replace the QCOW and YML files on the HLM VM with new versions
+        of the files that you downloaded in the patch file.</p>
+      <p><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different than the
+        default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
+          directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
+      <ol id="ol_tsv_2yt_q5">
+        <li>On the HLM VM, replace the existing <codeph>vsc_singledisk.qcow2</codeph> in the
+            <codeph>~/dcn/</codeph> directory with the <codeph>vsc_singledisk.qcow2</codeph> you
+          downloaded. </li>
+        <li>Change to the <codeph>/opt/share/hlm/1/ansibleconfig/roles/DCN-VSC/tasks</codeph>
+          directory. </li>
+        <li>Backup the <codeph>deploy.yml</codeph> by copying the file to a new extension that is
+          not YML For example: <codeblock>cp deploy.yml deploy.yml.ORIG</codeblock></li>
+        <li>Change to the
+            <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>
+          directory. </li>
+        <li>Backup the <codeph>deploy.yml</codeph> by copying the file to a new extension that is
+          not YML For example: <codeblock>cp deploy.yml deploy.yml.ORIG</codeblock></li>
+        <li>Replace the <codeph>deploy.yml</codeph> files you backed-up with the
+            <codeph>deploy.yml</codeph> file you downloaded with the patch in both locations.
+          <codeblock>/opt/share/hlm/1/ansibleconfig/roles/DCN-VSC/tasks
+/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeblock></li>
+      </ol>
+      <p><b>Remove the VSC VMs</b></p>
+      <p>Use the following steps to remove the virtual machine where the VSC is deployed.</p>
+      <p><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different than the
+        default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
+          directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
+      <ol id="ol_kps_myt_q5">
+        <li>Login to DCN host1 from the lifecycle manager. Using the example in the previous step,
+          BASE-CCP-T1-M1-NETCLM.</li>
+        <li>Execute the following commands to remove the VSC VM
+          <codeblock>virsh list --all 
+virsh destroy vsc 
+virsh undefine vsc</codeblock></li>
+        <li>Delete <codeph>vsc_singledisk.qcow2</codeph> from /home/images on DCN HOST1.</li>
+        <li>Execute the following command to deploy the VSC on one the host added in
+            <codeph>deploy-CCP-T1.yml</codeph>
+          file<codeblock>hlm deploy -c &lt;cloudname> -t deploy-CCP-T1.yml</codeblock></li>
+        <li>After the deployment of VSC on DCN host1 is complete, SSH to your VSC VM from HLM Host
+          using the DCM IP. </li>
+        <li>execute the following commands to verify that the VRG, VSD, VRS are listed in the VSC as
+            <b>Functional</b> and in <b>Available</b> status.
+          <codeblock>show vswitch-controller vswitches 
+show vswitch-controller xmpp-server 
+show vswitch-controller vsd </codeblock></li>
+      </ol>
+    </section>
+    <section>
+      <title>Locating the base directory</title>
+      <p>The path to the <codeph>/base/</codeph> directory can different than the default, if the
+          <codeph>nickname</codeph> field in the <codeph>definition.json</codeph> file was changed
+        to any value other than the default name during cloud deployment.The default path is:</p>
+      <codeblock>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/</codeblock>
+      <p>Use the following steps to locate the directory in the lifecycle manager VM:<ol
+          id="ol_z5r_45t_q5">
+          <li>Change to the <codeph>/var/hlm/clouds/&lt;cloud name>/desired_state</codeph>
+            directory. </li>
+          <li>Execute the following
+              command:<codeblock>dcntaskloc=$(find . -name DCN-VSC -type d| head -n 1); cd $dcntaskloc/task</codeblock><p>The
+              output will indicate the location of the the <codeph>/base/</codeph>
+            directory.</p></li>
+        </ol></p>
+      <p/>
+    </section>
+    <p/>
   </body>
 </topic>

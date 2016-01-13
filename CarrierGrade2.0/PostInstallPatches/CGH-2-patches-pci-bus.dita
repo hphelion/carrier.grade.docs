@@ -17,9 +17,8 @@
   <body>
     <p>This patch fixes the PCI Bus Assignment for VM Guest. This patch is applicable for all cloud
       topologies. </p>
-    <p>If you did not deploy the KVM Region Custom Patch,
-        <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph> during installation, perform the
-      following steps. </p>
+    <p>If you did not deploy this patch, <codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph> during
+      installation, perform the following steps. </p>
     <p>You should have downloaded the following patch files during the prerequisites. The patch is
       in a compressed file called <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>. The README
       with the patch download contains information on files changed by these patches.</p>
@@ -43,7 +42,7 @@
         <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
           page.</li>
         <li>Download the <b><b id="productShow_appName">Helion Carrier Grade 2.0 WR003
-            Patch007</b></b> and the associated checksum and signature files.</li>
+            Patch007</b></b> file and the associated checksum and signature files.</li>
         <li>Verify the <xref
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
             >downloaded signature</xref> and the <xref
@@ -97,5 +96,6 @@
               <codeph>controller-0</codeph> is the standby
           controller:</p><codeblock>system host-patch-reboot controller-0</codeblock></li>
       </ol></section>
+    
   </body>
 </topic>
