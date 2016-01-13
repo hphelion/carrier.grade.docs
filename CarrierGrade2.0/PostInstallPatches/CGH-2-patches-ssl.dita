@@ -22,11 +22,27 @@
         then click <b>Admin</b>, then <b>System</b>, and <b>Resrouce Usage</b>. Click the
           <b>Stats</b> table.</p>You should have downloaded the following patch files during the
       prerequisites: <!--HCG-998--><ul id="ul_i42_qhz_35">
-        <li>kcp-ssl-implementation.patch </li>
-      </ul><p>The patch is in a compressed file called
-          <codeph>HCG2.0_Heat001_Patch003.tar.gz</codeph>. The README with the patch download
-        contains information on files changed by these patches.</p><p>To prevent this condition,
-        execute the following commands:<ol id="ol_j42_qhz_35">
+        <li>kcp-ssl-implem</li>
+      </ul></section>
+    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. </li>
+        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+          page.</li>
+        <li>Click <b id="productShow_appName">Helion Carrier Grade 2.0 Heat001 Patch003</b> and
+          download the patch.</li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+      <p>The patch is in a compressed file called <codeph>HCG2.0_Heat001_Patch003.tar.gz</codeph>.
+        The README with the patch download contains information on files changed by these
+        patches.</p>
+      <p>To prevent this condition, execute the following commands:<ol id="ol_j42_qhz_35">
           <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
           <li>Change to the <codeph>kenobi-configuration-processor</codeph>
             directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
@@ -57,6 +73,7 @@
               <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph> directory on
             KVM region <codeph>controller-0</codeph>. Make sure you make a backup copy of the
               <codeph>server-cert.pem</codeph> before the copy operation.</li>
-        </ol></p></section>
+        </ol></p>
+    </section>
   </body>
 </topic>

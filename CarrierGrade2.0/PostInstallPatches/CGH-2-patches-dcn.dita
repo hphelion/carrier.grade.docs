@@ -14,8 +14,22 @@
     </metadata>
   </prolog>
   <body>
-    <section id="dcn"><b>Note:</b> Not required for Denver deployments.<p>For highly-available HP
-        Helion OpenStack Carrier Grade deployments, use the following steps. </p><p>
+    <section id="dcn"><b>Note:</b> Not required for Denver deployments.</section>
+    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. </li>
+        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+          page.</li>
+        <li>Click <b id="productShow_appName">Helion Carrier Grade 2.0 DCN001 Patch004 </b> and
+          download the patch.</li>
+      </ol></section>
+    <section><title>Install the patch</title><p>For highly-available HP Helion OpenStack Carrier
+        Grade deployments, use the following steps. </p><p>
         <ol id="ol_ac5_tvz_k5">
           <li>Backup the VSC VMs admin
             <codeblock>config scp admin@&lt;vsc ip>:/config.cfg &lt;destination directory> </codeblock></li>
