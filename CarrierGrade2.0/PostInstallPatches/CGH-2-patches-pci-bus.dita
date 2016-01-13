@@ -15,103 +15,87 @@
     </metadata>
   </prolog>
   <body>
-    
-      
-        <section><title>Download the patch</title><p>If you have not downloaded the patch, launch
-            the <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-              scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
-              href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
-              >obtain a user account on HDN</xref> in order to download these files. </p>In a
-          browser, navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
-            format="html" scope="external">Helion Download Network(HDN)</xref>. <ol
-            id="ol_skh_k5p_q5">
-            <li>Click <b>Sign In</b> to log in using your account. </li>
-            <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of
-              the page.</li>
-            <li>Download the patch.</li>
-          </ol></section>
-      
-    
-    <section>
-      <title>Install the patch</title>
-    </section>
-    <p>
-      <codeblock>This Patch fixes PCI Bus Assignment for VM Guest.
-
-This WR patch can be applied to KVM region on 2 scenarios..
-
-- Patch can be applied if the cloud is deployed and KVM region is already up.
-- Patch can be applied before config_region is run on the KVM region.
-
-This Patch tar file will have TS_HP_15_Custom_PATCH_0002.patch, Readme.txt &amp;  Usecase.txt file.
-
-TS_HP_15_Custom_PATCH_0002.patch c8a191bd08be08e5b720bc6c998e81d8
-
-
-This patch is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies
-
-===========================================================
-
-Case1: Steps for applying Patch HCG2.0_WR003_Patch007.tar.gz in an existing Cloud scenario
-==========================================================================================
-
-PreReq: WR Patch HCG2.0_WR002_Patch005.tar.gz is applied already. 
-
-1.      Log into controller-0 [active controller]
-
-2.	mkdir -p /tmp/patches
-3.	Copy patch file to /tmp/patches/
-4.	sudo sw-patch upload /tmp/patches/&lt;patch-name>.patch
-5.      sudo sw-patch query # check if the patch is Available
-6.      sudo sw-patch query-hosts  # check the Current state of all the hosts
-7.	sudo sw-patch apply &lt;patch-name>
-8.	source /etc/nova/openrc
-9.	system host-patch-reboot controller-1  # Assuming controller-0 is active controller
-        [ Wait until controller-1 node comes up after patching ]
-11.	system host-swact controller-0
-12.	Exit the ssh session and login to the newly active controller i.e., controller-1
-13.	source /etc/nova/openrc
-14.	system host-patch-reboot controller-0
-15.	system host-patch-reboot compute-0
-16.	system host-patch-reboot compute-1
-
-###################################
-
-Second Scenario
-
-####################################
-
-Case2: Steps for applying patch in fresh cloud deployment scenario and before config_region is run on KVM region
-================================================================================================================
-
-PreReq: WR Patch HCG2.0_WR002_Patch005.tar.gz is applied copied and loaded.
-
-Note: You can copy and load all the available WR patches in one go.  
-
-NEW INSTALL: software loaded onto controller-0 but the config_region script has not been executed
-
-1.	Log into controller-0 (change password when/if prompted) ==>this is run from console only
-2.	> mkdir -p /tmp/patches
-3.	Copy patch file to /tmp/patches
-4.	> sudo sw-patch upload-dir /tmp/patches
-          [Make sure all your uploaded patches are shown available]
-5.	> sudo sw-patch apply --all
-          [From the output, you will see patches are now in the repo]
-6.	> sudo sw-patch install-local
-          [Wait for the mesg stating - Patch installation is complete. This will take few minutes and user will be prompted for reboot]
-7.	> sudo reboot
-8.	Continue setting up controller-0 and the rest of the cloud as normal
-
-NOTES:
-•	The upload-dir operation registers all patches in the specific directory into the database. Once registered, you do not need to keep the files themselves around anymore; they are in the database itself.
-•	The apply --all operation tells the system to apply all registered patches to the nodes in this cluster
-•	The install-local operation tells the system to install all necessary patches on the un-configured local node
-
-
-Also you can check the below link for additional details and if you want to apply the patch from GUI
-
-http://gaf2871b9d2d13cf45c1306b35bf01764.cdn.hpcloudsvc.com/CGH-2-KVM-Admin.pdf
-</codeblock>
-    </p>
+    <p>This patch fixes the PCI Bus Assignment for VM Guest. This patch is applicable for all cloud
+      topologies. </p>
+    <p>If you did not deploy the KVM Region Custom Patch,
+        <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph> during installation, perform the
+      following steps. </p>
+    <p>You should have downloaded the following patch files during the prerequisites. The patch is
+      in a compressed file called <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>. The README
+      with the patch download contains information on files changed by these patches.</p>
+    <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
+        <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+        <b>Inventory</b>. Click the <b>Patches</b> table.</p>
+    <p>This patch can be applied to KVM region in one of the following scenarios: <ul
+        id="ul_vkz_w1t_q5">
+        <li>after the cloud is deployed and KVM region is already up;</li>
+        <li>before the KVM region has been deployed (before the <codeph>config_region</codeph>
+          command has been executed)..</li>
+      </ul></p>
+    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+        scope="external">Helion Download Network(HDN)</xref>. <ol id="ol_skh_k5p_q5">
+        <li>Click <b>Sign In</b> to log in using your account. </li>
+        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+          page.</li>
+        <li>Download the <b><b id="productShow_appName">Helion Carrier Grade 2.0 WR003
+            Patch007</b></b> and the associated checksum and signature files.</li>
+        <li>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</li>
+        <li>Extract the compressed files until the
+          <codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph>, readme.txt and usecase.txt files are
+          available.</li>
+      </ol></section>
+    <section><title>Deploy the patch on an existing system</title>If the cloud is deployed and KVM
+      region is already up, perform the following steps to deploy this patch: <p><b>Patch the
+          standby controller</b></p><p><b>Important:</b> Make sure the <xref
+          href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch</xref> has
+        been applied.</p><ol id="ol_erh_3xs_q5">
+        <li>SSH into active controller in the KVM region. For example: <codeph>controller-0</codeph>
+        </li>
+        <li>Create a directory for the patch, if the directory does not
+          exist:<codeblock>mkdir -p /tmp/patches</codeblock></li>
+        <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:<ul>
+            <li><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph><p>You should have downloaded this
+                patch file in the Prerequisites. </p></li>
+          </ul></li>
+        <li>Execute the following commands:
+          <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0002.patch                </codeblock></li>
+        <li>Execute the following command to verify that the patch is
+          available:<codeblock>sudo sw-patch query</codeblock></li>
+        <li>Execute the following command to verify the current state of all the
+          hosts:<codeblock>sudo sw-patch query-hosts</codeblock></li>
+        <li>Execute the following command to deploy the
+          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0002.patch</codeblock></li>
+        <li>Execute the following command to set the environment variables in the Open Stack RC
+          file:<codeblock>source /etc/nova/openrc</codeblock></li>
+        <li>Execute the following command to patch and reboot the standby controller:
+            <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>Wait until the
+            rebooted controller node comes up after patching.</p><p>For example if
+              <codeph>controller-1</codeph> is the standby
+          controller:</p><codeblock>system host-patch-reboot controller-1</codeblock></li>
+        <li>Execute the following command to switch the active controller from the specifed
+          controller: <codeblock>system host-swact controller-# </codeblock><p>For example, switch
+            the active controller from <codeph>controller-0</codeph> to
+              <codeph>controller-1</codeph>:<codeblock>system host-swact controller-0</codeblock></p></li>
+        <li>Exit the SSH session and SSH into the newly active controller.</li>
+        <li>Execute the following command to set the environment variables in the Open Stack RC
+          file:<codeblock>source /etc/nova/openrc</codeblock></li>
+      </ol><p><b>Patch the new standby controller</b></p><p>Log onto the newly active controller and
+        patch the standby controller.</p><ol id="ol_ovz_4s4_j5">
+        <li>SSH into the newly active controller. For example: <codeph>controller-1</codeph>.</li>
+        <li>Execute the following command: <codeblock>source /etc/nova/openrc</codeblock></li>
+        <li>Execute the following command to patch and reboot the standby controller:
+            <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+              <codeph>controller-0</codeph> is the standby
+          controller:</p><codeblock>system host-patch-reboot controller-0</codeblock></li>
+      </ol></section>
   </body>
 </topic>
