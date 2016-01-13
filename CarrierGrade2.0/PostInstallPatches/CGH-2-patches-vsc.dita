@@ -106,7 +106,7 @@
         default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
           directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
       <ol id="ol_ezp_trt_q5">
-        <li>Login to DCN host1. Using the example in the previous step, BASE-CCP-T1-M1-NETCLM.</li>
+        <li>Log into DCN host1. Using the example in the previous step, BASE-CCP-T1-M1-NETCLM.</li>
         <li>Execute the following commands to remove the VSC VM
           <codeblock>virsh list --all 
 virsh destroy vsc 
@@ -114,8 +114,7 @@ virsh undefine vsc</codeblock></li>
         <li>Delete <codeph>vsc_singledisk.qcow2</codeph> from /home/images on DCN HOST1.</li>
         <li>Change to the
             <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/</codeph>
-          directory. Check for "Additional Info:" section provided at the end of case1 if directory
-          structure is different from default. </li>
+          directory.  </li>
         <li>Modify the <codeph>deploy-CCP-T1.yml</codeph> file as below location of the file: <p>
             <ol id="ol_k2j_fqt_q5">
               <li>Edit the <codeph>hosts</codeph> value in the file with the host name you retrieved
@@ -152,7 +151,7 @@ virsh undefine vsc</codeblock></li>
           file<codeblock>hlm deploy -c &lt;cloudname> -t deploy-CCP-T1.yml</codeblock></li>
         <li>After the deployment of VSC on DCN host1 is complete, , SSH to your VSC VM from HLM Host
           using the DCM IP. </li>
-        <li>execute the following commads to verify that the VRG, VSD, VRS are listed in the VSC as
+        <li>execute the following commands to verify that the VRG, VSD, VRS are listed in the VSC as
             <b>Functional</b> and in <b>Available</b> status.
           <codeblock>show vswitch-controller vswitches 
 show vswitch-controller xmpp-server 
@@ -212,7 +211,7 @@ show vswitch-controller vsd </codeblock></li>
         default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the base
           directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
       <ol id="ol_kps_myt_q5">
-        <li>Login to DCN host1 from the lifecycle manager. Using the example in the previous step,
+        <li>Log into DCN host1 from the lifecycle manager. Using the example in the previous step,
           BASE-CCP-T1-M1-NETCLM.</li>
         <li>Execute the following commands to remove the VSC VM
           <codeblock>virsh list --all 
@@ -235,7 +234,7 @@ show vswitch-controller vsd </codeblock></li>
       <title>Locating the base directory</title>
       <p>The path to the <codeph>/base/</codeph> directory can different than the default, if the
           <codeph>nickname</codeph> field in the <codeph>definition.json</codeph> file was changed
-        to any value other than the default name during cloud deployment.The default path is:</p>
+        to any value other than the default name during cloud deployment. The default path is:</p>
       <codeblock>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/</codeblock>
       <p>Use the following steps to locate the directory in the lifecycle manager VM:<ol
           id="ol_z5r_45t_q5">
@@ -246,8 +245,6 @@ show vswitch-controller vsd </codeblock></li>
               output will indicate the location of the the <codeph>/base/</codeph>
             directory.</p></li>
         </ol></p>
-      <p/>
     </section>
-    <p/>
   </body>
 </topic>
