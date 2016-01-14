@@ -19,6 +19,22 @@
     <p>If you are installing the <codeph>sacramento</codeph> template, which includes the KVM
       region, the baremetal region, ESX storage, and uses HPE DCN VRS networking, follow these
       instructions to provision baremetal nodes. </p>
+    <section>
+      <title>Pre-Requisite for network configuration:</title>
+      <p>
+        <ol id="ol_blz_gbc_r5">
+          <li>Ensure that the switch ports connected to baremetal instance nodes are in access mode.
+            To configure a port onto access mode execute the following on the
+            switch:<codeblock>system-view
+interface &lt;interface-name&gt; &lt;port&gt;
+port link-type access
+save force
+quit
+quit</codeblock></li>
+          <li>Ensure that the switch port connected to BM-controller is in trunk mode</li>
+        </ol>
+      </p>
+    </section>
   <bodydiv id="all">  
   <section>
       <title>Change Ironic configuration file permissions on baremetal nodes</title>
