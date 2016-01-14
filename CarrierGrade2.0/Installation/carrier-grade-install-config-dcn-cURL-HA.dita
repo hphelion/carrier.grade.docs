@@ -19,6 +19,19 @@
       <p>The following is the cURL script to enable floating IPs on the VRS-G during the <xref
         href="carrier-grade-install-config-dcn.dita#topic10581cgicdha">Configuring Your Cloud with DCN VSD</xref> procedures. </p>
       <ol id="ol_ks4_zhj_1t">
+        <li>Copy the code from one of the following pages to a new file on the lifecycle manager
+          host. <ul id="ul_vxf_nzw_q5">
+            <li>
+              <p>For a <xref href="carrier-grade-install-config-dcn-cURL-HA.dita#topic10581cgicd"
+                  >cURL script for a high availability environment</xref></p>
+            </li>
+            <li>
+              <p>For a <xref href="carrier-grade-install-config-dcn-cUR.dita#topic10581cgicd">cURL
+                  script for a non-high availability environment</xref>.</p>
+            </li>
+          </ul></li>
+        <li>Save the file to any name with the <codeph>.sh</codeph> file type. For example:
+            <codeph>curl.sh</codeph>.</li>
         <li>Modify the cURL script for your environment:<ul id="ul_bzs_r1c_1t">
             <li>FIP_NAME is the one that is retrieved from previous step.</li>
             <li>GW_NAME is the redundant gateway name.</li>
