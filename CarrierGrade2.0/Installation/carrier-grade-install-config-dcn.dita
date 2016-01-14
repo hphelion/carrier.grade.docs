@@ -32,13 +32,16 @@
               <li>Using Chrome or Safari, navigate to
                   <codeph>https://&lt;VSD_address>:8443/</codeph> and enter user name, password and
                 organization. See the DCN documentation if you need to locate the IP address for the VSD.<p>
-                  <codeblock>User Name: Csproot 
+                  <codeblock>User Name: csproot 
 Password: csproot 
 Org: csp 
 VSD Server : auto </codeblock>
                 </p></li>
               <li>Click the arrow icon to log in.</li>
             </ul></li>
+          <li>Click the Open Monitoring Console icon in the top right corner, then click the
+              <b>Back</b> tab.<p><image href="../../media/CGH-install-montior-icon.png"
+                id="image_idb_d41_r5"/></p></li>
           <li>Right click <b>Helion_Nuage_Integration</b> to create a new organization.</li>
           <li>Enter a name, description, and password for the organization. </li>
           <li>Click <b>Create</b>.</li>
@@ -74,31 +77,63 @@ Password: cghelion</codeblock>
         gateway and configure the <codeph>eth0</codeph> port.</p>
       <p><i>For more information on performing this task, refer to the latest DCN documentation
         </i></p>
-      <ol id="onboard-gateway">      <!--Section used in CGH-2-Config-Multi-DC.dita -->
-        <li><xref href="../OperationsGuide/Dashboard/CGH-2-User-Dasboard-VSD.dita#topic1160c2udv">Log into the
-            VSD dashboard</xref>.</li>
-        <li>Click <b>Platform Configuration</b>, then the <b>Infrastructure</b> tab, then click the
-            <b>Data Center Gateways</b> icon. The new gateway appears in the <b>Pending Gateways</b>
-          list on the left.</li>
+      <ol id="onboard-gateway">
+        <!--Section used in CGH-2-Config-Multi-DC.dita -->
+        <li><xref href="../OperationsGuide/Dashboard/CGH-2-User-Dasboard-VSD.dita#topic1160c2udv"
+            >Log into the VSD dashboard</xref>.</li>
+        <li>Click the Open Platform Configuration icon in the top right corner.<p><image
+              href="../../media/CGH-install-platform-icon.png" id="image_x5q_f41_r5"/></p></li>
+        <li>Click the <b>Infrastructure</b> tab, then click the <b>Data Center Gateways</b> icon.
+          The new gateway appears in the <b>Pending Gateways</b> list on the left.</li>
         <li>Click the blue arrow next to one of the new gateways to manage that gateway.<p><image
               href="../../media/CGH-2-install-nuage-gateway-alpha.png" id="image_rgy_5fz_xs"
-              width="350"/></p></li>
+              width="300"/></p></li>
         <li>Add a port for the gateway by clicking <b>Create a Port</b> in the second panel from the
           left. <!--Do not see Create a Port for VRS-G--></li>
         <li>Enter the information as required, specifying <codeph>eth0</codeph> in the <b>Physical
             Name</b> field and entering the VLAN ID for the external network. Also, change the
-            <b>Type</b> field to <codeph>Access</codeph>.<p><image href="../../media/CGH-install-gateway-port.png" id="image_w3p_sgz_xs" width="250"/></p></li>
-        <li>Click <b>Create</b>.<p>The VLAN and other ports will appear similar to
-          the following:</p><p><image href="../../media/CGH-install-vcenter-vlan.png"
-            id="image_sgn_mh1_1t"/></p></li>
-        <!-- Hide for alpha <li>Click the blue arrow next to the second new gateway.</li>
+            <b>Type</b> field to <codeph>Access</codeph>.<p><image
+              href="../../media/CGH-install-gateway-port.png" id="image_w3p_sgz_xs" width="250"
+            /></p></li>
+        <li>Click <b>Create</b>.<p>The VLAN and other ports will appear similar to the
+            following:</p><p><image href="../../media/CGH-install-vcenter-vlan.png"
+              id="image_sgn_mh1_1t"/></p></li>
+        <li>Click the blue arrow next to the second new gateway.</li>
         <li>Perform the same steps to add a port entering the same information. Both gateways must
-          be configured in an identical manner.</li>-->
+          be configured in an identical manner.</li>
       </ol>
     </section>
-    <!--<section><title>Create a redundancy group for the VRS-G</title>
-Hide for alpha
- <i>For more information on performing this task, refer to the latest DCN documentation </i> <p>In order to achieve high availability for the VRS-G, you must create a redundancy group using the VSD dashboard.</p><p>A redundancy group will designate one of the two gateways as the authoritative (active) gateway and the other as the secondary (passive) gateway. You can change which gateway is authoritative either at that point or at a later tine, by selecting the group and clicking the pencil icon.</p><p> Redundancy groups can be created out of two instantiated gateways of the VRS-G type. Both instances must either:</p><ul><li>Come from the same template</li><li>Be instantiated </li></ul><p>In addition, the two gateways that make up a redundancy group must have exactly the same port and VLAN configuration. </p><p>To create a redundancy group, using the VSD dashboard: </p><ol><li>Select the two peers and click on the redundancy group icon.<p><image href="../../media/CGH-install-vsd-redundancy.png" id="image_q5q_5j1_1t"/></p></li></ol></section><section/>-->
+    <section><title>Create a redundancy group for the VRS-G</title><p>In order to achieve high
+        availability for the VRS-G, you must create a redundancy group using the VSD
+        dashboard.</p><i>For more information on performing this task, refer to the latest DCN
+        documentation.</i><p>A redundancy group will designate one of the two gateways as the
+        authoritative (active) gateway and the other as the secondary (passive) gateway. You can
+        change which gateway is authoritative either at that point or at a later tine, by selecting
+        the group and clicking the pencil icon.</p><p> Redundancy groups can be created out of two
+        instantiated gateways of the VRS-G type. Both instances must either:</p><ul
+        id="ul_iqn_11b_r5">
+        <li>Come from the same template</li>
+        <li>Be instantiated </li>
+      </ul><p>In addition, the two gateways that make up a redundancy group must have exactly the
+        same port and VLAN configuration. </p><p>To create a redundancy group, using the VSD
+        dashboard: </p><ol id="ol_jqn_11b_r5">
+        <li><xref href="../OperationsGuide/Dashboard/CGH-2-User-Dasboard-VSD.dita#topic1160c2udv"
+            >Log into the VSD dashboard</xref>.</li>
+        <li>Click the Open Platform Configuration icon in the top right corner.<p><image
+              href="../../media/CGH-install-platform-icon.png" id="image_znd_vbb_r5"/></p></li>
+        <li>Click the <b>Infrastructure</b> tab, then click the <b>Data Center Gateways</b> icon.
+          The new gateway appears in the <b>Pending Gateways</b> list on the left.</li>
+        <li>Select two gateway peers and click on the redundancy group icon.<p><image
+              href="../../media/CGH-install-vsd-redundancy.png" id="image_q5q_5j1_1t"/></p></li>
+        <li>Give the group a name that is meaningful to organization users.  </li>
+        <li>Click <b>Create</b>. The domain instance is saved, and the two gateways are displayed as
+          a single unit listed under Redundancy Groups.<p><image
+              href="../../media/CGH-install-vsd-redundancy-grp.png" id="image_f5p_4cb_r5"/></p></li>
+        <li>Click the newly created group to see the ports and VLANs associated with the group,
+          similar to the following image:<p><image
+              href="../../media/CGH-install-vsd-redundancy-full.png" id="image_ip2_dvb_r5"
+              width="600"/></p></li>
+      </ol></section>
     <section><title>Assign permissions to the VRS-G</title> There are two types of permissions,
         <b>Use Permissions</b> and <b>Extend Permissions</b>. Use Permissions allow members in the
       assigned group to use an object. Extend Permissions allow the members of an assigned group to
@@ -131,9 +166,9 @@ Hide for alpha
               href="../../media/CGH-2-install-VSD-add-IP-sub.png" id="image_kvz_fgs_nt" width="250"
             /></p></li>
         <li>For the floating IP subnet, right-click and select <b>Edit</b> to get the subnet name.
-              <p><image href="../../media/CGH-install-vsd-fip.png" id="image_okn_sjz_xs"
-            /></p><p>Make note of this name, as you will use it to tun the cURL script in the
-            following step.</p></li>
+              <p><image href="../../media/CGH-install-vsd-find-fip.png" id="image_okn_sjz_xs"
+              width="250"/></p><p>Make note of this name, as you will use it to tun the cURL script
+            in the following step.</p></li>
       </ol>
     </section>
     <section id="curl">
@@ -146,11 +181,13 @@ Hide for alpha
           host. <ul id="ul_vxf_nzw_q5">
             <li>
               <p>For a <xref href="carrier-grade-install-config-dcn-cURL-HA.dita#topic10581cgicd"
-                  >cURL script for a high availability environment</xref></p>
+                  >cURL script for a high availability environment</xref> -- production deployments
+                are high availability; </p>
             </li>
             <li>
               <p>For a <xref href="carrier-grade-install-config-dcn-cUR.dita#topic10581cgicd">cURL
-                  script for a non-high availability environment</xref>.</p>
+                  script for a non-high availability environment</xref> -- non-HA environments are
+                for proof-of-concept only and not supported for production environments. </p>
             </li>
           </ul></li>
         <li>Save the file to any name with the <codeph>.sh</codeph> file type. For example:
@@ -168,7 +205,12 @@ Hide for alpha
             <li>Click <b>Nuage-VSP</b>, then the VSC-1, then the VRS-G node under VRs. The IP
               address for the VRS-G VR is in the cURL script, if needed. </li>
           </ol><p><image href="../../media/CGH-install-curl.png" id="image_d2h_mcc_1t" width="700"
-            /></p></li>
+            /></p><p><b>Notes: </b><ul id="ul_sb3_xdb_r5">
+              <li>The VSC status will appear as red/downstate in the VSD dashboard. This is known
+                cosmetic behavior and does not impact any functionality.</li>
+              <li>Multiple entries of the VSC might appear VSD Dashboard after a VSC upgrade. This
+                is a known VSD GUI behavior. </li>
+            </ul></p></li>
       </ol>
     </section>
     <section><title>Create a Layer 3 Domain Template</title><p>A domain is a single Layer 3 space. A
@@ -182,7 +224,7 @@ Hide for alpha
           <li>Click the organization you created previously. </li>
           <li>Click the <b>Networks</b> tab.<p>A default L3 Template is created for the
               organization. You can edit this template or create a new template.</p></li>
-          <li>Select the template and click the <b>Designer</b> tab.</li>
+          <li>Select the template and click the <b>Design</b> tab.</li>
           <li>Double-click <b>Zone Template</b> and <b>Public Zone Template</b> in the Object
             Library to add the zones to the template.</li>
           <li>Click the <b>Policies</b> tab.</li>
@@ -195,12 +237,12 @@ Hide for alpha
               <li>Select <b>Enable this policy</b>.</li>
               <li>Click <b>Create</b>.</li>
             </ol></li>
-          <li>Select the ingress policy you created.</li>
+          <li>Click the Unlock icon at the bottom of the screen.  </li>
           <li>Click the + icon to create a new ingress policy entry. </li>
           <li>Click <b>Apply Policy Changes</b>. The policy is effective only when it is
                 applied.<p><image href="../../media/CGH-2-install-VSD-apply.png"
                 id="image_smb_3rs_nt" width="600"/></p></li>
-          <li>Click the blue <b>Egress Security Policies</b> icon. </li>
+          <li>Click the red <b>Egress Security Policies</b> icon. </li>
           <li>Click the + icon to create a new policy <p><image
                 href="../../media/CGH-2-install-vsd-egress.png" width="250" id="image_f3v_lrs_nt"
               /></p><ol id="ol_g3v_lrs_nt">
@@ -210,8 +252,6 @@ Hide for alpha
               <li>Select <b>Enable this policy</b>.</li>
               <li>Click <b>Create</b>.</li>
             </ol></li>
-          <li>Select the egress policy you created.</li>
-          <li>Click the + icon to create a new ingress policy entry. </li>
           <li>Click <b>Apply Policy Changes</b>. The policy is effective only when it is
             applied.</li>
         </ol></p><p>When the domain template is created, the domain template can be used to create a
@@ -228,7 +268,7 @@ Hide for alpha
         <li>In <xref href="../OperationsGuide/Dashboard/CGH-2-User-Dasboard-VSD.dita#topic1160c2udv">the VSD
             dashboard</xref>, click <b>Platform Configuration</b>.</li>
         <li>Select the domain template you created.</li>
-        <li>Click the <b>Instantiate</b> icon.<p><image
+        <li>Click the <b>Instantiate</b> icon in the top right corner.<p><image
               href="../../media/CGH-2-install-vsd-instantate.png" id="image_bz3_fyx_nt" width="400"
               /><ol id="ol_g5m_nyx_nt">
               <li>Enter a name and description for the instance.</li>
@@ -241,11 +281,9 @@ Hide for alpha
         <li>Double-click <b>Subnet</b> in the Object Library to add a subnet to the zone. <p><image
               href="../../media/CGH-2-install-vsd-instantate-subnet.png" id="image_gjb_gzx_nt"
               width="400"/></p></li>
-        <li>Launch a new browser session and enter VSD debug mode:<p>
-            <codeblock>https://&lt;vsd ip&gt;:8443/?debug</codeblock>
-          </p></li>
-        <li>Select the new subnet and  pickup UUID from debug log:. <!--For example: How do to find this??-->
-          <codeblock>HEAD https://10.20.5.21:8443/nuage/api/v3_2/subnets/239f0521-973c-44d9-98d8-4442185f5b45/vports (200):Debug log can be checked on web Console of Dev Tools on Browser:</codeblock></li>
+        <li>Right-click the subnet icon and select <b>Inspect</b>. </li>
+        <li>In the Inspector pop-up, note the VSD ID. This will be the UUID  for the
+            <codeph>–nuagenet</codeph> option during subnet create command.</li>
       </ol></section>
     <section>
       <title>Operations to be Performed on the non-KVM controller0</title>
@@ -291,9 +329,10 @@ start=10.51.77.50,end=10.51.77.250 --nuagenet &lt;UUID> --net-partition &lt;part
             dashboard</xref>, click <b>Platform Configuration</b>.</li>
         <li>Click the organization you created previously. </li>
         <li>Click the <b>Networks</b> tab.</li>
-        <li>Double-click the L3 domain you instantiated. Click the domain icon in the design area,
-          if needed.<p><image href="../../media/CGH-2-install-vsd-L3-icon.png" id="image_x5z_lfz_nt"
-              width="200"/></p></li>
+        <li>Click the L3 domain you instantiated. </li>
+        <li>Click the domain icon in the design area.<p><image
+              href="../../media/CGH-2-install-vsd-L3-icon.png" id="image_x5z_lfz_nt" width="200"
+            /></p></li>
         <li>Allocate floating IPs from the IP pool:<ol id="ol_i1q_qgz_nt">
             <li>Click the floating IP icon in the top right corner.<p><image
                   href="../../media/CGH-2-install-vsd-L3-fip-icon.png" id="image_ijq_vfz_nt"
