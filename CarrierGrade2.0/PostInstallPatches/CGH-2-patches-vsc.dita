@@ -64,7 +64,7 @@
       <p>Use the following steps to replace the QCOW and YML files on the HLM VM with new versions
         of the files that you downloaded in the patch file.</p>
       <p id="note"><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different
-        than the default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the
+        from the default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the
           base directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
       <ol id="ol_dpc_14t_q5">
         <li id="1"> On the HLM VM, replace the existing <codeph>vsc_singledisk.qcow2</codeph> in the
@@ -291,6 +291,7 @@ max_fail_percentage: 0
       <p><b>Replace the QCOW and YML files with the new files</b></p>
       <p>Use the following steps to replace the QCOW and YML files on the HLM VM with new versions
         of the files that you downloaded in the patch file.</p>
+      <p conref="#topic10581pdpv/note"/>
       <ol id="ol_w3l_1n5_q5">
         <li conref="#topic10581pdpv/1"/>
         <li conref="#topic10581pdpv/2"/>
@@ -311,7 +312,7 @@ max_fail_percentage: 0
         <li conref="#topic10581pdpv/b8"/>
       </ol>
     </section>
-    <section>
+    <section id="additional">
       <title>Locating the base directory</title>
       <p>The path to the <codeph>/base/</codeph> directory can different than the default, if the
           <codeph>nickname</codeph> field in the <codeph>definition.json</codeph> file was changed
@@ -323,9 +324,7 @@ max_fail_percentage: 0
         <li>Change to the <codeph>/var/hlm/clouds/&lt;cloud name>/desired_state</codeph> directory. </li>
         <li>Execute the following
             command:<codeblock>dcntaskloc=$(find . -name DCN-VSC -type d| head -n 1); cd $dcntaskloc/tasks</codeblock><p>The
-            prompt will change to the
-              /<codeph>var/hlm/clouds/tb2tahoe/desired_state/tb2tahoe/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>
-            directory.</p></li>
+            prompt will change to the proper directory.</p></li>
       </ol>
     </section>
   </body>

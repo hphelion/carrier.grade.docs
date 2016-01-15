@@ -20,9 +20,9 @@
       <p>The process for installing the KVM region involves the following tasks:<ul
           id="ul_fj4_mct_g5">
           <li><xref href="#topic1107cgiks/controller-0" format="dita"/></li>
-          <li><xref href="#topic1107cgiks/kvm-custom-patch" format="dita"/></li>
-          <li><xref href="#topic1107cgiks/pci-bus" format="dita">Step 3: Deploy the PCI Bus
-              Patch</xref></li>
+          <!--<li><xref href="#topic1107cgiks/kvm-custom-patch" format="dita"/></li>-->
+          <li><xref href="#topic1107cgiks/pci-bus" format="dita">Step 2: Apply KVM region
+              patches</xref></li>
           <li><xref href="#topic1107cgiks/install-cloud" format="dita"/></li>
           <li><xref href="#topic1107cgiks/unlock" format="dita"/></li>
           <li><xref href="#topic1107cgiks/horizon-patch" format="dita"/></li>
@@ -64,53 +64,19 @@ ifconfig eth0 up</codeblock></li>
             process.</p></li>
       </ol>
     </section>
-    <section id="kvm-custom-patch">
-      <title>Step 2: Deploy the KVM Region Custom Patch</title>
-      <p>This patch addresses a number of issues in the KVM region.</p>
-      <p>
-        <ol>
-          <li>On KVM region <codeph>controller-0</codeph>, create a directory for the
-            patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
-          <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
-              <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
-              id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph><p>You should have downloaded
-                  this patch file in the Prerequisites. </p></li>
-            </ul></li>
-          <li>Execute the following commands:
-              <codeblock>sudo sw-patch upload-dir /tmp/patches
+    <!--<section id="kvm-custom-patch"><title>Step 2: Deploy the KVM Region Custom Patch</title><p>This patch addresses a number of issues in the KVM region.</p><p><ol><li>On KVM region <codeph>controller-0</codeph>, create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li><li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory: <ul id="ul_ald_spz_35"><li><codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph><p>You should have downloaded this patch file in the Prerequisites. </p></li></ul></li><li>Execute the following commands: <codeblock>sudo sw-patch upload-dir /tmp/patches
 sudo sw-patch query
 sudo sw-patch query-hosts
 sudo sw-patch apply TS_HP_15_Custom_PATCH_0001_2.patch
-source /etc/nova/openrc</codeblock><p>The
-                <codeph>upload-dir</codeph> command registers all patches in the specific directory
-              into an internal database. Once registered, you can delete the patch files from the
-              controller as the patches have been added to the database.</p></li>
-          <li>Patch the standby
-            controller:<codeblock>system host-patch-reboot &lt;standby-controller> </codeblock>Assuming
-            controller-0 is active
-            controller:<codeblock>system host-patch-reboot controller-1</codeblock></li>
-          <li>After the patched controller node comes up, switch the active
-              controller:<codeblock>system host-swact &lt;active-controller></codeblock><p>Assuming
-              controller-0 is active
-              controller:<codeblock>system host-swact controller-0</codeblock></p></li>
-          <li>Exit the SSH session and login to the newly active controller.</li>
-          <li>Execute the following commands:<codeblock>source /etc/nova/openrc</codeblock></li>
-          <li>Patch the standby
-            controller:<codeblock>system host-patch-reboot &lt;standby-controller> </codeblock></li>
-          <li>Reboot the compute
-            nodes:<codeblock>system host-patch-reboot compute-0
-system host-patch-reboot compute-1</codeblock></li>
-          <li>Make controller-0 active:<codeblock>system host-swact controller-1</codeblock></li>
-        </ol>
-      </p>
-    </section>
-    <section id="pci-bus"><title>Step 3: Deploy the PCI Bus Patch</title>After deploying the
-      TS_HP_15_Custom_PATCH_0001_2.patch, perform the following steps to deploy the PCI bus patch.<ol>
+source /etc/nova/openrc</codeblock><p>The <codeph>upload-dir</codeph> command registers all patches in the specific directory into an internal database. Once registered, you can delete the patch files from the controller as the patches have been added to the database.</p></li><li>Patch the standby controller:<codeblock>system host-patch-reboot &lt;standby-controller> </codeblock>Assuming controller-0 is active controller:<codeblock>system host-patch-reboot controller-1</codeblock></li><li>After the patched controller node comes up, switch the active controller:<codeblock>system host-swact &lt;active-controller></codeblock><p>Assuming controller-0 is active controller:<codeblock>system host-swact controller-0</codeblock></p></li><li>Exit the SSH session and login to the newly active controller.</li><li>Execute the following commands:<codeblock>source /etc/nova/openrc</codeblock></li><li>Patch the standby controller:<codeblock>system host-patch-reboot &lt;standby-controller> </codeblock></li><li>Reboot the compute nodes:<codeblock>system host-patch-reboot compute-0
+system host-patch-reboot compute-1</codeblock></li><li>Make controller-0 active:<codeblock>system host-swact controller-1</codeblock></li></ol></p></section>-->
+    <section id="pci-bus"><title>Step 2: Apply KVM region patches</title>Perform the following steps
+      to deploy two required patches.<ol>
         <li>On KVM region <codeph>controller-0</codeph>, create a directory for the
           patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
-        <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory: <ul
+        <li>Copy the following patches file to the <codeph>/tmp/patches</codeph> directory: <ul
             id="ul_zbh_j2t_q5">
+            <li><codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph></li>
             <li><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph><p>You should have downloaded this
                 patch file in the Prerequisites. </p></li>
           </ul></li>
