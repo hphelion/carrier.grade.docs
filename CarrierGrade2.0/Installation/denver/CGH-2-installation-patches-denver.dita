@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581cgiptchd">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Installing Required Patches
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Alpha: Installing Required Patches
     for the Denver Deployment</title>
   <prolog>
     <metadata>
@@ -20,28 +20,6 @@
         >Helion Distribution Network (HDN)</xref>. You must <xref
         href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
         >obtain a user account on HDN</xref> in order to download these files.</p>
-    <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/cobbler"/>
-    <section id="providernet-patch"><title>Deploy the Horizon Provider Network Patch
-        <!--providernet patch--></title><p>Because of a configuration issue with the Ansible roles,
-        the Provider Networks tab in the Horizon interface will be hidden unless you deploy the
-        following patch. <!--HCG-991--></p>You should have downloaded the following patch files
-      during the prerequisites:<ul id="ul_awq_db1_f5">
-        <li>providernet-tab-missing-in-horizon.patch</li>
-      </ul><p>The README with the patch download contains information on files changed by these
-        patches.</p><p>To prevent this condition, execute the following commands:<ol
-          id="ol_imr_fgt_25">
-          <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
-          <li>Change to the <codeph>kenobi-node-configuration</codeph>
-            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
-          <li>Execute the following command to install the second patch
-            <codeblock>patch -p1 &lt; providernet-tab-missing-in-horizon.patch</codeblock></li>
-          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
-            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
-          <li>Execute the following command to integrate the changes into the
-            environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the <codeph>hlm
-              generate</codeph> command is executed, the changes will be included. </li>
-        </ol></p></section>
-    <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/ssl-patch"/>
     <section id="next-step">
       <title>Next Step</title>
       <p><xref href="../denver/CGH-2-install-denver.dita">Installing the Non-KVM Region</xref></p>
