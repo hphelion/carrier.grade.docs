@@ -21,7 +21,10 @@
         installation, and can create PCI-Passthrough or SR-IOV interfaces in Horizon, disregard
         these steps. </p><p>Due to an API error, you cannot create a PCI-Passthrough or SR-IOV
         interface using the Horizon UI. To correct this issue, deploy the following patch.
-        <!--HCG-1011/1012--></p></section>
+        <!--HCG-1011/1012--></p>You should have downloaded the following patch files during the
+        prerequisites:<ul id="ul_awq_db1_f5">
+        <li>WR-HZN-1011</li>
+      </ul></section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
@@ -32,9 +35,8 @@
         <li>Click <b>Sign In</b> to log in using your account. </li>
         <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
           page.</li>
-        <li>Download the <b
-            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/002"/>
-          patch and the associated checksum and signature files.</li>
+        <li>Download the <b id="productShow_appName">Helion Carrier Grade 2.0 Horizon001
+            Patch002</b> patch and the associated checksum and signature files.</li>
         <li>Verify the <xref
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
             >downloaded signature</xref> and the <xref
@@ -49,10 +51,6 @@
         <codeph>HCG2.0_Horizon001_Patch002.tar.gz</codeph>. The README with the patch download
         contains information on files changed by these patches.</p>
       <p>Execute the following commands:<ol id="ol_imr_fgt_25">
-          <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
-              HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
-              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
-              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
           <li>Copy the HZN-HCG-1011 directory to the
               <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on the lifecycle
             manager. </li>

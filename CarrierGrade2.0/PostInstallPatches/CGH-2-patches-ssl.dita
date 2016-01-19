@@ -34,7 +34,8 @@
         <li>Click <b>Sign In</b> to log in using your account. </li>
         <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
           page.</li>
-        <li>Download the <b id="productShow_appName">Helion Carrier Grade 2.0 Heat001 Patch003</b>
+        <li>Download the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/003"/>
           patch and the associated checksum and signature files.</li>
         <li>Verify the <xref
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
@@ -51,10 +52,14 @@
         The README with the patch download contains information on files changed by these
         patches.</p>
       <p>To prevent this condition, execute the following commands:<ol id="ol_j42_qhz_35">
+          <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
+              HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
           <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
           <li>Change to the <codeph>kenobi-configuration-processor</codeph>
             directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
-          <li>Execute the following command to install the second patch
+          <li>Execute the following command to install the patch
             <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
           <li>Change to the <codeph>kenobi-node-configuration</codeph>
             directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
