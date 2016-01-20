@@ -19,16 +19,9 @@
       important to meet the requirements and conform to the recommendations listed in this document. <ul>
         <li><xref href="#topic1773cgsms/hardware" format="dita">Supported Hardware</xref></li>
         <li><xref href="#topic1773cgsms/req-specs" format="dita">Required Specifications</xref></li>
-          <li><xref href="#topic1773cgsms/esx-dcn-hardware" format="dita">ESX and DCN
-            components</xref></li>
         <li><xref href="#topic1773cgsms/hardware-config" format="dita">Required Hardware
-          Configurations</xref></li>
-        <li><xref href="#topic1773cgsms/dcn" format="dita">DCN Components</xref></li>
-        <li><xref href="#topic1773cgsms/esx" format="dita">ESX Components</xref></li>
-        <li><xref href="#topic1773cgsms/ironic" format="dita">Ironic Baremetal Components</xref></li>
+              Configurations</xref></li>
         <li><xref href="#topic1773cgsms/software" format="dita">Software Requirements</xref></li>
-        <li><xref href="#topic1773cgsms/add-esx" format="dita">ESX Software Requirements</xref></li>
-        <li><xref href="#topic1773cgsms/add-dcn" format="dita">DCN Software Requirements</xref></li>
         <li><xref href="#topic1773cgsms/storage" format="dita">External Storage</xref></li>
         <li><xref href="#topic1773cgsms/guestOS" format="dita">Supported Guest Operating Systems</xref></li>
         <li><xref href="#topic1773cgsms/os-dcn-esx" format="dita">Additional Guest Operating
@@ -39,12 +32,11 @@
       <title>Supported Hardware</title>
       <p>The following servers are supported for the lifecycle manager host, and for the controllers
         and compute servers.</p>
-      <p><b id="hlm">Lifecycle Manager Host</b> The lifecycle maager host is a single server with at
-        least a 40 GB disk size and 8,192 MB RAM.</p>
-      <p id="controllers"><b>Comtrollers and compute servers</b> The following servers are supported
-        for the controllers and compute servers in both the <xref
-          href="../../Overview/carrier-grade-overview-non-kvm.dita#topic1495">Non-KVM region</xref> and
-        <xref href="../../Overview/carrier-grade-overview-kvm.dita#topic1743cgok">KVM region</xref>. The
+      <p><b id="hlm">Lifecycle Manager Host</b> The lifecycle manager host is a single server with
+        at least a 500 GB disk size, 4GB of virtual memory and 2 virtual CPUs. </p>
+      <p id="controllers"><b>Controllers and compute servers</b> The following servers are supported
+        for the controllers and compute servers in the <xref
+          href="../../Overview/carrier-grade-overview-kvm.dita#topic1743cgok">KVM region</xref>. The
         servers must meet the specifications in <xref href="#topic1773cgsms/specs" format="dita">the
           Required Specifications table below</xref>:</p>
       <p><b>Controller:</b></p>
@@ -60,7 +52,7 @@
       </ul>
       <p><b>Notes:</b>
         <ul id="ul_mxb_gzd_ss">
-          <li>If you are using Gen9 systens, you must update the firmware to HPE Service Pack for
+          <li>If you are using Gen9 systems, you must update the firmware to HPE Service Pack for
             ProLiant (SPP) Version 2015.06.0.</li>
           <li>If you are using Gen8 systems, you will experience reduced performance.</li>
         </ul></p>
@@ -205,114 +197,41 @@
         </table>
       </p>
     </section>
-    <section id="esx-dcn-hardware">
-      <title>ESX and DCN Specifications</title>
-      <p>For the KVM + ESX cloud, consult the DCN and ESX documentation for the supported hardware
-        and required hardware specifications. </p>
-    </section>
   <section id="hardware-config">
       <title>Required Hardware Configurations </title>
-      <p>The servers, selected from the <xref href="#topic1773cgsms/hardware" format="dita">Supported
-          Hardware</xref> lists, must be configured as follows for HP Helion OpenStack Carrier
-        Grade.</p>
+      <p>The servers, selected from the <xref href="#topic1773cgsms/hardware" format="dita"
+          >Supported Hardware</xref> lists, must be configured as follows for HP Helion OpenStack
+        Carrier Grade.</p>
       <p>One (1) <b>Lifecycle Manager Host</b>. You must have a server with a 40GB Disk and 8,192 MB
-        RAM for the lifecycle manager host. This server will also host the VSD VM.</p>
-      <p id="non-kvm-hos">Three (3) <b>HP Helion OpenStack Controllers.</b> You must have three (3)
-        baremetal systems to install the HP Helion OpenStack controllers that meet the following
-        requirements: </p>
-          <ul id="ul_s1h_432_qs">
-            <li>For systems with multiple NICs, only one NIC may be active or connected. </li>
-            <li>Capable of hosting VMs <!--Remove for RC0 <li>For Compute nodes, Intel or AMD hardware virtualization support required. The CPU
-              cores and memory requirements must be sized based on the VM instances hosted by the
-              Compute node.</li>-->
-              <p>
-                <b>Important:</b> Since the installer currently uses only the first available disk,
-                all servers must have RAID controllers pre-configured to present their storage as a
-                single, logical disk. RAID across multiple physical discs is strongly recommended
-                for both performance and resilience.</p><p><b>Notes:</b></p><ul>
-                <li>On the controller nodes, make sure the RAID array is configured to reflect a
-                  total size of less than 4TB.</li>
-                <li>The root volume cannot exceed 2TB</li>
-              </ul></li>
-          </ul>
-      <p id="kvm-config">Two (2) <b>KVM controllers</b>. You must have two (2) baremetal systems to
-        install the KVM region controllers. For systems with multiple NICs, only one NIC may be
-        active or connected. </p>
-      <p>Two (2) <b>KVM compute servers</b>. You must have two (2) or more baremetal systems to
-        install the KVM region compute servers.</p>
-      
-        <ul id="ul_lwc_ltz_jt">
-          <li><b>KVM region NICs.</b> The following NICs have been verified for PXE booting of KVM
+        RAM for the lifecycle manager host. This server will also host three (3) virtual machines
+        that serve as controllers for HP Helion OpenStack Carrier Grade. Each of the controller
+        nodes requires 20GB of virtual disk, 16GB of virtual memory, and 4 virtual CPUs.</p>
+      <p id="kvm-config">Two (2) <b>KVM region controllers</b>. You must have two (2) baremetal
+        systems to install the KVM region controllers. For systems with multiple NICs, only one NIC
+        may be active or connected. </p>
+      <p>One (1) or more <b>KVM Region compute servers</b>. You must have at least one (1) baremetal
+        system to install the KVM region compute servers.</p>
+      <ul id="ul_lwc_ltz_jt">
+        <li><b>KVM region NICs.</b> The following NICs have been verified for PXE booting of KVM
           region servers:
             <!--Admin Guide has list of supported NICs; check there to make the same--><ul
             id="ul_sdq_q1f_qs">
             <li>Emulex 10G </li>
             <li>Intel 82599 </li>
           </ul><p><b>Important:</b> Using the correct NICs is essential to proper installation of HP
-            Helion OpenStack Carrier Grade.</p></li></ul>
-  </section>
-  <section id="dcn">
-    <title>DCN Components</title>
-      
-      <p>If you are installing HP Distributed Cloud Networking (DCN), you need the following
-        additional components. Refer to the <xref
-          href="http://h20566.www2.hpe.com/portal/site/hpsc/template.PAGE/public/psi/manualsResults/?sp4ts.oid=7268885&amp;spf_p.tpst=psiContentResults&amp;spf_p.prp_psiContentResults=wsrp-navigationalState%3Daction%253Dmanualslist%257Ccontentid%253DGeneral-Reference%257Clang%253Den&amp;javax.portlet.begCacheTok=com.vignette.cachetoken&amp;javax.portlet.endCacheTok=com.vignette.cachetoken"
-          format="html" scope="external">DCN release notes</xref> for the supported hardware
-        configurations. </p>
-    <p>
-      <ul>
-        <li>Two (2) <b>DCN hosts</b>. You must have: <ul>
-              <li>two (2) baremetal systems for DCN VSC controllers (HA mode) ; this system will
-                host the VSC-VM.</li>
-              <li>two (2) baremetal systems for DCN VRS-G Software Gateway (HA mode); this system
-                will host the VRS-G gateway.</li>
-              <li>VRSvApp requirements VRSvApp must be installed. Please Refer to the DCN VSP 3.0 R7
-                installation Guide for VRSvApp installation. </li>
-            </ul></li></ul></p>
-  </section>
-  <section id="esx">
-    <title>ESX Components</title>
-      <p>If you are installing VMware vSphere, you need the following additional components. Refer
-        to the ESX documentation for the supported hardware configurations. </p>
-    <p>
-        <ul id="ul_s3d_pmx_dt">
-          <li>Two (2) <b>ESX hosts</b>. You must have a minimum of two (2) baremetal systems for
-            ESXi hosts. A minimum of 1 ESX cluster with two nodes. This cluster will host the ESX
-            Compute Proxy. A VRSvApp deployment is required for each cluster.<p>One (1) to four (4)
-              ESXi clusters are supported. Refer to the ESX documentation for the supported hardware
-              configurations.</p><ul id="ul_pl3_glv_rt">
-              <li> vSphere Cluster running ESXi 5.5u2 with vMotion enabled.</li>
-              <li>1 Virtual Machine Port Group with all Cloud Vlans associated to the Port Group.
-              </li>
-            </ul></li></ul></p>
+            Helion OpenStack Carrier Grade.</p></li>
+      </ul>
     </section>
-  <section id="ironic">
-    <title>Ironic Baremetal Components</title>
-    
-    <p>If you are installing the Ironic baremetal region, you need the following additional
-        components:<ul id="ul_anc_1c2_xt">
-        <li>One (1) <b>Controller</b>. You must have one (1) HPE ProLiant DL360 or DL380 baremetal
-          system to install the baremetal region controllers.</li>
-      </ul></p>
-  </section>
-  <section id="software"><title>Software Requirements</title><p><b>Lifecycle Manager Host</b>. The lifecycle manager host requires the Ubuntu Server 14.04.2 LTS
-        operating system. </p>
-    <p><b>Non-KVM Region Controllers</b>. The servers should be baremetal. The HP Helion OpenStack
+  <section id="software">
+      <title>Software Requirements</title>
+      <p><b>Lifecycle Manager Host</b>. The lifecycle manager host requires the Ubuntu Server
+        14.04.2 LTS operating system. </p>
+      <p><b>Non-KVM Region Controllers</b>. The servers should be baremetal. The HP Helion OpenStack
         Carrier Grade installation process installs the required software.</p>
-    <p><b>KVM Region Controllers</b>. The servers should be baremetal. The HP Helion OpenStack
+      <p><b>KVM Region Controllers</b>. The servers should be baremetal. The HP Helion OpenStack
         Carrier Grade installation process installs the required software.</p>
-      <p><b>KVM Region Compute</b>. The servers should be baremetal. The HP Helion OpenStack
-        Carrier Grade installation process installs the required software.</p></section>
-    <section id="add-esx">
-      <title>ESX Software Requirements</title>
-      <p>VMware vSphere must be fully installed and operational before installing HP Helion
-        OpenStack Carrier Grade.</p>
-    </section>
-  <section id="add-dcn">
-      <title>DCN Software Requirements</title>
-      <p>HP Distributed Cloud Networking (DCN) must be fully installed and operational before
-        installing HP Helion OpenStack Carrier Grade. The currently supported version is <b
-          conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-version"/>.</p>
+      <p><b>KVM Region Compute</b>. The servers should be baremetal. The HP Helion OpenStack Carrier
+        Grade installation process installs the required software.</p>
     </section>
     <section id="storage">
       <title>External Storage</title>
@@ -330,11 +249,10 @@
   
   <section id="guestOS"><title>Supported Guest Operating Systems</title> The following guest
       operating systems (guest OSs) are supported for the HP Helion OpenStack Carrier Grade servers.
-          <p><b>KVM Host</b>. There are no supported guest OSs for the KVM Host server.
-          </p><p><b>Non-KVM Region Controllers</b>. There are no supported guest OSs for the servers
-        that host the HP Helion OpenStack Controllers.</p><p><b>KVM Region Compute and
-          Controllers</b>. The following Guest OSs are supported for the servers in the KVM region
-        for both cloud topologies: </p><ul id="ul_sty_hd2_qs">
+          <p><b>Lifecycle Manager Host</b>. There are no supported guest OSs for the Lifecycle
+        Manager Host server. </p><p><b>KVM Region Compute and Controllers</b>. The following Guest
+        OSs are supported for the servers in the KVM region for both cloud topologies: </p><ul
+        id="ul_sty_hd2_qs">
         <li>
           <p>WindRiver Linux 6.0</p>
         </li>

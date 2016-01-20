@@ -106,8 +106,6 @@ export no_proxy=localhost,127.0.0.1,&lt;IP_address>,&lt;provider_network></codep
                                 <li>xfce4 </li>
                                 <li>qemu-kvm </li>
                                 <li>libvirt-bin </li>
-                                <li>openvswitch-switch </li>
-                                <li>openvswitch-common </li>
                                 <li>python-libvirt </li>
                                 <li>qemu-system-x86 </li>
                                 <li>libssl-dev </li>
@@ -131,7 +129,7 @@ export no_proxy=localhost,127.0.0.1,&lt;IP_address>,&lt;provider_network></codep
                         <ol>
                                 <li>On the KLM host, run the following command to install all
                                                 required packages:
-                                                <codeblock><codeph>sudo su -l -c "apt-get install -y ntp firefox gedit xrdp xfce4 qemu-kvm libvirt-bin openvswitch-switch openvswitch-common python-libvirt qemu-system-x86 libssl-dev libffi-dev git python-virtualenv python-dev virt-manager xorg gnome-core gnome-system-tools gnome-app-install sshpass gnupg jq vlan sudo ansible"
+                                                <codeblock><codeph>sudo su -l -c "apt-get install -y ntp firefox gedit xrdp xfce4 qemu-kvm libvirt-bin python-libvirt qemu-system-x86 libssl-dev libffi-dev git python-virtualenv python-dev virt-manager xorg gnome-core gnome-system-tools gnome-app-install sshpass gnupg jq vlan sudo ansible"
 </codeph></codeblock></li>
                                 <li>Add the 802.1q module to the kernel on boot. The 802.1q standard
                                         supports VLAN tagging on an ethernet
