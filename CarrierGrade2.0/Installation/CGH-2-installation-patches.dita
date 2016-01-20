@@ -81,11 +81,57 @@
                 <codeph>hlm generate</codeph> command is executed, the changes will be included.
             </li>
           </ol></p></section>
+      <section id="icinga"><title>Deploy the Icinga Random Password Patch</title>This patch must be
+        applied only after the HP Helion OpenStack Carrier Grade is fully deployed for the all cloud
+        topologies to create a random password for Icinga.<p>To deploy the patch:<ol
+            id="ol_ifp_ysm_s5">
+            <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
+            <li>Change to the <codeph>kenobi-node-configuration</codeph>
+              directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+            <li>Execute the following command to install the second patch
+              <codeblock>patch -p1 -b &lt; /root/icinga-random-password.patch</codeblock></li>
+            <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+              <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the
+                <codeph>hlm generate</codeph> command is executed, the changes will be
+              included.</li>
+          </ol></p> The command creates a random password in the following
+        directory<codeblock>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/persistent_state/private_data.yml</codeblock>Open
+        the <codeph>private_data.yml</codeph> file to locate the random password in the
+          <codeph>icinga_root_pwd</codeph> variable<p>You access the Icinga web portal using
+            <codeph>http://&lt;CLM-IP>:82/icinga-web/</codeph>. Use <codeph>root</codeph> as a user
+          name and the random password to log in. </p><p>To change the password:</p><p>
+          <ol id="ol_et5_2rm_s5">
+            <li>Click the <b>Root</b> menu in the top right. </li>
+            <li>Select <b>Preferences</b>, then <b>Password</b>. </li>
+            <li> Enter a new password and click Save </li>
+            <li>Log out by clicking the <b>Root</b> menu, then <b>Logout</b>. </li>
+          </ol>
+        </p></section>
+      <section><title>Deploy the Horizon Switcher Patch</title>This patch must be applied only after
+        the HP Helion OpenStack Carrier Grade is fully deployed for the Denver and Tahoe cloud
+          topologies.<ul id="ul_pv1_g5m_s5">
+          <li>horizon-region-switcher.patch</li>
+        </ul><p>To deploy the patch:<ol id="ol_qv1_g5m_s5">
+            <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
+            <li>Change to the kenobi-node-configuration
+              directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+            <li>Execute the following command to install the second patch
+              <codeblock>patch -p1  &lt; ../horizon-region-switcher.patch
+</codeblock></li>
+            <li>Change to the <codeph>kenobi-node-configuration</codeph>
+              directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+            <li>Execute the following command to install the second patch
+              <codeblock>patch -p1 &lt; ../kcp-ssl-implementation.patch</codeblock></li>
+            <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+              <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the
+                <codeph>hlm generate</codeph> command is executed, the changes will be included.
+            </li>
+          </ol></p></section>
       
     </bodydiv>
-    <section>
-      <title/>
-      <p/>
-    </section>
   </body>
 </topic>
