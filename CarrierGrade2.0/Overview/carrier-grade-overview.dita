@@ -158,7 +158,10 @@
                 <li>KVM-based cloud only (using the Denver template)</li>
                 <li>KVM with HP Distributed Cloud Networking (using the Tahoe template)</li>
                 <li>KVM + VMware ESX<tm tmtype="reg"/> with DCN (using the Memphis template)</li>
-                <li> KVM + ESX + Ironic with DCN (using the Sacramento Deployment)</li>
+                <li> KVM + ESX + Ironic with DCN (using the Sacramento Deployment)<p>The currently
+                    supported version VMware vShpere ESX is <b
+                      conref="../Installation/sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/ESXVer"
+                    />. </p></li>
               </ul></p>
           </dd>
         </dlentry>
@@ -171,9 +174,17 @@
               <li>With HPE StoreVirtual VSA storage <p>HPE StoreVirtual VSA software is a Virtual
                   Storage Appliance that provides the complete array functionality on top of a Linux
                   KVM environment without external hardware. VSA eliminates the need for external
-                  shared storage required to implement Block Storage features.</p></li>
+                  shared storage required to implement Block Storage features. The currently
+                  supported version of HPE StoreVirtual VSA is <b
+                    conref="../Installation/sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/VSAVer"
+                  /></p></li>
               <li>With HPE StoreServ (3PAR) storage <p>HPE 3PAR StoreServ is a storage array that
-                  supports Fibre Channel (FC) as well as iSCSI protocol.</p></li>
+                  supports Fibre Channel (FC) as well as iSCSI protocol. The currently supported
+                  versions of HPE StoreServ (3PAR) are <b
+                    conref="../Installation/sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/3ParVer"
+                    /><b
+                    conref="../Installation/sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/3ParVer2"
+                  />.</p></li>
             </ul>
             <p>You must install 3PAR or VSA before starting the HP Helion OpenStack installation and
               are independent of HP Helion OpenStack Carrier Grade. </p>
@@ -228,8 +239,9 @@
               deployed over an existing DC IP network fabric. The main components in the HP DCN
               solution are: Virtualized Services Directory (VSD) and Virtualized Services Directory
               Architect (VSD-A), Virtualized Services Controller (VSC) and Virtual Routing and
-              Switching (VRS).  For more information on the DCN components, see <xref
-                href="carrier-grade-overview-non-kvm.dita#topic1495/dcn"/> in the overview. </p>
+              Switching (VRS). For more information on the DCN components, see DCN Components in the
+                <xref href="../Installation/carrier-grade-support-matrix2.dita#topic1773cgsm2"
+                >Support Matrix</xref> for the Tahoe, Memphis or Sacramento deployment. </p>
             <p>VRS is included in the Tahoe, Memphis and Sacramento deployments of HP Helion Carrier
               Grade. The <xref
                 href="../Installation/carrier-grade-technical-overview.dita#topic3485cgto">Technical
