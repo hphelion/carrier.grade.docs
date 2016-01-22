@@ -208,8 +208,8 @@
     </section>
     <section id="esx-dcn-hardware">
       <title>ESX and DCN Specifications</title>
-      <p>For the KVM + ESX cloud, consult the DCN and ESX documentation for the supported hardware
-        and required hardware specifications. </p>
+      <p>Consult the DCN and ESX documentation for the supported hardware and required hardware
+        specifications. </p>
     </section>
   <section id="hardware-config">
       <title>Required Hardware Configurations </title>
@@ -270,13 +270,15 @@
               <li>VRSvApp requirements VRSvApp must be installed. Please Refer to the DCN VSP 3.0 R7
                 installation Guide for VRSvApp installation. </li>
             </ul></li></ul></p>
+      <p><b>Note:</b> HP Distributed Cloud Networking (DCN) <b
+          conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-version"/> must
+        be fully installed and operational before installing HP Helion OpenStack Carrier Grade. </p>
   </section>
   <section id="esx">
     <title>ESX Components</title>
       <p>If you are installing VMware vSphere, you need the following additional components. Refer
         to the ESX documentation for the supported hardware configurations. </p>
-    <p>
-        <ul id="ul_s3d_pmx_dt">
+    <p><ul id="ul_s3d_pmx_dt">
           <li>Two (2) <b>ESX hosts</b>. You must have a minimum of two (2) baremetal systems for
             ESXi hosts. A minimum of 1 ESX cluster with two nodes. This cluster will host the ESX
             Compute Proxy. A VRSvApp deployment is required for each cluster.<p>One (1) to four (4)
@@ -285,7 +287,9 @@
               <li> vSphere Cluster running ESXi 5.5u2 with vMotion enabled.</li>
               <li>1 Virtual Machine Port Group with all Cloud VLANs associated to the Port Group.
               </li>
-            </ul></li></ul></p>
+            </ul></li>
+        </ul><b>Note:</b> VMware vSphere <b>5.5</b> must be fully installed and operational before
+        installing HP Helion OpenStack Carrier Grade.</p>
     </section>
   <section id="ironic">
     <title>Ironic Baremetal Components</title>
@@ -311,9 +315,9 @@
     </section>
   <section id="add-dcn">
       <title>DCN Software Requirements</title>
-      <p>HP Distributed Cloud Networking (DCN) must be fully installed and operational before
-        installing HP Helion OpenStack Carrier Grade. The currently supported version is <b
-          conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-version"/>.</p>
+      <p>HP Distributed Cloud Networking (DCN) <b
+          conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-version"/> must
+        be fully installed and operational before installing HP Helion OpenStack Carrier Grade. </p>
     </section>
     <section id="storage">
       <title>External Storage</title>
