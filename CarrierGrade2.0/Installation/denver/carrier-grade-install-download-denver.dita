@@ -23,41 +23,132 @@
         <body>
                
                 <p conref="../prereqs/../prereqs/carrier-grade-install-download.dita#topic7148cgid/intro"/>
-                <section>In a browser, navigate to <xref
-                                href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
-                                format="html" scope="external">Helion Download Network(HDN)</xref>.
-                                <ol id="ul_lvg_jb2_xs">
-                                <li>Click <b>Sign In</b> to log in using your account. </li>
-                                <li>After signing in, click the <b>Downloads</b> link in the menu on
-                                        the left side of the page.</li>
-                                <li id="download-avs">Click the <b>Downloads</b> tab and locate the
-                                        following download. <ul id="ul_erk_kwh_k5">
-                                                <li><b>Helion Carrier Grade 2.0.0 AVS</b>
-                                                  Installation files for the HP Helion OpenStack
-                                                  Carrier Grade Tahoe, Memphis, and Sacramento
-                                                  deployments. This link will download the
-                                                  <codeph>hcg2_kvm_avs.tar.gz</codeph> file. </li>
-                                                <li><b>Helion Carrier Grade 2.0 AVS Checksum</b>.
-                                                  The SHA256 checksum for HP Helion Carrier Grade
-                                                  2.0 VRS. This link will download the
-                                                  <codeph>hcg2_kvm_avs.tar.gz.sha256</codeph>
-                                                  file.</li>
-                                                <li><b>Helion Carrier Grade 2.0 AVS Signature</b>.
-                                                  The signature file for HP Helion Carrier Grade 2.0
-                                                  VRS. This link will download the
-                                                  <codeph>hcg2_kvm_avs.tar.gz.sig</codeph>
-                                                  file.</li>
-                                                <li><b>GPG Keys to Verify Signature Files</b> The
-                                                  public keys for HP Helion Carrier Grade 2.0.</li>
-                                        </ul></li>
-                                        <li
-                                                conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/download-patches-avs"
-                                        />
-                        </ol><p><b>Note:</b> When downloading installation files, always download
-                                and verify the signature file before installing. </p></section>
-                <section conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"/>
-                <section conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"/>
-                <section conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/avs"/>
+                <section id="avs">
+                        <b>Download the HP Helion OpenStack Carrier Grade installation
+                                files</b><p>Download the installation files as indicated in the
+                                following tables. Also download the associated MD5 file for
+                                verification.</p><p>
+                                <table id="table_rkj_yyk_2t">
+                                        <tgroup cols="3">
+                                                <colspec colnum="1" colname="col2"/>
+                                                <colspec colnum="2" colname="col3"/>
+                                                <colspec colnum="3" colname="col4"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry><b>File Name</b></entry>
+                                                  <entry><b>Copy to location on the Lifecycle
+                                                  Manager</b></entry>
+                                                  <entry><b>Notes</b></entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><xref
+                                                  href="http://15.214.241.88/cg-hos-builds/cg-hlm.qcow2"
+                                                  format="html" scope="external"
+                                                  >cg-hlm.qcow2</xref></entry>
+                                                  <entry>
+                                                  <p>/var/lib/libvirt/images</p>
+                                                  <p> </p>
+                                                  <p>Can copy this to any other directory and update
+                                                  the group_vars/all file with that dir folder
+                                                  path</p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry/>
+                                                  </row>
+                                                  <row>
+                                                  <entry>
+                                                  <p>cg-hos-misc.tar.gz</p>
+                                                  <p>cg-hos-src.tar.gz</p>
+                                                  </entry>
+                                                  <entry>
+                                                  <p>/root/cg</p>
+                                                  <p> </p>
+                                                  <p><b>Create cg folder if not present</b></p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry> cg-infra-src.tar.gz</entry>
+                                                  <entry>
+                                                  <p>/root </p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>cg-ironic-deploy-images.tar.gz</entry>
+                                                  <entry>/root/cg</entry>
+                                                  <entry>For Sacramento deployments only.</entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p id="kvm-avs"><b>KVM Region Installation files</b></p>Download the
+                        following files for installing the KVM region. Also download the associated
+                        MD5 file for verification.<p>
+                                <table id="table_ejh_qtj_k5">
+                                        <tgroup cols="2">
+                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
+                                                <colspec colnum="2" colname="col3" colwidth="2.13*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>File Name</entry>
+                                                  <entry>To be copied to the KVM Host</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><codeph>bootimage_avs_only.iso</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM region.</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM region. SDK files to be used as
+                                                  needed.</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM region. Sample guest operating system files to
+                                                  be used as needed.</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
+                                                  <entry>Patch instructions are provided in <xref
+                                                  href="carrier-grade-install-kvm-denver.dita#topic1107cgikd"
+                                                  >Deploying the KVM Region</xref></entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p></section>
+                <section id="checksum">
+                        <title>Verify the downloaded checksums</title>
+                        <p>You should also use a checksum verification tool, such as sha256sum,
+                                which should come installed with Ubuntu.</p>
+                        <ol id="ol_icb_k4f_xs">
+                                <li>Run the checksum tool against the download package:
+                                                <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar</codeblock><p>or
+                                                <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar
+sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p></li>
+                                <li>Compare the output of the checksum tool to the download checksum
+                                        file.
+                                        <codeblock>sha256sum.exe hcg2_kvm_esx_ironic_vrs.tar
+97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar                                                </codeblock>Note
+                                        that the checksum file contains the date that the file was
+                                        generated, the checksum string, and the name of the file
+                                        that was used, similar to the
+                                        following:<codeblock>Fri Jul 31 10:55:37 EDT 2015
+97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar</codeblock></li>
+                        </ol>
+                </section>
                 <section id="next-step">
                         <title>Next Step</title>
                         <p><xref href="CGH-2-install-lifecycle-denver.dita#topic10581c2ild"

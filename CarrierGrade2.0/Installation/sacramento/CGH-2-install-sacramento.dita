@@ -61,9 +61,16 @@ Password: cghelion</codeblock>
               id="image_bp1_c45_45" width="600"/></p></li>
       </ol>
     </section>
+    <section>
+      <title>Copy the node-provision.json file</title>
+      <p>Copy the <codeph>node-provision.json</codeph> from the lifecycle manager host to the
+        &lt;cloud name> directory on the lifecycle manager. Execute the following command from the
+        lifecycle manager host:
+        <codeblock>~/ scp /cg/node-provision.json root@192.168.122.240:/var/hlm/clouds/&lt;cloud name&gt;</codeblock></p>
+    </section>
     <section id="conref-node-provision-json">
       <title>Edit the node-provision JSON file</title>
-      <p>Modify the <codeph>node-provision.json</codeph> file in the
+      <p>On the lifecycle manager, modify the <codeph>node-provision.json</codeph> file in the
           <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory of the lifecycle manager. This
         file supplies input values to the <codeph>hprovision</codeph> script, later in the
         installation. </p>

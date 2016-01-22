@@ -27,10 +27,17 @@
           <li>Log into the lifecycle manager host using the default credentials</li>
           <li>Edit the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file for your
             environment. For information on each variable, refer to the comments in the file with
-            each variable. <p><b>Note:</b> Make sure the Cobbler passwords are blank. You will
-              deploy a patch during the installation to randomize the password.</p><p>The
-                <codeph>group_vars/all</codeph> file should appear similar to the
-            following:</p><codeblock>---
+            each variable. <ul id="ul_tzp_3zz_s5">
+              <li>Set the <codeph>ovs_cloud_only</codeph> variable to <codeph>2</codeph></li>
+              <li>Set the <codeph>cloud_type</codeph> variable to <codeph>'av'</codeph></li>
+              <li>
+                <p>Set the CLM IP network details for to your network setup</p>
+              </li>
+              <li>
+                <p>Set the Cobbler IP addresses according to your network setup</p>
+              </li>
+            </ul><p>The <codeph>group_vars/all</codeph> file should appear similar to the
+              following:</p><codeblock>---
 
 ############################################# Variables for HLM  #################################################################
 #These variables are relevant in both All Virtual and BareMetal scenarios.
@@ -40,7 +47,7 @@ ovs_cloud_only:  2
 
 #Set this to 'bm' if cloud is being deployed over baremetal.
 #Set this to 'av' if the cloud is all virtual
-cloud_type: 'bm'
+cloud_type: 'av'
 
 #These are hlm related variables that must be changed according to your Baremetal Env
 hlm_login_id:       root
@@ -56,8 +63,8 @@ cobbler_pxestartip: 10.10.1.100
 cobbler_pxeendip:   10.10.1.200
 cobbler_pxestaticip: 10.10.1.7
 cobbler_pxenetmask: 255.255.255.0
-cobbler_hlinux_password: 
-cobbler_web_password:
+cobbler_hlinux_password: ohcanada
+cobbler_web_password: cobbler
 
 #Set the location of your images that will be used by libvirt
 imagelocation: /var/lib/libvirt/images
@@ -90,6 +97,21 @@ upstream_ntp_servers:
    - 10.10.10.25
    - 10.1.64.20
 ###################################################################################################################################</codeblock></li>
+          <li>Edit the <codeph>group_vars/all-virtual</codeph> file:<ul id="ul_tjd_tzz_s5">
+              <li>Update the <codeph>kvm_user</codeph> and <codeph>kvm_password</codeph> variables
+                with your KVM Credentials.</li>
+              <li>Change the <codeph>Cloud_Topology</codeph> variable to
+                  <codeph>denver_virtual</codeph></li>
+            </ul></li>
+          <li>Edit the <codeph>group_vars/all-kvm-net</codeph> file to make sure the VLAN tag IDs
+            are correct according to your network configuration.</li>
+          <li>Change to <codeph>infra-ansible-playbooks</codeph> directory
+            <codeblock>~/ cd infra-ansible-playbooks</codeblock></li>
+          <li>Execute the following command to create required Ansible roles:
+              <codeph>DCN-RCP-INFRA</codeph>, <codeph>DCN-RCP-CLOUD</codeph>,
+              <codeph>HLM-RCP-CFG</codeph>. These roles create the lifecycle manager, the HP Helion
+            OpenStack Carrier Grade controllers and configure the lifecycle
+            manager.<codeblock>ansible-playbook -i hosts setup_rcpcloud.yml</codeblock></li>
           <li id="hosts">Check the <codeph>/root/infra-ansible-playbooks/hosts</codeph> file to
             enter the IP address of the <codeph>vibr0</codeph> interface in the
               <codeph>hlm_kvm_host</codeph> field, as shown in the following example. </li>
