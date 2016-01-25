@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1423089015252" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Allocating Host Memory Using the CLI</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">You can edit the platform and huge page memory allocations for a NUMA
+        node from the CLI.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="4" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <steps id="steps_brf_p33_dr" class="- topic/ol task/steps ">
+            <step id="step_N10031_N1002D_N1001F_N10001" ixia_locid="206" class="- topic/li task/step ">
+                <cmd ixia_locid="207" class="- topic/ph task/cmd ">Lock the affected host.</cmd>
+                <info ixia_locid="208" class="- topic/itemgroup task/info ">
+                    <codeblock ixia_locid="209" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="211" class="+ topic/ph sw-d/systemoutput ">(keystone_admin)$ </systemoutput><userinput ixia_locid="213" class="+ topic/ph sw-d/userinput ">system host-lock <varname ixia_locid="217" class="+ topic/keyword sw-d/varname ">hostname</varname></userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N1004D_N1002D_N1001F_N10001" ixia_locid="218" class="- topic/li task/step ">
+                <cmd ixia_locid="219" class="- topic/ph task/cmd ">Use the following command to set the memory allocations.</cmd>
+                <info ixia_locid="220" class="- topic/itemgroup task/info ">
+                    <codeblock ixia_locid="221" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="224" class="+ topic/ph sw-d/systemoutput ">(keystone_admin)$ </systemoutput><userinput ixia_locid="9" class="+ topic/ph sw-d/userinput ">system host-memory-modify <varname ixia_locid="10" class="+ topic/keyword sw-d/varname ">hostname</varname> <varname ixia_locid="11" class="+ topic/keyword sw-d/varname ">processor</varname> [-m <varname ixia_locid="241" class="+ topic/keyword sw-d/varname ">reserved</varname>] [-2M <varname ixia_locid="12" class="+ topic/keyword sw-d/varname ">2Mpages</varname>] [-1G <varname ixia_locid="13" class="+ topic/keyword sw-d/varname ">1Gpages</varname>]</userinput></codeblock>
+                    <p ixia_locid="14" class="- topic/p ">where</p>
+                    <parml class="+ topic/dl pr-d/parml ">
+                        <plentry ixia_locid="15" class="+ topic/dlentry pr-d/plentry ">
+                            <pt ixia_locid="16" class="+ topic/dt pr-d/pt ">hostname</pt>
+                            <pd ixia_locid="17" class="+ topic/dd pr-d/pd ">
+                                <p ixia_locid="18" class="- topic/p ">is the hostname or id of the compute node</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="19" class="+ topic/dlentry pr-d/plentry ">
+                            <pt ixia_locid="20" class="+ topic/dt pr-d/pt ">processor</pt>
+                            <pd ixia_locid="21" class="+ topic/dd pr-d/pd ">
+                                <p ixia_locid="22" class="- topic/p ">is the NUMA node of the compute node (0 or 1)</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="242" class="+ topic/dlentry pr-d/plentry ">
+                            <pt ixia_locid="244" class="+ topic/dt pr-d/pt ">reserved</pt>
+                            <pd ixia_locid="246" class="+ topic/dd pr-d/pd ">
+                                <p ixia_locid="248" class="- topic/p ">(if the optional <option ixia_locid="250" class="+ topic/keyword pr-d/option ">-m</option> argument is included) the amount of memory
+                                    reserved for platform use, in MiB.</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="243" class="+ topic/dlentry pr-d/plentry ">
+                            <pt ixia_locid="245" class="+ topic/dt pr-d/pt ">2Mpages</pt>
+                            <pd ixia_locid="247" class="+ topic/dd pr-d/pd ">
+                                <p ixia_locid="249" class="- topic/p ">(if the optional <option ixia_locid="251" class="+ topic/keyword pr-d/option ">-2M</option> argument is included) the number of 2MiB huge
+                                    pages to make available.</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="27" class="+ topic/dlentry pr-d/plentry ">
+                            <pt ixia_locid="28" class="+ topic/dt pr-d/pt ">1Gpages</pt>
+                            <pd ixia_locid="29" class="+ topic/dd pr-d/pd ">
+                                <p ixia_locid="30" class="- topic/p ">(if the optional <option ixia_locid="240" class="+ topic/keyword pr-d/option ">-1G</option> argument is included) number of 1GiB huge
+                                    pages to make available</p>
+                            </pd>
+                        </plentry>
+                    </parml>
+                </info>
+                <stepxmp ixia_locid="236" class="- topic/itemgroup task/stepxmp ">
+                    <p ixia_locid="31" class="- topic/p ">For example, to allocate four 2 MiB huge pages for use by VMs
+                        on NUMA node 1 of compute node <nameliteral ixia_locid="32" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">compute-0</nameliteral> :</p>
+                    <codeblock ixia_locid="210" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="212" class="+ topic/ph sw-d/systemoutput ">(keystone_admin)$ </systemoutput><userinput ixia_locid="214" class="+ topic/ph sw-d/userinput ">system host-memory-modify compute-0 1 -2M 4</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100E8_N1002D_N1001F_N10001" ixia_locid="227" class="- topic/li task/step ">
+                <cmd ixia_locid="228" class="- topic/ph task/cmd ">Unlock the host.</cmd>
+                <stepxmp ixia_locid="237" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="222" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="225" class="+ topic/ph sw-d/systemoutput ">(keystone_admin)$ </systemoutput><userinput ixia_locid="215" class="+ topic/ph sw-d/userinput ">system host-unlock <varname ixia_locid="230" class="+ topic/keyword sw-d/varname ">hostname</varname></userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10104_N1002D_N1001F_N10001" ixia_locid="231" class="- topic/li task/step ">
+                <cmd ixia_locid="232" class="- topic/ph task/cmd ">Wait for the host to be reported as <nameliteral ixia_locid="233" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">available</nameliteral>. </cmd>
+                <stepxmp ixia_locid="238" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="223" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="226" class="+ topic/ph sw-d/systemoutput ">(keystone_admin)$ </systemoutput><userinput ixia_locid="216" class="+ topic/ph sw-d/userinput ">system host-list <varname ixia_locid="235" class="+ topic/keyword sw-d/varname ">hostname</varname></userinput>
+<systemoutput ixia_locid="205" class="+ topic/ph sw-d/systemoutput ">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | unlocked       | enabled     | available    |
+| 3  | compute-0    | compute     | unlocked       | enabledd    | available      |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

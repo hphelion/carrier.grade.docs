@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1441306845507" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Using a Controller Configuration Input File</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">For automated installation, you can create a configuration file to use with the
+        controller configuration script.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4" class="- topic/section task/context ">
+            <p ixia_locid="5" class="- topic/p "><draft-comment author="jowens" ixia_locid="6" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 new topic</draft-comment>The controller
+                configuration script accepts a path to a configuration file as an optional
+                parameter:</p>
+            <codeblock ixia_locid="7" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="8" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="9" class="+ topic/ph sw-d/userinput ">config_controller --config-file <varname ixia_locid="10" class="+ topic/keyword sw-d/varname ">filename</varname></userinput></codeblock>
+            <p ixia_locid="11" class="- topic/p ">where <varname ixia_locid="17" class="+ topic/keyword sw-d/varname ">filename</varname> is the path and name of the file.</p>
+            <p ixia_locid="13" class="- topic/p ">The configuration file contains all the settings required by the
+                script, expressed using INI format. You can create one manually, or you can use the
+                configuration file generator utility provided with the HP Helion OpenStack Carrier Grade Guest
+                Software Development Kit. For more about the format, see <xref href="jow1441306905052.xml" ixia_locid="15" class="- topic/xref "/>. <draft-comment author="rstone" ixia_locid="23" translate="no" dir="ltr" class="- topic/draft-comment ">US63902 and US63694 add</draft-comment>For information about the
+                configuration file generator utility, see <cite ixia_locid="19" class="- topic/cite ">HP Helion OpenStack Carrier Grade
+                    Software Development Kit: wrs-configutilities—Configuration
+                Utilities</cite>.</p>
+            <p ixia_locid="20" class="- topic/p ">You can validate a configuration file before applying it, using the
+                    <cmdname ixia_locid="18" class="+ topic/keyword sw-d/cmdname ">config_validator</cmdname> utility provided with the
+                HP Helion OpenStack Carrier Grade Guest Software Development Kit. The same validation is also
+                performed automatically when the configuration controller script is executed.</p>
+            <draft-comment author="rstone" ixia_locid="24" translate="no" dir="ltr" class="- topic/draft-comment ">US63902 and US63694 add</draft-comment>
+            <p ixia_locid="21" class="- topic/p ">For information about the configuration file validator utility, see
+                    <cite ixia_locid="22" class="- topic/cite ">HP Helion OpenStack Carrier Grade Software Development Kit:
+                    wrs-configutilities—Configuration Utilities</cite>.</p>
+        </context>
+    </taskbody>
+</task-wr>

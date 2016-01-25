@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1410807811981" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Performing a System Data Backup</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">A system data backup captures core system information needed to restore a fully
+        operational HP Helion OpenStack Carrier Grade cluster.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4" class="- topic/section task/context ">
+            <p ixia_locid="5" class="- topic/p ">System data backups include:</p>
+            <ul id="ul_enh_3dl_lp" class="- topic/ul ">
+                <li ixia_locid="6" class="- topic/li ">
+                    <p ixia_locid="7" class="- topic/p ">platform configuration details</p>
+                </li>
+                <li ixia_locid="8" class="- topic/li ">
+                    <p ixia_locid="9" class="- topic/p ">system databases</p>
+                </li>
+                <li ixia_locid="10" class="- topic/li ">
+                    <p ixia_locid="11" class="- topic/p ">patching and package repositories</p>
+                </li>
+                <li ixia_locid="14" class="- topic/li ">
+                    <p ixia_locid="15" class="- topic/p ">home directory for the <nameliteral ixia_locid="66" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral>
+                        user and all LDAP user accounts. See <xref href="jow1404333563834.xml" ixia_locid="22" class="- topic/xref "/> for additional information.</p>
+                </li>
+            </ul>
+            <p ixia_locid="16" class="- topic/p ">System data backups do not include:</p>
+            <ul id="ul_im2_b2y_lp" class="- topic/ul ">
+                <li ixia_locid="17" class="- topic/li ">
+                    <p ixia_locid="18" class="- topic/p ">Modifications manually made to the file systems, such as
+                        configuration changes on the <filepath ixia_locid="19" class="+ topic/ph sw-d/filepath ">/etc</filepath>
+                        directory. After a restore operation has been completed,  these modification
+                        have to be reapplied.</p>
+                </li>
+                <li ixia_locid="20" class="- topic/li ">
+                    <p ixia_locid="21" class="- topic/p ">Home directories and passwords of local user accounts. They
+                        must be backed up manually by the system administrator.</p>
+                </li>
+                <li ixia_locid="59" class="- topic/li ">
+                    <p ixia_locid="60" class="- topic/p ">The <filepath ixia_locid="61" class="+ topic/ph sw-d/filepath ">/root</filepath> directory. Use
+                        the <nameliteral ixia_locid="62" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral> account instead when
+                        root access is needed.</p>
+                </li>
+            </ul>
+        </context>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N10081_N1007E_N1001C_N10001" ixia_locid="25" class="- topic/li task/step ">
+                <cmd ixia_locid="26" class="- topic/ph task/cmd ">Log in as user <nameliteral ixia_locid="27" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral> to the active controller.</cmd>
+                <info ixia_locid="63" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="64" class="- topic/p ">You can log in directly on the console or remotely using
+                            <nameliteral ixia_locid="65" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">ssh</nameliteral>.</p>
+                </info>
+            </step>
+            <step id="step_N1008E_N1007E_N1001C_N10001" ixia_locid="28" class="- topic/li task/step ">
+                <cmd ixia_locid="29" class="- topic/ph task/cmd ">Execute the system backup.</cmd>
+                <stepxmp ixia_locid="30" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="31" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="32" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="33" class="+ topic/ph sw-d/userinput ">sudo config_controller --backup titanium_backup_20140918</userinput>
+<systemoutput ixia_locid="58" class="+ topic/ph sw-d/systemoutput ">Performing backup (this will take several minutes):
+Step 13 of 13 [#############################################] [100%]
+System backup file created: /opt/backups/titanium_backup_20140918_system.tgz
+Images backup file created: /opt/backups/titanium_backup_20140918_images.tgz
+
+Backup complete</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="34" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="35" class="- topic/p ">In this example, the argument <term ixia_locid="36" class="- topic/term ">titanium_backup_20140918</term> to the <option ixia_locid="37" class="+ topic/keyword pr-d/option ">--backup</option> option is an arbitrary identifier you want to use for
+                        the backup.</p>
+                </info>
+                <stepresult ixia_locid="38" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="39" class="- topic/p ">Upon successful execution of the command, the following two files are
+                        available on the controller's file system:</p>
+                    <ul id="ul_tx1_jyy_lp" class="- topic/ul ">
+                        <li ixia_locid="40" class="- topic/li ">
+                            <p ixia_locid="41" class="- topic/p "><filepath ixia_locid="42" class="+ topic/ph sw-d/filepath ">/opt/backups/titanium_backup_20140918_system.tgz</filepath></p>
+                        </li>
+                        <li ixia_locid="43" class="- topic/li ">
+                            <p ixia_locid="44" class="- topic/p "><filepath ixia_locid="45" class="+ topic/ph sw-d/filepath ">/opt/backups/titanium_backup_20140918_images.tgz</filepath></p>
+                        </li>
+                    </ul>
+                    <p ixia_locid="46" class="- topic/p ">Together, these two files represent the entire system
+                        data.</p>
+                </stepresult>
+            </step>
+            <step id="step_N100D9_N1007E_N1001C_N10001" ixia_locid="47" class="- topic/li task/step ">
+                <cmd ixia_locid="48" class="- topic/ph task/cmd ">Transfer the backup files to an external storage resource.</cmd>
+                <info ixia_locid="49" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="50" class="- topic/p ">You can use a command such as <cmdname ixia_locid="51" class="+ topic/keyword sw-d/cmdname ">scp</cmdname> to transfer the backup
+                        files to a server reachable over the OAM network. You can also copy them to
+                        a locally attached storage device, such as an external USB drive.</p>
+                </info>
+            </step>
+            <step id="step_N100EE_N1007E_N1001C_N10001" importance="optional" ixia_locid="52" class="- topic/li task/step ">
+                <cmd ixia_locid="53" class="- topic/ph task/cmd ">Delete the backup files.</cmd>
+                <info ixia_locid="54" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="55" class="- topic/p ">You may want to free up disk space on the controller to accommodate upcoming
+                        Cinder volume backups.</p>
+                </info>
+            </step>
+        </steps>
+        <result id="result_N100FD_N1001C_N10001" ixia_locid="56" class="- topic/section task/result ">
+            <p ixia_locid="57" class="- topic/p ">The system data backup is now complete. The backup files must be kept
+                in a secured location, probably holding multiple copies of them for redundancy
+                purposes.</p>
+        </result>
+    </taskbody>
+</task-wr>

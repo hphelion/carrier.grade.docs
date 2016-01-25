@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333737339" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic concept/concept concept-wr/concept-wr ">
+    <title ixia_locid="1" class="- topic/title ">The Infrastructure Network</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">The infrastructure network is a private network visible only to the
+        hosts in the cluster. It is optional unless storage nodes are part of the
+        cluster.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="25" class="- topic/author ">Jim Owens</author>
+        <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <conbody class="- topic/body  concept/conbody ">
+        <p ixia_locid="26" class="- topic/p "><draft-comment author="jowens" ixia_locid="27" translate="no" dir="ltr" class="- topic/draft-comment ">86214 updated</draft-comment>For the most
+            part, the infrastructure network shares the design considerations applicable to the
+            internal management network. It can be implemented using either a 1 Gb or 10 Gb Ethernet
+            interface. It can be VLAN-tagged, enabling it to share an interface with the management
+            or OAM network. It can own the entire IP address range on the subnet, or a specified
+            range.</p>
+        <p ixia_locid="28" class="- topic/p ">The infrastructure network supports dynamic or static IP address
+            assignment. The setting is determined by the setting for the management network. If
+            static assignment is used, you must manually assign IP addresses on the infrastructure
+            network for the other hosts in the cluster, using the <cmdname ixia_locid="29" class="+ topic/keyword sw-d/cmdname ">system
+                host-addr-add</cmdname> command.</p>
+        <p ixia_locid="5" class="- topic/p ">The decision whether to implement an infrastructure network depends on the
+            infrastructure traffic levels expected. The following table provides general guidelines
+            on when to implement the infrastructure network, using the number of compute nodes in
+            the HP Helion OpenStack Carrier Grade cluster as an indication of expected traffic levels.</p>
+        <simpletable id="simpletable_lgh_vms_14" relcolwidth="1.0* 3.0*" class="- topic/simpletable ">
+            <sthead class="- topic/sthead ">
+                <stentry ixia_locid="6" class="- topic/stentry ">
+                    <p ixia_locid="7" class="- topic/p ">Number of Compute Nodes</p>
+                </stentry>
+                <stentry ixia_locid="8" class="- topic/stentry ">
+                    <p ixia_locid="9" class="- topic/p ">Infrastructure Network Implementation</p>
+                </stentry>
+            </sthead>
+            <strow class="- topic/strow ">
+                <stentry ixia_locid="10" class="- topic/stentry ">
+                    <p ixia_locid="11" class="- topic/p ">2 to 4</p>
+                </stentry>
+                <stentry ixia_locid="12" class="- topic/stentry ">
+                    <p ixia_locid="13" class="- topic/p ">No infrastructure network required. All infrastructure
+                        traffic is carried over the internal management network.</p>
+                </stentry>
+            </strow>
+            <strow class="- topic/strow ">
+                <stentry ixia_locid="14" class="- topic/stentry ">
+                    <p ixia_locid="15" class="- topic/p ">5 to 8</p>
+                </stentry>
+                <stentry ixia_locid="16" class="- topic/stentry ">
+                    <p ixia_locid="17" class="- topic/p ">Use 1 Gb Ethernet</p>
+                </stentry>
+            </strow>
+            <strow class="- topic/strow ">
+                <stentry ixia_locid="18" class="- topic/stentry ">
+                    <p ixia_locid="19" class="- topic/p ">9 or more</p>
+                </stentry>
+                <stentry ixia_locid="20" class="- topic/stentry ">
+                    <p ixia_locid="30" class="- topic/p ">Use 10 Gb Ethernet</p>
+                </stentry>
+            </strow>
+        </simpletable>
+        <p ixia_locid="22" class="- topic/p ">In addition to the number of compute nodes, other factors must be taken into account when
+            deciding the type of infrastructure network to use. For example, live migration of
+            large, memory-intensive, guest applications is likely to require additional network
+            resources that might not be available in the current configuration. It is always safe to
+            implement the fastest infrastructure network possible.</p>
+        <note id="note_N10095_N1001D_N10001" ixia_locid="23" class="- topic/note ">
+            <p ixia_locid="24" class="- topic/p " conref="jow1419267499106.xml#jow1419267499106/multicast_in_use"/>
+        </note>
+    </conbody>
+</concept-wr>

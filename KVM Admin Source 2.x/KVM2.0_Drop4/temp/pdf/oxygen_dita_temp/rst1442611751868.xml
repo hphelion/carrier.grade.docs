@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="rst1442611751868" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Changing the MTU on a small-footprint System</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">
+        <draft-comment author="rstone" ixia_locid="40" translate="no" dir="ltr" class="- topic/draft-comment ">Topic created for CGTS-1944</draft-comment>
+    </shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Ron Stone</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4" class="- topic/section task/context ">
+            <p ixia_locid="41" class="- topic/p ">The following steps illustrate how to change the MTU for an interface
+                for an infrastructure network. </p>
+        </context>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N10029_N10026_N1001B_N10001" ixia_locid="6" class="- topic/li task/step ">
+                <cmd ixia_locid="7" class="- topic/ph task/cmd ">Lock Controller-1.</cmd>
+                <substeps id="substeps_gx5_1bc_kt" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="8" class="- topic/li task/substep ">
+                        <cmd ixia_locid="9" class="- topic/ph task/cmd ">From <menucascade ixia_locid="10" class="+ topic/ph ui-d/menucascade ">
+                            <uicontrol ixia_locid="11" class="+ topic/ph ui-d/uicontrol ">System</uicontrol>
+                            <uicontrol ixia_locid="12" class="+ topic/ph ui-d/uicontrol ">Instances</uicontrol>
+                        </menucascade>, select the <uicontrol ixia_locid="13" class="+ topic/ph ui-d/uicontrol ">Hosts</uicontrol> tab.</cmd>
+                    </substep>
+                    <substep ixia_locid="14" class="- topic/li task/substep ">
+                        <cmd ixia_locid="15" class="- topic/ph task/cmd ">From the <uicontrol ixia_locid="16" class="+ topic/ph ui-d/uicontrol ">Edit</uicontrol> menu for Controller-1, select
+                            <uicontrol ixia_locid="17" class="+ topic/ph ui-d/uicontrol ">Lock Host</uicontrol>.</cmd>
+                        <info ixia_locid="18" class="- topic/itemgroup task/info ">
+                            <fig id="fig_N1005E_N1005B_N1004C_N10030_N10029_N10026_N1001B_N10001" ixia_locid="19" class="- topic/fig ">
+                                <image href="rst1442611298701.image" ixia_locid="20" placement="inline" class="- topic/image "/>
+                            </fig>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1006D_N10026_N1001B_N10001" ixia_locid="21" class="- topic/li task/step ">
+                <cmd ixia_locid="22" class="- topic/ph task/cmd ">Modify the MTU of an interface on controller-1.</cmd>
+                <substeps id="substeps_jks_chy_kt" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="42" class="- topic/li task/substep ">
+                        <cmd ixia_locid="43" class="- topic/ph task/cmd ">Click on the name of controller-1, then switch to the
+                                <uicontrol ixia_locid="44" class="+ topic/ph ui-d/uicontrol ">Interfaces</uicontrol> tab and select
+                                <uicontrol ixia_locid="45" class="+ topic/ph ui-d/uicontrol ">Edit</uicontrol> for the interface you want to
+                            change.</cmd>
+                    </substep>
+                    <substep ixia_locid="46" class="- topic/li task/substep ">
+                        <cmd ixia_locid="47" class="- topic/ph task/cmd ">In the <wintitle ixia_locid="48" class="+ topic/keyword ui-d/wintitle ">Edit Interface</wintitle> dialog, change the
+                                <uicontrol ixia_locid="49" class="+ topic/ph ui-d/uicontrol ">MTU</uicontrol> field, then click
+                                <uicontrol ixia_locid="50" class="+ topic/ph ui-d/uicontrol ">Save</uicontrol>. </cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10076_N10026_N1001B_N10001" ixia_locid="23" class="- topic/li task/step ">
+                <cmd ixia_locid="24" class="- topic/ph task/cmd ">Unlock Controller-1.</cmd>
+                <info ixia_locid="25" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="26" class="- topic/p ">From the <uicontrol ixia_locid="27" class="+ topic/ph ui-d/uicontrol ">Edit</uicontrol> menu for Controller-1, select
+                        <uicontrol ixia_locid="28" class="+ topic/ph ui-d/uicontrol ">Unlock Host</uicontrol>.</p>
+                </info>
+            </step>
+            <step id="step_N1008F_N10026_N1001B_N10001" ixia_locid="29" class="- topic/li task/step ">
+                <cmd ixia_locid="30" class="- topic/ph task/cmd ">Swact host to Controller-1</cmd>
+                <info ixia_locid="31" class="- topic/itemgroup task/info ">
+                    <fig id="fig_N10096_N10093_N1008C_N10026_N1001B_N10001" ixia_locid="32" class="- topic/fig ">
+                        <image href="psa1420751608971.image" ixia_locid="33" placement="inline" class="- topic/image "/>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N100A6_N10026_N1001B_N10001" ixia_locid="34" class="- topic/li task/step ">
+                <cmd ixia_locid="35" class="- topic/ph task/cmd ">Lock controller-0</cmd>
+            </step>
+            <step id="step_N100AF_N10026_N1001B_N10001" ixia_locid="36" class="- topic/li task/step ">
+                <cmd ixia_locid="37" class="- topic/ph task/cmd ">Modify the MTU of an interface on controller-0</cmd>
+            </step>
+            <step id="step_N100B8_N10026_N1001B_N10001" ixia_locid="38" class="- topic/li task/step ">
+                <cmd ixia_locid="39" class="- topic/ph task/cmd ">Unlock Controller-0</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

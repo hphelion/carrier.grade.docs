@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333563170" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic concept/concept concept-wr/concept-wr ">
+    <!-- Modification History
+
+ -->
+    <title ixia_locid="1" class="- topic/title ">Reference Logical Architecture</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">The HP Helion OpenStack Carrier Grade architecture supports various types of host,
+        networks, and networking hardware in different configurations. In this documentation, a
+        reference configuration is used for discussion.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+        <author ixia_locid="132" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <conbody class="- topic/body  concept/conbody ">
+        <note id="note_N10027_N10024_N10001" ixia_locid="203" product="tis_small" class="- topic/note ">
+            <p ixia_locid="201" class="- topic/p ">The reference configuration assumes that the controller and compute
+                functions are implemented on different hosts. HP Helion OpenStack Carrier Grade also supports a
+                minimal two-server configuration in which these functions are implemented on the
+                same host. For more information, see the <cite ixia_locid="202" class="- topic/cite ">HP Helion OpenStack Carrier Grade
+                    Software Installation Guide: Minimal Two-server Configuration</cite>. </p>
+        </note>
+        <p ixia_locid="4" class="- topic/p ">A logical view of the reference hardware platform is illustrated in the following figure.</p>
+        <fig id="fig-logical-architecture" ixia_locid="5" class="- topic/fig ">
+            <title ixia_locid="6" class="- topic/title ">HP Helion OpenStack Carrier Grade Reference Logical Architecture</title>
+            <image href="jow1404333560781.image" id="image_c1k_wtk_cn" ixia_locid="7" placement="inline" width="6in" class="- topic/image ">
+                <alt ixia_locid="167" class="- topic/alt ">HP Helion OpenStack Carrier Grade logical view</alt>
+            </image>
+        </fig>
+        <note id="note_N10044_N10024_N10001" ixia_locid="168" class="- topic/note ">
+            <p ixia_locid="169" class="- topic/p ">For clarity, connections to the internal, infrastructure, and board
+                management networks are illustrated for just one host of each type.</p>
+        </note>
+        <dl class="- topic/dl ">
+            <dlentry ixia_locid="8" class="- topic/dlentry ">
+                <dt ixia_locid="9" class="- topic/dt ">Controller Nodes</dt>
+                <dd ixia_locid="10" class="- topic/dd ">
+                    <p ixia_locid="11" class="- topic/p ">Run the HP Helion OpenStack Carrier Grade services needed to manage the cloud
+                        infrastructure. The two controller nodes run the services in carrier grade
+                        mode, that is, as a high-availability cluster. See <xref href="jow1404333798721.xml" ixia_locid="183" class="- topic/xref "/> for more information.</p>
+                    <p ixia_locid="12" class="- topic/p ">Controller nodes manage other hosts over the attached
+                        internal management network. They also provide administration interfaces to
+                        clients over the OAM network. Two controllers are necessary for Titanium
+                        Server to operate properly.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="13" class="- topic/dlentry ">
+                <dt ixia_locid="14" class="- topic/dt ">Storage Node</dt>
+                <dd ixia_locid="15" class="- topic/dd ">
+                    <p ixia_locid="16" class="- topic/p ">Runs HP Helion OpenStack Carrier Grade storage services.</p>
+                    <p ixia_locid="17" class="- topic/p ">Storage servers are optional, but when available:</p>
+                    <ul id="ul_bjz_34g_m4" class="- topic/ul ">
+                        <li ixia_locid="18" class="- topic/li ">
+                            <p ixia_locid="19" class="- topic/p ">two of them are mandatory for reliability
+                                purposes</p>
+                        </li>
+                        <li ixia_locid="20" class="- topic/li ">
+                            <p ixia_locid="21" class="- topic/p ">they must connect to both the internal management and infrastructure networks</p>
+                        </li>
+                    </ul>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="22" class="- topic/dlentry ">
+                <dt ixia_locid="23" class="- topic/dt ">Compute Node</dt>
+                <dd ixia_locid="24" class="- topic/dd ">
+                    <p ixia_locid="25" class="- topic/p ">Runs the HP Helion OpenStack Carrier Grade compute services and hosts the
+                        virtual machines.</p>
+                    <p ixia_locid="26" class="- topic/p ">A compute node connects to the controller nodes over the
+                        internal management network, and to the provider networks using its data
+                        interfaces.</p>
+                    <dl class="- topic/dl ">
+                        <dlentry ixia_locid="27" class="- topic/dlentry ">
+                            <dt ixia_locid="28" class="- topic/dt ">Data Interfaces</dt>
+                            <dd ixia_locid="29" class="- topic/dd ">
+                                <p ixia_locid="180" class="- topic/p ">In a compute node, a data interface is a logical
+                                    network adapter used to connect to one or more provider
+                                    networks. It is created by mapping a physical network interface
+                                    on the compute node to the target provider networks. The mapping
+                                    can use multiple physical network interfaces to support a LAG
+                                    connection. For more information about LAG modes see the <cite ixia_locid="181" class="- topic/cite ">HP Helion OpenStack Carrier Grade Software Installation
+                                        Guide</cite>.</p>
+                                <p ixia_locid="182" class="- topic/p ">Provider networks used by a single data interface must share the
+                                    same Ethernet MTU value.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="142" class="- topic/dlentry ">
+                <dt ixia_locid="143" class="- topic/dt ">Internal L2 Switch</dt>
+                <dd ixia_locid="144" class="- topic/dd ">
+                    <p ixia_locid="145" class="- topic/p ">An L2 switching facility, often implemented on a single
+                        Top-of-Rack (ToR) switch, used to realize the internal and infrastructure
+                        networks, and depending on the system configuration, the board management
+                        network. These networks are implemented as follows:</p>
+                    <ul id="ul_ip4_w54_dp" class="- topic/ul ">
+                        <li ixia_locid="146" class="- topic/li ">
+                            <p ixia_locid="147" class="- topic/p ">The internal management network using a dedicated
+                                port-based VLAN. On ports connecting to controller nodes, VLAN
+                                tagging is enabled to connect them to the board management network
+                                also.</p>
+                        </li>
+                        <li ixia_locid="150" class="- topic/li ">
+                            <p ixia_locid="151" class="- topic/p ">The board management network as a port-based VLAN.
+                                This applies only if a board management network is in use, and is
+                                configured for internal access.</p>
+                        </li>
+                        <li ixia_locid="148" class="- topic/li ">
+                            <p ixia_locid="149" class="- topic/p ">The infrastructure network using a dedicated
+                                port-based VLAN.</p>
+                        </li>
+                    </ul>
+                    <p ixia_locid="152" class="- topic/p ">Each host in the HP Helion OpenStack Carrier Grade cluster connects to the
+                        internal L2 switch, as follows:</p>
+                    <ul id="ul_ebw_qs4_dp" class="- topic/ul ">
+                        <li ixia_locid="153" class="- topic/li ">
+                            <p ixia_locid="154" class="- topic/p ">One dedicated mother-board physical port to
+                                participate in the internal management network. This connection is
+                                mandatory.</p>
+                            <ul id="ul_qhf_dyw_dp" class="- topic/ul ">
+                                <li ixia_locid="170" class="- topic/li ">
+                                    <p ixia_locid="171" class="- topic/p ">Controller nodes connect also to the board management network
+                                        using VLAN tagging on this same port.</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="155" class="- topic/li ">
+                            <p ixia_locid="156" class="- topic/p ">One dedicated physical port to participate in the
+                                infrastructure network. This connection is optional, but inclusive
+                                for all hosts. That is, if an infrastructure network is to be used,
+                                then all hosts must connect to it.</p>
+                        </li>
+                        <li ixia_locid="157" class="- topic/li ">
+                            <p ixia_locid="158" class="- topic/p ">Optionally, one physical iLO (Integrated Lights Out)
+                                port to participate in the board management network. This applies
+                                only if a board management network is in use, and is configured for
+                                internal access.</p>
+                        </li>
+                    </ul>
+                    <p ixia_locid="163" class="- topic/p ">As long as the integrity and isolation of the internal,
+                        infrastructure, and board management networks are ensured, the internal L2
+                        switch can be realized over physical switching resources that provide
+                        connectivity to other networks.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="31" class="- topic/dlentry ">
+                <dt ixia_locid="32" class="- topic/dt ">Internal Management Network</dt>
+                <dd ixia_locid="172" class="- topic/dd ">
+                    <p ixia_locid="34" class="- topic/p ">An isolated L2 network implemented on the internal L2 switch,
+                        used to enable communications among HP Helion OpenStack Carrier Grade hosts for software
+                        installation, and management of hosts and virtual machines. This network is
+                        only accessible within the HP Helion OpenStack Carrier Grade cluster, and for the most part,
+                        it is transparent to management operations of the cloud.</p>
+                    <p ixia_locid="35" class="- topic/p ">The internal management network must be unique and dedicated to the HP Helion OpenStack Carrier Grade
+            Cluster. Sharing it with other HP Helion OpenStack Carrier Grade Cluster, or other non-related equipment,
+            is not supported.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="36" class="- topic/dlentry ">
+                <dt ixia_locid="37" class="- topic/dt ">Infrastructure Network</dt>
+                <dd ixia_locid="38" class="- topic/dd ">
+                    <p ixia_locid="39" class="- topic/p ">An optional network used to improve overall performance for a
+                        variety of operational functions. When available, it is used by Titanium
+                        Server during the following operations:</p>
+                    <ul id="ul_dcp_r3m_14" class="- topic/ul ">
+                        <li ixia_locid="41" class="- topic/li ">
+                            <p ixia_locid="42" class="- topic/p ">control and data synchronization when migrating virtual machines between compute
+                nodes</p>
+                        </li>
+                        <li ixia_locid="43" class="- topic/li ">
+                            <p ixia_locid="44" class="- topic/p ">isolation of storage traffic when accessing storage
+                                nodes providing storage services</p>
+                        </li>
+                    </ul>
+                    <p ixia_locid="45" class="- topic/p ">Overall, an infrastructure network provides a target for the HP Helion OpenStack Carrier Grade software
+            to offload heavy traffic from the internal management network. This prevents sensitive
+            traffic, such as internal heartbeat and monitoring messages, from being starved for
+            bandwidth when background traffic, such as storage-related flows, peaks during normal
+            operations.</p>
+                    <p ixia_locid="46" class="- topic/p ">When unavailable, all infrastructure traffic is carried over
+                        the internal management network.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="47" class="- topic/dlentry ">
+                <dt ixia_locid="48" class="- topic/dt ">OAM Network</dt>
+                <dd ixia_locid="49" class="- topic/dd ">
+                    <p ixia_locid="50" class="- topic/p ">A physical network used to provide access to the
+                        configuration and management facilities of HP Helion OpenStack Carrier Grade. It provides
+                        connectivity between the controller nodes and the edge router of the OAM
+                        network. The web administration interface, and the console interfaces (using
+                        SSH) to the controllers, are available on this network. Depending on the
+                        system configuration, the OAM network may also be used for controller access
+                        to the board management network.</p>
+                    <p ixia_locid="51" class="- topic/p ">The OAM network provides access to the OpenStack and Titanium
+                        Server-specific REST APIs, which can be used by users and third-party
+                        developers to develop high-level cloud orchestration services.</p>
+                    <p ixia_locid="52" class="- topic/p ">The OAM network also provides the controller nodes with access to system-wide
+            resources such as DNS and time servers. Access to the open Internet can also be provided
+            if desired, at the discretion of each particular installation.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="133" class="- topic/dlentry ">
+                <dt ixia_locid="134" class="- topic/dt ">Board Management Network</dt>
+                <dd ixia_locid="135" class="- topic/dd ">
+                    <p ixia_locid="164" class="- topic/p ">An optional network used by the controller nodes to perform
+                        out-of-band reset and power-on/power-off operations on hosts equipped with
+                        iLO (Integrated Lights Out) board management modules.</p>
+                    <p ixia_locid="174" class="- topic/p ">This network can be configured for internal access or
+                        external access.</p>
+                    <dl class="- topic/dl ">
+                        <dlentry ixia_locid="204" class="- topic/dlentry ">
+                            <dt ixia_locid="205" class="- topic/dt ">Internal access</dt>
+                            <dd ixia_locid="206" class="- topic/dd ">
+                                <p ixia_locid="207" class="- topic/p ">In this configuration, the modules are
+                                    accessible using a VLAN network implemented on an internal L2
+                                    switch.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="208" class="- topic/dlentry ">
+                            <dt ixia_locid="209" class="- topic/dt ">External access</dt>
+                            <dd ixia_locid="210" class="- topic/dd ">
+                                <p ixia_locid="211" class="- topic/p ">In this configuration, the modules are accessible using the OAM
+                                    network.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                    <p ixia_locid="175" class="- topic/p ">Board management modules are optional. Associated
+                        maintenance operations are available only for hosts equipped with them.</p>
+                    <p ixia_locid="176" class="- topic/p ">For more information, refer to <xref href="jow1406727863674.xml" ixia_locid="173" class="- topic/xref "/>.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="53" class="- topic/dlentry ">
+                <dt ixia_locid="54" class="- topic/dt ">Physical Network</dt>
+                <dd ixia_locid="55" class="- topic/dd ">
+                    <p ixia_locid="56" class="- topic/p ">A physical transport resource used to interconnect compute nodes among themselves and
+            with external networks. Virtual networks, such as provider and tenant networks, are
+            built on top of the physical network. Access to multiple physical networks can be
+            defined by the HP Helion OpenStack Carrier Grade administrator.</p>
+                    <p ixia_locid="57" class="- topic/p ">Physical networks are not configured by the HP Helion OpenStack Carrier Grade administrator. They are
+            physically provisioned by the data center where the HP Helion OpenStack Carrier Grade cluster is
+            deployed.</p>
+                </dd>
+            </dlentry>
+            <dlentry id="provider-networks-definition" ixia_locid="58" class="- topic/dlentry ">
+                <dt ixia_locid="59" class="- topic/dt ">Provider Network</dt>
+                <dd ixia_locid="60" class="- topic/dd ">
+                    <p ixia_locid="61" class="- topic/p ">A Layer 2 virtual network used to provide the underlying
+                        network connectivity needed to instantiate the tenant networks. Multiple
+                        provider networks may be configured as required, and realized over the same
+                        or different physical networks. Access to external networks is typically
+                        granted to the compute nodes via the provider network. The extent of this
+                        connectivity, including access to the open Internet, is application
+                        dependent.</p>
+                    <p ixia_locid="62" class="- topic/p ">Provider networks are created by the HP Helion OpenStack Carrier Grade administrator to make use of an
+            underlying set of resources on a physical network. They can be created as being of one
+            of the following types:</p>
+                    <dl class="- topic/dl ">
+                        <dlentry ixia_locid="73" class="- topic/dlentry ">
+                            <dt ixia_locid="74" class="- topic/dt ">flat</dt>
+                            <dd ixia_locid="75" class="- topic/dd ">
+                                <p ixia_locid="76" class="- topic/p ">A provider network mapped entirely over the
+                                    physical network. The physical network is used as a single Layer
+                                    2 broadcast domain. Each physical network can realize at most
+                                    one flat provider network.</p>
+                                <p ixia_locid="77" class="- topic/p ">A provider network of this type supports at most
+                                    one tenant network, even if its corresponding shared flag is
+                                    enabled.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="65" class="- topic/dlentry ">
+                            <dt ixia_locid="66" class="- topic/dt ">VLAN</dt>
+                            <dd ixia_locid="67" class="- topic/dd ">
+                                <p ixia_locid="68" class="- topic/p ">A provider network implemented over a range of IEEE 802.1Q VLAN identifiers
+                  supported by the physical network. This allows for multiple provider networks to
+                  be defined over the same physical network, all operating over non-overlapping sets
+                  of VLAN IDs.</p>
+                                <p ixia_locid="69" class="- topic/p ">A set of consecutive VLAN IDs over which the
+                                    provider network is defined is referred to as a network's
+                                        <nameliteral ixia_locid="70" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">segmentation
+                                        range</nameliteral>. A provider network can have more than
+                                    one segmentation range. Each VLAN ID in a segmentation range is
+                                    used to support the implementation of a single tenant
+                                    network.</p>
+                                <p ixia_locid="71" class="- topic/p ">A segmentation range can be shared by multiple
+                                    tenants if its <nameliteral ixia_locid="177" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">shared</nameliteral> flag is set.
+                                    Otherwise, the segmentation range supports tenant networks
+                                    belonging to a single specified tenant.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="197" class="- topic/dlentry ">
+                            <dt ixia_locid="198" class="- topic/dt ">VXLAN</dt>
+                            <dd ixia_locid="199" class="- topic/dd ">
+                                <p ixia_locid="200" class="- topic/p ">A provider network implemented over a range of
+                                    VXLAN Network Identifiers (VNIs.) This is similar to the VLAN
+                                    option, in that it allows multiple provider networks to be
+                                    defined over the same physical network using unique VNIs defined
+                                    in segmentation ranges. In addition, VXLAN provides a Layer 2
+                                    overlay scheme on Layer 3 networks, enabling connectivity
+                                    between Layer 2 segments separated by one or more Layer 3
+                                    routers.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="78" class="- topic/dlentry ">
+                <dt ixia_locid="79" class="- topic/dt ">Tenant Network</dt>
+                <dd ixia_locid="80" class="- topic/dd ">
+                    <p ixia_locid="81" class="- topic/p ">A virtual network associated with a tenant. A tenant network
+                        is instantiated on a compute node, and makes use of a provider network,
+                        either directly over a flat network, or using technologies such as VLAN and
+                        VXLAN.</p>
+                    <p ixia_locid="82" class="- topic/p ">Tenant networks use the high-performance virtual L2 switching capabilities built into
+            the HP Helion OpenStack Carrier Grade software stack of the compute node. They provide switching
+            facilities to the virtual service instances, to communicate with external resources and
+            with other virtual service instances running on the same or different compute nodes.</p>
+                    <p ixia_locid="178" class="- topic/p ">When instantiated over a provider network of the VLAN or
+                        VXLAN type, the VLAN ID or VNI  for the tenant network is assigned
+                        automatically. The allocation algorithm selects the lowest available ID from
+                        any segmentation range owned by the tenant. If no such ID is available, it
+                        selects the lowest available ID from any shared segmentation range. The
+                        system reports an error when no available ID is found.</p>
+                    <p ixia_locid="179" class="- topic/p ">Tenant networks created by the administration can also be
+                        configured to use a pre-selected VLAN ID or VNI. This can be used to extend
+                        connectivity to external networks.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="83" class="- topic/dlentry ">
+                <dt ixia_locid="84" class="- topic/dt ">Controller Floating IP Address</dt>
+                <dd ixia_locid="85" class="- topic/dd ">
+                    <p ixia_locid="86" class="- topic/p ">A unique IP address shared by the cluster of controller nodes. Only the master
+            controller node is active on this address at any time. The IP address is floating in the
+            sense that it is automatically transferred from one controller node to the other, as
+            dictated by the high-availability directives of the cluster.</p>
+                    <p ixia_locid="87" class="- topic/p ">The controller cluster has two floating IP addresses, one
+                        facing the OAM network, only seen by the web interface SSH administration
+                        clients and REST APIs, and another facing the internal management network,
+                        only seen by the compute nodes.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="88" class="- topic/dlentry ">
+                <dt ixia_locid="89" class="- topic/dt ">Link Aggregation (LAG) or Aggregated Ethernet (AE)</dt>
+                <dd ixia_locid="90" class="- topic/dd ">
+                    <p ixia_locid="91" class="- topic/p ">A mechanism that allows multiple parallel Ethernet network
+                        connections between two hosts to be used as a single logical connection.
+                        HP Helion OpenStack Carrier Grade supports LAG connections on all its Ethernet connections for
+                        the purpose of protection (fault-tolerance) only. Different modes of
+                        operation are supported. For details, see the <cite ixia_locid="92" class="- topic/cite ">Titanium
+                            Server Software Installation Guide</cite>.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="93" class="- topic/dlentry ">
+                <dt ixia_locid="94" class="- topic/dt ">OAM Network L2 Switch(es)</dt>
+                <dd ixia_locid="95" class="- topic/dd ">
+                    <p ixia_locid="96" class="- topic/p ">One or more switches used to provide an entry point into the
+                        OAM network.</p>
+                    <note id="note_N101AD_N101A6_N1019F_N10033_N1001C_N10001" ixia_locid="97" class="- topic/note ">
+                        <p ixia_locid="98" class="- topic/p ">The OAM ports on the controller do not support VLAN
+                            tagging. If needed, port- or MAC-based VLANs defined on the L2 switch
+                            can be used to steer OAM traffic appropriately.</p>
+                    </note>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="99" class="- topic/dlentry ">
+                <dt ixia_locid="100" class="- topic/dt ">Provider Network L2 Switches</dt>
+                <dd ixia_locid="101" class="- topic/dd ">
+                    <p ixia_locid="102" class="- topic/p ">Provide the entry point into the provider networks. It is through these L2 switches
+            that the compute nodes get integrated as active end points into each of the provider
+            networks.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="103" class="- topic/dlentry ">
+                <dt ixia_locid="104" class="- topic/dt ">Edge Router</dt>
+                <dd ixia_locid="105" class="- topic/dd ">
+                    <p ixia_locid="106" class="- topic/p ">Provides connectivity to external networks as needed by controller and compute
+            nodes.</p>
+                    <p ixia_locid="107" class="- topic/p ">Reachability to the open Internet is not mandatory, but strictly application-dependent.
+            Guest applications running on the compute nodes may need to access, or be reachable
+            from, the Internet. Additionally, access to the OAM Network from external networks might
+            be desirable.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="108" class="- topic/dlentry ">
+                <dt ixia_locid="109" class="- topic/dt ">Web Administration Interface</dt>
+                <dd ixia_locid="110" class="- topic/dd ">
+                    <p ixia_locid="111" class="- topic/p ">Provides the HP Helion OpenStack Carrier Grade main management interface. It is available using any W3C
+            standards-compliant web browser, from any point within the OAM Network where the
+            OAM floating IP address is reachable.</p>
+                </dd>
+            </dlentry>
+        </dl>
+        <section id="section_N101EC_N1001C_N10001" ixia_locid="112" class="- topic/section ">
+            <title ixia_locid="113" class="- topic/title ">About Tenants (Projects) and Users</title>
+            <p ixia_locid="114" class="- topic/p ">Tenants and users are system resources managed by the OpenStack
+                Keystone service.</p>
+            <p ixia_locid="116" class="- topic/p ">Tenants are the core resource structure on which all end user services are managed. They
+        are isolated resource containers consisting of networks, storage volumes, images, virtual
+        machines, authentication keys, and users.</p>
+            <p ixia_locid="117" class="- topic/p ">When HP Helion OpenStack Carrier Grade is deployed, two default tenants are created:
+                    <nameliteral ixia_locid="118" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> and <nameliteral ixia_locid="119" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">services</nameliteral>. They are used to group resources to be
+                associated with the user <nameliteral ixia_locid="120" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> and the
+                cloud services, respectively.</p>
+            <note id="note_N10211_N101ED_N1001C_N10001" ixia_locid="121" class="- topic/note ">
+                <p ixia_locid="122" class="- topic/p ">Earlier versions of OpenStack used the term <term ixia_locid="138" class="- topic/term ">project</term>
+                    instead of <term ixia_locid="139" class="- topic/term ">tenant</term>. Because of this legacy terminology, the web
+                    administration interface uses both terms, and some command-line tools use
+                        <nameliteral ixia_locid="125" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">--project_id</nameliteral> when a tenant ID is
+                    expected.</p>
+            </note>
+            <p ixia_locid="126" class="- topic/p ">Users are system resources that can operate on one or more tenants, within the constraints
+        of a particular role. For each user, the Keystone service maintains a list of (tenant, role)
+        tuples, which are used to determine the tenants the user can operate on, and the role the
+        user should play on each of them.</p>
+            <p ixia_locid="127" class="- topic/p ">In the default installation of HP Helion OpenStack Carrier Grade, several users are
+                already defined. Each of the OpenStack services, such as Nova and Neutron, exist as
+                system users. They all operate on the default tenant <nameliteral ixia_locid="128" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">services</nameliteral>.</p>
+            <p ixia_locid="129" class="- topic/p ">The Keystone <nameliteral ixia_locid="130" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> user
+                is associated with the <nameliteral ixia_locid="131" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> tenant.
+                This user has administrator privileges for creating, modifying, and deleting
+                OpenStack resources, including creating other tenants and users.</p>
+        </section>
+    </conbody>
+</concept-wr>

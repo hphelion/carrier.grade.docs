@@ -1,0 +1,1 @@
+Source files for the HP Helion OpenStack Carrier Grade KVM region Admin Guide for HCG version 2.0. These are from Wind River, delivered in Drop 4. USe these files to generate a PDF of the KVM Admin Guide. In the repo for back up purposes only.

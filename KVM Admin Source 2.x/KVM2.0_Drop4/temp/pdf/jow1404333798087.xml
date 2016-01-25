@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333798087" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic concept/concept concept-wr/concept-wr ">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1" class="- topic/title ">Ports</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">The tab <uicontrol ixia_locid="3" class="+ topic/ph ui-d/uicontrol ">Ports</uicontrol> on the <wintitle ixia_locid="4" class="+ topic/keyword ui-d/wintitle ">Inventory Detail</wintitle> page presents information about the physical
+        ports on a host, as illustrated below.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="5" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <conbody class="- topic/body  concept/conbody ">
+        <fig id="fig_N10027_N10024_N10001" ixia_locid="6" class="- topic/fig ">
+            <image href="jow1404333796281.image" id="image_vlm_zxz_l4" ixia_locid="7" width="6in" placement="inline" class="- topic/image "/>
+        </fig>
+        <p ixia_locid="8" class="- topic/p ">Currently none of the port attributes is configurable; they are all read
+            directly from the hardware. Port information is presented in several columns, as
+            follows:</p>
+        <dl class="- topic/dl ">
+            <dlentry ixia_locid="9" class="- topic/dlentry ">
+                <dt ixia_locid="10" class="- topic/dt ">Name</dt>
+                <dd ixia_locid="11" class="- topic/dd ">
+                    <p ixia_locid="12" class="- topic/p ">The name of the physical port, as identified by the host's
+                        Linux kernel.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="13" class="- topic/dlentry ">
+                <dt ixia_locid="14" class="- topic/dt ">MAC Address</dt>
+                <dd ixia_locid="15" class="- topic/dd ">
+                    <p ixia_locid="16" class="- topic/p ">The port's unique MAC address.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="17" class="- topic/dlentry ">
+                <dt ixia_locid="18" class="- topic/dt ">PCI Address</dt>
+                <dd ixia_locid="19" class="- topic/dd ">
+                    <p ixia_locid="20" class="- topic/p ">The port's unique address on the PCI bus. Together with the
+                        MAC address, this field can be used to uniquely identify a port on the
+                        host's hardware platform.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="21" class="- topic/dlentry ">
+                <dt ixia_locid="22" class="- topic/dt ">Processor</dt>
+                <dd ixia_locid="23" class="- topic/dd ">
+                    <p ixia_locid="24" class="- topic/p ">The processor node that the port's IO controller is connected to.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="25" class="- topic/dlentry ">
+                <dt ixia_locid="26" class="- topic/dt ">Auto Negotiation</dt>
+                <dd ixia_locid="27" class="- topic/dd ">
+                    <p ixia_locid="28" class="- topic/p ">The status of the Ethernet auto-negotiation flag. Currently,
+                        auto-negotiation is always enabled.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="29" class="- topic/dlentry ">
+                <dt ixia_locid="30" class="- topic/dt ">Boot Interface</dt>
+                <dd ixia_locid="31" class="- topic/dd ">
+                    <p ixia_locid="32" class="- topic/p ">The boot flag, whether or not PXE booting is enabled.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="37" class="- topic/dlentry ">
+                <dt ixia_locid="38" class="- topic/dt ">Accelerated</dt>
+                <dd ixia_locid="39" class="- topic/dd ">
+                    <draft-comment author="rstone" ixia_locid="41" translate="no" dir="ltr" class="- topic/draft-comment ">US60503 changes</draft-comment>
+                    <p ixia_locid="40" class="- topic/p ">The acceleration status. If the port is supported by AVS
+                        using DPDK poll-mode drivers, acceleration will be used. Otherwise, it will
+                        operate in non-accelerated mode with AVS leveraging kernel drivers. </p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="33" class="- topic/dlentry ">
+                <dt ixia_locid="34" class="- topic/dt ">Device Type</dt>
+                <dd ixia_locid="35" class="- topic/dd ">
+                    <p ixia_locid="36" class="- topic/p ">Hardware information about the port type, manufacturer, and model.</p>
+                </dd>
+            </dlentry>
+        </dl>
+    </conbody>
+</concept-wr>

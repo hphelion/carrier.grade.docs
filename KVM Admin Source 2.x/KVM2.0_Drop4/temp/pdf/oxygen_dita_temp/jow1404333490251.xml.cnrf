@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333490251" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic task/task task-wr/task-wr ">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Initializing Controller-0 from a Local Device</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc "> You can initialize <nameliteral ixia_locid="3" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> using the HP Helion OpenStack Carrier Grade bootable ISO image. </shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="4" class="- topic/author ">Jim Owens</author>
+        <author ixia_locid="5" class="- topic/author ">Pedro Sanchez</author>
+        <author ixia_locid="163" class="- topic/author ">Tom Towle</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+            <prereq id="d18e14" ixia_locid="166" class="- topic/section task/prereq ">
+                <p ixia_locid="169" class="- topic/p ">Before installing the software on the first controller, ensure
+                    the following:</p>
+                <ul id="d18e19" class="- topic/ul ">
+                    <li ixia_locid="172" class="- topic/li ">
+                        <p ixia_locid="175" class="- topic/p ">The host meets the hardware requirements for a
+                            controller.</p>
+                    </li>
+                    <li ixia_locid="90" class="- topic/li ">
+                        <p ixia_locid="10" class="- topic/p ">You have terminal-server access to the host, so that you
+                            can monitor messages during initialization.</p>
+                    </li>
+                    <li ixia_locid="178" class="- topic/li ">
+                        <p ixia_locid="181" class="- topic/p ">The management, OAM, and optional PXE boot and
+                            infrastructure networks are planned, set up, and connected.</p>
+                    </li>
+                    <li ixia_locid="91" class="- topic/li ">
+                        <p ixia_locid="92" class="- topic/p ">All other hosts on the system are powered off.</p>
+                    </li>
+                    <li ixia_locid="93" class="- topic/li ">
+                        <p ixia_locid="94" class="- topic/p ">You have reviewed the Release Notes for any additional
+                            information pertaining to installation. </p>
+                    </li>
+                </ul>
+            </prereq>
+            <steps id="d18e53" class="- topic/ol task/steps ">
+                <step id="d18e55" ixia_locid="61" class="- topic/li task/step ">
+                    <cmd ixia_locid="62" class="- topic/ph task/cmd ">Power on the host to be configured as <nameliteral ixia_locid="184" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral>.</cmd>
+                </step>
+                <step id="d18e64" ixia_locid="11" class="- topic/li task/step ">
+                    <cmd ixia_locid="12" class="- topic/ph task/cmd ">Configure the host BIOS boot sequence to boot from a USB
+                        removable storage device.</cmd>
+                </step>
+                <step id="d18e70" ixia_locid="14" class="- topic/li task/step ">
+                    <cmd ixia_locid="15" class="- topic/ph task/cmd ">Insert the USB flash drive and boot the host.</cmd>
+                    <stepresult ixia_locid="16" class="- topic/itemgroup task/stepresult ">
+                        <p ixia_locid="17" class="- topic/p ">The installer welcome screen appears.</p>
+                        <fig id="d18e80" ixia_locid="18" class="- topic/fig ">
+                            <title ixia_locid="19" class="- topic/title ">HP Helion OpenStack Carrier Grade Installer Welcome Screen</title>
+                            <image href="jow1433084986736.image" id="d18e85" ixia_locid="208" product="tis_not_small" placement="inline" class="- topic/image ">
+                                <alt ixia_locid="209" class="- topic/alt ">TiS Installer screen (basic)</alt>
+                            </image>
+                            <image href="jow1404333487370.image" id="d18e91" ixia_locid="210" product="tis_small" placement="inline" class="- topic/image ">
+                                <alt ixia_locid="211" class="- topic/alt ">TiS Installer screen with two-server configuration</alt>
+                            </image>
+                        </fig>
+                    </stepresult>
+                </step>
+                <step id="d18e100" ixia_locid="21" class="- topic/li task/step ">
+                    <cmd ixia_locid="22" class="- topic/ph task/cmd ">Select the type of installation and the display device to
+                        be used during initialization, and then press <uicontrol ixia_locid="23" class="+ topic/ph ui-d/uicontrol ">Enter</uicontrol>.</cmd>
+                    <info ixia_locid="145" class="- topic/itemgroup task/info ">
+                        <p ixia_locid="205" product="tis_small" class="- topic/p ">To install a standalone controller, select from the
+                            first group.</p>
+                        <dl class="- topic/dl ">
+                            <dlentry ixia_locid="187" class="- topic/dlentry ">
+                                <dt ixia_locid="190" class="- topic/dt "><nameliteral ixia_locid="193" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Serial Controller
+                                        Node Install</nameliteral> (default)</dt>
+                                <dd ixia_locid="196" class="- topic/dd ">
+                                    <p ixia_locid="185" class="- topic/p ">Installs the controller function on the
+                                        host, using the serial port to display messages. You can
+                                        monitor the port using the terminal server.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="199" class="- topic/dlentry ">
+                                <dt ixia_locid="164" class="- topic/dt "><nameliteral ixia_locid="170" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Graphics
+                                        Controller Node Install</nameliteral></dt>
+                                <dd ixia_locid="201" class="- topic/dd ">
+                                    <p ixia_locid="203" class="- topic/p ">Installs the controller function on the
+                                        host, using graphics mode to display messages. This
+                                        selection works with most console displays.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="167" class="- topic/dlentry ">
+                                <dt ixia_locid="179" class="- topic/dt "><nameliteral ixia_locid="173" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Graphics Text
+                                        Controller Node Install</nameliteral></dt>
+                                <dd ixia_locid="176" class="- topic/dd ">
+                                    <p ixia_locid="182" class="- topic/p ">Installs the controller function on the
+                                        host, using text mode to display messages. This is a safe
+                                        option for nodes that do not support graphics mode.</p>
+                                </dd>
+                            </dlentry>
+                        </dl>
+                        <p ixia_locid="206" product="tis_small" class="- topic/p ">To install a minimal two-server configuration, in which
+                            the controller and compute functions are implemented on a single host,
+                            select from the second group.</p>
+                        <dl product="tis_small" class="- topic/dl ">
+                            <dlentry ixia_locid="188" class="- topic/dlentry ">
+                                <dt ixia_locid="191" class="- topic/dt "><nameliteral ixia_locid="194" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Serial
+                                        Controller+Compute Node Install</nameliteral> (default)</dt>
+                                <dd ixia_locid="197" class="- topic/dd ">
+                                    <p ixia_locid="186" class="- topic/p ">Installs controller and compute functions on
+                                        the host, using the serial port to display messages. You can
+                                        monitor the port using the terminal server.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="200" class="- topic/dlentry ">
+                                <dt ixia_locid="165" class="- topic/dt "><nameliteral ixia_locid="171" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Graphics
+                                        Controller+Compute Node Install</nameliteral></dt>
+                                <dd ixia_locid="202" class="- topic/dd ">
+                                    <p ixia_locid="204" class="- topic/p ">Installs controller and compute functions on
+                                        the host, using graphics mode to display messages. This
+                                        selection works with most console displays.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="168" class="- topic/dlentry ">
+                                <dt ixia_locid="180" class="- topic/dt "><nameliteral ixia_locid="174" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Graphics Text
+                                        Controller+Compute Node Install</nameliteral></dt>
+                                <dd ixia_locid="177" class="- topic/dd ">
+                                    <p ixia_locid="183" class="- topic/p ">Installs controller and compute functions on
+                                        the host, using text mode to display messages. This is a
+                                        safe option for nodes that do not support graphics mode.</p>
+                                </dd>
+                            </dlentry>
+                        </dl>
+                        <note id="d18e202" ixia_locid="212" class="- topic/note ">
+                            <p ixia_locid="213" class="- topic/p "><draft-comment author="jowens" ixia_locid="214" translate="no" dir="ltr" class="- topic/draft-comment ">US62816 note added</draft-comment>The default rootfs device is
+                                    <filepath ixia_locid="215" class="+ topic/ph sw-d/filepath ">/dev/sda</filepath>. You can
+                                optionally change this (or other parameters) by selecting the
+                                installation mode, pressing the <uicontrol ixia_locid="216" class="+ topic/ph ui-d/uicontrol ">Tab</uicontrol> key, modifying the command that appears, and
+                                then pressing
+                                <uicontrol ixia_locid="218" class="+ topic/ph ui-d/uicontrol ">Enter</uicontrol>.<codeblock ixia_locid="217" class="+ topic/pre pr-d/codeblock ">vmlinux rootwait console=ttyS0, 115200 root=LABEL=oe_iso_boot \
+ngpt textinst serial ks=/mnt/install/source/ks.cfg boot_device=sda \
+rootfs_device=sda initrd=initrd</codeblock></p>
+                        </note>
+                    </info>
+                </step>
+                <step id="d18e223" ixia_locid="70" class="- topic/li task/step ">
+                    <cmd ixia_locid="71" class="- topic/ph task/cmd ">Monitor the initialization until it is complete.</cmd>
+                    <info ixia_locid="72" class="- topic/itemgroup task/info ">
+                        <p ixia_locid="73" class="- topic/p ">The installer initializes the target hard drive with the
+                            HP Helion OpenStack Carrier Grade image. When initialization is complete, a reboot is
+                            initiated on the host. </p>
+                    </info>
+                </step>
+                <step id="d18e236" ixia_locid="189" class="- topic/li task/step ">
+                    <cmd importance="high" ixia_locid="192" class="- topic/ph task/cmd ">Immediately remove the USB flash drive
+                        from the host to ensure that the host reboots from the hard drive.</cmd>
+                    <info ixia_locid="195" class="- topic/itemgroup task/info ">
+                        <note id="d18e243" ixia_locid="67" type="caution" class="- topic/note ">
+                            <p ixia_locid="198" class="- topic/p ">If the USB flash drive is still attached when the
+                                host reboots, then unless the boot sequence has been configured to
+                                prevent it, the host will boot from the USB flash drive again
+                                instead of the hard drive.</p>
+                        </note>
+                        <p id="d18e249" ixia_locid="47" class="- topic/p "> After a few minutes, the host
+                            reboots from the hard drive and displays the <wintitle ixia_locid="48" class="+ topic/keyword ui-d/wintitle ">GNU GRUB</wintitle> welcome screen.<fig id="d18e254" ixia_locid="49" class="- topic/fig ">
+                                <image alt="GNU GRUB screen" href="jow1404333488777.image" id="d18e256" ixia_locid="51" width="4in" placement="inline" class="- topic/image "/>
+                            </fig></p>
+                        <p ixia_locid="52" class="- topic/p ">After a brief delay, the system boots automatically into
+                            the HP Helion OpenStack Carrier Grade image.</p>
+                    </info>
+                </step>
+                <step id="d18e264" ixia_locid="53" class="- topic/li task/step ">
+                    <cmd ixia_locid="54" class="- topic/ph task/cmd ">Log into the host as <userinput ixia_locid="55" class="+ topic/ph sw-d/userinput ">wrsroot</userinput>, with password <userinput ixia_locid="56" class="+ topic/ph sw-d/userinput ">wrsroot</userinput>.</cmd>
+                    <info ixia_locid="140" class="- topic/itemgroup task/info ">
+                        <note id="d18e277" ixia_locid="149" class="- topic/note ">
+                            <p ixia_locid="150" class="- topic/p ">Typed responses to password prompts are suppressed
+                                and do not appear on the display.</p>
+                        </note>
+                        <p ixia_locid="142" class="- topic/p ">The first time you log in as <userinput ixia_locid="143" class="+ topic/ph sw-d/userinput ">wrsroot</userinput>, you are required to change your password.</p>
+                        <codeblock ixia_locid="151" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="152" class="+ topic/ph sw-d/systemoutput ">Changing password for wrsroot.
+(current) UNIX Password:</systemoutput></codeblock>
+                        <p ixia_locid="153" class="- topic/p ">Enter the current password (<nameliteral ixia_locid="154" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral>).</p>
+                        <codeblock ixia_locid="155" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="156" class="+ topic/ph sw-d/systemoutput ">New password:</systemoutput></codeblock>
+                        <p ixia_locid="157" class="- topic/p ">Enter a new password for the <nameliteral ixia_locid="161" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot </nameliteral>account.</p>
+                        <codeblock ixia_locid="158" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="159" class="+ topic/ph sw-d/systemoutput ">Retype new password:</systemoutput></codeblock>
+                        <p ixia_locid="160" class="- topic/p ">Enter the new password again to confirm it.</p>
+                    </info>
+                </step>
+            </steps>
+            <result id="d18e320" ixia_locid="57" class="- topic/section task/result ">
+                <p ixia_locid="58" class="- topic/p ">The host is now ready for configuration as <nameliteral ixia_locid="144" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral>.</p>
+            </result>
+        </taskbody>
+    <related-links class="- topic/related-links ">
+        <link href="jow1419267663457.xml" ixia_locid="168" class="- topic/link "/>
+        <link href="jow1404333486758.xml" ixia_locid="167" class="- topic/link "/>
+    </related-links>
+</task-wr>

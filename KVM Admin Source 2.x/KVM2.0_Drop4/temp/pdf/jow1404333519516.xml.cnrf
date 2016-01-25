@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333519516" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic task/task task-wr/task-wr ">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Configuring Provider Networks</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">You can use the HP Helion OpenStack Carrier Grade CLI or web administration interface to
+        set up provider networks over physical networks.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+        <author ixia_locid="4" class="- topic/author ">Pedro Sanchez</author>
+        <author ixia_locid="5" class="- topic/author ">Tom Towle</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1002C_N10029_N10001" ixia_locid="215" class="- topic/section task/context ">
+                <p ixia_locid="244" class="- topic/p ">A <term ixia_locid="192" class="- topic/term ">provider network</term> is a layer-2
+                    virtual network associated with a physical network. Provider networks are used
+                    to provide connectivity for tenant networks.</p>
+                <p ixia_locid="245" class="- topic/p ">You can choose from three types of provider network:</p>
+                <ul id="d377e43" class="- topic/ul ">
+                    <li ixia_locid="222" class="- topic/li ">
+                        <p ixia_locid="223" class="- topic/p ">A flat network mapped directly to the physical network.</p>
+                    </li>
+                    <li ixia_locid="224" class="- topic/li ">
+                        <p ixia_locid="225" class="- topic/p ">A VLAN network, which can support multiple tenant
+                            networks using designated ranges of VLAN IDs for communication between
+                            hosts on the same Layer 2 network.</p>
+                    </li>
+                    <li ixia_locid="226" class="- topic/li ">
+                        <p ixia_locid="227" class="- topic/p ">A VXLAN network, which can support multiple tenant
+                            networks using designated ranges of VNIs for communication between hosts
+                            on different Layer 2 segments separated by one or more L3 routers.</p>
+                    </li>
+                </ul>
+            </context>
+        <context id="context_N10032_N10029_N10001" ixia_locid="217" class="- topic/section task/context ">
+                <p ixia_locid="228" class="- topic/p ">For more about provider networks and tenant networks, see the
+                        <cite ixia_locid="193" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration Guide: Network
+                        Requirements</cite>.</p>
+                <p ixia_locid="191" class="- topic/p ">To create an association with a physical network, the provider
+                    network must be mapped to an Ethernet interface on a compute node. At least one
+                    such interface must be set up before the compute node can be unlocked. For more
+                    information, see <xref href="jow1426948577755.xml" ixia_locid="368" class="- topic/xref "/>.</p>
+            </context>
+        <context id="context_N10038_N10029_N10001" ixia_locid="367" class="- topic/section task/context ">
+                <note id="d377e81" ixia_locid="364" class="- topic/note ">
+                    <p ixia_locid="365" class="- topic/p ">If you plan to follow the exercises in the <cite ixia_locid="196" class="- topic/cite ">HP Helion OpenStack Carrier Grade Reference Deployment Scenarios</cite>,
+                        set up two provider networks of the <nameliteral ixia_locid="367" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">vlan</nameliteral> type, named <nameliteral ixia_locid="197" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">provider-net-a</nameliteral> and <nameliteral ixia_locid="198" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">provider-net-b</nameliteral>.</p>
+                </note>
+            </context>
+        <steps id="steps_rvq_zr2_hr" class="- topic/ol task/steps ">
+            <step id="step_N10031_N1002D_N1001F_N10001" ixia_locid="363" class="- topic/li task/step ">
+                    <cmd ixia_locid="12" class="- topic/ph task/cmd ">Open the HP Helion OpenStack Carrier Grade web administration
+                        interface.</cmd>
+                    <info ixia_locid="13" class="- topic/itemgroup task/info ">
+                        <p ixia_locid="14" class="- topic/p ">Using a browser, navigate to the OAM floating IP address,
+                            and log in as <nameliteral ixia_locid="15" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral>.</p>
+                    </info>
+                </step>
+            <step id="step_N1003A_N1002D_N1001F_N10001" ixia_locid="366" class="- topic/li task/step ">
+                    <cmd ixia_locid="17" class="- topic/ph task/cmd ">In the left-hand pane, select <menucascade ixia_locid="369" class="+ topic/ph ui-d/menucascade ">
+                            <uicontrol ixia_locid="18" class="+ topic/ph ui-d/uicontrol ">Admin</uicontrol>
+                            <uicontrol ixia_locid="370" class="+ topic/ph ui-d/uicontrol ">System</uicontrol>
+                            <uicontrol ixia_locid="19" class="+ topic/ph ui-d/uicontrol ">Networks</uicontrol>
+                        </menucascade>, and then select the <uicontrol ixia_locid="20" class="+ topic/ph ui-d/uicontrol ">Provider
+                            Networks</uicontrol> tab.</cmd>
+                    <stepresult ixia_locid="21" class="- topic/itemgroup task/stepresult ">
+                        <p ixia_locid="22" class="- topic/p ">The Provider Networks list is displayed.</p>
+                        <fig id="d377e163" ixia_locid="23" class="- topic/fig ">
+                            <image alt="Provider networks list" href="jow1404333508484.image" id="d377e165" ixia_locid="24" width="5.5in" placement="inline" class="- topic/image "/>
+                        </fig>
+                    </stepresult>
+                </step>
+            <step id="step_N10043_N1002D_N1001F_N10001" ixia_locid="10" class="- topic/li task/step ">
+                <cmd ixia_locid="11" class="- topic/ph task/cmd ">Create a provider network.</cmd>
+                <info ixia_locid="12" class="- topic/itemgroup task/info ">
+                        <p ixia_locid="239" class="- topic/p ">Click <uicontrol ixia_locid="30" class="+ topic/ph ui-d/uicontrol ">Create Provider Network</uicontrol>.</p>
+                        <p ixia_locid="237" class="- topic/p ">In the <wintitle ixia_locid="33" class="+ topic/keyword ui-d/wintitle ">Create Provider
+                                Network</wintitle> window, complete the fields as required.</p>
+                        <dl class="- topic/dl ">
+                            <dlentry ixia_locid="38" class="- topic/dlentry ">
+                                <dt ixia_locid="39" class="- topic/dt ">Name</dt>
+                                <dd ixia_locid="40" class="- topic/dd ">
+                                    <p ixia_locid="41" class="- topic/p ">The name of the provider network.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="43" class="- topic/dlentry ">
+                                <dt ixia_locid="44" class="- topic/dt ">Description</dt>
+                                <dd ixia_locid="45" class="- topic/dd ">
+                                    <p ixia_locid="46" class="- topic/p ">A free-text field for reference.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="56" class="- topic/dlentry ">
+                                <dt ixia_locid="57" class="- topic/dt ">Type</dt>
+                                <dd ixia_locid="58" class="- topic/dd ">
+                                    <p ixia_locid="59" class="- topic/p ">The type of provider network to be
+                                        created.</p>
+                                    <dl class="- topic/dl ">
+                                        <dlentry ixia_locid="246" class="- topic/dlentry ">
+                                            <dt ixia_locid="247" class="- topic/dt ">flat</dt>
+                                            <dd ixia_locid="248" class="- topic/dd ">
+                                                <p ixia_locid="249" class="- topic/p ">mapped directly to the physical network</p>
+                                            </dd>
+                                        </dlentry>
+                                        <dlentry ixia_locid="250" class="- topic/dlentry ">
+                                            <dt ixia_locid="251" class="- topic/dt ">vlan</dt>
+                                            <dd ixia_locid="252" class="- topic/dd ">
+                                                <p ixia_locid="253" class="- topic/p ">supports multiple tenant networks using VLAN
+                                                  IDs.</p>
+                                            </dd>
+                                        </dlentry>
+                                        <dlentry ixia_locid="254" class="- topic/dlentry ">
+                                            <dt ixia_locid="255" class="- topic/dt ">vxlan</dt>
+                                            <dd ixia_locid="256" class="- topic/dd ">
+                                                <p ixia_locid="257" class="- topic/p ">supports multiple tenant networks using VXLAN
+                                                  VNIs.</p>
+                                            </dd>
+                                        </dlentry>
+                                    </dl>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="60" class="- topic/dlentry ">
+                                <dt ixia_locid="61" class="- topic/dt ">MTU</dt>
+                                <dd ixia_locid="62" class="- topic/dd ">
+                                    <p ixia_locid="63" class="- topic/p ">The maximum transmission unit for the
+                                        Ethernet segment used to access the network.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="371" class="- topic/dlentry ">
+                                <dt ixia_locid="372" class="- topic/dt ">VLAN Transparent</dt>
+                                <dd ixia_locid="373" class="- topic/dd ">
+                                    <p ixia_locid="374" class="- topic/p ">Allow VLAN tagged packets to be encapsulated
+                                        within a VXLAN segment without removing or modifying the
+                                        guest VLAN tag.</p>
+                                </dd>
+                            </dlentry>
+                        </dl>
+                    </info>
+                <info ixia_locid="13" class="- topic/itemgroup task/info ">
+                    <fig id="fig_v3z_zsg_hr" ixia_locid="359" class="- topic/fig ">
+                        <image href="jow1425675012586.image" id="image_jss_vsg_hr" ixia_locid="360" placement="inline" class="- topic/image ">
+                            <alt ixia_locid="361" class="- topic/alt ">i-ccs-create-provider-network-generic</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N1005D_N1002D_N1001F_N10001" ixia_locid="16" class="- topic/li task/step ">
+                    <cmd ixia_locid="65" class="- topic/ph task/cmd ">Commit the changes.</cmd>
+                    <info ixia_locid="66" class="- topic/itemgroup task/info ">
+                        <p ixia_locid="67" class="- topic/p ">Click <uicontrol ixia_locid="68" class="+ topic/ph ui-d/uicontrol ">Create Provider
+                                Network</uicontrol>.</p>
+                    </info>
+                    <stepresult ixia_locid="69" class="- topic/itemgroup task/stepresult ">
+                        <p ixia_locid="70" class="- topic/p ">The new provider network is added to the <wintitle ixia_locid="71" class="+ topic/keyword ui-d/wintitle ">Provider Networks</wintitle> list.</p>
+                    </stepresult>
+                </step>
+        </steps>
+        <postreq id="postreq_N10061_N10029_N10001" ixia_locid="216" class="- topic/section task/postreq ">
+                <p id="d377e422" ixia_locid="240" class="- topic/p ">After creating a provider network of the
+                    VLAN or VXLAN type, you can assign one or more <term ixia_locid="207" class="- topic/term ">segmentation ranges</term> consisting of a set of consecutive VLAN IDs (for
+                    VLANs) or VNIs (for VXLANs). Segmentation ranges are required in order to set up
+                    tenant networks.</p>
+                <p id="d377e428" ixia_locid="241" class="- topic/p ">Segmentation ranges are not
+                    required in order to attach interfaces and unlock compute nodes.</p>
+                <p id="d377e431" ixia_locid="209" class="- topic/p ">For general information about segmentation ranges, see the <cite ixia_locid="210" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration Guide: Provider
+                        Networks</cite>. For more information about creating segmentation ranges or
+                    setting up tenant networks, see the <cite ixia_locid="211" class="- topic/cite ">HP Helion OpenStack Carrier Grade
+                        Reference Deployment Scenarios</cite>.</p>
+            </postreq>
+    </taskbody>
+</task-wr>

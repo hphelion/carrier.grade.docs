@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1426181040008" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Specifying Local Storage for VM Ephemeral Resources</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">To use local storage for ephemeral resources, you must specify
+        instantiation on a host with local storage. You can do this by using a flavor with the
+        appropriate extra specification.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N10022_N1001F_N10001" ixia_locid="358" class="- topic/section task/context ">
+            <p ixia_locid="356" class="- topic/p ">Each new flavor is automatically assigned a <nameliteral ixia_locid="365" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Storage Type</nameliteral> extra spec that specifies, as the
+                default, instantiation on hosts without local storage. You can change this extra
+                spec so that hosts with local storage are used. Ephemeral storage resources
+                    (<nameliteral ixia_locid="369" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Ephemeral Disk</nameliteral> and <nameliteral ixia_locid="370" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Swap Disk</nameliteral> space) defined for the flavor use this
+                local storage, which is allocated from the Local Volume Group on the host.</p>
+            <p ixia_locid="357" class="- topic/p ">If the extra spec is set for local storage and instance is booted
+                from an image, then the root disk is ephemeral and also uses local storage. If the
+                instance is booted from a volume, the root disk uses Cinder-based storage allocated
+                from the controller (for a system using LVM) or from storage hosts (for a system
+                using Ceph).</p>
+            <note id="note_N10036_N10022_N1001F_N10001" ixia_locid="366" class="- topic/note ">
+                <p ixia_locid="367" class="- topic/p ">For faster VM booting, use a prepared Cinder volume. For more information, see
+                        <xref href="jow1439393204460.xml" ixia_locid="368" class="- topic/xref "/>.</p>
+            </note>
+        </context>
+        <prereq id="prereq_N10022_N1001F_N10001" ixia_locid="8" class="- topic/section task/prereq ">
+            <p ixia_locid="9" class="- topic/p ">Before you can use local storage for a VM, you must configure at least
+                one compute node to provide local storage. For more information, see <xref href="jow1426183480976.xml" ixia_locid="10" class="- topic/xref "/>.</p>
+        </prereq>
+        <context id="context_N1002F_N1001F_N10001" ixia_locid="11" class="- topic/section task/context ">
+            <note id="note_N10037_N10032_N1001F_N10001" ixia_locid="81" class="- topic/note " conref="jow1426942555025.xml#jow1426942555025/note_local_storage_ephemeral"/>
+            <p ixia_locid="17" class="- topic/p ">To change the extra specification using the web administration
+                interface, click <uicontrol ixia_locid="360" class="+ topic/ph ui-d/uicontrol ">Edit</uicontrol> for the existing
+                    <nameliteral ixia_locid="361" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Storage Type</nameliteral> extra specification,
+                and then select the <uicontrol ixia_locid="355" class="+ topic/ph ui-d/uicontrol ">Local Storage</uicontrol> check box.
+                To access the extra specification, see <xref href="jow1429538642910.xml" ixia_locid="82" class="- topic/xref "/>. </p>
+            <note id="note_N10064_N10042_N1001F_N10001" ixia_locid="362" type="caution" class="- topic/note ">
+                <p ixia_locid="363" class="- topic/p ">If the <nameliteral ixia_locid="364" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Storage Type</nameliteral>
+                    extra spec is not specified, instantiated VMs may use hosts with or without
+                    local storage. To ensure that instantiated VMs use storage of a known type, do
+                    not delete this extra spec.</p>
+            </note>
+            <p ixia_locid="18" class="- topic/p ">You can also specify the extra spec from the CLI by setting the
+                following parameter for a flavor:</p>
+            <codeblock ixia_locid="20" class="+ topic/pre pr-d/codeblock "><userinput ixia_locid="22" class="+ topic/ph sw-d/userinput ">aggregate_instance_extra_specs:localstorage=<varname ixia_locid="23" class="+ topic/keyword sw-d/varname ">loc_storage</varname></userinput></codeblock>
+            <p ixia_locid="24" class="- topic/p ">where <varname ixia_locid="25" class="+ topic/keyword sw-d/varname ">loc_storage</varname> is one of the
+                following:</p>
+            <dl class="- topic/dl ">
+                <dlentry ixia_locid="26" class="- topic/dlentry ">
+                    <dt ixia_locid="27" class="- topic/dt ">true</dt>
+                    <dd ixia_locid="28" class="- topic/dd ">
+                        <p ixia_locid="29" class="- topic/p ">Specifies hosts with local storage for use by the VM.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="30" class="- topic/dlentry ">
+                    <dt ixia_locid="31" class="- topic/dt ">false</dt>
+                    <dd ixia_locid="32" class="- topic/dd ">
+                        <p ixia_locid="33" class="- topic/p ">Specifies hosts without local storage for use by the
+                            VM.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="354" class="- topic/p ">For example:</p>
+            <codeblock ixia_locid="321" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="328" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="335" class="+ topic/ph sw-d/userinput ">nova flavor-key <varname ixia_locid="346" class="+ topic/keyword sw-d/varname ">flavor_name</varname> \
+set aggregate_instance_extra_specs:localstorage=false</userinput></codeblock>
+            <p ixia_locid="359" class="- topic/p ">The local storage key is added by default on flavor creation and set
+                to false (hosts with no local storage).</p>
+        </context>
+    </taskbody>
+</task-wr>

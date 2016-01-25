@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1425584215069" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Adding and Maintaining Routes for a VXLAN Network</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">You can add or delete routing table entries for hosts on a VXLAN
+        network using the CLI.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <prereq id="prereq_N1001F_N1001C_N10001" ixia_locid="4" class="- topic/section task/prereq ">
+            <p ixia_locid="5" class="- topic/p ">The compute node must be locked.</p>
+        </prereq>
+        <context id="context_N1002D_N1001F_N10001" ixia_locid="68" class="- topic/section task/context ">
+            <p ixia_locid="69" class="- topic/p ">To add routes, use the following command.</p>
+            <codeblock ixia_locid="70" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="73" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="76" class="+ topic/ph sw-d/userinput ">system host-route-add <varname ixia_locid="79" class="+ topic/keyword sw-d/varname ">node</varname> <varname ixia_locid="81" class="+ topic/keyword sw-d/varname ">ifname</varname> <varname ixia_locid="83" class="+ topic/keyword sw-d/varname ">network</varname> <varname ixia_locid="85" class="+ topic/keyword sw-d/varname ">prefix</varname> <varname ixia_locid="86" class="+ topic/keyword sw-d/varname ">gateway</varname> <varname ixia_locid="87" class="+ topic/keyword sw-d/varname ">metric</varname></userinput></codeblock>
+            <p ixia_locid="51" class="- topic/p ">where</p>
+            <parml class="+ topic/dl pr-d/parml ">
+                <plentry ixia_locid="52" class="+ topic/dlentry pr-d/plentry ">
+                    <pt ixia_locid="53" class="+ topic/dt pr-d/pt ">node</pt>
+                    <pd ixia_locid="54" class="+ topic/dd pr-d/pd ">
+                        <p ixia_locid="55" class="- topic/p ">is the name or UUID of the compute node</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="56" class="+ topic/dlentry pr-d/plentry ">
+                    <pt ixia_locid="57" class="+ topic/dt pr-d/pt ">ifname</pt>
+                    <pd ixia_locid="58" class="+ topic/dd pr-d/pd ">
+                        <p ixia_locid="59" class="- topic/p ">is the name of the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="60" class="+ topic/dlentry pr-d/plentry ">
+                    <pt ixia_locid="61" class="+ topic/dt pr-d/pt ">network</pt>
+                    <pd ixia_locid="62" class="+ topic/dd pr-d/pd ">
+                        <p ixia_locid="63" class="- topic/p ">is an IPv4 or IPv6 network address</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="91" class="+ topic/dlentry pr-d/plentry ">
+                    <pt ixia_locid="94" class="+ topic/dt pr-d/pt ">prefix</pt>
+                    <pd ixia_locid="97" class="+ topic/dd pr-d/pd ">
+                        <p ixia_locid="100" class="- topic/p ">is the netmask length for the network address</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="92" class="+ topic/dlentry pr-d/plentry ">
+                    <pt ixia_locid="95" class="+ topic/dt pr-d/pt ">gateway</pt>
+                    <pd ixia_locid="98" class="+ topic/dd pr-d/pd ">
+                        <p ixia_locid="101" class="- topic/p ">is the default gateway</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="93" class="+ topic/dlentry pr-d/plentry ">
+                    <pt ixia_locid="96" class="+ topic/dt pr-d/pt ">metric</pt>
+                    <pd ixia_locid="99" class="+ topic/dd pr-d/pd ">
+                        <p ixia_locid="102" class="- topic/p ">is the cost of the route (the number of hops)</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="103" class="- topic/p ">To delete routes, use the following command.</p>
+            <codeblock ixia_locid="71" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="74" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="77" class="+ topic/ph sw-d/userinput ">system host-route-delete <varname ixia_locid="80" class="+ topic/keyword sw-d/varname ">uuid</varname> <varname ixia_locid="82" class="+ topic/keyword sw-d/varname ">ifname</varname> <varname ixia_locid="84" class="+ topic/keyword sw-d/varname ">network</varname> <varname ixia_locid="88" class="+ topic/keyword sw-d/varname ">prefix</varname> <varname ixia_locid="89" class="+ topic/keyword sw-d/varname ">gateway</varname> <varname ixia_locid="90" class="+ topic/keyword sw-d/varname ">metric</varname></userinput></codeblock>
+            <p ixia_locid="104" class="- topic/p ">where <nameliteral ixia_locid="105" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">uuid</nameliteral> is the UUID of the route to be deleted.</p>
+            <p ixia_locid="106" class="- topic/p ">To list existing routes, including their UUIDs, use the following command.</p>
+            <codeblock ixia_locid="72" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="75" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="78" class="+ topic/ph sw-d/userinput ">system host-route-list compute-0</userinput></codeblock>
+        </context>
+    </taskbody>
+</task-wr>

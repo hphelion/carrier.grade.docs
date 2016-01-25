@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1438192231731" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Connecting Virtual Machines to External Networks</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">You can provide VMs with external connectivity using one of several
+        methods.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4" class="- topic/section task/context ">
+            <p ixia_locid="55" class="- topic/p ">You can use source network address translation (SNAT) or floating IP
+                addresses to expose VMs to an external network. Alternatively, you can use an
+                external NAT device, or use a network address space for the VMs that is directly
+                visible from the external network.</p>
+            <p ixia_locid="53" class="- topic/p ">You can associate a floating IP address with a VM using a pool of
+                available floating IP addresses configured by the system administrator. When a host
+                on an external network initiates a connection to a public floating IP address, the
+                virtual router updates a connection table to enable bidirectional traffic flow
+                between the host and the VM.</p>
+            <p ixia_locid="54" class="- topic/p ">When SNAT is enabled, the virtual router updates the connection table
+                only when a VM initiates connection to an external host. Until this happens, the VM
+                is inaccessible from the external network. This is true even if the private IP
+                address of the VM is used directly by incoming traffic.</p>
+            <p ixia_locid="14" class="- topic/p ">You can use floating IP addresses and SNAT in any combination. The
+                following table presents an overview. </p>
+            <table frame="all" id="table_wbq_4p1_ws" rowheader="firstcol" class="- topic/table ">
+                <tgroup cols="3" class="- topic/tgroup ">
+                    <colspec colname="col1" colnum="1" colwidth="1.0*" class="- topic/colspec "/>
+                    <colspec colname="col2" colnum="2" colwidth="1.0*" class="- topic/colspec "/>
+                    <colspec colname="col3" colnum="3" colwidth="1.0*" class="- topic/colspec "/>
+                    <thead class="- topic/thead ">
+                        <row class="- topic/row ">
+                            <entry colname="col1" ixia_locid="15" class="- topic/entry "/>
+                            <entry colname="col2" ixia_locid="16" class="- topic/entry ">
+                                <p ixia_locid="17" class="- topic/p ">Floating IP disabled</p>
+                            </entry>
+                            <entry colname="col3" ixia_locid="18" class="- topic/entry ">
+                                <p ixia_locid="19" class="- topic/p ">Floating IP enabled</p>
+                            </entry>
+                        </row>
+                    </thead>
+                    <tbody class="- topic/tbody ">
+                        <row class="- topic/row ">
+                            <entry colname="col1" ixia_locid="20" class="- topic/entry ">
+                                <p ixia_locid="21" class="- topic/p ">SNAT disabled</p>
+                            </entry>
+                            <entry colname="col2" ixia_locid="22" class="- topic/entry ">
+                                <p ixia_locid="23" class="- topic/p ">VMs are directly accessible from the external
+                                    network, provided the tenant network address space is directly
+                                    visible from the external network, or NAT is implemented using a
+                                    separate device.</p>
+                            </entry>
+                            <entry colname="col3" ixia_locid="24" class="- topic/entry ">
+                                <p ixia_locid="25" class="- topic/p ">VMs cannot initiate connections to the external
+                                    network unless they have assigned floating IP addresses.
+                                    External hosts can initiate connections to VMs that have
+                                    assigned floating IP addresses.</p>
+                            </entry>
+                        </row>
+                        <row class="- topic/row ">
+                            <entry colname="col1" ixia_locid="26" class="- topic/entry ">
+                                <p ixia_locid="27" class="- topic/p ">SNAT enabled</p>
+                            </entry>
+                            <entry colname="col2" ixia_locid="28" class="- topic/entry ">
+                                <p ixia_locid="29" class="- topic/p ">VMs can initiate connections to the external
+                                    network. External hosts cannot initiate connections to the
+                                    VMs.</p>
+                            </entry>
+                            <entry colname="col3" ixia_locid="30" class="- topic/entry ">
+                                <p ixia_locid="31" class="- topic/p ">VMs can initiate connections to the external
+                                    network. External hosts can initiate connections to VMs that
+                                    have assigned floating IP addresses. </p>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <p ixia_locid="32" class="- topic/p ">To enable or disable SNAT, see <xref href="jow1438192116883.xml" ixia_locid="33" class="- topic/xref "/>.</p>
+            <p ixia_locid="34" class="- topic/p ">To configure floating IP addresses for VMs, refer to the public
+                OpenStack documentation.</p>
+        </context>
+        <prereq id="prereq_N100FD_N1001F_N10001" ixia_locid="50" class="- topic/section task/prereq ">
+            <p ixia_locid="51" class="- topic/p ">To connect VMs to external networks, you require an internal tenant network for the
+                VMs, an external tenant network connected to an edge router, and a virtual router
+                attached to both networks. For more information about adding and configuring these
+                components, see the <cite ixia_locid="52" class="- topic/cite ">HP Helion OpenStack Carrier Grade Reference Deployment Scenarios</cite>.</p>
+        </prereq>
+    </taskbody>
+</task-wr>

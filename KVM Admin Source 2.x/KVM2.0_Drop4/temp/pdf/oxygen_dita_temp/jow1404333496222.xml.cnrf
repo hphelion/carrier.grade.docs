@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333496222" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic task/task task-wr/task-wr ">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Configuring Controller-0</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">You can configure <nameliteral ixia_locid="3" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> by running a script from
+        the Linux command line.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="4" class="- topic/author ">Jim Owens</author>
+        <author ixia_locid="5" class="- topic/author ">Pedro Sanchez</author>
+        <author ixia_locid="6" class="- topic/author ">Tom Towle</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N10031_N1002E_N10001" ixia_locid="396" class="- topic/section task/context ">
+            <p ixia_locid="397" class="- topic/p "><draft-comment author="jowens" ixia_locid="398" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 mention controller configuration
+                    file</draft-comment>You can perform the configuration interactively, as
+                described in this section, or you can use a prepared configuration file. For more
+                about using a configuration file, see <xref href="jow1441306845507.xml" ixia_locid="399" class="- topic/xref "/>.</p>
+        </context>
+        <prereq id="prereq_N1002B_N10028_N10001" ixia_locid="7" class="- topic/section task/prereq ">
+            <p ixia_locid="8" class="- topic/p ">Before running the configuration script:</p>
+            <ul id="ul_hk2_wmr_g4" class="- topic/ul ">
+                <li ixia_locid="9" class="- topic/li ">
+                    <p ixia_locid="10" class="- topic/p ">Ensure that <nameliteral ixia_locid="144" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> has been
+                        initialized, as described in <xref href="jow1404333490251.xml" ixia_locid="12" class="- topic/xref "/>.</p>
+                </li>
+                <li ixia_locid="145" class="- topic/li ">
+                    <p ixia_locid="146" class="- topic/p ">Ensure that the management interface on
+                            <nameliteral ixia_locid="147" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> is connected and
+                        operational.</p>
+                </li>
+                <li ixia_locid="202" class="- topic/li ">
+                    <p ixia_locid="203" class="- topic/p ">Install system software patches if there are any available from Wind
+                        River.</p>
+                </li>
+                <li ixia_locid="13" class="- topic/li ">
+                    <p ixia_locid="14" class="- topic/p ">Prepare a configuration plan to use as a reference. For
+                        details, see  the <cite ixia_locid="15" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration
+                            Guide: Storage Planning</cite>.</p>
+                </li>
+            </ul>
+        </prereq>
+        <context id="context_N1007D_N1002E_N10001" ixia_locid="282" product="tis_small" class="- topic/section task/context ">
+            <p ixia_locid="283" class="- topic/p ">For a minimal two-server configuration, in which the controller and
+                compute functions are combined on a single host, the procedure varies slightly. The
+                compute function on <nameliteral ixia_locid="284" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> is
+                configured before the <nameliteral ixia_locid="285" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>
+                configuration is started.</p>
+        </context>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N10102_N10031_N1001E_N10001" ixia_locid="201" class="- topic/li task/step ">
+                <cmd ixia_locid="232" class="- topic/ph task/cmd ">Copy the license file to the controller node.</cmd>
+                <substeps id="substeps_rqq_nn2_hq" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="235" class="- topic/li task/substep ">
+                        <cmd ixia_locid="193" class="- topic/ph task/cmd ">Connect the controller to the OAM network.</cmd>
+                        <info ixia_locid="234" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="237" class="- topic/p ">On the controller, assign the correct OAM network
+                                address to the appropriate port.</p>
+                            <codeblock ixia_locid="239" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="466" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="467" class="+ topic/ph sw-d/userinput ">sudo ip addr add <varname ixia_locid="215" class="+ topic/keyword sw-d/varname ">OAM_IP_address/mask</varname> dev <varname ixia_locid="218" class="+ topic/keyword sw-d/varname ">port</varname></userinput>
+<systemoutput ixia_locid="468" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="316" class="+ topic/ph sw-d/userinput ">sudo ip link set <varname ixia_locid="319" class="+ topic/keyword sw-d/varname ">port</varname> up</userinput>
+<systemoutput ixia_locid="469" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="317" class="+ topic/ph sw-d/userinput ">sudo route add default gw <varname ixia_locid="320" class="+ topic/keyword sw-d/varname ">gateway_addr</varname></userinput></codeblock>
+                            <note id="note_N10139_N10115_N1010C_N10108_N10101_N10031_N1001E_N10001" ixia_locid="222" class="- topic/note ">
+                                <p ixia_locid="223" class="- topic/p ">To identify the controller-0 port and IP
+                                    address, refer to your OAM network plan.</p>
+                            </note>
+                        </info>
+                        <stepxmp ixia_locid="224" class="- topic/itemgroup task/stepxmp ">
+                            <p ixia_locid="225" class="- topic/p ">For example:</p>
+                            <codeblock ixia_locid="241" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="261" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="470" class="+ topic/ph sw-d/userinput ">sudo ip addr add 10.10.10.3/24 dev eth0</userinput>
+<systemoutput ixia_locid="471" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="472" class="+ topic/ph sw-d/userinput ">sudo ip link set eth0 up</userinput>
+<systemoutput ixia_locid="473" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="318" class="+ topic/ph sw-d/userinput ">sudo route add default gw 10.10.10.1</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="226" class="- topic/li task/substep ">
+                        <cmd ixia_locid="227" class="- topic/ph task/cmd ">Connect a server containing the license file to the
+                            OAM network.</cmd>
+                    </substep>
+                    <substep ixia_locid="243" class="- topic/li task/substep ">
+                        <cmd ixia_locid="126" class="- topic/ph task/cmd ">Copy the HP Helion OpenStack Carrier Grade license file to <filepath ixia_locid="127" class="+ topic/ph sw-d/filepath ">/home/wrsroot/license.lic</filepath> on the
+                            controller.</cmd>
+                        <info ixia_locid="245" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="246" class="- topic/p ">This is the default path offered during controller
+                                configuration. If you prefer, you can copy the file to a different
+                                path, and specify the path during configuration.</p>
+                        </info>
+                        <stepxmp ixia_locid="474" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="475" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="476" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="477" class="+ topic/ph sw-d/userinput ">scp <varname ixia_locid="478" class="+ topic/keyword sw-d/varname ">username</varname>@<varname ixia_locid="479" class="+ topic/keyword sw-d/varname ">sourcehost</varname>:<varname ixia_locid="480" class="+ topic/keyword sw-d/varname ">sourcepath</varname>/license.lic /home/wrsroot/license.lic</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1015F_N10092_N1002E_N10001" importance="optional" ixia_locid="343" class="- topic/li task/step ">
+                <cmd ixia_locid="344" class="- topic/ph task/cmd ">Copy a digital certificate file to the controller node. </cmd>
+                <info ixia_locid="345" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="346" class="- topic/p ">If you require secure REST API access using HTTPS, copy a
+                        CA-signed digital certificate (PEM file) to a directory on the controller.
+                        The recommended path is <filepath ixia_locid="350" class="+ topic/ph sw-d/filepath ">/home/wrsroot</filepath>.</p>
+                </info>
+                <stepxmp ixia_locid="330" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="332" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="334" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="336" class="+ topic/ph sw-d/userinput ">scp <varname ixia_locid="338" class="+ topic/keyword sw-d/varname ">username</varname>@<varname ixia_locid="340" class="+ topic/keyword sw-d/varname ">sourcehost</varname>:<varname ixia_locid="342" class="+ topic/keyword sw-d/varname ">sourcepath</varname>/<varname ixia_locid="351" class="+ topic/keyword sw-d/varname ">pem_file</varname> /home/wrsroot/<varname ixia_locid="352" class="+ topic/keyword sw-d/varname ">pem_file</varname></userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N101CB_N10031_N1001E_N10001" ixia_locid="481" class="- topic/li task/step ">
+                <cmd ixia_locid="482" class="- topic/ph task/cmd ">Install any required patches.</cmd>
+                <info ixia_locid="483" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="484" class="- topic/p ">For more information about obtaining and using patches,
+                        refer to the <cite ixia_locid="321" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration Guide:
+                            Managing Software Patches</cite>.</p>
+                </info>
+                <substeps id="substeps_mm2_2yf_hq" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="485" class="- topic/li task/substep ">
+                        <cmd ixia_locid="263" class="- topic/ph task/cmd ">Copy the patches from a connected server.</cmd>
+                        <info ixia_locid="486" class="- topic/itemgroup task/info ">
+                            <codeblock ixia_locid="487" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="268" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput> <userinput ixia_locid="229" class="+ topic/ph sw-d/userinput ">scp <varname ixia_locid="217" class="+ topic/keyword sw-d/varname ">username</varname>@<varname ixia_locid="221" class="+ topic/keyword sw-d/varname ">sourcehost</varname>:<varname ixia_locid="231" class="+ topic/keyword sw-d/varname ">sourcepath</varname>/<varname ixia_locid="488" class="+ topic/keyword sw-d/varname ">patchfile</varname> /home/wrsroot/<varname ixia_locid="489" class="+ topic/keyword sw-d/varname ">patchfile</varname></userinput></codeblock>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="420" class="- topic/li task/substep ">
+                        <cmd ixia_locid="490" class="- topic/ph task/cmd ">Upload the patches to the patch storage area.</cmd>
+                        <info ixia_locid="491" class="- topic/itemgroup task/info ">
+                            <codeblock ixia_locid="492" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="269" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="323" class="+ topic/ph sw-d/userinput ">sudo sw-patch upload ./<varname ixia_locid="493" class="+ topic/keyword sw-d/varname ">patchfile</varname></userinput></codeblock>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="276" class="- topic/li task/substep ">
+                        <cmd ixia_locid="494" class="- topic/ph task/cmd ">Apply the patches.</cmd>
+                        <info ixia_locid="278" class="- topic/itemgroup task/info ">
+                            <draft-comment author="rstone" ixia_locid="464" translate="no" dir="ltr" class="- topic/draft-comment ">US62817 changed
+                                wrs-patch -&gt; sw-patch</draft-comment>
+                            <codeblock ixia_locid="495" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="496" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="325" class="+ topic/ph sw-d/userinput ">sudo sw-patch apply --all</userinput></codeblock>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="327" class="- topic/li task/substep ">
+                        <cmd ixia_locid="497" class="- topic/ph task/cmd ">Install the patches locally.</cmd>
+                        <info ixia_locid="498" class="- topic/itemgroup task/info ">
+                            <draft-comment author="rstone" ixia_locid="465" translate="no" dir="ltr" class="- topic/draft-comment ">US62817 changed
+                                wrs-patch -&gt; sw-patch</draft-comment>
+                            <codeblock ixia_locid="499" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="500" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="501" class="+ topic/ph sw-d/userinput ">sudo sw-patch install-local</userinput></codeblock>
+                        </info>
+                        <stepresult ixia_locid="502" class="- topic/itemgroup task/stepresult ">
+                            <p ixia_locid="503" class="- topic/p ">This command applies and installs all applied
+                                patches on controller-0. </p>
+                            <note id="note_N1025B_N10254_N1023C_N101CA_N101B1_N10031_N1001E_N10001" ixia_locid="504" class="- topic/note ">
+                                <p ixia_locid="505" class="- topic/p ">You must reboot the controller to ensure that it
+                                    is running with the software fully patched.</p>
+                            </note>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="506" class="- topic/li task/substep ">
+                        <cmd ixia_locid="427" class="- topic/ph task/cmd ">Reboot controller-0.</cmd>
+                    </substep>
+                </substeps>
+                <stepresult ixia_locid="507" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="508" class="- topic/p ">Patch installation is complete.</p>
+                </stepresult>
+            </step>
+            <step id="step_N10058_N10055_N10028_N10001" ixia_locid="16" class="- topic/li task/step ">
+                <cmd ixia_locid="17" class="- topic/ph task/cmd ">Start the controller configuration script.</cmd>
+                <stepxmp ixia_locid="18" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="19" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="509" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="21" class="+ topic/ph sw-d/userinput ">sudo config_controller</userinput>
+<systemoutput ixia_locid="510" class="+ topic/ph sw-d/systemoutput ">HP Helion OpenStack Carrier Grade Configuration
+======================================
+Enter Q at any prompt to abort...</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10072_N10055_N10028_N10001" ixia_locid="23" class="- topic/li task/step ">
+                <cmd ixia_locid="24" class="- topic/ph task/cmd ">Configure the controller options as requested by the configuration script. </cmd>
+                <info ixia_locid="25" class="- topic/itemgroup task/info ">
+                    <note id="note_N1007B_N10078_N10071_N10055_N10028_N10001" ixia_locid="26" class="- topic/note ">
+                        <p ixia_locid="27" class="- topic/p ">The configuration is applied only after all options have been specified.
+                            You can safely abort the configuration process at any time by pressing
+                            the <nameliteral ixia_locid="28" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Q</nameliteral> key.</p>
+                    </note>
+                    <p ixia_locid="29" class="- topic/p ">The following configuration groups are presented. For detailed information,
+                        refer to <xref href="jow1419271369349.xml" ixia_locid="30" class="- topic/xref "/>.</p>
+                    <table frame="all" id="table_m21_cmz_cn" class="- topic/table ">
+                        <title ixia_locid="31" class="- topic/title ">Controller Configuration Groups</title>
+                        <tgroup cols="2" class="- topic/tgroup ">
+                            <colspec colname="col1" colnum="1" colwidth="1.0*" class="- topic/colspec "/>
+                            <colspec colname="col2" colnum="2" colwidth="1.0*" class="- topic/colspec "/>
+                            <thead class="- topic/thead ">
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="32" class="- topic/entry ">
+                                        <p ixia_locid="33" class="- topic/p ">Configuration Group</p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="34" class="- topic/entry ">
+                                        <p ixia_locid="35" class="- topic/p ">Comments</p>
+                                    </entry>
+                                </row>
+                            </thead>
+                            <tbody class="- topic/tbody ">
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="36" class="- topic/entry ">
+                                        <p ixia_locid="395" class="- topic/p "><nameliteral ixia_locid="536" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">System date and time:</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="38" class="- topic/entry ">
+                                        <p ixia_locid="353" class="- topic/p ">The date and time as read from the local system
+                                            clock.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="40" class="- topic/entry ">
+                                        <p ixia_locid="354" class="- topic/p "><nameliteral ixia_locid="539" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Storage:</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="42" class="- topic/entry ">
+                                        <p ixia_locid="43" class="- topic/p ">The disk space allocations for database, image, and
+                                            volume storage. For details, see the <cite ixia_locid="44" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration Guide</cite>.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="355" class="- topic/entry ">
+                                        <p ixia_locid="356" class="- topic/p ">
+                                        <nameliteral ixia_locid="474" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">PXEBoot
+                                            Network:</nameliteral><draft-comment author="jowens" ixia_locid="525" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 section added, although US62804
+                                            focuses on getting settings from a config file; the
+                                            option to use a separate PXE boot network was added
+                                            under US58516 Regions support, and US62804 incidentally
+                                            makes this a choice in the config_controller
+                                            script</draft-comment>
+                                    </p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="357" class="- topic/entry ">
+                                        <p ixia_locid="358" class="- topic/p ">The configuration associated with the
+                                            PXE Boot network.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="359" class="- topic/entry ">
+                                        <p ixia_locid="360" class="- topic/p "><nameliteral ixia_locid="485" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Management
+                                            Network:</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="361" class="- topic/entry ">
+                                        <p ixia_locid="48" class="- topic/p ">The configuration associated with the internal management
+                                            network.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="511" class="- topic/entry ">
+                                        <p ixia_locid="362" class="- topic/p "><nameliteral ixia_locid="349" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Board
+                                            Management Control Network:</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="279" class="- topic/entry ">
+                                        <p ixia_locid="281" class="- topic/p ">The configuration associated with the board management
+                                            control network.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="49" class="- topic/entry ">
+                                        <p ixia_locid="363" class="- topic/p "><nameliteral ixia_locid="350" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Infrastructure
+                                            Network:</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="51" class="- topic/entry ">
+                                        <p ixia_locid="52" class="- topic/p ">The configuration associated with the infrastructure
+                                            network.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="53" class="- topic/entry ">
+                                        <p ixia_locid="364" class="- topic/p "><nameliteral ixia_locid="351" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">External OAM
+                                            Network:</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="55" class="- topic/entry ">
+                                        <p ixia_locid="56" class="- topic/p ">The configuration associated with the OAM Network.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="57" class="- topic/entry ">
+                                        <p ixia_locid="365" class="- topic/p "><nameliteral ixia_locid="352" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Domain Name
+                                            System (DNS):</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="59" class="- topic/entry ">
+                                        <p ixia_locid="60" class="- topic/p ">The IP addresses to use for DNS servers.
+                                            The servers must be accessible from the OAM Network.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="61" class="- topic/entry ">
+                                        <p ixia_locid="366" class="- topic/p "><nameliteral ixia_locid="353" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Network Time
+                                            Protocol (NTP):</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="63" class="- topic/entry ">
+                                        <p ixia_locid="64" class="- topic/p ">The IP addresses to use for NTP servers.
+                                            The servers must be accessible from the OAM Network.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="367" class="- topic/entry ">
+                                        <p ixia_locid="368" class="- topic/p "><nameliteral ixia_locid="429" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Licensing:</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="369" class="- topic/entry ">
+                                        <p ixia_locid="158" class="- topic/p ">The path to the HP Helion OpenStack Carrier Grade license
+                                            file.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="370" class="- topic/entry ">
+                                        <p ixia_locid="371" class="- topic/p "><nameliteral ixia_locid="430" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Security:</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="372" class="- topic/entry ">
+                                        <p ixia_locid="373" class="- topic/p ">The configuration for secure API access.</p>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="153" class="- topic/entry ">
+                                        <p ixia_locid="374" class="- topic/p "><nameliteral ixia_locid="355" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Authentication:</nameliteral></p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="157" class="- topic/entry ">
+                                        <p ixia_locid="159" class="- topic/p ">A temporary password for the Titanium
+                                            Server cloud <nameliteral ixia_locid="178" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> account. </p>
+                                        <note id="note_N1016A_N1015F_N10154_N100C1_N10099_N10090_N10078_N10071_N10055_N10028_N10001" ixia_locid="70" class="- topic/note ">
+                                            <p ixia_locid="71" class="- topic/p ">This is the password for the cloud
+                                                  <nameliteral ixia_locid="160" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral>
+                                                account, not the Linux <nameliteral ixia_locid="161" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral> account.</p>
+                                        </note>
+                                    </entry>
+                                </row>
+                                <row class="- topic/row ">
+                                    <entry colname="col1" ixia_locid="72" class="- topic/entry ">
+                                        <p ixia_locid="73" class="- topic/p ">Apply the configuration settings</p>
+                                    </entry>
+                                    <entry colname="col2" ixia_locid="74" class="- topic/entry ">
+                                        <p ixia_locid="75" class="- topic/p ">This is the final question before the
+                                            configuration selections are applied. Once you enter
+                                                <userinput ixia_locid="76" class="+ topic/ph sw-d/userinput ">y</userinput> to accept
+                                            the selected options, the installation script commits
+                                            the configuration settings.</p>
+                                    </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </info>
+                <stepresult ixia_locid="77" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="78" class="- topic/p ">After a few minutes, the message 
+                        <b ixia_locid="79" class="+ topic/ph hi-d/b ">Configuration was applied</b>
+                    
+                        appears.</p>
+                </stepresult>
+            </step>
+            <step id="step_N1023D_N10087_N1002E_N10001" ixia_locid="162" class="- topic/li task/step ">
+                <cmd ixia_locid="163" class="- topic/ph task/cmd ">Change to the Keystone <nameliteral ixia_locid="164" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> account.</cmd>
+                <info ixia_locid="177" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="253" class="- topic/p ">Use the <cmdname ixia_locid="512" class="+ topic/keyword sw-d/cmdname ">source</cmdname> command to become the Keystone
+                            <nameliteral ixia_locid="513" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> user.</p>
+                    <codeblock ixia_locid="514" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="515" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="516" class="+ topic/ph sw-d/userinput ">source /etc/nova/openrc</userinput>
+<systemoutput ixia_locid="517" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput></codeblock>
+                </info>
+            </step>
+            
+            <step id="step_N101C3_N10055_N10028_N10001" ixia_locid="89" class="- topic/li task/step ">
+                <cmd ixia_locid="90" class="- topic/ph task/cmd ">Verify that the HP Helion OpenStack Carrier Grade controller services are running.</cmd>
+                <stepxmp ixia_locid="375" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="376" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="377" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="378" class="+ topic/ph sw-d/userinput ">nova service-list</userinput>
+<systemoutput ixia_locid="379" class="+ topic/ph sw-d/systemoutput ">+------------------+--------------+--------+---------+------------+-------+ ...
+| Binary           | Host         | Zone   | Status  | Maint Mode | State | ...
++------------------+--------------+--------+---------+------------+-------+ ...
+| nova-conductor   | controller-0 | int... | enabled | disabled   | up    | ...
+| nova-cert        | controller-0 | int... | enabled | disabled   | up    | ...
+| nova-consoleauth | controller-0 | int... | enabled | disabled   | up    | ...
+| nova-scheduler   | controller-0 | int... | enabled | disabled   | up    | ...
++------------------+--------------+--------+---------+------------+-------+ ...</systemoutput>
+</codeblock>
+                    <note id="note_N103F7_N103E1_N103D7_N10093_N1002E_N10001" ixia_locid="400" product="tis_small" class="- topic/note ">
+                        <p ixia_locid="401" class="- topic/p ">For a minimal two-server  configuration, the
+                                <nameliteral ixia_locid="382" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">nova-compute</nameliteral> service is also listed.</p>
+                    </note>
+                </stepxmp>
+            </step>
+            <step id="step_N10407_N10093_N1002E_N10001" ixia_locid="383" product="tis_small" class="- topic/li task/step ">
+                <cmd ixia_locid="384" class="- topic/ph task/cmd ">For a minimal two-server configuration, verify that the
+                    controller and compute subfunctions are present. </cmd>
+                <stepxmp ixia_locid="385" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="387" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="388" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="389" class="+ topic/ph sw-d/userinput ">system host-show 1 | grep subfunctions</userinput>
+<systemoutput ixia_locid="390" class="+ topic/ph sw-d/systemoutput ">| personality     | controller,compute</systemoutput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N101DE_N10055_N10028_N10001" ixia_locid="96" class="- topic/li task/step ">
+                <cmd ixia_locid="97" class="- topic/ph task/cmd ">Verify that <nameliteral ixia_locid="98" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> is in the state
+                        <nameliteral ixia_locid="99" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">unlocked-enabled-available</nameliteral>.</cmd>
+                <stepxmp ixia_locid="100" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="101" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="518" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="103" class="+ topic/ph sw-d/userinput ">system host-list</userinput>
+<systemoutput ixia_locid="519" class="+ topic/ph sw-d/systemoutput ">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10200_N10055_N10028_N10001" importance="optional" ixia_locid="105" class="- topic/li task/step ">
+                <cmd ixia_locid="106" class="- topic/ph task/cmd ">Synchronize the RAID array.</cmd>
+                <info ixia_locid="107" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="108" class="- topic/p ">Normally, the RAID array is already synchronized. If you need to synchronize
+                        the RAID array manually, do so now. You may be able to do this by pressing a
+                        button on the unit, or using a special key combination on the console
+                        keyboard. For details, consult the OEM documentation for the RAID.</p>
+                </info>
+            </step>
+            <step id="step_N10212_N10055_N10028_N10001" ixia_locid="109" class="- topic/li task/step ">
+                <cmd ixia_locid="110" class="- topic/ph task/cmd ">Using a Web browser, navigate to the OAM floating IP address
+                    to verify that the HP Helion OpenStack Carrier Grade web administration interface is
+                    available.</cmd>
+                <info ixia_locid="111" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="112" class="- topic/p ">To identify the OAM floating IP address, consult the
+                        configuration plan.</p>
+                </info>
+                <stepresult ixia_locid="114" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="115" class="- topic/p ">The <wintitle ixia_locid="116" class="+ topic/keyword ui-d/wintitle ">HP Helion OpenStack Carrier Grade</wintitle> login
+                        screen appears.</p>
+                    <fig id="fig_N10228_N1021D_N1020A_N10055_N10028_N10001" ixia_locid="117" class="- topic/fig ">
+                        <title ixia_locid="118" class="- topic/title ">HP Helion OpenStack Carrier Grade login screen</title>
+                        <image alt="Carrier Grade Communication Server login screen" href="jow1404333491396.image" id="image_t5q_4b1_dn" ixia_locid="119" placement="inline" width="2.5in" class="- topic/image "/>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10244_N10055_N10028_N10001" ixia_locid="120" class="- topic/li task/step ">
+                <cmd ixia_locid="121" class="- topic/ph task/cmd ">Log in using the cloud <nameliteral ixia_locid="122" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> account.</cmd>
+                <stepresult ixia_locid="123" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="124" class="- topic/p ">The <wintitle ixia_locid="125" class="+ topic/keyword ui-d/wintitle ">HP Helion OpenStack Carrier Grade</wintitle> web
+                        administration interface appears.</p>
+                    <fig id="fig_N10251_N10246_N1023B_N10055_N10028_N10001" ixia_locid="184" class="- topic/fig ">
+                        <title ixia_locid="186" class="- topic/title ">HP Helion OpenStack Carrier Grade web administration interface</title>
+                        <image alt="Carrier Grade Communication Server web administration interface" href="jow1404333493002.image" id="image_pzt_1ts_g4" ixia_locid="192" placement="inline" width="5.5in" class="- topic/image "/>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N1026E_N10055_N10028_N10001" ixia_locid="129" class="- topic/li task/step ">
+                <cmd ixia_locid="194" class="- topic/ph task/cmd ">In the left-hand pane, on the <uicontrol ixia_locid="131" class="+ topic/ph ui-d/uicontrol ">Admin</uicontrol> tab, click
+                        <uicontrol ixia_locid="196" class="+ topic/ph ui-d/uicontrol ">Inventory</uicontrol>, and then select the
+                        <uicontrol ixia_locid="133" class="+ topic/ph ui-d/uicontrol ">Hosts</uicontrol> tab.</cmd>
+                <stepresult ixia_locid="198" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="135" class="- topic/p "><nameliteral ixia_locid="200" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Controller-0</nameliteral> is reported in the hosts inventory
+                        list.</p>
+                    <fig id="fig_N10281_N10277_N10264_N10055_N10028_N10001" ixia_locid="182" class="- topic/fig ">
+                        <image alt="Hosts list showing controller-0" href="jow1404333494735.image" id="image_f1p_dtm_jn" ixia_locid="188" placement="inline" width="5.5in" class="- topic/image "/>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N1045B_N1008E_N1002E_N10001" ixia_locid="286" product="tis_small" class="- topic/li task/step ">
+                <cmd ixia_locid="287" class="- topic/ph task/cmd ">If you are installing a minimal two-server configuration,
+                    configure the compute function on <nameliteral ixia_locid="288" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral>.</cmd>
+                <substeps id="substeps_u5p_fth_yr" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="289" class="- topic/li task/substep ">
+                        <cmd ixia_locid="290" class="- topic/ph task/cmd ">Configure provider networks.</cmd>
+                        <info ixia_locid="291" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="292" class="- topic/p ">For detailed instructions, see <xref href="jow1404333519516.xml" ixia_locid="293" class="- topic/xref "/>.</p>
+                            <p ixia_locid="294" class="- topic/p ">Provider networks are required so that you can
+                                configure data interfaces and unlock the host. By configuring the
+                                data interfaces on <nameliteral ixia_locid="295" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> before you configure <nameliteral ixia_locid="296" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>, you can avoid the
+                                need to swact controllers.</p>
+                            <p ixia_locid="520" class="- topic/p ">Ordinarily, to attach data interfaces, you must lock
+                                the affected host. On a host that supports controller and compute
+                                functions, this would require a swact to lock the host. The Titanium
+                                Server setup for a minimal two-server configuration avoids this by
+                                allowing you to define the data interfaces on the unlocked
+                                    <nameliteral ixia_locid="298" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> during
+                                initial setup.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="299" class="- topic/li task/substep ">
+                        <cmd ixia_locid="300" class="- topic/ph task/cmd ">Attach the data interfaces to the provider networks.</cmd>
+                        <info ixia_locid="301" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="302" class="- topic/p ">For details, see <xref href="jow1426948577755.xml" ixia_locid="521" class="- topic/xref "/>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="304" class="- topic/li task/substep ">
+                        <cmd ixia_locid="305" class="- topic/ph task/cmd ">Apply the data interface configuration.</cmd>
+                        <info ixia_locid="306" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="307" class="- topic/p ">At the command prompt,  type the following command:</p>
+                            <codeblock ixia_locid="308" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="309" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="310" class="+ topic/ph sw-d/userinput ">system compute-config-complete</userinput></codeblock>
+                        </info>
+                        <stepresult ixia_locid="311" class="- topic/itemgroup task/stepresult ">
+                            <p ixia_locid="312" class="- topic/p ">The configuration is applied and the host is
+                                rebooted. </p>
+                        </stepresult>
+                    </substep>
+                </substeps>
+            </step>
+        </steps>
+        <result id="result_N1028D_N10028_N10001" ixia_locid="190" class="- topic/section task/result ">
+            <p ixia_locid="140" class="- topic/p ">The host <nameliteral ixia_locid="141" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> is
+                now fully operational. It can be used to initialize all other hosts in the Titanium
+                Server cluster.</p>
+            <note id="note_N105D7_N105C8_N1002E_N10001" ixia_locid="391" product="tis_small" class="- topic/note ">
+                <p ixia_locid="392" class="- topic/p ">For a minimal two-server configuration, you can verify that the
+                        <nameliteral ixia_locid="393" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">nova-compute</nameliteral> service is running on the controller
+                    by using the <cmdname ixia_locid="394" class="+ topic/keyword sw-d/cmdname ">nova service-list</cmdname> command.</p>
+            </note>
+        </result>
+        <postreq id="postreq_N106BD_N1002E_N10001" ixia_locid="525" product="tis_small" class="- topic/section task/postreq ">
+            <p ixia_locid="526" class="- topic/p "><draft-comment author="jowens" ixia_locid="527" translate="no" dir="ltr" class="- topic/draft-comment ">US65502 added</draft-comment>For a minimal two-server
+                configuration, you must also set up local storage. This means that after configuring
+                    <nameliteral ixia_locid="528" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>, you must swact the controllers in order
+                to lock <nameliteral ixia_locid="529" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> and configure its local storage. The
+                required steps are included in the instructions for <xref href="jow1404333507469.xml" ixia_locid="530" class="- topic/xref "/>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

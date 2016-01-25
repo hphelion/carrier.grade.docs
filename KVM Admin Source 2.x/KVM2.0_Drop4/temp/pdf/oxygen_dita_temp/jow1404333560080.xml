@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333560080" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic concept/concept concept-wr/concept-wr ">
+    <!-- Modification History
+
+ -->
+    <title ixia_locid="1" class="- topic/title ">HP Helion OpenStack Carrier Grade Overview</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc " HP Helion OpenStack Carrier Grade is a high-performance, high-availability,
+        cloud operating system that enables telecommunications operators to use
+        Commercial-off-the-shelf (COTS) hardware to manage Virtualized Network Functions (VNF)
+        within a carrier grade Network Function Virtualization (NFV) architecture.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="254" class="- topic/author ">Jim Owens</author>
+        <author ixia_locid="255" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <conbody class="- topic/body  concept/conbody ">
+        <p ixia_locid="5" class="- topic/p ">HP Helion OpenStack Carrier Grade brings together the flexibility and scalability of the IT
+            cloud, and the high-availability and performance demanded by the Telecommunications
+            industry, into a unique carrier grade, industry-leading solution to deliver a
+            price-performance ratio well above alternative solutions. HP Helion OpenStack Carrier Grade is aligned
+            with the ETSI-NFV architecture.</p>
+        <section id="section_N10027_N1001C_N10001" ixia_locid="6" class="- topic/section ">
+            <title ixia_locid="7" class="- topic/title ">Core HP Helion OpenStack Carrier Grade Capabilities</title>
+            <p ixia_locid="8" class="- topic/p ">HP Helion OpenStack Carrier Grade leverages core virtualization and
+                carrier-grade technologies, Intel DPDK high-performance packet processing, open
+                architectures, and the OpenStack software suite. It extends the OpenStack software
+                suite to implement a unique carrier-grade, high-availability architecture, on which
+                high-performance production systems can be deployed.</p>
+            <p ixia_locid="9" class="- topic/p ">Core capabilities unique to HP Helion OpenStack Carrier Grade include:</p>
+            <dl class="- topic/dl ">
+                <!--<dlentry ixia_locid="16">
+                    <dt ixia_locid="17"><nameliteral ixia_locid="18">Supported Guest
+                            OSs</nameliteral></dt>
+                    <dd ixia_locid="19">
+                        <p ixia_locid="20">HP Helion OpenStack Carrier Grade is designed to work with any Linux
+                            Distribution. Wind River Linux, Red Hat Enterprise Linux, CentOS, and
+                            Ubuntu have been sanity tested as OSs in the Guest virtual machines.</p>
+                    </dd>
+                </dlentry>--><!-- 2014-12-18 moved to Release Notes -->
+                <dlentry ixia_locid="21" class="- topic/dlentry ">
+                    <dt ixia_locid="22" class="- topic/dt "><nameliteral ixia_locid="23" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">High-Performance
+                            Networking</nameliteral></dt>
+                    <dd ixia_locid="24" class="- topic/dd ">
+                        <p ixia_locid="25" class="- topic/p ">HP Helion OpenStack Carrier Grade provides significantly improved network
+                            performance over the default open source OpenStack solution, up to 20
+                            Gbps throughput through a guest application on a virtual machine.</p>
+                        <p ixia_locid="26" class="- topic/p ">At the center of HP Helion OpenStack Carrier Grade Networking is a
+                            DPDK-Accelerated Virtual L2 Switch (AVS), running on the compute node
+                            hosts. It provides connectivity between virtual machines on the same
+                            compute node, and between virtual machines and external networks. AVS
+                            supports a variety of network connectivity options with the hosted
+                            virtual machines, as follows: </p>
+                        <ul id="ul_mgc_xnp_nn" class="- topic/ul ">
+                            <li ixia_locid="27" class="- topic/li ">
+                                <p ixia_locid="28" class="- topic/p ">Unmodified guests can use Linux networking and
+                                    virtio drivers. This provides a mechanism to bring existing
+                                    applications into the production environment immediately.</p>
+                            </li>
+                            <li ixia_locid="29" class="- topic/li ">
+                                <p ixia_locid="30" class="- topic/p ">Guest applications can be modified to leverage
+                                    the Accelerated Virtual Port (AVP) drivers provided with
+                                    HP Helion OpenStack Carrier Grade. AVP ports provide increased throughput over
+                                    plain virtio drivers when connected to the AVS.</p>
+                            </li>
+                            <li ixia_locid="31" class="- topic/li ">
+                                <p ixia_locid="32" class="- topic/p ">For the highest performance, guest applications
+                                    can also be modified to make use of the Intel DPDK libraries and
+                                    the AVP poll-mode drivers provided by HP Helion OpenStack Carrier Grade to connect
+                                    with the AVS Switch.</p>
+                            </li>
+                        </ul>
+                        <p ixia_locid="253" class="- topic/p ">In addition to AVS, HP Helion OpenStack Carrier Grade incorporates DPDK-Accelerated Neutron
+                            Virtual Router L3 Forwarding (AVR). Accelerated forwarding is used
+                            between directly attached tenant networks and subnets, as well as for
+                            gateway, SNAT, and floating IP functionality.</p>
+                        <p ixia_locid="351" class="- topic/p ">HP Helion OpenStack Carrier Grade also supports direct guest access to NICs using PCI
+                            passthrough or SR-IOV, with enhanced NUMA scheduling options compared to
+                            standard OpenStack. This offers very high performance, but because
+                            access is not managed by HP Helion OpenStack Carrier Grade, there is no support for live
+                            migration, LAG, host interface monitoring, QoS, or ACL. If VLANs are
+                            used, they must be managed by the guests.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="33" class="- topic/dlentry ">
+                    <dt ixia_locid="34" class="- topic/dt "><nameliteral ixia_locid="35" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">High-Availability</nameliteral></dt>
+                    <dd ixia_locid="36" class="- topic/dd ">
+                        <p ixia_locid="37" class="- topic/p ">HP Helion OpenStack Carrier Grade provides a number of extensions to
+                            OpenStack to deliver highly available hosting of virtual machines,
+                            including:</p>
+                        <dl class="- topic/dl ">
+                            <dlentry ixia_locid="38" class="- topic/dlentry ">
+                                <dt ixia_locid="39" class="- topic/dt ">1:1 OpenStack controller services</dt>
+                                <dd ixia_locid="40" class="- topic/dd ">
+                                    <p ixia_locid="41" class="- topic/p ">Automatic configuration of the OpenStack
+                                        controller services in 1:1 active/standby mode across two
+                                        controller nodes. </p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="42" class="- topic/dlentry ">
+                                <dt ixia_locid="43" class="- topic/dt ">Fast detection of compute host failures</dt>
+                                <dd ixia_locid="44" class="- topic/dd ">
+                                    <p ixia_locid="45" class="- topic/p ">Implemented by using a highly efficient and
+                                        highly scalable heartbeat protocol between the controller
+                                        and compute nodes.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="46" class="- topic/dlentry ">
+                                <dt ixia_locid="47" class="- topic/dt ">Fast recovery of virtual machines instances upon
+                                    detection of a compute node failure</dt>
+                                <dd ixia_locid="48" class="- topic/dd ">
+                                    <p ixia_locid="49" class="- topic/p ">Extensions to Nova services that
+                                        automatically re-schedule impacted virtual machine instances
+                                        to available alternative compute nodes in the cluster.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="50" class="- topic/dlentry ">
+                                <dt ixia_locid="51" class="- topic/dt ">Fast recovery of tenant network services upon
+                                    detection of a compute node failure</dt>
+                                <dd ixia_locid="52" class="- topic/dd ">
+                                    <p ixia_locid="53" class="- topic/p ">Extensions to Neutron that automatically
+                                        re-schedule impacted network services such as DHCP, L3
+                                        Routing, and User/Meta data server, for all affected tenant
+                                        networks. This covers tenant networks spanning multiple
+                                        compute nodes.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="54" class="- topic/dlentry ">
+                                <dt ixia_locid="55" class="- topic/dt ">Fast and enhanced detection of virtual machines
+                                    failures</dt>
+                                <dd ixia_locid="56" class="- topic/dd ">
+                                    <p ixia_locid="57" class="- topic/p ">Failure of any KVM/QEMU instance is
+                                        automatically reported by the Linux death process
+                                        notification.</p>
+                                    <p ixia_locid="58" class="- topic/p ">Additionally, modified guests can make use of
+                                        the HP Helion OpenStack Carrier Grade Guest Heartbeat Library to register
+                                        application-specific health check callbacks with the virtual
+                                        machine. This registration allows the compute node to
+                                        monitor the health of the guest application. The frequency
+                                        of the health checks is determined at registration time. The
+                                        semantics of the health check, that is, determining when the
+                                        application is in a good or a bad state, is under the
+                                        control of the application itself.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="59" class="- topic/dlentry ">
+                                <dt ixia_locid="60" class="- topic/dt ">Automatic recovery of failed virtual machine
+                                    instances</dt>
+                                <dd ixia_locid="61" class="- topic/dd ">
+                                    <p ixia_locid="62" class="- topic/p ">Extensions to Nova that automatically
+                                        re-start a failed virtual machine on the same compute node.
+                                        If the re-start operation fails, the virtual machine is
+                                        re-scheduled to use an alternative compute node.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="63" class="- topic/dlentry ">
+                                <dt ixia_locid="64" class="- topic/dt ">Virtual machine server groups</dt>
+                                <dd ixia_locid="65" class="- topic/dd ">
+                                    <p ixia_locid="66" class="- topic/p ">Named groups of virtual machines instances to
+                                        which a common set of attributes are applied, including:</p>
+                                    <ul id="ul_s5y_kbq_nn" class="- topic/ul ">
+                                        <li ixia_locid="237" class="- topic/li ">
+                                            <p ixia_locid="239" class="- topic/p ">compute node affinity or
+                                                anti-affinity</p>
+                                        </li>
+                                        <li ixia_locid="69" class="- topic/li ">
+                                            <p ixia_locid="70" class="- topic/p ">maximum number of virtual machine
+                                                instances</p>
+                                        </li>
+                                        <li ixia_locid="71" class="- topic/li ">
+                                            <p ixia_locid="72" class="- topic/p ">best effort or strict affinity
+                                                policy</p>
+                                        </li>
+                                    </ul>
+                                    <p ixia_locid="256" class="- topic/p ">Virtual machines in the same server group can use a server
+                                        group messaging API for low-bandwidth communications.</p>
+                                    <p ixia_locid="73" class="- topic/p ">In a typical use of a virtual machine server
+                                        group, guest applications in active/standby pairs are
+                                        deployed on different compute nodes to protect them from
+                                        hardware failures.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="74" class="- topic/dlentry ">
+                                <dt ixia_locid="75" class="- topic/dt ">Live migration support with DPDK-accelerated
+                                    networking</dt>
+                                <dd ixia_locid="76" class="- topic/dd ">
+                                    <p ixia_locid="77" class="- topic/p ">Live migration support for virtual machines,
+                                        using the high-performance networking options included with
+                                        HP Helion OpenStack Carrier Grade.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="78" class="- topic/dlentry ">
+                                <dt ixia_locid="79" class="- topic/dt ">Graceful shutdown (and other operations) of
+                                    virtual machines</dt>
+                                <dd ixia_locid="80" class="- topic/dd ">
+                                    <p ixia_locid="81" class="- topic/p ">Nova extensions that turn the default
+                                        shutdown operation of virtual machines into an ACPI
+                                        shutdown. Guest applications can therefore register shutdown
+                                        scripts using standard ACPI mechanisms to execute operations
+                                        such as closing files, updating persistent databases, or
+                                        cleanly disconnecting from subscribed services.</p>
+                                    <p ixia_locid="82" class="- topic/p ">Optionally, guest applications can use the
+                                        HP Helion OpenStack Carrier Grade Guest Heartbeat Library to register to
+                                        receive process management requests such as shutdown,
+                                        live-migrate, pause, auto-scale, and others. The guest
+                                        applications can then reject the requests based
+                                        upon application-specific state directives, or prepare for a
+                                        graceful execution.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="83" class="- topic/dlentry ">
+                                <dt ixia_locid="84" class="- topic/dt ">Link Aggregation (LAG) support</dt>
+                                <dd ixia_locid="85" class="- topic/dd ">
+                                    <p ixia_locid="86" class="- topic/p ">Support for LAG, also known as Aggregate
+                                        Ethernet, on controller and compute nodes for link
+                                        protection.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="231" class="- topic/dlentry ">
+                                <dt ixia_locid="232" class="- topic/dt ">Protected HA Middleware</dt>
+                                <dd ixia_locid="233" class="- topic/dd ">
+                                    <p ixia_locid="234" class="- topic/p ">HP Helion OpenStack Carrier Grade HA middleware is protected
+                                        by a process monitor that uses  Linux death
+                                        process notification to detect and respawn critical HA
+                                        processes.</p>
+                                </dd>
+                            </dlentry>
+                        </dl>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="87" class="- topic/dlentry ">
+                    <dt ixia_locid="88" class="- topic/dt "><nameliteral ixia_locid="89" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Virtual Machine
+                            Performance</nameliteral></dt>
+                    <dd ixia_locid="90" class="- topic/dd ">
+                        <p ixia_locid="91" class="- topic/p ">HP Helion OpenStack Carrier Grade provides an improved execution
+                            environment for virtual machines that contributes to their overall
+                            performance when deployed on the compute nodes. Enhancements to the
+                            execution environment include:</p>
+                        <ul id="ul_rx5_gfs_nn" class="- topic/ul ">
+                            <li ixia_locid="92" class="- topic/li ">
+                                <p ixia_locid="93" class="- topic/p ">Low-latency, bounded delivery of virtual
+                                    interrupts, and availability of low-latency high resolution
+                                    timers. This is done by leveraging the optimized kernel and
+                                    KVM/QEMU implementations of the Open Virtualization
+                                    Platform (OVP).</p>
+                            </li>
+                            <li ixia_locid="94" class="- topic/li ">
+                                <p ixia_locid="95" class="- topic/p ">Option to allocate 2 MB or 1 GB huge memory pages
+                                    to reduce swapping and TLB lookup misses.</p>
+                            </li>
+                            <li ixia_locid="96" class="- topic/li ">
+                                <p ixia_locid="97" class="- topic/p ">Improved resource tracking of VMs that use
+                                    dedicated CPUs, to ensure successful migration and
+                                    evacuation.</p>
+                            </li>
+                            <li ixia_locid="99" class="- topic/li ">
+                                <p ixia_locid="100" class="- topic/p ">Support for affining guest NUMA nodes to
+                                    specific host NUMA nodes.</p>
+                            </li>
+                            <li ixia_locid="204" class="- topic/li ">
+                                <p ixia_locid="205" class="- topic/p ">Capability to specify specific CPU models to be used by a virtual
+                                    machine in order to leverage advanced features of the CPU
+                                    architecture.</p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="247" class="- topic/dlentry ">
+                    <dt ixia_locid="248" class="- topic/dt "><nameliteral ixia_locid="252" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Guest VLANs</nameliteral></dt>
+                    <dd ixia_locid="249" class="- topic/dd ">
+                        <p ixia_locid="250" class="- topic/p ">HP Helion OpenStack Carrier Grade guests can make use of Titanium
+                            Server-defined VLANs to encapsulate IP traffic from a single or multiple
+                            IP subnets on a virtual Ethernet interface. HP Helion OpenStack Carrier Grade tenants can
+                            define one or more VLAN-tagged IP subnets on a single tenant network to
+                            allow their guests’ traffic to be encapsulated on VLAN IDs of their
+                            choice. These TiS-defined VLAN-tagged IP subnets have access to all of
+                            the services of the virtualized network infrastructure, such as DHCP,
+                            virtual routing, meta-data server, etc.</p>
+                        <draft-comment author="rstone" ixia_locid="354" translate="no" dir="ltr" class="- topic/draft-comment ">US60634 adds</draft-comment>
+                        <p ixia_locid="353" class="- topic/p ">Alternately, HP Helion OpenStack Carrier Grade guests can make use of
+                            transparent VLANs, in which packets are encapsulated within a provider
+                            network segment without removing or modifying the guest VLAN tag(s).
+                            VLAN Transparent provides more flexibility with respect to how VLAN
+                            tagged packets are handled without requiring that you pre-define which
+                            VLAN instances will be used. A guest can send/receive VLAN tagged
+                            packets (802.1q) and/or double VLAN tagged packets (802.1ad) without
+                            first defining a VLAN-tagged subnet in HP Helion OpenStack Carrier Grade. In addition, a
+                            VLAN transparent network will also propagate VLAN priority information
+                            (802.1p) to the destination VM instance. However, as a consequence of
+                            allowing arbitrary VLAN instances, you loose the ability to access DHCP
+                            servers, virtual routers, or meta-data servers over those VLAN-tagged
+                            networks. </p>
+                        <p ixia_locid="355" class="- topic/p ">Support for Guest VLANs is a key capability that facilitates the porting
+                            of current user applications running on dedicated physical servers using
+                            VLANs to a virtualized environment.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="101" class="- topic/dlentry ">
+                    <dt ixia_locid="102" class="- topic/dt "><nameliteral ixia_locid="103" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Inventory
+                            Management</nameliteral></dt>
+                    <dd ixia_locid="104" class="- topic/dd ">
+                        <p ixia_locid="105" class="- topic/p ">HP Helion OpenStack Carrier Grade provides complete inventory management
+                            of hosts in the OpenStack cloud, allowing the system administrator to
+                            install, configure, and maintain the individual servers. The inventory
+                            service gives the system administrator the following capabilities:</p>
+                        <ul id="ul_xyb_2bt_nn" class="- topic/ul ">
+                            <li ixia_locid="106" class="- topic/li ">
+                                <p ixia_locid="107" class="- topic/p ">Host management</p>
+                                <ul id="ul_afq_fbt_nn" class="- topic/ul ">
+                                    <li ixia_locid="108" class="- topic/li ">
+                                        <p ixia_locid="109" class="- topic/p ">discovery of new hosts in the
+                                            cluster</p>
+                                    </li>
+                                    <li ixia_locid="110" class="- topic/li ">
+                                        <p ixia_locid="111" class="- topic/p ">installation of the appropriate load,
+                                            controller, compute, or storage images</p>
+                                    </li>
+                                    <li ixia_locid="112" class="- topic/li ">
+                                        <p ixia_locid="113" class="- topic/p ">configuration of the management, OAM,
+                                            infrastructure, and provider network interfaces on each
+                                            host</p>
+                                    </li>
+                                    <li ixia_locid="114" class="- topic/li ">
+                                        <p ixia_locid="115" class="- topic/p ">creation and use of data interface and
+                                            CPU profiles to simplify host configuration</p>
+                                    </li>
+                                    <li ixia_locid="116" class="- topic/li ">
+                                        <p ixia_locid="117" class="- topic/p ">configuration of the number of CPUs
+                                            allocated to the Accelerated Virtual Switch (AVS) on
+                                            each compute node</p>
+                                    </li>
+                                    <li ixia_locid="245" class="- topic/li ">
+                                        <p ixia_locid="246" class="- topic/p ">configuration of huge memory page allocations for VM
+                                            use</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li ixia_locid="118" class="- topic/li ">
+                                <p ixia_locid="119" class="- topic/p ">Administrative operations</p>
+                                <ul id="ul_px4_nms_nn" class="- topic/ul ">
+                                    <li ixia_locid="120" class="- topic/li ">
+                                        <p ixia_locid="121" class="- topic/p ">lock/unlock</p>
+                                    </li>
+                                    <li ixia_locid="122" class="- topic/li ">
+                                        <p ixia_locid="123" class="- topic/p ">switch active controller host or
+                                            service</p>
+                                    </li>
+                                    <li ixia_locid="124" class="- topic/li ">
+                                        <p ixia_locid="125" class="- topic/p ">reboot and reset host</p>
+                                    </li>
+                                    <li ixia_locid="235" class="- topic/li ">
+                                        <p ixia_locid="236" class="- topic/p ">power-on and power-off</p>
+                                    </li>
+                                    <li ixia_locid="126" class="- topic/li ">
+                                        <p ixia_locid="127" class="- topic/p ">software re-installation</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li ixia_locid="128" class="- topic/li ">
+                                <p ixia_locid="129" class="- topic/p ">Status reporting</p>
+                                <ul id="ul_qgg_rms_nn" class="- topic/ul ">
+                                    <li ixia_locid="130" class="- topic/li ">
+                                        <p ixia_locid="131" class="- topic/p ">admin state</p>
+                                    </li>
+                                    <li ixia_locid="132" class="- topic/li ">
+                                        <p ixia_locid="133" class="- topic/p ">operational state</p>
+                                    </li>
+                                    <li ixia_locid="134" class="- topic/li ">
+                                        <p ixia_locid="135" class="- topic/p ">availability state</p>
+                                    </li>
+                                    <li ixia_locid="136" class="- topic/li ">
+                                        <p ixia_locid="137" class="- topic/p ">uptime</p>
+                                    </li>
+                                    <li ixia_locid="138" class="- topic/li ">
+                                        <p ixia_locid="139" class="- topic/p ">real-time command execution reports,
+                                            such as booting and testing</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li ixia_locid="140" class="- topic/li ">
+                                <p ixia_locid="141" class="- topic/p ">Host resources</p>
+                                <ul id="ul_x3s_xms_nn" class="- topic/ul ">
+                                    <li ixia_locid="142" class="- topic/li ">
+                                        <p ixia_locid="143" class="- topic/p ">processor, sockets, cores</p>
+                                    </li>
+                                    <li ixia_locid="144" class="- topic/li ">
+                                        <p ixia_locid="145" class="- topic/p ">memory</p>
+                                    </li>
+                                    <li ixia_locid="146" class="- topic/li ">
+                                        <p ixia_locid="147" class="- topic/p ">disk</p>
+                                    </li>
+                                    <li ixia_locid="148" class="- topic/li ">
+                                        <p ixia_locid="149" class="- topic/p ">network interfaces</p>
+                                    </li>
+                                    <li ixia_locid="150" class="- topic/li ">
+                                        <p ixia_locid="151" class="- topic/p ">additional hardware devices, such as
+                                            cryptographic and compression devices</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="152" class="- topic/dlentry ">
+                    <dt ixia_locid="153" class="- topic/dt "><nameliteral ixia_locid="154" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Highly Automated Installation
+                            and Commissioning</nameliteral></dt>
+                    <dd ixia_locid="155" class="- topic/dd ">
+                        <p ixia_locid="156" class="- topic/p ">HP Helion OpenStack Carrier Grade substantially simplifies and integrates
+                            the installation and commissioning sequence. The initial controller node
+                            installs the software from a USB flash drive, and is commissioned with a
+                            single configuration wizard script. All subsequent hosts get their
+                            software installed over the internal management network from the initial
+                            controller node, and are configured using either the web administration
+                            interface, or the command line on the controller.</p>
+                        <p ixia_locid="157" class="- topic/p ">This is in contrast with the installation and
+                            commissioning sequence of the open-source OpenStack, which involves the
+                            setup of numerous individual configuration files, the installation of
+                            various backends supporting OpenStack components, and the configuration
+                            of multiple Linux services and other open-source programs.</p>
+                    </dd>
+                </dlentry>
+                <!--<dlentry ixia_locid="161"><dt ixia_locid="162"><nameliteral ixia_locid="163">Power Management</nameliteral></dt><dd ixia_locid="164"><p ixia_locid="165">A cloud orchestration service that monitors and manages the resource usage on the compute nodes to power down servers during periods of low usage. This service contributes to saving power and operational costs.</p><p ixia_locid="166">By continuously monitoring the resource usage, the power management service can de-fragment the service cloud by live-migrating virtual machine instances onto a smaller set of compute nodes. Unused hosts can then be manually powered down.</p><p ixia_locid="167">As the cloud usage levels rise, unused compute nodes can be manually powered on to host new virtual machine instances.</p></dd></dlentry>-->
+                <dlentry ixia_locid="168" class="- topic/dlentry ">
+                    <dt ixia_locid="169" class="- topic/dt "><nameliteral ixia_locid="170" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Performance Management
+                            Extensions</nameliteral></dt>
+                    <dd ixia_locid="171" class="- topic/dd ">
+                        <p ixia_locid="172" class="- topic/p ">The Ceilometer service included with HP Helion OpenStack Carrier Grade
+                            features improved performance, scalability, and usability. It has been
+                            extended to support a CSV-formatted file backend that provides a more
+                            traditional Telco Northbound interface for performance management.
+                                <draft-comment author="rstone" ixia_locid="352" translate="no" dir="ltr" class="- topic/draft-comment ">US64057 adds:</draft-comment>Titanium
+                            Server also adds performance monitoring for the vswitch process. </p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="173" class="- topic/dlentry ">
+                    <dt ixia_locid="174" class="- topic/dt "><nameliteral ixia_locid="175" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Improved Web Administration
+                            Interface</nameliteral></dt>
+                    <dd ixia_locid="176" class="- topic/dd ">
+                        <p ixia_locid="177" class="- topic/p ">HP Helion OpenStack Carrier Grade web administration interface is an
+                            enhanced version of the Horizon web interface provided by OpenStack. The
+                            enhancements include:</p>
+                        <ul id="ul_xyt_r1t_nn" class="- topic/ul ">
+                            <li ixia_locid="178" class="- topic/li ">
+                                <p ixia_locid="179" class="- topic/p ">Automatic page refresh for immediate
+                                    notification of status changes. This eliminates the need for
+                                    manual reloading of web pages to access up-to-date information
+                                    about the cloud</p>
+                            </li>
+                            <li ixia_locid="180" class="- topic/li ">
+                                <p ixia_locid="181" class="- topic/p ">Admin Overview page with charts and tables
+                                    providing a high-level overview of cloud resources</p>
+                                <ul id="ul_kcf_qbt_nn" class="- topic/ul ">
+                                    <li ixia_locid="182" class="- topic/li ">
+                                        <p ixia_locid="183" class="- topic/p ">avg/max/min compute vCPU usage</p>
+                                    </li>
+                                    <li ixia_locid="184" class="- topic/li ">
+                                        <p ixia_locid="185" class="- topic/p ">avg/max/min compute memory usage</p>
+                                    </li>
+                                    <li ixia_locid="186" class="- topic/li ">
+                                        <p ixia_locid="187" class="- topic/p ">avg/max/min compute disk usage</p>
+                                    </li>
+                                    <li ixia_locid="188" class="- topic/li ">
+                                        <p ixia_locid="189" class="- topic/p ">avg/max/min AVS CPU utilization</p>
+                                    </li>
+                                    <li ixia_locid="190" class="- topic/li ">
+                                        <p ixia_locid="191" class="- topic/p ">avg/max/min provider network port
+                                            utilization</p>
+                                    </li>
+                                    <li ixia_locid="192" class="- topic/li ">
+                                        <p ixia_locid="193" class="- topic/p ">current host status (available,
+                                            unavailable, locked, unlocked)</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li ixia_locid="194" class="- topic/li ">
+                                <p ixia_locid="195" class="- topic/p ">Improved performance management resource usage
+                                    web page</p>
+                                <ul id="ul_cr2_kct_nn" class="- topic/ul ">
+                                    <li ixia_locid="196" class="- topic/li ">
+                                        <p ixia_locid="197" class="- topic/p ">optimized performance management sample
+                                            DB queries for improved usability</p>
+                                    </li>
+                                    <li ixia_locid="198" class="- topic/li ">
+                                        <p ixia_locid="199" class="- topic/p ">capability to filter on fields in the
+                                            performance management sample’s metadata</p>
+                                    </li>
+                                    <li ixia_locid="200" class="- topic/li ">
+                                        <p ixia_locid="201" class="- topic/p ">human-readable legends and chart labels
+                                            using object names instead of long UUID text strings</p>
+                                    </li>
+                                    <li ixia_locid="202" class="- topic/li ">
+                                        <p ixia_locid="203" class="- topic/p ">performance management meters can be
+                                            selected using their brief descriptions</p>
+                                    </li>
+                                    <li ixia_locid="206" class="- topic/li ">
+                                        <p ixia_locid="207" class="- topic/p ">meters for CPU, memory, and disk utilization</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="208" class="- topic/dlentry ">
+                    <dt ixia_locid="209" class="- topic/dt "><nameliteral ixia_locid="241" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Heat Extensions</nameliteral></dt>
+                    <dd ixia_locid="210" class="- topic/dd ">
+                        <p ixia_locid="211" class="- topic/p ">The OpenStack Heat orchestration service is enhanced to include:</p>
+                        <ul id="ul_n5s_kbh_tp" class="- topic/ul ">
+                            <li ixia_locid="212" class="- topic/li ">
+                                <p ixia_locid="213" class="- topic/p ">Support for several missing resource types in the public
+                                    reference implementation</p>
+                            </li>
+                            <li ixia_locid="214" class="- topic/li ">
+                                <p ixia_locid="215" class="- topic/p ">Helpful example templates illustrating real reference
+                                    scenarios</p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="216" class="- topic/dlentry ">
+                    <dt ixia_locid="217" class="- topic/dt "><nameliteral ixia_locid="242" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Backup and Restore</nameliteral></dt>
+                    <dd ixia_locid="218" class="- topic/dd ">
+                        <p ixia_locid="219" class="- topic/p ">Tools and procedures to backup and restore system data, virtual machines,
+                            resources.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="220" class="- topic/dlentry ">
+                    <dt ixia_locid="221" class="- topic/dt "><nameliteral ixia_locid="243" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Patching</nameliteral></dt>
+                    <dd ixia_locid="222" class="- topic/dd ">
+                        <p ixia_locid="223" class="- topic/p ">Tools and procedures to patch system images to ensure they are always up
+                            to date with the latest release and security fixes.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="224" class="- topic/dlentry ">
+                    <dt ixia_locid="225" class="- topic/dt "><nameliteral ixia_locid="244" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Alarms Generation and
+                        Reporting</nameliteral></dt>
+                    <dd ixia_locid="226" class="- topic/dd ">
+                        <ul id="ul_ltp_xch_tp" class="- topic/ul ">
+                            <li ixia_locid="227" class="- topic/li ">
+                                <p ixia_locid="228" class="- topic/p ">alarms on performance management thresholds and cloud-level
+                                    services and equipment</p>
+                            </li>
+                            <li ixia_locid="229" class="- topic/li ">
+                                <p ixia_locid="230" class="- topic/p ">SNMPv2c support</p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="10" class="- topic/dlentry ">
+                    <dt ixia_locid="11" class="- topic/dt "><nameliteral ixia_locid="12" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Supported OpenStack
+                            Services</nameliteral></dt>
+                    <dd ixia_locid="13" class="- topic/dd ">
+                        <p ixia_locid="14" class="- topic/p ">HP Helion OpenStack Carrier Grade integrates the following OpenStack
+                            services into its cloud solution: Nova, Neutron, Keystone, Glance,
+                            Cinder, Horizon, Ceilometer, Heat.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="257" class="- topic/dlentry ">
+                    <dt ixia_locid="258" class="- topic/dt "><nameliteral ixia_locid="311" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">REST API</nameliteral></dt>
+                    <dd ixia_locid="259" class="- topic/dd ">
+                        <p ixia_locid="260" class="- topic/p ">HP Helion OpenStack Carrier Grade supports the following external REST
+                            APIs through its OAM floating IP address:</p>
+                        <ul id="ul_ylk_dcv_ds" class="- topic/ul ">
+                            <li ixia_locid="331" class="- topic/li ">
+                                <p ixia_locid="332" class="- topic/p ">OpenStack REST APIS</p>
+                                <ul id="ul_jry_kvz_cs" class="- topic/ul ">
+                                    <li ixia_locid="333" class="- topic/li ">
+                                        <p ixia_locid="338" class="- topic/p ">Block Storage API (with HP Helion OpenStack Carrier Grade
+                                            extensions)</p>
+                                    </li>
+                                    <li ixia_locid="334" class="- topic/li ">
+                                        <p ixia_locid="339" class="- topic/p ">Compute API  (with HP Helion OpenStack Carrier Grade
+                                            extensions)</p>
+                                    </li>
+                                    <li ixia_locid="335" class="- topic/li ">
+                                        <p ixia_locid="340" class="- topic/p ">Identity API</p>
+                                    </li>
+                                    <li ixia_locid="336" class="- topic/li ">
+                                        <p ixia_locid="341" class="- topic/p ">Image Service API</p>
+                                    </li>
+                                    <li ixia_locid="263" class="- topic/li ">
+                                        <p ixia_locid="264" class="- topic/p ">Networking API  (with HP Helion OpenStack Carrier Grade
+                                            extensions)</p>
+                                    </li>
+                                    <li ixia_locid="337" class="- topic/li ">
+                                        <p ixia_locid="342" class="- topic/p ">Orchestration API</p>
+                                    </li>
+                                    <li ixia_locid="265" class="- topic/li ">
+                                        <p ixia_locid="266" class="- topic/p ">Telemetry API (with HP Helion OpenStack Carrier Grade
+                                            extensions)</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li ixia_locid="345" class="- topic/li ">
+                                <p ixia_locid="346" class="- topic/p ">HP Helion OpenStack Carrier Grade REST APIs</p>
+                                <ul id="ul_xgp_scv_ds" class="- topic/ul ">
+                                    <li ixia_locid="347" class="- topic/li ">
+                                        <p ixia_locid="348" class="- topic/p ">SysInv API</p>
+                                    </li>
+                                    <li ixia_locid="349" class="- topic/li ">
+                                        <p ixia_locid="350" class="- topic/p ">Patching API</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <note id="note_N1053E_N104EC_N104E8_N104DF_N104D3_N10040_N1002C_N10024_N10001" ixia_locid="343" class="- topic/note ">
+                            <p ixia_locid="344" class="- topic/p ">HP Helion OpenStack Carrier Grade extensions use the OpenStack
+                                Extension Mechanism to ensure compatibility with existing
+                                clients.</p>
+                        </note>
+                        <p ixia_locid="268" class="- topic/p ">HTTP or HTTPS protocol can be supported for these
+                            external REST APIs.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="269" class="- topic/dlentry ">
+                    <dt ixia_locid="270" class="- topic/dt "><nameliteral ixia_locid="312" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">HP Helion OpenStack Carrier Grade SDK</nameliteral></dt>
+                    <dd ixia_locid="271" class="- topic/dd ">
+                        <p ixia_locid="272" class="- topic/p ">The HP Helion OpenStack Carrier Grade Software Development Kit (SDK) provides drivers,
+                            daemons, API libraries, and configuration files that you can include in
+                            a guest image to leverage the extended capabilities of HP Helion OpenStack Carrier Grade.
+                            Available components include:</p>
+                        <ul id="ul_zdh_d51_ds" class="- topic/ul ">
+                            <li ixia_locid="313" class="- topic/li ">
+                                <p ixia_locid="314" class="- topic/p ">Accelerated Kernel Network Drivers—Drivers for improved
+                                    performance of kernel-based networking VNFs</p>
+                            </li>
+                            <li ixia_locid="315" class="- topic/li ">
+                                <p ixia_locid="316" class="- topic/p ">Accelerated DPDK Network Drivers—Drivers for
+                                    high-performance DPDK-based networking VNFs</p>
+                            </li>
+                            <li ixia_locid="317" class="- topic/li ">
+                                <p ixia_locid="318" class="- topic/p ">VM Resource Scaling—A service for scaling the capacity of a
+                                    guest server on demand</p>
+                            </li>
+                            <li ixia_locid="319" class="- topic/li ">
+                                <p ixia_locid="320" class="- topic/p ">Guest Heartbeat—A service for health monitoring of guest
+                                    applications</p>
+                            </li>
+                            <li ixia_locid="321" class="- topic/li ">
+                                <p ixia_locid="322" class="- topic/p ">Server Group Messaging—A service for low-bandwidth peer
+                                    messaging between servers in the same group</p>
+                            </li>
+                            <li ixia_locid="323" class="- topic/li ">
+                                <p ixia_locid="324" class="- topic/p ">SNMP MIB—Resources for system alarms management</p>
+                            </li>
+                            <li ixia_locid="325" class="- topic/li ">
+                                <p ixia_locid="326" class="- topic/p ">Sample Heat Orchestration Templates—Resources for deploying
+                                    and managing stacks of applications or application services</p>
+                            </li>
+                            <li ixia_locid="327" class="- topic/li ">
+                                <p ixia_locid="328" class="- topic/p ">OpenStack REST API Documentation—Documentation
+                                    for HP Helion OpenStack Carrier Grade REST APIs and HP Helion OpenStack Carrier Grade extensions to
+                                    OpenStack REST APIs</p>
+                            </li>
+                            <li ixia_locid="329" class="- topic/li ">
+                                <p ixia_locid="330" class="- topic/p ">Custom Branding—Resources for customizing the Horizon
+                                    GUI</p>
+                            </li>
+                        </ul>
+                        <p ixia_locid="309" class="- topic/p ">For more information, see the <cite ixia_locid="310" class="- topic/cite ">HP Helion OpenStack Carrier Grade Software Development Kit</cite>.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </section>
+    </conbody>
+</concept-wr>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333628570" xml:lang="en-us" class="- topic/topic task/task task-wr/task-wr ">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Launching a Stack</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">You can launch stacks using the web administration interface, or you
+        can use the command-line interface.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="5" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N10027_N10024_N10001" ixia_locid="6" class="- topic/section task/context ">
+            <p ixia_locid="7" class="- topic/p ">These instructions assume you are using the web administration
+                interface. For CLI assistance, use the following command.</p>
+            <codeblock ixia_locid="28" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="29" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="8" class="+ topic/ph sw-d/userinput ">heat help stack-create</userinput></codeblock>
+        </context>
+        <prereq id="prereq_N10034_N10024_N10001" ixia_locid="9" class="- topic/section task/prereq ">
+            <p ixia_locid="10" class="- topic/p ">Ensure that you have a template for the stack.</p>
+            <p ixia_locid="11" class="- topic/p ">Depending on the template, you may need to collect some parameters in advance. For
+                details, see the documentation for the specific template, or refer to the Parameters
+                section of the template.</p>
+        </prereq>
+        
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N1004F_N1004C_N10029_N10001" ixia_locid="24" class="- topic/li task/step ">
+            <cmd ixia_locid="7" class="- topic/ph task/cmd ">Open the list of existing stacks.</cmd>
+            <info ixia_locid="8" class="- topic/itemgroup task/info ">
+                <p ixia_locid="9" class="- topic/p ">From the <uicontrol ixia_locid="10" class="+ topic/ph ui-d/uicontrol ">Project</uicontrol> menu of
+                    the web administration interface, select <menucascade ixia_locid="19" class="+ topic/ph ui-d/menucascade ">
+                        <uicontrol ixia_locid="11" class="+ topic/ph ui-d/uicontrol ">Orchestration</uicontrol>
+                        <uicontrol ixia_locid="12" class="+ topic/ph ui-d/uicontrol ">Stacks</uicontrol>
+                    </menucascade>.</p>
+                <p ixia_locid="15" class="- topic/p ">The Stacks list appears.</p>
+                <fig id="d509e37" ixia_locid="16" class="- topic/fig ">
+                    <image alt="Stacks table: Launch Stack control" href="jow1404333623353.image" id="d509e39" ixia_locid="17" width="6in" placement="inline" class="- topic/image "/>
+                </fig>
+            </info>
+        </step>
+            <step id="step_N10056_N1004C_N10029_N10001" ixia_locid="26" class="- topic/li task/step ">
+            <cmd ixia_locid="19" class="- topic/ph task/cmd ">Launch a new stack and specify a template.</cmd>
+            <info ixia_locid="20" class="- topic/itemgroup task/info ">
+                <p ixia_locid="21" class="- topic/p ">Click <uicontrol ixia_locid="22" class="+ topic/ph ui-d/uicontrol ">Launch Stack</uicontrol>, and
+                    then complete the <wintitle ixia_locid="23" class="+ topic/keyword ui-d/wintitle ">Select Template</wintitle> dialog
+                    box.</p>
+                <fig id="d530e28" ixia_locid="24" class="- topic/fig ">
+                    <image alt="Select Template" href="jow1404333624807.image" id="d530e30" ixia_locid="25" placement="inline" class="- topic/image "/>
+                </fig>
+                <p ixia_locid="26" class="- topic/p ">The <uicontrol ixia_locid="27" class="+ topic/ph ui-d/uicontrol ">Template Source</uicontrol>
+                    drop-down list offers several ways to specify a template.</p>
+            </info>
+            <choicetable id="d530e40" keycol="1" class="- topic/simpletable task/choicetable ">
+                <chrow class="- topic/strow task/chrow ">
+                    <choption ixia_locid="28" class="- topic/stentry task/choption ">
+                        <p ixia_locid="29" class="- topic/p ">URL</p>
+                    </choption>
+                    <chdesc ixia_locid="30" class="- topic/stentry task/chdesc ">
+                        <p ixia_locid="31" class="- topic/p ">Provides a text field for URL access to a template
+                            file.</p>
+                    </chdesc>
+                </chrow>
+                <chrow class="- topic/strow task/chrow ">
+                    <choption ixia_locid="32" class="- topic/stentry task/choption ">
+                        <p ixia_locid="33" class="- topic/p ">File</p>
+                    </choption>
+                    <chdesc ixia_locid="34" class="- topic/stentry task/chdesc ">
+                        <p ixia_locid="35" class="- topic/p ">Provides a <uicontrol ixia_locid="36" class="+ topic/ph ui-d/uicontrol ">Browse</uicontrol>
+                            button for access to locally stored template files.</p>
+                    </chdesc>
+                </chrow>
+                <chrow class="- topic/strow task/chrow ">
+                    <choption ixia_locid="37" class="- topic/stentry task/choption ">
+                        <p ixia_locid="38" class="- topic/p ">Direct Input</p>
+                    </choption>
+                    <chdesc ixia_locid="39" class="- topic/stentry task/chdesc ">
+                        <p ixia_locid="40" class="- topic/p ">Provides a text window for direct entry of template
+                            content.</p>
+                    </chdesc>
+                </chrow>
+            </choicetable>
+        </step>
+            
+            <step id="step_N10052_N10041_N10024_N10001" ixia_locid="16" class="- topic/li task/step ">
+                <cmd ixia_locid="17" class="- topic/ph task/cmd ">Complete the <wintitle ixia_locid="18" class="+ topic/keyword ui-d/wintitle ">Launch Stack</wintitle> form to provide any parameter
+                    values required by the template.</cmd>
+                <info ixia_locid="19" class="- topic/itemgroup task/info ">
+                    <note id="note_N1005E_N1005B_N10050_N10041_N10024_N10001" ixia_locid="20" class="- topic/note ">
+                        <p ixia_locid="21" class="- topic/p ">The form is created dynamically based on the Parameters section of the
+                            template, and varies depending on the template. The form shown here is
+                            an example only.</p>
+                    </note>
+                    <fig id="fig_N10066_N1005B_N10050_N10041_N10024_N10001" ixia_locid="22" class="- topic/fig ">
+                        <image alt="Launch Stack" href="jow1404333626947.image" id="image_xrx_kkv_34" ixia_locid="23" placement="inline" class="- topic/image "/>
+                    </fig>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1438192116883" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Configuring SNAT on a Virtual Router</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">Source Network Address Translation (SNAT) provides network address
+        translation for internally initiated UDP and TCP traffic flows. A virtual router with SNAT
+        enabled translates between IP addresses and ports used on an internal network, and an IP
+        address and ports used on an external network.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N10022_N1001F_N10001" ixia_locid="109" class="- topic/section task/context ">
+            <p ixia_locid="71" class="- topic/p ">You can enable or disable Source Network Address Translation for each
+                individual external network connection on a virtual router. By default, SNAT is
+                enabled for all external networks.</p>
+            <p ixia_locid="72" class="- topic/p ">When SNAT is enabled, the virtual router maintains network
+                translation tables for all internally-initiated UDP and TCP traffic flows. An
+                instance connected to an internal tenant network can initiate connections to servers
+                on an external, usually public, network. SNAT does <i ixia_locid="112" class="+ topic/ph hi-d/i ">not</i> allow
+                external servers to initiate connections to external addresses mapped to internal
+                addresses. For this capability, the use of floating IP addresses <!-- for future use: or DNAT -->is
+                required.</p>
+            <p ixia_locid="75" class="- topic/p ">System administrators can enable or disable SNAT using the following
+                command:</p>
+            <codeblock ixia_locid="76" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="77" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="78" class="+ topic/ph sw-d/userinput ">neutron router-update <varname ixia_locid="79" class="+ topic/keyword sw-d/varname ">routername</varname> --external_gateway_info type=dict \
+network_id=<varname ixia_locid="80" class="+ topic/keyword sw-d/varname ">externalnetwork</varname>,enable_snat=<varname ixia_locid="81" class="+ topic/keyword sw-d/varname ">boolean</varname></userinput></codeblock>
+            <p ixia_locid="82" class="- topic/p ">where:</p>
+            <parml class="+ topic/dl pr-d/parml ">
+                <plentry ixia_locid="83" class="+ topic/dlentry pr-d/plentry ">
+                    <pt ixia_locid="84" class="+ topic/dt pr-d/pt "><varname ixia_locid="85" class="+ topic/keyword sw-d/varname ">routername</varname></pt>
+                    <pd ixia_locid="86" class="+ topic/dd pr-d/pd ">
+                        <p ixia_locid="87" class="- topic/p ">is the name or UUID of the virtual router</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="88" class="+ topic/dlentry pr-d/plentry ">
+                    <pt ixia_locid="89" class="+ topic/dt pr-d/pt "><varname ixia_locid="90" class="+ topic/keyword sw-d/varname ">externalnetwork</varname></pt>
+                    <pd ixia_locid="91" class="+ topic/dd pr-d/pd ">
+                        <p ixia_locid="92" class="- topic/p ">is the name or UUID of the external network</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="93" class="+ topic/dlentry pr-d/plentry ">
+                    <pt ixia_locid="94" class="+ topic/dt pr-d/pt "><varname ixia_locid="95" class="+ topic/keyword sw-d/varname ">boolean</varname></pt>
+                    <pd ixia_locid="96" class="+ topic/dd pr-d/pd ">
+                        <p ixia_locid="97" class="- topic/p ">is <option ixia_locid="98" class="+ topic/keyword pr-d/option ">true</option> (to enable SNAT)
+                            or <option ixia_locid="99" class="+ topic/keyword pr-d/option ">false</option> (to disable SNAT)</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <note id="note_N100A7_N10022_N1001F_N10001" ixia_locid="100" type="caution" class="- topic/note ">
+                <p ixia_locid="101" class="- topic/p ">For SNMP implemented on guests, the following limitations apply
+                    when SNAT is enabled:</p>
+                <ul id="ul_h2h_czk_xs" class="- topic/ul ">
+                    <li ixia_locid="102" class="- topic/li ">
+                        <p ixia_locid="103" class="- topic/p ">An SNMP agent on an internal network cannot receive
+                            requests from SNMP managers on external networks.</p>
+                    </li>
+                    <li ixia_locid="104" class="- topic/li ">
+                        <p ixia_locid="105" class="- topic/p ">An SNMP manager on an internal network cannot receive
+                            traps from SNMP agents on external networks, even if communication is
+                            initiated by the manager. This is because SNMP traps are sent to UDP
+                            port 162, not to the source port.</p>
+                    </li>
+                </ul>
+                <p ixia_locid="110" class="- topic/p ">Only agent responses to requests from a manager on the internal
+                    network are processed appropriately.</p>
+                <p ixia_locid="111" class="- topic/p ">To overcome these limitations, you can use floating IP addresses
+                    or make internal addresses public. For more information, see <xref href="jow1438192231731.xml" ixia_locid="108" class="- topic/xref "/>.</p>
+            </note>
+        </context>
+    </taskbody>
+</task-wr>

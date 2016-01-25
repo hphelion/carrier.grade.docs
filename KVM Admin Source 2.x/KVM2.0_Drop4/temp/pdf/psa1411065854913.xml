@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1411065854913" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic concept/concept concept-wr/concept-wr ">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1" class="- topic/title ">Cinder Volume Backups</title>
+ <shortdesc ixia_locid="2" class="- topic/shortdesc ">Cinder volume backups are executed selectively, one volume at a time.
+  They can include virtual disk images and any other Cinder volumes available in the
+  system.</shortdesc>
+ <prolog class="- topic/prolog ">
+  <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+ </prolog>
+ <conbody class="- topic/body  concept/conbody ">
+  <p ixia_locid="4" class="- topic/p ">Consider the following recommendations when executing Cinder volume backups.</p>
+  <dl class="- topic/dl ">
+   <dlentry ixia_locid="5" class="- topic/dlentry ">
+    <dt ixia_locid="6" class="- topic/dt ">Aim at backing up an idle system</dt>
+    <dd ixia_locid="7" class="- topic/dd ">
+     <p ixia_locid="28" class="- topic/p ">In an idle system, there are no running virtual machines. All VMs are either
+      shut down or terminated. This is the ideal state for ensuring that the current content of all
+      volumes is captured for replication at the next restore operation. Volumes reported as <i ixia_locid="30" class="+ topic/ph hi-d/i ">available</i> are not associated with any VMs, while volumes reported as <i ixia_locid="9" class="+ topic/ph hi-d/i ">in-use</i> are associated only with shut-down VMs, and are not being actively
+      modified.</p>
+     <p ixia_locid="10" class="- topic/p ">In a non-idle system, at least one VM is running. Volumes reported as <i ixia_locid="11" class="+ topic/ph hi-d/i ">in-use</i> may be subject to write operations. In this case, you can create
+      snapshots and back them up, but there is a risk of changes after the snapshot that are not
+      captured.</p>
+     <p ixia_locid="12" class="- topic/p ">Instructions to back up Cinder volumes in <i ixia_locid="13" class="+ topic/ph hi-d/i ">available</i>
+      and <i ixia_locid="14" class="+ topic/ph hi-d/i ">in-use</i> states are provided in the following sections.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="15" class="- topic/dlentry ">
+    <dt ixia_locid="16" class="- topic/dt ">Back up one volume at a time</dt>
+    <dd ixia_locid="17" class="- topic/dd ">
+     <p ixia_locid="18" class="- topic/p ">Backing up Cinder volumes can be a time- and space- consuming process, as
+      determined by the size of the volumes themselves. Having two or more backup processes running
+      simultaneously is likely to result in a severe performance hit to the controller and the
+      running instances. This not only slows the normal system operations, but also makes the backup
+      operations themselves take much longer.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="19" class="- topic/dlentry ">
+    <dt ixia_locid="20" class="- topic/dt ">Clean up as soon as possible</dt>
+    <dd ixia_locid="21" class="- topic/dd ">
+     <p ixia_locid="22" class="- topic/p ">Backup files for Cinder volumes can fill up the <filepath ixia_locid="23" class="+ topic/ph sw-d/filepath ">/opt/backups</filepath> partition
+      on the controller very quickly. This is likely to cause further backup operations to fail in
+      the middle of the execution. Therefore, as soon as a Cinder volume is backed up, and its
+      backup files transferred and securely stored elsewhere:</p>
+     <ul id="ul_jws_dpz_lp" class="- topic/ul ">
+      <li ixia_locid="24" class="- topic/li ">
+       <p ixia_locid="25" class="- topic/p ">remove any snapshots you may have created during the backup process</p>
+      </li>
+      <li ixia_locid="26" class="- topic/li ">
+       <p ixia_locid="27" class="- topic/p ">remove the backup files themselves</p>
+      </li>
+     </ul>
+    </dd>
+   </dlentry>
+  </dl>
+ </conbody>
+</concept-wr>

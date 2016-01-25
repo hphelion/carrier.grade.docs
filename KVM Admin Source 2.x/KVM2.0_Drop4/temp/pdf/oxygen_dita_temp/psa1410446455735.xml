@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1410446455735" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic concept/concept concept-wr/concept-wr ">
+ <!-- Modification History
+
+ -->
+ <title ixia_locid="1" class="- topic/title ">Managing Software Patches</title>
+ <shortdesc ixia_locid="2" class="- topic/shortdesc ">Patches to the system software become available as needed to address
+  issues associated with a current HP Helion OpenStack Carrier Grade software release. They must be uploaded to the
+  active controller and applied to all required hosts in the cluster.</shortdesc>
+ <prolog class="- topic/prolog ">
+  <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+ </prolog>
+ <conbody class="- topic/body  concept/conbody ">
+  <p ixia_locid="16" class="- topic/p ">The patching system is implemented using the following components:</p>
+  <dl class="- topic/dl ">
+   <dlentry ixia_locid="17" class="- topic/dlentry ">
+    <dt ixia_locid="18" class="- topic/dt ">Patch Controller</dt>
+    <dd ixia_locid="19" class="- topic/dd ">
+     <p ixia_locid="20" class="- topic/p ">This is a daemon running on the active controller. The daemon queries the
+      patch agents to collect information about the state of patches on every host in the cluster.
+      It also communicates with the patch agents to command patch operations to take place.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="21" class="- topic/dlentry ">
+    <dt ixia_locid="22" class="- topic/dt ">Patch Agent</dt>
+    <dd ixia_locid="23" class="- topic/dd ">
+     <p ixia_locid="24" class="- topic/p ">These are daemons running on the cluster hosts, one agent per host. Each
+      patch agent maintains up-to-date information about the status of patches on the host, and
+      responds to queries and commands from the patch controller.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="25" class="- topic/dlentry ">
+    <dt ixia_locid="26" class="- topic/dt ">Patching Commands</dt>
+    <dd ixia_locid="28" class="- topic/dd ">
+     <p ixia_locid="29" class="- topic/p ">The<draft-comment author="rstone" ixia_locid="49" translate="no" dir="ltr" class="- topic/draft-comment ">US62817 changed wrs-patch -&gt;
+       sw-patch</draft-comment>
+      <cmdname ixia_locid="38" class="+ topic/keyword sw-d/cmdname ">sw-patch</cmdname> command is available on the active controller. It
+      provides the user interface to process the patches, including querying the state of a patch,
+      listing affected hosts, and applying, installing, and removing patches.</p>
+     <p ixia_locid="39" class="- topic/p ">The <cmdname ixia_locid="40" class="+ topic/keyword sw-d/cmdname ">system host-patch-reboot</cmdname> command
+      provides a convenient way to lock a host, install all pending patches, reboot, and bring the
+      host back to the unlock-available state.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="30" class="- topic/dlentry ">
+    <dt ixia_locid="31" class="- topic/dt ">Patch Storage Area</dt>
+    <dd ixia_locid="32" class="- topic/dd ">
+     <p ixia_locid="33" class="- topic/p ">A central storage area maintained by the patch controller. Patches are
+      initially uploaded to the patch storage area and remain there until they are deleted.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="34" class="- topic/dlentry ">
+    <dt ixia_locid="35" class="- topic/dt ">Software Updates Repository</dt>
+    <dd ixia_locid="36" class="- topic/dd ">
+     <p ixia_locid="37" class="- topic/p ">A central repository of software updates associated with patches applied to
+      the system. This repository is used by all hosts in the cluster to identify the software
+      updates and rollbacks required on each host.</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <p ixia_locid="5" class="- topic/p ">The overall flow for installing a patch from the command line interface on a
+   working HP Helion OpenStack Carrier Grade cluster is the following:</p>
+  <ol id="ol_vgf_yzz_jp" class="- topic/ol ">
+   <li ixia_locid="6" class="- topic/li ">
+    <p ixia_locid="7" class="- topic/p ">Download the patch to a workstation that can reach
+     the active controller through the OAM network. </p>
+   </li>
+   <li ixia_locid="8" class="- topic/li ">
+    <p ixia_locid="9" class="- topic/p ">Copy the patch to the active controller using the cluster's OAM floating IP
+     address as the destination point. You can use a command such as <cmdname ixia_locid="10" class="+ topic/keyword sw-d/cmdname ">scp</cmdname> to copy the patch. The patching workflows presented in this document assume
+     that this step is complete already, that is, they assume that the patch is already available
+     from the file system of the active controller.</p>
+   </li>
+   <li ixia_locid="12" class="- topic/li ">
+    <p ixia_locid="13" class="- topic/p ">Upload the new patch to the patching storage area. This step makes the new
+     patch available within the patching system, but does not install it to the cluster yet. For all
+     purposes, the patch is dormant.</p>
+   </li>
+   <li ixia_locid="14" class="- topic/li ">
+    <p ixia_locid="15" class="- topic/p ">Apply the patch, and install it on each of the affected hosts in the
+     cluster.</p>
+   </li>
+  </ol>
+  <p ixia_locid="47" class="- topic/p ">Patching the system can be done using the web administration interface or the
+   command line interface on the active controller. When using the web administration interface you
+   upload the patch directly from your workstation using a file browser window provided by the patch
+   upload facility.</p>
+  <p ixia_locid="48" class="- topic/p ">A special case occurs during the initial provisioning of a cluster, when you
+   want to patch <nameliteral ixia_locid="42" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> before the system software
+   is configured. This can only be done from the command line interface. See <xref href="psa1414084582159.xml" ixia_locid="43" class="- topic/xref "/> for details.</p>
+  <p ixia_locid="45" class="- topic/p ">The following sections introduce the core patching concepts using the command
+   line interface. It is therefore advised that you read this content before reading the section
+    <xref href="psa1420733173602.xml" ixia_locid="46" class="- topic/xref "/>, which assumes you are already familiar with
+   the patching workflow.</p>
+ </conbody>
+</concept-wr>

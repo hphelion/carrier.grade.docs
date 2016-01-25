@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1410807838150" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Performing a System Restore</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">You can restore a HP Helion OpenStack Carrier Grade cluster from available system data
+        and Cinder volume backup files to bring it back to the operational state it was when the
+        backup procedure took place.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="278" class="- topic/author ">Jim Owens</author>
+        <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4" class="- topic/section task/context ">
+            <note id="note_N1002C_N10027_N10024_N10001" ixia_locid="281" product="tis_small" class="- topic/note ">
+                <p ixia_locid="282" class="- topic/p ">The following procedure is for use with a system that has
+                    separate controller and compute nodes. For a system with combined controller and
+                    compute nodes, see <xref href="jow1437657423737.xml" ixia_locid="283" class="- topic/xref "/>.</p>
+            </note>
+            <p ixia_locid="5" class="- topic/p ">Restoring a HP Helion OpenStack Carrier Grade cluster from a set of backup files is done
+                by restoring one host at a time, starting with the controllers, then the storage
+                nodes, and finally the compute nodes.</p>
+        </context>
+        <prereq id="prereq_N1003F_N10024_N10001" ixia_locid="284" class="- topic/section task/prereq " conref="jow1437656331081.xml#maintask/prereq_N1002D_N1001F_N10001"/>
+        <steps class="- topic/ol task/steps ">
+            <step conrefend="jow1437656331081.xml#maintask/common_end" id="step_N10077_N10074_N10024_N10001" ixia_locid="279" class="- topic/li task/step " conref="jow1437656331081.xml#maintask/common_start">
+                <cmd ixia_locid="280" class="- topic/ph task/cmd "/>
+            </step>
+            <step conrefend="jow1437656331081.xml#maintask/restore_computes" id="step_N10054_N10045_N10024_N10001" ixia_locid="285" class="- topic/li task/step " conref="jow1437656331081.xml#maintask/restore_controller_1">
+                <cmd ixia_locid="286" class="- topic/ph task/cmd "/>
+            </step>
+        </steps>
+        <result id="result_N10065_N10024_N10001" ixia_locid="287" class="- topic/section task/result " conref="jow1437656331081.xml#maintask/result"/>
+        <postreq id="postreq_N1006B_N10024_N10001" ixia_locid="288" class="- topic/section task/postreq " conref="jow1437656331081.xml#maintask/restore_passwords"/>
+    </taskbody>
+</task-wr>

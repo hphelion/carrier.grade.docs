@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333759364" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic concept/concept concept-wr/concept-wr ">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1" class="- topic/title ">System Alarms</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">HP Helion OpenStack Carrier Grade can generate system alarms when operational conditions
+        change on any of the hosts in the cluster.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="295" class="- topic/author ">Jim Owens</author>
+        <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <conbody class="- topic/body  concept/conbody ">
+        <p ixia_locid="296" class="- topic/p "><draft-comment author="jowens" ixia_locid="297" translate="no" dir="ltr" class="- topic/draft-comment ">US64069 mention sensor
+                alarms</draft-comment>This includes alarms based on hardware sensors monitored by
+            board management modules, if present. For more information, see <xref href="jow1443819549360.xml" ixia_locid="298" class="- topic/xref "/>.</p>
+        <p ixia_locid="36" class="- topic/p ">The supported interfaces to the alarms subsystem are the command line
+            interface (see <xref href="psa1419970253127.xml" ixia_locid="247" class="- topic/xref "/>), the web interface
+            (click the <uicontrol ixia_locid="248" class="+ topic/ph ui-d/uicontrol ">Fault Management</uicontrol> menu on the
+                <uicontrol ixia_locid="249" class="+ topic/ph ui-d/uicontrol ">Admin</uicontrol> tab), SNMP, and the system REST
+            API.</p>
+        <section id="section_N10027_N1001F_N10001" ixia_locid="37" class="- topic/section ">
+            <title ixia_locid="38" class="- topic/title ">About SNMP Support</title>
+            <p ixia_locid="39" class="- topic/p ">Support for SNMP is implemented as follows:</p>
+            <ul id="ul_bjv_cjd_cp" class="- topic/ul ">
+                <li ixia_locid="40" class="- topic/li ">
+                    <p ixia_locid="41" class="- topic/p ">access is disabled by default, must be enabled manually from the command line
+                        interface</p>
+                </li>
+                <li ixia_locid="42" class="- topic/li ">
+                    <p ixia_locid="43" class="- topic/p ">available using the controller's node floating OAM IP address, over the
+                        standard UDP port 161</p>
+                </li>
+                <li ixia_locid="44" class="- topic/li ">
+                    <p ixia_locid="45" class="- topic/p ">supported version is SNMPv2c</p>
+                </li>
+                <li ixia_locid="46" class="- topic/li ">
+                    <p ixia_locid="47" class="- topic/p ">access is read-only for all SNMP communities</p>
+                </li>
+                <li ixia_locid="48" class="- topic/li ">
+                    <p ixia_locid="49" class="- topic/p ">all SNMP communities have access to the entire OID tree, there is not support
+                        for <term ixia_locid="50" class="- topic/term ">VIEWS</term></p>
+                </li>
+                <li ixia_locid="51" class="- topic/li ">
+                    <p ixia_locid="52" class="- topic/p ">supported SNMP operations are <term ixia_locid="53" class="- topic/term ">GET</term>, <term ixia_locid="271" class="- topic/term ">GETNEXT</term>, <term ixia_locid="267" class="- topic/term ">GETBULK</term>,
+                        and <term ixia_locid="273" class="- topic/term ">SNMPv2C-TRAP2</term></p>
+                </li>
+                <li ixia_locid="275" class="- topic/li ">
+                    <p ixia_locid="57" class="- topic/p ">the SNMP <term ixia_locid="58" class="- topic/term ">SET</term> operation is not supported</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N10099_N1001F_N10001" ixia_locid="66" class="- topic/section ">
+            <title ixia_locid="67" class="- topic/title ">SNMPv2-MIB (RFC 3418)</title>
+            <p ixia_locid="68" class="- topic/p ">Support for the basic standard MIB for SNMP entities is limited to
+                the System and SNMP groups, as follows:</p>
+            <ul id="ul_ulb_ypl_hp" class="- topic/ul ">
+                <li ixia_locid="69" class="- topic/li ">
+                    <p ixia_locid="70" class="- topic/p ">System Group, <nameliteral ixia_locid="71" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">.iso.org.dod.internet.mgmt.mib-2.system</nameliteral></p>
+                </li>
+                <li ixia_locid="72" class="- topic/li ">
+                    <p ixia_locid="73" class="- topic/p ">SNMP Group, <nameliteral ixia_locid="74" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">.iso.org.dod.internet.mgmt.mib-2.snmp</nameliteral></p>
+                </li>
+                <li ixia_locid="75" class="- topic/li ">
+                    <p ixia_locid="76" class="- topic/p ">coldStart and warmStart Traps</p>
+                </li>
+            </ul>
+            <p ixia_locid="189" class="- topic/p ">The following system attributes are used in support of the SNMP implementation. They
+                can be displayed using the <cmdname ixia_locid="190" class="+ topic/keyword sw-d/cmdname ">system show</cmdname> command.</p>
+            <dl class="- topic/dl ">
+                <dlentry ixia_locid="191" class="- topic/dlentry ">
+                    <dt ixia_locid="192" class="- topic/dt ">contact</dt>
+                    <dd ixia_locid="193" class="- topic/dd ">
+                        <p ixia_locid="194" class="- topic/p ">A read-write system attribute used to populate the
+                            <nameliteral ixia_locid="195" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">sysContact</nameliteral> attribute of the SNMP System
+                            group. The contact value can be set with the following command:</p>
+                        <codeblock ixia_locid="196" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="268" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="198" class="+ topic/ph sw-d/userinput ">system modify contact="the-site-contact"</userinput></codeblock>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="199" class="- topic/dlentry ">
+                    <dt ixia_locid="200" class="- topic/dt ">location</dt>
+                    <dd ixia_locid="201" class="- topic/dd ">
+                        <p ixia_locid="202" class="- topic/p ">A read-write system attribute used to populate the
+                                <nameliteral ixia_locid="203" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">sysLocation</nameliteral> attribute of the SNMP System
+                            group. The location value can be set with the following command:</p>
+                        <codeblock ixia_locid="231" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="269" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="235" class="+ topic/ph sw-d/userinput ">system modify location="some-location"</userinput></codeblock>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="207" class="- topic/dlentry ">
+                    <dt ixia_locid="208" class="- topic/dt ">name</dt>
+                    <dd ixia_locid="209" class="- topic/dd ">
+                        <p ixia_locid="210" class="- topic/p ">A read-write system attribute used to populate the
+                                <nameliteral ixia_locid="211" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">sysName</nameliteral> attribute of the
+                            SNMP System group. The name value can be set with the following
+                            command:</p>
+                        <codeblock ixia_locid="232" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="270" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="236" class="+ topic/ph sw-d/userinput ">system modify name="the-system-name"</userinput></codeblock>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="212" class="- topic/dlentry ">
+                    <dt ixia_locid="213" class="- topic/dt ">software_version</dt>
+                    <dd ixia_locid="214" class="- topic/dd ">
+                        <p ixia_locid="215" class="- topic/p ">A read-only system attribute set automatically by the system. Its value
+                            is used to populate the <nameliteral ixia_locid="216" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">sysDescr</nameliteral> attribute of
+                            the SNMP System group.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="217" class="- topic/p ">The following SNMP attributes are used as follows:</p>
+            <dl class="- topic/dl ">
+                <dlentry ixia_locid="218" class="- topic/dlentry ">
+                    <dt ixia_locid="219" class="- topic/dt ">sysObjectId</dt>
+                    <dd ixia_locid="220" class="- topic/dd ">
+                        <p ixia_locid="221" class="- topic/p ">Set to
+                                <nameliteral ixia_locid="237" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">iso.org.dod.internet.private.enterprise.wrs.titanium</nameliteral>
+                            (1.3.6.1.4.1.1.2).</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="223" class="- topic/dlentry ">
+                    <dt ixia_locid="224" class="- topic/dt ">sysUpTime</dt>
+                    <dd ixia_locid="225" class="- topic/dd ">
+                        <p ixia_locid="226" class="- topic/p ">Set to the up time of the active controller.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="227" class="- topic/dlentry ">
+                    <dt ixia_locid="228" class="- topic/dt ">sysServices</dt>
+                    <dd ixia_locid="229" class="- topic/dd ">
+                        <p ixia_locid="230" class="- topic/p ">Set to the nominal value of 72 to indicate that the host
+                            provides services at layers 1 to 7.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </section>
+        <section id="section_N100C9_N1001F_N10001" ixia_locid="77" class="- topic/section ">
+            <title ixia_locid="78" class="- topic/title ">Enterprise MIBs</title>
+            <p ixia_locid="79" class="- topic/p ">HP Helion OpenStack Carrier Grade supports the <term ixia_locid="80" class="- topic/term ">Enterprise Registration</term> and <term ixia_locid="81" class="- topic/term ">Alarm</term> MIBs.</p>
+            <dl class="- topic/dl ">
+                <dlentry ixia_locid="82" class="- topic/dlentry ">
+                    <dt ixia_locid="83" class="- topic/dt ">Enterprise Registration MIB, wrsEnterpriseReg.mib</dt>
+                    <dd ixia_locid="84" class="- topic/dd ">
+                        <p ixia_locid="85" class="- topic/p ">Defines the Systems hierarchy underneath the
+                                <nameliteral ixia_locid="86" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">iso(1).org(3).dod(6).internet(1).private(4).enterprise(1)</nameliteral>.
+                            This hierarchy is administered as follows:</p>
+                        <ul id="ul_twp_s5l_hp" class="- topic/ul ">
+                            <li ixia_locid="87" class="- topic/li ">
+                                <p ixia_locid="88" class="- topic/p "><nameliteral ixia_locid="89" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">.wrs(731)</nameliteral>, the IANA-registered
+                                    enterprise code for Systems</p>
+                            </li>
+                            <li ixia_locid="90" class="- topic/li ">
+                                <p ixia_locid="91" class="- topic/p "><nameliteral ixia_locid="92" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">.wrs(731).wrsCommon(1).wrs&lt;Module&gt;(1-...)</nameliteral>,
+                                    defined in <filepath ixia_locid="93" class="+ topic/ph sw-d/filepath ">wrsCommon&lt;Module&gt;.mib</filepath>.</p>
+                            </li>
+                            <li ixia_locid="94" class="- topic/li ">
+                                <p ixia_locid="95" class="- topic/p "><nameliteral ixia_locid="96" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">.wrs(731).wrsProduct(2-...)</nameliteral>, defined
+                                    in <filepath ixia_locid="97" class="+ topic/ph sw-d/filepath ">wrs&lt;Product&gt;.mib</filepath>.</p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="98" class="- topic/dlentry ">
+                    <dt ixia_locid="99" class="- topic/dt ">Alarm MIB, wrsAlarmMib.mib</dt>
+                    <dd ixia_locid="100" class="- topic/dd ">
+                        <p ixia_locid="101" class="- topic/p ">Defines the common TRAP and ALARM MIBs for 
+                            Systems products. The definition includes <term ixia_locid="102" class="- topic/term ">textual
+                                conventions</term>, an <term ixia_locid="103" class="- topic/term ">active alarm
+                                table</term>, a <term ixia_locid="250" class="- topic/term ">historical alarm table</term>, and <term ixia_locid="104" class="- topic/term ">traps</term>.</p>
+                        <dl class="- topic/dl ">
+                            <dlentry ixia_locid="105" class="- topic/dlentry ">
+                                <dt ixia_locid="106" class="- topic/dt ">Textual Conventions</dt>
+                                <dd ixia_locid="107" class="- topic/dd ">
+                                    <p ixia_locid="108" class="- topic/p ">Semantic statements used to simplify definitions in the
+                                        active alarm table and traps components of the MIB.</p>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="238" class="- topic/dlentry ">
+                                <dt ixia_locid="240" class="- topic/dt ">Active Alarm Table</dt>
+                                <dd ixia_locid="242" class="- topic/dd ">
+                                    <p ixia_locid="244" class="- topic/p ">A list of all <term ixia_locid="113" class="- topic/term ">active</term> or <term ixia_locid="114" class="- topic/term ">set</term>
+                                        alarms in the system. Each entry in the table includes the
+                                        following variables:</p>
+                                    <ul id="ul_y1w_4lk_qq" class="- topic/ul ">
+                                        <li ixia_locid="115" class="- topic/li ">
+                                            <p ixia_locid="116" class="- topic/p "><varname ixia_locid="117" class="+ topic/keyword sw-d/varname ">UUID</varname></p>
+                                        </li>
+                                        <li ixia_locid="118" class="- topic/li ">
+                                            <p ixia_locid="119" class="- topic/p "><varname ixia_locid="120" class="+ topic/keyword sw-d/varname ">AlarmID</varname></p>
+                                        </li>
+                                        <li ixia_locid="121" class="- topic/li ">
+                                            <p ixia_locid="122" class="- topic/p "><varname ixia_locid="123" class="+ topic/keyword sw-d/varname ">EntityInstanceID</varname></p>
+                                        </li>
+                                        <li ixia_locid="124" class="- topic/li ">
+                                            <p ixia_locid="125" class="- topic/p "><varname ixia_locid="126" class="+ topic/keyword sw-d/varname ">DateAndTime</varname></p>
+                                        </li>
+                                        <li ixia_locid="127" class="- topic/li ">
+                                            <p ixia_locid="128" class="- topic/p "><varname ixia_locid="129" class="+ topic/keyword sw-d/varname ">AlarmSeverity</varname></p>
+                                        </li>
+                                        <li ixia_locid="130" class="- topic/li ">
+                                            <p ixia_locid="131" class="- topic/p "><varname ixia_locid="132" class="+ topic/keyword sw-d/varname ">ReasonText</varname></p>
+                                        </li>
+                                        <li ixia_locid="133" class="- topic/li ">
+                                            <p ixia_locid="134" class="- topic/p "><varname ixia_locid="135" class="+ topic/keyword sw-d/varname ">EventType</varname></p>
+                                        </li>
+                                        <li ixia_locid="136" class="- topic/li ">
+                                            <p ixia_locid="137" class="- topic/p "><varname ixia_locid="138" class="+ topic/keyword sw-d/varname ">ProbableCause</varname></p>
+                                        </li>
+                                        <li ixia_locid="139" class="- topic/li ">
+                                            <p ixia_locid="140" class="- topic/p "><varname ixia_locid="293" class="+ topic/keyword sw-d/varname ">ProposedRepairAction</varname></p>
+                                        </li>
+                                        <li ixia_locid="142" class="- topic/li ">
+                                            <p ixia_locid="143" class="- topic/p "><varname ixia_locid="144" class="+ topic/keyword sw-d/varname ">ServiceAffecting</varname></p>
+                                        </li>
+                                        <li ixia_locid="145" class="- topic/li ">
+                                            <p ixia_locid="146" class="- topic/p "><varname ixia_locid="147" class="+ topic/keyword sw-d/varname ">SuppressionAllowed</varname></p>
+                                        </li>
+                                    </ul>
+                                    <p ixia_locid="251" class="- topic/p ">On the web interface, click the <uicontrol ixia_locid="252" class="+ topic/ph ui-d/uicontrol ">Fault
+                                            Management</uicontrol> menu on the
+                                            <uicontrol ixia_locid="253" class="+ topic/ph ui-d/uicontrol ">Admin</uicontrol> tab, and then select the
+                                            <uicontrol ixia_locid="254" class="+ topic/ph ui-d/uicontrol ">Active Alarms</uicontrol> tab. Active alarms
+                                        are displayed as illustrated below:</p>
+                                    <fig id="fig_bgh_ldl_qq" ixia_locid="255" class="- topic/fig ">
+                                        <image href="psa1420475905055.image" id="image_cqk_xdl_qq" ixia_locid="257" placement="inline" width="550" class="- topic/image ">
+                                            <alt ixia_locid="258" class="- topic/alt ">Active Alarms</alt>
+                                        </image>
+                                    </fig>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="239" class="- topic/dlentry ">
+                                <dt ixia_locid="241" class="- topic/dt ">Historical Alarm Table</dt>
+                                <dd ixia_locid="243" class="- topic/dd ">
+                                    <p ixia_locid="245" class="- topic/p ">A history of set and clear alarm operations
+                                        in the system. The table includes the same variables as the
+                                        active alarm table, plus the variable
+                                            <varname ixia_locid="246" class="+ topic/keyword sw-d/varname ">AlarmState</varname> used to indicate whether
+                                        the table entry is a SET or a CLEAR operation.</p>
+                                    <p ixia_locid="277" class="- topic/p ">On the web interface, click the <uicontrol ixia_locid="279" class="+ topic/ph ui-d/uicontrol ">Fault
+                                            Management</uicontrol> menu on the
+                                            <uicontrol ixia_locid="281" class="+ topic/ph ui-d/uicontrol ">Admin</uicontrol> tab, and then select the
+                                            <uicontrol ixia_locid="283" class="+ topic/ph ui-d/uicontrol ">Historical Alarms</uicontrol> tab. The alarm
+                                        history is displayed as illustrated below:</p>
+                                    <fig id="fig_mwl_12l_qq" ixia_locid="263" class="- topic/fig ">
+                                        <image href="psa1420476170224.image" id="image_lzp_22l_qq" ixia_locid="265" placement="inline" width="550" class="- topic/image ">
+                                            <alt ixia_locid="266" class="- topic/alt ">Historical Alarms</alt>
+                                        </image>
+                                    </fig>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="285" class="- topic/dlentry ">
+                                <dt ixia_locid="286" class="- topic/dt ">Customer Log Table</dt>
+                                <dd ixia_locid="287" class="- topic/dd ">
+                                    <p ixia_locid="288" class="- topic/p ">A list of all customer logs in the system.
+                                        The table includes the same variables as the Active Alarm
+                                        Table, with the exception that <varname ixia_locid="294" class="+ topic/keyword sw-d/varname ">ProposedRepairAction</varname> and  <varname ixia_locid="292" class="+ topic/keyword sw-d/varname ">SuppressionAllowed</varname> are
+                                        excluded.</p>
+                                    <p ixia_locid="278" class="- topic/p ">On the web interface, click the <uicontrol ixia_locid="280" class="+ topic/ph ui-d/uicontrol ">Fault Management</uicontrol> menu on
+                                        the <uicontrol ixia_locid="282" class="+ topic/ph ui-d/uicontrol ">Admin</uicontrol> tab, and
+                                        then select the <uicontrol ixia_locid="284" class="+ topic/ph ui-d/uicontrol ">Customer
+                                            Logs</uicontrol> tab. Logs are displayed as illustrated
+                                        below:</p>
+                                    <fig id="fig_cyy_xqx_bs" ixia_locid="272" class="- topic/fig ">
+                                        <image href="jow1432054510610.image" id="image_ixf_drx_bs" ixia_locid="274" width="5in" placement="inline" class="- topic/image ">
+                                            <alt ixia_locid="276" class="- topic/alt ">TiS Customer Logs</alt>
+                                        </image>
+                                    </fig>
+                                </dd>
+                            </dlentry>
+                            <dlentry ixia_locid="148" class="- topic/dlentry ">
+                                <dt ixia_locid="149" class="- topic/dt ">Traps</dt>
+                                <dd ixia_locid="150" class="- topic/dd ">
+                                    <p ixia_locid="151" class="- topic/p ">Defines the following generic traps:</p>
+                                    <ul id="ul_clc_vyl_hp" class="- topic/ul ">
+                                        <li ixia_locid="152" class="- topic/li ">
+                                            <p ixia_locid="153" class="- topic/p "><nameliteral ixia_locid="154" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsAlarmCritical</nameliteral></p>
+                                        </li>
+                                        <li ixia_locid="155" class="- topic/li ">
+                                            <p ixia_locid="156" class="- topic/p "><nameliteral ixia_locid="157" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsAlarmMajor</nameliteral></p>
+                                        </li>
+                                        <li ixia_locid="158" class="- topic/li ">
+                                            <p ixia_locid="159" class="- topic/p "><nameliteral ixia_locid="160" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsAlarmMinor</nameliteral></p>
+                                        </li>
+                                        <li ixia_locid="161" class="- topic/li ">
+                                            <p ixia_locid="162" class="- topic/p "><nameliteral ixia_locid="163" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsAlarmWarning</nameliteral></p>
+                                        </li>
+                                        <li ixia_locid="164" class="- topic/li ">
+                                            <p ixia_locid="165" class="- topic/p "><nameliteral ixia_locid="166" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsAlarmMessage</nameliteral></p>
+                                        </li>
+                                        <li ixia_locid="167" class="- topic/li ">
+                                            <p ixia_locid="168" class="- topic/p "><nameliteral ixia_locid="169" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsAlarmClear</nameliteral></p>
+                                        </li>
+                                        <li ixia_locid="170" class="- topic/li ">
+                                            <p ixia_locid="171" class="- topic/p "><nameliteral ixia_locid="172" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsAlarmHierarchicalClear</nameliteral></p>
+                                        </li>
+                                    </ul>
+                                </dd>
+                            </dlentry>
+                        </dl>
+                        <p ixia_locid="289" class="- topic/p ">For all alarms, the Notification Type is based on the
+                            severity of the trap or alarm. This is done to facilitate the
+                            interaction with most SNMP trap viewers which typically use the
+                            Notification Type to drive the coloring of traps, that is, red for
+                            critical, yellow for minor, and so on. </p>
+                        <p ixia_locid="290" class="- topic/p ">Customer Logs always result in <nameliteral ixia_locid="291" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsAlarmMessage</nameliteral> traps.</p>
+                        <p ixia_locid="174" class="- topic/p ">For Critical, Major, Minor, Warning, and Message traps, all
+                            variables in the active alarm table are included as <term ixia_locid="175" class="- topic/term ">varbinds</term>.</p>
+                        <p ixia_locid="176" class="- topic/p ">For the Clear trap, <term ixia_locid="177" class="- topic/term ">varbinds</term> include
+                            only the <varname ixia_locid="178" class="+ topic/keyword sw-d/varname ">AlarmID</varname>, <varname ixia_locid="179" class="+ topic/keyword sw-d/varname ">EntityInstanceID</varname>, <varname ixia_locid="180" class="+ topic/keyword sw-d/varname ">DateAndTime</varname>,
+                            and <varname ixia_locid="181" class="+ topic/keyword sw-d/varname ">ReasonText</varname> variables.</p>
+                        <p ixia_locid="182" class="- topic/p ">For the HierarchicalClear trap, <term ixia_locid="183" class="- topic/term ">varbinds</term> include only the <varname ixia_locid="184" class="+ topic/keyword sw-d/varname ">EntityInstanceID</varname>, <varname ixia_locid="185" class="+ topic/keyword sw-d/varname ">DateAndTime</varname>,
+                            and <varname ixia_locid="186" class="+ topic/keyword sw-d/varname ">ReasonText</varname> variables.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </section>
+        <section id="section_N10272_N1001F_N10001" ixia_locid="187" class="- topic/section ">
+            <title ixia_locid="188" class="- topic/title ">Enabling SNMP Support</title>
+            <p ixia_locid="59" class="- topic/p ">In order to have a workable SNMP configuration you must use the
+                command line interface on the active controller to:</p>
+            <ol id="ol_amx_tql_hp" class="- topic/ol ">
+                <li ixia_locid="60" class="- topic/li ">
+                    <p ixia_locid="61" class="- topic/p ">Define at least one SNMP community string. See <xref href="psa1408039460152.xml" ixia_locid="62" class="- topic/xref "/> for details.</p>
+                </li>
+                <li ixia_locid="63" class="- topic/li ">
+                    <p ixia_locid="64" class="- topic/p ">Configure at least one SNMP trap destination so that alarms
+                        can be reported as they happen. See <xref href="psa1408040130437.xml" ixia_locid="65" class="- topic/xref "/> for details.</p>
+                </li>
+            </ol>
+        </section>
+    </conbody>
+</concept-wr>

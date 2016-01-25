@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><referable-content xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1437656331081" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic concept)                            (topic concept glossentry)                            (topic concept glossgroup)                            (topic reference)                            (topic task)                            (topic hi-d)                             (topic ut-d)                             (topic indexing-d)                            (topic hazard-d)                            (topic abbrev-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                             (topic task strictTaskbody-c)                             a(loc  ixia_locid)                            (topic strictPara-c)                            (topic strictSection-c)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic referable-content/referable-content ">
+<title ixia_locid="278" class="- topic/title ">[RC task] Performing a System Restore (tis_small, tis_not_small)</title>
+<rcbody class="- topic/body referable-content/body ">
+    <task id="maintask" ditaarch:DITAArchVersion="1.2" domains="(topic concept)                            (topic concept glossentry)                            (topic concept glossgroup)                            (topic reference)                            (topic task)                            (topic hi-d)                             (topic ut-d)                             (topic indexing-d)                            (topic hazard-d)                            (topic abbrev-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                             (topic task strictTaskbody-c)                             a(loc  ixia_locid)                            (topic strictPara-c)                            (topic strictSection-c)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task ">
+        <title ixia_locid="279" class="- topic/title "/>
+        <taskbody class="- topic/body task/taskbody ">
+            <prereq id="prereq_N1002D_N1001F_N10001" ixia_locid="8" class="- topic/section task/prereq ">
+                <p ixia_locid="9" class="- topic/p ">Before you start the restore procedure you must ensure the following conditions are
+                    in place:</p>
+                <ul id="ul_rfq_qfg_mp" class="- topic/ul ">
+                    <li ixia_locid="10" class="- topic/li ">
+                        <p ixia_locid="11" class="- topic/p ">All cluster hosts must be powered down, just as if they were
+                            going to be initialized anew.</p>
+                    </li>
+                    <li ixia_locid="12" class="- topic/li ">
+                        <p ixia_locid="13" class="- topic/p ">All backup files are accessible from a USB flash drive
+                            locally attached to the controller where the restore operation takes place
+                            (<nameliteral ixia_locid="172" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral>).</p>
+                    </li>
+                    <li ixia_locid="14" class="- topic/li ">
+                        <p ixia_locid="132" class="- topic/p ">You have the HP Helion OpenStack Carrier Grade installation image available on
+                            a USB flash drive, just as when the software was installed the first time.
+                            It is mandatory that you use the exact same version of the software used
+                            during the original installation, otherwise the restore procedure will
+                            fail.</p>
+                    </li>
+                    <li ixia_locid="134" class="- topic/li ">
+                        <p ixia_locid="136" class="- topic/p ">The restore procedure requires all hosts but <nameliteral ixia_locid="138" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> to boot over the internal
+                            management network using the PXE protocol, just as it was done during the
+                            initial software installation. Ideally, you cleaned up all hard drives in
+                            the cluster, and the old boot images are no longer present; the hosts then
+                            default to boot from the network when powered on. If this is not the case,
+                            you must configure each host manually for network booting right after this
+                            exercise asks you to power them on.</p>
+                    </li>
+                </ul>
+            </prereq>    
+        <steps id="steps_dxn_ldb_5s" class="- topic/ol task/steps ">
+            <step id="common_start" ixia_locid="6" class="- topic/li task/step ">
+                <cmd ixia_locid="7" class="- topic/ph task/cmd ">Install the HP Helion OpenStack Carrier Grade software on <nameliteral ixia_locid="140" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> from the USB flash drive.</cmd>
+                <info ixia_locid="20" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="21" class="- topic/p ">Refer to the <cite ixia_locid="241" class="- topic/cite ">HP Helion OpenStack Carrier Grade Software
+                            Installation Guide</cite> for details.</p>
+                </info>
+                <stepresult ixia_locid="23" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="24" class="- topic/p ">When the software installation is complete, you should be
+                        able to log in using the host's console and the web administration
+                        interface.</p>
+                </stepresult>
+            </step>
+            <step id="step_N10085_N1005F_N1001F_N10001" ixia_locid="25" class="- topic/li task/step ">
+                <cmd ixia_locid="26" class="- topic/ph task/cmd ">Log in to the console as user <nameliteral ixia_locid="27" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral> with password <nameliteral ixia_locid="28" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral>.</cmd>
+            </step>
+            <step id="step_N10096_N1005F_N1001F_N10001" ixia_locid="29" class="- topic/li task/step ">
+                <cmd ixia_locid="30" class="- topic/ph task/cmd ">Ensure the backup files are available to the controller.</cmd>
+                <info ixia_locid="31" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="32" class="- topic/p ">Plug the USB flash drive containing the backup files into the
+                        system. The USB flash drive is mounted automatically. Use the command
+                            <cmdname ixia_locid="33" class="+ topic/keyword sw-d/cmdname ">df</cmdname> to list the mount points.</p>
+                    <p ixia_locid="40" class="- topic/p ">The following steps assume that the backup files are
+                        available from a USB flash drive mounted in <filepath ixia_locid="41" class="+ topic/ph sw-d/filepath ">/media/wrsroot</filepath> in the directory <filepath ixia_locid="42" class="+ topic/ph sw-d/filepath ">backups</filepath>.</p>
+                </info>
+            </step>
+            <step id="step_N100CB_N1005F_N1001F_N10001" ixia_locid="43" class="- topic/li task/step ">
+                <cmd ixia_locid="44" class="- topic/ph task/cmd ">Update the controller's software to the previous patching
+                    level.</cmd>
+                <info ixia_locid="173" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="174" class="- topic/p ">When restoring the system configuration, the current
+                        software version on the controller, at this time, the original software
+                        version from the ISO image, is compared against the version available in the
+                        backup files. They differ if the latter includes patches applied to the
+                        controller's software at the time the backup files were created. If
+                        different, the restore process automatically applies the patches and forces
+                        an additional reboot of the controller to make them effective.</p>
+                    <p ixia_locid="175" class="- topic/p ">The following is the command output if patching is
+                        necessary:</p>
+                </info>
+                <stepxmp ixia_locid="176" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="178" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="250" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="182" class="+ topic/ph sw-d/userinput ">sudo config_controller --restore-system \
+/media/wrsroot/backups/titanium_backup_20140918_system.tgz</userinput>
+<systemoutput ixia_locid="251" class="+ topic/ph sw-d/systemoutput ">Restoring system (this will take several minutes):
+Step  4 of 19 [#########                                    ] [21%]
+This controller has been patched. A reboot is required.
+After the reboot is complete, re-execute the restore command.
+Enter 'reboot' to reboot controller:</systemoutput></codeblock>
+                    <p ixia_locid="185" class="- topic/p ">You must enter <nameliteral ixia_locid="186" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">reboot</nameliteral> at the prompt as requested. Once the controller is
+                        back, log in as user <nameliteral ixia_locid="187" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral> as
+                        before to continue.</p>
+                </stepxmp>
+                <stepresult ixia_locid="188" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="189" class="- topic/p ">After the reboot, you can verify that the patches were
+                        applied, as illustrated in the following example:</p>
+                            <draft-comment author="rstone" ixia_locid="426" translate="no" dir="ltr" class="- topic/draft-comment ">Changed from wrs-patch for
+                                US62817</draft-comment>
+                    <codeblock ixia_locid="190" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="252" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="192" class="+ topic/ph sw-d/userinput ">sudo sw-patch query</userinput>
+<systemoutput ixia_locid="253" class="+ topic/ph sw-d/systemoutput ">        Patch ID          Repo State  Patch State
+========================  ==========  ===========
+COMPUTECONFIG             Available       n/a
+LIBCUNIT_CONTROLLER_ONLY   Applied        n/a
+STORAGECONFIG              Applied        n/a</systemoutput></codeblock>
+                </stepresult>
+            </step>
+            <step id="step_N10125_N1006E_N1001F_N10001" ixia_locid="194" class="- topic/li task/step ">
+                <cmd ixia_locid="195" class="- topic/ph task/cmd ">Restore the system configuration.</cmd>
+                <info ixia_locid="196" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="197" class="- topic/p ">The controller's software is up to date now, at the same
+                        stage it was when the backup operation was executed. The restore procedure
+                        can be invoked again, and should run without interruptions.</p>
+                </info>
+                <stepxmp ixia_locid="177" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="179" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="254" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="183" class="+ topic/ph sw-d/userinput ">sudo config_controller --restore-system \
+/media/wrsroot/backups/titanium_backup_20140918_system.tgz</userinput>
+<systemoutput ixia_locid="255" class="+ topic/ph sw-d/systemoutput ">Restoring system (this will take several minutes):
+Step 19 of 19 [##########################] [100%]
+Restoring node states (this will take several minutes):
+
+Locking nodes:
+Powering-off nodes:
+Step 0 of 0 [#############################################] [100%]
+
+System restore complete </systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10101_N10011_N1000E_N10001" ixia_locid="52" class="- topic/li task/step ">
+                <cmd ixia_locid="53" class="- topic/ph task/cmd ">Authenticate to the system as Keystone user <nameliteral ixia_locid="54" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral>.</cmd>
+                <info ixia_locid="55" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="56" class="- topic/p ">Source the <nameliteral ixia_locid="57" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral>
+                        user environment as follows:</p>
+                </info>
+                <stepxmp ixia_locid="58" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="59" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="256" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="61" class="+ topic/ph sw-d/userinput ">cd; source /etc/nova/openrc</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="common_end" ixia_locid="62" class="- topic/li task/step ">
+                <cmd ixia_locid="63" class="- topic/ph task/cmd ">Restore the system images.</cmd>
+                <stepxmp ixia_locid="64" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="65" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="257" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="67" class="+ topic/ph sw-d/userinput ">sudo config_controller --restore-images \
+/media/wrsroot/backups/titanium_backup_20140918_images.tgz</userinput>
+<systemoutput ixia_locid="258" class="+ topic/ph sw-d/systemoutput ">Step 2 of 2 [#############################################] [100%]
+
+Images restore complete</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="69" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="70" class="- topic/p ">This step assumes that the backup file resides on the
+                        attached USB drive. If instead you copied the image backup file to the
+                            <filepath ixia_locid="199" class="+ topic/ph sw-d/filepath ">/opt/backups</filepath> directory, for
+                        example using the <cmdname ixia_locid="200" class="+ topic/keyword sw-d/cmdname ">scp</cmdname> command, you can
+                        remove it now.</p>
+                </info>
+            </step><!-- The next steps are for the original separate-nodes procedure. They are brought in using conref and conrefend. After them, some of the same steps, specialized for small footprint, are included. -->
+            <step id="restore_controller_1" ixia_locid="280" class="- topic/li task/step ">
+                <cmd ixia_locid="281" class="- topic/ph task/cmd ">Restore <nameliteral ixia_locid="282" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>.</cmd>
+                <substeps id="substeps_wt4_5dh_mp" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="283" class="- topic/li task/substep ">
+                        <cmd ixia_locid="284" class="- topic/ph task/cmd ">List the current state of the hosts.</cmd>
+                        <stepxmp ixia_locid="285" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="286" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="287" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="288" class="+ topic/ph sw-d/userinput ">system host-list</userinput>
+<systemoutput ixia_locid="289" class="+ topic/ph sw-d/systemoutput ">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | locked         | disabled    | offline      |
+| 3  | compute-0    | compute     | locked         | disabled    | offline      |
+| 4  | storage-0    | storage     | locked         | disabled    | offline      |
+| 5  | storage-1    | storage     | locked         | disabled    | offline      |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="290" class="- topic/li task/substep ">
+                        <cmd ixia_locid="291" class="- topic/ph task/cmd ">Power on the host.</cmd>
+                        <info ixia_locid="292" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="293" class="- topic/p ">Remember to ensure that the host boots from the
+                                network and not from an old disk image that might still be present
+                                on its hard drive.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="294" class="- topic/li task/substep ">
+                        <cmd ixia_locid="295" class="- topic/ph task/cmd ">Unlock the host.</cmd>
+                        <stepxmp ixia_locid="296" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="297" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="298" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="299" class="+ topic/ph sw-d/userinput ">system host-unlock 2</userinput>
+<systemoutput ixia_locid="300" class="+ topic/ph sw-d/systemoutput ">+-----------------+--------------------------------------+
+| Property        | Value                                |
++-----------------+--------------------------------------+
+| action          | none                                 |
+| administrative  | locked                               |
+| availability    | online                               |
+| ...             | ...                                  |
+| uuid            | 5fc4904a-d7f0-42f0-991d-0c00b4b74ed0 |
++-----------------+--------------------------------------+</systemoutput></codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="301" class="- topic/li task/substep ">
+                        <cmd ixia_locid="302" class="- topic/ph task/cmd ">Verify the new state of the hosts.</cmd>
+                        <stepxmp ixia_locid="303" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="304" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="305" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="306" class="+ topic/ph sw-d/userinput ">system host-list</userinput>
+<systemoutput ixia_locid="307" class="+ topic/ph sw-d/systemoutput ">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | unlocked       | enabled     | available    |
+| 3  | compute-0    | compute     | locked         | disabled    | offline      |
+| 4  | storage-0    | storage     | locked         | disabled    | offline      |
+| 5  | storage-1    | storage     | locked         | disabled    | offline      |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                        </stepxmp>
+                    </substep>
+                </substeps>
+                <stepresult ixia_locid="308" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="309" class="- topic/p ">The unlocking operation forces a reboot of the host, which
+                        is then initialized with the corresponding image available from the system
+                        backup.</p>
+                    <p ixia_locid="310" class="- topic/p ">You must wait for the host to become enabled and available
+                        before proceeding to the next step.</p>
+                </stepresult>
+            </step>
+            <step id="step_N101BB_N1005F_N1001F_N10001" ixia_locid="105" class="- topic/li task/step ">
+                <cmd ixia_locid="106" class="- topic/ph task/cmd ">Restore the storage nodes.</cmd>
+                <info ixia_locid="109" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="110" class="- topic/p ">You need to restore the storage nodes if you are using the
+                        Cinder Ceph backend. Follow the same procedure used to restore <nameliteral ixia_locid="111" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>, first restoring host
+                            <nameliteral ixia_locid="202" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">storage-0</nameliteral> and then
+                            <nameliteral ixia_locid="203" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">storage-1</nameliteral>.</p>
+                </info>
+                <stepresult ixia_locid="112" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="113" class="- topic/p ">The state of the hosts when the restore operation is
+                        complete is as follows:</p>
+                    <codeblock ixia_locid="142" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="265" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="116" class="+ topic/ph sw-d/userinput ">system host-list</userinput>
+<systemoutput ixia_locid="266" class="+ topic/ph sw-d/systemoutput ">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | unlocked       | enabled     | available    |
+| 3  | compute-0    | compute     | locked         | disabled    | offline      |
+| 4  | storage-0    | storage     | unlocked       | enabled     | available    |
+| 5  | storage-1    | storage     | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                </stepresult>
+            </step>
+            <step id="restore_cinder_vols" ixia_locid="101" class="- topic/li task/step ">
+                <cmd ixia_locid="102" class="- topic/ph task/cmd ">Restore Cinder volumes.</cmd>
+                <info ixia_locid="103" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="104" class="- topic/p ">You restore Cinder volumes by importing them from the backup
+                        files. You must import all volume backup files, one at a time.</p>
+                </info>
+                <substeps id="substeps_xhg_151_np" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="204" class="- topic/li task/substep ">
+                        <cmd ixia_locid="205" class="- topic/ph task/cmd ">Delete any snapshots that may exist in the
+                            system.</cmd>
+                        <info ixia_locid="206" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="207" class="- topic/p ">The restore operation fails if a snapshot exists for
+                                a volume that is about to be restored. You can list the available
+                                snapshots with the command <cmdname ixia_locid="208" class="+ topic/keyword sw-d/cmdname ">﻿cinder
+                                    snapshot-list --all-tenants</cmdname>, and remove them with the
+                                command <cmdname ixia_locid="209" class="+ topic/keyword sw-d/cmdname ">﻿cinder snapshot-delete</cmdname>
+                                <varname ixia_locid="212" class="+ topic/keyword sw-d/varname ">snapshot-id</varname>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="144" class="- topic/li task/substep ">
+                        <cmd ixia_locid="145" class="- topic/ph task/cmd ">List the current state of the Cinder volumes.</cmd>
+                        <stepxmp ixia_locid="146" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="147" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="267" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="149" class="+ topic/ph sw-d/userinput ">cinder list --all-tenants</userinput>
+<systemoutput ixia_locid="268" class="+ topic/ph sw-d/systemoutput ">+--------------+-----------+--------------+... +----------+--------------+
+|     ID       |   Status  | Display Name |... | Bootable | Attached to  |
++--------------+-----------+--------------+... +----------+--------------+
+| 53ad007a-... |   error   |   volume-1   |... |  false   | c820df55-... |
+| 578da734-... |   error   |              |... |  true    | c820df55-... |
+| 593111d8-... |   error   |   volume-2   |... |  true    |              |
++--------------+-----------+--------------+... +----------+--------------+</systemoutput></codeblock>
+                        </stepxmp>
+                        <info ixia_locid="151" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="152" class="- topic/p ">All volumes are reported to be in the <i ixia_locid="153" class="+ topic/ph hi-d/i ">error</i> state because they are not available
+                                yet, but they are registered in the storage database.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="243" class="- topic/li task/substep ">
+                        <cmd ixia_locid="244" class="- topic/ph task/cmd ">Copy the Cinder volumes to the <filepath ixia_locid="245" class="+ topic/ph sw-d/filepath ">/opt/backups</filepath> folder.</cmd>
+                        <stepxmp ixia_locid="246" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="247" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="269" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="249" class="+ topic/ph sw-d/userinput ">sudo cp /media/wrsroot/backups/volume-* /opt/backups</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="154" class="- topic/li task/substep ">
+                        <cmd ixia_locid="155" class="- topic/ph task/cmd ">Change to the backups directory, and then import a
+                                    volume.</cmd>
+                        <stepxmp ixia_locid="156" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="157" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="343" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="344" class="+ topic/ph sw-d/userinput ">cd /opt/backups</userinput>
+<systemoutput ixia_locid="345" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="159" class="+ topic/ph sw-d/userinput ">cinder import volume-53ad007a-841a-4fd3-a22b-813d4a6a8a85.tgz</userinput>
+<systemoutput ixia_locid="271" class="+ topic/ph sw-d/systemoutput ">+---------------------+--------------------------------------+
+|       Property      |                Value                 |
++---------------------+--------------------------------------+
+| display_description |                 None                 |
+|          id         | 53ad007a-841a-4fd3-a22b-813d4a6a8a85 |
+|         size        |                  1                   |
+|        status       |              importing               |
+|      updated_at     |      2014-09-19T16:10:24.791220      |
+|     volume_type     |                 None                 |
++---------------------+--------------------------------------+</systemoutput></codeblock>
+                        </stepxmp>
+                        <stepresult ixia_locid="160" class="- topic/itemgroup task/stepresult ">
+                            <p ixia_locid="161" class="- topic/p ">The volume remains in the <i ixia_locid="162" class="+ topic/ph hi-d/i ">importing</i> state while the operation takes place.
+                                        Use the <nameliteral ixia_locid="210" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">backup_status</nameliteral> field on the output of the
+                                            <cmdname ixia_locid="211" class="+ topic/keyword sw-d/cmdname ">cinder show</cmdname> command
+                                        to monitor the progress. You must wait until the original
+                                        volume's state, <i ixia_locid="163" class="+ topic/ph hi-d/i ">in-use</i> or <i ixia_locid="164" class="+ topic/ph hi-d/i ">available</i>, is restored. Note that
+                                            <i ixia_locid="165" class="+ topic/ph hi-d/i ">in-use</i> volumes are fully
+                                        restored even if their corresponding instances are not
+                                        running yet.</p>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="166" class="- topic/li task/substep ">
+                        <cmd ixia_locid="167" class="- topic/ph task/cmd ">Import all other volumes in the backup files.</cmd>
+                        <info ixia_locid="168" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="169" class="- topic/p ">Once finished, all volumes are listed in their
+                                original states, as illustrated below.</p>
+                        </info>
+                        <stepxmp ixia_locid="133" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="135" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="272" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="139" class="+ topic/ph sw-d/userinput ">cinder list --all-tenants</userinput>
+<systemoutput ixia_locid="273" class="+ topic/ph sw-d/systemoutput ">+--------------+-----------+--------------+... +----------+--------------+
+|     ID       |   Status  | Display Name |... | Bootable | Attached to  |
++--------------+-----------+--------------+... +----------+--------------+
+| 53ad007a-... |   in-use  |   volume-1   |... |  false   | c820df55-... |
+| 578da734-... |   in-use  |              |... |  true    | c820df55-... |
+| 593111d8-... | available |   volume-2   |... |  true    |              |
++--------------+-----------+--------------+... +----------+--------------+</systemoutput></codeblock>
+                        </stepxmp>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="remove_error_vols" ixia_locid="346" class="- topic/li task/step ">
+                <cmd ixia_locid="347" class="- topic/ph task/cmd ">Remove any <i ixia_locid="348" class="+ topic/ph hi-d/i ">in-use</i> volumes that remain
+                    in error.</cmd>
+                <info ixia_locid="349" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="350" class="- topic/p ">You must remove all <i ixia_locid="351" class="+ topic/ph hi-d/i ">in-use</i> volumes
+                        that for any reason failed to recover, and their associated virtual machine
+                        instances. This is necessary to prevent errors from occurring when restoring
+                        the compute nodes used to launch the virtual machines. If an <i ixia_locid="352" class="+ topic/ph hi-d/i ">in-use</i> volume is in error at the time its virtual
+                        machine is launched, the Nova scheduler reports an error and the restore
+                        operation fails.</p>
+                    <p ixia_locid="353" class="- topic/p ">For the purposes of this example, assume that volume
+                            <nameliteral ixia_locid="354" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">53ad007a-...</nameliteral> failed to
+                        restore. Its status is then reported as <nameliteral ixia_locid="355" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">error</nameliteral>.</p>
+                </info>
+                <substeps id="substeps_trd_3hq_pp" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="356" class="- topic/li task/substep ">
+                        <cmd ixia_locid="357" class="- topic/ph task/cmd ">Find the associated virtual machine instance.</cmd>
+                        <info ixia_locid="358" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="359" class="- topic/p ">The ID of the associated instance is available from
+                                        the output of the <cmdname ixia_locid="360" class="+ topic/keyword sw-d/cmdname ">cinder list
+                                            --all-tenants</cmdname> command in the previous step. In
+                                        this case it is <nameliteral ixia_locid="361" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">c820df55-...</nameliteral>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="362" class="- topic/li task/substep ">
+                        <cmd ixia_locid="363" class="- topic/ph task/cmd ">Remove the virtual machine instance.</cmd>
+                        <stepxmp ixia_locid="364" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="365" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="366" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="367" class="+ topic/ph sw-d/userinput ">nova delete c820df55-...</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="368" class="- topic/li task/substep ">
+                        <cmd ixia_locid="369" class="- topic/ph task/cmd ">Remove the volume in error status.</cmd>
+                        <stepxmp ixia_locid="370" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="371" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="372" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="373" class="+ topic/ph sw-d/userinput ">cinder delete 53ad007a-...</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="restore_computes" ixia_locid="374" class="- topic/li task/step ">
+                <cmd ixia_locid="375" class="- topic/ph task/cmd ">Restore the compute nodes, one at a time.</cmd>
+                <info ixia_locid="376" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="377" class="- topic/p ">You restore these hosts following the same procedure used to
+                        restore <nameliteral ixia_locid="378" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>.</p>
+                </info>
+                <stepresult ixia_locid="379" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="380" class="- topic/p ">The state of the hosts when the restore operation is
+                        complete is as follows:</p>
+                    <codeblock ixia_locid="381" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="382" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="383" class="+ topic/ph sw-d/userinput ">system host-list</userinput>
+<systemoutput ixia_locid="384" class="+ topic/ph sw-d/systemoutput ">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | unlocked       | enabled     | available    |
+| 3  | compute-0    | compute     | unlocked       | enabledd    | available    |
+| 4  | storage-0    | storage     | unlocked       | enabled     | available    |
+| 5  | storage-1    | storage     | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                    <p ixia_locid="385" class="- topic/p ">As each compute node is restored, the original instances at
+                        the time the backups were done are started automatically.</p>
+                </stepresult>
+            </step>
+            <!-- The next steps are specialized versions for small footprint -->
+            <step id="remove_error_vols_small" ixia_locid="386" class="- topic/li task/step ">
+                <cmd ixia_locid="387" class="- topic/ph task/cmd ">Remove any <i ixia_locid="388" class="+ topic/ph hi-d/i ">in-use</i> volumes that remain
+                    in error.</cmd>
+                <info ixia_locid="389" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="390" class="- topic/p ">You must remove all <i ixia_locid="391" class="+ topic/ph hi-d/i ">in-use</i> volumes
+                                that for any reason failed to recover, and their associated virtual
+                                machine instances. This is necessary to prevent errors from
+                                occurring when restoring the compute functions used to launch the
+                                virtual machines. If an <i ixia_locid="392" class="+ topic/ph hi-d/i ">in-use</i> volume is in
+                                error at the time its virtual machine is launched, the Nova
+                                scheduler reports an error and the restore operation fails.</p>
+                    <p ixia_locid="393" class="- topic/p ">For the purposes of this example, assume that volume
+                        <nameliteral ixia_locid="394" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">53ad007a-...</nameliteral> failed to
+                        restore. Its status is then reported as <nameliteral ixia_locid="395" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">error</nameliteral>.</p>
+                </info>
+                <substeps id="substeps_trd_3hq_pp_small" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="396" class="- topic/li task/substep ">
+                        <cmd ixia_locid="397" class="- topic/ph task/cmd ">Find the associated virtual machine instance.</cmd>
+                        <info ixia_locid="398" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="399" class="- topic/p ">The ID of the associated instance is available from
+                                the output of the <cmdname ixia_locid="400" class="+ topic/keyword sw-d/cmdname ">cinder list
+                                    --all-tenants</cmdname> command in the previous step. In
+                                this case it is <nameliteral ixia_locid="401" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">c820df55-...</nameliteral>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="402" class="- topic/li task/substep ">
+                        <cmd ixia_locid="403" class="- topic/ph task/cmd ">Remove the virtual machine instance.</cmd>
+                        <stepxmp ixia_locid="404" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="405" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="406" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="407" class="+ topic/ph sw-d/userinput ">nova delete c820df55-...</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="408" class="- topic/li task/substep ">
+                        <cmd ixia_locid="409" class="- topic/ph task/cmd ">Remove the volume in error status.</cmd>
+                        <stepxmp ixia_locid="410" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="411" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="412" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="413" class="+ topic/ph sw-d/userinput ">cinder delete 53ad007a-...</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                </substeps>
+            </step>
+                    <step id="step_N104E9_N10062_N1001D_N10012_N1000F_N10001" ixia_locid="414" class="- topic/li task/step ">
+                        <cmd ixia_locid="415" class="- topic/ph task/cmd ">Restore the compute functions, one at a time.</cmd>
+                        <info ixia_locid="416" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="417" class="- topic/p ">You restore these hosts following the same procedure
+                                used to restore <nameliteral ixia_locid="418" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>.</p>
+                        </info>
+                        <stepresult ixia_locid="419" class="- topic/itemgroup task/stepresult ">
+                            <p ixia_locid="420" class="- topic/p ">The state of the hosts when the restore operation is
+                                complete is as follows:</p>
+                            <codeblock ixia_locid="421" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="422" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="423" class="+ topic/ph sw-d/userinput ">system host-list</userinput>
+<systemoutput ixia_locid="424" class="+ topic/ph sw-d/systemoutput ">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | unlocked       | enabled     | available    |
+| 3  | compute-0    | compute     | unlocked       | enabledd    | available    |
+| 4  | storage-0    | storage     | unlocked       | enabled     | available    |
+| 5  | storage-1    | storage     | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                            <p ixia_locid="425" class="- topic/p ">As each compute node is restored, the original
+                                instances at the time the backups were done are started
+                                automatically.</p>
+                        </stepresult>
+                    </step>
+                    <step id="restore_controller_1_small" ixia_locid="311" class="- topic/li task/step ">
+                        <cmd ixia_locid="312" class="- topic/ph task/cmd ">Restore <nameliteral ixia_locid="313" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>.</cmd>
+                        <substeps id="substeps_hyb_znc_5s" class="- topic/ol task/substeps ">
+                            <substep ixia_locid="314" class="- topic/li task/substep ">
+                                <cmd ixia_locid="315" class="- topic/ph task/cmd ">List the current state of the hosts.</cmd>
+                                <stepxmp ixia_locid="316" class="- topic/itemgroup task/stepxmp ">
+                                    <codeblock ixia_locid="317" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="318" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="319" class="+ topic/ph sw-d/userinput ">system host-list</userinput>
+<systemoutput ixia_locid="320" class="+ topic/ph sw-d/systemoutput ">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | locked         | disabled    | offline      |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                                </stepxmp>
+                            </substep>
+                            <substep ixia_locid="321" class="- topic/li task/substep ">
+                                <cmd ixia_locid="322" class="- topic/ph task/cmd ">Power on the host.</cmd>
+                                <info ixia_locid="323" class="- topic/itemgroup task/info ">
+                                    <p ixia_locid="324" class="- topic/p ">Remember to ensure that the host boots from
+                                        the network and not from an old disk image that might still
+                                        be present on its hard drive.</p>
+                                </info>
+                            </substep>
+                            <substep ixia_locid="325" class="- topic/li task/substep ">
+                                <cmd ixia_locid="326" class="- topic/ph task/cmd ">Unlock the host.</cmd>
+                                <stepxmp ixia_locid="327" class="- topic/itemgroup task/stepxmp ">
+                                    <codeblock ixia_locid="328" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="329" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="330" class="+ topic/ph sw-d/userinput ">system host-unlock 2</userinput>
+<systemoutput ixia_locid="331" class="+ topic/ph sw-d/systemoutput ">+-----------------+--------------------------------------+
+| Property        | Value                                |
++-----------------+--------------------------------------+
+| action          | none                                 |
+| administrative  | locked                               |
+| availability    | online                               |
+| ...             | ...                                  |
+| uuid            | 5fc4904a-d7f0-42f0-991d-0c00b4b74ed0 |
++-----------------+--------------------------------------+</systemoutput></codeblock>
+                                </stepxmp>
+                            </substep>
+                            <substep ixia_locid="332" class="- topic/li task/substep ">
+                                <cmd ixia_locid="333" class="- topic/ph task/cmd ">Verify the new state of the hosts.</cmd>
+                                <stepxmp ixia_locid="334" class="- topic/itemgroup task/stepxmp ">
+                                    <codeblock ixia_locid="335" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="336" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="337" class="+ topic/ph sw-d/userinput ">system host-list</userinput>
+<systemoutput ixia_locid="338" class="+ topic/ph sw-d/systemoutput ">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                                </stepxmp>
+                            </substep>
+                        </substeps>
+                        <stepresult ixia_locid="339" class="- topic/itemgroup task/stepresult ">
+                            <p ixia_locid="340" class="- topic/p ">The unlocking operation forces a reboot of the host,
+                                which is then initialized with the corresponding image available
+                                from the system backup.</p>
+                            <p ixia_locid="341" class="- topic/p ">You must wait for the host to become enabled and
+                                available before proceeding to the next step.</p>
+                        </stepresult>
+                    </step>
+        </steps>
+                <result id="result" ixia_locid="130" class="- topic/section task/result ">
+                    <p ixia_locid="131" class="- topic/p ">The HP Helion OpenStack Carrier Grade is fully restored. The state of the
+                        system, including storage resources and virtual machines, is identical to
+                        the state the cluster was in when the backup procedure took place.</p>
+                </result>
+                <postreq id="restore_passwords" ixia_locid="342" class="- topic/section task/postreq ">
+                    <p ixia_locid="171" class="- topic/p ">Passwords for local user accounts must be restored manually
+                        since they are not included as part of the backup and restore procedures.
+                        See <xref href="jow1404333563834.xml" ixia_locid="242" class="- topic/xref "/> for additional
+                        information.</p>
+                </postreq>
+        </taskbody>
+    </task>
+    
+    </rcbody>
+</referable-content>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1429547742880" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="345" class="- topic/title ">Configuring vCPU Scheduling and Priority</title>
+    <shortdesc ixia_locid="346" class="- topic/shortdesc ">You can assign the Linux scheduler and priority for non-boot virtual CPUs using an
+        extra specification.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="347" class="- topic/author ">Jim Owens</author>
+        <author ixia_locid="366" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="348" class="- topic/section task/context ">
+            <p ixia_locid="182" class="- topic/p ">This extra specification applies to non-boot virtual CPUs. For the
+                boot CPU, the Linux scheduler and priority are fixed to normal time-shared
+                scheduling policy with a <i ixia_locid="183" class="+ topic/ph hi-d/i ">nice</i> priority of 0.</p>
+            <note id="note_N1017D_N1016B_N10161_N100BC_N10024_N10001" ixia_locid="467" class="- topic/note ">
+                <p ixia_locid="468" class="- topic/p ">This extra spec is shown only for flavors with more than one
+                    CPU.</p>
+            </note>
+            <p ixia_locid="137" class="- topic/p ">For each additional virtual CPU, the available options are:</p>
+            <dl class="- topic/dl ">
+                <dlentry ixia_locid="349" class="- topic/dlentry ">
+                    <dt ixia_locid="350" class="- topic/dt ">Default Policy</dt>
+                    <dd ixia_locid="351" class="- topic/dd ">
+                        <p ixia_locid="352" class="- topic/p ">Assigns a normal time-shared scheduling policy with <i ixia_locid="141" class="+ topic/ph hi-d/i ">nice</i> priority of 0.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="353" class="- topic/dlentry ">
+                    <dt ixia_locid="354" class="- topic/dt ">Real-Time FIFO</dt>
+                    <dd ixia_locid="355" class="- topic/dd ">
+                        <p ixia_locid="356" class="- topic/p ">Assigns a real-time, first-in-first-out policy, with
+                            priority in the range of 1‒99, specified in the associated <uicontrol ixia_locid="358" class="+ topic/ph ui-d/uicontrol ">VCPU Priority</uicontrol> field.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="359" class="- topic/dlentry ">
+                    <dt ixia_locid="360" class="- topic/dt ">Real-Time Round Robin</dt>
+                    <dd ixia_locid="361" class="- topic/dd ">
+                        <p ixia_locid="362" class="- topic/p ">Assigns a real-time, round-robin policy, with priority
+                            of 1‒99, specified in the associated <uicontrol ixia_locid="364" class="+ topic/ph ui-d/uicontrol ">VCPU
+                                Priority</uicontrol> field.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <note id="note_N10089_N10026_N10023_N10001" ixia_locid="367" class="- topic/note ">
+                <p ixia_locid="368" class="- topic/p ">The scheduling policy and priority level set by this extra spec become effective
+                    when the virtual CPU thread is scheduled to run on regularly shared cores.
+                    Virtual CPU threads pinned to run on shared-only CPUs always use the default
+                    policy of time-shared scheduling with <i ixia_locid="369" class="+ topic/ph hi-d/i ">nice</i> priority of 0. See <xref href="jow1426625051841.xml" ixia_locid="370" class="- topic/xref "/> for details.</p>
+            </note>
+            <p ixia_locid="17" class="- topic/p ">To add this extra spec to a flavor using the web administration
+                interface, use the <uicontrol ixia_locid="314" class="+ topic/ph ui-d/uicontrol ">VCPU Scheduler Policy</uicontrol>
+                selection in the <uicontrol ixia_locid="316" class="+ topic/ph ui-d/uicontrol ">Create Flavor Extra Spec</uicontrol>
+                drop-down menu. To access this menu, see <xref href="jow1429538642910.xml" ixia_locid="318" class="- topic/xref "/>.</p>
+            <p ixia_locid="142" class="- topic/p ">You can specify the scheduler policy and priority for non-boot
+                virtual CPUs from the CLI using the <option ixia_locid="143" class="+ topic/keyword pr-d/option ">hw:wrs:vcpu:scheduler</option> parameter on the <cmdname ixia_locid="145" class="+ topic/keyword sw-d/cmdname ">nova
+                    flavor-key</cmdname> command. This parameter accepts a semicolon-separated list
+                of <varname ixia_locid="146" class="+ topic/keyword sw-d/varname ">scheduler:priority:vcpus</varname> values enclosed by
+                quotes, as follows.</p>
+            <dl class="- topic/dl ">
+                <dlentry ixia_locid="147" class="- topic/dlentry ">
+                    <dt ixia_locid="148" class="- topic/dt "><varname ixia_locid="149" class="+ topic/keyword sw-d/varname ">scheduler</varname></dt>
+                    <dd ixia_locid="150" class="- topic/dd ">
+                        <p ixia_locid="151" class="- topic/p ">The scheduler policy. One of <i ixia_locid="152" class="+ topic/ph hi-d/i ">other</i>, <i ixia_locid="153" class="+ topic/ph hi-d/i ">fifo</i>, or <i ixia_locid="154" class="+ topic/ph hi-d/i ">rr</i> to indicate normal time-shared, FIFO, and Round Robin
+                            policies respectively.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="155" class="- topic/dlentry ">
+                    <dt ixia_locid="156" class="- topic/dt "><varname ixia_locid="157" class="+ topic/keyword sw-d/varname ">priority</varname></dt>
+                    <dd ixia_locid="158" class="- topic/dd ">
+                        <p ixia_locid="159" class="- topic/p ">The real-time scheduler priority. A value between 1 and
+                            99.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="160" class="- topic/dlentry ">
+                    <dt ixia_locid="161" class="- topic/dt "><varname ixia_locid="162" class="+ topic/keyword sw-d/varname ">vcpus</varname></dt>
+                    <dd ixia_locid="163" class="- topic/dd ">
+                        <p ixia_locid="164" class="- topic/p ">An optional list of virtual CPUs as a comma-separated
+                            list (1,2,3), or a range specification (1-3). Virtual CPU number 0
+                            refers to the boot virtual CPU and therefore cannot be used.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </context>
+        <example ixia_locid="365" class="- topic/example ">
+            <p ixia_locid="166" class="- topic/p ">To set real-time schedulers and priorities on virtual CPU 1 (FIFO,
+                50) and virtual CPU 2 (Round Robin, 80):</p>
+            <codeblock ixia_locid="167" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="200" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="169" class="+ topic/ph sw-d/userinput ">nova flavor-key <varname ixia_locid="341" class="+ topic/keyword sw-d/varname ">flavor_name</varname> set hw:wrs:vcpu:scheduler="fifo:50:1;rr:80:2"</userinput></codeblock>
+            <p ixia_locid="170" class="- topic/p ">To set real-time Round Robin schedulers for three virtual CPU (Round
+                Robin, 80):</p>
+            <codeblock ixia_locid="171" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="201" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="173" class="+ topic/ph sw-d/userinput ">nova flavor-key <varname ixia_locid="342" class="+ topic/keyword sw-d/varname ">flavor_name</varname> set hw:wrs:vcpu:scheduler=rr:80:1-3</userinput></codeblock>
+            <p ixia_locid="174" class="- topic/p ">To set the FIFO scheduler with priority 50 on all virtual CPUs
+                except virtual CPU 0:</p>
+            <codeblock ixia_locid="175" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="202" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="177" class="+ topic/ph sw-d/userinput ">nova flavor-key <varname ixia_locid="343" class="+ topic/keyword sw-d/varname ">flavor_name</varname> set hw:wrs:vcpu:scheduler=fifo:50</userinput></codeblock>
+            <p ixia_locid="178" class="- topic/p ">To reset all scheduler settings to default values (non real-time
+                scheduler with priority 0):</p>
+            <codeblock ixia_locid="222" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="225" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="228" class="+ topic/ph sw-d/userinput ">nova flavor-key <varname ixia_locid="344" class="+ topic/keyword sw-d/varname ">flavor_name</varname> unset hw:wrs:vcpu:scheduler</userinput></codeblock>
+        </example>
+    </taskbody>
+</task-wr>

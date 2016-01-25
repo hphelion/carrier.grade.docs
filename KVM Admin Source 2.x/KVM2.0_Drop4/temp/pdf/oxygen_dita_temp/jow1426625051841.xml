@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1426625051841" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="302" class="- topic/title ">Pinning a vCPU to a Shared Physical CPU</title>
+    <shortdesc ixia_locid="303" class="- topic/shortdesc ">You can pin a vCPU to a shared physical CPU by using a flavor with the required extra
+        specification.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="304" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="305" class="- topic/section task/context ">
+            <p ixia_locid="306" class="- topic/p ">You can set up a shared physical CPU on the host to run low-load or
+                non-real-time tasks for multiple VMs, freeing other cores on the host for dedicated
+                high-load tasks. You can then use an extra spec to pin a specified vCPU to the
+                shared physical CPU.</p>
+        </context>
+        <context id="context_N1004A_N1001C_N10001" ixia_locid="309" class="- topic/section task/context ">
+            <p ixia_locid="310" class="- topic/p ">To add the required extra specification to a flavor using the web
+                administration interface, use the <uicontrol ixia_locid="311" class="+ topic/ph ui-d/uicontrol ">Shared VCPU
+                    ID</uicontrol> selection in the <uicontrol ixia_locid="312" class="+ topic/ph ui-d/uicontrol ">Create Flavor Extra
+                    Spec</uicontrol> drop-down menu. To access this menu, see <xref href="jow1429538642910.xml" ixia_locid="313" class="- topic/xref "/>.</p>
+            <p ixia_locid="299" class="- topic/p ">To set the Shared VCPU ID from the CLI, use a command of the
+                following form:</p>
+            <codeblock ixia_locid="282" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="284" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="286" class="+ topic/ph sw-d/userinput ">nova flavor-key <varname ixia_locid="288" class="+ topic/keyword sw-d/varname ">flavor_name</varname> set hw:wrs:shared_vcpu=<varname ixia_locid="290" class="+ topic/keyword sw-d/varname ">vcpu_id</varname></userinput></codeblock>
+            <p ixia_locid="300" class="- topic/p ">where <nameliteral ixia_locid="301" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">vcpu_id</nameliteral> is an
+                integer that identifies the vcpu. The valid range starts at 0 and must be less than
+                the <nameliteral ixia_locid="314" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">VCPUs</nameliteral> value defined for the flavor.</p>
+        </context>
+        <prereq id="prereq_N1002D_N1001C_N10001" ixia_locid="307" class="- topic/section task/prereq ">
+            <p ixia_locid="308" class="- topic/p ">To use this extra spec, you must define a shared physical CPU on at
+                least one host. For more information, see <xref href="jow1426618822854.xml" ixia_locid="295" class="- topic/xref "/>. To support migration, shared physical CPUs on multiple hosts
+                are recommended.</p>
+            <p ixia_locid="296" class="- topic/p ">You must also set the <nameliteral ixia_locid="297" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">CPU
+                    Policy</nameliteral> extra specification for the flavor to <nameliteral ixia_locid="298" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Dedicated</nameliteral>. This enables the high-load vCPUs for
+                the instance to be pinned.</p>
+        </prereq>
+    </taskbody>
+</task-wr>

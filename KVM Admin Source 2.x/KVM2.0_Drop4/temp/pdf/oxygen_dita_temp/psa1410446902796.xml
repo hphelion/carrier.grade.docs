@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1410446902796" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic task/task task-wr/task-wr ">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Removing Patches</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc "><draft-comment author="rstone" ixia_locid="108" translate="no" dir="ltr" class="- topic/draft-comment ">US62817 changed wrs-patch -&gt;
+            sw-patch</draft-comment>Patches in the <i ixia_locid="38" class="+ topic/ph hi-d/i ">Applied</i> or <i ixia_locid="37" class="+ topic/ph hi-d/i ">Partial-Apply</i> states can be removed if necessary, for example, when
+        they trigger undesired or unplanned effects on the Titanium cluster.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001D_N1001A_N10001" ixia_locid="4" class="- topic/section task/context ">
+            <p ixia_locid="5" class="- topic/p ">Rolling back patches is conceptually identical to installing patches.
+                A roll-back operation can be commanded for a patch in either the <i ixia_locid="39" class="+ topic/ph hi-d/i ">Applied</i> or the <i ixia_locid="40" class="+ topic/ph hi-d/i ">Partial-Apply</i> states. As the patch is
+                removed, it goes through the following state transitions:</p>
+            <dl class="- topic/dl ">
+                <dlentry ixia_locid="9" class="- topic/dlentry ">
+                    <dt ixia_locid="10" class="- topic/dt "><i ixia_locid="41" class="+ topic/ph hi-d/i ">Applied</i> or <i ixia_locid="42" class="+ topic/ph hi-d/i ">Partial-Apply</i> to <i ixia_locid="43" class="+ topic/ph hi-d/i ">Partial-Remove</i></dt>
+                    <dd ixia_locid="13" class="- topic/dd ">
+                        <p ixia_locid="16" class="- topic/p ">A patch in the <i ixia_locid="17" class="+ topic/ph hi-d/i ">Partial-Remove</i>
+                            state indicates that it has been removed from zero or more, but not from
+                            all, the applicable hosts.</p>
+                        <p ixia_locid="14" class="- topic/p ">Use the command <cmdname ixia_locid="15" class="+ topic/keyword sw-d/cmdname ">sw-patch
+                                remove</cmdname> to trigger this transition.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="18" class="- topic/dlentry ">
+                    <dt ixia_locid="19" class="- topic/dt "><i ixia_locid="44" class="+ topic/ph hi-d/i ">Partial-Remove</i> to <i ixia_locid="21" class="+ topic/ph hi-d/i ">Available</i></dt>
+                    <dd ixia_locid="22" class="- topic/dd ">
+                        <p ixia_locid="23" class="- topic/p ">Use the command <cmdname ixia_locid="24" class="+ topic/keyword sw-d/cmdname ">sw-patch
+                                host-install</cmdname> repeatedly targeting each time one of the
+                            applicable hosts in the cluster. The transition to the <i ixia_locid="25" class="+ topic/ph hi-d/i ">Available</i> state is complete when the patch is
+                            removed from all target hosts. The patch remains in the patch storage
+                            area as if it had just been uploaded.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="46" class="- topic/p ">The following example is basically a copy of the workflow used in
+                    <xref href="psa1410446976545.xml" ixia_locid="47" class="- topic/xref "/>, but this time removing
+                instead of installing the patch. The steps are therefore presented in simplified
+                form.</p>
+        </context>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N10029_N10026_N1001A_N10001" ixia_locid="6" class="- topic/li task/step ">
+                <cmd ixia_locid="7" class="- topic/ph task/cmd ">Log in as Keystone user <nameliteral ixia_locid="45" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> to the active controller.</cmd>
+            </step>
+            <step id="step_N100B2_N1009F_N10027_N10001" ixia_locid="48" class="- topic/li task/step ">
+                <cmd ixia_locid="49" class="- topic/ph task/cmd ">Verify the state of the patch.</cmd>
+                <stepxmp ixia_locid="32" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="33" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="101" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="35" class="+ topic/ph sw-d/userinput ">sudo sw-patch query</userinput>
+<systemoutput ixia_locid="102" class="+ topic/ph sw-d/systemoutput ">﻿       Patch ID             Patch State
+=========================   ===========
+TITANIUM_14.10_PATCH_0001   Applied</systemoutput></codeblock>
+                    <p ixia_locid="50" class="- topic/p ">In this example the patch is listed in the <i ixia_locid="51" class="+ topic/ph hi-d/i ">Applied</i> state, but it could
+                        be in the <i ixia_locid="52" class="+ topic/ph hi-d/i ">Partial-Apply</i> state as well.</p>
+                </stepxmp>
+            </step>
+            <step id="step_N100DD_N1009F_N10027_N10001" ixia_locid="53" class="- topic/li task/step ">
+                <cmd ixia_locid="54" class="- topic/ph task/cmd ">Remove the patch.</cmd>
+                <stepxmp ixia_locid="55" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="56" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="103" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="58" class="+ topic/ph sw-d/userinput ">sudo sw-patch remove TITANIUM_14.10_PATCH_0001</userinput>
+<systemoutput ixia_locid="104" class="+ topic/ph sw-d/systemoutput ">TITANIUM_14.10_PATCH_0001 has been removed from the repo</systemoutput></codeblock>
+                </stepxmp>
+                <stepresult ixia_locid="60" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="61" class="- topic/p ">The patch is now in the <i ixia_locid="62" class="+ topic/ph hi-d/i ">Partial-Remove</i>
+                        state, ready to be removed from the impacted hosts where it was already
+                        installed.</p>
+                </stepresult>
+            </step>
+            <step id="step_N10103_N1009F_N10027_N10001" ixia_locid="63" class="- topic/li task/step ">
+                <cmd ixia_locid="64" class="- topic/ph task/cmd ">Query the patching status of all hosts in the cluster.</cmd>
+                <stepxmp ixia_locid="65" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="66" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="105" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="68" class="+ topic/ph sw-d/userinput ">sudo sw-patch query-hosts</userinput>
+<systemoutput ixia_locid="106" class="+ topic/ph sw-d/systemoutput ">﻿  Hostname      IP Address    Patch Current  Reboot Required
+============  ==============  =============  ===============
+compute-0     192.168.204.15       Yes             No
+controller-0  192.168.204.3        No              Yes
+controller-1  192.168.204.4        No              Yes</systemoutput></codeblock>
+                    <p ixia_locid="70" class="- topic/p ">In this example, the controllers have patches ready to be
+                        removed, and therefore must be rebooted.</p>
+                </stepxmp>
+            </step>
+            <step id="step_N10121_N1009F_N10027_N10001" ixia_locid="71" class="- topic/li task/step ">
+                <cmd ixia_locid="72" class="- topic/ph task/cmd ">Remove all pending-for-removal patches from <nameliteral ixia_locid="73" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral>.</cmd>
+                <substeps id="substeps_kzv_x13_pp" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="74" class="- topic/li task/substep ">
+                        <cmd ixia_locid="75" class="- topic/ph task/cmd ">Swact controller services.</cmd>
+                    </substep>
+                    <substep ixia_locid="78" class="- topic/li task/substep ">
+                        <cmd ixia_locid="79" class="- topic/ph task/cmd ">Run the patching sequence.</cmd>
+                        <stepxmp ixia_locid="80" class="- topic/itemgroup task/stepxmp ">
+                            <codeblock ixia_locid="81" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="107" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="83" class="+ topic/ph sw-d/userinput ">system host-patch-reboot controller-0</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1017D_N1009F_N10027_N10001" ixia_locid="94" class="- topic/li task/step ">
+                <cmd ixia_locid="95" class="- topic/ph task/cmd ">Remove all pending patches from <nameliteral ixia_locid="96" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>.</cmd>
+            </step>
+        </steps>
+        <result id="result_N10186_N10027_N10001" ixia_locid="97" class="- topic/section task/result ">
+            <p ixia_locid="98" class="- topic/p ">The Titanium cluster is up to date now. All patches have been
+                removed, and the patch TITANIUM_14.10_PATCH_0001 can be deleted from the patch
+                storage area if necessary.</p>
+            <p ixia_locid="99" class="- topic/p ">It is important to note the role of the command <cmdname ixia_locid="100" class="+ topic/keyword sw-d/cmdname ">wrs-path
+                    host-install</cmdname> as a tool that both installs and removes patches as
+                necessary.</p>
+        </result>
+    </taskbody>
+</task-wr>
