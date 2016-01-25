@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1425585636142" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Setting Up a VXLAN Provider Network</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">You can use the CLI or the web administration interface to set up a VXLAN provider
+        network and add segmentation ranges.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N10022_N1001F_N10001" ixia_locid="4" class="- topic/section task/context ">
+            <p ixia_locid="5" class="- topic/p ">VXLAN provider networks are an alternative to VLAN provider networks
+                when VM L2 connectivity is required across separate Layer 2 network segments
+                separated by one or more Layer 3 routers.</p>
+            <p ixia_locid="288" class="- topic/p ">The steps in this section describe how to set up a VXLAN provider
+                network and add segmentation ranges using the web administration interface. For
+                information about using CLI commands, see <xref href="jow1425677233816.xml" ixia_locid="365" class="- topic/xref "/>.</p>
+        </context>
+        <steps id="steps_rvq_zr2_hr" class="- topic/ol task/steps ">
+            <step id="step_N10031_N1002D_N1001F_N10001" ixia_locid="6" class="- topic/li task/step " conref="jow1424191621914.xml#jow1424191621914/step_N1003F_N1003C_N10024_N10001">
+                <cmd ixia_locid="7" class="- topic/ph task/cmd "/>
+            </step>
+            <step id="step_N1003A_N1002D_N1001F_N10001" ixia_locid="8" class="- topic/li task/step " conref="jow1424191621914.xml#jow1424191621914/step_N10054_N1003C_N10024_N10001">
+                <cmd ixia_locid="9" class="- topic/ph task/cmd "/>
+            </step>
+            <step id="step_N10043_N1002D_N1001F_N10001" ixia_locid="10" class="- topic/li task/step ">
+                <cmd ixia_locid="11" class="- topic/ph task/cmd ">Create a  provider network.</cmd>
+                <info ixia_locid="12" class="- topic/itemgroup task/info " conref="jow1424191621914.xml#jow1424191621914/Provider_Network_dialog"/>
+                <info ixia_locid="13" class="- topic/itemgroup task/info ">
+                    <fig id="fig_v3z_zsg_hr" ixia_locid="359" class="- topic/fig ">
+                        <image href="jow1425675012586.image" id="image_jss_vsg_hr" ixia_locid="360" placement="inline" class="- topic/image ">
+                            <alt ixia_locid="361" class="- topic/alt ">i-ccs-create-provider-network-generic</alt>
+                        </image>
+                    </fig>
+                    <p ixia_locid="14" class="- topic/p ">For the <nameliteral ixia_locid="362" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Type</nameliteral>, select <nameliteral ixia_locid="15" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">VXLAN</nameliteral>.</p>
+                    <p ixia_locid="363" class="- topic/p ">For the MTU, set a maximum transmission unit that allows for the overhead
+                        required by VXLAN encapsulation. For more information, see <xref href="jow1404333732592.xml" ixia_locid="364" class="- topic/xref "/>.</p>
+                </info>
+            </step>
+            <step id="step_N1005D_N1002D_N1001F_N10001" ixia_locid="16" class="- topic/li task/step " conref="jow1424191621914.xml#jow1424191621914/step_N10127_N1003C_N10024_N10001">
+                <cmd ixia_locid="17" class="- topic/ph task/cmd "/>
+            </step>
+            <step id="step_N10072_N1002D_N1001F_N10001" ixia_locid="274" class="- topic/li task/step ">
+                <cmd ixia_locid="273" class="- topic/ph task/cmd ">Add one or more segmentation ranges.</cmd>
+                <info ixia_locid="275" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="276" class="- topic/p " conref="jow1425657297895.xml#jow1425657297895/seg_range_definition"/>
+                </info>
+                <info ixia_locid="277" class="- topic/itemgroup task/info " conref="jow1425657297895.xml#jow1425657297895/info_add_seg-range"/>
+                <!--RS: removed following UI element definitions because latest version of dialog does not show them-->
+                <info ixia_locid="281" class="- topic/itemgroup task/info ">
+                    <!--
+<dl conref="jow1425657297895.xml#jow1425657297895/dl_VxLAN_extras">
+                        <dlentry ixia_locid="285">
+                            <dt ixia_locid="286"/>
+                            <dd ixia_locid="287"/>
+                        </dlentry>
+                    </dl>-->
+                    <fig id="fig_tlm_tfg_hr" ixia_locid="282" class="- topic/fig ">
+                        <image href="jow1425669118942.image" id="image_o4n_cgg_hr" ixia_locid="283" width="5in" placement="inline" class="- topic/image ">
+                            <alt ixia_locid="284" class="- topic/alt ">i-css-create-seg-range-vxlan</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N10088_N1002D_N1001F_N10001" ixia_locid="278" class="- topic/li task/step ">
+                <cmd ixia_locid="279" class="- topic/ph task/cmd " conref="jow1425657297895.xml#jow1425657297895/cmd_commit_seg_range"/>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

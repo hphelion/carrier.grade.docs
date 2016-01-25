@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1414074138348" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="144" class="- topic/title ">Managing Storage Nodes</title>
+    <shortdesc ixia_locid="145" class="- topic/shortdesc ">On systems that use a <nameliteral ixia_locid="16" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Ceph</nameliteral> backend for Cinder storage, you can add or replace storage disks or
+        swap a storage node while the system is running, even if the storage resources are in active
+        use.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="146" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N10024_N10021_N10001" ixia_locid="147" class="- topic/section task/context ">
+            <p ixia_locid="148" class="- topic/p ">A HP Helion OpenStack Carrier Grade system with a Ceph storage backend uses exactly
+                two storage nodes; you cannot add or remove storage nodes. However, you can add
+                disks to a storage node to increase capacity, and you can replace a faulty host.</p>
+            <note id="note_N1002C_N10024_N10021_N10001" ixia_locid="149" class="- topic/note ">
+                <p ixia_locid="150" class="- topic/p ">The storage node pair in a HP Helion OpenStack Carrier Grade system provides
+                    redundancy for High Availability. A balanced storage capacity is recommended, in
+                    which each host has sufficient independent resources to meet the operational
+                    requirements of the system.</p>
+            </note>
+        </context>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N10039_N10036_N10021_N10001" ixia_locid="151" class="- topic/li task/step ">
+                <cmd ixia_locid="152" class="- topic/ph task/cmd ">Lock the host to be modified or replaced.</cmd>
+                <info ixia_locid="76" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="77" class="- topic/p ">Open the <wintitle ixia_locid="143" class="+ topic/keyword ui-d/wintitle ">Hosts</wintitle> list by
+                        clicking <uicontrol ixia_locid="78" class="+ topic/ph ui-d/uicontrol ">Inventory</uicontrol> on the<wintitle ixia_locid="79" class="+ topic/keyword ui-d/wintitle "> System Panel</wintitle> section of the <wintitle ixia_locid="80" class="+ topic/keyword ui-d/wintitle ">Admin</wintitle> menu, and then selecting the <uicontrol ixia_locid="81" class="+ topic/ph ui-d/uicontrol ">Hosts</uicontrol> tab.</p>
+                    <p ixia_locid="153" class="- topic/p ">Click <menucascade ixia_locid="155" class="+ topic/ph ui-d/menucascade ">
+                            <uicontrol ixia_locid="156" class="+ topic/ph ui-d/uicontrol ">More</uicontrol>
+                            <uicontrol ixia_locid="158" class="+ topic/ph ui-d/uicontrol ">Lock Host</uicontrol>
+                        </menucascade> for the host. </p>
+                    <p ixia_locid="154" class="- topic/p ">Wait for the procedure to be completed.</p>
+                </info>
+            </step>
+            <step id="step_N1007C_N10036_N10021_N10001" ixia_locid="159" class="- topic/li task/step ">
+                <cmd ixia_locid="160" class="- topic/ph task/cmd ">Power down the host and make any required hardware
+                    changes.</cmd>
+                <info ixia_locid="161" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="162" class="- topic/p ">This may involve replacing or adding disks, or replacing the
+                        host completely.</p>
+                </info>
+            </step>
+            <step id="step_N1008D_N10036_N10021_N10001" ixia_locid="163" class="- topic/li task/step ">
+                <cmd ixia_locid="164" class="- topic/ph task/cmd ">Place the new or modified host node into service.</cmd>
+                <info ixia_locid="165" class="- topic/itemgroup task/info ">
+                    <ul id="ul_zhp_2fv_hp" class="- topic/ul ">
+                        <li ixia_locid="6" class="- topic/li ">
+                            <p ixia_locid="7" class="- topic/p ">For disk replacement, no additional configuration
+                                changes are needed. To begin using the new disk, power up the host
+                                and unlock it. </p>
+                        </li>
+                        <li ixia_locid="8" class="- topic/li ">
+                            <p ixia_locid="9" class="- topic/p ">For disk addition, you must create a new storage
+                                volume (OSD) before you can use the new disk. For more information,
+                                see the <cite ixia_locid="166" class="- topic/cite ">HP Helion OpenStack Carrier Grade Software Installation Guide: Creating
+                                    Storage Volumes</cite>.</p>
+                        </li>
+                        <li ixia_locid="10" class="- topic/li ">
+                            <p ixia_locid="11" class="- topic/p ">For host replacement, you must delete the existing
+                                host using <menucascade ixia_locid="167" class="+ topic/ph ui-d/menucascade ">
+                                    <uicontrol ixia_locid="157" class="+ topic/ph ui-d/uicontrol ">More</uicontrol>
+                                    <uicontrol ixia_locid="168" class="+ topic/ph ui-d/uicontrol ">Delete Host</uicontrol>
+                                </menucascade>. Then you must initialize the new host with a
+                                personality as a storage node, configure its interfaces, and create
+                                storage volumes. For more information on initializing and
+                                configuring a storage node, see the <cite ixia_locid="169" class="- topic/cite ">Titanium
+                                    Server Software Installation Guide: Initializing and Configuring
+                                    Storage Nodes</cite>.</p>
+                        </li>
+                    </ul>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

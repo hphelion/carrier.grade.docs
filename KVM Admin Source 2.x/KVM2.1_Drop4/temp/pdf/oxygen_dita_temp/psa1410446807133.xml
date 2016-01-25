@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1410446807133" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">Populating the Patch Storage Area</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc "><draft-comment author="rstone" ixia_locid="72" translate="no" dir="ltr" class="- topic/draft-comment ">US62817 changed wrs-patch -&gt;
+            sw-patch</draft-comment>Patches have to be uploaded to the HP Helion OpenStack Carrier Grade patch storage
+        area before they can be applied.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4" class="- topic/section task/context "/>
+        <steps class="- topic/ol task/steps ">
+            <step id="cli-admin-login" ixia_locid="18" class="- topic/li task/step ">
+                <cmd ixia_locid="19" class="- topic/ph task/cmd ">Log in as Keystone user <nameliteral ixia_locid="20" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> to the active controller.</cmd>
+                <info ixia_locid="60" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="61" class="- topic/p ">Log in as user <nameliteral ixia_locid="23" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral> to the active controller and source the script
+                            <filepath ixia_locid="62" class="+ topic/ph sw-d/filepath ">/etc/nova/openrc</filepath> to obtain
+                        administrative privileges as described in <xref href="jow1404333563834.xml" ixia_locid="63" class="- topic/xref "/>.</p>
+                </info>
+            </step>
+            <step id="step_N1002B_N10028_N1001C_N10001" ixia_locid="6" class="- topic/li task/step ">
+                <cmd ixia_locid="7" class="- topic/ph task/cmd ">Upload the patch file to the patch storage area.</cmd>
+                <stepxmp ixia_locid="11" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="12" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="64" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="14" class="+ topic/ph sw-d/userinput ">sudo sw-patch upload /tmp/patches/TITANIUM_CONTROLLER_14.10_PATCH_0001.patch</userinput>
+<systemoutput ixia_locid="65" class="+ topic/ph sw-d/systemoutput ">TITANIUM_CONTROLLER_14.10_PATCH_0001 is now available</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="8" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="9" class="- topic/p ">This example uploads a single patch to the storage area. You
+                        can specify multiple patch files on the same command separating their names
+                        with spaces.</p>
+                    <p ixia_locid="32" class="- topic/p ">Alternatively, you can upload all patch files stored in a directory using a
+                        single command, as illustrated in the following example:</p>
+                    <codeblock ixia_locid="33" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="66" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="35" class="+ topic/ph sw-d/userinput ">sudo sw-patch upload-dir /tmp/patches</userinput></codeblock>
+                </info>
+                <stepresult ixia_locid="36" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="37" class="- topic/p ">The patch files are available now in the patch storage area, but they have
+                        not yet been applied to the cluster.</p>
+                </stepresult>
+            </step>
+            <step id="step_N10051_N10028_N1001C_N10001" ixia_locid="16" class="- topic/li task/step ">
+                <cmd ixia_locid="17" class="- topic/ph task/cmd ">Verify the status of the patch.</cmd>
+                <stepxmp ixia_locid="38" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="39" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="67" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="41" class="+ topic/ph sw-d/userinput ">sudo sw-patch query</userinput>
+<systemoutput ixia_locid="68" class="+ topic/ph sw-d/systemoutput ">﻿       Patch ID             Patch State
+=========================   ===========
+TITANIUM_14.10_PATCH_0001   Available</systemoutput></codeblock>
+                    <p ixia_locid="43" class="- topic/p ">The patch state is <i ixia_locid="44" class="+ topic/ph hi-d/i ">Available</i> now, indicating that it is included in
+                        the patch storage area. Further details about the patch can be retrieved as
+                        follows:</p>
+                    <codeblock ixia_locid="45" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="69" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="47" class="+ topic/ph sw-d/userinput ">sudo sw-patch show TITANIUM_14.10_PATCH_0001</userinput>
+<systemoutput ixia_locid="70" class="+ topic/ph sw-d/systemoutput ">TITANIUM_14.10_PATCH_0001:
+    Patch State:    Available
+    Release Status: Released
+    Summary:        Add logs to hbsClient and libalarm-clock
+    Description:    Modified log in hbsClient. Expect to see this log on
+                    all blade types  'hbsClient patches by
+                    TITANIUM_14.10_PATCH_0001' when hbsClient
+                    restarts. Also added a log to ac_init() function
+                    that reads "TITANIUM_14.10_PATCH_0001 patched
+                    libalarm-clock".  Should be seen when heartbeat
+                    process is restarted on controller and compute.
+    Install Instructions:
+                    install text here
+    Requires:
+                    TITANIUM_14.10_PATCH_0001
+    Contents:
+                    titanium-mtce-common-1.0-r23.x86_64.rpm
+                    titanium-mtce-common-dev-1.0-r23.x86_64.rpm
+                    titanium-mtce-common-pmon-1.0-r23.x86_64.rpm
+                    titanium-mtce-common-rmon-1.0-r23.x86_64.rpm
+                    libalarm-clock-1.0-r1.x86_64.rpm</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100D8_N1002D_N1001F_N10001" ixia_locid="49" class="- topic/li task/step ">
+                <cmd importance="optional" ixia_locid="50" class="- topic/ph task/cmd ">Delete a patch from the patch storage area.</cmd>
+                <info ixia_locid="51" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="52" class="- topic/p ">Patches in the <i ixia_locid="53" class="+ topic/ph hi-d/i ">Available</i> state can be
+                        deleted as illustrated in the following command:</p>
+                </info>
+                <stepxmp ixia_locid="54" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="55" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="71" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="57" class="+ topic/ph sw-d/userinput ">sudo sw-patch delete TITANIUM_14.10_PATCH_0001</userinput></codeblock>
+                    <p ixia_locid="58" class="- topic/p ">The patch to delete from the patch storage area is identified
+                        by the patch ID reported by the <cmdname ixia_locid="59" class="+ topic/keyword sw-d/cmdname ">sw-patch
+                            query</cmdname> command. You can provide multiple patch IDs to the
+                        delete command separated by spaces.</p>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

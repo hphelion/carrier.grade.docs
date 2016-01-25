@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1432240580490" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="370" class="- topic/title ">Enabling Server Group Messaging for a VM</title>
+    <shortdesc ixia_locid="371" class="- topic/shortdesc ">You can enable a messaging API for a VM, for use with other VMs in
+        the same server group.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="372" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="373" class="- topic/section task/context ">
+            <p ixia_locid="399" class="- topic/p "> If this extra spec is not added, then by default this API is
+                disabled.</p>
+            <p ixia_locid="400" class="- topic/p ">Server Group Messaging is a service that provides simple
+                low-bandwidth datagram messaging and notifications for virtual machines that belong
+                to the same server group. This message channel is available regardless of whether IP
+                networking is functional within the server, and requires no knowledge about the
+                other members in the group.</p>
+            <p ixia_locid="375" class="- topic/p ">Guest applications can access this service if the Server Group
+                Messaging API is enabled for the VM. To enable the API, select this option. For more
+                information about the Server Group Messaging API, refer to the <cite ixia_locid="376" class="- topic/cite ">HP Helion OpenStack Carrier Grade Software Development Kit</cite>.</p>
+            <note id="note_N10036_N10022_N1001F_N10001" ixia_locid="396" class="- topic/note ">
+                <p ixia_locid="397" class="- topic/p ">The non-default value <nameliteral ixia_locid="398" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">True</nameliteral> is offered when the extra
+                    spec is added.</p>
+            </note>
+            <p ixia_locid="377" class="- topic/p ">The service provides three types of messaging:</p>
+            <ul id="ul_dtr_pkn_cs" class="- topic/ul ">
+                <li ixia_locid="378" class="- topic/li ">
+                    <p ixia_locid="379" class="- topic/p "><nameliteral ixia_locid="380" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Broadcast</nameliteral>—allows the server to send a
+                        datagram of up to 3050 bytes to all other servers in the server group.</p>
+                </li>
+                <li ixia_locid="381" class="- topic/li ">
+                    <p ixia_locid="382" class="- topic/p "><nameliteral ixia_locid="383" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Notification</nameliteral>—provides servers with
+                        information about changes to the state of other servers in the server
+                        group.</p>
+                </li>
+                <li ixia_locid="384" class="- topic/li ">
+                    <p ixia_locid="385" class="- topic/p "><nameliteral ixia_locid="386" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Status</nameliteral>—allows
+                        the server to query the current state of all servers in the group (including
+                        the originating server).</p>
+                </li>
+            </ul>
+            <note id="note_N10059_N1001F_N1001C_N10001" ixia_locid="387" type="caution" class="- topic/note ">
+                <p ixia_locid="388" class="- topic/p ">This service is not intended for high-bandwidth or low-latency
+                    operations. If reliability is an important consideration, use acknowledgements
+                    and retries.</p>
+            </note>
+            <p ixia_locid="389" class="- topic/p ">To add this extra spec to a flavor using the web administration interface, use the
+                    <uicontrol ixia_locid="390" class="+ topic/ph ui-d/uicontrol ">Server Group Messaging</uicontrol> selection in the <uicontrol ixia_locid="391" class="+ topic/ph ui-d/uicontrol ">Create
+                    Flavor Extra Spec</uicontrol> drop-down menu. To access this menu, see <xref href="jow1429538642910.xml" ixia_locid="392" class="- topic/xref "/>.</p>
+            <p ixia_locid="393" class="- topic/p ">To enable the Server Group Messaging API using the CLI, use the following
+                command:</p>
+            <codeblock ixia_locid="319" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="326" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="333" class="+ topic/ph sw-d/userinput ">nova flavor-key <varname ixia_locid="340" class="+ topic/keyword sw-d/varname ">flavor_name</varname> set sw:wrs:srv_grp_messaging=<varname ixia_locid="351" class="+ topic/keyword sw-d/varname ">value</varname></userinput></codeblock>
+            <p ixia_locid="368" class="- topic/p ">where <varname ixia_locid="369" class="+ topic/keyword sw-d/varname ">value</varname> is either
+                    <option ixia_locid="394" class="+ topic/keyword pr-d/option ">False</option> or <option ixia_locid="395" class="+ topic/keyword pr-d/option ">True</option>.</p>
+        </context>
+    </taskbody>
+</task-wr>

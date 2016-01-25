@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="rst1442341292102" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic concept concept-wr)                            (topic hi-d)                             (topic indexing-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic concept/concept concept-wr/concept-wr ">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1" class="- topic/title ">VLAN Transparent</title>
+ <shortdesc ixia_locid="2" class="- topic/shortdesc "><draft-comment author="rstone" ixia_locid="94" translate="no" dir="ltr" class="- topic/draft-comment ">New topic for
+   US60634</draft-comment>A <term ixia_locid="3" class="- topic/term ">vlan transparent</term> tenant network is one that
+  allows VLAN tagged packets to be encapsulated within a provider network segment without removing
+  or modifying the guest VLAN tag. VLAN Transparent is provided in addition to VLAN-tagged Neutron
+  subnets for guest VLANs.</shortdesc>
+ <prolog class="- topic/prolog ">
+  <author ixia_locid="4" class="- topic/author ">Ron Stone</author>
+ </prolog>
+ <conbody class="- topic/body  concept/conbody ">
+  <p ixia_locid="7" class="- topic/p ">VLAN Transparent must be supported on a provider network before a VLAN
+   Transparent tenant network can be created on that provider network. The <uicontrol ixia_locid="65" class="+ topic/ph ui-d/uicontrol ">VLAN Transparent</uicontrol> column in the list of defined provider networks on
+   the <uicontrol ixia_locid="66" class="+ topic/ph ui-d/uicontrol ">Provider Networks</uicontrol> tab of the <menucascade ixia_locid="67" class="+ topic/ph ui-d/menucascade ">
+    <uicontrol ixia_locid="68" class="+ topic/ph ui-d/uicontrol ">System</uicontrol>
+    <uicontrol ixia_locid="69" class="+ topic/ph ui-d/uicontrol ">Networks</uicontrol>
+   </menucascade> page indicates availability. </p>
+  <p ixia_locid="95" class="- topic/p ">VLAN Priority attributes are propagated to the provider VLAN tag and then restored to the guest
+   VLAN tag.</p>
+  <fig id="fig_glw_vwk_jt" ixia_locid="71" class="- topic/fig ">
+   <image href="rst1442405927569.image" id="image_dbb_wwk_jt" ixia_locid="72" placement="inline" class="- topic/image "/>
+  </fig>
+  <p ixia_locid="80" class="- topic/p ">This information is also available from the following command.</p>
+  <codeblock ixia_locid="81" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="82" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="83" class="+ topic/ph sw-d/userinput ">neutron providernet-show provider1-vt</userinput>
+<systemoutput ixia_locid="84" class="+ topic/ph sw-d/systemoutput ">+------------------+--------------------------------------------------------+
+| Field            | Value                                                  |
++------------------+--------------------------------------------------------+
+| description      |                                                        |
+| id               | 72a09e68-7170-493e-b9c6-d2bcb881f458                   |
+| mtu              | 1500                                                   |
+| name             | provider1-vt                                           |
+| ranges           | {                                                      |
+|                  |      "name": "provider1-vt-r1-0",                      |
+|                  |      "tenant_id": "c17a85ac5283496da1152ce68b79e606",  |
+|                  |      "maximum": 50,                                    |
+|                  |      "minimum": 59,                                    |
+|                  |      "shared": false,                                  |
+|                  |      "id": "8b1fa184-80e0-4555-bd9f-bcf444384189",     |
+|                  |      "description": null                               |
+|                  | }                                                      |
+| status           | DOWN                                                   |
+| type             | vlan                                                   |
+| vlan_transparent | True                                                   |
++------------------+--------------------------------------------------------+</systemoutput></codeblock>
+  <p ixia_locid="73" class="- topic/p ">The summary information available by selecting a tenant network name form the
+    <uicontrol ixia_locid="74" class="+ topic/ph ui-d/uicontrol ">Provider Networks</uicontrol> tab of the <menucascade ixia_locid="75" class="+ topic/ph ui-d/menucascade ">
+    <uicontrol ixia_locid="76" class="+ topic/ph ui-d/uicontrol ">System</uicontrol>
+    <uicontrol ixia_locid="77" class="+ topic/ph ui-d/uicontrol ">Networks</uicontrol>
+   </menucascade> page indicates if a tenant network will request VLAN Transparent services from a
+   provider network.</p>
+  <fig id="fig_t5z_4vk_jt" ixia_locid="78" class="- topic/fig ">
+   <image href="rst1442405324298.image" id="image_utg_pvk_jt" ixia_locid="79" placement="inline" class="- topic/image "/>
+  </fig>
+  <p ixia_locid="85" class="- topic/p ">This information is also available from the following command.</p>
+  <codeblock ixia_locid="86" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="87" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="88" class="+ topic/ph sw-d/userinput ">neutron net-show tenant1-vt</userinput>
+<systemoutput ixia_locid="89" class="+ topic/ph sw-d/systemoutput ">+---------------------------+--------------------------------------+
+| Field                     | Value                                |
++---------------------------+--------------------------------------+
+| admin_state_up            | True                                 |
+| id                        | 011cea1e-422f-49d1-9d80-ba864bab361f |
+| mtu                       | 1500                                 |
+| name                      | tenant1-vt                           |
+| provider:network_type     | vlan                                 |
+| provider:physical_network | provider1-vt                         |
+| provider:segmentation_id  | 50                                   |
+| router:external           | False                                |
+| shared                    | False                                |
+| status                    | ACTIVE                               |
+| subnets                   | 3bff6cb0-8422-4596-857f-a02d68a051b1 |
+|                           | dedcd9e0-d4ee-4306-a6bf-194104baa9b4 |
+| tenant_id                 | c17a85ac5283496da1152ce68b79e606     |
+| vlan_transparent          | True                                 |
++---------------------------+--------------------------------------+</systemoutput></codeblock>
+  <p ixia_locid="90" class="- topic/p ">For more information on setting up provider networks, see <cite ixia_locid="91" class="- topic/cite ">HP Helion OpenStack Carrier Grade Software Installation Guide: Configuring Provider Networks</cite> and <cite ixia_locid="92" class="- topic/cite ">HP Helion OpenStack Carrier Grade Software Installation Guide: Configuring Provider Networks Using
+    the CLI</cite>. For more information on setting up tenant networks, see <xref href="rst1442339291916.xml" ixia_locid="93" class="- topic/xref "/>.</p>
+  <table frame="all" id="table_njv_rkd_jt" class="- topic/table ">
+   <title ixia_locid="8" class="- topic/title ">VLAN Transparent Compatibility</title>
+   <tgroup cols="5" class="- topic/tgroup ">
+    <colspec colname="col1" colnum="1" colwidth="1.0*" class="- topic/colspec "/>
+    <colspec colname="col2" colnum="2" colwidth="1.0*" class="- topic/colspec "/>
+    <colspec colname="col3" colnum="3" colwidth="1.0*" class="- topic/colspec "/>
+    <colspec colname="col4" colnum="4" colwidth="1.0*" class="- topic/colspec "/>
+    <colspec colname="col5" colnum="5" colwidth="1.0*" class="- topic/colspec "/>
+    <thead class="- topic/thead ">
+     <row class="- topic/row ">
+      <entry colname="col1" ixia_locid="9" class="- topic/entry "/>
+      <entry colname="col2" ixia_locid="10" class="- topic/entry ">
+       <p ixia_locid="11" class="- topic/p ">802.1p</p>
+      </entry>
+      <entry colname="col3" ixia_locid="12" class="- topic/entry ">
+       <p ixia_locid="13" class="- topic/p ">802.1q</p>
+      </entry>
+      <entry colname="col4" ixia_locid="14" class="- topic/entry ">
+       <p ixia_locid="15" class="- topic/p ">802.1ad</p>
+      </entry>
+      <entry colname="col5" ixia_locid="16" class="- topic/entry ">
+       <p ixia_locid="17" class="- topic/p ">QinQ</p>
+      </entry>
+     </row>
+    </thead>
+    <tbody class="- topic/tbody ">
+     <row class="- topic/row ">
+      <entry colname="col1" ixia_locid="18" class="- topic/entry ">
+       <p ixia_locid="19" class="- topic/p "><b ixia_locid="20" class="+ topic/ph hi-d/b ">Flat Provider Network</b></p>
+      </entry>
+      <entry colname="col2" ixia_locid="21" class="- topic/entry ">
+       <p ixia_locid="22" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col3" ixia_locid="23" class="- topic/entry ">
+       <p ixia_locid="24" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col4" ixia_locid="25" class="- topic/entry ">
+       <p ixia_locid="26" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col5" ixia_locid="27" class="- topic/entry ">
+       <p ixia_locid="28" class="- topic/p ">Yes</p>
+      </entry>
+     </row>
+     <row class="- topic/row ">
+      <entry colname="col1" ixia_locid="29" class="- topic/entry ">
+       <p ixia_locid="30" class="- topic/p "><b ixia_locid="31" class="+ topic/ph hi-d/b ">VLAN Provider Network</b></p>
+      </entry>
+      <entry colname="col2" ixia_locid="32" class="- topic/entry ">
+       <p ixia_locid="33" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col3" ixia_locid="34" class="- topic/entry ">
+       <p ixia_locid="35" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col4" ixia_locid="36" class="- topic/entry ">
+       <p ixia_locid="37" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col5" ixia_locid="38" class="- topic/entry ">
+       <p ixia_locid="39" class="- topic/p ">Yes</p>
+      </entry>
+     </row>
+     <row class="- topic/row ">
+      <entry colname="col1" ixia_locid="40" class="- topic/entry ">
+       <p ixia_locid="41" class="- topic/p "><b ixia_locid="42" class="+ topic/ph hi-d/b ">VXLAN Provider Network</b></p>
+      </entry>
+      <entry colname="col2" ixia_locid="43" class="- topic/entry ">
+       <p ixia_locid="44" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col3" ixia_locid="45" class="- topic/entry ">
+       <p ixia_locid="46" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col4" ixia_locid="47" class="- topic/entry ">
+       <p ixia_locid="48" class="- topic/p ">Yes<fn ixia_locid="49" class="- topic/fn ">
+        <p ixia_locid="50" class="- topic/p ">VLAN priority attributes not propagated to IP header differentiated services field.</p>
+       </fn></p>
+      </entry>
+      <entry colname="col5" ixia_locid="51" class="- topic/entry ">
+       <p ixia_locid="52" class="- topic/p ">Yes</p>
+      </entry>
+     </row>
+     <row class="- topic/row ">
+      <entry colname="col1" ixia_locid="53" class="- topic/entry ">
+       <p ixia_locid="54" class="- topic/p "><b ixia_locid="55" class="+ topic/ph hi-d/b ">VLAN Tagged Subnets</b></p>
+      </entry>
+      <entry colname="col2" ixia_locid="56" class="- topic/entry ">
+       <p ixia_locid="57" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col3" ixia_locid="58" class="- topic/entry ">
+       <p ixia_locid="59" class="- topic/p ">Yes</p>
+      </entry>
+      <entry colname="col4" ixia_locid="60" class="- topic/entry ">
+       <p ixia_locid="61" class="- topic/p ">No</p>
+      </entry>
+      <entry colname="col5" ixia_locid="62" class="- topic/entry ">
+       <p ixia_locid="63" class="- topic/p ">No</p>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </table>
+ </conbody>
+</concept-wr>

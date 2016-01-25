@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333660893" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic concept/concept concept-wr/concept-wr ">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1" class="- topic/title ">Server Groups</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc "><i ixia_locid="5" class="+ topic/ph hi-d/i ">Server Groups</i> is a mechanism to group virtual
+        machines to which a common set of attributes is applied.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <conbody class="- topic/body  concept/conbody ">
+        <p ixia_locid="4" class="- topic/p ">Select the option <option ixia_locid="7" class="+ topic/keyword pr-d/option ">Server Groups</option> from
+            either the <uicontrol ixia_locid="8" class="+ topic/ph ui-d/uicontrol ">Project</uicontrol> or the <uicontrol ixia_locid="9" class="+ topic/ph ui-d/uicontrol ">Admin</uicontrol> tabs on the web administration interface to display
+            the <wintitle ixia_locid="6" class="+ topic/keyword ui-d/wintitle ">Server Groups</wintitle> window illustrated in the
+            following figure:</p>
+        <fig id="fig_N1003B_N1001C_N10001" ixia_locid="11" class="- topic/fig ">
+            <image href="jow1404333656422.image" id="image_up4_5m2_14" ixia_locid="12" placement="inline" class="- topic/image "/>
+        </fig>
+        <p ixia_locid="13" class="- topic/p ">Click the button <uicontrol ixia_locid="14" class="+ topic/ph ui-d/uicontrol ">Create Server Group</uicontrol> to create a new server group, as
+      illustrated below:</p>
+        <fig id="fig_N1004F_N1001C_N10001" ixia_locid="15" class="- topic/fig ">
+            <image href="jow1404333657930.image" id="image_wfj_pn2_14" ixia_locid="16" placement="inline" class="- topic/image "/>
+        </fig>
+        <p ixia_locid="17" class="- topic/p ">The following parameters can be defined for the new server group:</p>
+        <dl class="- topic/dl ">
+            <dlentry ixia_locid="18" class="- topic/dlentry ">
+                <dt ixia_locid="19" class="- topic/dt ">Project</dt>
+                <dd ixia_locid="20" class="- topic/dd ">
+                    <p ixia_locid="21" class="- topic/p ">Identifies the tenant the new service group should be
+                        associated with. This field is only available as part of the
+                            <nameliteral ixia_locid="96" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Admin</nameliteral> operations; the project identity is
+                        implicit within the context of a specific tenant.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="22" class="- topic/dlentry ">
+                <dt ixia_locid="23" class="- topic/dt ">Server Group Name</dt>
+                <dd ixia_locid="24" class="- topic/dd ">
+                    <p ixia_locid="25" class="- topic/p ">The name for the new server group.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="26" class="- topic/dlentry ">
+                <dt ixia_locid="27" class="- topic/dt ">Policy</dt>
+                <dd ixia_locid="28" class="- topic/dd ">
+                    <p ixia_locid="29" class="- topic/p ">The following scheduling policy options are available:</p>
+                    <dl class="- topic/dl ">
+                        <dlentry ixia_locid="30" class="- topic/dlentry ">
+                            <dt ixia_locid="31" class="- topic/dt ">affinity</dt>
+                            <dd ixia_locid="32" class="- topic/dd ">
+                                <p ixia_locid="89" class="- topic/p ">When this option is selected, new instances launched as part of this server group
+                  are scheduled to run on the same compute node. </p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="34" class="- topic/dlentry ">
+                            <dt ixia_locid="35" class="- topic/dt ">anti-affinity</dt>
+                            <dd ixia_locid="36" class="- topic/dd ">
+                                <p ixia_locid="37" class="- topic/p ">When this option is selected, new instances launched as part of this server group
+                  are scheduled to run on different compute nodes. For example, you can use the
+                  anti-affinity option when you have two virtual machines that run in 1:1 HA
+                  protection mode, and you want them to be protected against hardware failures.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                    <p ixia_locid="93" class="- topic/p ">See <xref href="jow1404333800588.xml" ixia_locid="94" class="- topic/xref "/> and <xref href="jow1404333655771.xml" ixia_locid="95" class="- topic/xref "/> for additional considerations on scheduling and live migration for each
+                        of these policies.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="38" class="- topic/dlentry ">
+                <dt ixia_locid="39" class="- topic/dt ">Best Effort</dt>
+                <dd ixia_locid="40" class="- topic/dd ">
+                    <p ixia_locid="41" class="- topic/p ">When selected, the policy in place, affinity, or
+                        anti-affinity, is enforced whenever possible, on a best-effort basis. If for
+                        any reason the policy cannot be enforced, then the deployment of the new
+                        instance proceeds using the regular scheduling.</p>
+                    <p ixia_locid="42" class="- topic/p ">When cleared, the policy in place must be executable for the
+                        new instance to be scheduled. Launching of a new virtual machine fails if
+                        there are no resources to comply with the selected policy.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="43" class="- topic/dlentry ">
+                <dt ixia_locid="44" class="- topic/dt ">Max Group Size (Instances)</dt>
+                <dd ixia_locid="45" class="- topic/dd ">
+                    <p ixia_locid="46" class="- topic/p ">Determines the maximum number of instances that can co-exist
+                        as part of this server group.</p>
+                </dd>
+            </dlentry>
+        </dl>
+        <p ixia_locid="47" class="- topic/p ">The new service group is displayed as follows:</p>
+        <fig id="fig_N100DF_N1001C_N10001" ixia_locid="48" class="- topic/fig ">
+            <image href="jow1404333659426.image" id="image_jmp_5v5_14" ixia_locid="49" placement="inline" class="- topic/image "/>
+        </fig>
+        <p ixia_locid="50" class="- topic/p ">Once a server group is defined, you can add virtual machines to it at launch time. This is
+      done by selecting the desired server group from the tab <uicontrol ixia_locid="51" class="+ topic/ph ui-d/uicontrol ">Server Group</uicontrol> on
+      the launch window.</p>
+        <section id="section_N1019F_N10023_N10001" ixia_locid="80" class="- topic/section ">
+            <title ixia_locid="81" class="- topic/title ">Server Groups and the CLI</title>
+            <p ixia_locid="82" class="- topic/p ">Server groups can be created and deleted using the CLI as illustrated in the
+                following examples:</p>
+            <codeblock ixia_locid="83" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="97" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="85" class="+ topic/ph sw-d/userinput ">nova server-group-create --policy affinity \ 
+--metadata wrs-sg:best_effort=true --metadata wrs-sg:group_size=2 ht-group-test</userinput>
+<systemoutput ixia_locid="98" class="+ topic/ph sw-d/systemoutput ">+--------------+---------------+----------------+---------+------------+
+| Id           | Name          | Policies       | Members | Metadata   |
++--------------+---------------+----------------+---------+------------+
+| 63752c24-... | ht-group-test | [u'affinity... | []      | {u'best... |
++--------------+---------------+----------------+---------+------------+
+~(keystone_admin)$ </systemoutput><userinput ixia_locid="87" class="+ topic/ph sw-d/userinput ">nova server-group-delete 63752c24-...</userinput>
+<systemoutput ixia_locid="99" class="+ topic/ph sw-d/systemoutput ">Server group 63752c24-... has been successfully deleted.</systemoutput></codeblock>
+        </section>
+    </conbody>
+</concept-wr>

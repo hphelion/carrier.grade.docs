@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="rst1441899910150" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="491" class="- topic/title ">Disabling Instance Auto Recovery</title>
+    <shortdesc ixia_locid="492" class="- topic/shortdesc ">You can disable auto recovery of failed virtual machine
+        instances.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="493" class="- topic/author ">Ron Stone</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="494" class="- topic/section task/context ">
+            <p ixia_locid="495" class="- topic/p "><draft-comment author="rstone" ixia_locid="509" translate="no" dir="ltr" class="- topic/draft-comment ">Topic added for
+                    US61157</draft-comment>If this extra spec is not added, then the system will
+                automatically recover failed virtual machine instances. Set this option to false if,
+                for example, you are writing a Virtual Network Function Manager (VNFM) and the VNFM
+                is to manage the auto-recovery of its VMs. Setting it to false disables this
+                behavior. To re-enable virtual machine instance auto recovery, set the value to
+                true. </p>
+            <p ixia_locid="510" class="- topic/p ">Instance auto-recovery can be configured as an extra spec on a
+                flavor, such that any VM instance created with this flavor will have the specified
+                instance auto-recovery. Alternatively, instance auto-recovery can be configured as
+                meta-data on an image, such that any VM instance created based on the image will
+                have the specified instance auto-recovery. Note that Flavor extra-specs will
+                override the image meta-data.</p>
+            <p ixia_locid="511" class="- topic/p ">To set the option using the web administration interface, do one of
+                the following:</p>
+            <ul id="ul_orz_33t_lt" class="- topic/ul ">
+                <li ixia_locid="513" class="- topic/li ">
+                    <p ixia_locid="512" class="- topic/p ">As <term ixia_locid="514" class="- topic/term ">admin</term>, use the <uicontrol ixia_locid="526" class="+ topic/ph ui-d/uicontrol ">Instance Auto Recovery</uicontrol> selection in the <uicontrol ixia_locid="490" class="+ topic/ph ui-d/uicontrol ">Create Flavor Extra Spec</uicontrol> drop-down menu. To
+                        access this menu, see <xref href="jow1429538642910.xml" ixia_locid="470" class="- topic/xref "/>.</p>
+                </li>
+
+                    <li ixia_locid="528" class="- topic/li ">
+                    <p ixia_locid="529" class="- topic/p ">As either <term ixia_locid="530" class="- topic/term ">admin</term> or a tenant,
+                        select <menucascade ixia_locid="531" class="+ topic/ph ui-d/menucascade ">
+                            <uicontrol ixia_locid="532" class="+ topic/ph ui-d/uicontrol ">System</uicontrol>
+                            <uicontrol ixia_locid="533" class="+ topic/ph ui-d/uicontrol ">Images</uicontrol>
+                            <uicontrol ixia_locid="534" class="+ topic/ph ui-d/uicontrol ">Edit Image</uicontrol>
+                            <uicontrol ixia_locid="535" class="+ topic/ph ui-d/uicontrol "/>
+                        </menucascade> for the desired images and uncheck the <uicontrol ixia_locid="527" class="+ topic/ph ui-d/uicontrol ">Instance Auto Recovery</uicontrol> option. </p>
+                </li>
+                <!-- RS: Old/alternate method
+                    <li ixia_locid="515">
+                    <p ixia_locid="516">As either <term ixia_locid="517">admin</term> or a tenant, select <menucascade ixia_locid="518">
+                            <uicontrol ixia_locid="519">System</uicontrol>
+                            <uicontrol ixia_locid="520">Images</uicontrol>
+                            <uicontrol ixia_locid="521">Edit Image</uicontrol>
+                            <uicontrol ixia_locid="522">Update Metadata</uicontrol>
+                        </menucascade> for the desired images and add an entry with:</p>
+                    <codeblock ixia_locid="523">sw_wrs_auto_recovery=false</codeblock>
+                </li> -->
+            </ul>
+        </context>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N1003F_N1003C_N1001C_N10001" ixia_locid="496" class="- topic/li task/step ">
+                <cmd ixia_locid="472" class="- topic/ph task/cmd ">To set the option from the command line do one of the
+                    following.</cmd>
+                <choices id="choices_cdc_hl5_ht" class="- topic/ul task/choices ">
+                    <choice ixia_locid="497" class="- topic/li task/choice ">
+                        <p ixia_locid="498" class="- topic/p ">As <term ixia_locid="524" class="- topic/term ">admin</term>, add an extra spec to a
+                            flavor:</p>
+                        <codeblock ixia_locid="499" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="500" class="+ topic/ph sw-d/systemoutput ">~(keystone)admin)$ </systemoutput><userinput ixia_locid="502" class="+ topic/ph sw-d/userinput ">nova flavor-key <varname ixia_locid="503" class="+ topic/keyword sw-d/varname ">flavorName</varname> set sw:wrs:auto_recovery=false</userinput></codeblock>
+                    </choice>
+                    <choice ixia_locid="504" class="- topic/li task/choice ">
+                        <p ixia_locid="505" class="- topic/p ">As <term ixia_locid="525" class="- topic/term ">admin</term> or a tenant:</p>
+                        <codeblock ixia_locid="506" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="501" class="+ topic/ph sw-d/systemoutput ">~(keystone)admin)$ </systemoutput><userinput ixia_locid="507" class="+ topic/ph sw-d/userinput ">glance image-update --property sw_wrs_auto_recovery=false <varname ixia_locid="508" class="+ topic/keyword sw-d/varname ">imageName</varname></userinput></codeblock>
+                    </choice>
+                </choices>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

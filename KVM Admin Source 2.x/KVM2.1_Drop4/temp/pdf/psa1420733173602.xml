@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="psa1420733173602" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+  Draft template 08/07/2014      
+-->
+    <title ixia_locid="199" class="- topic/title ">Patching Using the Web Administration Interface</title>
+    <shortdesc ixia_locid="200" class="- topic/shortdesc ">Use the web management interface to upload, delete, apply, and remove
+        patches.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="201" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="202" class="- topic/section task/context ">
+            <p ixia_locid="203" class="- topic/p ">This section presents a example patching workflow using the single patch
+                TITANIUM_14.10_PATCH_0001. </p>
+        </context>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N1002B_N10028_N1001C_N10001" ixia_locid="204" class="- topic/li task/step ">
+                <cmd ixia_locid="205" class="- topic/ph task/cmd ">Log in to the web administration interface as the
+                        <nameliteral ixia_locid="206" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> user.</cmd>
+            </step>
+            <step id="step_N10038_N10028_N1001C_N10001" ixia_locid="207" class="- topic/li task/step ">
+                <cmd ixia_locid="208" class="- topic/ph task/cmd ">Visit the <wintitle ixia_locid="209" class="+ topic/keyword ui-d/wintitle ">Patches</wintitle> page to see the current patch
+                    status.</cmd>
+                <info ixia_locid="210" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="211" class="- topic/p ">Click the <uicontrol ixia_locid="212" class="+ topic/ph ui-d/uicontrol ">Admin</uicontrol> tab on the System Panel, select
+                            <uicontrol ixia_locid="213" class="+ topic/ph ui-d/uicontrol ">Inventory</uicontrol> to display the <wintitle ixia_locid="214" class="+ topic/keyword ui-d/wintitle ">System
+                            Inventory</wintitle> page, and then click the
+                            <uicontrol ixia_locid="215" class="+ topic/ph ui-d/uicontrol ">Patches</uicontrol> tab.</p>
+                </info>
+                <stepresult ixia_locid="216" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="217" class="- topic/p ">The <wintitle ixia_locid="218" class="+ topic/keyword ui-d/wintitle ">Patches</wintitle> page is
+                        displayed presenting the current status of all patches uploaded to the
+                        system. If there are no patches, an empty page is displayed as illustrated
+                        below.</p>
+                    <fig id="fig_bgj_f23_rq" ixia_locid="219" class="- topic/fig ">
+                        <image href="psa1420749412637.image" id="image_hrp_h23_rq" ixia_locid="220" width="550" placement="inline" class="- topic/image ">
+                            <alt ixia_locid="221" class="- topic/alt ">TiS patches page</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N1007A_N10028_N1001C_N10001" ixia_locid="222" class="- topic/li task/step ">
+                <cmd ixia_locid="223" class="- topic/ph task/cmd ">Upload the patch file to the patch storage area.</cmd>
+                <info ixia_locid="224" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="225" class="- topic/p ">Click the <uicontrol ixia_locid="226" class="+ topic/ph ui-d/uicontrol ">Upload
+                            Patch</uicontrol> button to display an upload window from which you can
+                        browse your workstation's file system to select the patch file. Press the
+                            <uicontrol ixia_locid="227" class="+ topic/ph ui-d/uicontrol ">Upload Patch</uicontrol> button once the
+                        selection is done.</p>
+                </info>
+                <stepresult ixia_locid="228" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="229" class="- topic/p ">The patch file is available now in the patch storage area, but it has yet to
+                        be applied to the cluster. This is reflected in the
+                            <wintitle ixia_locid="230" class="+ topic/keyword ui-d/wintitle ">Patches</wintitle> page as illustrated below.</p>
+                    <fig id="fig_yrl_jf3_rq" ixia_locid="231" class="- topic/fig ">
+                        <image href="psa1420750069946.image" id="image_uv3_4f3_rq" ixia_locid="232" width="550" placement="inline" class="- topic/image ">
+                            <alt ixia_locid="233" class="- topic/alt ">TiS patches available</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N100B0_N10028_N1001C_N10001" ixia_locid="234" class="- topic/li task/step ">
+                <cmd ixia_locid="235" class="- topic/ph task/cmd ">Apply the patch.</cmd>
+                <info ixia_locid="236" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="237" class="- topic/p ">Click the <uicontrol ixia_locid="238" class="+ topic/ph ui-d/uicontrol ">Apply
+                            Patch</uicontrol> button associated with the patch. Alternatively,
+                        select the patch first using the selection boxes on the left, and then click
+                        the <uicontrol ixia_locid="239" class="+ topic/ph ui-d/uicontrol ">Apply Patches</uicontrol> button at the top.
+                        You can use this selection process to apply all patches, or a selected
+                        subset, in a single operation.</p>
+                </info>
+                <stepresult ixia_locid="240" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="241" class="- topic/p ">The <wintitle ixia_locid="242" class="+ topic/keyword ui-d/wintitle ">Patches</wintitle> page is updated to report the patch to be in
+                        the <i ixia_locid="243" class="+ topic/ph hi-d/i ">Partial-Apply</i> state.</p>
+                    <fig id="fig_kmj_ng3_rq" ixia_locid="244" class="- topic/fig ">
+                        <image href="psa1420750565559.image" id="image_z2n_qg3_rq" ixia_locid="245" width="550" placement="inline" class="- topic/image ">
+                            <alt ixia_locid="246" class="- topic/alt ">TiS patches partial-apply</alt>
+                        </image>
+                    </fig>
+                    <p ixia_locid="247" class="- topic/p ">The <uicontrol ixia_locid="248" class="+ topic/ph ui-d/uicontrol ">Hosts</uicontrol> tab on the <wintitle ixia_locid="249" class="+ topic/keyword ui-d/wintitle ">System
+                            Inventory</wintitle> page is also updated to reflect the new status of
+                        the hosts with respect to the new patch state. As illustrated in the
+                        following image, both controllers are now reported as not patch current and
+                        requiring reboot.</p>
+                    <fig id="fig_ix5_dh3_rq" ixia_locid="250" class="- topic/fig ">
+                        <image href="psa1420750853151.image" id="image_lvt_gh3_rq" ixia_locid="251" width="550" placement="inline" class="- topic/image ">
+                            <alt ixia_locid="252" class="- topic/alt ">TiS patch host not patch current</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10107_N10028_N1001C_N10001" ixia_locid="253" class="- topic/li task/step ">
+                <cmd ixia_locid="254" class="- topic/ph task/cmd ">Install the patch on <nameliteral ixia_locid="255" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral>.</cmd>
+                <substeps id="substeps_gvv_wh3_rq" class="- topic/ol task/substeps ">
+                    <substep ixia_locid="256" class="- topic/li task/substep ">
+                        <cmd ixia_locid="257" class="- topic/ph task/cmd ">Transfer active services to the standby controller.</cmd>
+                        <info ixia_locid="258" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="259" class="- topic/p ">Swact <nameliteral ixia_locid="260" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> using the <option ixia_locid="261" class="+ topic/keyword pr-d/option ">Swact
+                                    Host</option> option from the <uicontrol ixia_locid="262" class="+ topic/ph ui-d/uicontrol ">More</uicontrol> button
+                                associated with the host.</p>
+                            <fig id="fig_rm4_533_rq" ixia_locid="263" class="- topic/fig ">
+                                <image href="psa1420751608971.image" id="image_pfy_x33_rq" ixia_locid="264" width="150" placement="inline" class="- topic/image ">
+                                    <alt ixia_locid="265" class="- topic/alt ">TiS swact option</alt>
+                                </image>
+                            </fig>
+                            <note id="note_N1013D_N10119_N10112_N1010E_N10103_N10028_N1001C_N10001" ixia_locid="266" class="- topic/note ">
+                                <p ixia_locid="267" class="- topic/p ">Access to the web administration interface may be lost briefly
+                                    during the active controller transition. You may have to log in
+                                    as user <nameliteral ixia_locid="268" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> again.</p>
+                            </note>
+                        </info>
+                        <stepresult ixia_locid="269" class="- topic/itemgroup task/stepresult ">
+                            <p ixia_locid="270" class="- topic/p ">After a suitable delay, <nameliteral ixia_locid="271" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>
+                                becomes the active controller and
+                                    <nameliteral ixia_locid="272" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> is the standby
+                                controller. It is safe then to install the patch.</p>
+                            <fig id="fig_uww_tj3_rq" ixia_locid="273" class="- topic/fig ">
+                                <image href="psa1420752134726.image" id="image_wdr_bk3_rq" ixia_locid="274" width="550" placement="inline" class="- topic/image ">
+                                    <alt ixia_locid="275" class="- topic/alt ">TiS patch swact active controller</alt>
+                                </image>
+                            </fig>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="276" class="- topic/li task/substep ">
+                        <cmd ixia_locid="277" class="- topic/ph task/cmd ">Install the patch.</cmd>
+                        <info ixia_locid="278" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="279" class="- topic/p ">Select the <option ixia_locid="280" class="+ topic/keyword pr-d/option ">Install Patches</option> option from the
+                                    <uicontrol ixia_locid="281" class="+ topic/ph ui-d/uicontrol ">More</uicontrol> button associated with
+                                    <nameliteral ixia_locid="282" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral>. </p>
+                            <fig id="fig_cxx_hl3_rq" ixia_locid="283" class="- topic/fig ">
+                                <image href="psa1420752753002.image" id="image_mh4_kl3_rq" ixia_locid="284" width="150" placement="inline" class="- topic/image ">
+                                    <alt ixia_locid="285" class="- topic/alt ">TiS install patches option</alt>
+                                </image>
+                            </fig>
+                            <p ixia_locid="286" class="- topic/p ">A confirmation window is presented giving you a last
+                                opportunity to cancel the operation before proceeding. Note that the
+                                patching sequence reboots the host in order to install the
+                                patches.</p>
+                            <fig id="fig_jbq_y43_rq" ixia_locid="287" class="- topic/fig ">
+                                <image href="psa1420754416884.image" id="image_bs4_cp3_rq" ixia_locid="288" width="450" placement="inline" class="- topic/image ">
+                                    <alt ixia_locid="289" class="- topic/alt ">TiS patches confirm installation</alt>
+                                </image>
+                            </fig>
+                        </info>
+                        <stepresult ixia_locid="290" class="- topic/itemgroup task/stepresult ">
+                            <p ixia_locid="291" class="- topic/p ">The patch is now installed on <nameliteral ixia_locid="198" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> which resumes operation as the
+                                standby controller.</p>
+                            <fig id="fig_el2_4p3_rq" ixia_locid="292" class="- topic/fig ">
+                                <image href="psa1420754739770.image" id="image_nd4_tp3_rq" ixia_locid="293" width="550" placement="inline" class="- topic/image ">
+                                    <alt ixia_locid="294" class="- topic/alt ">TiS patch installed controller-0</alt>
+                                </image>
+                            </fig>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="295" class="- topic/li task/substep ">
+                        <cmd ixia_locid="296" class="- topic/ph task/cmd ">Let <nameliteral ixia_locid="297" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> resume the active controller role.</cmd>
+                        <info ixia_locid="298" class="- topic/itemgroup task/info ">
+                            <p ixia_locid="299" class="- topic/p ">Select the <option ixia_locid="300" class="+ topic/keyword pr-d/option ">Swact
+                                    Host</option> option again on either controller to transition
+                                    <nameliteral ixia_locid="301" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> to the
+                                active controller role. </p>
+                        </info>
+                        <stepresult ixia_locid="302" class="- topic/itemgroup task/stepresult ">
+                            <p ixia_locid="303" class="- topic/p ">The updated host list looks then as follows:</p>
+                            <fig id="fig_grm_ys3_rq" ixia_locid="304" class="- topic/fig ">
+                                <image href="psa1420756289090.image" id="image_qxb_2t3_rq" ixia_locid="305" width="550" placement="inline" class="- topic/image ">
+                                    <alt ixia_locid="306" class="- topic/alt ">TiS patch installed acrive
+                                        controller-0</alt>
+                                </image>
+                            </fig>
+                        </stepresult>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1020A_N10028_N1001C_N10001" ixia_locid="307" class="- topic/li task/step ">
+                <cmd ixia_locid="308" class="- topic/ph task/cmd ">Install the patch on <nameliteral ixia_locid="309" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral>.</cmd>
+                <info ixia_locid="310" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="311" class="- topic/p ">Select the <option ixia_locid="312" class="+ topic/keyword pr-d/option ">Install Patches</option>
+                        option from the <uicontrol ixia_locid="313" class="+ topic/ph ui-d/uicontrol ">More</uicontrol> button
+                        associated with <nameliteral ixia_locid="314" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-1</nameliteral> in
+                        the <wintitle ixia_locid="329" class="+ topic/keyword ui-d/wintitle ">Hosts</wintitle> window, and wait for the host to resume its
+                        standby controller role.</p>
+                </info>
+            </step>
+            <step id="step_N1022B_N10028_N1001C_N10001" ixia_locid="315" class="- topic/li task/step ">
+                <cmd ixia_locid="316" class="- topic/ph task/cmd ">Verify the state of the patch.</cmd>
+                <info ixia_locid="317" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="318" class="- topic/p ">Visit the <wintitle ixia_locid="319" class="+ topic/keyword ui-d/wintitle ">Patches</wintitle> page again. The patch is now in the
+                            <i ixia_locid="320" class="+ topic/ph hi-d/i ">Applied</i> state as illustrated below.</p>
+                    <fig id="fig_mvq_153_rq" ixia_locid="321" class="- topic/fig ">
+                        <image href="psa1420756752042.image" id="image_bld_f53_rq" ixia_locid="322" width="550" placement="inline" class="- topic/image ">
+                            <alt ixia_locid="323" class="- topic/alt ">TiS patches applied</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+        </steps>
+        <result id="result_N1024E_N1001C_N10001" ixia_locid="324" class="- topic/section task/result ">
+            <p ixia_locid="325" class="- topic/p ">The patch is applied now, all affected hosts have been updated.</p>
+            <p ixia_locid="326" class="- topic/p ">Patches can be removed using the <uicontrol ixia_locid="327" class="+ topic/ph ui-d/uicontrol ">Remove
+                    Patches</uicontrol> button from the <wintitle ixia_locid="328" class="+ topic/keyword ui-d/wintitle ">Patches</wintitle> page. The workflow is similar to the one presented in this
+                section, with the exception that patches are being removed from each host instead of
+                being applied.</p>
+        </result>
+    </taskbody>
+</task-wr>

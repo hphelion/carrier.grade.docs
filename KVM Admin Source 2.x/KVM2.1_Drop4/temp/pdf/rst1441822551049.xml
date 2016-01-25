@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="rst1441822551049" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="466" class="- topic/title ">Specifying a Live Migration Timeout</title>
+    <shortdesc ixia_locid="467" class="- topic/shortdesc ">Live migrations can take a long time to complete for reasons such as
+        high levels of guest activity, network latency, and so on. You can specify the number of
+        seconds to wait for a live migration to complete. </shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="468" class="- topic/author ">Ron Stone</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="469" class="- topic/section task/context ">
+            <p ixia_locid="487" class="- topic/p "><draft-comment author="rstone" ixia_locid="491" translate="no" dir="ltr" class="- topic/draft-comment ">Topic created for
+                    US60539</draft-comment>If no value is set, the default is 800 seconds.</p>
+            <p ixia_locid="455" class="- topic/p ">If the value is exceeded, the migration is canceled and a customer
+                log entry is created. The counter starts when the migration begins. The minimum
+                timeout value is 120 seconds and the maximum is 800 seconds. <draft-comment author="rstone" ixia_locid="523" translate="no" dir="ltr" class="- topic/draft-comment ">Following sentence to be confirmed</draft-comment>Set this value
+                to 0 to disable the live migration timeout feature. For more information, see <xref href="jow1404333655771.xml" ixia_locid="465" class="- topic/xref "/>. </p>
+            <note id="note_N10044_N10029_N10026_N10001" ixia_locid="524" class="- topic/note ">
+                <p ixia_locid="525" class="- topic/p ">NOVA maintains an internal timer which guards a complete lack of
+                    VM instance live migration progress for longer than 150 seconds. If this timer
+                    expires, the live migration will be canceled; regardless of the value of the
+                    live migration maximum timeout.</p>
+            </note>
+            <p ixia_locid="526" class="- topic/p ">A live migration timeout can be configured as an extra spec on a
+                flavor, such that any VM instance created with the flavor will inherit the specified
+                timeout value. Alternatively, a live migration timeout can be configured as
+                meta-data on an image, such that any VM instance created based on this Image will
+                have the specified timeout value. If the timeout value is provisioned in both the
+                flavor and the image, the smaller value is used.</p>
+            <p ixia_locid="527" class="- topic/p ">To set this option using the web administration interface:</p>
+            <ul id="ul_xy2_v3y_lt" class="- topic/ul ">
+                <li ixia_locid="528" class="- topic/li ">
+                    <p ixia_locid="488" class="- topic/p ">As <term ixia_locid="529" class="- topic/term ">admin</term>, use the <uicontrol ixia_locid="489" class="+ topic/ph ui-d/uicontrol ">Live Migration Timeout</uicontrol> selection in the <uicontrol ixia_locid="490" class="+ topic/ph ui-d/uicontrol ">Create Flavor Extra Spec</uicontrol> drop-down menu. To
+                        access this menu, see <xref href="jow1429538642910.xml" ixia_locid="470" class="- topic/xref "/>.</p>
+                </li>
+            </ul>
+            <p ixia_locid="530" class="- topic/p ">or</p>
+            <ul id="ul_sbp_djy_lt" class="- topic/ul ">
+                <li ixia_locid="531" class="- topic/li ">
+                    <p ixia_locid="532" class="- topic/p ">As either <term ixia_locid="517" class="- topic/term ">admin</term> or a tenant, select
+                            <menucascade ixia_locid="518" class="+ topic/ph ui-d/menucascade ">
+                            <uicontrol ixia_locid="519" class="+ topic/ph ui-d/uicontrol ">System</uicontrol>
+                            <uicontrol ixia_locid="520" class="+ topic/ph ui-d/uicontrol ">Images</uicontrol>
+                            <uicontrol ixia_locid="521" class="+ topic/ph ui-d/uicontrol ">Edit Image</uicontrol>
+                            <uicontrol ixia_locid="522" class="+ topic/ph ui-d/uicontrol ">Update Metadata</uicontrol>
+                        </menucascade> for the desired images and add an entry with:</p>
+                    <codeblock ixia_locid="533" class="+ topic/pre pr-d/codeblock ">hw_wrs_live_migration_timeout=<varname ixia_locid="534" class="+ topic/keyword sw-d/varname ">seconds</varname></codeblock>
+                </li>
+            </ul>
+        </context>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N10035_N10032_N1001C_N10001" ixia_locid="471" class="- topic/li task/step ">
+                <cmd ixia_locid="472" class="- topic/ph task/cmd ">Set the timer from the command line:</cmd>
+                <info ixia_locid="473" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="474" class="- topic/p ">The following examples set the timeout to 400 seconds.</p>
+                </info>
+                <choices id="choices_iks_2wn_ht" class="- topic/ul task/choices ">
+                    <choice ixia_locid="475" class="- topic/li task/choice ">
+                        <p ixia_locid="476" class="- topic/p ">As <term ixia_locid="535" class="- topic/term ">admin</term>, add an extra spec to a flavor
+                            by:</p>
+                        <codeblock ixia_locid="477" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="483" class="+ topic/ph sw-d/systemoutput ">~(keystone)admin)$ </systemoutput><userinput ixia_locid="484" class="+ topic/ph sw-d/userinput ">nova flavor-key <varname ixia_locid="478" class="+ topic/keyword sw-d/varname ">flavorName</varname> set hw:wrs:live_migration_timeout=400</userinput></codeblock>
+                    </choice>
+                    <choice ixia_locid="479" class="- topic/li task/choice ">
+                        <p ixia_locid="480" class="- topic/p ">As <term ixia_locid="536" class="- topic/term ">admin</term> or a tenant, update the metadata
+                            of an image by:</p>
+                        <codeblock ixia_locid="481" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="485" class="+ topic/ph sw-d/systemoutput ">~(keystone)admin)$ </systemoutput><userinput ixia_locid="486" class="+ topic/ph sw-d/userinput ">glance image-update --property hw_wrs_live_migration_timeout=400 <varname ixia_locid="482" class="+ topic/keyword sw-d/varname ">imageName</varname></userinput></codeblock>
+                    </choice>
+                </choices>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

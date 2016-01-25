@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><concept-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333563834" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic concept/concept concept-wr/concept-wr ">
+    <title ixia_locid="1" class="- topic/title ">Linux User Accounts</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">Linux user accounts are available on all hosts for administration,
+        operation, and general hosting purposes. They have no relation with the cloud user tenant
+        accounts created using the web management interface, the CLI commands, or the
+        APIs.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Pedro Sanchez</author>
+        <author ixia_locid="141" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <conbody class="- topic/body  concept/conbody ">
+        <p ixia_locid="49" class="- topic/p ">You can log in remotely as a Linux user by using an SSH connection and
+            specifying the OAM floating IP address as the target. This establishes a connection to
+            the currently active controller. If the OAM floating IP address moves from one
+            controller node to another, the SSH session is blocked. To ensure access to a particular
+            controller regardless of its current role, specify the controller physical address
+            instead.</p>
+        <section id="section_N10025_N1001D_N10001" ixia_locid="70" class="- topic/section ">
+            <title ixia_locid="71" class="- topic/title ">The wrsroot Account</title>
+            <p ixia_locid="122" class="- topic/p ">This is a local, per-host, account created automatically when a new
+                host is provisioned. On controller nodes, this account is available even before the
+                    <nameliteral ixia_locid="73" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">config_controller</nameliteral> script is executed. </p>
+            <p ixia_locid="123" class="- topic/p ">The default initial password is
+                <nameliteral ixia_locid="124" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral>.</p>
+            <ul id="ul_aqh_b41_pq" class="- topic/ul ">
+                <li ixia_locid="118" class="- topic/li ">
+                    <p ixia_locid="119" class="- topic/p ">The initial password must be changed immediately when you
+                        log in to <nameliteral ixia_locid="125" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">controller-0</nameliteral> for the first time. For
+                        details, see the <cite ixia_locid="95" class="- topic/cite ">HP Helion OpenStack Carrier Grade Software Installation
+                            Guide</cite>.</p>
+                </li>
+                <li ixia_locid="120" class="- topic/li ">
+                    <p ixia_locid="121" class="- topic/p ">After five consecutive unsuccessful login attempts, further
+                        attempts are blocked for  about five minutes.</p>
+                </li>
+            </ul>
+            <p ixia_locid="96" class="- topic/p ">Subsequent password changes must be executed on the active controller
+                to ensure that they propagate to all other hosts in the cluster. Otherwise, they
+                remain local to the host where they were executed, and are overwritten on the next
+                reboot to match the password on the active controller.</p>
+            <p ixia_locid="74" class="- topic/p ">From the <nameliteral ixia_locid="75" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral> account,
+                you can execute commands requiring different privileges.</p>
+            <ul id="ul_hlh_f2c_5p" class="- topic/ul ">
+                <li ixia_locid="76" class="- topic/li ">
+                    <p ixia_locid="77" class="- topic/p ">You can execute non-root level commands as a regular Linux
+                        user directly.</p>
+                    <p ixia_locid="146" class="- topic/p ">If you do not have sufficient privileges to execute a command as a regular
+                        Linux user, you may receive a permissions error, or in some cases, the
+                        command may be reported as not found.</p>
+                </li>
+                <li ixia_locid="78" class="- topic/li ">
+                    <p ixia_locid="126" class="- topic/p ">You can execute root-level commands as the <nameliteral ixia_locid="80" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">root</nameliteral> user.</p>
+                    <p ixia_locid="127" class="- topic/p ">To become the root user, use the <cmdname ixia_locid="81" class="+ topic/keyword sw-d/cmdname ">sudo</cmdname> command to elevate your privileges, followed by the
+                        command to be executed. For example, to run the <cmdname ixia_locid="128" class="+ topic/keyword sw-d/cmdname ">config_controller</cmdname> command as the <cmdname ixia_locid="129" class="+ topic/keyword sw-d/cmdname ">root</cmdname> user:</p>
+                    <codeblock ixia_locid="130" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="153" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="134" class="+ topic/ph sw-d/userinput ">sudo config_controller</userinput>
+</codeblock>
+                    <p ixia_locid="136" class="- topic/p ">If a password is requested, provide the password for the
+                            <nameliteral ixia_locid="138" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral> account.</p>
+                </li>
+                <li ixia_locid="82" class="- topic/li ">
+                    <p ixia_locid="83" class="- topic/p ">You can execute OpenStack administrative commands as the
+                        Keystone <nameliteral ixia_locid="139" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> user. </p>
+                    <p ixia_locid="85" class="- topic/p ">Source the script <filepath ixia_locid="152" class="+ topic/ph sw-d/filepath ">/etc/nova/openrc</filepath> while
+                        working on the active controller to acquire Keystone administrative
+                        privileges.</p>
+                    <codeblock ixia_locid="131" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="154" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="135" class="+ topic/ph sw-d/userinput ">source /etc/nova/openrc</userinput>
+<systemoutput ixia_locid="155" class="+ topic/ph sw-d/systemoutput ">[wrsroot@controller-0 ~(keystone_admin)]$ </systemoutput></codeblock>
+                    <p ixia_locid="147" class="- topic/p ">The system prompt changes to indicate the new acquired
+                        privileges.</p>
+                    <note id="note_N100F4_N100C7_N1007A_N1002A_N10022_N10001" ixia_locid="148" class="- topic/note ">
+                        <p ixia_locid="149" class="- topic/p ">The default Keystone prompt includes the host name and
+                            the current working path. For simplicity,  this guide uses the following
+                            generic prompt instead:</p>
+                        <codeblock ixia_locid="150" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="156" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput></codeblock>
+                    </note>
+                    <p ixia_locid="90" class="- topic/p ">For more information on the active controller, see <xref href="jow1404333798721.xml" ixia_locid="91" class="- topic/xref "/>.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N10094_N1001D_N10001" ixia_locid="97" class="- topic/section ">
+            <title ixia_locid="98" class="- topic/title ">Local User Accounts</title>
+            <p ixia_locid="142" class="- topic/p ">You can manage regular Linux user accounts on any host in the cluster
+                using standard Linux commands.  New accounts created on one host are not
+                automatically propagated to other hosts. </p>
+            <p ixia_locid="143" class="- topic/p ">Password changes are not enforced automatically on first login, and
+                they are not propagated by the system (with the exception of the <nameliteral ixia_locid="100" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">wrsroot</nameliteral> account, for which passwords changed on
+                the active controller are propagated to other hosts.) Any special considerations for
+                these accounts, if any, must be configured manually.</p>
+            <p ixia_locid="101" class="- topic/p ">Local user accounts can be added to the <term ixia_locid="102" class="- topic/term ">sudoers</term> list using the <cmdname ixia_locid="103" class="+ topic/keyword sw-d/cmdname ">visudo</cmdname>
+                command. They can also source the script <filepath ixia_locid="104" class="+ topic/ph sw-d/filepath ">/etc/nova/openrc</filepath> to become OpenStack administrators when working on
+                the active controller. </p>
+            <p ixia_locid="105" class="- topic/p ">Backup and restore operations of home directories and passwords must be done
+                manually. They are ignored by the system backup and restore utilities. See <xref href="psa1410807758201.xml" ixia_locid="106" class="- topic/xref "/> for further details.</p>
+        </section>
+        <section id="section_N100E3_N1001A_N10001" ixia_locid="107" class="- topic/section ">
+            <title ixia_locid="51" class="- topic/title ">LDAP User Accounts</title>
+            <p ixia_locid="144" class="- topic/p ">You can create regular Linux user accounts using the HP Helion OpenStack Carrier Grade
+                LDAP service. LDAP accounts are centrally managed; changes made on any host are
+                propagated automatically to all hosts on the cluster. </p>
+            <p ixia_locid="145" class="- topic/p ">In other respects, LDAP user accounts behave as any local user
+                account. They can be added to the sudoers list, and can acquire OpenStack
+                administration credentials when executing on the active controller.</p>
+            <p ixia_locid="23" class="- topic/p ">LDAP user accounts share the following set of attributes:</p>
+            <ul id="ul_d4q_g5c_5p" class="- topic/ul ">
+                <li ixia_locid="24" class="- topic/li ">
+                    <p ixia_locid="25" class="- topic/p ">The initial password is the name of the account.</p>
+                </li>
+                <li ixia_locid="28" class="- topic/li ">
+                    <p ixia_locid="29" class="- topic/p ">The initial password must be changed immediately upon first
+                        login.</p>
+                </li>
+                <li ixia_locid="30" class="- topic/li ">
+                    <p ixia_locid="31" class="- topic/p ">Requirements for new passwords include:</p>
+                    <ul id="ul_ipq_g5c_5p" class="- topic/ul ">
+                        <li ixia_locid="32" class="- topic/li ">
+                            <p ixia_locid="33" class="- topic/p ">to be at least eight characters long</p>
+                        </li>
+                        <li ixia_locid="34" class="- topic/li ">
+                            <p ixia_locid="35" class="- topic/p ">to have at least one lowercase character</p>
+                        </li>
+                        <li ixia_locid="36" class="- topic/li ">
+                            <p ixia_locid="37" class="- topic/p ">to differ in at least three characters from the
+                                previous password</p>
+                        </li>
+                        <li ixia_locid="38" class="- topic/li ">
+                            <p ixia_locid="39" class="- topic/p ">not to be evidently trivial to guess, such as
+                                a2345678, or a reversed version of the old password</p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="40" class="- topic/li ">
+                    <p ixia_locid="41" class="- topic/p ">Login sessions are logged out automatically after about 15
+                        minutes of inactivity.</p>
+                </li>
+                <li ixia_locid="42" class="- topic/li ">
+                    <p ixia_locid="43" class="- topic/p ">The accounts block following five consecutive unsuccessful
+                        login attempts. They unblock automatically after a period of about five
+                        minutes.</p>
+                </li>
+                <li ixia_locid="44" class="- topic/li ">
+                    <p ixia_locid="45" class="- topic/p ">Home directories are created dynamically on first login. Note
+                        that home directories for local user accounts are created when the accounts
+                        are created.</p>
+                </li>
+                <li ixia_locid="110" class="- topic/li ">
+                    <p ixia_locid="112" class="- topic/p ">All authentication attempts are recorded on the file
+                            <filepath ixia_locid="48" class="+ topic/ph sw-d/filepath ">/var/log/auth.log</filepath> of the target
+                        host.</p>
+                </li>
+                <li ixia_locid="111" class="- topic/li ">
+                    <p ixia_locid="113" class="- topic/p ">Home directories and passwords are backed up and restored by
+                        the system backup utilities.</p>
+                </li>
+            </ul>
+            <p ixia_locid="5" class="- topic/p ">The following LDAP user accounts are available by default on newly
+                deployed hosts, regardless of their personality:</p>
+            <dl class="- topic/dl ">
+                <dlentry ixia_locid="6" class="- topic/dlentry ">
+                    <dt ixia_locid="7" class="- topic/dt ">admin</dt>
+                    <dd ixia_locid="8" class="- topic/dd ">
+                        <p ixia_locid="9" class="- topic/p ">A cloud administrative account, comparable in purpose to
+                            the default <nameliteral ixia_locid="10" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> account
+                            used in the web management interface.</p>
+                        <p ixia_locid="11" class="- topic/p ">This user account operates on a restricted Linux shell,
+                            with very limited access to native Linux commands. However, the shell is
+                            preconfigured to have administrative access to OpenStack commands,
+                            including the available HP Helion OpenStack Carrier Grade CLI extensions.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="12" class="- topic/dlentry ">
+                    <dt ixia_locid="13" class="- topic/dt ">operator</dt>
+                    <dd ixia_locid="14" class="- topic/dd ">
+                        <p ixia_locid="15" class="- topic/p ">A host administrative account. It has access to all
+                            native Linux commands and is included in the sudoers list.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="114" class="- topic/p ">For increased security, the <nameliteral ixia_locid="115" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> and <nameliteral ixia_locid="116" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">operator</nameliteral>
+                accounts must be used from the console ports of the hosts; no SSH access is
+                allowed.</p>
+        </section>
+        <section id="section_N1019F_N1001D_N10001" ixia_locid="108" class="- topic/section ">
+            <title ixia_locid="117" class="- topic/title ">Managing LDAP User Accounts</title>
+            <p ixia_locid="52" class="- topic/p ">Although the scope of operations for the LDAP user accounts is local,
+                that is, they operate on the target host exclusively, management of these accounts
+                operates at the cluster level. This means that operations such as password change,
+                and addition or removal of users, are applied to the entire cluster. For example, a
+                password change executed while logged into controller-0, is effective immediately on
+                all other hosts in the cluster.</p>
+            <p ixia_locid="53" class="- topic/p ">Centralized management is implemented using two LDAP servers, one
+                running on each controller node. LDAP server synchronization is automatic using the
+                native LDAP content synchronization protocol.</p>
+            <p ixia_locid="54" class="- topic/p ">A set of LDAP commands is available to operate on LDAP user accounts.
+                The commands are installed in the directory <filepath ixia_locid="55" class="+ topic/ph sw-d/filepath ">/usr/local/sbin</filepath>, and are available to any user account in the
+                sudoers list. Included commands are <cmdname ixia_locid="58" class="+ topic/keyword sw-d/cmdname ">lsldap</cmdname>,
+                    <cmdname ixia_locid="59" class="+ topic/keyword sw-d/cmdname ">ldapadduser</cmdname>, <cmdname ixia_locid="60" class="+ topic/keyword sw-d/cmdname ">ldapdeleteuser</cmdname>, and several others starting with the prefix <cmdname ixia_locid="61" class="+ topic/keyword sw-d/cmdname ">ldap</cmdname>. Use the command option <option ixia_locid="62" class="+ topic/keyword pr-d/option ">--help</option> on any command to display a brief help message, as illustrated
+                below.</p>
+            <codeblock ixia_locid="63" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="157" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="65" class="+ topic/ph sw-d/userinput ">ldapadduser --help</userinput>
+<systemoutput ixia_locid="158" class="+ topic/ph sw-d/systemoutput ">Usage : /usr/local/sbin/ldapadduser &lt;username&gt; &lt;groupname | gid&gt; [uid]</systemoutput>
+<systemoutput ixia_locid="159" class="+ topic/ph sw-d/systemoutput ">$ </systemoutput><userinput ixia_locid="68" class="+ topic/ph sw-d/userinput ">ldapdeleteuser --help</userinput>
+<systemoutput ixia_locid="160" class="+ topic/ph sw-d/systemoutput ">Usage : /usr/local/sbin/ldapdeleteuser &lt;username | uid&gt;</systemoutput></codeblock>
+        </section>
+    </conbody>
+</concept-wr>

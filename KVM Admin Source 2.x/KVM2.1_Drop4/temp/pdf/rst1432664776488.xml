@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/?><?path2project?><?path2project-uri ./?><referable-content xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="rst1432664776488" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic concept)                            (topic concept glossentry)                            (topic concept glossgroup)                            (topic reference)                            (topic task)                            (topic hi-d)                             (topic ut-d)                             (topic indexing-d)                            (topic hazard-d)                            (topic abbrev-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                             (topic task strictTaskbody-c)                             a(loc  ixia_locid)                            (topic strictPara-c)                            (topic strictSection-c)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic referable-content/referable-content ">
+<title ixia_locid="70" class="- topic/title ">ConRef: Attaching to Networks Using an Ethernet Interface</title>
+<rcbody class="- topic/body referable-content/body ">
+        <shortdesc id="shortdesc" ixia_locid="2" class="- topic/shortdesc ">You can attach an Ethernet interface to a network by editing the
+            interface.</shortdesc>
+        <prolog id="prolog" class="- topic/prolog ">
+            <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+        </prolog>
+        <taskbody id="body" class="- topic/body task/taskbody ">
+            <context id="context" ixia_locid="4" class="- topic/section task/context ">
+                <p ixia_locid="5" class="- topic/p ">When a compute or storage node is added to HP Helion OpenStack Carrier Grade and
+                    initialized, Ethernet interfaces are created automatically for each physical
+                    port detected. To support installation using PXE booting, one interface is
+                    attached automatically to the management network. You must attach additional
+                    interfaces manually before you can unlock the node. For more about this
+                    requirement, see <xref href="jow1426948577755.xml" ixia_locid="6" class="- topic/xref "/>.</p>
+                <p ixia_locid="65" class="- topic/p "> For a network that uses Ethernet interfaces, you can edit an
+                    existing Ethernet interface on the node to attach it, as described in this
+                    topic. You can also do this from the CLI; for more information, see <xref href="jow1427029415968.xml" ixia_locid="67" class="- topic/xref "/>. </p>
+                <p ixia_locid="66" class="- topic/p ">For a network that uses aggregated Ethernet or VLAN interfaces,
+                    you must create an interface in order to attach it; see <xref href="jow1426951671346.xml" ixia_locid="8" class="- topic/xref "/> or <xref href="jow1426951757970.xml" ixia_locid="9" class="- topic/xref "/>.</p>
+            </context>
+            <steps id="steps_z3w_41x_ds" class="- topic/ol task/steps ">
+                <step id="step_N1003B_N10038_N1001C_N10001" ixia_locid="10" class="- topic/li task/step " conref="jow1426453628262.xml#jow1426453628262/step_N1002B_N10028_N1001C_N10001">
+                    <cmd ixia_locid="11" class="- topic/ph task/cmd "/>
+                </step>
+                <step id="step_N10044_N10038_N1001C_N10001" ixia_locid="12" class="- topic/li task/step ">
+                    <cmd ixia_locid="13" class="- topic/ph task/cmd ">Select the <uicontrol ixia_locid="14" class="+ topic/ph ui-d/uicontrol ">Interfaces</uicontrol> tab.</cmd>
+                    <stepresult ixia_locid="15" class="- topic/itemgroup task/stepresult ">
+                        <fig id="fig_ypk_blk_lr" ixia_locid="16" class="- topic/fig ">
+                            <image href="jow1426954731455.image" id="image_onc_hlk_lr" ixia_locid="17" width="6in" placement="inline" class="- topic/image ">
+                                <alt ixia_locid="18" class="- topic/alt ">Compute node default interfaces</alt>
+                            </image>
+                        </fig>
+                    </stepresult>
+                </step>
+                <step id="step_N10066_N10038_N1001C_N10001" ixia_locid="19" class="- topic/li task/step ">
+                    <cmd ixia_locid="20" class="- topic/ph task/cmd ">Click <uicontrol ixia_locid="21" class="+ topic/ph ui-d/uicontrol ">Edit Interface</uicontrol>
+                        for the interface you want to attach to a network.</cmd>
+                    <stepresult ixia_locid="22" class="- topic/itemgroup task/stepresult ">
+                        <fig id="fig_tgf_tlk_lr" ixia_locid="23" class="- topic/fig ">
+                            <image href="jow1426954976474.image" id="image_w5l_tlk_lr" ixia_locid="24" placement="inline" class="- topic/image ">
+                                <alt ixia_locid="25" class="- topic/alt ">TiS Edit Interface</alt>
+                            </image>
+                        </fig>
+                        <p ixia_locid="103" class="- topic/p ">For an Ethernet interface, the <uicontrol ixia_locid="104" class="+ topic/ph ui-d/uicontrol ">Port</uicontrol> is already selected. </p>
+                    </stepresult>
+                </step>
+                <step id="step_N10088_N10038_N1001C_N10001" ixia_locid="26" class="- topic/li task/step ">
+                    <cmd ixia_locid="27" class="- topic/ph task/cmd ">Select the type of network for the interface.</cmd>
+                    <info ixia_locid="28" class="- topic/itemgroup task/info ">
+                        <p ixia_locid="68" class="- topic/p ">For details, see <xref href="jow1426955886080.xml" ixia_locid="69" class="- topic/xref "/>.</p>
+                    </info>
+                </step>
+                <step id="step_N10101_N10038_N1001C_N10001" ixia_locid="55" class="- topic/li task/step ">
+                    <cmd ixia_locid="56" class="- topic/ph task/cmd ">Complete the required information for the type of
+                        interface.</cmd>
+                    <info ixia_locid="57" class="- topic/itemgroup task/info ">
+                        <p ixia_locid="58" class="- topic/p ">For more information, see <xref href="jow1426955886080.xml" ixia_locid="59" class="- topic/xref "/>.</p>
+                    </info>
+                </step>
+                <step id="step_N10116_N10038_N1001C_N10001" ixia_locid="60" class="- topic/li task/step ">
+                    <cmd ixia_locid="61" class="- topic/ph task/cmd ">Click <uicontrol ixia_locid="62" class="+ topic/ph ui-d/uicontrol ">Save</uicontrol> to save
+                        your changes and close the dialog box. </cmd>
+                    <info ixia_locid="236" class="- topic/itemgroup task/info ">
+                        <note id="note_N101BB_N10194_N1013A_N1010A_N100D4_N10012_N1000F_N10001" ixia_locid="233" class="- topic/note ">
+                            <draft-comment author="rstone" ixia_locid="237" translate="no" dir="ltr" class="- topic/draft-comment ">US60503 adds</draft-comment>
+                            <p ixia_locid="234" class="- topic/p ">If an interface is not supported by AVS using DPDK
+                                poll-mode drivers, it will operate in non-accelerated mode
+                                leveraging kernel drivers. For more information see <cite ixia_locid="235" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration Guide:
+                                    Interfaces</cite>.</p>
+                        </note>
+                    </info>
+                </step>
+            </steps>
+            <result id="result_N1011E_N1001C_N10001" ixia_locid="63" class="- topic/section task/result ">
+                <p ixia_locid="64" class="- topic/p ">The interface is attached to the network.</p>
+            </result>
+        </taskbody>
+    </rcbody>
+</referable-content>

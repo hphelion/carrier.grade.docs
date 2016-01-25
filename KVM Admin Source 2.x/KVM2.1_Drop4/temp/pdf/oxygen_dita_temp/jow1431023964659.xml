@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><referable-content xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1431023964659" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic concept)                            (topic concept glossentry)                            (topic concept glossgroup)                            (topic reference)                            (topic task)                            (topic hi-d)                             (topic ut-d)                             (topic indexing-d)                            (topic hazard-d)                            (topic abbrev-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                             (topic task strictTaskbody-c)                             a(loc  ixia_locid)                            (topic strictPara-c)                            (topic strictSection-c)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic referable-content/referable-content ">
+<title ixia_locid="179" class="- topic/title ">[RC] dl: Interface Settings (TiS)</title>
+<rcbody class="- topic/body referable-content/body ">
+        <dl id="interface_settings" class="- topic/dl ">
+            <dlentry ixia_locid="12" class="- topic/dlentry ">
+                <dt ixia_locid="13" class="- topic/dt ">Interface Name</dt>
+                <dd ixia_locid="14" class="- topic/dd ">
+                    <p ixia_locid="15" class="- topic/p ">A name used to identify the interface.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="16" class="- topic/dlentry ">
+                <dt ixia_locid="17" class="- topic/dt ">Network Type</dt>
+                <dd ixia_locid="18" class="- topic/dd ">
+                    <p ixia_locid="180" class="- topic/p ">The type of network to which the interface is attached.</p>
+                    <note id="note_N1003C_N10033_N1002A_N10012_N1000F_N10001" ixia_locid="183" class="- topic/note ">
+                        <p ixia_locid="181" class="- topic/p ">This selection supports multiple network types on the
+                            same <i ixia_locid="184" class="+ topic/ph hi-d/i ">logical</i> interface. HP Helion OpenStack Carrier Grade also supports multiple
+                            network types on the same <i ixia_locid="185" class="+ topic/ph hi-d/i ">physical</i> interface, using VLAN
+                            interfaces.</p>
+                    </note>
+                    <p ixia_locid="182" class="- topic/p ">You can select multiple check boxes, but the only valid
+                        multiple selection is <uicontrol ixia_locid="176" class="+ topic/ph ui-d/uicontrol ">data</uicontrol> in
+                        addition to either <uicontrol ixia_locid="177" class="+ topic/ph ui-d/uicontrol ">mgmt</uicontrol> or
+                            <uicontrol ixia_locid="178" class="+ topic/ph ui-d/uicontrol ">infra</uicontrol> on the interface connected
+                        to the management or infrastructure network.</p>
+                    <p ixia_locid="158" class="- topic/p ">Depending on the interface, the check box options may
+                        include:</p>
+                    <dl class="- topic/dl ">
+                        <dlentry ixia_locid="104" class="- topic/dlentry ">
+                            <dt ixia_locid="105" class="- topic/dt ">none</dt>
+                            <dd ixia_locid="106" class="- topic/dd ">
+                                <p ixia_locid="107" class="- topic/p ">Clears the Network Type setting.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="108" class="- topic/dlentry ">
+                            <dt ixia_locid="109" class="- topic/dt ">infra</dt>
+                            <dd ixia_locid="110" class="- topic/dd ">
+                                <p ixia_locid="111" class="- topic/p ">Attaches the interface to an infrastructure
+                                    network.</p>
+                                <p ixia_locid="112" class="- topic/p ">When a compute or storage node is added to
+                                    HP Helion OpenStack Carrier Grade, an interface must be attached to the
+                                    infrastructure network before the node can be unlocked.</p>
+                                <p ixia_locid="171" class="- topic/p ">You can edit the infrastructure interface to add
+                                    a <uicontrol ixia_locid="173" class="+ topic/ph ui-d/uicontrol ">data</uicontrol> network and
+                                    provider network. This allows both infrastructure and data
+                                    traffic to be carried on the interface.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="115" class="- topic/dlentry ">
+                            <dt ixia_locid="116" class="- topic/dt ">oam</dt>
+                            <dd ixia_locid="117" class="- topic/dd ">
+                                <p ixia_locid="161" class="- topic/p ">Attaches the interface to the OAM network. </p>
+                                <p ixia_locid="162" class="- topic/p ">The OAM network is used by controller nodes for
+                                    administrator remote access. It is not applicable to compute or
+                                    storage nodes.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="119" class="- topic/dlentry ">
+                            <dt ixia_locid="120" class="- topic/dt ">mgmt</dt>
+                            <dd ixia_locid="121" class="- topic/dd ">
+                                <p ixia_locid="163" class="- topic/p ">Attaches the interface to the management
+                                    network.</p>
+                                <p ixia_locid="164" class="- topic/p ">When a compute or storage node is added to
+                                    HP Helion OpenStack Carrier Grade, the interface used for PXE boot is assigned
+                                    automatically to the management network. In the settings for
+                                    this interface, <uicontrol ixia_locid="166" class="+ topic/ph ui-d/uicontrol ">mgmt</uicontrol> is
+                                    already selected. For other interfaces, this selection is not
+                                    used.</p>
+                                <p ixia_locid="172" class="- topic/p ">You can edit the management interface to add a
+                                        <uicontrol ixia_locid="174" class="+ topic/ph ui-d/uicontrol ">data</uicontrol> network and
+                                    provider network. This allows both management and data traffic
+                                    to be carried on the interface.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="126" class="- topic/dlentry ">
+                            <dt ixia_locid="127" class="- topic/dt ">pci-passthrough</dt>
+                            <dd ixia_locid="128" class="- topic/dd ">
+                                <p ixia_locid="150" class="- topic/p ">Provides for a direct connection to physical
+                                    interface hardware and the attached provider network from a
+                                    virtual machine. A single VM can directly access the physical
+                                    interface. For more information, see the <cite ixia_locid="130" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration Guide: PCI Passthrough
+                                        Ethernet Devices.</cite></p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="131" class="- topic/dlentry ">
+                            <dt ixia_locid="132" class="- topic/dt ">data</dt>
+                            <dd ixia_locid="133" class="- topic/dd ">
+                                <p ixia_locid="147" class="- topic/p ">Attaches the interface to a provider
+                                    network.</p>
+                                <p ixia_locid="148" class="- topic/p ">You can add a data interface to a management or
+                                    infrastructure interface by editing the interface and selecting
+                                        <uicontrol ixia_locid="137" class="+ topic/ph ui-d/uicontrol ">data</uicontrol> in addition to
+                                        <uicontrol ixia_locid="168" class="+ topic/ph ui-d/uicontrol ">mgmt</uicontrol> or <uicontrol ixia_locid="175" class="+ topic/ph ui-d/uicontrol ">infra</uicontrol>.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="138" class="- topic/dlentry ">
+                            <dt ixia_locid="139" class="- topic/dt ">pci-sriov</dt>
+                            <dd ixia_locid="140" class="- topic/dd ">
+                                <p ixia_locid="141" class="- topic/p ">Provides for a direct connection to a virtual
+                                    unit of physical interface hardware, and the attached provider
+                                    network, from a virtual machine. Multiple VMs can directly
+                                    access and share the same physical interface. For more
+                                    information, see the <cite ixia_locid="142" class="- topic/cite ">HP Helion OpenStack Carrier Grade
+                                        Administration Guide: SR-IOV Ethernet Interfaces</cite>.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="20" class="- topic/dlentry ">
+                <dt ixia_locid="21" class="- topic/dt ">Interface Type</dt>
+                <dd ixia_locid="22" class="- topic/dd ">
+                    <p ixia_locid="23" class="- topic/p ">(Shown only when the <uicontrol ixia_locid="152" class="+ topic/ph ui-d/uicontrol ">Network
+                            Type</uicontrol> is set to <uicontrol ixia_locid="153" class="+ topic/ph ui-d/uicontrol ">mgmt</uicontrol>,
+                            <uicontrol ixia_locid="154" class="+ topic/ph ui-d/uicontrol ">oam</uicontrol>, <uicontrol ixia_locid="155" class="+ topic/ph ui-d/uicontrol ">data</uicontrol>, or <uicontrol ixia_locid="156" class="+ topic/ph ui-d/uicontrol ">infra</uicontrol>) The
+                        type of interface (Ethernet, Aggregated Ethernet, or VLAN).</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="24" class="- topic/dlentry ">
+                <dt ixia_locid="25" class="- topic/dt ">Aggregated Ethernet - Mode</dt>
+                <dd ixia_locid="26" class="- topic/dd ">
+                    <p ixia_locid="27" class="- topic/p ">(Shown only when the <uicontrol ixia_locid="28" class="+ topic/ph ui-d/uicontrol ">Interface
+                            Type</uicontrol> is set to <nameliteral ixia_locid="29" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">aggregated
+                            ethernet</nameliteral>) The operational mode for link aggregation.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="186" class="- topic/dlentry ">
+                <dt ixia_locid="187" class="- topic/dt ">Aggregated Ethernet - Tx Policy</dt>
+                <dd ixia_locid="188" class="- topic/dd ">
+                    <p ixia_locid="189" class="- topic/p ">(Shown only when the <nameliteral ixia_locid="190" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Aggregated Ethernet - Mode</nameliteral> is
+                        set to <nameliteral ixia_locid="191" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">balanced</nameliteral> or
+                            <nameliteral ixia_locid="192" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">802.3ad</nameliteral>) The transmit policy for link
+                        aggregation.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="31" class="- topic/dlentry ">
+                <dt ixia_locid="32" class="- topic/dt ">Vlan ID</dt>
+                <dd ixia_locid="33" class="- topic/dd ">
+                    <p ixia_locid="34" class="- topic/p "><draft-comment author="jowens" ixia_locid="194" translate="no" dir="ltr" class="- topic/draft-comment ">US62814
+                            removed statement about when Vlan ID is shown. It seems to be shown for
+                            any Network Type.</draft-comment>A unique VLAN identifier for the
+                        network.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="37" class="- topic/dlentry ">
+                <dt ixia_locid="38" class="- topic/dt ">Port(s)</dt>
+                <dd ixia_locid="39" class="- topic/dd ">
+                    <p ixia_locid="40" class="- topic/p ">The physical port or ports used for the interface.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="41" class="- topic/dlentry ">
+                <dt ixia_locid="42" class="- topic/dt ">Provider Networks</dt>
+                <dd ixia_locid="43" class="- topic/dd ">
+                    <p ixia_locid="44" class="- topic/p ">(Shown only when the Network Type is set to <nameliteral ixia_locid="45" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">data</nameliteral>, <nameliteral ixia_locid="46" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">pci-passthrough</nameliteral>, or <nameliteral ixia_locid="193" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">pci-sriov</nameliteral>)
+                        The available provider networks. To attach the interface to a provider
+                        network, select the provider network. </p>
+                    <note id="note_N101F2_N101DA_N101D1_N10045_N10036_N10033_N10001" ixia_locid="169" class="- topic/note ">
+                        <p ixia_locid="170" class="- topic/p ">You cannot attach to a VLAN provider network using a
+                            VLAN data interface.</p>
+                    </note>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="48" class="- topic/dlentry ">
+                <dt ixia_locid="49" class="- topic/dt ">MTU</dt>
+                <dd ixia_locid="50" class="- topic/dd ">
+                    <p ixia_locid="51" class="- topic/p ">The maximum transmission unit for the interface. For more
+                        information, see the <cite ixia_locid="52" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration
+                            Guide: The Ethernet MTU</cite>. </p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="53" class="- topic/dlentry ">
+                <dt ixia_locid="54" class="- topic/dt ">IPv4 Addressing Mode</dt>
+                <dd ixia_locid="55" class="- topic/dd ">
+                    <p ixia_locid="56" class="- topic/p ">(Shown only when the Network Type is set to <nameliteral ixia_locid="57" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">data</nameliteral>) The method for assigning an IP
+                        address to the interface for use with VXLAN networks. For more information
+                        about VXLAN networks, see the <cite ixia_locid="58" class="- topic/cite ">HP Helion OpenStack Carrier Grade
+                            Administration Guide: Using VXLANs</cite>. The available options are
+                            <nameliteral ixia_locid="59" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">static</nameliteral> or <nameliteral ixia_locid="60" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">disabled</nameliteral>.</p>
+                    <dl class="- topic/dl ">
+                        <dlentry ixia_locid="61" class="- topic/dlentry ">
+                            <dt ixia_locid="62" class="- topic/dt ">Disabled</dt>
+                            <dd ixia_locid="63" class="- topic/dd ">
+                                <p ixia_locid="64" class="- topic/p ">Do not assign an IPv4 address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="65" class="- topic/dlentry ">
+                            <dt ixia_locid="66" class="- topic/dt ">Static</dt>
+                            <dd ixia_locid="67" class="- topic/dd ">
+                                <p ixia_locid="68" class="- topic/p ">Use a static IPv4 address.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="69" class="- topic/dlentry ">
+                <dt ixia_locid="70" class="- topic/dt ">IPv6 Addressing Mode</dt>
+                <dd ixia_locid="71" class="- topic/dd ">
+                    <p ixia_locid="72" class="- topic/p ">(Shown only when the Network Type is set to <nameliteral ixia_locid="73" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">data</nameliteral>) The method for assigning an IP
+                        address to the interface for use with VXLAN networks. For more information
+                        about VXLAN networks, see the <cite ixia_locid="91" class="- topic/cite ">HP Helion OpenStack Carrier Grade
+                            Administration Guide: Using VXLANs</cite>.</p>
+                    <dl class="- topic/dl ">
+                        <dlentry ixia_locid="75" class="- topic/dlentry ">
+                            <dt ixia_locid="76" class="- topic/dt ">Disabled</dt>
+                            <dd ixia_locid="77" class="- topic/dd ">
+                                <p ixia_locid="78" class="- topic/p ">Do not assign an IPv6 address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="79" class="- topic/dlentry ">
+                            <dt ixia_locid="80" class="- topic/dt ">Static</dt>
+                            <dd ixia_locid="81" class="- topic/dd ">
+                                <p ixia_locid="82" class="- topic/p ">Use a static IPv6 address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="83" class="- topic/dlentry ">
+                            <dt ixia_locid="84" class="- topic/dt ">Automatic Assignment</dt>
+                            <dd ixia_locid="85" class="- topic/dd ">
+                                <p ixia_locid="86" class="- topic/p ">Use an automatically assigned IPv6 address.
+                                    <!-- JO 2015-03-21 need input --></p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="87" class="- topic/dlentry ">
+                            <dt ixia_locid="88" class="- topic/dt ">Link Local</dt>
+                            <dd ixia_locid="89" class="- topic/dd ">
+                                <p ixia_locid="90" class="- topic/p ">Use a link local IPv6 address.
+                                    <!-- JO 2015-03-21 need input --></p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="93" class="- topic/dlentry ">
+                <dt ixia_locid="94" class="- topic/dt ">Virtual Functions</dt>
+                <dd ixia_locid="95" class="- topic/dd ">
+                    <p ixia_locid="96" class="- topic/p ">(Shown only when the Network Type is set to <nameliteral ixia_locid="97" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">pci-sriov</nameliteral>) The number of virtual
+                        interfaces to use. For more information, see the <cite ixia_locid="92" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration Guide: SR-IOV Ethernet
+                        Interfaces</cite>.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="98" class="- topic/dlentry ">
+                <dt ixia_locid="99" class="- topic/dt ">Maximum Virtual Functions</dt>
+                <dd ixia_locid="100" class="- topic/dd ">
+                    <p ixia_locid="101" class="- topic/p ">(Shown only when the Network Type is set to <nameliteral ixia_locid="102" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">pci-sriov</nameliteral>) </p>
+                    <p ixia_locid="103" class="- topic/p ">the maximum number of virtual interfaces available.</p>
+                </dd>
+            </dlentry>
+        </dl>
+    </rcbody>
+</referable-content>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1436210207074" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="34" class="- topic/title ">Affining a VM to a NUMA Node with a vSwitch Core</title>
+    <shortdesc ixia_locid="35" class="- topic/shortdesc ">You can select whether to place a VM in the same NUMA node as a
+        vSwitch (AVS) core.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="36" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="37" class="- topic/section task/context ">
+            <p ixia_locid="38" class="- topic/p ">For optimal networking performance, you can set an extra spec so that
+                a VM is instantiated on a host only if the host can offer a NUMA node with at least
+                one core assigned as a vSwitch. You can optionally specify best-effort placement, so
+                that if a suitable host is unavailable, the VM is still instantiated, but using a
+                NUMA node without a vSwitch core.</p>
+            <p ixia_locid="42" class="- topic/p ">To add this extra spec to a flavor using the web administration
+                interface, use the <nameliteral ixia_locid="43" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Vswitch NUMA Affinity</nameliteral>
+                selection in the <nameliteral ixia_locid="44" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Create Flavor Extra Spec</nameliteral>
+                drop-down menu. To access this menu, see <xref href="jow1429538642910.xml" ixia_locid="45" class="- topic/xref "/>.</p>
+            <p ixia_locid="46" class="- topic/p ">You can also specify the extra spec from the CLI by setting the following parameter
+                for a flavor:</p>
+            <codeblock ixia_locid="47" class="+ topic/pre pr-d/codeblock "><userinput ixia_locid="22" class="+ topic/ph sw-d/userinput ">hw:wrs:vswitch_numa_affinity=<varname ixia_locid="23" class="+ topic/keyword sw-d/varname ">vswitch_affinity</varname></userinput></codeblock>
+            <p ixia_locid="24" class="- topic/p ">where <varname ixia_locid="25" class="+ topic/keyword sw-d/varname ">vswitch_affinity</varname> is one of
+                the following:</p>
+            <dl class="- topic/dl ">
+                <dlentry ixia_locid="26" class="- topic/dlentry ">
+                    <dt ixia_locid="27" class="- topic/dt ">strict</dt>
+                    <dd ixia_locid="28" class="- topic/dd ">
+                        <p ixia_locid="29" class="- topic/p ">Requires a host NUMA node that has a vSwitch core. For a
+                            VM configured to use multiple NUMA nodes, each host NUMA node must have
+                            a vSwitch core. If these conditions cannot be satisfied, the
+                            instantiation fails.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="30" class="- topic/dlentry ">
+                    <dt ixia_locid="31" class="- topic/dt ">prefer</dt>
+                    <dd ixia_locid="32" class="- topic/dd ">
+                        <p ixia_locid="33" class="- topic/p ">Prefers a host NUMA node that has a vSwitch core. For a
+                            VM configured to use multiple NUMA nodes,  prefers host NUMA nodes with
+                            a vSwitch core for as many virtual NUMA nodes as possible. If these
+                            conditions cannot be satisfied, another NUMA node can be used.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="48" class="- topic/p ">For information about assigning vSwitch cores on a host, see <xref href="jow1404333768530.xml" ixia_locid="49" class="- topic/xref "/>.</p>
+        </context>
+    </taskbody>
+</task-wr>

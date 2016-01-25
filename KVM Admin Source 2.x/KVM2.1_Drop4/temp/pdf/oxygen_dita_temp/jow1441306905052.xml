@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><reference-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1441306905052" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic reference reference-wr)                            (topic hi-d)                             (topic indexing-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                             (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic       reference/reference  reference-wr/reference-wr ">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1" class="- topic/title ">Configuration Input File Format</title>
+  <shortdesc ixia_locid="2" class="- topic/shortdesc ">The configuration file uses key-value pairs in standard INI format.</shortdesc>
+  <prolog class="- topic/prolog ">
+    <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+  </prolog>
+  <refbody class="- topic/body        reference/refbody ">
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4" class="- topic/section ">
+      <p ixia_locid="5" class="- topic/p "><draft-comment author="jowens" ixia_locid="6" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 new
+          topic.</draft-comment>Valid sections, keys, and values are as follows.</p>
+      <table colsep="0" frame="all" id="table_c5k_dh1_mt" rowsep="0" class="- topic/table ">
+        <title ixia_locid="7" class="- topic/title ">Configuration Input File INI Specification </title>
+        <tgroup cols="4" class="- topic/tgroup ">
+          <colspec colname="col1" colnum="1" colwidth="1.0*" class="- topic/colspec "/>
+          <colspec colname="col2" colnum="2" colwidth="1.0*" class="- topic/colspec "/>
+          <colspec colname="col3" colnum="3" colwidth="1.0*" class="- topic/colspec "/>          
+          <thead class="- topic/thead ">
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="10" class="- topic/entry ">
+                <p ixia_locid="11" class="- topic/p ">[Section] / Key</p>
+              </entry>
+              <entry colname="col2" ixia_locid="12" class="- topic/entry ">
+                <p ixia_locid="13" class="- topic/p ">Value</p>
+              </entry>
+              <entry colname="col3" ixia_locid="14" class="- topic/entry ">
+                <p ixia_locid="15" class="- topic/p ">Remarks</p>
+              </entry>
+            </row>
+          </thead>
+          <tbody class="- topic/tbody ">
+            <row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="365" class="- topic/entry ">
+                <p ixia_locid="366" class="- topic/p "><nameliteral ixia_locid="413" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[STORAGE]</nameliteral></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="367" class="- topic/entry ">
+                <p ixia_locid="368" class="- topic/p "> DATABASE_STORAGE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="20" class="- topic/entry ">
+                <p ixia_locid="21" class="- topic/p ">(size in GB)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="22" class="- topic/entry ">
+                <p ixia_locid="23" class="- topic/p ">Postgres database size</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="25" class="- topic/entry ">
+                <p ixia_locid="26" class="- topic/p "> IMAGE_STORAGE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="27" class="- topic/entry ">
+                <p ixia_locid="28" class="- topic/p ">(size in GB)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="29" class="- topic/entry ">
+                <p ixia_locid="30" class="- topic/p ">Storage for nova instances launched from glance images</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="32" class="- topic/entry ">
+                <p ixia_locid="33" class="- topic/p "> BACKUP_STORAGE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="34" class="- topic/entry ">
+                <p ixia_locid="35" class="- topic/p ">(size in GB)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="36" class="- topic/entry ">
+                <p ixia_locid="37" class="- topic/p ">Must be at least DATABASE_STORAGE + 10</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="39" class="- topic/entry ">
+                <p ixia_locid="40" class="- topic/p "> CINDER_BACKEND</p>
+              </entry>
+              <entry colname="col2" ixia_locid="41" class="- topic/entry ">
+                <p ixia_locid="42" class="- topic/p "><option ixia_locid="43" class="+ topic/keyword pr-d/option ">lvm</option> or <option ixia_locid="44" class="+ topic/keyword pr-d/option ">ceph</option></p>
+              </entry>
+              <entry colname="col3" ixia_locid="45" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="47" class="- topic/entry ">
+                <p ixia_locid="48" class="- topic/p "> CINDER_DEVICE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="49" class="- topic/entry ">
+                <p ixia_locid="50" class="- topic/p ">(string)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="51" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="53" class="- topic/entry ">
+                <p ixia_locid="54" class="- topic/p "> CINDER_STORAGE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="55" class="- topic/entry ">
+                <p ixia_locid="56" class="- topic/p ">(size in GB)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="57" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="414" class="- topic/entry ">
+                <p ixia_locid="415" class="- topic/p "><nameliteral ixia_locid="416" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[DNS]</nameliteral></p> 
+              </entry>
+              <entry colname="col2" ixia_locid="417" class="- topic/entry "><p ixia_locid="418" class="- topic/p "/></entry>
+              <entry colname="col3" ixia_locid="419" class="- topic/entry "><p ixia_locid="420" class="- topic/p ">(optional)</p></entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="371" class="- topic/entry ">
+                <p ixia_locid="372" class="- topic/p "> NAMESERVER_1</p>
+              </entry>
+              <entry colname="col2" ixia_locid="62" class="- topic/entry ">
+                <p ixia_locid="63" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="64" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="66" class="- topic/entry ">
+                <p ixia_locid="67" class="- topic/p "> NAMESERVER_2</p>
+              </entry>
+              <entry colname="col2" ixia_locid="68" class="- topic/entry ">
+                <p ixia_locid="69" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="70" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="72" class="- topic/entry ">
+                <p ixia_locid="73" class="- topic/p "> NAMESERVER_3</p>
+              </entry>
+              <entry colname="col2" ixia_locid="74" class="- topic/entry ">
+                <p ixia_locid="75" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="76" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="421" class="- topic/entry ">
+                <p ixia_locid="422" class="- topic/p "><nameliteral ixia_locid="423" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[NTP]</nameliteral></p> 
+              </entry>
+              <entry colname="col2" ixia_locid="424" class="- topic/entry "><p ixia_locid="425" class="- topic/p "/></entry>
+              <entry colname="col3" ixia_locid="426" class="- topic/entry "><p ixia_locid="427" class="- topic/p ">(optional)</p></entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="375" class="- topic/entry ">
+                <p ixia_locid="376" class="- topic/p "> NTP_SERVER_1</p>
+              </entry>
+              <entry colname="col2" ixia_locid="81" class="- topic/entry ">
+                <p ixia_locid="82" class="- topic/p ">(IPv4 address or FQDN)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="83" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="85" class="- topic/entry ">
+                <p ixia_locid="86" class="- topic/p "> NTP_SERVER_2</p>
+              </entry>
+              <entry colname="col2" ixia_locid="87" class="- topic/entry ">
+                <p ixia_locid="88" class="- topic/p ">(IPv4 address or FQDN)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="89" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="91" class="- topic/entry ">
+                <p ixia_locid="92" class="- topic/p "> NTP_SERVER_3</p>
+              </entry>
+              <entry colname="col2" ixia_locid="93" class="- topic/entry ">
+                <p ixia_locid="94" class="- topic/p ">(IPv4 address or FQDN)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="95" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="377" class="- topic/entry ">
+                <p ixia_locid="378" class="- topic/p "><nameliteral ixia_locid="428" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[LOGICAL_INTERFACE_n]</nameliteral></p>
+              </entry>
+              <entry colname="col2" ixia_locid="429" class="- topic/entry "/>
+              <entry colname="col3" ixia_locid="430" class="- topic/entry "><p ixia_locid="431" class="- topic/p ">(where <i ixia_locid="100" class="+ topic/ph hi-d/i ">n</i> is an
+                interface number, beginning with 1)</p></entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="382" class="- topic/entry ">
+                <p ixia_locid="383" class="- topic/p "> LAG_INTERFACE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="384" class="- topic/entry ">
+                <p ixia_locid="385" class="- topic/p "><option ixia_locid="105" class="+ topic/keyword pr-d/option ">Y</option> or <option ixia_locid="106" class="+ topic/keyword pr-d/option ">N</option></p>
+              </entry>
+              <entry colname="col3" ixia_locid="386" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="109" class="- topic/entry ">
+                <p ixia_locid="110" class="- topic/p "> LAG_MODE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="111" class="- topic/entry ">
+                <p ixia_locid="112" class="- topic/p "><option ixia_locid="113" class="+ topic/keyword pr-d/option ">802.3ad (LACP) policy</option> or</p>
+                <p ixia_locid="114" class="- topic/p "><option ixia_locid="115" class="+ topic/keyword pr-d/option ">Balanced XOR policy</option> or</p>
+                <p ixia_locid="116" class="- topic/p "><option ixia_locid="117" class="+ topic/keyword pr-d/option ">Active-backup policy</option></p>
+              </entry>
+              <entry colname="col3" ixia_locid="118" class="- topic/entry "/>
+              
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="121" class="- topic/entry ">
+                <p ixia_locid="122" class="- topic/p "> INTERFACE_MTU</p>
+              </entry>
+              <entry colname="col2" ixia_locid="123" class="- topic/entry ">
+                <p ixia_locid="124" class="- topic/p "> (MTU size)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="125" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="127" class="- topic/entry ">
+                <p ixia_locid="128" class="- topic/p "> INTERFACE_PORTS</p>
+              </entry>
+              <entry colname="col2" ixia_locid="129" class="- topic/entry ">
+                <p ixia_locid="130" class="- topic/p ">(a comma-separated list of ethernet interfaces)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="131" class="- topic/entry ">
+                <p ixia_locid="132" class="- topic/p ">for example: <option ixia_locid="133" class="+ topic/keyword pr-d/option ">eth0,eth1</option></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="387" class="- topic/entry ">
+                <p ixia_locid="388" class="- topic/p "><nameliteral ixia_locid="432" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[MGMT_NETWORK]</nameliteral></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="389" class="- topic/entry ">
+                <p ixia_locid="390" class="- topic/p "> VLAN</p>
+              </entry>
+              <entry colname="col2" ixia_locid="391" class="- topic/entry ">
+                <p ixia_locid="392" class="- topic/p ">(VLAN id)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="393" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="142" class="- topic/entry ">
+                <p ixia_locid="143" class="- topic/p "> IP_START_ADDRESS</p>
+              </entry>
+              <entry colname="col2" ixia_locid="144" class="- topic/entry ">
+                <p ixia_locid="145" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="146" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="148" class="- topic/entry ">
+                <p ixia_locid="149" class="- topic/p "> IP_END_ADDRESS</p>
+              </entry>
+              <entry colname="col2" ixia_locid="150" class="- topic/entry ">
+                <p ixia_locid="151" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="152" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="154" class="- topic/entry ">
+                <p ixia_locid="155" class="- topic/p "> CIDR</p>
+              </entry>
+              <entry colname="col2" ixia_locid="156" class="- topic/entry ">
+                <p ixia_locid="157" class="- topic/p ">(network/mask)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="158" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="160" class="- topic/entry ">
+                <p ixia_locid="161" class="- topic/p "> DYNAMIC_ALLOCATION</p>
+              </entry>
+              <entry colname="col2" ixia_locid="162" class="- topic/entry ">
+                <p ixia_locid="163" class="- topic/p "><option ixia_locid="164" class="+ topic/keyword pr-d/option ">Y</option> or <option ixia_locid="165" class="+ topic/keyword pr-d/option ">N</option></p>
+              </entry>
+              <entry colname="col3" ixia_locid="166" class="- topic/entry ">
+                <p ixia_locid="441" class="- topic/p ">This setting applies to other network types system-wide, such as the Infra
+                  network.</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="168" class="- topic/entry ">
+                <p ixia_locid="169" class="- topic/p "> LOGICAL_INTERFACE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="170" class="- topic/entry ">
+                <p ixia_locid="171" class="- topic/p "><option ixia_locid="172" class="+ topic/keyword pr-d/option ">LOGICAL_INTERFACE_</option><i ixia_locid="173" class="+ topic/ph hi-d/i ">n</i></p>
+              </entry>
+              <entry colname="col3" ixia_locid="176" class="- topic/entry ">
+                <p ixia_locid="174" class="- topic/p "> (where <i ixia_locid="175" class="+ topic/ph hi-d/i ">n</i> is an interface number,
+                  beginning with 1)</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="178" class="- topic/entry ">
+                <p ixia_locid="179" class="- topic/p "> GATEWAY</p>
+              </entry>
+              <entry colname="col2" ixia_locid="180" class="- topic/entry ">
+                <p ixia_locid="181" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="182" class="- topic/entry ">
+                <p ixia_locid="183" class="- topic/p ">This key can be  specified in the MGMT_NETWORK section or OAM_NETWORK section,
+                  but not both</p>
+              </entry>
+            </row><row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="394" class="- topic/entry ">
+                <p ixia_locid="395" class="- topic/p "><nameliteral ixia_locid="433" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[INFRA_NETWORK]</nameliteral></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="186" class="- topic/entry ">
+                <p ixia_locid="187" class="- topic/p "> VLAN</p>
+              </entry>
+              <entry colname="col2" ixia_locid="188" class="- topic/entry ">
+                <p ixia_locid="189" class="- topic/p ">(VLAN id)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="190" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="192" class="- topic/entry ">
+                <p ixia_locid="193" class="- topic/p "> IP_START_ADDRESS</p>
+              </entry>
+              <entry colname="col2" ixia_locid="194" class="- topic/entry ">
+                <p ixia_locid="195" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="196" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="198" class="- topic/entry ">
+                <p ixia_locid="199" class="- topic/p "> IP_END_ADDRESS</p>
+              </entry>
+              <entry colname="col2" ixia_locid="200" class="- topic/entry ">
+                <p ixia_locid="201" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="202" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="204" class="- topic/entry ">
+                <p ixia_locid="205" class="- topic/p "> CIDR</p>
+              </entry>
+              <entry colname="col2" ixia_locid="206" class="- topic/entry ">
+                <p ixia_locid="207" class="- topic/p ">(network/mask)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="208" class="- topic/entry "/>
+            </row>
+           <!-- RS: Removed per Tyler Smith review <row>
+              <entry ixia_locid="210">
+                <p ixia_locid="211"> DYNAMIC_ALLOCATION</p>
+              </entry>
+              <entry ixia_locid="212">
+                <p ixia_locid="213"><option ixia_locid="214">Y</option> or <option ixia_locid="215">N</option></p>
+              </entry>
+              <entry ixia_locid="216"/>
+            </row> -->
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="218" class="- topic/entry ">
+                <p ixia_locid="219" class="- topic/p "> LOGICAL_INTERFACE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="220" class="- topic/entry ">
+                <p ixia_locid="221" class="- topic/p "><option ixia_locid="222" class="+ topic/keyword pr-d/option ">LOGICAL_INTERFACE_</option><i ixia_locid="223" class="+ topic/ph hi-d/i ">n</i></p>
+              </entry>
+              <entry colname="col3" ixia_locid="226" class="- topic/entry ">
+                <p ixia_locid="224" class="- topic/p "> (where <i ixia_locid="225" class="+ topic/ph hi-d/i ">n</i> is an interface number,
+                  beginning with 1)</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="396" class="- topic/entry ">
+                <p ixia_locid="397" class="- topic/p "><nameliteral ixia_locid="434" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[OAM_NETWORK]</nameliteral></p>
+              </entry>
+            </row> 
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="229" class="- topic/entry ">
+                <p ixia_locid="230" class="- topic/p "> VLAN</p>
+              </entry>
+              <entry colname="col2" ixia_locid="231" class="- topic/entry ">
+                <p ixia_locid="232" class="- topic/p ">(VLAN id)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="233" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="235" class="- topic/entry ">
+                <p ixia_locid="236" class="- topic/p "> IP_START_ADDRESS</p>
+              </entry>
+              <entry colname="col2" ixia_locid="237" class="- topic/entry ">
+                <p ixia_locid="238" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="239" morerows="1" class="- topic/entry ">
+                <p ixia_locid="442" class="- topic/p ">You can use these to define contiguous addresses for the IP
+                  floating address and unit addresses; for example, 10.10.10.2 (the IP floating
+                  address) through 10.10.10.4 (for two contiguous unit addresses). As an
+                  alternative, you can specify the addresses separately (and non-contiguously) using
+                  the keys IP_FLOATING_ADDRESS,  IP_UNIT_0_ADDRESS, and IP_UNIT_1_ADDRESS.</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="241" class="- topic/entry ">
+                <p ixia_locid="242" class="- topic/p "> IP_END_ADDRESS</p>
+              </entry>
+              <entry colname="col2" ixia_locid="243" class="- topic/entry ">
+                <p ixia_locid="244" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="247" class="- topic/entry ">
+                <p ixia_locid="248" class="- topic/p "> CIDR</p>
+              </entry>
+              <entry colname="col2" ixia_locid="249" class="- topic/entry ">
+                <p ixia_locid="250" class="- topic/p ">(network/mask)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="251" class="- topic/entry "/>
+            </row>
+          <!--  RS: Removed per Tyler Smith 
+            <row>
+              <entry ixia_locid="253">
+                <p ixia_locid="254"> DYNAMIC_ALLOCATION</p>
+              </entry>
+              <entry ixia_locid="255">
+                <p ixia_locid="256"><option ixia_locid="257">Y</option> or <option ixia_locid="258">N</option></p>
+              </entry>
+              <entry ixia_locid="259"/>
+            </row> -->
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="261" class="- topic/entry ">
+                <p ixia_locid="262" class="- topic/p "> LOGICAL_INTERFACE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="263" class="- topic/entry ">
+                <p ixia_locid="264" class="- topic/p "><option ixia_locid="265" class="+ topic/keyword pr-d/option ">LOGICAL_INTERFACE_</option><i ixia_locid="266" class="+ topic/ph hi-d/i ">n</i></p>
+              </entry>
+              <entry colname="col3" ixia_locid="269" class="- topic/entry ">
+                <p ixia_locid="267" class="- topic/p "> (where <i ixia_locid="268" class="+ topic/ph hi-d/i ">n</i> is an interface number,
+                  beginning with 1)</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="271" class="- topic/entry ">
+                <p ixia_locid="272" class="- topic/p "> GATEWAY</p>
+              </entry>
+              <entry colname="col2" ixia_locid="273" class="- topic/entry ">
+                <p ixia_locid="274" class="- topic/p ">(IPv4 address)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="275" class="- topic/entry ">
+                <p ixia_locid="276" class="- topic/p ">This key can be  specified in the MGMT_NETWORK section or OAM_NETWORK section,
+                  but not both</p>
+              </entry>
+            </row> 
+            <row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="398" class="- topic/entry ">
+                <p ixia_locid="399" class="- topic/p "><nameliteral ixia_locid="435" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[PXEBOOT_NETWORK]</nameliteral></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="279" class="- topic/entry ">
+                <p ixia_locid="280" class="- topic/p "> PXEBOOT_CIDR</p>
+              </entry>
+              <entry colname="col2" ixia_locid="281" class="- topic/entry ">
+                <p ixia_locid="282" class="- topic/p ">(network/mask)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="283" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="400" class="- topic/entry ">
+                <p ixia_locid="401" class="- topic/p "><nameliteral ixia_locid="439" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[LICENSING]</nameliteral></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="294" class="- topic/entry ">
+                <p ixia_locid="295" class="- topic/p "> LICENSE_FILE_NAME</p>
+              </entry>
+              <entry colname="col2" ixia_locid="296" class="- topic/entry ">
+                <p ixia_locid="297" class="- topic/p ">(filename or full path to license file)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="298" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="405" class="- topic/entry ">
+                <p ixia_locid="406" class="- topic/p "><nameliteral ixia_locid="440" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[SECURITY]</nameliteral></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="301" class="- topic/entry ">
+                <p ixia_locid="302" class="- topic/p "> SSL_REST_API</p>
+              </entry>
+              <entry colname="col2" ixia_locid="303" class="- topic/entry ">
+                <p ixia_locid="304" class="- topic/p "><option ixia_locid="305" class="+ topic/keyword pr-d/option ">Y</option> or <option ixia_locid="306" class="+ topic/keyword pr-d/option ">N</option></p>
+              </entry>
+              <entry colname="col3" ixia_locid="307" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="309" class="- topic/entry ">
+                <p ixia_locid="310" class="- topic/p "> SELF_SIGNED</p>
+              </entry>
+              <entry colname="col2" ixia_locid="311" class="- topic/entry ">
+                <p ixia_locid="312" class="- topic/p "><option ixia_locid="313" class="+ topic/keyword pr-d/option ">Y</option> or <option ixia_locid="314" class="+ topic/keyword pr-d/option ">N</option></p>
+              </entry>
+              <entry colname="col3" ixia_locid="315" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="317" class="- topic/entry ">
+                <p ixia_locid="318" class="- topic/p "> CERTIFICATE_FILE_NAME</p>
+              </entry>
+              <entry colname="col2" ixia_locid="319" class="- topic/entry ">
+                <p ixia_locid="320" class="- topic/p ">(filename or full path to license file)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="321" class="- topic/entry ">
+                <p ixia_locid="322" class="- topic/p ">Required only if SELF_SIGNED=N</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="324" class="- topic/entry ">
+                <p ixia_locid="325" class="- topic/p "> CERTIFICATE_PASSWORD</p>
+              </entry>
+              <entry colname="col2" ixia_locid="326" class="- topic/entry ">
+                <p ixia_locid="327" class="- topic/p ">(string)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="328" class="- topic/entry ">
+                <p ixia_locid="329" class="- topic/p ">Required if CERTIFICATE_FILE_NAME is password-protected</p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="407" class="- topic/entry ">
+                <p ixia_locid="408" class="- topic/p "><nameliteral ixia_locid="436" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[BOARD_MANAGEMENT_NETWORK]</nameliteral></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="332" class="- topic/entry ">
+                <p ixia_locid="333" class="- topic/p "> VLAN</p>
+              </entry>
+              <entry colname="col2" ixia_locid="334" class="- topic/entry ">
+                <p ixia_locid="335" class="- topic/p ">(VLAN id)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="336" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="338" class="- topic/entry ">
+                <p ixia_locid="339" class="- topic/p "> MTU</p>
+              </entry>
+              <entry colname="col2" ixia_locid="340" class="- topic/entry ">
+                <p ixia_locid="341" class="- topic/p ">(MTU size)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="342" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="344" class="- topic/entry ">
+                <p ixia_locid="345" class="- topic/p "> SUBNET</p>
+              </entry>
+              <entry colname="col2" ixia_locid="346" class="- topic/entry ">
+                <p ixia_locid="347" class="- topic/p ">(network/mask)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="348" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="409" class="- topic/entry ">
+                <p ixia_locid="410" class="- topic/p "><nameliteral ixia_locid="437" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[CEILOMETER]</nameliteral></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="351" class="- topic/entry ">
+                <p ixia_locid="352" class="- topic/p "> TIME_TO_LIVE</p>
+              </entry>
+              <entry colname="col2" ixia_locid="353" class="- topic/entry ">
+                <p ixia_locid="354" class="- topic/p ">(seconds)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="355" class="- topic/entry "/>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" namest="col1" nameend="col3" ixia_locid="411" class="- topic/entry ">
+                <p ixia_locid="412" class="- topic/p "><nameliteral ixia_locid="438" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">[AUTHENTICATION]</nameliteral></p>
+              </entry>
+            </row>
+            <row class="- topic/row ">
+              <entry colname="col1" ixia_locid="358" class="- topic/entry ">
+                <p ixia_locid="359" class="- topic/p "> ADMIN_PASSWORD</p>
+              </entry>
+              <entry colname="col2" ixia_locid="360" class="- topic/entry ">
+                <p ixia_locid="361" class="- topic/p ">(string)</p>
+              </entry>
+              <entry colname="col3" ixia_locid="362" class="- topic/entry "/>
+            </row>
+            
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="363" class="- topic/p ">The following example is provided for reference.</p>
+      <codeblock ixia_locid="364" class="+ topic/pre pr-d/codeblock ">[STORAGE]
+; Storage Configuration
+CINDER_BACKEND=lvm
+DATABASE_STORAGE=20
+IMAGE_STORAGE=10
+BACKUP_STORAGE=42
+CINDER_DEVICE=/dev/sdb
+CINDER_STORAGE=110
+
+;LOGICAL_INTERFACE_&lt;number&gt;
+;  LAG_INTERFACE   &lt;Y/N&gt;    
+;  LAG_MODE        One of 1) Active-backup policy
+;                         2) Balanced XOR policy
+;                         4) 802.3ad (LACP) policy
+;                  Interface for pxebooting can only be LACP
+;  INTERFACE_MTU   &lt;mtu size&gt;      
+;  INTERFACE_PORTS &lt;comma separated list of ethernet interfaces&gt;
+
+[LOGICAL_INTERFACE_1]
+LAG_INTERFACE=N
+;LAG_MODE=
+INTERFACE_MTU=1500
+INTERFACE_PORTS=eth1
+
+[LOGICAL_INTERFACE_2]
+LAG_INTERFACE=N
+;LAG_MODE=
+INTERFACE_MTU=1500
+INTERFACE_PORTS=eth0
+
+[MGMT_NETWORK]
+; Management Network Configuration
+CIDR=192.168.204.0/24
+DYNAMIC_ALLOCATION=Y
+IP_START_ADDRESS=192.168.204.2
+IP_END_ADDRESS=192.168.204.99
+LOGICAL_INTERFACE=LOGICAL_INTERFACE_1
+
+;[INFRA_NETWORK]
+; Infrastructure Network Configuration
+
+[OAM_NETWORK]
+; External OAM Network Configuration
+CIDR=128.224.150.0/23
+GATEWAY=128.224.150.1
+IP_FLOATING_ADDRESS=128.224.151.212
+IP_UNIT_0_ADDRESS=128.224.151.192
+IP_UNIT_1_ADDRESS=128.224.151.193
+LOGICAL_INTERFACE=LOGICAL_INTERFACE_2
+
+[DNS]
+; DNS Configuration
+NAMESERVER_1=128.224.144.130
+NAMESERVER_2=8.8.8.8
+NAMESERVER_3=8.8.4.4
+
+[NTP]
+; NTP Configuration
+NTP_SERVER_1=0.pool.ntp.org
+NTP_SERVER_2=1.pool.ntp.org
+NTP_SERVER_3=2.pool.ntp.org
+
+[LICENSING]
+LICENSE_FILE_NAME=license.lic
+
+[SECURITY]
+ENABLE_HTTPS=N
+
+[AUTHENTICATION]
+ADMIN_PASSWORD=admin
+</codeblock>
+    </section>
+  </refbody>
+</reference-wr>

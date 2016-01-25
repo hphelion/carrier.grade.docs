@@ -1,0 +1,896 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><referable-content xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1419271183630" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic concept)                            (topic concept glossentry)                            (topic concept glossgroup)                            (topic reference)                            (topic task)                            (topic hi-d)                             (topic ut-d)                             (topic indexing-d)                            (topic hazard-d)                            (topic abbrev-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                             (topic task strictTaskbody-c)                             a(loc  ixia_locid)                            (topic strictPara-c)                            (topic strictSection-c)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic referable-content/referable-content ">
+<title ixia_locid="379" class="- topic/title ">[RC concept] HP Helion OpenStack Carrier Grade Controller Configuration Script [main
+        stream]</title>
+<rcbody class="- topic/body referable-content/body ">
+        <shortdesc id="shortdesc" ixia_locid="2" class="- topic/shortdesc ">The config_controller script presents a series of prompts for
+            initial configuration of the HP Helion OpenStack Carrier Grade system.</shortdesc>
+        <prolog id="prolog_N10017_N1000E_N10001" class="- topic/prolog ">
+            <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+            <author ixia_locid="4" class="- topic/author ">Pedro Sanchez</author>
+        </prolog>
+        <refbody id="refbody_N10026_N1000E_N10001" class="- topic/body        reference/refbody ">
+            <section id="section_N10022_N1001F_N10001" ixia_locid="266" class="- topic/section ">
+                <note id="note_N1003D_N10027_N10024_N10001" ixia_locid="363" class="- topic/note ">
+                    <p ixia_locid="364" class="- topic/p ">In many cases, you can accept the default values. Prompts
+                        requiring special attention are marked with an asterisk (*).</p>
+                </note>
+                <p id="apply_or_abort" ixia_locid="371" class="- topic/p ">The configuration is applied only after all options have been
+                    specified. You can safely abort the configuration process at any time by
+                    pressing the <nameliteral ixia_locid="373" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Q</nameliteral> key.</p>
+                <note id="note_config_file_option" ixia_locid="552" class="- topic/note ">
+                    <p ixia_locid="553" class="- topic/p "><draft-comment author="jowens" ixia_locid="554" translate="no" dir="ltr" class="- topic/draft-comment ">US62804
+                            mention controller configuration input file:</draft-comment>As an
+                        alternative to interacting with the script, you can prepare and use a <xref href="jow1441306845507.xml" ixia_locid="555" class="- topic/xref ">controller configuration input
+                        file</xref>.</p>
+                </note>
+                <table id="table_vs3_pcb_3p" class="- topic/table ">
+                    <tgroup cols="2" class="- topic/tgroup ">
+                        <colspec colname="col1" colwidth="1.13*" class="- topic/colspec "/>
+                        <colspec colname="col2" colwidth="1*" class="- topic/colspec "/>
+                        <thead class="- topic/thead ">
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="253" class="- topic/entry ">
+                                    <p ixia_locid="254" class="- topic/p ">Prompt</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="255" class="- topic/entry ">
+                                    <p ixia_locid="256" class="- topic/p ">Comment</p>
+                                </entry>
+                            </row>
+                        </thead>
+                        <tbody class="- topic/tbody ">
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="534" class="- topic/entry ">
+                                    <p id="date_time_section" ixia_locid="535" class="- topic/p "><nameliteral ixia_locid="536" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">System date and time:</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="464" class="- topic/entry ">
+                                    <p id="date_time_prompt" ixia_locid="465" class="- topic/p ">Is the current date and
+                                        time correct? [y/n]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="466" class="- topic/entry ">
+                                    <p id="date_time" ixia_locid="467" class="- topic/p ">Confirmation for the system
+                                        date and time.</p>
+                                    <p id="date_time_Install" ixia_locid="20" class="- topic/p ">The controller
+                                        periodically synchronizes the local system date and time
+                                        with reference time servers configured later in the script.
+                                        If the local time is not within about 15 minutes of the
+                                        reference UTC time, the controller does not make the
+                                        synchronization.</p>
+                                    
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="468" class="- topic/entry ">
+                                    <p id="date_time_change_prompt" ixia_locid="469" class="- topic/p ">Enter new system date and time (UTC) in YYYY-MM-DDD HH:MM:SS format:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="470" class="- topic/entry ">
+                                    <p id="date_time_change" ixia_locid="471" class="- topic/p ">The date and time to
+                                        apply locally, if the current system setting needs updating.                                   incorrect.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="537" class="- topic/entry ">
+                                    <p id="storage_section" ixia_locid="538" class="- topic/p "><nameliteral ixia_locid="539" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Storage:</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="26" class="- topic/entry ">
+                                    <p id="backend_prompt" ixia_locid="372" class="- topic/p ">Cinder storage backend
+                                        [lvm]*:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="374" class="- topic/entry ">
+                                    <p id="backend" ixia_locid="259" class="- topic/p ">The storage resource type for
+                                        VMs and VM data.</p>
+                                    <note id="note_N10109_N100AF_N100A2_N1006D_N10041_N1003D_N10027_N10024_N10001" ixia_locid="359" type="caution" class="- topic/note ">
+                                        <p ixia_locid="360" class="- topic/p ">The Cinder storage type cannot be
+                                            changed after the system is installed.</p>
+                                    </note>
+                                    <ul id="backend_Quick" class="- topic/ul ">
+                                        <li ixia_locid="260" class="- topic/li ">
+                                            <p ixia_locid="261" class="- topic/p ">For a system with storage nodes,
+                                                type <userinput ixia_locid="262" class="+ topic/ph sw-d/userinput ">ceph</userinput>.</p>
+                                        </li>
+                                        <li ixia_locid="263" class="- topic/li ">
+                                            <p ixia_locid="264" class="- topic/p ">For a system without storage nodes,
+                                                type <userinput ixia_locid="265" class="+ topic/ph sw-d/userinput ">lvm</userinput>.
+                                                (This uses shares on the controller secondary
+                                                disk).</p>
+                                        </li>
+                                    </ul>
+                                    <dl id="backend_Install" class="- topic/dl ">
+                                        <dlentry ixia_locid="29" class="- topic/dlentry ">
+                                            <dt ixia_locid="30" class="- topic/dt ">lvm</dt>
+                                            <dd ixia_locid="31" class="- topic/dd ">
+                                                <p ixia_locid="32" class="- topic/p ">Provides a small-scale storage
+                                                  solution using LVM/iSCSI shares on the controller
+                                                  node. Note that this option does not use or
+                                                  support storage nodes in the HP Helion OpenStack Carrier Grade
+                                                  cluster.</p>
+                                            </dd>
+                                        </dlentry>
+                                        <dlentry ixia_locid="33" class="- topic/dlentry ">
+                                            <dt ixia_locid="34" class="- topic/dt ">ceph</dt>
+                                            <dd ixia_locid="35" class="- topic/dd ">
+                                                <p ixia_locid="36" class="- topic/p ">Provides a large-scale storage
+                                                  solution using a Ceph storage system. This option
+                                                  uses storage nodes in the HP Helion OpenStack Carrier Grade
+                                                  cluster.</p>
+                                            </dd>
+                                        </dlentry>
+                                    </dl>
+                                    <note id="note_N1012D_N100C7_N100BA_N10086_N1005A_N10056_N10027_N10024_N10001" ixia_locid="376" class="- topic/note ">
+                                        <p ixia_locid="377" class="- topic/p ">For Ceph storage, an infrastructure
+                                            network is required.</p>
+                                    </note>
+                                    <p id="local_storage" ixia_locid="425" class="- topic/p ">After the system is installed, you can selectively implement
+                                        local compute node storage for VM data. For more
+                                        information, see the <cite ixia_locid="426" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration
+                                            Guide: Storage Planning</cite>.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="318" class="- topic/entry ">
+                                    <p id="db_storage_prompt" ixia_locid="320" class="- topic/p ">Database storage in
+                                        GiB [20]*:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="322" class="- topic/entry ">
+                                    <p ixia_locid="324" class="- topic/p "><ph id="db_storage" ixia_locid="380" class="- topic/ph ">The storage allotment for the OpenStack
+                                        database. As a reference point, a system with six hosts, 40
+                                        VMs and 120 tenant networks requires about 9 GiB. </ph><ph id="db_storage_Install" ixia_locid="326" class="- topic/ph "> For more details,
+                                            see the <cite ixia_locid="328" class="- topic/cite ">HP Helion OpenStack Carrier Grade
+                                                Administration Guide: Storage
+                                        Planning</cite>.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="46" class="- topic/entry ">
+                                    <p id="image_storage_prompt" ixia_locid="47" class="- topic/p ">Image storage in
+                                        GiB [19]*:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="48" class="- topic/entry ">
+                                    <p id="image_storage" ixia_locid="49" class="- topic/p ">The size of the partition to use for image
+                                        storage. Consider the expected number of images and their
+                                        storage requirements. A minimum of 10 GiB is recommended.
+                                        The prompt shows the current available disk space.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="319" class="- topic/entry ">
+                                    <p id="backup_storage_prompt" ixia_locid="321" class="- topic/p ">Backup storage in
+                                        GiB [20]*:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="323" class="- topic/entry ">
+                                    <p ixia_locid="325" class="- topic/p "><ph id="backup_storage" ixia_locid="381" class="- topic/ph ">The storage allotment for backup operations.
+                                        To ensure enough space for at least one backup, this must be
+                                        at least 20 GiB larger than the <nameliteral ixia_locid="361" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Image storage</nameliteral> allotment.</ph>
+                                            <ph id="backup_storage_Install" ixia_locid="327" class="- topic/ph "> For details,
+                                            see the <cite ixia_locid="329" class="- topic/cite ">HP Helion OpenStack Carrier Grade
+                                                Administration Guide: Storage
+                                        Planning</cite>.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="205" class="- topic/entry ">
+                                    <p id="vol_storage_loc_prompt" ixia_locid="207" class="- topic/p ">Volume storage
+                                        location [0]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="209" class="- topic/entry ">
+                                    <p ixia_locid="211" class="- topic/p "><ph id="vol_storage_loc_1" ixia_locid="382" class="- topic/ph ">(For LVM storage only) The disk to use for a
+                                        storage volume.</ph> <ph id="vol_storage_loc_Install_1" ixia_locid="284" class="- topic/ph ">A
+                                            numbered list of available disks is displayed.</ph> <ph id="vol_storage_loc_2" ixia_locid="383" class="- topic/ph ">Type
+                                                the number for the disk you want to assign.</ph> <ph id="vol_storage_loc_Install_2" ixia_locid="285" class="- topic/ph ">Note that the
+                                            primary disk is not included in this list.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="206" class="- topic/entry ">
+                                    <p id="vol_storage_prompt" ixia_locid="208" class="- topic/p ">Volume storage in
+                                        GiB [500]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="210" class="- topic/entry ">
+                                    <p id="vol_storage" ixia_locid="212" class="- topic/p ">(For LVM storage only) The storage allotment
+                                        for all volumes used by the guest instances. The prompt
+                                        shows the current available disk space.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="472" class="- topic/entry ">
+                                    <p id="pxeboot_network_section" ixia_locid="473" class="- topic/p ">
+                                        <nameliteral ixia_locid="474" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">PXEBoot
+                                            Network:</nameliteral><draft-comment author="jowens" ixia_locid="525" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 section added, although US62804
+                                            focuses on getting settings from a config file; the
+                                            option to use a separate PXE boot network was added
+                                            under US58516 Regions support, and US62804 incidentally
+                                            makes this a choice in the config_controller
+                                            script</draft-comment>
+                                    </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="475" class="- topic/entry ">
+                                    <p id="pxeboot_network_prompt" ixia_locid="476" class="- topic/p ">Configure a separate PXEBoot
+                                        network [y/N]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="477" class="- topic/entry ">
+                                    <p id="pxeboot_network" ixia_locid="478" class="- topic/p "><ph id="pxeboot_network_qs_ig" ixia_locid="550" class="- topic/ph ">An option to
+                                            configure a dedicated network for PXE booting. This is
+                                            for use where the management network must be
+                                            VLAN-tagged.</ph>
+                                        <ph id="pxeboot_network_ig" ixia_locid="551" class="- topic/ph ">If this option
+                                            is selected, then the PXE boot network and the
+                                            management network share the same physical interface
+                                            (specified later, during management network setup), and
+                                            the management network uses VLAN tagging.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="479" class="- topic/entry ">
+                                    <p id="pxeboot_network_subnet_prompt" ixia_locid="480" class="- topic/p ">PXEBoot
+                                        subnet [192.168.202.0/24]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="481" class="- topic/entry ">
+                                    <p id="pxeboot_network_subnet" ixia_locid="482" class="- topic/p ">The subnet to
+                                        use for the PXE boot network.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="483" class="- topic/entry ">
+                                    <p id="mgmt_network_section" ixia_locid="484" class="- topic/p "><nameliteral ixia_locid="485" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Management
+                                            Network:</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="55" class="- topic/entry ">
+                                    <p id="mgmt_network_LAG_prompt" ixia_locid="56" class="- topic/p ">Management
+                                        interface link aggregation [y/N]*:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="57" class="- topic/entry ">
+                                    <p ixia_locid="286" class="- topic/p "><ph id="mgmt_network_LAG" ixia_locid="384" class="- topic/ph ">An option to use LAG for the management network.</ph>
+                                        <ph id="mgmt_network_LAG_Quick" ixia_locid="340" class="- topic/ph ">If using
+                                            LAG, you are asked for the name of the bonding
+                                            interface, the bonding policy, and the name of an
+                                            additional physical interface.</ph></p>
+                                    <p id="mgmt_network_LAG_Install" ixia_locid="59" class="- topic/p ">If using LAG,
+                                        you are asked for the name of the bonding interface to be
+                                        created, the name of an additional physical interface to use
+                                        for bonding, and the <xref href="jow1404333496893.xml" ixia_locid="518" class="- topic/xref "/> to use.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="213" class="- topic/entry ">
+                                    <p id="mgmt_if_prompt" ixia_locid="217" class="- topic/p ">Management Interface
+                                        [eth1]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="221" class="- topic/entry ">
+                                    <p id="mgmt_if_Quick" ixia_locid="292" class="- topic/p ">The controller interface
+                                        used for the management network.</p>
+                                    <p id="mgmt_if_Install" ixia_locid="225" class="- topic/p ">The name of the
+                                        physical interface to use to connect to the internal
+                                        management network in non-LAG mode.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="214" class="- topic/entry ">
+                                    <p id="mgmt_if_MTU_prompt" ixia_locid="218" class="- topic/p ">Management Interface
+                                        MTU [1500]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="222" class="- topic/entry ">
+                                    <p id="mgmt_if_MTU" ixia_locid="226" class="- topic/p ">The maximum transmission unit for the
+                                        internal management network. The default value is 1500. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="540" class="- topic/entry ">
+                                    <p id="mgmt_vlan_id_prompt" ixia_locid="541" class="- topic/p ">Management VLAN
+                                        Identifier []:<draft-comment author="jowens" ixia_locid="542" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 new</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="543" class="- topic/entry ">
+                                    <p id="mgmt_vlan_id" ixia_locid="544" class="- topic/p ">The VLAN ID for the
+                                        management network. This is required if a PXE boot network
+                                        has been configured.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="545" class="- topic/entry ">
+                                    <p id="mgmt_subnet_prompt" ixia_locid="546" class="- topic/p ">Management subnet [192.168.204.0/24]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="547" class="- topic/entry ">
+                                    <p ixia_locid="548" class="- topic/p "><ph id="mgmt_subnet" ixia_locid="385" class="- topic/ph ">The
+                                            subnet to use for the internal management network. You
+                                            can safely accept the default value assigned to this
+                                            internal network.</ph>
+                                        <ph id="mgmt_subnet_Install" ixia_locid="293" class="- topic/ph "> The suggested
+                                            value belongs to the 16-bit block of private networks
+                                            specified in RFC 1918. Use the suggested value, or any
+                                            other 16-bit private address block.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="490" class="- topic/entry ">
+                                    <p id="mgmt_subnet_entire_prompt" ixia_locid="491" class="- topic/p ">Use entire
+                                        management subnet [Y/n]:<draft-comment author="jowens" ixia_locid="549" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 new</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="492" class="- topic/entry ">
+                                    <p id="mgmt_subnet_entire" ixia_locid="520" class="- topic/p ">An option to reserve
+                                        all or part of the management subnet for allocation by
+                                        HP Helion OpenStack Carrier Grade. By default, the entire subnet is
+                                        available.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="494" class="- topic/entry ">
+                                    <p id="mgmt_subnet_start_prompt" ixia_locid="495" class="- topic/p ">Management
+                                        network start address [192.168.204.2]:<draft-comment author="jowens" ixia_locid="527" translate="no" dir="ltr" class="- topic/draft-comment ">US62804
+                                            new</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="496" class="- topic/entry ">
+                                    <p id="mgmt_subnet_start" ixia_locid="497" class="- topic/p ">The start of the
+                                        management IP address range owned by HP Helion OpenStack Carrier Grade.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="498" class="- topic/entry ">
+                                    <p id="mgmt_subnet_end_prompt" ixia_locid="499" class="- topic/p ">Management
+                                        network end address [192.168.204.254]:<draft-comment author="jowens" ixia_locid="528" translate="no" dir="ltr" class="- topic/draft-comment ">US62804
+                                            new</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="500" class="- topic/entry ">
+                                    <p id="mgmt_subnet_end" ixia_locid="521" class="- topic/p ">The end of the
+                                        management IP address range owned by HP Helion OpenStack Carrier Grade. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="502" class="- topic/entry ">
+                                    <p id="mgmt_ip_dynamic_prompt" ixia_locid="503" class="- topic/p ">Dynamic IP
+                                        address allocation [Y/n]:<draft-comment author="jowens" ixia_locid="529" translate="no" dir="ltr" class="- topic/draft-comment ">US62814 new</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="504" class="- topic/entry ">
+                                    <p id="mgmt_ip_dynamic" ixia_locid="505" class="- topic/p ">An option to use
+                                        dynamic or static IP addressing on the management and
+                                        infrastructure networks. By default, dynamic addressing is
+                                        used.</p>
+                                    <note id="note_N103D1_N103C7_N103B2_N1008E_N10062_N1005E_N1002B_N10027_N1000F_N10001" ixia_locid="556" class="- topic/note ">
+                                        <p ixia_locid="557" class="- topic/p ">This setting is also applied to the infrastructure
+                                            network.</p>
+                                    </note>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="271" class="- topic/entry ">
+                                    <p id="bd_mgmt_network_section" ixia_locid="278" class="- topic/p "><nameliteral ixia_locid="349" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Board
+                                            Management Control Network:</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="235" class="- topic/entry ">
+                                    <p id="config_bd_mgmt_prompt" ixia_locid="236" class="- topic/p ">Configure board
+                                        management control network [y/N]:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="237" class="- topic/entry ">
+                                    <p id="config_bd_mgmt_Quick" ixia_locid="294" class="- topic/p ">An option to use
+                                        an internal baseboard management network for hosts equipped
+                                        with iLO3, iLO4 or Quanta modules.</p>
+                                    <p id="config_bd_mgmt_Install" ixia_locid="238" class="- topic/p ">Select whether
+                                        to configure an internal baseboard management network. This
+                                        option is for use with hosts equipped with iLO (Integrated
+                                        Lights-Out) modules.</p>
+                                    <note id="config_bd_mgmt_OAM_note" ixia_locid="456" class="- topic/note ">
+                                        <p ixia_locid="457" class="- topic/p ">To use an external baseboard management network
+                                            (accessible from the OAM network), type
+                                                <userinput ixia_locid="458" class="+ topic/ph sw-d/userinput ">N</userinput>. For more information, see
+                                            the <cite ixia_locid="459" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration Guide: The
+                                                Board Management Network.</cite></p>
+                                    </note>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="239" class="- topic/entry ">
+                                    <p id="bd_mgmt_vlan_prompt" ixia_locid="240" class="- topic/p ">Board management
+                                        control VLAN Identifier []:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="241" class="- topic/entry ">
+                                    <p id="bd_mgmt_vlan_Quick" ixia_locid="295" class="- topic/p ">The VLAN ID designated for
+                                        the board management control network.</p>
+                                    <p id="bd_mgmt_vlan_Install" ixia_locid="242" class="- topic/p ">The VLAN number
+                                        designated for board management control traffic on the
+                                        management network. For more information, see the <cite ixia_locid="362" class="- topic/cite ">HP Helion OpenStack Carrier Grade Administration Guide:
+                                            Network Planning</cite>. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="243" class="- topic/entry ">
+                                    <p id="bd_mgmt_MTU_prompt" ixia_locid="244" class="- topic/p ">Board management
+                                        control interface MTU [1496]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="245" class="- topic/entry ">
+                                    <p ixia_locid="227" class="- topic/p "><ph id="bd_mgmt_MTU" ixia_locid="386" class="- topic/ph ">The
+                                            maximum transmission unit for the board management
+                                            control network. This must be at least 4 bytes less than
+                                            the management network MTU.</ph>
+                                        <ph id="bd_mgmt_Install" ixia_locid="368" class="- topic/ph "> If the management
+                                            network MTU is greater than 1504, then the board
+                                            management control MTU default value is 1500. Otherwise,
+                                            the default value is 1496.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="246" class="- topic/entry ">
+                                    <p id="bd_mgmt_subnet_prompt" ixia_locid="247" class="- topic/p ">Board management
+                                        control subnet [192.168.203.0/24]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="248" class="- topic/entry ">
+                                    <p ixia_locid="249" class="- topic/p "><ph id="bd_mgmt_subnet" ixia_locid="387" class="- topic/ph ">The
+                                            subnet to use for the board management control network.
+                                            You can safely accept the default value assigned to this
+                                            internal network.</ph>
+                                        <ph id="bd_mgmt_subnet_Install" ixia_locid="296" class="- topic/ph "> The
+                                            suggested value belongs to the 16-bit block of private
+                                            networks specified in RFC 1918. Use the suggested value,
+                                            or any other 16-bit private address block.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="272" class="- topic/entry ">
+                                    <p id="infra_network_section" ixia_locid="279" class="- topic/p "><nameliteral ixia_locid="350" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Infrastructure
+                                            Network:</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="94" class="- topic/entry ">
+                                    <p id="config_infra_if_prompt" ixia_locid="95" class="- topic/p ">Configure an
+                                        infrastructure interface [y/N]:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="96" class="- topic/entry ">
+                                    <p id="config_infra_if_Quick" ixia_locid="297" class="- topic/p ">An option to use an
+                                        infrastructure network.</p>
+                                    <p id="config_infra_if_Install" ixia_locid="97" class="- topic/p ">Select whether
+                                        to configure an Ethernet interface for access to an
+                                        infrastructure network.</p>
+                                    <p id="config_infra_if" ixia_locid="378" class="- topic/p ">For a system using Ceph storage, an
+                                        infrastructure network is required.</p>
+                                    <note id="infra_no_change_after_install" ixia_locid="417" type="caution" class="- topic/note ">
+                                        <p ixia_locid="418" class="- topic/p ">This choice cannot be changed after the system is
+                                            installed.</p>
+                                    </note>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="100" class="- topic/entry ">
+                                    <p id="infra_if_LAG_prompt" ixia_locid="101" class="- topic/p ">Infrastructure
+                                        interface link aggregation [y/N]:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="102" class="- topic/entry ">
+                                    <p ixia_locid="298" class="- topic/p "><ph id="infra_if_LAG" ixia_locid="388" class="- topic/ph ">An
+                                            option to use LAG for the infrastructure network.</ph>
+                                        <ph id="infra_if_LAG_Quick" ixia_locid="341" class="- topic/ph ">If using LAG,
+                                            you are asked for the name of the bonding interface, the
+                                            bonding policy, and the name of an additional physical
+                                            interface..</ph></p>
+                                    <p id="infra_if_LAG_Install" ixia_locid="104" class="- topic/p ">If using LAG, you
+                                        are asked for the name of the bonding interface to be
+                                        created, the name of an additional physical interface to use
+                                        for bonding, and the <xref href="jow1404333496893.xml" ixia_locid="519" class="- topic/xref "/> to use.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="394" class="- topic/entry ">
+                                    <p id="infra_if_prompt" ixia_locid="107" class="- topic/p ">Infrastructure
+                                        interface []:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="397" class="- topic/entry ">
+                                    <p id="infra_if_Quick" ixia_locid="300" class="- topic/p "><ph id="infra_if_Quick_all" ixia_locid="421" class="- topic/ph ">The controller
+                                            interface used for the infrastructure network.</ph>
+                                        <ph id="infra_if_Quick_15.x" ixia_locid="422" class="- topic/ph ">You can optionally share the interface assigned for the
+                                            management or OAM network.</ph></p>
+                                    <p id="infra_if_Install" ixia_locid="109" class="- topic/p "><ph id="infra_if_install_14.10" ixia_locid="419" class="- topic/ph ">The name of
+                                            the physical interface to use to connect to the
+                                            infrastructure network in non-LAG mode.</ph>
+                                        <ph id="dedicated_or_shared_interface" ixia_locid="416" class="- topic/ph ">You
+                                            can use a dedicated interface, or share the interface
+                                            used for the management or OAM network. For a shared
+                                            interface, a VLAN ID is required.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="395" class="- topic/entry ">
+                                    <p id="infra_if_vlan_prompt" ixia_locid="400" class="- topic/p ">Configure an
+                                        infrastructure VLAN [y/N]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="398" class="- topic/entry ">
+                                    <p id="infra_if_vlan" ixia_locid="462" class="- topic/p ">An option to implement
+                                        this network on the selected interface using VLAN tagging.
+                                        If the same interface has already been selected for an
+                                        untagged network, you must answer 'y' or abort the
+                                        configuration. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="396" class="- topic/entry ">
+                                    <p id="infra_if_vlan_id_prompt" ixia_locid="404" class="- topic/p ">Infrastructure
+                                        VLAN identifier []:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="399" class="- topic/entry ">
+                                    <p id="infra_vlan_id" ixia_locid="406" class="- topic/p ">The VLAN ID, if VLAN
+                                        tagging is used.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="215" class="- topic/entry ">
+                                    <p id="infra_if_MTU_prompt" ixia_locid="219" class="- topic/p ">Infrastructure
+                                        interface MTU [1500]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="223" class="- topic/entry ">
+                                    <p id="infra_if_MTU" ixia_locid="228" class="- topic/p ">The maximum transmission unit for the
+                                        infrastructure network. The default value is 1500. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="110" class="- topic/entry ">
+                                    <p id="infra_subnet_prompt" ixia_locid="111" class="- topic/p ">Infrastructure
+                                        subnet [192.168.205.0/24]:<draft-comment author="jowens" ixia_locid="530" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 new</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="112" class="- topic/entry ">
+                                    <p ixia_locid="113" class="- topic/p "><ph id="infra_subnet" ixia_locid="389" class="- topic/ph ">The
+                                            subnet to use for the infrastructure network. You can
+                                            safely accept the default value assigned to this
+                                            internal network.</ph>
+                                        <ph id="infra_subnet_Install" ixia_locid="301" class="- topic/ph ">The suggested
+                                            value belongs to the 16-bit block of private networks
+                                            specified in RFC 1918. Use the suggested value, or any
+                                            other 16-bit private address block.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="506" class="- topic/entry ">
+                                    <p id="infra_subnet_entire_prompt" ixia_locid="507" class="- topic/p ">Use entire
+                                        infrastructure subnet [Y/n]:<draft-comment author="jowens" ixia_locid="531" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 new</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="508" class="- topic/entry ">
+                                    <p id="infra_subnet_entire" ixia_locid="522" class="- topic/p ">An option to reserve all or part of the
+                                        infrastructure subnet for allocation by HP Helion OpenStack Carrier Grade. By
+                                        default, the entire subnet is available.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="510" class="- topic/entry ">
+                                    <p id="infra_subnet_start_prompt" ixia_locid="511" class="- topic/p ">Infrastructure network start address
+                                            [192.168.205.2]:<draft-comment author="jowens" ixia_locid="532" translate="no" dir="ltr" class="- topic/draft-comment ">US62804 new</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="512" class="- topic/entry ">
+                                    <p id="infra_subnet_start" ixia_locid="523" class="- topic/p ">The start of the infrastructure IP address
+                                        range owned by HP Helion OpenStack Carrier Grade. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="514" class="- topic/entry ">
+                                    <p id="infra_subnet_end_prompt" ixia_locid="515" class="- topic/p ">Infrastructure
+                                        network end address [192.168.205.254]:<draft-comment author="jowens" ixia_locid="533" translate="no" dir="ltr" class="- topic/draft-comment ">US62804
+                                            new</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="516" class="- topic/entry ">
+                                    <p id="infra_subnet_end" ixia_locid="524" class="- topic/p ">The end of the infrastructure IP address
+                                        range owned by HP Helion OpenStack Carrier Grade. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="273" class="- topic/entry ">
+                                    <p id="ext_OAM_section" ixia_locid="280" class="- topic/p "><nameliteral ixia_locid="351" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">External OAM
+                                            Network:</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="135" class="- topic/entry ">
+                                    <p id="ext_OAM_LAG_prompt" ixia_locid="136" class="- topic/p ">External OAM
+                                        interface Link aggregation [y/N]:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="137" class="- topic/entry ">
+                                    <p ixia_locid="302" class="- topic/p "><ph id="ext_OAM_LAG" ixia_locid="390" class="- topic/ph ">An option to use LAG for the external OAM
+                                        network.</ph> <ph id="ext_OAM_LAG_Quick" ixia_locid="342" class="- topic/ph ">If using
+                                            LAG, you are asked for the name of the bonding
+                                            interface, the names of two physical interfaces to use,
+                                            and the bonding policy.</ph></p>
+                                    <p id="ext_OAM_LAG_Install" ixia_locid="139" class="- topic/p ">If using LAG, you are
+                                        asked for the name of the bonding interface to be created,
+                                        and the name of the two physical interfaces to use for
+                                        bonding. Additional questions about the LAG options are also
+                                        asked. For details, refer to <xref href="jow1404333496893.xml" ixia_locid="140" class="- topic/xref "/>.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="408" class="- topic/entry ">
+                                    <p id="ext_OAM_if_prompt" ixia_locid="142" class="- topic/p ">External OAM
+                                        interface [eth0]:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="411" class="- topic/entry ">
+                                    <p id="ext_OAM_if_Quick" ixia_locid="304" class="- topic/p "><ph id="ext_OAM_if_Quick_all" ixia_locid="423" class="- topic/ph ">The controller
+                                            interface used for the external OAM network.</ph>
+                                        <ph id="ext_OAM_if_Quick_15.x" ixia_locid="424" class="- topic/ph ">You can optionally share the interface assigned for the
+                                            management or infrastructure network.</ph></p>
+                                    <p id="ext_OAM_if_Install" ixia_locid="144" class="- topic/p "><ph id="ext_OAM_install_14.10" ixia_locid="420" class="- topic/ph ">The name of the
+                                            physical interface to use to connect to the OAM network
+                                            in non-LAG mode.</ph> You can use a dedicated interface,
+                                        or share the interface used for the management or
+                                        infrastructure network. For a shared interface, a VLAN ID is
+                                        required.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="409" class="- topic/entry ">
+                                    <p id="oam_vlan_prompt" ixia_locid="414" class="- topic/p ">Configure an external
+                                        OAM VLAN [y/N]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="412" class="- topic/entry ">
+                                    <p id="oam_vlan" ixia_locid="463" class="- topic/p ">An option to implement this
+                                        network on the selected interface using VLAN tagging. If the
+                                        same interface has already been selected for an untagged
+                                        network, you must answer 'y' or abort the configuration. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="410" class="- topic/entry ">
+                                    <p id="oam_vlan_id_prompt" ixia_locid="405" class="- topic/p ">External OAM VLAN
+                                        identifier []:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="413" class="- topic/entry ">
+                                    <p id="oam_vlan_id" ixia_locid="407" class="- topic/p ">The VLAN ID, if VLAN
+                                        tagging is used.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="216" class="- topic/entry ">
+                                    <p id="ext_OAM_MTU_prompt" ixia_locid="220" class="- topic/p ">External OAM
+                                        interface MTU [1500]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="224" class="- topic/entry ">
+                                    <p id="ext_OAM_MTU" ixia_locid="229" class="- topic/p ">The maximum transmission unit for the OAM
+                                        network. The default value is 1500.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="145" class="- topic/entry ">
+                                    <p id="ext_OAM_subnet_prompt" ixia_locid="146" class="- topic/p ">External OAM
+                                        subnet [10.10.10.0/24]:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="147" class="- topic/entry ">
+                                    <p ixia_locid="148" class="- topic/p "><ph id="ext_OAM_subnet" ixia_locid="391" class="- topic/ph ">The
+                                            subnet to use for the OAM network.</ph>
+                                        <ph id="ext_OAM_subnet_Quick" ixia_locid="356" class="- topic/ph "> You must
+                                            provide a value for this external network, in accordance
+                                            with your OAM network addressing plan.</ph>
+                                        <ph id="ext_OAM_subnet_Install" ixia_locid="305" class="- topic/ph "> Note that
+                                            the default value provided by the script is probably not
+                                            appropriate. Provide a valid subnet value as per your
+                                            OAM Network's IP address plan.</ph></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="149" class="- topic/entry ">
+                                    <p id="ext_OAM_gateway_prompt" ixia_locid="150" class="- topic/p ">External OAM
+                                        gateway address [10.10.10.1]:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="151" class="- topic/entry ">
+                                    <p id="ext_OAM_gateway" ixia_locid="152" class="- topic/p ">The IP address for the
+                                        OAM subnet's default gateway. You must provide a value in
+                                        accordance with your OAM network address plan. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="153" class="- topic/entry ">
+                                    <p id="ext_OAM_floating_prompt" ixia_locid="154" class="- topic/p ">External OAM floating address
+                                        [10.10.10.2]*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="155" class="- topic/entry ">
+                                    <p id="ext_OAM_floating" ixia_locid="156" class="- topic/p ">The floating IP address for the OAM network.
+                                        This is the address used to access the web administration
+                                        interface or the controller console. You must provide a
+                                        value in accordance with your OAM network address plan.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="157" class="- topic/entry ">
+                                    <p id="ext_OAM_addr_c1_prompt" ixia_locid="158" class="- topic/p ">External OAM
+                                        address for first controller node [10.10.10.3]:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="159" class="- topic/entry ">
+                                    <p id="ext_OAM_addr_c1_Quick" ixia_locid="314" class="- topic/p ">The IP address
+                                        for the first controller on the OAM network. You must
+                                        provide a value in accordance with your OAM network address
+                                        plan.</p>
+                                    <p id="ext_OAM_addr_c1_Install" ixia_locid="315" class="- topic/p ">The IP address
+                                        to be assigned to the first controller on the OAM network.
+                                        You must provide a value in accordance with your OAM network
+                                        address plan.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="161" class="- topic/entry ">
+                                    <p id="ext_OAM_addr_c2_prompt" ixia_locid="162" class="- topic/p ">External OAM
+                                        address for second controller node [10.10.10.4]:*</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="163" class="- topic/entry ">
+                                    <p id="ext_OAM_addr_c2_Quick" ixia_locid="316" class="- topic/p ">The IP address
+                                        for the second controller on the OAM network. You must
+                                        provide a value in accordance with your OAM network address
+                                        plan.</p>
+                                    <p id="ext_OAM_addr_c2_Install" ixia_locid="317" class="- topic/p ">The IP address
+                                        to be assigned to the second controller on the OAM network.
+                                        You must provide a value in accordance with your OAM network
+                                        address plan.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="330" class="- topic/entry ">
+                                    <p id="DNS_section" ixia_locid="333" class="- topic/p "><nameliteral ixia_locid="352" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Domain Name
+                                            System (DNS):</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" id="nameservers_prompts" ixia_locid="170" class="- topic/entry ">
+                                    <p ixia_locid="171" class="- topic/p ">Nameserver 1 [8.8.8.8]:</p>
+                                    <p ixia_locid="172" class="- topic/p ">Nameserver 2 [8.8.4.4]:</p>
+                                    <p ixia_locid="173" class="- topic/p ">Nameserver 3 []:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="174" class="- topic/entry ">
+                                    <p id="nameservers" ixia_locid="175" class="- topic/p ">The IP addresses of up to
+                                        three DNS servers. The default values are addresses of
+                                        public DNS servers available from Google. To continue
+                                        without configuring DNS servers, press the <uicontrol ixia_locid="369" class="+ topic/ph ui-d/uicontrol ">C</uicontrol> key.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="331" class="- topic/entry ">
+                                    <p id="NTP_section" ixia_locid="334" class="- topic/p "><nameliteral ixia_locid="353" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Network Time
+                                            Protocol (NTP):</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" id="timeservers_prompts" ixia_locid="181" class="- topic/entry ">
+                                
+                                    <p ixia_locid="182" class="- topic/p ">NTP server 1 [0.pool.ntp.org]:</p>
+                                    <p ixia_locid="183" class="- topic/p ">NTP server 2 [1.pool.ntp.org]:</p>
+                                    <p ixia_locid="184" class="- topic/p ">NTP server 3 [2.pool.ntp.org]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="185" class="- topic/entry ">
+                                    <p ixia_locid="365" class="- topic/p "><ph id="timeservers" ixia_locid="392" class="- topic/ph ">The IP
+                                            addresses of up to three NTP servers used to synchronize
+                                            the HP Helion OpenStack Carrier Grade cluster.</ph>
+                                        <ph id="timeservers_ntp_pool" ixia_locid="393" class="- topic/ph ">The default
+                                            values are addresses of public NTP servers available
+                                            from the <xref format="html" href="http://www.pool.ntp.org" ixia_locid="187" scope="external" class="- topic/xref ">NTP Pool Project</xref>.</ph>
+                                    </p>
+                                    <p id="timeservers_Install" ixia_locid="366" class="- topic/p ">The use of an NTP
+                                        server is recommended. If no NTP server is available, the
+                                        controller clock is used to synchronize the cluster. If
+                                        necessary, you can continue without configuring NTP servers
+                                        by pressing the <uicontrol ixia_locid="367" class="+ topic/ph ui-d/uicontrol ">C</uicontrol>
+                                        key.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="343" class="- topic/entry ">
+                                    <p id="license_section" ixia_locid="427" class="- topic/p "><nameliteral ixia_locid="429" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Licensing:</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="431" class="- topic/entry ">
+                                    <p id="license_prompt" ixia_locid="337" class="- topic/p ">License File
+                                        [/home/wrsroot/license.lic]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="434" class="- topic/entry ">
+                                    <p id="license" ixia_locid="339" class="- topic/p ">The path to a valid Titanium
+                                        Server license file. The file name may differ from the
+                                        default.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="432" class="- topic/entry ">
+                                    <p id="api_https_section" ixia_locid="428" class="- topic/p "><nameliteral ixia_locid="430" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Security:</nameliteral></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="435" class="- topic/entry "/>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="558" class="- topic/entry ">
+                                    <p id="api_https_prompt" ixia_locid="559" class="- topic/p ">Use secure (https)
+                                        external connection [N/y]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="560" class="- topic/entry ">
+                                    <p id="api_https_desc" ixia_locid="561" class="- topic/p ">An option to enable secure access for external REST APIs. </p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="562" class="- topic/entry ">
+                                    <p id="firewall_prompt" ixia_locid="563" class="- topic/p ">Install custom
+                                        firewall rules [y/N]:<draft-comment author="jowens" ixia_locid="564" translate="no" dir="ltr" class="- topic/draft-comment ">US65292
+                                            added</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="565" class="- topic/entry ">
+                                    <p id="firewall_desc" ixia_locid="566" class="- topic/p ">An option to change the
+                                        firewall rules for the OAM network. The default rules
+                                        included with HP Helion OpenStack Carrier Grade are recommended for most
+                                        applications. If required, you can override or augment them.
+                                        For more information, see <xref href="jow1443627833422.xml" ixia_locid="572" class="- topic/xref "/>.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="567" class="- topic/entry ">
+                                    <p id="firewall_rules_file_prompt" ixia_locid="568" class="- topic/p ">Firewall rules file:<draft-comment author="jowens" ixia_locid="569" translate="no" dir="ltr" class="- topic/draft-comment ">US65292
+                                            added</draft-comment></p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="570" class="- topic/entry ">
+                                    <p id="firewall_rules_file_desc" ixia_locid="571" class="- topic/p "> The path to a
+                                        file that defines custom firewall rules for the OAM
+                                        network.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="440" class="- topic/entry ">
+                                    <p id="api_https_self-signed_prompt" ixia_locid="447" class="- topic/p ">Use WRS provided self-signed certificate [y/N]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="444" class="- topic/entry ">
+                                    <p id="api_https_self-signed" ixia_locid="448" class="- topic/p ">An option to use
+                                        a self-signed certificate included with HP Helion OpenStack Carrier Grade for
+                                        secure REST API access. This certificate is provided for
+                                        evaluation purposes, and is not recommended for deployed
+                                        systems.</p>
+                                    <note id="api_https_caution" ixia_locid="460" type="caution" class="- topic/note ">
+                                        <p ixia_locid="461" class="- topic/p ">For the current release, the certificate selected during
+                                            controller configuration cannot be updated after installation.</p>
+                                    </note>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="441" class="- topic/entry ">
+                                    <p id="api_https_CA-signed_prompt" ixia_locid="449" class="- topic/p ">CA-Signed
+                                        Certificate and Key file:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="445" class="- topic/entry ">
+                                    <p id="api_https_CA-signed" ixia_locid="450" class="- topic/p ">The full path to a
+                                        PEM file containing a certificate (signed by a Certificate
+                                        Authority) and a Private Key (optionally password-protected)
+                                        for secure REST API access; for example, <filepath ixia_locid="455" class="+ topic/ph sw-d/filepath ">/home/wrsroot/pp-combo.pem</filepath>.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="442" class="- topic/entry ">
+                                    <p id="api_https_passphrase_prompt" ixia_locid="451" class="- topic/p ">Password
+                                        for the CA-Signed  certificate file [Enter &lt;CR&gt; for no
+                                        password]:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="446" class="- topic/entry ">
+                                    <p id="api_https_passphrase" ixia_locid="453" class="- topic/p ">The password for
+                                        the CA-signed certificate, if a password-protected private
+                                        key is used.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" namest="col1" nameend="col2" ixia_locid="344" class="- topic/entry ">
+                                    <p id="auth_section" ixia_locid="346" class="- topic/p "><nameliteral ixia_locid="355" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">Authentication:</nameliteral></p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="193" class="- topic/entry ">
+                                    <p id="password_prompt" ixia_locid="194" class="- topic/p ">Create admin user
+                                        password:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="195" class="- topic/entry ">
+                                    <p id="password" ixia_locid="196" class="- topic/p ">The password for the cloud <nameliteral ixia_locid="197" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">admin</nameliteral> user. This account
+                                        is used to log into the web administration interface.</p>
+                                </entry>
+                            </row>
+                            <row class="- topic/row ">
+                                <entry colname="col1" ixia_locid="199" class="- topic/entry ">
+                                    <p id="password_confirm_prompt" ixia_locid="200" class="- topic/p ">Repeat admin
+                                        user password:</p>
+                                </entry>
+                                <entry colname="col2" ixia_locid="201" class="- topic/entry ">
+                                    <p id="password_confirm" ixia_locid="202" class="- topic/p ">Password confirmation.</p>
+                                </entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </section>
+        </refbody>
+    </rcbody>
+</referable-content>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><referable-content xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1404333506827" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic concept)                            (topic concept glossentry)                            (topic concept glossgroup)                            (topic reference)                            (topic task)                            (topic hi-d)                             (topic ut-d)                             (topic indexing-d)                            (topic hazard-d)                            (topic abbrev-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                             (topic task strictTaskbody-c)                             a(loc  ixia_locid)                            (topic strictPara-c)                            (topic strictSection-c)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic referable-content/referable-content ">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1" class="- topic/title ">[RC steps] Locking and Unlocking Hosts</title>
+    <shortdesc ixia_locid="2" class="- topic/shortdesc ">You can lock a host in order to change its configuration, or unlock it
+        to make it available for use.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="3" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <rcbody class="- topic/body referable-content/body ">
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4" class="- topic/section task/context ">
+            <p ixia_locid="5" class="- topic/p ">Unlocking causes the host to be rebooted so that its configuration can
+                be updated.</p>
+            <note id="note_N10027_N1001F_N1001C_N10001" ixia_locid="6" class="- topic/note ">
+                <p ixia_locid="7" class="- topic/p ">A newly added host is locked by default. To make it operational,
+                    you must unlock it manually.</p>
+            </note>
+        </context>
+        <prereq id="prereq_N10030_N1001C_N10001" ixia_locid="8" class="- topic/section task/prereq ">
+            <p ixia_locid="9" class="- topic/p ">Ensure that the required network interfaces have been defined.</p>
+            <ul id="ul_gkf_wcn_m4" class="- topic/ul ">
+                <li ixia_locid="10" class="- topic/li ">
+                    <p ixia_locid="11" class="- topic/p ">Before you can unlock a <nameliteral ixia_locid="12" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">compute</nameliteral> host, at least one data interface to an existing
+                        provider network is required.</p>
+                </li>
+                <li ixia_locid="13" class="- topic/li ">
+                    <p ixia_locid="14" class="- topic/p ">Before you can unlock a <nameliteral ixia_locid="15" class="+ topic/ph hi-d/b wr-sw-d/nameliteral ">storage</nameliteral> host, an interface to the infrastructure network
+                        is required.</p>
+                </li>
+            </ul>
+        </prereq>
+        <steps id="steps_N10066_N1001F_N10001" class="- topic/ol task/steps ">
+            <step id="lock-node" ixia_locid="48" class="- topic/li task/step ">
+                <cmd ixia_locid="49" class="- topic/ph task/cmd ">Lock the host to prepare it for configuration changes.</cmd>
+                <info ixia_locid="50" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="51" class="- topic/p ">In the <uicontrol ixia_locid="52" class="+ topic/ph ui-d/uicontrol ">Hosts</uicontrol> list,
+                        click <uicontrol ixia_locid="54" class="+ topic/ph ui-d/uicontrol ">More</uicontrol> for the host, and then
+                        select <uicontrol ixia_locid="55" class="+ topic/ph ui-d/uicontrol ">Lock Host</uicontrol>.</p>
+                    <p ixia_locid="56" class="- topic/p ">The host is locked and reported as <uicontrol ixia_locid="57" class="+ topic/ph ui-d/uicontrol ">Locked</uicontrol>, <uicontrol ixia_locid="58" class="+ topic/ph ui-d/uicontrol ">Disabled</uicontrol>,
+                        and <uicontrol ixia_locid="59" class="+ topic/ph ui-d/uicontrol ">Online</uicontrol>.</p>
+                </info>
+            </step>
+            <step id="lock-or-unlock-node" ixia_locid="16" class="- topic/li task/step ">
+                <cmd ixia_locid="17" class="- topic/ph task/cmd ">In the <uicontrol ixia_locid="18" class="+ topic/ph ui-d/uicontrol ">Hosts</uicontrol> list, on
+                    the row associated with the host, click <uicontrol ixia_locid="19" class="+ topic/ph ui-d/uicontrol ">More</uicontrol> to display a menu of actions.</cmd>
+                <choices id="choices_e2n_qfr_l4" class="- topic/ul task/choices ">
+                    <choice ixia_locid="20" class="- topic/li task/choice ">
+                        <p ixia_locid="21" class="- topic/p ">To unlock a locked host, click <uicontrol ixia_locid="22" class="+ topic/ph ui-d/uicontrol ">Unlock Host</uicontrol>. The host is rebooted, and its <uicontrol ixia_locid="23" class="+ topic/ph ui-d/uicontrol ">Availability State</uicontrol> is reported as
+                                <uicontrol ixia_locid="24" class="+ topic/ph ui-d/uicontrol ">In-Test</uicontrol>. After a few minutes,
+                            it is reported as <uicontrol ixia_locid="25" class="+ topic/ph ui-d/uicontrol ">Unlocked</uicontrol>,
+                                <uicontrol ixia_locid="26" class="+ topic/ph ui-d/uicontrol ">Enabled</uicontrol>, and <uicontrol ixia_locid="27" class="+ topic/ph ui-d/uicontrol ">Available</uicontrol>.</p>
+                    </choice>
+                    <choice ixia_locid="28" class="- topic/li task/choice ">
+                        <p ixia_locid="29" class="- topic/p ">To lock an unlocked host, click <uicontrol ixia_locid="30" class="+ topic/ph ui-d/uicontrol ">Lock Host</uicontrol>, and confirm your selection in
+                            the dialog box that appears. The host is locked and reported as
+                                <uicontrol ixia_locid="31" class="+ topic/ph ui-d/uicontrol ">Locked</uicontrol>, <uicontrol ixia_locid="32" class="+ topic/ph ui-d/uicontrol ">Disabled</uicontrol>, and <uicontrol ixia_locid="33" class="+ topic/ph ui-d/uicontrol ">Online</uicontrol>.</p>
+                    </choice>
+                </choices>
+            </step>
+            <step id="unlock-node" ixia_locid="34" class="- topic/li task/step ">
+                <cmd ixia_locid="35" class="- topic/ph task/cmd ">Unlock the host to make it available for use.</cmd>
+                <info ixia_locid="36" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="37" class="- topic/p ">In the <uicontrol ixia_locid="38" class="+ topic/ph ui-d/uicontrol ">Hosts</uicontrol> list,  on the row associated with the
+                        node, click <menucascade ixia_locid="39" class="+ topic/ph ui-d/menucascade "><uicontrol ixia_locid="40" class="+ topic/ph ui-d/uicontrol ">More</uicontrol><uicontrol ixia_locid="41" class="+ topic/ph ui-d/uicontrol ">Unlock Host</uicontrol></menucascade>.</p>
+                </info>
+                <stepresult ixia_locid="60" class="- topic/itemgroup task/stepresult ">
+                    <p ixia_locid="42" class="- topic/p ">The host is rebooted, and its <uicontrol ixia_locid="43" class="+ topic/ph ui-d/uicontrol ">Availability State</uicontrol> is reported as <uicontrol ixia_locid="44" class="+ topic/ph ui-d/uicontrol ">In-Test</uicontrol>. After a few minutes, it is reported
+                        as <uicontrol ixia_locid="45" class="+ topic/ph ui-d/uicontrol ">Unlocked</uicontrol>, <uicontrol ixia_locid="46" class="+ topic/ph ui-d/uicontrol ">Enabled</uicontrol>, and <uicontrol ixia_locid="47" class="+ topic/ph ui-d/uicontrol ">Available</uicontrol>.</p>
+                </stepresult>
+            </step>
+        </steps>
+    </rcbody>
+</referable-content>

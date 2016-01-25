@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" id="jow1414074167395" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="164" class="- topic/title ">Removing Compute Nodes</title>
+    <shortdesc ixia_locid="165" class="- topic/shortdesc ">You can remove a compute node from the pool of available
+        resources.</shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="166" class="- topic/author ">Jim Owens</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N10022_N1001F_N10001" ixia_locid="189" class="- topic/section task/context ">
+            <p ixia_locid="190" class="- topic/p ">You may need to remove a compute node in order to replace a failed host, or to change
+                the configuration of a host. If the host is active, you can migrate instances on it
+                by locking the host. </p>
+        </context>
+        <prereq id="prereq_N10034_N1001C_N10001" ixia_locid="172" class="- topic/section task/prereq ">
+            <note id="note_N101C5_N101C2_N101BB_N1003F_N1001F_N10001" ixia_locid="161" type="caution" class="- topic/note ">
+                <p ixia_locid="163" class="- topic/p ">Before locking a host, ensure that sufficient resources are
+                    available on other hosts to migrate any running instances.</p>
+            </note>
+        </prereq>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N10048_N10045_N1001C_N10001" ixia_locid="173" class="- topic/li task/step ">
+                <cmd ixia_locid="174" class="- topic/ph task/cmd ">Lock the host to be removed.</cmd>
+                <info ixia_locid="76" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="77" class="- topic/p ">Open the <wintitle ixia_locid="143" class="+ topic/keyword ui-d/wintitle ">Hosts</wintitle> list by
+                        clicking <uicontrol ixia_locid="78" class="+ topic/ph ui-d/uicontrol ">Inventory</uicontrol> on the<wintitle ixia_locid="79" class="+ topic/keyword ui-d/wintitle "> System Panel</wintitle> section of the <wintitle ixia_locid="80" class="+ topic/keyword ui-d/wintitle ">Admin</wintitle> menu, and then selecting the <uicontrol ixia_locid="81" class="+ topic/ph ui-d/uicontrol ">Hosts</uicontrol> tab.</p>
+                    <p ixia_locid="175" class="- topic/p ">Click <menucascade ixia_locid="178" class="+ topic/ph ui-d/menucascade ">
+                            <uicontrol ixia_locid="179" class="+ topic/ph ui-d/uicontrol ">More</uicontrol>
+                            <uicontrol ixia_locid="181" class="+ topic/ph ui-d/uicontrol ">Lock Host</uicontrol>
+                        </menucascade> for the host. </p>
+                    <p ixia_locid="176" class="- topic/p ">Wait for the procedure to be completed.</p>
+                </info>
+            </step>
+            <step id="step_N1008B_N10045_N1001C_N10001" ixia_locid="182" class="- topic/li task/step ">
+                <cmd ixia_locid="183" class="- topic/ph task/cmd ">Delete the host from the HP Helion OpenStack Carrier Grade system.</cmd>
+                <info ixia_locid="184" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="177" class="- topic/p ">Click <menucascade ixia_locid="185" class="+ topic/ph ui-d/menucascade ">
+                            <uicontrol ixia_locid="180" class="+ topic/ph ui-d/uicontrol ">More</uicontrol>
+                            <uicontrol ixia_locid="186" class="+ topic/ph ui-d/uicontrol ">Delete Host</uicontrol>
+                        </menucascade> for the host. </p>
+                </info>
+            </step>
+            <step id="step_N100AA_N10045_N1001C_N10001" ixia_locid="187" class="- topic/li task/step ">
+                <cmd ixia_locid="188" class="- topic/ph task/cmd ">Power down the host and remove the hardware from the cluster.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

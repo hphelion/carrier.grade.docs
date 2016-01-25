@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><?workdir /C:\Drop3and4\Drop4\temp\pdf\oxygen_dita_temp?><?workdir-uri file:/C:/Drop3and4/Drop4/temp/pdf/oxygen_dita_temp/?><?path2project?><?path2project-uri ./?><task-wr xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/" domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1408040130437" xml:lang="en-us" ditaarch:DITAArchVersion="1.2" class="- topic/topic task/task task-wr/task-wr ">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="58" class="- topic/title ">Configuring SNMP Trap Destinations</title>
+    <shortdesc ixia_locid="59" class="- topic/shortdesc ">SNMP trap destinations are hosts configured in HP Helion OpenStack Carrier Grade to
+        receive unsolicited SNMP notifications. </shortdesc>
+    <prolog class="- topic/prolog ">
+        <author ixia_locid="60" class="- topic/author ">Pedro Sanchez</author>
+    </prolog>
+    <taskbody class="- topic/body task/taskbody ">
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="61" class="- topic/section task/context ">
+            <p ixia_locid="62" class="- topic/p ">Destination hosts are specified by IP address, or by host name if it
+                can be properly resolved by HP Helion OpenStack Carrier Grade. Notifications are sent to the hosts
+                using a designated community string so that they can be validated.</p>
+        </context>
+        <steps class="- topic/ol task/steps ">
+            <step id="step_N10040_N1003D_N1001C_N10001" ixia_locid="11" class="- topic/li task/step ">
+                <cmd ixia_locid="12" class="- topic/ph task/cmd ">Configure IP address 10.10.10.1 to receive SNMP notifications
+                    using the community string <term ixia_locid="13" class="- topic/term ">commstr1</term>.</cmd>
+                <stepxmp ixia_locid="14" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="15" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="78" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="17" class="+ topic/ph sw-d/userinput ">system snmp-trapdest-add -c commstr1 --ip_address 10.10.10.1</userinput>
+<systemoutput ixia_locid="79" class="+ topic/ph sw-d/systemoutput ">+------------+--------------------------------------+
+| Property   | Value                                |
++------------+--------------------------------------+
+| uuid       | c7b6774e-7f45-40f5-bcca-3668de2a186f |
+| ip_address | 10.10.10.1                           |
+| community  | commstr1                             |
+| type       | snmpv2c_trap                         |
+| port       | 162                                  |
+| transport  | udp                                  |
++------------+--------------------------------------+</systemoutput>
+</codeblock>
+                </stepxmp>
+                <info ixia_locid="19" class="- topic/itemgroup task/info ">
+                    <p ixia_locid="20" class="- topic/p ">The following are attributes associated with the new
+                        community string:</p>
+                    <dl class="- topic/dl ">
+                        <dlentry ixia_locid="25" class="- topic/dlentry ">
+                            <dt ixia_locid="26" class="- topic/dt ">uuid</dt>
+                            <dd ixia_locid="27" class="- topic/dd ">
+                                <p ixia_locid="28" class="- topic/p ">The UUID associated with the trap destination
+                                    object.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="21" class="- topic/dlentry ">
+                            <dt ixia_locid="22" class="- topic/dt ">ip_address</dt>
+                            <dd ixia_locid="23" class="- topic/dd ">
+                                <p ixia_locid="24" class="- topic/p ">The trap destination IP address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="29" class="- topic/dlentry ">
+                            <dt ixia_locid="30" class="- topic/dt ">community</dt>
+                            <dd ixia_locid="31" class="- topic/dd ">
+                                <p ixia_locid="32" class="- topic/p ">The community string value to be associated with
+                                    the notifications.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="65" class="- topic/dlentry ">
+                            <dt ixia_locid="68" class="- topic/dt ">type</dt>
+                            <dd ixia_locid="71" class="- topic/dd ">
+                                <p ixia_locid="74" class="- topic/p "><term ixia_locid="77" class="- topic/term ">snmpv2c_trap</term>, the
+                                    only supported message type for SNMP traps.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="66" class="- topic/dlentry ">
+                            <dt ixia_locid="69" class="- topic/dt ">port</dt>
+                            <dd ixia_locid="72" class="- topic/dd ">
+                                <p ixia_locid="75" class="- topic/p ">The destination UDP port that SNMP notifications
+                                    are sent to.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="67" class="- topic/dlentry ">
+                            <dt ixia_locid="70" class="- topic/dt ">transport</dt>
+                            <dd ixia_locid="73" class="- topic/dd ">
+                                <p ixia_locid="76" class="- topic/p ">The transport protocol used to send
+                                    notifications.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </info>
+            </step>
+            <step id="step_N100AA_N1003D_N1001C_N10001" ixia_locid="37" class="- topic/li task/step ">
+                <cmd ixia_locid="38" class="- topic/ph task/cmd ">List defined trap destinations.</cmd>
+                <stepxmp ixia_locid="39" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="40" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="80" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="42" class="+ topic/ph sw-d/userinput ">system snmp-trapdest-list</userinput>
+<systemoutput ixia_locid="81" class="+ topic/ph sw-d/systemoutput ">+------------+----------------+------+--------------+-----------+
+| IP Address  | SNMP Community | Port | Type         | Transport |
++-------------+----------------+------+--------------+-----------+
+| 10.10.10.1  | commstr1       | 162  | snmpv2c_trap | udp       |
++-------------+----------------+------+--------------+-----------+</systemoutput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100C5_N1003D_N1001C_N10001" ixia_locid="44" class="- topic/li task/step ">
+                <cmd ixia_locid="45" class="- topic/ph task/cmd ">Query access details of a specific trap destination.</cmd>
+                <stepxmp ixia_locid="46" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="47" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="82" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="49" class="+ topic/ph sw-d/userinput ">system snmp-trapdest-show 10.10.10.1</userinput>
+<systemoutput ixia_locid="83" class="+ topic/ph sw-d/systemoutput ">+------------+--------------------------------------+
+| Property   | Value                                |
++------------+--------------------------------------+
+| uuid       | c7b6774e-7f45-40f5-bcca-3668de2a186f |
+| ip_address | 10.10.10.1                           |
+| community  | commstr1                             |
+| type       | snmpv2c_trap                         |
+| port       | 162                                  |
+| transport  | udp                                  |
++------------+--------------------------------------+</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100E0_N1003D_N1001C_N10001" ixia_locid="51" class="- topic/li task/step ">
+                <cmd ixia_locid="52" class="- topic/ph task/cmd ">Disable the sending of SNMP notifications to a specific IP
+                    address.</cmd>
+                <stepxmp ixia_locid="53" class="- topic/itemgroup task/stepxmp ">
+                    <codeblock ixia_locid="54" class="+ topic/pre pr-d/codeblock "><systemoutput ixia_locid="84" class="+ topic/ph sw-d/systemoutput ">~(keystone_admin)$ </systemoutput><userinput ixia_locid="56" class="+ topic/ph sw-d/userinput ">system snmp-trapdest-delete 10.10.10.1</userinput>
+<systemoutput ixia_locid="85" class="+ topic/ph sw-d/systemoutput ">Deleted ip 10.10.10.1</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>
