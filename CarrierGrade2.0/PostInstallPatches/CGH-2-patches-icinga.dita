@@ -45,12 +45,12 @@
             HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
             lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
             file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-        <li>Copy the <codeph>icinga-random-password.patch</codeph> to the <codeph>/root/</codeph>
+        <li>Copy the <codeph>icinga-random-password.patch</codeph> to the <codeph>~/</codeph>
           directory. </li>
         <li>Change to the <codeph>root/kenobi-node-configuration</codeph>
           directory:<codeblock>cd /root/kenobi-node-configuration</codeblock></li>
         <li> Execute the following command to deploy the patch:
-          <codeblock>patch -p1 &lt; /root/icinga-random-password.patch</codeblock></li>
+          <codeblock>patch -p1 &lt; ../icinga-random-password.patch</codeblock></li>
         <li>Execute the following command to integrate the changes into the
           environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
         <li>Execute the following
@@ -59,7 +59,7 @@
           <codeblock>hlm deploy -c &lt;cloud name> -t "IC2-SVC IC2-WEB" </codeblock></li>
       </ol>
     </section>
-    <section>
+    <section id="icinga-pass">
       <title>Locate the random password</title>
       <p>The command creates a random password in the  following
         directory<codeblock>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/persistent_state/private_data.yml</codeblock>Open
