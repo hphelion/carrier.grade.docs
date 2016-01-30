@@ -22,19 +22,25 @@
         >Helion Distribution Network (HDN)</xref>. You must <xref
         href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
         >obtain a user account on HDN</xref> in order to download these files.</p>
+    <p>Some patches must be installed prior to deploying yout cloud and some patches must be
+      installed after the cloud is fully installed and running. Consult the following table for the
+      patches you need to apply and when they must be applied.</p>
     <section>
       <title>Install the folllowing patches </title>
     
-    <p>For your cloud topology, install the following patches:</p>
+    <p>For your cloud topology, install the appropriate patches:</p>
     <p>
       <table frame="all" rowsep="1" colsep="1" id="table_tlr_3mm_s5">
-        <tgroup cols="6">
+        <tgroup cols="9">
             <colspec colname="c1" colnum="1" colwidth="2.22*"/>
             <colspec colname="newCol2" colnum="2" colwidth="4.84*"/>
             <colspec colname="c2" colnum="3" colwidth="1*"/>
             <colspec colname="c3" colnum="4" colwidth="1.16*"/>
             <colspec colname="c4" colnum="5" colwidth="1.2*"/>
             <colspec colname="c5" colnum="6" colwidth="1.45*"/>
+            <colspec colname="newCol7" colnum="7" colwidth="1*"/>
+            <colspec colname="newCol8" colnum="8" colwidth="1*"/>
+            <colspec colname="newCol9" colnum="9" colwidth="1*"/>
             <thead>
               <row>
                 <entry>Patch</entry>
@@ -43,6 +49,9 @@
                 <entry>Tahoe</entry>
                 <entry>Memphis</entry>
                 <entry>Sacramento</entry>
+                <entry>Pre-deployment</entry>
+                <entry>Post-deployment</entry>
+                <entry>Prerequisites</entry>
               </row>
             </thead>
             <tbody>
@@ -52,10 +61,13 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/002"
                   /></entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle"/>
+                <entry/>
               </row>
               <row>
                 <entry><xref href="CGH-2-patches-ssl.dita#topic10581pdps">SSL patch:
@@ -63,10 +75,13 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/003"
                   /></entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+                <entry/>
+                <entry/>
               </row>
               <row>
                 <entry><xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom
@@ -74,18 +89,24 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/005"
                   /></entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+                <entry/>
+                <entry/>
               </row>
               <row>
                 <entry><xref href="CGH-2-patches-vsc.dita#topic10581pdpv">VSC patch</xref></entry>
                 <entry><b id="productShow_appName">HCG_2.0_DCN002_Patch006</b></entry>
-                <entry align="center" valign="middle">N</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+                <entry/>
+                <entry/>
               </row>
               <row>
                 <entry><xref href="CGH-2-patches-pci-bus.dita#topic10581pdpp">PCI-Bus
@@ -93,10 +114,13 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/007"
                   /></entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+                <entry/>
+                <entry/>
               </row>
               <row>
                 <entry><xref href="CGH-2-patches-icinga.dita#topic10581pdpi">Icinga Random Password
@@ -104,10 +128,13 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/008"
                   /></entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+                <entry/>
+                <entry/>
               </row>
               <row>
                 <entry><xref href="CGH-2-patches-horizon-002.dita#topic10581pdph2">Horizon-002
@@ -115,19 +142,82 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/009"
                   /></entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">N</entry>
-                <entry align="center" valign="middle">N</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle"/>
+                <entry/>
+                <entry/>
+                <entry/>
               </row>
               <row>
                 <entry><b>Keystone001 Patch</b></entry>
-                <entry><b>Helion Carrier Grade 2.0 Keystone001
-                  Patch010</b></entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
-                <entry align="center" valign="middle">Y</entry>
+                <entry><b>Helion Carrier Grade 2.0 Keystone001 Patch010</b></entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">
+                  <p><b>Helion Carrier Grade 2.0 Heat001 Patch003</b></p>
+                </entry>
+              </row>
+              <row>
+                <entry/>
+                <entry><b>Helion Carrier Grade 2.0 Stackrc001 Patch011</b>
+                </entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+              </row>
+              <row>
+                <entry/>
+                <entry><b>Helion Carrier Grade 2.0 RMQ001 Patch012</b></entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+              </row>
+              <row>
+                <entry/>
+                <entry><b>Helion Carrier Grade 2.0 LOG001 Patch013</b></entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+              </row>
+              <row>
+                <entry/>
+                <entry><b>Helion Carrier Grade 2.0 ELK001 Patch014</b></entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+              </row>
+              <row>
+                <entry/>
+                <entry><b>Helion Carrier Grade 2.0 LOG002_Patch015</b></entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
               </row>
             </tbody>
           </tgroup>
