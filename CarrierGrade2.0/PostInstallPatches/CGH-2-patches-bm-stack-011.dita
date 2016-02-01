@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
-<topic xml:lang="en-us" id="topic10581pdph2">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Horizon Region
-    Switcher Patch</title>
+<topic xml:lang="en-us" id="topic10581pdpssl">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the SSL Certificate
+    Alternate Name Patch</title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -17,12 +17,10 @@
   <body>
     <section id="horizon-patch">
       <p>This patch must be applied only after the HP Helion OpenStack Carrier Grade is fully
-        deployed for the Denver and Tahoe cloud topologies.</p>
-      <p><b>Note:</b> If you applied the Horizon-002 Patch, <codeph id="name"
-        >horizon-region-switcher.patch</codeph> during installation and can switch between regions
-        in Horizon (for example, from the <b>Overview</b> panel), disregard these steps. </p>
-      <p>This patch fixes a problem that the prevents the user from switching between regions in
-        Horizon. <!--HCG-1111-->. </p>
+        deployed.</p>
+      <p>This patch fixes a problem with the HP Helion OpenStack Carrier Grade certificate. There is
+        no Subject Alternate Name (SAN) specified in the certificate and is malformed as a result.
+        <!--HCG-1201-->. </p>
     </section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
@@ -35,47 +33,36 @@
         <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
           page.</li>
         <li>Download the <b
-            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/009"/>
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/010"/>
           patch and the associated checksum and signature files.</li>
         <li>Verify the <xref
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
             >downloaded signature</xref> and the <xref
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
             >downloaded checksums</xref>.</li>
-        <li>Extract the compressed files until the <codeph conref="#topic10581pdph2/name"/>
-          directory is available.</li>
+        <li>Extract the compressed files until the <codeph id="patch"
+          >kcp-ssl-cert-v3.patch</codeph>, <codeph id="patch2">knc-ssl-cert-v3.patch</codeph>, and
+          readme files are available. <p>The README with the patch download contains information on
+            files changed by these patches.</p></li>
       </ol></section>
     <section>
-      <title>Prerequisites</title>
-      <p>Before installing the patch, make sure::<ul id="ul_kgy_xcm_s5">
-          <li>The lifecycle manager VM node is up and running </li>
-          <li>The <xref
-              href="../Installation/denver/CGH-2-installation-patches-denver.dita#topic10581cgiptchd/providernet-patch"
-              >Horizon Provider Network Patch (providernet-tab-missing-in-horizon)</xref> was
-            applied is already applied </li>
-          <li>If you have updated any files in the <codeph>/opt/share/hlm/site/services</codeph>
-            directory, make a backup of that directory. For information on using the Attis backup
-            and restore application, see <xref
-              href="../OperationsGuide/Backup/CGH-2-attis-backup.dita#topic10581c2ab">Backup and
-              Restore</xref>.</li>
-        </ul></p>
-    </section>
-    <section>
       <title>Install the patch</title>
-      <p>The patch is in a compressed file called <codeph conref="#topic10581pdph2/name"/>. The
-        README with the patch download contains information on files changed by these patches.</p>
       <p>
         <ol id="ol_p13_ghm_s5">
           <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
               lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Copy the <codeph conref="#topic10581pdph2/name"/> file to the <codeph>/root/</codeph>
-            directory. </li>
+          <li>Copy the <codeph conref="#topic10581pdpssl/patch2"/> and <codeph
+              conref="#topic10581pdpssl/patch"/> file to the <codeph>/root/</codeph> directory. </li>
+          <li>Change to the <codeph>~/kenobi-configuration-processor</codeph>
+            directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
+          <li> Execute the following command to deploy the patch:
+            <codeblock>patch -p1 &lt; ../kcp-ssl-cert-v3.patch</codeblock></li>
           <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
             directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
           <li> Execute the following command to deploy the patch:
-            <codeblock>patch -p1 &lt; ../horizon-region-switcher.patch</codeblock></li>
+            <codeblock>patch -p1 &lt; ../knc-ssl-cert-v3.patch</codeblock></li>
           <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
             <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
           <li>Execute the following command to integrate the changes into the
@@ -83,7 +70,15 @@
           <li>Execute the following
             command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
           <li>Execute the following command to redeploy the Horizon UI:
-            <codeblock>hlm deploy -c &lt;cloud name> -t "WR-HZN" </codeblock></li>
+            <codeblock>hlm deploy -c &lt;cloud name> -t "FND-CLU FND-STN HZN-WEB WR-HZN" </codeblock></li>
+          <li>Change to the KVM region configuration directory
+            <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state wrloc=$(find . -name windriver-config -type d| head -n 1); cd $wrloc</codeblock></li>
+          <li>Make a backup of the original <codeph>server-cert.pem</codeph> key. </li>
+          <li>Copy contents of <codeph>cakey.pem</codeph> file into the
+              <codeph>server-cert.pem</codeph> key available in <codeph>/etc/ssl/private/</codeph>
+            on the active and standby KVM region controllers. </li>
+          <li> Restart <b>haproxy</b> on active controller:
+            <codeblock>service haproxy restart</codeblock></li>
         </ol>
       </p>
     </section>
