@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581cgiptch-test">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Installing Required Patches
+    for the Sacramento Deployment</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>All patch files can be downloaded from the <xref
+        href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html" scope="external"
+        >Helion Distribution Network (HDN)</xref>. You must <xref
+        href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+        >obtain a user account on HDN</xref> in order to download these files.</p>
+    <p><!--Helion Carrier Grade 2.0 Horizon001 Patch002 post-deployment only--></p>
+    <bodydiv id="all">
+      <section id="cobbler">
+        <title>Deploy the Randomize Cobbler Password Patch <!-- "security patch"--></title>
+        <p>Cobbler is a build and deployment system that the HP Helion OpenStack Carrier Grade
+          installation process uses. For security, you must generate a random password that will be
+          passed to the installation process, rather than entering an explicit password through the
+            <codeph>group_vars/all</codeph> file.</p>
+        <p>You downloaded the patch file, <codeph>knc-cobbler-random.patch</codeph>, during the
+          prerequisites. The file is in the installation package in the <b>security_patches</b>
+          directory.</p>
+        <p>
+          <ol id="ol_cqf_s4k_f5">
+            <li>Copy the patch file to the <codeph>~/</codeph> directory. </li>
+            <li>Change to the ~/cg-hlm directory: <codeblock>cd ~/cg-hlm</codeblock></li>
+            <li>Execute the following command to deploy the patch:
+              <codeblock>patch -p1 -b &lt; ../cg-hlm-cobbler-random.patch</codeblock></li>
+            <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph>
+              directory:<codeblock>cd ~/cg-hlm/hlm-build </codeblock></li>
+            <li>Execute the following
+                command:<codeblock>./hlm_initcobbler.sh &lt;ip address&gt; &lt;netmask&gt; &lt;dhcp begin range&gt; &lt;dhcp end range&gt;    </codeblock><p>Where
+                  <codeph>&lt;ip address></codeph> is the PXE IP of the HLM node.</p><p>For
+                example:</p><codeblock>./hlm_initcobbler.sh 192.168.100.2 255.255.255.0 192.168.100.100 192.168.100.200 </codeblock></li>
+            <li>Execute the following command: <codeblock>./hlm_importiso.sh</codeblock></li>
+            <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+              directory:<codeblock>cd ~/kenobi-node-configuration </codeblock></li>
+            <li>Execute the following
+              command:<codeblock>patch -p1 -b &lt; ../knc-cobbler-random.patch </codeblock></li>
+            <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory:
+              <codeblock>cd ~/cg-hlm/hlm-build </codeblock></li>
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          </ol>
+        </p>
+        <p>The root user can retrieve the randomized password in the
+            <codeph>/var/hlm/clouds/.cobbler</codeph> file.</p>
+      </section>
+      <section id="ssl-patch"><title>Upload the patch files</title><title>Upload the SSL patch
+          <!--heat/keystone/ssl patch--></title><p>This patch addresses a number of issues. </p>You
+        should have downloaded the <codeph>HCG2.0_Heat001_Patch003</codeph> file during the
+        prerequisites. Extract the <codeph>kcp-ssl-implementation.patch</codeph> and readme files.
+          <!--HCG-998--><p>To prevent this condition, copy the
+            <codeph>kcp-ssl-implementation.patch</codeph> patch file to <codeph>~/</codeph> on the
+          lifecycle manager.
+            </p><!--HCG_2.0_DCN001_Patch004 is obsolete
+HCG 2.0 WR002 Patch005 is covered in KVM install--><!--HCG_2.0_DCN002_Patch006 is postinstall
+HCG 2.0 WR003 Patch007 is covered in KVM install--><p><b>Upload
+            the Icinga Random Password Patch</b></p>This patch must be applied only after the HP
+        Helion OpenStack Carrier Grade is fully deployed for the all cloud topologies to create a
+        random password for Icinga. <!--<b>HCG2.0_Icinga001_Patch008</b>--><p>You should have
+          downloaded <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/008"/>
+          during the prerequisites. Extract the <codeph id="name"
+            >icinga-random-password.patch</codeph> and readme files. </p><p>To deploy the patch copy
+          the <codeph>icinga-random-password.patch</codeph> to <codeph>~/</codeph> on the lifecycle
+          manager.</p><p><b>Note:</b> To locate the randomizes paddword after the patch is deployed,
+          see <xref href="#topic10581cgiptch-test" format="dita">Locating the new Icinga random
+            password</xref>.</p><b>Upload the SSL Certificate Alternate Name
+          Patch</b><p><!--HCG2.0_Horizon002_Patch009 is in Denver and Tahoe--></p>This patch fixes a
+        problem with the HP Helion OpenStack Carrier Grade certificate. There is no Subject
+        Alternate Name (SAN) specified in the certificate and is malformed as a result.
+        <!--HCG-1201-->. <p>You should have downloaded and extracted the
+            <b>HCG2.0_Keystone001_Patch010</b> file during the prerequisites. Extract the
+            <codeph>kcp-ssl-cert-v3.patch</codeph>, <codeph>knc-ssl-cert-v3.patch</codeph>, and
+          readme files.</p><p>On the lifecycle manager VM. copy the
+            <codeph>kcp-ssl-cert-v3.patch</codeph> and <codeph>knc-ssl-cert-v3.patch</codeph> file
+          to the <codeph>~/</codeph> directory.
+          </p><!--<p>HCG2.0_Stackrc001_ Patch011 DTMS</p><p>HCG2.0_RMQ001_Patch012 DTMS</p>--><title>Upload
+          the Log Rotate Patch</title><p><!--Helion Carrier Grade 2.0 Log001_Patch013--></p>This
+        patch fixes a problem with the RabbitMQ service installed on HP Helion OpenStack
+        CarrierGrade. RabbitMQ was consuming excessive memory. After deploying this patch, the
+        Elasticsearch service's memory will be set to 50% of free memory. If the free memory exceeds
+        32g then the memory will be set to 32g as per the Elasticsearch guidelines. In addition,
+        this patch includes a script file that will delete logstash logs greater than 8 days
+        old.<!--HCG-1118-->. <!--DTMS--><p>You should have downloaded and extracted the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/013"/>
+          patch during the prerequisites. Extract the <codeph>knc-logrotate.patch</codeph> and
+          readme files. Copy the <codeph>knc-logrotate.patch</codeph> patch to the ~/ location.
+          </p><title>Upload the Debug
+          Patch</title><p><!--Helion Carrier Grade 2.0 LOG002_Patch015--></p>This is an optional
+        patch to change the logging of the services from INFO or DEBUG to WARNING. <!--HCG-1104-->.
+          <!--DTMS--><p>You should have downloaded and extracted the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/015"/>
+          patch during the prerequisites. Extract the <codeph id="15name"
+            >knc-debug-off.patch</codeph> and readme files. On the lifecycle manager VM, copy the
+            <codeph>knc-debug-off.patch</codeph> file to the <codeph>~/</codeph> directory.
+          </p><title>Upload the ELK Patch</title><!--HCG2.0_ELK001_Patch014--><p>This patch
+          addresses the ELK (ElasticSearch, Logstash, Kibana) related issues listed below. </p><ul
+          id="ul_jvw_5fc_w5">
+          <li>logs from compute proxy node should be shown in kibana</li>
+          <li>logs of cinder,swift should be shown in kibana</li>
+          <li>logs from baremetal node should be shown in kibana</li>
+          <li>All services should generate DEBUG logs except nova on compute proxy. </li>
+        </ul><p>You should have downloaded and extracted the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/014"/>
+          patch during the prerequisites. Extract the <codeph>elk1.patch</codeph>,
+            <codeph>elk2.patch</codeph>, <codeph>elk3.patch</codeph> and readme files. </p><p>On the
+          lifecycle manager VM, copy the three <codeph>elk#.patch</codeph> files to the
+            <codeph>/root/kenobi-node-configuration</codeph> location. <ol id="ol_y2c_rcc_w5">
+            <li>Execute the following commands to import the patch files:
+              <codeblock>patch -p1 --binary &lt; elk1.patch
+patch -p0 &lt; elk2.patch
+patch -p0 &lt; elk3.patch </codeblock></li>
+          </ol></p></section>
+      <section>
+        <title>Import the patch files into the Configuration Processor</title>
+        <p>On the lifecycle manager VM, execute the following steps for each patch:</p>
+        <ol id="ol_jkm_n1d_w5">
+          <li>Change to the <codeph>kenobi-configuration-processor</codeph>
+            directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
+          <li>Execute the <codeph>patch -p1</codeph> command for each patch:
+            <codeblock>patch -p1 &lt; ../kcp-ssl-implementation.patch
+patch -p1 &lt; ../kcp-ssl-cert-v3.patch</codeblock></li>
+        </ol>
+      </section>
+      <section><title>Import the patch files into the Node Configuration</title>On the lifecycle
+        manager VM, execute the following steps for each patch:<p>
+          <ol id="ol_kkm_n1d_w5">
+            <li>Change to the <codeph>kenobi-node-configuration</codeph>
+              directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+            <li>Execute the following command to install the second patch
+              <codeblock>patch -p1 &lt; ../knc-ssl-implementation.patch
+patch -p1 -b &lt; ../icinga-random-password.patch
+patch -p1 -b &lt; ../knc-ssl-cert-v3.patch
+patch -p1 -b &lt; ../knc-logrotate.patch
+patch -p1 -b &lt; ../knc-debug-off.patch</codeblock></li>
+          </ol>
+        </p></section>
+      <section>
+        <title>Install the patches</title>
+        <p>On the lifecyvle manager, perform the following steps one time:</p>
+        <ol>
+          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the <codeph>hlm
+              generate</codeph> command is executed, the changes from all patches in the ~/
+            directory will be included. </li>
+        </ol>
+      </section>
+    
+    <section><title>Locating the new Icinga random password</title>The Icinga patch,
+          <codeph>icinga-random-password.patch</codeph>, creates a random password in the following
+        file:<codeblock id="icingapass">/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/persistent_state/private_data.yml</codeblock>Open
+        the <codeph>private_data.yml</codeph> file to locate the random password in the
+          <codeph>icinga_root_pwd</codeph> variable<p>You access the Icinga web portal using
+            <codeph>http://&lt;CLM-IP>:82/icinga-web/</codeph>. Use <codeph>root</codeph> as a user
+          name and the random password to log in. You can use the Icinga web portal to change this
+          password, if needed.</p><p>To change the password:</p><p>
+          <ol id="ol_et5_2rm_s5">
+            <li>In the Icinga web portal, click the <b>Root</b> menu in the top right. </li>
+            <li>Select <b>Preferences</b>, then <b>Password</b>. </li>
+            <li> Enter a new password and click Save </li>
+            <li>Log out by clicking the <b>Root</b> menu, then <b>Logout</b>. </li>
+          </ol>
+        </p></section>
+    </bodydiv>
+  </body>
+</topic>

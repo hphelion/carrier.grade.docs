@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
-<topic xml:lang="en-us" id="topic10581pdpssl">
+<topic xml:lang="en-us" id="topic10581pdpbm">
   <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the SSL Certificate
     Alternate Name Patch</title>
   <prolog>
@@ -16,8 +16,6 @@
   </prolog>
   <body>
     <section id="horizon-patch">
-      <p>This patch must be applied only after the HP Helion OpenStack Carrier Grade is fully
-        deployed.</p>
       <p>This patch fixes a problem with the HP Helion OpenStack Carrier Grade certificate. There is
         no Subject Alternate Name (SAN) specified in the certificate and is malformed as a result.
         <!--HCG-1201-->. </p>
@@ -53,8 +51,8 @@
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
               lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Copy the <codeph conref="#topic10581pdpssl/patch2"/> and <codeph
-              conref="#topic10581pdpssl/patch"/> file to the <codeph>/root/</codeph> directory. </li>
+          <li>Copy the <codeph conref="#topic10581pdpbm/patch2"/> and <codeph
+              conref="#topic10581pdpbm/patch"/> file to the <codeph>/root/</codeph> directory. </li>
           <li>Change to the <codeph>~/kenobi-configuration-processor</codeph>
             directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
           <li> Execute the following command to deploy the patch:
