@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
-<topic xml:lang="en-us" id="topic10581pdplr">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Log Rotate
+<topic xml:lang="en-us" id="topic10581pdpdebug">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the RabbitMQ
     Patch</title>
   <prolog>
     <metadata>
@@ -16,9 +16,14 @@
   </prolog>
   <body>
     <section id="horizon-patch">
-      <p>I have set the logrotate to execute every hour, this will lessen the disk space that are
-        used by the logfiles, because the logs beyond 2 hours will be compressed already.
-        <!--HCG-1103--></p>
+      <p>This patch fixes a problem with the RabbitMQ service installed on HP Helion OpenStack
+        CarrierGrade. RabbitMQ was consuming excessive memory. After deploying this patch, the
+        Elasticsearch service's memory will be set to 50% of free memory. If the free memory exceeds
+        32g then the memory will be set to 32g as per the Elasticsearch guidelines. </p>
+      <p>In addition, this patch includes a script file that will delete Logstash logs greater than
+        8 days old. The script file can be found on each controller in the
+          <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> directory. Modify cleanup schedule by
+        changing the <codeph>DAYS</codeph> variable in that file. <!--HCG-1118-->. </p>
     </section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
@@ -31,16 +36,16 @@
         <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
           page.</li>
         <li>Download the <b
-            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/013"/>
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/012"/>
           patch and the associated checksum and signature files.</li>
         <li>Verify the <xref
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
             >downloaded signature</xref> and the <xref
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
             >downloaded checksums</xref>.</li>
-        <li>Extract the compressed files until the <codeph id="patch">knc-log.rotate.patch</codeph>
-          and readme files are available. <p>The README with the patch download contains information
-            on files changed by these patches.</p></li>
+        <li>Extract the compressed files until the <codeph id="patch">rabbitmq.patch</codeph> and
+          readme files are available. <p>The README with the patch download contains information on
+            files changed by these patches.</p></li>
       </ol></section>
     <section>
       <title>Install the patch</title>
@@ -50,26 +55,20 @@
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
               lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Copy the <codeph conref="#topic10581pdplr/patch"/> file to the <codeph>/root/</codeph>
+          <li>Copy the <codeph conref="#topic10581pdpdebug/patch"/> file to the <codeph>~/</codeph>
             directory. </li>
           <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
             directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
           <li> Execute the following command to deploy the patch:
-            <codeblock>patch -p1 &lt; ../knc-log.rotate.patch</codeblock></li>
+            <codeblock>patch -p1 &lt; ../rabbitmq.patch</codeblock></li>
           <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
             <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
           <li>Execute the following command to integrate the changes into the
             environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
           <li>Execute the following
             command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
-          <li>Execute the following command to redeploy the Horizon UI: <ul id="ul_amv_2sb_w5">
-              <li>For Sacramento
-                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU NEU-API DCN-NEU ML2-SRIOV NEU-API-BAR Conclude"</codeblock></li>
-              <li>For Memphis and Tahoe
-                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU NEU-API DCN-NEU ML2-SRIOV Conclude"</codeblock></li>
-              <li> For Denver
-                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU Conclude"</codeblock></li>
-            </ul></li>
+          <li>Execute the following command on all tiers:
+            <codeblock>hlm deploy -c &lt;cloud name> -t "ELK-SCH"</codeblock></li>
         </ol>
       </p>
     </section>

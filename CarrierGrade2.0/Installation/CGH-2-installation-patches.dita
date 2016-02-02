@@ -119,12 +119,13 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
           </title><p><!--HCG2.0_Horizon002_Patch009 is in Denver and Tahoe--></p>This patch fixes a
         problem with the HP Helion OpenStack Carrier Grade certificate. There is no Subject
         Alternate Name (SAN) specified in the certificate and is malformed as a result.
-        <!--HCG-1201-->. <p>You should have downloaded and extracted the
-            <b>HCG2.0_Keystone001_Patch010</b> file during the prerequisites. Extract the <codeph
-            id="patch">kcp-ssl-cert-v3.patch</codeph>, <codeph id="patch2"
-            >knc-ssl-cert-v3.patch</codeph>, and readme files.</p><p>
+        <!--HCG-1201-->. <p>You should have downloaded and extracted the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/010"/>
+          file during the prerequisites. Extract the <codeph id="patch"
+            >kcp-ssl-cert-v3.patch</codeph>, <codeph id="patch2">knc-ssl-cert-v3.patch</codeph>, and
+          readme files.</p><p>
           <ol id="ol_edf_gcc_w5">
-            <li>On the lifecycle manager VM. copy the <codeph conref="#topic10581cgiptch/patch2"/>
+            <li>On the lifecycle manager VM, copy the <codeph conref="#topic10581cgiptch/patch2"/>
               and <codeph conref="#topic10581cgiptch/patch"/> file to the <codeph>~/</codeph>
               directory. </li>
             <li>Change to the <codeph>~/kenobi-configuration-processor</codeph>
@@ -141,20 +142,66 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
               environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
           </ol>
         </p></section>
-      <section><!--HCG2.0_Stackrc001_ Patch011 DTMS--></section>
-      <section><!--HCG2.0_RMQ001_Patch012 DTMS--></section>
-      <section id="13"><title>Deploy the Log Rotate
-          Patch</title><p><!--Helion Carrier Grade 2.0 Log001_Patch013--></p>This patch fixes a
-        problem with the RabbitMQ service installed on HP Helion OpenStack CarrierGrade. RabbitMQ
-        was consuming excessive memory. After deploying this patch, the Elasticsearch service's
-        memory will be set to 50% of free memory. If the free memory exceeds 32g then the memory
-        will be set to 32g as per the Elasticsearch guidelines. In addition, this patch includes a
-        script file that will delete logstash logs greater than 8 days old.<!--HCG-1118-->.
-          <!--DTMS--><p>You should have downloaded and extracted the <b
+      <section>
+        <title>Deploy the baremetal service patch</title>
+        <p>This patch fixes issue where the baremetal service (Ironic) is not able to use the CAN
+          endpoint. The patch sets the <codeph>OS_ENDPOINT_TYPE=internalURL</codeph> variable in the
+            <codeph>stackrc</codeph> file that is generated on the HP Helion OpenStack controller
+          nodes. </p>
+        <p>You should have downloaded and extracted the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/011"/>
+          file during the prerequisites. Extract the <codeph>bm-endpoint-stackrc.patch</codeph> and
+          readme files.</p>
+        <p>
+          <ol>
+            <li>On the lifecycle manager VM, copy the <codeph>bm-endpoint-stackrc.patch</codeph> to
+              the <codeph>~/</codeph> directory. </li>
+            <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+              directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+            <li> Execute the following command to deploy the patch:
+              <codeblock>patch -p1 &lt; ../bm-endpoint-stackrc.patch</codeblock></li>
+            <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+              <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          </ol>
+        </p>
+      </section>
+      <section id="012"><title>Deploy the RabbitMQ Patch</title>This patch fixes a problem with the RabbitMQ
+        service installed on HP Helion OpenStack CarrierGrade. RabbitMQ was consuming excessive
+        memory. After deploying this patch, the Elasticsearch service's memory will be set to 50% of
+        free memory. If the free memory exceeds 32g then the memory will be set to 32g as per the
+        Elasticsearch guidelines. <p>In addition, this patch includes a script file that will delete
+          Logstash logs greater than 8 days old. The script file can be found on each controller in
+          the <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> directory. Modify cleanup schedule by
+          changing the <codeph>DAYS</codeph> variable in that file. </p><p>You should have
+          downloaded and extracted the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/012"/>
+          patch during the prerequisites. Extract the <codeph>rabbitmq.patch</codeph> and readme
+          files. </p><ol id="ol_xqw_xgk_w5">
+          <li>On the lifecycle manager VM, copy the <codeph>rabbitmq.patch</codeph> to the
+              <codeph>~/</codeph> directory. </li>
+          <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li> Execute the following command to deploy the patch:
+            <codeblock>patch -p1 &lt; ../rabbitmq.patch</codeblock></li>
+          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+        </ol></section>
+      <section id="13"><title>Deploy the Log Rotate Patch</title>This patch fixes a problem with the
+        RabbitMQ service installed on HP Helion OpenStack CarrierGrade. RabbitMQ was consuming
+        excessive memory. After deploying this patch, the Elasticsearch service's memory will be set
+        to 50% of free memory. If the free memory exceeds 32g then the memory will be set to 32g as
+        per the Elasticsearch guidelines. In addition, this patch includes a script file that will
+        delete logstash logs greater than 8 days old.<!--HCG-1118-->. <!--DTMS--><p>You should have
+          downloaded and extracted the <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/013"/>
-          patch during the prerequisites. Extract the <codeph>knc-logrotate.patch</codeph> and
+          patch during the prerequisites. Extract the <codeph>knc-log.rotate.patch</codeph> and
           readme files. <ol id="ol_xrn_lcc_w5">
-            <li>Copy the patch in ~/ location. </li>
+            <li>On the lifecycle manager VM, copy the <codeph>knc-log.rotate.patch</codeph> file to
+              the <codeph>~/</codeph> directory. </li>
             <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
               directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
             <li> Execute the following command to deploy the patch:
