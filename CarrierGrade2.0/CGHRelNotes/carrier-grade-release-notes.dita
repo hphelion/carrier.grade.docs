@@ -15,7 +15,7 @@
     </prolog>
     <body>
         <p>Thank you for your interest in HPE Helion OpenStack This document provides an overview of
-            the features contained within HPE Helion OpenStack version 1.1.1, including known issues
+            the features contained within HPE Helion OpenStack version 2.0, including known issues
             and workarounds, and where to find further information on the product release.</p>
         <p>For more information on using HP Helion OpenStack Carrier Grade, see the <xref
                 href="../Installation/carrier-grade-install-overview.dita#topic1925cgio">HP Helion
@@ -38,234 +38,27 @@
             <p>The following enhancements were added for the HP Helion OpenStack Carrier Grade 2.0
                 release:</p>
             <ul id="ul_ccj_3wm_vt">
-                <li>Ironic Baremetal Region</li>
-                <li>Support for Unbonded or Bonded NIC</li>
-                <li>Support for Multiple NIC VMs</li>
+                <li>Reduced control plane</li>
+                <li>Support for restarting MySQL and RabbitMQ clusters after failure</li>
             </ul>
-            <p>The following enhancements were added for the HP Helion OpenStack Carrier Grade 2.0
-                Alpha release:</p>
-            <ul id="ul_dcj_3wm_vt">
-                <li>Support for ESX </li>
-                <li>
-                    <p>Virtual machine instantiation is enhanced to support:</p>
-                    <ul id="ul_ecj_3wm_vt">
-                        <li>
-                            <p>CPU pinning</p>
-                        </li>
-                        <li>
-                            <p>CPU up/down scaling</p>
-                        </li>
-                        <li>
-                            <p>NUMA node awareness</p>
-                        </li>
-                        <li>
-                            <p>Multi-NUMA support</p>
-                        </li>
-                        <li>
-                            <p>Dedicated and configurable 2M and 1G huge pages</p>
-                        </li>
-                        <li>
-                            <p>VM local storage support</p>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <p>To use shared VCPUs, a shared physical CPU must be designated. For more
-                        information, see the <cite>HP Helion OpenStack Carrier Grade Administration
-                            Guide: Designating Shared Physical CPUs on Compute Host</cite>.</p>
-                </li>
-                <li>
-                    <p>Extra-specification commands are revised for improved OpenStack
-                        compatibility:</p>
-                    <ul id="ul_fcj_3wm_vt">
-                        <li>
-                            <p>Custom <cmdname>nova flavor-create</cmdname> options are replaced by
-                                    <b>nova flavor-key</b> options as follows:</p>
-                            <simpletable id="simpletable_gcj_3wm_vt">
-                                <sthead>
-                                    <stentry>
-                                        <p>nova flavor-create (removed)</p>
-                                    </stentry>
-                                    <stentry>
-                                        <p>nova flavor-key (added)</p>
-                                    </stentry>
-                                </sthead>
-                                <strow>
-                                    <stentry>
-                                        <p>--vcpu-model</p>
-                                    </stentry>
-                                    <stentry>
-                                        <p>hw:cpu_model</p>
-                                    </stentry>
-                                </strow>
-                                <strow>
-                                    <stentry>
-                                        <p>--dedicated-cpus &lt;true | false&gt;</p>
-                                    </stentry>
-                                    <stentry>
-                                        <p>hw:cpu-model &lt;dedicated | shared&gt;</p>
-                                    </stentry>
-                                </strow>
-                                <strow>
-                                    <stentry>
-                                        <p>--guest-heartbeat</p>
-                                    </stentry>
-                                    <stentry>
-                                        <p>sw:wrs:guest-heartbeat</p>
-                                    </stentry>
-                                </strow>
-                                <strow>
-                                    <stentry>
-                                        <p>--processor-node &lt;host-numa-node #&gt;</p>
-                                    </stentry>
-                                    <stentry>
-                                        <p>hw:numa_node.&lt;guest-numa-node-#&gt; =
-                                            &lt;host-numa-node-#&gt;</p>
-                                    </stentry>
-                                </strow>
-                            </simpletable>
-                        </li>
-                        <li>
-                            <p>HP Helion OpenStack Carrier Grade-specific options are identified
-                                using the string <b>wrs</b>:</p>
-                            <ul id="ul_hcj_3wm_vt">
-                                <li>
-                                    <p>hw:wrs:min_vcpus</p>
-                                </li>
-                                <li>
-                                    <p>hw:wrs:shared_vcpu</p>
-                                </li>
-                                <li>
-                                    <p>hw:wrs:vcpu:scheduler</p>
-                                </li>
-                                <li>
-                                    <p>sw:wrs:guest-heartbeat</p>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <p>Networking capabilities are enhanced to support:</p>
-                    <ul id="ul_icj_3wm_vt">
-                        <li>
-                            <p>Consolidated interfaces for OAM, management, infrastructure, and data
-                                networks</p>
-                        </li>
-                        <li>
-                            <p>Accelerated virtual routing</p>
-                        </li>
-                        <li>
-                            <p>Distributed virtual routing</p>
-                        </li>
-                        <li>
-                            <p>VXLAN networking</p>
-                        </li>
-                        <li>
-                            <p>PCI Pass-through and SR-IOV support</p>
-                        </li>
-                        <li>
-                            <p>Mellanox CX-3 NICs (Supported for use with AVS vSwitch only.)
-                                <!--Per Vlad and Shantanu email-->See <xref
-                                    href="#topic6108cgrn/mellanox" format="dita">additional
-                                    caveats</xref> below.</p>
-                        </li>
-                    </ul>
-                    <note>
-                        <p>The syntax and GUI controls for adding and modifying interfaces are
-                            revised substantially to accommodate logical interfaces and interface
-                            consolidation.</p>
-                    </note>
-                </li>
-                <li>
-                    <p>Management facilities are enhanced for:</p>
-                    <ul id="ul_jcj_3wm_vt">
-                        <li>
-                            <p>Historical alarms</p>
-                        </li>
-                        <li>
-                            <p>GUI-based patching</p>
-                        </li>
-                        <li>
-                            <p>REST API patching access</p>
-                        </li>
-                        <li>
-                            <p>Customer logs</p>
-                        </li>
-                        <li>
-                            <p>Support for externally managed board management network</p>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <p>REST API extensions are added for Nova, Neutron, Cinder, and Ceilometer.</p>
-                </li>
-                <li>
-                    <p>HTTPS support is added for REST API access</p>
-                </li>
-            </ul>
-            <p><b>Differences from HCG 1.1 Architecture</b></p>
-            <p>HCG 2.0 Architecture is built upon HCG 1.1 with the following key differences:</p>
-            <ol id="ol_azt_whc_f5">
-                <li>WR computes can support vSwitch of your choice - AVS or VRS: To enable this
-                    feature, we are replacing AVS with VRS based on the product SKU being selected.
-                    The architecture toggles between Neutron being a shared service (HCG-VRS) to
-                    dedicated service per region (HCG-AVS). The architecture for both products is
-                    documented on this one architecture page. Both products share many components.
-                    Many of the interfaces have not changed since HCG 1.1 other than being
-                    renumbered as part of cleaning up this page. </li>
-                <li>Baremetal Region to provide baremetal provisioning as a service: We extended the
-                    architecture by adding another control plane (single node) running identical
-                    services plus ironic but in different region - nova, neutron and ironic</li>
-                <li>VxLAN to VLAN bridging: We are now using HPN 5930/7900 switches in the
-                    architecture as enabler for providing VxLAN to VLAN switching. This is
-                    specifically for VMs with virtio vNICs to communicate with baremetal ports like
-                    SR-IOV, PCI-PT and Host Port.</li>
-                <li>Enhance Standard control plane for Backup, Logging and Monitoring services for
-                    Standard region services: Added and enhanced new services like Icinga,
-                    Elastic-Logstash-Kibana (ELK), Attis services. </li>
-                <li>Infoblox as IPAM plugin: Neutron has now a plugin to support IP reservation
-                    through Infoblox appliance. Architecturally, it is an enhancement to Neutron
-                    Service running in each region.</li>
-            </ol>
-            <p><b>Added Components</b></p>
-            <ul id="ul_bzt_whc_f5">
-                <li><b>Standard Controller</b> (Controller running on hLinux): Standard IaaS control
-                    plane very similar to HOS. The main difference is that DCN/Nuage is used for
-                    networking rather than OVS to enable cloud-to-cloud communication. Icinga has
-                    also been upgraded to Icinga2 to enable more monitoring features. Many
-                    components of this region are shared with the WR Region.</li>
-                <li><b>ESX Compute</b>: Standard IaaS compute node using DCN/Nuage components for
-                    networking. <b>The product has evolved such that there will be no compute nodes
-                        based on hLinux KVM for 2.0. One offering will not have any ESX compute
-                        nodes and also no DCN nodes. Another offering will have vCenter based ESX
-                        compute nodes.</b> This component has sub component <b>DCN VRS</b>
-                    (Virtualized Routing &amp; Switching). It provide L2/L3 capabilities to enable
-                    VMs to communicate within the cloud and for remote cloud communication.</li>
-                <li><b>WR Compute</b>: Realtime compute node with Wind River (WR) networking
-                    components. Wind River Linux with a modified, realtime KVM run on these nodes. A
-                    change for 2.0 is that one of the HCG products will ship with DCN VRS and the
-                    other will ship with AVS networking configured.</li>
-                <li><b>BM Controller</b>: Ironic server and compute proxy along with dependent
-                    services such as DHCP and DNS run on this single node to control requests for
-                    bare metal compute nodes. The bare metal controller and compute nodes run in
-                    their own region of the cloud.</li>
-                <li><b>BM Node</b>: Bare metal node to be allocated and used on demand similar to a
-                    VM. They are managed by the BM Controller.</li>
-                <li><b>5930 Switch</b>: HP Networking hardware switch to provide VxLAN to VLAN
-                    Bridging for SR-IOV, PC-PT or Baremtal Host ports. It also provides DHCP
-                    services to these baremetal ports. We have plans to use this for external
-                    network connectivity to replace software gateway VRS-G.</li>
-                <li><b>Infoblox</b>: 3rd party product requested by Telefonica to support IPAM.
-                    Infoblox will be optional for other customers and is not expected to be
-                    used.</li>
-            </ul>
+            <p><b>Differences from HCG 2.0 Architecture</b></p>
+            <p>HP Helion OpenStack Carrier Grade 2.1 Architecture is built upon HP Helion OpenStack
+                Carrier Grade  2.0 with the following key differences:</p>
+            <p>
+                <ul id="ul_jqf_jgj_w5">
+                    <li><b>Virtual control planes.</b> The HP Helion OpenStack controllers are
+                        deployed onto virtual machines on a single host system. The controllers and
+                        the lifecycle manager are deployed on the same host system. In HP Helion
+                        OpenStack Carrier Grade, each of these components required a separate
+                        server.</li>
+                </ul>
+            </p>
         </section>
         <section id="usage"><title>Usage
                 Caveats</title><p><!--From WR jow1404333831397.xml--></p><b>Backup files in cloud
                 directories can cause installation to fail</b>
             <p>During the HP Helion OpenStack Carrier Grade installation, you will need to create
-                and eddit a number of JSON configuration files. You should create backups of these
+                and edit a number of JSON configuration files. You should create backups of these
                 files, in the event you need to reinstall. Create the backups in a directory on
                     <codeph>/root/</codeph> directory or on a remote system. Do not store backups of
                 the JSON files inside your cloud directory or any where inside the
@@ -509,7 +302,7 @@ hp3par_snapshot_expiration=72</codeblock>
                 <li>
                     <p>Jumbo frames are not supported on Mellanox NICs.</p>
                 </li>
-                <li>SR-IOV, PCI-PassThrough are not supported on Mellanox NICs.
+                <li>SR-IOV, PCI-Passthrough are not supported on Mellanox NICs.
                     <!--Per Vlad, Sanjib, Shantanu email--></li>
             </ul>
             <p><b>Installation does not fully utilize disks greater than two terabytes</b></p>
