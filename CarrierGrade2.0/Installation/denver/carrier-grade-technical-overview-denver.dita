@@ -37,7 +37,8 @@
       <p>The following diagram depicts a simplified deployment scenario of HP Helion OpenStack
         Carrier Grade.</p>
       <p>
-        <image href="../../../media/CGH-2-deploy-arch-denver-v10.png" width="800"/></p>
+        <image href="../../../media/carrier.grade.docs/CGH-21-deploy-arch-denver.png" width="800"
+        /></p>
       <p><b>Note:</b> Use the browser tools to expand and zoom in on the image as needed. Many
         browsers allow you to view only the image and have tools to zoom.</p>
       <p>The following sections describe essential aspects of this diagram.</p>
@@ -58,28 +59,24 @@
           </thead>
           <tbody>
             <row>
-              <entry> PXE-1</entry>
-              <entry>Boot/initial configuration network for non-KVM region controllers. Untagged </entry>
-            </row>
-            <row>
-              <entry>PXE-2</entry>
-              <entry>Boot/initial configuration network for KVM region controllers. Untagged
-              </entry>
-            </row>
-            <row>
-              <entry> CLM / MGMT</entry>
+              <entry> CLM </entry>
               <entry>Cloud Management Network. Shared between the Non-KVM and KVM regions.</entry>
             </row>
             <row>
-              <entry> CAN / OAM</entry>
+              <entry> CAN</entry>
               <entry>Consumer Access Network Shared between the Non-KVM and KVM regions.</entry>
+            </row>
+            <row>
+              <entry> EXT </entry>
+              <entry>Provider VLAN as an External network (provides that FIP pool for the KVM
+                region). </entry>
             </row>
             <row>
               <entry> CTL </entry>
               <entry>IPMI/iLO network. Shared between the Non-KVM and KVM regions.</entry>
             </row>
             <row>
-              <entry> BLS / INFRA</entry>
+              <entry> BLS</entry>
               <entry>Block Storage Network. Shared between the Non-KVM and KVM regions.</entry>
             </row>
             <row>
@@ -88,13 +85,18 @@
                 multiple data centers. </entry>
             </row>
             <row>
-              <entry> TUL/SR-IOV </entry>
-              <entry>Tenant Underlay Network for the KVM region </entry>
+              <entry>WR- PXE</entry>
+              <entry>Boot/initial configuration network for non-KVM region controllers. Untagged
+              </entry>
             </row>
             <row>
-              <entry> EXT </entry>
-              <entry>Provider VLAN as an External network (provides that FIP pool for the KVM
-                region). </entry>
+              <entry>VLAN-TUL</entry>
+              <entry>Tenant Underlay Network for the KVM region Virtual/PCI-PT/SR-IOV interfaces.
+                This is a set of tagged VLANs presented to multiple interfaces.</entry>
+            </row>
+            <row>
+              <entry>BR*</entry>
+              <entry>Linux bridges for standard controller VMs.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -104,10 +106,15 @@
       <title>Interfaces</title>
       <p>The following are the interfaces being used, based on the technical architecture diagram.
         You can use more than two interfaces and specific networks to physical networks.</p>
-      <ul>
+      <ul id="ul_zbt_3jj_w5">
         <li>Intf0 is mapped to Port1/Bonded Pair</li>
-        <li>Intf1 is mapped to Port2/Bonded Pair</li>
-        <li>Intf<i>n</i> are Multiple Provider Networks or SR-IOV interfaces.</li>
+        <li>Intf1 is mapped to Port2/Bonded Pair </li>
+        <li>Intf<i>n</i> are Multiple Provider Networks or SR-IOV interfaces (no bonding).</li>
+      </ul>
+      <p>Also note the following required interfaces:</p>
+      <ul id="ul_act_3jj_w5">
+        <li>Switch ports</li>
+        <li>Switch management port or iLO port</li>
       </ul>
     </section>
     <section id="routing-acls">
@@ -136,11 +143,31 @@
               <entry> CTL </entry>
               <entry> Access iLO network for managing the lifecycle of the node </entry>
             </row>
+            <row>
+              <entry>CLM </entry>
+              <entry>EXT</entry>
+              <entry>Access external public network </entry>
+            </row>
+            <row>
+              <entry>CLM</entry>
+              <entry>CAN</entry>
+              <entry>Access OpnStack APIs</entry>
+            </row>
+            <row>
+              <entry>DCM</entry>
+              <entry>CLM</entry>
+              <entry>VSC IP to lifecycle manager CLM VM IP - only during deployment</entry>
+            </row>
+            <row>
+              <entry>DCM1 </entry>
+              <entry>DCM2</entry>
+              <entry>Inter-datacenter communications (VLAN tunnel, BGP, MPLS)</entry>
+            </row>
           </tbody>
         </tgroup>
       </table>
-      <p>CLM, PXE-1, PXE-2, BLS, TUL should use RFC 1918 non-routable IPs to prevent access to these
-        networks from DCM, CTL, or EXT.</p>
+      <p>CLM, PXE, BLS, WR-PXE, VLAN-TUL should use RFC 1918 non-routable IPs to prevent access to
+        these networks from DCM, CTL, or EXT.</p>
       <p>DCM, CAN, and EXT should use routable IP addresses. DCM should be restricted to the
         corporate network. </p>
     </section>
