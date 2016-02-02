@@ -131,17 +131,21 @@ patch -p0 &lt; elk3.patch </codeblock></li>
           <li>Change to the <codeph>kenobi-configuration-processor</codeph>
             directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
           <li>Execute the <codeph>patch -p1</codeph> command for each patch:
-            <codeblock>patch -p1 &lt; ../kcp-ssl-implementation.patch
+              <codeblock>patch -p1 &lt; ../&lt;patch_name></codeblock><p>At the current patch level,
+              ecexute the following
+            commands:</p><codeblock>patch -p1 &lt; ../kcp-ssl-implementation.patch
 patch -p1 &lt; ../kcp-ssl-cert-v3.patch</codeblock></li>
         </ol>
       </section>
-      <section><title>Import the patch files into the Node Configuration</title>On the lifecycle
+      <section><title>Import the patch files into the Cloud Configuration</title>On the lifecycle
         manager VM, execute the following steps for each patch:<p>
           <ol id="ol_kkm_n1d_w5">
             <li>Change to the <codeph>kenobi-node-configuration</codeph>
               directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
-            <li>Execute the following command to install the second patch
-              <codeblock>patch -p1 &lt; ../knc-ssl-implementation.patch
+            <li>Execute the <codeph>patch -p1</codeph> command for each patch:
+                <codeblock>patch -p1 &lt; ../&lt;patch_name></codeblock><p>At the current patch
+                level, ecexute the following
+              commands:</p><codeblock>patch -p1 &lt; ../knc-ssl-implementation.patch
 patch -p1 -b &lt; ../icinga-random-password.patch
 patch -p1 -b &lt; ../knc-ssl-cert-v3.patch
 patch -p1 -b &lt; ../knc-logrotate.patch
