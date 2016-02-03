@@ -20,7 +20,7 @@
         >Helion Distribution Network (HDN)</xref>. You must <xref
         href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
         >obtain a user account on HDN</xref> in order to download these files.</p>
-    <p><!--Helion Carrier Grade 2.0 Horizon001 Patch002 post-deployment only--></p>
+    <p><!--Horizon001 Patch002 post-deployment only--></p>
     <bodydiv id="all">
       <section id="cobbler">
         <title>Deploy the Randomize Cobbler Password Patch <!-- "security patch"--></title>
@@ -167,15 +167,15 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
           </ol>
         </p>
       </section>
-      <section id="012"><title>Deploy the RabbitMQ Patch</title>This patch fixes a problem with the RabbitMQ
-        service installed on HP Helion OpenStack CarrierGrade. RabbitMQ was consuming excessive
-        memory. After deploying this patch, the Elasticsearch service's memory will be set to 50% of
-        free memory. If the free memory exceeds 32g then the memory will be set to 32g as per the
-        Elasticsearch guidelines. <p>In addition, this patch includes a script file that will delete
-          Logstash logs greater than 8 days old. The script file can be found on each controller in
-          the <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> directory. Modify cleanup schedule by
-          changing the <codeph>DAYS</codeph> variable in that file. </p><p>You should have
-          downloaded and extracted the <b
+      <section id="012"><title>Deploy the RabbitMQ Patch</title>This patch fixes a problem with the
+        RabbitMQ service installed on HP Helion OpenStack CarrierGrade. RabbitMQ was consuming
+        excessive memory. After deploying this patch, the Elasticsearch service's memory will be set
+        to 50% of free memory. If the free memory exceeds 32g then the memory will be set to 32g as
+        per the Elasticsearch guidelines. <p>In addition, this patch includes a script file that
+          will delete Logstash logs greater than 8 days old. The script file can be found on each
+          controller in the <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> directory. Modify
+          cleanup schedule by changing the <codeph>DAYS</codeph> variable in that file. </p><p>You
+          should have downloaded and extracted the <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/012"/>
           patch during the prerequisites. Extract the <codeph>rabbitmq.patch</codeph> and readme
           files. </p><ol id="ol_xqw_xgk_w5">
@@ -246,11 +246,11 @@ patch -p0 &lt; elk3.patch </codeblock></li>
         patch to change the logging of the services from INFO or DEBUG to WARNING. <!--HCG-1104-->.
           <!--DTMS--><p>You should have downloaded and extracted the <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/015"/>
-          patch during the prerequisites. Extract the <codeph id="15name">knc-debug-off.patch</codeph>
-          and readme files.</p><p>
+          patch during the prerequisites. Extract the <codeph id="15name"
+            >knc-debug-off.patch</codeph> and readme files.</p><p>
           <ol>
-            <li>On the lifecycle manager VM, copy the <codeph conref="#topic10581cgiptch/15name"/> file
-              to the <codeph>~/</codeph> directory. </li>
+            <li>On the lifecycle manager VM, copy the <codeph conref="#topic10581cgiptch/15name"/>
+              file to the <codeph>~/</codeph> directory. </li>
             <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
               directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
             <li> Execute the following command to deploy the patch:

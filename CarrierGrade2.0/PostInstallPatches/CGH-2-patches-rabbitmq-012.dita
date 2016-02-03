@@ -16,10 +16,10 @@
   </prolog>
   <body>
     <section id="horizon-patch">
-      <p>This patch fixes a problem with the RabbitMQ service installed on HP Helion OpenStack
-        CarrierGrade. RabbitMQ was consuming excessive memory. After deploying this patch, the
-        Elasticsearch service's memory will be set to 50% of free memory. If the free memory exceeds
-        32g then the memory will be set to 32g as per the Elasticsearch guidelines. </p>
+      <p>This patch fixes a problem with the logging of the RabbitMQ service installed on HP Helion
+        OpenStack CarrierGrade. RabbitMQ was consuming excessive memory. After deploying this patch,
+        the Elasticsearch service's memory will be set to 50% of free memory. If the free memory
+        exceeds 32g then the memory will be set to 32g as per the Elasticsearch guidelines. </p>
       <p>In addition, this patch includes a script file that will delete Logstash logs greater than
         8 days old. The script file can be found on each controller in the
           <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> directory. Modify cleanup schedule by
