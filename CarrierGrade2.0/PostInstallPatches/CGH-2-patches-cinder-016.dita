@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdplr">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Cinder
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section id="horizon-patch">
+      <p>This patch addresses a specific issue where a 3PAR volume cannot be deleted after the
+        instance has been deleted. </p>
+      <p>After live migration of a instance that is booted from a 3PAR cinder volume; the volume
+        cannot be deleted after the instance has been deleted. If there are any volumes in the above
+        state, this patch will not delete those volumes. You will still need to manually delete the
+        volumes. After adding this patch we will be able to delete these volumes.
+        <!--HCG-990 HCG-1013-->
+      </p>
+    </section>
+    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. </li>
+        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+          page.</li>
+        <li>Download the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/016"/>
+          patch and the associated checksum and signature files.</li>
+        <li>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</li>
+        <li>Extract the compressed files until the <codeph id="patch"
+            >HCG-cinder_live_migration</codeph> directory and readme files are available. <p>The
+            README with the patch download contains information on files changed by these
+            patches.</p></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+      <p>
+        <ol id="ol_p13_ghm_s5">
+          <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
+              HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Copy the <codeph conref="#topic10581pdplr/patch"/> file to the <codeph>~/</codeph>
+            directory. </li>
+          <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li> Execute the following command to deploy the patch:
+            <codeblock>patch -p1 &lt; ../knc-log.rotate.patch</codeblock></li>
+          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          <li>Execute the following
+            command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+          <li>Execute the following command run Ansible roles and Conclude role on all the tiers:
+              <ul id="ul_amv_2sb_w5">
+              <li>For Sacramento
+                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU NEU-API DCN-NEU ML2-SRIOV NEU-API-BAR Conclude"</codeblock></li>
+              <li>For Memphis and Tahoe
+                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU NEU-API DCN-NEU ML2-SRIOV Conclude"</codeblock></li>
+              <li> For Denver
+                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU Conclude"</codeblock></li>
+            </ul></li>
+        </ol>
+      </p>
+    </section>
+  </body>
+</topic>
