@@ -252,7 +252,7 @@ Password: cghelion</codeblock>
     </section>
     <section id="conref-wr-json">
       <title>Edit the wr.json file</title>
-      <p><b>For bonded NIC environments</b>, modify the <codeph>wr.json</codeph> file in the
+      <p><b>For bonded NIC environments only</b>, modify the <codeph>wr.json</codeph> file in the
           <codeph>/var/hlm/clouds/&lt;cloudname>/vars</codeph> directory on the lifecycle
         manager.</p>
     </section>
@@ -260,10 +260,11 @@ Password: cghelion</codeblock>
         file</xref>. </p>
     <section id="conref-mach-json">
       <title>Edit the machine_architecture.json file</title>
-      <p><b>For bonded NIC environments</b>, modify the <codeph>machine_architecture.json</codeph>
-        file in the <codeph>/opt/share/hlm/1/site/</codeph> directory of the lifecycle manager to
-        fit your hardware model. You have to gather the correct PCI SLOT INFO and add ports
-        accordingly on the hardware slots or cards used for networking.</p>
+      <p><b>For bonded NIC environments only</b>, modify the
+          <codeph>machine_architecture.json</codeph> file in the
+          <codeph>/opt/share/hlm/1/site/</codeph> directory of the lifecycle manager to fit your
+        hardware model. You have to gather the correct PCI SLOT INFO and add ports accordingly on
+        the hardware slots or cards used for networking.</p>
       <p>Click here to see a  <xref
         href="../json/carrier-grade-install-kvm-machine-json-bonded.dita#topic4797cgikmjb">sample
           machine_architecture.json file</xref>.</p>
