@@ -23,7 +23,7 @@
     <p><!--Horizon001 Patch002 post-deployment only--></p>
     <bodydiv id="all">
       <section id="cobbler">
-        <title>Deploy the Randomize Cobbler Password Patch <!-- "security patch"--></title>
+        <title>Deploy the Randomize Cobbler Password patch <!-- "security patch"--></title>
         <p>Cobbler is a build and deployment system that the HP Helion OpenStack Carrier Grade
           installation process uses. For security, you must generate a random password that will be
           passed to the installation process, rather than entering an explicit password through the
@@ -83,7 +83,7 @@
 HCG 2.0 WR002 Patch005 is covered in KVM install-->
       <!--HCG_2.0_DCN002_Patch006 is postinstall
 HCG 2.0 WR003 Patch007 is covered in KVM install-->
-      <section id="icinga"><title>Deploy the Icinga Random Password Patch</title>This patch must be
+      <section id="icinga"><title>Deploy the Icinga Random Password patch</title>This patch must be
         applied only after the HP Helion OpenStack Carrier Grade is fully deployed for the all cloud
         topologies to create a random password for Icinga.
           <!--<b>HCG2.0_Icinga001_Patch008</b>--><p>You should have downloaded <b
@@ -115,7 +115,7 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
             <li>Log out by clicking the <b>Root</b> menu, then <b>Logout</b>. </li>
           </ol>
         </p></section>
-      <section id="010"><title>Deploy the SSL Certificate Alternate Name Patch
+      <section id="010"><title>Deploy the SSL Certificate Alternate Name patch
           </title><p><!--HCG2.0_Horizon002_Patch009 is in Denver and Tahoe--></p>This patch fixes a
         problem with the HP Helion OpenStack Carrier Grade certificate. There is no Subject
         Alternate Name (SAN) specified in the certificate and is malformed as a result.
@@ -143,7 +143,7 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
           </ol>
         </p></section>
       <section>
-        <title>Deploy the baremetal service patch</title>
+        <title>Deploy the Baremetal Service patch</title>
         <p>This patch fixes issue where the baremetal service (Ironic) is not able to use the CAN
           endpoint. The patch sets the <codeph>OS_ENDPOINT_TYPE=internalURL</codeph> variable in the
             <codeph>stackrc</codeph> file that is generated on the HP Helion OpenStack controller
@@ -167,7 +167,7 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
           </ol>
         </p>
       </section>
-      <section id="012"><title>Deploy the RabbitMQ Patch</title>This patch fixes a problem with the
+      <section id="012"><title>Deploy the RabbitMQ patch</title>This patch fixes a problem with the
         RabbitMQ service installed on HP Helion OpenStack CarrierGrade. RabbitMQ was consuming
         excessive memory. After deploying this patch, the Elasticsearch service's memory will be set
         to 50% of free memory. If the free memory exceeds 32g then the memory will be set to 32g as
@@ -190,7 +190,7 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
           <li>Execute the following command to integrate the changes into the
             environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
         </ol></section>
-      <section id="13"><title>Deploy the Log Rotate Patch</title>This patch fixes a problem with the
+      <section id="13"><title>Deploy the Log Rotate patch</title>This patch fixes a problem with the
         RabbitMQ service installed on HP Helion OpenStack CarrierGrade. RabbitMQ was consuming
         excessive memory. After deploying this patch, the Elasticsearch service's memory will be set
         to 50% of free memory. If the free memory exceeds 32g then the memory will be set to 32g as
@@ -212,7 +212,7 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
               environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
           </ol></p></section>
       <section id="14">
-        <title>Deploy the ELK Patch</title>
+        <title>Deploy the ELK patch</title>
         <!--HCG2.0_ELK001_Patch014-->
         <p>This patch addresses the ELK (ElasticSearch, Logstash, Kibana) related issues listed
           below. </p>
@@ -242,7 +242,7 @@ patch -p0 &lt; elk3.patch </codeblock></li>
         </p>
       </section>
       <section id="15"><title>Deploy the Debug
-          Patch</title><p><!--Helion Carrier Grade 2.0 LOG002_Patch015--></p>This is an optional
+          patch</title><p><!--Helion Carrier Grade 2.0 LOG002_Patch015--></p>This is an optional
         patch to change the logging of the services from INFO or DEBUG to WARNING. <!--HCG-1104-->.
           <!--DTMS--><p>You should have downloaded and extracted the <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/015"/>

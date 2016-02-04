@@ -15,8 +15,8 @@
     </metadata>
   </prolog>
   <body>
-    <p>This patch must be applied only after the HP Helion OpenStack Carrier Grade is fully deployed
-      for the Tahoe, Memphis and Sacramento cloud topologies.</p>
+    <p>This patch fixes an issue that causes  the host name of active and standby VSC to be
+      identical.</p>
     <p><b>Note:</b> This patch is not required for the Denver topology.</p>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
@@ -42,19 +42,21 @@
     <section>
       <title>Install the patch</title>
       <p>The process for installing this patch is different for highly-available (HA) and non-HA
-        environments. Follow the procedure appropriate for your environment:<ul id="ul_owx_bc5_q5">
+        environments. A highly-available VSC environment will have two VSC controllers, one active
+        and one stand-by:</p>
+      <p>Follow the procedure appropriate for your environment:<ul id="ul_owx_bc5_q5">
           <li><xref href="#topic10581pdpv/ha" format="dita"/></li>
           <li><xref href="#topic10581pdpv/non-ha" format="dita"/></li>
         </ul></p>
     </section>
     <section id="ha">
       <title>Deploy the patch into a highly-available deployment</title>
-      <p>A highly-available VSC environment will have two VSC controllers, one active and one
-        stand-by. For highly-available deployments:</p>
+      <p>Execute the following commands for highly-available deployments:</p>
       <ol id="ol_ozs_5jt_q5">
-        <li id="a1">Execute the following command to backup the VSC configuration file:
+        <li id="a1">Log into the VSC VM.</li>
+        <li id="a2">Execute the following command to backup the VSC configuration file:
           <codeblock>scp admin@&lt;vsc ip>:/config.cfg  &lt;destination directory></codeblock></li>
-        <li id="a2">Log into the lifecycle manager VM.
+        <li id="a3">Log into the lifecycle manager VM.
             <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where: HLM_VM_IP is the CLM IP of the
             lifecycle manager. Locate the IP address for the lifecycle manager in the
               <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
@@ -77,7 +79,7 @@
           <codeblock>cp deploy.yml deploy.yml.ORIG</codeblock></li>
         <li id="4">Change to the
             <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/DCN-VSC/tasks</codeph>
-          directory. </li>
+          directory. <p>Where <codeph>&lt;cloud name></codeph> is the name of your cloud.</p></li>
         <li id="5">Backup the <codeph>deploy.yml</codeph> by copying the file to a new extension
           that is not YML. For example: <codeblock>cp deploy.yml deploy.yml.ORIG</codeblock></li>
         <li id="6">Replace <codeph>deploy.yml</codeph> files you backed-up with the
@@ -91,9 +93,9 @@
           extension that is not YML For example:
           <codeblock>cp deploy-CCP-T1.yml deploy-CCP-T1.yml.ORIG</codeblock></li>
       </ol>
-      <p><b>Retrieve the DCN host names</b></p>
+      <p id="dcnhost"><b>Retrieve the DCN host names</b></p>
       <p>If you do not know the names of your DCN host systems, use the following steps to retrieve
-        the hostnames:</p>
+        the host names:</p>
       <p conref="#topic10581pdpv/note"/>
       <ol id="ol_fny_4nt_q5">
         <li>Change to the
@@ -108,7 +110,7 @@ BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.20.x.x </codeblock></p></li>
       <p>Use the following steps to redeploy the virtual machine where the VSC is deployed on
         Host1.</p>
       <ol id="ol_ezp_trt_q5">
-        <li id="b1">Log into DCN host1. Using the example in the previous step,
+        <li id="b1">Log into DCN <codeph>host1</codeph>. Using the example in the previous section:
           BASE-CCP-T1-M1-NETCLM.</li>
         <li id="b2">Execute the following commands to remove the VSC
           VM:<codeblock>virsh list --all 
@@ -197,17 +199,18 @@ show vswitch-controller vsd </codeblock></li>
       </ol>
       <p><b>Redeploy the VSC VMs on DCN Host2</b></p>
       <p>Use the following steps to redeploy the virtual machine where the VSC is deployed on
-        Host2.</p>
+          <codeph>host2</codeph>.</p>
       <ol id="ol_wxp_lb5_q5">
-        <li>Log into DCN host2. Using the example in the previous step, BASE-CCP-T1-M2-NETCLM.</li>
+        <li>Log into DCN <codeph>host2</codeph>. Using the example in the previous section:
+          BASE-CCP-T1-M2-NETCLM.</li>
         <li conref="#topic10581pdpv/b2"/>
         <li conref="#topic10581pdpv/b3"/>
         <li conref="#topic10581pdpv/b4"/>
         <li>Modify the <codeph>deploy-CCP-T1.yml</codeph> file as below location of the file:
             <p>Edit the <codeph>hosts</codeph> value in the file with the host name you retrieved
-            from the hosts file previously. This has to be done in two places in the file, as shown
-            (bolding added for emphasis): </p><simpletable frame="all" relcolwidth="1.0* 1.0*"
-            id="simpletable_vg5_tf5_q5">
+            from the <codeph>hosts</codeph> file previously. This has to be done in two places in
+            the file, as shown (bolding added for emphasis): </p><simpletable frame="all"
+            relcolwidth="1.0* 1.0*" id="simpletable_vg5_tf5_q5">
             <strow>
               <stentry>Original file:</stentry>
               <stentry>Change to:</stentry>
@@ -287,6 +290,7 @@ max_fail_percentage: 0
       <ol id="ol_ssv_2yt_q5">
         <li conref="#topic10581pdpv/a1"/>
         <li conref="#topic10581pdpv/a2"/>
+        <li conref="#topic10581pdpv/a3"/>
       </ol>
       <p><b>Replace the QCOW and YML files with the new files</b></p>
       <p>Use the following steps to replace the QCOW and YML files on the HLM VM with new versions
@@ -301,7 +305,9 @@ max_fail_percentage: 0
         <li conref="#topic10581pdpv/6"/>
       </ol>
       <p><b>Remove the VSC VMs</b></p>
-      <p>Use the following steps to remove the virtual machine where the VSC is deployed.</p>
+      <p>Use the following steps to remove the virtual machine where the VSC is deployed. If you do
+        not know the names of your DCN host systems, see <xref href="#topic10581pdpv/dcnhost"
+          format="dita">Retrieve the DCN host names</xref> above. </p>
       <ol id="ol_kps_myt_q5">
         <li conref="#topic10581pdpv/b1"/>
         <li conref="#topic10581pdpv/b2"/>

@@ -19,7 +19,11 @@
       <p>This patch fixes issue where the baremetal service (Ironic) is not able to use the CAN
         endpoint. The patch sets the <codeph>OS_ENDPOINT_TYPE=internalURL</codeph> variable in the
           <codeph>stackrc</codeph> file that is generated on the HP Helion OpenStack controller
-        nodes. <codeph>HCG-1116</codeph></p>
+        nodes. <!--HCG-1116--></p>
+      <p>If the <codeph>stackrc</codeph> file is present in the <codeph>/root/</codeph> directory on
+        any HP Helion OpenStack controller, and the file has an entry for <codeph>export
+          OS_ENDPOINT_TYPE=internalURL</codeph>, this patch was applied during installation. You can
+        disregard these steps.</p>
       <p><b>Note:</b> This patch is for Sacramento deployments only.</p>
     </section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
@@ -52,7 +56,7 @@
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
               lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Copy the <codeph conref="#topic10581pdpbm/patch2"/> and file to the
+          <li>Copy the <codeph conref="#topic10581pdpbm/patch"/> and file to the
               <codeph>/~</codeph> directory. </li>
           <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
             directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
@@ -63,7 +67,8 @@
           <li>Execute the following command to integrate the changes into the
             environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
           <li>Execute the following
-            command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+              command:<codeblock>hlm generate -c &lt;cloud name></codeblock><p>Where
+                <codeph>&lt;cloud name></codeph> is the name of your cloud.</p></li>
           <li>Execute the following command to redeploy the Horizon UI:
             <codeblock>hlm deploy -c &lt;cloud name> -t "STACKRC" </codeblock></li>
         </ol>
@@ -71,9 +76,10 @@
     </section>
     <section>
       <title>Verify the patch</title>
-      <p>SSH to any HP Helion OpenStack controller node and check that the <codeph>stackrc</codeph>
-        file is present in the <codeph>/root/</codeph> directory and has an entry for <codeph>export
-          OS_ENDPOINT_TYPE=internalURL</codeph>.</p>
+      <p>SSH to any HP Helion OpenStack controller node and check that the
+          <systemoutput>stackrc</systemoutput> file is present in the
+          <systemoutput>/root/</systemoutput> directory and has an entry for <systemoutput>export
+          OS_ENDPOINT_TYPE=internalURL</systemoutput>.</p>
     </section>
   </body>
 </topic>

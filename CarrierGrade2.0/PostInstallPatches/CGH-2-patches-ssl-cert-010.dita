@@ -17,7 +17,13 @@
   <body>
     <section id="horizon-patch">This patch fixes a problem with the HP Helion OpenStack Carrier
       Grade certificate. There is no Subject Alternate Name (SAN) specified in the certificate and
-      is malformed as a result. <!--HCG-1201-->. </section>
+      is malformed as a result. <!--HCG-1201-->
+    </section>
+    <section>
+      <title>Prerequisite</title>
+      <p>This patch requires the <xref href="CGH-2-patches-ssl.dita#topic10581pdps">SSL patch
+          (HCG2.0_Heat001_Patch003)</xref> to be applied first.</p>
+    </section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
@@ -64,7 +70,8 @@
           <li>Execute the following command to integrate the changes into the
             environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
           <li>Execute the following
-            command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+              command:<codeblock>hlm generate -c &lt;cloud name></codeblock><p>Where
+                <codeph>&lt;cloud name></codeph> is the name of your cloud.</p></li>
           <li>Execute the following command to redeploy the Horizon UI:
             <codeblock>hlm deploy -c &lt;cloud name> -t "FND-CLU FND-STN HZN-WEB WR-HZN" </codeblock></li>
           <li>Change to the KVM region configuration directory
@@ -77,13 +84,6 @@
             <codeblock>service haproxy restart</codeblock></li>
         </ol>
       </p>
-    </section>
-    <section>
-      <title>Verify the patch</title>
-      <p>After applying the patch, log into Horizon. You should by default be logged into WR region
-        which is "regionone" </p>
-      <p><b>Note:</b> The region drop-down in Horizon continues to show non-KVM region, but nothing
-        will happen when you select the non-KVM region.</p>
     </section>
   </body>
 </topic>

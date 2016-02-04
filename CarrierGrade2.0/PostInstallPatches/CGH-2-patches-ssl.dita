@@ -14,16 +14,14 @@
     </metadata>
   </prolog>
   <body>
-    <section id="ssl"><p>If you did not deploy the <codeph>kcp-ssl-implementation.patch</codeph>
-        during installation, perform the following steps: <!--HCG-998--></p><p>This patch addresses
-        a number of issues. </p><p><b>Note:</b> If you can view statistics in
-          <codeph>regionkvm</codeph>, from the <b>Stats</b> tab on the <b>Resource Usage
-          Overview</b> page, you can disregard these steps. Select the <codeph>regionkvm</codeph>,
-        then click <b>Admin</b>, then <b>System</b>, and <b>Resrouce Usage</b>. Click the
-          <b>Stats</b> table.</p>You should have downloaded the following patch files during the
-      prerequisites: <!--HCG-998--><ul id="ul_i42_qhz_35">
-        <li>kcp-ssl-implem</li>
-      </ul></section>
+    <section id="ssl">
+      <p>This patch addresses a number of issues. </p>
+      <p>If you can view statistics in <codeph>regionkvm</codeph> using the Horizon UI, from the
+          <b>Stats</b> tab on the <b>Resource Usage Overview</b> page,  you applied  this patch
+        during installation, disregard these steps. Select the <codeph>regionkvm</codeph>, then
+        click <b>Admin</b>, then <b>System</b>, and <b>Resrouce Usage</b>. Click the <b>Stats</b>
+        table. <!--HCG-998--></p>
+    </section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
@@ -48,10 +46,7 @@
       </ol></section>
     <section>
       <title>Install the patch</title>
-      <p>The patch is in a compressed file called <codeph>HCG2.0_Heat001_Patch003.tar.gz</codeph>.
-        The README with the patch download contains information on files changed by these
-        patches.</p>
-      <p>To prevent this condition, execute the following commands:<ol id="ol_j42_qhz_35">
+      <p>Execute the following commands:<ol id="ol_j42_qhz_35">
           <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
               lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
@@ -70,7 +65,8 @@
           <li>Execute the following command to integrate the changes into the
             environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
           <li>Execute the following
-            command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+              command:<codeblock>hlm generate -c &lt;cloud name></codeblock><p>Where
+                <codeph>&lt;cloud name></codeph> is the name of your cloud. </p></li>
           <li>Execute the following command to create haproxy, stunnel and horizon roles
             <codeblock>hlm deploy -c &lt;cloud name> -t "FND-CLU FND-STN HZN-WEB WR-HZN" </codeblock></li>
           <li>Change to the following directory:
@@ -82,7 +78,7 @@
           <li>Execute the following command on KVM region <codeph>controller-0</codeph> to restart
             the haproxy service: <codeblock>service haproxy restart</codeblock></li>
           <li>Log onto the KVM region <codeph>controller-1</codeph>, the standby controller.</li>
-          <li>Copy contents of <codeph>cakey.pem</codeph> file on the lifycycle manager to the
+          <li>Copy contents of <codeph>cakey.pem</codeph> file on the lifecycle manager to the
               <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph> directory on
             KVM region <codeph>controller-0</codeph>. Make sure you make a backup copy of the
               <codeph>server-cert.pem</codeph> before the copy operation.</li>

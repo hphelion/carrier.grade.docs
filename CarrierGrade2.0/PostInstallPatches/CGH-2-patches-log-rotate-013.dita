@@ -16,9 +16,15 @@
   </prolog>
   <body>
     <section id="horizon-patch">
-      <p>I have set the logrotate to execute every hour, this will lessen the disk space that are
-        used by the logfiles, because the logs beyond 2 hours will be compressed already.
-        <!--HCG-1103--></p>
+      <p>This patch changes the <xref href="http://www.linuxcommand.org/man_pages/logrotate8.html"
+          format="html" scope="external">Linux logrotate program</xref> to run hourly and configures
+        logging of other services that where previously not being rotated by logrotate. Increasing
+        this frequency reduces the disk space used by the log files The logrotate program archives
+        specified logs and creates new logs to replace the archived logs. The logrotate logs are
+        saved in the <codeph>/var/log/</codeph> directory. </p>
+      <p>If the logrotate configuration files, <codeph>/etc/logrotate.d</codeph> or <codeph>
+          /etc/logrotate.conf</codeph>, specify an hourly rotation interval, this patch was applied
+        during installation. You can disregard these steps.   </p>
     </section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
@@ -50,7 +56,7 @@
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
               lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Copy the <codeph conref="#topic10581pdplr/patch"/> file to the <codeph>/root/</codeph>
+          <li>Copy the <codeph conref="#topic10581pdplr/patch"/> file to the <codeph>~/</codeph>
             directory. </li>
           <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
             directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
@@ -62,7 +68,8 @@
             environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
           <li>Execute the following
             command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
-          <li>Execute the following command to redeploy the Horizon UI: <ul id="ul_amv_2sb_w5">
+          <li>Execute the following command run Ansible roles and Conclude role on all the tiers:
+              <ul id="ul_amv_2sb_w5">
               <li>For Sacramento
                 deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU NEU-API DCN-NEU ML2-SRIOV NEU-API-BAR Conclude"</codeblock></li>
               <li>For Memphis and Tahoe

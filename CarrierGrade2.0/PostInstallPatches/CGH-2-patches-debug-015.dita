@@ -2,7 +2,8 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdpdebug">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Debug Patch</title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Debug Off
+    Patch</title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -17,6 +18,9 @@
     <section id="horizon-patch">
       <p>This is an optional patch to change the logging of the services from INFO or DEBUG to
         WARNING. <!--HCG-1104--></p>
+      <p>If the <codeph>/etc/glance/api-logging.conf</codeph> and
+          <codeph>/etc/glance/registry-logging.conf</codeph> files both have the log level set to
+        INFO, this patch was applied during installation. You can disregard these steps. </p>
     </section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"

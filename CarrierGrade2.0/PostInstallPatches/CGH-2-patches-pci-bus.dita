@@ -19,18 +19,9 @@
       topologies. </p>
     <p>If you did not deploy this patch, <codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph> during
       installation, perform the following steps. </p>
-    <p>You should have downloaded the following patch files during the prerequisites. The patch is
-      in a compressed file called <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>. The README
-      with the patch download contains information on files changed by these patches.</p>
     <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
         <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
         <b>Inventory</b>. Click the <b>Patches</b> table.</p>
-    <p>This patch can be applied to KVM region in one of the following scenarios: <ul
-        id="ul_vkz_w1t_q5">
-        <li>after the cloud is deployed and KVM region is already up;</li>
-        <li>before the KVM region has been deployed (before the <codeph>config_region</codeph>
-          command has been executed)..</li>
-      </ul></p>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
@@ -53,18 +44,16 @@
           <codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph>, readme.txt and usecase.txt files are
           available.</li>
       </ol></section>
-    <section><title>Deploy the patch on an existing system</title>If the cloud is deployed and KVM
-      region is already up, perform the following steps to deploy this patch: <p><b>Patch the
-          standby controller</b></p><p><b>Important:</b> Make sure the <xref
+    <section><title>Install the patch</title>Execute the following commands: <p><b>Patch the standby
+          controller</b></p><p><b>Important:</b> Make sure the <xref
           href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch</xref> has
         been applied.</p><ol id="ol_erh_3xs_q5">
-        <li>SSH into active controller in the KVM region. For example: <codeph>controller-0</codeph>
-        </li>
+        <li>SSH into the active controller in the KVM region. <p>For example:
+              <codeph>controller-0</codeph>. </p></li>
         <li>Create a directory for the patch, if the directory does not
           exist:<codeblock>mkdir -p /tmp/patches</codeblock></li>
         <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:<ul>
-            <li><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph><p>You should have downloaded this
-                patch file in the Prerequisites. </p></li>
+            <li><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></li>
           </ul></li>
         <li>Execute the following commands:
           <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0002.patch                </codeblock></li>
@@ -74,7 +63,7 @@
           hosts:<codeblock>sudo sw-patch query-hosts</codeblock></li>
         <li>Execute the following command to deploy the
           patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0002.patch</codeblock></li>
-        <li>Execute the following command to set the environment variables in the Open Stack RC
+        <li>Execute the following command to set the environment variables in the OpenStack RC
           file:<codeblock>source /etc/nova/openrc</codeblock></li>
         <li>Execute the following command to patch and reboot the standby controller:
             <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>Wait until the
@@ -86,11 +75,12 @@
             the active controller from <codeph>controller-0</codeph> to
               <codeph>controller-1</codeph>:<codeblock>system host-swact controller-0</codeblock></p></li>
         <li>Exit the SSH session and SSH into the newly active controller.</li>
-        <li>Execute the following command to set the environment variables in the Open Stack RC
+        <li>Execute the following command to set the environment variables in the OpenStack RC
           file:<codeblock>source /etc/nova/openrc</codeblock></li>
       </ol><p><b>Patch the new standby controller</b></p><p>Log onto the newly active controller and
         patch the standby controller.</p><ol id="ol_ovz_4s4_j5">
-        <li>SSH into the newly active controller. For example: <codeph>controller-1</codeph>.</li>
+        <li>SSH into the newly active controller. <p>For example:
+          <codeph>controller-1</codeph>.</p></li>
         <li>Execute the following command: <codeblock>source /etc/nova/openrc</codeblock></li>
         <li>Execute the following command to patch and reboot the standby controller:
             <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if

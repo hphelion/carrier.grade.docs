@@ -15,13 +15,11 @@
     </metadata>
   </prolog>
   <body>
-    <section id="horizon-patch">If you are unable to create a PCI-Passthrough or SR-IOV interface
-      using the Horizon UI, but can create those interfces using CLI, you need to apply the Horizon
-      Patch. <p><b>Note:</b> If you applied the Horizon Patch, <codeph>WR-HZN-1011</codeph> during
-        installation, and can create PCI-Passthrough or SR-IOV interfaces in Horizon, disregard
-        these steps. </p><p>Due to an API error, you cannot create a PCI-Passthrough or SR-IOV
-        interface using the Horizon UI. To correct this issue, deploy the following patch.
-        <!--HCG-1011/1012--></p></section>
+    <section id="horizon-patch">This patch fixes an API error that prevents a user from creating a
+      PCI-Passthrough or SR-IOV interface using the Horizon UI. The user was able create those
+      interfces using CLI. <p>If you can create PCI-Passthrough and SR-IOV interfaces in Horizon,
+        this patch was applied during installation, disregard these steps.
+      <!--HCG-1011/1012--></p></section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
@@ -45,9 +43,6 @@
       </ol></section>
     <section>
       <title>Install the patch</title>
-      <p>The patch is in a compressed file called
-        <codeph>HCG2.0_Horizon001_Patch002.tar.gz</codeph>. The README with the patch download
-        contains information on files changed by these patches.</p>
       <p>Execute the following commands:<ol id="ol_imr_fgt_25">
           <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
