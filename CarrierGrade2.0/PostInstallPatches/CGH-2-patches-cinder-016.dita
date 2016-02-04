@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
-<topic xml:lang="en-us" id="topic10581pdplr">
+<topic xml:lang="en-us" id="topic10581pdpc">
   <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Cinder
     Patch</title>
   <prolog>
@@ -44,39 +44,26 @@
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
             >downloaded checksums</xref>.</li>
         <li>Extract the compressed files until the <codeph id="patch"
-            >HCG-cinder_live_migration</codeph> directory and readme files are available. <p>The
-            README with the patch download contains information on files changed by these
-            patches.</p></li>
+            >HCG-cinder_live_migration</codeph> directory is available. The directory contains the
+            <codeph>metatdata.tar.gz</codeph> and readme files.<p>The README with the patch download
+            contains information on files changed by these patches.</p></li>
       </ol></section>
     <section>
       <title>Install the patch</title>
       <p>
         <ol id="ol_p13_ghm_s5">
-          <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
-              HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
-              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
-              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Copy the <codeph conref="#topic10581pdplr/patch"/> file to the <codeph>~/</codeph>
-            directory. </li>
-          <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
-            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li>Log onto the lifecycle manager host.<codeblock>ssh &lt;HLM_IP></codeblock></li>
+          <li>Copy the complete <codeph>HCG-cinder_live_migration</codeph> directory to
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on the lifecycle
+            manager host. </li>
           <li> Execute the following command to deploy the patch:
-            <codeblock>patch -p1 &lt; ../knc-log.rotate.patch</codeblock></li>
-          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
-            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
-          <li>Execute the following command to integrate the changes into the
-            environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
-          <li>Execute the following
-            command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
-          <li>Execute the following command run Ansible roles and Conclude role on all the tiers:
-              <ul id="ul_amv_2sb_w5">
-              <li>For Sacramento
-                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU NEU-API DCN-NEU ML2-SRIOV NEU-API-BAR Conclude"</codeblock></li>
-              <li>For Memphis and Tahoe
-                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU NEU-API DCN-NEU ML2-SRIOV Conclude"</codeblock></li>
-              <li> For Denver
-                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU Conclude"</codeblock></li>
-            </ul></li>
+              <codeblock>hlm patch -c &lt;cloud-name> -n HCG-cinder_live_migration -t &lt;controller tier></codeblock><p>Where
+              &lt;cloud name> is the name of your cloud and <codeph>controller tier</codeph> is the
+              tier on which the various controllers are running. The tier information can be found
+              in the
+                <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
+              file.</p><p>For
+              example:<codeblock>hlm patch -c cloud1 -n HCG-cinder_live_migration -t BASE-CCP-T1</codeblock></p></li>
         </ol>
       </p>
     </section>
