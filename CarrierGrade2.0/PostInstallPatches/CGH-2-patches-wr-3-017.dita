@@ -14,7 +14,15 @@
     </metadata>
   </prolog>
   <body>
-    <p>This patch addresses a number of issues in the KVM region.</p>
+    <p>This patch addresses a number of issues in the KVM region, including:<ul id="ul_n5w_gk2_x5">
+        <li>Correct an issue with failure to establish SSH connection to Board Management
+          Controller</li>
+        <li>Correct VM migration issues while applying a patch to a live cloud</li>
+        <li>Correct an issue wth controllers auto-swacting</li>
+        <li>Fix the Linux grub backspace vulnerability</li>
+        <li>Fix an issue with computes degrading after applying
+            <codeph>HP_15_Custom_PATCH_0003</codeph></li>
+      </ul></p>
       <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
         <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
         <b>Inventory</b>. Click the <b>Patches</b> table for the
