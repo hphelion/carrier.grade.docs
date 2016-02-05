@@ -58,10 +58,10 @@
           present:<codeblock>mkdir -p /tmp/patches</codeblock></li>
         <li>Copy the <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph> patch file to the
             <codeph>/tmp/patches</codeph> directory.</li>
-        <li>Execute the following command to upload the patch to the database:
+        <li>Execute the following command to upload the patch to the repository:
           <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0001_2.patch</codeblock></li>
         <li>Execute the following command to check if the patch is available for
-              installation:<codeblock>sudo sw-patch query</codeblock><p><image
+            installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
               href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
               id="image_tft_ncg_x5"/></p></li>
         <li>Execute the following command to check the current state of all the
@@ -98,14 +98,12 @@ source /etc/nova/openrc</codeblock></li>
           <codeblock>system host-patch-reboot compute-1</codeblock></li>
       </ol></section>
     <section id="remove">
-      <title>Remove Patch001and then install patch</title>
+      <title>Remove Patch001</title>
       <p>If you have deployed <codeph>HCG2.0_WR001_Patch001</codeph>, use the following steps to
-        remove that patch and install the Partch005.</p>
+        remove that patch.</p>
       <p><b>Note:</b> You can refer to the <xref
           href="../AdminGuide/carrier-grade-admin-guide.dita#topic15959cgag">KVM Region
           Administrator Guide</xref> for more information on removing patches.</p>
-      <p>Execute the following commands to remove <codeph>HCG2.0_WR001_Patch001</codeph>, if
-          installed:</p>
         <ol id="ol_erq_vmx_w5">
           <li>SSH into active controller in the KVM region. <p>For example:
                 <codeph>controller-0</codeph>
@@ -119,11 +117,11 @@ source /etc/nova/openrc</codeblock></li>
             patch:<codeblock>sudo sw-patch remove HCG2.0_WR001_Patch001</codeblock></li>
           <li>If you execute another query command, the <b>Patch State</b> will be
               <b>Partial-Remove</b>.<codeblock>sudo sw-patch query</codeblock></li>
-          <li>Execute the following command to query the patching status of all hosts in the
-            cluster: <codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot
-              Required</b> state will be <b>Yes</b>.<p><image
-                href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png"
-                id="image_j4z_gyf_x5" width="500"/></p></li>
+          <li>Execute the following commands to check the current state of all the hosts:
+          <codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b> state
+          will be <b>Yes</b>. For example:<p><image
+              href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png" id="image_j4z_gyf_x5"
+              width="500"/></p></li>
           <li>Execute the following command to reboot the stanby
               controller:<codeblock>system host-patch-reboot controller-#</codeblock><p>For example
               if <codeph>controller-1</codeph> is the standby
