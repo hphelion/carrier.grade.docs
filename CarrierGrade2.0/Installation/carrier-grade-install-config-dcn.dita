@@ -184,13 +184,13 @@ Password: cghelion</codeblock>
       <ol id="ol_vjv_252_x5">
         <li>On the system where the patch file is located, extract the compressed files until the
             <codeph>HCG-CurlScript</codeph> directory is available. </li>
-        <li>Copy the complete <codeph>HCG-CurlScript</codeph> to
+        <li>Copy the complete <codeph>HCG-CurlScript</codeph> directory to
             <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on lifecycle manager
-          host. </li>
+          host. <p>Where <codeph>&lt;cloud name></codeph> is the name of your cloud.</p></li>
         <li>Execute following command to apply patch
           <codeblock>hlm patch -c &lt;cloud-name> -n HCG-CurlScript -t localhost</codeblock></li>
-        <li>Once the above patch is deployed, the <codeph>vrsg_curl_script.tar</codeph> is installed
-          in the <codeph>/opt</codeph> directory on lifecycle manager VM. </li>
+        <li>Once the patch is deployed, the <codeph>vrsg_curl_script.tar</codeph> is installed in
+          the <codeph>/opt</codeph> directory on lifecycle manager VM. </li>
         <li>Execute the following command to extract the <codeph>vrsg_curl_script.tar</codeph> file:
             <codeblock>tar -vxf vrsg_curl_script.tar</codeblock><p>The following files are
             extracted:</p><ul id="ul_dss_2p2_x5">
@@ -210,6 +210,7 @@ Password: cghelion</codeblock>
       <p>This script creates the uplink on the VRS-G, which is a requirement for the EXT-NET to
         function with HP Helion OpenStack Carrier Grade. </p>
       <ol id="ol_ks4_zhj_1t">
+        <li>On lifecycle manager host, change to the <codeph>/opt</codeph> directory.</li>
         <li>Modify the appropriate cURL script for your environment:<ul id="ul_bzs_r1c_1t">
             <li>FIP_NAME is the one that is retrieved from previous step.</li>
             <li>GW_NAME is the redundant gateway name.</li>
