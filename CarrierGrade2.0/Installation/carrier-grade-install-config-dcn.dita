@@ -171,35 +171,54 @@ Password: cghelion</codeblock>
             in the following step.</p></li>
       </ol>
     </section>
+    <section id="cURL-patch">
+      <title>Install a cURL script to enable floating IPs on the VRS-G</title>
+      <p>You should have downloaded the <b
+          conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"/>
+        file during the prerequisites. If you have not downloaded the patch, launch the <xref
+          href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref> and locate the patch file and
+        the associated checksum and signature files. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>
+      <ol id="ol_vjv_252_x5">
+        <li>On the system where the patch file is located, extract the compressed files until the
+            <codeph>HCG-CurlScript</codeph> directory is available. </li>
+        <li>Copy the complete <codeph>HCG-CurlScript</codeph> to
+            <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on lifecycle manager
+          host. </li>
+        <li>Execute following command to apply patch
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-CurlScript -t localhost</codeblock></li>
+        <li>Once the above patch is deployed, the <codeph>vrsg_curl_script.tar</codeph> is installed
+          in the <codeph>/opt</codeph> directory on lifecycle manager VM. </li>
+        <li>Execute the following command to extract the <codeph>vrsg_curl_script.tar</codeph> file:
+            <codeblock>tar -vxf vrsg_curl_script.tar</codeblock><p>The following files are
+            extracted:</p><ul id="ul_dss_2p2_x5">
+            <li>curl_vrsg_ha.sh -- The cURL script for a high availability environment -- production
+              deployments are high availability; </li>
+            <li>curl_vrsg_ha.txt</li>
+            <li>curl_vrsg_single.sh -- The cURL script for a non-high availability environment --
+              non-HA environments are for proof-of-concept only and not supported for production
+              environments.</li>
+            <li>curl-vrsg_single.txt </li>
+          </ul></li>
+      </ol>
+    </section>
     <section id="curl">
-      <title>Run a cURL script to enable floating IPs on the VRS-G</title>
+      <title>Run the cURL script to enable floating IPs</title>
     
       <p>This script creates the uplink on the VRS-G, which is a requirement for the EXT-NET to
         function with HP Helion OpenStack Carrier Grade. </p>
       <ol id="ol_ks4_zhj_1t">
-        <li>Copy the code from one of the following pages to a new file on the lifecycle manager
-          host. <ul id="ul_vxf_nzw_q5">
-            <li>
-              <p>For a <xref href="carrier-grade-install-config-dcn-cURL-HA.dita#topic10581cgicd"
-                  >cURL script for a high availability environment</xref> -- production deployments
-                are high availability; </p>
-            </li>
-            <li>
-              <p>For a <xref href="carrier-grade-install-config-dcn-cUR.dita#topic10581cgicd">cURL
-                  script for a non-high availability environment</xref> -- non-HA environments are
-                for proof-of-concept only and not supported for production environments. </p>
-            </li>
-          </ul></li>
-        <li>Save the file to any name with the <codeph>.sh</codeph> file type. For example:
-            <codeph>curl.sh</codeph>.</li>
-        <li>Modify the cURL script for your environment:<ul id="ul_bzs_r1c_1t">
+        <li>Modify the appropriate cURL script for your environment:<ul id="ul_bzs_r1c_1t">
             <li>FIP_NAME is the one that is retrieved from previous step.</li>
             <li>GW_NAME is the redundant gateway name.</li>
             <li>All the UPLINK info are from the core switch on their specific testbed</li>
           </ul></li>
         <li>Save and close the script.</li>
         <li>Execute the cURL script <codeblock>bash +x &lt;script_name>.sh</codeblock><p>Where:
-            &lt;script_name> is the name of the cURL script you created.</p></li>
+            &lt;script_name> is the name of the cURL script you created.</p><p>For
+            example:<codeblock>bash +x curl_vrsg_ha.txt</codeblock></p></li>
         <li>Use the VSD dashboard to confirm that uplink port appears <ol id="ol_gdy_f3s_nt">
             <li>Click <b>Monitoring Console</b>.</li>
             <li>Click <b>Nuage-VSP</b>, then the VSC-1, then the VRS-G node under VRs. The IP
