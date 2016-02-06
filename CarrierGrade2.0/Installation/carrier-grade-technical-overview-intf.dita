@@ -17,47 +17,28 @@
   <body>
     <p>This page introduces you to the service architecture diagrams and interface details for the
       HP Helion OpenStack Carrier Grade environment that you will be installing.</p>
-    <section id="diagrams"><title>Service Architecture Diagrams</title><p><b>VRS:
-          Tahoe/Memphis/Sacramento deployments</b></p><p>The following diagram represents the
-        control plane interfaces for the <xref
-          href="sacramento/carrier-grade-technical-overview-sacramento.dita#topic3485cgtos/deploy-arch"
-          >Sacramento</xref> deployment. The <xref
-          href="memphis/carrier-grade-technical-overview-memphis.dita#topic3485cgtom/deploy-arch"
-          >Memphis</xref> and <xref
-          href="tahoe/carrier-grade-technical-overview-tahoe.dita#topic3485cgtot/deploy-arch"
-          >Tahoe</xref> deployments are based on this model, without the baremetal region.
-        </p><p>See the legend below for more information and <xref href="#topic3485cgtoi/interfaces"
-          format="dita"/> for details on each interface.</p><p>
-        <image href="../../media/CGH-2-control-plane-intf.png" id="image_mrd_1jc_f5"/></p><p><b>Data
-          Plane Interfaces </b></p>The following diagram represents the data plane interfaces for
-      the Sacramento deployment. The Memphis and Tahoe deployments are based on this model, without
-      the baremetal region. See the legend below for more information and <xref
-        href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.<p/><image
-        href="../../media/CGH-2-data-plane-intf.png" id="image_tlh_2jc_f5"
-        /><p><b>Legend</b></p><p>Dotted lines show different security domains.</p><p>Lines between
-        components show interactions. Colors of these lines help classify the interactions into the
-        following categories:</p><ul id="ul_yls_r3c_f5">
-        <li><b>Purple:</b> Lifecycle manager, bi-directional</li>
-        <li><b>Gold:</b> Distributed Cloud Networking (DCN), bi-directional</li>
-        <li><b>Red:</b> API access to the cloud</li>
-        <li><b>Green:</b> Storage</li>
-        <li><b>Black:</b> Compute control, bi-directional</li>
-        <li><b>Blue:</b> Shared component access</li>
-      </ul><p><b>AVS: Denver deployment</b></p><p><b>Control and Data Plane Interfaces</b></p><p>
-        The following diagram represents the control and data plane interfaces for the Denver
+    <section id="diagrams">
+      <title>Service Architecture Diagrams</title>
+      <!--<p><b>VRS: Tahoe/Memphis/Sacramento deployments</b></p><p>The following diagram represents the control plane interfaces for the <xref href="sacramento/carrier-grade-technical-overview-sacramento.dita#topic3485cgtos/deploy-arch">Sacramento</xref> deployment. The <xref href="memphis/carrier-grade-technical-overview-memphis.dita#topic3485cgtom/deploy-arch">Memphis</xref> and <xref href="tahoe/carrier-grade-technical-overview-tahoe.dita#topic3485cgtot/deploy-arch">Tahoe</xref> deployments are based on this model, without the baremetal region. </p><p>See the legend below for more information and <xref href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.</p><p> <image href="../../media/CGH-2-control-plane-intf.png" id="image_mrd_1jc_f5"/></p><p><b>Data Plane Interfaces </b></p>The following diagram represents the data plane interfaces for the Sacramento deployment. The Memphis and Tahoe deployments are based on this model, without the baremetal region. See the legend below for more information and <xref href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.<p/><image href="../../media/CGH-2-data-plane-intf.png" id="image_tlh_2jc_f5"/><p><b>Legend</b></p><p>Dotted lines show different security domains.</p><p>Lines between components show interactions. Colors of these lines help classify the interactions into the following categories:</p><ul id="ul_yls_r3c_f5"><li><b>Purple:</b> Lifecycle manager, bi-directional</li><li><b>Gold:</b> Distributed Cloud Networking (DCN), bi-directional</li><li><b>Red:</b> API access to the cloud</li><li><b>Green:</b> Storage</li><li><b>Black:</b> Compute control, bi-directional</li><li><b>Blue:</b> Shared component access</li></ul>-->
+      <p><b>AVS: Denver deployment</b></p>
+      <p><b>Control and Data Plane Interfaces</b></p>
+      <p> The following diagram represents the control and data plane interfaces for the Denver
         deployment. See the legend below for more information and <xref
           href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.<image
-          href="../../media/CGH-2-ctrl-data-plane-intf.png" id="image_yyy_hjc_f5"
-          /></p><p><b>Legend</b></p><p>Dotted lines show different security domains.</p><p>Lines
-        between components show interactions. Colors of these lines help classify the interactions
-        into the following categories:</p><ul id="ul_x2y_yz3_f5">
+          href="../../media/CGH-2-ctrl-data-plane-intf.png" id="image_yyy_hjc_f5"/></p>
+      <p><b>Legend</b></p>
+      <p>Dotted lines show different security domains.</p>
+      <p>Lines between components show interactions. Colors of these lines help classify the
+        interactions into the following categories:</p>
+      <ul id="ul_x2y_yz3_f5">
         <li><b>Purple:</b> Lifecycle manager, bi-directional</li>
         <li><b>Gold:</b> Networking, bi-directional</li>
         <li><b>Red:</b> API access to the cloud</li>
         <li><b>Green:</b> Storage</li>
         <li><b>Black:</b> Compute control, bi-directional</li>
         <li><b>Blue:</b> Shared component access</li>
-      </ul></section>
+      </ul>
+    </section>
     <section id="interfaces">
       <title>Interfaces</title>
       <p>See the Serivce Architecture Diagrams above.</p>
@@ -872,14 +853,9 @@
     </section>
     <p>Return to the Technical Overview for:<ul id="ul_cch_jv4_45">
         <li><xref
-          href="tahoe/carrier-grade-technical-overview-tahoe.dita#topic3485cgtot/deploy-arch"
-            >Tahoe</xref></li>
-        <li><xref
-            href="memphis/carrier-grade-technical-overview-memphis.dita#topic3485cgtom/deploy-arch"
-            >Memphis</xref></li>
-        <li><xref
-            href="sacramento/carrier-grade-technical-overview-sacramento.dita#topic3485cgtos/deploy-arch"
-            >Sacramento</xref></li>
+            href="denver/carrier-grade-technical-overview-denver.dita#topic3485cgtod/deploy-arch"
+            >Denver</xref></li>
+        <!--<li><xref href="tahoe/carrier-grade-technical-overview-tahoe.dita#topic3485cgtot/deploy-arch">Tahoe</xref></li><li><xref href="memphis/carrier-grade-technical-overview-memphis.dita#topic3485cgtom/deploy-arch">Memphis</xref></li><li><xref href="sacramento/carrier-grade-technical-overview-sacramento.dita#topic3485cgtos/deploy-arch">Sacramento</xref></li>-->
       </ul></p>
   </body>
 </topic>
