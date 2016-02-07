@@ -87,18 +87,8 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
       </ol>If an entire cluster goes down, due to an issue (such as data corruption or MySQL
       defect), and the cluster does not come back up, you can use the backup to restore the cluster
       to a previous well-known state (backup) and start the cluster from that point.</section>
-    <section id="vsd-database">
-      <title>Backup VSD database</title>
-      <p>You can use Attis to back up the HP DCN VSD database.</p>
-      <p>To backup the VSD database:</p>
-      <ol id="ol_esc_pyc_p5">
-        <li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li>
-        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
-        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
-        <li>Run the backup
-          command:<codeblock>attis backup --config-id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock></li>
-      </ol>
-    </section>
+    <!--<section id="vsd-database"><title>Backup VSD database</title><p>You can use Attis to back up the HP DCN VSD database.</p><p>To backup the VSD database:</p><ol id="ol_esc_pyc_p5"><li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li><li>Change to the root user:<codeblock>sudo -i</codeblock></li><li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"><p/><p/><p/><p/></li><li>After removing comment, change &lt;dash> to &lt;dash>&lt;dash> in above section.</li><li>Run the backup command:<codeblock>attis backup -config-id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock><p>      &lt;p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash>&lt;/p></p></li></ol></section>-->
+    <!-- 
     <section id="vsc"><title>Backup VSC system files</title><p>You can use Attis to back up the HP
         DCN VSC system files.</p><b>Note:</b> If the VSC username and/or password has been changed
       from the default, modify <i>vsc_user_name</i> and/or <i>vsc_user_pass</i> in the
@@ -108,8 +98,11 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Execute the following
-          command:<codeblock>attis backup --config-id &lt;Config_ID_of_ VSC_Appliance_config_files_Backup&gt;</codeblock></li>
-      </ol></section>
+          command:<codeblock>attis backup -config-id &lt;Config_ID_of_ VSC_Appliance_config_files_Backup&gt;</codeblock></li>
+      </ol>
+      <p>After remove comment, change <dash> to <dash><dash></p>
+      </section>
+       -->
     <section id="kvm">
       <title>Backup KVM region system files </title>
       <p>You can use Attis to back up the KVM region system files.</p>
@@ -122,16 +115,19 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
           up.<codeblock>attis backup --config-id &lt;Config_ID_of_ WR_Appliance_system_files_Backup&gt;</codeblock></li>
       </ol>
     </section>
-    <section id="baremetal">
+    <!--     <section id="baremetal">
       <title>Backup Baremetal Controller database and files</title>
       <p>You can use Attis to back up the baremetal controllers in a Sacaramento deployment.</p>
       <p>To backup the baremetal controllers: </p>
       <ol id="ol_h5c_zzc_p5">
         <li>Log into the active baremetal controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
-        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"><p/><p/><p/></li>
         <li>Execute the following
-          command:<codeblock>attis backup --config-id &lt;Config_ID_of_ BM_Controller_Data_Backup&gt;</codeblock></li>
+          command:<codeblock>attis backup -config-id &lt;Config_ID_of_ BM_Controller_Data_Backup&gt;</codeblock></li>
       </ol>
-    </section></body>
+      <p>After remove comment, change <dash> to <dash><dash></p>
+    </section>-->
+
+    </body>
 </topic>

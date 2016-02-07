@@ -107,10 +107,9 @@ upstream_ntp_servers:
             are correct according to your network configuration.</li>
           <li>Change to <codeph>infra-ansible-playbooks</codeph> directory
             <codeblock>~/ cd infra-ansible-playbooks</codeblock></li>
-          <li>Execute the following command to create required Ansible roles:
-              <codeph>DCN-RCP-INFRA</codeph>, <codeph>DCN-RCP-CLOUD</codeph>,
-              <codeph>HLM-RCP-CFG</codeph>. These roles create the lifecycle manager, the HP Helion
-            OpenStack Carrier Grade controllers and configure the lifecycle
+          <li>Execute the following command to create required Ansible roles. These roles create the
+            lifecycle manager, the HP Helion OpenStack Carrier Grade controllers and configure the
+            lifecycle
             manager.<codeblock>ansible-playbook -i hosts setup_rcpcloud.yml</codeblock></li>
           <li id="hosts">Check the <codeph>/root/infra-ansible-playbooks/hosts</codeph> file to
             enter the IP address of the <codeph>vibr0</codeph> interface in the
@@ -138,23 +137,6 @@ upstream_ntp_servers:
             to SSH into the lifecycle manager VM during the HP Helion OpenStack Carrier Grade
             installation process.</li>
         </ol>
-      </section>
-      <section>
-        <title>Configure Networking for the Baremetal Region</title>
-        <p>If you are deploying the baremetal region, perform the following tasks:</p>
-        <p>
-          <ol id="ol_uvk_chg_vt">
-            <li>Execute the following command to add a BM-CTL route:
-                <codeblock>route add default gw &lt;ip-address> dev &lt;int></codeblock><p>Where
-                  <codeph>&lt;ip-address></codeph> is the gateway and <codeph>&lt;eth></codeph> is
-                the Ethernet interface.</p><p>For
-                example:<codeblock>route add default gw 192.168.122.1 dev eth0</codeblock></p></li>
-            <li>Make sure that the vNet corresponding to eth0 is part of virbr0 bridge on the KVM
-              Host.</li>
-            <li>Verify that all iLO ips of the controller blades/DLs are pingable from KVM
-              Host.</li>
-          </ol>
-        </p>
       </section>
     </bodydiv>
     <p/>

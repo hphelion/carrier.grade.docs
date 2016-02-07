@@ -71,29 +71,8 @@ But the CLI, REST API etc should all be same --></p>
           nova-compute service:<codeblock>service nova-compute restart</codeblock></li>
       </ol>
     </section>
-    <section>
-      <title>Restoring the VSD database</title>
-      <p>You can use Attis to restore the HP DCN VSD database from a previous backup..</p>
-      <ol id="ol_l43_w3d_p5">
-        <li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li>
-        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
-        <li>SSH to the VSD node from controller and stop all services on VSD.
-          <codeblock>service vsd stop</codeblock></li>
-        <li>Execute the following command:
-          <codeblock>attis restore --config-id &lt;Config_ID_of_VSD_Appliance_DB_Restore> --backup-id BACKUP_ID</codeblock></li>
-        <li>After restore job is complete, SSH to the VSD node and restart the VSD service.
-          <codeblock>service vsd restart</codeblock></li>
-      </ol>
-    </section>
-    <section>
-      <title>Restoring the VSC system files </title>
-      <p>You can use Attis to restore the HP DCN VSC system files from a previous backup..<ol>
-          <li>Log into the VSC controller as the <codeph>cghelion</codeph> user.</li>
-          <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
-          <li>Execute the following
-            command:<codeblock>attis restore --config-id &lt;Config_ID_of_VSC_Appliance_config_files_Restore> --backup-id BACKUP_ID </codeblock></li>
-        </ol></p>
-    </section>
+    <!--<section><title>Restoring the VSD database</title><p>You can use Attis to restore the HP DCN VSD database from a previous backup..</p><ol id="ol_l43_w3d_p5"><li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li><li>Change to the root user:<codeblock>sudo -i</codeblock></li><li>SSH to the VSD node from controller and stop all services on VSD. <codeblock>service vsd stop</codeblock></li><li>Execute the following command: <codeblock>attis restore -config-id &lt;Config_ID_of_VSD_Appliance_DB_Restore> -backup-id BACKUP_ID</codeblock><p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash></p></li><li>After restore job is complete, SSH to the VSD node and restart the VSD service. <codeblock>service vsd restart</codeblock></li></ol></section>-->
+    <!--<section><title>Restoring the VSC system files </title><p>You can use Attis to restore the HP DCN VSC system files from a previous backup..<ol><li>Log into the VSC controller as the <codeph>cghelion</codeph> user.</li><li>Change to the root user:<codeblock>sudo -i</codeblock></li><li>Execute the following command:<codeblock>attis restore -config-id &lt;Config_ID_of_VSC_Appliance_config_files_Restore> -backup-id BACKUP_ID </codeblock></li></ol></p><p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash></p></section>-->
     <section>
       <title>Restoring the KVM region system files </title>
       <p>You can use Attis to restore the KVM region system files from a previous backup..</p>
@@ -117,6 +96,7 @@ But the CLI, REST API etc should all be same --></p>
             command:<codeblock>attis restore --config-id &lt;Config_ID_of_BM_Controller_Data_Restore> --backup-id BACKUP_ID </codeblock></li>
         </ol>
       </p>
+      <p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash></p>
     </section>
     <p> </p></body>
 </topic>
