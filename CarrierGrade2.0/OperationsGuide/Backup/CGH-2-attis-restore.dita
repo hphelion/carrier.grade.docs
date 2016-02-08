@@ -62,6 +62,8 @@ But the CLI, REST API etc should all be same --></p>
         <li>Log into the cloud controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
+        <li>For the restore, due to internal issues, you need to log in as the Attis
+          user:<codeblock>sudo su attis</codeblock></li>
         <li>Perform one of the following:<p><b>for NFS
             storage</b><codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeblock></p><b>for
             SCP storage</b>
