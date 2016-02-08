@@ -70,6 +70,7 @@ But the CLI, REST API etc should all be same --></p>
           <codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeblock></li>
         <li>After restore job is complete, ssh to the compute proxy nodes from HLM, and restart
           nova-compute service:<codeblock>service nova-compute restart</codeblock></li>
+          <p>Use care when restating the Compute service on the KVM region controllers, such as locking and unlocking the nodes.</p>
       </ol>
     </section>
     <section>
