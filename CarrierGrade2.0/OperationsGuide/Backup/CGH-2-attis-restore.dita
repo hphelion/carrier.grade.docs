@@ -63,14 +63,17 @@ But the CLI, REST API etc should all be same --></p>
       <ol id="ul_hhw_ml3_k5">
         <li>Log into the cloud controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
-        <li>For the restore, due to internal issues, you need to log in as the Attis user:
-          <codeblock>sudo su attis</codeblock></li>
+        <li>Log in as the Attis user: <codeblock>sudo su attis</codeblock></li>
         <li>Perform one of the following:<p><b>for NFS
             storage</b><codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeblock></p><b>for
             SCP storage</b>
           <codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeblock></li>
-        <li>After restore job is complete, ssh to the compute proxy nodes from HLM, and restart
-          nova-compute service:<codeblock>service nova-compute restart</codeblock></li>
+        <li>After restore job is complete, SSH from the lifecycle manager host to the compute proxy
+          nodes in the KVM region. </li>
+        <li>Execute the following command to restart  the Compute
+            service:<codeblock>service nova-compute restart</codeblock><p>Use care when restating
+            the Compute service on the KVM region controllers, such as locking and unlocking the
+            nodes.</p></li>
       </ol>
     </section>
     <!--<section><title>Restoring the VSD database</title><p>You can use Attis to restore the HP DCN VSD database from a previous backup..</p><ol id="ol_l43_w3d_p5"><li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li><li>Change to the root user:<codeblock>sudo -i</codeblock></li><li>SSH to the VSD node from controller and stop all services on VSD. <codeblock>service vsd stop</codeblock></li><li>Execute the following command: <codeblock>attis restore -config-id &lt;Config_ID_of_VSD_Appliance_DB_Restore> -backup-id BACKUP_ID</codeblock><p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash></p></li><li>After restore job is complete, SSH to the VSD node and restart the VSD service. <codeblock>service vsd restart</codeblock></li></ol></section>-->

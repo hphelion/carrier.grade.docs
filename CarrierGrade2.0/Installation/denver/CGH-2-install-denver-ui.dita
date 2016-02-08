@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2idui">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Using the HCG Dashboard
+        to Deploy the Denver Template </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carrier Grade 2.0"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carrier Grade 2.0"/>
+    </metadata>
+  </prolog>
+  <body>
+        <p>After the lifecycle manager is installed, the next task in installing the Denver topology
+            is to deploy the HP Helion OpenStack cloud.</p>
+        <p>If you are installing the <codeph>denver</codeph> template, using the HCG Dashboard,
+            follow these instructions. If you want to use the HLM CLI, see <xref
+                href="CGH-2-install-denver-cli.dita#topic10581c2idcli">Using the CLI to Deploy the
+                Denver Template</xref>. </p>
+    <section id="next-step"><b>Introduction</b><p>HCG-Dashboard is a cloud management tool which
+                allows users to Define, Deploy, Manage and Monitor cloud.</p><p>This tool
+                facilitates users to provide and validate cloud definitions required define a cloud
+                through web interface.</p><p>Once the cloud is defined user will be able guided
+                through various stages of deployment</p><p>After the cloud is deployed, user will be
+                able to perform various post deployment activities as Service resets, patching and
+                upgrade.</p><p> </p><p>Currently, HCG-Dashboard supports "RCP" cloud
+                only<b>.</b></p><p>For beta- the UI is hosted on Django's internal web server. In
+                the coming weeks, the UI will be hosted on Apache2.</p><b>How to access the
+                dashboard? </b><ol id="ol_txn_xwl_x5">
+                <li>UI will be setup as part of hlm_prepareenv.sh script so it will be available as
+                    soon as you execute that script</li>
+                <li>The dashboard service runs on port 8080 and can be accessed using http://&lt;hlm
+                    ip&gt;:8080/</li>
+                <li>If you are accessing UI from an outside machine (like a jump server), you should
+                    be using hlm ip (in above URL) that is accessible from that machine </li>
+            </ol><b> Features Available Today</b><p>The UI supports Reduced Control Plane creation
+                and configuration. The UI supports Cloud Definition for RCP template only.</p><p>Use
+                the "Cloud Input" wizard on the UI to:</p><ol id="ol_uxn_xwl_x5">
+                <li>Specify Cloud Name</li>
+                <li>Specify KVM Servers info and Map the KVM servers to the Controllers</li>
+                <li>In the KVM servers get validated for connectivity and credentials
+                    correctness.</li>
+                <li>Specify Network information for all 5 types of networks (CLM, API, BLS) (If you
+                    do not have Segment IDs, Enter -1) </li>
+                <li>View validation results of network information provided (Validation for API and
+                    BLS networks not part of 2.1 Beta but will be added for 2.1 GA)</li>
+                <li>Specify all variables</li>
+                <li>View validation results of DNS Server IP and NTP Server IP (There is a known
+                    cosmetic bug for the results of this validation, will be fixed in upcoming
+                    builds)</li>
+                <li>Click Finish to save all this data into your clouds json files.</li>
+                <li>By default, RCP template is used to create the cloud definitions.</li>
+            </ol><p>Use the "Deploy Cloud" wizard on the UI to (More details below):</p><ol
+                id="ol_vxn_xwl_x5">
+                <li>Provision the Nodes (equivalent to hlm provision)</li>
+                <li>Generate the cloud configuration from jsons (equivalent to hlm generate)</li>
+                <li>Network Initialize the cloud nodes (equivalent to hlm netinit)</li>
+                <li>Deploy the cloud nodes (equivalent to hlm deploy)</li>
+            </ol><p>Use the "Manage Cloud" wizard on the UI to:</p><ol id="ol_wxn_xwl_x5">
+                <li>Reset service including - MySQL, RabbitMQ, NTP, Apache, Keystone, Glance, Swift,
+                    Cinder, Elastic Search, Logstash, Kibana, Beaver, Icinga and Attis </li>
+            </ol><b>Important to Note</b><p>Editing an existing cloud definition is supported except
+                for the Inventory Nodes (KVM Servers) </p><p> </p><b>Deploy Cloud workflow</b><ul
+                id="ul_xxn_xwl_x5">
+                <li>After you enter all necessary inputs to your cloud, you will be redirected to a
+                    page where you can see description and current status of your cloud along with a
+                    few other options:<p><image
+                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard.png"
+                            width="500" id="image_mxb_jyl_x5"/></p></li>
+            </ul><p> </p><ul id="ul_zxn_xwl_x5">
+                <li>You can click on "DEPLOY" button (as seen in above page) to start/return to a
+                    deploy workflow:<p><image
+                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy.png"
+                            width="500" id="image_xh4_jyl_x5"/></p></li>
+            </ul><ul id="ul_byn_xwl_x5">
+                <li>"Deploy Workflow" consists of four phases - provision, generate, netinit and
+                    deploy</li>
+                <li>At the top you will see the name of your cloud and current status - "DEFINED" |
+                    "PROVISIONED" | "GENERATED" | "NETINITIALIZED" | "DEPLOYED"</li>
+                <li>Depending on the status, marker on the wizard will move by default to a process
+                    which was completed successfully</li>
+                <li>
+                    <p>To execute a particular process, you can navigate (or directly click) on
+                        corresponding step and click "Run"</p>
+                    <p>(Note: you will not be able to navigate to step "n" if step "n-1" is not
+                        completed) </p>
+                </li>
+                <li>
+                    <p>Once you hit the "Run" button, you will see your process being executed as
+                        shown below:</p>
+                </li>
+                <li>The process runs asynchronously in background. So while the process is running,
+                    if you close your session or browser, you can still return to the same page
+                    again to check status of your process.</li>
+                <li>
+                    <p>Also, when your process is running, you can look at the current log content
+                        by clicking on the "logs" tab and selecting a log file pertaining to that
+                        process as seen below:</p>
+                    <p><image
+                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-logs.png"
+                            width="500" id="image_znz_lyl_x5"/></p>
+                </li>
+            </ul><p> </p><ul id="ul_dyn_xwl_x5">
+                <li>
+                    <p>Once the process completes, you will be notified whether it passed or failed
+                        as seen below:</p>
+                    <p><image
+                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deployed.png"
+                            width="500" id="image_s5p_nyl_x5"/></p>
+                </li>
+            </ul><title>Next Step</title><p><xref
+                    href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd"
+                    >Launching the Horizon Interface</xref></p></section>
+  </body>
+</topic>

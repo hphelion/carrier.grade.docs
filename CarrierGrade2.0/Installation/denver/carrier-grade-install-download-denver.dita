@@ -77,11 +77,6 @@
                                                   </entry>
                                                   <entry> </entry>
                                                   </row>
-                                                  <row>
-                                                  <entry>cg-ironic-deploy-images.tar.gz</entry>
-                                                  <entry>/root/cg</entry>
-                                                  <entry>For Sacramento deployments only.</entry>
-                                                  </row>
                                                 </tbody>
                                         </tgroup>
                                 </table>
@@ -119,12 +114,6 @@
                                                   KVM region. Sample guest operating system files to
                                                   be used as needed.</entry>
                                                   </row>
-                                                  <row>
-                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
-                                                  <entry>Patch instructions are provided in <xref
-                                                  href="carrier-grade-install-kvm-denver.dita#topic1107cgikd"
-                                                  >Deploying the KVM Region</xref></entry>
-                                                  </row>
                                                 </tbody>
                                         </tgroup>
                                 </table>
@@ -141,7 +130,7 @@ sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p>
                                 <li>Compare the output of the checksum tool to the download checksum
                                         file.
                                         <codeblock>sha256sum.exe hcg2_kvm_esx_ironic_vrs.tar
-97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar                                                </codeblock>Note
+97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar</codeblock>Note
                                         that the checksum file contains the date that the file was
                                         generated, the checksum string, and the name of the file
                                         that was used, similar to the
@@ -149,6 +138,18 @@ sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p>
 97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar</codeblock></li>
                         </ol>
                 </section>
+                <section><title>Enable SPICE</title>Use the following steps to enable SPICE, a
+                        program to improve graphic interfaces on KVM systems.<p>
+                                <ol id="ol_htk_zhb_y5">
+                                        <li>Launch a terminal and log in to your lifecycle manager
+                                                host as root:<codeblock>sudo su -</codeblock></li>
+                                        <li>Change to the following directory:
+                                                <codeblock>cd /usr/bin</codeblock></li>
+                                        <li>Execute the following commands to enable
+                                                SPICE:<codeblock>ln -s kvm kvm-spice
+ln -s qemu-system-x86_64 qemu-system-x86_64-spice </codeblock></li>
+                                </ol>
+                        </p></section>
                 <section id="next-step">
                         <title>Next Step</title>
                         <p><xref href="CGH-2-install-lifecycle-denver.dita#topic10581c2ild"

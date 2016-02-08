@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic4797cgikejbm">
+<title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Sample environment.json
+        File</title>
+<prolog>
+    <metadata>
+        <othermeta name="layout" content="default"/>
+        <othermeta name="product-version" content="HPE Helion Openstack Carreir Grade 1.1"/>
+        <othermeta name="role" content="Storage Administrator"/>
+        <othermeta name="role" content="Storage Architect"/>
+        <othermeta name="role" content="Michael B"/>
+        <othermeta name="product-version1" content="HPE Helion Openstack Carreir Grade 1.1"/>
+    </metadata>
+</prolog>
+<body>
+    <p>The process for installing the Denver deployment requires several JSON files that will be
+            used when deploying the lifecycle manager.</p>
+<section id="sample-node-provisionjson-file">
+            <p>The following represents a sample
+                    <codeph>/var/hlm/clouds/&lt;cloudname&gt;/environment.json</codeph> file for a
+                bonded NIC installation. The IP addresses are masked for security purposes. Use
+                values appropriate for your environment. </p>
+            <p>Note that the <codeph>port</codeph> field should not be changed from the example. The
+                    <codeph>label</codeph> field can be changed, as needed. </p>
+            <codeblock>{
+    "product": {
+        "version": 1
+    },
+
+    "node-type": [
+        {
+            "name": "CCN",
+            "interface-map": [
+                {
+                    "name": "INTF0",
+                    "ethernet-port-map": {
+                        "interface-ports": [ "eth1" ]
+                    },
+                    "logical-network-map": [
+                        {
+                            "name": "CLM",
+                            "type": "vlan",
+                            "segment-id": "",
+                            "network-address": {
+                                "cidr": "10.200.x.x/24",
+                                "start-address": "10.200.x.x",
+                                "gateway": "10.200.x.x"
+                            }
+                        }
+                    ]
+		  },
+		  {
+                    "name": "INTF1",
+                    "ethernet-port-map": {
+                        "interface-ports": [ "eth2" ]
+                    },
+                    "logical-network-map": [
+                        {
+                            "name": "CAN",
+                            "type": "vlan",
+                            "segment-id": "",
+                            "network-address": {
+                                "cidr": "10.200.x.x/24",
+                                "start-address": "10.200.x.x"
+                            }
+                        }
+		     ]
+		  },
+		  {
+                    "name": "INTF2",
+                    "ethernet-port-map": {
+                        "interface-ports": [ "eth3" ]
+                    },
+                    "logical-network-map": [
+                        {
+                            "name": "BLS",
+                            "type": "vlan",
+                            "segment-id": "",
+                            "network-address": {
+                                "cidr": "192.168.x.x/24",
+                                "start-address": "192.168.x.x"
+                            }
+                        }
+		     ]
+                }
+            ]
+        }
+    ]
+}</codeblock>
+            <p> NOTE: The Helion Configuration Processor assigns the first address of the CLM
+                address range to itself for serving python and debian repositories. Make sure that
+                you set the first IP address of the CLM range for the eth2 (CLM) address of the KVM
+                Host.</p>
+            <p>Return to installing the non-KVM region for the:
+                  
+                </p>
+        </section>
+</body>
+</topic>
