@@ -125,9 +125,10 @@ ssh-copy-id &lt;remotescpuser&gt;@&lt;hostofscplocation&gt;</codeblock></p><p>If
               <codeph>backup_base_dirpath</codeph> and <codeph>restore_to_incrementnumber</codeph>
             values in the <codeph>base_folder</codeph> and <codeph>last_incremental_ref</codeph>
             column from output of command. </p>The following is an example of
-            <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>:<p><image
-              href="../../../media/carrier.grade.docs/CGH-2-attis-restore.png" width="600"
-              id="image_cby_dhd_p5"/></p></li>
+            <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>.
+          For NFS template, storage_path is the client mount path. All other parameters are same as
+          in SCP template.<p><image href="../../../media/carrier.grade.docs/CGH-2-attis-restore.png"
+              width="600" id="image_cby_dhd_p5"/></p></li>
         <li>Update the <codeph>Storage</codeph> parameters (SCP or NFS).</li>
       </ol>
     </section>
