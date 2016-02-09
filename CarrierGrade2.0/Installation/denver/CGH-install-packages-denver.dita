@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
-<topic xml:lang="en-us" id="topic7148cipd">
+<topic xml:lang="en-us" id="topic7148cipdp">
         <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 1a: Installing
                 Required Packages</title>
         <titlealts>
@@ -80,40 +80,38 @@ deb <xref href="http://file/media/cdrom/" format="html" scope="external">file:/o
                                 would like to use APT to install so that the dependencies would be
                                 automatically solved.</p><p>To do that create a directory and put
                                 the .debs you want to index in it . For example (the directory
-                                /somewhere is JUST a suggestion, not cast in stone):</p><lq>
-                                <pre>     # mkdir /somewhere</pre>
-                        </lq><p>Unpack the Extra-hLinux-Packages.tar in this /somewhere/ directory/
-                                </p><p>Make sure your /somewhere directory has appropriate
+                                /somewhere is JUST a suggestion, not cast in
+                                stone):<codeblock># mkdir /somewhere</codeblock></p><p>Unpack the
+                                        <codeph>Extra-hLinux-Packages.tar</codeph> in this
+                                        <codeph>/somewhere/ </codeph>directory/ </p><p>Make sure
+                                your <codeph>/somewhere</codeph> directory has appropriate
                                 permissions as well as for all of the files in
                                 /somewhere/extraPackages/</p><p><b>Optional:</b>You may modify the
                                 definitions set on the package's control file directly for your
                                 repository using an<systemoutput>override</systemoutput>file. Inside
                                 this file you may want to define some options to override the ones
-                                that come with the package. It looks like follows:</p><lq>
-                                <pre>     package priority section</pre>
-                        </lq><p>package is the name of the package, priority is low, medium or high
-                                and section is the section to which it belongs. The file name does
-                                not matter, you'll have to pass it as an argument for
-                                <codeblock>dpkg-scanpackages</codeblock>later. If you do not want to
-                                write an<systemoutput>override</systemoutput>file, just use
-                                <codeblock>/dev/null</codeblock>. when calling
-                                <codeblock>dpkg-scanpackages</codeblock>.</p><p>Still in the
-                                /somewhere directory do:</p><p>Without override file:</p><lq>
-                                <pre>     # dpkg-scanpackages extraPackages /dev/null | gzip &gt; extraPackages/Packages.gz
-</pre>
-                        </lq><p>With override file:</p><lq>
-                                <pre>     # dpkg-scanpackages extraPackages file | gzip &gt; extraPackages/Packages.gz</pre>
-                        </lq><p>In the above line, "file" is
-                                        the<systemoutput>override</systemoutput>file, the command
-                                generates a file <codeblock>Packages.gz</codeblock> that contains
-                                various information about the packages, which are used by APT. To
-                                use the packages, finally, add the following line to the
-                                /etc/apt/sources.list file:</p><lq>
-                                <pre>     deb file:/somewhere/extraPackages/ ./
-</pre>
-                        </lq><p>After that just use the APT commands as usual.</p></section>
-                
-                <p/>
+                                that come with the package. It looks like
+                                follows:<codeblock>package priority section</codeblock></p><p>package
+                                is the name of the package, priority is low, medium or high and
+                                section is the section to which it belongs. The file name does not
+                                matter, you'll have to pass it as an argument for
+                                        <codeph>dpkg-scanpackageslater</codeph>. If you do not want
+                                to write an<systemoutput>override</systemoutput> file, just use
+                                        <codeph>/dev/null</codeph>. when calling
+                                        <codeph>dpkg-scanpackages</codeph>.</p><p>Still in the
+                                        <codeph>/somewhere</codeph> directory do:</p><p>Without
+                                override
+                                file:<codeblock># dpkg-scanpackages extraPackages /dev/null | gzip &gt; extraPackages/Packages.gz</codeblock></p><p>With
+                                override
+                                file:<codeblock># dpkg-scanpackages extraPackages file | gzip &gt; extraPackages/Packages.gz</codeblock></p><p>In
+                                the above line, "file" is
+                                the<systemoutput>override</systemoutput>file, the command generates
+                                a file <codeblock>Packages.gz</codeblock>that contains various
+                                information about the packages, which are used by APT. To use the
+                                packages, finally, add the following line to the
+                                /etc/apt/sources.list file:deb
+                                file:<codeblock>/somewhere/extraPackages/ ./</codeblock></p><p>After
+                                that just use the APT commands as usual.</p></section>
                 <section><title>Next Step</title>Before installing HP Helion OpenStack Carrier
                         Grade, you are responsible for preparing the network for all
                                 installations.<p>See <xref
