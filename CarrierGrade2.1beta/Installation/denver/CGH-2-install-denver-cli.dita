@@ -20,10 +20,28 @@
             is to deploy the HP Helion OpenStack cloud.</p>
         <p>If you are installing the <codeph>denver</codeph> template, using the HCG Dashboard,
             follow these instructions. If you want to use the HLM CLI, see <xref
-                href="CGH-2-install-denver-ui.dita#topic10581c2ui">Using the HCG Dashboard to
+                href="CGH-2-install-denver-ui.dita#topic10581c2idui">Using the HCG Dashboard to
                 Deploy the Denver Template</xref>. </p>
-        <section
-            conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-hos-install"/>
+        <section id="conref-hos-install">
+            <title>Launch the HPE Helion OpenStack cloud</title>
+            <p>Use the following steps on the lifecycle manager host to log on to the lifecycle
+                manager:</p>
+            <ol id="ol_ncd_wff_zt">
+                <li>Log into the lifecycle manager. <codeblock>ssh &lt;CLM_IP></codeblock><p>where:
+                        HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for
+                        the lifecycle manager in the
+                            <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
+                            <codeph>hlm_clmstaticip</codeph> field.</p><p>Use the default
+                        credentials: </p><p>
+                        <codeblock>User Name: root
+Password: cghelion</codeblock>
+                    </p><p><b>Important:</b> After logging in with the default password, make sure
+                        you change the password for the <codeph>root</codeph> user. </p></li>
+                <li>Execute the following command to switch to the root
+                    user:<codeblock>sudo su -</codeblock></li>
+                <li>Change to the home directory.<codeblock>cd ~</codeblock></li>
+            </ol>
+        </section>
         <section id="conref-provision">
             <title>Provision the new cloud</title>
             <ol id="ol_kwm_c1k_zt">
@@ -102,7 +120,23 @@
                     href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
                     node-provision.json file</xref>. </p>
         </section>
-        <section conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-pxe-boot"/>
+        <section id="conref-pxe-boot">
+            <title>Configure PXE boot</title>
+            <p>After you edit the <codeph>node-provision.json</codeph> file, you must enable
+                one-time PXE boot on the servers to set the correct boot order. Execute the
+                following on the lifecycle manager:</p>
+            <ol id="ol_d5m_dhf_zt">
+                <li>Copy the <codeph>ilopxebootonce.py</codeph> from the
+                        <codeph>/root/cg-hlm/dev-tools/ilopxebootonce.py</codeph> to the
+                        <codeph>&lt;cloudname></codeph> directory where you have the
+                        <codeph>node-provision.json</codeph> file.</li>
+                <li>Execute the following script:
+                    <codeblock>python ilopxebootonce.py node-provision.json</codeblock></li>
+            </ol>
+            <p>After the script is run, the <codeph>Current One-Time Boot Option</codeph> is set to
+                    <codeph>Network Device 1</codeph> on all the servers listed in
+                    <codeph>node-provision.json</codeph> file.</p>
+        </section>
         <section id="environment">
             <title id="env-json">Edit the environment.json file</title>
             <p>Modify the <codeph>environment.json</codeph> file in the
@@ -496,9 +530,16 @@ route add default gw &lt;CLM_IP> </codeblock><p>Where
                     the shared directory <codeph>/var/shared_kvm_cluster/</codeph> you created.
                 </li>
             </ul></section>
-        <section
-            conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-ldap-keystone"
-            id="ldap3"/>
+        <section id="conref-ldap-keystone">
+            <title>Configure LDAP to enable CLI and use Keystone v3</title>
+            <p>By default, the HPE Helion OpenStack Carrier Grade services are configured to use
+                Keystone v2 authorization. The services need to be modified to use Keystone v3.
+                Users will not be able to execute OpenStack CLI commands until the specific changes
+                are made on all three controller nodes in the non-KVM region. </p>
+            <p>For information, see <xref
+                    href="../carrier-grade-install-config-ldap3.dita#topic10581cgicl">Configuring
+                    LDAP CLI Support</xref></p>
+        </section>
         <section id="next-step">
             <title>Next Step</title>
             <p><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd"
