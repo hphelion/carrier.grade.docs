@@ -27,24 +27,254 @@
           <li><xref href="#topic1773cgsmd/guestos" format="dita">Supported Guest Operating Systems</xref></li>
         </ul></p>
     </section>
-  <section
-      conref="../sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/hardware"
-      id="hardware"/>
-  <section
-      conref="../sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/req-specs"
-      id="req-specs"/>
-  <section
-      conref="../sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/hardware-config"
-      id="hardware-config"/>
-  <section
-      conref="../sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/software"
-      id="software"/>
-  <section
-      conref="../sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/storage"
-      id="storage"/>
-  <section
-      conref="../sacramento/carrier-grade-support-matrix-sacramento.dita#topic1773cgsms/guestOS"
-      id="guestos"/>
+        <section id="hardware">
+            <title>Supported Hardware</title>
+            <p>The following servers are supported for the lifecycle manager host, and for the
+                controllers and compute servers.</p>
+            <p><b id="hlm">Lifecycle Manager Host</b> The lifecycle manager host is a single server
+                with at least a 500 GB disk size, 4GB of virtual memory and 2 virtual CPUs. </p>
+            <p id="controllers"><b>Controllers and compute servers</b> The following servers are
+                supported for the controllers and compute servers in the <xref
+                    href="../../Overview/carrier-grade-overview-kvm.dita#topic1743cgok">KVM
+                    region</xref>. The servers must meet the specifications in <xref
+                    href="#topic1773cgsmd/specs" format="dita">the Required Specifications table
+                    below</xref>:</p>
+            <p><b>Controller:</b></p>
+            <ul id="ul_qf5_vbp_y5">
+                <li>DL360 (Gen 9 or Gen 8)</li>
+                <li>DL380 (Gen 9 or Gen 8)</li>
+            </ul>
+            <p><b>Compute:</b></p>
+            <ul id="ul_rf5_vbp_y5">
+                <li>DL360 (Gen 9 or Gen 8)</li>
+                <li>DL380 (Gen 9 or Gen 8)</li>
+                <li>BL460 (Gen 9 or Gen 8)</li>
+            </ul>
+            <p><b>Notes:</b>
+                <ul id="ul_mxb_gzd_ss">
+                    <li>If you are using Gen9 systems, you must update the firmware to HPE Service
+                        Pack for ProLiant (SPP) Version 2015.06.0.</li>
+                    <li>If you are using Gen8 systems, you will experience reduced performance.</li>
+                </ul></p>
+        </section>
+        <section id="req-specs">
+            <title id="specs"><b>Required Specifications</b></title>
+            <p>The following table lists the specifications for the servers that will host the
+                lifecycle manager, HP Helion OpenStack, and the KVM region. </p>
+            <p>
+                <table frame="all" rowsep="1" colsep="1" id="table_c54_dxd_ss">
+                    <tgroup cols="3">
+                        <colspec colname="c1" colnum="1" colwidth="1*"/>
+                        <colspec colname="c2" colnum="2" colwidth="1.29*"/>
+                        <colspec colname="c4" colnum="3" colwidth="4.18*"/>
+                        <thead>
+                            <row>
+                                <entry>Server</entry>
+                                <entry>Used for</entry>
+                                <entry>Requirements</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry namest="c1" nameend="c4"><b>HPE ProLiant Rack
+                                    Servers</b></entry>
+                            </row>
+                            <row>
+                                <entry morerows="1">DL360 Gen9<p>DL380 Gen9</p></entry>
+                                <entry>
+                                    <ul id="ul_ut3_wbp_y5">
+                                        <li>Controller</li>
+                                    </ul>
+                                </entry>
+                                <entry>
+                                    <ul id="ul_vt3_wbp_y5">
+                                        <li>2 x Intel Xeon® E5-2640v3</li>
+                                        <li>8 x 16GB (1x16GB) Dual Rank x4 DDR4-2133 memory</li>
+                                        <li>4 x 1.2TB 6G SAS 10K rpm SFF (2.5-inch)</li>
+                                        <li>1 x FlexFabric 10Gb 2-port 556FLR-SFP</li>
+                                        <li>1 x Smart Array P440ar/2G FIO Controller</li>
+                                    </ul>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <ul id="ul_wt3_wbp_y5">
+                                        <li>Compute</li>
+                                    </ul>
+                                </entry>
+                                <entry>
+                                    <ul id="ul_xt3_wbp_y5">
+                                        <li>2 x Intel Xeon® E5-2680v3</li>
+                                        <li>16 x 16GB (1x16GB) Dual Rank x4 DDR4-2133 memory</li>
+                                        <li>4 x 1.2TB 6G SAS 10K rpm SFF (2.5-inch)</li>
+                                        <li>1 x FlexFabric 10Gb 2-port 556FLR-SFP <b>AND</b> HPE
+                                            Ethernet 10Gb 2-port 560SFP+ Adapter</li>
+                                        <li>1 x Smart Array P440ar/2G FIO Controller/2 x Ethernet
+                                            10Gb 2P 560SFP</li>
+                                    </ul>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry morerows="1">DL360 Gen8<p>DL380 Gen8</p></entry>
+                                <entry>
+                                    <ul id="ul_yt3_wbp_y5">
+                                        <li>Controller</li>
+                                    </ul>
+                                </entry>
+                                <entry>
+                                    <ul id="ul_g1f_qyd_ss">
+                                        <li>2 x Intel(R) Xeon(R) CPU E5-2650 v2 @ 2.6GHz</li>
+                                        <li>128 GB DDR3 1600 MHz</li>
+                                        <li>HPE FlexFabric 10Gb 2port 554FLR-SFP+ Adapter <b>OR</b>
+                                            HPE FlexFabric 10Gb 2port 534FLR-SFP+ Adapter</li>
+                                    </ul>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <ul id="ul_owp_vh2_ss">
+                                        <li>Compute</li>
+                                    </ul>
+                                </entry>
+                                <entry>
+                                    <ul id="ul_zt3_wbp_y5">
+                                        <li>2 x Intel(R) Xeon(R) CPU E5-2680 v2 @ 2.8GHz </li>
+                                        <li>256 GB DDR3 1600 MHz </li>
+                                        <li>HPE FlexFabric 10Gb 2port 554FLR-SFP+ Adapter <b>AND</b>
+                                            HPE Ethernet 10Gb 2-port 560SFP+ Adapter </li>
+                                    </ul>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry namest="c1" nameend="c4">
+                                    <b>HPE ProLiant BladeSystem</b>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>BL460c Gen9</entry>
+                                <entry>
+                                    <ul id="ul_a53_wbp_y5">
+                                        <li>Compute</li>
+                                    </ul>
+                                </entry>
+                                <entry>
+                                    <ul id="ul_b53_wbp_y5">
+                                        <li>2 x Intel® Xeon® E5-2680v3</li>
+                                        <li>16 x 16GB (1x16GB) Dual Rank x4 DDR4-2133 memory</li>
+                                        <li>2 x 1.2TB 6G SAS 10K rpm SFF (2.5-inch)</li>
+                                        <li>1 x Smart Array P244br/1GB FBWC</li>
+                                        <li>1 x HPE FlexFabric 20Gb 2-port 650FLB <b>AND</b> 1 x HPE
+                                            Ethernet 10Gb 2-port 560M Adapter</li>
+                                    </ul>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>BL460c Gen8</entry>
+                                <entry>
+                                    <ul id="ul_c53_wbp_y5">
+                                        <li>Compute</li>
+                                    </ul>
+                                </entry>
+                                <entry>
+                                    <ul id="ul_d53_wbp_y5">
+                                        <li>2 x Intel(R) Xeon(R) CPU E5-2680 v2 @ 2.8GHz</li>
+                                        <li>256 GB DDR3 1600 MHz </li>
+                                        <li>2 x 1.2TB 6G SAS 10K rpm SFF (2.5-inch)</li>
+                                        <li>1 x HPE FlexFabric 10Gb 2port 554FLB-SFP+ Adapter
+                                                <b>AND</b> 1 x HPE Ethernet 10Gb 2-port 560M
+                                            Adapter</li>
+                                    </ul>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry namest="c1" nameend="c4">
+                                    <b>Switch</b>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry namest="c1" nameend="c4">HP FlexFabric 5930 Switch
+                                    Series</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </p>
+        </section>
+        <section id="hardware-config">
+            <title>Required Hardware Configurations </title>
+            <p>The servers, selected from the <xref href="#topic1773cgsmd/hardware" format="dita"
+                    >Supported Hardware</xref> lists, must be configured as follows for HP Helion
+                OpenStack Carrier Grade.</p>
+            <p>One (1) <b>Lifecycle Manager Host</b>. You must have a server with a 40GB Disk and
+                8,192 MB RAM for the lifecycle manager host. This server will also host three (3)
+                virtual machines that serve as controllers for HP Helion OpenStack Carrier Grade.
+                Each of the controller nodes requires 20GB of virtual disk, 16GB of virtual memory,
+                and 4 virtual CPUs.</p>
+            <p id="kvm-config">Two (2) <b>KVM region controllers</b>. You must have two (2)
+                baremetal systems to install the KVM region controllers. For systems with multiple
+                NICs, only one NIC may be active or connected. </p>
+            <p>One (1) or more <b>KVM Region compute servers</b>. You must have at least one (1)
+                baremetal system to install the KVM region compute servers.</p>
+            <ul id="ul_lwc_ltz_jt">
+                <li><b>KVM region NICs.</b> The following NICs have been verified for PXE booting of
+                    KVM region servers:
+                        <!--Admin Guide has list of supported NICs; check there to make the same--><ul
+                        id="ul_sdq_q1f_qs">
+                        <li>Emulex 10G </li>
+                        <li>Intel 82599 </li>
+                    </ul><p><b>Important:</b> Using the correct NICs is essential to proper
+                        installation of HP Helion OpenStack Carrier Grade.</p></li>
+            </ul>
+        </section>
+        <section id="software">
+            <title>Software Requirements</title>
+            <p><b>Lifecycle Manager Host</b>. The lifecycle manager host requires the Ubuntu Server
+                14.04.2 LTS operating system. </p>
+            <p><b>Non-KVM Region Controllers</b>. The servers should be baremetal. The HP Helion
+                OpenStack Carrier Grade installation process installs the required software.</p>
+            <p><b>KVM Region Controllers</b>. The servers should be baremetal. The HP Helion
+                OpenStack Carrier Grade installation process installs the required software.</p>
+            <p><b>KVM Region Compute</b>. The servers should be baremetal. The HP Helion OpenStack
+                Carrier Grade installation process installs the required software.</p>
+        </section>
+        <section id="storage">
+            <title>External Storage</title>
+            <p>The following back-end drivers are supported to enable management of the OpenStack
+                Block Storage volumes in the non-KVM region.</p>
+            <p>
+                <ul id="ul_oh5_dyx_5t">
+                    <li>HPE 3PAR StoreServ, version 3.1.3 or 3.2.1 MU2 or higher .</li>
+                    <li>HPE StoreVirtual VSA with LeftHand OS 11.5.</li>
+                </ul>
+            </p>
+            <p>You will configure the installer to integrate one or both of these drivers during the
+                installation process. </p>
+        </section>
+        <section id="guestos"><title>Supported Guest Operating Systems</title> The following guest
+            operating systems (guest OSs) are supported for the HP Helion OpenStack Carrier Grade
+            servers. <p><b>Lifecycle Manager Host</b>. There are no supported guest OSs for the
+                Lifecycle Manager Host server. </p><p><b>KVM Region Compute and Controllers</b>. The
+                following Guest OSs are supported for the servers in the KVM region for both cloud
+                topologies: </p><ul id="ul_sty_hd2_qs">
+                <li>
+                    <p>WindRiver Linux 6.0</p>
+                </li>
+                <li>
+                    <p>WindRiver Linux 5.0</p>
+                </li>
+                <li>
+                    <p>CentOS 6.4</p>
+                </li>
+                <li>
+                    <p>Fedora 19</p>
+                </li>
+                <li>
+                    <p>RHEL 6.5</p>
+                </li>
+                <li>
+                    <p>OpenSUSE 12.3 </p>
+                </li>
+            </ul></section>
 
   <section id="next"> <title>Next step</title>
     <p>Review the <xref href="CGH-install-prereqs-denver.dita">Installation Prerequisites</xref>.</p>

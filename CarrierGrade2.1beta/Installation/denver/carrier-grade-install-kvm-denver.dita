@@ -38,16 +38,35 @@
           the controller node.<codeblock>mount bootimage_avs_only.iso</codeblock></li>
         <li>Follow the install wizard. Select the Graphics mode for the controller only. Do not
           select <codeph>Controller+Compute</codeph>.<p>After the installation is complete, you will
-            need to reboot the server. After the reboot:</p></li>
-      </ol>
-      <ol conref="../sacramento/carrier-grade-install-kvm-sacramento.dita#topic1107cgiks/controller-0-2"
-        id="ol_xf4_rnq_35">
-        <li/>
+            need to reboot the server. After the reboot:</p><ol id="controller-0-2">
+            <li>Log in as user name <codeph>wrsroot</codeph> and password <codeph>wrsroot</codeph>.
+              Make sure you change the password.</li>
+            <li>Temporarily assign an IP address to the <codeph>PXE NIC - eth0</codeph>. Use the IP
+              you have reserved for the KVM PXE.
+              <codeblock>ip addr add &lt;CIDR> dev eth0
+ifconfig eth0 up</codeblock></li>
+            <li> Set the default gateway to the PXE network gateway
+              <codeblock>route add default gw &lt;CIDR_gateway_IP&gt;</codeblock></li>
+            <li>Copy the following KVM revion license files from the lifecycle manager to the
+                <codeph>/home/wrsroot/</codeph> directory of the <codeph>controller-0</codeph>. <ul
+                id="ul_mpn_hnr_bt">
+                <li><codeph>license.lic</codeph> Located in the
+                    <codeph>/root/cg-hlm/windriver-files</codeph> directory</li>
+                <li><codeph>region_config</codeph> Located in the
+                    /<codeph>var/hlm/clouds/&lt;cloud-name&gt;/desired_state/&lt;cloud-name&gt;/001/base/stage/windriver-config</codeph>
+                  directory</li>
+                <li><codeph>cakey.pem</codeph> Located in the
+                    <codeph>/var/hlm/clouds/&lt;cloud-name&gt;/desired_state/&lt;cloud-name&gt;/001/base/stage/windriver-config</codeph>
+                  directory</li>
+              </ul><p>These files are loaded to the lifecycle manager during the installation
+                process.</p></li>
+          </ol></li>
       </ol>
     </section>
     <section id="kvm-custom-patch">
-      <title>Step 2: Apply KVM region patches</title>Perform the following steps to deploy two
-      required patches.<ol>
+      <title> Step 2: Apply KVM region patches</title>
+      <p>Perform the following steps to deploy two required patches.</p>
+      <ol>
         <li>On KVM region <codeph>controller-0</codeph>, create a directory for the
           patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
         <li>Copy the following patches file to the <codeph>/tmp/patches</codeph> directory: <ul
@@ -68,7 +87,8 @@
             is complete</i> message. This will take few minutes and you will be prompted for
           reboot.</li>
         <li>Reboot the controller:<codeblock>sudo reboot</codeblock></li>
-      </ol></section>
+      </ol>
+    </section>
     <section id="cloud">
       <title>Step 3: Configure the KVM region cloud</title>
       <ol id="ol_vl1_5fj_y5">
