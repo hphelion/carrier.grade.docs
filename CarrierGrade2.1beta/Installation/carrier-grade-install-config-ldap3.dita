@@ -18,7 +18,7 @@
   <p>By default, the HP Helion OpenStack Carrier Grade services are configured to use Keystone v2
       authorization. The services need to be modified to use Keystone v3. You will not be able to
       execute OpenStack CLI commands until the following changes are made on all three controller
-      nodes in the non-KVM region. </p>
+      nodes in the Non-KVM Region. </p>
 
   <section><title>Modify the <codeph>stackrc</codeph> files</title>
     <p>The <codeph>stackrc</codeph> file is a configuration file that contains all of the settings
@@ -88,9 +88,10 @@ export OS_REGION_NAME=regionone </codeblock></p></li>
           directory.<codeblock>cd ~/&lt;cloudname&gt; </codeblock></li>
         <li>Execute the following command, using your cloudname and failure-zone:
             <codeblock>hupdate -c &lt;cloudname> -f &lt;failureZone> hoscg-update.tgz</codeblock><p>Where:</p><ul>
-            <li>&lt;cloudname> is the name of your cloud;</li>
-            <li>&lt;failurezone> is controller mapping can be obtained from
-              &lt;cloud-directory&gt;/nodes.json file on the lifecycle manager host.</li>
+            <li><codeph>&lt;cloudname> </codeph>is the name of your cloud;</li>
+            <li><codeph>&lt;failurezone></codeph> is controller mapping can be obtained from
+                <codeph>&lt;cloud-directory>/nodes.json</codeph> file on the lifecycle manager
+              host.</li>
           </ul></li>
       </ol> Execute this command on all three non-KVM controllers, using a different failure zone
       for each. The command output ends with the following upon
@@ -105,7 +106,7 @@ B53DEMO-CCP-VRG-N0001-NETCLM : ok=4    changed=0    unreachable=0    failed=0
 B53DEMO-CCP-VRG-N0002-NETCLM : ok=4    changed=0    unreachable=0    failed=0      
 localhost                    : ok=6    changed=2    unreachable=0    failed=0        </codeblock></section>
   <section><title>Configure Controllers</title>
- <p>On each of the three non-KVM region conrollers, you meed to perform the following tasks:</p>    
+ <p>On each of the three Non-KVM Region conrollers, you meed to perform the following tasks:</p>    
   <ol>
         <li>Replace the <codeph>/etc/keystone/keystone-paste.ini</codeph> file on all three
           controllers. From the lifecycle manager host, execute the following command for each
@@ -150,7 +151,7 @@ SecurityWarning
         </li>
   </ol>
 </section>
-  <p>Return installing the non-KVM region using <ul id="ul_n3r_dfx_wt">
+  <p>Return installing the Non-KVM Region using <ul id="ul_n3r_dfx_wt">
         <li><xref href="denver/CGH-2-install-denver-ui.dita#topic10581c2idui">HCG
           Dashboard</xref></li>
         <li><xref href="denver/CGH-2-install-denver-cli.dita#topic10581c2idcli/conref-ldap-keystone"

@@ -41,7 +41,7 @@
             approach is it doesn't indicate which tenant network the pci device is on and what is
             the IP-MAC relationship recorded in neutron. In short, this implementation is neutron
                 unaware.<codeblock>nova boot vm1-pci-pt1 --flavor pci-pt --image wr-new</codeblock><p/><b>Non-KVM
-                Region</b><p>No changes needed on the controller nodes in the non-KVM region.
+                Region</b><p>No changes needed on the controller nodes in the Non-KVM Region.
                 However, if you need information on the provider network and the VLAN ranges
                 configured for that network, view the
                     <codeph>/etc/neutron/plugins/ml2/ml2_conf.ini</codeph> file. For example in this
@@ -56,7 +56,7 @@ network_vlan_ranges = physnet1:810:813,physnet2:814:815</pre><b>Configure
                 device vendor ID and its alias, to pickup the right compute node . The alias
                 typically refers to provider net. </p><ol id="ul_vzh_yfn_xt">
                 <li>Update the <codeph>pci_alias</codeph> field in the
-                        <codeph>/etc/nova/nova.conf</codeph> file on both KVM region controllers to
+                        <codeph>/etc/nova/nova.conf</codeph> file on both KVM Region controllers to
                     indicate the PCI device to use, similar to the following
                     example:<codeblock>[DEFAULT]
 pci_alias={"vendor_id":"8086", "product_id":"10fb", "name":"physnet1"}</codeblock>This

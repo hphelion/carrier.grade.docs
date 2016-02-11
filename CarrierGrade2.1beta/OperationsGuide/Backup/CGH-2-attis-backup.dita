@@ -20,7 +20,7 @@ The high level design needs to be adjusted to more suite with CG(It is reflectin
 But the CLI, REST API etc should all be same  Also HCG-1025--></p>
     <p>HP Helion OpenStack Carrier Grade includes a backup and restore application called Attis
       which you can use to backup and restore essential system files and databases of the running
-      cloud. Attis is automatically installed on each of the controller nodes in the non-KVM region.
+      cloud. Attis is automatically installed on each of the controller nodes in the Non-KVM Region.
       Attis uses a command line interface. For more information, see <xref
         href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
       CLI</xref>.</p>
@@ -78,7 +78,7 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         nodes.</p>For disaster recovery, you should take full backups of the MySQL cluster
       frequently, such as on a daily basis. Backing up the node on any single controller will back
       up the full cluster.<ol>
-        <li>Log in to one of the non-KVM region controllers as the <codeph>cghelion</codeph>
+        <li>Log in to one of the Non-KVM Region controllers as the <codeph>cghelion</codeph>
           user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
@@ -104,11 +104,11 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
       </section>
        -->
     <section id="kvm">
-      <title>Backup KVM region system files </title>
-      <p>You can use Attis to back up the KVM region system files.</p>
-      <p>To backup the KVM region system files:</p>
+      <title>Backup KVM Region system files </title>
+      <p>You can use Attis to back up the KVM Region system files.</p>
+      <p>To backup the KVM Region system files:</p>
       <ol id="ol_zrk_4zc_p5">
-        <li>Log into the active KVM region controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Log into the active KVM Region controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Execute the following command to perform the back

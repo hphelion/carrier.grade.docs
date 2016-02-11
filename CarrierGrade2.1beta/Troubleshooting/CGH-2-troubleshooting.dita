@@ -18,7 +18,7 @@
     <section>
       <ul id="ul_xzh_nmc_mt">
         <li><xref href="#topic10581c2t/baremetal" format="dita"/></li>
-        <!--<li><xref href="#topic10581c2t/no-instance" format="dita">Unable to create an instance in the non-KVM region</xref></li>-->
+        <!--<li><xref href="#topic10581c2t/no-instance" format="dita">Unable to create an instance in the Non-KVM Region</xref></li>-->
         <li><xref href="#topic10581c2t/backup" format="dita"/></li>
         <li><xref href="#topic10581c2t/glance" format="dita"/></li>
         <li><xref href="#topic10581c2t/two-controllers" format="dita"/></li>
@@ -58,15 +58,15 @@
             <li><b>neutron net-list</b> should display the created networks</li>
           </ul></li>
       </ol></section>
-    <!--<section id="no-instance"><title><b>Unable to create an instance in the non-KVM region</b></title><p>When trying to create a virtual machine instance in the non-KVM region, the user receives a <codeph>No valid host found</codeph> error. Check that all ESX host machines in the cluster are configured with the ESX compute proxy. If one or more hosts in the cluster is configured with the proxy, disconnect the host(s) from the cluster or <xref href="../Installation/carrier-grade-install-esx-proxy.dita#topic10581cgiep">install the ESX compute proxy</xref>. CG-1413</p></section>-->
+    <!--<section id="no-instance"><title><b>Unable to create an instance in the Non-KVM Region</b></title><p>When trying to create a virtual machine instance in the Non-KVM Region, the user receives a <codeph>No valid host found</codeph> error. Check that all ESX host machines in the cluster are configured with the ESX compute proxy. If one or more hosts in the cluster is configured with the proxy, disconnect the host(s) from the cluster or <xref href="../Installation/carrier-grade-install-esx-proxy.dita#topic10581cgiep">install the ESX compute proxy</xref>. CG-1413</p></section>-->
     <section id="backup">
       <title>Backup storage size should be at least 120GB</title>
       <p>If you experience the following error, you can edit the <codeph>region_config</codeph> file
-        for the KVM region to increase the default storage.</p>
+        for the KVM Region to increase the default storage.</p>
       <p><image href="../../media/CGH-trouble-storage.png" width="400" id="image_ehc_qjc_mt"/></p>
       <p>
         <ol id="ol_vcj_rjc_mt">
-          <li>Log into the KVM region controller-0.</li>
+          <li>Log into the KVM Region controller-0.</li>
           <li>Edit the <codeph>./&lt;cloud name&gt;/clouds/&lt;cloud
               name&gt;/001/stage/windriver-config/region_config</codeph> file to update the
               <codeph>backup_storage</codeph> value to 120 or higher.</li>

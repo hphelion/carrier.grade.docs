@@ -27,9 +27,9 @@
             <p>Use the following steps on the lifecycle manager host to log on to the lifecycle
                 manager:</p>
             <ol id="ol_ncd_wff_zt">
-                <li>Log into the lifecycle manager. <codeblock>ssh &lt;CLM_IP></codeblock><p>where:
-                        HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for
-                        the lifecycle manager in the
+                <li>Log into the lifecycle manager.
+                        <codeblock>ssh root@&lt;CLM_IP></codeblock><p>where: CLM_IP is located in
+                        the IP address for the lifecycle manager in the
                             <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
                             <codeph>hlm_clmstaticip</codeph> field.</p><p>Use the default
                         credentials: </p><p>
@@ -390,7 +390,7 @@ Password: cghelion</codeblock>
                 volumes on HPE StoreVirtual VSA and/or HPE StoreServ (3PAR) storage arrays. The HPE
                 Block Storage (Cinder) service allows you to configure multiple storage back-ends. A
                 sample file provides all the variables needed to use VSA and/or 3PAR attached to the
-                KVM region. You need to edit this file for your environment and save as
+                KVM Region. You need to edit this file for your environment and save as
                     <codeph>cinder_conf</codeph>. <!--Section shared with Denver--></p>
             <p>Use the following steps to configure back-end support:</p>
             <ol id="ul_btr_l52_xs">
@@ -402,7 +402,7 @@ Password: cghelion</codeblock>
                 <li>Edit the <codeph>cinder_conf.multiBackendSample</codeph> file. <p>Use the
                             <codeph>enabled_backends</codeph> variable to list each of the back-ends
                         you are using.
-                        <!--You must specify at least one back-end for the non-KVM region and one or more for the KVM region.--></p><table
+                        <!--You must specify at least one back-end for the Non-KVM Region and one or more for the KVM Region.--></p><table
                         id="backend">
                         <tgroup cols="3">
                             <colspec colname="col1" colsep="1" rowsep="1"/>
@@ -428,7 +428,7 @@ Password: cghelion</codeblock>
                                 </row>
                             </tbody>
                         </tgroup>
-                    </table><p>You can use either 3PAR and VSA in the KVM region or select both if
+                    </table><p>You can use either 3PAR and VSA in the KVM Region or select both if
                         you have respective storage arrays </p><p><b>Note:</b> The HP 3PAR Web
                         Services API server must be enabled and running on the HP 3PAR storage
                         system. For more information, see the OpenStack documentation at: <xref
@@ -546,7 +546,7 @@ route add default gw &lt;CLM_IP> </codeblock><p>Where
             <p>By default, the HPE Helion OpenStack Carrier Grade services are configured to use
                 Keystone v2 authorization. The services need to be modified to use Keystone v3.
                 Users will not be able to execute OpenStack CLI commands until the specific changes
-                are made on all three controller nodes in the non-KVM region. </p>
+                are made on all three controller nodes in the Non-KVM Region. </p>
             <p>For information, see <xref
                     href="../carrier-grade-install-config-ldap3.dita#topic10581cgicl">Configuring
                     LDAP CLI Support</xref></p>

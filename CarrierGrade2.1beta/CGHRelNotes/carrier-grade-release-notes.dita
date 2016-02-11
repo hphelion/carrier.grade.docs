@@ -101,7 +101,7 @@
             </p>
             <!--<p>When powering on the ESX Compute Proxy VM, you might receive a <systemoutput>VMK_NO_MEMORY</systemoutput> error. This is a known problem with HP server and ESXi 5.x.</p><p>To fix this issue, upgrade to HP AMS version 10.0.1 and above. See <xref href="../Installation/CGH-2-install-vmware-workaround.dita#topic10581c2ivw">Fixing the VMware VMK_NO_MEMORY Error</xref>.</p><p>Comment: From jow1404333831397.xml and added info </p>-->
             <p><b>Use the CLI with the KVM Region </b></p>
-            <p>When working with the servers in the KVM region, do not use the Horizon interface.
+            <p>When working with the servers in the KVM Region, do not use the Horizon interface.
                 Please use the <xref href="http://docs.openstack.org/cli-reference/content/"
                     format="html" scope="external">OpenStack command-line interface CLI
                     commands</xref>. </p>
@@ -121,7 +121,7 @@
             <!-- CG-1012 -->
             <p>When router is configured either centralized (server default) or distributed , it is
                 seen that Floating IP is not working.</p>
-            <p>To fix this issue, log onto <codeph>controller-0</codeph> for the KVM region and
+            <p>To fix this issue, log onto <codeph>controller-0</codeph> for the KVM Region and
                 execute the following command to disable SNAT on the router:
                 <codeblock>neutron router-update &lt;router-name> --external_gateway_info type=dict network_id=&lt;network-id>,enable_snat=False</codeblock></p>
             <p><b>Unable to create new users through the Horizon UI</b></p>
@@ -226,13 +226,13 @@ hp3par_snapshot_expiration=72</codeblock>
             </ol>
             <p><b>Non-shared services do not work from Horizon dashboard</b></p>
             <ol id="ol_kzl_ccw_c5">
-                <li>Go to each controller node in the non-KVM region and replace
+                <li>Go to each controller node in the Non-KVM Region and replace
                         <codeph>user.py</codeph> file in the following location:
                         <codeph>/opt/stack/venvs/horizon/lib/python2.7/site-packages/openstack_auth/user.py</codeph></li>
                 <li>Restart apache2 service</li>
             </ol>
-            <p><b>LAG for the KVM region control plane does not work</b></p>
-            <p>Link aggregation groups (LAG) are not supported in the KVM region control plane. This
+            <p><b>LAG for the KVM Region control plane does not work</b></p>
+            <p>Link aggregation groups (LAG) are not supported in the KVM Region control plane. This
                 is a known limitation that is scheduled to be corrected with the HP Helion OpenStack
                 Carrier Grade GA release. A LAG is a mechanism that allows multiple parallel
                 Ethernet network connections between two hosts to be used as a single logical
@@ -300,7 +300,7 @@ hp3par_snapshot_expiration=72</codeblock>
                     <!--Per Vlad, Sanjib, Shantanu email--></li>
             </ul>
             <p><b>Installation does not fully utilize disks greater than two terabytes</b></p>
-            <p>HP Helion OpenStack Carrier Grade in the KVM region can be installed on disks greater
+            <p>HP Helion OpenStack Carrier Grade in the KVM Region can be installed on disks greater
                 than 2 TB, but only 2 TB of the disk is useable.</p>
             <!-- Remove per Hrushi email 7-2
         

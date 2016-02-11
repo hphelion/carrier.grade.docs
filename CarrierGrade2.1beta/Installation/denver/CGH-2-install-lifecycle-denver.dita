@@ -37,13 +37,15 @@
               <li>
                 <p>Set the Cobbler IP addresses according to your network setup;</p>
               </li>
-            </ul><p>The <codeph>group_vars/all</codeph> file should appear similar to the
-              following:</p><codeblock>---
-
-############################################# Variables for HLM  #################################################################
+            </ul><p>The <codeph>group_vars/all</codeph> file should appear similar to the following
+              (IP addresses masked for
+            security):</p><codeblock>############################################# Variables for HLM  #################################################################
 #These variables are relevant in both All Virtual and BareMetal scenarios.
 
-#Set this to '0' for dcn cloud, '1' for ovs cloud, '2' for denver or denver_virtual cloud.
+#ovs_cloud_only: 0 #memphis
+#ovs_cloud_only: 1 #ovs
+#ovs_cloud_only: 2 #denver
+#ovs_cloud_only: 3 #rcp
 ovs_cloud_only:  3
 
 #Set this to 'bm' if cloud is being deployed over baremetal.
@@ -55,17 +57,15 @@ hlm_login_id:       root
 hlm_password:       cghelion
 
 #The following variables are for CLM network IP details for HLM
-hlm_clmstaticip:    10.10.2.100
+hlm_clmstaticip:    10.x.x.x
 hlm_clmnetmask:     255.255.255.0
-hlm_clmgateway:     10.10.2.1
+hlm_clmgateway:     10.x.x.x
 
 #The variables starting with cobbler_ are inputs that are usually given to initcobbler.sh. Set accordingly.
-cobbler_pxestartip: 10.10.1.100
-cobbler_pxeendip:   10.10.1.200
-cobbler_pxestaticip: 10.10.1.7
+cobbler_pxestartip: 10.x.x.x
+cobbler_pxeendip:   10.x.x.x
+cobbler_pxestaticip: 10.x.x.x
 cobbler_pxenetmask: 255.255.255.0
-cobbler_hlinux_password: ohcanada
-cobbler_web_password: cobbler
 
 #Set the location of your images that will be used by libvirt
 imagelocation: /var/lib/libvirt/images
@@ -88,39 +88,53 @@ dcn_dir: ~/cg/dcn
 #If you have already configured a VSD and ignore the following variables
 
 dns_domain_name: helion.cg
-dns_address: 10.10.10.25
-vsd_address: 10.10.10.10
-vsd_gateway: 10.10.10.1
+dns_address: 10.x.x.x
+vsd_address: 10.x.x.x
+vsd_gateway: 10.x.x.x
 vsd_netmask: 255.255.255.0
 vsd_name: vsd
 vsdimagename: VSD-3.0.0_HP_r3.0_36
 upstream_ntp_servers:
-   - 10.10.10.25
-   - 10.1.64.20
-###################################################################################################################################</codeblock></li>
+   - 10.x.x.x
+   - 10.x.x.x
+###################################################################################################################################
+</codeblock></li>
           <li>Edit the <codeph>group_vars/all-virtual</codeph> file:<ul id="ul_tjd_tzz_s5">
-              <li>Update the <codeph>kvm_user</codeph> and <codeph>kvm_password</codeph> variables
-                with your KVM Credentials;</li>
-              <li>Change the <codeph>Cloud_Topology</codeph> variable to
-                  <codeph>denver_virtual</codeph>.</li>
+              <li>Update the <codeph>root_user</codeph> and <codeph>root_password</codeph> variables
+                with your root
+                credentials;<codeblock>#Variables related to pxe booting the VMs - will be used by hprovision 
+#The user has to be non-root kvm_ip: 192.168.122.1 
+root_user: root 
+root_pass: cghelion</codeblock></li>
+              <li>Change the <codeph>cloud_topology</codeph> variable to
+                <codeph>rcp</codeph>.<codeblock>#Cloud topology to be used. Provide the name of the cloud topology you wish to use in cloud deploy. 
+#This topology MUST be an "all-virtual" cloud topology only. 
+cloud_topology: rcp</codeblock></li>
             </ul></li>
           <li>Edit the <codeph>group_vars/all-kvm-net</codeph> file to make sure the VLAN tag IDs
-            are correct according to your network configuration.</li>
+            are correct according to your network configuration.:
+            <codeblock>#vlan tag ids for various networks on base 
+KVM clm_vlan_id: 3007 
+bls_vlan_id: 210 
+dcm_vlan_id: 211</codeblock></li>
         </ol>
       </section>
       <section><title>Increase the hard disk size (optional)</title>You can increase the hard disk
         size for the controllers. By default, each controller is assigned 80 GB.<p>
           <ol id="ol_bn1_5vb_y5">
             <li>Edit the <codeph>group_vars/all-virtual</codeph> file to set the disk and RAM size,
-              as needed.<p>
-                <codeblock>vm_ctrl_ram:
-vm_ctrl_disksize: </codeblock>
-              </p></li>
+              as needed.<p>For
+                example:<codeblock>#Specify how much RAM and Disk Size must be attached to the cloud VMs. Disk Size is in GBs
+vm_ctrl_ram: 16777376
+vm_ctrl_disksize: 200</codeblock></p></li>
             <li>Change to the following
               directory:<codeblock>cd ~/infra-ansible-playbooks/roles/SETUP-CLOUD-ON-AV/tasks/</codeblock></li>
             <li>Edit the <codeph>rcp_controller.yml</codeph> file to change the
-                <codeph>+80G</codeph> value in the <codeph>QCOW2</codeph> line for all
-              controllers:<codeblock>qemu-img create -f qcow2 -o preallocation=metdata ((imagelocation)) /ccn1.qcow2 +80G </codeblock></li>
+                <codeph>+80G</codeph> value in the <codeph>QCOW2</codeph> line for each controllers:
+                <!--NEED TO BE THE SAME ON ALL?--><p>For
+              example:</p><codeblock>###################### Controller 1 #############################################################
+-   name:           Create Qcow2 file
+    command:        qemu-img create -f qcow2 -o preallocation=metadata {{ imagelocation }}/ccn1.qcow2 +180G</codeblock></li>
           </ol>
         </p></section>
       <section>
@@ -130,33 +144,27 @@ vm_ctrl_disksize: </codeblock>
         <ol id="ol_jld_mvb_y5">
           <li>Change to <codeph>infra-ansible-playbooks</codeph> directory
             <codeblock>~/ cd infra-ansible-playbooks</codeblock></li>
-          <li>If you want to use the HCG Dashboard to perform the installation, edit the
-              <codeph>setup_vcloud.yml</codeph> file to  comment out
-              <codeph>SETUP-CLOUD-ON-AV</codeph> role.<p><image
-                href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-setup-vcloud.png"
-                width="500" id="image_b5g_bbc_y5"/></p></li>
-          <li>Execute the following command to create required Ansible roles. These roles create the
-            lifecycle manager, the HP Helion OpenStack Carrier Grade controllers and configure the
-            lifecycle
-              manager.<codeblock>ansible-playbook -i hosts setup_rcpcloud.yml</codeblock><p>The
-                <codeph>setup_rcpcloud.yml</codeph> file contains 3 Ansible roles:
-                <codeph>SETUP-INFRA-ON-AV</codeph>, <codeph>SETUP-CLOUD-ON-AV</codeph>,
-                <codeph>HLM-CFG</codeph>. These roles creates lifecycle manager VM, install the HP
-              Helion OpenStack controllers and configure the lifecycle manager VM.</p><image
-              href="../../../media/CGH-ansible-playbook-run.png" id="image_lhd_2dc_y5">
-              <alt>Sample Ansible Playbook run output</alt>
-            </image><p><b>Note: </b>If you receive the following error during the Ansible
-              deployment:
+          <li>Execute one of the following commands <ul id="ul_ozg_p5q_y5">
+              <li>To deploy cloud using HCG
+                  Dashboard:<codeblock>ansible-playbooks -i hosts setup_hlm_for_UI.yml</codeblock><p>This
+                  command deploys and configures the lifecycle manager VM. </p></li>
+              <li>To deploy cloud using
+                  CLI:<codeblock>ansible-playbook -i hosts setup_vcloud.yml</codeblock><p>This
+                  command uses three Ansible roles, <codeph>SETUP-INFRA-ON-AV</codeph>,
+                    <codeph>SETUP-CLOUD-ON-AV</codeph>, and <codeph>HLM-CFG</codeph>, to create and
+                  configure the lifecycle manager VM and create the controller VMs.</p></li>
+            </ul><p><b>Note: </b>If you receive the following error during the Ansible deployment:
               <codeblock>Failed to fetch http://hlinux-deejay.us.rdlabs.hpecorp.net/hLinux/dists/cattleprod/InRelease 
 Unable to find expected entry 'main/binary-i386/Packages' in Release file (Wrong sources.list entry or malformed file)
 Some index files failed to download. They have been ignored, or old ones used instead.</codeblock>Run
-              the following command:<codeblock>dpkg --remove-architecture i386</codeblock></p></li>
-          <li id="hosts">Check the <codeph>/root/infra-ansible-playbooks/hosts</codeph> file to
-            enter the IP address of the <codeph>vibr0</codeph> interface in the
-              <codeph>hlm_kvm_host</codeph> field, as shown in the following example. </li>
+              the following command:
+              <!--AND RERUN ANSIBLE?--><codeblock>dpkg --remove-architecture i386</codeblock></p></li>
+          <li id="hosts">Check the <codeph>infra-ansible-playbooks/hosts</codeph> file to enter the
+            IP address of the <codeph>vibr0</codeph> interface in the <codeph>hlm_kvm_host</codeph>
+            field, as shown in the following example.
+            <codeblock>[hlm_kvm_host]
+192.168.122.1 </codeblock></li>
         </ol>
-        <codeblock>  [hlm_kvm_host]
-  192.168.122.1 </codeblock>
       </section>
     </bodydiv>
   <section id="next-step">

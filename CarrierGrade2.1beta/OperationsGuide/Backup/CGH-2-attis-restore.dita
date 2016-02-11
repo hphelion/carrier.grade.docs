@@ -20,7 +20,7 @@ The high level design needs to be adjusted to more suite with CG(It is reflectin
 But the CLI, REST API etc should all be same --></p>
     <p>HP Helion OpenStack Carrier Grade includes a backup and restore application called Attis
       which you can use to backup and restore essential system files and databases on the running
-      cloud. Attis is automatically installed on each of the controller nodes in the non-KVM region.
+      cloud. Attis is automatically installed on each of the controller nodes in the Non-KVM Region.
       Attis uses a command line interface. For more information, see <xref
         href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
       CLI</xref>.</p>
@@ -69,21 +69,21 @@ But the CLI, REST API etc should all be same --></p>
             SCP storage</b>
           <codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeblock></li>
         <li>After restore job is complete, SSH from the lifecycle manager host to the compute proxy
-          nodes in the KVM region. </li>
+          nodes in the KVM Region. </li>
         <li>Execute the following command to restart  the Compute
             service:<codeblock>service nova-compute restart</codeblock><p>Use care when restating
-            the Compute service on the KVM region controllers, such as locking and unlocking the
+            the Compute service on the KVM Region controllers, such as locking and unlocking the
             nodes.</p></li>
       </ol>
     </section>
     <!--<section><title>Restoring the VSD database</title><p>You can use Attis to restore the HP DCN VSD database from a previous backup..</p><ol id="ol_l43_w3d_p5"><li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li><li>Change to the root user:<codeblock>sudo -i</codeblock></li><li>SSH to the VSD node from controller and stop all services on VSD. <codeblock>service vsd stop</codeblock></li><li>Execute the following command: <codeblock>attis restore -config-id &lt;Config_ID_of_VSD_Appliance_DB_Restore> -backup-id BACKUP_ID</codeblock><p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash></p></li><li>After restore job is complete, SSH to the VSD node and restart the VSD service. <codeblock>service vsd restart</codeblock></li></ol></section>-->
     <!--<section><title>Restoring the VSC system files </title><p>You can use Attis to restore the HP DCN VSC system files from a previous backup..<ol><li>Log into the VSC controller as the <codeph>cghelion</codeph> user.</li><li>Change to the root user:<codeblock>sudo -i</codeblock></li><li>Execute the following command:<codeblock>attis restore -config-id &lt;Config_ID_of_VSC_Appliance_config_files_Restore> -backup-id BACKUP_ID </codeblock></li></ol></p><p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash></p></section>-->
     <section>
-      <title>Restoring the KVM region system files </title>
-      <p>You can use Attis to restore the KVM region system files from a previous backup..</p>
+      <title>Restoring the KVM Region system files </title>
+      <p>You can use Attis to restore the KVM Region system files from a previous backup..</p>
       
         <ol>
-          <li>Log into the active KVM region controller as the <codeph>cghelion</codeph> user.</li>
+          <li>Log into the active KVM Region controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
           <li>Execute the following command to perform the back
             up.<codeblock>attis restore --config-id &lt;Config_ID_of_WR_Appliance_system_files_Restore> --backup-id BACKUP_ID</codeblock></li>

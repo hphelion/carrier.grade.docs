@@ -27,7 +27,7 @@
             <p><b>Configure WR Compute Nodes</b>
                 <!--Beta only!! Remove for GA--></p>
             <ol id="ol_qnf_5sg_tt">
-                <li>Log into the KVM region <codeph>controller-0</codeph> node with root
+                <li>Log into the KVM Region <codeph>controller-0</codeph> node with root
                     privileges.</li>
                 <li>Identify the compute node with Niantic NIC and configure the node.
                         <codeblock>system host-port-list &lt;compute-name> </codeblock><p>The
@@ -76,7 +76,7 @@ system host-unlock mem17-compute0</codeblock></li>
                 their tenant networks. <!--2nd sentence from WR admin--></p>
             <p>To create provider network: </p>
             <ol id="ol_wvw_cyq_5t">
-                <li>Log into the KVM region <codeph>controller-0</codeph> node with root
+                <li>Log into the KVM Region <codeph>controller-0</codeph> node with root
                     privileges.</li>
                 <li>Execute the following command to create the network:<p>
                         <codeblock>neutron net-create &lt;network-name> --provider:network_type vlan --provider:segmentation_id &lt;segmentation_id&gt;  --provider:&lt;physical_network_name&gt;</codeblock>

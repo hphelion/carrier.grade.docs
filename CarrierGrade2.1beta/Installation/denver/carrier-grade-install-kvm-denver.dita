@@ -16,13 +16,13 @@
 <body>
     <section id="intro">
       <p>After the lifecycle manager is up and running and HP Helion OpenStack is installed, use the
-        following steps to deploy the KVM region.</p>
-      <p>The process for installing the KVM region involves the following tasks:<ul
+        following steps to deploy the KVM Region.</p>
+      <p>The process for installing the KVM Region involves the following tasks:<ul
           id="ul_fj4_mct_g5">
           <li><xref href="#topic1107cgikd/controller-0" format="dita">Step 1: Bring Up Controller-0
               in the KVM Region</xref></li>
           <li><xref href="#topic1107cgikd/kvm-custom-patch" format="dita"/></li>
-        <li><xref href="#topic1107cgikd/cloud" format="dita">Step 3: Configure the KVM region
+        <li><xref href="#topic1107cgikd/cloud" format="dita">Step 3: Configure the KVM Region
               cloud</xref></li>
         <li><xref href="#topic1107cgikd/unlock" format="dita">Step 4: Configure and unlock the
               compute controllers</xref></li>
@@ -32,7 +32,7 @@
       <title>Step 1: Bring Up Controller-0 in the KVM Region</title>
       <ol id="ol_mf2_knq_35">
         <li>Make sure the server you will use for controller-0 is powered on and the other servers
-          to be used in KVM region are shutdown.</li>
+          to be used in KVM Region are shutdown.</li>
         <li>Launch the iLO interface for the server.</li>
         <li>Execute the following command to use the <codeph>bootimage_avs_only.iso</codeph> to boot
           the controller node.<codeblock>mount bootimage_avs_only.iso</codeblock></li>
@@ -64,10 +64,10 @@ ifconfig eth0 up</codeblock></li>
       </ol>
     </section>
     <section id="kvm-custom-patch">
-      <title> Step 2: Apply KVM region patches</title>
+      <title> Step 2: Apply KVM Region patches</title>
       <p>Perform the following steps to deploy two required patches.</p>
       <ol>
-        <li>On KVM region <codeph>controller-0</codeph>, create a directory for the
+        <li>On KVM Region <codeph>controller-0</codeph>, create a directory for the
           patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
         <li>Copy the following patches file to the <codeph>/tmp/patches</codeph> directory: <ul
             id="ul_zbh_j2t_q5">
@@ -90,11 +90,11 @@ ifconfig eth0 up</codeblock></li>
       </ol>
     </section>
     <section id="cloud">
-      <title>Step 3: Configure the KVM region cloud</title>
+      <title>Step 3: Configure the KVM Region cloud</title>
       <ol id="ol_vl1_5fj_y5">
         <li>In the iLO web interface, launch a console session to the <codeph>controller-0</codeph>
           node.</li>
-        <li>Execute the following command to install the KVM region cloud:<p><b>Important:</b>
+        <li>Execute the following command to install the KVM Region cloud:<p><b>Important:</b>
             Always execute this command from a console window, not an SSH
               session</p><codeblock>sudo config_region region_config</codeblock><p><image
               href="../../../media/CGH-install-KVM.png" width="500" id="image_wl1_5fj_y5"
@@ -122,12 +122,12 @@ system host-add --hostname &lt;unique-compute-name&gt; --personality compute --m
           and the <b>Availability State</b> should be <b>Online</b>. <p><b>Note:</b>The Horizon
             Dashboard will be running on the first IP address of the CLM network range (refer to the
               <codeph>ip_start_address</codeph> value provided for the CLM network in the
-              <codeph>definition.json</codeph> during the non-KVM Region deployment). </p><p>The
+              <codeph>definition.json</codeph> during the Non-KVM Region deployment). </p><p>The
             log-in credentials for Horizon are as
             follows:</p><codeblock>username: admin 
 password:  &lt;random></codeblock><p>The Horizon
             password is randomly generated during the installation. You can locate the password in
-            the <codeph>stackrc</codeph> file on any of the non-KVM region controllers.</p></li>
+            the <codeph>stackrc</codeph> file on any of the Non-KVM Region controllers.</p></li>
       </ol>
     </section>
   <section id="unlock">
