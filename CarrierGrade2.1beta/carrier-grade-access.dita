@@ -23,6 +23,7 @@
       <li><xref href="#topic10581cgilhd/controller" format="dita"/></li>
       <li><xref href="#topic10581cgilhd/horizon" format="dita"/></li>
       <li><xref href="#topic10581cgilhd/dashboard" format="dita"/></li>
+      <li><xref href="#topic10581cgilhd/ilo" format="dita"/></li>
       </ul>
       <section id="host">
         <title>Access the lifecycle manager host</title>
@@ -87,14 +88,24 @@ unset OS_AUTH_VERSION</codeblock><p>In
           <codeph>https://10.x.x.x</codeph>.</p><p>Enter the IP in the browser to access the log-in
         page:<codeblock>https://&lt;CAN_IP></codeblock></p><p>By default, the user name is
           <codeph>admin</codeph>. You can find the installation password for <codeph>admin</codeph>
-        in the <codeph>/root/stackrc</codeph> file from any of the controller nodes. </p><p>The
+        in the <codeph>/root/stackrc</codeph> file from any of the controller nodes.
+        <codeblock>export OS_PASSWORD=qekuTPcc26
+export OS_USERNAME=admin</codeblock></p><p>The
         Horizon interface appears similar to the following:</p><p><image
-          href="/media/CGH-install-horizon.png" id="image_rcc_td1_1t"/>
+          href="/media/CGH-install-horizon-launch.png" id="image_rcc_td1_1t" width="600"/>
       </p></section><section id="dashboard">
         <title>Access the HCG Dashboard</title>
         <p>The HCG Dashboard can be accessed using any supported web browser using the IP address of
-          the lifecycle manager and port 8080:<codeblock>http://&lt;HLM_IP>:8080/</codeblock></p>
+        the lifecycle manager VM and port 8080. <codeblock>http://&lt;HLM_IP>:8080</codeblock></p>
       </section>
+    <section id="ilo">
+      <title>Access the iLO console</title>
+      <p>iLO is HPE Integrated Lights-Out, a server management tool embedded with the ProLiant
+        servers. </p>
+      <p>The iLO interface can be accessed using any supported web browser using the iLO IP address
+        and port 80. Consult your iLO documentation for information on how to locate the iLO IP
+        address, user name, and password. <codeblock>https://&lt;iLO_IP>:80</codeblock></p>
+    </section>
     
   </body>
 </topic>
