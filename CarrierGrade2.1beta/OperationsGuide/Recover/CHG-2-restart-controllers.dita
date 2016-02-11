@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic5937recover">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Restart HCG Controller
+    VMs</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack"/>
+      <othermeta name="product-version" content="HP Helion OpenStack 1.1"/>
+      <othermeta name="role" content="Systems Administrator"/>
+      <othermeta name="role" content="Cloud Architect"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Network Administrator"/>
+      <othermeta name="role" content="Service Developer"/>
+      <othermeta name="role" content="Cloud Administrator"/>
+      <othermeta name="role" content="Application Developer"/>
+      <othermeta name="role" content="Network Engineer"/>
+      <othermeta name="role" content="Paul F"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack"/>
+      <othermeta name="product-version2" content="HP Helion OpenStack 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p><b>MySQL Cluster:</b><ul id="ul_vcs_myw_y5">
+        <li>
+          <pre>To check if MYSQL cluster is running do with all HOS controller  nodes IP from HLM : 
+
+</pre>
+          <pre>ssh cghelion@&lt;IP of Controller&gt; "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</pre>
+        </li>
+        <li>
+          <p>if it is down you should see :</p>
+        </li>
+      </ul><ul id="ul_wcs_myw_y5">
+        <li>
+          <p>to recover MySQL Cluster do :</p>
+        </li>
+      </ul><pre>    hlm stop -c&lt;your-cloud-name&gt; -t FND-MDB</pre></p>
+    <p>and</p>
+    <p><pre>    hlm start -c &lt;your-cloud-name&gt; -t FND-MDB</pre><ul id="ul_xcs_myw_y5">
+        <li>
+          <p>check that MySQL Cluster is up and running by doing the same command during first step:
+          </p>
+        </li>
+      </ul><pre>    ssh cghelion@10.20.20.102 "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"  </pre><image
+        href="https://wiki.hpcloud.net/download/attachments/56149786/Untitled5.jpg?version=1&amp;modificationDate=1454115656000&amp;api=v2"
+        id="image_ycs_myw_y5"/>
+      <b>RabbitMQ Cluster:</b><ul id="ul_zcs_myw_y5">
+        <li>
+          <p>To check if RabbitMQ cluster is running do with all HOS controller nodes IP from HLM
+            :</p>
+        </li>
+      </ul><pre>    ssh cghelion@&lt;IP of Controller&gt; "sudo rabbitmqctl cluster_status"</pre><image
+        href="https://wiki.hpcloud.net/download/attachments/56149786/Untitled6.jpg?version=1&amp;modificationDate=1454116070000&amp;api=v2"
+        width="500" id="image_ads_myw_y5"/><ul id="ul_bds_myw_y5">
+        <li>
+          <p>To Restart RabbitMQ cluster do on HLM:</p>
+          <p>- cd to
+            /var/hlm/cloud/&lt;cloud_name&gt;/desired_state/&lt;cloud_name&gt;/001/base/stage/ansible-
+            download and copy the<b> restart-RMQ-Cluster.yml</b>
+              from<b>sftp://15.242.209.8/cg-hos-2-0-builds/RabbitMQ_restart_script/restart-RMQ-Cluster.yml</b>in
+            this directory</p>
+          <p>replace in the file : “hosts: BASE-CCP-T1 ” if Host Controller is part of a different
+            Tier group (for other topology than Denver, check <b>hosts</b> file )</p>
+          <p>from this directory run the command : <b>ansible-playbook -i hosts
+              restart-RMQ-Cluster.yml</b></p>
+          <p>some errors may appear during the role execution but it should reach the end : </p>
+        </li>
+      </ul><ol id="ol_cds_myw_y5">
+        <li>
+          <p>ssh cghelion@&lt;IP of Controller&gt; "sudo rabbitmqctl cluster_status"</p>
+        </li>
+      </ol><b>To Restart all services do (this will interrupt services for user because it is done
+        on all nodes should be used carefully) from :</b> cd to
+        <b>/var/hlm/cloud/&lt;cloud_name&gt;/desired_state/&lt;cloud_name&gt;/001/base/stage/ansible</b>
+            run:<pre>       ansible-playbook -i hosts stop.yml --skip-tags "FND-MDB,FND-RMQ"</pre><pre>       ansible-playbook -i hosts start.yml --skip-tags "FND-MDB,FND-RMQ"</pre><b><u><b>Build
+            &gt; 39:</b></u></b><b><u>Failure simulation:</u></b></p>
+    <p>You can can simulate failure situation on three HOS Controller nodes by shutting them down
+      via virsh command: you should see them disabled :</p>
+    <p><image
+        href="https://wiki.hpcloud.net/download/attachments/56149786/Untitled1.jpg?version=1&amp;modificationDate=1454114972000&amp;api=v2"
+        id="image_dds_myw_y5"/></p>
+    <p>Then bring them back:</p>
+    <p><image
+        href="https://wiki.hpcloud.net/download/attachments/56149786/Untitled3.jpg?version=1&amp;modificationDate=1454114979000&amp;api=v2"
+        id="image_eds_myw_y5"/><b>MySQL Cluster:</b><ul id="ul_fds_myw_y5">
+        <li>check if Mysql Cluster is down by running the command with the controller IP from HLM
+          :</li>
+      </ul><pre>     ssh cghelion@10.20.20.102 "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"  </pre><ul
+        id="ul_gds_myw_y5">
+        <li>
+          <p>to recover MySQL Cluster do :</p>
+        </li>
+      </ul><pre>    hlm stop -c&lt;your-cloud-name&gt; -t FND-MDB</pre>and<pre>    hlm start -c &lt;your-cloud-name&gt; -t FND-MDB</pre><ul
+        id="ul_hds_myw_y5">
+        <li>
+          <p>check that MySQL CLuster is up and running by doing the same command during first step:
+          </p>
+        </li>
+      </ul><pre>ssh cghelion@10.20.20.102 "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"  </pre><b>RabbitMQ:</b><ul
+        id="ul_ids_myw_y5">
+        <li>
+          <p>shutting down and restarting all three controllers won't take RabbitMQ's cluster
+            down:</p>
+          <p>but here are the steps to check if it is up and running: </p>
+          <pre>ssh cghelion@10.20.20.102 "sudo rabbitmqctl cluster_status"</pre>
+        </li>
+        <li>
+          <p>if the RabbitMQ Cluster is down:</p>
+        </li>
+        <li>
+          <p>do :</p>
+          <pre>hlm stop -c &lt;cloud-name&gt; -t  FND-RMQ</pre>
+        </li>
+      </ul><ul id="ul_jds_myw_y5">
+        <li>and Start with:</li>
+      </ul><pre>     hlm start -c &lt;cloud-name&gt; -t FND-RMQ</pre>
+      <ul id="ul_kds_myw_y5">
+        <li>check again with the first command</li>
+      </ul><image
+        href="https://wiki.hpcloud.net/download/attachments/56149786/stateyes.png?version=1&amp;modificationDate=1454359121000&amp;api=v2"
+        id="image_lds_myw_y5"/></p>
+  </body>
+</topic>
