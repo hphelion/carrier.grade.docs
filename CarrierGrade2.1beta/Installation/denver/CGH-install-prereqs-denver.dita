@@ -204,8 +204,7 @@ fi
 StrictHostKeyChecking no </codeblock></li>
                                                   <li>Save the file,</li>
                                                 </ol></li>
-                                        <li>Configure the public key and passwordless SSH
-                                                  access.<p>a. Enter the following
+                                        <li>Configure the public key.<p>a. Enter the following
                                                   command:</p><codeblock><codeph>ssh-keygen -t rsa </codeph></codeblock><p>b.
                                                   Press Enter to use default path
                                                   (<codeph>/root/.ssh/id_rsa</codeph>)</p><p>c.
@@ -217,23 +216,49 @@ StrictHostKeyChecking no </codeblock></li>
                                                   following:</p><codeblock><codeph>ssh-copy-id 192.168.122.1 </codeph></codeblock><p>If
                                                   you get a <i>permission denied</i> error, make
                                                   sure you are logged in as root.</p></li>
-                                        <li>Enable root login in the
-                                                  <codeph>/etc/ssh/sshd_config</codeph>: <ol
-                                                  id="ol_h13_kqk_yt">
-                                                  <li>Set the following values: </li>
-                                                </ol><codeblock># Authentication:
+                                        <li>Configure passwordless SSH access <ol id="ol_h13_kqk_yt">
+                                                  <li>Edit the <codeph>/etc/ssh/sshd_config</codeph>
+                                                  file.</li>
+                                                  <li>Set the following values: 
+                                                          <codeblock># Authentication:
 LoginGraceTime 120
-#PermitRootLogin without-password
+#PermitRootLogin yes
 PermitRootLogin yes
 #StrictModes yes
 StrictModes no
 PermitRootLogin yes</codeblock></li>
+                                        <li>Execute the following command to copy the public key on
+                                                  the local host to the  authorized_keys file on the
+                                                  remote host. This command also changes the
+                                                  permissions of the remote user's home,
+                                                  <b>~/.ssh</b>, and <b>~/.ssh/authorized_keys</b>
+                                                  to remove group
+                                                  writability.<codeblock>ssh-copy-id &lt;IP_Address></codeblock>Where
+                                                  IP_Address is is the gateway of the default
+                                                  network on the lifecycle manager.<p><b>Note:</b>
+                                                  If you get a permission denied error,  make sure
+                                                  you are logged in as root. Then repreat the
+                                                  <codeph>ssh-copy-id</codeph> command.</p></li></ol></li>
+                                        
                                         <li>Restart the SSH
-                                                service:<codeblock><codeph>service ssh restart</codeph></codeblock></li>
+                                                service:<codeblock>service ssh restart</codeblock></li>
                                 </ol>
                         </section>
+                        <section><title>Enable SPICE</title>Use the following steps to enable SPICE,
+                                a program to improve graphic interfaces on KVM systems.<p>
+                                        <ol id="ol_htk_zhb_y5">
+                                                <li>Launch a terminal and log in to your lifecycle
+                                                  manager host as
+                                                  root:<codeblock>sudo su -</codeblock></li>
+                                                <li>Change to the following directory:
+                                                  <codeblock>cd /usr/bin</codeblock></li>
+                                                <li>Execute the following commands to enable
+                                                  SPICE:<codeblock>ln -s kvm kvm-spice
+ln -s qemu-system-x86_64 qemu-system-x86_64-spice </codeblock></li>
+                                        </ol>
+                                </p></section>
                         <section id="ldap">
-                                <title>Integrating LDAP</title>
+                                <title>Integrate LDAP</title>
                                 <p><b>OPTIONAL:</b> The HP Helion OpenStack Identity service can use
                                         Lightweight Directory Access Protocol (LDAP) to integrate
                                         your organization's existing directory service and user

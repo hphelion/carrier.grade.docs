@@ -21,11 +21,27 @@
                 <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
                 <p
                         conref="../prereqs/../prereqs/carrier-grade-install-download.dita#topic7148cgid/intro"/>
+                <section conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/linux"/>
                 <section id="avs">
                         <b>Download the HP Helion OpenStack Carrier Grade installation
-                                files</b><p>Download the installation files as indicated in the
+                                files</b><p>From the <xref
+                                        href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
+                                        format="html" scope="external">Helion Download
+                                        Network(HDN)</xref>, locate the following download: <b
+                                        id="productShow_appName">Helion OpenStack 2.1</b> and the
+                                associated checksum and signature files. This link downloads the
+                                        <codeph>HelionOpenStack-2.1.iso</codeph>
+                                file.</p><p>Download the installation files as indicated in the
                                 following tables. Also download the associated MD5 file for
-                                verification.</p><p>
+                                verification.</p></section>
+                <section
+                        conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"/>
+                <section id="extract"><title>Extract the downloaded files</title><p>After
+                                downloading the files from HDN, extract the move the files as
+                                indicacted in this section. It is important to the installation
+                                process for the installer files to be in the correct
+                                        locations.</p><p><b>Non-KVM Region installation
+                                files</b></p><p>Extract the Non-KVM Region files as following:</p><p>
                                 <table id="table_rkj_yyk_2t">
                                         <tgroup cols="3">
                                                 <colspec colnum="1" colname="col2"/>
@@ -78,7 +94,7 @@
                                                 </tbody>
                                         </tgroup>
                                 </table>
-                        </p><p id="kvm-avs"><b>KVM Region Installation files</b></p>Download the
+                        </p><p id="kvm-avs"><b>KVM Region installation files</b></p>Download the
                         following files for installing the KVM Region. Also download the associated
                         MD5 file for verification.<p>
                                 <table id="table_ejh_qtj_k5">
@@ -116,38 +132,9 @@
                                         </tgroup>
                                 </table>
                         </p></section>
-                <section id="checksum">
-                        <title>Verify the downloaded checksums</title>
-                        <p>You should also use a checksum verification tool, such as sha256sum,
-                                which should come installed with Ubuntu.</p>
-                        <ol id="ol_icb_k4f_xs">
-                                <li>Run the checksum tool against the download package:
-                                                <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar</codeblock><p>or
-                                                <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar
-sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p></li>
-                                <li>Compare the output of the checksum tool to the download checksum
-                                        file.
-                                        <codeblock>sha256sum.exe hcg2_kvm_esx_ironic_vrs.tar
-97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar</codeblock>Note
-                                        that the checksum file contains the date that the file was
-                                        generated, the checksum string, and the name of the file
-                                        that was used, similar to the
-                                        following:<codeblock>Fri Jul 31 10:55:37 EDT 2015
-97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar</codeblock></li>
-                        </ol>
+                <section>
+                        <title>Enable </title>
                 </section>
-                <section><title>Enable SPICE</title>Use the following steps to enable SPICE, a
-                        program to improve graphic interfaces on KVM systems.<p>
-                                <ol id="ol_htk_zhb_y5">
-                                        <li>Launch a terminal and log in to your lifecycle manager
-                                                host as root:<codeblock>sudo su -</codeblock></li>
-                                        <li>Change to the following directory:
-                                                <codeblock>cd /usr/bin</codeblock></li>
-                                        <li>Execute the following commands to enable
-                                                SPICE:<codeblock>ln -s kvm kvm-spice
-ln -s qemu-system-x86_64 qemu-system-x86_64-spice </codeblock></li>
-                                </ol>
-                        </p></section>
                 <section id="next-step">
                         <title>Next Step</title>
                         <p><xref href="CGH-2-install-lifecycle-denver.dita#topic10581c2ild"
