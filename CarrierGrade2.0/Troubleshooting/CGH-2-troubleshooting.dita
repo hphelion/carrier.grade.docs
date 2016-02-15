@@ -30,15 +30,15 @@
       <p>Also see <xref href="CGH-2-troubleshooting-install.dita#topic10581c2ti">Installation
           Troubleshooting</xref>. </p>
     </section>
-    <section id="kvm"><title>KVM Region compute node cannot be unlocked multiple times</title><p><b>System
-          Behavior/Message</b></p><p>After unlocking a compute node in the KVM Region for the first
-        time, the node keeps rebooting during subsequent locks. </p><p>The unlock and the reboot
-        process gets stuck at <codeph>compute-huge.sh restart</codeph> and times out after 300
-        seconds causing compute node to reboot. The process id trying to access <xref
-          href="http://pxecontroller" format="html" scope="external">http://pxecontroller</xref> .
-        Due to a bug, this host name is not pingable as there is no PXE IP on any of the interfaces.
-        <!--HCG-1352--></p><b>Resolution</b><p>Provide a route from CLM network to PXE such that
-        pxecontroller is reachable from CLM network. </p></section>
+    <section id="kvm"><title>KVM Region compute node cannot be unlocked multiple
+          times</title><p><b>System Behavior/Message</b></p><p>After unlocking a compute node in the
+        KVM Region for the first time, the node keeps rebooting during subsequent locks. </p><p>The
+        unlock and the reboot process gets stuck at <codeph>compute-huge.sh restart</codeph> and
+        times out after 300 seconds causing compute node to reboot. The process is trying to access
+          <xref href="http://pxecontroller" format="html" scope="external"
+          >http://pxecontroller</xref> . Due to a bug, this host name is not pingable as there is no
+        PXE IP on any of the interfaces. <!--HCG-1352--></p><b>Resolution</b><p>Provide a route from
+        CLM network to PXE such that pxecontroller is reachable from CLM network. </p></section>
     <section id="baremetal">
       <title>Baremetal Control plane RDBMS recovery after reboot</title>
       <p><!--https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?title=Baremetal+Control+plane+RDBMS+recovery+after+reboot++-+HCG2.0&spaceKey=cloudos--></p>
