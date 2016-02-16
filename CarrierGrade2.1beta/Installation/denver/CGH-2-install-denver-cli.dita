@@ -86,10 +86,11 @@ Password: cghelion</codeblock>
                                 <ul id="ul_k3h_dt3_y5">
                                 <li><codeph>&lt;cloudname></codeph> is the name of the cloud you
                                     created with the <codeph>hlm define</codeph> command.</li>
-                                <li><codeph>&lt;IP_address></codeph> is the </li>
+                                <li><codeph>&lt;IP_address></codeph>
+                                    <!--GET THIS--></li>
                             </ul></p></li>
-                    <li>Edit the <codeph>node-provision.json</codeph> file to change only the
-                        following fields: <table id="table_ycw_qrn_xs">
+                    <li>Edit the <codeph>node-provision.json</codeph> file: <ol id="ol_z4f_rsg_1v">
+                            <li>For all deployments, edit the following fields: <table id="table_ycw_qrn_xs">
                             <tgroup cols="2">
                                 <colspec colname="col1" colsep="1" rowsep="1"/>
                                 <colspec colname="col2" colsep="1" rowsep="1"/>
@@ -126,10 +127,36 @@ Password: cghelion</codeblock>
                                     </row>
                                 </tbody>
                             </tgroup>
-                        </table></li> </ol></p>
-            <p>Click here to see a <xref
+                            </table></li>
+                    <li>For OpenSAF deployments, the set <codeph>OpenSAF</codeph> field to
+                                    <codeph>true</codeph> for each controller. If your environment
+                                is not configured for OpenSAF, leave this field as
+                                    <codeph>false</codeph>.
+                                <codeblock>"OpenSAF": true </codeblock></li></ol></li></ol>
+            Click here to see a <xref
                     href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
                     node-provision.json file</xref>. </p>
+        </section>
+        <section>
+            <title>Create a JSON file for OpenSAF</title>
+            <p>For OpenSAF deployments, create the KVM_hosts.json file and configure for your
+                environment (IP addresses masked for security):
+                <codeblock>{
+   "name": "ctrl1", 
+   "clm_ip": "10.x.x.x", 
+   "pxe_user": "root", 
+   "pxe_pass": "xxxxx", 
+   "OpenSAF": true, 
+   "OpenSAF_dir": "data1/opensaf", 
+},
+{
+   "name": "ctrl2", 
+   "clm_ip": "10.x.x.x", 
+   "pxe_user": "root", 
+   "pxe_pass": "xxxxx", 
+   "OpenSAF": true, 
+   "OpenSAF_dir": "data1/opensaf", 
+}</codeblock></p>
         </section>
         <section id="conref-pxe-boot">
             <title>Configure PXE boot</title>
@@ -348,12 +375,15 @@ Password: cghelion</codeblock>
         <section id="conref-create-cloud">
             <title>Provision the cloud nodes and bring the cloud nodes up</title>
             <ol id="ol_f1b_cmf_zt">
-                <li>On the lifecycle manager, use the following script to start the provisioning of
-                    the HPE Helion OpenStack cloud:
-                        <codeblock>hlm provision -c &lt;cloudname&gt;          </codeblock><p>Where
-                            <codeph>&lt;cloudname></codeph> is the name of the cloud you created
-                        with the <codeph>hlm define</codeph> command. The script takes approximately
-                        15 to 30 minutes. <b><!--TIME ANY DIFFERENT??--></b></p><image
+                <li>On the lifecycle manager, use one of the following commands to start the
+                    provisioning of the HPE Helion OpenStack cloud: <ul id="ul_att_35g_1v">
+                        <li>For OpenSAF
+                            environments:<codeblock>hlm provision -c &lt;cloudname&gt; -r</codeblock></li>
+                        <li>For environments not configured for
+                            OpenSAF:<codeblock>hlm provision -c &lt;cloudname&gt;          </codeblock></li>
+                    </ul><p>Where <codeph>&lt;cloudname></codeph> is the name of the cloud you
+                        created with the <codeph>hlm define</codeph> command. The script takes
+                        approximately 15 to 30 minutes. <b><!--TIME ANY DIFFERENT??--></b></p><image
                         href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-provision.png"
                         id="image_ogm_cs1_t5" width="600"/><p>This script prepares the servers for
                         the HPE Helion OpenStack Carrier Grade cloud installation including the
@@ -494,10 +524,16 @@ hplefthand_debug = false</codeblock></li>
         <section id="conref-hdeploy">
             <title>Deploy HPE Helion OpenStack</title>
             <ol id="ol_jxp_dnf_zt">
-                <li>Use the following command to deploy the HPE Helion OpenStack cloud:
-                    <codeblock>hlm deploy –c &lt;cloudname&gt;</codeblock>Where
-                        <codeph>&lt;cloudname></codeph> is the name of the cloud you created with
-                    the <codeph>hlm define</codeph> command.<p>This command takes a significant
+                <li>Use one of the following commands to deploy the HPE Helion OpenStack cloud: <ul
+                        id="ul_gwj_1vg_1v">
+                        <li>For OpenSAF
+                                environments:<codeblock>hlm deploy -c &lt;cloudname&gt;  -t "Conclude"</codeblock><p>The
+                                    <codeph>Conclude</codeph> Ansible role launches libvirtmon on
+                                the controller nodes.</p></li>
+                        <li>For environments not configured for
+                            OpenSAF:<codeblock>hlm deploy -c &lt;cloudname&gt;          </codeblock></li>
+                    </ul>Where <codeph>&lt;cloudname></codeph> is the name of the cloud you created
+                    with the <codeph>hlm define</codeph> command.<p>This command takes a significant
                         period of time. When this command completes without errors or warnings, the
                         non-KVM cloud installation is complete. Use the following sections to
                         configure the Horizon interface and configures virtual
@@ -507,6 +543,22 @@ hplefthand_debug = false</codeblock></li>
                     </p></li>
                 <li>Enter <codeph>exit</codeph> to leave the root shell.</li>
             </ol>
+        </section>
+        <section>
+            <title>Verify Libvirt monitoring (OpenSAF environments)</title>
+            <p>For OpenSAF environments, you can verify that the HP Helion OpenStack controllers (in
+                the Standard Region) are being monitored by Libvirt. Use the HP Helion OpenStack
+                Carrier Grade Libvirt CLI commands.<ol id="ol_l5w_pwg_1v">
+                    <li>On the lifecycle manager host, execute the following commands: <ul
+                            id="ul_adb_swg_1v">
+                            <li>Display list of VMs monitored by
+                                Libvirtmon:<codeblock>kvmha -l</codeblock></li>
+                            <li>Display the curent state:
+                                <codeblock>kvmha -d yourVM -c status</codeblock>Where
+                                    <codeph>yourVM</codeph> is</li>
+                        </ul></li>
+                </ol></p>
+            <p/>
         </section>
         <section>
             <title>Change the gateway address <!--WHERE IS THIS SET??--></title>
@@ -523,24 +575,6 @@ route add default gw &lt;CLM_IP> </codeblock><p>Where
                 </ol>
             </p>
         </section>
-        <section><title>Register libvirtmon (Optional)</title><p>The libvirt.mon registration need
-                to be done for each VM we want to monitor (for RCP template it has to be done for
-                    <b>hlm, ccn1, ccn2, ccn3</b>), the following steps take HLM vm as
-                exemple:</p><b>Prerequisites</b><ul id="ol_jnn_gv3_y5">
-                <li>The KVM OpenSAF cluster has to be already installed and configured before
-                    bringing up libvirtmon to monitor the VM.</li>
-                <li>
-                    <p>The KVM cluster need to share a common filesystem mounted under a same
-                        directory, for example: <codeph>/var/shared_kvm_cluster/</codeph></p>
-                </li>
-                <li>
-                    <p>From the lifecycle manager VM dump the XML, for example:
-                        <codeblock>virsh dumpxml hlm &gt; hlm.xml</codeblock></p>
-                </li>
-                <li>Make sure to move the VM qcow2 from <codeph>/var/lib/libvirt/images</codeph> to
-                    the shared directory <codeph>/var/shared_kvm_cluster/</codeph> you created.
-                </li>
-            </ul></section>
         <section id="conref-ldap-keystone">
             <title>Configure LDAP to enable CLI and use Keystone v3</title>
             <p>By default, the HPE Helion OpenStack Carrier Grade services are configured to use

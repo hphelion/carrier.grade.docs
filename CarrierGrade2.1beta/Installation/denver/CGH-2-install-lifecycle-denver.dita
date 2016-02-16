@@ -37,6 +37,14 @@
               <li>
                 <p>Set the Cobbler IP addresses according to your network setup;</p>
               </li>
+              <li>
+                <p><b>Optional:</b> If you plan to deploy a KVM cluster with multiple servers for
+                  HA, enter the IP addressed for the host systems in the <codeph>OpenSAF
+                    configuration</codeph> in the <codeph>group_vars/all</codeph> file. The other
+                  hosts are <codeph>passive</codeph>, ranked in the order listed in the file. Make
+                  sure you follow the step in the <xref href="#topic10581c2ild/kvm-cluster"
+                    format="dita"/> below.</p>
+              </li>
             </ul><p>The <codeph>group_vars/all</codeph> file should appear similar to the following
               (IP addresses masked for
             security):</p><codeblock>############################################# Variables for HLM  #################################################################
@@ -122,8 +130,8 @@ dcm_vlan_id: 211</codeblock></li>
       <section><title>Increase the hard disk size (optional)</title>You can increase the hard disk
         size for the controllers. By default, each controller is assigned 80 GB.<p>
           <ol id="ol_bn1_5vb_y5">
-            <li>Edit the <codeph>group_vars/all-virtual</codeph> file to set the disk and RAM size,
-              as needed.<p>For
+            <li>On the lifecycle manager host, edit the <codeph>group_vars/all-virtual</codeph> file
+              to set the disk and RAM size, as needed.<p>For
                 example:<codeblock>#Specify how much RAM and Disk Size must be attached to the cloud VMs. Disk Size is in GBs
 vm_ctrl_ram: 16777376
 vm_ctrl_disksize: 200</codeblock></p></li>
@@ -137,6 +145,29 @@ vm_ctrl_disksize: 200</codeblock></p></li>
     command:        qemu-img create -f qcow2 -o preallocation=metadata {{ imagelocation }}/ccn1.qcow2 +180G</codeblock></li>
           </ol>
         </p></section>
+      <section id="kvm-cluster">
+        <title>Deploy the lifecycle manager for a KVM cluster (optional)</title>
+        <p>If you plan to deploy a KVM cluster with multiple servers for Service Availability (SA),
+          follow the steps n this section to deploy the lifecycle manager on a remote server and
+          configures the server as part of a KVM cluster. These steps make the cluster OpenSAF
+          aware, which is further monitored by libvirtmon.</p>
+        <p>In this scenario the lifecycle manager VM becomes active on the first host that you
+          specified in the <codeph>OpenSAF configuration</codeph> in the
+            <codeph>group_vars/all</codeph> file. The other hosts are <codeph>passive</codeph>,
+          ranked in the order listed in the file.</p>
+        <p>In order to deploy a KVM cluster, OpenSAF and libvirmon must be installed and operational
+          on all of the hosts.</p>
+        <p>To configure the lifecycle manger for a KVM cluster:</p>
+        <p>
+          <ol id="ol_mr1_g4g_1v">
+            <li>On the lifecycle manager, make sure the hosts are specified in the
+                <codeph>group_vars/all</codeph> file. </li>
+            <li>Change to the <codeph>/root/infra-ansible-playbooks</codeph> directory.</li>
+            <li>Execute following
+              command:<codeblock>ansible-playbook -i hosts setup_kvm_cluster.yml</codeblock></li>
+          </ol>
+        </p>
+      </section>
       <section>
         <title>Deploy the Lifecycle Manager Virtual Machine</title>
         <p>Use the following steps on the lifecycle manager host to deploy the lifecycle manager on
