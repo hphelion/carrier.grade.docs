@@ -17,6 +17,7 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
+        <li><xref href="#topic10581c2t/kvm" format="dita"/></li>
         <li><xref href="#topic10581c2t/baremetal" format="dita"/></li>
         <!--<li><xref href="#topic10581c2t/no-instance" format="dita">Unable to create an instance in the Non-KVM Region</xref></li>-->
         <li><xref href="#topic10581c2t/backup" format="dita"/></li>
@@ -24,6 +25,16 @@
         <li><xref href="#topic10581c2t/two-controllers" format="dita"/></li>
       </ul>
     </section>
+    <section id="kvm"><title>KVM Region compute node cannot be unlocked multiple
+          times</title><p><b>System Behavior/Message</b></p><p>After unlocking a compute node in the
+        KVM Region for the first time, the node keeps rebooting during subsequent locks. </p><p>The
+        unlock and the reboot process gets stuck at <codeph>compute-huge.sh restart</codeph> and
+        times out after 300 seconds causing compute node to reboot. The process is trying to access
+          <xref href="http://pxecontroller" format="html" scope="external"
+          >http://pxecontroller</xref> . Due to a bug, this host name is not pingable as there is no
+        PXE IP on any of the interfaces. <!--HCG-1352-->
+      </p><b>Resolution</b><p>Provide a route from CLM network to PXE such that pxecontroller is
+        reachable from CLM network. </p></section>
     <section id="baremetal">
       <title>Baremetal Control plane RDBMS recovery after reboot</title>
       <p><!--https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?title=Baremetal+Control+plane+RDBMS+recovery+after+reboot++-+HCG2.0&spaceKey=cloudos--></p>
