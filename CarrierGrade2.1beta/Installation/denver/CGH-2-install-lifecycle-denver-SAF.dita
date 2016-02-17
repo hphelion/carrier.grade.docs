@@ -15,7 +15,7 @@
 </prolog>
 <body>
     <!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki-->
-    <p><b>If you plan to deploy a KVM cluster with multiple servers for Service Availability (SA),
+    <p><b>If you are deploying a KVM cluster with multiple servers for Service Availability (SA),
         follow the steps n this section.</b></p>
   <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves creating a
       bootstrapping the lifecycle manager VM and installation services. Use the steps below to
@@ -40,8 +40,10 @@
           <li>Edit the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file for your
             environment. For information on each variable, refer to the comments in the file with
             each variable. <ul id="ul_tzp_3zz_s5">
-              <li id="all1">Set the <codeph>ovs_cloud_only</codeph> variable to <codeph>3</codeph>;</li>
-              <li id="all2">Set the <codeph>cloud_type</codeph> variable to <codeph>'av'</codeph>;</li>
+              <li id="all1">Set the <codeph>ovs_cloud_only</codeph> variable to
+                <codeph>3</codeph>;</li>
+              <li id="all2">Set the <codeph>cloud_type</codeph> variable to
+                <codeph>'av'</codeph>;</li>
               <li id="all3">
                 <p>Set the CLM IP network details for to your network setup;</p>
               </li>
@@ -49,16 +51,16 @@
                 <p>Set the Cobbler IP addresses according to your network setup;</p>
               </li>
               <li>
-                <p><b>Optional:</b> If you plan to deploy a KVM cluster with multiple servers for
-                  HA, enter the IP addressed for the host systems in the <codeph>OpenSAF
-                    configuration</codeph> in the <codeph>group_vars/all</codeph> file. The other
-                  hosts are <codeph>passive</codeph>, ranked in the order listed in the file. Make
-                  sure you follow the step in the <xref href="#topic10581c2ild/kvm-cluster"
-                    format="dita"/> below.</p>
+                <p>Set the <codeph>kvm_cluster</codeph> value in the <codeph>KVM Cluster
+                    configuration</codeph> section to <codeph>1</codeph></p>
               </li>
-            </ul>
-            <p id="all">The <codeph>group_vars/all</codeph> file should appear similar to the following
-              (IP addresses masked for
+              <li>
+                <p>Enter the IP addresses for the host systems in the <codeph>KVM Cluster
+                    configuration</codeph> section. The first host in the list is active. The other
+                  hosts are passive, ranked in the order listed in the file. </p>
+              </li>
+            </ul><p id="all">The <codeph>group_vars/all</codeph> file should appear similar to the
+              following (IP addresses masked for
               security):<codeblock>############################################# Variables for HLM  #################################################################
 #These variables are relevant in both All Virtual and BareMetal scenarios.
 
@@ -82,9 +84,9 @@ hlm_clmnetmask:     255.255.255.0
 hlm_clmgateway:     10.x.x.x
 
 #The variables starting with cobbler_ are inputs that are usually given to initcobbler.sh. Set accordingly.
-cobbler_pxestartip: 10.x.x.x
-cobbler_pxeendip:   10.x.x.x
-cobbler_pxestaticip: 10.x.x.x
+cobbler_pxestartip: 192.x.x.x
+cobbler_pxeendip:   192.x.x.x
+cobbler_pxestaticip: 192.x.x.x
 cobbler_pxenetmask: 255.255.255.0
 
 #Set the location of your images that will be used by libvirt
@@ -117,6 +119,22 @@ vsdimagename: VSD-3.0.0_HP_r3.0_36
 upstream_ntp_servers:
    - 10.x.x.x
    - 10.x.x.x
+###################################################################################################################################
+
+########################################################### KVM Cluster configuration #############################################
+
+#kvm_cluster: 0 #indicates do not configure kvm cluster
+#kvm_cluster: 1 #indicates configure kvm cluster for openSAF
+kvm_cluster: 1
+
+#List of KVM hosts that will be participate in cluster if 'kvm_cluster' variable is set to 1
+#IP Address for the KVM hosts must be defined in the order of Rank
+##In the below list indicates 10.0.0.1=rank1, 10.0.0.2=rank2, 10.0.0.3=rank3...
+kvm_hosts:
+   - 10.0.0.1
+   - 10.0.0.2
+   - 10.0.0.3
+   - 10.0.0.4
 ###################################################################################################################################
               </codeblock></p></li>
           <li id="3">Edit the <codeph>group_vars/all-virtual</codeph> file:<ul id="ul_tjd_tzz_s5">
@@ -158,11 +176,10 @@ vm_ctrl_disksize: 200</codeblock></p></li>
           </ol>
         </p></section>
       <section id="kvm-cluster">
-        <title>Deploy the lifecycle manager for a KVM cluster (optional)</title>
-        <p>If you plan to deploy a KVM cluster with multiple servers for Service Availability (SA),
-          follow the steps n this section to deploy the lifecycle manager on a remote server and
-          configures the server as part of a KVM cluster. These steps make the cluster OpenSAF
-          aware, which is further monitored by libvirtmon.</p>
+        <title>Deploy the lifecycle manager for a KVM cluster</title>
+        <p>Follow the steps n this section to deploy the lifecycle manager on a remote server and
+          configure the server as part of a KVM cluster. These steps make the cluster OpenSAF aware,
+          which is further monitored by libvirtmon.</p>
         <p>In this scenario the lifecycle manager VM becomes active on the first host that you
           specified in the <codeph>OpenSAF configuration</codeph> in the
             <codeph>group_vars/all</codeph> file. The other hosts are <codeph>passive</codeph>,
@@ -206,12 +223,7 @@ vm_ctrl_disksize: 200</codeblock></p></li>
                   command uses three Ansible roles, <codeph>SETUP-INFRA-ON-AV</codeph>,
                     <codeph>SETUP-CLOUD-ON-AV</codeph>, and <codeph>HLM-CFG</codeph>, to create and
                   configure the lifecycle manager VM and create the controller VMs. </p></li>
-          </ul><p  id="trouble"><b>Note: </b>If you receive the following error during the Ansible deployment:
-              <codeblock>Failed to fetch http://hlinux-deejay.us.rdlabs.hpecorp.net/hLinux/dists/cattleprod/InRelease 
-Unable to find expected entry 'main/binary-i386/Packages' in Release file (Wrong sources.list entry or malformed file)
-Some index files failed to download. They have been ignored, or old ones used instead.</codeblock>Run
-              the following command:
-              <!--AND RERUN ANSIBLE?--><codeblock>dpkg --remove-architecture i386</codeblock></p></li>
+            </ul></li>
           <li id="hosts">Check the <codeph>infra-ansible-playbooks/hosts</codeph> file to enter the
             IP address of the <codeph>vibr0</codeph> interface in the <codeph>hlm_kvm_host</codeph>
             field, as shown in the following example.
@@ -222,7 +234,8 @@ Some index files failed to download. They have been ignored, or old ones used in
     </bodydiv>
   <section id="next-step">
     <title>Next Step</title>
-    <p><xref href="CGH-2-install-denver.dita#topic10581c2id">Deploying the Standard Region</xref></p>
+    <p><xref href="CGH-2-install-denver-cli-sa.dita#topic10581c2idclisa">Deploying the Standard
+          Region</xref></p>
   </section>
   </body>
 </topic>

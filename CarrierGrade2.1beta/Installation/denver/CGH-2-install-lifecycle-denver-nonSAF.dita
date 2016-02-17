@@ -36,7 +36,84 @@
               <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all2"/>
               <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all3"/>
               <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all4"/>
-            </ul><p conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all"/></li>
+            </ul><p id="all">The <codeph>group_vars/all</codeph> file should appear similar to the
+              following (IP addresses masked for
+              security):<codeblock>############################################# Variables for HLM  #################################################################
+#These variables are relevant in both All Virtual and BareMetal scenarios.
+
+#ovs_cloud_only: 0 #memphis
+#ovs_cloud_only: 1 #ovs
+#ovs_cloud_only: 2 #denver
+#ovs_cloud_only: 3 #rcp
+ovs_cloud_only:  3
+
+#Set this to 'bm' if cloud is being deployed over baremetal.
+#Set this to 'av' if the cloud is all virtual
+cloud_type: 'av'
+
+#These are hlm related variables that must be changed according to your Baremetal Env
+hlm_login_id:       root
+hlm_password:       cghelion
+
+#The following variables are for CLM network IP details for HLM
+hlm_clmstaticip:    10.x.x.x
+hlm_clmnetmask:     255.255.255.0
+hlm_clmgateway:     10.x.x.x
+
+#The variables starting with cobbler_ are inputs that are usually given to initcobbler.sh. Set accordingly.
+cobbler_pxestartip: 192.x.x.x
+cobbler_pxeendip:   192.x.x.x
+cobbler_pxestaticip: 192.x.x.x
+cobbler_pxenetmask: 255.255.255.0
+
+#Set the location of your images that will be used by libvirt
+imagelocation: /var/lib/libvirt/images
+
+#Set the location of your infra-ansible-playbooks
+ansible_dir: ~/infra-ansible-playbooks
+
+##################################################################################################################################
+
+############################################# Variables for DCN ##################################################################
+#Set the location of dcn bits on KVM
+#There must be 4 debs, 2 tar.gz files, 1 vsc qcow2
+#You must copy your VSD qcow2 to the imagelocation on the KVM if you want to provision it on the same KVM as the HLM
+dcn_dir: ~/cg/dcn
+##################################################################################################################################
+
+############################################# Variables for VSD ##################################################################
+#Ignore these variables if creating an OVS cloud. This section is relevant only for DCN cloud - in both BM and All Virtual cases
+#These variables are used for VSD Configuration
+#If you have already configured a VSD and ignore the following variables
+
+dns_domain_name: helion.cg
+dns_address: 10.x.x.x
+vsd_address: 10.x.x.x
+vsd_gateway: 10.x.x.x
+vsd_netmask: 255.255.255.0
+vsd_name: vsd
+vsdimagename: VSD-3.0.0_HP_r3.0_36
+upstream_ntp_servers:
+   - 10.x.x.x
+   - 10.x.x.x
+###################################################################################################################################
+
+########################################################### KVM Cluster configuration #############################################
+
+#kvm_cluster: 0 #indicates do not configure kvm cluster
+#kvm_cluster: 1 #indicates configure kvm cluster for openSAF
+kvm_cluster: 0
+
+#List of KVM hosts that will be participate in cluster if 'kvm_cluster' variable is set to 1
+#IP Address for the KVM hosts must be defined in the order of Rank
+##In the below list indicates 10.0.0.1=rank1, 10.0.0.2=rank2, 10.0.0.3=rank3...
+kvm_hosts:
+   - 10.0.0.1
+   - 10.0.0.2
+   - 10.0.0.3
+   - 10.0.0.4
+###################################################################################################################################
+              </codeblock></p></li>
           <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/3"/>
           <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/4"/>
         </ol>
