@@ -548,9 +548,17 @@ hplefthand_debug = false</codeblock></li>
                                     <codeph>VM-name</codeph> is the name of the VM to display.</li>
                         </ul></li>
                 </ol></p>
-            <p>Should you need to remove a node from the cluster, execute the following
-                command:<codeblock>delfromimm -p -d &lt;VM-name&gt;</codeblock></p>
         </section>
+        <section><title>Manually launch Libirt monitoring</title>Libvirt monitoring is started
+            automatically during the cloud deployment process.<p>You can manually invoke Libvirt, if
+                needed, using  the CLI: <ol id="ol_x2y_1sp_1v">
+                    <li>Execute the following commands to remove the existing association
+                        using:<codeblock>delfromimm -p -d CCN1
+delfromimm -p -d CCN2
+delfromimm -p -d CCN3</codeblock></li>
+                    <li>Execute the following command on HLM to launch libvirtmon on the Controller
+                        nodes:<codeblock>hlm deploy -c &lt;cloudname&gt; -t "rcp-libvirtmon-opensaf"</codeblock></li>
+                </ol></p></section>
         <!--<section><title>Change the gateway address WHERE IS THIS SET?? Hide this section. Was removed in wiki.</title><p>If the IP address for your gateway is different from the CLM gateway, you need to assign the CLM IP address as the gateway address on all the controllers: (it's required only if your gateway is not CLM) </p><p><ol id="ol_rql_553_y5"><li>SSH to each controllers. <b>IP addresses??</b></li><li>Execute the following command: <codeblock>route delete default
 route add default gw &lt;CLM_IP> </codeblock><p>Where <codeph>&lt;CLM_IP></codeph> is the CLM IP address.</p></li></ol></p></section>-->
         <section id="trouble"><title>Installation Troubleshooting</title> If you receive the following error
