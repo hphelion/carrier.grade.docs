@@ -41,7 +41,7 @@
             approach is it doesn't indicate which tenant network the pci device is on and what is
             the IP-MAC relationship recorded in neutron. In short, this implementation is neutron
                 unaware.<codeblock>nova boot vm1-pci-pt1 --flavor pci-pt --image wr-new</codeblock><p/><b>Non-KVM
-                Region</b><p>No changes needed on the controller nodes in the Non-KVM Region.
+                Region</b><p>No changes needed on the controller nodes in the Standard Region.
                 However, if you need information on the provider network and the VLAN ranges
                 configured for that network, view the
                     <codeph>/etc/neutron/plugins/ml2/ml2_conf.ini</codeph> file. For example in this

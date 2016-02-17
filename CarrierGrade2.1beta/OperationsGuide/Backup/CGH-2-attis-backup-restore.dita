@@ -20,7 +20,7 @@ The high level design needs to be adjusted to more suite with CG(It is reflectin
 But the CLI, REST API etc should all be same --></p>
     <p>HP Helion OpenStack Carrier Grade includes a backup and restore application called Attis
       which you can use to backup and restore essential system files and databases of the running
-      cloud. Attis is automatically installed on each of the controller nodes in the Non-KVM Region.
+      cloud. Attis is automatically installed on each of the controller nodes in the Standard Region.
       Attis uses a command line interface. For more information, see <xref
         href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
       CLI</xref>.</p>
@@ -46,7 +46,7 @@ But the CLI, REST API etc should all be same --></p>
       <title>What gets backed up</title>
       <p>The following components can be backed up and restored:<ul id="ul_pzx_1b3_k5">
           <li>Lifecycle manager data [opt and root files]</li>
-          <li>Percona® XtraDB® cluster on controllers in Non-KVM Region</li>
+          <li>Percona® XtraDB® cluster on controllers in Standard Region</li>
           <li>Percona® XtraDB® cluster on VSD</li>
           <li>System files on VSC</li>
           <li>System files in KVM Region </li>
@@ -58,7 +58,7 @@ But the CLI, REST API etc should all be same --></p>
       <title>Authenticate</title>
       <p>Each Attis session, you must authenticate before executing any commands </p>
       <ol id="ol_lbs_sfk_p5">
-        <li>Log one of the Non-KVM Region controllers as the <codeph>cghelion</codeph> user.</li>
+        <li>Log one of the Standard Region controllers as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li id="authenticate">Authenticate using export variables:
           <codeblock>source stackrc</codeblock>or<codeblock>export OS_TENANT_NAME=&lt;The name of your project/tenant> 
@@ -74,7 +74,7 @@ export OS_AUTH_URL=&lt;The address of the Identity API served through keystone><
       <p>Most of the Attis backup and restore commands require a config ID. You can obtain the ID
         using the <codeph>attis config</codeph> command.</p>
       <ol id="ol_qsq_dtj_p5">
-        <li>Log one of the Non-KVM Region controllers as the <codeph>cghelion</codeph> user.</li>
+        <li>Log one of the Standard Region controllers as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="#topic10581c2abr/authenticate"/>
         <li>Execute the following command:<codeblock>attis config</codeblock><p>The output appears
