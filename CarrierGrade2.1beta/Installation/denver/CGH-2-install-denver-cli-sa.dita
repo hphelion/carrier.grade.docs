@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
-<topic xml:lang="en-us" id="topic10581c2idcli">
+<topic xml:lang="en-us" id="topic10581c2idclisa">
   <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Using the CLI to Deploy
-        the Standard Region in an SA/Denver Environment</title>
+        the Standard Region in a Denver SA Deployment</title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -16,12 +16,14 @@
   </prolog>
   <body>
         <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
+        <p><b>If you plan to deploy a KVM cluster with multiple servers for Service Availability
+                (SA), follow the steps n this section.</b></p>
         <p>After the lifecycle manager is installed, the next task in installing the Denver topology
-            is to deploy the HP Helion OpenStack cloud.</p>
-        <p>If you are installing the <codeph>denver</codeph> template, using the HCG Dashboard,
-            follow these instructions. If you want to use the HLM CLI, see <xref
-                href="CGH-2-install-denver-ui.dita#topic10581c2idui">Using the HCG Dashboard to
-                Deploy the Denver Template</xref>. </p>
+            is to deploy the HP Helion OpenStack cloud. This section describes how to use the
+            lifecycle manager CLI to deploy the cloud.</p>
+        <p><b>Note:</b> If you are not deploy a KVM cluster with multiple servers for Service
+            Availability (SA), see <xref href="CGH-2-install-denver-cli-nonsa.dita#topic10581c2idclinsa"
+                >Deploy the Standard Region in a Denver Non-SA Deployment</xref>.</p>
       <section id="launch">
             <title>Launch the HPE Helion OpenStack cloud</title>
             <p>Use the following steps on the lifecycle manager host to log on to the lifecycle

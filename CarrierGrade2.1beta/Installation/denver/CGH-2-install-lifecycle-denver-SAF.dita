@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic10581c2ild">
 <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 3 -Deploying the
-    Lifecycle Manager in an SA/Denver Deployment</title>
+    Lifecycle Manager in a Denver SA Deployment</title>
 <prolog>
   <metadata>
     <othermeta name="layout" content="default"/>
@@ -15,17 +15,21 @@
 </prolog>
 <body>
     <!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki-->
+    <p><b>If you plan to deploy a KVM cluster with multiple servers for Service Availability (SA),
+        follow the steps n this section.</b></p>
   <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves creating a
-    bootstrapping the lifecycle manager VM and installation services. </p>
-    <p>If you plan to deploy a KVM cluster with multiple servers for Service Availability (SA),
-      follow the steps n this section to deploy the lifecycle manager on a remote server and
-      configures the server as part of a KVM cluster. These steps make the cluster OpenSAF aware,
-      which is further monitored by libvirtmon.</p>
+      bootstrapping the lifecycle manager VM and installation services. Use the steps below to
+      deploy the lifecycle manager on a remote server and configure the server as part of a KVM
+      cluster. These steps make the cluster OpenSAF aware, which is further monitored by
+      libvirtmon.</p>
     <p>In this scenario the lifecycle manager VM becomes active on the first host that you specified
       in the <codeph>OpenSAF configuration</codeph> in the <codeph>group_vars/all</codeph> file. The
       other hosts are <codeph>passive</codeph>, ranked in the order listed in the file.</p>
   <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
     required installation processes.</p>
+    <p><b>Note:</b> If you are not deploy a KVM cluster with multiple servers for Service
+      Availability (SA), see <xref href="CGH-2-install-lifecycle-denver-nonSAF.dita#topic10581c2ild"
+        >Deploying the Lifecycle Manager in a Denver SA Deployment</xref>.</p>
     <bodydiv id="hlm">
       <section id="prepare">
         <title>Prepare the system for deployment</title>

@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic10581c2ild">
 <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 3 -Deploying the
-    Lifecycle Manager in a Non-SA/Denver Deployment</title>
+    Lifecycle Manager in a Denver Non-SA Deployment</title>
 <prolog>
   <metadata>
     <othermeta name="layout" content="default"/>
@@ -15,10 +15,13 @@
 </prolog>
 <body>
     <!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki-->
-  <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves creating a
-    bootstrapping the lifecycle manager VM and installation services. </p>
-  <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
-    required installation processes.</p>
+    <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves creating a
+      bootstrapping the lifecycle manager VM and installation services. </p>
+    <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
+      required installation processes.</p>
+    <bodydiv><b>Note:</b> If you plan to deploy a KVM cluster with multiple servers for Service
+      Availability (SA), see <xref href="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild"
+        >Deploying the Lifecycle Manager in a Denver SA Deployment</xref>.</bodydiv>
     <bodydiv id="hlm">
       <section id="prepare">
         <title>Prepare the system for deployment</title>
@@ -63,9 +66,10 @@
         </ol>
       </section>
     </bodydiv>
-  <section id="next-step">
-    <title>Next Step</title>
-    <p><xref href="CGH-2-install-denver.dita#topic10581c2id">Deploying the Non-KVM Region</xref></p>
-  </section>
+    <section id="next-step">
+      <title>Next Step</title>
+      <p><xref href="CGH-2-install-denver.dita#topic10581c2id">Deploying the Standard
+        Region</xref></p>
+    </section>
   </body>
 </topic>
