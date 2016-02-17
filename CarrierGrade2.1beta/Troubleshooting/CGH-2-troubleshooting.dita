@@ -25,6 +25,45 @@
         <li><xref href="#topic10581c2t/two-controllers" format="dita"/></li>
       </ul>
     </section>
+    <section>
+      <title>Cannot use admin commands in OpenStack Identity CLI</title>
+      <p><b>System Behavior/Message</b></p>
+      <p>Using OpenStack CLI, the user cannot perform any administrative action related to the
+        Identity (Keystone) service. For example, project list, tenant list, tenant create.
+        <!--HCG-1072--></p>
+      <p><b>Cause</b>: </p>
+      <p>There are two reasons:</p>
+      <ul id="ul_ljr_vv4_1v">
+        <li>Keystone v2 does not support admin actions on identity service over CAN (Public URL)
+          network.</li>
+        <li>Keystonre v3 does support, but Kilo based python-openstackclient does not support an
+          environment variable named <codeph>OS_INTERFACE</codeph> to indicate which URL to
+          enforce.</li>
+      </ul>
+      <p><b>Resolution</b></p>
+      <p>Use the Keystone v3 endpoint in your <codeph>stackrc</codeph> file as below:</p>
+      <pre>export OS_USERNAME=admin
+export OS_PASSWORD=r54DQY
+export OS_TENANT_NAME=admin
+export OS_PROJECT_NAME=admin
+export OS_PROJECT_DOMAIN_NAME=Default
+export OS_USER_DOMAIN_ID=default
+export OS_IDENTITY_API_VERSION=3
+export OS_AUTH_VERSION=3
+export OS_REGION_NAME=memphis
+export OS_AUTH_URL=https://10.x.x.x:5000/v3
+export OS_CACERT=/home/cghelion/ca.crt
+export OS_INTERFACE=public</pre>
+      <p>Also, make sure you are using Liberty-based python-openstackclient (openstack 1.7.0). </p>
+      <p>For example, if you are running OpenStack CLIs on an Ubuntu guest:<ol id="ol_xdr_nw4_1v">
+          <li>Update the package repository of the Ubuntu client to point to OpenStack Liberty
+            repository:<codeblock>apt-get install ubuntu-cloud-keyring
+echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu" \ "trusty-updates/kilo main" &gt; /etc/apt/sources.list.d/cloudarchive-kilo.list
+apt-get update &amp;&amp; apt-get dist-upgrade</codeblock></li>
+          <li>Install python OpenStack
+            Client<codeblock>apt-get install python-openstackclient</codeblock></li>
+        </ol></p>
+    </section>
     <section id="kvm"><title>KVM Region compute node cannot be unlocked multiple
           times</title><p><b>System Behavior/Message</b></p><p>After unlocking a compute node in the
         KVM Region for the first time, the node keeps rebooting during subsequent locks. </p><p>The
