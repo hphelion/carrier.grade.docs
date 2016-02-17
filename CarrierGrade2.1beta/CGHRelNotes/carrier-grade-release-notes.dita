@@ -63,8 +63,16 @@
             </p>
         </section>
         <section id="usage"><title>Usage
-                Caveats</title><p><!--From WR jow1404333831397.xml--></p><b>Backup files in cloud
-                directories can cause installation to fail</b>
+                    Caveats</title><p><!--From WR jow1404333831397.xml--></p><p><b>Cannot use public
+                    URL with Admin actions in OpenStackClient Identity CLI </b></p><p>Due to a
+                defect in OpenStack Keystone v3, when using the OpenStackClient Identity CLI from a
+                public URL when executing an Admin command, the command will fail. This is due to a
+                known defect related to using different IPs for public and admin URLs of endpoint
+                that has reportedly been resolved through a Keystone patch. See <xref
+                    href="https://bugs.launchpad.net/keystone/+bug/1381961" format="html"
+                    scope="external">Keystone API GET 5000/v3 returns wrong endpoint URL in response
+                    body </xref>.</p><b>Backup files in cloud directories can cause installation to
+                fail</b>
             <p>During the HP Helion OpenStack Carrier Grade installation, you will need to create
                 and edit a number of JSON configuration files. You should create backups of these
                 files, in the event you need to reinstall. Create the backups in a directory on

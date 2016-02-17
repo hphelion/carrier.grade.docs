@@ -33,13 +33,25 @@
             <topicref href="denver/carrier-grade-install-download-denver.dita"
                 navtitle="Step 2: Download the Installation Packages" locktitle="yes"/>
             <topicref href="denver/CGH-2-install-lifecycle-denver.dita"
-                navtitle="Step 3: Deploying the Lifecycle Manager" locktitle="yes"/>
+                navtitle="Step 3: Deploying the Lifecycle Manager" locktitle="yes"
+                otherprops="lifecycle">
+                <topicref href="denver/CGH-2-install-lifecycle-denver-nonSAF.dita"
+                    navtitle="Deploy the Lifecycle Manager in a Non-SA Environment" locktitle="yes"/>
+                <topicref href="denver/CGH-2-install-lifecycle-denver-SAF.dita"
+                    navtitle="Deploy the Lifecycle Manager in an SA environment" locktitle="yes"/>
+            </topicref>
             <topicref href="denver/CGH-2-install-denver.dita"
-                navtitle="Step 4: Deploying the Non-KVM Region" locktitle="yes">
+                navtitle="Step 4: Deploying the Standard Region" locktitle="yes"
+                otherprops="standard">
                 <topicref href="denver/CGH-2-install-denver-ui.dita"
                     navtitle="Using the HCG Dashboard" locktitle="yes"/>
                 <topicref href="denver/CGH-2-install-denver-cli.dita" navtitle="Using the CLI"
-                    locktitle="yes"/>
+                    locktitle="yes" otherprops="cli">
+                    <topicref href="denver/CGH-2-install-denver-cli-nonsa.dita"
+                        navtitle="In a Non-SA Environment" locktitle="yes"/>
+                    <topicref href="denver/CGH-2-install-denver-cli-sa.dita"
+                        navtitle="In an SA Environment" locktitle="yes"/>
+                </topicref>
             </topicref>
             <topicref href="denver/carrier-grade-install-launch-horizon-denver.dita"
                 navtitle="Step 6: Launching the Horizon Interface" locktitle="yes"/>

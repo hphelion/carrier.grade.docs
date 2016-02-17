@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic10581c2ild">
+<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 3 -Deploying the
+    Lifecycle Manager in a Non-SA/Denver Deployment</title>
+<prolog>
+  <metadata>
+    <othermeta name="layout" content="default"/>
+    <othermeta name="product-version" content="HP Helion OpenStack Carrier Grade 2.0"/>
+    <othermeta name="role" content="Storage Administrator"/>
+    <othermeta name="role" content="Storage Architect"/>
+    <othermeta name="role" content="Michael B"/>
+    <othermeta name="product-version1" content="HP Helion OpenStack Carrier Grade 2.0"/>
+  </metadata>
+</prolog>
+<body>
+    <!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki-->
+  <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves creating a
+    bootstrapping the lifecycle manager VM and installation services. </p>
+  <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
+    required installation processes.</p>
+    <bodydiv id="hlm">
+      <section id="prepare">
+        <title>Prepare the system for deployment</title>
+        <p>Use the following steps to prepare the server on which the lifecycle manager will be
+          deployed (the lifecycle manager host):</p>
+        <ol id="ol_hx2_33q_f5">
+          <li>Log into the lifecycle manager host using the default credentials</li>
+          <li>Edit the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file for your
+            environment. For information on each variable, refer to the comments in the file with
+            each variable. <ul id="ul_tzp_3zz_s5">
+              <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all1"/>
+              <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all2"/>
+              <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all3"/>
+              <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all4"/>
+            </ul><p conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all"/></li>
+          <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/3"/>
+          <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/4"/>
+        </ol>
+      </section>
+      <section conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/disk-size"/>
+      <section>
+        <title>Deploy the Lifecycle Manager Virtual Machine</title>
+        <p>Use the following steps on the lifecycle manager host to deploy the lifecycle manager on
+          that host using Ansible playbooks.</p>
+        <ol id="ol_jld_mvb_y5">
+          <li>On the lifecycle manager, change to <codeph>infra-ansible-playbooks</codeph> directory
+            <codeblock>cd ~/infra-ansible-playbooks</codeblock></li>
+          <li>Execute one of the following commands <ul id="ul_ozg_p5q_y5">
+              <li><b>Use the HCG Dashboard to deploy the cloud:</b><p>Use this option if you intend
+                  to deploy the Standard Region cloud using the HCG Dashboard.
+                  <codeblock>ansible-playbook -i hosts setup_hlm_for_UI.yml</codeblock></p></li>
+              <li>
+                <p><b>Use the CLI to deploy the cloud</b></p>
+                <p>Use the following command if you intend to deploy the Standard Region cloud using
+                  the command
+                  line:<codeblock>ansible-playbook -i hosts setup_vcloud.yml</codeblock></p>
+                <p>This command deploys and configures the lifecycle manager VM. Aftetr deployment,
+                  you can add the lifecycle manager host to OpenSAF cluster manually. </p>
+              </li>
+            </ul><p conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/trouble"/></li>
+          <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/hosts"/>
+        </ol>
+      </section>
+    </bodydiv>
+  <section id="next-step">
+    <title>Next Step</title>
+    <p><xref href="CGH-2-install-denver.dita#topic10581c2id">Deploying the Non-KVM Region</xref></p>
+  </section>
+  </body>
+</topic>

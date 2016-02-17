@@ -3,7 +3,7 @@
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581c2idcli">
   <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Using the CLI to Deploy
-        the Denver Template </title>
+        the Standard Region in an SA/Denver Environment</title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -22,7 +22,7 @@
             follow these instructions. If you want to use the HLM CLI, see <xref
                 href="CGH-2-install-denver-ui.dita#topic10581c2idui">Using the HCG Dashboard to
                 Deploy the Denver Template</xref>. </p>
-        <section id="conref-hos-install">
+      <section id="launch">
             <title>Launch the HPE Helion OpenStack cloud</title>
             <p>Use the following steps on the lifecycle manager host to log on to the lifecycle
                 manager:</p>
@@ -42,7 +42,7 @@ Password: cghelion</codeblock>
                 <li>Change to the home directory.<codeblock>cd ~</codeblock></li>
             </ol>
         </section>
-        <section id="conref-provision">
+        <section id="define">
             <title>Provision the new cloud</title>
             <ol id="ol_kwm_c1k_zt">
                 <li>Execute the following command to provision and configure the HPE Helion
@@ -66,77 +66,73 @@ Password: cghelion</codeblock>
                         contains several JSON template files. </p></li>
             </ol>
         </section>
-        <section>
-            <title>Configuring JSON files</title>
+      <section id="jsons">
+            <title>Configuring JSON files </title>
+            <p>The HP Helion OpenStack deployment requires several JSON files.</p>
+            <p><b>Important:</b> Do not store backup of the JSON files inside your cloud directory
+                or any where inside the <codeph>/var/hlm/clouds</codeph> directory. You can create a
+                backup folder on <codeph>/root/</codeph> directory or on a remote system.
+                <!--HCG-681--></p>
         </section>
-        <section id="jsons">The HP Helion OpenStack deployment requires several JSON
-                    files.<p><b>Important:</b> Do not store backup of the JSON files inside your
-                cloud directory or any where inside the <codeph>/var/hlm/clouds</codeph> directory.
-                You can create a backup folder on <codeph>/root/</codeph> directory or on a remote
-                system. <!--HCG-681--></p></section>
-        <section id="node-prov">
-            <title>Edit the node-provision.json file</title>
-            <p>Modify the <codeph>node-provision.json</codeph> file in the
+      <section id="node-prov"><title>Edit the node-provision.json file </title><p
+                id="node-prov-intro">Modify the <codeph>node-provision.json</codeph> file in the
                     <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory of the lifecycle
                 manager. This file supplies input values to the hprovision script, later in the
-                    installation.<ol id="ol_sds_ms3_y5">
-                    <li>Copy node-provision.json from the lifecycle manager host to cloud folder on
-                        the lifecycle manager
-                            VM:.<codeblock>~/ scp /cg/node-provision.json root@&lt;IP_address>:/var/hlm/clouds/&lt;cloudname&gt;</codeblock><p>Where:
-                                <ul id="ul_k3h_dt3_y5">
-                                <li><codeph>&lt;cloudname></codeph> is the name of the cloud you
-                                    created with the <codeph>hlm define</codeph> command.</li>
-                                <li><codeph>&lt;IP_address></codeph>
-                                    <!--GET THIS--></li>
-                            </ul></p></li>
-                    <li>Edit the <codeph>node-provision.json</codeph> file: <ol id="ol_z4f_rsg_1v">
-                            <li>For all deployments, edit the following fields: <table id="table_ycw_qrn_xs">
-                            <tgroup cols="2">
-                                <colspec colname="col1" colsep="1" rowsep="1"/>
-                                <colspec colname="col2" colsep="1" rowsep="1"/>
-                                <thead>
-                                    <row>
-                                        <entry colsep="1" rowsep="1">Field</entry>
-                                        <entry colsep="1" rowsep="1">Description</entry>
-                                    </row>
-                                </thead>
-                                <tbody>
-                                    <row>
-                                        <entry>Pxe-mac-address</entry>
-                                        <entry>MAC address of the interface you want to PXE boot
-                                            onto. This is not same as iLO MAC address.</entry>
-                                    </row>
-                                    <row>
-                                        <entry>pm_ip</entry>
-                                        <entry>Power management IP (iLO ip)</entry>
-                                    </row>
-                                    <row>
-                                        <entry>pm_user</entry>
-                                        <entry>Power management user (iLO username)</entry>
-                                    </row>
-                                    <row>
-                                        <entry>pm_pass</entry>
-                                        <entry>Power management password (iLO password)</entry>
-                                    </row>
-                                    <row>
-                                        <entry>failure_zone, vendor, model, os_partition_size,
-                                            data_partition_size</entry>
-                                        <entry>Enter the same value as for these fields an in the
-                                                <codeph>nodes.json</codeph> file used during cloud
-                                            deployment </entry>
-                                    </row>
-                                </tbody>
-                            </tgroup>
-                            </table></li>
-                    <li>For OpenSAF deployments, the set <codeph>OpenSAF</codeph> field to
-                                    <codeph>true</codeph> for each controller. If your environment
-                                is not configured for OpenSAF, leave this field as
-                                    <codeph>false</codeph>.
-                                <codeblock>"OpenSAF": true </codeblock></li></ol></li></ol>
-            Click here to see a <xref
-                    href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
-                    node-provision.json file</xref>. </p>
-        </section>
+                installation.</p><ol id="ol_sds_ms3_y5">
+                <li id="node-prov1">Copy node-provision.json from the lifecycle manager host to
+                    cloud folder on the lifecycle manager
+                        VM:.<codeblock>~/ scp /cg/node-provision.json root@&lt;IP_address>:/var/hlm/clouds/&lt;cloudname&gt;</codeblock><p>Where:
+                            <ul id="ul_k3h_dt3_y5">
+                            <li><codeph>&lt;cloudname></codeph> is the name of the cloud you created
+                                with the <codeph>hlm define</codeph> command.</li>
+                            <li><codeph>&lt;IP_address></codeph>
+                                <!--GET THIS--></li>
+                        </ul></p></li>
+                <li id="node-prov2">Edit the following fields in the
+                        <codeph>node-provision.json</codeph> file: <table id="table_ycw_qrn_xs">
+                        <tgroup cols="2">
+                            <colspec colname="col1" colsep="1" rowsep="1"/>
+                            <colspec colname="col2" colsep="1" rowsep="1"/>
+                            <thead>
+                                <row>
+                                    <entry colsep="1" rowsep="1">Field</entry>
+                                    <entry colsep="1" rowsep="1">Description</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>Pxe-mac-address</entry>
+                                    <entry>MAC address of the interface you want to PXE boot onto.
+                                        This is not same as iLO MAC address.</entry>
+                                </row>
+                                <row>
+                                    <entry>pm_ip</entry>
+                                    <entry>Power management IP (iLO ip)</entry>
+                                </row>
+                                <row>
+                                    <entry>pm_user</entry>
+                                    <entry>Power management user (iLO username)</entry>
+                                </row>
+                                <row>
+                                    <entry>pm_pass</entry>
+                                    <entry>Power management password (iLO password)</entry>
+                                </row>
+                                <row>
+                                    <entry>failure_zone, vendor, model, os_partition_size,
+                                        data_partition_size</entry>
+                                    <entry>Enter the same value as for these fields an in the
+                                            <codeph>nodes.json</codeph> file used during cloud
+                                        deployment </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table></li>
+                <li>Set <codeph>OpenSAF</codeph> field in the <codeph>node-provision.json</codeph>
+                    file to <codeph>true</codeph> for each
+                    controller:<codeblock>"OpenSAF": true </codeblock></li>
+            </ol> Click here to see a <xref
+                href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
+                node-provision.json file</xref>. </section>
         <section>
             <title>Create a JSON file for OpenSAF</title>
             <p>For OpenSAF deployments, create the KVM_hosts.json file and configure for your
@@ -158,7 +154,7 @@ Password: cghelion</codeblock>
    "OpenSAF_dir": "data1/opensaf", 
 }</codeblock></p>
         </section>
-        <section id="conref-pxe-boot">
+        <section id="pxe-boot">
             <title>Configure PXE boot</title>
             <p>After you edit the <codeph>node-provision.json</codeph> file, you must enable
                 one-time PXE boot on the servers to set the correct boot order. Execute the
@@ -176,7 +172,7 @@ Password: cghelion</codeblock>
                     <codeph>node-provision.json</codeph> file.</p>
         </section>
         <section id="environment">
-            <title id="env-json">Edit the environment.json file</title>
+            <title>Edit the environment.json file</title>
             <p>Modify the <codeph>environment.json</codeph> file in the
                     <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory of the lifecycle
                 manager. Configure the VLANs and network addresses as appropriate for your
@@ -265,13 +261,13 @@ Password: cghelion</codeblock>
                 you set the first IP address of the CLM range for the eth2 (CLM) address of the HLM
                 host.</p>
         </section>
-        <section>
+        <section id="lnet">
             <title>Edit the lnet-control.json file <!--NEED THIS??--></title>
             <p>Modify the <codeph>lnet-control.json</codeph> file in the
                     <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory of the lifecycle
                 manager.</p>
         </section>
-        <section>
+      <section id="ansible">
             <title>Edit the ansible.json file</title>
             <p>Modify the <codeph>ansible.json</codeph> file in the
                     <codeph>/var/hlm/clouds/&lt;cloudname>/vars</codeph> directory of the lifecycle
@@ -306,7 +302,7 @@ Password: cghelion</codeblock>
 </codeblock>
             </p>
         </section>
-        <section>
+      <section  id="wr">
             <title>Edit the wr.json file</title>
             <p>Modify the <codeph>wr.json</codeph> file in the
                     <codeph>/var/hlm/clouds/&lt;cloudname>/vars/</codeph> directory of the lifecycle
@@ -372,7 +368,7 @@ Password: cghelion</codeblock>
                 json.tool: </p>
             <codeblock>python -m json.tool &lt;filename>.json</codeblock>
         </section>
-        <section id="conref-create-cloud">
+        <section id="provision">
             <title>Provision the cloud nodes and bring the cloud nodes up</title>
             <ol id="ol_f1b_cmf_zt">
                 <li>On the lifecycle manager, use one of the following commands to start the
@@ -385,15 +381,15 @@ Password: cghelion</codeblock>
                         created with the <codeph>hlm define</codeph> command. The script takes
                         approximately 15 to 30 minutes. <b><!--TIME ANY DIFFERENT??--></b></p><image
                         href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-provision.png"
-                        id="image_ogm_cs1_t5" width="600"/><p>This script prepares the servers for
+                        id="image_ogm_cs1_t5" width="600"/><p id="provision1a">This script prepares the servers for
                         the HPE Helion OpenStack Carrier Grade cloud installation including the
                         hLinux operating system. The script also PXE boots the nodes specified in
                             <codeph>node-provision.json</codeph> file and tracks the PXE boot
                         completion process. The script also creates the <codeph>nodes.json</codeph>
-                        file in the directory. </p><p>You can log in to the iLO server management
+                            file in the directory. </p><p id="provision1b">You can log in to the iLO server management
                         tool for each of the nodes to monitor the boot process. Consult your iLO
                         documentation for information on how to log into iLO. </p></li>
-                <li>Make sure the nodes are booted up using iLO. For example:<p><image
+                <li  id="provision2">Make sure the nodes are booted up using iLO. For example:<p><image
                             href="../../../media/CGH-2-install-cobbler.png" width="600"
                             id="image_c5k_d4b_kt"/></p><p><b>Note:</b> In rare situations, a node
                         might not boot due to an issue with network configuration. If this happens,
@@ -405,7 +401,7 @@ Password: cghelion</codeblock>
                     nodes are provisioned, make sure the <codeph>nodes.json</codeph> file is
                     generated to the <codeph>var/hlm/clouds/&lt;cloudname&gt;/</codeph> directory.
                     The <codeph>nodes.json</codeph> file will have entries for three controllers. </li>
-                <li>Verify that each node in the <codeph>nodes.json</codeph> file is installed and
+                <li id="provision3">Verify that each node in the <codeph>nodes.json</codeph> file is installed and
                     active. <ol id="ol_g1b_cmf_zt">
                         <li>Ping proxy node from lifecycle manager with the IP using IP specified in
                                 <codeph>nodes.json</codeph> file.</li>
@@ -414,7 +410,7 @@ Password: cghelion</codeblock>
                     </ol></li>
             </ol>
         </section>
-        <section>
+      <section  id="back-end">
             <title>Configure the back-end drivers  <!--NEED THIS??--></title>
             <p>Configure the back-end drivers to enable management of the OpenStack Block Storage
                 volumes on HPE StoreVirtual VSA and/or HPE StoreServ (3PAR) storage arrays. The HPE
@@ -497,7 +493,7 @@ hplefthand_debug = false</codeblock></li>
                 <li>Save the file to <codeph>cinder_conf</codeph>.</li>
             </ol>
         </section>
-        <section id="conref-config-proc">
+        <section id="config-proc">
             <title>Deploy the HPE Helion OpenStack cloud</title>
             <ol id="ol_bst_mmf_zt">
                 <li>Run the HPE Helion OpenStack Carrier Grade configuration processor:
@@ -521,7 +517,7 @@ hplefthand_debug = false</codeblock></li>
                     </p></li>
             </ol>
         </section>
-        <section id="conref-hdeploy">
+        <section id="hdeploy">
             <title>Deploy HPE Helion OpenStack</title>
             <ol id="ol_jxp_dnf_zt">
                 <li>Use one of the following commands to deploy the HPE Helion OpenStack cloud: <ul
@@ -563,7 +559,7 @@ hplefthand_debug = false</codeblock></li>
         </section>
         <!--<section><title>Change the gateway address WHERE IS THIS SET?? Hide this section. Was removed in wiki.</title><p>If the IP address for your gateway is different from the CLM gateway, you need to assign the CLM IP address as the gateway address on all the controllers: (it's required only if your gateway is not CLM) </p><p><ol id="ol_rql_553_y5"><li>SSH to each controllers. <b>IP addresses??</b></li><li>Execute the following command: <codeblock>route delete default
 route add default gw &lt;CLM_IP> </codeblock><p>Where <codeph>&lt;CLM_IP></codeph> is the CLM IP address.</p></li></ol></p></section>-->
-        <section id="conref-ldap-keystone">
+        <section id="ldap-keystone">
             <title>Configure LDAP to enable CLI and use Keystone v3</title>
             <p>By default, the HPE Helion OpenStack Carrier Grade services are configured to use
                 Keystone v2 authorization. The services need to be modified to use Keystone v3.
