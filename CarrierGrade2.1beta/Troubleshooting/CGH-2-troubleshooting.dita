@@ -30,16 +30,17 @@
     <section id="logs">
       <title>Centralized logging take too much space</title>
       <p><b>System Behavior/Message</b></p>
-      <p>If the logs created by the <xref
+      <p id="logs1">If the logs created by the <xref
         href="../OperationsGuide/Logging/CHG-2-logging-overview.dita#topic5937">Centralized
         Logging service</xref> take up too much space on the Standard Region controllers, you can
         manually adjust the number of days that logs are retained. By default, a cron job,
         <codeph>elastic_cleanup.sh</codeph>, deletes these logs after 8 days. This means all the
         logs older than 8 days will be deleted when the cron job runs daily.</p>
       <p><b>Resolution</b></p>
-      <p>If the logs are taking up too much space, you can set the <codeph>DAYS</codeph> parameter
-        in <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> file to some lower number (For example,
-          <codeph>DAYS=3</codeph>). <!--HCG-1396--></p>
+      <p id="logs2">You can change how long logs are retained  by editing the cron script file,
+          <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> file. Set the <codeph>DAYS</codeph>
+        parameter in  to some lower number (For example, <codeph>DAYS=3</codeph>).
+        <!--HCG-1396--></p>
     </section>
     
     <section id="keystone">
