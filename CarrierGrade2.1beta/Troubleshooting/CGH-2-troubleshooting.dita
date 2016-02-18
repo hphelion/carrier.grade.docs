@@ -17,15 +17,30 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
+        <li><xref href="#topic10581c2t/logs" format="dita"/></li>
         <li><xref href="#topic10581c2t/keystone" format="dita"/></li>
         <li><xref href="#topic10581c2t/kvm" format="dita"/></li>
-        <li><xref href="#topic10581c2t/baremetal" format="dita"/></li>
+        <!--<li><xref href="#topic10581c2t/baremetal" format="dita"/></li>-->
         <!--<li><xref href="#topic10581c2t/no-instance" format="dita">Unable to create an instance in the Standard Region</xref></li>-->
         <li><xref href="#topic10581c2t/backup" format="dita"/></li>
         <li><xref href="#topic10581c2t/glance" format="dita"/></li>
         <li><xref href="#topic10581c2t/two-controllers" format="dita"/></li>
       </ul>
     </section>
+    <section id="logs">
+      <title>Centralized logging take too much space</title>
+      <p>If the logs created by the <xref
+        href="../OperationsGuide/Logging/CHG-2-logging-overview.dita#topic5937">Centralized
+        Logging service</xref> take up too much space on the Standard Region controllers, you can
+        manually adjust the number of days that logs are retained. By default, a cron job,
+        <codeph>elastic_cleanup.sh</codeph>, deletes these logs after 8 days. This means all the
+        logs older than 8 days will be deleted when the cron job runs daily.</p>
+      <p>If the logs are taking up too much space, you can set the <codeph>DAYS</codeph> parameter
+        in <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> file to some lower number (For example,
+        <codeph>DAYS=3</codeph>).</p>
+      <p> So that the logs are cleanedup more frequently.</p>
+    </section>
+    
     <section id="keystone">
       <title>Cannot use admin commands in OpenStack Identity CLI</title>
       <p><b>System Behavior/Message</b></p>
@@ -75,40 +90,7 @@ apt-get update &amp;&amp; apt-get dist-upgrade</codeblock></li>
         PXE IP on any of the interfaces. <!--HCG-1352-->
       </p><b>Resolution</b><p>Provide a route from CLM network to PXE such that pxecontroller is
         reachable from CLM network. </p></section>
-    <section id="baremetal">
-      <title>Baremetal Control plane RDBMS recovery after reboot</title>
-      <p><!--https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?title=Baremetal+Control+plane+RDBMS+recovery+after+reboot++-+HCG2.0&spaceKey=cloudos--></p>
-    </section>
-    <p><b>System Behavior/Message</b></p>
-    <p>The controller in the baremetal region of the Sacaramento deployment is designed to be a
-      single control plane. If the controller reboots, the MySQL database installed into the
-      controller crashes and the <codeph>mysql</codeph> service does not restart. </p>
-    <p><b>Resolution</b></p>
-    <p>Perform the following steps:</p>
-    <p>
-      <ol id="ol_avt_1r1_d5">
-        <li>From the lifecycle manager VM, log in to the baremetal controller after
-            reboot.<codeblock>ssh cghelion@&lt;BM_Controller_IP&gt;</codeblock><p>The
-              <codeph>BM_Controller_IP</codeph> address can be obtained from the
-              <codeph>nodes.json</codeph> file in <codeph>/var/hlm/clouds/&lt;cloud_name>/</codeph>
-            directory on the lifecycle manager.</p></li>
-        <li>Switch to the root user:<pre>sudo su -</pre></li>
-        <li>Execute the following command to manually restart the <codeph>mysql</codeph>
-          service:<codeblock>/etc/init.d/mysql bootstrap-pxc</codeblock></li>
-      </ol>
-    </p>
-    <section><b>Validation</b><ol id="ol_c5j_qr1_d5">
-        <li>Execute the following command to check status of mysql service:
-          <codeblock>service mysql status</codeblock>This status should be <codeph>active</codeph>. </li>
-        <li>Log in to MySQL.  <pre>sudo su -</pre></li>
-        <li>Execute the following command to log into the MySQL database:
-          <codeblock>mysql</codeblock></li>
-        <li>Exit after logging in:<codeblock>exit</codeblock></li>
-        <li>Check that the previous data is intact: Example commands: <ul id="ol_d5j_qr1_d5">
-            <li><b>ironic node-list</b> should display the nodes registered before reboot</li>
-            <li><b>neutron net-list</b> should display the created networks</li>
-          </ul></li>
-      </ol></section>
+    <!--<section id="baremetal"><title>Baremetal Control plane RDBMS recovery after reboot</title><p>https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?title=Baremetal+Control+plane+RDBMS+recovery+after+reboot++-+HCG2.0&amp;spaceKey=cloudos</p></section><p><b>System Behavior/Message</b></p><p>The controller in the baremetal region of the Sacaramento deployment is designed to be a single control plane. If the controller reboots, the MySQL database installed into the controller crashes and the <codeph>mysql</codeph> service does not restart. </p><p><b>Resolution</b></p><p>Perform the following steps:</p><p><ol id="ol_avt_1r1_d5"><li>From the lifecycle manager VM, log in to the baremetal controller after reboot.<codeblock>ssh cghelion@&lt;BM_Controller_IP&gt;</codeblock><p>The <codeph>BM_Controller_IP</codeph> address can be obtained from the <codeph>nodes.json</codeph> file in <codeph>/var/hlm/clouds/&lt;cloud_name>/</codeph> directory on the lifecycle manager.</p></li><li>Switch to the root user:<pre>sudo su -</pre></li><li>Execute the following command to manually restart the <codeph>mysql</codeph> service:<codeblock>/etc/init.d/mysql bootstrap-pxc</codeblock></li></ol></p><section><b>Validation</b><ol id="ol_c5j_qr1_d5"><li>Execute the following command to check status of mysql service: <codeblock>service mysql status</codeblock>This status should be <codeph>active</codeph>. </li><li>Log in to MySQL. <pre>sudo su -</pre></li><li>Execute the following command to log into the MySQL database: <codeblock>mysql</codeblock></li><li>Exit after logging in:<codeblock>exit</codeblock></li><li>Check that the previous data is intact: Example commands: <ul id="ol_d5j_qr1_d5"><li><b>ironic node-list</b> should display the nodes registered before reboot</li><li><b>neutron net-list</b> should display the created networks</li></ul></li></ol></section>-->
     <!--<section id="no-instance"><title><b>Unable to create an instance in the Standard Region</b></title><p>When trying to create a virtual machine instance in the Standard Region, the user receives a <codeph>No valid host found</codeph> error. Check that all ESX host machines in the cluster are configured with the ESX compute proxy. If one or more hosts in the cluster is configured with the proxy, disconnect the host(s) from the cluster or <xref href="../Installation/carrier-grade-install-esx-proxy.dita#topic10581cgiep">install the ESX compute proxy</xref>. CG-1413</p></section>-->
     <section id="backup">
       <title>Backup storage size should be at least 120GB</title>
