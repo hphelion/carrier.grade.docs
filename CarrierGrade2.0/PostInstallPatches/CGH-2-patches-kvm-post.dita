@@ -15,6 +15,11 @@
   </prolog>
   <body>
     <p>The following patches addresses a number of issues in the KVM region.</p>
+    <p>Use the Horizon UI to see which patches have been deployed to the KVM region servers. Select
+      the <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+        <b>Inventory</b>. Click <b>Patches</b> for a list of installed patches. Or use the CLI on
+      the active KVM controller: <codeph>sudo sw-patch query</codeph>. Only deploy the patches in
+      the following table that do not appear in the list.</p>
     <p>
       <table frame="all" rowsep="1" colsep="1" id="table_jhr_ckc_bv">
         
@@ -31,7 +36,7 @@
           </thead>
           <tbody>
             <row>
-              <entry>TS_HP_15_Custom_PATCH_0001_2.patch</entry>
+              <entry><codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph></entry>
               <entry><b
                   conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/005"
                 /></entry>
@@ -43,7 +48,7 @@
               </entry>
             </row>
             <row>
-              <entry>TS_HP_15_Custom_PATCH_0002.patch</entry>
+              <entry><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
               <entry>
                 <b
                   conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/007"
@@ -55,7 +60,7 @@
               </entry>
             </row>
             <row>
-              <entry>TS_HP_15_Custom_PATCH_0003.patch</entry>
+              <entry><codeph>TS_HP_15_Custom_PATCH_0003.patch</codeph></entry>
               <entry><b
                   conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"
                 /></entry>
@@ -75,7 +80,7 @@
               </entry>
             </row>
             <row>
-              <entry>TS_HP_15_Custom_PATCH_0004.patch</entry>
+              <entry><codeph>TS_HP_15_Custom_PATCH_0004.patch</codeph></entry>
               <entry><b
                   conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/019"
                 /></entry>
@@ -108,11 +113,6 @@
         </tgroup>
       </table>
     </p>
-      <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
-        <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
-        <b>Inventory</b>. Click the <b>Patches</b> table for the
-        <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>.  Or use the CLI on the active KVM
-      controller: <codeph>sudo sw-patch query</codeph>.</p>
     <section><title>Download the patches</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
