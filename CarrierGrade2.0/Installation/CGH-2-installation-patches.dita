@@ -163,18 +163,15 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
           </ol>
         </p>
       </section>
-      <section id="012"><title>Deploy the RabbitMQ patch</title>This patch fixes a problem with the
-        RabbitMQ service installed on HP Helion OpenStack CarrierGrade. RabbitMQ was consuming
-        excessive memory. After deploying this patch, the Elasticsearch service's memory will be set
-        to 50% of free memory. If the free memory exceeds 32g then the memory will be set to 32g as
-        per the Elasticsearch guidelines. <p>In addition, this patch includes a script file that
-          will delete Logstash logs greater than 8 days old. The script file can be found on each
-          controller in the <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> directory. Modify
-          cleanup schedule by changing the <codeph>DAYS</codeph> variable in that file. </p><p>You
-          should have downloaded and extracted the <b
+      <section id="012">
+        <title>Deploy the RabbitMQ patch</title>
+        <p conref="../PostInstallPatches/CGH-2-patches-rabbitmq-012.dita#topic10581pdprabbit/introl"/>
+        <p conref="../PostInstallPatches/CGH-2-patches-rabbitmq-012.dita#topic10581pdprabbit/intro2"/>
+        <p>You should have downloaded and extracted the <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/012"/>
           patch during the prerequisites. Extract the <codeph>rabbitmq.patch</codeph> and readme
-          files. </p><ol id="ol_xqw_xgk_w5">
+          files. </p>
+        <ol id="ol_xqw_xgk_w5">
           <li>On the lifecycle manager VM, copy the <codeph>rabbitmq.patch</codeph> to the
               <codeph>~/</codeph> directory. </li>
           <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
@@ -185,14 +182,16 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
             <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
           <li>Execute the following command to integrate the changes into the
             environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
-        </ol></section>
-      <section id="13"><title>Deploy the Log Rotate patch</title>This patch fixes a problem with the
-        RabbitMQ service installed on HP Helion OpenStack CarrierGrade. RabbitMQ was consuming
-        excessive memory. After deploying this patch, the Elasticsearch service's memory will be set
-        to 50% of free memory. If the free memory exceeds 32g then the memory will be set to 32g as
-        per the Elasticsearch guidelines. In addition, this patch includes a script file that will
-        delete logstash logs greater than 8 days old.<!--HCG-1118-->. <!--DTMS--><p>You should have
-          downloaded and extracted the <b
+        </ol>
+      </section>
+      <section id="13">
+        <title>Deploy the Log Rotate patch</title>
+        <p conref="../PostInstallPatches/CGH-2-patches-log-rotate-013.dita#topic10581pdplr/intro1"
+          conrefend="../PostInstallPatches/CGH-2-patches-log-rotate-013.dita#topic10581pdplr/intro2"/>
+        <p><!--HCG-1118-->. <!--DTMS--></p>
+        <p conref="../PostInstallPatches/CGH-2-patches-rabbitmq-012.dita#topic10581pdprabbit/introl"/>
+        <p conref="../PostInstallPatches/CGH-2-patches-rabbitmq-012.dita#topic10581pdprabbit/intro2"/>
+        <p>You should have downloaded and extracted the <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/013"/>
           patch during the prerequisites. Extract the <codeph>knc-log.rotate.patch</codeph> and
           readme files. <ol id="ol_xrn_lcc_w5">
@@ -206,7 +205,8 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
               <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
             <li>Execute the following command to integrate the changes into the
               environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
-          </ol></p></section>
+          </ol></p>
+      </section>
       <section id="14">
         <title>Deploy the ELK patch</title>
         <!--HCG2.0_ELK001_Patch014-->

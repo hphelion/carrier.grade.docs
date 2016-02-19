@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic7646cginp">
-<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Preparing the Network for Installation</title>
+<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Preparing the Networks for
+        Installation</title>
 <prolog>
     <metadata>
         <othermeta name="layout" content="default"/>
@@ -18,7 +19,7 @@
             <title>VLAN ID Reference</title>
             <p>Make sure you have all VLAN IDs defined for the networks as defined in the <xref
                     href="../carrier-grade-technical-overview.dita#topic3485cgto">Architecture
-                    Diagram</xref></p>
+                    Diagram</xref>.</p>
 
         <p><b><u>Example</u></b></p>
         <table id="table_a1r_yq5_mt">
@@ -157,7 +158,8 @@
         </table>
         </section>
     <section id="configure-vlan-networking-on-the-kvm-host">
-            <title>Configure VLAN networking on the lifecycle manager host</title>
+            <title>Create network bridges</title>
+            <p>Use the following steps to configure the required network bridges.</p>
             <ol>
                 <li>Launch a terminal and log in to your lifecycle manager host as root:
                     <codeblock>sudo su -</codeblock></li>
@@ -272,8 +274,7 @@ ovs_type OVSPort
 ovs_version: "2.0.2"</codeblock></li>
             </ol>
         </section>
-    <section id="create-the-networks-for-associating-with-the-hlm-virtual-machine"> <title>Create the networks for associating with the lifecycle manager virtual machine</title>
-<p>The installation process will create a virtual machine for the lifecycle manager.</p>
+    <section id="create-the-networks-for-associating-with-the-hlm-virtual-machine"> <title>Enable the networks</title>
 <p>Perform the following steps to enable networks that will be associated with lifecycle manager.</p>
 <ol>
 <li>Launch a terminal and log in to your lifecycle manager host as root:<p>

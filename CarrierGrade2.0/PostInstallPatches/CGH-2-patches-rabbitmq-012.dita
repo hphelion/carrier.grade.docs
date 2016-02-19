@@ -16,18 +16,19 @@
   </prolog>
   <body>
     <section id="horizon-patch">
-      <p>This patch fixes a problem with the logging of the RabbitMQ service installed on HP Helion
+      <p id="introl">This patch fixes a problem with the logging of the RabbitMQ service installed on HP Helion
         OpenStack CarrierGrade. RabbitMQ was consuming excessive memory. After deploying this patch,
         the memory for the Elasticsearch service will be set to 50% of free memory. If the free
         memory exceeds 32g then the memory will be set to 32g as recommended by Elasticsearch
         guidelines. </p>
-      <p>In addition, this patch includes a script file that will delete Logstash logs greater than
-        eight (8) days old. The script file can be found on each controller in the
-          <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> directory. Modify cleanup schedule by
-        changing the <codeph>DAYS</codeph> variable in that file. <!--HCG-1118-->. </p>
-      <p>If any of your HP Helion OpenStack controllers has the <codeph>elastic_cleanup.sh</codeph>
-        script in the <codeph>/var/lib/hlm/</codeph> directory, this patch was installed during
-        installation. You can disregard these steps.</p>
+      <p id="intro2">In addition to this, this patch includes script file which will be responsible
+        for cleanup of Logstash log greater than 8 days. The script file can be found on controller
+        under <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> in which one can modify cleanup
+        schedule by changing the <codeph>DAYS</codeph> variable.</p>
+      <p>If any of your HP Helion OpenStack controllers has the
+          <systemoutput>elastic_cleanup.sh</systemoutput> script in the
+          <systemoutput>/var/lib/hlm/</systemoutput> directory, this patch was installed during
+        installation. You can disregard these steps. </p>
     </section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
@@ -59,7 +60,7 @@
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
               lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Copy the <codeph conref="#topic10581pdpdebug/patch"/> file to the <codeph>~/</codeph>
+          <li>Copy the <codeph conref="#topic10581pdprabbit/patch"/> file to the <codeph>~/</codeph>
             directory. </li>
           <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
             directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>

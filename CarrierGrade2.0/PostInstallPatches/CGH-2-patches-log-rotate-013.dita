@@ -16,13 +16,13 @@
   </prolog>
   <body>
     <section id="horizon-patch">
-      <p>This patch changes the <xref href="http://www.linuxcommand.org/man_pages/logrotate8.html"
+      <p id="intro1">This patch changes the <xref href="http://www.linuxcommand.org/man_pages/logrotate8.html"
           format="html" scope="external">Linux logrotate program</xref> to run hourly and configures
         logging of other services that where previously not being rotated by logrotate. Increasing
         this frequency reduces the disk space used by the log files The logrotate program archives
         specified logs and creates new logs to replace the archived logs. The logrotate logs are
         saved in the <codeph>/var/log/</codeph> directory. </p>
-      <p>If the logrotate configuration files, <codeph>/etc/logrotate.d</codeph> or <codeph>
+      <p id="intro2">If the logrotate configuration files, <codeph>/etc/logrotate.d</codeph> or <codeph>
           /etc/logrotate.conf</codeph>, specify an hourly rotation interval, this patch was applied
         during installation. You can disregard these steps.   </p>
     </section>
