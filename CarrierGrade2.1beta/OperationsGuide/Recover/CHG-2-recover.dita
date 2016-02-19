@@ -44,13 +44,15 @@
         <ol id="ol_wpw_frg_t5">
           <li>Log into the lifecycle manager. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
-              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              lifecycle manager in the <codeph>~/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Verify that the <codeph>ansible/roles/FND-MDB/tasks/restart_cluster.yml</codeph> and
-              <codeph>ansible/restart-MySQL-CCP-T1.yml</codeph> files exist.<p>If the
-                <codeph>ansible/roles/FND-MDB/tasks/restart_cluster.yml</codeph> file does not
-              exist, edit the <codeph>ansible/roles/FND-MDB/tasks/deploy.yml</codeph> to comment out
-              all the <codeph>include</codeph> statements and add in restart_cluster.</p></li>
+          <li>Verify that the <codeph>restart_cluster.yml</codeph> and
+              <codeph>ansible/restart-MySQL-CCP-T1.yml</codeph> files exist in the
+              <codeph>~/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/FND-MDB/tasks/</codeph>
+              directory.<p>If the <codeph>restart_cluster.yml</codeph> file does not exist, edit the
+                <codeph>ansible/roles/FND-MDB/tasks/deploy.yml</codeph> to comment out all the
+                <codeph>include</codeph> statements and add in <codeph>restart_cluster</codeph> and
+              save as <codeph>restart_cluster.yml</codeph>.</p></li>
           <li>Log into the controller
             <codeblock>ssh cghelion@&lt;IP of Controller> </codeblock></li>
           <li>Execute the following command to determine the status of the MySQL
@@ -58,9 +60,10 @@
             command will return an error if MySQL cluster is down. </li>
           <li>If the cluster is down, execute the following command to restart the
             cluster:<codeblock>ansible-playbook -i hosts restart-MySQL-CCP-T1.yml</codeblock>If the
-            file does not exist, edit the <codeph>ansible/roles/FND-MDB/tasks/deploy.yml</codeph> to
-            comment out all <codeph>include</codeph> statements and add in
-              <codeph>restart_cluster</codeph>.</li>
+            file does not exist, edit the
+              <codeph>~/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/FND-MDB/tasks/
+              directory/deploy.yml</codeph> file to comment out all <codeph>include</codeph>
+            statements and add in <codeph>restart_cluster</codeph>.</li>
           <li>Execute the following command to determine the status of the MySQL
             cluster:<codeblock>ssh cghelion@&lt;IP of Controller> "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock>This
             command should return a cluster status where all VMs are listed. </li>
@@ -77,11 +80,12 @@
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
               lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Verify that the <codeph>ansible/roles/FND-RMQ/tasks/restart_cluster.yml</codeph> and
-              <codeph>ansible/restart-RMQ-CCP-T1.yml</codeph> files exist.<p>If the
-                <codeph>ansible/roles/FND-RMQ/tasks/restart_cluster.yml</codeph> file does not
-              exist, edit the <codeph>ansible/roles/FND-RMQ/tasks/deploy.yml</codeph> to comment out
-              all the <codeph>include</codeph> statements and add in restart_cluster.</p></li>
+          <li>Verify that the <codeph>restart_cluster.yml</codeph> and
+              <codeph>restart-RMQ-CCP-T1.yml</codeph>  files exist in the
+              <codeph>~/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/FND-MDB/tasks/</codeph>
+              directory.<p>If the <codeph>restart_cluster.yml</codeph> file does not exist, edit the
+                <codeph>deploy.yml</codeph> to comment out all the <codeph>include</codeph>
+              statements and add in restart_cluster.</p></li>
           <li>Log into the controller
             <codeblock>ssh cghelion@&lt;IP of Controller> </codeblock></li>
           <li>Execute the following command to determine the status of the RabbitMQ

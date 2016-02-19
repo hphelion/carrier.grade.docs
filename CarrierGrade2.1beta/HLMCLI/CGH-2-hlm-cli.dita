@@ -174,6 +174,99 @@ hlm define -l </codeblock>
       <p><codeph>--verbose, -v</codeph> -- Produce verbose output. </p>
       <p><codeph>--tags, -t</codeph>  --Run only specified tags separated by a space and included in
         double quotes.</p>
+      <p><codeph>role</codeph> is the role name associated with the service, from the following
+        table </p>
+      
+      <table id="role">
+        <title id="table-title">Service to Role Name Mapping</title>
+        <tgroup cols="2">
+          <colspec colnum="1" colname="col1"/>
+          <colspec colnum="2" colname="col2"/>
+          <thead>
+            <row>
+              <entry>Service Name</entry>
+              <entry>
+                <p>Role Name</p>
+                <p>(used with hlm start/stop command)</p>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>keystone</entry>
+              <entry>KEY-API </entry>
+            </row>
+            <row>
+              <entry>mysql</entry>
+              <entry>FND-MDB</entry>
+            </row>
+            <row>
+              <entry>rabbitmq</entry>
+              <entry>FND-RMQ</entry>
+            </row>
+            <row>
+              <entry>glance</entry>
+              <entry>GLA-API</entry>
+            </row>
+            <row>
+              <entry>swift_container</entry>
+              <entry>SWF-CON</entry>
+            </row>
+            <row>
+              <entry>swift_object</entry>
+              <entry>SWF-OBJ</entry>
+            </row>
+            <row>
+              <entry>swift_proxy</entry>
+              <entry>SWF-PRX</entry>
+            </row>
+            <row>
+              <entry>swift_account</entry>
+              <entry>SWF-ACC</entry>
+            </row>
+            <row>
+              <entry>logstash</entry>
+              <entry>ELK-LOG</entry>
+            </row>
+            <row>
+              <entry>attis</entry>
+              <entry>ATTIS</entry>
+            </row>
+            <row>
+              <entry>ntp</entry>
+              <entry>NTP-CLI</entry>
+            </row>
+            <row>
+              <entry>apache</entry>
+              <entry>FND-AP2</entry>
+            </row>
+            <row>
+              <entry>elastic_search</entry>
+              <entry>ELK-SCH</entry>
+            </row>
+            <row>
+              <entry>beaver</entry>
+              <entry>BVR-LOG</entry>
+            </row>
+            <row>
+              <entry>kibana</entry>
+              <entry>ELK-KIB</entry>
+            </row>
+            <row>
+              <entry>cinder</entry>
+              <entry>CND-SVC</entry>
+            </row>
+            <row>
+              <entry>icinga_service</entry>
+              <entry>IC2-SVC</entry>
+            </row>
+            <row>
+              <entry>icinga_web</entry>
+              <entry>IC2-WEB</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
       <p><b>Examples</b></p>
       <p>Start the Horizon service on all control planes:
         <codeblock>hlm start -c mycloud -t "HZN-WEB"</codeblock></p>
