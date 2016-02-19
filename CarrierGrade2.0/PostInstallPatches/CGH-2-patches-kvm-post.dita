@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdpkvm4">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 4 </title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patches </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -14,42 +14,106 @@
     </metadata>
   </prolog>
   <body>
-    <p>This patch addresses a number of issues in the KVM region, including:<ul id="ul_n5w_gk2_x5">
-        <li>
-          <p>Correcting an issue that prevented users from adding a second static route to data
-            interface;</p>
-        </li>
-        <li>
-          <p>Correcting an issue that caused the AVS agent on the compute nodes to crash; </p>
-        </li>
-        <li>
-          <p>Correcting an issue that caused the networking agent on the compute nodes to not
-            respond after launching a Heat stack;</p>
-        </li>
-        <li>
-          <p>Correcting an issue that caused a Horizon blocking page to occur when locking a host in
-            booting state;</p>
-        </li>
-        <li>
-          <p>Correcting an issue that caused a  Compute node to not run the patched RPMs, even
-            though it shows patch-current.</p>
-        </li>
-      </ul></p>
+    <p>The following patches addresses a number of issues in the KVM region.</p>
+    <p>
+      <table frame="all" rowsep="1" colsep="1" id="table_jhr_ckc_bv">
+        
+        <tgroup cols="3">
+          <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+          <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+          <colspec colname="c3" colnum="3" colwidth="1.0*"/>
+          <thead>
+            <row>
+              <entry>Patch</entry>
+              <entry>Download File</entry>
+              <entry>Fixes</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry>TS_HP_15_Custom_PATCH_0001_2.patch</entry>
+              <entry><b
+                  conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/005"
+                /></entry>
+              <entry>
+                <ul id="ul_gph_blc_bv">
+                  <li>Corrects and issue where the coompute nodes do not get unlocked during patch
+                    update process.</li>
+                </ul>
+              </entry>
+            </row>
+            <row>
+              <entry>TS_HP_15_Custom_PATCH_0002.patch</entry>
+              <entry>
+                <b
+                  conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/007"
+                /></entry>
+              <entry>
+                <ul id="ul_j41_skc_bv">
+                  <li>Corrects an issue with PCI Bus Assignment for VM Guest.</li>
+                </ul>
+              </entry>
+            </row>
+            <row>
+              <entry>TS_HP_15_Custom_PATCH_0003.patch</entry>
+              <entry><b
+                  conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"
+                /></entry>
+              <entry>
+                <p>
+                  <ul>
+                    <li>Corrects an issue that prevented SSH connections to Board Management
+                      Controller;</li>
+                    <li>Corrects an issue that caused VM migration problems while applying a patch
+                      to a live cloud;</li>
+                    <li>Corrects an issue that caused controllers to automatically swacting;</li>
+                    <li>Corrects an issue that caused compute nodes to degrade after applying the
+                        <codeph>HP_15_Custom_PATCH_0002</codeph> patch;</li>
+                    <li>Closes the Linux Grub backspace vulnerability.</li>
+                  </ul>
+                </p>
+              </entry>
+            </row>
+            <row>
+              <entry>TS_HP_15_Custom_PATCH_0004.patch</entry>
+              <entry><b
+                  conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/019"
+                /></entry>
+              <entry>
+                <ul>
+                  <li>
+                    <p>Corrects an issue that prevented users from adding a second static route to
+                      data interface;</p>
+                  </li>
+                  <li>
+                    <p>Corrects an issue that caused the AVS agent on the compute nodes to crash;
+                    </p>
+                  </li>
+                  <li>
+                    <p>Corrects an issue that caused the networking agent on the compute nodes to
+                      not respond after launching a Heat stack;</p>
+                  </li>
+                  <li>
+                    <p>Corrects an issue that caused a Horizon blocking page to occur when locking a
+                      host in booting state;</p>
+                  </li>
+                  <li>
+                    <p>Corrects an issue that caused a Compute node to not run the patched RPMs,
+                      even though it shows patch-current</p>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </p>
       <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
         <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
         <b>Inventory</b>. Click the <b>Patches</b> table for the
         <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>.  Or use the CLI on the active KVM
       controller: <codeph>sudo sw-patch query</codeph>.</p>
-    <section>
-      <title>Prerequisites</title>
-      <p>You must install the <xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region
-          Custom Patch (<codeph>HCG2.0_WR002_Patch005</codeph>)</xref> and the <xref
-          href="CGH-2-patches-pci-bus.dita#topic10581pdpp">PCI Bus Patch
-            (<codeph>HCG2.0_WR003_Patch007</codeph>)</xref> and <xref
-          href="CGH-2-patches-wr-3-017.dita#topic10581pdpkvm3">KVM Custom Patch 3 (HCG_2.0 WR004
-          Patch017)</xref>before installing this patch.</p>
-    </section>
-    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+    <section><title>Download the patches</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
           href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
@@ -59,18 +123,16 @@
         <li>Click <b>Sign In</b> to log in using your account. </li>
         <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
           page.</li>
-        <li>Download the <b
-            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/019"/>
-          file and the associated checksum and signature files.</li>
+        <li>Download the required file and the associated checksum and signature files.</li>
         <li>Verify the <xref
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
             >downloaded signature</xref> and the <xref
             href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
             >downloaded checksums</xref>.</li>
-        <li>Extract the compressed files until the <codeph>TS_HP_15_Custom_PATCH_0004.patch</codeph>
-          and readme files are available.</li>
+        <li>Extract the compressed files until the <codeph id="4"
+            >TS_HP_15_Custom_PATCH_####.patch</codeph> and readme files are available.</li>
       </ol></section>
-    <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
+    <section><title>Install the patches</title><p><b>Patch the standby controller</b></p><ol
         id="ol_bcm_yg4_j5">
         <li>SSH into active controller in the KVM region. <p>For example:
               <codeph>controller-0</codeph>
@@ -79,10 +141,16 @@
         <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
             <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
             id="ul_ald_spz_35">
+            <li><codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph></li>
+            <li><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></li>
+            <li><codeph>TS_HP_15_Custom_PATCH_0003.patch</codeph></li>
             <li><codeph>TS_HP_15_Custom_PATCH_0004.patch</codeph></li>
           </ul></li>
-        <li>Execute the following commands to upload the patch to the database:
-          <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0004.patch</codeblock></li>
+        <li>Execute the following command to registers all patches in the specific directory into an
+          internal database:
+            <codeblock>sudo sw-patch upload-dir /tmp/patches                </codeblock><p>Once
+            registered, you can delete the patch files from the controller as the patches have been
+            added to the database.</p></li>
         <li>Execute the following commands to check if the patch is available for
             installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
               href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
@@ -93,7 +161,7 @@
               href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png" id="image_j4z_gyf_x5"
               width="500"/></p></li>
         <li>Execute the following commands to apply the
-          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0004.patch
+          patch:<codeblock>sudo sw-patch apply --all
 source /etc/nova/openrc</codeblock></li>
         <li>Execute the following command to patch and reboot the standby controller:
             <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
