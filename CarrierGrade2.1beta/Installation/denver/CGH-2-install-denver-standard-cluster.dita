@@ -17,13 +17,14 @@
   <body>
         <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
         <p><b>If you are deploying a KVM cluster with multiple servers for Service Availability
-                (SA), follow the steps n this section.</b></p>
-        <p><b>Note:</b> If you are not deploy a KVM cluster with multiple servers for Service
-            Availability (SA), see <xref href="CGH-2-install-denver-standalone.dita#topic10581c2id"
-                >Deploy the Standard Region in a Denver Non-SA Deployment</xref>.</p>
+                (SA), follow the steps in this section.</b></p>
+        <p><b>Note:</b> If you are not deploy a KVM cluster, see <xref
+                href="CGH-2-install-denver-standalone.dita#topic10581c2id">Deploy the Standard
+                Region in a Denver Non-SA Deployment</xref>.</p>
         <p>After the lifecycle manager is installed, the next task in installing the Denver topology
-            is to deploy the HP Helion OpenStack cloud. This section describes how to use the
-            lifecycle manager CLI to deploy the cloud.</p>
+            is to deploy the Standard Region, which includes an HP Helion OpenStack cloud. This
+            section describes how to use the lifecycle manager CLI to deploy the Standard
+            Region.</p>
         <section id="launch">
             <title>Launch the HPE Helion OpenStack cloud</title>
             <p>Use the following steps on the lifecycle manager host to log on to the lifecycle
@@ -52,7 +53,7 @@ Password: cghelion</codeblock>
                         <codeblock>hlm define –c &lt;cloud-name&gt; -t denver_rcp</codeblock>
                     </p><p>Where:: <codeph>&lt;cloudname></codeph> is the name of the cloud to
                         create.</p><p id="cloudname">The cloud name can be any combination of up to
-                        40 digits, letters:<ul id="ul_lz5_rbf_bt">
+                        40 digits and/or letters:<ul id="ul_lz5_rbf_bt">
                             <li>
                                 <p>Cannot contain with the <codeph>-</codeph> character;</p>
                             </li>
@@ -83,12 +84,14 @@ Password: cghelion</codeblock>
                 installation.</p><ol id="ol_sds_ms3_y5">
                 <li id="node-prov1">Copy node-provision.json from the lifecycle manager host to
                     cloud folder on the lifecycle manager
-                        VM:.<codeblock>~/ scp /cg/node-provision.json root@&lt;IP_address>:/var/hlm/clouds/&lt;cloudname&gt;</codeblock><p>Where:
+                        VM:.<codeblock>~/ scp /cg/node-provision.json root@&lt;CLM_IP>:/var/hlm/clouds/&lt;cloudname&gt;</codeblock><p>Where:
                             <ul id="ul_k3h_dt3_y5">
                             <li><codeph>&lt;cloudname></codeph> is the name of the cloud you created
                                 with the <codeph>hlm define</codeph> command.</li>
-                            <li><codeph>&lt;IP_address></codeph>
-                                <!--GET THIS--></li>
+                            <li><codeph>CLM_IP</codeph> is located in the IP address for the
+                                lifecycle manager in the
+                                    <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+                                file under <codeph>hlm_clmstaticip</codeph> field.</li>
                         </ul></p></li>
                 <li id="node-prov2">Edit the following fields in the
                         <codeph>node-provision.json</codeph> file: <table id="table_ycw_qrn_xs">
@@ -137,8 +140,8 @@ Password: cghelion</codeblock>
                 node-provision.json file</xref>. </section>
         <section>
             <title>Create a JSON file for OpenSAF</title>
-            <p>For OpenSAF deployments, create the KVM_hosts.json file and configure for your
-                environment (IP addresses masked for security):
+            <p>Create a <codeph>KVM_hosts.json</codeph> file and enter the following values,
+                configured for your environment (IP addresses masked for security):
                 <codeblock>{
    "name": "ctrl1", 
    "clm_ip": "10.x.x.x", 
@@ -382,9 +385,9 @@ Password: cghelion</codeblock>
                         href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-provision.png"
                         id="image_ogm_cs1_t5" width="600"/><p id="provision1a">This script prepares
                         the servers for the HPE Helion OpenStack Carrier Grade cloud installation
-                        including the hLinux operating system. The script also PXE boots the nodes
-                        specified in <codeph>node-provision.json</codeph> file and tracks the PXE
-                        boot completion process. The script also creates the
+                        including the HPE Linux operating system. The script also PXE boots the
+                        nodes specified in <codeph>node-provision.json</codeph> file and tracks the
+                        PXE boot completion process. The script also creates the
                             <codeph>nodes.json</codeph> file in the directory. </p><p
                         id="provision1b">You can log in to the iLO server management tool for each
                         of the nodes to monitor the boot process. Consult your iLO documentation for
@@ -403,10 +406,10 @@ Password: cghelion</codeblock>
                     The <codeph>nodes.json</codeph> file will have entries for three controllers. </li>
                 <li id="provision3">Verify that each node in the <codeph>nodes.json</codeph> file is
                     installed and active. <ol id="ol_g1b_cmf_zt">
-                        <li>Ping proxy node from lifecycle manager with the IP using IP specified in
-                                <codeph>nodes.json</codeph> file.</li>
-                        <li>SSH to the compute proxy node from the lifecycle manager using IP
-                            specified in <codeph>nodes.json</codeph> file.</li>
+                        <li>Ping the proxy node from the lifecycle manager using the IP address
+                            specified in the <codeph>nodes.json</codeph> file.</li>
+                        <li>SSH to the compute proxy node from the lifecycle manager using the IP
+                            address specified in the <codeph>nodes.json</codeph> file.</li>
                     </ol></li>
             </ol>
         </section>
@@ -520,13 +523,13 @@ hplefthand_debug = false</codeblock></li>
         <section id="hdeploy">
             <title>Deploy HPE Helion OpenStack</title>
             <ol id="ol_jxp_dnf_zt">
-                <li>Use one of the following commands to deploy the HPE Helion OpenStack cloud:
+                <li>Use the following command to deploy the HPE Helion OpenStack cloud:
                     <codeblock>hlm deploy -c &lt;cloudname&gt; -t "rcp-libvirtmon-opensaf"</codeblock>Where
                         <codeph>&lt;cloudname></codeph> is the name of the cloud you created with
                     the <codeph>hlm define</codeph> command.<p>This command takes a significant
                         period of time. When this command completes without errors or warnings, the
-                        Standard Region cloud installation is complete. Use the following sections to
-                        configure the Horizon interface and configures virtual
+                        Standard Region cloud installation is complete. Use the following sections
+                        to configure the Horizon interface and configures virtual
                             networking.</p><p><image
                             href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-deploy.png"
                             width="400" id="image_hf1_2t1_t5"/>
