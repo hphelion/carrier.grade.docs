@@ -2,8 +2,8 @@
   <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581c2idclinsa">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Using the CLI to Deploy
-        the Standard Region in a Denver Non-SA Deployment</title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Deploy the Standard
+        Region using the HLM CLI (Standalone Denver Deployment)</title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -16,31 +16,37 @@
   </prolog>
   <body>
         <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
-        <p>After the lifecycle manager is installed, the next task in installing the Denver topology
-            is to deploy the HP Helion OpenStack cloud.</p>
+        <p><b>If you are deploying a HP Helion OpenStack Carrier Grade onto a standalone KVM, follow
+                the steps n this section.</b></p>
         <p><b>Note:</b> If you plan to deploy a KVM cluster with multiple servers for Service
-            Availability (SA), see <xref href="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa"
-                >Deploy the Standard Region in a Denver SA Deployment</xref>.</p>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/launch"/>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/define"/>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/jsons"/>
+            Availability (SA), see <xref
+                href="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa">Deploying the
+                Standard Region in a KVM Cluster</xref>.</p>
+        <p>After the lifecycle manager is installed, the next task in installing the Denver topology
+            is to deploy the HP Helion OpenStack cloud. Follow the steps in this section to use the
+            HLM CLI to peform the required tasks. Or, you can <xref
+                href="CGH-2-install-denver-standalone-ui.dita#topic10581c2idui">use the HCG
+                Dashboard</xref> to perform these tasks.</p>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/launch"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/define"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/jsons"/>
         <section id="node-prov">
             <title>Edit the node-provision.json file</title>
             <p/>
-            <p conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/node-prov-intro"/>
+            <p conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov-intro"/>
             <p><ol id="ol_sds_ms3_y5">
-                <li conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/node-prov1"/>
-                <li conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/node-prov2"/>
+                <li conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov1"/>
+                <li conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov2"/>
                 </ol>Click here to see a <xref
                     href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
                     node-provision.json file</xref>. </p>
         </section>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/pxe-boot"/>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/environment"/>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/lnet"/>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/ansible"/>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/wr"/>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/verify-json"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/pxe-boot"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/environment"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/lnet"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ansible"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/wr"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/verify-json"/>
         <section id="conref-create-cloud">
             <title>Provision the cloud nodes and bring the cloud nodes up</title>
             <ol id="ol_f1b_cmf_zt">
@@ -52,16 +58,16 @@
                         15 to 30 minutes. <b><!--TIME ANY DIFFERENT??--></b></p><image
                         href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-provision.png"
                         id="image_ogm_cs1_t5" width="600"/><p
-                            conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/provision1a"
+                            conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/provision1a"
                         /><p
-                            conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/provision1b"
+                            conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/provision1b"
                     /></li>
-                <li conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/provision2"/>
-                <li conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/provision3"/>
+                <li conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/provision2"/>
+                <li conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/provision3"/>
             </ol>
         </section>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/back-end"/>
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/config-proc"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/back-end"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/config-proc"/>
         <section id="hdeploy">
             <title>Deploy HPE Helion OpenStack</title>
             <ol id="ol_jxp_dnf_zt">
@@ -82,7 +88,7 @@
         <!--<section><title>Change the gateway address WHERE IS THIS SET?? Hide this section. Was removed in wiki.</title><p>If the IP address for your gateway is different from the CLM gateway, you need to assign the CLM IP address as the gateway address on all the controllers: (it's required only if your gateway is not CLM) </p><p><ol id="ol_rql_553_y5"><li>SSH to each controllers. <b>IP addresses??</b></li><li>Execute the following command: <codeblock>route delete default
 route add default gw &lt;CLM_IP> </codeblock><p>Where <codeph>&lt;CLM_IP></codeph> is the CLM IP address.</p></li></ol></p></section>-->
       
-      <section conref="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa/ldap-keystone" id="ldap-keystone"/>
+      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone" id="ldap-keystone"/>
         <section id="next-step">
             <title>Next Step</title>
             <p><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd"

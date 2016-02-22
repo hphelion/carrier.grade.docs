@@ -18,13 +18,13 @@
         <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
         <p><b>If you are deploying a KVM cluster with multiple servers for Service Availability
                 (SA), follow the steps n this section.</b></p>
-        <p>After the lifecycle manager is installed, the next task in installing the Denver topology
-            is to deploy the HP Helion OpenStack cloud. This section describes how to use the
-            lifecycle manager CLI to deploy the cloud.</p>
         <p><b>Note:</b> If you are not deploy a KVM cluster with multiple servers for Service
             Availability (SA), see <xref href="CGH-2-install-denver-standalone.dita#topic10581c2id"
                 >Deploy the Standard Region in a Denver Non-SA Deployment</xref>.</p>
-      <section id="launch">
+        <p>After the lifecycle manager is installed, the next task in installing the Denver topology
+            is to deploy the HP Helion OpenStack cloud. This section describes how to use the
+            lifecycle manager CLI to deploy the cloud.</p>
+        <section id="launch">
             <title>Launch the HPE Helion OpenStack cloud</title>
             <p>Use the following steps on the lifecycle manager host to log on to the lifecycle
                 manager:</p>
@@ -68,7 +68,7 @@ Password: cghelion</codeblock>
                         contains several JSON template files. </p></li>
             </ol>
         </section>
-      <section id="jsons">
+        <section id="jsons">
             <title>Configuring JSON files </title>
             <p>The HP Helion OpenStack deployment requires several JSON files.</p>
             <p><b>Important:</b> Do not store backup of the JSON files inside your cloud directory
@@ -76,7 +76,7 @@ Password: cghelion</codeblock>
                 backup folder on <codeph>/root/</codeph> directory or on a remote system.
                 <!--HCG-681--></p>
         </section>
-      <section id="node-prov"><title>Edit the node-provision.json file </title><p
+        <section id="node-prov"><title>Edit the node-provision.json file </title><p
                 id="node-prov-intro">Modify the <codeph>node-provision.json</codeph> file in the
                     <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory of the lifecycle
                 manager. This file supplies input values to the hprovision script, later in the
@@ -269,7 +269,7 @@ Password: cghelion</codeblock>
                     <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory of the lifecycle
                 manager.</p>
         </section>
-      <section id="ansible">
+        <section id="ansible">
             <title>Edit the ansible.json file</title>
             <p>Modify the <codeph>ansible.json</codeph> file in the
                     <codeph>/var/hlm/clouds/&lt;cloudname>/vars</codeph> directory of the lifecycle
@@ -304,7 +304,7 @@ Password: cghelion</codeblock>
 </codeblock>
             </p>
         </section>
-      <section  id="wr">
+        <section id="wr">
             <title>Edit the wr.json file</title>
             <p>Modify the <codeph>wr.json</codeph> file in the
                     <codeph>/var/hlm/clouds/&lt;cloudname>/vars/</codeph> directory of the lifecycle
@@ -389,20 +389,20 @@ Password: cghelion</codeblock>
                         id="provision1b">You can log in to the iLO server management tool for each
                         of the nodes to monitor the boot process. Consult your iLO documentation for
                         information on how to log into iLO. </p></li>
-                <li  id="provision2">Make sure the nodes are booted up using iLO. For example:<p><image
-                            href="../../../media/CGH-2-install-cobbler.png" width="600"
-                            id="image_c5k_d4b_kt"/></p><p><b>Note:</b> In rare situations, a node
-                        might not boot due to an issue with network configuration. If this happens,
-                        you need to log into that node and manually boot using the Retry
-                        Auto-Configuration option. The provisioning will continue as you reboot that
-                        node. See <xref
+                <li id="provision2">Make sure the nodes are booted up using iLO. For
+                            example:<p><image href="../../../media/CGH-2-install-cobbler.png"
+                            width="600" id="image_c5k_d4b_kt"/></p><p><b>Note:</b> In rare
+                        situations, a node might not boot due to an issue with network
+                        configuration. If this happens, you need to log into that node and manually
+                        boot using the Retry Auto-Configuration option. The provisioning will
+                        continue as you reboot that node. See <xref
                             href="../../Troubleshooting/CGH-2-troubleshooting-install.dita#topic10581c2ti/provision"
                             >Node fails to boot during HLM provision</xref>. </p>Once the baremetal
                     nodes are provisioned, make sure the <codeph>nodes.json</codeph> file is
                     generated to the <codeph>var/hlm/clouds/&lt;cloudname&gt;/</codeph> directory.
                     The <codeph>nodes.json</codeph> file will have entries for three controllers. </li>
-                <li id="provision3">Verify that each node in the <codeph>nodes.json</codeph> file is installed and
-                    active. <ol id="ol_g1b_cmf_zt">
+                <li id="provision3">Verify that each node in the <codeph>nodes.json</codeph> file is
+                    installed and active. <ol id="ol_g1b_cmf_zt">
                         <li>Ping proxy node from lifecycle manager with the IP using IP specified in
                                 <codeph>nodes.json</codeph> file.</li>
                         <li>SSH to the compute proxy node from the lifecycle manager using IP
@@ -410,8 +410,8 @@ Password: cghelion</codeblock>
                     </ol></li>
             </ol>
         </section>
-      <section  id="back-end">
-            <title>Configure the back-end drivers  <!--NEED THIS??--></title>
+        <section id="back-end">
+            <title>Configure the back-end drivers <!--NEED THIS??--></title>
             <p>Configure the back-end drivers to enable management of the OpenStack Block Storage
                 volumes on HPE StoreVirtual VSA and/or HPE StoreServ (3PAR) storage arrays. The HPE
                 Block Storage (Cinder) service allows you to configure multiple storage back-ends. A
@@ -551,7 +551,7 @@ hplefthand_debug = false</codeblock></li>
         </section>
         <section><title>Manually launch Libirt monitoring</title>Libvirt monitoring is started
             automatically during the cloud deployment process.<p>You can manually invoke Libvirt, if
-                needed, using  the CLI: <ol id="ol_x2y_1sp_1v">
+                needed, using the CLI: <ol id="ol_x2y_1sp_1v">
                     <li>Execute the following commands to remove the existing association
                         using:<codeblock>delfromimm -p -d CCN1
 delfromimm -p -d CCN2
@@ -561,8 +561,8 @@ delfromimm -p -d CCN3</codeblock></li>
                 </ol></p></section>
         <!--<section><title>Change the gateway address WHERE IS THIS SET?? Hide this section. Was removed in wiki.</title><p>If the IP address for your gateway is different from the CLM gateway, you need to assign the CLM IP address as the gateway address on all the controllers: (it's required only if your gateway is not CLM) </p><p><ol id="ol_rql_553_y5"><li>SSH to each controllers. <b>IP addresses??</b></li><li>Execute the following command: <codeblock>route delete default
 route add default gw &lt;CLM_IP> </codeblock><p>Where <codeph>&lt;CLM_IP></codeph> is the CLM IP address.</p></li></ol></p></section>-->
-        <section id="trouble"><title>Installation Troubleshooting</title> If you receive the following error
-            during installation:
+        <section id="trouble"><title>Installation Troubleshooting</title> If you receive the
+            following error during installation:
             <codeblock>Failed to fetch http://hlinux-deejay.us.rdlabs.hpecorp.net/hLinux/dists/cattleprod/InRelease 
 Unable to find expected entry 'main/binary-i386/Packages' in Release file (Wrong sources.list entry or malformed file)
 Some index files failed to download. They have been ignored, or old ones used instead.</codeblock>Run

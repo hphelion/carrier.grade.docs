@@ -15,13 +15,16 @@
 </prolog>
 <body>
     <!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki-->
+    <p><b>If you are deploying a HP Helion OpenStack Carrier Grade onto a standalone KVM, follow the
+        steps n this section.</b></p>
+    <bodydiv><b>Note:</b> If you plan to deploy a KVM cluster with multiple servers for Service
+      Availability (SA), see <xref
+        href="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild">Deploying the Lifecycle
+        Manager in a KVM Cluster</xref>.</bodydiv>
     <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves creating a
       bootstrapping the lifecycle manager VM and installation services. </p>
     <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
       required installation processes.</p>
-    <bodydiv><b>Note:</b> If you plan to deploy a KVM cluster with multiple servers for Service
-      Availability (SA), see <xref href="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild"
-        >Deploying the Lifecycle Manager in a Denver SA Deployment</xref>.</bodydiv>
     <bodydiv id="hlm">
       <section id="prepare">
         <title>Prepare the system for deployment</title>
