@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic10581c2ild">
-<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 3 -Deploying the Lifecycle
-    Manager in a Denver Deployment</title>
+<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 3 -Deploying In a KVM
+    Cluster (Denver Deployment)</title>
 <prolog>
   <metadata>
     <othermeta name="layout" content="default"/>
@@ -16,14 +16,15 @@
 <body>
     <!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki-->
   <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves creating a
-    bootstrapping the lifecycle manager VM and installation services. </p>
-  <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
-      required installation processes.</p>
-    <p>See one of the following, depending upon your environment:<ul id="ul_kp5_fyn_1v">
-        <li><xref href="CGH-2-install-lifecycle-denver-nonSAF.dita#topic10581c2ild">Deploy the
-            Lifecycle Manager</xref></li>
-        <li><xref href="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild">Deploy the
-            Lifecycle Manager in an SA environment</xref></li>
-      </ul></p>
+      bootstrapping the lifecycle manager VM and installation services. You will then deploy the
+      Standard Region, which includes HP Helion OpenStack.</p>
+  <p>The installation uses Ansible playbooks to deploy the lifecycle manager VM. Ansible playbooks
+      are files that contain scripts that execute required installation processes. You will then
+      edit JSON files and use the HLM CLI to deploy the Standard Region. </p>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild">Deploy the
+          Lifecycle Manager</xref></p>
+    </section>
   </body>
 </topic>

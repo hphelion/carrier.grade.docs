@@ -20,7 +20,7 @@
     <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
       required installation processes.</p>
     <bodydiv><b>Note:</b> If you plan to deploy a KVM cluster with multiple servers for Service
-      Availability (SA), see <xref href="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild"
+      Availability (SA), see <xref href="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild"
         >Deploying the Lifecycle Manager in a Denver SA Deployment</xref>.</bodydiv>
     <bodydiv id="hlm">
       <section id="prepare">
@@ -32,10 +32,10 @@
           <li>Edit the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file for your
             environment. For information on each variable, refer to the comments in the file with
             each variable. <ul id="ul_tzp_3zz_s5">
-              <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all1"/>
-              <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all2"/>
-              <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all3"/>
-              <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/all4"/>
+              <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all1"/>
+              <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all2"/>
+              <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all3"/>
+              <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all4"/>
             </ul><p id="all">The <codeph>group_vars/all</codeph> file should appear similar to the
               following (IP addresses masked for
               security):<codeblock>############################################# Variables for HLM  #################################################################
@@ -114,11 +114,11 @@ kvm_hosts:
    - 10.0.0.4
 ###################################################################################################################################
               </codeblock></p></li>
-          <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/3"/>
-          <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/4"/>
+          <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/3"/>
+          <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/4"/>
         </ol>
       </section>
-      <section conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/disk-size"/>
+      <section conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/disk-size"/>
       <section>
         <title>Deploy the Lifecycle Manager Virtual Machine</title>
         <p>Use the following steps on the lifecycle manager host to deploy the lifecycle manager on
@@ -138,8 +138,8 @@ kvm_hosts:
                 <p>This command deploys and configures the lifecycle manager VM. Aftetr deployment,
                   you can add the lifecycle manager host to OpenSAF cluster manually. </p>
               </li>
-            </ul><p conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/trouble"/></li>
-          <li conref="CGH-2-install-lifecycle-denver-SAF.dita#topic10581c2ild/hosts"/>
+            </ul></li>
+          <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/hosts"/>
         </ol>
       </section>
     </bodydiv>

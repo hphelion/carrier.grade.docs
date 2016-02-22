@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic10581c2ild">
 <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 3 -Deploying the
-    Lifecycle Manager in a Denver SA Deployment</title>
+    Lifecycle Manager in KVM Cluster (Denver Deployment)</title>
 <prolog>
   <metadata>
     <othermeta name="layout" content="default"/>
@@ -28,8 +28,9 @@
   <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
     required installation processes.</p>
     <p><b>Note:</b> If you are not deploy a KVM cluster with multiple servers for Service
-      Availability (SA), see <xref href="CGH-2-install-lifecycle-denver-nonSAF.dita#topic10581c2ild"
-        >Deploying the Lifecycle Manager in a Denver SA Deployment</xref>.</p>
+      Availability (SA), see <xref
+        href="CGH-2-install-lifecycle-denver-standlaone.dita#topic10581c2ild">Deploying the
+        Lifecycle Manager On a Standalone KVM</xref>.</p>
     <bodydiv id="hlm">
       <section id="prepare">
         <title>Prepare the system for deployment</title>
@@ -232,10 +233,10 @@ vm_ctrl_disksize: 200</codeblock></p></li>
         </ol>
       </section>
     </bodydiv>
-  <section id="next-step">
-    <title>Next Step</title>
-    <p><xref href="CGH-2-install-denver-cli-sa.dita#topic10581c2idclisa">Deploying the Standard
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-install-denver-cli-cluster.dita#topic10581c2idclisa">Deploy the Standard
           Region</xref></p>
-  </section>
+    </section>
   </body>
 </topic>
