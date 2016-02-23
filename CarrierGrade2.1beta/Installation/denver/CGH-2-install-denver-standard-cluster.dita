@@ -30,11 +30,10 @@
             <p>Use the following steps on the lifecycle manager host to log on to the lifecycle
                 manager:</p>
             <ol id="ol_ncd_wff_zt">
-                <li>Log into the lifecycle manager.
-                        <codeblock>ssh root@&lt;CLM_IP></codeblock><p>where: CLM_IP is located in
-                        the IP address for the lifecycle manager in the
-                            <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
-                            <codeph>hlm_clmstaticip</codeph> field.</p><p>Use the default
+                <li>Log into the lifecycle manager. <codeblock>ssh root@&lt;CLM_IP></codeblock><p
+                        id="clmip">Where: CLM_IP is located in the IP address for the lifecycle
+                        manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+                        file under <codeph>hlm_clmstaticip</codeph> field.</p><p>Use the default
                         credentials: </p><p>
                         <codeblock>User Name: root
 Password: cghelion</codeblock>
@@ -132,7 +131,7 @@ Password: cghelion</codeblock>
                 href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
                 node-provision.json file</xref>. </section>
         <section>
-            <title>Create a JSON file for OpenSAF</title>
+            <title>Create a JSON file </title>
             <p>Create a <codeph>KVM_hosts.json</codeph> file and enter the following values,
                 configured for your environment (IP addresses masked for security):
                 <codeblock>{
@@ -408,7 +407,7 @@ Password: cghelion</codeblock>
         </section>
         <section id="back-end">
             <title>Configure the back-end drivers <!--NEED THIS??--></title>
-            <p>Configure the back-end drivers to enable management of the OpenStack Block Storage
+            <p id="cinderintro">Configure the back-end drivers to enable management of the OpenStack Block Storage
                 volumes on HPE StoreVirtual VSA and/or HPE StoreServ (3PAR) storage arrays. The HPE
                 Block Storage (Cinder) service allows you to configure multiple storage back-ends. A
                 sample file provides all the variables needed to use VSA and/or 3PAR attached to the

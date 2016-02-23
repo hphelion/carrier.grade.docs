@@ -31,7 +31,7 @@
             manage, and monitor a HP Helion OpenStack cloud. The tool helps you provide and validate
             the cloud definitions required to deploy your cloud and guide you through the
             deployment. </p>
-        <section id="launch"><title>Launch the HCG Dashboard</title>
+        <p><b>Launch the HCG Dashboard</b></p>
         <p>The HCG Dashboard will be available as soon as the lifecycle manager is deployed. The
             dashboard service runs on port 8080 and can be accessed using
                 <codeph>http://&lt;CLM_IP>:8080/</codeph>.</p>
@@ -47,39 +47,24 @@
                         change the password before you can continue. Once password is updated, you
                         will need to log in again with newly created password.</p></li>
             </ol>
-        </p></section>
+        </p>
         <section>
             <title>Specify the cloud definition</title>
-            <p>Use the <b>Create New Cloud Definition</b> wizard on the UI to:<ol id="ol_byp_hrf_cv">
-                    <li>Click the <b>Create New Cloud Definition</b> dashboard.</li>
-                    <li>On the <b>Step 1</b> table, specify a name for the cloud: <p
+            <p>Use the <b>Cloud Input</b> wizard on the UI to:<ol id="ol_byp_hrf_cv">
+                    <li>Specify a name for the cloud: <p
                             conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/cloudname"
                         /></li>
-                    <li>Specify if you are using HPE StoreVirtual VSA (VSA) and/or HPE StoreServ
-                        (3PAR) storage.<p>You can incorporate back-end drivers to enable management
-                            of the OpenStack Block Storage volumes on VSA and/or 3PAR storage
-                            arrays. The HPE Block Storage (Cinder) service allows you to configure
-                            multiple storage back-ends. </p></li>
-                    <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 2</b> table, specify the Standard Region servers and map the
-                        servers to the controllers.</li>
+                    <li>Specify the Standard Region servers and map the servers to the
+                        controllers.</li>
                     <li>Validate the Standard Region servers for connectivity and credentials.</li>
-                    <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 3</b> table, specify network information for all required
-                        networks (CLM, API, BLS). If you do not have segment IDs, enter
-                            <codeph>-1</codeph>. </li>
-                    <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 4</b> table, validate the network information you
-                        provided.</li>
-                    <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 5</b> table:<ol id="ol_z51_tbg_cv">
-                            <li>Specify all required variables for the Standard Region.</li>
-                            <li>Specify all required variables for the KVM Region.</li>
-                            <li>Specify information for any VSA and HP 3PAR storage backend
-                                        configuration.<p><b>Note: </b> There is no validation
-                                    integrated for storage configuration with cloud. </p></li>
-                        </ol></li>
-                    <li>On the <b>Step 6</b> table, validate the DNS Server IP and NTP Server IP. </li>
+                    <li>Specify network information for all required networks (CLM, API, BLS). If
+                        you do not have segment IDs, enter <codeph>-1</codeph>. </li>
+                    <li>Validate the network information you provided.</li>
+                    <li>Specify all required variables.</li>
+                    <li>Specify information for any VSA and HP 3PAR storage backend
+                                configuration.<p><b>Note: </b> There is no validation integrated for
+                            storage configuration with cloud. </p></li>
+                    <li>Validate the DNS Server IP and NTP Server IP. </li>
                     <li>Click <b>Finish</b> to save all data in JSON files that will be used during
                         the deployment.</li>
                 </ol></p>
@@ -90,27 +75,26 @@
             of your cloud. The page appears similar to the following:<p><image
                     href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard.png"
                     width="500" id="image_lw5_msf_cv"/></p><ol id="ol_i2y_yxf_cv">
-                <li>Click the Deploy Cloud dashboard.</li>
-                <li>Click <b>Run</b> to start deploying the cloud.<p><image
+                <li>Click <b>DEPLOY</b> to start deploying the cloud.<p><image
                             href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy.png"
                             width="500" id="image_xh4_jyl_x5"/></p>The deployment consists of four
                     phases: provision, generate, netinit and deploy. As the phases progress, you
                     will see the name of your cloud and current status at the top of the page and
-                    the marker on the wizard will move to the process as it completes.<p>The process
-                        runs asynchronously in background. So while a process is running, if you
-                        close your session or browser, you can still return to the same page again
-                        to check status of your process.Also, when your process is running, you can
-                        look at the current log content by clicking on the "logs" tab and selecting
-                        a log file pertaining to that process as seen below:</p><p><image
+                    the marker on the wizard will move to the process as it completes.<p>To execute
+                        a particular process, you can click on a step and click <b>Run</b>. Once you
+                        hit the <b>Run</b> button, you will see your process being executed as shown
+                        below.</p><b>Note:</b> To execute a process, all previous processes must be
+                    completed. <p>The process runs asynchronously in background. So while a process
+                        is running, if you close your session or browser, you can still return to
+                        the same page again to check status of your process.</p>Also, when your
+                    process is running, you can look at the current log content by clicking on the
+                    "logs" tab and selecting a log file pertaining to that process as seen
+                            below:<p><image
                             href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-logs.png"
                             width="500" id="image_znz_lyl_x5"/></p>Once the process completes, you
                     will be notified whether it passed or failed as seen below:<p><image
                             href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deployed.png"
-                            width="500" id="image_s5p_nyl_x5"/></p><p>To execute a particular
-                        process, you can click on a step and click <b>Run</b>. Once you hit the
-                            <b>Run</b> button, you will see your process being executed as shown
-                        below.</p><b>Note:</b> To execute a process, all previous processes must be
-                    completed. </li>
+                            width="500" id="image_s5p_nyl_x5"/></p></li>
             </ol></section>
         <section
             conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone"
