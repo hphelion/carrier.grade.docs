@@ -32,7 +32,7 @@
             <p>The following servers are supported for the lifecycle manager host, and for the
                 controllers and compute servers.</p>
             <p><b id="hlm">Lifecycle Manager Host</b> The lifecycle manager host is a single server
-                with at least a 500 GB disk size, 4GB of virtual memory and 2 virtual CPUs. </p>
+                with at least a 2TB Disk, 132GB RAM and 2 virtual CPUs. </p>
             <p id="controllers"><b>Controllers and compute servers</b> The following servers are
                 supported for the controllers and compute servers in the <xref
                     href="../../Overview/carrier-grade-overview-kvm.dita#topic1743cgok">KVM
@@ -53,7 +53,7 @@
             <p><b>Notes:</b>
                 <ul id="ul_mxb_gzd_ss">
                     <li>If you are using Gen9 systems, you must update the firmware to HPE Service
-                        Pack for ProLiant (SPP) Version 2015.06.0.</li>
+                        Pack for ProLiant (SPP) Version 2015.10.0.</li>
                     <li>If you are using Gen8 systems, you will experience reduced performance.</li>
                 </ul></p>
         </section>
@@ -205,11 +205,11 @@
             <p>The servers, selected from the <xref href="#topic1773cgsmd/hardware" format="dita"
                     >Supported Hardware</xref> lists, must be configured as follows for HP Helion
                 OpenStack Carrier Grade.</p>
-            <p>One (1) <b>Lifecycle Manager Host</b>. You must have a server with a 40GB Disk and
-                8,192 MB RAM for the lifecycle manager host. This server will also host three (3)
-                virtual machines that serve as controllers for HP Helion OpenStack Carrier Grade.
-                Each of the controller nodes requires 20GB of virtual disk, 16GB of virtual memory,
-                and 4 virtual CPUs.</p>
+            <p>One (1) <b>Lifecycle Manager Host</b>. You must have a server with a 2TB Disk and 132
+                GB RAM for the lifecycle manager host. This server will also host three (3) virtual
+                machines that serve as controllers for HP Helion OpenStack Carrier Grade. Each of
+                the controller nodes requires 200GB of virtual disk, 32GB of virtual memory, and 4
+                virtual CPUs.</p>
             <p id="kvm-config">Two (2) <b>KVM Region controllers</b>. You must have two (2)
                 baremetal systems to install the KVM Region controllers. For systems with multiple
                 NICs, only one NIC may be active or connected. </p>
@@ -228,14 +228,42 @@
         </section>
         <section id="software">
             <title>Software Requirements</title>
-            <p><b>Lifecycle Manager Host</b>. The lifecycle manager host requires the Ubuntu Server
-                14.04.2 LTS operating system. </p>
-            <p><b>Standard Region Controllers</b>. The servers should be baremetal. The HP Helion
-                OpenStack Carrier Grade installation process installs the required software.</p>
+            <p><b>Lifecycle Manager Host</b>. The lifecycle manager host requires the latest H
+                operating system. </p>
+            <!--<p><b>Standard Region Controllers</b>. The servers should be baremetal. The HP Helion OpenStack Carrier Grade installation process installs the required software.</p>-->
             <p><b>KVM Region Controllers</b>. The servers should be baremetal. The HP Helion
                 OpenStack Carrier Grade installation process installs the required software.</p>
             <p><b>KVM Region Compute</b>. The servers should be baremetal. The HP Helion OpenStack
                 Carrier Grade installation process installs the required software.</p>
+        </section>
+        <section id="prepbare">
+            <title>Prepare the servers</title>
+            <p>Perform the following tasks on each server you will use as a compute server or
+                controller in the Standard Region and KVM region:</p>
+            <ul id="ul_jy1_tvp_rs">
+                <li>Configure the boot order with Network/PXE boot as the first option:<p>For
+                        example, to set the boot order for a HPE SL390, from the iLO prompt enter
+                            <codeph>set system1/bootconfig1/bootsource5
+                    bootorder=1</codeph>.</p></li>
+                <li>
+                    <p>Configure the BIOS:</p>
+                    <ul id="ul_ly1_tvp_rs">
+                        <li>to the correct date and time</li>
+                        <li>to use UTC (Coordinated Universal Time)</li>
+                        <li>with only one network interface enabled for PXE/network boot and any
+                            additional interfaces should have PXE/network boot disabled</li>
+                        <li>to stay powered off in the event of being shutdown rather than
+                            automatically restarting</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Update to the latest firmware recommended by the system vendor for all system
+                        components, including the BIOS, BMC firmware, disk controller firmware,
+                        drive firmware, network adapter firmware, and so forth.</p>
+                    <p><b>Note:</b> If you are using ProLiant Gen9 blades or rack servers, you must
+                        update the Snap3 firmware. </p>
+                </li>
+            </ul>
         </section>
         <section id="storage">
             <title>External Storage</title>
@@ -243,8 +271,8 @@
                 Block Storage volumes in the Standard Region.</p>
             <p>
                 <ul id="ul_oh5_dyx_5t">
-                    <li>HPE 3PAR StoreServ, version 3.1.3 or 3.2.1 MU2 or higher .</li>
-                    <li>HPE StoreVirtual VSA with LeftHand OS 11.5.</li>
+                    <li>HPE 3PAR StoreServ, version 3.1.3 or 3.2.1 MU3 or higher .</li>
+                    <li>HPE StoreVirtual VSA with LeftHand OS 12.0.</li>
                 </ul>
             </p>
             <p>You will configure the installer to integrate one or both of these drivers during the
@@ -254,8 +282,8 @@
             operating systems (guest OSs) are supported for the HP Helion OpenStack Carrier Grade
             servers. <p><b>Lifecycle Manager Host</b>. There are no supported guest OSs for the
                 Lifecycle Manager Host server. </p><p><b>KVM Region Compute and Controllers</b>. The
-                following Guest OSs are supported for the servers in the KVM Region for both cloud
-                topologies: </p><ul id="ul_sty_hd2_qs">
+                following Guest OSs are supported for the servers in the KVM Region: </p><ul
+                id="ul_sty_hd2_qs">
                 <li>
                     <p>WindRiver Linux 6.0</p>
                 </li>

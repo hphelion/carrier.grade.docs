@@ -105,20 +105,31 @@
                                 and verify the signature file before installing. </p><p/></section>
                 <section id="linux">
                         <title>Download the HPE Linux Source</title>
-                        <p>Download the source files for installing HPE Linux on the Non-KVM Region
-                                systems.</p>
-                        <p>In a browser, navigate to <xref
-                                        href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
-                                        format="html" scope="external">Helion Download
-                                        Network(HDN)</xref>. <ol>
+                        <p>The lifecycle manager host must have HPE Linux installed before
+                                performing the HP Helion OpenStack Carrier Grade installation.
+                                Download the source files for installing HPE Linux on the Non-KVM
+                                Region systems.</p>
+                        <p>
+                                <ol id="hpelinux">
+                                        <li>In a browser, navigate to <xref
+                                                  href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
+                                                  format="html" scope="external">Helion Download
+                                                  Network(HDN)</xref>. </li>
                                         <li>Click <b>Sign In</b> to log in using your account. </li>
                                         <li>After signing in, click the <b>Downloads</b> link in the
                                                 menu on the left side of the page.</li>
                                         <li>Click the <b>Downloads</b> tab and locate the following
-                                                download: <b>HP Linux For Helion Source Tarball For
-                                                  Helion 2.1</b>. This link downloads the
-                                                  <codeph>hlinuxhos21sources.tar.gz</codeph> file. </li>
-                                </ol></p>
+                                                download: <b>Helion OpenStack 2.1</b>. This link
+                                                downloads the
+                                                  <codeph>HelionOpenStack-2.1.iso</codeph> file.
+                                                Also download the associated checksum and signature
+                                                files. </li>
+                                        <li>Also download the required operating system packages
+                                                that you will deploy later in the installation.</li>
+                                        <li>Use the iLO interface to mount the ISO file to the
+                                                system that will host the lifecycle manager VM.</li>
+                                </ol>
+                        </p>
                 </section>
                 <section>
                         <ol>
@@ -142,7 +153,23 @@
                                 <b>Note:</b> When downloading installation files, always download
                                 and verify the signature file before installing. </p>
                 </section>
-                <section/>
+                <section id="download">
+                        <title>Download the installation files</title>
+                        <p>In a browser, navigate to <xref
+                                        href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
+                                        format="html" scope="external">Helion Download
+                                        Network(HDN)</xref>. <ol id="ol_wpm_c2h_cv">
+                                        <li>Click <b>Sign In</b> to log in using your account. </li>
+                                        <li>After signing in, click the <b>Downloads</b> link in the
+                                                menu on the left side of the page.</li>
+                                        <li>Click the <b>Downloads</b> tab and locate the following
+                                                download: <b>Helion OpenStack 2.1</b>. This link
+                                                downloads the
+                                                  <codeph>HelionOpenStack-2.1.iso</codeph> file.
+                                                Also download the associated checksum and signature
+                                                files. </li>
+                                </ol></p>
+                </section>
                 <section id="verify">
                         <title>Verify the downloaded signature</title>
                         <p>After downloading the installation packages, you should verify the
@@ -312,11 +339,7 @@ sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p>
                                                   </entry>
                                                   <entry> </entry>
                                                   </row>
-                                                  <row>
-                                                  <entry>cg-ironic-deploy-images.tar.gz</entry>
-                                                  <entry>/root/cg</entry>
-                                                  <entry>For Sacramento deployments only.</entry>
-                                                  </row>
+                                                  <!--<row><entry>cg-ironic-deploy-images.tar.gz</entry><entry>/root/cg</entry><entry>For Sacramento deployments only.</entry></row>-->
                                                   </tbody>
                                                 </tgroup>
                                         </table><p id="kvm"><b>KVM Region Installation
@@ -341,20 +364,8 @@ sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p>
                                                   <systemoutput>controller-0</systemoutput> in the
                                                   KVM region.</entry>
                                                   </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
-                                                  <entry><systemoutput>/root</systemoutput> on
-                                                  <systemoutput>controller-0</systemoutput> in the
-                                                  KVM region. SDK files to be used as
-                                                  needed.</entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
-                                                  <entry><systemoutput>/root</systemoutput> on
-                                                  <systemoutput>controller-0</systemoutput> in the
-                                                  KVM region. Sample guest operating system files to
-                                                  be used as needed.</entry>
-                                                  </row>
+                                                  <!--<row><entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry><entry><systemoutput>/root</systemoutput> on <systemoutput>controller-0</systemoutput> in the KVM region. SDK files to be used as needed.</entry></row>-->
+                                                  <!--<row><entry><codeph>WR-15.09-sample-guest.img</codeph></entry><entry><systemoutput>/root</systemoutput> on <systemoutput>controller-0</systemoutput> in the KVM region. Sample guest operating system files to be used as needed.</entry></row>-->
                                                   </tbody>
                                                   </tgroup>
                                                 </table>
