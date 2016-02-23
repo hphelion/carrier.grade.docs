@@ -24,91 +24,73 @@
                 Standard Region in a KVM Cluster</xref>.</p>
         <p>After the lifecycle manager is installed, the next task in installing the Denver topology
             is to deploy the HP Helion OpenStack cloud. Follow the steps in this section to use the
-            HLM CLI to peform the required tasks. Or, you can <xref
-                href="CGH-2-install-denver-standalone-cli.dita#topic10581c2idclinsa">use the HCG
-                Dashboard</xref> to perform these tasks.</p>
+            HCG Dashboard UI to perform the required tasks. Or, you can <xref
+                href="CGH-2-install-denver-standalone-cli.dita#topic10581c2idclinsa">use the HLM
+                CLI</xref> to perform these tasks.</p>
         
-        <p>HCG-Dashboard is a cloud management tool which allows users to
-            Define, Deploy, Manage and Monitor cloud.</p><p>This tool facilitates users to provide and
-                validate cloud definitions required define a cloud through web
-            interface.</p>
-        <p>Once the cloud is defined user will be able guided through various stages of
-            deployment</p>
-        <p>After the cloud is deployed, user will be able to perform various post deployment
-            activities as Service resets, patching and upgrade.</p>
-        <p> </p>
-        <p>Currently, HCG-Dashboard supports "RCP" cloud only<b>.</b></p>
-        <p>For beta- the UI is hosted on Django's internal web server. In the coming weeks, the UI
-            will be hosted on Apache2.</p>
-        <p><b>How to access the dashboard? </b><ol id="ol_txn_xwl_x5">
-                <li>UI will be setup as part of hlm_prepareenv.sh script so it will be available as
-                    soon as you execute that script</li>
-                <li>The dashboard service runs on port 8080 and can be accessed using http://&lt;hlm
-                    ip&gt;:8080/</li>
-                <li>If you are accessing UI from an outside machine (like a jump server), you should
-                    be using hlm ip (in above URL) that is accessible from that machine </li>
-            </ol></p>
-        <p><b> Features Available Today</b></p>
-        <p>The UI supports Reduced Control Plane creation and configuration. The UI supports Cloud
-            Definition for RCP template only.</p>
-        <p>Use the "Cloud Input" wizard on the UI to:</p>
+        <p>The HCG Dashboard UI is a cloud management tool that allows users to define, deploy,
+            manage, and monitor a HP Helion OpenStack cloud. The tool helps you provide and validate
+            the cloud definitions required to deploy your cloud and guide you through the
+            deployment. </p>
+        <p><b>How to access the dashboard? </b>
+        </p>
+        <p>The HCG Dashboard will be available as soon as the lifecycle manager is deployed. The
+            dashboard service runs on port 8080 and can be accessed using <codeph>http://&lt;hlm
+                ip>:8080/</codeph></p>
+        <p><b> Dashboard features</b></p>
+        <p>Use the <b>Cloud Input</b> wizard on the UI to:</p>
         <ol id="ol_uxn_xwl_x5">
-            <li>Specify the Cloud Name</li>
-            <li>Specify KVM Servers info and Map the KVM servers to the Controllers</li>
-            <li>In the KVM servers get validated for connectivity and credentials correctness.</li>
-            <li>Specify Network information for all 5 types of networks (CLM, API, BLS) (If you do
-                not have Segment IDs, Enter -1) </li>
-            <li>View validation results of network information provided (Validation for API and BLS
-                networks not part of 2.1 Beta but will be added for 2.1 GA)</li>
-            <li>Specify all variables</li>
-            <li>View validation results of DNS Server IP and NTP Server IP (There is a known
-                cosmetic bug for the results of this validation, will be fixed in upcoming
-                builds)</li>
-            <li>Click Finish to save all this data into your clouds json files.</li>
-            <li>By default, RCP template is used to create the cloud definitions.</li>
+            <li>Specify a name for the cloud:<p
+                    conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/cloudname"
+                /></li>
+            <li>Specify the Standard Region servers and map the servers to the controllers.</li>
+            <li>Validate the Standard Region servers for connectivity and credentials.</li>
+            <li>Specify network information for all required networks (CLM, API, BLS). If you do not
+                have segment IDs, enter <codeph>-1</codeph>. </li>
+            <li>Validate the network information you provided.</li>
+            <li>Specify all required variables.</li>
+            <li>Validate the DNS Server IP and NTP Server IP. </li>
+            <li>Save all data in JSON files that will be used during the deployment.</li>
         </ol>
-        <p>Use the "Deploy Cloud" wizard on the UI to (More details below):</p>
+        <p>Use the <b>Deploy Cloud</b> wizard on the UI to (More details below):</p>
         <ol id="ol_vxn_xwl_x5">
-            <li>Provision the Nodes (equivalent to hlm provision)</li>
-            <li>Generate the cloud configuration from jsons (equivalent to hlm generate)</li>
-            <li>Network Initialize the cloud nodes (equivalent to hlm netinit)</li>
-            <li>Deploy the cloud nodes (equivalent to hlm deploy)</li>
+            <li>Provision the nodes.</li>
+            <li>Generate the cloud configuration from JSON files.</li>
+            <li>Network initialize the cloud nodes.</li>
+            <li>Deploy the cloud nodes.</li>
         </ol>
-        <p>Use the "Manage Cloud" wizard on the UI to:</p>
+        <p>Use the <b>Manage Cloud</b> wizard on the UI to:</p>
         <ol id="ol_wxn_xwl_x5">
             <li>Reset service including - MySQL, RabbitMQ, NTP, Apache, Keystone, Glance, Swift,
-                Cinder, Elastic Search, Logstash, Kibana, Beaver, Icinga and Attis </li>
+                Cinder, Elastic Search, Logstash, Kibana, Beaver, Icinga and Attis. </li>
+            <li>Edit an existing cloud definition for the Inventory Nodes.</li>
         </ol>
-        <p><b>Important to Note</b></p>
-        <p>Editing an existing cloud definition is supported except for the Inventory Nodes (KVM
-            Servers) </p>
-        <section><title>Deploying the cloud</title>After you enter all necessary inputs to your
-            cloud, you will be redirected to a page where you can see description and current status
-            of your cloud along with a few other options:<p><image
+        <section><title>Deploying the cloud</title>After you enter all necessary information for
+            your cloud, you will be redirected to a page where you can see description and current
+            status of your cloud. The page appears similar to the following:<p><image
                     href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard.png"
                     width="500"/>
-            </p>You can click on "DEPLOY" button (as seen in above page) to start/return to a deploy
-                    workflow:<p><image
+            </p>Click on <b>DEPLOY</b> button to start deploying the cloud.<p><image
                     href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy.png"
-                    width="500" id="image_xh4_jyl_x5"/></p>"Deploy Workflow" consists of four phases
-            - provision, generate, netinit and deploy<p>At the top you will see the name of your
-                cloud and current status - "DEFINED" | "PROVISIONED" | "GENERATED" |
-                "NETINITIALIZED" | "DEPLOYED"</p>Depending on the status, marker on the wizard will
-            move by default to a process which was completed successfully<p>To execute a particular
-                process, you can navigate (or directly click) on corresponding step and click
-                "Run"</p><p><b>Note:</b> you will not be able to navigate to step "n" if step "n-1"
-                is not completed</p>Once you hit the "Run" button, you will see your process being
-            executed as shown below:<p>The process runs asynchronously in background. So while the
-                process is running, if you close your session or browser, you can still return to
-                the same page again to check status of your process.</p>Also, when your process is
-            running, you can look at the current log content by clicking on the "logs" tab and
-            selecting a log file pertaining to that process as seen below:<p><image
+                    width="500" id="image_xh4_jyl_x5"/></p>The deployment consists of four phases:
+            provision, generate, netinit and deploy. As the phases progress, you will see the name
+            of your cloud and current status at the top of the page and the marker on the wizard
+            will move to the process as it completes.<p>To execute a particular process, you can
+                click on a step and click <b>Run</b>. Once you hit the <b>Run</b> button, you will
+                see your process being executed as shown below.</p><p><b>Note:</b> To execute a
+                process, all previous processes must be completed. </p><p>The process runs
+                asynchronously in background. So while a process is running, if you close your
+                session or browser, you can still return to the same page again to check status of
+                your process.</p>Also, when your process is running, you can look at the current log
+            content by clicking on the "logs" tab and selecting a log file pertaining to that
+            process as seen below:<p><image
                     href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-logs.png"
                     width="500" id="image_znz_lyl_x5"/></p><p> </p>Once the process completes, you
             will be notified whether it passed or failed as seen below:<p><image
                     href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deployed.png"
                     width="500" id="image_s5p_nyl_x5"/></p></section>
-        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone"
+        <section
+            conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone"
             id="ldap-keystone"/>
         <section>
             <title>Next Step</title>
