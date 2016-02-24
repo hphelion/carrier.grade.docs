@@ -85,22 +85,10 @@ But the CLI, REST API etc should all be same --></p>
           <li>Log into the active KVM Region controller as the <codeph>cghelion</codeph> user.</li>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
           <li>Execute the following command to perform the back
-            up.<codeblock>attis restore --config-id &lt;Config_ID_of_WR_Appliance_system_files_Restore> --backup-id BACKUP_ID</codeblock></li>
+            up.<codeblock>attis restore -config-id &lt;Config_ID_of_WR_Appliance_system_files_Restore> -backup-id BACKUP_ID</codeblock><p>Comment:
+            After removing comment tags, add two dashes before config and backup</p></li>
         </ol>
       </section>
-    <section>
-      <title>Restoring the Baremetal Controller database and files</title>
-      <p>You can use Attis to restore the baremetal controllers in a Sacaramento deployment from a
-        previous backup.</p>
-      <p>
-        <ol id="ol_h5c_zzc_p5">
-          <li>Log into the active baremetal controller as the <codeph>cghelion</codeph> user.</li>
-          <li>Change to the Attis user:<codeblock>sudo su attis</codeblock></li>
-          <li>Execute the following
-            command:<codeblock>attis restore --config-id &lt;Config_ID_of_BM_Controller_Data_Restore> --backup-id BACKUP_ID </codeblock></li>
-        </ol>
-      </p>
-      <p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash></p>
-    </section>
+    <!--<section><title>Restoring the Baremetal Controller database and files</title><p>You can use Attis to restore the baremetal controllers in a Sacaramento deployment from a previous backup.</p><p><ol id="ol_h5c_zzc_p5"><li>Log into the active baremetal controller as the <codeph>cghelion</codeph> user.</li><li>Change to the Attis user:<codeblock>sudo su attis</codeblock></li><li>Execute the following command:<codeblock>attis restore -config-id &lt;Config_ID_of_BM_Controller_Data_Restore> -backup-id BACKUP_ID </codeblock></li></ol></p><p>Comment: After removing comment tags, add two dashes before config and backup</p><p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash></p></section>-->
     <p> </p></body>
 </topic>

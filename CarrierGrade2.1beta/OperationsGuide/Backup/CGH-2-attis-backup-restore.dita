@@ -47,8 +47,7 @@ But the CLI, REST API etc should all be same --></p>
       <p>The following components can be backed up and restored:<ul id="ul_pzx_1b3_k5">
           <li>Lifecycle manager data [opt and root files]</li>
           <li>Percona® XtraDB® cluster on controllers in Standard Region</li>
-          <li>Percona® XtraDB® cluster on VSD</li>
-          <li>System files on VSC</li>
+          <!--<li>Percona® XtraDB® cluster on VSD</li><li>System files on VSC</li>-->
           <li>System files in KVM Region </li>
           <li>MySQL database and Neutron, Nova, Ironic files under /etc on the baremetal controller
             (Sacramento deployments only)</li>
@@ -89,30 +88,27 @@ export OS_AUTH_URL=&lt;The address of the Identity API served through keystone><
 | 17edcc39-5f5c-39cc48c92895 | HLM_Appliance_opt_files_Restore      | restore | hlmappliances             | 3600    |
 | 720264d5-fd17-f0a5e9b88ab3 | HLM_Appliance_root_files_Backup      | backup  | hlmappliances             | 3600    |
 | c0e33946-6641-6ad688d2cf37 | HLM_Appliance_root_files_Restore     | restore | hlmappliances             | 3600    |
-| b71d6f61-7347-e3929ac1e4a4 | VSC_Appliance_config_files_Backup    | backup  | vscappliances             | 3600    |
+<!--| b71d6f61-7347-e3929ac1e4a4 | VSC_Appliance_config_files_Backup    | backup  | vscappliances             | 3600    |
 | b71e32b0-7347-e3929ac1e4a4 | VSC_Appliance_config_files_Restore   | restore | vscappliances             | 3600    |
 | 098316b0-66c3-e3929ac1e4a4 | VSD_Appliance_DB_Backup              | backup  | vsdappliances             | 3600    |
-| f4ec104f-6936-e3929ac1e4a4 | VSD_Appliance_DB_Restore             | restore | vsdappliances             | 3600    |
+| f4ec104f-6936-e3929ac1e4a4 | VSD_Appliance_DB_Restore             | restore | vsdappliances             | 3600    |-->
 | 13b370f8-79f1-d72dee4aa55b | WR_Appliance_system_files_Backup     | backup  | wrappliances              | 3600    |
 | 1cdcf21c-79f1-c76cce2f76d6 | WR_Appliance_system_files_Restore    | restore | wrappliances              | 3600    |
 +----------------------------+--------------------------------------+---------+---------------------------+---------+</codeblock><p>Use
             the ID associated with the appropriate configuration file:</p><p>
             <ul id="ul_tmd_15j_p5">
-              <li><codeph>Cloud_Controller_Appliance_DB</codeph> -- Use this configuration file when
+              <li><codeph>Cloud_Controller_Appliance_DB</codeph> - Use this configuration file when
                 backing up the MySQL database on a controller.</li>
-              <li><codeph>HLM_Appliance_Data</codeph> -- Use this configuration when backing up or
+              <li><codeph>HLM_Appliance_Data</codeph> - Use this configuration when backing up or
                 restoring the lifecycle manager</li>
-              <li><codeph>HLM_Appliance_opt_files</codeph> -- Use this configuration when backing up
+              <li><codeph>HLM_Appliance_opt_files</codeph> - Use this configuration when backing up
                 or restoring the files in the <codeph>opt</codeph> directory on the lifecycle
                 manager.</li>
-              <li><codeph>HLM_Appliance_root_files</codeph> -- Use this configuration when backing
-                up or restoring the files in the <codeph>root</codeph> directory on the lifecycle
+              <li><codeph>HLM_Appliance_root_files</codeph> - Use this configuration when backing up
+                or restoring the files in the <codeph>root</codeph> directory on the lifecycle
                 manager.</li>
-              <li><codeph>VSC_Appliance_config_files</codeph> -- Use this configuration when backing
-                up or restoring the VSC system files. </li>
-              <li><codeph>VSD_Appliance_DB</codeph> -- Use this configuration when backing up or
-                restoring the VSD database.</li>
-              <li><codeph>WR_Appliance_system_files</codeph> -- Use this configuration when backing
+              <!--<li><codeph>VSC_Appliance_config_files</codeph> - Use this configuration when backing up or restoring the VSC system files. </li><li><codeph>VSD_Appliance_DB</codeph> - Use this configuration when backing up or restoring the VSD database.</li>-->
+              <li><codeph>WR_Appliance_system_files</codeph> - Use this configuration when backing
                 up or restoring the KVM-region system files.</li>
             </ul>
           </p></li>

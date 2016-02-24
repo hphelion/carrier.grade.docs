@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic7646cginp">
-<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Step 1B: Preparing the Network
+<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Step 1b: Preparing the Network
         for Installation</title>
 <prolog>
     <metadata>
@@ -165,6 +165,17 @@ post-up ifconfig $IFACE up
 pre-down ifconfig $IFACE down
 vlan-raw-device eth0
 
+auto br-pxe
+iface br-pxe inet static
+address 10.200.186.43
+netmask 255.255.255.0
+gateway 10.200.186.1
+bridge_ports eth0
+bridge_stp off
+bridge_fd 9
+bridge_hello 2
+bridge_maxage 12
+bridge_maxwait 0
 
 auto br-clm
 iface br-clm inet static
@@ -195,18 +206,6 @@ address 10.200.92.10
 netmask 255.255.255.0
 gateway 10.200.92.1
 bridge_ports eth0.1592
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0
-
-auto br-pxe
-iface br-pxe inet static
-address 10.200.186.43
-netmask 255.255.255.0
-gateway 10.200.186.1
-bridge_ports eth0
 bridge_stp off
 bridge_fd 9
 bridge_hello 2
@@ -252,6 +251,17 @@ post-up ifconfig $IFACE up
 pre-down ifconfig $IFACE down
 vlan-raw-device bond1
 
+auto br-pxe
+iface br-pxe inet static
+address 10.200.x.x
+netmask 255.255.255.0
+gateway 10.200.x.x
+bridge_ports bond1
+bridge_stp off
+bridge_fd 9
+bridge_hello 2
+bridge_maxage 12
+bridge_maxwait 0
 
 auto br-clm
 iface br-clm inet static
@@ -282,18 +292,6 @@ address 10.200.x.x
 netmask 255.255.255.0
 gateway 10.200.x.x
 bridge_ports bond1.1592
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0
-
-auto br-pxe
-iface br-pxe inet static
-address 10.200.x.x
-netmask 255.255.255.0
-gateway 10.200.x.x
-bridge_ports bond1
 bridge_stp off
 bridge_fd 9
 bridge_hello 2
@@ -352,20 +350,15 @@ virsh net-autostart br-bls</codeph></codeblock></li>
                     auto-start:</p><codeblock><codeph>virsh net-define br-pxe.xml
 virsh net-start br-pxe
 virsh net-autostart br-pxe</codeph></codeblock></li>
-                <li>Create the <codeph>br-dcm</codeph> network by creating an XML definition
-                        file:<p>a. Manually create the XML file, using the name
-                            <codeph>br-dcm.xml</codeph>:</p><codeblock><codeph>cat br-dcm.xml
+                <!--<li>Create the <codeph>br-dcm</codeph> network by creating an XML definition file:<p>a. Manually create the XML file, using the name <codeph>br-dcm.xml</codeph>:</p><codeblock><codeph>cat br-dcm.xml
 &lt;network&gt;
 &lt;name&gt;br-dcm&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-dcm'/&gt;
 &lt;virtualport type='openvswitch'/&gt;
-&lt;/network&gt;</codeph></codeblock><p>b.
-                        Execute the following commands to create and start the network and configure
-                        the network to
-                    auto-start:</p><codeblock><codeph>virsh net-define br-dcm.xml
+&lt;/network&gt;</codeph></codeblock><p>b. Execute the following commands to create and start the network and configure the network to auto-start:</p><codeblock><codeph>virsh net-define br-dcm.xml
 virsh net-start br-dcm
-virsh net-autostart br-dcm</codeph></codeblock></li>
+virsh net-autostart br-dcm</codeph></codeblock></li>-->
                 <li>Use the <codeph>virsh net-list</codeph> command to view information on the new
                     networks:<codeblock><codeph>virsh net-list
                         
@@ -373,7 +366,7 @@ Name        State       Autostart       Persistent
 ----------------------------------------------------------
 br-bls      active      yes             yes
 br-clm      active      yes             yes
-br-dcm      active      yes             yes
+br-can      active      yes             yes
 br-pxe      active      yes             yes
 default     active      yes             yes</codeph></codeblock></li>
                 <li>Execute the following command to make sure the <codeph>br-pxe</codeph> network
@@ -396,64 +389,30 @@ ifup &lt;yourinterface&gt;</codeph></codeblock></li>
                     configured as expected.<codeblock><codeph>route -n</codeph></codeblock></li>
                 
                 <li>Execute the following command to make sure the VLAN ID is as expected.
-                        <codeblock>ovs-vsctl show</codeblock><p>The output should appear similar to
-                        the following:</p><codeblock><codeph>Bridge br-clm
-Port "vnet2"
-Interface "vnet2"
-Port "em1.1551"
-Interface "em1.1551"
-Port br-clm
-Interface br-clm
-type: internal
-Bridge br-pxe
-Port br-pxe
-Interface br-pxe
-type: internal
-Port "vnet1"
-Interface "vnet1"
-Port "em1"
-Interface "em1"
-Bridge br-dcm
-Port br-dcm
-Interface br-dcm
-type: internal
-Port "em1.1550"
-Interface "em1.1550"
-Port "vnet3"
-Interface "vnet3"
-Bridge br-bls
-Port "em1.1554"
-Interface "em1.1554"
-Port br-bls
-Interface br-bls
-type: internal
-ovs_version: "2.0.2"</codeph></codeblock><p>
-                        <b>Note:</b> If <codeph>ovs-vsctl show</codeph> does not show all the
-                        required bridges, bring up the interface where the bridge does not
-                        appear:</p><codeblock><codeph>ifup br-bls
-ifup br-dcm
-ifup br-clm</codeph> </codeblock></li>
+                        <codeblock>brctl show</codeblock><p>The output should appear similar to the
+                        following:</p><codeblock>bridge name     bridge id               STP enabled     interfaces
+br-bls          8000.5cb9017aa370       no              eth0.210
+                                                        vnet10
+                                                        vnet14
+                                                        vnet6
+br-can          8000.5cb9017aa370       no              eth0.208
+                                                        vnet13
+                                                        vnet5
+                                                        vnet9
+br-clm          8000.5cb9017aa370       no              eth0.3007
+                                                        vnet12
+                                                        vnet2
+                                                        vnet4
+                                                        vnet8
+br-dcm          8000.5cb9017aa370       no              eth0.211
+br-pxe          8000.5cb9017aa370       no              eth0
+                                                        vnet1
+                                                        vnet11
+                                                        vnet3
+                                                        vnet7
+virbr0          8000.febbccddeeff       yes             vnet0 
+</codeblock></li>
             </ol>
-        </section>
-        <section>
-            <title>Modify JSON files</title>
-            <p>The installation requires modifying two JSON files for your environment. Configure
-                the VLANs and network addresses as appropriate for your environment: CLM
-                (management), CAN (api), and BLS (blockstore) networks.  </p>
-            <p>
-                <ul id="ul_srz_11b_y5">
-                    <li><systemoutput>environment.json</systemoutput>. Modify the
-                            <systemoutput>environment.json</systemoutput> file in the
-                            <systemoutput>/var/hlm/clouds/&lt;cloudname&gt;</systemoutput> directory
-                        of the lifecycle manager host. See a <xref
-                            href="../json/carrier-grade-install-env-json-denver.dita#topic4797cgikejbm"
-                            >sample environment.json file</xref>.</li>
-                    <li><systemoutput>lnet-control.json</systemoutput>. Modify the
-                            <systemoutput>lnet-control.json</systemoutput> file in the
-                            <systemoutput>/var/hlm/clouds/&lt;cloudname&gt;</systemoutput> directory
-                        of the lifecycle manager host.</li>
-                </ul>
-            </p>
         </section>
     
 <section id="networking-issues-ubuntu-1404">

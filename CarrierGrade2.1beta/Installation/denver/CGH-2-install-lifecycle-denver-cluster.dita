@@ -136,14 +136,12 @@ root_pass: cghelion</codeblock></li>
             <li>Change the <codeph>cloud_topology</codeph> variable to
                 <codeph>rcp</codeph>.<codeblock>#Cloud topology to be used. Provide the name of the cloud topology you wish to use in cloud deploy. 
 
-cloud_topology: rcp</codeblock></li>
+cloud_topology: denver_rcp</codeblock></li>
             </ul></li>
-          <li id="4">Edit the <codeph>group_vars/all-kvm-net</codeph> file to make sure the VLAN tag IDs
-            are correct according to your network configuration.:
-            <codeblock>#vlan tag ids for various networks on base 
+          <!--<li id="4">Edit the <codeph>group_vars/all-kvm-net</codeph> file to make sure the VLAN tag IDs are correct according to your network configuration: <codeblock>#vlan tag ids for various networks on base 
 KVM clm_vlan_id: 3007 
 bls_vlan_id: 210 
-dcm_vlan_id: 211</codeblock></li>
+dcm_vlan_id: 211</codeblock></li>-->
         </ol>
       </section>
       <section id="disk-size"><title>Increase the hard disk size (optional)</title>
@@ -152,10 +150,9 @@ dcm_vlan_id: 211</codeblock></li>
           the hard disk size for the controllers. By default, each controller is assigned 200 GB. <!--ONLY CLI Install?--></p><p>
           <ol id="ol_bn1_5vb_y5">
             <li>On the lifecycle manager host, edit the <codeph>group_vars/all-virtual</codeph> file
-              to set the disk and RAM size, as needed.<p>For
+              to set the RAM size, as needed.<p>For
                 example:<codeblock>#Specify how much RAM and Disk Size must be attached to the cloud VMs. Disk Size is in GBs
-vm_ctrl_ram: 16777376
-vm_ctrl_disksize: 200</codeblock></p></li>
+vm_ctrl_ram: 16777376</codeblock></p></li>
             <li>Change to the following
               directory:<codeblock>cd ~/infra-ansible-playbooks/roles/SETUP-CLOUD-ON-AV/tasks/</codeblock></li>
             <li>Edit the <codeph>rcp_controller.yml</codeph> file to change the
@@ -163,7 +160,7 @@ vm_ctrl_disksize: 200</codeblock></p></li>
                 <!--NEED TO BE THE SAME ON ALL?--><p>For
               example:</p><codeblock>###################### Controller 1 #############################################################
 -   name:           Create Qcow2 file
-    command:        qemu-img create -f qcow2 -o preallocation=metadata {{ imagelocation }}/ccn1.qcow2 +180G</codeblock></li>
+    command:        qemu-img create -f qcow2 -o preallocation=metadata {{ imagelocation }}/ccn1.qcow2 +80G</codeblock></li>
           </ol>
           </p></section>
       <section id="kvm-cluster">
