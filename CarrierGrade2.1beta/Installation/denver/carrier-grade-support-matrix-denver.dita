@@ -24,7 +24,7 @@
           <li><xref href="#topic1773cgsmd/hardware-config" format="dita">Hardware Configurations</xref></li>
           <li><xref href="#topic1773cgsmd/software" format="dita">Software Requirements</xref></li>
           <li><xref href="#topic1773cgsmd/storage" format="dita">External Storage</xref></li>
-          <li><xref href="#topic1773cgsmd/guestos" format="dita">Supported Guest Operating Systems</xref></li>
+                    <!--<li><xref href="#topic1773cgsmd/guestos" format="dita">Supported Guest Operating Systems</xref></li>-->
         </ul></p>
     </section>
         <section id="hardware">
@@ -60,7 +60,8 @@
         <section id="req-specs">
             <title id="specs"><b>Required Specifications</b></title>
             <p>The following table lists the specifications for the servers that will host the
-                lifecycle manager, HP Helion OpenStack, and the KVM Region. </p>
+                <!--lifecycle manager, HP Helion OpenStack, and the--> KVM Region. For the lifecycle
+                manager host, use the Controller requirements for the DL360 or DL380 systems.</p>
             <p>
                 <table frame="all" rowsep="1" colsep="1" id="table_c54_dxd_ss">
                     <tgroup cols="3">
@@ -208,8 +209,10 @@
             <p>One (1) <b>Lifecycle Manager Host</b>. You must have a server with a 2TB Disk and 132
                 GB RAM for the lifecycle manager host. This server will also host three (3) virtual
                 machines that serve as controllers for HP Helion OpenStack Carrier Grade. Each of
-                the controller nodes requires 200GB of virtual disk, 32GB of virtual memory, and 4
-                virtual CPUs.</p>
+                the controller nodes requires at least 200GB of virtual disk, 32GB of virtual
+                memory, and 4 virtual CPUs. The amount of memory required depends upon the types of
+                applications being run on the cloud.. You can add additional memory for each
+                controller, as needed, during the installation.</p>
             <p id="kvm-config">Two (2) <b>KVM Region controllers</b>. You must have two (2)
                 baremetal systems to install the KVM Region controllers. For systems with multiple
                 NICs, only one NIC may be active or connected. </p>
@@ -228,8 +231,8 @@
         </section>
         <section id="software">
             <title>Software Requirements</title>
-            <p><b>Lifecycle Manager Host</b>. The lifecycle manager host requires the latest H
-                operating system. </p>
+            <p><b>Lifecycle Manager Host</b>. The lifecycle manager host requires the latest HPE
+                Linux operating system. </p>
             <!--<p><b>Standard Region Controllers</b>. The servers should be baremetal. The HP Helion OpenStack Carrier Grade installation process installs the required software.</p>-->
             <p><b>KVM Region Controllers</b>. The servers should be baremetal. The HP Helion
                 OpenStack Carrier Grade installation process installs the required software.</p>
@@ -241,10 +244,7 @@
             <p>Perform the following tasks on each server you will use as a compute server or
                 controller in the Standard Region and KVM region:</p>
             <ul id="ul_jy1_tvp_rs">
-                <li>Configure the boot order with Network/PXE boot as the first option:<p>For
-                        example, to set the boot order for a HPE SL390, from the iLO prompt enter
-                            <codeph>set system1/bootconfig1/bootsource5
-                    bootorder=1</codeph>.</p></li>
+                <!--<li>Configure the boot order with Network/PXE boot as the first option:<p>For example, to set the boot order for a HPE SL390, from the iLO prompt enter <codeph>set system1/bootconfig1/bootsource5 bootorder=1</codeph>.</p></li> Not needed; using iLO for this-->
                 <li>
                     <p>Configure the BIOS:</p>
                     <ul id="ul_ly1_tvp_rs">
@@ -278,31 +278,7 @@
             <p>You will configure the installer to integrate one or both of these drivers during the
                 installation process. </p>
         </section>
-        <section id="guestos"><title>Supported Guest Operating Systems</title> The following guest
-            operating systems (guest OSs) are supported for the HP Helion OpenStack Carrier Grade
-            servers. <p><b>Lifecycle Manager Host</b>. There are no supported guest OSs for the
-                Lifecycle Manager Host server. </p><p><b>KVM Region Compute and Controllers</b>. The
-                following Guest OSs are supported for the servers in the KVM Region: </p><ul
-                id="ul_sty_hd2_qs">
-                <li>
-                    <p>WindRiver Linux 6.0</p>
-                </li>
-                <li>
-                    <p>WindRiver Linux 5.0</p>
-                </li>
-                <li>
-                    <p>CentOS 6.4</p>
-                </li>
-                <li>
-                    <p>Fedora 19</p>
-                </li>
-                <li>
-                    <p>RHEL 6.5</p>
-                </li>
-                <li>
-                    <p>OpenSUSE 12.3 </p>
-                </li>
-            </ul></section>
+        <!--<section id="guestos"><title>Supported Guest Operating Systems</title> The following guest operating systems (guest OSs) are supported for the HP Helion OpenStack Carrier Grade servers. <p><b>Lifecycle Manager Host</b>. There are no supported guest OSs for the Lifecycle Manager Host server. </p><p><b>KVM Region Compute and Controllers</b>. The following Guest OSs are supported for the servers in the KVM Region: </p><ul id="ul_sty_hd2_qs"><li><p>WindRiver Linux 6.0</p></li><li><p>WindRiver Linux 5.0</p></li><li><p>CentOS 6.4</p></li><li><p>Fedora 19</p></li><li><p>RHEL 6.5</p></li><li><p>OpenSUSE 12.3 </p></li></ul></section> Hiding per GP in SoS 2/24-->
 
   <section id="next"> <title>Next step</title>
     <p>Review the <xref href="CGH-install-prereqs-denver.dita">Installation Prerequisites</xref>.</p>

@@ -20,11 +20,10 @@
     <p><b>Note:</b> If you are not deploying a KVM cluster, see <xref
         href="CGH-2-install-lifecycle-denver-standlaone.dita#topic10581c2ild">Deploying the
         Lifecycle Manager On a Standalone KVM</xref>.</p>
-  <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves creating a
-      bootstrapping the lifecycle manager VM and installation services. The steps in this topic
-      deploy the lifecycle manager on a remote server and configure the server as part of a KVM
-      cluster. These steps make the cluster OpenSAF aware, which is further monitored by
-      libvirtmon.</p>
+  <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves deploying the
+      lifecycle manager VM and installation services. The steps in this topic deploy the lifecycle
+      manager on a remote server and configure the server as part of a KVM cluster. These steps make
+      the cluster OpenSAF aware, which is further monitored by libvirtmon.</p>
   <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
     required installation processes.</p>
     <bodydiv id="hlm">
@@ -39,8 +38,8 @@
             each variable. <ul id="ul_tzp_3zz_s5">
               <li id="all1">Set the <codeph>ovs_cloud_only</codeph> variable to
                 <codeph>3</codeph>;</li>
-              <li id="all2">Set the <codeph>cloud_type</codeph> variable to
-                <codeph>'av'</codeph>;</li>
+              <li id="all2">Verify that the <codeph>cloud_type</codeph> variable is
+                  <codeph>'av'</codeph>;</li>
               <li id="all3">Set the CLM IP network details according to your network setup;</li>
               <li id="all4">Set the Cobbler IP addresses according to your network setup;</li>
               <li>Set the <codeph>kvm_cluster</codeph> value in the <codeph>KVM Cluster
@@ -165,8 +164,8 @@ vm_ctrl_ram: 16777376</codeblock></p></li>
           </p></section>
       <section id="kvm-cluster">
         <title>Deploy the lifecycle manager VM</title>
-        <p>Follow the steps in this section to deploy the lifecycle manager These steps configure
-          the cluster for SA, which includes Libvert monitoring.</p>
+        <p>Follow the steps in this section to deploy the lifecycle manager VM. These steps
+          configure the cluster for SA, which includes Libvert monitoring.</p>
         <p>In this scenario the lifecycle manager VM becomes active on the first host that you
           specified in the <codeph>OpenSAF configuration</codeph> in the
             <codeph>group_vars/all</codeph> file. The other hosts are <codeph>passive</codeph>,

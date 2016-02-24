@@ -118,22 +118,21 @@ kvm_hosts:
 ###################################################################################################################################
               </codeblock></p></li>
           <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/3"/>
-          <li>
-            <p>[‎2/‎23/‎2016 2:45 PM] Muthumani, Devapraba: HCG-1284</p>
-            <p><u>Step 1</u></p>
-            <p>/home/cghelion/.profile</p>
-            <p>=========================</p>
-            <p># set PATH so it includes user's private bin if it exists</p>
-            <p>if [ -d "$HOME/bin" ] ; then</p>
-            <p> PATH="$HOME/bin:$PATH"</p>
-            <p>fi</p>
-            <p>export LIBVIRT_DEFAULT_URI="qemu:///system"</p>
-            <p>source .profile</p>
-            <p><u>step 2</u></p>
-            <p>sudo usermod -a -G libvirt cghelion </p>
-            <p> </p>
-          </li>
-          <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/4"/>
+          <li>Perform the following tasks to configure Libvirt to work with Ansible:<ol
+              id="ol_l52_tdn_cv">
+              <li>Change to the cghelion directory<codeblock>cd /home/cghelion/</codeblock></li>
+              <li>Edit the <codeph>.profile</codeph> file. to set PATH so it includes user's private
+                bin if it
+                exists<codeblock>if [ -d "$HOME/bin" ] ; then
+PATH="$HOME/bin:$PATH"
+fi
+export LIBVIRT_DEFAULT_URI="qemu:///system"</codeblock></li>
+              <li>Source the <codeph>.profile</codeph>
+                file.<codeblock>source .profile</codeblock></li>
+              <li>Execute the following
+                command:<codeblock>sudo usermod -a -G libvirt cghelion </codeblock></li>
+            </ol></li>
+          <!--<li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/4"/>-->
         </ol>
       </section>
       <section conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/disk-size"/>

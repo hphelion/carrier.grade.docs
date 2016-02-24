@@ -125,9 +125,14 @@ Password: cghelion</codeblock>
                             </tbody>
                         </tgroup>
                     </table></li>
-                <li>Set <codeph>OpenSAF</codeph> field in the <codeph>node-provision.json</codeph>
-                    file to <codeph>true</codeph> for each
-                    controller:<codeblock>"OpenSAF": true </codeblock></li>
+                <li>Set <codeph>opensaf</codeph> field in the <codeph>node-provision.json</codeph>
+                    file to <codeph>1</codeph> if the cluster is administered by OpenSAF and 0 if
+                    the cluster is administered by a different package. The value must be the same
+                    for each controller:<codeblock>"opensaf": 1</codeblock></li>
+                <li>Set the <codeph>kvm_pass_enc</codeph> to <codeph>0</codeph>  in the
+                        <codeph>node-provision.json</codeph> file if you are entering the
+                        <codeph>pm_pass</codeph> in clear text in the file. Set to
+                        <codeph>1</codeph> if <codeph>pm_password</codeph> was encrypted by the UI.  </li>
             </ol> Click here to see a <xref
                 href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
                 node-provision.json file</xref>. </section>
@@ -135,22 +140,46 @@ Password: cghelion</codeblock>
             <title>Create a JSON file </title>
             <p>Create a <codeph>KVM_hosts.json</codeph> file and enter the following values,
                 configured for your environment (IP addresses masked for security):
-                <codeblock>{
-   "name": "ctrl1", 
-   "clm_ip": "10.x.x.x", 
-   "pxe_user": "root", 
-   "pxe_pass": "xxxxx", 
-   "OpenSAF": true, 
-   "OpenSAF_dir": "data1/opensaf", 
-},
-{
-   "name": "ctrl2", 
-   "clm_ip": "10.x.x.x", 
-   "pxe_user": "root", 
-   "pxe_pass": "xxxxx", 
-   "OpenSAF": true, 
-   "OpenSAF_dir": "data1/opensaf", 
-}</codeblock></p>
+                <codeblock>[
+    {
+        "name": "rack1-ctrl1", 
+        "kvm_ip": "10.207.121.249", 
+        "kvm_user": "root", 
+        "kvm_pass": "password_inclear",
+	    "kvm_pass_enc": 0, 
+        "opensaf": 1,
+        "opensaf_dir": "/data1/opensaf"
+    }, 
+    {
+        "name": "rack1-ctrl2", 
+        "kvm_ip": "10.207.121.250", 
+        "kvm_user": "root", 
+        "kvm_pass": "U2FsdGVkX1+aXu9V7hHddpL+wPacWFfpxyLGW0Yx1KQ=", 
+	    "kvm_pass_enc": 1, 
+        "opensaf": 1,
+        "opensaf_dir": "/data1/opensaf"
+    }
+]</codeblock></p>
+            <p>Where:</p>
+            <p>
+                <ul id="ul_k3f_pyn_cv">
+                    <li><codeph>kvm_ip</codeph> is the CLM IP address</li>
+                    <li><codeph>kvm_user</codeph> is the user to SSH into the lifecycle manager
+                        host. </li>
+                    <li><codeph>kvm_pass</codeph> is the password to SSH into the lifecycle manager
+                        host.</li>
+                    <li><codeph>kvm_pass_enc</codeph> if you are entering the KVM password in clear
+                        text in the file. Set to <codeph>1</codeph> if KVM password was encrypted by
+                        the UI.</li>
+                    <li><codeph>opensaf</codeph> should be set to <codeph>1</codeph> if the cluster
+                        is administered by OpenSAF and 0 if the cluster is administered by a
+                        different package. The value must be the same for each controller.</li>
+                    <li><codeph>opensaf_dir</codeph> is the path of the directory shared by each
+                        node of the cluster in the format <codeph>/data1/opensaf</codeph>, if it is
+                        not an OpenSAF cluster it can be set to “” (should be same value for each
+                        Node entry in KVM_Hosts.json) </li>
+                </ul>
+            </p>
         </section>
         <section id="pxe-boot">
             <title>Configure PXE boot</title>
@@ -450,10 +479,10 @@ Password: cghelion</codeblock>
                                 </row>
                             </tbody>
                         </tgroup>
-                    </table><p>You can use either 3PAR and VSA in the KVM Region or select both if
-                        you have respective storage arrays </p><p><b>Note:</b> The HP 3PAR Web
-                        Services API server must be enabled and running on the HP 3PAR storage
-                        system. For more information, see the OpenStack documentation at: <xref
+                    </table><p>You can use 3PAR and/or VSA in the KVM Region or select both if you
+                        have respective storage arrays </p><p><b>Note:</b> The HP 3PAR Web Services
+                        API server must be enabled and running on the HP 3PAR storage system. For
+                        more information, see the OpenStack documentation at: <xref
                             href="http://docs.openstack.org/liberty/config-reference/content/enable-hp-3par-fibre-channel.html"
                             format="html" scope="external">Enable the HP 3PAR Fibre Channel and
                             iSCSI drivers</xref>.</p><p id="storage">A typical configuration file

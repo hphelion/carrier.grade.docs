@@ -30,7 +30,7 @@
           >Services Overview</xref> page.</p>
     </section>
     <p><b>Network/Component Architecture</b></p>
-    <p><image href="../../../media/CGH-2-block-arch-denver.png" width="750" id="image_wdn_zbw_mt"/></p>
+    <!--<p><image href="../../../media/CGH-2-block-arch-denver.png" width="750" id="image_wdn_zbw_mt"/></p>-->
     <ul>
       <li>
         <xref type="section" href="#topic3485cgtod/deploy-arch">Deployment architecture</xref>
@@ -165,14 +165,11 @@
               <entry>CLM</entry>
               <entry>VSC IP to lifecycle manager CLM VM IP - only during deployment</entry>
             </row>
-            <row>
-              <entry>DCM1 </entry>
-              <entry>DCM2</entry>
-              <entry>Inter-datacenter communications (VLAN tunnel, BGP, MPLS)</entry>
-            </row>
+            <!--<row><entry>DCM1 </entry><entry>DCM2</entry><entry>Inter-datacenter communications (VLAN tunnel, BGP, MPLS)</entry></row>-->
           </tbody>
         </tgroup>
       </table>
+      <p><!--Commented out last row in table DCM1 to DCM2 for 2.1--></p>
       <p>CLM, PXE, BLS, WR-PXE, VLAN-TUL should use RFC 1918 non-routable IPs to prevent access to
         these networks from DCM, CTL, or EXT.</p>
       <p>DCM, CAN, and EXT should use routable IP addresses. DCM should be restricted to the
