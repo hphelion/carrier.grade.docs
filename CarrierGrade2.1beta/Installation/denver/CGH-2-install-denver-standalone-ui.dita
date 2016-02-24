@@ -33,12 +33,12 @@
             deployment. </p>
         <section id="launch"><title>Launch the HCG Dashboard</title>
         <p>The HCG Dashboard will be available as soon as the lifecycle manager is deployed. The
-            dashboard service runs on port 8080 and can be accessed using
-                <codeph>http://&lt;CLM_IP>:8080/</codeph>.</p>
+                dashboard service runs on port 8000 and can be accessed using
+                    <codeph>http://&lt;CLM_IP>:8000/</codeph>.</p>
         <p conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/clmip"/>
         <p>
             <ol>
-                <li>Launch a browser and navigate to <codeph>http://&lt;CLM_IP>:8080/</codeph>.</li>
+                <li>Launch a browser and navigate to <codeph>http://&lt;CLM_IP>:8000/</codeph>.</li>
                 <li>Log into the HCG Dashboard. By default use <ul id="ul_qyn_brf_cv">
                         <li>username: <codeph>cghelion</codeph>
                         </li>
@@ -63,7 +63,8 @@
                     <li>Click <b>Next</b>.</li>
                     <li>On the <b>Step 2</b> table, specify the Standard Region servers and map the
                         servers to the controllers.</li>
-                    <li>Validate the Standard Region servers for connectivity and credentials.</li>
+                    <li>View the validation results for connectivity and credentials of the Standard
+                        Region servers.</li>
                     <li>Click <b>Next</b>.</li>
                     <li>On the <b>Step 3</b> table, specify network information for all required
                         networks (CLM, API, BLS). If you do not have segment IDs, enter
@@ -76,15 +77,17 @@
                             <li>Specify all required variables for the Standard Region.</li>
                             <li>Specify all required variables for the KVM Region.</li>
                             <li>Specify information for any VSA and HP 3PAR storage backend
-                                        configuration.<p><b>Note: </b> There is no validation
-                                    integrated for storage configuration with cloud. </p></li>
+                                        configuration.<p><b>Note: </b> The values will be specified
+                                    for VSA and/or 3PAR will be accepted by the application and
+                                    saved as is to the <codeph>cinder_conf </codeph>file. </p></li>
                         </ol></li>
-                    <li>On the <b>Step 6</b> table, validate the DNS Server IP and NTP Server IP. </li>
+                    <li>On the <b>Step 6</b> table, view the validation results for the DNS Server
+                        IP and NTP Server IP. </li>
                     <li>Click <b>Finish</b> to save all data in JSON files that will be used during
                         the deployment.</li>
                 </ol></p>
         </section>
-        <section conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/disk-size"/>
+        <!--<section conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/disk-size"/> Removed per HCG-1456-->
         <section><title>Deploy the cloud </title>After you enter all necessary information for your
             cloud, you will be redirected to a page where you can see description and current status
             of your cloud. The page appears similar to the following:<p><image
@@ -112,13 +115,14 @@
                         below.</p><b>Note:</b> To execute a process, all previous processes must be
                     completed. </li>
             </ol></section>
-        <section
-            conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone"
-            id="ldap-keystone"/>
+        <!--<section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone" id="ldap-keystone"/>-->
         <section>
             <title>Manage the cloud</title>
-            <p>After the cloud is deployed, you can use the <b>Manage Cloud</b> wizard in the HCG
-                Dashboard to reset services including: <ul id="ul_ptt_3tf_cv">
+            <p>The Manage cloud option allows the user to perform post-deployment activities for the
+                selected cloud. This feature can be launched by clicking the <b>Manage</b> button on
+                the <b>Cloud List</b> screen after the cloud is deployed.</p>
+            <p>You can use the <b>Manage Cloud</b> wizard in the HCG Dashboard to reset services
+                including: <ul id="ul_ptt_3tf_cv">
                     <li>MySQL</li>
                     <li>RabbitMQ</li>
                     <li>NTP</li>
