@@ -16,14 +16,15 @@
   </prolog>
   <body>
     <bodydiv id="horizon">
-      <p>After the HP Helion OpenStack cloud is installed, you can launch the Horizon interface to
-        verify that the installation was successful.</p>
+      <p>After the Standard Region is deployed, you can launch the Horizon interface to verify that
+        the installation was successful.</p>
       <section>
         <title>Import the Horizon browser certificate</title>
         <p>You need to import the Horizon security certificate (<codeph>ca.crt</codeph>) into your
           browser. The <codeph>ca.crt</codeph> is available in the lifecycle manager in the
-            <codeph>~/&lt;cloudname></codeph> folder. You can use any file transfer program to move
-          the certificate file from the lifecycle manager to the local system.</p>
+            <codeph>/var/hlm/clouds/n17b46/&lt;cloudname&gt;</codeph> folder. You can use any file
+          transfer program to move the certificate file from the lifecycle manager to the local
+          system.</p>
         <p>Use the instructions provided by the browser manufacturer to import the
             <codeph>ca.crt</codeph> file. For a list of browsers supported by OpenStack, see <xref
             href="https://wiki.openstack.org/wiki/Horizon/BrowserSupport" format="html"
@@ -38,7 +39,7 @@
           to launch Horizon. You can locate the CAN IP address in the <codeph>~/stackrc</codeph>
           file on any of the controller nodes in the Standard Region. The CAN IP address contains
           port <codeph>5000</codeph>. </p>
-        <p>To access a controller node:<ol id="ol_tby_t2r_y5">
+        <p>To access a the CAN IP:<ol id="ol_tby_t2r_y5">
             <li>SSH into the lifecycle manager host as the root user. The default password is
                 <codeph>cghelion</codeph>.<codeblock>ssh root@&lt;CLM_IP></codeblock><p>where:
                 CLM_IP is located in the IP address for the lifecycle manager in the
@@ -48,6 +49,8 @@
                 <codeph>cghelion</codeph>.</li>
             <li>SSH into a controller as the <codeph>cghelion</codeph> user. No password is
               required.</li>
+            <li>Change to the root user.<codeblock>sudo -i</codeblock> 5. View the
+                <codeph>stackrc</codeph> file: <codeblock>cat ~/stackrc</codeblock></li>
           </ol></p>
         <p>For example:</p>
         <codeblock>export OS_PASSWORD=qekuTPcc26Ig
