@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp20">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Cinder
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section>To ensure that Gateway setting on shareMGMTsubnet results in neutron subnet creation
+      This patch is applicable on the templates- memphis, sacramento and tahoe, post cloud
+      deployment </section>
+    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. </li>
+        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+          page.</li>
+        <li>Download the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/020"/>
+          patch and the associated checksum and signature files.</li>
+        <li>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</li>
+        <li>Extract the compressed file until the <codeph>HCG-nuage-patch-management-gw
+          </codeph>directory is available: <ol id="ol_kkb_3v5_cv">
+            <li>Extract the <codeph>HCG2.0_DCN004_Patch020.tar.gz</codeph> compressed file. </li>
+            <li>Extract the <codeph>metadata.tar.gz</codeph> compressed file.</li>
+            <li>Extract the <codeph>metadata.tar</codeph> compressed file. <p>The
+                  <codeph>HCG-nuage-patch-management-gw</codeph> is inside the
+                  <codeph>metadata/roles</codeph> directory.</p></li>
+          </ol></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+      <p>
+        <ol id="ol_p13_ghm_s5">
+          <li>Log onto the lifecycle manager host.<codeblock>ssh &lt;HLM_IP></codeblock></li>
+          <li>Log into the lifecycle manager VM.</li>
+          <li>. Copy the complete folder <codeph>HCG-nuage-patch-management-gw</codeph> to the
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on HLM VM </li>
+          <li>Execute following command to apply patch
+            <codeblock>hlm patch -c &lt;cloud-name> -n HCG-nuage-patch-management-gw -t &lt;tier-to-apply></codeblock>Example:
+            <codeblock>hlm patch -c sac36 -n HCG-nuage-patch-management-gw -t BASE-CCP-T2</codeblock></li>
+        </ol>
+      </p>
+    </section>
+  </body>
+</topic>
