@@ -32,13 +32,15 @@
             <p>The following servers are supported for the lifecycle manager host, and for the
                 controllers and compute servers.</p>
             <p><b id="hlm">Lifecycle Manager Host</b> The lifecycle manager host is a single server
-                with at least a 2TB Disk, 132GB RAM and 2 virtual CPUs. </p>
+                with at least a 2TB Disk, 128GB RAM and 2 physical CPUs. The CPUs must meet the
+                specifications in <xref href="#topic1773cgsmd/specs" format="dita">the Required
+                    Specifications table below</xref>.</p>
             <p id="controllers"><b>Controllers and compute servers</b> The following servers are
                 supported for the controllers and compute servers in the <xref
                     href="../../Overview/carrier-grade-overview-kvm.dita#topic1743cgok">KVM
                     region</xref>. The servers must meet the specifications in <xref
                     href="#topic1773cgsmd/specs" format="dita">the Required Specifications table
-                    below</xref>:</p>
+                    below</xref>.</p>
             <p><b>Controller:</b></p>
             <ul id="ul_qf5_vbp_y5">
                 <li>DL360 (Gen 9 or Gen 8)</li>
@@ -206,17 +208,17 @@
             <p>The servers, selected from the <xref href="#topic1773cgsmd/hardware" format="dita"
                     >Supported Hardware</xref> lists, must be configured as follows for HP Helion
                 OpenStack Carrier Grade.</p>
-            <p>One (1) <b>Lifecycle Manager Host</b>. You must have a server with a 2TB Disk and 132
-                GB RAM for the lifecycle manager host. This server will also host three (3) virtual
-                machines that serve as controllers for HP Helion OpenStack Carrier Grade. Each of
-                the controller nodes requires at least 200GB of virtual disk, 32GB of virtual
-                memory, and 4 virtual CPUs. The amount of memory required depends upon the types of
-                applications being run on the cloud.. You can add additional memory for each
-                controller, as needed, during the installation.</p>
+            <p>One (1) <b>Lifecycle Manager Host</b>. You must have a server with a 2TB Disk and 128
+                GB RAM, and 2 physical CPUs for the lifecycle manager host. This server will also
+                host three (3) virtual machines that serve as controllers for HP Helion OpenStack
+                Carrier Grade. Each of the controller nodes requires at least 200GB of virtual disk,
+                32GB of virtual memory, and 4 virtual CPUs. The amount of memory required depends
+                upon the types of applications being run on the cloud.. You can add additional
+                memory for each controller, as needed, during the installation.</p>
             <p id="kvm-config">Two (2) <b>KVM Region controllers</b>. You must have two (2)
                 baremetal systems to install the KVM Region controllers. For systems with multiple
                 NICs, only one NIC may be active or connected. </p>
-            <p>One (1) or more <b>KVM Region compute servers</b>. You must have at least one (1)
+            <p>Two (2) or more <b>KVM Region compute servers</b>. You must have at least two (2)
                 baremetal system to install the KVM Region compute servers.</p>
             <ul id="ul_lwc_ltz_jt">
                 <li><b>KVM Region NICs.</b> The following NICs have been verified for PXE booting of
