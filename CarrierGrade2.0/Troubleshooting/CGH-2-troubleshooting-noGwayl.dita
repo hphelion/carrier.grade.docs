@@ -176,14 +176,14 @@
           <title>Set the No Gateway Option on a Subnet</title>
           
           
-          <ol><li>Get the dhcp options for a specific subnet:
+          <ol><li>Get the DHCP options for a specific subnet:
                     <codeblock>curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/3370ba9e-17b4-4cec-86f0-6bfe63fc6989/dhcpoptions | python -mjson.tool
 Blank output to begin with since we haven't set any dhcpoptions yet
                   
 POST - No default router (3)
 curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -H "Content-Type:application/json" -d '{"type":"03","length":"01", "value":"00"}' -X POST https://10.10.4.21:8443/nuage/api/v3_2/subnets/3370ba9e-17b4-4cec-86f0-6bfe63fc6989/dhcpoptions | python - mjson.tool</codeblock></li>
               
-              <li>GET command to double check that dhcpoptions are set:
+              <li>GET command to double check that DHCP options are set:
                     <codeblock>root@LR4TB1:~# curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/3370ba9e-17b4-4cec-86f0-6bfe63fc6989/dhcpoptions | python -mjson.tool
 [
     {
@@ -206,7 +206,7 @@ curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organizat
         "value": "00"
     }
 ]                  </codeblock></li>
-              <li>Repeat on the multinic2
+              <li>Repeat on the <codeph>multinic2</codeph>.
                     <codeblock>curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -X GET https://10.10.4.21:8443/nuage/api/v3_2/subnets/176972b4-c532-4ceb-869a-a50990146bdb/dhcpoptions | python -mjson.tool
 
 root@LR4TB1:~# curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-Nuage-Organization: csp" -H "Content-Type:application/json" -d '{"type":"03","length":"01", "value":"00"}' -X POST https://10.10.4.21:8443/nuage/api/v3_2/subnets/176972b4-c532-4ceb-869a-a50990146bdb/dhcpoptions | python - mjson.tool
@@ -232,12 +232,14 @@ root@LR4TB1:~# curl -k -s -u csproot:d7126af3-b8a4-42e4-b77b-d99308c1e83b -H "X-
         "value": "00"
     }
 ]                  </codeblock>
-                    Now multinicsub3 and multinicsub3 are set to NO DEFAULT GW entry.</li>
+                    Now the <codeph>multinicsub2</codeph> and <codeph>multinicsub3</codeph> subnets
+                    are set to NO DEFAULT GW entry.</li>
               
-              <li>Post this operation launch a VM with multinicsub1,multinicsub2,multinicsub3
-                  only multinicsub1 should get GW route entry for the VM.</li>
+              <li>Launch a VM with <codeph>multinicsub1</codeph>, <codeph>multinicsub2</codeph>,
+                        <codeph>multinicsub3</codeph>. Only <codeph>multinicsub1</codeph> should get
+                    a gateway route entry for the VM.</li>
               
-              <li>Assign FIP to this multinicsub1 IP.</li>
+              <li>Assign a floating IP address to this multinicsub1 IP.</li>
           </ol>
       </section>
               

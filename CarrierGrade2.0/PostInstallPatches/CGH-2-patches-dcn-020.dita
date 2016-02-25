@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdp20">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Cinder
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the DCN Subnet
     Patch</title>
   <prolog>
     <metadata>
@@ -15,9 +15,8 @@
     </metadata>
   </prolog>
   <body>
-    <section>To ensure that Gateway setting on shareMGMTsubnet results in neutron subnet creation
-      This patch is applicable on the templates- memphis, sacramento and tahoe, post cloud
-      deployment </section>
+    <section>This patch fixes an issue that causes Neutron subnet creation to fail when DHCP is set
+      to No Gateway on the <codeph>SharedMGMT</codeph> subnet. </section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
@@ -49,11 +48,14 @@
       <title>Install the patch</title>
       <p>
         <ol id="ol_p13_ghm_s5">
-          <li>Log onto the lifecycle manager host.<codeblock>ssh &lt;HLM_IP></codeblock></li>
-          <li>Log into the lifecycle manager VM.</li>
+          <li>Log into the lifecycle manager VM. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
+              HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
           <li>. Copy the complete folder <codeph>HCG-nuage-patch-management-gw</codeph> to the
-              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on HLM VM </li>
-          <li>Execute following command to apply patch
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on lifecycle manager
+            VM </li>
+          <li>Execute following command to apply patch:
             <codeblock>hlm patch -c &lt;cloud-name> -n HCG-nuage-patch-management-gw -t &lt;tier-to-apply></codeblock>Example:
             <codeblock>hlm patch -c sac36 -n HCG-nuage-patch-management-gw -t BASE-CCP-T2</codeblock></li>
         </ol>
