@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic10581c2ild">
 <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 3 -Deploying the
-    Lifecycle Manager on a Standalone KVM (Denver Deployment)</title>
+    Lifecycle Manager VM on a Standalone KVM (Denver Deployment)</title>
 <prolog>
   <metadata>
     <othermeta name="layout" content="default"/>
@@ -28,7 +28,7 @@
     <bodydiv id="hlm">
       <section id="prepare">
         <title>Prepare the system for deployment</title>
-        <p>Use the following steps to prepare the server on which the lifecycle manager will be
+        <p>Use the following steps to prepare the server on which the lifecycle manager VM will be
           deployed (the lifecycle manager host):</p>
         <ol id="ol_hx2_33q_f5">
           <li>Log into the lifecycle manager host using the default credentials</li>
@@ -143,19 +143,11 @@ export LIBVIRT_DEFAULT_URI="qemu:///system"</codeblock></li>
         <ol id="ol_jld_mvb_y5">
           <li>On the lifecycle manager, change to <codeph>infra-ansible-playbooks</codeph> directory
             <codeblock>cd ~/infra-ansible-playbooks</codeblock></li>
-          <li>Execute one of the following commands <ul id="ul_ozg_p5q_y5">
-              <li><b>Use the HCG Dashboard to deploy the cloud:</b><p>Use this option if you intend
-                  to deploy the Standard Region cloud using the HCG Dashboard.
-                  <codeblock>ansible-playbook -i hosts setup_hlm_for_UI.yml</codeblock></p></li>
-              <li>
-                <p><b>Use the CLI to deploy the cloud</b></p>
-                <p>Use the following command if you intend to deploy the Standard Region cloud using
-                  the command
-                  line:<codeblock>ansible-playbook -i hosts setup_vcloud.yml</codeblock></p>
-                <p>This command deploys and configures the lifecycle manager VM. Aftetr deployment,
-                  you can add the lifecycle manager host to OpenSAF cluster manually. </p>
-              </li>
-            </ul></li>
+          <li>Execute the following command to deploy the lifecycle manager VM using Ansible:
+            <codeblock>ansible-playbook -i hosts setup_hlm_for_UI.yml</codeblock>This command
+            deploys and configures the lifecycle manager VM. After deployment, you can add the
+            lifecycle manager host to a KVM cluster
+              manually.<p><!--<ul id="ul_ozg_p5q_y5"><li><b>Use the HCG Dashboard UI to deploy the cloud:</b><p>Use this option if you intend to deploy the Standard Region cloud using the HCG Dashboard UI. <codeblock>ansible-playbook -i hosts setup_hlm_for_UI.yml</codeblock></p></li><li><p><b>Use the CLI to deploy the cloud</b></p><p>Use the following command if you intend to deploy the Standard Region cloud using the command line:<codeblock>ansible-playbook -i hosts setup_vcloud.yml</codeblock></p><p>This command deploys and configures the lifecycle manager VM. After deployment, you can add the lifecycle manager host to OpenSAF cluster manually. </p></li></ul>--></p></li>
           <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/hosts"/>
         </ol>
       </section>

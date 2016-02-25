@@ -15,7 +15,7 @@
 </prolog>
 <body>
     <section id="intro">
-      <p>After the lifecycle manager is up and running and HP Helion OpenStack is installed, use the
+      <p>After the lifecycle manager VM is up and running and HP Helion OpenStack is installed, use the
         following steps to deploy the KVM Region.</p>
       <p>The process for installing the KVM Region involves the following tasks:<ul
           id="ul_fj4_mct_g5">
@@ -47,7 +47,7 @@
 ifconfig eth0 up</codeblock></li>
             <li> Set the default gateway to the PXE network gateway
               <codeblock>route add default gw &lt;CIDR_gateway_IP&gt;</codeblock></li>
-            <li>Copy the following KVM revion license files from the lifecycle manager to the
+            <li>Copy the following KVM revion license files from the lifecycle manager VM to the
                 <codeph>/home/wrsroot/</codeph> directory of the <codeph>controller-0</codeph>. <ul
                 id="ul_mpn_hnr_bt">
                 <li><codeph>license.lic</codeph> Located in the
@@ -58,7 +58,7 @@ ifconfig eth0 up</codeblock></li>
                 <li><codeph>cakey.pem</codeph> Located in the
                     <codeph>/var/hlm/clouds/&lt;cloud-name&gt;/desired_state/&lt;cloud-name&gt;/001/base/stage/windriver-config</codeph>
                   directory</li>
-              </ul><p>These files are loaded to the lifecycle manager during the installation
+              </ul><p>These files are loaded to the lifecycle manager VM during the installation
                 process.</p></li>
           </ol></li>
       </ol>

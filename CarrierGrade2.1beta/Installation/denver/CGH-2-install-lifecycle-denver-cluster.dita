@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic10581c2ild">
 <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 3 -Deploying the
-    Lifecycle Manager in KVM Cluster (Denver Deployment)</title>
+    Lifecycle Manager VM in KVM Cluster (Denver Deployment)</title>
 <prolog>
   <metadata>
     <othermeta name="layout" content="default"/>
@@ -19,7 +19,7 @@
         follow the steps in this section.</b></p>
     <p><b>Note:</b> If you are not deploying a KVM cluster, see <xref
         href="CGH-2-install-lifecycle-denver-standlaone.dita#topic10581c2ild">Deploying the
-        Lifecycle Manager On a Standalone KVM</xref>.</p>
+        Lifecycle Manager VM on a Standalone KVM</xref>.</p>
   <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves deploying the
       lifecycle manager VM and installation services. The steps in this topic deploy the lifecycle
       manager on a remote server and configure the server as part of a KVM cluster. These steps make
@@ -47,15 +47,15 @@
               <li>Enter the IP addresses for the host systems in the <codeph>KVM Cluster
                   configuration</codeph> section. The first host in the list is active. The other
                 hosts are passive, ranked in the order listed in the file. </li>
-            </ul><p id="all">The <codeph>group_vars/all</codeph> file should appear similar to the
-              following (IP addresses masked for
+            </ul><p id="all">The <codeph>group_vars/all</codeph> file should appear similar to the following (IP
+              addresses masked for
               security):<codeblock>############################################# Variables for HLM  #################################################################
 #These variables are relevant in both All Virtual and BareMetal scenarios.
 
 #ovs_cloud_only: 0 #memphis
 #ovs_cloud_only: 1 #ovs
 #ovs_cloud_only: 2 #denver
-#ovs_cloud_only: 3 #rcp
+#ovs_cloud_only: 3 #denver_rcp
 ovs_cloud_only:  3
 
 #Set this to 'bm' if cloud is being deployed over baremetal.
@@ -144,22 +144,19 @@ dcm_vlan_id: 211</codeblock></li>-->
         </ol>
       </section>
       <section id="disk-size"><title>Increase the hard disk size (optional)</title>
-        
-        <p>You can increase
-          the hard disk size for the controllers. By default, each controller is assigned 200 GB. <!--ONLY CLI Install?--></p><p>
+        <p>The installation process provides 200 GB HD and 16 GB RAM for each controller, by
+          default. If you want to increase the size follow below steps before creating cloud:</p><p>
           <ol id="ol_bn1_5vb_y5">
-            <li>On the lifecycle manager host, edit the <codeph>group_vars/all-virtual</codeph> file
-              to set the RAM size, as needed.<p>For
-                example:<codeblock>#Specify how much RAM and Disk Size must be attached to the cloud VMs. Disk Size is in GBs
-vm_ctrl_ram: 16777376</codeblock></p></li>
-            <li>Change to the following
-              directory:<codeblock>cd ~/infra-ansible-playbooks/roles/SETUP-CLOUD-ON-AV/tasks/</codeblock></li>
-            <li>Edit the <codeph>rcp_controller.yml</codeph> file to change the
-                <codeph>+80G</codeph> value in the <codeph>QCOW2</codeph> line for each controllers:
-                <!--NEED TO BE THE SAME ON ALL?--><p>For
-              example:</p><codeblock>###################### Controller 1 #############################################################
--   name:           Create Qcow2 file
-    command:        qemu-img create -f qcow2 -o preallocation=metadata {{ imagelocation }}/ccn1.qcow2 +80G</codeblock></li>
+            <li>On the lifecycle manager host, change to the <codeph>KVM-CREATE-VM/defaults</codeph>
+              directory.
+              <codeblock>cd~/kenobi-node-configration/infra-hlm/roles/KVM-CREATE-VM/defaults</codeblock></li>
+            <li>Edit the <codeph>nano main.yml</codeph> file to set the RAM size, as needed.<p>For
+                example:<codeblock>vm_cpu: 4
+vm_ram: 16384 #values should be given in Megabytes
+vm_disk: 200 #values should be given in Gigabytes
+vm_pool: default</codeblock></p></li>
+            <li>Run the following command to integrate the changes into the
+              environment::<codeblock> ~/cg-hlm/hlm-build/hlm_prepare-env.sh</codeblock></li>
           </ol>
           </p></section>
       <section id="kvm-cluster">

@@ -3,7 +3,7 @@
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581c2idui">
   <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Deploy the Standard
-        Region using the HCG Dashboard (Standalone Denver Deployment) </title>
+        Region using the HCG Dashboard UI (Standalone Denver Deployment) </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -22,7 +22,7 @@
             Availability (SA), see <xref
                 href="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa">Deploying the
                 Standard Region in a KVM Cluster</xref>.</p>
-        <p>After the lifecycle manager is installed, the next task in installing the Denver topology
+        <p>After the lifecycle manager VM is installed, the next task in installing the Denver topology
             is to deploy the HP Helion OpenStack cloud. Follow the steps in this section to use the
             HCG Dashboard UI to perform the required tasks. Or, you can <xref
                 href="CGH-2-install-denver-standalone-cli.dita#topic10581c2idclinsa">use the HLM
@@ -31,15 +31,15 @@
             manage, and monitor a HP Helion OpenStack cloud. The tool helps you provide and validate
             the cloud definitions required to deploy your cloud and guide you through the
             deployment. </p>
-        <section id="launch"><title>Launch the HCG Dashboard</title>
-        <p>The HCG Dashboard will be available as soon as the lifecycle manager is deployed. The
+        <section id="launch"><title>Launch the HCG Dashboard UI</title>
+        <p>The HCG Dashboard UI will be available as soon as the lifecycle manager is deployed. The
                 dashboard service runs on port 8000 and can be accessed using
                     <codeph>http://&lt;CLM_IP>:8000/</codeph>.</p>
         <p conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/clmip"/>
         <p>
             <ol>
                 <li>Launch a browser and navigate to <codeph>http://&lt;CLM_IP>:8000/</codeph>.</li>
-                <li>Log into the HCG Dashboard. By default use <ul id="ul_qyn_brf_cv">
+                <li>Log into the HCG Dashboard UI. By default use <ul id="ul_qyn_brf_cv">
                         <li>username: <codeph>cghelion</codeph>
                         </li>
                         <li>password: <codeph>cghelion</codeph></li>
@@ -121,7 +121,7 @@
             <p>The Manage cloud option allows the user to perform post-deployment activities for the
                 selected cloud. This feature can be launched by clicking the <b>Manage</b> button on
                 the <b>Cloud List</b> screen after the cloud is deployed.</p>
-            <p>You can use the <b>Manage Cloud</b> wizard in the HCG Dashboard to reset services
+            <p>You can use the <b>Manage Cloud</b> wizard in the HCG Dashboard UI to reset services
                 including: <ul id="ul_ptt_3tf_cv">
                     <li>MySQL</li>
                     <li>RabbitMQ</li>

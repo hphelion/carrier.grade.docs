@@ -21,7 +21,7 @@
         <p><b>Note:</b> If you are not deploy a KVM cluster, see <xref
                 href="CGH-2-install-denver-standalone.dita#topic10581c2id">Deploy the Standard
                 Region in a Denver Non-SA Deployment</xref>.</p>
-        <p>After the lifecycle manager is installed, the next task in installing the Denver topology
+        <p>After the lifecycle manager VM is installed, the next task in installing the Denver topology
             is to deploy the Standard Region, which includes an HP Helion OpenStack cloud. This
             section describes how to use the lifecycle manager CLI to deploy the Standard
             Region.</p>
@@ -30,7 +30,7 @@
             <p>Use the following steps on the lifecycle manager host to log on to the lifecycle
                 manager:</p>
             <ol id="ol_ncd_wff_zt">
-                <li>Log into the lifecycle manager. <codeblock>ssh root@&lt;CLM_IP></codeblock><p
+                <li>Log into the lifecycle manager VM. <codeblock>ssh root@&lt;CLM_IP></codeblock><p
                         id="clmip">Where: CLM_IP is located in the IP address for the lifecycle
                         manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
                         file under <codeph>hlm_clmstaticip</codeph> field.</p><p>Use the default
@@ -82,7 +82,7 @@ Password: cghelion</codeblock>
                             <li><codeph>&lt;cloudname></codeph> is the name of the cloud you created
                                 with the <codeph>hlm define</codeph> command.</li>
                             <li><codeph>CLM_IP</codeph> is located in the IP address for the
-                                lifecycle manager in the
+                                lifecycle manager VM in the
                                     <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
                                 file under <codeph>hlm_clmstaticip</codeph> field.</li>
                         </ul></p></li>
