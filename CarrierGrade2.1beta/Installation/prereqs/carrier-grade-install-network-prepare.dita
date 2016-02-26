@@ -14,10 +14,16 @@
     </metadata>
 </prolog>
 <body>
-<p>Before installing HP Helion OpenStack Carrier Grade, you are responsible for preparing the network for all installations.</p>
         <p><!--https://wiki.hpcloud.net/display/HCG/HCG+2.1+RCP+AVS+Denver+Cloud+KVM+Network+Configuration--></p>
-        <section>
-            <title>VLAN ID Reference</title>
+<p>Before installing HP Helion OpenStack Carrier Grade, you are responsible for preparing the
+            network for all installations:</p>
+        <ul id="ul_lvl_mkv_cv">
+            <li><xref href="#topic7646cginp/vlanid" format="dita"/></li>
+            <li><xref href="#topic7646cginp/vlanconfig" format="dita"/></li>
+            <li><xref href="#topic7646cginp/bridges" format="dita"/></li>
+        </ul>
+        <section id="vlanid">
+            <title>Define VLAN IDs</title>
             <p>Make sure you have all VLAN IDs defined for the networks as defined in the <xref
                     href="../carrier-grade-technical-overview.dita#topic3485cgto">Architecture
                     Diagram</xref></p>
@@ -113,10 +119,16 @@
             </table>
             <!--<table id="table_p3v_nq1_y5"><tgroup cols="4"><colspec colnum="1" colname="col2" colwidth="294pt"/><colspec colnum="2" colname="col3" colwidth="75pt"/><colspec colnum="3" colname="col4" colwidth="102.75pt"/><colspec colnum="4" colname="col5" colwidth="66.75pt"/><tbody><row><entry><b>Helion Carrier Grade Bare Metal Reservation </b></entry><entry/><entry><b>R6N6640</b></entry><entry/></row><row><entry><b>VLAN Function</b></entry><entry><b>VLAN ID</b></entry><entry><b>Network Range</b></entry><entry><b>Gateway</b></entry></row><row><entry>untagged PXE</entry><entry>3534</entry><entry>10.244.44.0/24</entry><entry>10.244.44.1</entry></row><row><entry>tagged eth0 CLM</entry><entry>3535</entry><entry>10.244.45.0/24</entry><entry>10.244.45.1</entry></row><row><entry>tagged eth0 CAN</entry><entry>3536</entry><entry>10.244.46.0/24</entry><entry>10.244.46.1</entry></row><row><entry>tagged eth0 EXT</entry><entry>3537</entry><entry>10.244.47.0/24</entry><entry>10.244.47.1</entry></row><row><entry>tagged eth0 BLS</entry><entry>101</entry><entry> </entry><entry> </entry></row><row><entry>tagged eth0 DCM</entry><entry>3538</entry><entry>10.244.48.0/24</entry><entry>10.244.48.1</entry></row><row><entry>untagged eth1 TUL</entry><entry>102</entry><entry> </entry><entry> </entry></row><row><entry>VXLAN-TUL</entry><entry>3539</entry><entry>10.244.49.0/24</entry><entry>10.244.49.1</entry></row><row><entry>BM-CLM</entry><entry>103</entry><entry> </entry><entry> </entry></row><row><entry>BM-CTL</entry><entry>104</entry><entry> </entry><entry> </entry></row><row><entry>WR PXE</entry><entry>105</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>106</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>107</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>108</entry><entry> </entry><entry> </entry></row></tbody></tgroup></table>-->
 </section>
-        <section>
+        <section id="vlanconfig">
             <title>Configure VLAN networking on the lifecycle manager host</title>
-            <p>Use the following steps to create the required network bridges.</p>
-            <p><b>Single NIC environment</b></p>
+            <p>Use the following steps to create the required network bridges, for a:<ul
+                    id="ul_fj4_zjv_cv">
+                    <li><xref href="#topic7646cginp/single" format="dita">Single NIC
+                            environment</xref></li>
+                    <li><xref href="#topic7646cginp/bonded" format="dita">Bonded NIC
+                            environment</xref></li>
+                </ul></p>
+            <p><b id="single">Single NIC environment</b></p>
             <p>In a single NIC environment: </p>
             <ol id="ol_y3b_lv1_y5">
                 <li>Launch a terminal and log in to your lifecycle manager host as
@@ -194,7 +206,7 @@ bridge_hello 2
 bridge_maxage 12
 bridge_maxwait 0</codeblock></li>
             </ol>
-            <p><b>Bonded NIC environment</b></p>
+            <p  id="bonded"><b>Bonded NIC environment</b></p>
             <p>In a bonded NIC environment: </p>
             <p>
                 <ol>
@@ -282,7 +294,7 @@ bridge_maxwait 0</codeblock></li>
                 </ol>
             </p>
         </section>
-        <section>
+        <section id="bridges">
             <title>Create network bridges</title>
             <p>The installation process will create the lifecycle manager virtual machine.</p>
             <p>Perform the following steps to enable networks that will be associated with lifecycle manager VM.</p>
@@ -397,7 +409,7 @@ virbr0          8000.febbccddeeff       yes             vnet0
             </ol>
         </section>
     
-<section id="networking-issues-ubuntu-1404">
+<section id="next">
             <title>Next Step</title>
             <p><xref href="carrier-grade-install-download.dita#topic7148cgid">Download the
                     Installation Packages</xref>.</p>
