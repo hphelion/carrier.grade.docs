@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic6108cgrn">
-    <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Release Notes</title>
+    <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Release Notes</title>
     <prolog>
         <metadata>
             <othermeta name="layout" content="default"/>
@@ -37,13 +37,6 @@
             <p><!--From WR jow1404333830815.xml and added info--></p>
             <p>The following enhancements were added for the HP Helion OpenStack Carrier Grade 2.0
                 release:</p>
-            <ul id="ul_ccj_3wm_vt">
-                <li>Reduced control plane</li>
-                <li>Support for restarting MySQL and RabbitMQ clusters after failure</li>
-            </ul>
-            <p><b>Differences from HCG 2.0 Architecture</b></p>
-            <p>HP Helion OpenStack Carrier Grade 2.1 Architecture is built upon HP Helion OpenStack
-                Carrier Grade 2.0 with the following key differences:</p>
             <p>
                 <ul id="ul_jqf_jgj_w5">
                     <li><b>Virtual control planes.</b> The HP Helion OpenStack controllers are
@@ -51,14 +44,19 @@
                         the lifecycle manager are deployed on the same host system. In HP Helion
                         OpenStack Carrier Grade, each of these components required a separate
                         server.</li>
-                    <li><b>OpenSAF support.</b> The HP Helion OpenStack controller can optionally be
-                        deployed as KVM cluster (optional) using OpenSAF for Service Availability.
-                        OpenSAF is an open source middleware consistent with Service Availability
-                        Forum (SA Forum) specifications. SA goes beyond High Availability (HA)
-                        requirements. <!--From http://devel.opensaf.org/--> OpenSAF must be
-                        installed prior to starting the HP Helion OpenStack Carrier Grade
-                        installation. Specific steps to integrate OpenSAF are provided in the
-                        installation sections.</li>
+                    <li><b>Installer and management interface.</b> The HP Helion OpenStack cloud can
+                        be defined and deployed using a new web-based user interface, called the HCG
+                        Dashboard. You can also use the dashboard to perform post-deployment
+                        activities your cloud. </li>
+                    <li><b>Support for restarting MySQL and RabbitMQ clusters</b>. In HP Helion
+                        OpenStack Carrier Grade 2.1, the controllers are virtual machines on a
+                        single server. In the event that server goes down, you will need to manually
+                        restart the MySQL servers after the server is restarted. You might also need
+                        to restart RabbitMQ. The installation includes an Ansible playbook to
+                        manually restart these services. See <xref
+                            href="../OperationsGuide/Recover/CHG-2-recover.dita#topic5937recover"
+                            >Restart MySQL and RabbitMQ</xref>.</li>
+                    <!--<li><b>OpenSAF support.</b> The HP Helion OpenStack controller can optionally be deployed as KVM cluster (optional) using OpenSAF for Service Availability. OpenSAF is an open source middleware consistent with Service Availability Forum (SA Forum) specifications. SA goes beyond High Availability (HA) requirements. <b><i>From http://devel.opensaf.org/</i></b> OpenSAF must be installed prior to starting the HP Helion OpenStack Carrier Grade installation. Specific steps to integrate OpenSAF are provided in the installation sections.</li>-->
                 </ul>
             </p>
         </section>
