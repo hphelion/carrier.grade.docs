@@ -16,9 +16,9 @@
   </prolog>
   <body>
         <p><!--https://wiki.hpcloud.net/pages/viewpage.action?pageId=56149826--></p>
-        <p>After the lifecycle manager VM is installed, the next task in installing the Denver topology
-            is to deploy the HP Helion OpenStack cloud. Follow the steps in this section to use the
-            HCG Dashboard UI to perform the required tasks. Or, you can <xref
+        <p>After the lifecycle manager VM is installed, the next task in installing the HP Helion
+            OpenStack cloud. Follow the steps in this section to use the HCG Dashboard UI to perform
+            the required tasks. Or, you can <xref
                 href="CGH-2-install-denver-standalone-cli.dita#topic10581c2idclinsa">use the HLM
                 CLI</xref> to perform these tasks.</p>
         <p>The HCG Dashboard UI is a cloud management tool that allows users to define, deploy,
@@ -91,14 +91,16 @@
                 <li>Click <b>Run</b> to start deploying the cloud.<p><image
                             href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy.png"
                             width="500" id="image_xh4_jyl_x5"/></p>The deployment consists of four
-                    phases: provision, generate, netinit and deploy. As the phases progress, you
-                    will see the name of your cloud and current status at the top of the page and
-                    the marker on the wizard will move to the process as it completes.<p>The process
-                        runs asynchronously in background. So while a process is running, if you
-                        close your session or browser, you can still return to the same page again
-                        to check status of your process.Also, when your process is running, you can
-                        look at the current log content by clicking on the "logs" tab and selecting
-                        a log file pertaining to that process as seen below:</p><p><image
+                    phases: <b>Provision</b>, <b>Generate</b>, <b>Netinit</b> and <b>Deploy</b>. As
+                    the phases progress, you will see the name of your cloud and current status at
+                    the top of the page and the marker on the wizard will move to the process as it
+                        completes.<p>Note: If you receive an error during the <b>Deploy</b> phase,
+                        rerun <b>Deploy</b>. </p><p>The process runs asynchronously in background.
+                        So while a process is running, if you close your session or browser, you can
+                        still return to the same page again to check status of your process. Also,
+                        when your process is running, you can look at the current log content by
+                        clicking on the "logs" tab and selecting a log file pertaining to that
+                        process as seen below:</p><p><image
                             href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-logs.png"
                             width="500" id="image_znz_lyl_x5"/></p>Once the process completes, you
                     will be notified whether it passed or failed as seen below:<p><image
@@ -126,6 +128,14 @@
                         Icinga and Attis) </li>
                 </ul></p>
             <p>You can also edit an existing cloud definition for the Inventory Nodes.</p>
+        </section>
+        <section>
+            <title>Installation Troubleshooting</title>
+            <p>If you receive the following error during the Deploy phase, rerun the
+                Deploy.<codeblock>hlm deploy –c &lt;cloud-name&gt; -r</codeblock></p>
+            <p><image
+                    href="../../../media/carrier.grade.docs/2.1/CGH-21-installation-deploy-error.png"
+                    id="image_z42_v4d_dv"/></p>
         </section>
         <section>
             <title>Next Step</title>

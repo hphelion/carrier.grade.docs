@@ -16,11 +16,11 @@
   </prolog>
   <body>
     
-    <p>This page introduces deployment and network architectures of the Denver deployment of HPE
-      Helion OpenStack Carrier Grade. During the installation, use the <codeph>denver</codeph>
-      template that comes with the installation package. </p>
-    <p><b>Note:</b> The Denver deployment is for proof-of-concept (POC) only and is not intended for
-      production environments.</p>
+    <p>This page introduces deployment and network architectures of
+      <!--the Denver deployment of -->HPE Helion OpenStack Carrier Grade.
+      <!--During the installation, use the <codeph>denver</codeph> template that comes with the installation package.-->
+    </p>
+    <p><!--<b>Note:</b> The Denver deployment is for proof-of-concept (POC) only and is not intended for production environments.--></p>
     <section id="Helion-services">
       <title>Services overview</title>
       <p>HP Helion OpenStack Carrier Grade is comprised of several integrated OpenStack services.
@@ -85,11 +85,6 @@
             <row>
               <entry> BLS</entry>
               <entry>Block Storage Network. Shared between the Standard and KVM Regions.</entry>
-            </row>
-            <row>
-              <entry> DCM </entry>
-              <entry>Data Center Management network (accessible to KVM Region) and route across
-                multiple data centers. </entry>
             </row>
             <row>
               <entry>WR- PXE</entry>
@@ -160,20 +155,15 @@
               <entry>CAN</entry>
               <entry>Access OpnStack APIs</entry>
             </row>
-            <row>
-              <entry>DCM</entry>
-              <entry>CLM</entry>
-              <entry>VSC IP to lifecycle manager CLM VM IP - only during deployment</entry>
-            </row>
             <!--<row><entry>DCM1 </entry><entry>DCM2</entry><entry>Inter-datacenter communications (VLAN tunnel, BGP, MPLS)</entry></row>-->
           </tbody>
         </tgroup>
       </table>
       <p><!--Commented out last row in table DCM1 to DCM2 for 2.1--></p>
       <p>CLM, PXE, BLS, WR-PXE, VLAN-TUL should use RFC 1918 non-routable IPs to prevent access to
-        these networks from DCM, CTL, or EXT.</p>
-      <p>DCM, CAN, and EXT should use routable IP addresses. DCM should be restricted to the
-        corporate network. </p>
+        these networks from <!--DCM, -->CTL, or EXT.</p>
+      <p><!--DCM, -->CAN and EXT should use routable IP addresses.
+        <!--DCM should be restricted to the corporate network. --></p>
     </section>
     <section><title>Service Architecture Diagram</title>
       <p>For service architecture diagrams with interface details, see <xref
@@ -204,7 +194,7 @@
         <li><b>Standard Region Controller</b>. Standard IaaS control plane to enable cloud-to-cloud
           communication. </li>
         <li><b>StoreVirtual/3PAR</b>: Hardware storage array used as backend for Cinder. Support for
-          3PAR has a similar architecture as StoreVirtual on iSCSI, not Fibre.</li>
+          3PAR has a similar architecture as StoreVirtual on iSCSI, not Fibre Channel.</li>
         <li><b>KVM Region Controller</b>: Real-time control plane for compute and networking.
           Contains modified versions of most of the OpenStack components.</li>
         <li><b>KVM Region Compute</b>: Realtime compute node with networking components.</li>
@@ -398,19 +388,17 @@
         in the compute nodes are available. For configuration purposes, the compute nodes themselves
         are entirely served by the services provided by the controller nodes over the internal
         management network.</p>
-      <title id="infrastructure-network">Infrastructure Network</title>
-      <p>This is an optional network.</p>
+      <title id="infrastructure-network">Infrastructure Network (Optional)</title>
       <p>As with the internal management network, the infrastructure network must be implemented as
         a single, dedicated, Layer 2 broadcast domain for the exclusive use of each server
         cluster.</p>
-      <p>Sharing of this network by more than one server cluster is not a supported
-        configuration.</p>
+      <p>Sharing of this network by more than one cloud is not a supported configuration.</p>
       <p>The infrastructure network can be implemented as a 10 Gb Ethernet network. In its absence,
         all infrastructure traffic is carried over the internal management network.</p>
       <title id="board-network">Board Management Network</title>
       <p>Board Management CTL (IPMI Control) Network External access to the board management
-        network, the board management modules are assigned IP addresses accessible from the OAM
-        network, and the controller uses the OAM network to connect to them.</p>
+        network, the board management modules are assigned IP addresses accessible from the CAN
+        network, and the controller uses the CAN network to connect to them.</p>
     </section> 
  <section>
       <title>Next Step</title>

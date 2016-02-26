@@ -30,17 +30,17 @@
             <p
                 conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov-intro"/>
             <p><ol id="ol_sds_ms3_y5">
-                <li
-                        conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov1"/>
+                <!-- <li
+                        conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov1"/> -->
                 <li
                         conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov2"/>
                 </ol>Click here to see a <xref
                     href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
                     node-provision.json file</xref>. </p>
         </section>
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/pxe-boot"/>
+      <!-- <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/pxe-boot"/> -->
       <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/environment"/>
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/lnet"/>
+        <!--<section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/lnet"/>-->
       <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ansible"/>
       <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/wr"/>
       <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/verify-json"/>
@@ -86,9 +86,16 @@
         </section>
         <!--<section><title>Change the gateway address WHERE IS THIS SET?? Hide this section. Was removed in wiki.</title><p>If the IP address for your gateway is different from the CLM gateway, you need to assign the CLM IP address as the gateway address on all the controllers: (it's required only if your gateway is not CLM) </p><p><ol id="ol_rql_553_y5"><li>SSH to each controllers. <b>IP addresses??</b></li><li>Execute the following command: <codeblock>route delete default
 route add default gw &lt;CLM_IP> </codeblock><p>Where <codeph>&lt;CLM_IP></codeph> is the CLM IP address.</p></li></ol></p></section>-->
-      
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone"
-            id="ldap-keystone"/>
+        <!--<section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone" id="ldap-keystone"/>-->
+        <section>
+            <title>Installation Troubleshooting</title>
+            <p>If you receive the following error during the <codeph>hlm deploy</codeph> command,
+                rerun the <codeph>hlm deploy</codeph> with a <codeph>-r</codeph>
+                parameter.<codeblock>hlm deploy –c &lt;cloud-name&gt; -r</codeblock></p>
+            <p><image
+                    href="../../../media/carrier.grade.docs/2.1/CGH-21-installation-deploy-error.png"
+                    id="image_z42_v4d_dv"/></p>
+        </section>
         <section id="next-step">
             <title>Next Step</title>
             <p><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd"

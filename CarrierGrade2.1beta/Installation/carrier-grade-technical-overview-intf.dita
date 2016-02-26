@@ -22,8 +22,8 @@
       <!--<p><b>VRS: Tahoe/Memphis/Sacramento deployments</b></p><p>The following diagram represents the control plane interfaces for the <xref href="sacramento/carrier-grade-technical-overview-sacramento.dita#topic3485cgtos/deploy-arch">Sacramento</xref> deployment. The <xref href="memphis/carrier-grade-technical-overview-memphis.dita#topic3485cgtom/deploy-arch">Memphis</xref> and <xref href="tahoe/carrier-grade-technical-overview-tahoe.dita#topic3485cgtot/deploy-arch">Tahoe</xref> deployments are based on this model, without the baremetal region. </p><p>See the legend below for more information and <xref href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.</p><p> <image href="../../media/CGH-2-control-plane-intf.png" id="image_mrd_1jc_f5"/></p><p><b>Data Plane Interfaces </b></p>The following diagram represents the data plane interfaces for the Sacramento deployment. The Memphis and Tahoe deployments are based on this model, without the baremetal region. See the legend below for more information and <xref href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.<p/><image href="../../media/CGH-2-data-plane-intf.png" id="image_tlh_2jc_f5"/><p><b>Legend</b></p><p>Dotted lines show different security domains.</p><p>Lines between components show interactions. Colors of these lines help classify the interactions into the following categories:</p><ul id="ul_yls_r3c_f5"><li><b>Purple:</b> Lifecycle manager, bi-directional</li><li><b>Gold:</b> Distributed Cloud Networking (DCN), bi-directional</li><li><b>Red:</b> API access to the cloud</li><li><b>Green:</b> Storage</li><li><b>Black:</b> Compute control, bi-directional</li><li><b>Blue:</b> Shared component access</li></ul>-->
       <p><b>AVS: Denver deployment</b></p>
       <p><b>Control and Data Plane Interfaces</b></p>
-      <p> The following diagram represents the control and data plane interfaces for the Denver
-        deployment. See the legend below for more information and <xref
+      <p> The following diagram represents the control and data plane interfaces for HP Helion
+        Carrier Grade. See the legend below for more information and <xref
           href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.<image
           href="../../media/CGH-2-ctrl-data-plane-intf.png" id="image_yyy_hjc_f5"/></p>
       <p><b>Legend</b></p>
@@ -373,186 +373,6 @@
                 change.</entry>
             </row>
             <row>
-              <entry>16</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>ESX Compute</entry>
-              <entry>Send packets</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>VM traffic to gateway. Tenant Networks are isolated through VxLANs tunnels.
-              </entry>
-            </row>
-            <row>
-              <entry>17</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>ESX Compute (DCN VRS)</entry>
-              <entry>Send packets</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>ESX Compute (DCN VRS)</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>VM Traffic within Cloud. Tenant Networks are isolated through VxLANs
-                tunnels.</entry>
-            </row>
-            <row>
-              <entry>18</entry>
-              <entry>TUL</entry>
-              <entry>OpenFlow</entry>
-              <entry>DCN VSC</entry>
-              <entry>Control command</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>ESX Compute (DCN VRS)</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Similar to HOS 1.1 VxLAN tenant overlay network.</entry>
-            </row>
-            <row>
-              <entry><b>Interface</b></entry>
-              <entry><b>Network name</b></entry>
-              <entry><b>Network protocol</b></entry>
-              <entry><b>Requestor</b></entry>
-              <entry><b>Request</b></entry>
-              <entry><b>Request credentials</b></entry>
-              <entry><b>Request authorization</b></entry>
-              <entry><b>Listener</b></entry>
-              <entry><b>Response</b></entry>
-              <entry><b>Response credentials</b></entry>
-              <entry><b>Description of operation</b></entry>
-            </row>
-            <row>
-              <entry>19</entry>
-              <entry>TUL</entry>
-              <entry>OpenFlow</entry>
-              <entry>DCN VSC</entry>
-              <entry>Control command</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Similar to HOS 1.1 VxLAN tenant overlay network.</entry>
-            </row>
-            <row>
-              <entry>20</entry>
-              <entry>TUL</entry>
-              <entry>
-                <p>OpenFlow/</p>
-                <p>BGP(intradc)</p>
-                <p>/MPLS(interdc)</p>
-              </entry>
-              <entry>DCN VSC (DCN 3.2 can be enabled to use TLS, once enabled used for both OpenFlow
-                and XMPP) </entry>
-              <entry>Control command</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Remote Cloud VSC</entry>
-              <entry> none</entry>
-              <entry>none </entry>
-              <entry>Bidirectional (remote cloud can be intradc or interdc)</entry>
-            </row>
-            <row>
-              <entry>21</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>ESX Compute (DCN VRS)</entry>
-              <entry>Send Packets</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Remote ESX Compute (DCN VRS)/VRS-G</entry>
-              <entry> none</entry>
-              <entry> none </entry>
-              <entry>Bidirectional; Tenant Networks are isolated through VxLANs tunnels.</entry>
-            </row>
-            <row>
-              <entry>22</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>Send Packets</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Remote ESX Compute / Remote DCN VRS-G</entry>
-              <entry> none</entry>
-              <entry> none </entry>
-              <entry>Tenant traffic isolated through VxLAN tunnels.</entry>
-            </row>
-            <row>
-              <entry>23a</entry>
-              <entry>DCM</entry>
-              <entry>XMPP</entry>
-              <entry>Remote DCN VSC (HCG2.0/DCN 3.2 VSC can be configured for TLS<b>)</b></entry>
-              <entry>Management data</entry>
-              <entry>username, password</entry>
-              <entry>none</entry>
-              <entry>DC DCN VSD (HCG2.0/DCN 3.2 VSC with TLS can establish encrypted XMPP
-                session)</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Management traffic. Policy enforcement. Status Update</entry>
-            </row>
-            <row>
-              <entry>23b</entry>
-              <entry>DCM</entry>
-              <entry>XMPP</entry>
-              <entry>DC DCN VSD (HCG2.0/DCN 3.2 PKI service generate,store,revoke all VSP system
-                certs, signed by VSD Root CA).</entry>
-              <entry>Management data</entry>
-              <entry>username, password</entry>
-              <entry>none</entry>
-              <entry>Remote DCN VSC</entry>
-              <entry>none</entry>
-              <entry> cert </entry>
-              <entry>Management traffic. Policy enforcement. Status Update</entry>
-            </row>
-            <row>
-              <entry>24</entry>
-              <entry>DCM</entry>
-              <entry>HTTP</entry>
-              <entry>Non-KVM region Controller (DCN Neutron plugin)(APIs)</entry>
-              <entry>Control command</entry>
-              <entry>username, password</entry>
-              <entry>none</entry>
-              <entry>DC DCN VSD</entry>
-              <entry>none </entry>
-              <entry> none </entry>
-              <entry>API Requests</entry>
-            </row>
-            <row>
-              <entry>25a</entry>
-              <entry>DCM</entry>
-              <entry>XMPP</entry>
-              <entry>DCN VSC (HCG2.0/DCN 3.2 VSC can be configured for TLS)</entry>
-              <entry>Management data</entry>
-              <entry>username, password</entry>
-              <entry>none</entry>
-              <entry>DC DCN VSD (HCG2.0/DCN 3.2 VSC with TLS can establish encrypted XMPP
-                session)</entry>
-              <entry>none</entry>
-              <entry> none </entry>
-              <entry>Management traffic. Policy enforcement. Status Update</entry>
-            </row>
-            <row>
-              <entry>25b</entry>
-              <entry>DCM</entry>
-              <entry>XMPP</entry>
-              <entry>DC DCN VSD (HCG2.0/DCN 3.2 PKI service generate,store,revoke all VSP system
-                certs, signed by VSD Root CA).</entry>
-              <entry>Management data</entry>
-              <entry>username, password</entry>
-              <entry>none</entry>
-              <entry>DCN VSC</entry>
-              <entry>none</entry>
-              <entry> cert </entry>
-              <entry>Management traffic. Policy enforcement. Status Update</entry>
-            </row>
-            <row>
               <entry><b>Interface</b></entry>
               <entry><b>Network name</b></entry>
               <entry><b>Network protocol</b></entry>
@@ -579,32 +399,6 @@
               <entry>Tenant traffic isolated through VxLAN tunnels.New in HCG 2.0.</entry>
             </row>
             <row>
-              <entry>27</entry>
-              <entry>TUL</entry>
-              <entry>OpenFlow</entry>
-              <entry>DCN VSC</entry>
-              <entry>Control command</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>ToR Switch 5930</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Similar to HOS 1.1 VxLAN tenant overlay network. New in HCG 2.0.</entry>
-            </row>
-            <row>
-              <entry>28</entry>
-              <entry>TUL</entry>
-              <entry>OpenFlow</entry>
-              <entry>DCN VSC</entry>
-              <entry>Control command</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>KVM region Compute (DCN RVS)</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Similar to HOS 1.1 VxLAN tenant overlay network. New in HCG 2.0.</entry>
-            </row>
-            <row>
               <entry>29</entry>
               <entry>TUL</entry>
               <entry>Any</entry>
@@ -619,34 +413,6 @@
                 2.0.</entry>
             </row>
             <row>
-              <entry>30</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>BM Node</entry>
-              <entry>Send Packets</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>ToR Switch 5930</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>VM traffic to gateway. Tenant Networks are isolated through VLANs, New in HCG
-                2.0.</entry>
-            </row>
-            <row>
-              <entry>31</entry>
-              <entry>CTL</entry>
-              <entry>SSH</entry>
-              <entry>BM Controller</entry>
-              <entry>Control Command</entry>
-              <entry>username, password</entry>
-              <entry>root user w/ network-admin/network-operator role</entry>
-              <entry>ToR Switch 5930</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Controls the VLAN configuration on the BM node's switch port. Switch between
-                provisioning VLAN to Tenant VLAN. New in HCG 2.0.</entry>
-            </row>
-            <row>
               <entry><b>Interface</b></entry>
               <entry><b>Network name</b></entry>
               <entry><b>Network protocol</b></entry>
@@ -658,33 +424,6 @@
               <entry><b>Response</b></entry>
               <entry><b>Response credentials</b></entry>
               <entry><b>Description of operation</b></entry>
-            </row>
-            <row>
-              <entry>32</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>KVM region Compute (DCN VRS)</entry>
-              <entry>Data</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Remote DCN VRS/DCN VRS-G</entry>
-              <entry> none</entry>
-              <entry> none </entry>
-              <entry>Bidirectional; Tenant Networks are isolated through VxLANs tunnels. New in HCG
-                2.0.</entry>
-            </row>
-            <row>
-              <entry>33</entry>
-              <entry>DCM</entry>
-              <entry>HTTP</entry>
-              <entry>Orchestrator</entry>
-              <entry>Control command</entry>
-              <entry>username, password</entry>
-              <entry>none</entry>
-              <entry>DC DCN VSD</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>API requests. Happens outside HCG.</entry>
             </row>
             <row>
               <entry>34</entry>
@@ -779,19 +518,6 @@
               <entry>Inter-service communication, rabbitmq and SQL updates. New in HCG 2.0.</entry>
             </row>
             <row>
-              <entry>40</entry>
-              <entry>DCM</entry>
-              <entry>RPC</entry>
-              <entry>Non-KVM region Controller</entry>
-              <entry>Data Center utility requests: user creds, hostname, email msg</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>DC Utilities: AD, DNS, SMTP</entry>
-              <entry>user auth, IP address, email sent ack</entry>
-              <entry>none</entry>
-              <entry>Active Directory, DNS, SMTP.</entry>
-            </row>
-            <row>
               <entry>41</entry>
               <entry>TUL</entry>
               <entry>Any</entry>
@@ -804,48 +530,6 @@
               <entry>none</entry>
               <entry>Bidirectional; Tenant Networks are isolated through VxLANs tunnels or VLAN
                 segmentation</entry>
-            </row>
-            <row>
-              <entry>42</entry>
-              <entry>DCM</entry>
-              <entry>HTTPS</entry>
-              <entry>Non-KVM region Controller</entry>
-              <entry>IP reservation request</entry>
-              <entry>username/ password</entry>
-              <entry>none</entry>
-              <entry>Infoblox</entry>
-              <entry>Infoblox API response</entry>
-              <entry>Server certificate</entry>
-              <entry>IPAM - sends a request to reserve an IP for newly created neutron port. New in
-                HCG 2.0.</entry>
-            </row>
-            <row>
-              <entry>43</entry>
-              <entry>DCM</entry>
-              <entry>HTTPS</entry>
-              <entry>Remote Non-KVM region Controller</entry>
-              <entry>IP reservation request</entry>
-              <entry>username/ password</entry>
-              <entry>none</entry>
-              <entry>Infoblox</entry>
-              <entry>Infoblox API response</entry>
-              <entry>Server certificate</entry>
-              <entry>IPAM - sends a request to reserve an IP for newly created neutron port. New in
-                HCG 2.0.</entry>
-            </row>
-            <row>
-              <entry>44</entry>
-              <entry>DCM</entry>
-              <entry>HTTPS</entry>
-              <entry>BM Controller</entry>
-              <entry>IP reservation request</entry>
-              <entry>username/ password</entry>
-              <entry>none</entry>
-              <entry>Infoblox</entry>
-              <entry>Infoblox API response</entry>
-              <entry>Server certificate</entry>
-              <entry>IPAM - sends a request to reserve an IP for newly created neutron port. New in
-                HCG 2.0.</entry>
             </row>
           </tbody>
         </tgroup>

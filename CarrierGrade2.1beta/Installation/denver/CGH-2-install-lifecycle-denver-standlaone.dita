@@ -26,7 +26,10 @@
           deployed (the lifecycle manager host):</p>
         <ol id="ol_hx2_33q_f5">
           <li>Log into the lifecycle manager host using the default credentials.</li>
-          <li>Edit the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file for your
+          <li>Extract the <codeph>~/cg-infra-src.tar.gz</codeph> file you downloaded in the
+              prerequisites.<codeblock>tar zxvf cg-infra-src.tar.gz </codeblock><p>This file deploys
+              the Ansible files and directories required for the installation.</p></li>
+          <li>Edit the <codeph>~/infra-ansible-playbooks/group_vars/all</codeph> file for your
             environment. For information on each variable, refer to the comments in the file with
             each variable. <ul id="ul_tzp_3zz_s5">
               <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all1"/>
@@ -34,14 +37,15 @@
               <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all3"/>
               <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all4"/>
             </ul><p id="all">The <codeph>group_vars/all</codeph> file should appear similar to the
-              following (IP addresses masked for
-              security):<codeblock>############################################# Variables for HLM  #################################################################
+              following (IP addresses masked for security):</p><p><b>Note:</b> The
+                <codeph>group_vars/all</codeph> file cannot contain tab
+              characters.<codeblock>############################################# Variables for HLM  #################################################################
 #These variables are relevant in both All Virtual and BareMetal scenarios.
 
 #ovs_cloud_only: 0 #memphis
 #ovs_cloud_only: 1 #ovs
 #ovs_cloud_only: 2 #denver
-#ovs_cloud_only: 3 #rcp
+#ovs_cloud_only: 3 #rcp_denver
 ovs_cloud_only:  3
 
 #Set this to 'bm' if cloud is being deployed over baremetal.
@@ -112,23 +116,26 @@ kvm_hosts:
 ###################################################################################################################################
               </codeblock></p></li>
           <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/3"/>
-          <li>Perform the following tasks to configure Libvirt to work with Ansible:<ol
-              id="ol_l52_tdn_cv">
-              <li>Change to the cghelion directory<codeblock>cd /home/cghelion/</codeblock></li>
-              <li>Edit the <codeph>.profile</codeph> file to add the <codeph>export</codeph> line
-                  below:<codeblock>export LIBVIRT_DEFAULT_URI="qemu:///system"</codeblock><p>For
-                  example:</p><codeblock>if [ -d "$HOME/bin" ] ; then
-PATH="$HOME/bin:$PATH"
-fi
-</codeblock></li>
-              <li>Execute the following
-                command:<codeblock>sudo usermod -a -G libvirt cgheion</codeblock></li>
-              <li>Change to the <codeph>etc/</codeph> directory.</li>
-              <li>Add a user to the <codeph>sudoers</codeph>
-                file:<codeblock>% sudo ALL=(ALL:ALL) ALL
-cghelion ALL=(ALL) NOPASSWD:ALL</codeblock></li>
-            </ol></li>
           <!--<li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/4"/>-->
+        </ol>
+      </section>
+      <section>
+        <p><b>Important:</b> If you specify a non-root user in the <b>all-virtual</b> file, perform
+          the following tasks to configure Libvirt to work with Ansible:</p>
+        <ol id="ol_tsy_sfd_dv">
+          <li>Change to the cghelion directory<codeblock>cd /home/cghelion/</codeblock></li>
+          <li>Edit the <codeph>.profile</codeph> file to add the <codeph>export</codeph> line
+              below:<codeblock>export LIBVIRT_DEFAULT_URI="qemu:///system"</codeblock><p>For
+              example:</p><codeblock>if [ -d "$HOME/bin" ] ; then
+                PATH="$HOME/bin:$PATH"
+                fi
+              </codeblock></li>
+          <li>Execute the following
+            command:<codeblock>sudo usermod -a -G libvirt cgheion</codeblock></li>
+          <li>Change to the <codeph>etc/</codeph> directory.</li>
+          <li>Add a user to the <codeph>sudoers</codeph>
+            file:<codeblock>% sudo ALL=(ALL:ALL) ALL
+              cghelion ALL=(ALL) NOPASSWD:ALL</codeblock></li>
         </ol>
       </section>
       <section>

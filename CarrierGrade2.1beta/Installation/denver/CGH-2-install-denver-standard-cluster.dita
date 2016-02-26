@@ -202,7 +202,8 @@ Password: cghelion</codeblock>
                 environment. Set the following for the CLM, CAN, and BLS
                 network:<codeblock>"cidr": 
           "start-address": </codeblock> The three
-                controller nodes should have CLM, CAN, EXT, BLS on eth0 and TUL on eth1.
+                controller nodes should have CLM, CAN, <!--EXT,-->BLS on
+                eth0<!-- and TUL on eth1-->.
                 <!--Hiding for RC0 
               <p>The two compute nodes should have CLM, EXT, BLS on eth0 and TUL on eth1.</p>
            -->
@@ -527,9 +528,11 @@ hplefthand_debug = false</codeblock></li>
                         without errors, you will a message:</p><p><image
                             href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-generate.png"
                             width="600" id="image_ah5_ys1_t5"/></p></li>
-                <li>Review the CloudDiagram, <codeph>hosts.hf</codeph>, and
-                        <codeph>/etc/network/interfaces.d/eth.cfg</codeph> files to make sure the
-                    network settings are correct.</li>
+                <li>Review the
+                        <codeph>/var/hlm/clouds/rcpvm/desired_state/rcpvm/001/base/stage/CloudDiagram.txt</codeph>
+                    file, <codeph>hosts.hf</codeph> file, and
+                        <codeph>/etc/network/interfaces.d/eth.cfg</codeph> file to review the
+                    network settings that were deployed.</li>
                 <li>Initialize network interfaces on all the cloud nodes using the following
                     command: <codeblock>hlm netinit –c &lt;cloudname&gt;</codeblock><p>Where
                             <codeph>&lt;cloudname></codeph> is the name of the cloud you created
@@ -552,7 +555,7 @@ hplefthand_debug = false</codeblock></li>
                             href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-deploy.png"
                             width="400" id="image_hf1_2t1_t5"/>
                     </p></li>
-                <li>Enter <codeph>exit</codeph> to leave the root shell.</li>
+                <li>Enter <codeph>exit</codeph> to leave the root shell.<p/></li>
             </ol>
         </section>
         <section><title>Manually launch Libirt monitoring</title>Libvirt monitoring is started
@@ -589,16 +592,7 @@ Unable to find expected entry 'main/binary-i386/Packages' in Release file (Wrong
 Some index files failed to download. They have been ignored, or old ones used instead.</codeblock>Run
             the following command:
             <!--AND RERUN ANSIBLE?--><codeblock>dpkg --remove-architecture i386 </codeblock></section>
-        <section id="ldap-keystone">
-            <title>Configure LDAP to enable CLI and use Keystone v3</title>
-            <p>By default, the HPE Helion OpenStack Carrier Grade services are configured to use
-                Keystone v2 authorization. The services need to be modified to use Keystone v3.
-                Users will not be able to execute OpenStack CLI commands until the specific changes
-                are made on all three controller nodes in the Standard Region. </p>
-            <p>For information, see <xref
-                    href="../carrier-grade-install-config-ldap3.dita#topic10581cgicl">Configuring
-                    LDAP CLI Support</xref></p>
-        </section>
+        <!--<section id="ldap-keystone"><title>Configure LDAP to enable CLI and use Keystone v3</title><p>By default, the HPE Helion OpenStack Carrier Grade services are configured to use Keystone v2 authorization. The services need to be modified to use Keystone v3. Users will not be able to execute OpenStack CLI commands until the specific changes are made on all three controller nodes in the Standard Region. </p><p>For information, see <xref href="../carrier-grade-install-config-ldap3.dita#topic10581cgicl">Configuring LDAP CLI Support</xref></p></section>-->
         <section id="next-step">
             <title>Next Step</title>
             <p><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd"

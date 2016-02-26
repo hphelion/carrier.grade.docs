@@ -61,12 +61,6 @@
                             <entry>10.20.20.1</entry>
                         </row>
                         <row>
-                            <entry>221</entry>
-                            <entry>DCM</entry>
-                            <entry>10.20.21.0/24</entry>
-                            <entry>10.20.21.1</entry>
-                        </row>
-                        <row>
                             <entry>222</entry>
                             <entry>TUL</entry>
                             <entry>10.20.22.0/24</entry>
@@ -323,8 +317,8 @@ virsh net-autostart br-pxe</codeph></codeblock></li>
 &lt;name&gt;br-clm&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-clm'/&gt;
-<!--&lt;virtualport type='openvswitch'/&gt;-->
-&lt;/network&gt;</codeph></codeblock><p>b.
+<cite>&amp;lt;virtualport type='openvswitch'/&amp;gt;
+</cite>&lt;/network&gt;</codeph></codeblock><p>b.
                         Execute the following commands, using the name of your XML file, to create
                         and start the network and configure the network to
                     auto-start:</p><codeblock><codeph>virsh net-define <systemoutput>br-clm.xml</systemoutput>
@@ -337,8 +331,8 @@ virsh net-autostart br-clm</codeph></codeblock></li>
 &lt;name&gt;br-bls&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-bls'/&gt;
-<!--&lt;virtualport type='openvswitch'/&gt;-->
-&lt;/network&gt;</codeph></codeblock><p>b.
+<!--&lt;virtualport type='openvswitch'/&gt;
+-->&lt;/network&gt;</codeph></codeblock><p>b.
                         Execute the following commands to create and start the network and configure
                         the network to
                     auto-start:</p><codeblock><codeph>virsh net-define br-bls.xml
@@ -398,7 +392,6 @@ br-clm          8000.5cb9017aa370       no              eth0.3007
                                                         vnet2
                                                         vnet4
                                                         vnet8
-br-dcm          8000.5cb9017aa370       no              eth0.211
 br-pxe          8000.5cb9017aa370       no              eth0
                                                         vnet1
                                                         vnet11
