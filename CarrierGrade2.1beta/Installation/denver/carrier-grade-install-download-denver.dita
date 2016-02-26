@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd">
+<topic xml:lang="en-us" id="topic7148cgidd">
+        <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Step 2 - Download
+                the Installation Packages</title>
+        <titlealts>
+                <searchtitle>HP Helion OpenStack Carrier Grade Installation
+                        Prerequisites</searchtitle>
+        </titlealts>
+        <prolog>
+                <metadata>
+                        <othermeta name="layout" content="default"/>
+                        <othermeta name="product-version" content="HP Helion OpenStack Carrier Grade 2.0"/>
+                        <othermeta name="role" content="Storage Administrator"/>
+                        <othermeta name="role" content="Storage Architect"/>
+                        <othermeta name="role" content="Michael B"/>
+                        <othermeta name="product-version1" content="HP Helion OpenStack Carrier Grade 2.0"/>
+                </metadata>
+        </prolog>
+        <body>
+                <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
+                <p
+                        conref="../prereqs/../prereqs/carrier-grade-install-download.dita#topic7148cgid/intro"/>
+                <section
+                        conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/download"/>
+                <section
+                        conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"/>
+                <section id="extract"><title>Extract the downloaded files</title><p>After
+                                downloading the files from HDN, extract the move the files as
+                                indicated in this section. It is important to the installation
+                                process for the installer files to be in the correct
+                                        locations.</p><p><b>Standard Region installation
+                                files</b></p><p>Extract the Standard Region files as following:</p><p>
+                                <table id="table_rkj_yyk_2t">
+                                        <tgroup cols="3">
+                                                <colspec colnum="1" colname="col2"/>
+                                                <colspec colnum="2" colname="col3"/>
+                                                <colspec colnum="3" colname="col4"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry><b>File Name</b></entry>
+                                                  <entry><b>Copy to location on the Lifecycle
+                                                  Manager</b></entry>
+                                                  <entry><b>Notes</b></entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><xref
+                                                  href="http://15.214.241.88/cg-hos-builds/cg-hlm.qcow2"
+                                                  format="html" scope="external"
+                                                  >cg-hlm.qcow2</xref></entry>
+                                                  <entry>
+                                                  <p>/var/lib/libvirt/images</p>
+                                                  <p> </p>
+                                                  <p>Can copy this to any other directory and update
+                                                  the group_vars/all file with that dir folder
+                                                  path</p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry/>
+                                                  </row>
+                                                  <row>
+                                                  <entry>
+                                                  <p>cg-hos-misc.tar.gz</p>
+                                                  <p>cg-hos-src.tar.gz</p>
+                                                  </entry>
+                                                  <entry>
+                                                  <p>/root/cg</p>
+                                                  <p> </p>
+                                                  <p><b>Create cg folder if not present</b></p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry> cg-infra-src.tar.gz</entry>
+                                                  <entry>
+                                                  <p>/root </p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p id="kvm-avs"><b>KVM Region installation files</b></p>Download the
+                        following files for installing the KVM Region. Also download the associated
+                        MD5 file for verification.<p>
+                                <table id="table_ejh_qtj_k5">
+                                        <tgroup cols="2">
+                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
+                                                <colspec colnum="2" colname="col3" colwidth="2.13*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>File Name</entry>
+                                                  <entry>To be copied to the KVM Host</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><codeph>bootimage_avs_only.iso</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM Region.</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM Region. SDK files to be used as
+                                                  needed.</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM Region. Sample guest operating system files to
+                                                  be used as needed.</entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p></section>
+                <section>
+                        <title>Enable </title>
+                </section>
+                <section id="next-step">
+                        <title>Next Step</title>
+                </section>
+                <ul id="ul_kp5_fyn_1v">
+                        <li><xref href="CGH-2-install-denver-standard.dita#topic10581c2id">Deploy
+                                        the Standard Region</xref>
+                        </li>
+                </ul>
+        </body>
+</topic>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Alpha: Post-Deployment
+    Patches</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>Occasionally, you will be asked to deploy a patch to your running HP Helion OpenStack Carrier
+      Grade environment.</p>
+    <p>All patch files can be downloaded from the <xref
+        href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html" scope="external"
+        >Helion Distribution Network (HDN)</xref>. You must <xref
+        href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+        >obtain a user account on HDN</xref> in order to download these files.</p>
+    <p>
+      <ul id="ul_wr4_tpg_j5">
+        <li><xref href="#topic10581pdp/ssl" format="dita">SSL patch:
+            kcp-ssl-implementation.patch</xref></li>
+        <li><xref href="#topic10581pdp/kvm-custom" format="dita">KVM Region Custom Patch</xref></li>
+        <li><xref href="#topic10581pdp/horizon-patch" format="dita">Horizon patch:</xref></li>
+        <li><xref href="#topic10581pdp/dcn" format="dita">DCN patch</xref></li>
+      </ul>
+    </p>
+    <section id="ssl"><title>SSL patch</title><p>If you did not deploy the
+          <codeph>kcp-ssl-implementation.patch</codeph> during installation, perform the following
+        steps: <!--HCG-998--></p><p>This patch addresses a number of issues. </p><p><b>Note:</b> If
+        you can view statistics in <codeph>regionkvm</codeph>, from the <b>Stats</b> tab on the
+          <b>Resource Usage Overview</b> page, you can disregard these steps. Select the
+          <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and <b>Resrouce
+          Usage</b>. Click the <b>Stats</b> table.</p>You should have downloaded the following patch
+      files during the prerequisites: <!--HCG-998--><ul id="ul_i42_qhz_35">
+        <li>kcp-ssl-implementation.patch </li>
+      </ul><p>The patch is in a compressed file called
+          <codeph>HCG2.0_Heat001_Patch003.tar.gz</codeph>. The README with the patch download
+        contains information on files changed by these patches.</p><p>To prevent this condition,
+        execute the following commands:<ol id="ol_j42_qhz_35">
+          <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
+          <li>Change to the <codeph>kenobi-configuration-processor</codeph>
+            directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
+          <li>Execute the following command to install the second patch
+            <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
+          <li>Change to the <codeph>kenobi-node-configuration</codeph>
+            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li>Execute the following command to install the second patch
+            <codeblock>patch -p1 &lt; kcp-ssl-implementation.patch</codeblock></li>
+          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          <li>Execute the following
+            command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+          <li>Execute the following command to create haproxy, stunnel and horizon roles
+            <codeblock>hlm deploy -c &lt;cloud name> -t "FND-CLU FND-STN HZN-WEB WR-HZN" </codeblock></li>
+          <li>Change to the following directory:
+            <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud name>/001/base/stage/windriver-config </codeblock></li>
+          <li>Copy contents of <codeph>cakey.pem</codeph> file in that directory to the
+              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph> directory on
+            KVM region <codeph>controller-0</codeph>. Make sure you make a backup copy of the
+              <codeph>server-cert.pem</codeph> before the copy operation.</li>
+          <li>Execute the following command on KVM region <codeph>controller-0</codeph> to restart
+            the haproxy service: <codeblock>service haproxy restart</codeblock></li>
+          <li>Log onto the KVM region <codeph>controller-1</codeph>, the standby controller.</li>
+          <li>Copy contents of <codeph>cakey.pem</codeph> file on the lifycycle manager to the
+              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph> directory on
+            KVM region <codeph>controller-0</codeph>. Make sure you make a backup copy of the
+              <codeph>server-cert.pem</codeph> before the copy operation.</li>
+        </ol></p></section>
+    <section id="kvm-custom"><title>KVM Region Custom Patch </title><p>If you did not deploy the KVM
+        Region Custom Patch, <codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph> during installation,
+        perform the following steps. </p>You should have downloaded the following patch files during
+      the prerequisites. The patch is in a compressed file called
+        <codeph>HCG2.0_WR001_Patch001.tar.gz</codeph>. The README with the patch download contains
+      information on files changed by these patches.<p><b>Note:</b> You can use the Horizon UI to
+        see if the patch has been deployed. Select the <codeph>regionkvm</codeph>, then click
+          <b>Admin</b>, then <b>System</b>, and <b>Inventory</b>. Click the <b>Patches</b>
+        table.</p><p>This patch addresses a number of issues in the KVM region.</p><p><b>Patch the
+          standby controller</b></p><p>First log into the active cotroller, patch the standby
+        controller, then make the standby active.</p><p>The following steps assume that
+          <codeph>controller-0</codeph> is active and <codeph>controller-1</codeph> is
+        standby.</p><ol id="ol_bcm_yg4_j5">
+        <li>SSH into active controller in the KVM region. For example: <codeph>controller-0</codeph>
+        </li>
+        <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
+        <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
+            <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
+            id="ul_ald_spz_35">
+            <li><codeph>TS_HP_15_Custom_PATCH_0001.patch</codeph><p>You should have downloaded this
+                patch file in the Prerequisites. </p></li>
+          </ul></li>
+        <li>Execute the following commands:
+          <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0001.patch
+sudo sw-patch apply TS_HP_15_Custom_PATCH_0001.patch
+source /etc/nova/openrc</codeblock></li>
+        <li>Execute the following command to patch and reboot the standby controller:
+            <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+              <codeph>controller-1</codeph> is the standby
+          controller:</p><codeblock>system host-patch-reboot controller-1</codeblock></li>
+        <li>Execute the following command to switch the active controller from the specifed
+          controller: <codeblock>system host-swact controller-# </codeblock><p>For example, switch
+            the active controller from <codeph>controller-0</codeph> to
+              <codeph>controller-1</codeph>:<codeblock>system host-swact controller-0</codeblock></p></li>
+        <li>Exit the SSH session. </li>
+      </ol><p><b>Patch the new standby controller</b></p><p>Now, log onto the newly active
+        controller and patch the standby controller.</p><ol id="ol_ovz_4s4_j5">
+        <li>SSH into the newly active controller. For example: <codeph>controller-1</codeph>.</li>
+        <li>Execute the following command: <codeblock>source /etc/nova/openrc</codeblock></li>
+        <li>Execute the following command to patch and reboot the standby controller:
+            <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+              <codeph>controller-0</codeph> is the standby
+          controller:</p><codeblock>system host-patch-reboot controller-0</codeblock></li>
+      </ol><p><b>Patch the compute nodes</b></p><p>From the active controller, perform the following
+        steps:</p><ol id="ol_z3h_xs4_j5">
+        <li>Execute the following command to lock
+          <codeph>compute-0</codeph>:<codeblock>system host-lock compute-0 </codeblock>If this
+          fails, perform a force lock:<codeblock>system host-lock --force compute-0</codeblock></li>
+        <li>Execute the following command to patch and reboot <codeph>compute-0</codeph>:
+          <codeblock>system host-patch-reboot compute-0</codeblock></li>
+        <li>Execute the following command to unlock
+          <codeph>compute-0</codeph>:<codeblock>system host-unlock compute-0 </codeblock></li>
+        <li>Execute the following command to lock
+          <codeph>compute-1</codeph>:<codeblock>system host-lock compute-1 </codeblock>If this
+          fails, perform a force lock:<codeblock>system host-lock --force compute-1</codeblock></li>
+        <li>Execute the following command to patch and reboot <codeph>compute-1</codeph>:
+          <codeblock>system host-patch-reboot compute-1</codeblock></li>
+        <li>Execute the following command to unlock
+          <codeph>compute-1</codeph>:<codeblock>system host-unlock compute-1 </codeblock></li>
+      </ol></section>
+    <section id="horizon-patch"><title>Horizon Patch</title><p>If you are unable to create a
+        PCI-Passthrough or SR-IOV interface using the Horizon UI, but can create those interfces
+        using CLI, you need to apply the Horizon Patch. </p><p><b>Note:</b> If you applied the
+        Horizon Patch, <codeph>WR-HZN-1011</codeph> during installation, and can create
+        PCI-Passthrough or SR-IOV interfaces in Horizon, disregard these steps. </p><p>Due to an API
+        error, you cannot create a PCI-Passthrough or SR-IOV interface using the Horizon UI. To
+        correct this issue, deploy the following patch. <!--HCG-1011/1012--></p>You should have
+      downloaded the following patch files during the prerequisites:<ul id="ul_awq_db1_f5">
+        <li>WR-HZN-1011</li>
+      </ul><p>The patch is in a compressed file called
+          <codeph>HCG2.0_Horizon001_Patch002.tar.gz</codeph>. The README with the patch download
+        contains information on files changed by these patches.</p><p>Execute the following
+          commands:<ol id="ol_imr_fgt_25">
+          <li>Copy the WR-HZN-1011 directory to the
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on the lifecycle
+            manager. </li>
+          <li>Execute following command to apply patch
+              <codeblock>hlm patch -c &lt;cloud-name> -n WR-HZN-1011 -t &lt;tier></codeblock><p>Where:
+              &lt;tier> is the tier on which the various controllers are running. </p>For example:
+            <codeblock>hlm patch -c sac36 -n WR-HZN-1011 -t BASE-CCP-T2</codeblock>The tier
+            information can be found in the
+              <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
+            file. </li>
+        </ol></p></section>
+    <section id="dcn"><title>DCN Patch</title><p><b>Note:</b> Not required for Denver deployments.</p><p>For
+        highly-available HP Helion OpenStack Carrier Grade deployments, use the following steps. </p><p>
+        <ol id="ol_ac5_tvz_k5">
+          <li>Backup the VSC VMs admin
+            <codeblock>config scp admin@&lt;vsc ip>:/config.cfg &lt;destination directory> </codeblock></li>
+          <li>Login to DCN host </li>
+          <li>Execute the following command to remove the VSC VM:
+            <codeblock>virsh destroy vsc virsh undefine vsc</codeblock></li>
+          <li>Delete <codeph>vsc.qcow2</codeph> from <codeph>/home/images</codeph>. </li>
+          <li>Repeat the steps from 2-4 for DCN host2 </li>
+          <li>Log into lifecycle manager VM. </li>
+          <li>Replace <codeph>vsc_singledisk.qcow2</codeph> on the lifecycle manager with new
+              <codeph>vsc_singledisk.qcow2</codeph> in the <codeph>~/dcn/</codeph> directory. </li>
+          <li>Edit the Ansible hosts file to comment out every occurrence of one of the DCN hosts.
+            The Ansible hosts file is located at
+              <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/hosts</codeph>.
+            For example, here M1 is commented and M2 is available for deployment:
+            <codeblock>#BASE-CCP-T1-M1-NETPXE ansible_ssh_host=10.30.1.104 clm_hostname=BASE-CCP-T1-M1-NETCLM 
+BASE-CCP-T1-M2-NETPXE ansible_ssh_host=10.30.1.105 clm_hostname=BASE-CCP-T1-M2-NETCLM </codeblock></li>
+          <li>Execute the following command
+              <codeblock>hlm deploy -c cloud -t &lt;tier1> </codeblock><p>For example:
+              <codeblock>hlm deploy -c &lt;cloud-name> -t deploy-CCP-T1.yml </codeblock></p></li>
+          <li>Repeat steps 8 and 9 for other DCN host by uncommenting the previous DCN host and
+            commenting the deployed DCN host. </li>
+        </ol>
+      </p>For highly-available HP Helion OpenStack Carrier Grade deployments, use the following
+      steps. <ol id="ol_myd_lxz_k5">
+        <li>Backup the VSC VMs admin
+          <codeblock>config scp admin@&lt;vsc ip>:/config.cfg &lt;destination directory></codeblock></li>
+        <li>Login to DCN host </li>
+        <li>Execute the following command to remove the VSC
+          VM:<codeblock>virsh destroy vsc virsh undefine vsc</codeblock></li>
+        <li>Delete <codeph>vsc.qcow2</codeph> from <codeph>/home/images</codeph>. </li>
+        <li>Log into lifecycle manager VM. </li>
+        <li>Replace <codeph>vsc_singledisk.qcow2</codeph> on the lifecycle manager with new
+            <codeph>vsc_singledisk.qcow2</codeph> in the <codeph>~/dcn/</codeph> directory. </li>
+        <li>Execute the following command
+            <codeblock>hlm deploy -c cloud -t &lt;tier1> </codeblock><p>For example:
+            <codeblock>hlm deploy -c &lt;cloud-name> -t deploy-CCP-T1.yml </codeblock></p></li>
+      </ol></section>
+  </body>
+</topic>

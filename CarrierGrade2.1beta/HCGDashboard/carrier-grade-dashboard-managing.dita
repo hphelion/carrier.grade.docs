@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2idui">
+    <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the Standard
+        Region using the HCG Dashboard (Standalone Denver Deployment) </title>
+    <prolog>
+        <metadata>
+            <othermeta name="layout" content="default"/>
+            <othermeta name="product-version" content="HP Helion OpenStack Carrier Grade 2.0"/>
+            <othermeta name="role" content="Storage Administrator"/>
+            <othermeta name="role" content="Storage Architect"/>
+            <othermeta name="role" content="Michael B"/>
+            <othermeta name="product-version1" content="HP Helion OpenStack Carrier Grade 2.0"/>
+        </metadata>
+    </prolog>
+    <body>
+        <p><!--https://wiki.hpcloud.net/pages/viewpage.action?pageId=56149826--></p>
+        <p>The HCG Dashboard UI is a cloud management tool that allows users to define, deploy,
+            manage, and monitor a HP Helion OpenStack cloud. The tool helps you provide and validate
+            the cloud definitions required to deploy your cloud and guide you through the
+            deployment. </p>
+        <p>After the cloud is deployed, you can use the <b>Manage Cloud</b> wizard in the HCG
+            Dashboard to reset services including: </p>
+        <section>
+            <p>
+                <ul id="ul_ptt_3tf_cv">
+                    <li>MySQL</li>
+                    <li>RabbitMQ</li>
+                    <li>NTP</li>
+                    <li>Apache</li>
+                    <li>OpenStack services (Keystone, Glance, Swift, Cinder) </li>
+                    <li>Centralized Logging services (ElasticSearch, Logstash, Kibana, Beaver,
+                        Icinga and Attis) </li>
+                </ul>
+            </p>
+            <p>You can also edit an existing cloud definition for the Inventory Nodes.</p>
+        </section>
+        <section
+            conref="../Installation/denver/CGH-2-install-denver-standalone-ui.dita#topic10581c2idui/launch"/>
+        <p/>
+        <ul id="ul_ipp_nzf_cv">
+            <li>"Manage" cloud option allows user to perform post deployment activities for the
+                selected cloud. This feature can be launched by clicking "Manage" button on "Cloud
+                List" screen after the cloud is deployed.</li>
+        </ul>
+        <p> </p>
+        <p><image
+                href="https://wiki.hpcloud.net/download/attachments/56149826/cloudList.png?version=1&amp;modificationDate=1454997552000&amp;api=v2"
+                width="500" id="image_jpp_nzf_cv"/></p>
+        <p> </p>
+        <ul id="ul_kpp_nzf_cv">
+            <li>Currently, this option facilitates user to reset\recover all the services running on
+                remote control plane</li>
+        </ul>
+        <p><image
+                href="https://wiki.hpcloud.net/download/attachments/56149826/serviceList.png?version=1&amp;modificationDate=1454997734000&amp;api=v2"
+                width="500" id="image_lpp_nzf_cv"/></p>
+        <p> </p>
+        <p><image
+                href="https://wiki.hpcloud.net/download/attachments/56149826/serviceInProgress.png?version=1&amp;modificationDate=1454997602000&amp;api=v2"
+                width="500" id="image_mpp_nzf_cv"/></p>
+        <p> </p>
+        <p><image
+                href="https://wiki.hpcloud.net/download/attachments/56149826/serviceSuccessful.png?version=1&amp;modificationDate=1454997618000&amp;api=v2"
+                width="500" id="image_npp_nzf_cv"/></p>
+        <p> </p>
+        <p><image
+                href="https://wiki.hpcloud.net/download/attachments/56149826/serviceFailed.png?version=1&amp;modificationDate=1454997636000&amp;api=v2"
+                width="500" id="image_opp_nzf_cv"/></p>
+        <p> </p>
+        <p> </p>
+    </body>
+</topic>

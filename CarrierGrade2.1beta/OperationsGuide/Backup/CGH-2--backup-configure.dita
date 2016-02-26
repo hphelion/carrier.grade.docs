@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2bc">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Configuring the Backup and
+    Restore Environment </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <!-- https://wiki.hpcloud.net/pages/viewpage.action?pageId=53513771 -->
+    <p><!--Here is the wiki link for Attis. <xref href="https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?pageId=946944841" format="html" scope="external">https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?pageId=946944841</xref> 
+The high level design needs to be adjusted to more suite with CG(It is reflecting CS in some areas)I will soon update it. 
+But the CLI, REST API etc should all be same --></p>
+    <p>Before performing a back up or restore using Attis, perform the following one-time tasks:<ul
+        id="ul_gm5_4jk_p5">
+        <li><xref href="#topic10581c2bc/location" format="dita"/></li>
+      <li><xref href="#topic10581c2bc/template" format="dita"/></li>
+        <!--<li><xref href="#topic10581c2bc/trust" format="dita"/></li>-->
+        <li><xref href="#topic10581c2bc/kvm-password" format="dita"/></li>
+        <!--<li><xref href="#topic10581c2bc/baremetal" format="dita"/></li>-->
+        <!--<li><xref href="#topic10581c2bc/keys" format="dita"/></li>-->
+      </ul></p>
+    <section id="location">
+      <title>Configuring the Backup and Restore Location </title>
+      <p>Before you start your first backup, you must use the Attis CLI to specify where HP Helion
+        OpenStack Carrier Grade will store backup files. For information about the attis CLI, see
+        the <xref href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
+          CLI</xref>.</p>
+      <p>You can store backup files using:<ul id="ul_uzn_3b3_k5">
+          <li>SCP: A location on a remote server where the backup file is secure copied.</li>
+          <li>NFS: A location on a network file system.</li>
+          <li>FILE: A location on the cloud controller.</li>
+        </ul>HPE recommends that you use an SCP or NFS server so that backup files are automatically
+        moved to an off-appliance location in case of a catastrophic failure of the cloud
+        controllers. You can use the FILE option if you want to manually mount shared storage on all
+        three nodes of the cloud controller.</p>
+      <p>IMPORTANT: If you do not set a storage location, the backup will not succeed. In the backup
+        job list, you will see that SSH connection to the storage path failed, and the state is
+        Failed.</p>
+      <p>Perform the following steps on any cloud controller node. <ol id="ol_vzn_3b3_k5">
+          <li>Log into HLM node</li>
+          <li>SSH to any controller nodes from HLM using controller credentials (default username:
+            cghelion)</li>
+          <li>Switch to the root user by running sudo –i.</li>
+          <li>Set the type of backup storage location. <ul id="ul_fk5_vp3_k5">
+              <li>To set the backup storage location to an SCP server, run:
+                <codeblock>attis storage --use SCP</codeblock></li>
+              <li>To set the backup storage location to an NFS server, run:
+                <codeblock>attis storage --use NFS</codeblock></li>
+            </ul></li>
+          <li>List the storage details.
+            <codeblock>root@ma1:~# attis storage
++--------------------------------------+------+----------+ 
+| id                                   |type  |selected  |
++--------------------------------------+------+----------+ 
+|529cd8fb-c6a2-401d-9caf-61caeede7f81  |FILE  |False     |   
+|d6210603-01b1-4d76-9068-e3ffa44a449e  |NFS   |False     | 
+|7abb6f30-3f10-4918-9f8d-a58b157d59b9  |SCP   |True      |
++--------------------------------------+------+----------+ </codeblock></li>
+          <li>View the storage parameters that you will need to update by selecting the storage ID
+            of the selected type. Example:
+            <codeblock>root@ma1:~# attis storage --id 7abb6f30-3f10-4918-9f8d-a58b157d59b9
++--------------------------------------+------+----------+ 
+| id                                   |type  |selected  |
++--------------------------------------+------+----------+ 
+|7abb6f30-3f10-4918-9f8d-a58b157d59b9  |SCP   |True      |
++--------------------------------------+------+----------+
++--------------------------------+--------------------------------------+---------+ 
+|id           |storage_id        | parameter_name               | value           |
++---------------+----------------+----------------------+-------------------------+
+| 18bb9b5e-&lt;...&gt;| 7abb6f30-&lt;...&gt; | user                 |                         | 
+| 78aaa60e-&lt;...&gt;| 7abb6f30-&lt;...&gt; | storage_path         |                         | 
+| c0a5c549-&lt;...&gt;| 7abb6f30-&lt;...&gt; | server               |                         |
+| e34ac1b2-&lt;...&gt;| 7abb6f30-&lt;...&gt; | private_key_filepath | /home/attis/.ssh/id_rsa |
++---------------+----------------+----------------------+-------------------------+</codeblock></li>
+          <li>Set the attis configuration of the storage type you entered in step 4 by entering:
+              <codeblock>attis storage --id &lt;storage_id from the table&gt; --update '{"parameter":"new value", "parameter":"new value"}'</codeblock><p>where
+              parameter in an SCP configuration is:</p><ul id="ul_c14_3b3_k5">
+              <li>user: User to SSH into the remote SCP server.</li>
+              <li>storage_path: Path on the remote SCP server where you want to store backup
+                files.</li>
+              <li>server: IP address or DNS resolvable hostname of the remote server.</li>
+              <li>private_key_filepath: Private key used to SSH to the remote SCP server. By default
+                /home/attis/.ssh/id_rsa on the controller is prepopulated.</li>
+            </ul><p><b>SCP Example</b>
+            </p><p>To specify the details of an SCP server to use for backup file
+                storage:</p><codeblock>attis storage --update '{"storage_path":"/mybackupDirOnRemoteMachine","private_key_filepath":"/home/attis/.ssh/id_rsa","server":"hostofscplocation","user":"remotescpuser"}' --id &lt;copy the storage_id from attis storage&gt; </codeblock><p><b>IMPORTANT:</b>
+              If you select SCP, you must copy the public key text located at
+              /home/attis/.ssh/id_rsa.pub from controller nodes and paste it into the
+              authorized_keys file of the SCP
+              server.<codeblock>sudo su attis
+ssh-copy-id &lt;remotescpuser&gt;@&lt;hostofscplocation&gt;</codeblock></p><p>If
+              you want to generate a new key for setting up trust between attis and the SCP server,
+              copy the private key to each controller node. Then use the attis command storage
+              --update to update the private_key_filepath.</p><p><b>NFS Example</b>
+            </p><p>To specify the details of an NFS server to use for backup file
+              storage:<codeblock>attis storage --update '{"server":"NFS server ip", "client_mount_path": "name of storage mount on cloud controller", "storage_path":"mybackupDironRemoteMachine"}' --id &lt;copy the storage_id from attis storage&gt;</codeblock></p></li>
+          <li>Restart Attis server on all three controllers if the storage option is changed to NFS
+            or FILE option: <codeblock>service attis-server restart</codeblock></li>
+        </ol></p>
+    </section>
+    <section id="template">
+      <title>Configure the restore templates</title>
+      <p>Before performing a restore:</p>
+      <ol id="ol_jdk_3gd_p5">
+        <li>Log into the cloud controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li>Update required parameters of the configuration template you are using before you
+          trigger restore. Enter values into each of the blank fields in the file:<ul
+            id="ul_vpr_kld_p5">
+            <li><b>for NFS storage</b> edit
+                <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeph>
+              file</li>
+            <li><b>for SCP storage</b> edit the
+                <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>
+              file.</li>
+          </ul><p>You can use the <codeph>attis backuplog</codeph> command to locate the
+              <codeph>backup_base_dirpath</codeph> and <codeph>restore_to_incrementnumber</codeph>
+            values in the <codeph>base_folder</codeph> and <codeph>last_incremental_ref</codeph>
+            column from output of command. </p>The following is an example of
+            <codeph>/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>.
+          For NFS template, storage_path is the client mount path. All other parameters are same as
+          in SCP template.<p><image href="../../../media/carrier.grade.docs/CGH-2-attis-restore.png"
+              width="600" id="image_cby_dhd_p5"/></p></li>
+        <li>Update the <codeph>Storage</codeph> parameters (SCP or NFS).</li>
+      </ol>
+    </section>
+    <!--<section id="trust"><title>Set up trust between the controllers and the VSD</title><p>Before running VSD backup, you must set up trust between the controllers and VSD.<ol id="ol_aqp_n23_k5"><li>Log in the VSD controller.</li><li>Execute the following command on all three controllers to copy the Attis public key to the VSD <codeph>authorized_keys</codeph> file:<codeblock>sudo su attis
+ssh-copy-id vsd_user@vsd_address</codeblock><b>Note:</b> The <i>vsd_user</i> can be found by viewing the configuration file:<p>The <i>vsd_address</i> can be found in the /etc/attis/dcn.lst file:</p><codeblock>cat /etc/attis/dcn.lst</codeblock></li></ol></p></section>-->
+    <section id="kvm-password">
+      <title>Set the KVM Password</title>
+      <p>If the KVM Region controller username and/or password is set other than defaults, use the
+        Attis CLI to update those values in the KVM Region controller configurataion file.</p>
+      <p>To change the username/password:</p>
+      <ol id="ol_dtl_clj_k5">
+        <li>Log into the active KVM Region controller.</li>
+        <li> Execute the following
+          commands:<codeblock>attis config --id &lt;config_id of WR_Appliance_system_files_Backup&gt; --update-parameter '{"wr_controller_backup_user":"YOUR_USER"}'
+attis config --id &lt;config_id of WR_Appliance_system_files_Restore&gt; --update-parameter '{"wr_controller_backup_password":"YOUR_PASSWORD"}</codeblock></li>
+      </ol>
+    </section>
+    <!--<section id="baremetal"><title>Configure the baremetal controller details </title><p><b><i>After removing comment, change &lt;dash>id to &lt;dash>&lt;dash>id; &lt;dash>update-parameter to &lt;dash>&lt;dash>update-parameter</i></b></p><p>Before backing up or restoring the baremetal controller:<ol id="ol_mqc_s23_k5"><li>Log into the active baremetal controller.</li><li>Change to the root user:<codeblock>sudo -i</codeblock></li><li>Edit the the <codeph>/etc/attis/dcn.lst</codeph> file to update the <codeph>bm_controller_address</codeph> field:<codeblock>vi /etc/attis/dcn.lst</codeblock></li><li>Execute the following commands to update the <codeph>target_restore_nodes</codeph> parameter in baremetal controller files restore configuration files:<codeblock>attis config -id &lt;Config_ID_of_BM_Controller_ironic_files_Restore&gt; -update-parameter '{"target_restore_nodes":"&lt;BM_Controller_IP&gt;:&lt;BM_Controller_IP&gt;"}'
+attis config -id &lt;Config_ID_of_BM_Controller_neutron_files_Restore&gt; -update-parameter '{"target_restore_nodes":"&lt;BM_Controller_IP&gt;:&lt;BM_Controller_IP&gt;"}'
+attis config -id &lt;Config_ID_of_BM_Controller_nova_files_Restore&gt; -update-parameter '{"target_restore_nodes":"&lt;BM_Controller_IP&gt;:&lt;BM_Controller_IP&gt;"}'</codeblock> Where: <ul id="ul_utr_hjk_p5"><li><codeph>Config_ID_of_BM_Controller_ironic_files_Restore</codeph> is the ID of the <codeph>BM_Controller_ironic_files_Restore</codeph> configuration file.</li><li><codeph>BM_Controller_IP</codeph> is the IP of the baremetal controller.</li></ul></li></ol></p></section>-->
+    <!--<section id="keys"><title>Copy the Attis public keys to the baremetal controller</title><p>For Sacramento deployments, copy the Attis public key from each controller to the baremetal controller.</p><p><ol><li>Copy the Attis public key from each of the controllers in the KVM Region. The key is located in:<codeblock> /home/attis/.ssh/id_rsa.pub</codeblock></li><li>Paste the keys into the <codeph>authorized_keys</codeph> file on the baremetal controller, <codeph>/home/cghelion/.ssh/authorized_keys</codeph>.</li></ol></p></section>-->
+  </body>
+</topic>

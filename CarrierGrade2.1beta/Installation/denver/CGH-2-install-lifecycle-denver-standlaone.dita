@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic10581c2ild">
+<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Step 3a -Deploying the
+    Lifecycle Manager VM (Denver Deployment)</title>
+<prolog>
+  <metadata>
+    <othermeta name="layout" content="default"/>
+    <othermeta name="product-version" content="HP Helion OpenStack Carrier Grade 2.0"/>
+    <othermeta name="role" content="Storage Administrator"/>
+    <othermeta name="role" content="Storage Architect"/>
+    <othermeta name="role" content="Michael B"/>
+    <othermeta name="product-version1" content="HP Helion OpenStack Carrier Grade 2.0"/>
+  </metadata>
+</prolog>
+<body>
+    <!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki-->
+    <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves deploying a
+      virtual machine to host lifecycle manager tool for installing and maintaining your cloud. </p>
+    <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
+      required installation processes.</p>
+    <bodydiv id="hlm">
+      <section id="prepare">
+        <title>Prepare the system for deployment</title>
+        <p>Use the following steps to prepare the server on which the lifecycle manager VM will be
+          deployed (the lifecycle manager host):</p>
+        <ol id="ol_hx2_33q_f5">
+          <li>Log into the lifecycle manager host using the default credentials.</li>
+          <li>Edit the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file for your
+            environment. For information on each variable, refer to the comments in the file with
+            each variable. <ul id="ul_tzp_3zz_s5">
+              <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all1"/>
+              <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all2"/>
+              <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all3"/>
+              <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/all4"/>
+            </ul><p id="all">The <codeph>group_vars/all</codeph> file should appear similar to the
+              following (IP addresses masked for
+              security):<codeblock>############################################# Variables for HLM  #################################################################
+#These variables are relevant in both All Virtual and BareMetal scenarios.
+
+#ovs_cloud_only: 0 #memphis
+#ovs_cloud_only: 1 #ovs
+#ovs_cloud_only: 2 #denver
+#ovs_cloud_only: 3 #rcp
+ovs_cloud_only:  3
+
+#Set this to 'bm' if cloud is being deployed over baremetal.
+#Set this to 'av' if the cloud is all virtual
+cloud_type: 'av'
+
+#These are hlm related variables that must be changed according to your Baremetal Env
+hlm_login_id:       root
+hlm_password:       cghelion
+
+#The following variables are for CLM network IP details for HLM
+hlm_clmstaticip:    10.x.x.x
+hlm_clmnetmask:     255.255.255.0
+hlm_clmgateway:     10.x.x.x
+
+#The variables starting with cobbler_ are inputs that are usually given to initcobbler.sh. Set accordingly.
+cobbler_pxestartip: 192.x.x.x
+cobbler_pxeendip:   192.x.x.x
+cobbler_pxestaticip: 192.x.x.x
+cobbler_pxenetmask: 255.255.255.0
+
+#Set the location of your images that will be used by libvirt
+imagelocation: /var/lib/libvirt/images
+
+#Set the location of your infra-ansible-playbooks
+ansible_dir: ~/infra-ansible-playbooks
+
+##################################################################################################################################
+
+############################################# Variables for DCN ##################################################################
+#Set the location of dcn bits on KVM
+#There must be 4 debs, 2 tar.gz files, 1 vsc qcow2
+#You must copy your VSD qcow2 to the imagelocation on the KVM if you want to provision it on the same KVM as the HLM
+dcn_dir: ~/cg/dcn
+##################################################################################################################################
+
+############################################# Variables for VSD ##################################################################
+#Ignore these variables if creating an OVS cloud. This section is relevant only for DCN cloud - in both BM and All Virtual cases
+#These variables are used for VSD Configuration
+#If you have already configured a VSD and ignore the following variables
+
+dns_domain_name: helion.cg
+dns_address: 10.x.x.x
+vsd_address: 10.x.x.x
+vsd_gateway: 10.x.x.x
+vsd_netmask: 255.255.255.0
+vsd_name: vsd
+vsdimagename: VSD-3.0.0_HP_r3.0_36
+upstream_ntp_servers:
+   - 10.x.x.x
+   - 10.x.x.x
+###################################################################################################################################
+
+########################################################### KVM Cluster configuration #############################################
+
+#kvm_cluster: 0 #indicates do not configure kvm cluster
+#kvm_cluster: 1 #indicates configure kvm cluster for openSAF
+kvm_cluster: 0
+
+#List of KVM hosts that will be participate in cluster if 'kvm_cluster' variable is set to 1
+#IP Address for the KVM hosts must be defined in the order of Rank
+##In the below list indicates 10.0.0.1=rank1, 10.0.0.2=rank2, 10.0.0.3=rank3...
+kvm_hosts:
+   - 10.0.0.1
+   - 10.0.0.2
+   - 10.0.0.3
+   - 10.0.0.4
+###################################################################################################################################
+              </codeblock></p></li>
+          <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/3"/>
+          <li>Perform the following tasks to configure Libvirt to work with Ansible:<ol
+              id="ol_l52_tdn_cv">
+              <li>Change to the cghelion directory<codeblock>cd /home/cghelion/</codeblock></li>
+              <li>Edit the <codeph>.profile</codeph> file to add the <codeph>export</codeph> line
+                  below:<codeblock>export LIBVIRT_DEFAULT_URI="qemu:///system"</codeblock><p>For
+                  example:</p><codeblock>if [ -d "$HOME/bin" ] ; then
+PATH="$HOME/bin:$PATH"
+fi
+</codeblock></li>
+              <li>Execute the following
+                command:<codeblock>sudo usermod -a -G libvirt cgheion</codeblock></li>
+              <li>Change to the <codeph>etc/</codeph> directory.</li>
+              <li>Add a user to the <codeph>sudoers</codeph>
+                file:<codeblock>% sudo ALL=(ALL:ALL) ALL
+cghelion ALL=(ALL) NOPASSWD:ALL</codeblock></li>
+            </ol></li>
+          <!--<li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/4"/>-->
+        </ol>
+      </section>
+      <section>
+        <title>Deploy the Lifecycle Manager Virtual Machine</title>
+        <p>Use the following steps on the lifecycle manager host to deploy the lifecycle manager on
+          that host using Ansible playbooks.</p>
+        <ol id="ol_jld_mvb_y5">
+          <li>On the lifecycle manager, change to <codeph>infra-ansible-playbooks</codeph> directory
+            <codeblock>cd ~/infra-ansible-playbooks</codeblock></li>
+          <li>Execute the following command to deploy the lifecycle manager VM using Ansible:
+            <codeblock>ansible-playbook -i hosts setup_hlm_for_UI.yml</codeblock>This command
+            deploys and configures the lifecycle manager VM. After deployment, you can add the
+            lifecycle manager host to a KVM cluster
+              manually.<p><!--<ul id="ul_ozg_p5q_y5"><li><b>Use the HCG Dashboard UI to deploy the cloud:</b><p>Use this option if you intend to deploy the Standard Region cloud using the HCG Dashboard UI. <codeblock>ansible-playbook -i hosts setup_hlm_for_UI.yml</codeblock></p></li><li><p><b>Use the CLI to deploy the cloud</b></p><p>Use the following command if you intend to deploy the Standard Region cloud using the command line:<codeblock>ansible-playbook -i hosts setup_vcloud.yml</codeblock></p><p>This command deploys and configures the lifecycle manager VM. After deployment, you can add the lifecycle manager host to OpenSAF cluster manually. </p></li></ul>--></p></li>
+          <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/hosts"/>
+        </ol>
+      </section>
+      <section conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/disk-size"/>
+    </bodydiv>
+    <section id="next-step">
+      <title>Next Step</title>
+      <p><xref href="CGH-2-install-denver-standalone-helion.dita#topic10581c2idh">Deploying HP Helion
+          OpenStack</xref></p>
+    </section>
+  </body>
+</topic>

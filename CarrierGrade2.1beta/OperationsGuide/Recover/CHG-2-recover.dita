@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic5937recover">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Restart MySQL and
+    RabbitMQ</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack"/>
+      <othermeta name="product-version" content="HP Helion OpenStack 1.1"/>
+      <othermeta name="role" content="Systems Administrator"/>
+      <othermeta name="role" content="Cloud Architect"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Network Administrator"/>
+      <othermeta name="role" content="Service Developer"/>
+      <othermeta name="role" content="Cloud Administrator"/>
+      <othermeta name="role" content="Application Developer"/>
+      <othermeta name="role" content="Network Engineer"/>
+      <othermeta name="role" content="Paul F"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack"/>
+      <othermeta name="product-version2" content="HP Helion OpenStack 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>A default deployment of HP Helion OpenStack Carrier Grade includes a MySQL database instance
+      and RabbitMQ instance on each controller, configured as a MySQL cluster. </p>
+    <p>In HP Helion OpenStack Carrier Grade 2.1, the controllers are virtual machines on a single
+      server. In the event that server goes down, you will need to manually restart the MySQL
+      servers after the server is restarted. You might also need to restart RabbitMQ.</p>
+    <section>
+      <title>Restarting MySQL</title>
+      <p>If the server hosting the controller VMs goes down, the MySQL server on each controller
+        will need to be manually restarted. HP Helion OpenStack Carrier Grade includes an Ansible
+        playbook that will:<ul id="ul_tqm_lrg_t5">
+          <li>shut down all MySQL servers</li>
+          <li>perform a <codeph>mysql stop</codeph> command to clear potential errors</li>
+          <li>query the status of the MySQL cluster to determine the last MySQL server to fail</li>
+          <li>bootstrap that MySQL server</li>
+          <li>restart the other MySQL servers</li>
+        </ul></p>
+      <p>
+        <ol id="ol_wpw_frg_t5">
+          <li>Log into the lifecycle manager. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
+              HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>~/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Verify that the <codeph>restart_cluster.yml</codeph> and
+              <codeph>ansible/restart-MySQL-CCP-T1.yml</codeph> files exist in the
+              <codeph>~/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/FND-MDB/tasks/</codeph>
+              directory.<p>If the <codeph>restart_cluster.yml</codeph> file does not exist, edit the
+                <codeph>ansible/roles/FND-MDB/tasks/deploy.yml</codeph> to comment out all the
+                <codeph>include</codeph> statements and add in <codeph>restart_cluster</codeph> and
+              save as <codeph>restart_cluster.yml</codeph>.</p></li>
+          <li>Log into the controller
+            <codeblock>ssh cghelion@&lt;IP of Controller> </codeblock></li>
+          <li>Execute the following command to determine the status of the MySQL
+            cluster:<codeblock>"sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock>This
+            command will return an error if MySQL cluster is down. </li>
+          <li>If the cluster is down, execute the following command to restart the
+            cluster:<codeblock>ansible-playbook -i hosts restart-MySQL-CCP-T1.yml</codeblock>If the
+            file does not exist, edit the
+              <codeph>~/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/FND-MDB/tasks/
+              directory/deploy.yml</codeph> file to comment out all <codeph>include</codeph>
+            statements and add in <codeph>restart_cluster</codeph>.</li>
+          <li>Execute the following command to determine the status of the MySQL
+            cluster:<codeblock>ssh cghelion@&lt;IP of Controller> "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock>This
+            command should return a cluster status where all VMs are listed. </li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>Restarting RabbitMQ</title>
+      <p>If the server hosting the controller VMs goes down, the RabbitMQ message broker service
+        might need to be manually restarted.</p>
+      <p>
+        <ol>
+          <li>Log into the lifecycle manager. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
+              HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Verify that the <codeph>restart_cluster.yml</codeph> and
+              <codeph>restart-RMQ-CCP-T1.yml</codeph>  files exist in the
+              <codeph>~/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/ansible/roles/FND-MDB/tasks/</codeph>
+              directory.<p>If the <codeph>restart_cluster.yml</codeph> file does not exist, edit the
+                <codeph>deploy.yml</codeph> to comment out all the <codeph>include</codeph>
+              statements and add in restart_cluster.</p></li>
+          <li>Log into the controller
+            <codeblock>ssh cghelion@&lt;IP of Controller> </codeblock></li>
+          <li>Execute the following command to determine the status of the RabbitMQ
+            cluster:<codeblock>"sudo rabbitmqctl cluster_status"</codeblock>This command will return
+            an error if RabbitMQ cluster is down. </li>
+          <li>If the cluster is down, execute the following command to restart the
+            cluster:<codeblock>ansible-playbook -i hosts restart-RMQ-CCP-T1.yml</codeblock></li>
+          <li>Execute the following command to determine the status of the RabbitMQ
+            cluster:<codeblock>"sudo rabbitmqctl cluster_status"</codeblock>This command should
+            return a cluster status where all VMs are listed.</li>
+        </ol>
+      </p>
+    </section>
+  </body>
+</topic>

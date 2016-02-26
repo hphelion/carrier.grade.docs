@@ -1,0 +1,93 @@
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map xml:lang="en" linking="none" locktitle="no">
+    
+    <title> HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Installation
+        Guide</title>
+    <topicmeta>
+        <copyright>
+            <copyryear year="2015"/>
+            <copyrholder>HP Helion</copyrholder>
+        </copyright>
+        <prodinfo>
+            <prodname >HP Helion OpenStack Carrier Grade</prodname>
+            <vrmlist>
+                <vrm release="1.1" version=""/>
+            </vrmlist>
+        </prodinfo>
+    </topicmeta>
+    <topicref href="carrier-grade-install-overview.dita" navtitle="Installation" locktitle="yes"
+        otherprops="install-overview">
+        <topicref href="denver/carrier-grade-install-overview-denver.dita"
+            navtitle="Deploying HP Helion OpenStack Carrier Grade" locktitle="yes"
+            otherprops="deploy-denver">
+            <topicref href="denver/carrier-grade-technical-overview-denver.dita"
+                navtitle="Technical Overview" locktitle="yes"/>
+            <topicref href="denver/carrier-grade-support-matrix-denver.dita"
+                navtitle="Support Matrix" locktitle="yes"/>
+            <topicref href="denver/CGH-install-prereqs-denver.dita"
+                navtitle="Step 1: Installation Prerequisites" locktitle="yes">
+                <topicref href="prereqs/carrier-grade-install-network-prepare.dita"
+                    navtitle="Step 1a: Preparing the Network for Installation" locktitle="yes"/>
+            </topicref>
+            <topicref href="denver/carrier-grade-install-download-denver.dita"
+                navtitle="Step 2: Download the Installation Packages" locktitle="yes"/>
+            <topicref href="denver/CGH-2-install-denver-standard.dita"
+                navtitle="Step 3: Deploy the Standard Region" locktitle="yes" otherprops="nonsla">
+                <topicref href="denver/CGH-2-install-lifecycle-denver-standlaone.dita"
+                    navtitle="Step 3a: Deploy the Lifecycle Manager VM" locktitle="yes"/>
+                <topicref href="denver/CGH-2-install-denver-standalone-helion.dita"
+                    navtitle="Step 3a: Deploy HP Helion OpenStack" locktitle="yes">
+                    <topicref href="denver/CGH-2-install-denver-standalone-ui.dita"
+                        navtitle="Using the HCG Dashboard UI" locktitle="yes"/>
+                    <topicref href="denver/CGH-2-install-denver-standalone-cli.dita" locktitle="yes"
+                        navtitle="Using the CLI"/>
+                </topicref>
+            </topicref>
+            <!-- <topicref href="denver/CGH-2-install-denver-cluster.dita"
+                navtitle="Step 3: Deploying In a KVM Cluster" locktitle="yes" otherprops="lifecycle">
+                <topicref href="denver/CGH-2-install-lifecycle-denver-cluster.dita"
+                    navtitle="Deploy the Lifecycle Manager VM" locktitle="yes"/>
+                <topicref href="denver/CGH-2-install-denver-standard-cluster.dita"
+                    navtitle="Deploy the Standard Region" locktitle="yes"/>
+            </topicref>
+            <topicref href="denver/CGH-2-install-denver-standalone.dita"
+                navtitle="Step 3: Deploying On a Standalone KVM" locktitle="yes"
+                otherprops="standard"/> -->
+            <topicref href="denver/carrier-grade-install-launch-horizon-denver.dita"
+                navtitle="Step 4: Launching the Horizon Interface" locktitle="yes"/>
+            <topicref href="denver/carrier-grade-install-kvm-denver.dita"
+                navtitle="Step 5: Deploying the KVM Region" locktitle="yes"/>
+            <topicref href="denver/carrier-grade-install-post-denver.dita"
+                navtitle="Step 6: Post-Deployment Tasks" locktitle="yes"
+                otherprops="post-installation-denver">
+                <topicref href="carrier-grade-install-ldap-verify.dita"
+                    navtitle="Step 8A- Verifying the LDAP Deployment" locktitle="yes" toc="yes"/>
+                <topicref href="denver/carrier-grade-install-denver-networking.dita"
+                    navtitle="Step 8B- Configuring the Provider Networks" locktitle="yes"/>
+            </topicref>
+            <topicref href="denver/CGH-2-install-workarounds.dita"
+                navtitle="Known Issues and Workarounds" locktitle="yes"/>
+            <topicref href="../carrier-grade-access.dita" navtitle="Accessing Cloud Components"
+                locktitle="yes"/>
+        </topicref>
+        <topicref href="CGH-2-install-sriov-pci.dita"
+            navtitle="Configuring SR-IOV or PCI Passthrough Networking" locktitle="yes"
+            otherprops="sriov-pci">
+            <topicref href="CGH-2-install-sr-iov.dita" navtitle="Configuring SR-IOV" locktitle="yes"/>
+            <topicref href="CGH-2-install-pci-pass.dita" navtitle="Configuring PCI-Passthrough"
+                locktitle="yes"/>
+        </topicref>
+        <topicref href="../BestPractice/carrier-grade-best-prctice.dita" navtitle="Best Practices"
+            locktitle="yes" otherprops="bestpractice">
+            <topicref href="../BestPractice/carrier-grade-installation-best-prctice.dita"
+                navtitle="Installation Best Practices" locktitle="yes"/>
+        </topicref>
+        <topicref href="../carrier-grade-reference-files.dita" navtitle="Reference files"
+            locktitle="yes" toc="no" otherprops="reference-files">
+            <topicref href="carrier-grade-install-non-kvm.dita"
+                navtitle="Deploying the Standard Region" locktitle="yes" toc="no"/>
+            <topicref href="carrier-grade-install-config-ldap3.dita" toc="no"
+                navtitle="HP Helion OpenStack Carrier Grade 2.1: Configuring LDAP 3" locktitle="yes"/>
+            <topicref href="carrier-grade-install-bonded-nic.dita"/>
+        </topicref>
+    </topicref></map>

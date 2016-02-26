@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic1107cgikd">
+<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Step 5 - Deploying the KVM
+    Region in a Denver Deployment</title>
+<prolog>
+  <metadata>
+    <othermeta name="layout" content="default"/>
+    <othermeta name="product-version" content="HP Helion OpenStack Carrier Grade 2.0"/>
+    <othermeta name="role" content="Storage Administrator"/>
+    <othermeta name="role" content="Storage Architect"/>
+    <othermeta name="role" content="Michael B"/>
+    <othermeta name="product-version1" content="HP Helion OpenStack Carrier Grade 2.0"/>
+  </metadata>
+</prolog>
+<body>
+    <section id="intro">
+      <p>After the lifecycle manager VM is up and running and HP Helion OpenStack is installed, use the
+        following steps to deploy the KVM Region.</p>
+      <p>The process for installing the KVM Region involves the following tasks:<ul
+          id="ul_fj4_mct_g5">
+          <li><xref href="#topic1107cgikd/controller-0" format="dita">Step 1: Bring Up Controller-0
+              in the KVM Region</xref></li>
+          <li><xref href="#topic1107cgikd/kvm-custom-patch" format="dita"/></li>
+        <li><xref href="#topic1107cgikd/cloud" format="dita">Step 3: Configure the KVM Region
+              cloud</xref></li>
+        <li><xref href="#topic1107cgikd/unlock" format="dita">Step 4: Configure and unlock the
+              compute controllers</xref></li>
+        </ul></p>
+    </section>
+    <section id="controller-0">
+      <title>Step 1: Bring Up Controller-0 in the KVM Region</title>
+      <ol id="ol_mf2_knq_35">
+        <li>Make sure the server you will use for controller-0 is powered on and the other servers
+          to be used in KVM Region are shutdown.</li>
+        <li>Launch the iLO interface for the server.</li>
+        <li>Execute the following command to use the <codeph>bootimage_avs_only.iso</codeph> to boot
+          the controller node.<codeblock>mount bootimage_avs_only.iso</codeblock></li>
+        <li>Follow the install wizard. Select the Graphics mode for the controller only. Do not
+          select <codeph>Controller+Compute</codeph>.<p>After the installation is complete, you will
+            need to reboot the server. After the reboot:</p><ol id="controller-0-2">
+            <li>Log in as user name <codeph>wrsroot</codeph> and password <codeph>wrsroot</codeph>.
+              Make sure you change the password.</li>
+            <li>Temporarily assign an IP address to the <codeph>PXE NIC - eth0</codeph>. Use the IP
+              you have reserved for the KVM PXE.
+              <codeblock>ip addr add &lt;CIDR> dev eth0
+ifconfig eth0 up</codeblock></li>
+            <li> Set the default gateway to the PXE network gateway
+              <codeblock>route add default gw &lt;CIDR_gateway_IP&gt;</codeblock></li>
+            <li>Copy the following KVM revion license files from the lifecycle manager VM to the
+                <codeph>/home/wrsroot/</codeph> directory of the <codeph>controller-0</codeph>. <ul
+                id="ul_mpn_hnr_bt">
+                <li><codeph>license.lic</codeph> Located in the
+                    <codeph>/root/cg-hlm/windriver-files</codeph> directory</li>
+                <li><codeph>region_config</codeph> Located in the
+                    /<codeph>var/hlm/clouds/&lt;cloud-name&gt;/desired_state/&lt;cloud-name&gt;/001/base/stage/windriver-config</codeph>
+                  directory</li>
+                <li><codeph>cakey.pem</codeph> Located in the
+                    <codeph>/var/hlm/clouds/&lt;cloud-name&gt;/desired_state/&lt;cloud-name&gt;/001/base/stage/windriver-config</codeph>
+                  directory</li>
+              </ul><p>These files are loaded to the lifecycle manager VM during the installation
+                process.</p></li>
+          </ol></li>
+      </ol>
+    </section>
+    <section id="kvm-custom-patch">
+      <title> Step 2: Apply KVM Region patches</title>
+      <p>Perform the following steps to deploy two required patches.</p>
+      <ol>
+        <li>On KVM Region <codeph>controller-0</codeph>, create a directory for the
+          patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
+        <li>Copy the following patches file to the <codeph>/tmp/patches</codeph> directory: <ul
+            id="ul_zbh_j2t_q5">
+            <li><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></li>
+            <li><codeph>TS_HP_15_Custom_PATCH_0003.patch</codeph><p>You should have downloaded this
+                patch file in the Prerequisites. </p></li>
+          </ul></li>
+        <li>Execute the following command to registers all patches in the specific directory into an
+          internal database:
+            <codeblock>sudo sw-patch upload-dir /tmp/patches                </codeblock><p>Once
+            registered, you can delete the patch files from the controller as the patches have been
+            added to the database.</p></li>
+        <li>Execute the following command to apply all registered patches to the nodes in this
+          cluster:<codeblock>sudo sw-patch apply --all</codeblock></li>
+        <li>Execute the following command to deploy the
+          patch:<codeblock>sudo sw-patch install-local</codeblock>Wait for the <i>Patch installation
+            is complete</i> message. This will take few minutes and you will be prompted for
+          reboot.</li>
+        <li>Reboot the controller:<codeblock>sudo reboot</codeblock></li>
+      </ol>
+    </section>
+    <section id="cloud">
+      <title>Step 3: Configure the KVM Region cloud</title>
+      <ol id="ol_vl1_5fj_y5">
+        <li>In the iLO web interface, launch a console session to the <codeph>controller-0</codeph>
+          node.</li>
+        <li>Execute the following command to install the KVM Region cloud:<p><b>Important:</b>
+            Always execute this command from a console window, not an SSH
+              session</p><codeblock>sudo config_region region_config</codeblock><p><image
+              href="../../../media/CGH-install-KVM.png" width="500" id="image_wl1_5fj_y5"
+          /></p>Ignore the message which displays during <codeph>config_region</codeph> process.
+              <codeblock>Step 9 of 29 [####  ]dm-6 WRITE SAME failed. Manually zeroing. </codeblock><p><image
+              href="../../../media/CGH-install-kvm-error.png" width="500" id="image_xl1_5fj_y5"
+            /></p></li>
+        <li>After <codeph>controller-0</codeph> is deployed, add and configure the remaining nodes
+          as <codeph>controller-1</codeph> and <codeph>compute-'n'</codeph>.
+              <codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
+system host-add --hostname &lt;unique-compute-name&gt; --personality compute --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;ilo_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt;  --bm_password &lt;ilo_password&gt;</codeblock><p><b>Note:</b>
+            When adding a controller, the name is assigned in order. Unique controller names are
+            ignored.</p><p><image href="../../../media/CGH-install-kvm-host-add.png" width="300"
+              id="image_yl1_5fj_y5"/></p></li>
+        <li>In the iLO web interface, set the controller and compute nodes to one-time PXE booting
+          from the network.</li>
+        <li>Restart the nodes.</li>
+        <li><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd">Access the
+            Horizon dashboard</xref> using the CAN network IP (HTTPS). </li>
+        <li>Select <b>regionone</b> in the <xref
+            href="../../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita#jow1432757989702"
+            >region selector</xref>.</li>
+        <li>Click <b>Admin</b> then <b>Inventory</b> to monitor the status of nodes being PXE
+          booted. After a succesful PXE boot, the <b>Operational State</b> should be <b>Disabled</b>
+          and the <b>Availability State</b> should be <b>Online</b>. <p><b>Note:</b>The Horizon
+            Dashboard will be running on the first IP address of the CLM network range (refer to the
+              <codeph>ip_start_address</codeph> value provided for the CLM network in the
+              <codeph>definition.json</codeph> during the Standard Region deployment). </p><p>The
+            log-in credentials for Horizon are as
+            follows:</p><codeblock>username: admin 
+password:  &lt;random></codeblock><p>The Horizon
+            password is randomly generated during the installation. You can locate the password in
+            the <codeph>stackrc</codeph> file on any of the Standard Region controllers.</p></li>
+      </ol>
+    </section>
+  <section id="unlock">
+    <title>Step 4: Configure and unlock the compute controllers</title>
+    <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
+      the following commands from controller-0 to unlock each compute node in the inventory.</p>
+    <ul id="ul_f1c_dk1_h5">
+      <li><xref href="#topic1107cgikd/kvm-esx-unlock" format="dita">For a Non-Bonded
+            Environment</xref></li>
+      <li><xref href="#topic1107cgikd/nic-unlock" format="dita">For a Bonded Environment</xref></li>
+    </ul>
+    
+    <p id="kvm-esx-unlock">
+      <b>For a Non-Bonded Environment</b></p>
+    <ol>
+      <li>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
+          the following commands from controller-0 to unlock the compute nodes.<ol
+            id="ol_p42_d35_lt">
+            <li>Configure the controller node:
+                <codeblock>system host-add --hostname &lt;unique-controller-name> --personality controller --mgmt_mac &lt;MAC_Address> --bm_mac &lt;MAC_Address> --bm_ip &lt;IP_Address> --bm_type ilo4 --bm_username cghelion --bm_password &lt;password></codeblock><p>For
+                example:<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac 6C:3B:E5:A3:BB:90 --bm_mac 38:63:bb:2d:78:b0 --bm_ip 10.1.68.162 --bm_type ilo4 --bm_username cghelion --bm_password admblabla </codeblock></p></li>
+            <li>Configure the compute nodes: <p>
+                <codeblock>system host-add --hostname &lt;unique-compute-name> --personality compute --mgmt_mac &lt;MAC_Address>:80 --bm_mac &lt;MAC_Address> --bm_ip &lt;IP_Address> --bm_type ilo4 --bm_username Administrator --bm_password &lt;password></codeblock>
+              </p><p>For
+                example:<codeblock>system host-add --hostname compute1 --personality compute --mgmt_mac d0:bf:9c:f1:b0:80 --bm_mac 38:63:bb:2d:78:b0 --bm_ip 128.224.150.227 --bm_type ilo4 --bm_username Administrator --bm_password CTE69HAU</codeblock></p></li>
+            <li>Set <codeph>controller-1</codeph> and <codeph>compute-0</codeph> to <b>One-time PXE
+                boot from network</b>.</li>
+          </ol></li>
+        <li>PXE boot all the registered nodes.<p>Login to Horizon and monitor the status of nodes
+            being PXE booted on the <b>Admin > Inventory</b> page. After succesful PXE boot, the
+            Operational State should be <b>Disabled</b> and the Availability State should be
+              <b>Online</b>. </p></li>
+    </ol>
+    
+    <p id="nic-unlock">
+      <b>For bonded NIC environments</b></p>
+    <p>If you are using a bonded NIC environment, after configuring and unlocking the compute
+      nodes, perform these steps:</p>
+    <ol id="ol_nr5_ddw_mt">
+      <li>Use the following commands to delete the MGMT interface: <ol id="ol_zfq_5h1_tt">
+        <li>Obtain the compute name or ID number:<codeblock>system host-list</codeblock></li>
+        <li>Obtain the UUID of the MGMT interface to
+          remove:<codeblock>system host-if-list</codeblock></li>
+        <li>Remove the PXE boot flag off the
+          interface:<codeblock>system host-if-modify -nt "none" compute-0 pxeboot0</codeblock></li>
+        <li>Delete the
+          interface:<codeblock>system host-if-delete compute-0 95e7b495-1454-49d1-8123-301215503e86      </codeblock></li>
+      </ol></li>
+      <li>Use the following commands to create a bonded interface and setup node to be unlocked:
+          <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-0 bond0 ae "none" eth0 eth1
+system host-if-add -V 303 -nt mgmt compute-0 mgmt vlan bond0
+system host-if-add -V 74 -nt infra compute-0 infra vlan bond0
+system host-addr-add compute-0 infra 172.16.74.244 24
+system host-if-add -a balanced -x layer2 -nt "none" compute-0 bondvrs ae "none" eth2 eth3</codeblock></li>
+      <li>Use one of the following steps to configure a static IP address for the bonded NIC
+        interface or assign an IP address from an IP address pool:<ul id="ol_uqd_l5z_st">
+          <li>To assign a static IP:
+              <codeblock>system host-if-modify compute-0 -nt data-vrs --ipv4-mode=static bondvrs
+system host-addr-add compute-0 bondvrs 10.30.6.244 24</codeblock></li>
+          <li>To assign an IP address from a pool:<p>
+            <codeblock>system addrpool-add vrspool 10.30.6.0 24 --order random --ranges 10.30.6.240-10.30.6.249
+system host-if-modify compute-0 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-pool=vrspool
+system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-pool=vrspool</codeblock>
+          </p></li>
+        </ul></li>
+      <li>Execute the following command to assign IP addresses to
+        compute-0:<codeblock>system host-update compute-0 vsc_controllers=10.30.6.31,10.30.6.32</codeblock></li>
+    </ol>
+  </section>
+  <section id="next-step">
+    <title>Next Steps</title>
+    <p><xref href="carrier-grade-install-post-denver.dita#topic1107cgidp">Post-Installation
+      Tasks</xref>.</p>
+  </section>
+  
+  </body>
+</topic>
