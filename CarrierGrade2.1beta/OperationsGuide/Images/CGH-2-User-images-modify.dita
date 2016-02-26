@@ -26,12 +26,31 @@
 <li>In the <b>Images</b> screen, click <b>More</b> then click <b>Edit</b> next to the image you want
           to modify.</li>
 <li>Update the image information:<ul>
-            <li><b>Name</b> - Enter a name for the image.</li>
-            <li><b>Description</b> - Optionally, enter a brief description of the image.</li>
-            <li><b>Protected</b> - Select this option to prevent the image from being deleted. Leave
-              the option clear to allow the image to be deleted.</li>
-          </ul>
-            <note> Fields that cannot be modified are shaded.</note></li>
+                        <li><b>Name</b> - Enter a name for the image.</li>
+                        <li><b>Description</b> - Optionally, enter a brief description of the
+                            image.</li>
+                        <li><b>Format</b> - Select the correct format (for example, QCOW2) for the
+                            image.</li>
+                        <li><b>Minimum Disk</b> - Enter the minimum disk size required to boot the
+                            image. Leave the field blank to specify no minimum. </li>
+                        <li><b>Minimum RAM (MB)</b> - Enter the minimum memory size required to boot
+                            the image. Leave the field blank to specify no minimum.</li>
+                        <li><b>Live Migration Timeout in seconds (120-800)</b> - The maximum time
+                            allowed for live migration. Set to 0 to disable timeout. If unspecified,
+                            this valure defaults to 800 seconds.</li>
+                        <li><b>Live Migration Max Downtime in milliseconds </b> - The maximum
+                            downtime allowed for live migration in milliseconds. if unspecified,
+                            this values defaults to 500ms.</li>
+                        <li><b>Public</b> - Select this option to make the image public to all users
+                            with access to the current project. Leave the option clear to allow the
+                            image to be used in all projects in the domain.</li>
+                        <li><b>Protected</b> - Select this option to prevent the image from being
+                            deleted. Leave the option clear to allow the image to be deleted.</li>
+                        <li><b>Instance Auto Recovery</b> - Select this option to configure the
+                            instance for automatic recovery. Auto Recovery automatically replacing
+                            damaged or unresponsive instances.</li>
+                    </ul>
+                    <note> Fields that cannot be modified are shaded.</note></li>
 </ol>
 <p>5, When complete, click <b>Update Image</b>.</p>
 </section>
