@@ -18,9 +18,6 @@
         <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
         <p><b>If you are deploying a KVM cluster with multiple servers for Service Availability
                 (SA), follow the steps in this section.</b></p>
-        <p><b>Note:</b> If you are not deploy a KVM cluster, see <xref
-                href="CGH-2-install-denver-standalone.dita#topic10581c2id">Deploy the Standard
-                Region in a Denver Non-SA Deployment</xref>.</p>
         <p>After the lifecycle manager VM is installed, the next task in installing the Denver topology
             is to deploy the Standard Region, which includes an HP Helion OpenStack cloud. This
             section describes how to use the lifecycle manager CLI to deploy the Standard
@@ -53,7 +50,6 @@ Password: cghelion</codeblock>
                     </p><p>Where:: <codeph>&lt;cloudname></codeph> is the name of the cloud to
                         create.</p><p id="cloudname">The cloud name can be any combination of up to
                         40 digits and/or letters:<ul id="cloudname0">
-                            <li id="cloudname1">Cannot contain with the <codeph>-</codeph> character;</li>
                             <li>No special characters or spaces allowed;</li>
                             <li id="cloudname2">Must be greater than 0 characters;</li>
                             <li id="cloudname3">No restriction on the number of letters or digits (0 or more).</li>
@@ -77,7 +73,7 @@ Password: cghelion</codeblock>
                 installation.</p><ol id="ol_sds_ms3_y5">
                 <li id="node-prov1">Copy node-provision.json from the lifecycle manager host to
                     cloud folder on the lifecycle manager
-                        VM:.<codeblock>~/ scp /cg/node-provision.json root@&lt;CLM_IP>:/var/hlm/clouds/&lt;cloudname&gt;</codeblock><p>Where:
+                        VM:<codeblock>~/ scp /cg/node-provision.json root@&lt;CLM_IP>:/var/hlm/clouds/&lt;cloudname&gt;</codeblock><p>Where:
                             <ul id="ul_k3h_dt3_y5">
                             <li><codeph>&lt;cloudname></codeph> is the name of the cloud you created
                                 with the <codeph>hlm define</codeph> command.</li>
@@ -436,13 +432,13 @@ Password: cghelion</codeblock>
             </ol>
         </section>
         <section id="back-end">
-            <title>Configure the back-end drivers <!--NEED THIS??--></title>
-            <p id="cinderintro">Configure the back-end drivers to enable management of the OpenStack Block Storage
-                volumes on HPE StoreVirtual VSA and/or HPE StoreServ (3PAR) storage arrays. The HPE
-                Block Storage (Cinder) service allows you to configure multiple storage back-ends. A
-                sample file provides all the variables needed to use VSA and/or 3PAR attached to the
-                KVM Region. You need to edit this file for your environment and save as
-                    <codeph>cinder_conf</codeph>. <!--Section shared with Denver--></p>
+            <title>Configure the back-end drivers </title>
+            <p id="cinderintro">Configure the back-end drivers to enable management of the OpenStack
+                Block Storage volumes on HPE StoreVirtual VSA and/or HPE StoreServ (3PAR) storage
+                arrays. The HPE Block Storage (Cinder) service allows you to configure multiple
+                storage back-ends. A sample file provides all the variables needed to use VSA and/or
+                3PAR attached to the KVM Region. You need to edit this file for your environment and
+                save as <codeph>cinder_conf</codeph>. </p>
             <p>Use the following steps to configure back-end support:</p>
             <ol id="ul_btr_l52_xs">
                 <li>Change to the <codeph>/cinder/blocks</codeph> directory:
@@ -480,7 +476,7 @@ Password: cghelion</codeblock>
                             </tbody>
                         </tgroup>
                     </table><p>You can use 3PAR and/or VSA in the KVM Region or select both if you
-                        have respective storage arrays </p><p><b>Note:</b> The HP 3PAR Web Services
+                        have respective storage arrays. </p><p><b>Note:</b> The HP 3PAR Web Services
                         API server must be enabled and running on the HP 3PAR storage system. For
                         more information, see the OpenStack documentation at: <xref
                             href="http://docs.openstack.org/liberty/config-reference/content/enable-hp-3par-fibre-channel.html"

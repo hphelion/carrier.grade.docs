@@ -143,30 +143,23 @@ password:  &lt;random></codeblock><p>The Horizon
     <p id="kvm-esx-unlock">
       <b>For a Non-Bonded Environment</b></p>
     <ol>
-      <li>After the controller-1 and the compute nodes come up successfully after PXE boot,
-        execute the following commands from controller-0 to unlock the compute nodes.<ol
-          id="ol_p42_d35_lt">
-          <li>Create the Infra interface:
-            <codeblock>system host-if-add –V &lt;bls/infra VLAN ID&gt; –nt &lt;network_type> &lt;host-name or ID> &lt;interface_name> &lt;interface_type> &lt;port or interfaces></codeblock></li>
-          <li>Add an IP address to the Infra interface:
-            <codeblock>system host-addr-add &lt;host-name or ID> &lt;interface_name> &lt;ipv4/ipv6_address> &lt;prefix-length></codeblock></li>
-          <li>Configure the VRS interface:
-            <codeblock>system host-if-modify &lt;host-name or ID> -n &lt;interface_name> -nt &lt;network_type> --ipv4-mode=static eth-x </codeblock><p>Where
-              <codeph>eth-x</codeph> is the interface on which untagged TUL is
-              presented.</p></li>
-          <li>Add an IP address to the VRS interface:
-            <codeblock>system host-addr-add &lt;host-name or ID> vrs &lt;ipv4/ipv6_address> &lt;prefix_length></codeblock></li>
-          <li>Update the host:
-            <codeblock> system host-update &lt;host-name or ID> vsc_controllers=&lt;ipv4/ipv6_address>,&lt;ipv4/ipv6_address> </codeblock><p>Enter
-              the IP address of the VSC controllers</p></li>
-          <li>Unlock the host: <codeblock>system host-unlock &lt;host-name or ID></codeblock></li>
-        </ol><p><b>Example
-          commands:</b></p><codeblock>system host-if-add –V 722 –nt infra compute-3 infra vlan pxeboot0
-            system host-addr-add compute-3 infra 10.70.22.81 24
-            system host-if-modify compute-3 -n vrs -nt data-vrs --ipv4-mode=static eth4
-            system host-addr-add compute-3 vrs 10.70.5.83 24
-            system host-update compute-3 vsc_controllers=10.70.5.31,10.70.5.32
-            system host-unlock compute-3        </codeblock></li>
+      <li>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
+          the following commands from controller-0 to unlock the compute nodes.<ol
+            id="ol_p42_d35_lt">
+            <li>Configure the controller node:
+                <codeblock>system host-add --hostname &lt;unique-controller-name> --personality controller --mgmt_mac &lt;MAC_Address> --bm_mac &lt;MAC_Address> --bm_ip &lt;IP_Address> --bm_type ilo4 --bm_username cghelion --bm_password &lt;password></codeblock><p>For
+                example:<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac 6C:3B:E5:A3:BB:90 --bm_mac 38:63:bb:2d:78:b0 --bm_ip 10.1.68.162 --bm_type ilo4 --bm_username cghelion --bm_password admblabla </codeblock></p></li>
+            <li>Configure the compute nodes: <p>
+                <codeblock>system host-add --hostname &lt;unique-compute-name> --personality compute --mgmt_mac &lt;MAC_Address>:80 --bm_mac &lt;MAC_Address> --bm_ip &lt;IP_Address> --bm_type ilo4 --bm_username Administrator --bm_password &lt;password></codeblock>
+              </p><p>For
+                example:<codeblock>system host-add --hostname compute1 --personality compute --mgmt_mac d0:bf:9c:f1:b0:80 --bm_mac 38:63:bb:2d:78:b0 --bm_ip 128.224.150.227 --bm_type ilo4 --bm_username Administrator --bm_password CTE69HAU</codeblock></p></li>
+            <li>Set <codeph>controller-1</codeph> and <codeph>compute-0</codeph> to <b>One-time PXE
+                boot from network</b>.</li>
+          </ol></li>
+        <li>PXE boot all the registered nodes.<p>Login to Horizon and monitor the status of nodes
+            being PXE booted on the <b>Admin > Inventory</b> page. After succesful PXE boot, the
+            Operational State should be <b>Disabled</b> and the Availability State should be
+              <b>Online</b>. </p></li>
     </ol>
     
     <p id="nic-unlock">
@@ -184,20 +177,20 @@ password:  &lt;random></codeblock><p>The Horizon
           interface:<codeblock>system host-if-delete compute-0 95e7b495-1454-49d1-8123-301215503e86      </codeblock></li>
       </ol></li>
       <li>Use the following commands to create a bonded interface and setup node to be unlocked:
-        <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-0 bond0 ae "none" eth0 eth1
-          system host-if-add -V 303 -nt mgmt compute-0 mgmt vlan bond0
-          system host-if-add -V 74 -nt infra compute-0 infra vlan bond0
-          system host-addr-add compute-0 infra 172.16.74.244 24
-          system host-if-add -a balanced -x layer2 -nt "none" compute-0 bondvrs ae "none" eth2 eth3</codeblock></li>
+          <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-0 bond0 ae "none" eth0 eth1
+system host-if-add -V 303 -nt mgmt compute-0 mgmt vlan bond0
+system host-if-add -V 74 -nt infra compute-0 infra vlan bond0
+system host-addr-add compute-0 infra 172.16.74.244 24
+system host-if-add -a balanced -x layer2 -nt "none" compute-0 bondvrs ae "none" eth2 eth3</codeblock></li>
       <li>Use one of the following steps to configure a static IP address for the bonded NIC
         interface or assign an IP address from an IP address pool:<ul id="ol_uqd_l5z_st">
           <li>To assign a static IP:
-            <codeblock>system host-if-modify compute-0 -nt data-vrs --ipv4-mode=static bondvrs
-              system host-addr-add compute-0 bondvrs 10.30.6.244 24</codeblock></li>
+              <codeblock>system host-if-modify compute-0 -nt data-vrs --ipv4-mode=static bondvrs
+system host-addr-add compute-0 bondvrs 10.30.6.244 24</codeblock></li>
           <li>To assign an IP address from a pool:<p>
             <codeblock>system addrpool-add vrspool 10.30.6.0 24 --order random --ranges 10.30.6.240-10.30.6.249
-              system host-if-modify compute-0 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-pool=vrspool
-              system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-pool=vrspool</codeblock>
+system host-if-modify compute-0 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-pool=vrspool
+system host-if-modify compute-1 bondvrs -nt data-vrs --ipv4-mode=pool --ipv4-pool=vrspool</codeblock>
           </p></li>
         </ul></li>
       <li>Execute the following command to assign IP addresses to

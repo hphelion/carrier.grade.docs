@@ -15,12 +15,8 @@
 </prolog>
 <body>
     <!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki-->
-    <bodydiv><b>Note:</b> If you plan to deploy a KVM cluster with multiple servers for Service
-      Availability (SA), see <xref
-        href="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild">Deploying the Lifecycle
-        Manager in a KVM Cluster</xref>.</bodydiv>
-    <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves creating a
-      bootstrapping the lifecycle manager VM and installation services. </p>
+    <p>The first phase of the HP Helion OpenStack Carrier Grade installation involves deploying a
+      virtual machine to host lifecycle manager tool for installing and maintaining your cloud. </p>
     <p>The installation uses Ansible playbooks, which are files that contain scripts that execute
       required installation processes.</p>
     <bodydiv id="hlm">
@@ -29,7 +25,7 @@
         <p>Use the following steps to prepare the server on which the lifecycle manager VM will be
           deployed (the lifecycle manager host):</p>
         <ol id="ol_hx2_33q_f5">
-          <li>Log into the lifecycle manager host using the default credentials</li>
+          <li>Log into the lifecycle manager host using the default credentials.</li>
           <li>Edit the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file for your
             environment. For information on each variable, refer to the comments in the file with
             each variable. <ul id="ul_tzp_3zz_s5">
@@ -119,16 +115,18 @@ kvm_hosts:
           <li>Perform the following tasks to configure Libvirt to work with Ansible:<ol
               id="ol_l52_tdn_cv">
               <li>Change to the cghelion directory<codeblock>cd /home/cghelion/</codeblock></li>
-              <li>Edit the <codeph>.profile</codeph> file. to set PATH so it includes user's private
-                bin if it
-                exists<codeblock>if [ -d "$HOME/bin" ] ; then
+              <li>Edit the <codeph>.profile</codeph> file to add the <codeph>export</codeph> line
+                  below:<codeblock>export LIBVIRT_DEFAULT_URI="qemu:///system"</codeblock><p>For
+                  example:</p><codeblock>if [ -d "$HOME/bin" ] ; then
 PATH="$HOME/bin:$PATH"
 fi
-export LIBVIRT_DEFAULT_URI="qemu:///system"</codeblock></li>
-              <li>Source the <codeph>.profile</codeph>
-                file.<codeblock>source .profile</codeblock></li>
+</codeblock></li>
               <li>Execute the following
-                command:<codeblock>sudo usermod -a -G libvirt cghelion </codeblock></li>
+                command:<codeblock>sudo usermod -a -G libvirt cgheion</codeblock></li>
+              <li>Change to the <codeph>etc/</codeph> directory.</li>
+              <li>Add a user to the <codeph>sudoers</codeph>
+                file:<codeblock>% sudo ALL=(ALL:ALL) ALL
+cghelion ALL=(ALL) NOPASSWD:ALL</codeblock></li>
             </ol></li>
           <!--<li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/4"/>-->
         </ol>
