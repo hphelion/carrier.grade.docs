@@ -94,11 +94,13 @@ But the CLI, REST API etc should all be same  Also HCG-1025--></p>
         command: <codeph>attis queue</codeph> to view the queue. </p><p>If you want to back up the
         controller database withing 60 minutes of a restore, you must delete the
           <codeph>cloudcontrollerdbbackup</codeph> job in the Attis queue before performing the back
-        up.</p><p>This situation occurs because when Attis restores the controller database, Attis
-        also restores the <b>in progress</b> job which triggers the controller database backup. That
-          <b>in progress</b> job prevents any incoming back up job to be executed by Attis until the
-          <b>in progress</b> job times out after 3600 seconds (60 minutes) by default.
-      </p></section>
+        up:
+        <codeblock>mysql 
+mysql&gt; use attis; delete from Queue where job_name="cloudcontrollerappliancedbbackup";</codeblock></p><p>This
+        situation occurs because when Attis restores the controller database, Attis also restores
+        the <b>in progress</b> job which triggers the controller database backup. That <b>in
+          progress</b> job prevents any incoming back up job to be executed by Attis until the <b>in
+          progress</b> job times out after 3600 seconds (60 minutes) by default.  </p></section>
     <!--<section id="vsd-database"><title>Backup VSD database</title><p>You can use Attis to back up the HP DCN VSD database.</p><p>To backup the VSD database:</p><ol id="ol_esc_pyc_p5"><li>Log in the VSD controller as the <codeph>cghelion</codeph> user.</li><li>Change to the root user:<codeblock>sudo -i</codeblock></li><li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"><p/><p/><p/><p/></li><li>After removing comment, change &lt;dash> to &lt;dash>&lt;dash> in above section.</li><li>Run the backup command:<codeblock>attis backup -config-id &lt;Config_ID_of_VSD_Appliance_DB_Backup&gt;</codeblock><p>      &lt;p>After remove comment, change &lt;dash> to &lt;dash>&lt;dash>&lt;/p></p></li></ol></section>-->
     <!-- 
     <section id="vsc"><title>Backup VSC system files</title><p>You can use Attis to back up the HP
