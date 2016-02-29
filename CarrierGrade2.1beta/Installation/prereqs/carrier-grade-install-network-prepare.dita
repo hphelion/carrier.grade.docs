@@ -22,97 +22,13 @@
             <li><xref href="#topic7646cginp/vlanconfig" format="dita"/></li>
             <li><xref href="#topic7646cginp/bridges" format="dita"/></li>
         </ul>
-        <section id="vlanid">
-            <title>Define VLAN IDs</title>
-            <p>Make sure you have all VLAN IDs defined for the networks as defined in the <xref
+        <section id="vlanid"><title>Define VLAN IDs</title><p>Make sure you have all VLAN IDs
+                defined for the networks as defined in the <xref
                     href="../carrier-grade-technical-overview.dita#topic3485cgto">Architecture
-                    Diagram</xref></p>
-
-        <p><b><u>Example</u></b></p>
-            <table id="table_f2z_wgn_cv">
-                <tgroup cols="4">
-                    <colspec colnum="1" colname="col1"/>
-                    <colspec colnum="2" colname="col2"/>
-                    <colspec colnum="3" colname="col3"/>
-                    <colspec colnum="4" colname="col4"/>
-                    <tbody>
-                        <row>
-                            <entry>VLAN ID</entry>
-                            <entry>Description/Assignment</entry>
-                            <entry>CIDR</entry>
-                            <entry>GW</entry>
-                        </row>
-                        <row>
-                            <entry>219</entry>
-                            <entry>HOS PXE</entry>
-                            <entry>10.20.19.0/24</entry>
-                            <entry>10.20.19.1</entry>
-                        </row>
-                        <row>
-                            <entry>3019</entry>
-                            <entry>CLM</entry>
-                            <entry>10.20.49.0/24</entry>
-                            <entry>10.20.49.1</entry>
-                        </row>
-                        <row>
-                            <entry>220</entry>
-                            <entry>CAN</entry>
-                            <entry>10.20.20.0/24</entry>
-                            <entry>10.20.20.1</entry>
-                        </row>
-                        <row>
-                            <entry>222</entry>
-                            <entry>TUL</entry>
-                            <entry>10.20.22.0/24</entry>
-                            <entry>10.20.22.1</entry>
-                        </row>
-                        <row>
-                            <entry>223</entry>
-                            <entry>BLS</entry>
-                            <entry>10.20.23.0/24</entry>
-                            <entry>10.20.23.1</entry>
-                        </row>
-                        <row>
-                            <entry>224</entry>
-                            <entry>EXT</entry>
-                            <entry>10.20.24.0/24</entry>
-                            <entry>10.20.24.1</entry>
-                        </row>
-                        <row>
-                            <entry>3020</entry>
-                            <entry>VXLAN-TUL</entry>
-                            <entry>10.20.50.0/24</entry>
-                            <entry>10.20.50.1</entry>
-                        </row>
-                        <row>
-                            <entry>3021</entry>
-                            <entry>WR PXE</entry>
-                            <entry>10.20.51.0/24</entry>
-                            <entry>10.20.51.1</entry>
-                        </row>
-                        <row>
-                            <entry>3022</entry>
-                            <entry>WR Provider</entry>
-                            <entry>10.20.52.0/24</entry>
-                            <entry>10.20.52.1</entry>
-                        </row>
-                        <row>
-                            <entry>3023</entry>
-                            <entry>WR Provider</entry>
-                            <entry>10.20.53.0/24</entry>
-                            <entry>10.20.53.1</entry>
-                        </row>
-                        <row>
-                            <entry>3024</entry>
-                            <entry>WR Provider</entry>
-                            <entry>10.20.54.0/24</entry>
-                            <entry>10.20.54.1</entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
-            <!--<table id="table_p3v_nq1_y5"><tgroup cols="4"><colspec colnum="1" colname="col2" colwidth="294pt"/><colspec colnum="2" colname="col3" colwidth="75pt"/><colspec colnum="3" colname="col4" colwidth="102.75pt"/><colspec colnum="4" colname="col5" colwidth="66.75pt"/><tbody><row><entry><b>Helion Carrier Grade Bare Metal Reservation </b></entry><entry/><entry><b>R6N6640</b></entry><entry/></row><row><entry><b>VLAN Function</b></entry><entry><b>VLAN ID</b></entry><entry><b>Network Range</b></entry><entry><b>Gateway</b></entry></row><row><entry>untagged PXE</entry><entry>3534</entry><entry>10.244.44.0/24</entry><entry>10.244.44.1</entry></row><row><entry>tagged eth0 CLM</entry><entry>3535</entry><entry>10.244.45.0/24</entry><entry>10.244.45.1</entry></row><row><entry>tagged eth0 CAN</entry><entry>3536</entry><entry>10.244.46.0/24</entry><entry>10.244.46.1</entry></row><row><entry>tagged eth0 EXT</entry><entry>3537</entry><entry>10.244.47.0/24</entry><entry>10.244.47.1</entry></row><row><entry>tagged eth0 BLS</entry><entry>101</entry><entry> </entry><entry> </entry></row><row><entry>tagged eth0 DCM</entry><entry>3538</entry><entry>10.244.48.0/24</entry><entry>10.244.48.1</entry></row><row><entry>untagged eth1 TUL</entry><entry>102</entry><entry> </entry><entry> </entry></row><row><entry>VXLAN-TUL</entry><entry>3539</entry><entry>10.244.49.0/24</entry><entry>10.244.49.1</entry></row><row><entry>BM-CLM</entry><entry>103</entry><entry> </entry><entry> </entry></row><row><entry>BM-CTL</entry><entry>104</entry><entry> </entry><entry> </entry></row><row><entry>WR PXE</entry><entry>105</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>106</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>107</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>108</entry><entry> </entry><entry> </entry></row></tbody></tgroup></table>-->
-</section>
+                    Diagram</xref></p><p><b><u>Example</u></b></p><image
+                href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-vlans.png"
+                id="image_jrf_zdx_dv"
+            /><!--<table id="table_p3v_nq1_y5"><tgroup cols="4"><colspec colnum="1" colname="col2" colwidth="294pt"/><colspec colnum="2" colname="col3" colwidth="75pt"/><colspec colnum="3" colname="col4" colwidth="102.75pt"/><colspec colnum="4" colname="col5" colwidth="66.75pt"/><tbody><row><entry><b>Helion Carrier Grade Bare Metal Reservation </b></entry><entry/><entry><b>R6N6640</b></entry><entry/></row><row><entry><b>VLAN Function</b></entry><entry><b>VLAN ID</b></entry><entry><b>Network Range</b></entry><entry><b>Gateway</b></entry></row><row><entry>untagged PXE</entry><entry>3534</entry><entry>10.244.44.0/24</entry><entry>10.244.44.1</entry></row><row><entry>tagged eth0 CLM</entry><entry>3535</entry><entry>10.244.45.0/24</entry><entry>10.244.45.1</entry></row><row><entry>tagged eth0 CAN</entry><entry>3536</entry><entry>10.244.46.0/24</entry><entry>10.244.46.1</entry></row><row><entry>tagged eth0 EXT</entry><entry>3537</entry><entry>10.244.47.0/24</entry><entry>10.244.47.1</entry></row><row><entry>tagged eth0 BLS</entry><entry>101</entry><entry> </entry><entry> </entry></row><row><entry>tagged eth0 DCM</entry><entry>3538</entry><entry>10.244.48.0/24</entry><entry>10.244.48.1</entry></row><row><entry>untagged eth1 TUL</entry><entry>102</entry><entry> </entry><entry> </entry></row><row><entry>VXLAN-TUL</entry><entry>3539</entry><entry>10.244.49.0/24</entry><entry>10.244.49.1</entry></row><row><entry>BM-CLM</entry><entry>103</entry><entry> </entry><entry> </entry></row><row><entry>BM-CTL</entry><entry>104</entry><entry> </entry><entry> </entry></row><row><entry>WR PXE</entry><entry>105</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>106</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>107</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>108</entry><entry> </entry><entry> </entry></row></tbody></tgroup></table>--></section>
         <section id="vlanconfig">
             <title>Configure VLAN networking on the lifecycle manager host</title>
             <p>Use the following steps to create the required network bridges, for a:<ul
@@ -127,50 +43,42 @@
             <ol id="ol_y3b_lv1_y5">
                 <li>Launch a terminal and log in to your lifecycle manager host as
                     root:<codeblock>sudo su -</codeblock></li>
-                <li>Edit <systemoutput>/etc/network/interfaces</systemoutput> file to provide
+                <li>Edit <systemoutput>/etc/network/interfaces.d</systemoutput> file to provide
                     network details on the each interface:
-                    <codeblock>auto lo
+                    <codeblock># The loopback network interface
+auto lo
 iface lo inet loopback
 
 auto eth0
 iface eth0 inet manual
-
-auto eth0.1591
-iface eth0.1591  inet manual
 post-up ifconfig $IFACE up
 pre-down ifconfig $IFACE down
 vlan-raw-device eth0
 
-auto eth0.133
-iface eth0.133  inet manual
+auto eth0.3001
+iface eth0.3001  inet manual
 post-up ifconfig $IFACE up
 pre-down ifconfig $IFACE down
 vlan-raw-device eth0
 
-auto eth0.1592
-iface eth0.1592  inet manual
+auto eth0.204
+iface eth0.204  inet manual
 post-up ifconfig $IFACE up
 pre-down ifconfig $IFACE down
 vlan-raw-device eth0
 
-auto br-pxe
-iface br-pxe inet static
-address 10.200.186.43
-netmask 255.255.255.0
-gateway 10.200.186.1
-bridge_ports eth0
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0
+auto eth0.202
+iface eth0.202  inet manual
+post-up ifconfig $IFACE up
+pre-down ifconfig $IFACE down
+vlan-raw-device eth0
 
 auto br-clm
 iface br-clm inet static
-address 10.200.91.10
+address 10.20.31.12
 netmask 255.255.255.0
-gateway 10.200.91.1
-bridge_ports eth0.1591
+gateway 10.20.31.1
+bridge_ports eth0.3001
 bridge_stp off
 bridge_fd 9
 bridge_hello 2
@@ -178,10 +86,8 @@ bridge_maxage 12
 bridge_maxwait 0
 
 auto br-bls
-iface br-bls inet static
-address 192.168.133.10
-netmask 255.255.255.0
-bridge_ports eth0.133
+iface br-bls inet manual
+bridge_ports eth0.204
 bridge_stp off
 bridge_fd 9
 bridge_hello 2
@@ -189,11 +95,17 @@ bridge_maxage 12
 bridge_maxwait 0
 
 auto br-can
-iface br-can inet static
-address 10.200.92.10
-netmask 255.255.255.0
-gateway 10.200.92.1
-bridge_ports eth0.1592
+iface br-can inet manual
+bridge_ports eth0.202
+bridge_stp off
+bridge_fd 9
+bridge_hello 2
+bridge_maxage 12
+bridge_maxwait 0
+
+auto br-pxe
+iface br-pxe inet manual
+bridge_ports eth0
 bridge_stp off
 bridge_fd 9
 bridge_hello 2
@@ -209,82 +121,74 @@ bridge_maxwait 0</codeblock></li>
                     <li>Edit <systemoutput>/etc/network/interfaces</systemoutput> file to provide
                         network details on the each interface (IP addresses masked for security):
                         <codeblock>auto lo
-iface lo inet loopback
+ iface lo inet loopback
 
 auto bond1
-iface bond1 inet manual
-slaves  eth0 eth1
-bond_mode active-backup
-bond_miimon 100
-bond_downdelay 200
-bond_updelay 200
-bond_lcap_rate faste
-bond_xmit_hash_policy layer2+3
+ iface bond1 inet manual
+ slaves eth0 eth1
+ bond_mode active-backup
+ bond_miimon 100
+ bond_downdelay 200
+ bond_updelay 200
+ bond_lcap_rate faste
+ bond_xmit_hash_policy layer2+3
 
 auto bond1.1591
-iface bond1.1591  inet manual
-post-up ifconfig $IFACE up
-pre-down ifconfig $IFACE down
-vlan-raw-device bond1
+ iface bond1.1591 inet manual
+ post-up ifconfig $IFACE up
+ pre-down ifconfig $IFACE down
+ vlan-raw-device bond1
 
 auto bond1.133
-iface bond1.133  inet manual
-post-up ifconfig $IFACE up
-pre-down ifconfig $IFACE down
-vlan-raw-device bond1
+ iface bond1.133 inet manual
+ post-up ifconfig $IFACE up
+ pre-down ifconfig $IFACE down
+ vlan-raw-device bond1
 
 auto bond1.1592
-iface bond1.1592  inet manual
-post-up ifconfig $IFACE up
-pre-down ifconfig $IFACE down
-vlan-raw-device bond1
-
-auto br-pxe
-iface br-pxe inet static
-address 10.200.x.x
-netmask 255.255.255.0
-gateway 10.200.x.x
-bridge_ports bond1
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0
+ iface bond1.1592 inet manual
+ post-up ifconfig $IFACE up
+ pre-down ifconfig $IFACE down
+ vlan-raw-device bond1
 
 auto br-clm
-iface br-clm inet static
-address 10.200.x.x
-netmask 255.255.255.0
-gateway 10.200.x.x
-bridge_ports bond1.1591
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0
+ iface br-clm inet static
+ address 10.200.91.11
+ netmask 255.255.255.0
+ gateway 10.200.91.1
+ bridge_ports bond1.1591
+ bridge_stp off
+ bridge_fd 9
+ bridge_hello 2
+ bridge_maxage 12
+ bridge_maxwait 0
 
 auto br-bls
-iface br-bls inet static
-address 192.168.x.x
-netmask 255.255.255.0
-bridge_ports bond1.133
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0
+ iface br-bls inet manual
+ bridge_ports bond1.133
+ bridge_stp off
+ bridge_fd 9
+ bridge_hello 2
+ bridge_maxage 12
+ bridge_maxwait 0
 
-auto br-can
-iface br-can inet static
-address 10.200.x.x
-netmask 255.255.255.0
-gateway 10.200.x.x
-bridge_ports bond1.1592
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0</codeblock></li>
+ auto br-can
+ iface br-can inet manual
+ bridge_ports bond1.1592
+ bridge_stp off
+ bridge_fd 9
+ bridge_hello 2
+ bridge_maxage 12
+ bridge_maxwait 0
+
+ auto br-pxe
+ iface br-pxe inet manual
+ bridge_ports bond1
+ bridge_stp off
+ bridge_fd 9
+ bridge_hello 2
+ bridge_maxage 12
+ bridge_maxwait 0</codeblock></li>
                 </ol>
             </p>
         </section>
