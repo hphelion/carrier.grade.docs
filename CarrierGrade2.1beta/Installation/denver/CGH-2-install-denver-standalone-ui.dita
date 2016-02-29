@@ -46,9 +46,8 @@
             <title>Specify the cloud definition</title>
             <p>Use the <b>Create New Cloud Definition</b> wizard on the UI to:<ol id="ol_byp_hrf_cv">
                     <li>Click the <b>Create New Cloud Definition</b> dashboard.</li>
-                    <li>On the <b>Step 1</b> table, specify a name for the cloud: <p
-                            conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/cloudname"
-                        /></li>
+                    <li>On the <b>Step 1</b> table, specify a name for the cloud: <p><b>Note:</b> No
+                            special characters or spaces allowed;</p></li>
                     <li>Specify if you are using HPE StoreVirtual VSA (VSA) and/or HPE StoreServ
                         (3PAR) storage.<p>You can incorporate back-end drivers to enable management
                             of the OpenStack Block Storage volumes on VSA and/or 3PAR storage
@@ -133,10 +132,12 @@
             <p>Refer to the <b>Manage Services</b> page list for all of the available services.</p>
             <p>You can also edit an existing cloud definition for the Inventory Nodes.</p>
         </section>
-        <section>
-            <title>Installation Troubleshooting</title>
-            <p>If you receive the following error during the Deploy phase, rerun the Deploy.</p>
-            <ol id="ol_rgv_ltx_dv">
+        <section><title>Installation Troubleshooting</title><p>If you receive the following error
+                during the Deploy phase, rerun the Deploy.</p><image
+                href="../../../media/carrier.grade.docs/2.1/CGH-21-installation-deploy-error.png"
+                id="image_z42_v4d_dv"/><p>If you still receive this error, try using the command
+                line to re-deploy.</p><ol id="ol_rgv_ltx_dv">
+                <li>Log into the lifecycle manager host.</li>
                 <li>Log into the lifecycle manager VM.
                     <codeblock>ssh cghelion@&lt;CLM_IP></codeblock>Where: CLM_IP is located in the
                     IP address for the lifecycle manager in the
@@ -145,11 +146,8 @@
                         <codeblock>User Name: cghelion
 Password: cghelion</codeblock></p></li>
                 <li>Execute the following
-                        command:<codeblock>hlm deploy –c &lt;cloud-name> -r</codeblock><image
-                        href="../../../media/carrier.grade.docs/2.1/CGH-21-installation-deploy-error.png"
-                        id="image_z42_v4d_dv"/></li>
-            </ol>
-        </section>
+                    command:<codeblock>hlm deploy –c &lt;cloud-name> -r</codeblock></li>
+            </ol></section>
         <section>
             <title>Next Step</title>
             <p><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd"
