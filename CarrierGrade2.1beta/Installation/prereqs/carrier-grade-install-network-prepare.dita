@@ -22,13 +22,15 @@
             <li><xref href="#topic7646cginp/vlanconfig" format="dita"/></li>
             <li><xref href="#topic7646cginp/bridges" format="dita"/></li>
         </ul>
-        <section id="vlanid"><title>Define VLAN IDs</title><p>Make sure you have all VLAN IDs
-                defined for the networks as defined in the <xref
+        <section id="vlanid">
+            <title>Define VLAN IDs</title>
+            <p>Make sure you have all VLAN IDs defined for the networks as defined in the <xref
                     href="../carrier-grade-technical-overview.dita#topic3485cgto">Architecture
-                    Diagram</xref></p><p><b><u>Example</u></b></p><image
-                href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-vlans.png"
-                id="image_jrf_zdx_dv"
-            /><!--<table id="table_p3v_nq1_y5"><tgroup cols="4"><colspec colnum="1" colname="col2" colwidth="294pt"/><colspec colnum="2" colname="col3" colwidth="75pt"/><colspec colnum="3" colname="col4" colwidth="102.75pt"/><colspec colnum="4" colname="col5" colwidth="66.75pt"/><tbody><row><entry><b>Helion Carrier Grade Bare Metal Reservation </b></entry><entry/><entry><b>R6N6640</b></entry><entry/></row><row><entry><b>VLAN Function</b></entry><entry><b>VLAN ID</b></entry><entry><b>Network Range</b></entry><entry><b>Gateway</b></entry></row><row><entry>untagged PXE</entry><entry>3534</entry><entry>10.244.44.0/24</entry><entry>10.244.44.1</entry></row><row><entry>tagged eth0 CLM</entry><entry>3535</entry><entry>10.244.45.0/24</entry><entry>10.244.45.1</entry></row><row><entry>tagged eth0 CAN</entry><entry>3536</entry><entry>10.244.46.0/24</entry><entry>10.244.46.1</entry></row><row><entry>tagged eth0 EXT</entry><entry>3537</entry><entry>10.244.47.0/24</entry><entry>10.244.47.1</entry></row><row><entry>tagged eth0 BLS</entry><entry>101</entry><entry> </entry><entry> </entry></row><row><entry>tagged eth0 DCM</entry><entry>3538</entry><entry>10.244.48.0/24</entry><entry>10.244.48.1</entry></row><row><entry>untagged eth1 TUL</entry><entry>102</entry><entry> </entry><entry> </entry></row><row><entry>VXLAN-TUL</entry><entry>3539</entry><entry>10.244.49.0/24</entry><entry>10.244.49.1</entry></row><row><entry>BM-CLM</entry><entry>103</entry><entry> </entry><entry> </entry></row><row><entry>BM-CTL</entry><entry>104</entry><entry> </entry><entry> </entry></row><row><entry>WR PXE</entry><entry>105</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>106</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>107</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>108</entry><entry> </entry><entry> </entry></row></tbody></tgroup></table>--></section>
+                    Diagram</xref></p>
+
+        <p><b><u>Example</u></b></p>
+            <!--<table id="table_p3v_nq1_y5"><tgroup cols="4"><colspec colnum="1" colname="col2" colwidth="294pt"/><colspec colnum="2" colname="col3" colwidth="75pt"/><colspec colnum="3" colname="col4" colwidth="102.75pt"/><colspec colnum="4" colname="col5" colwidth="66.75pt"/><tbody><row><entry><b>Helion Carrier Grade Bare Metal Reservation </b></entry><entry/><entry><b>R6N6640</b></entry><entry/></row><row><entry><b>VLAN Function</b></entry><entry><b>VLAN ID</b></entry><entry><b>Network Range</b></entry><entry><b>Gateway</b></entry></row><row><entry>untagged PXE</entry><entry>3534</entry><entry>10.244.44.0/24</entry><entry>10.244.44.1</entry></row><row><entry>tagged eth0 CLM</entry><entry>3535</entry><entry>10.244.45.0/24</entry><entry>10.244.45.1</entry></row><row><entry>tagged eth0 CAN</entry><entry>3536</entry><entry>10.244.46.0/24</entry><entry>10.244.46.1</entry></row><row><entry>tagged eth0 EXT</entry><entry>3537</entry><entry>10.244.47.0/24</entry><entry>10.244.47.1</entry></row><row><entry>tagged eth0 BLS</entry><entry>101</entry><entry> </entry><entry> </entry></row><row><entry>tagged eth0 DCM</entry><entry>3538</entry><entry>10.244.48.0/24</entry><entry>10.244.48.1</entry></row><row><entry>untagged eth1 TUL</entry><entry>102</entry><entry> </entry><entry> </entry></row><row><entry>VXLAN-TUL</entry><entry>3539</entry><entry>10.244.49.0/24</entry><entry>10.244.49.1</entry></row><row><entry>BM-CLM</entry><entry>103</entry><entry> </entry><entry> </entry></row><row><entry>BM-CTL</entry><entry>104</entry><entry> </entry><entry> </entry></row><row><entry>WR PXE</entry><entry>105</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>106</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>107</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>108</entry><entry> </entry><entry> </entry></row></tbody></tgroup></table>-->
+</section>
         <section id="vlanconfig">
             <title>Configure VLAN networking on the lifecycle manager host</title>
             <p>Use the following steps to create the required network bridges, for a:<ul
@@ -207,8 +209,7 @@ auto br-bls
 &lt;name&gt;br-pxe&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-pxe'/&gt;
-<!--&lt;virtualport type='openvswitch'/&gt; hide for 2.1-->
-&lt;/network&gt;</codeph></codeblock><p>b.
+&lt;/network&gt;</codeph></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--><p>b.
                         Execute the following commands to create and start the network and configure
                         the network to
                     auto-start:</p><codeblock><codeph>virsh net-define br-pxe.xml
@@ -221,8 +222,7 @@ virsh net-autostart br-pxe</codeph></codeblock></li>
 &lt;name&gt;br-clm&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-clm'/&gt;
-<cite>&amp;lt;virtualport type='openvswitch'/&amp;gt;
-</cite>&lt;/network&gt;</codeph></codeblock><p>b.
+&lt;/network&gt;</codeph></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--><p>b.
                         Execute the following commands, using the name of your XML file, to create
                         and start the network and configure the network to
                     auto-start:</p><codeblock><codeph>virsh net-define <systemoutput>br-clm.xml</systemoutput>
@@ -235,8 +235,7 @@ virsh net-autostart br-clm</codeph></codeblock></li>
 &lt;name&gt;br-bls&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-bls'/&gt;
-<!--&lt;virtualport type='openvswitch'/&gt;
--->&lt;/network&gt;</codeph></codeblock><p>b.
+&lt;/network&gt;</codeph></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--><p>b.
                         Execute the following commands to create and start the network and configure
                         the network to
                     auto-start:</p><codeblock><codeph>virsh net-define br-bls.xml

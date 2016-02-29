@@ -64,8 +64,8 @@
                         networks (CLM, API, BLS). If you do not have segment IDs, enter
                             <codeph>-1</codeph>. </li>
                     <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 4</b> table, validate the network information you
-                        provided.</li>
+                    <li>On the <b>Step 4</b> table, view the validation results for the network
+                        information you provided.</li>
                     <li>Click <b>Next</b>.</li>
                     <li>On the <b>Step 5</b> table:<ol id="ol_z51_tbg_cv">
                             <li>Specify all required variables for the Standard Region.</li>
@@ -116,8 +116,11 @@
             <title>Manage the cloud</title>
             <p>The Manage cloud option allows the user to perform post-deployment activities for the
                 selected cloud. This feature can be launched by clicking the <b>Manage</b> button on
-                the <b>Cloud List</b> screen after the cloud is deployed.</p>
-            <p>You can use the <b>Manage Cloud</b> wizard in the HCG Dashboard UI to reset services
+                the <b>Cloud List</b> screen after the cloud is deployed. For more information, see
+                    <xref
+                    href="../../HCGDashboard/carrier-grade-dashboard-overviewi.dita#topic10581c2idui"
+                    >Administer Your Cloud Using the HCG Dashboard</xref>.</p>
+            <p>You can use the <b>Manage Services</b> page in the HCG Dashboard UI to reset services
                 including: <ul id="ul_ptt_3tf_cv">
                     <li>MySQL</li>
                     <li>RabbitMQ</li>
@@ -127,15 +130,25 @@
                     <li>Centralized Logging services (ElasticSearch, Logstash, Kibana, Beaver,
                         Icinga and Attis) </li>
                 </ul></p>
+            <p>Refer to the <b>Manage Services</b> page list for all of the available services.</p>
             <p>You can also edit an existing cloud definition for the Inventory Nodes.</p>
         </section>
         <section>
             <title>Installation Troubleshooting</title>
-            <p>If you receive the following error during the Deploy phase, rerun the
-                Deploy.<codeblock>hlm deploy –c &lt;cloud-name&gt; -r</codeblock></p>
-            <p><image
-                    href="../../../media/carrier.grade.docs/2.1/CGH-21-installation-deploy-error.png"
-                    id="image_z42_v4d_dv"/></p>
+            <p>If you receive the following error during the Deploy phase, rerun the Deploy.</p>
+            <ol id="ol_rgv_ltx_dv">
+                <li>Log into the lifecycle manager VM.
+                    <codeblock>ssh cghelion@&lt;CLM_IP></codeblock>Where: CLM_IP is located in the
+                    IP address for the lifecycle manager in the
+                        <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
+                        <codeph>hlm_clmstaticip</codeph> field.<p>Use the default credentials:
+                        <codeblock>User Name: cghelion
+Password: cghelion</codeblock></p></li>
+                <li>Execute the following
+                        command:<codeblock>hlm deploy –c &lt;cloud-name> -r</codeblock><image
+                        href="../../../media/carrier.grade.docs/2.1/CGH-21-installation-deploy-error.png"
+                        id="image_z42_v4d_dv"/></li>
+            </ol>
         </section>
         <section>
             <title>Next Step</title>
