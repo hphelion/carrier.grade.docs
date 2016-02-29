@@ -51,9 +51,9 @@
                     <li><b>Support for restarting MySQL and RabbitMQ clusters</b>. In HP Helion
                         OpenStack Carrier Grade 2.1, the controllers are virtual machines on a
                         single server. In the event that server goes down, you will need to manually
-                        restart the MySQL servers after the server is restarted. You might also need
-                        to restart RabbitMQ. The installation includes an Ansible playbook to
-                        manually restart these services. See <xref
+                        restart the MySQL servers and RabbitMQ after the server is restarted. The
+                        installation includes an Ansible playbook to manually restart these
+                        services. See <xref
                             href="../OperationsGuide/Recover/CHG-2-recover.dita#topic5937recover"
                             >Restart MySQL and RabbitMQ</xref>.</li>
                     <!--<li><b>OpenSAF support.</b> The HP Helion OpenStack controller can optionally be deployed as KVM cluster (optional) using OpenSAF for Service Availability. OpenSAF is an open source middleware consistent with Service Availability Forum (SA Forum) specifications. SA goes beyond High Availability (HA) requirements. <b><i>From http://devel.opensaf.org/</i></b> OpenSAF must be installed prior to starting the HP Helion OpenStack Carrier Grade installation. Specific steps to integrate OpenSAF are provided in the installation sections.</li>-->
@@ -111,10 +111,10 @@
                     format="html" scope="external">OpenStack command-line interface CLI
                     commands</xref>. </p>
             <p><b>Potential Vulnerability with Intel® LAN Products with SR-IOV</b></p>
-            <p>In Intel® LAN products with SR-IOV capability, the potential exists where, under
-                specific conditions, Virtual Machines (VMs) can cause network congestion spreading,
-                a well-known side-effect of Ethernet flow control, which could affect other VMs as
-                well as the Hypervisor itself.</p>
+            <p>In Intel® LAN products with SR-IOV capability, under specific conditions, Virtual
+                Machines (VMs) can cause network congestion spreading, a well-known side-effect of
+                Ethernet flow control, which could affect other VMs as well as the Hypervisor
+                itself.</p>
             <p>For more information, see the <xref
                     href="https://security-center.intel.com/advisory.aspx?intelid=INTEL-SA-00046&amp;languageid=en-fr"
                     format="html" scope="external">bulletin in the Intel Security Center</xref>.</p>

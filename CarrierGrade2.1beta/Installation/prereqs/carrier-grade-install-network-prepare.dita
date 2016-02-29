@@ -45,7 +45,7 @@
             <ol id="ol_y3b_lv1_y5">
                 <li>Launch a terminal and log in to your lifecycle manager host as
                     root:<codeblock>sudo su -</codeblock></li>
-                <li>Edit <systemoutput>/etc/network/interfaces.d</systemoutput> file to provide
+                <li>Edit <systemoutput>/etc/network/interfaces</systemoutput> file to provide
                     network details on the each interface:
                     <codeblock># The loopback network interface
 auto lo
@@ -241,6 +241,19 @@ virsh net-autostart br-clm</codeph></codeblock></li>
                     auto-start:</p><codeblock><codeph>virsh net-define br-bls.xml
 virsh net-start br-bls
 virsh net-autostart br-bls</codeph></codeblock></li>
+                <li>Create the <codeph>br-can</codeph> network by creating an XML definition
+                        file:<p>a. Manually create the XML file, here named
+                            <codeph>br-can.xml</codeph>:</p><codeblock><codeph>cat br-can.xml
+&lt;network&gt;
+&lt;name&gt;br-can&lt;/name&gt;
+&lt;forward mode='bridge'/&gt;
+&lt;bridge name='br-can'/&gt;
+&lt;/network&gt;</codeph></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--><p>b.
+                        Execute the following commands, using the name of your XML file, to create
+                        and start the network and configure the network to
+                    auto-start:</p><codeblock><codeph>virsh net-define <systemoutput>br-can.xml</systemoutput>
+virsh net-start br-can
+virsh net-autostart br-can</codeph></codeblock></li>
                 <!--<li>Create the <codeph>br-dcm</codeph> network by creating an XML definition file:<p>a. Manually create the XML file, using the name <codeph>br-dcm.xml</codeph>:</p><codeblock><codeph>cat br-dcm.xml
 &lt;network&gt;
 &lt;name&gt;br-dcm&lt;/name&gt;
@@ -260,21 +273,21 @@ br-clm      active      yes             yes
 br-can      active      yes             yes
 br-pxe      active      yes             yes
 default     active      yes             yes</codeph></codeblock></li>
-                <li>Execute the following command to make sure the <codeph>br-pxe</codeph> network
+                <li>Execute the following command to make sure the <codeph>br-clm</codeph> network
                     has been assigned an IP
-                        address:<codeblock><codeph>ifconfig br-pxe</codeph></codeblock><p>Run
-                        following command if the <codeph>br-pxe</codeph> does not indicate the IP
+                        address:<codeblock><codeph>ifconfig br-clm</codeph></codeblock><p>Run
+                        following command if the <codeph>br-clm</codeph> does not indicate the IP
                         address has been
-                    assigned:</p><codeblock><codeph>ifdown br-pxe
+                    assigned:</p><codeblock><codeph>ifdown br-clm
 ifdown &lt;interface&gt;
-ifup br-pxe
+ifup br-clm
 ifup &lt;yourinterface&gt;</codeph></codeblock></li>
-                <li>Execute the following command to make sure the <codeph>br-pxe</codeph> network was assigned the
-                    IP address of the primary
+                <li>Execute the following command to make sure the <codeph>br-clm</codeph> network
+                    was assigned the IP address of the primary
                     interface.<codeblock><codeph>ifconfig | more</codeph></codeblock></li>
                 <li>Reboot the system.</li>
-                <li>Execute the following command to make sure the primary interface does not have an IP address and
-                    confirm the IP address of the <codeph>br-pxe</codeph>
+                <li>Execute the following command to make sure the primary interface does not have
+                    an IP address and confirm the IP address of the <codeph>br-clm</codeph>
                     network:<codeblock><codeph>ifconfig | more</codeph></codeblock></li>
                 <li>Execute the following command to view the routing table. Make sure all of the networks are
                     configured as expected.<codeblock><codeph>route -n</codeph></codeblock></li>
