@@ -21,29 +21,31 @@
             required tasks. Or, you can <xref
                 href="CGH-2-install-denver-standalone-ui.dita#topic10581c2idui">use the HCG
                 Dashboard</xref> to perform these tasks.</p>
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/launch"/>
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/define"/>
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/jsons"/>
+        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/launch"/>
+        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/define"/>
+        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/jsons"/>
         <section id="node-prov">
             <title>Edit the node-provision.json file</title>
             <p/>
             <p
                 conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov-intro"/>
             <p><ol id="ol_sds_ms3_y5">
-                <!-- <li
+                    <!-- <li
                         conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov1"/> -->
-                <li
-                        conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov2"/>
+                    <li
+                        conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/node-prov2"
+                    />
                 </ol>Click here to see a <xref
                     href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
                     node-provision.json file</xref>. </p>
         </section>
-      <!-- <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/pxe-boot"/> -->
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/environment"/>
+        <!-- <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/pxe-boot"/> -->
+        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/environment"/>
         <!--<section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/lnet"/>-->
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ansible"/>
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/wr"/>
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/verify-json"/>
+        <section>New JSON</section>
+        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ansible"/>
+        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/wr"/>
+        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/verify-json"/>
         <section id="conref-create-cloud">
             <title>Provision the cloud nodes and bring the cloud nodes up</title>
             <ol id="ol_f1b_cmf_zt">
@@ -52,7 +54,7 @@
                         <codeblock>hlm provision -c &lt;cloudname&gt; -r</codeblock><p>Where
                             <codeph>&lt;cloudname></codeph> is the name of the cloud you created
                         with the <codeph>hlm define</codeph> command. The script takes approximately
-                        15 to 30 minutes. <b><!--TIME ANY DIFFERENT??--></b></p><image
+                        15 to 20 minutes. </p><image
                         href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-provision.png"
                         id="image_ogm_cs1_t5" width="600"/><p
                         conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/provision1a"
@@ -62,11 +64,12 @@
                 <li
                     conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/provision2"/>
                 <li
-                    conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/provision3"/>
+                    conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/provision3"
+                />
             </ol>
         </section>
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/back-end"/>
-      <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/config-proc"/>
+        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/back-end"/>
+        <section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/config-proc"/>
         <section id="hdeploy">
             <title>Deploy HPE Helion OpenStack</title>
             <ol id="ol_jxp_dnf_zt">
@@ -75,8 +78,8 @@
                             <codeph>&lt;cloudname></codeph> is the name of the cloud you created
                         with the <codeph>hlm define</codeph> command.</p><p>This command takes a
                         significant period of time. When this command completes without errors or
-                        warnings, the Standard Region cloud installation is complete. Use the following
-                        sections to configure the Horizon interface and configures virtual
+                        warnings, the Standard Region cloud installation is complete. Use the
+                        following sections to configure the Horizon interface and configures virtual
                         networking.</p><p><image
                             href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-deploy.png"
                             width="400" id="image_hf1_2t1_t5"/>

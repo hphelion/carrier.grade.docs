@@ -134,7 +134,7 @@ cloud_topology: denver_rcp</codeblock></li>
                 with your root
                 credentials;<codeblock>#Variables related to pxe booting the VMs - will be used by hprovision 
 #The user has to be non-root kvm_ip: 192.168.122.1 
-root_user: root 
+root_user: cghelion 
 root_pass: cghelion</codeblock></li>
             </ul></li>
           <!--<li id="4">Edit the <codeph>group_vars/all-kvm-net</codeph> file to make sure the VLAN tag IDs are correct according to your network configuration: <codeblock>#vlan tag ids for various networks on base 
@@ -149,7 +149,7 @@ dcm_vlan_id: 211</codeblock></li>-->
           <ol id="ol_bn1_5vb_y5">
             <li>On the lifecycle manager host, change to the <codeph>KVM-CREATE-VM/defaults</codeph>
               directory.
-              <codeblock>cd~/kenobi-node-configration/infra-hlm/roles/KVM-CREATE-VM/defaults</codeblock></li>
+              <codeblock>cd ~/kenobi-node-configration/infra-hlm/roles/KVM-CREATE-VM/defaults</codeblock></li>
             <li>Edit the <codeph>nano main.yml</codeph> file to set the RAM size, as needed. <ol
                 id="ol_qts_shd_dv">
                 <li>Enter a value in Megabytes for <codeph>vm_ram</codeph>.</li>

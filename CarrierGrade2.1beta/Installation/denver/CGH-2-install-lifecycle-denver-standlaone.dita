@@ -25,10 +25,10 @@
         <p>Use the following steps to prepare the server on which the lifecycle manager VM will be
           deployed (the lifecycle manager host):</p>
         <ol id="ol_hx2_33q_f5">
-          <li>Log into the lifecycle manager host using the default credentials.</li>
+          <li>Log into the lifecycle manager host using your credentials.</li>
           <li>Extract the <codeph>~/cg-infra-src.tar.gz</codeph> file you downloaded in the
-              prerequisites.<codeblock>tar zxvf cg-infra-src.tar.gz </codeblock><p>This file deploys
-              the Ansible files and directories required for the installation.</p></li>
+              prerequisites.<codeblock>tar -zxvf cg-infra-src.tar.gz </codeblock><p>This file
+              deploys the Ansible files and directories required for the installation.</p></li>
           <li>Edit the <codeph>~/infra-ansible-playbooks/group_vars/all</codeph> file for your
             environment. For information on each variable, refer to the comments in the file with
             each variable. <ul id="ul_tzp_3zz_s5">
@@ -128,14 +128,13 @@ kvm_hosts:
               below:<codeblock>export LIBVIRT_DEFAULT_URI="qemu:///system"</codeblock><p>For
               example:</p><codeblock>if [ -d "$HOME/bin" ] ; then
                 PATH="$HOME/bin:$PATH"
-                fi
-              </codeblock></li>
+                fi     </codeblock></li>
           <li>Execute the following
             command:<codeblock>sudo usermod -a -G libvirt cgheion</codeblock></li>
           <li>Change to the <codeph>etc/</codeph> directory.</li>
           <li>Add a user to the <codeph>sudoers</codeph>
             file:<codeblock>% sudo ALL=(ALL:ALL) ALL
-              cghelion ALL=(ALL) NOPASSWD:ALL</codeblock></li>
+cghelion ALL=(ALL) NOPASSWD:ALL</codeblock></li>
         </ol>
       </section>
       <section>
@@ -150,7 +149,6 @@ kvm_hosts:
             deploys and configures the lifecycle manager VM. After deployment, you can add the
             lifecycle manager host to a KVM cluster
               manually.<p><!--<ul id="ul_ozg_p5q_y5"><li><b>Use the HCG Dashboard UI to deploy the cloud:</b><p>Use this option if you intend to deploy the Standard Region cloud using the HCG Dashboard UI. <codeblock>ansible-playbook -i hosts setup_hlm_for_UI.yml</codeblock></p></li><li><p><b>Use the CLI to deploy the cloud</b></p><p>Use the following command if you intend to deploy the Standard Region cloud using the command line:<codeblock>ansible-playbook -i hosts setup_vcloud.yml</codeblock></p><p>This command deploys and configures the lifecycle manager VM. After deployment, you can add the lifecycle manager host to OpenSAF cluster manually. </p></li></ul>--></p></li>
-          <li conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/hosts"/>
         </ol>
       </section>
       <section conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/disk-size"/>

@@ -132,68 +132,6 @@ password:  &lt;random></codeblock><p>The Horizon
             the <codeph>stackrc</codeph> file on any of the Standard Region controllers.</p></li>
       </ol>
     </section>
-  <section id="unlock">
-    <title>Step 4: Configure and unlock the compute controllers</title>
-    <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
-      the following commands from controller-0 to unlock each compute node in the inventory.</p>
-    <ul id="ul_f1c_dk1_h5">
-      <li><xref href="#topic1107cgikd/kvm-esx-unlock" format="dita">For a Non-Bonded
-            Environment</xref></li>
-      <li><xref href="#topic1107cgikd/nic-unlock" format="dita">For a Bonded Environment</xref></li>
-    </ul>
-    
-    <p id="kvm-esx-unlock">
-      <b>For a Non-Bonded Environment</b></p>
-    <ol>
-      <li>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
-          the following commands from controller-0 to add the required interfaces.<ol
-            id="ol_p42_d35_lt">
-            <li>Add the infrastructure network interface:
-                <codeblock>system host-if-add -V &lt;VLAN_ID> -nt infra compute-1 infra vlan pxeboot0</codeblock><p>For
-                example:<codeblock>system host-if-add -V 539 -nt infra compute-1 infra vlan pxeboot0</codeblock></p><p>This
-                command configures the <codeph>pxeboot0</codeph> interface on compute-1 to connect
-                to the infrastructure network using VLAN ID 539.  </p></li>
-            <li>Configure the compute nodes: <p>
-                <codeblock>system host-if-modify -nt data compute-1 "provider-net-1" &lt;port></codeblock>
-              </p><p>For
-                example:<codeblock>system host-if-modify -nt data compute-1 "provider-net-1" eth3</codeblock></p><p>This
-                command configures the data interface on <codeph>compute-1</codeph> to connect with
-                  <codeph>provider-net-1</codeph> using <codeph>eth3</codeph>.</p></li>
-          </ol></li>
-        <li>Unlock the stand-by compute
-          controller:<codeblock>system host-unlock compute-1</codeblock></li>
-        <li>PXE boot all the registered nodes.<p>Login to Horizon and monitor the status of nodes
-            being PXE booted on the <b>Admin</b> then <b>Inventory</b> page. After succesful PXE
-            boot, the Operational State should be <b>Disabled</b> and the Availability State should
-            be <b>Online</b>. </p></li>
-    </ol>
-    
-    <p id="nic-unlock">
-      <b>For bonded NIC environments</b></p>
-    <p>If you are using a bonded NIC environment, after configuring and unlocking the compute
-      nodes, perform these steps:</p>
-    <ol id="ol_nr5_ddw_mt">
-      <li>Use the following commands to delete the MGMT interface: <ol id="ol_zfq_5h1_tt">
-        <li>Obtain the compute name or ID number:<codeblock>system host-list</codeblock></li>
-        <li>Obtain the UUID of the MGMT interface to
-          remove:<codeblock>system host-if-list</codeblock></li>
-        <li>Remove the PXE boot flag off the
-              interface:<codeblock>system host-if-modify -nt "none" compute-1 pxeboot0</codeblock></li>
-      </ol></li>
-      <li>Use the following commands to create a bonded interface and setup node to be unlocked:<ol
-            id="ol_xyc_fww_dv">
-            <li>Create a bonded interface for the control plane:
-              <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-1 bond0 ae none eth0 eth1</codeblock></li>
-            <li>Configure the stand-by compute
-              node:<codeblock>system host-if-add -V 532 -nt mgmt compute-1 mgmt vlan bond0
-system host-if-add -V 539 -nt infra compute-1 infra vlan bond0</codeblock></li>
-            <li>Create a bonded interface for the data plane:
-              <codeblock>system host-if-add -a balanced -x layer2 -nt data compute-1 databond ae "provider-net-1" eth2 eth3 </codeblock></li>
-          </ol></li>
-        <li>Unlock the stand-by compute
-          controller:<codeblock>system host-unlock compute-1</codeblock></li>
-    </ol>
-  </section>
   <section id="next-step">
     <title>Next Steps</title>
     <p><xref href="carrier-grade-install-post-denver.dita#topic1107cgidp">Post-Installation
