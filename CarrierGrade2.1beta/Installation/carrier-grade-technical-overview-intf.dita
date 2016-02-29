@@ -72,97 +72,6 @@
           </thead>
           <tbody>
             <row>
-              <entry>1a</entry>
-              <entry>CTL</entry>
-              <entry>IPMI</entry>
-              <entry>HLM</entry>
-              <entry>Power on</entry>
-              <entry>iLO username, password</entry>
-              <entry>Admin-only access to iLO</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>Authorized/Unauthorized</entry>
-              <entry>none</entry>
-              <entry>Power on node</entry>
-            </row>
-            <row>
-              <entry>1b</entry>
-              <entry>PXE</entry>
-              <entry>DHCP</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>IP address request</entry>
-              <entry>Registered MAC address</entry>
-              <entry>(network isolation only)</entry>
-              <entry>HLM</entry>
-              <entry>IP address</entry>
-              <entry>none</entry>
-              <entry>Request IP address</entry>
-            </row>
-            <row>
-              <entry>1c</entry>
-              <entry>PXE</entry>
-              <entry>TFTP</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>Image request</entry>
-              <entry>Registered MAC address</entry>
-              <entry>(network isolation only)</entry>
-              <entry>HLM</entry>
-              <entry>Image</entry>
-              <entry>none</entry>
-              <entry>Request an image</entry>
-            </row>
-            <row>
-              <entry>1d</entry>
-              <entry>PXE</entry>
-              <entry>SSH</entry>
-              <entry>HLM</entry>
-              <entry>Network config</entry>
-              <entry>SSH key pair</entry>
-              <entry>HLM admin</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>success/failure</entry>
-              <entry>SSH key pair</entry>
-              <entry>Setup cloud networking</entry>
-            </row>
-            <row>
-              <entry>1e</entry>
-              <entry>CLM</entry>
-              <entry>SSH</entry>
-              <entry>HLM</entry>
-              <entry>Node configuration</entry>
-              <entry>SSH key pair</entry>
-              <entry>HLM admin</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>success/failure</entry>
-              <entry>SSH key pair</entry>
-              <entry>Configure node</entry>
-            </row>
-            <row>
-              <entry>1f</entry>
-              <entry>CLM</entry>
-              <entry>RPC</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>Package request</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>HLM</entry>
-              <entry>Package</entry>
-              <entry>none</entry>
-              <entry>Request a package</entry>
-            </row>
-            <row>
-              <entry>2 - 4</entry>
-              <entry>as above for 1</entry>
-              <entry>as above for 1</entry>
-              <entry>HLM</entry>
-              <entry>as above for 1</entry>
-              <entry>as above for 1</entry>
-              <entry>as above for 1</entry>
-              <entry>DCN VSC (KVM Host), Non-KVM region Controller, ESX Compute</entry>
-              <entry>as above for 1</entry>
-              <entry>as above for 1</entry>
-              <entry>Same as 1a through 1f above</entry>
-            </row>
-            <row>
               <entry><b>Interface</b></entry>
               <entry><b>Network name</b></entry>
               <entry><b>Network protocol</b></entry>
@@ -344,33 +253,6 @@
               <entry>OpenStack service response</entry>
               <entry>none</entry>
               <entry>Keystone</entry>
-            </row>
-            <row>
-              <entry>14</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>KVM region Compute</entry>
-              <entry>Send packets</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>DCN VRS-G</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>VM traffic to gateway. Tenant Networks are isolated through VxLANs.</entry>
-            </row>
-            <row>
-              <entry>15</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>KVM region Compute (DCN VRS)</entry>
-              <entry>Send packets</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>KVM region Compute (DCN VRS)</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>VM Traffic within Cloud. Tenant Networks are isolated through VxLANs. HCG 2.0
-                change.</entry>
             </row>
             <row>
               <entry><b>Interface</b></entry>
