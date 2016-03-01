@@ -2,8 +2,8 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic3485cgtoi">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Alpha: Technical Reference: Service
-    Architecture and Interfaces </title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Service Architecture and
+    Interfaces </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -85,33 +85,6 @@
               <entry><b>Description of operation</b></entry>
             </row>
             <row>
-              <entry>5</entry>
-              <entry>CAN</entry>
-              <entry>HTTPS</entry>
-              <entry>Orchestrator</entry>
-              <entry>OpenStack service request</entry>
-              <entry>username, password or Keystone token</entry>
-              <entry>Keystone and policy.json</entry>
-              <entry>Non-KVM region Controller</entry>
-              <entry>OpenStack service response</entry>
-              <entry>server certificate</entry>
-              <entry>Keystone, Cinder, Glance, Swift, Nova. Neutron, Heat, Ceilometer,
-                Horizon,</entry>
-            </row>
-            <row>
-              <entry>6</entry>
-              <entry>CAN</entry>
-              <entry>HTTPS</entry>
-              <entry>Orchestrator</entry>
-              <entry>OpenStack service request</entry>
-              <entry>Keystone token</entry>
-              <entry>Keystone and policy.json</entry>
-              <entry>KVM region Controller</entry>
-              <entry>OpenStack service response</entry>
-              <entry>server certificate</entry>
-              <entry>Nova, Heat, Ceilometer, Patching, Sysinv, Power_mgmt</entry>
-            </row>
-            <row>
               <entry>7</entry>
               <entry>BLS</entry>
               <entry>HTTP</entry>
@@ -125,19 +98,6 @@
               <entry>Volume Create/Delete</entry>
             </row>
             <row>
-              <entry>8</entry>
-              <entry>BLS</entry>
-              <entry>iSCSI, CHAP</entry>
-              <entry>ESX Compute</entry>
-              <entry>Storage access</entry>
-              <entry>username, password</entry>
-              <entry>storage admin</entry>
-              <entry>StoreVirtual, 3PAR</entry>
-              <entry>Storage blocks</entry>
-              <entry>none</entry>
-              <entry>Volume attach or Create Volume from Image</entry>
-            </row>
-            <row>
               <entry>9</entry>
               <entry>BLS</entry>
               <entry>iSCSI, CHAP</entry>
@@ -149,45 +109,6 @@
               <entry>Storage blocks</entry>
               <entry>none</entry>
               <entry>Volume attach</entry>
-            </row>
-            <row>
-              <entry>10a</entry>
-              <entry>CLM</entry>
-              <entry>HTTP</entry>
-              <entry>Non-KVM region Controller</entry>
-              <entry>Management control &amp; images</entry>
-              <entry>username, password or Keystone token</entry>
-              <entry>service accounts</entry>
-              <entry>ESX Compute</entry>
-              <entry>Inter-service response</entry>
-              <entry>none</entry>
-              <entry>Inter-service communication</entry>
-            </row>
-            <row>
-              <entry>10b</entry>
-              <entry>CLM</entry>
-              <entry>RPC/HTTP</entry>
-              <entry>ESX Compute</entry>
-              <entry>Management control &amp; images</entry>
-              <entry>username, password or Keystone token</entry>
-              <entry>service accounts</entry>
-              <entry>Non-KVM region Controller</entry>
-              <entry>Inter-service response</entry>
-              <entry>none</entry>
-              <entry>Inter-service communication, rabbitmq and SQL updates</entry>
-            </row>
-            <row>
-              <entry><b>Interface</b></entry>
-              <entry><b>Network name</b></entry>
-              <entry><b>Network protocol</b></entry>
-              <entry><b>Requestor</b></entry>
-              <entry><b>Request</b></entry>
-              <entry><b>Request credentials</b></entry>
-              <entry><b>Request authorization</b></entry>
-              <entry><b>Listener</b></entry>
-              <entry><b>Response</b></entry>
-              <entry><b>Response credentials</b></entry>
-              <entry><b>Description of operation</b></entry>
             </row>
             <row>
               <entry>11a</entry>
@@ -216,7 +137,7 @@
               <entry>Inter-service communication, rabbitmq and SQL updates</entry>
             </row>
             <row>
-              <entry>12a</entry>
+              <entry>12</entry>
               <entry>CLM</entry>
               <entry>HTTP</entry>
               <entry>KVM region Controller</entry>
@@ -227,19 +148,6 @@
               <entry>OpenStack service response</entry>
               <entry>none</entry>
               <entry>Keystone, Glance, Cinder, Swift, Neutron. HCG 2.0 change.</entry>
-            </row>
-            <row>
-              <entry>12b*</entry>
-              <entry>CLM</entry>
-              <entry>HTTP</entry>
-              <entry>Non-KVM region Controller</entry>
-              <entry>OpenStack service request</entry>
-              <entry>Keystone token</entry>
-              <entry>Keystone and policy.json</entry>
-              <entry>KVM region Controller</entry>
-              <entry>OpenStack service response</entry>
-              <entry>none</entry>
-              <entry>Horizon to KVM region Nova. HCG 2.0 change.</entry>
             </row>
             <row>
               <entry>13</entry>
@@ -253,151 +161,6 @@
               <entry>OpenStack service response</entry>
               <entry>none</entry>
               <entry>Keystone</entry>
-            </row>
-            <row>
-              <entry><b>Interface</b></entry>
-              <entry><b>Network name</b></entry>
-              <entry><b>Network protocol</b></entry>
-              <entry><b>Requestor</b></entry>
-              <entry><b>Request</b></entry>
-              <entry><b>Request credentials</b></entry>
-              <entry><b>Request authorization</b></entry>
-              <entry><b>Listener</b></entry>
-              <entry><b>Response</b></entry>
-              <entry><b>Response credentials</b></entry>
-              <entry><b>Description of operation</b></entry>
-            </row>
-            <row>
-              <entry>26</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>ESX Compute</entry>
-              <entry>Send Packets</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>ToR Switch 5930</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>Tenant traffic isolated through VxLAN tunnels.New in HCG 2.0.</entry>
-            </row>
-            <row>
-              <entry>29</entry>
-              <entry>TUL</entry>
-              <entry>Any</entry>
-              <entry>KVM region Compute</entry>
-              <entry>Send Packets</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>ToR Switch 5930</entry>
-              <entry>none</entry>
-              <entry>none</entry>
-              <entry>VM traffic to gateway. Tenant Networks are isolated through VLANs.New in HCG
-                2.0.</entry>
-            </row>
-            <row>
-              <entry><b>Interface</b></entry>
-              <entry><b>Network name</b></entry>
-              <entry><b>Network protocol</b></entry>
-              <entry><b>Requestor</b></entry>
-              <entry><b>Request</b></entry>
-              <entry><b>Request credentials</b></entry>
-              <entry><b>Request authorization</b></entry>
-              <entry><b>Listener</b></entry>
-              <entry><b>Response</b></entry>
-              <entry><b>Response credentials</b></entry>
-              <entry><b>Description of operation</b></entry>
-            </row>
-            <row>
-              <entry>34</entry>
-              <entry>CAN</entry>
-              <entry>HTTPS</entry>
-              <entry>Orchestrator</entry>
-              <entry>OpenStack service request</entry>
-              <entry>username, password or Keystone token</entry>
-              <entry>Keystone and policy.json</entry>
-              <entry>BM Controller</entry>
-              <entry>OpenStack service response</entry>
-              <entry>server certificate</entry>
-              <entry>Keystone, Cinder, Glance, Swift, Nova. Neutron, Heat, Ceilometer, Horizon. New
-                in HCG 2.0.</entry>
-            </row>
-            <row>
-              <entry>35</entry>
-              <entry>as above for 1</entry>
-              <entry>as above for 1</entry>
-              <entry>HLM</entry>
-              <entry>as above for 1</entry>
-              <entry>as above for 1</entry>
-              <entry>as above for 1</entry>
-              <entry>BM Controller</entry>
-              <entry>as above for 1</entry>
-              <entry>as above for 1</entry>
-              <entry>Same as 1a - 1f above. New in HCG 2.0.</entry>
-            </row>
-            <row>
-              <entry><b>Interface</b></entry>
-              <entry><b>Network name</b></entry>
-              <entry><b>Network protocol</b></entry>
-              <entry><b>Requestor</b></entry>
-              <entry><b>Request</b></entry>
-              <entry><b>Request credentials</b></entry>
-              <entry><b>Request authorization</b></entry>
-              <entry><b>Listener</b></entry>
-              <entry><b>Response</b></entry>
-              <entry><b>Response credentials</b></entry>
-              <entry><b>Description of operation</b></entry>
-            </row>
-            <row>
-              <entry>36</entry>
-              <entry>CLM</entry>
-              <entry>HTTP</entry>
-              <entry>BM Controller</entry>
-              <entry>OpenStack service request</entry>
-              <entry>username, password or Keystone token</entry>
-              <entry> </entry>
-              <entry>Non-KVM region Controller</entry>
-              <entry>OpenStack service response</entry>
-              <entry>none</entry>
-              <entry>Keystone, Glance, Swift. New in HCG 2.0.</entry>
-            </row>
-            <row>
-              <entry>37</entry>
-              <entry>CLM</entry>
-              <entry>HTTP or RPC</entry>
-              <entry>BM Node</entry>
-              <entry>OpenStack service request</entry>
-              <entry>username, password or Keystone token</entry>
-              <entry> </entry>
-              <entry>Non-KVM region Controller</entry>
-              <entry>OpenStack service response</entry>
-              <entry>none</entry>
-              <entry>Keystone, Glance and Swift. New in HCG 2.0.</entry>
-            </row>
-            <row>
-              <entry>39a</entry>
-              <entry>CLM</entry>
-              <entry>HTTP</entry>
-              <entry>BM Controller</entry>
-              <entry>Management control</entry>
-              <entry>username, password or Keystone token</entry>
-              <entry>service accounts</entry>
-              <entry>BM Node</entry>
-              <entry>Inter-service response</entry>
-              <entry>none</entry>
-              <entry>Inter-service communication. New in HCG 2.0.</entry>
-            </row>
-            <row>
-              <entry>39b</entry>
-              <entry>CLM</entry>
-              <entry>RPC/HTTP</entry>
-              <entry>BM Node</entry>
-              <entry>Management control</entry>
-              <entry>username, password or Keystone token</entry>
-              <entry>service accounts</entry>
-              <entry>BM Controller</entry>
-              <entry>Inter-service response</entry>
-              <entry>none</entry>
-              <entry>Inter-service communication, rabbitmq and SQL updates. New in HCG 2.0.</entry>
             </row>
             <row>
               <entry>41</entry>

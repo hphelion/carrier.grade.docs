@@ -100,7 +100,18 @@
                 changed to "none" before it can be changed to "data."</p><p>
                 <b>Glance image deletion does not release storage space</b></p><p>The storage space
                 used by a glance image is not released when the image is deleted. To free the space
-                for other uses, a glance-api restart is required.</p></section>
+                for other uses, a glance-api restart is required.</p><p><b>Lifecycle Manager host as
+                    NFS server needs firewall ports opened</b></p><p>If you should configure your
+                lifecycle manager as an NFS server, for example as a <xref
+                    href="../OperationsGuide/Backup/CGH-2-attis-backup-restore.dita#topic10581c2abr"
+                    >backup location for the Attis service</xref>, you will need to open ports in
+                the firewall. The HP Helion OpenStack Carrier Grade installation process configures
+                and starts the firewall on the lifecycle manager host. <!--HCG-1535-->
+            </p><p>You will need to open ports: <ul id="ul_p1l_jsz_dv">
+                    <li>111</li>
+                    <li>2049</li>
+                    <li>4001</li>
+                </ul></p></section>
         <section id="problems">
             <title>Known Problems and Limitations</title>
             <p><!--<b>VMware VMK No Memory Error    </b> --></p>
