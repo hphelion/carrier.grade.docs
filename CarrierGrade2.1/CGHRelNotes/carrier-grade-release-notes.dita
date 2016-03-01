@@ -62,15 +62,14 @@
                 </ul>
             </p>
         </section>
-        <section id="usage"><title>Usage
-                Caveats</title><p><!--From WR jow1404333831397.xml--></p><b>Backup files in cloud
-                directories can cause installation to fail</b>
+        <section id="usage"><title>Usage Caveats</title><b>Backup files in cloud directories can
+                cause installation to fail</b>
             <p>During the HP Helion OpenStack Carrier Grade installation, you will need to create
                 and edit a number of JSON configuration files. You should create backups of these
                 files, in the event you need to reinstall. Create the backups in a directory on
                     <codeph>/root/</codeph> directory or on a remote system. Do not store backups of
                 the JSON files inside your cloud directory or any where inside the
-                    <codeph>/var/hlm/clouds</codeph> directory. </p><p>
+                    <codeph>/var/hlm/clouds</codeph> directory. </p><!--From WR jow1404333831397.xml--><p>
                 <b>VMs reported as ACTIVE before compute nodes are recovered</b></p><p>During a
                 system recovery (for example, after a site power outage), when the controller is
                 available but before the compute nodes are available, the Nova service shows an
@@ -141,19 +140,6 @@
             <p>Cinder Volume Backup is not working upon installation of HP Helion OpenStack Carrier
                 Grade 2.0 The <codeph>cinder.backup.driver</codeph> file is not present in
                 /etc/cinder/cinder.conf.</p>
-            <p><b>Non-shared services do not work from Horizon dashboard</b></p>
-            <ol id="ol_kzl_ccw_c5">
-                <li>Go to each controller node in the Standard Region and replace
-                        <codeph>user.py</codeph> file in the following location:
-                        <codeph>/opt/stack/venvs/horizon/lib/python2.7/site-packages/openstack_auth/user.py</codeph></li>
-                <li>Restart apache2 service</li>
-            </ol>
-            <p><b>LAG for the KVM Region control plane does not work</b></p>
-            <p>Link aggregation groups (LAG) are not supported in the KVM Region control plane. This
-                is a known limitation that is scheduled to be corrected with the HP Helion OpenStack
-                Carrier Grade GA release. A LAG is a mechanism that allows multiple parallel
-                Ethernet network connections between two hosts to be used as a single logical
-                connection.</p>
             <p><b>SR-IOV limitations</b></p>
             <ul id="ul_pzl_ccw_c5">
                 <li>

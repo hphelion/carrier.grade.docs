@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581cgidppncli">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Step 5A- Configuring the
+    Provider Networks</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carrier Grade 2.0"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carrier Grade 2.0"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section>
+      <p>After the HP Helion OpenStack Carrier Grade cloud is fully deployed, perform the following
+        tasks in the Horizon UI.</p>
+      <title>Create Provider Networks</title>
+      <p>Use the following steps to create a provider network. Or, see <xref
+          href="../../OperationsGuide/Network/CGH-2-User-network-create-provider.dita#topic3878"
+          >Creating and Deleting Provider Networks</xref> and <xref
+            href="../../OperationsGuide/Network/CGH-2-User-.network-create-segment.dita#topic2171"
+          >Creating a Segmentation Range</xref>. </p>
+      <p>
+        <ol id="ol_fcr_tkr_35">
+          <li>Launch the <xref
+            href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+              >Helion dashboard</xref></li>
+          <li>Click <b>Admin</b>, then <b>System</b>, then <b>Networks</b>. </li>
+          <li>Select the <b>Provider Networks</b> tab.<p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-1.png"
+                id="image_nkw_hqq_35" width="600"/></p></li>
+          <li>Click <b>Create Provider Network</b> button to create the provider network.<p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-2.png"
+                width="600" id="image_zsm_mvq_35"/></p></li>
+          <li>Add the VLAN ID range to a provider network.<p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-3.png"
+                width="600" id="image_xjb_svq_35"/></p></li>
+          <li>Click <b>Create Range</b> to open the Create Segmentation Range page.<p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-4.png"
+                width="600" id="image_ydn_yvq_35"/></p><p>Complete the form as required.</p><ul
+              id="ul_hwp_bmr_35">
+              <li>
+                <b>Name</b> - Enter the name of the segmentation range.</li>
+              <li>
+                <b>Description</b> - Enter a free-text field for reference.</li>
+              <li>
+                <b>Shared</b> - If selected, shares the range for use by all tenants. </li>
+              <li>
+                <b>Project</b> - Select the tenant associated with the segmentation range.</li>
+              <li>
+                <b>Minimum</b> Enter the lowest value of a range of IDs.</li>
+              <li>
+                <b>Maximum</b> Enter the highest value of a range of IDs.</li>
+            </ul></li>
+          <li>Click <b>Create Segmentation Range</b> to commit the changes.</li>
+          <li>Once the Provider network is successful, hit the network tab and create the necessary
+            networks. <p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-5.png"
+                width="600" id="image_v4z_cwq_35"/></p></li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>Create Networks</title>
+      <p>Use the following steps to create the required network. Or, see <xref
+          href="../../OperationsGuide/Network/CGH-2-User-network-create.dita#topic3372">Creating and
+          Deleting Networks</xref>.</p>
+      <ol id="ol_d51_3mr_35">
+        <li>Click <b>Create Network</b> button to start creating the network. <p><image
+              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-6.png"
+              width="600" id="image_ucj_3wq_35"/></p><p><b>Note :</b> Segmentation ID is the VLAN id
+            that is intended to use for the network. For example, in the above diagram, we used 110
+            VLAN ID for the data network. </p></li>
+        <li>Click <b>Create Subnet</b>. <p><image
+              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-7.png"
+              id="image_sny_ynr_35" width="600"/></p></li>
+        <li>After the network is complete, click <b>Create Subnet</b>. <p><image
+              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-8.png"
+              id="image_gqc_14r_35" width="600"/></p></li>
+        <li>Complete the <b>Subnet</b> and <b>Subnet Detail</b> tabs.</li>
+        <li>Click <b>Create</b>.<p><image
+              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-9.png"
+              id="image_l14_b4r_35" width="600"/></p></li>
+      </ol>
+    </section>
+    <section id="unlock">
+      <title>Configure and unlock the compute controllers</title>
+      <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
+        the following commands from controller-0 to unlock each compute node in the inventory.</p>
+      <ul id="ul_f1c_dk1_h5">
+        <li><xref href="#topic1107cgikd/kvm-esx-unlock" format="dita">For a Non-Bonded
+            Environment</xref></li>
+        <li><xref href="#topic1107cgikd/nic-unlock" format="dita">For a Bonded
+          Environment</xref></li>
+      </ul>
+      <p id="kvm-esx-unlock">
+        <b>For a Non-Bonded Environment</b></p>
+      <ol id="ol_w1g_3gz_dv">
+        <li>PXE boot all the registered nodes.<p>Login to Horizon and monitor the status of nodes
+            being PXE booted on the <b>Admin</b> then <b>Inventory</b> page. After succesful PXE
+            boot, the Operational State should be <b>Disabled</b> and the Availability State should
+            be <b>Online</b>. </p></li>
+        <li>After the controller-1 and the compute nodes come up successfully after PXE boot,
+          execute the following commands from controller-0 to add the required interfaces.<ol
+            id="ol_p42_d35_lt">
+            <li>Add the infrastructure network interface:
+                <codeblock>system host-if-add -V &lt;VLAN_ID> -nt infra compute-1 infra vlan pxeboot0</codeblock><p>For
+                example:<codeblock>system host-if-add -V 539 -nt infra compute-1 infra vlan pxeboot0</codeblock></p><p>This
+                command configures the <codeph>pxeboot0</codeph> interface on compute-1 to connect
+                to the infrastructure network using VLAN ID 539. </p></li>
+            <li>Configure the compute nodes: <p>
+                <codeblock>system host-if-modify -nt data compute-1 "provider-net-1" &lt;port></codeblock>
+              </p><p>For
+                example:<codeblock>system host-if-modify -nt data compute-1 "provider-net-1" eth3</codeblock></p><p>This
+                command configures the data interface on <codeph>compute-1</codeph> to connect with
+                  <codeph>provider-net-1</codeph> using <codeph>eth3</codeph>.</p></li>
+          </ol></li>
+        <li>Unlock the stand-by compute
+          controller:<codeblock>system host-unlock compute-1</codeblock></li>
+      </ol>
+      <p id="nic-unlock">
+        <b>For bonded NIC environments</b></p>
+      <p>If you are using a bonded NIC environment, after configuring and unlocking the compute
+        nodes, perform these steps:</p>
+      <ol id="ol_nr5_ddw_mt">
+        <li>Use the following commands to delete the MGMT interface: <ol id="ol_zfq_5h1_tt">
+            <li>Obtain the compute name or ID number:<codeblock>system host-list</codeblock></li>
+            <li>Obtain the UUID of the MGMT interface to
+              remove:<codeblock>system host-if-list</codeblock></li>
+            <li>Remove the PXE boot flag off the
+              interface:<codeblock>system host-if-modify -nt "none" compute-1 pxeboot0</codeblock></li>
+          </ol></li>
+        <li>Use the following commands to create a bonded interface and setup node to be
+            unlocked:<ol id="ol_xyc_fww_dv">
+            <li>Create a bonded interface for the control plane:
+              <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-1 bond0 ae none eth0 eth1</codeblock></li>
+            <li>Create a bonded interface for infra and management
+              interface:<codeblock>system host-if-add -V 532 -nt mgmt compute-1 mgmt vlan bond0
+system host-if-add -V 539 -nt infra compute-1 infra vlan bond0</codeblock></li>
+            <li>Create a bonded interface for the data plane:
+              <codeblock>system host-if-add -a balanced -x layer2 -nt data compute-1 databond ae "provider-net-1" eth2 eth3 </codeblock></li>
+          </ol></li>
+        <li>Unlock the stand-by compute
+          controller:<codeblock>system host-unlock compute-1</codeblock></li>
+      </ol>
+    </section>
+  </body>
+</topic>
