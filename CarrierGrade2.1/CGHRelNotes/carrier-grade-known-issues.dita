@@ -19,41 +19,40 @@
             <ul id="ul_bkf_ht1_2v">
                 <li>Currently, in HCG dashboard, there is no provision to rerun or execute a
                     particular role if cloud deploy fails. </li>
+                <li>HLM dashboard crashes when UI has failed cloudtemplate. Workaround is to delete
+                    the failed cloud template from HLM CLI and re-login to the dashboard. For
+                    example: <codeblock>rm -r /var/hlm/clouds/&lt;cloudname&gt;</codeblock></li>
+                <li>When Pipelines or Retention period settings are changed through Horizon, it
+                    takes a long time to apply the settings and will crash eventually. Try to
+                    re-login to get to Horizon dashboard.</li>
+                <li>Newly created tenants not getting listed in the dropdown menu from Horizon.
+                    Workaround is to logout of HOS horizon and log back.</li>
+                <li>Network address field shows default values when we edit the cloud from UI. But
+                    wr.json file shows the right updated entries.</li>
+                <li>Horizon becomes inaccessible after restarting iptables services <p>Workaround to
+                        fix this issue is the execute following commands on all the 3 HOS
+                        controllers:<codeblock>ifdown eth2 ; ifup eth2
+service haproxy restart
+service keepalived restart </codeblock></p>Note:
+                    eth2 is CAN network<p>If you see few icons not being loaded in horizon after
+                        above workaround, it is likely because service went in to an inconsistent
+                        state. In that case, go to HCG Dashboard's "manage cloud" page and restart
+                        "wr_horizon" service and then try logging into horizon again.</p><p>To Get
+                        to HCG dashboard <xref href="http://%3cHLM" format="html" scope="external"
+                            >http://&lt;HLM</xref> CLM IP>:8000</p></li>
+                <li>If you should configure your lifecycle manager as an NFS server, for example as
+                    a <xref
+                        href="../OperationsGuide/Backup/CGH-2-attis-backup-restore.dita#topic10581c2abr"
+                        >backup location for the Attis service</xref>, you will need to open ports
+                    in the firewall. The HP Helion OpenStack Carrier Grade installation process
+                    configures and starts the firewall on the lifecycle manager host. <!--HCG-1535-->
+                    <p>You will need to open ports: <ul id="ul_p1l_jsz_dv">
+                            <li>111</li>
+                            <li>2049</li>
+                            <li>4001</li>
+                        </ul></p></li>
             </ul>
         </p>
-        <p> </p>
-        <p>2. HLM dashboard crashes when UI has failed cloudtemplate. Workaround is to delete the
-            failed cloud template from HLM CLI and re-login to the dashboard. </p>
-        <p> </p>
-        <p>Eg: rm -r /var/hlm/clouds/&lt;cloudname&gt;</p>
-        <p> </p>
-        <p>3. When Pipelines or Retention period settings are changed through Horizon, it takes a
-            long time to apply the settings and will crash eventually. Try to re-login to get to
-            Horizon dashboard.</p>
-        <p> </p>
-        <p>4. Newly created tenants not getting listed in the dropdown menu from Horizon. Workaround
-            is to logout of HOS horizon and log back.</p>
-        <p> </p>
-        <p>5. Network address field shows default values when we edit the cloud from UI. But wr.json
-            file shows the right updated entries.</p>
-        <p> </p>
-        <p>6. Horizon becomes inaccessible after restarting iptables services </p>
-        <p> </p>
-        <p>Workaround to fix this issue is the execute following commands on all the 3 HOS
-            controllers:</p>
-        <p> ifdown eth2 ; ifup eth2</p>
-        <p> service haproxy restart</p>
-        <p> service keepalived restart </p>
-        <p> </p>
-        <p>Note: eth2 is CAN network</p>
-        <p> </p>
-        <p>If you see few icons not being loaded in horizon after above workaround, it is likely
-            because service went in to an inconsistent state. In that case, go to HCG Dashboard's
-            "manage cloud" page and restart "wr_horizon" service and then try logging into horizon
-            again.</p>
-        <p> </p>
-        <p>To Get to HCG dashboard <xref href="http://%3cHLM" format="html" scope="external"
-                >http://&lt;HLM</xref> CLM IP&gt;:8000</p>
         <p> </p>
     </body>
 </topic>
