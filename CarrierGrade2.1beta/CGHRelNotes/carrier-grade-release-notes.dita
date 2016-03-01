@@ -133,23 +133,6 @@
             <p>Changing the default password for Swift, Glance, Cinder results in failing of their
                 respective cloud admin operations. </p>
             <p><!--HCG-919--></p>
-            <p><b>Floating IP not working when SNAT is enabled</b></p>
-            <!-- CG-1012 -->
-            <p>When router is configured either centralized (server default) or distributed , it is
-                seen that Floating IP is not working.</p>
-            <p>To fix this issue, log onto <codeph>controller-0</codeph> for the KVM Region and
-                execute the following command to disable SNAT on the router:
-                <codeblock>neutron router-update &lt;router-name> --external_gateway_info type=dict network_id=&lt;network-id>,enable_snat=False</codeblock></p>
-            <p><b>Unable to create new users through the Horizon UI</b></p>
-            <!-- CG-1042 -->
-            <p>After logging into the Horizon interface as an <codeph>admin</codeph> user, an error
-                occurs when you click <b>Create User</b> under the <b>Idenity</b> section.</p>
-            <p>You can create users with the OpenStack Keystone CLI commands. For axample:</p>
-            <codeblock>keystone user-create --name &lt;user-name> [--tenant &lt;tenant>][--pass [&lt;pass>]] [--email &lt;email>][--enabled &lt;true|false>]</codeblock>
-            <p>For more information, see <xref
-                    href="http://docs.openstack.org/cli-reference/content/keystoneclient_commands.html"
-                    format="html" scope="external">OpenStack Command-Line Interface
-                Reference</xref>.</p>
             <p><b>Unable to create new project through the Horizon Identity UI</b></p>
             <!-- CG-1041 -->
             <p>After logging into the Horizon interface as an <codeph>admin</codeph> user, an error
@@ -167,77 +150,6 @@
             <p>Cinder Volume Backup is not working upon installation of HP Helion OpenStack Carrier
                 Grade 2.0 The <codeph>cinder.backup.driver</codeph> file is not present in
                 /etc/cinder/cinder.conf.</p>
-            <p><b>Bonding on the control interface is not supported</b></p>
-            <!-- CG-1052 -->
-            <p>Due to an issue in <codeph>config_region</codeph> script, bonding on the control
-                interface (hosts PXE, CLM, BLS, CAN networks) is not supported. A patch to support
-                this feature is actively being worked upon. </p>
-            <p>Because of this issue, the data interface on the compute node does support
-                balanced-xor bonding mode and Active/Standby modes. </p>
-            <p><b>StoreVirtual Cluster VIP not available on storage network. </b></p>
-            <p>If you cannot ping a specific virtual IP address on a StoreVirtual server, locate the
-                host with the associated IP and reboot that server.</p>
-            <p><!--  CG-1306 --></p>
-            <p>
-                <b>Cinder Block Storage snapshot feature not working </b></p>
-            <!-- CG-1043 -->
-            <p>For HP Helion OpenStack Carrier Grade cloud using 3PAR iSCSI configured as the Cinder
-                block storage service. The Cinder volume snapshot feature might not function
-                properly if following entries are enabled in the
-                    <codeph>/etc/cinder/cinder.conf</codeph> file. </p>
-            <codeblock>hp3par_snapshot_retention=48
-hp3par_snapshot_expiration=72</codeblock>
-            <p> To correct this issue, edit the <codeph>/etc/cinder/cinder.conf</codeph> file to
-                disable these entries by commenting-out the entries, as follows:</p>
-            <codeblock>#hp3par_snapshot_retention=48
-#hp3par_snapshot_expiration=72           </codeblock>
-            <p>The <codeph>hp3par_snapshot_retention</codeph> entry is the time in hours to retain a
-                snapshot.</p>
-            <p>The <codeph>hp3par_snapshot_expiration</codeph> entry is the time in hours when a
-                snapshot expires and is deleted. </p>
-            <p> LDAP conflict causing error with templates</p>
-            <p>When deploying templates, such as <codeph>VMAutoScaling.yaml</codeph> you might
-                receive a n error similar to the following:
-                <codeblock>Error: Can’t find role heat_stack_user </codeblock></p>
-            <p>The problem is due to an inconsistency in the HP Helion OpenStack Carrier Grade LDAP
-                implementation. To fix this problem, you should disable LDAP in Keystone and create
-                few roles as mentioned below. </p>
-            <p>How you fix the problem depends upon whether your he HP Helion OpenStack Carrier
-                Grade cloud is currently deployed.</p>
-            <p><b><i>If the cloud is not deployed</i></b></p>
-            <ol id="ol_lzl_ccw_c5">
-                <li>If the HP Helion OpenStack Carrier Grade cloud is not deployed, before deploying
-                    edit the <codeph>definition.json</codeph> file to set
-                        <codeph>ldap_enabled</codeph> to 0.
-                        <codeblock>"ldap_enabled": 0,</codeblock><p>This setting causes the cloud to
-                        deploy with SQL as Keystone backend instead of LDAP.</p></li>
-                <li>After you deploy the cloud, create the following roles in the Keystone by
-                    logging on to one of the controller nodes: <ol id="ol_mzl_ccw_c5">
-                        <li>Source the stackrc file: <codeblock>source stackrc</codeblock></li>
-                        <li>Execute the following command to create the heat_stack_owner role:
-                            <codeblock>keystone role-create --name heat_stack_owner </codeblock></li>
-                        <li>Execute the following command to create the heat_stack_owner role:
-                            <codeblock>keystone role-create --name heat_stack_user</codeblock></li>
-                    </ol></li>
-            </ol>
-            <p><i>
-                    <b>If the cloud is currently deployed</b></i></p>
-            <ol id="ol_nzl_ccw_c5">
-                <li>After the cloud is deployed, on each controller, modify the
-                        <codeph>/etc/keystone/keystone.conf</codeph> to comment-out the LDAP entry
-                    and uncomment SQL driver, as shown:
-                    <codeblock>    [identity]
-    driver = keystone.identity.backends.sql.Identity
-    #driver = keystone.identity.backends.ldap.Identity</codeblock></li>
-                <li>Create the following roles in the Keystone by logging on to one of the
-                    controller nodes: <ol id="ol_ozl_ccw_c5">
-                        <li>Source the stackrc file: <codeblock>source stackrc</codeblock></li>
-                        <li>Execute the following command to create the heat_stack_owner role:
-                            <codeblock>keystone role-create --name heat_stack_owner </codeblock></li>
-                        <li>Execute the following command to create the heat_stack_owner role:
-                            <codeblock>keystone role-create --name heat_stack_user </codeblock></li>
-                    </ol></li>
-            </ol>
             <p><b>Non-shared services do not work from Horizon dashboard</b></p>
             <ol id="ol_kzl_ccw_c5">
                 <li>Go to each controller node in the Standard Region and replace
