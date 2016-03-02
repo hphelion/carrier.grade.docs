@@ -21,9 +21,15 @@
                 projects in the domain. <ul id="ul_q5f_shf_2v">
                     <li>Project panel -- Changes made though the <b>Project</b> panel affect only
                         the currently selected project. A non-admin can access only the
-                            <b>Project</b> panel. </li>
+                            <b>Project</b> panel. Projects are organizational units in the cloud to
+                        which you can assign users. Projects are also known as tenants or accounts.
+                        <!--last two sentences from http://docs.openstack.org/user-guide-admin/manage_projects_users_and_roles.html--></li>
                     <li>Admin panel -- Changes made throught the <b>Admin</b> panel generally affect
-                        all projects. An admin can access the <b>Admin</b> panel. </li>
+                        all projects within the cloud domain. An admin can access the <b>Admin</b>
+                        panel. A domain is an Identity API v3 entity. Represents a collection of
+                        projects, groups and users that defines administrative boundaries for
+                        managing OpenStack Identity entities.
+                        <!--last two sentences from http://docs.openstack.org/user-guide-admin/common/glossary.html--></li>
                 </ul></p>When working in HP Helion OpenStack Carrier Grade, you can log in as an
                 <b>admin</b> user or a <b>non-admin user</b>. <ul>
                 <li>admin user -- an admin user can work with the entire domain: all projects, all

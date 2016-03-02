@@ -18,7 +18,7 @@
     <section id="horizon-patch">
       <p>This patch addresses a specific issue where a 3PAR volume cannot be deleted after the
         instance has been deleted. </p>
-      <p>After live migration of a instance that is booted from a 3PAR cinder volume, a user cannot
+      <p>After live migration of an instance that is booted from a 3PAR cinder volume, a user cannot
         delete a volume after the instance has been deleted. If there are any volumes in the above
         state, this patch will not delete those volumes. You will still need to manually delete the
         volumes. After adding this patch you will be able to manually delete these volumes.

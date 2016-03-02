@@ -13,19 +13,21 @@
                                 <li>Ensure that the <codeph>domain_specific_drivers_enabled</codeph> option is set to
                                         <codeph>True</codeph> in the main configuration file template in this file:
                                         <codeblock>/home/stack/helion/my_cloud/config/keystone/keystone.conf.j2</codeblock></li>
-                                <li>Create a YAML file which contains the definition of the LDAP server connection. The
-                                        sample file below is already provided as part of the lifecycle-managers <xref
-                                                href="../installation/using_git.dita#using_git">local git repository</xref>. It is
-                                        available on a deployer/lifecycle-manager node in the following file:
+                                <li>Create a YAML file which contains the definition of the LDAP
+                                        server connection. The sample file below is already provided
+                                        as part of the lifecycle manager local git repository. It is available on the
+                                        lifecycle manager VM in the following file:
                                         <codeblock>/home/stack/helion/my_cloud/config/keystone/keystone_configure_ldap_sample.yml</codeblock>.
-                                        <p>Save a copy of this file with a new name, for example:</p>
+                                                <p>Save a copy of this file with a new name, for
+                                                example:</p>
                                         <codeblock>/home/stack/helion/my_cloud/config/keystone/keystone_configure_ldap_my.yml</codeblock>
                                         <note>Please refer to [ldap] section of the <xref
-                                                href="http://docs.openstack.org/kilo/config-reference/content/keystone-configuration-file.html"
-                                                scope="external" format="html">Keystone</xref> documentation for OpenStack Kilo for
-                                                the full option list and description.</note>
-                                        <p>Here is the sample YAML configuration, optimized for Microsoft Active Directory
-                                                server:</p>
+                                                  href="http://docs.openstack.org/kilo/config-reference/content/keystone-configuration-file.html"
+                                                  scope="external" format="html">Keystone</xref>
+                                                documentation for OpenStack Kilo for the full option
+                                                list and description.</note>
+                                        <p>Here is the sample YAML configuration, optimized for
+                                                Microsoft Active Directory server:</p>
                                         <codeblock>---
                                                 
                                                 keystone_domainldap_conf:
@@ -106,10 +108,7 @@
                                                 
                                                 tls_cacertfile: /etc/keystone/ssl/certs/all_ldapca.pem</codeblock>
                                 </li>
-                                <li>As suggested at <xref
-                                                href="../installation/using_git.dita#using_git"
-                                                >Using Git for Configuration Management</xref>,
-                                        commit the new file into local git repository, and rerun
+                                <li>Commit the new file into local git repository, and rerun
                                         Configuration Processor / deployment area preparation
                                         playbooks :
                                         <codeblock>$ cd ~/helion

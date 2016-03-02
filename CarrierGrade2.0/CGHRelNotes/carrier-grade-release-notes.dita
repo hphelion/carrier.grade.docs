@@ -230,7 +230,7 @@
             <p><b>Added Components</b></p>
             <ul id="ul_bzt_whc_f5">
                 <li><b>Standard Controller</b> (Controller running on HPE Linux): Standard IaaS control
-                    plane very similar to HOS. The main difference is that DCN/Nuage is used for
+                    plane very similar to HPE Helion OpenStack. The main difference is that DCN/Nuage is used for
                     networking rather than OVS to enable cloud-to-cloud communication. Icinga has
                     also been upgraded to Icinga2 to enable more monitoring features. Many
                     components of this region are shared with the WR Region.</li>
@@ -247,9 +247,9 @@
                     other will ship with AVS networking configured.</li>
                 <li><b>BM Controller</b>: Ironic server and compute proxy along with dependent
                     services such as DHCP and DNS run on this single node to control requests for
-                    bare metal compute nodes. The bare metal controller and compute nodes run in
+                    baremetal compute nodes. The baremetal controller and compute nodes run in
                     their own region of the cloud.</li>
-                <li><b>BM Node</b>: Bare metal node to be allocated and used on demand similar to a
+                <li><b>BM Node</b>: baremetal node to be allocated and used on demand similar to a
                     VM. They are managed by the BM Controller.</li>
                 <li><b>5930 Switch</b>: HP Networking hardware switch to provide VxLAN to VLAN
                     Bridging for SR-IOV, PC-PT or Baremtal Host ports. It also provides DHCP

@@ -39,9 +39,10 @@
                                 this:</p><ol id="ol_xgd_pth_y5">
                                 <li>Use the vitrual cd feature of the ILO remote console to make the
                                         blaster ISO contents available. Once this is done the system
-                                        will make the iso available to the OS via /dev/sr0 When this
-                                        happens correctly the following log messages will appea in
-                                        the <codeph>dmesg</codeph> kernel
+                                        will make the iso available to the operating system over
+                                                <codeph>/dev/sr0</codeph>. When this happens
+                                        correctly the following log messages will appea in the
+                                                <codeph>dmesg</codeph> kernel
                                         log:<codeblock>root@kvmhost: # dmesg | tail -100
 kernel: [341466.871783] scsi 3:0:0:0: CD-ROM HP Virtual DVD-ROM PQ: 0 ANSI: 0 CCS
 kernel: [341466.872152] scsi 3:0:0:0: Attached scsi generic sg3 type 5
@@ -73,7 +74,7 @@ deb <xref href="http://file/media/cdrom/" format="html" scope="external">file:/o
                                 <codeph>Extra-hLinux-Packages.tar</codeph>.<p>When you extract the
                                 compressed file, a directory called <codeph>extraPackages</codeph>
                                 is created.</p><p>This tar ball already has a Packages.gz file in
-                                the extraPackages directory but I have also included the the
+                                the extraPackages directory but I have also included the
                                 directions below for generating that just in case. <b>Note:</b> This
                                 Packages.gz file contained in the above tarball is 24kb to 25kb in
                                 size.</p><p>Sometimes you have lots of .deb package files that you
