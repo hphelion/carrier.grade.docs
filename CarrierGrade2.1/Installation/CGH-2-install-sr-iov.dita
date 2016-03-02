@@ -49,11 +49,13 @@
                         specific NIC model. This value is reported as 0 when the selected interface
                         does not support SRIOV.</p> The interface can also be configured from the
                     CLI as illustrated below:
-                        <codeblock>~(keystone_admin)$ system host-if-modify \ -nt pci-sriov -N 4 -p group0-data0 compute-0 eth8</codeblock><b>Note:</b>
+                        <codeblock>~(keystone_admin)$ system host-if-modify -nt pci-sriov -N 4 -p group0-data0 compute-0 eth8</codeblock><b>Note:</b>
                     By default, a VM that requires an SR-IOV interface is instantiated only if a
                     host NUMA node with a directly attached PCI interface is available. You can
                     specify best-effort instantiation by using an extra specification. For more
-                    information, see Specifying Best Effort for PCI NUMA Node Affinity on page 151. </li>
+                    information, see <i>Specifying Best Effort for PCI NUMA Node Affinity</i> in the
+                        <xref href="http://docs.hpcloud.com/pdf/static/CGH-21-KVM-Admin.pdf"
+                        format="html" scope="external">KVM Region Administration Guide</xref>. </li>
                 <li>Create the tenant1-net1 tenant network. You must ensure that: <ul
                         id="ul_udm_332_2v">
                         <li>The tenant1 tenant has access to the tenant network, either assigning it
@@ -83,11 +85,10 @@
                     <p>The new virtual machine instance is up now. It has a SR-IOV VF connection to
             the tenant1-net1 tenant network identified with VLAN ID 20. </p>
         <p>Access switches must be properly configured to ensure that virtual machines using
-            PCI-passthrough or SRIOV Ethernet interfaces (the latter discussed in SR-IOV Ethernet
-            Interfaces on page 32) have the expected connectivity. In a common scenario, the virtual
-            machine using these interfaces connects to external end points only, that is, it does
-            not connect to other virtual machines in the same cluster. In this case: <ul
-                id="ul_p1p_432_2v">
+            PCI-passthrough or SRIOV Ethernet interfaces have the expected connectivity. In a common
+            scenario, the virtual machine using these interfaces connects to external end points
+            only, that is, it does not connect to other virtual machines in the same cluster. In
+            this case: <ul id="ul_p1p_432_2v">
                 <li>Traffic between the virtual machine and the access switch can be tagged or
                     untagged. </li>
                 <li>The connecting port on the access switch is part of a port-based VLAN. </li>
@@ -95,7 +96,8 @@
                     ranges used by the AVS ports. </li>
                 <li>The port-based VLAN provides the required connectivity to external switching and
                     routing equipment needed by guest applications to establish connections to the
-                    intended end points.</li></ul></p> <p>For connectivity to other virtual machines in the cluster the following configuration is also
+                    intended end points.</li>
+            </ul></p> <p>For connectivity to other virtual machines in the cluster the following configuration is also
             required: <ul id="ul_p2f_t32_2v">
                 <li>The VLAN ID used for the tenant network, 10 in this example, and the default
                     port VLAN ID of the access port on the switch are the same. This ensures that

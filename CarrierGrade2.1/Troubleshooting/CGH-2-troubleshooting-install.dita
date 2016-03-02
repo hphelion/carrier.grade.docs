@@ -24,7 +24,7 @@
         <li><xref href="#topic10581c2ti/fail-ntp" format="dita"/></li>
         <li><xref href="#topic10581c2ti/install-fails" format="dita"/></li>
         <!--<li><xref href="#topic10581c2ti/vm" format="dita"/></li>-->
-        <li><xref href="#topic10581c2ti/vrs" format="dita"/></li>
+        <!--<li><xref href="#topic10581c2ti/vrs" format="dita"/></li>-->
       </ul>
     </section>
     <section id="provision"><title>Node fails to boot during HLM provision</title>
@@ -189,21 +189,7 @@ HLM-CFG</codeblock></li>
       </ol>
     </section>
     <!--<section id="vm"><title>VM fails to get private/Fixed IP address</title><p> <b>System Behavior/Message</b> </p><p>After <xref href="../Installation/carrier-grade-install-config-dcn.dita#topic10581cgicd/vrsg-config">configuring the VRS-G</xref> during installation, the VRS-G VM is assigned with private and floating IP ddress, when seen on the VSD dashboard. However, if you launch a console session to the VM, there is no networking.</p><p> <b>Resolution</b> </p><p>Make sure the Glance image has the correct properties set. For example, check that the adapter type is <codeph>ide</codeph>. Also, check if gateway and subnet values are correctly assigned to VRSvAPPs. </p></section>-->
-    <section id="vrs">
-      <title>VRSvAPPs missing in VSD dashboard</title>
-      <p>
-        <b>System Behavior/Message</b>
-      </p>
-      <p>While performing basic verification of cloud deployment, the VRSvAPPs might not appear in
-        the VSD dashboard and the associated TUL addresses are not pingable from VRS-G node. </p>
-      <p>
-        <b>Resolution</b>
-      </p>
-      <p>This issue occurs if the VRSvAPP is not configured correctly. </p>
-      <p>Make sure all properties are populated corectly for the VRSvAPP VMs running in the ESX
-        environment. Make sure there is a one-to-one mapping between each ESX host and a
-        VRSvAPP.</p>
-    </section>
+    <!--<section id="vrs"><title>VRSvAPPs missing in VSD dashboard</title><p> <b>System Behavior/Message</b> </p><p>While performing basic verification of cloud deployment, the VRSvAPPs might not appear in the VSD dashboard and the associated TUL addresses are not pingable from VRS-G node. </p><p> <b>Resolution</b> </p><p>This issue occurs if the VRSvAPP is not configured correctly. </p><p>Make sure all properties are populated corectly for the VRSvAPP VMs running in the ESX environment. Make sure there is a one-to-one mapping between each ESX host and a VRSvAPP.</p></section> NOT NEEDED FOR 2.1-->
     <section>
       <title>See Also</title>
       <p>For troubleshooting tips related to the HP Helion OpenStack cloud, see <xref

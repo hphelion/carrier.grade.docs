@@ -26,15 +26,6 @@
             <li>You have identified the NIC ports to be used for PCI Passthrough devices from each
                 compute node</li>
         </ul>
-        <section id="nova"><b>Standard Region</b><p>No changes needed on the controller nodes in the
-                Standard Region. However, if you need information on the provider network and the
-                VLAN ranges configured for that network, view the
-                    <codeph>/etc/neutron/plugins/ml2/ml2_conf.ini</codeph> file. For example in this
-                scenario, there are two provider networks: <codeph>physnet1</codeph> and
-                    <codeph>physnet2</codeph>. The examples in this document use
-                    <codeph>physnet1</codeph>.</p><pre>[ml2_type_vlan]
-network_vlan_ranges = physnet1:810:813,physnet2:814:815</pre></section>
-        <p><b>Standard Region</b></p>
         <p>To configure PCI-Passsthrough:</p>
         <p>
             <ol id="ol_k3j_q22_2v">
@@ -77,8 +68,11 @@ network_vlan_ranges = physnet1:810:813,physnet2:814:815</pre></section>
                         use a trunk port on the access switch so that it handles tagged packets as
                         well. However, this opens the possibility for guest applications to join
                         other tenant networks using tagged packets with different VLAN IDs, which
-                        might compromise the security of the system.</p> See L2 Access Switches on
-                    page 58 for other details regarding the configuration of the access switch. </li>
+                        might compromise the security of the system.</p>See <i>L2 Access
+                        Switches</i>  in the <xref
+                        href="http://docs.hpcloud.com/pdf/static/CGH-21-KVM-Admin.pdf" format="html"
+                        scope="external">KVM Region Administration Guide</xref> for other details
+                    regarding the configuration of the access switch. </li>
                 <li>Unlock the compute node. </li>
                 <li>Launch the virtual machine: <ol id="ol_hkm_rf2_2v">
                         <li>Log in as user user1 to the web management interface. </li>
