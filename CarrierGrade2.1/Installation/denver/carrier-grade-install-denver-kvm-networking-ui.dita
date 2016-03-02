@@ -27,8 +27,10 @@
       <p>
         <ol id="ol_fcr_tkr_35">
           <li>Launch the <xref
-            href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
-              >Helion dashboard</xref></li>
+              href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+              >Helion dashboard</xref> and log in as an admin user.</li>
+          <li><xref href="../../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita">Select
+              the <codeph>regionone</codeph> region</xref>.</li>
           <li>Click <b>Admin</b>, then <b>System</b>, then <b>Networks</b>. </li>
           <li>Select the <b>Provider Networks</b> tab.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-1.png"
@@ -41,8 +43,8 @@
                 width="600" id="image_xjb_svq_35"/></p></li>
           <li>Click <b>Create Range</b> to open the Create Segmentation Range page.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-4.png"
-                width="600" id="image_ydn_yvq_35"/></p><p>Complete the form as required.</p><ul
-              id="ul_hwp_bmr_35">
+                width="600" id="image_ydn_yvq_35"/></p></li>
+          <li>Enter the following values, based on your environment:<ul id="ul_hwp_bmr_35">
               <li>
                 <b>Name</b> - Enter the name of the segmentation range.</li>
               <li>
@@ -57,8 +59,8 @@
                 <b>Maximum</b> Enter the highest value of a range of IDs.</li>
             </ul></li>
           <li>Click <b>Create Segmentation Range</b> to commit the changes.</li>
-          <li>Once the Provider network is successful, hit the network tab and create the necessary
-            networks. <p><image
+          <li>Once the Provider network is created, click the <b>Networks</b> tab and create the
+            necessary networks. <p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-5.png"
                 width="600" id="image_v4z_cwq_35"/></p></li>
         </ol>
@@ -72,16 +74,52 @@
       <ol id="ol_d51_3mr_35">
         <li>Click <b>Create Network</b> button to start creating the network. <p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-6.png"
-              width="600" id="image_ucj_3wq_35"/></p><p><b>Note :</b> Segmentation ID is the VLAN id
-            that is intended to use for the network. For example, in the above diagram, we used 110
-            VLAN ID for the data network. </p></li>
+              width="600" id="image_ucj_3wq_35"/></p></li>
+        <li>Enter the following values, based on your environment:<ul id="ul_mmk_qxf_2v">
+            <li>Name -- Enter </li>
+            <li>Project -- Select the <codeph>admin</codeph> project.</li>
+            <li>Provider Network Type -- Select infra.</li>
+            <li>Segmentation ID -- The VLAN ID that is intended to use for the network. For example,
+              in the above diagram, we used 110 VLAN ID for the data network. </li>
+            <li>Admin State -- Select <codeph>UP</codeph>.</li>
+            <li>QoS Policy -- Select a quality-of-service policy.</li>
+            <li>Shared -- Select this option to make the network shared through out the domain.</li>
+            <li>External Network -- Leave this option clear to make the network internal.</li>
+            <li>VLAN Transparent -- </li>
+          </ul></li>
         <li>Click <b>Create Subnet</b>. <p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-7.png"
               id="image_sny_ynr_35" width="600"/></p></li>
         <li>After the network is complete, click <b>Create Subnet</b>. <p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-8.png"
               id="image_gqc_14r_35" width="600"/></p></li>
-        <li>Complete the <b>Subnet</b> and <b>Subnet Detail</b> tabs.</li>
+        <li>Complete the <b>Subnet</b> tab: <ul id="ul_clz_jbg_2v">
+            <li>
+              <p><b>Subnet Name</b> - Specify a name for the subnet.</p>
+            </li>
+            <li>
+              <p><b>Network Address</b> - Specify the IP address for the subnet.</p>
+            </li>
+            <li>
+              <p><b>IP Version</b> -  Select IPv4 or IPv6.</p>
+            </li>
+            <li>
+              <p><b>Gateway IP</b> - Specify an IP address for a specific gateway. This parameter is
+                optional.</p>
+            </li>
+            <li>
+              <p><b>Disable Gateway</b> - Select this check box to disable a gateway IP address.</p>
+            </li>
+          </ul></li>
+        <li>Click the <b>Subnet Detail</b> tabs and enter values based on your environment:<ul
+            id="ul_o5q_pbg_2v">
+            <li>
+              <p><b>Enable DHCP</b> - Select this check box to enable DHCP.</p>
+            </li>
+            <li><b>Allocation Pools</b> - Specify IP address pools.</li>
+            <li><b>DNS Name Servers</b> - Specify a name for the DNS server.</li>
+            <li><b>Host Routes</b> - Specify the IP address of host routes.</li>
+          </ul></li>
         <li>Click <b>Create</b>.<p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-9.png"
               id="image_l14_b4r_35" width="600"/></p></li>

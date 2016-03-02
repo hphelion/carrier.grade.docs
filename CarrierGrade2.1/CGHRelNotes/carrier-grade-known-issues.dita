@@ -51,9 +51,9 @@ service keepalived restart </codeblock></p>Note:
                             <li>111</li>
                             <li>2049</li>
                             <li>4001</li>
-                        </ul></p>For rpcmount, make the following changes to the
-                        <codeph>/etc/default/nfs-kernel-server</codeph>
-                    file:<codeblock>#RPCMOUNTDOPTS="--manage-gids"
+                        </ul></p>For rpcmount, edit the
+                        <codeph>/etc/default/nfs-kernel-server</codeph> file to specify a
+                    port:<codeblock>#RPCMOUNTDOPTS="--manage-gids"
 RPCMOUNTDOPTS="-p 4001 -g"</codeblock>Then,
                     stop and restart services in the following
                     order:<codeblock>/etc/init.d/rpcbind stop
