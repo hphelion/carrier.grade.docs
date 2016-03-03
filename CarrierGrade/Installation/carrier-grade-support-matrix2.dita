@@ -32,12 +32,12 @@
       information on these topologies.</p>
     <section id="hardware">
       <title>Supported Hardware</title>
-      <p>The following servers are supported for the HLM host, and for the controllers and compute
+      <p>The following servers are supported for the lifecycle manager host, and for the controllers and compute
         servers.</p>
       <p><b>Note:</b>
         <i><b>For the KVM + ESX cloud</b></i>, consult the DCN and ESX documentation for the
         supported hardware.</p>
-      <p><b id="hlm">HLM Host</b> The HLM host is a single server with at least a 40 GB disk size
+      <p><b id="hlm">Lifecycle Manager Host</b> The lifecycle manager host is a single server with at least a 40 GB disk size
         and 8,192 MB RAM.</p>
       <p id="controllers"><b>Comtrollers and compute servers</b> The following servers are supported
         for the controllers and compute servers in both the <xref
@@ -227,7 +227,7 @@
       <title>Required Hardware Configurations </title>
       <p>The servers, selected from the <xref href="#topic1773/hardware" format="dita">Supported Hardware</xref> lists, must be configured as follows for HPE Helion OpenStack
         Carrier Grade.</p>
-      <p><b>HLM Host</b>. You must have a server with a 40GB Disk and 8,192 MB RAM for the HLM
+    <p><b>Lifecycle Manager Host</b>. You must have a server with a 40GB Disk and 8,192 MB RAM for the HLM
         host.</p>
       <p id="non-kvm-hos"><b>HPE Helion OpenStack Controllers.</b> You must have three (3) baremetal
         systems to install the HPE Helion OpenStack controllers that meet the following requirements: </p>
@@ -280,7 +280,7 @@
                 </p><p><b>Note:</b> These systems are not required for a KVM-only cloud.</p></li></ul></p>
     </section>
 
-  <section id="software"><title>Software Requirements</title><p><b>HLM Host</b>. The HLM host
+  <section id="software"><title>Software Requirements</title><p><b>Lifecycle Manager Host</b>. The lifecycle manager host
         requires the Ubuntu Server 14.04.2 LTS operating system. </p>
     <p><b>HPE Helion OpenStack Controllers</b>. The servers should be baremetal. The HPE Helion
         OpenStack Carrier Grade installation process installs the required software.</p>
@@ -293,7 +293,7 @@
   
   <section id="guestOS"><title>Supported Guest Operating Systems</title> The following guest
       operating systems (guest OSs) are supported for the HPE Helion OpenStack Carrier Grade servers.
-          <p><b>HLM Host</b>. There are no supported guest OSs for the HLM host server. </p><p><b>HP
+    <p><b>Lifecycle Manager Host</b>. There are no supported guest OSs for the lifecycle manager host server. </p><p><b>HP
           Helion OpenStack Controllers</b>. There are no supported guest OSs for the servers that
         host the HPE Helion OpenStack Controllers.</p><p><b>KVM compute and controllers</b>. The
         following Guest OSs are supported for the servers in the KVM region for both cloud

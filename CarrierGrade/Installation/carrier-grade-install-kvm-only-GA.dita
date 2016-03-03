@@ -14,7 +14,7 @@
       steps that should be run.</p>
 
 <section id="prepare"> <title>Prepare the system for deployment</title>
-<p>Use the following steps to prepare the server on which the HLM VM will be deployed (the HLM host):</p>
+  <p>Use the following steps to prepare the server on which the HLM VM will be deployed (the lifecycle manager host):</p>
 <ol>
 
   <li>Edit the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file for your
@@ -88,13 +88,13 @@
 </section>
 <section id="deploy-the-hlm-and-vsd-vm">
       <title>Deploy the HLM Virtual Machine</title>
-      <p>Use the following steps to deploy the HLM VM on the HLM Host using Ansible playbooks.</p>
+  <p>Use the following steps to deploy the lifecycle manager VM on the lifecycle manager Host using Ansible playbooks.</p>
       <ol>
         <li>Make sure the Ansible playbook file is not in executable mode.</li>
         <li>Execute the following
           command:<codeblock>ansible-playbook -i hosts setup_hlm_onBM.yml</codeblock> The command
           will do the following:<ul>
-            <li>Copy both installation files (tar balls) to the HLM host, decrypt, and extract the
+            <li>Copy both installation files (.tar) to the lifecycle manager host, decrypt, and extract the
               files.</li>
             <li>Execute the <codeph>updatepackages</codeph> command.</li>
             <li>Execute the <codeph>prepareenv</codeph> command.</li>
@@ -106,7 +106,7 @@
             <alt>Sample Ansible Playbook run output</alt>
           </image></li>
         <li>Locate the IP address for the HLM VM in the
-            <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file of the HLM host under
+          <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file of the lifecycle manager host under
           <codeph>hlm_clmstaticip</codeph> field.</li> 
       </ol>
       <p>For KVM + ESX deployments, proceed with <xref href="#topic10581cgikog/vsd" format="dita"/>.</p>    
@@ -131,7 +131,7 @@
   <!--<section id="vsd-performance-workaround"> <title>VSD Performance workaround</title>
 <p>By default VSD has only 8G memory. For better performance behavior, you can update the VSD memory to 16G.</p>
 <ol>
-<li>From HLM host, execute the following command to power down the VSD node:
+<li>From lifecycle manager host, execute the following command to power down the VSD node:
           VM:<codeblock>virsh destroy vsd</codeblock></li>
 <li>Execute the following command to edit the memory setting in the VSD XML
           file:<codeph>virsh edit vsd 
@@ -153,7 +153,7 @@ Change to
 </ol>
 </section>-->
 <section id="launch-vsd-dashboard"> <title>Launch VSD Dashboard</title>
-<p>On the HLM host:</p>
+  <p>On the lifecycle manager host:</p>
 <ol>
 <li>Using an browser such as Chrome or FireFox, navigate to the DCM IP of VSD.</li>
 <li>In the log in page, enter the default

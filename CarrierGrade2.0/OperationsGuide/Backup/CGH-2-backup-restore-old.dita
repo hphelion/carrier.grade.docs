@@ -55,9 +55,9 @@ But the CLI, REST API etc should all be same --></p>
             <tm tmtype="reg">XtraDB</tm> cluster on the controllers.</li>
           <li><tm tmtype="reg">Percona</tm>
             <tm tmtype="reg">XtraDB</tm> cluster on the VSD host.</li>
-          <li>All files under the <codeph>/opt/</codeph> folder on the HLM host.  This backs up all
+          <li>All files under the <codeph>/opt/</codeph> folder on the lifecycle manager host.  This backs up all
             the installed code/configuration and also h* installation scripts.</li>
-          <li>All files under the <codeph>/root/</codeph> folder on the HLM host. This backs up all
+          <li>All files under the <codeph>/root/</codeph> folder on the lifecycle manager host. This backs up all
             the source code, packages, hlinux netboot, infra-ansible-playbooks, SSH keys, as well as
             cloud folders.</li>
           <li>bog.cfg and config.cfg files on the VSC switch.</li>
@@ -94,7 +94,7 @@ But the CLI, REST API etc should all be same --></p>
           a second failure.</li>
       </ul>
       <p><b>Important:</b> During the restore process the original HLM VM will be deleted from the
-        HLM host. </p>
+        lifecycle manager host. </p>
     </section>
     <section>
       <title>Backup and Restore the MySQL cluster</title>
@@ -179,7 +179,7 @@ export OS_AUTH_URL=http://127.0.0.1:5000/v2.0</codeblock>Optionally
         VSD:<codeblock>service vsd restart</codeblock></p>
       <p><b>After restoring the controller database:</b></p>
       <ol id="ol_blr_crk_zt">
-        <li>After restore job is complete, from the HLM host, SSH to the compute proxy nodes. </li>
+        <li>After restore job is complete, from the lifecycle manager host, SSH to the compute proxy nodes. </li>
         <li>Execute the following command to restart the Compute (Nova) service
           <codeblock>service nova-compute restart</codeblock></li>
       </ol>

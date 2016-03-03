@@ -20,11 +20,11 @@
       required installation processes.</p>
 <section id="deploy-the-hlm-and-vsd-vm">
       <title>Deploy the HLM Virtual Machine</title>
-      <p>Use the following steps on the HLM host to deploy the HLM VM on the HLM Host using Ansible
+  <p>Use the following steps on the lifecycle manager host to deploy the HLM VM on the lifecycle manager host using Ansible
         playbooks.</p>
       <ol>
         <li>Execute the following command: <codeblock>ansible-playbook -i hosts setup_hlm_onBM.yml</codeblock>
-          <!-- The command will do the following:<ul><li>Copy both installation files (tar balls) to the HLM host, decrypt, 
+          <!-- The command will do the following:<ul><li>Copy both installation files (tar balls) to the lifecycle manager host, decrypt, 
             and extract the files.</li>
             <li>Execute the <codeph>updatepackages</codeph> command.</li>
             <li>Execute the <codeph>prepareenv</codeph> command.</li><li>Execute the <codeph>Init cobbler</codeph> command.</li><li>Execute the <codeph>Importiso</codeph> command.<p>You will see a message similar to the following image when the playbook is run successful:</p></li></ul>-->
@@ -32,7 +32,7 @@
             <alt>Sample Ansible Playbook run output</alt>
           </image></li>
         <li>Locate the IP address for the HLM VM in the
-            <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file of the HLM host under
+          <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file of the lifecycle manager host under
             <codeph>hlm_clmstaticip</codeph> field. You will use this IP address to SSH into the HLM
           VM during the HPE Helion OpenStack Carrier Grade installation process.</li> 
       </ol>

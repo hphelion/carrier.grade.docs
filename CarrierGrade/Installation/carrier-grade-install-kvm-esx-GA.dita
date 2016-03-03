@@ -97,7 +97,7 @@
         <image href="../../media/CGH-install-virsh-vsd.png" width="400"/></p>
     </section>
     <section><title>Apply the VSD License</title>You should have recevied a license file when you
-      purchased DCN. You need to apply that license on the HLM host. For more information, see <xref
+      purchased DCN. You need to apply that license on the lifecycle manager host. For more information, see <xref
         href="carrier-grade-install-vsd-license.dita#topic10581cgivl"/>.</section>
     <section id="create-user-for-plugin-login">
       <title>Create an OSadmin user for VSD</title>
@@ -108,7 +108,7 @@
     
     <section id="configure-a-json-file-for-installation">
       <title>Launch the HPE Helion OpenStack cloud</title>
-      <p>Use the following steps on the HLM host to log on to the HLM VM created in <xref
+      <p>Use the following steps on the lifecycle manager host to log on to the HLM VM created in <xref
         href="carrier-grade-install-hlm-vm.dita#topic10581cgihv">Bootstrapping the HPE Helion Lifecycle Management Virtual Machine and Installation Services</xref>:</p>
       <ol>
         <li>Login to HLM VM. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where: HLM_VM_IP is the CLM
@@ -328,7 +328,7 @@ Password: cghelion</codeblock>
     <section id="create-a-new-cloud-template-and-bring-the-cloud-nodes-up">
       <title>Provision the cloud nodes and bring the cloud nodes up</title>
       <ol>
-        <li>On the HLM host, use the following script to start the provisioning of the HPE Helion
+        <li>On the lifecycle manager host, use the following script to start the provisioning of the HPE Helion
           OpenStack cloud: <codeblock>hprovision &lt;cloudname&gt;          </codeblock><p>Where:
               <codeph>&lt;cloudname&gt;</codeph> is the name of the cloud you created. The script
             takes approximately 15 to 30 minutes.</p><p>This script prepares the baremetal servers
@@ -455,7 +455,8 @@ hplefthand_api_url = https://&lt;Iscsi Virtual IP address>/lhos </codeblock></li
       <p>For more information, see the README in the download or <xref
           href="carrier-grade-install-gre-patch.dita#topic10581cgigp">Applying the Generic Routing
           Encapsulation (GRE) Patch</xref>.</p>
-      <title>Apply the RabbitMQ Random Password patch</title>
+        </section><section>
+          <title>Apply the RabbitMQ Random Password patch</title>
       <p>For information, see the README in the download or <xref
           href="carrier-grade-install-rabbitmq-patch.dita#topic10581cgirp">Applying the Random RabbitMQ
           Password Patch</xref>.</p>

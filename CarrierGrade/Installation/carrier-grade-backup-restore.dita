@@ -51,7 +51,7 @@
     <section><title>Backing up the HLM VM</title>
       <p>To back up the HLM VM, use the following steps:</p>
       <ol>
-        <li>Log in to the HLM host.</li>
+        <li>Log in to the lifecycle manager host.</li>
         <li>Backup the <codeph>/root/infra-ansible-playbooks</codeph> folder by copying the folders
           to a remote system. This will backup the <codeph>group_vars</codeph> folder used to create
           the HLM VM. </li>
@@ -70,9 +70,9 @@
     <section><title>Restore the HLM VM</title>
       <p>To restore the HLM VM, use the following steps:</p>
       <ol>
-        <li>Log in to the HLM host.</li>
+        <li>Log in to the lifecycle manager host.</li>
         <li>Copy the <codeph>/root/infra-ansible-playbooks</codeph> folder from the backup location
-          to the HLM host.</li>
+          to the lifecycle manager host.</li>
         <li>Re-create the HLM VM by executing from <codeph>/root/infra-ansible-playbooks</codeph>
           folder: <codeblock>ansible-playbook -i hosts setup_hlm_onBM.yml</codeblock></li>
         <li>Log in to the HLM VM.</li>
