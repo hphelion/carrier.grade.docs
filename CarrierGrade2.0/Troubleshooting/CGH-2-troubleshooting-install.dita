@@ -29,8 +29,8 @@
     </section>
     <section id="provision"><title>Node fails to boot during HLM provision</title>
       <b>System Behavior/Message</b>
-      <p>In rare situations, a node might not boot during the HLM provisioning process due to an
-        issue with network configuration. <!--HCG-951--></p><p>
+      <p>In rare situations, a node might not boot during the lifecycle manager provisioning process
+        due to an issue with network configuration. <!--HCG-951--></p><p>
         <b>Resolution</b>
       </p>If this happens, log into that console. If you see a message stating that the boot failed
       at network configuration, use the Retry Auto Configuration option to attempt a re-boot. It
@@ -120,7 +120,7 @@ FATAL: all hosts have already failed – aborting </codeblock></p>
     <section id="install-fails">
       <title>Installation fails at Ansible playbook</title>
       <p><b>System Behavior/Message</b></p>
-      <p>The HP Helion OpenStack Carrier Grade installation fails during the HLM deployment (after
+      <p>The HP Helion OpenStack Carrier Grade installation fails during the lifecycle manager deployment (after
         executing the <codeph>ansible-playbook</codeph> command) with an error similar to the
         following.</p>
       <codeblock>
@@ -140,8 +140,8 @@ to retry, use: --limit @/root/setup_hlm_onBM.retry
       <p><b>Resolution</b></p>
       <p>Perform the following steps:</p>
       <ol id="ol_fqn_wqn_c5">
-        <li>Execute the following command to determine if the HLM VM was created:
-          <codeblock>virsh list –all</codeblock>If the HLM VM appears in the output, delete the VM
+        <li>Execute the following command to determine if the lifecycle manager VM was created:
+          <codeblock>virsh list –all</codeblock>If the lifecycle manager VM appears in the output, delete the VM
           using the following
           commands:<codeblock>virsh destroy hlm
 virsh undefined hlm</codeblock></li>
@@ -160,7 +160,7 @@ hosts: hlm
 HLM-CFG</codeblock></li>
         <li>Again, run the <codeph>ansible-playbook –i hosts setup_hlm_onBM.yml</codeph>.</li>
         <li>After the command completes, execute the following command to obtain the vibr0 IP
-          address for the HLM<codeblock>arp | grep aa</codeblock>Copy the IP address you get in the
+          address for the lifecycle manager <codeblock>arp | grep aa</codeblock>Copy the IP address you get in the
           output. 192.168.122.XXX</li>
         <li>Edit the <codeph>/root/infra-ansible-playbooks/hosts</codeph> file to add the vibr0 IP
           address in the following manner:
