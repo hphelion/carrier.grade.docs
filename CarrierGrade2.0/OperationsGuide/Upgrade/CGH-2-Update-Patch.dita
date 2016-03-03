@@ -18,11 +18,11 @@
         <p>This document provides a general description of the HP Helion OpenStack Carrier Grade
             patching and update processes.
             <!--https://wiki.hpcloud.net/pages/viewpage.action?pageId=56139004--></p>
-        <p>Update Existing HLM:</p>
-        <p>If you have an existing HLM and you want to upgrade it to a newer build, you can do
+        <p>Update Existing lifecycle manager:</p>
+        <p>If you have an existing lifecycle manager and you want to upgrade it to a newer build, you can do
             so without tearing it apart.</p>
         <p>This will help you to maintain all your existing cloud definitions and generated
-            configuration remain intact while the Debian Repository and HLM code has been updated to
+            configuration remain intact while the Debian Repository and lifecycle manager code has been updated to
             the latest version.</p>
         <p><b>Taking Back-Up and Preparing for Upgrade</b></p>
         <p>
@@ -137,7 +137,7 @@
                 </li>
             </ol>
         </p>
-        <p><b>Upgrade Existing HLM with New Build</b></p>
+        <p><b>Upgrade Existing lifecycle manager with New Build</b></p>
         <p>
             <ol id="ol_dbm_wcp_f5">
                 <li>
@@ -156,19 +156,19 @@
                     <pre>Run ansible-playbook -i hosts update_hlm_onBM.yml</pre>
                 </li>
                 <li>
-                    <pre>The above step has updated your HLM debian repo with latest deb and also has updated your HLM and Ansible code.</pre>
+                    <pre>The above step has updated your lifecycle manager debian repo with latest deb and also has updated your lifecycle manager and Ansible code.</pre>
                 </li>
             </ol>
         </p>
         <p><b>Upgrade Cloud Configuration with Existing Cloud Definitions (No JSON Changes in the
                 cloud definition for adding tiers or nodes. But adding variables is fine.)</b></p>
-        <p>Once you have updated your HLM to be on the latest version of the build, you still
+        <p>Once you have updated your lifecycle manager to be on the latest version of the build, you still
             have your existing cloud configurations (sitting under desired_state folder) </p>
         <p>that has not been updated to the newercode.</p>
         <p>You will have to perform some steps in order to get your existing cloud definitions
             updated to the latest. </p>
         <p>If you are not interested in your existing cloud definition and updating the existing
-            cloud itself from the current HLM, you can of course ignore these steps and create a new
+            cloud itself from the current lifecycle manager, you can of course ignore these steps and create a new
             cloud altogether.</p>
         <p><b>Update Cloud Configuration with Existing Cloud Definition (No JSON file
             Changes)</b></p>

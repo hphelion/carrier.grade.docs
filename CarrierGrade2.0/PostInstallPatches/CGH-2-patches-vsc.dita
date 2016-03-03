@@ -57,19 +57,19 @@
         <li id="a2">Execute the following command to backup the VSC configuration file:
           <codeblock>scp admin@&lt;vsc ip>:/config.cfg  &lt;destination directory></codeblock></li>
         <li id="a3">Log into the lifecycle manager VM.
-            <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where: HLM_VM_IP is the CLM IP of the
+            <codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle manager_VM_IP is the CLM IP of the
             lifecycle manager. Locate the IP address for the lifecycle manager in the
               <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
               <codeph>hlm_clmstaticip</codeph> field.</p></li>
       </ol>
       <p><b>Replace the QCOW and YML files with the new files</b></p>
-      <p>Use the following steps to replace the QCOW and YML files on the HLM VM with new versions
+      <p>Use the following steps to replace the QCOW and YML files on the lifecycle manager VM with new versions
         of the files that you downloaded in the patch file.</p>
       <p id="note"><b>Note:</b> If the path to the <codeph>/base/</codeph> directory is different
         from the default, see <xref href="#topic10581pdpv/additional" format="dita">Locating the
           base directory</xref> for a command to locate <codeph>/base/</codeph>. </p>
       <ol id="ol_dpc_14t_q5">
-        <li id="1"> On the HLM VM, replace the existing <codeph>vsc_singledisk.qcow2</codeph> in the
+        <li id="1"> On the lifecycle manager VM, replace the existing <codeph>vsc_singledisk.qcow2</codeph> in the
             <codeph>~/dcn/</codeph> directory with the <codeph>vsc_singledisk.qcow2</codeph> you
           downloaded. </li>
         <li id="2">Change to the <codeph>/opt/share/hlm/1/ansibleconfig/roles/DCN-VSC/tasks</codeph>
@@ -293,7 +293,7 @@ max_fail_percentage: 0
         <li conref="#topic10581pdpv/a3"/>
       </ol>
       <p><b>Replace the QCOW and YML files with the new files</b></p>
-      <p>Use the following steps to replace the QCOW and YML files on the HLM VM with new versions
+      <p>Use the following steps to replace the QCOW and YML files on the lifecycle manager VM with new versions
         of the files that you downloaded in the patch file.</p>
       <p conref="#topic10581pdpv/note"/>
       <ol id="ol_w3l_1n5_q5">

@@ -26,7 +26,7 @@ But the CLI, REST API etc should all be same --></p>
     <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/resp"/>
     <section>
       <title>When to restore</title>
-      <p>You should restore the HLM VM or other appliances if there are any issues with the HP
+      <p>You should restore the lifecycle manager VM or other appliances if there are any issues with the HP
         Helion OpenStack Carrier Grade components, for example:<ul id="ul_rzx_1b3_k5">
           <li>there is database corruption</li>
           <li>when two controllers have failed. HA Services are not guaranteed to be resilient after
@@ -42,7 +42,7 @@ But the CLI, REST API etc should all be same --></p>
         <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
         <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
         <li>Execute the following command to start the
-          restore:<codeblock>attis restore --config-id &lt;Config_ID_of_ HLM_Appliance_Data_Restore&gt; --backup-id BACKUP_ID</codeblock>Where:
+          restore:<codeblock>attis restore --config-id &lt;Config_ID_of_ lifecycle manager_Appliance_Data_Restore&gt; --backup-id BACKUP_ID</codeblock>Where:
       <ul id="ul_w2c_zk3_k5">
         <li><codeph>CONFIG_ID</codeph> specified the configuration file to use. Use the
             <codeph>attis config</codeph> command to get the configuration ID for the job. See <xref
@@ -68,7 +68,7 @@ But the CLI, REST API etc should all be same --></p>
             storage</b><codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_NFS.json</codeblock></p><b>for
             SCP storage</b>
           <codeblock>attis restore --config-path /etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeblock></li>
-        <li>After restore job is complete, ssh to the compute proxy nodes from HLM, and restart
+        <li>After restore job is complete, ssh to the compute proxy nodes from lifecycle manager, and restart
           nova-compute service:<codeblock>service nova-compute restart</codeblock>
           <p>For Denver deployments,the Nova service is hosted on the compute nodes in the KVM region. SSH to each compute node in the KVM region and restart the Compute service.</p>
           <p>Use care when restating the Compute service on the KVM region controllers, such as locking and unlocking the nodes.</p></li>

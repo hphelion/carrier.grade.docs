@@ -25,8 +25,8 @@
       <p>Use the following steps on the lifecycle manager host to log on to the lifecycle
         manager:</p>
       <ol id="ol_ncd_wff_zt">
-        <li>Log into the lifecycle manager VM. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
-            HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+        <li>Log into the lifecycle manager VM. <codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where:
+            lifecycle manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
             lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
             file under <codeph>hlm_clmstaticip</codeph> field.</p><p>Use the default credentials: </p><p>
             <codeblock>User Name: root
@@ -370,7 +370,7 @@ Password: cghelion</codeblock>
             using the Retry Auto-Configuration option. The provisioning will continue as you reboot
             that node. See <xref
               href="../../Troubleshooting/CGH-2-troubleshooting-install.dita#topic10581c2ti/provision"
-              >Node fails to boot during HLM provision</xref>. </p>Once the baremetal nodes are
+              >Node fails to boot during lifecycle manager provision</xref>. </p>Once the baremetal nodes are
           provisioned, make sure the <codeph>nodes.json</codeph> file is generated to the
             <codeph>var/hlm/clouds/&lt;cloud name&gt;/</codeph> directory. The
             <codeph>nodes.json</codeph> file will have entries for your environment: <table

@@ -301,7 +301,7 @@
               <entry>Low</entry>
               <entry>Yes</entry>
               <entry>Control plane and network topology and mapping to data center (input to
-                HLM)</entry>
+                lifecycle manager)</entry>
             </row>
             <row>
               <entry>Cloud Configuration</entry>
@@ -309,7 +309,7 @@
               <entry>High</entry>
               <entry>Low</entry>
               <entry>Yes</entry>
-              <entry>Configuration of services in cloud (output from HLM)</entry>
+              <entry>Configuration of services in cloud (output from lifecycle manager)</entry>
             </row>
             <row>
               <entry>MySQL database</entry>
@@ -502,7 +502,7 @@
       <title>Summary of Controls</title>
       <p>Summary of controls spanning multiple components and interfaces:</p>
       <ul id="ul_gms_r3c_f5">
-        <li><b>Audit:</b> OpenStack services, mySQL, RabbitMQ, HLM CP, Ansible, Cobbler perform
+        <li><b>Audit:</b> OpenStack services, mySQL, RabbitMQ, lifecycle manager CP, Ansible, Cobbler perform
           logging. Logs are collected by the centralized logging service.</li>
         <li>
           <p><b>Authentication: </b>Authentication via Keystone tokens at APIs. Password
