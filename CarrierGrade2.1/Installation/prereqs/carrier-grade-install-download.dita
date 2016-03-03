@@ -219,38 +219,36 @@
                                 <li>Execute the following command to import the keys:
                                                 <codeblock>gpg --import "&lt;filename>"</codeblock><p>Where
                                                 &lt;filename> is the name of the extracted
-                                                file.</p><p>The keys are then imported into the gpgp
-                                                key share:
-                                                <codeblock>gpg -\-import hpPublicKey.pub 
-gpg -\-import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-1.pub 
-gpg -\-import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-2.pub 
-gpg -\-import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-3.pub 
-gpg -\-import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-4.pub 
-gpg -\-import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-5.pub 
-gpg -\-import hpPublicKey2048.pub </codeblock></p></li>
+                                                file.</p><p>The keys are then imported into the gpgp key share:
+                                                <codeblock>gpg --import hpPublicKey.pub 
+gpg --import Hewlett-PackardCompanyRSA(HPCodesigningService)-1.pub
+gpg --import Hewlett-PackardCompanyRSA(HPCodesigningService)-2.pub 
+gpg --import Hewlett-PackardCompanyRSA(HPCodesigningService)-3.pub
+gpg --import Hewlett-PackardCompanyRSA(HPCodesigningService)-4.pub 
+gpg --import Hewlett-PackardCompanyRSA(HPCodesigningService)-5.pub
+gpg --import hpPublicKey2048.pub </codeblock></p></li>
                                 <li>Use the following command to view the keys in the key store:
-                                                <codeblock>gpg -\-list-keys</codeblock><p>The key
+                                                <codeblock>gpg --list-keys</codeblock><p>The key
                                                 store appears similar to the
                                         following:</p><codeblock>/home/sad/.gnupg/pubring.gpg
   -\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-
-pub   2048R/F7191CB9 2014-12-19
-pub   1024D/2689B887 2005-03-11 [expired: 2015-03-09]
-uid                  Hewlett Packard Enterprise Company (HPE Codesigning Service)
 pub   2048R/B1275EA3 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 1
+uid       [ unknown] Hewlett-Packard Company RSA (HP Codesigning Service) - 1
 pub   2048R/B564A643 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 2
+uid       [ unknown] Hewlett-Packard Company RSA (HP Codesigning Service) - 2
 pub   2048R/FF94BC78 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 3
+uid       [ unknown] Hewlett-Packard Company RSA (HP Codesigning Service) - 3
 pub   2048R/BA849975 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 4
+uid       [ unknown] Hewlett-Packard Company RSA (HP Codesigning Service) - 4
 pub   2048R/C6978F0C 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 5
+uid       [ unknown] Hewlett-Packard Company RSA (HP Codesigning Service) - 5
+pub   1024D/2689B887 2005-03-11 [expired: 2015-03-09]
+uid       [ expired] Hewlett-Packard Company (HP Codesigning Service)
 pub   2048R/5CE2D476 2012-12-04 [expires: 2022-12-02]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service)        </codeblock></li>
+uid       [ unknown] Hewlett-Packard Company RSA (HP Codesigning Service)</codeblock></li>
                                 <li>Use the following command to verify the signature:
                                                 <codeblock>gpg --verify ./hcg2_kvm_esx_ironic_vrs.tar.gz.sig ./hcg2_kvm_esx_ironic_vrs.tar.gz.sig  </codeblock><p>or</p><p>
-                                                <codeblock>gpg --verify ./hcg2_kvm_avs.tar.gz ./hcg2_kvm_avs.tar.gz  </codeblock>
+                                                <codeblock>gpg --verify ./hcg21_kvm_avs.tar.gz ./hcg21_kvm_avs.tar.gz</codeblock>
                                         </p><p>The output for the command appears similar to the
                                                 following. This indicates the signature is verified:
                                                   <b>Good signature from "Hewlett Packard Enterprise
@@ -269,18 +267,17 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                 which should come installed with Ubuntu.</p>
                         <ol id="ol_icb_k4f_xs">
                                 <li>Run the checksum tool against the download package:
-                                                <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar</codeblock><p>or
-                                                <codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_vrs.tar
-sha256sum &lt;path-to-file>/hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeblock></p></li>
+                                        <codeblock>sha256sum &lt;path-to-file>/hcg21_kvm_avs.tar.gz</codeblock></li>
                                 <li>Compare the output of the checksum tool to the download checksum
                                         file.
-                                        <codeblock>sha256sum.exe hcg2_kvm_esx_ironic_vrs.tar
-97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar</codeblock>Note
+                                        <codeblock>sha256sum.exe hcg21_kvm_avs.tar.gz
+97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg21_kvm_avs.tar.gz</codeblock>Note
                                         that the checksum file contains the date that the file was
                                         generated, the checksum string, and the name of the file
                                         that was used, similar to the
-                                        following:<codeblock>Fri Jul 31 10:55:37 EDT 2015
-97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg2_kvm_esx_ironic_vrs.tar</codeblock></li>
+                                        following:<codeblock>Tue Mar  1 10:51:11 PST 2016
+4e5a5514ba87401750f01196c592d8d93a9eb6c06546  hcg21_kvm_avs.tar.gz</codeblock>
+                                </li>
                         </ol>
                 </section>
                 <section id="extract"><title>Extract and copy the HP Helion OpenStack Carrier Grade
