@@ -48,7 +48,7 @@
                         connected to provider network group0-data0. Click the Save button to
                         proceed. </p>The interface can also be configured from the CLI as
                     illustrated
-                    below:<codeblock> ~(keystone_admin)$ system host-if-modify \ -nt pci-passthrough -p group0-data0 compute-0 eth8</codeblock></li>
+                    below:<codeblock>system host-if-modify -nt pci-passthrough -p group0-data0 compute-0 eth8</codeblock></li>
                 <li>Create the net0 tenant network: <p>Select the Networks window from the Admin
                         panel, click the Networks tab, and then click the Create Network button.
                         Fill in the Create Network window as illustrated below. You must ensure
@@ -87,7 +87,7 @@
                             button to proceed. </li>
                     </ol><p>Passthrough interfaces can be attached from the CLI when booting a new
                         virtual machine, as illustrated below:
-                        <codeblock>~(keystone_admin)$ nova boot \ --nic net-id=704e9f3b,vif-model=pci-passthrough \ --flavor small --image cgcs-guest my-new-vm </codeblock></p><b>Note:</b>
+                        <codeblock>nova boot --nic net-id=704e9f3b,vif-model=pci-passthrough --flavor small --image cgcs-guest my-new-vm </codeblock></p><b>Note:</b>
                     By default, a VM that requires a PCI passthrough interface is instantiated only
                     if a host NUMA node with a directly attached PCI interface is available. You can
                     specify best-effort instantiation by using an extra specification. For more
