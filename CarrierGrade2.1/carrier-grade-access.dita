@@ -54,16 +54,16 @@ root@10.x.x.x's password:</codeblock><p>The
             <li>SSH into the lifecycle VM as the root user. The default password is
                 <codeph>cghelion</codeph>.</li>
             <li>SSH into a controller using the CLM IP of the controller. Log in as the
-                <codeph>cghelion</codeph> user. No password is
-                required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on
-                the lifecycle manager VM in the
-                  <codeph>/var/hlm/clouds/lr4tb2c1b41/desired_state/lr4tb2c1b41/001/base/stage/ansible/hosts</codeph>
-                file. Look in the <codeph>[BASE-CCP-T1]</codeph>
-                section:<codeblock>BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.20.37.102 
+              <codeph>cghelion</codeph> user. No password is
+              required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on
+              the lifecycle manager VM in the
+                <codeph>/var/hlm/clouds/lr4tb2c1b41/desired_state/lr4tb2c1b41/001/base/stage/ansible/hosts</codeph>
+              file. Look in the <codeph>[BASE-CCP-T1]</codeph>
+              section:<codeblock>BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.20.37.102 
 BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.20.37.103 
 BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p>When
-              you log in, the prompt appears similar to the following, depending upon the system you
-              are using:<codeblock>cghelion@BASE-CCP-T1-M1-NETCLM:~$</codeblock><codeblock/></li>
+            you log in, the prompt appears similar to the following, depending upon the system you
+            are using:<codeblock>cghelion@BASE-CCP-T1-M1-NETCLM:~$</codeblock></li>
           </ol></p>
       </section><section id="horizon"><title>Access the Horizon Dashboard</title><p>At this point, you can log into
         the Horizon interface, a web-interface you can use to manage and maintain HP Helion

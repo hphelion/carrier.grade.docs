@@ -255,7 +255,7 @@
       <title>Creating a virtual router</title>
       <p>From  the <xref
           href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
-          >Helion dashboard</xref>, as an admin user: <ol>
+          >Horizon dashboard</xref>, as an admin user: <ol>
           <li><xref href="../../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita">Select
               the <codeph>regionone</codeph> region and project</xref>, such as admin.</li>
           <li>Click <b>Project</b>, then <b>Networks</b>, then <b>Router</b>. </li>
@@ -295,8 +295,50 @@
           <li>After the router is created,  select the router. </li>
           <li>Click the <b>Interface</b> tab and click <b>Add Interface</b>.</li>
           <li>Select the internal network subnet and click <b>Add Interface</b>.</li>
-        </ol><ol id="ol_cnx_j45_2v">
-          <li/>
+        </ol></p>
+    </section>
+    <section>
+      <title>Add interfaces</title>
+      <p>From  the <xref
+          href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+          >Helion dashboard</xref>, as an admin user, add the infra interface:<ol id="ol_q3v_1s5_2v">
+          <li>Click <b>Admin</b>, then <b>System</b>, then <b>Inventory</b>.</li>
+          <li>Click the <b>Hosts</b> tab. </li>
+          <li>Lock the compute and wait untl the compute is locked.</li>
+          <li>On the <b>Router Details</b> tab, click <b>Add interface</b>.</li>
+          <li>On the <b>Add Interface</b> screen:<table frame="all" rowsep="1" colsep="1"
+              id="table_bpv_4s5_2v">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>Description</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Interface Name</entry>
+                    <entry>Specify a name for the interface</entry>
+                    <entry>infra</entry>
+                  </row>
+                  <row>
+                    <entry>Network type</entry>
+                    <entry>Linking the router to the external network</entry>
+                    <entry>external</entry>
+                  </row>
+                  <row>
+                    <entry>Router Type</entry>
+                    <entry>Select centralized/distributed for the type of rotuer.</entry>
+                    <entry>centralized/distributed</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Add Interface</b></li>
         </ol></p>
     </section>
     <section id="unlock">
