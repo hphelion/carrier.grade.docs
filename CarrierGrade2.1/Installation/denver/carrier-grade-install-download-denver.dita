@@ -22,7 +22,10 @@
                 <p conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/intro"/>
                 <section id="download">
                         <title>Download the installation files</title>
-                        <p>In a browser, navigate to <xref
+                        <p>You should have downloaded the installation packages in <xref
+                                        href="CGH-install-prereqs-denver.dita#topic7148cipd/linux"
+                                        >Prerequisites</xref>. If you have not, in a browser,
+                                navigate to <xref
                                         href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
                                         format="html" scope="external">Helion Download
                                         Network(HDN)</xref>. <ol id="ol_wpm_c2h_cv">
@@ -31,11 +34,6 @@
                                                 menu on the left side of the page.</li>
                                         <li>Click the <b>Downloads</b> tab and locate the following
                                                 download: <ul id="ul_pq4_jvd_dv">
-                                                  <li><b>Helion OpenStack 2.1</b>. This link
-                                                  downloads the
-                                                  <codeph>hpelinux-hcg-kvm-amd64-20160224.iso</codeph>
-                                                  file. Also download the associated checksum and
-                                                  signature files. </li>
                                                   <li>
                                                   <p><b>Helion Carrier Grade 2.1 AVS</b>. This link
                                                   downloads the
@@ -45,7 +43,6 @@
                                                   files.</p>
                                                   </li>
                                                 </ul></li>
-                                        <!--<li>CHECK THIS: Download the following KVM Region patches:<ul id="ul_q2d_nvd_dv"><li><b>HCG2.0_WR002_Patch005</b></li><li><b>HCG2.0_WR003_Patch007</b></li><li><b>HCG2.0_WR004_Patch017</b></li><li><b>HCG2.0_WR005_Patch019</b></li></ul><p>You will install these patches during the installation of the KVM Region. </p></li>-->
                                 </ol></p>
                 </section>
                 <section
@@ -55,11 +52,19 @@
                 <section id="extract"><title>Extract the downloaded files</title><p>After
                                 downloading the files from HDN, extract the move the files as
                                 indicated in this section. It is important to the installation
-                                process for the installer files to be in the correct
-                                        locations.</p><p><b>Standard Region installation
-                                files</b></p><p>After downloading the
-                                        <codeph>hcg21_kvm_avs.tar.gz</codeph> file, extract the
-                                Standard Region files as following:</p><p>
+                                process for the installer files to be in the correct locations.<ol
+                                        id="ol_e4x_3w1_fv">
+                                        <li>Extrct the <codeph>hcg21_kvm_avs.tar.gz</codeph> file.
+                                                The compressed file contains the
+                                                  <codeph>hcg21_kvm_avs.tar</codeph> file.</li>
+                                        <li>Extract the <codeph>hcg21_kvm_avs.tar</codeph> file. The
+                                                compressed file contains the
+                                                  <codeph>hcg21_kvm_avs</codeph> directory.</li>
+                                </ol></p><p><b>Standard Region installation files</b></p><p>After
+                                downloading and extracting the <codeph>hcg21_kvm_avs.tar.gz</codeph>
+                                files, the Standard Region installation files are contained in the
+                                        <codeph>hcg21_kvm_avs</codeph> directory. Copy the files to
+                                the required locations in the following table. </p><p>
                                 <table id="table_rkj_yyk_2t">
                                         <tgroup cols="3">
                                                 <colspec colnum="1" colname="col2"/>
@@ -112,9 +117,17 @@
                                                 </tbody>
                                         </tgroup>
                                 </table>
-                        </p><p id="kvm-avs"><b>KVM Region installation files</b></p>After
-                        downloading the <codeph>hcg21_kvm_avs.tar.gz</codeph> file, extract the
-                        following files for installing the KVM Region.<p>
+                        </p><note>The <codeph>hcg21_kvm_avs</codeph> directory also contains the HPE
+                                Linux installation file, called
+                                        <codeph>hpelinux-hcg-kvm-amd64-20160224.iso.iso</codeph>.
+                                This ISO contains all required files to install HPE Linux and all
+                                Linux packages required for HPE Helion Carrier Grade. You should
+                                have deployed HPE Linux in the <xref
+                                        href="CGH-install-prereqs-denver.dita#topic7148cipd/linux"
+                                        >Prerequisites</xref>.  </note><p id="kvm-avs"><b>KVM Region
+                                        installation files</b></p>After downloading and extracting
+                        the <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following files for
+                        installing the KVM Region are in the <codeph>hcg21_kvm_avs/WR</codeph> directory.<p>
                                 <table id="table_ejh_qtj_k5">
                                         <tgroup cols="2">
                                                 <colspec colnum="1" colname="col2" colwidth="3.26*"/>
@@ -149,16 +162,42 @@
                                                 </tbody>
                                         </tgroup>
                                 </table>
-                        </p><p><b>KVM Region Patches</b></p><p>After downloading the
-                                        <codeph>hcg21_kvm_avs.tar.gz</codeph> file, extract the
-                                following patch files from the WR_Patches folder:<ul
-                                        id="ul_zkk_hyd_dv">
-                                        <li><codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph></li>
-                                        <li><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></li>
-                                        <li><codeph>TS_HP_15_Custom_PATCH_0003.patch</codeph></li>
-                                        <li><codeph>TS_HP_15_Custom_PATCH_0004.patch</codeph></li>
-                                </ul></p><p>You will be shown where to copy these files during the
-                                KVM Region installation.</p></section>
+                        </p><p><b>KVM Region Patches</b></p>After downloading and extracting the
+                                <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following patch
+                        files for the KVM Region are in the
+                                <codeph>hcg21_kvm_avs/WR/mandatory-patches</codeph> directory.<p>
+                                <table frame="all" rowsep="1" colsep="1" id="table_spx_4x1_fv">
+                                        <tgroup cols="2">
+                                                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                                                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>Compressed File</entry>
+                                                  <entry>Contrains Patch File</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR002_Patch005</b></entry>
+                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR003_Patch007</b></entry>
+                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR004_Patch017</b></entry>
+                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0003.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR005_Patch019</b></entry>
+                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0004.patch</codeph></entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p>You will be shown where to copy these files during the KVM Region
+                                installation.</p></section>
                 <section id="next-step">
                         <title>Next Step</title>
                 </section>

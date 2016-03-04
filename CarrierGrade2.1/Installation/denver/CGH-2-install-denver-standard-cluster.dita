@@ -413,16 +413,10 @@ Password: cghelion</codeblock>
                         information on how to log into iLO. </p></li>
                 <li id="provision2">Make sure the nodes are booted up using iLO. For
                             example:<p><image href="../../../media/CGH-2-install-cobbler.png"
-                            width="600" id="image_c5k_d4b_kt"/></p><p><b>Note:</b> In rare
-                        situations, a node might not boot due to an issue with network
-                        configuration. If this happens, you need to log into that node and manually
-                        boot using the Retry Auto-Configuration option. The provisioning will
-                        continue as you reboot that node. See <xref
-                            href="../../Troubleshooting/CGH-2-troubleshooting-install.dita#topic10581c2ti/provision"
-                            >Node fails to boot during HLM provision</xref>. </p>Once the baremetal
-                    nodes are provisioned, make sure the <codeph>nodes.json</codeph> file is
-                    generated to the <codeph>var/hlm/clouds/&lt;cloudname&gt;/</codeph> directory.
-                    The <codeph>nodes.json</codeph> file will have entries for three controllers. </li>
+                            width="600" id="image_c5k_d4b_kt"/></p>Once the baremetal nodes are
+                    provisioned, make sure the <codeph>nodes.json</codeph> file is generated to the
+                        <codeph>var/hlm/clouds/&lt;cloudname&gt;/</codeph> directory. The
+                        <codeph>nodes.json</codeph> file will have entries for three controllers. </li>
                 <li id="provision3">Verify that each node in the <codeph>nodes.json</codeph> file is
                     installed and active. <ol id="ol_g1b_cmf_zt">
                         <li>Ping the proxy node from the lifecycle manager using the IP address

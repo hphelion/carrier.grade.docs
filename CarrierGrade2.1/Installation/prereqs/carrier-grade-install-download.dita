@@ -119,15 +119,29 @@
                                         <li>After signing in, click the <b>Downloads</b> link in the
                                                 menu on the left side of the page.</li>
                                         <li>Click the <b>Downloads</b> tab and locate the following
-                                                download: <b>Helion OpenStack 2.1</b>. This link
-                                                downloads the
-                                                  <codeph>hpelinux-hcg-kvm-amd64-20160224.iso</codeph>
-                                                file. Also download the associated checksum and
-                                                signature files. </li>
+                                                download: <b>Helion Carrier Grade 2.1 AVS</b>. This
+                                                link downloads the
+                                                  <codeph>hcg21_kvm_avs.tar.gz</codeph> file. Also
+                                                download the associated checksum and signature
+                                                files. </li>
+                                        <li>Extrct the <codeph>hcg21_kvm_avs.tar.gz</codeph> file.
+                                                The compressed file contains the
+                                                  <codeph>hcg21_kvm_avs.tar</codeph> file.</li>
+                                        <li>Extract the <codeph>hcg21_kvm_avs.tar</codeph> file. The
+                                                compressed file contains the
+                                                  <codeph>hcg21_kvm_avs</codeph> directory. </li>
+                                        <li>Change to the the <codeph>hcg21_kvm_avs</codeph>
+                                                directory. The HPE Linux installation file is called
+                                                  <codeph>hpelinux-hcg-kvm-amd64-20160224.iso.iso</codeph>.
+                                                This ISO contains all required files to install HPE
+                                                Linux and all Linux packages required for HPE Helion
+                                                Carrier Grade.</li>
                                         <li>Use the Vitrual CD feature of the ILO remote console to
-                                                mount the ISO image to the system that will host the
-                                                lifecycle manager. Mounting the ISO makes the
-                                                contents available for the install.  </li>
+                                                mount the
+                                                  <codeph>hpelinux-hcg-kvm-amd64-20160224.iso.iso</codeph>
+                                                image to the system that will host the lifecycle
+                                                manager. Mounting the ISO makes the contents
+                                                available for the install. </li>
                                 </ol>
                         </p>
                 </section>
@@ -203,18 +217,18 @@
                                 <li>Copy the public keys to the lifecycle manager host, extract the keys
                                         from the compressed files. <p>The following keys are
                                                 included in the download:</p><ul id="ul_uzg_xmq_bt">
-                                                <li>Hewlett Packard
-                                                  EnterpriseCompanyRSA(HPCodesigningService)-1.pub</li>
-                                                <li>Hewlett Packard
-                                                  EnterpriseCompanyRSA(HPCodesigningService)-2.pub</li>
-                                                <li>Hewlett Packard
-                                                  EnterpriseCompanyRSA(HPCodesigningService)-3.pub</li>
-                                                <li>Hewlett Packard
-                                                  EnterpriseCompanyRSA(HPCodesigningService)-4.pub</li>
-                                                <li>Hewlett Packard
-                                                  EnterpriseCompanyRSA(HPCodesigningService)-5.pub</li>
-                                                <li>hpPublicKey.pub</li>
-                                                <li>hpPublicKey2048.pub</li>
+                                                <li><codeph>Hewlett Packard
+                                                  EnterpriseCompanyRSA(HPCodesigningService)-1.pub</codeph></li>
+                                                <li><codeph>Hewlett Packard
+                                                  EnterpriseCompanyRSA(HPCodesigningService)-2.pub</codeph></li>
+                                                <li><codeph>Hewlett Packard
+                                                  EnterpriseCompanyRSA(HPCodesigningService)-3.pub</codeph></li>
+                                                <li><codeph>Hewlett Packard
+                                                  EnterpriseCompanyRSA(HPCodesigningService)-4.pub</codeph></li>
+                                                <li><codeph>Hewlett Packard
+                                                  EnterpriseCompanyRSA(HPCodesigningService)-5.pub</codeph></li>
+                                                <li><codeph>hpPublicKey.pub</codeph></li>
+                                                <li><codeph>hpPublicKey2048.pub</codeph></li>
                                         </ul></li>
                                 <li>Execute the following command to import the keys:
                                                 <codeblock>gpg --import "&lt;filename>"</codeblock><p>Where
@@ -247,17 +261,16 @@ uid       [ expired] Hewlett-Packard Company (HP Codesigning Service)
 pub   2048R/5CE2D476 2012-12-04 [expires: 2022-12-02]
 uid       [ unknown] Hewlett-Packard Company RSA (HP Codesigning Service)</codeblock></li>
                                 <li>Use the following command to verify the signature:
-                                                <codeblock>gpg --verify ./hcg2_kvm_esx_ironic_vrs.tar.gz.sig ./hcg2_kvm_esx_ironic_vrs.tar.gz.sig  </codeblock><p>or</p><p>
-                                                <codeblock>gpg --verify ./hcg21_kvm_avs.tar.gz ./hcg21_kvm_avs.tar.gz</codeblock>
-                                        </p><p>The output for the command appears similar to the
+                                                <codeblock>gpg --verify &lt;path-to-file>/hcg21_kvm_avs.tar.gz.sig &lt;path-to-file>/hcg21_kvm_avs.tar.gz </codeblock><p>The
+                                                output for the command appears similar to the
                                                 following. This indicates the signature is verified:
                                                   <b>Good signature from "Hewlett Packard Enterprise
                                                   Company RSA (HPE Codesigning
-                                        Service)</b>.</p><codeblock>gpg: Signature made Tue 08 Sept 2015 12:15:20 PM EDT using RSA key ID C6978F0C
-gpg: Good signature from "Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 5"
+                                        Service)</b>.</p><codeblock>gpg: Signature made 03/01/16 13:50:21 Eastern Standard Time using RSA key ID C69 78F0C
+gpg: Good signature from "Hewlett-Packard Company RSA (HP Codesigning Service) - 5" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
-gpg: There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></li>
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 4EBB C697 8F0C</codeblock></li>
                                 <li>Perform this verification for each file you downloaded. </li>
                         </ol>
                 </section>
@@ -276,8 +289,7 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                         generated, the checksum string, and the name of the file
                                         that was used, similar to the
                                         following:<codeblock>Tue Mar  1 10:51:11 PST 2016
-4e5a5514ba87401750f01196c592d8d93a9eb6c06546  hcg21_kvm_avs.tar.gz</codeblock>
-                                </li>
+4e5a5514ba87401750f01196c592d8d93a9eb6c06546  hcg21_kvm_avs.tar.gz</codeblock></li>
                         </ol>
                 </section>
                 <section id="extract"><title>Extract and copy the HP Helion OpenStack Carrier Grade
