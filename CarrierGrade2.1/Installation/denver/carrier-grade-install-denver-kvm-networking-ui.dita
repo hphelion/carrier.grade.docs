@@ -304,9 +304,9 @@
           >Helion dashboard</xref>, as an admin user, add the infra interface:<ol id="ol_q3v_1s5_2v">
           <li>Click <b>Admin</b>, then <b>System</b>, then <b>Inventory</b>.</li>
           <li>Click the <b>Hosts</b> tab. </li>
-          <li>Lock the compute and wait untl the compute is locked.</li>
-          <li>On the <b>Router Details</b> tab, click <b>Add interface</b>.</li>
-          <li>On the <b>Add Interface</b> screen:<table frame="all" rowsep="1" colsep="1"
+          <li>Lock the compute and wait until the compute is locked.</li>
+          <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
+          <li>On the <b>Create Interface</b> screen:<table frame="all" rowsep="1" colsep="1"
               id="table_bpv_4s5_2v">
               <tgroup cols="3">
                 <colspec colname="c1" colnum="1" colwidth="1*"/>
@@ -327,18 +327,66 @@
                   </row>
                   <row>
                     <entry>Network type</entry>
-                    <entry>Linking the router to the external network</entry>
-                    <entry>external</entry>
+                    <entry>Network type of the interface</entry>
+                    <entry>infra</entry>
                   </row>
                   <row>
-                    <entry>Router Type</entry>
-                    <entry>Select centralized/distributed for the type of rotuer.</entry>
-                    <entry>centralized/distributed</entry>
+                    <entry>Interface Type</entry>
+                    <entry>Select the type of router.</entry>
+                    <entry>VLAN</entry>
                   </row>
                 </tbody>
               </tgroup>
             </table></li>
-          <li>Click <b>Add Interface</b></li>
+          <li>Click <b>Create Interface</b>.</li>
+          <li>On the <b>Interfaces</b> tab, repeat these steps to create a data interface.<table
+              frame="all" rowsep="1" colsep="1" id="table_vs2_3tb_fv">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>Description</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Interface Name</entry>
+                    <entry>Specify a name for the interface</entry>
+                    <entry>infra</entry>
+                  </row>
+                  <row>
+                    <entry>Network type</entry>
+                    <entry>Network type of the interface</entry>
+                    <entry>infra</entry>
+                  </row>
+                  <row>
+                    <entry>Interface Type</entry>
+                    <entry>Select the type of router.</entry>
+                    <entry>VLAN</entry>
+                  </row>
+                  <row>
+                    <entry>VLAN ID</entry>
+                    <entry>VLAN for the intra interface</entry>
+                    <entry>N/A</entry>
+                  </row>
+                  <row>
+                    <entry>Interfaces</entry>
+                    <entry/>
+                    <entry>eth1/eth2</entry>
+                  </row>
+                  <row>
+                    <entry>Provider network</entry>
+                    <entry>Attaching the provider net to the interface</entry>
+                    <entry>pnet1, pnet2</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Create Interface</b>.</li>
         </ol></p>
     </section>
     <section id="unlock">
