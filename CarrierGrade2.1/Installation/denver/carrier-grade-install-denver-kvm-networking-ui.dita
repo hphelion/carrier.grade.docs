@@ -30,39 +30,97 @@
               href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
               >Helion dashboard</xref> and log in as an admin user.</li>
           <li><xref href="../../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita">Select
-              the <codeph>regionone</codeph> region</xref>.</li>
+              the <codeph>regionone</codeph> region and project</xref>, such as admin.</li>
           <li>Click <b>Admin</b>, then <b>System</b>, then <b>Networks</b>. </li>
           <li>Select the <b>Provider Networks</b> tab.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-1.png"
                 id="image_nkw_hqq_35" width="600"/></p></li>
           <li>Click <b>Create Provider Network</b> button to create the provider network.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-2.png"
-                width="600" id="image_zsm_mvq_35"/></p></li>
-          <li>Add the VLAN ID range to a provider network.<p><image
+                width="600" id="image_zsm_mvq_35"/></p><table frame="all" rowsep="1" colsep="1"
+              id="table_pzm_sc5_2v">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.0*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>DescriptionExample</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Name</entry>
+                    <entry>Name of the provider network</entry>
+                    <entry>pnet1</entry>
+                  </row>
+                  <row>
+                    <entry>Description</entry>
+                    <entry>Description for the provider network (optional)</entry>
+                    <entry>providernet1</entry>
+                  </row>
+                  <row>
+                    <entry>Type</entry>
+                    <entry>Type of the provider network</entry>
+                    <entry>vlan</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Create Provider Network</b>.</li>
+          <li>In the Action drop-down for the new network, click <b>Create Segmentation
+            Range</b>.</li>
+          <li>In the Segmentation Ranges dialog, add the VLAN ID range to a provider
+                network.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-3.png"
                 width="600" id="image_xjb_svq_35"/></p></li>
           <li>Click <b>Create Range</b> to open the Create Segmentation Range page.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-4.png"
-                width="600" id="image_ydn_yvq_35"/></p></li>
-          <li>Enter the following values, based on your environment:<ul id="ul_hwp_bmr_35">
-              <li>
-                <b>Name</b> - Enter the name of the segmentation range.</li>
-              <li>
-                <b>Description</b> - Enter a free-text field for reference.</li>
-              <li>
-                <b>Shared</b> - If selected, shares the range for use by all tenants. </li>
-              <li>
-                <b>Project</b> - Select the tenant associated with the segmentation range.</li>
-              <li>
-                <b>Minimum</b> Enter the lowest value of a range of IDs.</li>
-              <li>
-                <b>Maximum</b> Enter the highest value of a range of IDs.</li>
-            </ul></li>
+                width="600" id="image_ydn_yvq_35"/></p><table frame="all" rowsep="1" colsep="1"
+              id="table_rhr_vd5_2v">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="4.06*"/>
+                <colspec colname="c3" colnum="3" colwidth="2.09*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>DescriptionExample</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Name</entry>
+                    <entry>Name of the segmentation range</entry>
+                    <entry>pnet1</entry>
+                  </row>
+                  <row>
+                    <entry>Description</entry>
+                    <entry>Description for the segmentation range (optional)</entry>
+                    <entry>providernet1</entry>
+                  </row>
+                  <row>
+                    <entry>Project</entry>
+                    <entry>Project where you created the provider network</entry>
+                    <entry>admin</entry>
+                  </row>
+                  <row>
+                    <entry>Minimum</entry>
+                    <entry>Minimum value of the range</entry>
+                    <entry>3001</entry>
+                  </row>
+                  <row>
+                    <entry>Maximum</entry>
+                    <entry>Maximum value of the range</entry>
+                    <entry>3004</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
           <li>Click <b>Create Segmentation Range</b> to commit the changes.</li>
-          <li>Once the Provider network is created, click the <b>Networks</b> tab and create the
-            necessary networks. <p><image
-                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-5.png"
-                width="600" id="image_v4z_cwq_35"/></p></li>
         </ol>
       </p>
     </section>
@@ -72,58 +130,174 @@
           href="../../OperationsGuide/Network/CGH-2-User-network-create.dita#topic3372">Creating and
           Deleting Networks</xref>.</p>
       <ol id="ol_d51_3mr_35">
+        <li>After the Provider network is created, click the <b>Networks</b> tab and create the
+          necessary networks. <p><image
+              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-5.png"
+              width="600" id="image_v4z_cwq_35"/></p></li>
         <li>Click <b>Create Network</b> button to start creating the network. <p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-6.png"
-              width="600" id="image_ucj_3wq_35"/></p></li>
-        <li>Enter the following values, based on your environment:<ul id="ul_mmk_qxf_2v">
-            <li>Name -- Enter </li>
-            <li>Project -- Select the <codeph>admin</codeph> project.</li>
-            <li>Provider Network Type -- Select infra.</li>
-            <li>Segmentation ID -- The VLAN ID that is intended to use for the network. For example,
-              in the above diagram, we used 110 VLAN ID for the data network. </li>
-            <li>Admin State -- Select <codeph>UP</codeph>.</li>
-            <li>QoS Policy -- Select a quality-of-service policy.</li>
-            <li>Shared -- Select this option to make the network shared through out the domain.</li>
-            <li>External Network -- Leave this option clear to make the network internal.</li>
-            <li>VLAN Transparent -- </li>
-          </ul></li>
-        <li>Click <b>Create Subnet</b>. <p><image
+              width="600" id="image_ucj_3wq_35"/></p><table frame="all" rowsep="1" colsep="1"
+            id="table_bpd_h25_2v">
+            <tgroup cols="3">
+              <colspec colname="c1" colnum="1" colwidth="1*"/>
+              <colspec colname="c2" colnum="2" colwidth="4.06*"/>
+              <colspec colname="c3" colnum="3" colwidth="2.09*"/>
+              <thead>
+                <row>
+                  <entry>Field</entry>
+                  <entry>DescriptionExample</entry>
+                  <entry>Example</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry>Name</entry>
+                  <entry>Name of the network</entry>
+                  <entry>pnet1</entry>
+                </row>
+                <row>
+                  <entry>Project</entry>
+                  <entry>Description for the segmentation range (optional)</entry>
+                  <entry>providernet1</entry>
+                </row>
+                <row>
+                  <entry>Provider network type</entry>
+                  <entry>Project where you created the provider network</entry>
+                  <entry>admin</entry>
+                </row>
+                <row>
+                  <entry>Physical network</entry>
+                  <entry>Provider Network under which the network should be created </entry>
+                  <entry>pnet1</entry>
+                </row>
+                <row>
+                  <entry>Segmentation ID</entry>
+                  <entry>Select an ID within the range</entry>
+                  <entry>3001</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table></li>
+        <li>Click <b>Create Network</b>. <p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-7.png"
-              id="image_sny_ynr_35" width="600"/></p></li>
+              id="image_sny_ynr_35" width="600"/></p><table frame="all" rowsep="1" colsep="1"
+            id="table_ibx_dh5_2v">
+            <tgroup cols="3">
+              <colspec colname="c1" colnum="1" colwidth="1*"/>
+              <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+              <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+              <thead>
+                <row>
+                  <entry>Field</entry>
+                  <entry>Description</entry>
+                  <entry>Example</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry>Subnet Name</entry>
+                  <entry>Name for the subnet</entry>
+                  <entry>subnet1</entry>
+                </row>
+                <row>
+                  <entry>Network Address</entry>
+                  <entry>CIDR</entry>
+                  <entry>10.20.30.0/24</entry>
+                </row>
+                <row>
+                  <entry>IP Version</entry>
+                  <entry>Type of the provider network</entry>
+                  <entry>VLAN</entry>
+                </row>
+                <row>
+                  <entry>Gateway IP</entry>
+                  <entry>Gateway for the CIDR (optional)</entry>
+                  <entry>10.20.30.1</entry>
+                </row>
+                <row>
+                  <entry>Allocation Pools</entry>
+                  <entry>Specify the range of IPs that can be implemented</entry>
+                  <entry>10.20.30.20,10.20.30.50</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table></li>
         <li>After the network is complete, click <b>Create Subnet</b>. <p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-8.png"
-              id="image_gqc_14r_35" width="600"/></p></li>
-        <li>Complete the <b>Subnet</b> tab: <ul id="ul_clz_jbg_2v">
-            <li>
-              <p><b>Subnet Name</b> - Specify a name for the subnet.</p>
-            </li>
-            <li>
-              <p><b>Network Address</b> - Specify the IP address for the subnet.</p>
-            </li>
-            <li>
-              <p><b>IP Version</b> -  Select IPv4 or IPv6.</p>
-            </li>
-            <li>
-              <p><b>Gateway IP</b> - Specify an IP address for a specific gateway. This parameter is
-                optional.</p>
-            </li>
-            <li>
-              <p><b>Disable Gateway</b> - Select this check box to disable a gateway IP address.</p>
-            </li>
-          </ul></li>
-        <li>Click the <b>Subnet Detail</b> tabs and enter values based on your environment:<ul
-            id="ul_o5q_pbg_2v">
-            <li>
-              <p><b>Enable DHCP</b> - Select this check box to enable DHCP.</p>
-            </li>
-            <li><b>Allocation Pools</b> - Specify IP address pools.</li>
-            <li><b>DNS Name Servers</b> - Specify a name for the DNS server.</li>
-            <li><b>Host Routes</b> - Specify the IP address of host routes.</li>
-          </ul></li>
+              id="image_gqc_14r_35" width="600"/></p><table frame="all" rowsep="1" colsep="1"
+            id="table_u3w_l35_2v">
+            <tgroup cols="3">
+              <colspec colname="c1" colnum="1" colwidth="1*"/>
+              <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+              <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+              <thead>
+                <row>
+                  <entry>Field</entry>
+                  <entry>Description</entry>
+                  <entry>Example</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry>Allocation Pools</entry>
+                  <entry>Specify the range of IPs that can be implemented</entry>
+                  <entry>10.20.30.20,10.20.30.50</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table></li>
         <li>Click <b>Create</b>.<p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-9.png"
               id="image_l14_b4r_35" width="600"/></p></li>
       </ol>
+    </section>
+    <section>
+      <title>Creating a virtual router</title>
+      <p>From  the <xref
+          href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+          >Helion dashboard</xref>, as an admin user: <ol>
+          <li><xref href="../../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita">Select
+              the <codeph>regionone</codeph> region and project</xref>, such as admin.</li>
+          <li>Click <b>Project</b>, then <b>Networks</b>, then <b>Router</b>. </li>
+          <li>Click <b>Create Router</b>.<table frame="all" rowsep="1" colsep="1"
+              id="table_fb3_d45_2v">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>Description</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Router Name</entry>
+                    <entry>Specify a name for the router</entry>
+                    <entry>router1</entry>
+                  </row>
+                  <row>
+                    <entry>External Network</entry>
+                    <entry>Linking the router to the external network</entry>
+                    <entry>external</entry>
+                  </row>
+                  <row>
+                    <entry>Router Type</entry>
+                    <entry>Select centralized/distributed for the type of rotuer.</entry>
+                    <entry>centralized/distributed</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Create Router</b>.</li>
+          <li>After the router is created,  select the router. </li>
+          <li>Click the <b>Interface</b> tab and click <b>Add Interface</b>.</li>
+          <li>Select the internal network subnet and click <b>Add Interface</b>.</li>
+        </ol><ol id="ol_cnx_j45_2v">
+          <li/>
+        </ol></p>
     </section>
     <section id="unlock">
       <title>Configure and unlock the compute controllers</title>
