@@ -72,8 +72,8 @@ neutron port-delete &lt;port id></codeblock></li>
               section:<codeblock>BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.20.37.102 
 BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.20.37.103 
 BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p></li>
-          <li>. Copy the complete folder <codeph>hp-poc-20160229.patch"</codeph> to the
-              <codeph>/tmp/</codeph> directory on the controller. </li>
+          <li>. Copy the <codeph>hp-poc-20160229.patch</codeph> file to the <codeph>/tmp/</codeph>
+            directory on the controller. </li>
           <li>Execute following command to apply patch:
             <codeblock>patch -p1 &lt; /tmp/hp-poc-20160229.patch</codeblock></li>
           <li>Edit the <codeph>/etc/neutron/infoblox_conditional.conf</codeph> on the controller to
