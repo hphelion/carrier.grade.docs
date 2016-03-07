@@ -34,7 +34,7 @@
                 <section id="kvm">
                         <title>Preparing the HLM host</title>
                         <p>Perform the following tasks on the HLM host:</p>
-                        <ul>
+                        <ul id="ul_gjv_fpv_fv">
                                 <li><?oxy_delete author="burkmich" timestamp="20150727T182909-0400" content="&lt;xref href=&quot;#topic7148/proxy&quot; format=&quot;dita&quot;&gt;Configure proxy information &lt;/xref&gt;"?><?oxy_insert_start author="burkmich" timestamp="20150727T182851-0400"?><xref
                                                 href="#topic7148/proxy" format="dita"
                                         /><?oxy_insert_end?></li>
@@ -58,6 +58,8 @@
                                 <li><xref href="#topic7148/checksum" format="dita"/></li>
                                 <li><xref href="#topic7148/prepbare" format="dita"/></li>
                         </ul>
+                </section>
+                <section>
                         <title>Install Ubuntu Server 14.04.2 LTS</title>
                         <p>The HLM host must have Ubuntu Server 14.04.2 LTS installed before
                                 performing the HPE Helion OpenStack Carrier Grade installation.</p>
@@ -302,12 +304,15 @@ StrictHostKeyChecking no </codeblock></li>
                                                 <li><b>Helion Carrier Grade 1.1.0 Horizon Web
                                                   patch</b>. The file is named
                                                   <codeph>horizon_web_patch_1.1.tar.gz</codeph></li>
-                                                <li><b>Helion Carrier Grade 1.1.0 ceilometer
+                                                <li><b>Helion Carrier Grade 1.1.0 Ceilometer
                                                   patch1</b>. The file is named
                                                   <codeph>hcg_1.1.0_ceilometer_patch1.tar.gz</codeph>.</li>
-                                                <li>NIC Bonding Patch. If you are using bonded NIC,
-                                                  download the
-                                                  <codeph>cg-hos-nic-bonding.patch</codeph>
+                                                <li><b>Helion Carrier Grade 1.1 hLinux001
+                                                  Patch001</b> The file is named
+                                                  <codeph>HCG1.1_hLinux001_Patch001.tar.gz</codeph>.</li>
+                                                <li><b>Helion Carrier Grade 1.1.0 NIC Bonding
+                                                  Patch</b>. If you are using bonded NIC, download
+                                                  the <codeph>cg-hos-nic-bonding.patch</codeph>
                                                   file.</li>
                                                 <li><b>GPG keys to verify signature files</b>. The
                                                   file is named

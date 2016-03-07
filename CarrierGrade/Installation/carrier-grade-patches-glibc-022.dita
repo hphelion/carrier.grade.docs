@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp22">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 1.1: Deploy the HPE Linux
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section>The HPE Linux glibc patch fixes a buffer overflow on HPE Linux systems. Common
+      Vulnerabilities and Exposures (CVE®) <xref
+        href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
+        scope="external">bulletin CVE-2015-7547</xref> describes multiple stack-based buffer
+      overflows in the (1) send_dg and (2) send_vc functions in the libresolv library in the GNU C
+      Library (aka glibc or libc6). Files added\impacted: <ul id="ul_ppq_2wr_fv">
+        <li>libc6 </li>
+        <li>libc-bin </li>
+        <li>libc-dev-bin </li>
+        <li>libc6-dev </li>
+        <li>locales </li>
+        <li>multiarch-support </li>
+      </ul><p><b>For KVM Deployments,</b> you must deploy this patch on the onto the: <ul
+          id="ul_a4z_bsv_fv">
+          <li>lifecycle manager VM</li>
+          <li>three HP Helion OpenStack Carrier Grade controllers in the non-KVM region.</li>
+        </ul></p><p><b>For KVM + ESX Deployments,</b> you must deploy this patch on the onto the:<ul>
+          <li>lifecycle manager VM</li>
+          <li>three HP Helion OpenStack Carrier Grade controllers in the non-KVM region.</li>
+          <li>DCN host</li>
+          <li>VRS-G</li>
+          <li>ESX Compute Proxy</li>
+        </ul></p></section>
+    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. </li>
+        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+          page.</li>
+        <li>Download the <b id="productShow_appName">Helion Carrier Grade 1.1 hLinux001 Patch001</b>
+          patch and the associated checksum and signature files.</li>
+        <li>Verify the downloaded signature and the downloaded checksums.</li>
+        <li>Extract the compressed file until the <b>new-debian</b> and <b>old-debian</b>
+          directories and README are available: <ol id="ol_kkb_3v5_cv">
+            <li>Extract the <codeph>HCG1.1_hLinux001_Patch001.tar.gz</codeph> compressed file. </li>
+            <li>Extract the <codeph>HCG1.1_hLinux001_Patch001.tar</codeph> compressed file.</li>
+          </ol></li>
+      </ol></section>
+    <section>
+      <title>Copy the patch files</title>
+      <p>
+        <ol id="ol_p13_ghm_s5">
+          <li>SSH into the lifecycle manager host as the root user. </li>
+          <li>Log into the lifecycle manager VM as root.
+              <codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle
+              manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Copy all the 6 new Debian (<codeph>.deb</codeph>) files from <b>new-debian</b>
+            directory to <codeph>/tmp</codeph> directory on the lifecycle manager VM.</li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <p><b>Patch the lifecycle manager VM and non-KVM controllers</b></p>
+      <p>After copying the patch files, use the following steps to deploy the patch onto the
+        lifecycle manager VM and the three HP Helion OpenStack Carrier Grade controllers in the
+        non-KVM region:</p>
+      <ol id="ol_w15_xxr_fv">
+        <li id="all-1">Change to the patch directory: <codeblock>cd /tmp/</codeblock></li>
+        <li id="all-2">Execute the following
+          command:<codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+        <li id="all-3">SSH into the non-KVM controller <codeph>Ctrl 0</codeph> using the CLM IP of
+          the controller. Log in as the <codeph>cghelion</codeph> user. No password is
+            required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on the
+            lifecycle manager VM in the
+              <codeph>/var/hlm/clouds/lr4tb2c1b41/desired_state/lr4tb2c1b41/001/base/stage/ansible/hosts</codeph>
+            file. Look in the <codeph>[BASE-CCP-T1]</codeph> section:</p></li>
+        <li id="all-4">Execute the following command to patch the controller:
+          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+        <li>SSH from the lifecycle manager VM to non-KVM controller <codeph>Ctrl 1</codeph>.</li>
+        <li>Execute the following command to patch the controller:
+          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+        <li>SSH from the lifecycle manager VM to non-KVM controller <codeph>Ctrl 2</codeph>.</li>
+        <li>Execute the following command to patch the controller:
+          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+      </ol>
+    </section>
+    <section>
+      <p><b>Patch the other controllers</b></p>
+      <p>For KVM + ESX deployments,  use the following steps to deploy the patch onto the DCN Host,
+        the VRS-G, and ESX Compute Proxy </p>
+      <ol id="ol_dkx_vqv_fv">
+        <li>From the lifecycle manager VM, SSH into the DCN host.</li>
+        <li>Execute the following command to patch the DCN host:
+          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+        <li>From the lifecycle manager VM, SSH into the VRS-G.</li>
+        <li>Execute the following command to patch the VRS-G:
+          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+        <li>From the lifecycle manager VM, SSH into the ESX Compute Proxy.</li>
+        <li>Execute the following command to patch the Compute Proxy:
+          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+      </ol>
+    </section>
+  </body>
+</topic>
