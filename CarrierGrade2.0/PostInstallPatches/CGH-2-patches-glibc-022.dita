@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp20">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the HPE Linux
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section>The HPE Linux glibc patch fixes a buffer overflow on HPE Linux systems. Common
+      Vulnerabilities and Exposures (CVE®) <xref
+        href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
+        scope="external">bulletin CVE-2015-7547</xref> describes multiple stack-based buffer
+      overflows in the (1) send_dg and (2) send_vc functions in the libresolv library in the GNU C
+      Library (aka glibc or libc6). Files added\impacted: <ul id="ul_ppq_2wr_fv">
+        <li>libc6 </li>
+        <li>libc-bin </li>
+        <li>libc-dev-bin </li>
+        <li>libc6-dev </li>
+        <li>locales </li>
+        <li>multiarch-support </li>
+      </ul></section>
+    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. </li>
+        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+          page.</li>
+        <li>Download the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/022"/>
+          patch and the associated checksum and signature files.</li>
+        <li>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</li>
+        <li>Extract the compressed file until the <codeph>metadata.tar.gz</codeph>file and README
+          are available: <ol id="ol_kkb_3v5_cv">
+            <li>Extract the <codeph>HCG2.0_hLinux001_Patch022.tar.gz</codeph> compressed file. </li>
+            <li>Extract the <codeph>HCG2.0_hLinux001_Patch022.tar</codeph> compressed file.</li>
+          </ol></li>
+      </ol></section>
+    <section>
+      <title>Copy the patch</title>
+      <p>
+        <ol id="ol_p13_ghm_s5">
+          <li>SSH into the lifecycle manager host as the root user. </li>
+          <li>Log into the lifecycle manager VM as root.
+              <codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle
+              manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Copy the patch to the <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph>
+            directory on the lifecycle manager VM.</li>
+        </ol>
+      </p>
+    </section>
+    <section>
+    <p><b>Denver</b></p>
+    <p>After copying the patch, use the following steps to deploy the patch on a Denver
+      Deployment:</p>
+    <ol id="ol_w15_xxr_fv">
+      <li id="all-1">Change to the patch directory
+        <codeblock>cd /var/hlm/clouds/&lt;cloudname>/patches</codeblock></li>
+      <li id="all-2">Execute the following
+        command:<codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t &lt;tier> </codeblock></li>
+      <li id="all-3">SSH into the Standard Region controller using the CLM IP of the controller. Log in as the
+          <codeph>cghelion</codeph> user. No password is
+          required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on the
+          lifecycle manager VM in the
+            <codeph>/var/hlm/clouds/lr4tb2c1b41/desired_state/lr4tb2c1b41/001/base/stage/ansible/hosts</codeph>
+          file. Look in the <codeph>[BASE-CCP-T1]</codeph>
+          section:<codeblock>BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.20.37.102 
+BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.20.37.103 
+BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p></li>
+      <li id="all-4">Execute the following command to patch the lifecycle manager VM:
+        <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t localhost</codeblock></li>
+      <li id="all-5">Execute the following command to patch the Standard Region
+        controller:<codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-T2</codeblock></li>
+    </ol>
+  </section>
+    <section>
+      <title>Tahoe</title>
+
+    <p>After copying the patch:</p>
+    <ol id="ol_v2r_qyr_fv">
+      <li conref="#topic10581pdp20/all-1"/>
+      <li conref="#topic10581pdp20/all-2"/>
+      <li conref="#topic10581pdp20/all-3"/>
+      <li conref="#topic10581pdp20/all-4"/>
+      <li conref="#topic10581pdp20/all-5"/>
+      <li id="dcn">Execute the following command to patch the DCN controller:
+        <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-T1</codeblock></li>
+        <li id="vrsg">Execute the following command to patch the VRS-G node:
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-VRG</codeblock></li>
+    </ol>
+    </section>
+    <section><title>Memphis</title>After copying the patch:<ol id="ol_kdj_2bs_fv">
+        <li conref="#topic10581pdp20/all-1"/>
+        <li conref="#topic10581pdp20/all-2"/>
+        <li conref="#topic10581pdp20/all-3"/>
+        <li conref="#topic10581pdp20/all-4"/>
+        <li conref="#topic10581pdp20/all-5"/>
+        <li conref="#topic10581pdp20/dcn"/>
+      <li conref="#topic10581pdp20/vrsg"/>
+        <li id="esx">Execute the following command to patch the ESX Compute Proxy
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-CPX</codeblock></li>
+      </ol></section>
+      <section><title>Sacramento</title>After copying the patch:<ol>
+        <li conref="#topic10581pdp20/all-1"/>
+        <li conref="#topic10581pdp20/all-2"/>
+        <li conref="#topic10581pdp20/all-3"/>
+        <li conref="#topic10581pdp20/all-4"/>
+        <li conref="#topic10581pdp20/all-5"/>
+        <li conref="#topic10581pdp20/dcn"/>
+        <li conref="#topic10581pdp20/vrsg"/>
+        <li conref="#topic10581pdp20/esx"/>
+        <li id="bm">Execute the following command to patch the baremetal controller:
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-RCP02-T1</codeblock></li>
+      </ol></section>
+  </body>
+</topic>
