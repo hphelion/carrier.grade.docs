@@ -15,12 +15,13 @@
     </metadata>
   </prolog>
   <body>
-    <section>The HPE Linux glibc patch fixes a buffer overflow on HPE Linux systems. Common
-      Vulnerabilities and Exposures (CVE®) <xref
+    <section>The HPE Linux glibc patch fixes a buffer overflow condition on systems running HPE
+      Linux. The condition is due to multiple stack-based buffer overflows in the (1) send_dg and
+      (2) send_vc functions in the libresolv library in the GNU C Library (aka glibc or libc6). The
+      Common Vulnerabilities and Exposures (CVE®) <xref
         href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
-        scope="external">bulletin CVE-2015-7547</xref> describes multiple stack-based buffer
-      overflows in the (1) send_dg and (2) send_vc functions in the libresolv library in the GNU C
-      Library (aka glibc or libc6). Files added\impacted: <ul id="ul_ppq_2wr_fv">
+        scope="external">bulletin CVE-2015-7547</xref> describes the condition.  </section>
+    <section>Files added\impacted by this patch: <ul id="ul_ppq_2wr_fv">
         <li>libc6 </li>
         <li>libc-bin </li>
         <li>libc-dev-bin </li>
@@ -101,8 +102,8 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p></li>
       <li conref="#topic10581pdp22/all-3"/>
       <li conref="#topic10581pdp22/all-4"/>
       <li conref="#topic10581pdp22/all-5"/>
-      <li id="dcn">Execute the following command to patch the DCN controller:
-        <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-T1</codeblock></li>
+      <li id="dcn">Execute the following command to patch the DCN host:
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-T1</codeblock></li>
         <li id="vrsg">Execute the following command to patch the VRS-G node:
           <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-VRG</codeblock></li>
     </ol>
@@ -115,7 +116,7 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p></li>
         <li conref="#topic10581pdp22/all-5"/>
         <li conref="#topic10581pdp22/dcn"/>
       <li conref="#topic10581pdp22/vrsg"/>
-        <li id="esx">Execute the following command to patch the ESX Compute Proxy
+        <li id="esx">Execute the following command to patch the ESX Compute Proxy host:
           <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-CPX</codeblock></li>
       </ol></section>
       <section><title>Sacramento</title>After copying the patch:<ol>
