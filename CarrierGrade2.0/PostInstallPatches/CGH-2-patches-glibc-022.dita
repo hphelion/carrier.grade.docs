@@ -28,7 +28,12 @@
         <li>libc6-dev </li>
         <li>locales </li>
         <li>multiarch-support </li>
-      </ul></section>
+      </ul><p>The patch is installed on each controller in the non-KVM Region using the following
+        format:<codeblock>hlm patch -c &lt;cloud name> -n HCG-glibc -t &lt;tier></codeblock>Where:
+        &lt;tier> is the tier on which the various controllers are running. The tier information can
+        be found in <codeph>/var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud
+          name>/001/base/stage/ansible/hosts</codeph> file on the lifecycle manager VM.
+      </p></section>
     <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
@@ -74,22 +79,11 @@
       Deployment:</p>
     <ol id="ol_w15_xxr_fv">
       <li id="all-1">Change to the patch directory
-        <codeblock>cd /var/hlm/clouds/&lt;cloudname>/patches</codeblock></li>
-      <li id="all-2">Execute the following
-        command:<codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t &lt;tier> </codeblock></li>
-      <li id="all-3">SSH into the Standard Region controller using the CLM IP of the controller. Log in as the
-          <codeph>cghelion</codeph> user. No password is
-          required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on the
-          lifecycle manager VM in the
-            <codeph>/var/hlm/clouds/lr4tb2c1b41/desired_state/lr4tb2c1b41/001/base/stage/ansible/hosts</codeph>
-          file. Look in the <codeph>[BASE-CCP-T1]</codeph>
-          section:<codeblock>BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.20.37.102 
-BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.20.37.103 
-BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p></li>
+          <codeblock>cd /var/hlm/clouds/&lt;cloud name>/patches</codeblock></li>
       <li id="all-4">Execute the following command to patch the lifecycle manager VM:
-        <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t localhost</codeblock></li>
+          <codeblock>hlm patch -c &lt;cloud name> -n HCG-glibc -t localhost</codeblock></li>
       <li id="all-5">Execute the following command to patch the Standard Region
-        controller:<codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-T2</codeblock></li>
+          controller:<codeblock>hlm patch -c &lt;cloud name> -n HCG-glibc -t BASE-CCP-T2</codeblock></li>
     </ol>
   </section>
     <section>
@@ -98,8 +92,6 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p></li>
     <p>After copying the patch:</p>
     <ol id="ol_v2r_qyr_fv">
       <li conref="#topic10581pdp22/all-1"/>
-      <li conref="#topic10581pdp22/all-2"/>
-      <li conref="#topic10581pdp22/all-3"/>
       <li conref="#topic10581pdp22/all-4"/>
       <li conref="#topic10581pdp22/all-5"/>
       <li id="dcn">Execute the following command to patch the DCN host:
@@ -110,8 +102,6 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p></li>
     </section>
     <section><title>Memphis</title>After copying the patch:<ol id="ol_kdj_2bs_fv">
         <li conref="#topic10581pdp22/all-1"/>
-        <li conref="#topic10581pdp22/all-2"/>
-        <li conref="#topic10581pdp22/all-3"/>
         <li conref="#topic10581pdp22/all-4"/>
         <li conref="#topic10581pdp22/all-5"/>
         <li conref="#topic10581pdp22/dcn"/>
@@ -121,8 +111,6 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p></li>
       </ol></section>
       <section><title>Sacramento</title>After copying the patch:<ol>
         <li conref="#topic10581pdp22/all-1"/>
-        <li conref="#topic10581pdp22/all-2"/>
-        <li conref="#topic10581pdp22/all-3"/>
         <li conref="#topic10581pdp22/all-4"/>
         <li conref="#topic10581pdp22/all-5"/>
         <li conref="#topic10581pdp22/dcn"/>

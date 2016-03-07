@@ -56,9 +56,9 @@ root@10.x.x.x's password:</codeblock><p>The
             <li>SSH into a controller using the CLM IP of the controller. Log in as the
               <codeph>cghelion</codeph> user. No password is
               required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on
-              the lifecycle manager VM in the
-                <codeph>/var/hlm/clouds/lr4tb2c1b41/desired_state/lr4tb2c1b41/001/base/stage/ansible/hosts</codeph>
-              file. Look in the <codeph>[BASE-CCP-T1]</codeph>
+              the lifecycle manager VM in the <codeph>/var/hlm/clouds/&lt;cloud
+                name>/desired_state/&lt;cloud name>/001/base/stage/ansible/hosts</codeph> file. Look
+              in the <codeph>[BASE-CCP-T1]</codeph>
               section:<codeblock>BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.20.37.102 
 BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.20.37.103 
 BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p>When
