@@ -65,32 +65,38 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p>When
             you log in, the prompt appears similar to the following, depending upon the system you
             are using:<codeblock>cghelion@BASE-CCP-T1-M1-NETCLM:~$</codeblock></li>
           </ol></p>
-      </section><section id="horizon"><title>Access the Horizon Dashboard</title><p>At this point, you can log into
+      </section>
+    <section id="horizon"><title>Access the Horizon Dashboard</title><p>At this point, you can log into
         the Horizon interface, a web-interface you can use to manage and maintain HP Helion
         OpenStack Carrier Grade. Use the <xref
           href="Installation/denver/carrier-grade-technical-overview-denver.dita#topic3485cgtod">CAN
           IP address</xref> to launch Horizon. You can locate the CAN IP address in the
           <codeph>~/stackrc</codeph> file on any of the controller nodes in the Standard Region. The
-        CAN IP address contains port <codeph>5000</codeph>. </p>For example:
+        CAN IP address contains port <codeph>5000</codeph>. </p>
+       
+        <p>For example:
         <codeblock>export OS_PASSWORD=qekuTPcc26Ig
 export OS_USERNAME=admin
 export OS_TENANT_NAME=admin
-export OS_AUTH_URL=https://10.20.4.120:5000/v2.0
+export OS_AUTH_URL=https://10.2.4.1:5000/v2.0
 export OS_CACERT=/etc/stunnel/ssl/hlm/certs/ca.crt
 export OS_REGION_NAME=tahoe
 unset OS_PROJECT_DOMAIN_NAME
 unset OS_PROJECT_NAME
 unset OS_USER_DOMAIN_ID
 unset OS_IDENTITY_API_VERSION
-unset OS_AUTH_VERSION</codeblock><p>In
+unset OS_AUTH_VERSION</codeblock></p>
+          <p>In
         this case, the CAN IP address is located in the
-          <codeph>OS_AUTH_URL=https://10.x.x.x:5000/v2.0</codeph> line. You would log in using
-          <codeph>https://10.x.x.x</codeph>.</p><p>Enter the IP in the browser to access the log-in
-        page:<codeblock>https://&lt;CAN_IP></codeblock></p><p>By default, the user name is
+          <codeph>OS_AUTH_URL=https://10.2.4.1:5000/v2.0</codeph> line. You would log in using
+          <codeph>https://10.2.4.1</codeph>.</p><p>Enter the IP in the browser to access the log-in
+        page:<codeblock>https://&lt;CAN_IP>:8000</codeblock></p><p>By default, the user name is
           <codeph>admin</codeph>. You can find the installation password for <codeph>admin</codeph>
         in the <codeph>/root/stackrc</codeph> file from any of the controller nodes.
         <codeblock>export OS_PASSWORD=qekuTPcc26
-export OS_USERNAME=admin</codeblock></p></section><section id="dashboard">
+          export OS_USERNAME=admin</codeblock></p>
+      </section>
+    <section id="dashboard">
         <title>Access the HCG Dashboard UI</title>
         <p>The HCG Dashboard UI can be accessed using any supported web browser using the CLM IP
         address of the lifecycle manager VM and port 8000.
