@@ -69,12 +69,11 @@
         lifecycle manager VM and the three HP Helion OpenStack Carrier Grade controllers in the
         non-KVM region:</p>
       <ol id="ol_w15_xxr_fv">
-        <li id="all-1">SSH into the lifecycle manager host as the root user. </li>
-        <li>Log into the lifecycle manager VM as root.
-            <codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle manager_VM_IP
-            is the CLM IP of the lifecycle manager. Locate the IP address for the lifecycle manager
-            in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
-              <codeph>hlm_clmstaticip</codeph> field.</p></li>
+        <li id="all-1">Log into the lifecycle manager host as the root user. </li>
+        <li>Log into the lifecycle manager VM as root. <codeblock>ssh &lt;CLM_IP></codeblock><p>The
+            CLM_IP is located on the lifecycle manager host in the
+              <systemoutput>~/infra-ansible-playbooks/group_vars/all</systemoutput> file under the
+              <systemoutput>hlm_clmstaticip</systemoutput> field.</p></li>
         <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
             <codeph>/tmp/</codeph> directory.</li>
         <li id="all-2">Execute the following
@@ -83,9 +82,8 @@
           the controller. Log in as the <codeph>cghelion</codeph> user. No password is
             required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on the
             lifecycle manager VM in the
-              <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
-              <codeph>hlm_clmstaticip</codeph> field. Look in the <codeph>[BASE-CCP-T1]</codeph>
-            section:</p></li>
+              <codeph>/var/hlm/clouds/&lt;cloud_name>/desired_state/&lt;cloud_name>/001/base/stage/ansible/hosts
+            </codeph> file. Look in the <codeph>[BASE-CCP-T1]</codeph> section:</p></li>
         <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
           /tmp/ directory.</li>
         <li id="all-4">Execute the following command to patch the controller:
