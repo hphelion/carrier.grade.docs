@@ -84,23 +84,12 @@
             lifecycle manager VM in the
               <codeph>/var/hlm/clouds/&lt;cloud_name>/desired_state/&lt;cloud_name>/001/base/stage/ansible/hosts
             </codeph> file. Look in the <codeph>[BASE-CCP-T1]</codeph> section:</p></li>
-        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
-          /tmp/ directory.</li>
-        <li id="all-4">Execute the following command to patch the controller:
-          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
-        <li>SSH from the lifecycle manager VM to non-KVM controller <codeph>Ctrl 1</codeph>.</li>
-        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
-            <codeph>/tmp/</codeph> directory.</li>
-        <li>Execute the following command to patch the controller:
-          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
-        <li>SSH from the lifecycle manager VM to non-KVM controller <codeph>Ctrl 2</codeph>.</li>
-        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
-            <codeph>/tmp/</codeph> directory.</li>
-        <li>Execute the following command to patch the controller:
-          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
+        <li>SSH into <codeph>Ctrl 1</codeph>.</li>
+        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
+        <li>SSH into <codeph>Ctrl 2</codeph>. </li>
+        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
       </ol>
-    </section>
-    <section>
       <p><b>Patch the other controllers</b></p>
       <p>For KVM + ESX deployments, use the following steps to deploy the patch onto the DCN Host,
         the VRS-G node, and ESX Compute Proxy node. </p>
@@ -111,15 +100,9 @@
         <li>Execute the following command to patch the DCN host:
           <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
         <li>From the lifecycle manager VM, SSH into the VRS-G node.</li>
-        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
-            <codeph>/tmp/</codeph> directory.</li>
-        <li>Execute the following command to patch the VRS-G:
-          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
         <li>From the lifecycle manager VM, SSH into the ESX Compute Proxy node.</li>
-        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
-            <codeph>/tmp/</codeph> directory.</li>
-        <li>Execute the following command to patch the Compute Proxy node:
-          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
+        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
       </ol>
     </section>
   </body>
