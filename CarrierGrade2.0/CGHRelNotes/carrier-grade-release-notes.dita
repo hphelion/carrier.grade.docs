@@ -304,20 +304,11 @@
         <section id="problems">
             <title>Known Problems and Limitations</title>
             <p><b>Booting a VM from Remote Storage</b></p>
-            <p>Due to performance and reliability reasons, booting a VM instance off a remote
-                storage is not supported in the current release. The only supported options
-                are:<!--HCG-1520--></p>
-            <p>
-                <ul id="ul_xk5_r31_fv">
-                    <li>Using local storage on the compute (which implies that there would be No
-                        support for HA features like Live Migration). Refer to <xref
-                            href="http://gaf2871b9d2d13cf45c1306b35bf01764.cdn.hpcloudsvc.com/CGH-2-KVM-Admin.pdf"
-                            format="pdf" scope="external">KVM Region Administrator Guide</xref> on
-                        how to configure compute node to use local storage. </li>
-                    <li>Using Cinder-Volumes (with 3Par or StoreVirtual VSA as volume
-                        backends).</li>
-                </ul>
-            </p>
+            <p>Due to performance and reliability reasons, booting a VM instance using an image and
+                using root/ephemeral storage off a remote storage (backed by NFS mount point hosted
+                on WR KVM controller nodes) is not supported in the current release. </p>
+            <p>The only supported option is to boot a VM using a Cinder volume backed by 3Par or
+                StoreVirtual VSA. <!--HCG-1520--></p>
             <p><b>VMware VMK No Memory Error</b>
             </p>
             <p>When powering on the ESX Compute Proxy VM, you might receive a
