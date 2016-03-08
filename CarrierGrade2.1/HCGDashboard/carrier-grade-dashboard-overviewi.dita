@@ -16,42 +16,57 @@
     </prolog>
     <body>
         <p><!--https://wiki.hpcloud.net/pages/viewpage.action?pageId=56149826--></p>
-        <section id="next-step"><p>The HCG-Dashboard is a cloud management tool which allows users
-                to Define, Deploy, Manage and Monitor the cloud.</p><p>The HCG-Dashboard allows
-                users to provide and validate the cloud definitions required to define a cloud
-                through a web interface.</p><p><image
-                    href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard.png"
-                    width="600" id="image_mxb_jyl_x5"/></p>Once the cloud is defined user will be
-            able guided through various stages of deployment<p>After the cloud is deployed, user
-                will be able to perform various post deployment activities as Service resets,
-                patching and upgrade.</p></section>
-        <section conref="../carrier-grade-access.dita#topic10581cgilhd/dashboard"/>
-        <section><b>Features Available Today</b><p>Use the "Cloud Input" wizard on the UI to:</p><ul
-                id="ol_uxn_xwl_x5">
-                <li>Specify the Cloud Name</li>
-                <li>Specify KVM Servers info and Map the KVM servers to the Controllers</li>
-                <li>In the KVM servers get validated for connectivity and credentials
-                    correctness.</li>
-                <li>Specify Network information for all 5 types of networks (CLM, API, BLS) (If you
-                    do not have Segment IDs, Enter -1) </li>
-                <li>View validation results of network information provided (Validation for API and
-                    BLS networks not part of 2.1 but will be added for 2.1 GA)</li>
-                <li>Specify all variables</li>
-                <li>View validation results of DNS Server IP and NTP Server IP (There is a known
-                    cosmetic bug for the results of this validation, will be fixed in upcoming
-                    builds)</li>
-                <li>Click Finish to save all this data into your clouds json files.</li>
-                <li>By default, RCP template is used to create the cloud definitions.</li>
-            </ul><p>Use the "Deploy Cloud" wizard on the UI to (More details below):</p><ul
-                id="ol_vxn_xwl_x5">
-                <li>Provision the Nodes (equivalent to hlm provision)</li>
-                <li>Generate the cloud configuration from jsons (equivalent to hlm generate)</li>
-                <li>Network Initialize the cloud nodes (equivalent to hlm netinit)</li>
-                <li>Deploy the cloud nodes (equivalent to hlm deploy)</li>
-            </ul><p>Use the "Manage Cloud" wizard on the UI to:</p><ul id="ol_wxn_xwl_x5">
-                <li>Reset service including - MySQL, RabbitMQ, NTP, Apache, Keystone, Glance, Swift,
-                    Cinder, Elastic Search, Logstash, Kibana, Beaver, Icinga and Attis </li>
-            </ul><b>Note:</b> You cannot edit an existing cloud definition for the KVM region
-            compute servers (Inventory Nodes).</section>
+        <section id="next-step">
+            <p>The HCG-Dashboard is a cloud management tool which allows users to define, deploy,
+                and manage the cloud.</p>
+            <p><image href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard.png"
+                    width="600" id="image_mxb_jyl_x5"/></p>
+        </section>
+        <section id="launch">
+            <title>Launch the HCG Dashboard UI</title>
+            <p>The HCG Dashboard UI will be available as soon as the lifecycle manager VM is
+                deployed. The dashboard service runs on port 8000 and can be accessed using
+                    <codeph>http://&lt;CLM_IP>:8000/</codeph>.</p>
+            <p conref="../Installation/denver/CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/clmip"/>
+            <p>
+                <ol id="ol_ky1_412_gv">
+                    <li>Launch a browser and navigate to
+                        <codeph>http://&lt;CLM_IP>:8000/</codeph>.</li>
+                    <li>Log into the HCG Dashboard UI. By default use <ul id="ul_qyn_brf_cv">
+                            <li>username: <codeph>cghelion</codeph>
+                            </li>
+                            <li>password: <codeph>cghelion</codeph></li>
+                        </ul><p>If this is the first time you have logged in, you will be prompted
+                            to change the password before you can continue. Once password is
+                            updated, you will need to log in again with newly created
+                        password.</p></li>
+                </ol>
+            </p>
+        </section>
+        <section><b>Create a cloud definition</b><p>Use the <b>Create New Cloud Definition</b> table
+                to create a new cloud definition that you can use to deploy the Standard Region for
+                a new cloud. The HCG Dashboard verifies much of the information as you enter it.
+                </p><image href="../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-1.png"
+                width="500" id="image_wgn_3vd_gv"/><p>Specific instructions for using this table can
+                be found in the installation instructions under <xref
+                    href="../Installation/denver/CGH-2-install-denver-standalone-ui.dita#topic10581c2idui"
+                    >Deploy HP Helion OpenStack Using the HCG Dashboard UI</xref>.</p></section>
+        <section>
+            <title>Manage your clouds</title>
+            <p>The <b>List of Clouds</b> table enables you to restart services running on the
+                Standard Region controllers. You can restart all services, all services on a
+                controller, or specific services on one controller. </p>
+            <p><image href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-list.png"
+                    width="500" id="image_fk2_15d_gv"/></p>
+            <p>For information on managing your cloud, see <xref
+                    href="carrier-grade-dashboard-managing.dita#topic10581c2idui">Managing Your
+                    Cloud with the HCG Dashboard</xref>.</p>
+        </section>
+        <section><title>Deploying a cloud</title><p>Use the <b>Deploy Cloud</b> table to create the
+                Standard Region based on one of your cloud definitions. </p><image
+                href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy.png"
+                width="500" id="image_djv_1vd_gv"/><p>For information on deploying a cloud, see
+                    <xref href="carrier-grade-dashboard-deploying.dita#topic10581c2idui">Deploying a
+                    Cloud with the HCG Dashboard</xref>.</p></section>
     </body>
 </topic>

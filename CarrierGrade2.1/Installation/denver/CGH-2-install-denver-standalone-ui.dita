@@ -25,131 +25,32 @@
             manage, and monitor a HP Helion OpenStack cloud. The tool helps you provide and validate
             the cloud definitions required to deploy your cloud and guide you through the
             deployment. </p>
-        <section id="launch"><title>Launch the HCG Dashboard UI</title>
-        <p>The HCG Dashboard UI will be available as soon as the lifecycle manager VM is deployed.
-                The dashboard service runs on port 8000 and can be accessed using
-                    <codeph>http://&lt;CLM_IP>:8000/</codeph>.</p>
-        <p conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/clmip"/>
-        <p>
-            <ol>
-                <li>Launch a browser and navigate to <codeph>http://&lt;CLM_IP>:8000/</codeph>.</li>
-                <li>Log into the HCG Dashboard UI. By default use <ul id="ul_qyn_brf_cv">
-                        <li>username: <codeph>cghelion</codeph>
-                        </li>
-                        <li>password: <codeph>cghelion</codeph></li>
-                    </ul><p>If this is the first time you have logged in, you will be prompted to
-                        change the password before you can continue. Once password is updated, you
-                        will need to log in again with newly created password.</p></li>
-            </ol>
-        </p></section>
+        <section
+            conref="../../HCGDashboard/carrier-grade-dashboard-overviewi.dita#topic10581c2idui/launch"/>
         <section>
-            <title>Specify the cloud definition</title>
-            <p>Use the <b>Create New Cloud Definition</b> wizard on the UI to:<ol id="ol_byp_hrf_cv">
-                    <li>Click the <b>Create New Cloud Definition</b> dashboard.</li>
-                    <li>On the <b>Step 1</b> table, specify a name for the cloud.<p><image
-                                width="500" id="image_vzw_ngz_fv"
-                                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-1.png"
-                            /></p><p><b>Note:</b> No special characters or spaces allowed;</p></li>
-                    <li>Specify if you are using HPE StoreVirtual VSA (VSA) and/or HPE StoreServ
-                        (3PAR) storage.<p>You can incorporate back-end drivers to enable management
-                            of the OpenStack Block Storage volumes on VSA and/or 3PAR storage
-                            arrays. The HPE Block Storage (Cinder) service allows you to configure
-                            multiple storage back-ends. </p></li>
-                    <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 2</b> table, specify the Standard Region servers and map the
-                        servers to the controllers.<p><image width="500"
-                                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-2.png"
-                                id="image_gfm_33z_fv"/></p><ol id="ol_fvw_whz_fv">
-                            <li>Enter the IP address, user name, and password for the lifecycle
-                                manager host in the <b>Standard Region Hosts</b> fields.</li>
-                            <li>Click the plus icon to add the server. The HCG Dashboard verifies
-                                the information and adds the Standard Region controllers to the
-                                    <b>Assign Standard Region Nodes to Hosts</b> fields.</li>
-                            <li>For each controller in the the <b>Assign Standard Region Nodes to
-                                    Hosts</b> fields, click the plus icon to add the servers.</li>
-                        </ol></li>
-                    <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 3</b> table, specify network information for all required
-                        networks (CLM, API, BLS). If you are using untagged networks, enter
-                            <codeph>-1</codeph> for segment ID. <p><image width="500"
-                                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-3.png"
-                                id="image_tby_yjz_fv"/></p></li>
-                    <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 4</b> table, view the validation information.</li>
-                    <li>Click <b>Next</b>. </li>
-                    <li>On the <b>Step 5</b> table enter the network information:<p><image
-                                width="500"
-                                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-4a.png"
-                                id="image_pv5_mlz_fv"/></p><ul id="ul_w51_mkz_fv">
-                            <li>Standard Region<ul id="ul_k3v_pkz_fv">
-                                    <li>DNS</li>
-                                    <li>NTP</li>
-                                    <li>SSL</li>
-                                </ul></li>
-                            <li>KVM Region<ul id="ul_rrn_rkz_fv">
-                                    <li>Storage sizes</li>
-                                    <li>LAG information</li>
-                                    <li>Network IPs</li>
-                                    <li>License file information</li>
-                                    <li>VLAN mappings</li>
-                                </ul></li>
-                        </ul></li>
-                    <li>On the <b>Step 6</b> table, view the validation results for the DNS Server
-                        IP and NTP Server IP. </li>
-                    <li>Click <b>Finish</b> to save all data in JSON files that will be used during
-                        the deployment.</li>
-                </ol></p>
+            <title>Create the cloud definition</title>
+            <p>Use the <b>Create New Cloud Definition</b> wizard on the UI to:</p>
+            <p>
+                <ol
+                    conref="../../HCGDashboard/carrier-grade-dashboard-definition.dita#topic10581c2idui/definition-steps"
+                    id="ol_xv4_j12_gv">
+                    <li/>
+                </ol>
+            </p>
         </section>
         <!--<section conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/disk-size"/> Removed per HCG-1456-->
-        <section><title>Deploy the cloud </title>After you enter all necessary information for your
-            cloud, you will be redirected to a page where you can see description and current status
-            of your cloud. The page appears similar to the following:<p><image
+        <section id="deploy"><title>Deploy the cloud </title>After you enter all necessary
+            information for your cloud, you will be redirected to a page where you can see
+            description and current status of your cloud. The page appears similar to the
+                    following:<p><image
                     href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard.png"
-                    width="500" id="image_lw5_msf_cv"/></p><ol id="ol_i2y_yxf_cv">
-                <li>Click the Deploy Cloud dashboard.</li>
-                <li>Click <b>Run</b> to start deploying the cloud.<p><image
-                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy.png"
-                            width="500" id="image_xh4_jyl_x5"/></p>The deployment consists of four
-                    phases: <b>Provision</b>, <b>Generate</b>, <b>Netinit</b> and <b>Deploy</b>. As
-                    the phases progress, you will see the name of your cloud and current status at
-                    the top of the page and the marker on the wizard will move to the process as it
-                        completes.<p>Note: If you receive an error during the <b>Deploy</b> phase,
-                        rerun <b>Deploy</b>. </p><p>The process runs asynchronously in background.
-                        So while a process is running, if you close your session or browser, you can
-                        still return to the same page again to check status of your process. Also,
-                        when your process is running, you can look at the current log content by
-                        clicking on the <b>Logs</b> tab and selecting a log file pertaining to that
-                        process as seen below:</p><p><image
-                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-logs.png"
-                            width="500" id="image_znz_lyl_x5"/></p>Once the process completes, you
-                    will be notified whether it passed or failed as seen below:<p><image
-                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deployed.png"
-                            width="500" id="image_s5p_nyl_x5"/></p><p>To execute a particular
-                        process, you can click on a step and click <b>Run</b>. </p><b>Note:</b> To
-                    execute a process, all previous processes must be completed. </li>
-            </ol></section>
-        <!--<section conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone" id="ldap-keystone"/>-->
-        <section>
-            <title>Manage the cloud</title>
-            <p>The Manage cloud option allows the user to perform post-deployment activities for the
-                selected cloud. This feature can be launched by clicking the <b>Manage</b> button on
-                the <b>Cloud List</b> screen after the cloud is deployed. For more information, see
-                    <xref
-                    href="../../HCGDashboard/carrier-grade-dashboard-overviewi.dita#topic10581c2idui"
-                    >Administer Your Cloud Using the HCG Dashboard</xref>.</p>
-            <p>You can use the <b>Manage Services</b> page in the HCG Dashboard UI to reset services
-                including: <ul id="ul_ptt_3tf_cv">
-                    <li>MySQL</li>
-                    <li>RabbitMQ</li>
-                    <li>NTP</li>
-                    <li>Apache</li>
-                    <li>OpenStack services (Keystone, Glance, Swift, Cinder) </li>
-                    <li>Centralized Logging services (ElasticSearch, Logstash, Kibana, Beaver,
-                        Icinga and Attis) </li>
-                </ul></p>
-            <p>Refer to the <b>Manage Services</b> page list for all of the available services.</p>
-            <p>You can also edit an existing cloud definition for the Inventory Nodes.</p>
-        </section>
+                    width="500" id="image_lw5_msf_cv"/></p><p>
+                <ol
+                    conref="../../HCGDashboard/carrier-grade-dashboard-deploying.dita#topic10581c2idui/deploy-steps"
+                    id="ol_esg_1zd_gv">
+                    <li/>
+                </ol>
+            </p></section>
         <section><title>Installation Troubleshooting</title><p>If you receive the following error
                 during the Deploy phase, click <b>Deploy</b> to rerun.</p><image
                 href="../../../media/carrier.grade.docs/2.1/CGH-21-installation-deploy-error.png"
