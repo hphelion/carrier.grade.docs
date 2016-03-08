@@ -17,17 +17,18 @@
     <body>
         <p><!--https://wiki.hpcloud.net/pages/viewpage.action?pageId=56149826--></p>
         <section id="next-step">
-            <p>The HCG-Dashboard is a cloud management tool which allows users to define, deploy,
-                and manage the cloud.</p>
+            <p>The HCG Dashboard is a cloud management tool that allows you to define, deploy, and
+                manage the Standard Region of your HP Helion OpenStack Carrier Grade cloud.</p>
             <p><image href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard.png"
                     width="600" id="image_mxb_jyl_x5"/></p>
         </section>
         <section id="launch">
-            <title>Launch the HCG Dashboard UI</title>
-            <p>The HCG Dashboard UI will be available as soon as the lifecycle manager VM is
-                deployed. The dashboard service runs on port 8000 and can be accessed using
+            <title>Launch the HCG Dashboard</title>
+            <p>The HCG Dashboard is available when the lifecycle manager VM is deployed. The
+                dashboard service runs on port 8000 and can be accessed using
                     <codeph>http://&lt;CLM_IP>:8000/</codeph>.</p>
-            <p conref="../Installation/denver/CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/clmip"/>
+            <p
+                conref="../Installation/denver/CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/clmip"/>
             <p>
                 <ol id="ol_ky1_412_gv">
                     <li>Launch a browser and navigate to
@@ -43,27 +44,36 @@
                 </ol>
             </p>
         </section>
-        <section><b>Create a cloud definition</b><p>Use the <b>Create New Cloud Definition</b> table
-                to create a new cloud definition that you can use to deploy the Standard Region for
-                a new cloud. The HCG Dashboard verifies much of the information as you enter it.
-                </p><image href="../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-1.png"
-                width="500" id="image_wgn_3vd_gv"/><p>Specific instructions for using this table can
-                be found in the installation instructions under <xref
+        <section><b>Create a cloud definition</b><p>Click the <b>Create New Cloud Definition</b>
+                link to open the <b>Input for Cloud</b> table to create a new cloud definition that
+                you can use to deploy the Standard Region. The HCG Dashboard verifies much of the
+                information as you enter it. </p><image
+                href="../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-1.png" width="500"
+                id="image_wgn_3vd_gv"/><p>Specific instructions for using this table can be found in
+                the installation instructions under <xref
                     href="../Installation/denver/CGH-2-install-denver-standalone-ui.dita#topic10581c2idui"
                     >Deploy the Standard Region Using the HCG Dashboard UI</xref>.</p></section>
         <section>
             <title>Manage your clouds</title>
-            <p>The <b>List of Clouds</b> table enables you to restart services running on the
-                Standard Region controllers. You can restart all services, all services on a
-                controller, or specific services on one controller. </p>
+            <p>Click the <b>List of Clouds</b> link to open the <b>List of Cloud Definitions</b>
+                table where you can see a list of cloud definition and the current status of any
+                cloud associated with the definition. </p>
+            <p>For the cloud you want to manage, click the Manage button to open the Manage Services
+                table where you can restart services running on the Standard Region controllers. You
+                can restart all services, all services on a controller, or specific services on one
+                controller. </p>
+            <p>You can also use the <b>List of Cloud Definitions</b> table to open the <b>Input for
+                    Cloud</b> table to edit the cloud definition or open the <b>Deploy Cloud</b>
+                table to deploy that cloud definition.  </p>
             <p><image href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-list.png"
                     width="500" id="image_fk2_15d_gv"/></p>
             <p>For information on managing your cloud, see <xref
                     href="carrier-grade-dashboard-managing.dita#topic10581c2idui">Managing Your
                     Cloud with the HCG Dashboard</xref>.</p>
         </section>
-        <section><title>Deploying a cloud</title><p>Use the <b>Deploy Cloud</b> table to create the
-                Standard Region based on one of your cloud definitions. </p><image
+        <section><title>Deploying a cloud</title><p>Click the <b>Deploy Cloud</b> link to openn the
+                deploy table where you can deploy the Standard Region based on one of your cloud
+                definitions. </p><image
                 href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy.png"
                 width="500" id="image_djv_1vd_gv"/><p>For information on deploying a cloud, see
                     <xref href="carrier-grade-dashboard-deploying.dita#topic10581c2idui">Deploying a

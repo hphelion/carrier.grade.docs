@@ -23,12 +23,12 @@
 </prolog>
 <body>
     <p>The IP address for the Horizon interface is stored in the CAN VIP value in the
-        <codeph>/root/stackrc</codeph> file on any controller node. The CAN IP contains port
+        <codeph>~/stackrc</codeph> file on any controller node. The CAN IP contains port
         <codeph>5000</codeph>. The CAN VIP can also be located in the lifecycle manager VM in the
         <codeph>~/&lt;cloud name&gt;/clouds/&lt;cloudname&gt;/001/stage/net/hosts.hf</codeph> file.
       Search for <codeph>VIP</codeph>.</p>
     <p><b>Note: </b>You need to import the <codeph>ca.crt</codeph> certificate  from the
-        <codeph>/root/&lt;cloudname&gt;</codeph> on the HLM VM. You can use any file transfer
+        <codeph>~/&lt;cloudname&gt;</codeph> on the HLM VM. You can use any file transfer
       program to move the certificate file from the HLM VM to the local system.</p>
 <ol>
 <li>Ask the cloud operator for the host name or public IP address where the dashboard is located,
@@ -39,7 +39,7 @@
         </p></li>
 <li>On the <b>Log In</b> page, enter your user name and password and then click <b>Sign In</b>.<p>By
           default, the user name is <codeph>admin</codeph>. You can find the installation password
-          for <codeph>admin</codeph> in the <codeph>/root/stackrc</codeph> file from any of the
+          for <codeph>admin</codeph> in the <codeph>~/stackrc</codeph> file from any of the
           controller node. If this is the first time you log in with that user name, make sure you
             <xref href="../Identity/CGH-2-User-Identity-users-password.dita#topic1008">change the
             password</xref>.</p><p><image href="../../../media/CGH-Horizon-Login.png" width="400"

@@ -64,7 +64,7 @@ hlm start -c &lt;cloud name> -t FND-MDB </codeblock></li>
         <ol>
           <li>Log into the lifecycle manager. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
               HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
-              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              lifecycle manager in the <codeph>~/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
           <li>Stop then start the
             service:<codeblock>hlm stop -c &lt;cloud name> -t FND-RMQ 
