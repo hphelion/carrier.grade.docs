@@ -121,5 +121,11 @@
         <li id="bm">Execute the following command to patch the baremetal controller:
           <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-RCP02-T1</codeblock></li>
       </ol></section>
+    <section>
+      <title>Patch Rollback</title>
+      <p>To rollback the patch on a particular node, use the following
+        command:<codeblock>hlm patch -c &lt;cloudname> -n HCG-glibc -t &lt;tier> -r </codeblock></p>
+      <p>Where: <codeph>&lt;tier></codeph> is the node you want to roll back.</p>
+    </section>
   </body>
 </topic>
