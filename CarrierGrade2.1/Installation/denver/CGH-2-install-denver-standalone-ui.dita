@@ -46,8 +46,10 @@
             <title>Specify the cloud definition</title>
             <p>Use the <b>Create New Cloud Definition</b> wizard on the UI to:<ol id="ol_byp_hrf_cv">
                     <li>Click the <b>Create New Cloud Definition</b> dashboard.</li>
-                    <li>On the <b>Step 1</b> table, specify a name for the cloud: <p><b>Note:</b> No
-                            special characters or spaces allowed;</p></li>
+                    <li>On the <b>Step 1</b> table, specify a name for the cloud.<p><image
+                                width="500" id="image_vzw_ngz_fv"
+                                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-1.png"
+                            /></p><p><b>Note:</b> No special characters or spaces allowed;</p></li>
                     <li>Specify if you are using HPE StoreVirtual VSA (VSA) and/or HPE StoreServ
                         (3PAR) storage.<p>You can incorporate back-end drivers to enable management
                             of the OpenStack Block Storage volumes on VSA and/or 3PAR storage
@@ -55,25 +57,43 @@
                             multiple storage back-ends. </p></li>
                     <li>Click <b>Next</b>.</li>
                     <li>On the <b>Step 2</b> table, specify the Standard Region servers and map the
-                        servers to the controllers.</li>
-                    <li>View the validation results for connectivity and credentials of the Standard
-                        Region servers.</li>
+                        servers to the controllers.<p><image width="500"
+                                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-2.png"
+                                id="image_gfm_33z_fv"/></p><ol id="ol_fvw_whz_fv">
+                            <li>Enter the IP address, user name, and password for the lifecycle
+                                manager host in the <b>Standard Region Hosts</b> fields.</li>
+                            <li>Click the plus icon to add the server. The HCG Dashboard verifies
+                                the information and adds the Standard Region controllers to the
+                                    <b>Assign Standard Region Nodes to Hosts</b> fields.</li>
+                            <li>For each controller in the the <b>Assign Standard Region Nodes to
+                                    Hosts</b> fields, click the plus icon to add the servers.</li>
+                        </ol></li>
                     <li>Click <b>Next</b>.</li>
                     <li>On the <b>Step 3</b> table, specify network information for all required
                         networks (CLM, API, BLS). If you are using untagged networks, enter
-                            <codeph>-1</codeph> for segment ID. </li>
+                            <codeph>-1</codeph> for segment ID. <p><image width="500"
+                                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-3.png"
+                                id="image_tby_yjz_fv"/></p></li>
                     <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 4</b> table, view the validation results for the network
-                        information you provided.</li>
-                    <li>Click <b>Next</b>.</li>
-                    <li>On the <b>Step 5</b> table:<ol id="ol_z51_tbg_cv">
-                            <li>Specify all required variables for the Standard Region.</li>
-                            <li>Specify all required variables for the KVM Region.</li>
-                            <li>Specify information for any VSA and HP 3PAR storage backend
-                                        configuration.<p><b>Note: </b> The values will be specified
-                                    for VSA and/or 3PAR will be accepted by the application and
-                                    saved as is to the <codeph>cinder_conf </codeph>file. </p></li>
-                        </ol></li>
+                    <li>On the <b>Step 4</b> table, view the validation information.</li>
+                    <li>Click <b>Next</b>. </li>
+                    <li>On the <b>Step 5</b> table enter the network information:<p><image
+                                width="500"
+                                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-dashboard-4a.png"
+                                id="image_pv5_mlz_fv"/></p><ul id="ul_w51_mkz_fv">
+                            <li>Standard Region<ul id="ul_k3v_pkz_fv">
+                                    <li>DNS</li>
+                                    <li>NTP</li>
+                                    <li>SSL</li>
+                                </ul></li>
+                            <li>KVM Region<ul id="ul_rrn_rkz_fv">
+                                    <li>Storage sizes</li>
+                                    <li>LAG information</li>
+                                    <li>Network IPs</li>
+                                    <li>License file information</li>
+                                    <li>VLAN mappings</li>
+                                </ul></li>
+                        </ul></li>
                     <li>On the <b>Step 6</b> table, view the validation results for the DNS Server
                         IP and NTP Server IP. </li>
                     <li>Click <b>Finish</b> to save all data in JSON files that will be used during
