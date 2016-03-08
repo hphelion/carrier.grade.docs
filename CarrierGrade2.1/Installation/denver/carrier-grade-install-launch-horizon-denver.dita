@@ -55,7 +55,7 @@
         <codeblock>export OS_PASSWORD=qekuTPcc26Ig
 export OS_USERNAME=admin
 export OS_TENANT_NAME=admin
-export OS_AUTH_URL=https://10.20.4.120:5000/v2.0
+export OS_AUTH_URL=https://10.2.4.1:5000/v2.0
 export OS_CACERT=/etc/stunnel/ssl/hlm/certs/ca.crt
 export OS_REGION_NAME=tahoe
 unset OS_PROJECT_DOMAIN_NAME
@@ -64,10 +64,10 @@ unset OS_USER_DOMAIN_ID
 unset OS_IDENTITY_API_VERSION
 unset OS_AUTH_VERSION</codeblock>
         <p>In this case, the CAN IP address is located in the
-            <codeph>OS_AUTH_URL=https://10.x.x.x:5000/v2.0</codeph> line. You would log in using
-            <codeph>https://10.x.x.x</codeph>.</p>
+            <codeph>OS_AUTH_URL=https://10.2.4.1:5000/v2.0</codeph> line. You would log in using
+            <codeph>https://10.2.4.1</codeph>.</p>
         <p>Enter the IP in the browser to access the log-in
-          page:<codeblock>https://&lt;CAN_IP></codeblock></p>
+          page:<codeblock>https://&lt;CAN_IP>:8000</codeblock></p>
         <p>By default, the user name is <codeph>admin</codeph>. You can find the installation
           password for <codeph>admin</codeph> in the <codeph>/root/stackrc</codeph> file from any of
           the controller nodes. </p>
