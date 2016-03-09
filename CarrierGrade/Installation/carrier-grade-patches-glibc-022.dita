@@ -78,17 +78,17 @@
             <codeph>/tmp/</codeph> directory.</li>
         <li id="all-2">Execute the following
           command:<codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
-        <li id="all-3">SSH into the non-KVM controller <codeph>Ctrl 0</codeph> using the CLM IP of
-          the controller. Log in as the <codeph>cghelion</codeph> user. No password is
+        <li id="all-3">SSH into each non-KVM controller (<codeph>Ctrl 0</codeph>, <codeph>Ctrl
+            1</codeph>, <codeph>Ctrl 2</codeph>) using the CLM IP of the controller. Log in as the
+            <codeph>cghelion</codeph> user. No password is
             required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on the
             lifecycle manager VM in the
               <codeph>/var/hlm/clouds/&lt;cloud_name>/desired_state/&lt;cloud_name>/001/base/stage/ansible/hosts
             </codeph> file. Look in the <codeph>[BASE-CCP-T1]</codeph> section:</p></li>
-        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
-        <li>SSH into <codeph>Ctrl 1</codeph>.</li>
-        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
-        <li>SSH into <codeph>Ctrl 2</codeph>. </li>
-        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
+        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
+            <codeph>/tmp/</codeph> directory on each controller.</li>
+        <li>Execute the following command on each
+          controller:<codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
       </ol>
       <p><b>Patch the other controllers</b></p>
       <p>For KVM + ESX deployments, use the following steps to deploy the patch onto the DCN Host,
@@ -100,9 +100,15 @@
         <li>Execute the following command to patch the DCN host:
           <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
         <li>From the lifecycle manager VM, SSH into the VRS-G node.</li>
-        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
+        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
+            <codeph>/tmp/</codeph> directory.</li>
+        <li>Execute the following command to patch the VRS-G node:
+          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
         <li>From the lifecycle manager VM, SSH into the ESX Compute Proxy node.</li>
-        <li>Repeat the steps to verify the Debian files and execute the same command.</li>
+        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
+            <codeph>/tmp/</codeph> directory.</li>
+        <li>Execute the following command to patch the Compute Proxy node:
+          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
       </ol>
     </section>
   </body>
