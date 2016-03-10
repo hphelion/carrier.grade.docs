@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp23">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Accelerate PID
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>This patch resolves the issue <codeph>Failed to launch the accelerated daemon</codeph>
+      encountered during the <codeph>hlm deploy</codeph> process during installation.</p>
+    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. </li>
+        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+          page.</li>
+        <li>Download the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/023"/>
+          patch and the associated checksum and signature files.</li>
+        <li>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</li>
+        <li>Extract the compressed file until the <codeph>knc-accelerate-pid.patch</codeph> file and
+          README are available: <ol id="ol_kkb_3v5_cv">
+            <li>Extract the <codeph>HCG2.0_Accelerate001_Patch023.tar.gz</codeph> compressed file. </li>
+            <li>Extract the <codeph>HCG2.0_Accelerate001_Patch023.tar</codeph> compressed file.</li>
+          </ol></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+    </section>
+    <ol>
+      <li>Log onto the lifecycle manager
+          VM.<codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle
+          manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+          lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+          file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+      <li>Copy the <codeph>knc-accelerate-pid.patch</codeph> file to the <codeph>~/</codeph>
+        directory. </li>
+      <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+        directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+      <li> Execute the following command to deploy the patch:
+        <codeblock>patch -p1 -b &lt; ../knc-accelerate-pid.patch</codeblock></li>
+      <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+        <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+      <li>Execute the following command to integrate the changes into the
+        environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+      <li>Execute the following command: <codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+    </ol>
+  </body>
+</topic>

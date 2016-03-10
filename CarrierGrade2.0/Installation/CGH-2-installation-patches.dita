@@ -37,8 +37,9 @@
               directory:<codeblock>cd ~/cg-hlm/hlm-build </codeblock></li>
             <li>Execute the following
                 command:<codeblock>./hlm_initcobbler.sh &lt;ip address&gt; &lt;netmask&gt; &lt;dhcp begin range&gt; &lt;dhcp end range&gt;    </codeblock><p>Where
-                  <codeph>&lt;ip address></codeph> is the PXE IP of the lifecycle manager node.</p><p>For
-                example:</p><codeblock>./hlm_initcobbler.sh 192.168.100.2 255.255.255.0 192.168.100.100 192.168.100.200 </codeblock></li>
+                  <codeph>&lt;ip address></codeph> is the PXE IP of the lifecycle manager
+                node.</p><p>For
+              example:</p><codeblock>./hlm_initcobbler.sh 192.168.100.2 255.255.255.0 192.168.100.100 192.168.100.200 </codeblock></li>
             <li>Execute the following command: <codeblock>./hlm_importiso.sh</codeblock></li>
             <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
               directory:<codeblock>cd ~/kenobi-node-configuration </codeblock></li>
@@ -224,7 +225,7 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
             <codeph>elk2.patch</codeph>, <codeph>elk3.patch</codeph> and readme files. </p>
         <p>
           <ol id="ol_y2c_rcc_w5">
-            <li>On the licyclemanager VM, copy the  three <codeph>elk#.patch</codeph> files to the
+            <li>On the licyclemanager VM, copy the three <codeph>elk#.patch</codeph> files to the
                 <codeph>/root/kenobi-node-configuration</codeph> location. </li>
             <li>Execute the following commands to import the patch files:
               <codeblock>patch -p1 --binary &lt; elk1.patch
@@ -257,10 +258,36 @@ patch -p0 &lt; elk3.patch </codeblock></li>
               environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
           </ol>
         </p></section>
-      <section id="24"><title>Deploy the Baremetal Region CAN Patch</title><p>This patch resolves the issue
-          with Horizon accessing Baremetal region to updates the creation of a certificate that can
-          be updated in future patches. </p><b>Prerequisites</b><p>This patch requires the SSL Patch
-          [HCG2.0_Heat001_Patch003] and SSL Certificate Alternative Name
+      <section>
+        <title>Deploy the Accelerate PID Patch</title>
+        <!--HCG2.0_Accelerate001_Patch023-->
+        <p>This patch resolves the issue with Horizon accessing Baremetal region to updates the
+          creation of a certificate that can be updated in future patches. <!--HCG-1498--></p>
+        <p><b>Install the patch</b></p>
+        <p>You should have downloaded and extracted the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/023"/>
+          patch during the prerequisites. Extract the <codeph>knc-accelerate-pid.patch</codeph> and
+          readme files.</p>
+        <p>
+          <ol>
+            <li>On the lifecycle manager VM, copy the <codeph>knc-accelerate-pid.patch</codeph> file
+              to the <codeph>~/</codeph> directory. </li>
+            <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+              directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+            <li> Execute the following command to deploy the patch:
+              <codeblock>patch -p1 -b &lt; ../knc-accelerate-pid.patch</codeblock></li>
+            <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+              <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          </ol>
+        </p>
+      </section>
+      <section id="24"><title>Deploy the Baremetal Region CAN
+          Patch</title><!--SSL-Baremetal-CAN-Endpoint Patch--><p>This patch resolves the issue with
+          Horizon accessing Baremetal region to updates the creation of a certificate that can be
+          updated in future patches. <!--HCG-1498--></p><b>Prerequisites</b><p>This patch requires
+          the SSL Patch [HCG2.0_Heat001_Patch003] and SSL Certificate Alternative Name
           [HCG2.0_Keystone001_Patch010] patches to be applied first. </p><p><b>Install the
           patch</b></p><p>You should have downloaded and extracted the <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/024"/>
