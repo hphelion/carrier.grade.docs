@@ -337,34 +337,28 @@
       <p>For the controller, a USB interface is required for backup and restore operations, and for
         software installation if a DVD is not available.</p>
     </section>
-    <section id="net">
-      <title>Network Requirements</title>
-      <p>The networking environment incorporates several types of network:</p>
-      <ul id="ul_ilv_d2p_y5">
+    <section id="net"><title>Network Requirements</title><p>The networking environment incorporates
+        several types of network:</p><ul id="ul_ilv_d2p_y5">
         <li>the internal management network</li>
         <li>the OAM network</li>
         <li>one or more provider networks</li>
         <li>an optional infrastructure network</li>
         <li>an optional board management network.</li>
-      </ul>
-      <p>Operational requirements for each network are described in the following sections.</p>
-      <title id="internal-management-network">Internal Management Network</title>
-      <p>The internal management network must be implemented as a single, dedicated, Layer 2
-        broadcast domain for the exclusive use of each server cluster. Sharing of this network by
-        more than one server cluster is not a supported configuration.</p>
-      <p>During the server software installation process, several network services such as DHCP, and
-        PXE, are expected to run over the internal management network. These services are used to
-        bring up the different hosts to an operational state. Therefore, it is mandatory that this
-        network be operational and available in advance, to ensure a successful installation.</p>
-      <p>On each host, the internal management network can be implemented using a 10 Gb Ethernet
-        port. In either case, requirements for this port are:</p>
-      <ul id="ul_jlv_d2p_y5">
+      </ul><p>Operational requirements for each network are described in the following
+        sections.</p><b>Internal Management Network</b><p>The internal management network must be
+        implemented as a single, dedicated, Layer 2 broadcast domain for the exclusive use of each
+        server cluster. Sharing of this network by more than one server cluster is not a supported
+        configuration.</p><p>During the server software installation process, several network
+        services such as DHCP, and PXE, are expected to run over the internal management network.
+        These services are used to bring up the different hosts to an operational state. Therefore,
+        it is mandatory that this network be operational and available in advance, to ensure a
+        successful installation.</p><p>On each host, the internal management network can be
+        implemented using a 10 Gb Ethernet port. In either case, requirements for this port
+        are:</p><ul id="ul_jlv_d2p_y5">
         <li>must be capable of PXE-booting</li>
         <li>can be used by the motherboard as a primary boot device</li>
-      </ul>
-      <title id="oam-network">CAN/OAM Network</title>
-      <p>You should ensure that the following services are available on the CAN/OAM Network:</p>
-      <ul id="ul_klv_d2p_y5">
+      </ul><b>CAN/OAM Network</b><p>You should ensure that the following services are available on
+        the CAN/OAM Network:</p><ul id="ul_klv_d2p_y5">
         <li>
           <p>DNS Service - Needed to facilitate the name resolution of servers reachable on the
             CAN/OAM Network.</p>
@@ -379,27 +373,21 @@
             things, to ensure that system-wide log reports present a unified view of the day-to-day
             operations.</p>
         </li>
-      </ul>
-      <p>The server compute nodes always use the controller nodes as the time server for the entire
-        cluster. </p>
-      <title id="provider-network">Provider Network</title>
-      <p>There are no specific requirements for network services to be available on the provider
-        network. However, you must ensure that all network services required by the guests running
-        in the compute nodes are available. For configuration purposes, the compute nodes themselves
-        are entirely served by the services provided by the controller nodes over the internal
-        management network.</p>
-      <title id="infrastructure-network">Infrastructure Network (Optional)</title>
-      <p>As with the internal management network, the infrastructure network must be implemented as
-        a single, dedicated, Layer 2 broadcast domain for the exclusive use of each server
-        cluster.</p>
-      <p>Sharing of this network by more than one cloud is not a supported configuration.</p>
-      <p>The infrastructure network can be implemented as a 10 Gb Ethernet network. In its absence,
-        all infrastructure traffic is carried over the internal management network.</p>
-      <title id="board-network">Board Management Network</title>
-      <p>Board Management CTL (IPMI Control) Network External access to the board management
-        network, the board management modules are assigned IP addresses accessible from the CAN
-        network, and the controller uses the CAN network to connect to them.</p>
-    </section> 
+      </ul><p>The server compute nodes always use the controller nodes as the time server for the
+        entire cluster. </p><b>Provider Network</b><p>There are no specific requirements for network
+        services to be available on the provider network. However, you must ensure that all network
+        services required by the guests running in the compute nodes are available. For
+        configuration purposes, the compute nodes themselves are entirely served by the services
+        provided by the controller nodes over the internal management network.</p><b>Infrastructure
+        Network (Optional)</b><p>As with the internal management network, the infrastructure network
+        must be implemented as a single, dedicated, Layer 2 broadcast domain for the exclusive use
+        of each server cluster.</p><p>Sharing of this network by more than one cloud is not a
+        supported configuration.</p><p>The infrastructure network can be implemented as a 10 Gb
+        Ethernet network. In its absence, all infrastructure traffic is carried over the internal
+        management network.</p><b>Board Management Network</b><p>Board Management CTL (IPMI Control)
+        Network External access to the board management network, the board management modules are
+        assigned IP addresses accessible from the CAN network, and the controller uses the CAN
+        network to connect to them.</p></section> 
  <section>
       <title>Next Step</title>
       <p>Review the <xref href="carrier-grade-support-matrix-denver.dita#topic1773cgsmd">Support

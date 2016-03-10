@@ -257,6 +257,25 @@ patch -p0 &lt; elk3.patch </codeblock></li>
               environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
           </ol>
         </p></section>
+      <section><title>Deploy the Baremetal Region CAN Patch</title><p>This patch resolves the issue
+          with Horizon accessing Baremetal region to updates the creation of a certificate that can
+          be updated in future patches. </p><b>Prerequisites</b><p>This patch requires the SSL Patch
+          [HCG2.0_Heat001_Patch003] and SSL Certificate Alternative Name
+          [HCG2.0_Keystone001_Patch010] patches to be applied first. </p><p><b>Install the
+          patch</b></p><p>You should have downloaded and extracted the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/024"/>
+          patch during the prerequisites. Extract the
+            <codeph>knc-ssl-baremetal-can-endpoint.patch</codeph> and readme files.<ol>
+            <li>On the lifecycle manager VM, copy the
+                <codeph>knc-ssl-baremetal-can-endpoint.patch</codeph> file to the
+                <codeph>~/</codeph> directory. </li>
+            <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+              directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+            <li> Execute the following command to deploy the patch:
+              <codeblock>patch -p1 -b &lt; ../knc-ssl-baremetal-can-endpoint.patch</codeblock></li>
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          </ol></p></section>
     </bodydiv>
   </body>
 </topic>
