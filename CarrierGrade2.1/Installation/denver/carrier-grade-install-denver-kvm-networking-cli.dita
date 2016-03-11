@@ -16,7 +16,7 @@
   </prolog>
   <body>
     <p>After the HP Helion OpenStack Carrier Grade cloud is fully deployed, perform the following
-      tasks in the Horizon UI.</p>
+      tasks using the Networking (Neutron) service CLI and KVM Region CLI.</p>
     <section>
       <title>Create the Provider Network</title>
       <p>Use the following steps to create a provider network and add a segmentation range. </p>
@@ -24,22 +24,23 @@
         <li>SSH into the KVM region controller. For information, see <xref
             href="../../carrier-grade-access.dita#topic10581cgilhd/controller"/>.</li>
         <li>Execute the following command to create the network:
-          <codeblock>neutron providernet-create &lt;name> \ --type=&lt;type> --description=&lt;description> mtu &lt;mtu_size></codeblock>Where:
+          <codeblock>neutron providernet-create &lt;name> --type=&lt;type> --description=&lt;description> mtu &lt;mtu_size></codeblock>Where:
             <ul id="ul_cjg_nqf_2v">
-            <li><codeph>name</codeph> is a name for the provider network </li>
-            <li><codeph>type</codeph> is the type of provider network (flat, vlan, or vxlan)</li>
-            <li><codeph>description</codeph> is a brief description for reference purposes </li>
-            <li><codeph>mtu_size</codeph> is the maximum transmission unit size</li>
+            <li><codeph>name</codeph> is a name for the provider network ;</li>
+            <li><codeph>type</codeph> is the type of provider network (flat, vlan, or vxlan);</li>
+            <li><codeph>description</codeph> is a brief description for reference purposes; </li>
+            <li><codeph>mtu_size</codeph> is the maximum transmission unit size.</li>
           </ul><p>For
             example:<codeblock>neutron providernet-create pnet1 --type=vlan --description=providernet1 --mtu=1500</codeblock></p></li>
         <li>Execute the following command to add a segmentation
               range:<codeblock>neutron providernet-range-create &lt;providernet-name> --name=&lt;segment name> --shared --range &lt;minimum>-&lt;maximum></codeblock><p>Where:<ul
               id="ul_n5r_crf_2v">
-              <li><codeph>provider_network</codeph> is the name of the associated provider network </li>
-              <li><codeph>name</codeph> is a name for the segmentation range </li>
-              <li><codeph>description</codeph> is a brief description for reference purposes </li>
-              <li><codeph>minimum</codeph> is the lowest value in the range </li>
-              <li><codeph>maximum</codeph> is the highest value in the range </li>
+              <li><codeph>provider_network</codeph> is the name of the associated provider network
+                you created; </li>
+              <li><codeph>name</codeph> is a name for the segmentation range; </li>
+              <li><codeph>description</codeph> is a brief description for reference purposes; </li>
+              <li><codeph>minimum</codeph> is the lowest value in the range; </li>
+              <li><codeph>maximum</codeph> is the highest value in the range; </li>
             </ul></p><p>For
             example:<codeblock>neutron providernet-range-create pnet1 --name=segment1 --shared --range 3001-3004</codeblock></p></li>
       </ol>
@@ -47,29 +48,30 @@
     <section><title>Create the Horizon Network</title>Use the following steps to create a network
       for the Horizon UI and add a segmentation range. <ol id="ol_qmh_sjs_gv">
         <li>From the KVM region controller, execute the following command to create the network:
-          <codeblock>neutron net-create --tenant-id &lt;admin-id> --admin-state-up --provider:network_type vlan --provider:physical_network&lt;physical network> --provider:segmentation_id &lt;segmentation id> &lt;network name></codeblock>Where:
+          <codeblock>neutron net-create --tenant-id &lt;admin-id> --admin-state-up --provider:network_type &lt;network-type> --provider:physical_network&lt;physical network> --provider:segmentation_id &lt;segmentation id> &lt;name></codeblock>Where:
             <ul id="ul_sb5_xks_gv">
             <li><codeph>admin-id</codeph> is the project where you are creating the provider
-              network.  The admin id can be obtained by executing the <codeph>keystone
+              network. The admin id can be obtained by executing the <codeph>keystone
                 tenant-list</codeph> command and searching (grep) for the
               <codeph>tenant-id</codeph>.</li>
-            <li><codeph>physical network</codeph> is the network should be created pnet1;</li>
-            <li><codeph>segmentation id</codeph> choose a id within the range 3001;</li>
-            <li><codeph>name</codeph> is a descriptive name.</li>
+            <li><codeph>network-type</codeph> is the type of provider network you created; </li>
+            <li><codeph>physical network</codeph> is the network should be created;</li>
+            <li><codeph>segmentation id</codeph> is an ID for the segment;</li>
+            <li><codeph>name</codeph> is a descriptive name for the network.</li>
           </ul><p>For example:
-            <codeblock>neutron net-create --tenant-id 54ddc79a54ae4572bae6843947d56f65 --admin-state-up --provider:network_type vlan --provider:physical_network pnet1 --provider:segmentation_id 3001 net1</codeblock></p></li>
+            <codeblock>neutron net-create --tenant-id 54ddc79a54ae457 --admin-state-up --provider:network_type vlan --provider:physical_network pnet1 --provider:segmentation_id 3001 net1</codeblock></p></li>
         <li>Execute the following command to add a
-          subnet:<codeblock>neutron subnet-create --tenant-id <i>&lt;admin-id> </i>--no-gateway --name &lt;subnet name> --ip-version 4 &lt;network name> &lt;CIDR></codeblock>Where:
+          subnet:<codeblock>neutron subnet-create --tenant-id <i>&lt;admin-id> </i>--no-gateway --name &lt;subnet-name> --ip-version 4 &lt;network-name> &lt;CIDR></codeblock>Where:
             <ul id="ul_s5l_fms_gv">
             <li><codeph>admin-id</codeph> is the project where you are creating the provider
               network. The admin id can be obtained by executing the <codeph>keystone
                 tenant-list</codeph> command and searching (grep) for the
               <codeph>tenant-id</codeph>.</li>
-            <li><codeph>subnet name</codeph> is a descriptive name for the subnet;</li>
-            <li><codeph>network name</codeph> is the network associated with the subnet;</li>
+            <li><codeph>subnet-name</codeph> is a descriptive name for the subnet;</li>
+            <li><codeph>network-name</codeph> is the network associated with the subnet;</li>
             <li><codeph>CIDR</codeph> is the CIDR of the network associated with the subnet.</li>
           </ul><p>For
-            example:<codeblock>neutron subnet-create --tenant-id 54ddc79a54ae4572bae6843947d56f65 --no-gateway --name subnet1 --ip-version 4 net1 10.20.30.1</codeblock></p></li>
+            example:<codeblock>neutron subnet-create --tenant-id 54ddc79a54ae457 --no-gateway --name subnet1 --ip-version 4 net1 10.20.30.1</codeblock></p></li>
       </ol></section>
     <section>
       <title>Create a virtual router</title>
@@ -108,24 +110,25 @@
       </ul>
       <p id="non">
         <b>For a Non-Bonded Environment</b></p>
-      <p>Use the following steps to create the interfaces.<ol id="ol_cjh_rys_gv">
+      <p>If you are using a non-bonded NIC environment, perform these steps to create the
+          interfaces.:<ol id="ol_cjh_rys_gv">
           <li>From the KVM region controller, execute the following command to create the
             infrastructure
             interface:<codeblock>system host-if-add -V &lt;vlan-id> -nt &lt;network> &lt;node> &lt;name> &lt;interface-type> &lt;inteface></codeblock>Where:
               <ul id="ul_edw_czs_gv">
               <li><codeph>vlan-id</codeph> is the VLAN ID;</li>
               <li><codeph>network</codeph> is the type of network;</li>
-              <li><codeph>node</codeph> is the name of the node;</li>
+              <li><codeph>node</codeph> is the name of the node where the interface is located;</li>
               <li><codeph>name</codeph> is the name of the interface;</li>
               <li><codeph>interface-type</codeph> is the type of interface;</li>
               <li><codeph>interface</codeph> is the name of the interface to attach.</li>
             </ul> For
             example:<codeblock>system host-if-add -V 539 -nt infra compute-1 infra vlan pxeboot0</codeblock></li>
           <li>Execute the following command to create the data
-            interface:<codeblock>system host-if-add -nt &lt;network> &lt;node> &lt;name> &lt;interface-type> &lt;inteface></codeblock>Where:
+            interface:<codeblock>system host-if-add -nt &lt;network> &lt;node> &lt;name> &lt;interface-type> &lt;interface></codeblock>Where:
               <ul id="ul_h31_21t_gv">
               <li><codeph>network</codeph> is the type of network;</li>
-              <li><codeph>node</codeph> is the name of the node;</li>
+              <li><codeph>node</codeph> is the name of the node where the interface is located;</li>
               <li><codeph>name</codeph> is the name of the interface;</li>
               <li><codeph>interface-type</codeph> is the type of interface;</li>
               <li><codeph>interface</codeph> is the name of the interface to attach.</li>
@@ -135,8 +138,8 @@
     
       <p id="bond">
         <b>For bonded NIC environments</b></p>
-      <p>If you are using a bonded NIC environment, after configuring and unlocking the compute
-        nodes, perform these steps:</p>
+      <p>If you are using a bonded NIC environment, perform these steps to create the
+        interfaces.:</p>
       <ol id="ol_nr5_ddw_mt">
         <li>After the controller-1 and the compute nodes come up successfully after PXE boot,
           execute the following commands from controller-0 to add the required interface:<ol
@@ -147,8 +150,7 @@
             <li>Remove the PXE boot flag off the
               interface:<codeblock>system host-if-modify -nt "none" compute-1 pxeboot0</codeblock></li>
           </ol></li>
-        <li>Execute the following commands to create a bonded interface and setup node to be
-            unlocked:<ol id="ol_xyc_fww_dv">
+        <li>Execute the following commands to create a bonded interface<ol id="ol_xyc_fww_dv">
             <li>Create a bonded interface for the control plane:
               <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-1 bond0 ae none eth0 eth1</codeblock></li>
             <li>Create a bonded interface for infra and management
@@ -159,12 +161,5 @@ system host-if-add -V 539 -nt infra compute-1 infra vlan bond0</codeblock></li>
           </ol></li>
       </ol>
     </section>
-    <section>
-      <title>Unlock the compute node</title>
-    </section>
-    <ol>
-      <li>Execute the following command on the controller to unlock the stand-by compute
-        controller:<codeblock>system host-unlock compute-1</codeblock></li>
-    </ol>
   </body>
 </topic>

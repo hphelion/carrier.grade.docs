@@ -18,7 +18,7 @@
     <section>
       <p>After the HP Helion OpenStack Carrier Grade cloud is fully deployed, perform the following
         tasks in the Horizon UI.</p>
-      <title>Create Provider Networks</title>
+      <title>Create the Provider network</title>
       <p>Use the following steps to create a provider network. Or, see <xref
           href="../../OperationsGuide/Network/CGH-2-User-network-create-provider.dita#topic3878"
           >Creating and Deleting Provider Networks</xref> and <xref
@@ -33,9 +33,10 @@
               the <codeph>regionone</codeph> region and project</xref>, such as admin.</li>
           <li>Click <b>Admin</b>, then <b>System</b>, then <b>Networks</b>. </li>
           <li>Select the <b>Provider Networks</b> tab.<p><image
-                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-1.png"
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-0.png"
                 id="image_nkw_hqq_35" width="600"/></p></li>
-          <li>Click <b>Create Provider Network</b> button to create the provider network.<p><image
+          <li>Click the <b>Create Provider Network</b> button to create the provider
+                network.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-2.png"
                 width="600" id="image_zsm_mvq_35"/></p><table frame="all" rowsep="1" colsep="1"
               id="table_pzm_sc5_2v">
@@ -70,9 +71,9 @@
               </tgroup>
             </table></li>
           <li>Click <b>Create Provider Network</b>.</li>
-          <li>In the Action drop-down for the new network, click <b>Create Segmentation
-            Range</b>.</li>
-          <li>In the Segmentation Ranges dialog, add the VLAN ID range to a provider
+          <li>In the <b>Action</b> drop-down for the new network, click <b>Create Segmentation
+              Range</b>.</li>
+          <li>In the <b>Segmentation Ranges</b> dialog, add the VLAN ID range to a provider
                 network.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-3.png"
                 width="600" id="image_xjb_svq_35"/></p></li>
@@ -130,9 +131,9 @@
           href="../../OperationsGuide/Network/CGH-2-User-network-create.dita#topic3372">Creating and
           Deleting Networks</xref>.</p>
       <ol id="ol_d51_3mr_35">
-        <li>After the Provider network is created, click the <b>Networks</b> tab and create the
-          necessary networks. <p><image
-              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-5.png"
+        <li>After the provider network is created, in the <b>Networks</b> table, click the
+            <b>Networks</b> tab and create the necessary networks. <p><image
+              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-5a.png"
               width="600" id="image_v4z_cwq_35"/></p></li>
         <li>Click <b>Create Network</b> button to start creating the network. <p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-6.png"
@@ -179,8 +180,15 @@
             </tgroup>
           </table></li>
         <li>Click <b>Create Network</b>. <p><image
+              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-5.png"
+              width="600" id="image_xfl_qwt_gv"/></p></li>
+        <li>On the Networks table, click the name of the new network to open the <b>Network
+            Details</b> page.<p><image
               href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-7.png"
-              id="image_sny_ynr_35" width="600"/></p><table frame="all" rowsep="1" colsep="1"
+              id="image_sny_ynr_35" width="600"/></p></li>
+        <li>Click <b>Create Subnet</b>. <p><image
+              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-8.png"
+              id="image_gqc_14r_35" width="600"/></p><table frame="all" rowsep="1" colsep="1"
             id="table_ibx_dh5_2v">
             <tgroup cols="3">
               <colspec colname="c1" colnum="1" colwidth="1*"/>
@@ -214,18 +222,12 @@
                   <entry>Gateway for the CIDR (optional)</entry>
                   <entry>10.20.30.1</entry>
                 </row>
-                <row>
-                  <entry>Allocation Pools</entry>
-                  <entry>Specify the range of IPs that can be implemented</entry>
-                  <entry>10.20.30.20,10.20.30.50</entry>
-                </row>
               </tbody>
             </tgroup>
           </table></li>
-        <li>After the network is complete, click <b>Create Subnet</b>. <p><image
-              href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-8.png"
-              id="image_gqc_14r_35" width="600"/></p><table frame="all" rowsep="1" colsep="1"
-            id="table_u3w_l35_2v">
+        <li>Click <b>Next</b>.</li>
+        <li>On the Subnet Details tab, specify an IP address allocation pool.<table frame="all"
+            rowsep="1" colsep="1" id="table_u3w_l35_2v">
             <tgroup cols="3">
               <colspec colname="c1" colnum="1" colwidth="1*"/>
               <colspec colname="c2" colnum="2" colwidth="3.09*"/>
@@ -256,9 +258,9 @@
       <p>From  the <xref
           href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
           >Horizon dashboard</xref>, as an admin user: <ol>
-          <li><xref href="../../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita">Select
-              the <codeph>regionone</codeph> region and project</xref>, such as admin.</li>
-          <li>Click <b>Project</b>, then <b>Networks</b>, then <b>Router</b>. </li>
+          <li>Click <b>Project</b>, then <b>Networks</b>, then <b>Router</b>. <p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-router.png" width="600"
+                id="image_qdy_5z5_gv"/></p></li>
           <li>Click <b>Create Router</b>.<table frame="all" rowsep="1" colsep="1"
               id="table_fb3_d45_2v">
               <tgroup cols="3">
@@ -285,16 +287,45 @@
                   </row>
                   <row>
                     <entry>Router Type</entry>
-                    <entry>Select centralized/distributed for the type of rotuer.</entry>
+                    <entry>Select centralized/distributed for the type of router.</entry>
                     <entry>centralized/distributed</entry>
                   </row>
                 </tbody>
               </tgroup>
             </table></li>
           <li>Click <b>Create Router</b>.</li>
-          <li>After the router is created,  select the router. </li>
-          <li>Click the <b>Interface</b> tab and click <b>Add Interface</b>.</li>
-          <li>Select the internal network subnet and click <b>Add Interface</b>.</li>
+          <li>After the router is created, click the name of the router. <p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-router-details.png"
+                width="600" id="image_xnq_w1v_gv"/></p></li>
+          <li>Click the <b>Interface</b> tab and click <b>Add Interface</b>.<p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-router-interface.png"
+                width="600" id="image_i4j_nbv_gv"/></p><table frame="all" rowsep="1" colsep="1"
+              id="table_n51_5bv_gv">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>Description</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Subnet</entry>
+                    <entry>Select the subnet</entry>
+                    <entry/>
+                  </row>
+                  <row>
+                    <entry>IP Address</entry>
+                    <entry/>
+                    <entry/>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
         </ol></p>
     </section>
     <section>
