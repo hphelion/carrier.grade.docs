@@ -76,10 +76,7 @@
           <li>In the <b>Segmentation Ranges</b> dialog, add the VLAN ID range to a provider
                 network.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-3.png"
-                width="600" id="image_xjb_svq_35"/></p></li>
-          <li>Click <b>Create Range</b> to open the Create Segmentation Range page.<p><image
-                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-4.png"
-                width="600" id="image_ydn_yvq_35"/></p><table frame="all" rowsep="1" colsep="1"
+                width="600" id="image_xjb_svq_35"/></p><table frame="all" rowsep="1" colsep="1"
               id="table_rhr_vd5_2v">
               <tgroup cols="3">
                 <colspec colname="c1" colnum="1" colwidth="1*"/>
@@ -96,12 +93,12 @@
                   <row>
                     <entry>Name</entry>
                     <entry>Name of the segmentation range</entry>
-                    <entry>pnet1</entry>
+                    <entry>segment1</entry>
                   </row>
                   <row>
                     <entry>Description</entry>
                     <entry>Description for the segmentation range (optional)</entry>
-                    <entry>providernet1</entry>
+                    <entry>segment under pnet1</entry>
                   </row>
                   <row>
                     <entry>Project</entry>
@@ -154,17 +151,17 @@
                 <row>
                   <entry>Name</entry>
                   <entry>Name of the network</entry>
-                  <entry>pnet1</entry>
+                  <entry>net1</entry>
                 </row>
                 <row>
                   <entry>Project</entry>
                   <entry>Description for the segmentation range (optional)</entry>
-                  <entry>providernet1</entry>
+                  <entry>admin</entry>
                 </row>
                 <row>
                   <entry>Provider network type</entry>
                   <entry>Project where you are creating the provider network</entry>
-                  <entry>admin</entry>
+                  <entry>vlan</entry>
                 </row>
                 <row>
                   <entry>Physical network</entry>
@@ -215,7 +212,7 @@
                 <row>
                   <entry>IP Version</entry>
                   <entry>Type of the provider network</entry>
-                  <entry>VLAN</entry>
+                  <entry>IPv4</entry>
                 </row>
                 <row>
                   <entry>Gateway IP</entry>
@@ -226,8 +223,8 @@
             </tgroup>
           </table></li>
         <li>Click <b>Next</b>.</li>
-        <li>On the Subnet Details tab, specify an IP address allocation pool.<table frame="all"
-            rowsep="1" colsep="1" id="table_u3w_l35_2v">
+        <li>On the <b>Subnet Details</b> tab, specify an IP address allocation pool.<table
+            frame="all" rowsep="1" colsep="1" id="table_u3w_l35_2v">
             <tgroup cols="3">
               <colspec colname="c1" colnum="1" colwidth="1*"/>
               <colspec colname="c2" colnum="2" colwidth="3.09*"/>
@@ -261,7 +258,9 @@
           <li>Click <b>Project</b>, then <b>Networks</b>, then <b>Router</b>. <p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-router.png" width="600"
                 id="image_qdy_5z5_gv"/></p></li>
-          <li>Click <b>Create Router</b>.<table frame="all" rowsep="1" colsep="1"
+          <li>Click <b>Create Router</b>.<p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-router.png"
+                width="600" id="image_lyg_x2z_gv"/></p><table frame="all" rowsep="1" colsep="1"
               id="table_fb3_d45_2v">
               <tgroup cols="3">
                 <colspec colname="c1" colnum="1" colwidth="1*"/>
@@ -317,12 +316,7 @@
                   <row>
                     <entry>Subnet</entry>
                     <entry>Select the subnet</entry>
-                    <entry/>
-                  </row>
-                  <row>
-                    <entry>IP Address</entry>
-                    <entry/>
-                    <entry/>
+                    <entry>ext: 10.20.59.0/24 (ext)</entry>
                   </row>
                 </tbody>
               </tgroup>
@@ -374,21 +368,31 @@
                     <entry>infra</entry>
                   </row>
                   <row>
+                    <entry>Interface Type</entry>
+                    <entry>Select the type of router.</entry>
+                    <entry>vlan</entry>
+                  </row>
+                  <row>
                     <entry>Network type</entry>
                     <entry>Network type of the interface</entry>
                     <entry>infra</entry>
                   </row>
                   <row>
-                    <entry>Interface Type</entry>
-                    <entry>Select the type of router.</entry>
-                    <entry>VLAN</entry>
+                    <entry>VLAN ID</entry>
+                    <entry>Select the VLAN ID for the infra interfce</entry>
+                    <entry>207</entry>
+                  </row>
+                  <row>
+                    <entry>Interfaces</entry>
+                    <entry/>
+                    <entry>pxeboot0</entry>
                   </row>
                 </tbody>
               </tgroup>
             </table></li>
           <li>Click <b>Create Interface</b>.</li>
-          <li>On the <b>Interfaces</b> tab, repeat these steps to create a data interface.<table
-              frame="all" rowsep="1" colsep="1" id="table_vs2_3tb_fv">
+          <li>On the <b>Interfaces</b> tab, repeat these steps to create a data interface using the
+            following values.<table frame="all" rowsep="1" colsep="1" id="table_vs2_3tb_fv">
               <tgroup cols="3">
                 <colspec colname="c1" colnum="1" colwidth="1*"/>
                 <colspec colname="c2" colnum="2" colwidth="3.09*"/>
@@ -439,40 +443,222 @@
       <p id="bonded"><b>For bonded NIC environments</b></p>
       <p>If you are using a bonded NIC environment, after configuring and unlocking the compute
         nodes, perform these steps:</p>
-      <ol id="ol_nr5_ddw_mt">
-        <li>Use the following commands to delete the MGMT interface: <ol id="ol_zfq_5h1_tt">
-            <li>Obtain the compute name or ID number:<codeblock>system host-list</codeblock></li>
-            <li>Obtain the UUID of the MGMT interface to
-              remove:<codeblock>system host-if-list</codeblock></li>
-            <li>Remove the PXE boot flag off the
-              interface:<codeblock>system host-if-modify -nt "none" compute-1 pxeboot0</codeblock></li>
-          </ol></li>
-        <li>Use the following commands to create a bonded interface and setup node to be
-            unlocked:<ol id="ol_xyc_fww_dv">
-            <li>Create a bonded interface for the control plane:
-              <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-1 bond0 ae none eth0 eth1</codeblock></li>
-            <li>Create a bonded interface for infra and management
-              interface:<codeblock>system host-if-add -V 532 -nt mgmt compute-1 mgmt vlan bond0
-system host-if-add -V 539 -nt infra compute-1 infra vlan bond0</codeblock></li>
-            <li>Create a bonded interface for the data plane:
-              <codeblock>system host-if-add -a balanced -x layer2 -nt data compute-1 databond ae "provider-net-1" eth2 eth3 </codeblock></li>
-          </ol></li>
-        <li>Unlock the stand-by compute
-          controller:<codeblock>system host-unlock compute-1</codeblock></li>
-      </ol>
-    </section>
-    <section id="unlock">
-      <title>Configure and unlock the compute controllers</title>
-      <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
-        the following commands from controller-0 to unlock each compute node in the inventory.</p>
-      <ul id="ul_f1c_dk1_h5">
-        <li><xref href="#topic1107cgikd/kvm-esx-unlock" format="dita">For a Non-Bonded
-            Environment</xref></li>
-        <li><xref href="#topic1107cgikd/nic-unlock" format="dita">For a Bonded
-          Environment</xref></li>
-      </ul>
-      <p id="kvm-esx-unlock">
-        <b>For a Non-Bonded Environment</b></p>
+      <p>From the <xref
+          href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+          >Helion dashboard</xref>, as an admin user, add the infra interface:<ol id="ol_h5m_hgz_gv">
+          <li>Click <b>Admin</b>, then <b>System</b>, then <b>Inventory</b>.</li>
+          <li>Click the <b>Hosts</b> tab. <p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-interface-hosts.png"
+                width="600" id="image_i5m_hgz_gv"/></p></li>
+          <li>Lock the compute and wait until the compute is locked.</li>
+          <li>Create a bonded interface:<ol id="ol_v5b_vjz_gv">
+              <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.<p><image
+                    href="../../../media/carrier.grade.docs/CGH-2-install-denver-interface-create.png"
+                    width="600" id="image_j5m_hgz_gv"/></p></li>
+              <li>Enter the <b>Create Interface</b> screen</li>
+              <li>Enter information for the interface.<table frame="all" rowsep="1" colsep="1"
+                  id="table_k5m_hgz_gv">
+                  <tgroup cols="3">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                    <thead>
+                      <row>
+                        <entry>Field</entry>
+                        <entry>Description</entry>
+                        <entry>Example</entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry>Interface Name</entry>
+                        <entry>Specify a name for the interface</entry>
+                        <entry>infra</entry>
+                      </row>
+                      <row>
+                        <entry>Interface Type</entry>
+                        <entry>Select the type of router.</entry>
+                        <entry>vlan</entry>
+                      </row>
+                      <row>
+                        <entry>Network type</entry>
+                        <entry>Network type of the interface</entry>
+                        <entry>infra</entry>
+                      </row>
+                      <row>
+                        <entry>VLAN ID</entry>
+                        <entry>Select the VLAN ID for the infra interfce</entry>
+                        <entry>207</entry>
+                      </row>
+                      <row>
+                        <entry>Interfaces</entry>
+                        <entry/>
+                        <entry>pxeboot0</entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table></li>
+              <li>Click <b>Create Interface</b>.</li>
+            </ol></li>
+          <li>Repeat these steps to create a management interface::<ol id="ol_s4d_3kz_gv">
+              <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
+              <li>Enter the <b>Create Interface</b> screen</li>
+              <li>Enter information for the interface.<table frame="all" rowsep="1" colsep="1"
+                  id="table_l5m_hgz_gv">
+                  <tgroup cols="3">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                    <thead>
+                      <row>
+                        <entry>Field</entry>
+                        <entry>Description</entry>
+                        <entry>Example</entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry>Interface Name</entry>
+                        <entry>Specify a name for the interface</entry>
+                        <entry>mgmt</entry>
+                      </row>
+                      <row>
+                        <entry>Network type</entry>
+                        <entry>Network type of the interface</entry>
+                        <entry>mgmt</entry>
+                      </row>
+                      <row>
+                        <entry>Interface Type</entry>
+                        <entry>Select the type of router.</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>VLAN ID</entry>
+                        <entry>VLAN for the intra interface</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>Interfaces</entry>
+                        <entry/>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>Provider network</entry>
+                        <entry>Attaching the provider net to the interface</entry>
+                        <entry/>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table></li>
+              <li>Click <b>Create Interface</b>.</li>
+            </ol></li>
+          <li>Repeat these steps to create a infrastructure interface::<ol id="ol_g4t_kkz_gv">
+              <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
+              <li>Enter the <b>Create Interface</b> screen</li>
+              <li>Enter information for the interface.<table frame="all" rowsep="1" colsep="1"
+                  id="table_h4t_kkz_gv">
+                  <tgroup cols="3">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                    <thead>
+                      <row>
+                        <entry>Field</entry>
+                        <entry>Description</entry>
+                        <entry>Example</entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry>Interface Name</entry>
+                        <entry>Specify a name for the interface</entry>
+                        <entry>infra</entry>
+                      </row>
+                      <row>
+                        <entry>Network type</entry>
+                        <entry>Network type of the interface</entry>
+                        <entry>infra</entry>
+                      </row>
+                      <row>
+                        <entry>Interface Type</entry>
+                        <entry>Select the type of router.</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>VLAN ID</entry>
+                        <entry>VLAN for the intra interface</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>Interfaces</entry>
+                        <entry/>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>Provider network</entry>
+                        <entry>Attaching the provider net to the interface</entry>
+                        <entry/>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table></li>
+              <li>Click <b>Create Interface</b>.</li>
+            </ol></li>
+          <li>Repeat these steps to create a data interface::<p>
+              <ol id="ol_udc_4kz_gv">
+                <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
+                <li>Enter the <b>Create Interface</b> screen</li>
+                <li>Enter information for the interface.<table frame="all" rowsep="1" colsep="1"
+                    id="table_vdc_4kz_gv">
+                    <tgroup cols="3">
+                      <colspec colname="c1" colnum="1" colwidth="1*"/>
+                      <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                      <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                      <thead>
+                        <row>
+                          <entry>Field</entry>
+                          <entry>Description</entry>
+                          <entry>Example</entry>
+                        </row>
+                      </thead>
+                      <tbody>
+                        <row>
+                          <entry>Interface Name</entry>
+                          <entry>Specify a name for the interface</entry>
+                          <entry>data</entry>
+                        </row>
+                        <row>
+                          <entry>Network type</entry>
+                          <entry>Network type of the interface</entry>
+                          <entry>data</entry>
+                        </row>
+                        <row>
+                          <entry>Interface Type</entry>
+                          <entry>Select the type of router.</entry>
+                          <entry/>
+                        </row>
+                        <row>
+                          <entry>VLAN ID</entry>
+                          <entry>VLAN for the intra interface</entry>
+                          <entry/>
+                        </row>
+                        <row>
+                          <entry>Interfaces</entry>
+                          <entry/>
+                          <entry/>
+                        </row>
+                        <row>
+                          <entry>Provider network</entry>
+                          <entry>Attaching the provider net to the interface</entry>
+                          <entry/>
+                        </row>
+                      </tbody>
+                    </tgroup>
+                  </table></li>
+                <li>Click <b>Create Interface</b>.</li>
+              </ol>
+            </p></li>
+        </ol></p>
     </section>
   </body>
 </topic>
