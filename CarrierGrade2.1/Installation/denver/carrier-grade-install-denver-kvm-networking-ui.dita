@@ -22,7 +22,7 @@
       <p>Use the following steps to create a provider network. Or, see <xref
           href="../../OperationsGuide/Network/CGH-2-User-network-create-provider.dita#topic3878"
           >Creating and Deleting Provider Networks</xref> and <xref
-            href="../../OperationsGuide/Network/CGH-2-User-.network-create-segment.dita#topic2171"
+          href="../../OperationsGuide/Network/CGH-2-User-.network-create-segment.dita#topic2171"
           >Creating a Segmentation Range</xref>. </p>
       <p>
         <ol id="ol_fcr_tkr_35">
@@ -255,7 +255,7 @@
     </section>
     <section>
       <title>Creating a virtual router</title>
-      <p>From  the <xref
+      <p>From the <xref
           href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
           >Horizon dashboard</xref>, as an admin user: <ol>
           <li>Click <b>Project</b>, then <b>Networks</b>, then <b>Router</b>. <p><image
@@ -297,7 +297,8 @@
           <li>After the router is created, click the name of the router. <p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-router-details.png"
                 width="600" id="image_xnq_w1v_gv"/></p></li>
-          <li>Click the <b>Interface</b> tab and click <b>Add Interface</b>.<p><image
+          <li>Click the <b>Interface</b> tab and click <b>Add Interface</b>.</li>
+          <li>Enter information for the interface.<p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-router-interface.png"
                 width="600" id="image_i4j_nbv_gv"/></p><table frame="all" rowsep="1" colsep="1"
               id="table_n51_5bv_gv">
@@ -326,18 +327,34 @@
                 </tbody>
               </tgroup>
             </table></li>
+          <li>Click <b>Add Interface</b>.</li>
         </ol></p>
     </section>
     <section>
-      <title>Add interfaces</title>
-      <p>From  the <xref
+      <title>Create the infrastructure and data interface</title>
+      <p>Execute the following commands from controller-0 to create the infrastructure and data
+        intefaces:</p>
+      <ul id="ul_ypf_bzy_gv">
+        <li><xref href="#topic10581cgidppnui/non" format="dita">For a Non-Bonded Environment</xref>
+        </li>
+        <li><xref href="#topic10581cgidppnui/bonded" format="dita">For a Bonded
+          Environment</xref></li>
+      </ul>
+      <p id="non">
+        <b>For a Non-Bonded Environment</b></p>
+      <p>From the <xref
           href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
           >Helion dashboard</xref>, as an admin user, add the infra interface:<ol id="ol_q3v_1s5_2v">
           <li>Click <b>Admin</b>, then <b>System</b>, then <b>Inventory</b>.</li>
-          <li>Click the <b>Hosts</b> tab. </li>
+          <li>Click the <b>Hosts</b> tab. <p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-interface-hosts.png"
+                width="600" id="image_nwm_zvy_gv"/></p></li>
           <li>Lock the compute and wait until the compute is locked.</li>
-          <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
-          <li>On the <b>Create Interface</b> screen:<table frame="all" rowsep="1" colsep="1"
+          <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.<p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-interface-create.png"
+                width="600" id="image_yjq_fyy_gv"/></p></li>
+          <li>Enter the <b>Create Interface</b> screen</li>
+          <li>Enter information for the interface.<table frame="all" rowsep="1" colsep="1"
               id="table_bpv_4s5_2v">
               <tgroup cols="3">
                 <colspec colname="c1" colnum="1" colwidth="1*"/>
@@ -387,12 +404,12 @@
                   <row>
                     <entry>Interface Name</entry>
                     <entry>Specify a name for the interface</entry>
-                    <entry>infra</entry>
+                    <entry>data</entry>
                   </row>
                   <row>
                     <entry>Network type</entry>
                     <entry>Network type of the interface</entry>
-                    <entry>infra</entry>
+                    <entry>data</entry>
                   </row>
                   <row>
                     <entry>Interface Type</entry>
@@ -419,44 +436,7 @@
             </table></li>
           <li>Click <b>Create Interface</b>.</li>
         </ol></p>
-    </section>
-    <section id="unlock">
-      <title>Configure and unlock the compute controllers</title>
-      <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
-        the following commands from controller-0 to unlock each compute node in the inventory.</p>
-      <ul id="ul_f1c_dk1_h5">
-        <li><xref href="#topic1107cgikd/kvm-esx-unlock" format="dita">For a Non-Bonded
-            Environment</xref></li>
-        <li><xref href="#topic1107cgikd/nic-unlock" format="dita">For a Bonded
-          Environment</xref></li>
-      </ul>
-      <p id="kvm-esx-unlock">
-        <b>For a Non-Bonded Environment</b></p>
-      <ol id="ol_w1g_3gz_dv">
-        <li>PXE boot all the registered nodes.<p>Login to Horizon and monitor the status of nodes
-            being PXE booted on the <b>Admin</b> then <b>Inventory</b> page. After succesful PXE
-            boot, the Operational State should be <b>Disabled</b> and the Availability State should
-            be <b>Online</b>. </p></li>
-        <li>After the controller-1 and the compute nodes come up successfully after PXE boot,
-          execute the following commands from controller-0 to add the required interfaces.<ol
-            id="ol_p42_d35_lt">
-            <li>Add the infrastructure network interface:
-                <codeblock>system host-if-add -V &lt;VLAN_ID> -nt infra compute-1 infra vlan pxeboot0</codeblock><p>For
-                example:<codeblock>system host-if-add -V 539 -nt infra compute-1 infra vlan pxeboot0</codeblock></p><p>This
-                command configures the <codeph>pxeboot0</codeph> interface on compute-1 to connect
-                to the infrastructure network using VLAN ID 539. </p></li>
-            <li>Configure the compute nodes: <p>
-                <codeblock>system host-if-modify -nt data compute-1 "provider-net-1" &lt;port></codeblock>
-              </p><p>For
-                example:<codeblock>system host-if-modify -nt data compute-1 "provider-net-1" eth3</codeblock></p><p>This
-                command configures the data interface on <codeph>compute-1</codeph> to connect with
-                  <codeph>provider-net-1</codeph> using <codeph>eth3</codeph>.</p></li>
-          </ol></li>
-        <li>Unlock the stand-by compute
-          controller:<codeblock>system host-unlock compute-1</codeblock></li>
-      </ol>
-      <p id="nic-unlock">
-        <b>For bonded NIC environments</b></p>
+      <p id="bonded"><b>For bonded NIC environments</b></p>
       <p>If you are using a bonded NIC environment, after configuring and unlocking the compute
         nodes, perform these steps:</p>
       <ol id="ol_nr5_ddw_mt">
@@ -480,6 +460,19 @@ system host-if-add -V 539 -nt infra compute-1 infra vlan bond0</codeblock></li>
         <li>Unlock the stand-by compute
           controller:<codeblock>system host-unlock compute-1</codeblock></li>
       </ol>
+    </section>
+    <section id="unlock">
+      <title>Configure and unlock the compute controllers</title>
+      <p>After the controller-1 and the compute nodes come up successfully after PXE boot, execute
+        the following commands from controller-0 to unlock each compute node in the inventory.</p>
+      <ul id="ul_f1c_dk1_h5">
+        <li><xref href="#topic1107cgikd/kvm-esx-unlock" format="dita">For a Non-Bonded
+            Environment</xref></li>
+        <li><xref href="#topic1107cgikd/nic-unlock" format="dita">For a Bonded
+          Environment</xref></li>
+      </ul>
+      <p id="kvm-esx-unlock">
+        <b>For a Non-Bonded Environment</b></p>
     </section>
   </body>
 </topic>
