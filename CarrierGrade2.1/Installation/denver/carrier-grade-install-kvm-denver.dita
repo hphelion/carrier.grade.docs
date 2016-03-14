@@ -105,12 +105,16 @@ ifconfig eth0 up</codeblock></li>
               href="../../../media/CGH-install-kvm-error.png" width="500" id="image_xl1_5fj_y5"
             /></p></li>
         <li>After <codeph>controller-0</codeph> is deployed, add and configure the remaining nodes
-          as <codeph>controller-1</codeph> and <codeph>compute-'n'</codeph>.
-              <codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
+          as <codeph>controller-1</codeph> and <codeph>compute-'n'</codeph>.  When adding a
+          controller, the name is assigned in order. Unique controller names are
+              ignored.<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
 system host-add --hostname &lt;unique-compute-name&gt; --personality compute --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;ilo_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt;  --bm_password &lt;ilo_password&gt;</codeblock><p><b>Note:</b>
-            When adding a controller, the name is assigned in order. Unique controller names are
-            ignored.</p><p><image href="../../../media/CGH-install-kvm-host-add.png" width="300"
-              id="image_yl1_5fj_y5"/></p></li>
+            If you include <codeph>-c tty0</codeph> to either of these commands, the system console
+            will be set to <codeph>tty0</codeph> which is the first virtual terminal on the screen
+            of a Linux system. If you do not specify this value, the default setting of the console
+            will be <codeph>ttyS0</codeph>, which is a serial port. You will not be able to see
+            console messages as the system is being installed or booted up after the install unless
+            you are using serial port connections for all servers.</p></li>
         <li>In the iLO web interface, set the controller and compute nodes to one-time PXE booting
           from the network.</li>
         <li>Restart the nodes.</li>

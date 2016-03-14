@@ -112,28 +112,40 @@
         <b>For a Non-Bonded Environment</b></p>
       <p>If you are using a non-bonded NIC environment, perform these steps to create the
           interfaces.:<ol id="ol_cjh_rys_gv">
-          <li>From the KVM region controller, execute the following command to create the
+          <li>From the KVM region controller, lock the compute-1
+            node.<codeblock>system host-lock compute-1</codeblock></li>
+          <li>Execute the following command to create an interface from compute-0 to the
             infrastructure
-            interface:<codeblock>system host-if-add -V &lt;vlan-id> -nt &lt;network> &lt;node> &lt;name> &lt;interface-type> &lt;inteface></codeblock>Where:
+            network:<codeblock>system host-if-add -V &lt;vlan-id> -nt infra compute-0 &lt;name> vlan pxeboot0</codeblock>Where:
               <ul id="ul_edw_czs_gv">
               <li><codeph>vlan-id</codeph> is the VLAN ID;</li>
-              <li><codeph>network</codeph> is the type of network;</li>
-              <li><codeph>node</codeph> is the name of the node where the interface is located;</li>
+              <li><codeph>infra</codeph> is the type of network;</li>
+              <li><codeph>compute-0</codeph> is the name of the compute node where the interface
+                will be created;</li>
               <li><codeph>name</codeph> is the name of the interface;</li>
-              <li><codeph>interface-type</codeph> is the type of interface;</li>
-              <li><codeph>interface</codeph> is the name of the interface to attach.</li>
+              <li><codeph>vlan</codeph> is the type of interface;</li>
+              <li><codeph>pxeboot0</codeph> is the name of the interface to attach.</li>
             </ul> For
-            example:<codeblock>system host-if-add -V 539 -nt infra compute-1 infra vlan pxeboot0</codeblock></li>
-          <li>Execute the following command to create the data
-            interface:<codeblock>system host-if-add -nt &lt;network> &lt;node> &lt;name> &lt;interface-type> &lt;interface></codeblock>Where:
+            example:<codeblock>system host-if-add -V 539 -nt infra compute-0 infra vlan pxeboot0</codeblock></li>
+          <li>Execute the following command to create  to create an interface from compute-0 to the
+            data
+            network:<codeblock>system host-if-add -nt data compute-0 &lt;name> vlan &lt;interface></codeblock>Where:
               <ul id="ul_h31_21t_gv">
-              <li><codeph>network</codeph> is the type of network;</li>
-              <li><codeph>node</codeph> is the name of the node where the interface is located;</li>
-              <li><codeph>name</codeph> is the name of the interface;</li>
-              <li><codeph>interface-type</codeph> is the type of interface;</li>
+              <li><codeph>data</codeph> is the data network;</li>
+              <li><codeph>compute-0</codeph> is the name of the compute node where the interface
+                will be created;</li>
+              <li><codeph>name</codeph> is a descriptive name for the interface;</li>
+              <li><codeph>vlan</codeph> is the type of interface;</li>
               <li><codeph>interface</codeph> is the name of the interface to attach.</li>
             </ul> For
-            example:<codeblock>system host-if-add -nt data compute-1 data vlan eth2 pnet1 pnet2</codeblock></li>
+            example:<codeblock>system host-if-add -nt data compute-0 data vlan eth2 pnet1 pnet2</codeblock></li>
+          <li>Unlock the compute-0 node.<codeblock>system host-unlock compute-0</codeblock></li>
+          <li>Lock the compute-1 node.<codeblock>system host-lock compute-1</codeblock></li>
+          <li>Repeat commands above to create interfaces on compute-1 to the infrastructure network
+            and the data network.
+            <codeblock>system host-if-add -V &lt;vlan-id> -nt infra compute-0 &lt;name> vlan pxeboot0
+system host-if-add -nt data compute-0 &lt;name> vlan &lt;interface></codeblock></li>
+          <li>Unlock the compute-1 node.<codeblock>system host-unlock compute-1</codeblock></li>
         </ol></p>
     
       <p id="bond">

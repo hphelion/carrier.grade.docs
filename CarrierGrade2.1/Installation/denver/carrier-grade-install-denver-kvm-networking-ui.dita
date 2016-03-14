@@ -325,9 +325,9 @@
         </ol></p>
     </section>
     <section>
-      <title>Create the infrastructure and data interface</title>
-      <p>Execute the following commands from controller-0 to create the infrastructure and data
-        intefaces:</p>
+      <title>Create the network interfaces</title>
+      <p>This section describes how to create and configure interfaces to the management,
+        infrastructure and data networks:</p>
       <ul id="ul_ypf_bzy_gv">
         <li><xref href="#topic10581cgidppnui/non" format="dita">For a Non-Bonded Environment</xref>
         </li>
@@ -338,14 +338,18 @@
         <b>For a Non-Bonded Environment</b></p>
       <p>From the <xref
           href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
-          >Helion dashboard</xref>, as an admin user, add the interface to the infrastructure
-        (infra) network:<ol id="ol_q3v_1s5_2v">
+          >Helion dashboard</xref>, as an admin user, add the interface from a compute node to the
+        infrastructure (infra) network and the data network:<ol id="ol_q3v_1s5_2v">
           <li>Click <b>Admin</b>, then <b>System</b>, then <b>Inventory</b>.</li>
           <li>Click the <b>Hosts</b> tab. <p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-interface-hosts.png"
                 width="600" id="image_nwm_zvy_gv"/></p></li>
-          <li>Lock the compute and wait until the compute is locked.</li>
-          <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
+          <li>For the compute you want to configure, from the <b>Actions</b> menu, select <b>Lock
+              Host</b>. Wait until the compute is locked.</li>
+          <li>Click the name of the computer you want to configure  The <b>Inventory Detail</b> page
+            displays.</li>
+          <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>. The Create Interface
+            button displays only when that host system is locked.</li>
           <li>Enter the <b>Create Interface</b> screen</li>
           <li>Enter information for the interface.<p><image
                 href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-infra.png"
@@ -370,7 +374,7 @@
                   </row>
                   <row>
                     <entry>Interface Type</entry>
-                    <entry>Select the type of router.</entry>
+                    <entry>Select the type of interface.</entry>
                     <entry>vlan</entry>
                   </row>
                   <row>
@@ -422,12 +426,7 @@
                   <row>
                     <entry>Interface Type</entry>
                     <entry>Select the type of router.</entry>
-                    <entry>VLAN</entry>
-                  </row>
-                  <row>
-                    <entry>VLAN ID</entry>
-                    <entry>VLAN for the intra interface</entry>
-                    <entry>N/A</entry>
+                    <entry>ae</entry>
                   </row>
                   <row>
                     <entry>Interfaces</entry>
@@ -437,12 +436,18 @@
                   <row>
                     <entry>Provider network</entry>
                     <entry>Attaching the provider net to the interface</entry>
-                    <entry>pnet1, pnet2</entry>
+                    <entry>pnet1</entry>
                   </row>
                 </tbody>
               </tgroup>
             </table></li>
           <li>Click <b>Create Interface</b>.</li>
+          <li>Return to the System Inventory page by clicking <b>Inventory</b> (click <b>Admin</b>,
+            then <b>System</b>, then <b>Inventory</b>).</li>
+          <li>For the compute you configured, from the <b>Actions</b> menu, select <b>Unlock
+              Host</b>. Wait until the compute is unlocked.</li>
+          <li>Lock the other compute and repeat the steps in this section to add interfaces to the
+            infrastructure (infra) network and the data network.</li>
         </ol></p>
       <p id="bonded"><b>For bonded NIC environments</b></p>
       <p>If you are using a bonded NIC environment, after configuring and unlocking the compute
@@ -454,7 +459,8 @@
           <li>Click the <b>Hosts</b> tab. <p><image
                 href="../../../media/carrier.grade.docs/CGH-2-install-denver-interface-hosts.png"
                 width="600" id="image_i5m_hgz_gv"/></p></li>
-          <li>Lock the compute and wait until the compute is locked.</li>
+          <li>For the compute you configured, from the <b>Actions</b> menu, select <b>Lock Host</b>.
+            Wait until the compute is locked.</li>
           <li>Create a bonded interface:<ol id="ol_v5b_vjz_gv">
               <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.<p><image
                     href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-mgmt.png"
@@ -506,8 +512,7 @@
                 </table></li>
               <li>Click <b>Create Interface</b>.</li>
             </ol></li>
-          <li>Repeat these steps to create an interface to the management network::<ol
-              id="ol_s4d_3kz_gv">
+          <li>Create an interface to the management network:<ol id="ol_s4d_3kz_gv">
               <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
               <li>Enter the <b>Create Interface</b> screen</li>
               <li>Enter information for the interface.<p><image
@@ -561,13 +566,12 @@
                 </table></li>
               <li>Click <b>Create Interface</b>.</li>
             </ol></li>
-          <li>Repeat these steps to create an interface to the infrastructure network:<ol
-              id="ol_g4t_kkz_gv">
+          <li>Create an interface to the infrastructure network:<ol id="ol_g4t_kkz_gv">
               <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
               <li>Enter the <b>Create Interface</b> screen</li>
-              <li>Enter information for the interface.<image
-                  href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-infra.png"
-                  width="600" id="image_rrm_mxz_gv"/><table frame="all" rowsep="1" colsep="1"
+              <li>Enter information for the interface.<p><image
+                    href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-infra.png"
+                    width="600" id="image_rrm_mxz_gv"/></p><table frame="all" rowsep="1" colsep="1"
                   id="table_h4t_kkz_gv">
                   <tgroup cols="3">
                     <colspec colname="c1" colnum="1" colwidth="1*"/>
@@ -616,7 +620,7 @@
                 </table></li>
               <li>Click <b>Create Interface</b>.</li>
             </ol></li>
-          <li>Repeat these steps to create an interface to the data network::<p>
+          <li>Create an interface to the data network::<p>
               <ol id="ol_udc_4kz_gv">
                 <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
                 <li>Enter the <b>Create Interface</b> screen</li>
@@ -672,6 +676,10 @@
                 <li>Click <b>Create Interface</b>.</li>
               </ol>
             </p></li>
+          <li>For the compute you configured, from the <b>Actions</b> menu, select <b>Unlock
+              Host</b>. Wait until the compute is unlocked.</li>
+          <li>Lock the other compute and repeat the steps in this section to add interfaces to the
+            infrastructure (infra) network and the data network.</li>
         </ol></p>
     </section>
   </body>
