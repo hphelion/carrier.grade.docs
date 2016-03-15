@@ -98,20 +98,16 @@
             example:<codeblock>neutron router-interface-add router1 internal_sub</codeblock></li>
         </ol></p>
     </section>
-    <section>
-      <title>Create the infrastructure and data interface</title>
-      <p>Execute the following commands from controller-0 to create the infrastructure and data
-        intefaces:</p>
-      <ul id="ul_f1c_dk1_h5">
+    <section><title>Create the infrastructure and data interface</title><p>Execute the following
+        commands from controller-0 to create the infrastructure and data intefaces:</p><ul
+        id="ul_f1c_dk1_h5">
         <li><xref href="#topic10581cgidppncli/non" format="dita">For a Non-Bonded
-            Environment</xref></li>
+          Environment</xref></li>
         <li><xref href="#topic10581cgidppncli/bond" format="dita">For a Bonded
           Environment</xref></li>
-      </ul>
-      <p id="non">
-        <b>For a Non-Bonded Environment</b></p>
-      <p>If you are using a non-bonded NIC environment, perform these steps to create the
-          interfaces.:<ol id="ol_cjh_rys_gv">
+      </ul><p id="non">
+        <b>For a Non-Bonded Environment</b></p><p>If you are using a non-bonded NIC environment,
+        perform these steps to create the interfaces.:<ol id="ol_cjh_rys_gv">
           <li>From the KVM region controller, lock the compute-1
             node.<codeblock>system host-lock compute-1</codeblock></li>
           <li>Execute the following command to create an interface from compute-0 to the
@@ -146,32 +142,50 @@
             <codeblock>system host-if-add -V &lt;vlan-id> -nt infra compute-0 &lt;name> vlan pxeboot0
 system host-if-add -nt data compute-0 &lt;name> vlan &lt;interface></codeblock></li>
           <li>Unlock the compute-1 node.<codeblock>system host-unlock compute-1</codeblock></li>
-        </ol></p>
-    
-      <p id="bond">
-        <b>For bonded NIC environments</b></p>
-      <p>If you are using a bonded NIC environment, perform these steps to create the
-        interfaces.:</p>
-      <ol id="ol_nr5_ddw_mt">
-        <li>After the controller-1 and the compute nodes come up successfully after PXE boot,
-          execute the following commands from controller-0 to add the required interface:<ol
-            id="ol_zfq_5h1_tt">
-            <li>Obtain the compute name or ID number:<codeblock>system host-list</codeblock></li>
-            <li>Obtain the UUID of the MGMT
-              interface:<codeblock>system host-if-list</codeblock></li>
-            <li>Remove the PXE boot flag off the
-              interface:<codeblock>system host-if-modify -nt "none" compute-1 pxeboot0</codeblock></li>
-          </ol></li>
-        <li>Execute the following commands to create a bonded interface<ol id="ol_xyc_fww_dv">
-            <li>Create a bonded interface for the control plane:
-              <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-1 bond0 ae none eth0 eth1</codeblock></li>
-            <li>Create a bonded interface for infra and management
-              interface:<codeblock>system host-if-add -V 532 -nt mgmt compute-1 mgmt vlan bond0
-system host-if-add -V 539 -nt infra compute-1 infra vlan bond0</codeblock></li>
-            <li>Create a bonded interface for the data plane:
-              <codeblock>system host-if-add -a balanced -x layer2 -nt data compute-1 databond ae "provider-net-1" eth2 eth3 </codeblock></li>
-          </ol></li>
-      </ol>
-    </section>
+        </ol></p><p id="bond">
+        <b>For bonded NIC environments</b></p><p>If you are using a bonded NIC environment, perform
+        these steps to create the interfaces.:</p>After the controller-1 and the compute nodes come
+      up successfully after PXE boot, execute the following commands from controller-0 to add the
+      required interface:<ol id="ol_zfq_5h1_tt">
+        <li>Obtain the compute name or ID number:<codeblock>system host-list</codeblock></li>
+        <li>Obtain the UUID of the MGMT interface:<codeblock>system host-if-list</codeblock></li>
+        <li>Remove the PXE boot flag off the
+          interface:<codeblock>system host-if-modify -nt "none" compute-1 pxeboot0</codeblock></li>
+      </ol>Execute the following commands to create a bonded interface<ol id="ol_xyc_fww_dv">
+        <li>From the KVM region controller, lock the compute-0
+          node.<codeblock>system host-lock compute-0</codeblock></li>
+        <li>Create a bonded interface for the control plane:
+          <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-0 bond0 ae none eth0 eth1</codeblock></li>
+        <li>Create a bonded interface to the infrastructure (infra) and management
+          interface:<codeblock>system host-if-add -V &lt;vlan-id> -nt mgmt compute-0 &lt;name> vlan bond0</codeblock>Where:
+            <ul id="ul_q4r_4jv_hv">
+            <li><codeph>vlan-id</codeph> is the VLAN ID;</li>
+            <li><codeph>mgmt</codeph> is the type of network;</li>
+            <li><codeph>compute-0</codeph> is the name of the compute node where the interface will
+              be created;</li>
+            <li><codeph>name</codeph> is the name of the interface;</li>
+            <li><codeph>vlan</codeph> is the type of interface;</li>
+            <li><codeph>bond0</codeph> is the name of the bonded interface.</li>
+          </ul></li>
+        <li>Create a bonded interface to the management interface using the varibles defined in the
+          previous
+          step:<codeblock>system host-if-add -V &lt;vlan-id> -nt infra compute-0 &lt;name> vlan bond0</codeblock>Where:
+            <ul id="ul_qt5_yjv_hv">
+            <li><codeph>mgmt</codeph> is the type of network;</li>
+          </ul></li>
+        <li>Create a bonded interface for the data plane:
+          <codeblock>system host-if-add -a balanced -x layer2 -nt data compute-0 databond ae "provider-net-1" eth2 eth3 </codeblock>Where:
+            <ul id="ul_c2b_1kv_hv">
+            <li><codeph>data</codeph> is the type of network;</li>
+          </ul></li>
+        <li>Unlock the compute-0 node.<codeblock>system host-unlock compute-0</codeblock></li>
+        <li>Lock the compute-1 node.<codeblock>system host-lock compute-1</codeblock></li>
+        <li>Repeat the steps above on
+          compute-1:<codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-1 bond0 ae none eth0 eth1
+system host-if-add -V 532 -nt mgmt compute-1 mgmt vlan bond0
+system host-if-add -V 539 -nt infra compute-1 infra vlan bond0
+system host-if-add -a balanced -x layer2 -nt data compute-1 databond ae "provider-net-1" eth2 eth3 </codeblock></li>
+        <li>Unlock the compute-1 node.<codeblock>system host-unlock compute-1</codeblock></li>
+      </ol></section>
   </body>
 </topic>

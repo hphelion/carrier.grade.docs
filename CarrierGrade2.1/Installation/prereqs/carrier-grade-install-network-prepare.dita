@@ -203,57 +203,66 @@ auto br-bls
                     <codeblock>sudo su -</codeblock>
                 </p></li>
                 <li>Create the <codeph>br-pxe</codeph> network by creating an XML definition
-                        file:<p>a. Manually create the XML file, using the name
-                            <codeph>br-pxe.xml</codeph>:</p><codeblock><codeph>cat br-pxe.xml
-&lt;network&gt;
+                        file:<ol id="ol_qys_c4d_3v">
+                        <li>Manually create the XML file, here named
+                            <codeph>br-pxe.xml</codeph>:<codeblock>cat br-pxe.xml 
+&lt;network>
 &lt;name&gt;br-pxe&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-pxe'/&gt;
-&lt;/network&gt;</codeph></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--><p>b.
-                        Execute the following commands to create and start the network and configure
-                        the network to
-                    auto-start:</p><codeblock><codeph>virsh net-define br-pxe.xml
+&lt;/network&gt;</codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
+                        <li>Execute the following commands, using the name of your XML file, to
+                            create and start the network and configure the network to
+                            auto-start:<codeblock>virsh net-define br-pxe.xml
 virsh net-start br-pxe
-virsh net-autostart br-pxe</codeph></codeblock></li>
+virsh net-autostart br-pxe</codeblock></li>
+                    </ol></li>
                 <li>Create the <codeph>br-clm</codeph> network by creating an XML definition
-                        file:<p>a. Manually create the XML file, here named
-                            <codeph>br-clm.xml</codeph>:</p><codeblock><codeph>cat br-clm.xml
-&lt;network&gt;
+                        file:<ol id="ol_xrq_14d_3v">
+                        <li>Manually create the XML file, here named
+                            <codeph>br-clm.xml</codeph>:<codeblock>cat br-clm.xml 
+&lt;network>
 &lt;name&gt;br-clm&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-clm'/&gt;
-&lt;/network&gt;</codeph></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--><p>b.
-                        Execute the following commands, using the name of your XML file, to create
-                        and start the network and configure the network to
-                    auto-start:</p><codeblock><codeph>virsh net-define <systemoutput>br-clm.xml</systemoutput>
+&lt;/network&gt;</codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
+                        <li>Execute the following commands, using the name of your XML file, to
+                            create and start the network and configure the network to
+                            auto-start:<codeblock>virsh net-define br-clm.xml
 virsh net-start br-clm
-virsh net-autostart br-clm</codeph></codeblock></li>
+virsh net-autostart br-clm</codeblock></li>
+                    </ol></li>
                 <li>Create the <codeph>br-bls</codeph> network by creating an XML definition
-                        file:<p>a. Manually create the XML file, using the name
-                            <codeph>br-bls.xml</codeph>:</p><codeblock><codeph>cat br-bls.xml
-&lt;network&gt;
+                        file:<ol id="ol_ekx_xnd_3v">
+                        <li>Manually create the XML file, here named
+                            <codeph>br-bls.xml</codeph>:<codeblock>cat br-bls.xml 
+&lt;network>
 &lt;name&gt;br-bls&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-bls'/&gt;
-&lt;/network&gt;</codeph></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--><p>b.
-                        Execute the following commands to create and start the network and configure
-                        the network to
-                    auto-start:</p><codeblock><codeph>virsh net-define br-bls.xml
+&lt;/network&gt;</codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
+                        <li>Execute the following commands, using the name of your XML file, to
+                            create and start the network and configure the network to
+                            auto-start:<codeblock>virsh net-define br-bls.xml
 virsh net-start br-bls
-virsh net-autostart br-bls</codeph></codeblock></li>
-                <li>Create the <codeph>br-can</codeph> network by creating an XML definition
-                        file:<p>a. Manually create the XML file, here named
-                            <codeph>br-can.xml</codeph>:</p><codeblock><codeph>cat br-can.xml
-&lt;network&gt;
+virsh net-autostart br-bls</codeblock></li>
+                    </ol></li>
+                <li>Create the <codeph>br-can</codeph> network by creating an XML definition file:<p>
+                        <ol id="ol_xbx_4nd_3v">
+                            <li>Manually create the XML file, here named
+                                <codeph>br-can.xml</codeph>:<codeblock>cat br-can.xml 
+&lt;network>
 &lt;name&gt;br-can&lt;/name&gt;
 &lt;forward mode='bridge'/&gt;
 &lt;bridge name='br-can'/&gt;
-&lt;/network&gt;</codeph></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--><p>b.
-                        Execute the following commands, using the name of your XML file, to create
-                        and start the network and configure the network to
-                    auto-start:</p><codeblock><codeph>virsh net-define <systemoutput>br-can.xml</systemoutput>
+&lt;/network&gt;</codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
+                            <li>Execute the following commands, using the name of your XML file, to
+                                create and start the network and configure the network to
+                                auto-start:<codeblock>virsh net-define br-can.xml
 virsh net-start br-can
-virsh net-autostart br-can</codeph></codeblock></li>
+virsh net-autostart br-can</codeblock></li>
+                        </ol>
+                    </p></li>
                 <!--<li>Create the <codeph>br-dcm</codeph> network by creating an XML definition file:<p>a. Manually create the XML file, using the name <codeph>br-dcm.xml</codeph>:</p><codeblock><codeph>cat br-dcm.xml
 &lt;network&gt;
 &lt;name&gt;br-dcm&lt;/name&gt;
@@ -263,6 +272,10 @@ virsh net-autostart br-can</codeph></codeblock></li>
 &lt;/network&gt;</codeph></codeblock><p>b. Execute the following commands to create and start the network and configure the network to auto-start:</p><codeblock><codeph>virsh net-define br-dcm.xml
 virsh net-start br-dcm
 virsh net-autostart br-dcm</codeph></codeblock></li>-->
+                <li>Execute the following command to start the default virbr0 network and configure
+                    the network to
+                    auto-start<codeblock>virsh net-start default
+virsh net-autostart default</codeblock></li>
                 <li>Use the <codeph>virsh net-list</codeph> command to view information on the new
                     networks:<codeblock><codeph>virsh net-list
                         
@@ -296,25 +309,9 @@ ifup &lt;yourinterface&gt;</codeph></codeblock></li>
                         <codeblock>brctl show</codeblock><p>The output should appear similar to the
                         following:</p><codeblock>bridge name     bridge id               STP enabled     interfaces
 br-bls          8000.5cb9017aa370       no              eth0.210
-                                                        vnet10
-                                                        vnet14
-                                                        vnet6
 br-can          8000.5cb9017aa370       no              eth0.208
-                                                        vnet13
-                                                        vnet5
-                                                        vnet9
 br-clm          8000.5cb9017aa370       no              eth0.3007
-                                                        vnet12
-                                                        vnet2
-                                                        vnet4
-                                                        vnet8
-br-pxe          8000.5cb9017aa370       no              eth0
-                                                        vnet1
-                                                        vnet11
-                                                        vnet3
-                                                        vnet7
-virbr0          8000.febbccddeeff       yes             vnet0 
-</codeblock></li>
+br-pxe          8000.5cb9017aa370       no              eth0</codeblock></li>
             </ol>
         </section>
     
