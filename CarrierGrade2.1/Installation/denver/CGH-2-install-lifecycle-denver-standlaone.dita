@@ -123,18 +123,24 @@ kvm_hosts:
         <p><b>Important:</b> If you specify a non-root user in the <b>all-virtual</b> file, perform
           the following tasks to configure Libvirt to work with Ansible:</p>
         <ol id="ol_tsy_sfd_dv">
-          <li>Change to the user directory<codeblock>cd /home/&lt;user>/</codeblock></li>
+          <li>Change to the user directory<codeblock>cd /home/&lt;user>/</codeblock><p>Where
+                <codeph>&lt;user></codeph> is the <codeph>root_user</codeph> created in the
+                <codeph>group_vars/all-virtual</codeph> file.</p></li>
           <li>Edit the <codeph>.profile</codeph> file to add the <codeph>export</codeph> line
               below:<codeblock>export LIBVIRT_DEFAULT_URI="qemu:///system"</codeblock><p>For
               example:</p><codeblock>if [ -d "$HOME/bin" ] ; then
                 PATH="$HOME/bin:$PATH"
                 fi     </codeblock></li>
           <li>Execute the following
-            command:<codeblock>sudo usermod -a -G libvirt &lt;user></codeblock></li>
+            command:<codeblock>sudo usermod -a -G libvirt &lt;user></codeblock>Where
+              <codeph>&lt;user></codeph> is the <codeph>root_user</codeph> created in the
+              <codeph>group_vars/all-virtual</codeph> file.</li>
           <li>Change to the <codeph>etc/</codeph> directory.</li>
           <li>Add a user to the <codeph>sudoers</codeph>
             file:<codeblock>% sudo ALL=(ALL:ALL) ALL
-&lt;user> ALL=(ALL) NOPASSWD:ALL</codeblock></li>
+&lt;user> ALL=(ALL) NOPASSWD:ALL</codeblock>Where
+              <codeph>&lt;user></codeph> is the <codeph>root_user</codeph> created in the
+              <codeph>group_vars/all-virtual</codeph> file.</li>
         </ol>
       </section>
       <section>
