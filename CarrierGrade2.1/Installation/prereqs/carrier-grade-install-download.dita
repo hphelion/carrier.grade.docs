@@ -279,15 +279,17 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 4EBB C697 8F0C</cod
                         <p>You should also use a checksum verification tool, such as sha256sum,
                                 which should come installed with Ubuntu.</p>
                         <ol id="ol_icb_k4f_xs">
-                                <li>Run the checksum tool against the download package:
-                                        <codeblock>sha256sum &lt;path-to-file>/hcg21_kvm_avs.tar.gz</codeblock></li>
+                                <li>Run the checksum tool against the download package: <codeblock>sha256sum &lt;path-to-file>/hcg21_kvm_avs.tar.gz</codeblock><p>
+                                                <note>The command can take a few minutes as the
+                                                  download package is a large file.</note>
+                                        </p></li>
                                 <li>Compare the output of the checksum tool to the download checksum
                                         file.
                                         <codeblock>sha256sum hcg21_kvm_avs.tar.gz
-4e5a5514ba87401750f01196c592d8d93a9eb6c06546  hcg21_kvm_avs.tar.gz</codeblock>Note
-                                        that the checksum file contains the date that the file was
-                                        generated, the checksum string, and the name of the file
-                                        that was used, similar to the
+4e5a5514ba87401750f01196c592d8d93a9eb6c06546 *hcg21_kvm_avs.tar.gz</codeblock>The
+                                        checksum file contains the date that the file was generated,
+                                        the checksum string, and the name of the file that was used,
+                                        similar to the
                                         following:<codeblock>Tue Mar  1 10:51:11 PST 2016
 4e5a5514ba87401750f01196c592d8d93a9eb6c06546  hcg21_kvm_avs.tar.gz</codeblock></li>
                         </ol>
