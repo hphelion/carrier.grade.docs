@@ -2,22 +2,22 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic7148cipd">
-        <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Step 1 - Preparing
+        <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Step 1 - Preparing
                 the Installation Environment</title>
         <titlealts>
-                <searchtitle>HP Helion OpenStack Carrier Grade Installation
+                <searchtitle>HPE Helion OpenStack Carrier Grade Installation
                         Prerequisites</searchtitle>
         </titlealts>
         <prolog>
                 <metadata>
                         <othermeta name="layout" content="default"/>
                         <othermeta name="product-version"
-                                content="HP Helion OpenStack Carrier Grade 2.0"/>
+                                content="HPE Helion OpenStack Carrier Grade 2.0"/>
                         <othermeta name="role" content="Storage Administrator"/>
                         <othermeta name="role" content="Storage Architect"/>
                         <othermeta name="role" content="Michael B"/>
                         <othermeta name="product-version1"
-                                content="HP Helion OpenStack Carrier Grade 2.0"/>
+                                content="HPE Helion OpenStack Carrier Grade 2.0"/>
                 </metadata>
         </prolog>
         <body>
@@ -31,7 +31,7 @@
                                         environment meets the hardware and software requirements.
                                         See the <xref
                                                 href="../carrier-grade-support-matrix2.dita#topic1773cgsm2"
-                                                >HP Helion OpenStack Support Matrix</xref>.</p>
+                                                >HPE Helion OpenStack Support Matrix</xref>.</p>
                         </section>
                         <section id="kvm">
                                 <title>Preparing the lifecycle manager host</title>
@@ -49,7 +49,7 @@
                         <section id="linux">
                                 <title>Download the HPE Linux Source</title>
                                 <p>The lifecycle manager host must have HPE Linux installed before
-                                        performing the HP Helion OpenStack Carrier Grade
+                                        performing the HPE Helion OpenStack Carrier Grade
                                         installation. You can download HPE Linux from  <xref
                                                 href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
                                                 format="html" scope="external">Helion Download
@@ -86,7 +86,7 @@ export https_proxy=http://&lt;web_proxy_IP&gt;/
 export no_proxy=localhost,127.0.0.1,&lt;IP_address>,&lt;provider_network></codeph></codeblock><p>Where:</p><codeblock>&lt;web_proxy_IP> is your web proxy IP address.
 &lt;IP_address> is the IP address of the lifecycle manager host</codeblock></li><li>Source the <codeph>environment</codeph> file:<codeblock><codeph>source /etc/environment
 </codeph></codeblock></li></ol></section>-->
-                        <!--<section id="packages"><title>Install additional packages</title><p>The HP Helion OpenStack Carrier Grade installation process requires a number of additional Linux packages. All of these packages are included in the <codeph>HelionOpenStack-2.1.iso</codeph> you downloaded and were be deployed to the proper locations when you mounted the ISO. However, you need to install ifenslave package.</p><p>To install the package on the lifecycle manager host: <ol id="ol_gvk_h54_cv"><li>SSH into the lifecycle manager host.</li><li>Execute the following command:<codeblock>apt-get install ifenslave</codeblock></li></ol></p><p>The ifenslave tool is used to attach and detach slave network devices to a bonding device.</p>Leave this in case needed later: After installing the base version of the HPE Linux operating system on the lifecycle manager host the following packages need to be installed:<p><ul id="ul_dlb_fr1_y5"><li>ethtool </li><li>sudo </li><li>vnc4server </li><li>qemu-system </li><li>libvirt-bin </li><li>python-libvirt </li><li>sshpass </li><li>ansible </li><li>ifenslave </li><li>bridge-utils</li></ul></p><p><ol id="ol_gbb_ls1_y5"><li>Execute the following command on the lifecycle manager host to install these packages:<codeblock>apt-get install ethtool sudo vnc4server qemu-system libvirt-bin python-libvirt sshpass ansible ifenslave bridge-utils</codeblock></li><li>Reboot the server</li><li>Log out and re-login to the lifecycle manager host to activate the proxy configuration.</li></ol></p></section>-->
+                        <!--<section id="packages"><title>Install additional packages</title><p>The HPE Helion OpenStack Carrier Grade installation process requires a number of additional Linux packages. All of these packages are included in the <codeph>HelionOpenStack-2.1.iso</codeph> you downloaded and were be deployed to the proper locations when you mounted the ISO. However, you need to install ifenslave package.</p><p>To install the package on the lifecycle manager host: <ol id="ol_gvk_h54_cv"><li>SSH into the lifecycle manager host.</li><li>Execute the following command:<codeblock>apt-get install ifenslave</codeblock></li></ol></p><p>The ifenslave tool is used to attach and detach slave network devices to a bonding device.</p>Leave this in case needed later: After installing the base version of the HPE Linux operating system on the lifecycle manager host the following packages need to be installed:<p><ul id="ul_dlb_fr1_y5"><li>ethtool </li><li>sudo </li><li>vnc4server </li><li>qemu-system </li><li>libvirt-bin </li><li>python-libvirt </li><li>sshpass </li><li>ansible </li><li>ifenslave </li><li>bridge-utils</li></ul></p><p><ol id="ol_gbb_ls1_y5"><li>Execute the following command on the lifecycle manager host to install these packages:<codeblock>apt-get install ethtool sudo vnc4server qemu-system libvirt-bin python-libvirt sshpass ansible ifenslave bridge-utils</codeblock></li><li>Reboot the server</li><li>Log out and re-login to the lifecycle manager host to activate the proxy configuration.</li></ol></p></section>-->
                         <!--<section id="configure-the-xrdp-remote-desktop-display"><title>Configure the XRDP remote desktop display</title><p>Configure XRDP on the lifecycle manager host for the remote desktop connection to access the server remotely as follows.</p><ol id="ol_ntm_3fb_y5"><li>Edit the <codeph>sesman.ini</codeph> file: <ol id="ol_otm_3fb_y5"><li>Open the file: <codeblock>vi /etc/xrdp/sesman.ini </codeblock></li><li>Update the <codeph>MaxSessions=1</codeph> to <codeph>MaxSessions=50</codeph>.</li><li>Save and close the file.</li></ol></li><li>Execute the following command to configure the system to use XRDP:<codeblock><codeph>echo "xfce4-session" &gt; ~/.xinitrc
 </codeph></codeblock></li><li>Execute the following command to restart the XDRP service: <codeblock>sudo /etc/init.d/xrdp restart</codeblock></li></ol><p>If the XDRP display does not work as expected, (you see a gray screen): <ol id="ol_hnf_vpk_yt"><li>Update the <codeph>startwm.sh</codeph> file:<codeblock><codeph>vi /etc/xrdp/startwm.sh
 
@@ -153,9 +153,9 @@ StrictModes yes </codeblock></li>
                                                 service:<codeblock>service ssh restart</codeblock></li>
                                 </ol>
                         </section>
-                        <!--<section id="ldap"><title>Integrate LDAP</title><p><b>OPTIONAL:</b> The HP Helion OpenStack Identity service can use Lightweight Directory Access Protocol (LDAP) to integrate your organization's existing directory service and user account management processes.</p><p>See <xref href="../prereqs/carrier-grade-install-ldap-enabling.dita#topic10581cgile">Enabling LDAP</xref></p></section>-->
+                        <!--<section id="ldap"><title>Integrate LDAP</title><p><b>OPTIONAL:</b> The HPE Helion OpenStack Identity service can use Lightweight Directory Access Protocol (LDAP) to integrate your organization's existing directory service and user account management processes.</p><p>See <xref href="../prereqs/carrier-grade-install-ldap-enabling.dita#topic10581cgile">Enabling LDAP</xref></p></section>-->
                 </bodydiv>
-                <section><title>Next Step</title>Before installing HP Helion OpenStack Carrier
+                <section><title>Next Step</title>Before installing HPE Helion OpenStack Carrier
                         Grade, you are responsible for preparing the network for all
                                 installations.<p>See <xref
                                         href="../prereqs/carrier-grade-install-network-prepare.dita#topic7646cginp"

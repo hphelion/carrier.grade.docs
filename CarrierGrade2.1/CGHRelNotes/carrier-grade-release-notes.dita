@@ -2,30 +2,30 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic6108cgrn">
-    <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Release Notes</title>
+    <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Release Notes</title>
     <prolog>
         <metadata>
             <othermeta name="layout" content="default"/>
-            <othermeta name="product-version" content="HP Helion Openstack Carreir Grade 1.1"/>
+            <othermeta name="product-version" content="HPE Helion Openstack Carreir Grade 1.1"/>
             <othermeta name="role" content="Storage Administrator"/>
             <othermeta name="role" content="Storage Architect"/>
             <othermeta name="role" content="Michael B"/>
-            <othermeta name="product-version1" content="HP Helion Openstack Carreir Grade 1.1"/>
+            <othermeta name="product-version1" content="HPE Helion Openstack Carreir Grade 1.1"/>
         </metadata>
     </prolog>
     <body>
         <p>Thank you for your interest in HPE Helion OpenStack This document provides an overview of
             the features contained within HPE Helion OpenStack version 2.0, including known issues
             and workarounds, and where to find further information on the product release.</p>
-        <p>For more information on using HP Helion OpenStack Carrier Grade, see the <xref
-                href="../Installation/carrier-grade-install-overview.dita#topic1925cgio">HP Helion
+        <p>For more information on using HPE Helion OpenStack Carrier Grade, see the <xref
+                href="../Installation/carrier-grade-install-overview.dita#topic1925cgio">HPE Helion
                 OpenStack Carrier Grade Installation Guide</xref>, the <xref
-                href="../carrier-grade-administration.dita#topic916cga">HP Helion OpenStack Carrier
+                href="../carrier-grade-administration.dita#topic916cga">HPE Helion OpenStack Carrier
                 Grade Administrator Guide</xref> and the <xref
-                href="../OperationsGuide/CGH-2-User-Overview.dita#jow1404333560080">HP Helion
-                OpenStack Operations Guide</xref>. For information on using the HP Helion OpenStack
+                href="../OperationsGuide/CGH-2-User-Overview.dita#jow1404333560080">HPE Helion
+                OpenStack Operations Guide</xref>. For information on using the HPE Helion OpenStack
             Carrier Grade Developer API, including API definitions and usage descriptions, see the
-                <xref href="../API/carrier-grade-api.dita#topic15959cga">HP Helion OpenStack Carrier
+                <xref href="../API/carrier-grade-api.dita#topic15959cga">HPE Helion OpenStack Carrier
                 Grade API and SDK Reference</xref>.</p>
         <section>See:<ul id="ul_z23_gdw_c5">
                 <li><xref href="#topic6108cgrn/changes" format="dita"/></li>
@@ -37,34 +37,34 @@
         <section id="changes">
             <title>Changes in this release</title>
             <p><!--From WR jow1404333830815.xml and added info--></p>
-            <p>The following enhancements were added for the HP Helion OpenStack Carrier Grade 2.0
+            <p>The following enhancements were added for the HPE Helion OpenStack Carrier Grade 2.0
                 release:</p>
             <p>
                 <ul id="ul_jqf_jgj_w5">
-                    <li><b>Virtual control planes.</b> The HP Helion OpenStack controllers are
+                    <li><b>Virtual control planes.</b> The HPE Helion OpenStack controllers are
                         deployed onto virtual machines on a single host system. The controllers and
-                        the lifecycle manager are deployed on the same host system. In HP Helion
+                        the lifecycle manager are deployed on the same host system. In HPE Helion
                         OpenStack Carrier Grade, each of these components required a separate
                         server.</li>
-                    <li><b>Installer and management interface.</b> The HP Helion OpenStack cloud can
+                    <li><b>Installer and management interface.</b> The HPE Helion OpenStack cloud can
                         be defined and deployed using a new web-based user interface, called the HCG
                         Dashboard. You can also use the dashboard to perform post-deployment
                         activities your cloud. </li>
-                    <li><b>Support for restarting MySQL and RabbitMQ clusters</b>. In HP Helion
+                    <li><b>Support for restarting MySQL and RabbitMQ clusters</b>. In HPE Helion
                         OpenStack Carrier Grade 2.1, the controllers are virtual machines on a
                         single server. In the event that server goes down, you will need to manually
                         restart the MySQL servers and RabbitMQ after the server is restarted. The
                         installation includes an Ansible playbook to manually restart these
                         services. See <xref
-                            href="../OperationsGuide/Recover/CHG-2-recover.dita#topic5937recover"
+                            href="../OperationsGuide/Recover/CHG-2-recover.dita#topic5937rabbit"
                             >Restart MySQL and RabbitMQ</xref>.</li>
-                    <!--<li><b>OpenSAF support.</b> The HP Helion OpenStack controller can optionally be deployed as KVM cluster (optional) using OpenSAF for Service Availability. OpenSAF is an open source middleware consistent with Service Availability Forum (SA Forum) specifications. SA goes beyond High Availability (HA) requirements. <b><i>From http://devel.opensaf.org/</i></b> OpenSAF must be installed prior to starting the HP Helion OpenStack Carrier Grade installation. Specific steps to integrate OpenSAF are provided in the installation sections.</li>-->
+                    <!--<li><b>OpenSAF support.</b> The HPE Helion OpenStack controller can optionally be deployed as KVM cluster (optional) using OpenSAF for Service Availability. OpenSAF is an open source middleware consistent with Service Availability Forum (SA Forum) specifications. SA goes beyond High Availability (HA) requirements. <b><i>From http://devel.opensaf.org/</i></b> OpenSAF must be installed prior to starting the HPE Helion OpenStack Carrier Grade installation. Specific steps to integrate OpenSAF are provided in the installation sections.</li>-->
                 </ul>
             </p>
         </section>
         <section id="usage"><title>Usage Caveats</title><b>Backup files in cloud directories can
                 cause installation to fail</b>
-            <p>During the HP Helion OpenStack Carrier Grade installation, you will need to create
+            <p>During the HPE Helion OpenStack Carrier Grade installation, you will need to create
                 and edit a number of JSON configuration files. You should create backups of these
                 files, in the event you need to reinstall. Create the backups in a directory on
                     <codeph>~/</codeph> directory or on a remote system. Do not store backups of
@@ -131,7 +131,7 @@
             <p><!--HCG-919--></p>
             <p><b>Cinder Volume Backup is not working upon cloud deployment</b></p>
             <!-- CG-410 -->
-            <p>Cinder Volume Backup is not working upon installation of HP Helion OpenStack Carrier
+            <p>Cinder Volume Backup is not working upon installation of HPE Helion OpenStack Carrier
                 Grade 2.0 The <codeph>cinder.backup.driver</codeph> file is not present in
                 /etc/cinder/cinder.conf.</p>
             <p><b>SR-IOV limitations</b></p>
@@ -197,7 +197,7 @@
                     <!--Per Vlad, Sanjib, Shantanu email--></li>
             </ul>
             <p><b>Installation does not fully utilize disks greater than two terabytes</b></p>
-            <p>HP Helion OpenStack Carrier Grade in the KVM Region can be installed on disks greater
+            <p>HPE Helion OpenStack Carrier Grade in the KVM Region can be installed on disks greater
                 than 2 TB, but only 2 TB of the disk is useable.</p>
             <!-- Remove per Hrushi email 7-2
         
@@ -209,7 +209,7 @@
             <p><b>Guest heartbeat and notification features are not fully validated.</b></p>
             <p>Heartbeat and notification services for VMs are not fully validated. </p>
             <p><b>Cinder API version generates a log warning</b></p>
-            <p>The V1 API for Cinder in use by this version of HP Helion OpenStack Carrier Grade is
+            <p>The V1 API for Cinder in use by this version of HPE Helion OpenStack Carrier Grade is
                 deprecated, resulting in log warnings.</p>
         </section>
     </body>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic1773cgsmd">
-<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Denver Deployment Support
+<title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Denver Deployment Support
     Matrix</title>
 <prolog>
   <metadata>
     <othermeta name="layout" content="default"/>
-    <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    <othermeta name="product-version" content="HPE Helion OpenStack Carreir Grade 1.1"/>
     <othermeta name="role" content="Storage Administrator"/>
     <othermeta name="role" content="Storage Architect"/>
     <othermeta name="role" content="Michael B"/>
-    <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    <othermeta name="product-version1" content="HPE Helion OpenStack Carreir Grade 1.1"/>
   </metadata>
 </prolog>
 <body>
 
     <section id="intro">
-      <p>To ensure the performance and stability of the HP Helion OpenStack Carrier Grade, it is
+      <p>To ensure the performance and stability of the HPE Helion OpenStack Carrier Grade, it is
         very important to meet the requirements and conform to the recommendations listed in this
         document. <ul id="ul_pyg_1kd_b5">
           <li><xref href="#topic1773cgsmd/hardware" format="dita">Supported Hardware</xref></li>
@@ -62,7 +62,7 @@
         <section id="req-specs">
             <title id="specs"><b>Required Specifications</b></title>
             <p>The following table lists the specifications for the servers that will host the
-                <!--lifecycle manager, HP Helion OpenStack, and the--> KVM Region. For the lifecycle
+                <!--lifecycle manager, HPE Helion OpenStack, and the--> KVM Region. For the lifecycle
                 manager host, use the Controller requirements for the DL360 or DL380 systems.</p>
             <p>
                 <table frame="all" rowsep="1" colsep="1" id="table_c54_dxd_ss">
@@ -205,11 +205,11 @@
         <section id="hardware-config">
             <title>Required Hardware Configurations </title>
             <p>The servers, selected from the <xref href="#topic1773cgsmd/hardware" format="dita"
-                    >Supported Hardware</xref> lists, must be configured as follows for HP Helion
+                    >Supported Hardware</xref> lists, must be configured as follows for HPE Helion
                 OpenStack Carrier Grade.</p>
             <p>One (1) <b>Lifecycle Manager Host</b>. You must have a server with a 2TB Disk and 128
                 GB RAM, and 2 physical CPUs for the lifecycle manager host. This server will also
-                host three (3) virtual machines that serve as controllers for HP Helion OpenStack
+                host three (3) virtual machines that serve as controllers for HPE Helion OpenStack
                 Carrier Grade. Each of the controller nodes requires at least 200GB of virtual disk,
                 32GB of virtual memory, and 4 virtual CPUs. The amount of memory required depends
                 upon the types of applications being run on the cloud.. You can add additional
@@ -227,7 +227,7 @@
                         <li>Emulex 10G </li>
                         <li>Intel 82599 </li>
                     </ul><p><b>Important:</b> Using the correct NICs is essential to proper
-                        installation of HP Helion OpenStack Carrier Grade.</p></li>
+                        installation of HPE Helion OpenStack Carrier Grade.</p></li>
             </ul>
             <table frame="all" rowsep="1" colsep="1" id="table_c54_dxd_s">
                 <tgroup cols="3">
@@ -283,10 +283,10 @@
             <title>Software Requirements</title>
             <p><b>Lifecycle Manager Host</b>. The lifecycle manager host requires the latest HPE
                 Linux operating system. </p>
-            <!--<p><b>Standard Region Controllers</b>. The servers should be baremetal. The HP Helion OpenStack Carrier Grade installation process installs the required software.</p>-->
-            <p><b>KVM Region Controllers</b>. The servers should be baremetal. The HP Helion
+            <!--<p><b>Standard Region Controllers</b>. The servers should be baremetal. The HPE Helion OpenStack Carrier Grade installation process installs the required software.</p>-->
+            <p><b>KVM Region Controllers</b>. The servers should be baremetal. The HPE Helion
                 OpenStack Carrier Grade installation process installs the required software.</p>
-            <p><b>KVM Region Compute</b>. The servers should be baremetal. The HP Helion OpenStack
+            <p><b>KVM Region Compute</b>. The servers should be baremetal. The HPE Helion OpenStack
                 Carrier Grade installation process installs the required software.</p>
         </section>
         <section id="prepbare">
@@ -329,7 +329,7 @@
             <p>You will configure the installer to integrate one or both of these drivers during the
                 installation process. </p>
         </section>
-        <!--<section id="guestos"><title>Supported Guest Operating Systems</title> The following guest operating systems (guest OSs) are supported for the HP Helion OpenStack Carrier Grade servers. <p><b>Lifecycle Manager Host</b>. There are no supported guest OSs for the Lifecycle Manager Host server. </p><p><b>KVM Region Compute and Controllers</b>. The following Guest OSs are supported for the servers in the KVM Region: </p><ul id="ul_sty_hd2_qs"><li><p>WindRiver Linux 6.0</p></li><li><p>WindRiver Linux 5.0</p></li><li><p>CentOS 6.4</p></li><li><p>Fedora 19</p></li><li><p>RHEL 6.5</p></li><li><p>OpenSUSE 12.3 </p></li></ul></section> Hiding per GP in SoS 2/24-->
+        <!--<section id="guestos"><title>Supported Guest Operating Systems</title> The following guest operating systems (guest OSs) are supported for the HPE Helion OpenStack Carrier Grade servers. <p><b>Lifecycle Manager Host</b>. There are no supported guest OSs for the Lifecycle Manager Host server. </p><p><b>KVM Region Compute and Controllers</b>. The following Guest OSs are supported for the servers in the KVM Region: </p><ul id="ul_sty_hd2_qs"><li><p>WindRiver Linux 6.0</p></li><li><p>WindRiver Linux 5.0</p></li><li><p>CentOS 6.4</p></li><li><p>Fedora 19</p></li><li><p>RHEL 6.5</p></li><li><p>OpenSUSE 12.3 </p></li></ul></section> Hiding per GP in SoS 2/24-->
 
   <section id="next"> <title>Next step</title>
     <p>Review the <xref href="CGH-install-prereqs-denver.dita">Installation Prerequisites</xref>.</p>
