@@ -2,16 +2,16 @@
   <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581c2idclisa">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Deploy the Standard
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Deploy the Standard
         Region in a KVM Cluster (Denver Deployment)</title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
-      <othermeta name="product-version" content="HP Helion OpenStack Carrier Grade 2.0"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
       <othermeta name="role" content="Storage Administrator"/>
       <othermeta name="role" content="Storage Architect"/>
       <othermeta name="role" content="Michael B"/>
-      <othermeta name="product-version1" content="HP Helion OpenStack Carrier Grade 2.0"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
     </metadata>
   </prolog>
   <body>
@@ -19,7 +19,7 @@
         <p><b>If you are deploying a KVM cluster with multiple servers for Service Availability
                 (SA), follow the steps in this section.</b></p>
         <p>After the lifecycle manager VM is installed, the next task in installing the Denver topology
-            is to deploy the Standard Region, which includes an HP Helion OpenStack cloud. This
+            is to deploy the Standard Region, which includes an HPE Helion OpenStack cloud. This
             section describes how to use the lifecycle manager CLI to deploy the Standard
             Region.</p>
         <section id="launch">
@@ -61,7 +61,7 @@ Password: cghelion</codeblock>
         </section>
         <section id="jsons">
             <title>Configuring JSON files </title>
-            <p>The HP Helion OpenStack deployment requires several JSON files.</p>
+            <p>The HPE Helion OpenStack deployment requires several JSON files.</p>
             <p><b>Important:</b> Do not store backup of the JSON files inside your cloud directory
                 or any where inside the <codeph>/var/hlm/clouds</codeph> directory. You can create a
                 backup folder on <codeph>/root/</codeph> directory or on a remote system.
@@ -565,8 +565,8 @@ delfromimm -p -d CCN3</codeblock></li>
                 </ol></p></section>
         <section>
             <title>Verify Libvirt monitoring</title>
-            <p>You can verify that the HP Helion OpenStack controllers (in the Standard Region) are
-                being monitored by Libvirt. Use the HP Helion OpenStack Carrier Grade Libvirt CLI
+            <p>You can verify that the HPE Helion OpenStack controllers (in the Standard Region) are
+                being monitored by Libvirt. Use the HPE Helion OpenStack Carrier Grade Libvirt CLI
                     commands.<ol id="ol_l5w_pwg_1v">
                     <li>On the lifecycle manager host, execute the following commands: <ul
                             id="ul_adb_swg_1v">
