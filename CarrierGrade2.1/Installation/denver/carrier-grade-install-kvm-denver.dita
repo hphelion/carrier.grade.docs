@@ -118,22 +118,18 @@ system host-add --hostname &lt;unique-compute-name&gt; --personality compute --m
         <li>In the iLO web interface, set the controller and compute nodes to one-time PXE booting
           from the network.</li>
         <li>Restart the nodes.</li>
-        <li><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd">Access the
-            Horizon dashboard</xref> using the CAN network IP (HTTPS). </li>
-        <li>Select <b>regionone</b> in the <xref
-            href="../../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita#jow1432757989702"
-            >region selector</xref>.</li>
-        <li>Click <b>Admin</b> then <b>Inventory</b> to monitor the status of nodes being PXE
-          booted. After a succesful PXE boot, the <b>Operational State</b> should be <b>Disabled</b>
-          and the <b>Availability State</b> should be <b>Online</b>. <p><b>Note:</b>The Horizon
-            Dashboard will be running on the first IP address of the CLM network range (refer to the
-              <codeph>ip_start_address</codeph> value provided for the CLM network in the
-              <codeph>definition.json</codeph> during the Standard Region deployment). </p><p>The
-            log-in credentials for Horizon are as
-            follows:</p><codeblock>username: admin 
-password:  &lt;random></codeblock><p>The Horizon
-            password is randomly generated during the installation. You can locate the password in
-            the <codeph>stackrc</codeph> file on any of the Standard Region controllers.</p></li>
+        <li>Monitor to monitor the status of nodes being PXE booted:
+          <codeblock>system host-list </codeblock><codeblock>+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 3  | comp1        | compute     | locked         | disabled    | online       |
+| 4  | comp2        | compute     | locked         | disabled    | online       |
+| 5  | comp3        | compute     | locked         | disabled    | online       |
+| 9  | controller-1 | controller  | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+</codeblock></li>
+        <!--Hide for 2.1 <li><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd">Access the Horizon dashboard</xref> using the CAN network IP (HTTPS). </li><li>Select <b>regionone</b> in the <xref href="../../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita#jow1432757989702">region selector</xref>.</li><li>Click <b>Admin</b> then <b>Inventory</b> to monitor the status of nodes being PXE booted. After a succesful PXE boot, the <b>Operational State</b> should be <b>Disabled</b> and the <b>Availability State</b> should be <b>Online</b>. <p><b>Note:</b>The Horizon Dashboard will be running on the first IP address of the CLM network range (refer to the <codeph>ip_start_address</codeph> value provided for the CLM network in the <codeph>definition.json</codeph> during the Standard Region deployment). </p><p>The log-in credentials for Horizon are as follows:</p><codeblock>username: admin 
+password:  &lt;random></codeblock><p>The Horizon password is randomly generated during the installation. You can locate the password in the <codeph>stackrc</codeph> file on any of the Standard Region controllers.</p></li>-->
       </ol>
     </section>
   <section id="next-step">
