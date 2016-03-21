@@ -14,9 +14,13 @@
     </metadata>
   </prolog>
   <body>
-    <p>This patch addresses a number of issues in the KVM region, including:<ul id="ul_jxm_nkt_jv">
-        <li> CVE: CVE-2015-7547: glibc getaddrinfo stack-based buffer overflow </li>
-      </ul></p>
+    <p>This patch fixes a buffer overflow condition on systems running Linux. The condition is due
+      to multiple stack-based buffer overflows in the <systemoutput>send_dg</systemoutput> and
+        <systemoutput>send_vc</systemoutput> functions in the libresolv library in the GNU C Library
+      (called <systemoutput>glibc</systemoutput> or <systemoutput>libc6</systemoutput>). The Common
+      Vulnerabilities and Exposures (CVE®) <xref
+        href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
+        scope="external">bulletin CVE-2015-7547</xref> describes the condition. </p>
       <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
         <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
         <b>Inventory</b>. Click the <b>Patches</b> table for the
