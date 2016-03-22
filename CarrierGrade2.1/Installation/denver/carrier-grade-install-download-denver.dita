@@ -43,6 +43,13 @@
                                                   files.</p>
                                                   </li>
                                                 </ul></li>
+                                        <li>Download the following KVM Region patches:<ul
+                                                  id="ul_njt_3l1_kv">
+                                                <li><b id="025">Helion Carrier Grade 2.0 WR006
+                                                  Patch025</b></li>
+                                                <li><b id="026">Helion Carrier Grade 2.0 WR007
+                                                  Patch026</b></li>
+                                                </ul></li>
                                 </ol></p>
                 </section>
                 <section
@@ -124,7 +131,7 @@
                                 Linux packages required for HPE Helion Carrier Grade. You should
                                 have deployed HPE Linux in the <xref
                                         href="CGH-install-prereqs-denver.dita#topic7148cipd/linux"
-                                        >Prerequisites</xref>.  </note><p id="kvm-avs"><b>KVM Region
+                                        >Prerequisites</xref>. </note><p id="kvm-avs"><b>KVM Region
                                         installation files</b></p>After downloading and extracting
                         the <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following files for
                         installing the KVM Region are in the <codeph>hcg21_kvm_avs/WR</codeph> directory.<p>
@@ -163,10 +170,10 @@
                                         </tgroup>
                                 </table>
                         </p><p><b>KVM Region Patches</b></p>After downloading and extracting the
-                                <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following patch
-                        files for the KVM Region are in the
+                                <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following files for
+                        installing the KVM Region are in the
                                 <codeph>hcg21_kvm_avs/WR/mandatory-patches</codeph> directory.<p>
-                                <table frame="all" rowsep="1" colsep="1" id="table_spx_4x1_fv">
+                                <table frame="all" rowsep="1" colsep="1" id="kvm_patches">
                                         <tgroup cols="2">
                                                 <colspec colname="c1" colnum="1" colwidth="1.0*"/>
                                                 <colspec colname="c2" colnum="2" colwidth="1.0*"/>
@@ -178,20 +185,45 @@
                                                 </thead>
                                                 <tbody>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR002_Patch005</b></entry>
-                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph></entry>
+                                                  <entry><b>HCG2.0_WR002_Patch005.tar.gz</b></entry>
+                                                  <entry><codeph id="001">TS_HP_15_Custom_PATCH_0001_2.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR003_Patch007</b></entry>
-                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
+                                                  <entry><b>HCG2.0_WR003_Patch007.tar.gx</b></entry>
+                                                          <entry><codeph id="002">TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR004_Patch017</b></entry>
-                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0003.patch</codeph></entry>
+                                                  <entry><b>HCG2.0_WR004_Patch017.tar.gz</b></entry>
+                                                          <entry><codeph id="003">TS_HP_15_Custom_PATCH_0003.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR005_Patch019</b></entry>
-                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0004.patch</codeph></entry>
+                                                  <entry><b>HCG2.0_WR005_Patch019.tar.gz</b></entry>
+                                                          <entry><codeph id="004">TS_HP_15_Custom_PATCH_0004.patch</codeph></entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p>You should have downloaded the following patch files from HDN:</p><p>
+                                <table frame="all" rowsep="1" colsep="1" id="table_ihq_jx1_kv">
+                                        <tgroup cols="2">
+                                                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                                                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>Compressed File</entry>
+                                                  <entry>Contrains Patch File</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR006_Patch025.tar.gz</b></entry>
+                                                          <entry><codeph id="005">TS_HP_15_Custom_PATCH_0005.patch</codeph>
+                                                  </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR007_Patch026.tar.gz</b></entry>
+                                                          <entry><codeph id="006">TS_HP_15_Custom_PATCH_0006.patch</codeph>
+                                                  </entry>
                                                   </row>
                                                 </tbody>
                                         </tgroup>

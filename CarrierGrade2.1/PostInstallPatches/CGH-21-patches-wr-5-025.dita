@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpkvm215">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the KVM Region Patch 5 </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <bodydiv id="025">
+      <section
+        conref="../../CarrierGrade2.0/PostInstallPatches/CGH-2-patches-wr-5-025.dita#topic10581pdpkvm5/fixes"/>
+      <section><title>Prerequisites</title>You should have installed the following patches during
+        the <xref href="../Installation/denver/carrier-grade-install-kvm-denver.dita#topic1107cgikd"
+          >installation of the KVM Region</xref>:<ul id="ul_cqr_spt_jv">
+          <li>KVM Region Custom Patch (<codeph
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/001"
+            />)</li>
+          <li>PCI Bus Patch (<codeph
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/002"
+            />)</li>
+          <li>KVM Custom Patch 3 (<codeph
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/003"
+            />)</li>
+          <li>KVM Custom Patch 4 (<codeph
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/004"
+            />)</li>
+        </ul></section>
+      <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+            <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+            scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+            href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+            >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+        navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+          <li>Click <b>Sign In</b> to log in using your account. </li>
+          <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+            page.</li>
+          <li>Download the <b
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/025"
+            /> file and the associated checksum and signature files.</li>
+          <li>Verify the <xref
+              href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+              >downloaded signature</xref> and the <xref
+              href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+              >downloaded checksums</xref>.</li>
+          <li>Extract the compressed files until the
+              <codeph>TS_HP_15_Custom_PATCH_0005.patch</codeph> and readme files are available.</li>
+        </ol></section>
+      <bodydiv
+        conref="../../CarrierGrade2.0/PostInstallPatches/CGH-2-patches-wr-5-025.dita#topic10581pdpkvm5/install"
+      />
+    </bodydiv>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/kvm">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+    
+      
+  </body>
+</topic>

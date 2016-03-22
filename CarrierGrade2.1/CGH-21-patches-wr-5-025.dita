@@ -14,7 +14,7 @@
     </metadata>
   </prolog>
   <body>
-    <section id="fixes">
+    <bodydiv id="025">
       <p>This patch addresses a number of issues in the KVM region, including:<ul id="ul_jxm_nkt_jv">
           <li>Correcting an issue on virtual machines with vNIC (Mellanox CX3 Pro) configured for
             PCI-Passthrough that causes tthe spawning state to hang indefinitely;</li>
@@ -24,20 +24,19 @@
             when HTTPS is configured;</li>
           <li>Correcting an issue where DRBD volumes are Offline after a network change; </li>
           <li>Correcting an issue with the Orchestration (Heat) service where auto-scaling does not
-            function when using HTTPS; </li>
-          <li>Correcting an issue on virtual machines that causes auto-recovery to fail in a
-            VRS-based cloud; </li>
+            function when using HTTPS; Issue still seen </li>
+          <li>Correcting an issue on virtual machines that causes auto-recovery to fails in a
+            VRS-based cloud </li>
           <li>Correcting an issue with the pre-check function of the Swact operation that forces a
             stand-by controller into a <codeph>go-standby</codeph> state;</li>
-          <li>Correcting an issue where the Install Patch command in the Horizon UI causes that node
-            to reset when locked in iLo.</li>
+          <li>Correcting an issue where the Install Patch command in the Horizon UI casuses that
+            node to reset when locked in iLo.</li>
         </ul></p>
       <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
           <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
           <b>Inventory</b>. Click the <b>Patches</b> table for the
           <codeph>TS_HP_15_Custom_PATCH_0005.patch</codeph>. Or use the CLI on the active KVM
         controller: <codeph>sudo sw-patch query</codeph>.</p>
-    </section>
       <section><title>Prerequisites</title>You must install the following patches before installing
         this patch:<ul id="ul_cqr_spt_jv">
           <li><xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch
@@ -73,7 +72,6 @@
           <li>Extract the compressed files until the
               <codeph>TS_HP_15_Custom_PATCH_0005.patch</codeph> and readme files are available.</li>
         </ol></section>
-    <bodydiv id="install">
       <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
           id="ol_bcm_yg4_j5">
           <li>SSH into active controller in the KVM region. <p>For example:

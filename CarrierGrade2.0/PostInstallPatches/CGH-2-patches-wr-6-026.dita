@@ -14,18 +14,20 @@
     </metadata>
   </prolog>
   <body>
-    <p>This patch fixes a buffer overflow condition on systems running Linux. The condition is due
-      to multiple stack-based buffer overflows in the <systemoutput>send_dg</systemoutput> and
-        <systemoutput>send_vc</systemoutput> functions in the libresolv library in the GNU C Library
-      (called <systemoutput>glibc</systemoutput> or <systemoutput>libc6</systemoutput>). The Common
-      Vulnerabilities and Exposures (CVE®) <xref
-        href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
-        scope="external">bulletin CVE-2015-7547</xref> describes the condition. </p>
+    <section id="issues">
+      <p>This patch fixes a buffer overflow condition on systems running Linux. The condition is due
+        to multiple stack-based buffer overflows in the <systemoutput>send_dg</systemoutput> and
+          <systemoutput>send_vc</systemoutput> functions in the libresolv library in the GNU C
+        Library (called <systemoutput>glibc</systemoutput> or <systemoutput>libc6</systemoutput>).
+        The Common Vulnerabilities and Exposures (CVE®) <xref
+          href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
+          scope="external">bulletin CVE-2015-7547</xref> describes the condition. </p>
       <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
-        <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
-        <b>Inventory</b>. Click the <b>Patches</b> table for the
-        <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>. Or use the CLI on the active KVM
-      controller: <codeph>sudo sw-patch query</codeph>.</p>
+          <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+          <b>Inventory</b>. Click the <b>Patches</b> table for the
+          <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>. Or use the CLI on the active KVM
+        controller: <codeph>sudo sw-patch query</codeph>.</p>
+    </section>
     <section>
       <title>Prerequisites</title>
       <p>You must install the following patches before installing this patch:<ul id="ul_cqr_spt_jv">
@@ -41,7 +43,7 @@
                 (<codeph>HCG_2.0 WR005 Patch019</codeph>)</xref>
           </li>
           <li><xref href="CGH-2-patches-wr-5-025.dita#topic10581pdpkvm5">KVM Custom Patch 5
-                (<codeph>HCG_2.0 WR025 Patch019</codeph>)</xref>
+                (<codeph>HCG_2.0 WR006 Patch025</codeph>)</xref>
           </li>
         </ul></p>
     </section>
@@ -66,6 +68,7 @@
         <li>Extract the compressed files until the <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>
           and readme files are available.</li>
       </ol></section>
+    <bodydiv id="install">
     <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
         id="ol_bcm_yg4_j5">
         <li>SSH into active controller in the KVM region. <p>For example:
@@ -127,7 +130,7 @@ source /etc/nova/openrc</codeblock></li>
       <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/kvm">Return to Post-Installation
           Patches</xref></p>
     </section>
-    
+    </bodydiv>
       
   </body>
 </topic>
