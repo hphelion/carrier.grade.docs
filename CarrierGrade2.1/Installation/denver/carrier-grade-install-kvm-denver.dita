@@ -69,18 +69,35 @@ ifconfig eth0 up</codeblock></li>
       <ol>
         <li>On KVM Region <codeph>controller-0</codeph>, create a directory for the
           patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
-        <li>Copy the following patches file to the <codeph>/tmp/patches</codeph> directory: <table
-            conref="carrier-grade-install-download-denver.dita#topic7148cgidd/kvm_patches"
-            id="table_awq_5m1_kv">
-            <tgroup cols="1">
-              <tbody>
-                <row>
-                  <entry/>
-                </row>
-              </tbody>
-            </tgroup>
-          </table><p>You should have downloaded and extracted these patch files in the
-            Prerequisites. </p></li>
+        <li>Copy the following patches files to the <codeph>/tmp/patches</codeph> directory: <p>
+            <ul id="ul_lvq_fmb_kv">
+              <li>After downloading and extracting the <codeph>hcg21_kvm_avs.tar.gz</codeph> file,
+                the following files for installing the KVM Region are in the
+                  <codeph>hcg21_kvm_avs/WR/mandatory-patches</codeph> directory of the download
+                  files.<table
+                  conref="carrier-grade-install-download-denver.dita#topic7148cgidd/kvm_patches"
+                  id="table_awq_5m1_kv">
+                  <tgroup cols="1">
+                    <tbody>
+                      <row>
+                        <entry/>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table></li>
+              <li>You should have downloaded the following patch files from HDN:<table
+                  conref="carrier-grade-install-download-denver.dita#topic7148cgidd/kvm_patches_hdn"
+                  id="table_d1g_bmb_kv">
+                  <tgroup cols="1">
+                    <tbody>
+                      <row>
+                        <entry/>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table></li>
+            </ul>
+          </p></li>
         <li>Execute the following command to registers all patches in the specific directory into an
           internal database:
             <codeblock>sudo sw-patch upload-dir /tmp/patches                </codeblock><p>Once
