@@ -199,9 +199,19 @@ password:  &lt;random></codeblock><p>The Horizon
             <li>Add an IP address to the Infra interface:
               <codeblock>system host-addr-add &lt;host-name or ID> &lt;interface_name> &lt;ipv4/ipv6_address> &lt;prefix-length></codeblock></li>
             <li>Configure the VRS interface:
-                <codeblock>system host-if-modify &lt;host-name or ID> -n &lt;interface_name> -nt &lt;network_type> --ipv4-mode=static eth-x </codeblock><p>Where
+                <codeblock>system host-if-modify &lt;host-name or ID> -n &lt;interface_name> -nt &lt;network_type> --ipv4-mode=static eth-x -m &lt;MTU Size in bytes> </codeblock><p>Where
                   <codeph>eth-x</codeph> is the interface on which untagged TUL is
-              presented.</p></li>
+                presented.</p><note>For a VXLAN network, the frame is either 54 or 74 bytes long,
+                depending on whether IPv4 or IPv6 protocol is used. This is because, in addition to
+                the Ethernet header and CRC, the payload is enclosed by an IP header (20 bytes for
+                Ipv4 or 40 bytes for IPv6), a UDP header (8 bytes), and a VXLAN header (8 bytes).
+                The additional IP, UDP, and VXLAN headers are invisible to the vrs-data interface,
+                which expects a frame only 18 bytes larger than the MTU. To accommodate the larger
+                frames on a VXLAN network, you must specify a larger nominal MTU on the vrs-data
+                interface. For simplicity, and to avoid issues with stacked VLAN tagging, some third
+                party vendors recommend rounding up by an additional 100 bytes for calculation
+                purposes. For example, to attach to a VXLAN provider network with an MTU of 1500, a
+                vrs-data interface with an MTU of 1600 is recommended.</note></li>
             <li>Add an IP address to the VRS interface:
               <codeblock>system host-addr-add &lt;host-name or ID> vrs &lt;ipv4/ipv6_address> &lt;prefix_length></codeblock></li>
             <li>Update the host:
@@ -211,7 +221,7 @@ password:  &lt;random></codeblock><p>The Horizon
           </ol><p><b>Example
           commands:</b></p><codeblock>system host-if-add –V 722 –nt infra compute-3 infra vlan pxeboot0
 system host-addr-add compute-3 infra 10.70.22.81 24
-system host-if-modify compute-3 -n vrs -nt data-vrs --ipv4-mode=static eth4
+system host-if-modify compute-3 -n vrs -nt data-vrs --ipv4-mode=static eth4 -m 1600
 system host-addr-add compute-3 vrs 10.70.5.83 24
 system host-update compute-3 vsc_controllers=10.70.5.31,10.70.5.32
 system host-unlock compute-3        </codeblock></li>
@@ -232,11 +242,24 @@ system host-unlock compute-3        </codeblock></li>
               interface:<codeblock>system host-if-delete compute-0 95e7b495-1454-49d1-8123-301215503e86      </codeblock></li>
           </ol></li>
         <li>Use the following commands to create a bonded interface and setup node to be unlocked:
-          <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-0 bond0 ae "none" eth0 eth1
+            <codeblock>system host-if-add -a 802.3ad -x layer2 -nt pxeboot compute-0 bond0 ae "none" eth0 eth1
 system host-if-add -V 303 -nt mgmt compute-0 mgmt vlan bond0
 system host-if-add -V 74 -nt infra compute-0 infra vlan bond0
 system host-addr-add compute-0 infra 172.16.74.244 24
-system host-if-add -a balanced -x layer2 -nt "none" compute-0 bondvrs ae "none" eth2 eth3</codeblock></li>
+system host-if-modify -m 1600 compute-0 eth2
+system host-if-modify -m 1600 compute-0 eth3
+system host-if-add -a balanced -x layer2 -nt "none" compute-0 bondvrs ae "none" eth2 eth3 -m 1600</codeblock><note>For
+            a VXLAN network, the frame is either 54 or 74 bytes long, depending on whether IPv4 or
+            IPv6 protocol is used. This is because, in addition to the Ethernet header and CRC, the
+            payload is enclosed by an IP header (20 bytes for Ipv4 or 40 bytes for IPv6), a UDP
+            header (8 bytes), and a VXLAN header (8 bytes). The additional IP, UDP, and VXLAN
+            headers are invisible to the vrs-data interface, which expects a frame only 18 bytes
+            larger than the MTU. To accommodate the larger frames on a VXLAN network, you must
+            specify a larger nominal MTU on the vrs-data interface. For simplicity, and to avoid
+            issues with stacked VLAN tagging, some third party vendors recommend rounding up by an
+            additional 100 bytes for calculation purposes. For example, to attach to a VXLAN
+            provider network with an MTU of 1500, a vrs-data interface with an MTU of 1600 is
+            recommended.</note></li>
         <li>Use one of the following steps to configure a static IP address for the bonded NIC
           interface or assign an IP address from an IP address pool:<ul id="ol_uqd_l5z_st">
             <li>To assign a static IP:
