@@ -136,20 +136,41 @@
                                                 This ISO contains all required files to install HPE
                                                 Linux and all Linux packages required for HPE Helion
                                                 Carrier Grade.</li>
-                                        <li>Use the following commands to mount the ISO
-                                                file:<codeblock>mkdir /mnt/local_repo 
-mount -oro ~cghelion/hpelinux-hcg-kvm-amd64-20160224.iso.iso /mnt/local_repo/ </codeblock></li>
+                                        <li>Use the following commands to mount the ISO file .
+                                                <codeblock>mkdir &lt;local_file> 
+mount -oro ~cghelion/hpelinux-hcg-kvm-amd64-20160224.iso.iso &lt;local_file> </codeblock>Where:
+                                                  <codeph>&lt;local file></codeph> is the path to
+                                                the file where you mounted the ISO. For
+                                                example:<codeblock>mkdir /mnt/local_repo
+mount -oro ~cghelion/hpelinux-hcg-kvm-amd64-20160224.iso.iso /mnt/local_repo/</codeblock></li>
                                         <li>Execute the following command to copy all of the files
                                                 off the ISO file to the local file
                                                 system:<codeblock>cd /mnt 
-tar cf - local_repo | ( cd /opt/; tar xf - )</codeblock></li>
+tar cf - &lt;local_repo> | ( cd /opt/; tar xf - )</codeblock>Where:
+                                                  <codeph>&lt;local file></codeph> is the path to
+                                                the file where you mounted the ISO. For
+                                                  example:<codeblock>cd /mnt
+tar cf - local_repo | ( cd /opt/; tar xf - )</codeblock><p>The
+                                                  example command copies the the
+                                                  <codeph>local_repo</codeph> file from
+                                                  <codeph>/mnt/local_repo</codeph> to
+                                                  <codeph>/opt/local_repo</codeph>. </p></li>
                                         <li>After the files are copied off the ISO, you can unmout
                                                 the
-                                                ISO.<codeblock>umount /mnt/local_repo</codeblock></li>
+                                                ISO.<codeblock>umount /mnt/&lt;local_file></codeblock>Where:
+                                                  <codeph>&lt;local file></codeph> is the path to
+                                                the file where you mounted the ISO. For example:
+                                                <codeblock>umount /mnt/local_repo</codeblock></li>
                                         <li>Modify the <codeph>/etc/apt/sources.list</codeph> file
                                                 to make this local file repo available to the
-                                                apt-get command as
-                                                follows:<codeblock>#deb-src cdrom:[hLinux _cattleprod_ - Official amd64 blaster NETINST 20151009-hlm%]/ cattleprod contrib main non-free
+                                                apt-get command by commenting out the
+                                                  <codeph>deb-src cdrom</codeph> and <codeph>deb
+                                                  cdrom</codeph> lines and adding the
+                                                  following:<codeblock>deb [trusted=yes] file:&lt;local file> cattleprod contrib main non-free</codeblock><p>Where:
+                                                  <codeph>&lt;local file></codeph> is the path to
+                                                  the file where you copied the contents of the ISO.
+                                                  For
+                                                example:</p><codeblock>#deb-src cdrom:[hLinux _cattleprod_ - Official amd64 blaster NETINST 20151009-hlm%]/ cattleprod contrib main non-free
 #deb cdrom:[hLinux _cattleprod_ - Official amd64 blaster NETINST 20151009-hlm%]/ cattleprod contrib main non-free
 deb [trusted=yes] file:/opt/local_repo/ cattleprod contrib main non-free</codeblock></li>
                                         <li>Execute the following command to update the apt package
