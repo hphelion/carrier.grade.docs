@@ -211,8 +211,13 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
       <section id="14">
         <title>Deploy the ELK patch</title>
         <!--HCG2.0_ELK001_Patch014-->
-        <p>This patch addresses the ELK (ElasticSearch, Logstash, Kibana) related issues listed
-          below. </p>
+        <p>This patch addresses the <xref
+            href="../OperationsGuide/Logging/CHG-2-logging-overview.dita#topic5937">Centralized
+            Logging (ELK) feature</xref> related issues listed below. </p>
+        <p>
+          <note>If you are not using the Centralized Logging feature, you do not need to apply this
+            patch.</note>
+        </p>
         <ul id="ul_jvw_5fc_w5">
           <li>logs from compute proxy node should be shown in kibana</li>
           <li>logs of cinder,swift should be shown in kibana</li>
@@ -239,9 +244,15 @@ patch -p0 &lt; elk3.patch </codeblock></li>
         </p>
       </section>
       <section id="15"><title>Deploy the Debug
-          patch</title><p><!--Helion Carrier Grade 2.0 LOG002_Patch015--></p>This is an optional
-        patch to change the logging of the services from INFO or DEBUG to WARNING. <!--HCG-1104-->.
-          <!--DTMS--><p>You should have downloaded and extracted the <b
+          patch</title><p><!--Helion Carrier Grade 2.0 LOG002_Patch015--></p><p>Use this patch if
+          you are not using the <xref
+            href="../OperationsGuide/Logging/CHG-2-logging-overview.dita#topic5937">Centralized
+            Logging (ELK) feature</xref> to turn debugging off. </p><p>
+          <note type="important">If you are using Centralized Logging, <b>do not apply this
+              patch</b>.</note>
+        </p><p>This patch changes the logging of the services from INFO or DEBUG to WARNING.
+          <!--HCG-1104--></p><!--HCG-1104-->. <!--DTMS--><p>You should have downloaded and extracted
+          the <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/015"/>
           patch during the prerequisites. Extract the <codeph id="15name"
             >knc-debug-off.patch</codeph> and readme files.</p><p>
