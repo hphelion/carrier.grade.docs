@@ -30,11 +30,17 @@
     </section>
     <section id="boot"><title>Instance launch fails when <i>Boot from image (creates a new
           volume)</i> is chosen as instance boot source</title><b>System
-        Behavior/Message</b><p>After deploying KVM Region Patches 5 and 6, you might not be able to
-        launch a new VM instance created directly from an exiting bootable volume, due to
-        configuration issues in the <codeph>conder.conf
-        </codeph>file.<!--HCG-1725--></p><b>Resolution</b><p>As a workaround, create the instance
-        using a bootable volume created from the image you want to use.</p></section>
+        Behavior/Message</b><p>Launching an instance might fail when you select <b>Boot from image
+          (creates a new volume)</b> as the <b>Instance Boot Source</b> if the Compute (Nova)
+        service has availability zones but the Block Storage (Cinder) service does not have
+        availability zones. This is a known OpenStack bug and fixed in Kilo/Liberty.
+        <!--HCG-1725--></p><p>For more information, see: <xref
+          href="https://bugs.launchpad.net/nova/+bug/1496235" format="html" scope="external"
+          >https://bugs.launchpad.net/nova/+bug/1496235</xref></p><b>Resolution</b><p>Create a
+        volume or use an existing bootable volume, then just provide that as the source when
+        launching an instance.</p><p>From Horizon, select <b>Boot from Volume</b> from the
+          <b>Instance Boot Source</b> drop down option and then select a bootable
+      volume.</p></section>
     <section id="logs">
       <title>Centralized logging take too much space</title>
       <p><b>System Behavior/Message</b></p>
