@@ -17,6 +17,9 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
+        <li>Instance launch fails when "Boot from image(creates a new volume) is chosen as instance
+          boot source </li>
+        <li><xref href="#topic10581c2t/boot" format="dita"/></li>
         <li><xref href="#topic10581c2t/logs" format="dita"/></li>
         <li><xref href="#topic10581c2t/keystone" format="dita"/></li>
         <li><xref href="#topic10581c2t/kvm" format="dita"/></li>
@@ -27,6 +30,13 @@
         <li><xref href="#topic10581c2t/two-controllers" format="dita"/></li>
       </ul>
     </section>
+    <section id="boot"><title>Instance launch fails when <i>Boot from image (creates a new
+          volume)</i> is chosen as instance boot source</title><b>System
+        Behavior/Message</b><p>After deploying KVM Region Patches 5 and 6, you might not be able to
+        launch a new VM instance created directly from an exiting bootable volume, due to
+        configuration issues in the <codeph>conder.conf
+        </codeph>file.<!--HCG-1725--></p><b>Resolution</b><p>As a workaround, create the instance
+        using a bootable volume created from the image you want to use.</p></section>
     <section id="logs">
       <title>Centralized logging take too much space</title>
       <p><b>System Behavior/Message</b></p>
