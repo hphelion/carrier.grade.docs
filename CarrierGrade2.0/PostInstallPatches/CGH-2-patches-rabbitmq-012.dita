@@ -74,6 +74,8 @@
             command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
           <li>Execute the following command on all tiers:
             <codeblock>hlm deploy -c &lt;cloud name> -t "ELK-SCH"</codeblock></li>
+          <li>Log into one of the controller nodes in the non-KVM region.</li>
+          <li>Restart RabbitMQ:<codeblock>service rabbitmq-server restart</codeblock></li>
         </ol>
       </p>
     </section>
