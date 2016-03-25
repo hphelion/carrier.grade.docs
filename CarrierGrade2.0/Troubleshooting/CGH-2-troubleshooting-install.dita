@@ -148,16 +148,20 @@ virsh undefined hlm</codeblock></li>
         <li>Edit the <codeph>/root/infra-ansible-playbooks/setup_hlm_onBM.yml</codeph> file to
           comment the second role. The file contains two roles: the first one creates the VM and the
           second one configures the VM.
-          <codeblock>hosts: hlm_kvm_host
-sudo: yes
-user: root
-roles:
-HLM-CREATE-ON-BM
-hosts: hlm
-#sudo: yes
-#user: root
-#roles:
-HLM-CFG</codeblock></li>
+          <codeblock>---
+
+#This role will create hlm VM
+- hosts:    hlm_kvm_host
+  sudo:     yes
+  user:     root
+  roles:
+            - HLM-CREATE-ON-BM
+
+#- hosts:    hlm
+#  sudo:     yes
+#  user:     root
+#  roles:
+#            - HLM-CFG</codeblock></li>
         <li>Again, run the <codeph>ansible-playbook –i hosts setup_hlm_onBM.yml</codeph>.</li>
         <li>After the command completes, execute the following command to obtain the vibr0 IP
           address for the lifecycle manager <codeblock>arp | grep aa</codeblock>Copy the IP address you get in the
