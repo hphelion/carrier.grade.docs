@@ -17,6 +17,7 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
+        <li><xref href="#topic10581c2t/volume" format="dita"/></li>
         <li><xref href="#topic10581c2t/logs" format="dita"/></li>
         <li><xref href="#topic10581c2t/keystone" format="dita"/></li>
         <li><xref href="#topic10581c2t/kvm" format="dita"/></li>
@@ -34,6 +35,19 @@
       <p>Also see <xref href="CGH-2-troubleshooting-install.dita#topic10581c2ti">Installation
           Troubleshooting</xref>. </p>
     </section>
+    <section id="volume"><title>Instance launch fails when <i>Boot from image (creates a new volume)</i> is
+        chosen as instance boot source</title><b>System Behavior/Message</b><p>Launching an instance
+        might fail when you select <b>Boot from image (creates a new volume)</b> as the <b>Instance
+          Boot Source</b> if the Compute (Nova) service has availability zones but the Block Storage
+        (Cinder) service does not have availability zones. This is a known OpenStack bug and fixed
+        in Kilo/Liberty. <!--HCG-1725--></p><p>For more information, see: <xref
+          href="https://bugs.launchpad.net/nova/+bug/1496235" format="html" scope="external"
+          >https://bugs.launchpad.net/nova/+bug/1496235</xref></p><b>Resolution</b><p>Create a
+        bootable volume or use an existing bootable volume, then select that volume as the source
+        when launching an instance.</p><p>From Horizon, select <b>Boot from Volume</b> from the
+          <b>Instance Boot Source</b> drop down option and then select a bootable
+          volume.</p><p><image href="../../media/carrier.grade.docs/CGH-2-troublesoot-volume.png"
+          width="600" id="image_mxk_rwy_kv"/></p></section>
     <section id="logs">
       <title>Centralized logging take too much space</title>
       <p><b>System Behavior/Message</b></p>
