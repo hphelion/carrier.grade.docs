@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic10581cgi5s">
+
+<title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Converting from VRS-G Switch to
+    ToR Switch</title>
+
+<prolog>
+  <metadata>
+    <othermeta name="layout" content="default"/>
+    <othermeta name="product-version" content="HP Helion OpenStack Carrier Grade 2.0"/>
+    <othermeta name="role" content="Storage Administrator"/>
+    <othermeta name="role" content="Storage Architect"/>
+    <othermeta name="role" content="Michael B"/>
+    <othermeta name="product-version1" content="HP Helion OpenStack Carrier Grade 2.0"/>
+  </metadata>
+</prolog>
+<body>
+    <section>
+      <title>Overview</title>
+      <p>The standard installation of HP Helion OpenStack Carrier Grade uses the HPE Distributed
+        Cloud Networking through the VRS-G gateway. You can optionally configure switching through
+        the HP FlexFabric 5930 top-of-rack switch. <!--HCG-853--><ul id="ul_rvd_lrz_lv">
+          <li>Disable the VRS-G by removing the uplink subnet associated with your floating IP
+            pool.</li>
+          <li>Configure the ToR </li>
+        </ul></p>
+      <p>This document provides a sequence of events to understand how VMs with vNIC type PCI-PT or
+        SRIOV is orchestrated to provide:</p>
+      <ul>
+        <li>IP assignment to the vNICs from the tenant network pool</li>
+        <li>
+          <p>vNICs are part of VSD managed subnet (VxLAN segment) to allow communication between a
+            VM with virtio vNIC, a VM with SRIOV vNIC and a VM with PCI-PT vNIC in the same l2
+            domain. See the figure:</p>
+        </li>
+      </ul>
+      <p><image href="../../../media/CGH-install-5930-diagram.png" id="image_uyn_rzr_zt" width="600"
+        /></p>
+    </section>
+    <section>
+      <title>Disable VRS-G</title>
+      <p>Use a cURL script to remove the uplink subnet associated with the floating IP.</p>
+      <p>During the DCN configuration, you <xref
+          href="../../Installation/carrier-grade-install-config-dcn.dita#topic10581cgicd">downloaded
+          a cURL script to enable floating IPs</xref>. You can modify that script to disable
+        floating IPs. <ol id="ol_kr1_g31_mv">
+          <li>Execute the following command to retreive the <systemoutput>APIKey</systemoutput> for
+            VSD:
+            <pre>curl -k -s -u csproot:csproot -H "X-Nuage-Organization: csp" -X GET https://&lt;VSD IP>:8443/nuage/api/v3_2/me | python -mjson.tool     </pre>For
+            example:
+              <codeblock>curl -k -s -u csproot:csproot -H "X-Nuage-Organization: csp" -X GET <xref href="https://10.30.5.22:8443/nuage/api/v3_0/me" format="html" scope="external">https://10.30.5.22:8443/nuage/api/v3_0/me</xref> | python -mjson.tool</codeblock><p>The
+              output appears similar
+            to:</p><codeblock>{       
+        "APIKey": "659d4f30-6cad-4063-847b-e8181e3c1922",       
+        "APIKeyExpiry": 1459346547356,    
+           "ID": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",       
+        "avatarData": null,       
+        "avatarType": null,       
+        "email": "csproot@CSP.com",       
+        "enterpriseID": "76046673-d0ea-4a67-b6af-2829952f0812",       
+        "enterpriseName": "CSP",       
+        "entityScope": null,       
+        "externalID": null,       
+        "externalId": null,       
+        "firstName": "csproot",       
+        "lastName": "csproot",       
+        "licenseCapabilities": [],       
+        "mobileNumber": null,       
+        "password": null,       
+        "role": "CSPROOT",       
+        "userName": "csproot"   
+  }</codeblock></li>
+          <li>Use the following command to retrieve the subnets:
+              <codeblock>root@cg-hlm:~# curl -k -s -u csproot:&lt;API-Key> -H "X-Nuage-Organization: csp" -X  GET <xref href="https://10.30.5.22:8443/nuage/api/v3_0/sharednetworkresources" format="html" scope="external">https://10.30.5.22:8443/nuage/api/v3_0/sharednetworkresources</xref> | python -mjson.tool</codeblock><p>Where:
+              API key is the key you obtained in the previous step.</p>For
+              example:<codeblock>root@cg-hlm:~# curl -k -s -u csproot:659d4f30-6cad-4063-847b-e8181e3c1922 -H "X-Nuage-Organization: csp" -X  GET <xref href="https://10.30.5.22:8443/nuage/api/v3_0/sharednetworkresources" format="html" scope="external">https://10.30.5.22:8443/nuage/api/v3_0/sharednetworkresources</xref> | python -mjson.tool</codeblock><p>The
+              output appears similar
+            to:</p><codeblock>{
+   "DHCPManaged": true,
+   "ID": "a3be372c-929f-4f01-8d6d-0236baf69d66",
+   "accessRestrictionEnabled": false,
+   "address": "10.30.9.0",
+   "backHaulRouteDistinguisher": null,
+   "backHaulRouteTarget": null,
+   "backHaulVNID": null,
+   "children": null,
+   "creationDate": 1458073494000,
+   "description": "uplink HW subnet",
+   "domainRouteDistinguisher": "65534:22667",
+   "domainRouteTarget": "65534:19895",
+   "entityScope": "GLOBAL",
+   "externalID": null,
+   "gateway": "10.30.9.3",
+   "lastUpdatedBy": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+   "lastUpdatedDate": 1458073494000,
+   "name": "FIP uplink HW subnet",
+   "netmask": "255.255.255.192",
+   "owner": "8a6f0e20-a4db-4878-ad84-9cc61756cd5e",
+   "parentID": "6e825fe1-db50-42e1-a633-428ac054777e",
+   "parentType": "zone",
+   "permittedActionType": null,
+   "sharedResourceParentID": "6e825fe1-db50-42e1-a633-428ac054777e",
+   "type": "UPLINK_SUBNET",
+   "underlay": false,
+   "uplinkGWVlanAttachmentID": "3e0b466a-68f8-4f7e-8cc4-ef96d3df12b3",
+   "uplinkInterfaceIP": "10.30.9.1",
+   "uplinkInterfaceMAC": "bc:ea:fa:1d:b0:80",
+   "uplinkVPortName": "uplink HW vport",
+   "vnID": 148914 
+},</codeblock>
+            For example, the subnet in the sample output is: <systemoutput>FIP uplink HW
+              subnet</systemoutput>. </li>
+          <li>Use the following command to delete the uplink subnet:
+              <codeblock/><codeblock>curl -k -s -u csproot:&lt;API-Key> -H "X-Nuage-Organization: csp" -X DELETE https://10.30.5.22:8443/nuage/api/v3_0/sharednetworkresources/&lt;????></codeblock><p>Where:
+              API key is the key you obtained in the previous step and ????? is.</p>For
+            example:<codeblock>curl -k -s -u csproot:94f44a1a-083e-4374-99e3-bd08d43e0658 -H "X-Nuage-Organization: csp" -X DELETE https://10.30.5.22:8443/nuage/api/v3_0/sharednetworkresources/61f96058-6afc-4cbb-9fd4-ffd</codeblock></li>
+        </ol></p>
+    </section>
+    <section>
+      <title>Update the ToR Switch Firmware</title>
+      <p>Perform the following one-time task to update the ToR switch firmware to support VxLAN-VLAN
+        bridging.</p>
+      <ol id="ol_w52_4yr_zt">
+        <li>Download and update firmware for the HP FlexFabric 5930 Switch assigned to the rack
+          hosting PCI-PT and SR-IOV compute nodes. The firmware is named:
+            <codeph>5930-D2413-1111.ipe</codeph>.<p>Follow the instructions with the download to
+            perform the update.</p></li>
+        <li>Execute the following command to validate that the firmware has been updated
+          successfully: Display Boot-Loader to confirm firmware is applied currently or will be next
+          boot:<codeblock>display boot-loader</codeblock>The output appears similar to the
+          following:<codeblock>Software images on slot 1: 
+Current software images: 
+  flash:/5930-cmw710-boot-d2423.bin 
+  flash:/5930-cmw710-system-d2423.bin 
+  flash:/5930-cmw710-devkit-d2423.bin 
+  flash:/5930-cmw710-manufacture-d2423.bin</codeblock></li>
+      </ol>
+    </section>
+    <section>
+      <title>Enable the L2/L3 OVSDB server and on-board the ToR as a VTEP Gateway</title>
+    
+    <ol id="ol_gx3_cmm_c5">
+      <li>Execute the following command to assign an IP address for the untagged VLAN for TUL
+        network: <codeblock>interface &lt;name> 
+ ip address &lt;IP_address></codeblock><p>Where:
+            <codeph>&lt;name></codeph> is a descriptive name for the interface and
+            <codeph>&lt;IP_address></codeph> is the address to assign.</p><p>For
+          example:<codeblock>interface Vlan-interface805 
+ ip address 10.80.5.250 255.255.255.0 </codeblock></p></li>
+      <li> Execute the following commands to enable Open vSwitch Database Management Protocol
+        (OVSDB) for L2/L3: <codeblock>l2vpn enable 
+vtep enable</codeblock></li>
+      <li>Execute the following commands assign a TUL IP to the switch. This acts as VTEP Gateway IP
+        and appears up in VSD. Select one unused IP from TUL Range.
+        <codeblock>tunnel global source-address &lt;tunnel_IP> 
+vxlan local-mac report 
+ovsdb server tcp &lt;IP_address> port &lt;port> 
+ovsdb server enable 
+dhcp enable</codeblock>
+        Where: <ul id="ul_nbm_cpm_c5">
+          <li><codeph>&lt;tunnel_IP></codeph> is </li>
+          <li><codeph>&lt;IP_address></codeph> and <codeph>&lt;port></codeph> are</li>
+        </ul>For
+        example:<codeblock>tunnel global source-address 10.80.5.250 
+vxlan local-mac report 
+ovsdb server tcp 10.80.5.31 port 6640 
+ovsdb server enable 
+dhcp enable</codeblock></li>
+      <li>Execute the following commands to configure the switch ports as VTEP access ports.<p>By
+          doing so, the participating switch ports (connected to the host ports that are configured
+          either as SRIOV or PCIPT devices) can now viewed in VSD and programmed through
+        it.</p><codeblock>interface Ten-GigabitEthernet 1/0/19:4
+ vtep access port
+ # The dhcp step is only needed if step 4 is not set to use in global mode
+ qos apply policy dhcp inbound 
+interface Ten-GigabitEthernet 2/0/23:4
+ vtep access port
+ # The dhcp step is only needed if step 4 is not set to use in global mode 
+ qos apply policy dhcp inbound
+#Example, 
+#For SRIOV Switch Port the complete configuration must look like:
+#interface Ten-GigabitEthernet1/0/19:4
+ #port link-mode bridge
+ #port link-type trunk
+ #port trunk permit vlan 805 810 to 817
+ #port trunk pvid vlan 805
+ #vtep access port
+</codeblock></li>
+      <li>Execute the following commands to configure a service loopback group for each slot.
+          <p>This is used for VxLAN-VLAN bridging, hence recommendation is to use 40G
+          Port.<codeblock>service-loopback group 1 type vsi-gateway
+reserve-vlan-interface 4000 to 4020
+interface FortyGigE1/0/4
+ port link-mode bridge
+ port service-loopback group 1</codeblock></p><p><b>Note:</b>
+          If needed, you can use multiple physical ports for each service-loopback group to provide
+          more bandwidth, specifically for L3 communication. </p></li>
+      <li>On-board the ToR as a VTEP Gateway in VSD<ol id="ol_cv2_4yr_zt">
+          <li>Launch the VSD Architect Dashboard.</li>
+          <li>Click the <b>Open Platform Configuration</b> icon.</li>
+          <li>Click <b>Infrastructure</b>, then <b>Gateways</b>, then <b>Pending Gateways</b>. </li>
+          <li>Click the <b>Use this gateway</b> icon.<p><b>Note: </b>You can now see all the ports
+              marked as VTEP Access port under the gateway.</p></li>
+        </ol>
+      </li>
+    </ol>
+    </section>
+    <section
+      conref="../../Installation/carrier-grade-install-config-dcn.dita#topic10581cgicd/subnet-and-FIP"/>
+  <section>
+      <title>Run a cURL script to enable floating IPs</title>
+      <p>You should have downloaded the <b
+          conref="../../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"/>
+        file during the prerequisites. If you have not downloaded the patch, launch the <xref
+          href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref> and locate the patch file and
+        the associated checksum and signature files. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. See <xref
+          href="../../Installation/carrier-grade-install-config-dcn.dita#topic10581cgicd/cURL-patch"
+        />.</p>
+      <ol>
+        <li>On lifecycle manager host, change to the <codeph>/opt</codeph> directory.</li>
+        <li>Modify the cURL script for your environment:<ul id="ul_bzs_r1c_1t">
+            <li>GW_NAME is the IP address of the Virtual Station Interface (VSI) on the ToR
+              switch.</li>
+            <li>All the UPLINK info are from the core switch on their specific
+              testbed<codeblock># Parameters
+VLAN="309"
+VSD_IP="10.30.5.22" # add DCM VSD IP
+FIP_NAME="FIP-HW" # unique name show in VSD created for external network floating ip pool
+GW_NAME="10.30.6.250" # use the TUL ip of the VSG node created on VSD / VSC
+PORT_NAME="R25N7040S1FTC-5930:::Bridge-Aggregation25" # uplink port/lag on 5930 to core switch
+
+#
+# IANA has reserved 192.0.0.0/29 for DS-lite transition
+#
+UPLINK_SUBNET="10.30.9.0"
+UPLINK_MASK="255.255.255.192"
+VRSG_IP="10.30.9.3" #ip assiged to vsi interface
+UPLINK_GW="10.30.9.1"                         # ROUTER IP ON SWITCH core 10.1.2.1
+UPLINK_GW_MAC="bc:ea:fa:1d:b0:80"       # mac address of the core switch 10.1.2.1</codeblock></li>
+          </ul></li>
+        <li>Save and close the script.</li>
+        <li>Execute the cURL script <p>
+            <codeblock>bash +x curl_vrsg_single.sh</codeblock>
+          </p></li>
+      </ol>
+    </section>
+    <section>
+      <title>Add a static route to the VPN instance</title>
+      <p>
+        <ol id="ol_rtq_ccb_mv">
+          <li>Execute the following command to obtain the name of the VPN
+              instance:<codeblock>display ip vpn-instance</codeblock><p>The output appears similar
+              to the
+            following:</p><codeblock>Total VPN-Instances configured : 1
+  VPN-Instance Name               RD                     Create time
+  vrf20051                                               2016/03/17 15:12:50</codeblock></li>
+          <li>Execute the following command to view routing table information for that VPN
+              instance:<codeblock>display ip vpn-instance</codeblock><p>The output appears similar
+              to the following:
+              <codeblock>Destinations : 16       Routes : 16
+Destination/Mask    Proto  Pre  Cost         NextHop         Interface
+0.0.0.0/0           Static 60   0            10.30.9.1       Vsi1
+0.0.0.0/32          Direct 0    0            127.0.0.1       InLoop0
+10.30.9.0/26        Direct 0    0            10.30.9.3       Vsi1
+10.30.9.0/32        Direct 0    0            10.30.9.3       Vsi1
+10.30.9.3/32        Direct 0    0            127.0.0.1       InLoop0
+10.30.9.63/32       Direct 0    0            10.30.9.3       Vsi1
+10.30.9.128/26      Static 60   0            0.136.0.4       Vsi0
+10.30.9.173/32      Static 60   0            0.136.0.4       Vsi0
+10.30.9.174/32      Static 60   0            0.136.0.8       Vsi0
+127.0.0.0/8         Direct 0    0            127.0.0.1       InLoop0
+127.0.0.0/32        Direct 0    0            127.0.0.1       InLoop0
+127.0.0.1/32        Direct 0    0            127.0.0.1       InLoop0
+127.255.255.255/32  Direct 0    0            127.0.0.1       InLoop0
+224.0.0.0/4         Direct 0    0            0.0.0.0         NULL0
+224.0.0.0/24        Direct 0    0            0.0.0.0         NULL0
+255.255.255.255/32  Direct 0    0            127.0.0.1       InLoop0</codeblock></p></li>
+          <li>Execute the following command to create a static route to the VPN
+            instance:<codeblock>ip route-static vpn-instance &lt;instance-name> 0.0.0.0 &lt;vsi-address></codeblock>Where:
+              <ul id="ul_sff_kgb_mv">
+              <li><codeph>instance-name is</codeph> the VPN instance</li>
+              <li><codeph>0.0.0.0</codeph> is destination address, making this route the
+                default</li>
+              <li>
+                <codeph>vsi-address</codeph> is the IP address of the VSI interface.</li>
+            </ul><p>For
+            example:</p><codeblock>ip route-static vpn-instance vrf20051 0.0.0.0 0 10.30.9.1</codeblock></li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>Verify the installation</title>
+      <p>
+        <codeblock>display ip routing-table vpn-instance vrf20051</codeblock>
+        <codeblock>dis interface Vsi-interface
+Vsi-interface0
+Current state: UP
+Line protocol state: UP
+Description: created by ovsdb
+Bandwidth: 1000000 kbps
+Maximum transmission unit: 1500
+Internet address: 10.30.9.3/26 (unnumbered)
+IP packet frame type: Ethernet II, hardware address: bcea-fa16-4a8e
+IPv6 packet frame type: Ethernet II, hardware address: bcea-fa16-4a8e
+Physical: Unknown, baudrate: 1000000 kbps
+Last clearing of counters: Never
+Last 300 seconds input rate: 0 bytes/sec, 0 bits/sec, 0 packets/sec
+Last 300 seconds output rate: 0 bytes/sec, 0 bits/sec, 0 packets/sec
+Input: 0 packets, 0 bytes, 0 drops
+Output: 0 packets, 0 bytes, 0 drops
+</codeblock>
+      </p>
+    </section>
+  </body>
+</topic>
