@@ -70,7 +70,7 @@
         "userName": "csproot"   
   }</codeblock><p>In
               this example, the API key is: <codeph>659d4f30-6cad-4063-847b</codeph>.</p></li>
-          <li>Use the following command to retrieve the subnets:
+          <li>Use the following command to retrieve the subnets and uplink ID:
               <codeblock>root@cg-hlm:~# curl -k -s -u csproot:&lt;API_Key> -H "X-Nuage-Organization: csp" -X  GET https://&lt;VSD_IP>:8443/nuage/api/v3_0/sharednetworkresources | python -mjson.tool</codeblock><p>Where:
                 <ul id="ul_fmb_yzg_mv">
                 <li><codeph>&lt;API_key></codeph> is the key you obtained in the previous step</li>
@@ -113,13 +113,16 @@
    "vnID": 148914 
 },</codeblock>
             For example, the subnet in the sample output is: <systemoutput>FIP uplink HW
-              subnet</systemoutput>. </li>
+              subnet</systemoutput> and the uplink ID is the
+              <codeph>uplinkGWVlanAttachmentID</codeph> value.</li>
           <li>Use the following command to delete the uplink subnet:
-              <codeblock>curl -k -s -u csproot:&lt;API_Key> -H "X-Nuage-Organization: csp" -X DELETE https://&lt;VSD_IP>:8443/nuage/api/v3_0/sharednetworkresources/&lt;????></codeblock><p>Where:
+              <codeblock>curl -k -s -u csproot:&lt;API_Key> -H "X-Nuage-Organization: csp" -X DELETE https://&lt;VSD_IP>:8443/nuage/api/v3_0/sharednetworkresources/&lt;Uplink_ID></codeblock><p>Where:
               API key is the key you obtained in the previous step and ????? is.<ul>
                 <li><codeph>&lt;API_key></codeph> is the key you obtained in the previous step</li>
                 <li><codeph>&lt;VSD_IP></codeph> is the IP address for VSD, the IP address you can
                   use to lunch the vCenter Deployment Toolbox.</li>
+                <li><codeph>&lt;Uplink_ID></codeph> is the <codeph>uplinkGWVlanAttachmentID</codeph>
+                  value in the output from the previous command.</li>
               </ul></p>For
             example:<codeblock>curl -k -s -u csproot:94f44a1a-083e-4374-99e3 -H "X-Nuage-Organization: csp" -X DELETE https://10.30.5.22:8443/nuage/api/v3_0/sharednetworkresources/61f96058-6afc-4cbb-9fd4-ffd</codeblock></li>
         </ol></p>
@@ -151,12 +154,13 @@ Current software images:
         in VSD. </p>
     
     <ol id="ol_gx3_cmm_c5">
-      <li>Execute the following command to assign an IP address for the untagged VLAN for TUL
-        network: <codeblock>interface &lt;name> 
+      <li>Log into the top-of-rack switch and execute the following command to assign an IP address
+          for the untagged VLAN for TUL network:
+            <codeblock>interface &lt;name> 
  ip address &lt;IP_address></codeblock><p>Where:
-            <codeph>&lt;name></codeph> is a descriptive name for the interface and
-            <codeph>&lt;IP_address></codeph> is the address to assign.</p><p>For
-          example:<codeblock>interface Vlan-interface805 
+              <codeph>&lt;name></codeph> is a descriptive name for the interface and
+              <codeph>&lt;IP_address></codeph> is the address to assign.</p><p>For
+            example:<codeblock>interface Vlan-interface805 
  ip address 10.80.5.250 255.255.255.0 </codeblock></p></li>
       <li> Execute the following commands to enable OVSDB:
           <codeblock>l2vpn enable 
@@ -249,13 +253,13 @@ UPLINK_GW_MAC="bc:ea:fa:1d:b0:80"       # mac address of the core switch 10.1.2.
     </section>
     <section id="static">
       <title>Add a static route to the VPN instance</title>
-      <p>If the ToR switch is not the core switch, you need to add a statci route to the routing
-        table. </p>
+      <p>If the top-of-rack switch switch is not the core switch, you need to add a static route to
+        the routing table. </p>
       <p>
         <ol id="ol_rtq_ccb_mv">
-          <li>Execute the following command to obtain the name of the VPN
-              instance:<codeblock>display ip vpn-instance</codeblock><p>The output appears similar
-              to the
+          <li>Log into the top-of-rack switch and execute the following command to obtain the name
+            of the VPN instance:<codeblock>display ip vpn-instance</codeblock><p>The output appears
+              similar to the
             following:</p><codeblock>Total VPN-Instances configured : 1
   VPN-Instance Name               RD                     Create time
   vrf20051                                               2016/03/17 15:12:50</codeblock></li>
