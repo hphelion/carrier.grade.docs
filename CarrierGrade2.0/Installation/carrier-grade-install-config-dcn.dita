@@ -154,11 +154,11 @@ Password: cghelion</codeblock>
           use the gateway.</li>
       </ol></section>
     <section id="subnet-and-FIP">
+      <title>Create a subnet for the floating IP pool</title>
       <!--Section used in CGH-2-Config-Multi-DC.dita -->
-      <title>Create a subnet for the floating IP</title>
-      <p>Use the following steps to create a subnet for the floating IP.</p>
+      <p>Use the following steps to create a floating IP address pool using a subnet.</p>
       <p><b>Note:</b> You will need the floating IP subnet name during the installation when you
-        create and edit a cURL script. </p>
+        created and edited the cURL script. </p>
       <p><i>For more information on performing these tasks, refer to the DCN documentation </i></p>
       <ol>
         <li>In <xref href="../OperationsGuide/Dashboard/CGH-2-User-Dasboard-VSD.dita#topic1160c2udv">the VSD
@@ -222,8 +222,8 @@ Password: cghelion</codeblock>
           </ul></li>
         <li>Save and close the script.</li>
         <li>Execute the cURL script <codeblock>bash +x &lt;script_name>.sh</codeblock><p>Where:
-            &lt;script_name> is the name of the cURL script you created.</p><p>For
-            example:<codeblock>bash +x curl_vrsg_ha.txt</codeblock></p></li>
+            &lt;script_name> is the name of the cURL script you modified.</p><p>For
+            example:<codeblock>bash +x curl_vrsg_ha.txt</codeblock></p><p>or<codeblock>bash +x curl_vrsg_single.sh</codeblock></p></li>
         <li>Use the VSD dashboard to confirm that uplink port appears <ol id="ol_gdy_f3s_nt">
             <li>Click <b>Monitoring Console</b>.</li>
             <li>Click <b>Nuage-VSP</b>, then the VSC-1, then the VRS-G node under VRs. The IP
