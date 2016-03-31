@@ -21,7 +21,14 @@
       <p>The standard installation of HP Helion OpenStack Carrier Grade uses the HPE Distributed
         Cloud Networking (DCN) to pass traffic through the Virtual Routing Services Gateway (VRS-G).
         You can optionally configure HP Helion OpenStack Carrier Grade to use the HP FlexFabric 5930
-        top-of-rack switch to pass traffic. <!--HCG-853--><ul id="ul_rvd_lrz_lv">
+        top-of-rack switch to pass traffic. <!--HCG-853--></p>
+      <p>Using a top-of-rack switch to handle traffic and automation should provide better
+        performance then using the VRS-G software running on a separate server when handling all the
+        traffic in and out of the cloud. In addition, using the top-of-rack switch requires two
+        fewer servers in your cloud (VRS-G requires two dedicated servers).</p>
+      <p>The general process for moving to the top-of-rack switch, includes the following tasks:</p>
+      <p>
+        <ul id="ul_rvd_lrz_lv">
           <li>
             <xref href="#topic10581cgi5s/disable-vrsg" format="dita"/> by removing the uplink subnet
             associated with your floating IP pool.</li>
@@ -32,7 +39,8 @@
           <li><xref href="#topic10581cgi5s/fip" format="dita"/></li>
           <li><xref href="#topic10581cgi5s/static" format="dita"/></li>
           <li><xref href="#topic10581cgi5s/verify" format="dita"/></li>
-        </ul></p>
+        </ul>
+      </p>
     </section>
   <section id="disable-vrsg">
       <title>Disable VRS-G</title>
@@ -214,8 +222,8 @@ interface FortyGigE1/0/4
   <section id="fip">
       <title>Run a cURL script to enable floating IPs</title>
       <p>You should have downloaded the <b
-          conref="../../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"/>
-        file during the prerequisites. If you have not downloaded the patch, launch the <xref
+          conref="../../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"
+        /> file during the prerequisites. If you have not downloaded the patch, launch the <xref
           href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref> and locate the patch file and
         the associated checksum and signature files. You must <xref

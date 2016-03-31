@@ -50,21 +50,77 @@
                                 <title>Download the HPE Linux </title>
                                 <p>The lifecycle manager host must have HPE Linux installed before
                                         performing the HPE Helion OpenStack Carrier Grade
-                                        installation. You can download HPE Linux from  <xref
-                                                href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
-                                                format="html" scope="external">Helion Download
-                                                Network(HDN)</xref>. </p>
-                                <p>You can also <xref
-                                                href="carrier-grade-install-download-denver.dita#topic7148cgidd"
-                                                >download the other installation packages</xref> at
-                                        this time or later in the installation process.</p>
+                                        installation. You can download HPE Linux from the <xref
+                                                href="http://www.hpe.com/Helion/CarrierGrade"
+                                                format="html" scope="external">Software Depot for HP
+                                                Helion Carrier Grade</xref>. </p>
+                                <p>You will also download the other installation packages at this
+                                        time or later in the installation process.</p>
                                 <p>
-                                        <ol
-                                                conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/hpelinux"
-                                                id="ol_lx4_bfh_cv">
-                                                <li/>
+                                        <ol id="hpelinux">
+                                                <li>Click <b>Sign In</b> to log in using your HP
+                                                  Passport account. <p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-signin.png"
+                                                  width="600" id="image_znx_k1q_mv"/></p></li>
+                                                <li>After signing in, click the <b>Select</b> button
+                                                  on the right side of the page.<p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-select.png"
+                                                  width="600" id="image_ylt_h4p_mv"/></p></li>
+                                                <li>Enter your personal information and address and
+                                                  accept the license agreement and click
+                                                  <b>Next</b>.</li>
+                                                <li>From the list of software, select the download
+                                                  method:<ul id="ul_cn1_ptp_mv">
+                                                  <li><b>Use HPE Download Manager</b>. Use the HPE
+                                                  Download Manager to specify where the installation
+                                                  package will be saved.</li>
+                                                  <li><b>Use Standard Download</b>. Use the standard
+                                                  download method for your browser.</li>
+                                                  </ul><p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-download.png"
+                                                  width="600" id="image_mtk_15p_mv"/></p></li>
+                                                <li>Click the <b>Download</b> link next to: <ul
+                                                  id="ul_pq4_jvd_dv">
+                                                  <li>
+                                                  <p><b>HCG 2.1 KVM AVS (Z7550-01914.tar.gz)</b>.
+                                                  This link downloads the
+                                                  <codeph>HCG_2.1_KVM_AVS_Z7550-01914.tar.gz</codeph>
+                                                  file to instal the Standard Region and KVM Region.
+                                                  Also download the associated checksum and
+                                                  signature files.</p>
+                                                  </li>
+                                                  </ul></li>
+                                                <li>If you selected to use the HPE Download Manager,
+                                                  and this is the first time you have download the
+                                                  HPE Software Depot from the current computer,
+                                                  install the HPE Download Manager:<ol
+                                                  id="ol_uxx_jsp_mv">
+                                                  <li>In the Open HP_Download_Manager.exe dialog
+                                                  box, click <b>Save As</b>.</li>
+                                                  <li>Locate and double-click the downloaded
+                                                  <codeph>HP_Download_Manager.exe</codeph>
+                                                  file.</li>
+                                                  <li>Accept the license agreement and click
+                                                  <b>Next</b> to use the wizard to install.</li>
+                                                  </ol></li>
                                         </ol>
                                 </p>
+                        </section>
+                        <section>
+                                <title>Install HPE Linux</title>
+                                <p>The HPE Linux installation file is called
+                                                <codeph>hpelinux-hcg-kvm-amd64-20160224.iso.iso</codeph>.
+                                        This ISO contains all required files to install HPE Linux
+                                        and all Linux packages required for HPE Helion Carrier Grade.<ol>
+                                                <li>Use the Vitrual CD feature of the ILO remote
+                                                  console to mount the
+                                                  <systemoutput>hpelinux-hcg-kvm-amd64-20160224.iso.iso</systemoutput>
+                                                  image to the system that will host the lifecycle
+                                                  manager. Mounting the ISO makes the contents
+                                                  available for the install. </li>
+                                                <li>Use the installation wizard to install HPE
+                                                  Linux.</li>
+                                        </ol></p>
                         </section>
                         <!--<section id="pub-key"> <title>Obtain a public key</title>
 <p>On the lifecycle manager host, the user <codeph>root</codeph> must have a public key.</p>
