@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd">
+<topic xml:lang="en-us" id="topic7148cgidd">
+        <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Step 2 - Download
+                the Installation Packages</title>
+        <titlealts>
+                <searchtitle>HPE Helion OpenStack Carrier Grade Installation
+                        Prerequisites</searchtitle>
+        </titlealts>
+        <prolog>
+                <metadata>
+                        <othermeta name="layout" content="default"/>
+                        <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                        <othermeta name="role" content="Storage Administrator"/>
+                        <othermeta name="role" content="Storage Architect"/>
+                        <othermeta name="role" content="Michael B"/>
+                        <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                </metadata>
+        </prolog>
+        <body>
+                <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
+                <p conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/intro"/>
+                <section id="download">
+                        <title>Download the installation files</title>
+                        <p>You should have downloaded the installation packages in <xref
+                                        href="CGH-install-prereqs-denver.dita#topic7148cipd/linux"
+                                        >Prerequisites</xref>. If you have not, in a browser:<ol
+                                        id="download-steps">
+                                        <li>Navigate to the <xref
+                                                  href="http://www.hpe.com/Helion/CarrierGrade"
+                                                  format="html" scope="external">Software Depot for
+                                                  HP Helion Carrier Grade</xref>. </li>
+                                        <li>Download the <b>HCG 2.1 KVM AVS
+                                                (Z7550-01914.tar.gz)</b>. This link downloads the
+                                                  <codeph>HCG_2.1_KVM_AVS_Z7550-01914.tar.gz</codeph>
+                                                file to instal the Standard Region and KVM Region.
+                                                Also download the associated checksum and signature
+                                                files.</li>
+                                        <li>Download the following KVM Region patches:<ul
+                                                  id="ul_njt_3l1_kv">
+                                                  <li><b id="025">Helion Carrier Grade 2.0 WR006
+                                                  Patch025</b></li>
+                                                  <li><b id="026">Helion Carrier Grade 2.0 WR007
+                                                  Patch026</b></li>
+                                                </ul></li>
+                                </ol></p>
+                </section>
+                <section
+                        conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/verify"/>
+                <section
+                        conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/checksum"/>
+                <section id="extract"><title>Extract the downloaded files</title><p>After
+                                downloading the files from HDN, extract the move the files as
+                                indicated in this section. It is important to the installation
+                                process for the installer files to be in the correct locations.<ol
+                                        id="ol_e4x_3w1_fv">
+                                        <li>Extrct the
+                                                  <codeph>HCG_2.1_KVM_AVS_Z7550-01914.tar.gz</codeph>
+                                                file. The compressed file contains the
+                                                  <codeph>HCG_2.1_KVM_AVS_Z7550-01914.tar</codeph>
+                                                file.</li>
+                                        <li>Extract the
+                                                  <codeph>HCG_2.1_KVM_AVS_Z7550-01914.tar</codeph>
+                                                file. </li>
+                                </ol></p><p><b>Standard Region installation files</b></p><p>After
+                                downloading and extracting the
+                                        <codeph>HCG_2.1_KVM_AVS_Z7550-01914.tar</codeph> file, copy
+                                the Standard Region installation files to the required locations in
+                                the following table. </p><p>
+                                <table id="table_rkj_yyk_2t">
+                                        <tgroup cols="3">
+                                                <colspec colnum="1" colname="col2"/>
+                                                <colspec colnum="2" colname="col3"/>
+                                                <colspec colnum="3" colname="col4"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry><b>File Name</b></entry>
+                                                  <entry><b>Copy to location on the Lifecycle
+                                                  Manager</b></entry>
+                                                  <entry><b>Notes</b></entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><codeph>cg-hlm.qcow2</codeph></entry>
+                                                  <entry>
+                                                  <p><codeph>/var/lib/libvirt/images</codeph></p>
+                                                  <p> </p>
+                                                  <p>Can copy this to any other directory and update
+                                                  the group_vars/all file with that dir folder
+                                                  path</p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry/>
+                                                  </row>
+                                                  <row>
+                                                  <entry>
+                                                  <p><codeph>cg-hos-misc.tar.gz</codeph></p>
+                                                  <p><codeph>cg-hos-src.tar.gz</codeph></p>
+                                                  </entry>
+                                                  <entry>
+                                                  <p><codeph>~/cg</codeph></p>
+                                                  <p> </p>
+                                                  <p><b>Create the <codeph>cg</codeph> folder if not
+                                                  present</b></p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>
+                                                  cg-infra-src.tar.gz</codeph></entry>
+                                                  <entry>
+                                                  <p><codeph>/root</codeph>
+                                                  </p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><note>The installation files also contain the HPE Linux installation
+                                file, called
+                                        <codeph>hpelinux-hcg-kvm-amd64-20160224.iso.iso</codeph>.
+                                This ISO contains all required files to install HPE Linux and all
+                                Linux packages required for HPE Helion Carrier Grade. You should
+                                have deployed HPE Linux in the <xref
+                                        href="CGH-install-prereqs-denver.dita#topic7148cipd/linux"
+                                        >Prerequisites</xref>. </note><p id="kvm-avs"><b>KVM Region
+                                        installation files</b></p>After downloading and extracting
+                        the <codeph>HCG_2.1_KVM_AVS_Z7550-01914.tar</codeph> file, the following
+                        files for installing the KVM Region are in the <codeph>WR</codeph> directory.<p>
+                                <table id="table_ejh_qtj_k5">
+                                        <tgroup cols="2">
+                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
+                                                <colspec colnum="2" colname="col3" colwidth="2.13*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>File Name</entry>
+                                                  <entry>To be copied to the KVM Host</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><codeph>bootimage_avs_only.iso</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM Region.</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM Region. SDK files to be used as
+                                                  needed.</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM Region. Sample guest operating system files to
+                                                  be used as needed.</entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p><b>KVM Region Patches</b></p>After downloading and extracting the
+                                <codeph>HCG_2.1_KVM_AVS_Z7550-01914.tar</codeph> file, the following
+                        files for installing the KVM Region are in the
+                                <codeph>/WR/mandatory-patches</codeph> directory of the download files.<p>
+                                <table frame="all" rowsep="1" colsep="1" id="kvm_patches">
+                                        <tgroup cols="2">
+                                                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                                                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>Download file</entry>
+                                                  <entry>Patch file</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR002_Patch005.tar.gz</b></entry>
+                                                  <entry><codeph id="001"
+                                                  >TS_HP_15_Custom_PATCH_0001_2.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR003_Patch007.tar.gx</b></entry>
+                                                  <entry><codeph id="002"
+                                                  >TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR004_Patch017.tar.gz</b></entry>
+                                                  <entry><codeph id="003"
+                                                  >TS_HP_15_Custom_PATCH_0003.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR005_Patch019.tar.gz</b></entry>
+                                                  <entry><codeph id="004"
+                                                  >TS_HP_15_Custom_PATCH_0004.patch</codeph></entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p>You should have downloaded the following patch files from HDN:</p><p>
+                                <table frame="all" rowsep="1" colsep="1" id="kvm_patches_hdn">
+                                        <tgroup cols="2">
+                                                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                                                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>Download file</entry>
+                                                  <entry>Patch file</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR006_Patch025.tar.gz</b></entry>
+                                                  <entry><codeph id="005"
+                                                  >TS_HP_15_Custom_PATCH_0005.patch</codeph>
+                                                  </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR007_Patch026.tar.gz</b></entry>
+                                                  <entry><codeph id="006"
+                                                  >TS_HP_15_Custom_PATCH_0006.patch</codeph>
+                                                  </entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p>You will be shown where to copy these files during the KVM Region
+                                installation.</p></section>
+                <section id="next-step">
+                        <title>Next Step</title>
+                </section>
+                <ul id="ul_kp5_fyn_1v">
+                        <li><xref href="CGH-2-install-denver-standard.dita#topic10581c2id">Deploy
+                                        the Standard Region</xref>
+                        </li>
+                </ul>
+        </body>
+</topic>

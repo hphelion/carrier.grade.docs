@@ -38,13 +38,52 @@
                         </ul></p>
                 
                 <p id="intro">This document describes the prerequisite steps to download the installation files required to install HP Helion OpenStack Carrier Grade.</p>
-                <section>In a browser, navigate to <xref
-                                href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
-                                format="html" scope="external">Helion Download Network(HDN)</xref>.
-                                <ol id="ul_lvg_jb2_xs">
-                                <li>Click <b>Sign In</b> to log in using your account. </li>
-                                <li>After signing in, click the <b>Downloads</b> link in the menu on
-                                        the left side of the page.</li>
+                <section id="depot">
+                        <title>Launch the Software Depot</title>
+                        <p>Launch the the <xref href="http://www.hpe.com/Helion/CarrierGrade"
+                                        format="html" scope="external">Software Depot for HP Helion
+                                        Carrier Grade</xref>. You must obtain an HP Passport user
+                                account in order to download these files. </p>
+                        <p>
+                                <ol id="hpelinux">
+                                        <li>Click <b>Sign In</b> to log in using your HP Passport
+                                                account. <p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-signin.png"
+                                                  width="600" id="image_znx_k1q_mv"/></p></li>
+                                        <li>After signing in, click the <b>Select</b> button on the
+                                                right side of the page.<p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-select.png"
+                                                  width="600" id="image_ylt_h4p_mv"/></p></li>
+                                        <li>Enter your personal information and address and accept
+                                                the license agreement and click <b>Next</b>.</li>
+                                        <li>From the list of software, select the download
+                                                  method:<ul id="ul_cn1_ptp_mv">
+                                                  <li><b>Use HPE Download Manager</b>. Use the HPE
+                                                  Download Manager to specify where the installation
+                                                  package will be saved.</li>
+                                                  <li><b>Use Standard Download</b>. Use the standard
+                                                  download method for your browser.</li>
+                                                </ul><p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-download.png"
+                                                  width="600" id="image_mtk_15p_mv"/></p><note>If
+                                                  you selected to use the HPE Download Manager, and
+                                                  this is the first time you have download the HPE
+                                                  Software Depot from the current computer, you will
+                                                  need to install the HPE Download Manager:<ol
+                                                  id="ol_uxx_jsp_mv">
+                                                  <li>In the Open HP_Download_Manager.exe dialog
+                                                  box, click <b>Save As</b>.</li>
+                                                  <li>Locate and double-click the downloaded
+                                                  <codeph>HP_Download_Manager.exe</codeph>
+                                                  file.</li>
+                                                  <li>Accept the license agreement and click
+                                                  <b>Next</b> to use the wizard to install.</li>
+                                                  </ol></note></li>
+                                </ol>
+                        </p>
+                </section>
+                <section>
+                        <ol id="ul_lvg_jb2_xs">
                                 <li id="download-vrs">Click the <b>Downloads</b> tab and locate the
                                         following download. <ul id="ul_zll_rjv_g5">
                                                 <li><b><b id="productShow_appName">Helion Carrier
@@ -157,21 +196,23 @@
                                                   WR007 Patch026</b>. This patch addresses a
                                                   security issue in the KVM region.</li>
                                         </ul></li>
-                        </ol><p>
+                        </ol>
+                        <p>
                                 <b>Note:</b> When downloading installation files, always download
                                 and verify the associated checksum and signature files before
-                                installing. </p><p id="download">You should have downloaded these
-                                files during the prerequisites. If you have not downloaded the
-                                patch, launch the <xref
+                                installing. </p>
+                        <p id="download">You should have downloaded these files during the
+                                prerequisites. If you have not downloaded the patch, launch the
+                                        <xref
                                         href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
                                         format="html" scope="external">Helion Distribution Network
                                         (HDN)</xref> and locate the patch files and the associated
                                 checksum and signature files. You must <xref
                                         href="https://idm.pod1.prod-core.hpwsportal.com/webid/"
                                         format="html" scope="external">obtain a user account on
-                                        HDN</xref> in order to download these files.
-                                </p><p>Post-install patches; linked to in Post Install page, not
-                                pre-reqs</p></section>
+                                        HDN</xref> in order to download these files. </p>
+                        <p>Post-install patches; linked to in Post Install page, not pre-reqs</p>
+                </section>
                 <p>
                         <ul id="ul_f1p_tsq_w5">
                                 <li id="li-002"><b id="002">Helion Carrier Grade 2.0

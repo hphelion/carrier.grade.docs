@@ -38,7 +38,7 @@
                                 <p>Perform the following tasks on the lifecycle manager host:</p>
                                 <ul id="ul_ktm_3fb_y5">
                                         <li><xref href="#topic7148cipd/linux" format="dita">Install
-                                                HPE Linux</xref></li>
+                                                  HPE Linux</xref></li>
                                         <!--<li><xref href="#topic7148cipd/proxy" format="dita"/></li>-->
                                         <!--<li><xref href="#topic7148cipd/packages" format="dita"/></li>-->
                                         <!--<li><xref href="#topic7148cipd/configure-the-xrdp-remote-desktop-display" format="dita"/></li><li><xref href="#topic7148cipd/ntp" format="dita"/></li>-->
@@ -50,21 +50,77 @@
                                 <title>Download the HPE Linux </title>
                                 <p>The lifecycle manager host must have HPE Linux installed before
                                         performing the HPE Helion OpenStack Carrier Grade
-                                        installation. You can download HPE Linux from  <xref
-                                                href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
-                                                format="html" scope="external">Helion Download
-                                                Network(HDN)</xref>. </p>
-                                <p>You can also <xref
-                                        href="carrier-grade-install-download-denver.dita#topic7148cgidd"
-                                        >download the other installation packages</xref> at
-                                        this time or later in the installation process.</p>
+                                        installation. You can download HPE Linux from the <xref
+                                                href="http://www.hpe.com/Helion/CarrierGrade"
+                                                format="html" scope="external">Software Depot for HP
+                                                Helion Carrier Grade</xref>. </p>
+                                <p>You will also download the other installation packages at this
+                                        time or later in the installation process.</p>
                                 <p>
-                                        <ol
-                                                conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/hpelinux"
-                                                id="ol_lx4_bfh_cv">
-                                                <li/>
+                                        <ol id="hpelinux">
+                                                <li>Click <b>Sign In</b> to log in using your HP
+                                                  Passport account. <p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-signin.png"
+                                                  width="600" id="image_znx_k1q_mv"/></p></li>
+                                                <li>After signing in, click the <b>Select</b> button
+                                                  on the right side of the page.<p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-select.png"
+                                                  width="600" id="image_ylt_h4p_mv"/></p></li>
+                                                <li>Enter your personal information and address and
+                                                  accept the license agreement and click
+                                                  <b>Next</b>.</li>
+                                                <li>From the list of software, select the download
+                                                  method:<ul id="ul_cn1_ptp_mv">
+                                                  <li><b>Use HPE Download Manager</b>. Use the HPE
+                                                  Download Manager to specify where the installation
+                                                  package will be saved.</li>
+                                                  <li><b>Use Standard Download</b>. Use the standard
+                                                  download method for your browser.</li>
+                                                  </ul><p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-download.png"
+                                                  width="600" id="image_mtk_15p_mv"/></p></li>
+                                                <li>Click the <b>Download</b> link next to: <ul
+                                                  id="ul_pq4_jvd_dv">
+                                                  <li>
+                                                  <p><b>HCG 2.1 KVM AVS (Z7550-01914.tar.gz)</b>.
+                                                  This link downloads the
+                                                  <codeph>HCG_2.1_KVM_AVS_Z7550-01914.tar.gz</codeph>
+                                                  file to instal the Standard Region and KVM Region.
+                                                  Also download the associated checksum and
+                                                  signature files.</p>
+                                                  </li>
+                                                  </ul></li>
+                                                <li>If you selected to use the HPE Download Manager,
+                                                  and this is the first time you have download the
+                                                  HPE Software Depot from the current computer,
+                                                  install the HPE Download Manager:<ol
+                                                  id="ol_uxx_jsp_mv">
+                                                  <li>In the Open HP_Download_Manager.exe dialog
+                                                  box, click <b>Save As</b>.</li>
+                                                  <li>Locate and double-click the downloaded
+                                                  <codeph>HP_Download_Manager.exe</codeph>
+                                                  file.</li>
+                                                  <li>Accept the license agreement and click
+                                                  <b>Next</b> to use the wizard to install.</li>
+                                                  </ol></li>
                                         </ol>
                                 </p>
+                        </section>
+                        <section>
+                                <title>Install HPE Linux</title>
+                                <p>The HPE Linux installation file is called
+                                                <codeph>hpelinux-hcg-kvm-amd64-20160224.iso.iso</codeph>.
+                                        This ISO contains all required files to install HPE Linux
+                                        and all Linux packages required for HPE Helion Carrier Grade.<ol>
+                                                <li>Use the Vitrual CD feature of the ILO remote
+                                                  console to mount the
+                                                  <systemoutput>hpelinux-hcg-kvm-amd64-20160224.iso.iso</systemoutput>
+                                                  image to the system that will host the lifecycle
+                                                  manager. Mounting the ISO makes the contents
+                                                  available for the install. </li>
+                                                <li>Use the installation wizard to install HPE
+                                                  Linux.</li>
+                                        </ol></p>
                         </section>
                         <!--<section id="pub-key"> <title>Obtain a public key</title>
 <p>On the lifecycle manager host, the user <codeph>root</codeph> must have a public key.</p>
@@ -109,47 +165,45 @@ fi
                                         SSH ports.</p>
                                 <ol id="ol_ptm_3fb_y5">
                                         <li>Disable strict host key checking: <ol id="ol_cxy_4rk_yt">
-                                                <li>In the <codeph>~/.ssh/config</codeph> file
-                                                        (create the file if it does not exist) add
-                                                        following
-                                                        lines<codeblock>Host *
-                                                                StrictHostKeyChecking no </codeblock></li>
-                                                <li>Save the file,</li>
-                                        </ol></li>
-                                        <li>Configure the public key. <ol id="ol_hbt_d5q_mv">
-                                                  <li>Enter the following
-                                                  command:<codeblock>ssh-keygen -t rsa </codeblock></li>
-                                                  <li>Press Enter to use default path
-                                                  (<codeph>~/.ssh/id_rsa</codeph>)</li>
-                                                  <li>Press Enter when prompted for the
-                                                  <codeph>passphrase</codeph>.</li>
-                                                  <li>Press Enter to confirm the empty
-                                                  <codeph>passphrase</codeph>.</li>
-                                                </ol><p>The output of the public key will display,
-                                                  similar to the
+                                                  <li>In the <codeph>~/.ssh/config</codeph> file
+                                                  (create the file if it does not exist) add
+                                                  following
+                                                  lines<codeblock>Host *
+StrictHostKeyChecking no </codeblock></li>
+                                                  <li>Save the file,</li>
+                                                </ol></li>
+                                        <li>Configure the public key.<p>a. Enter the following
+                                                  command:</p><codeblock><codeph>ssh-keygen -t rsa </codeph></codeblock><p>b.
+                                                  Press Enter to use default path
+                                                  (<codeph>~/.ssh/id_rsa</codeph>)</p><p>c.
+                                                  Press Enter when prompted for the
+                                                  <codeph>passphrase</codeph>.</p><p>d. Press Enter
+                                                  to confirm the empty
+                                                  <codeph>passphrase</codeph>.</p><p>The output of
+                                                  the public key will display, similar to the
                                                   following:</p><codeblock><codeph>ssh-copy-id 192.168.122.1 </codeph></codeblock><p>If
                                                   you get a <i>permission denied</i> error, make
                                                   sure you are logged in as root.</p></li>
                                         <li>Configure passwordless SSH access <ol id="ol_h13_kqk_yt">
-                                                <li>Edit the <codeph>/etc/ssh/sshd_config</codeph>
-                                                        file.</li>
-                                                <li>Set the following values:
+                                                  <li>Edit the <codeph>/etc/ssh/sshd_config</codeph>
+                                                  file.</li>
+                                                  <li>Set the following values:
                                                   <codeblock># Authentication:
 LoginGraceTime 120
 PermitRootLogin yes
 StrictModes yes </codeblock></li>
-                                                <li>Execute the following command to copy the public key on
-                                                        the local host to the  authorized_keys file on the
-                                                        remote host. This command also changes the
-                                                        permissions of the remote user's home,
-                                                        <b>~/.ssh</b>, and <b>~/.ssh/authorized_keys</b>
-                                                        to remove group
-                                                        writability.<codeblock>ssh-copy-id &lt;IP_Address></codeblock>Where
-                                                        IP_Address is is the gateway of the default
-                                                        network on the lifecycle manager.<p><b>Note:</b>
-                                                                If you get a permission denied error,  make sure
-                                                                you are logged in as root. Then repreat the
-                                                                <codeph>ssh-copy-id</codeph> command.</p></li></ol></li>
+                                        <li>Execute the following command to copy the public key on
+                                                  the local host to the  authorized_keys file on the
+                                                  remote host. This command also changes the
+                                                  permissions of the remote user's home,
+                                                  <b>~/.ssh</b>, and <b>~/.ssh/authorized_keys</b>
+                                                  to remove group
+                                                  writability.<codeblock>ssh-copy-id &lt;IP_Address></codeblock>Where
+                                                  IP_Address is is the gateway of the default
+                                                  network on the lifecycle manager.<p><b>Note:</b>
+                                                  If you get a permission denied error,  make sure
+                                                  you are logged in as root. Then repreat the
+                                                  <codeph>ssh-copy-id</codeph> command.</p></li></ol></li>
                                         
                                         <li>Restart the SSH
                                                 service:<codeblock>service ssh restart</codeblock></li>
@@ -159,8 +213,8 @@ StrictModes yes </codeblock></li>
                 </bodydiv>
                 <section><title>Next Step</title>Before installing HPE Helion OpenStack Carrier
                         Grade, you are responsible for preparing the network for all
-                        installations.<p>See <xref
-                                href="../prereqs/carrier-grade-install-network-prepare.dita#topic7646cginp"
-                                >Preparing the Network for Installation</xref></p></section>
+                                installations.<p>See <xref
+                                        href="../prereqs/carrier-grade-install-network-prepare.dita#topic7646cginp"
+                                        >Preparing the Network for Installation</xref></p></section>
         </body>
 </topic>
