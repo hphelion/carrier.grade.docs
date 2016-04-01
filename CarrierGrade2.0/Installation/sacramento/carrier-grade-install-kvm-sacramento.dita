@@ -168,10 +168,20 @@ system host-add --hostname &lt;unique-compute-name&gt; --personality compute --m
             >region selector</xref>.</li>
         <li>Click <b>Admin</b> then <b>Inventory</b> to monitor the status of nodes being PXE
           booted. After a succesful PXE boot, the <b>Operational State</b> should be <b>Disabled</b>
-          and the <b>Availability State</b> should be <b>Online</b>. <p><b>Note:</b>The Horizon
-            Dashboard will be running on the first IP address of the CLM network range (refer to the
-              <codeph>ip_start_address</codeph> value provided for the CLM network in the
-              <codeph>definition.json</codeph> during the non-KVM Region deployment). </p><p>The
+          and the <b>Availability State</b> should be <b>Online</b>. <p>
+            <codeblock>system host-list
++----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | locked         | disabled    | offline      |
++----+--------------+-------------+----------------+-------------+--------------+</codeblock>
+          </p></li>
+        <li>Execute the following command from controller-0 console to unlock
+              controller-1:<codeblock>system host-unlock controller-1</codeblock><p><b>Note:</b>The
+            Horizon Dashboard will be running on the first IP address of the CLM network range
+            (refer to the <codeph>ip_start_address</codeph> value provided for the CLM network in
+            the <codeph>definition.json</codeph> during the non-KVM Region deployment). </p><p>The
             log-in credentials for Horizon are as
             follows:</p><codeblock>username: admin 
 password:  &lt;random></codeblock><p>The Horizon
