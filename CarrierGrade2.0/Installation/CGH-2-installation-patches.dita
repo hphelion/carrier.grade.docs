@@ -80,10 +80,9 @@
 HCG 2.0 WR002 Patch005 is covered in KVM install-->
       <!--HCG_2.0_DCN002_Patch006 is postinstall
 HCG 2.0 WR003 Patch007 is covered in KVM install-->
-      <section id="icinga"><title>Deploy the Icinga Random Password patch</title>This patch must be
-        applied only after the HP Helion OpenStack Carrier Grade is fully deployed for the all cloud
-        topologies to create a random password for Icinga.
-          <!--<b>HCG2.0_Icinga001_Patch008</b>--><p>You should have downloaded <b
+      <section id="icinga"><title>Deploy the Icinga Random Password patch</title>This patch creates
+        a random password for Icinga.  <!--<b>HCG2.0_Icinga001_Patch008</b>--><p>You should have
+          downloaded <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/008"/>
           during the prerequisites. Extract the <codeph id="name"
             >icinga-random-password.patch</codeph> and readme files.</p><p>To deploy the patch:<ol
@@ -99,8 +98,9 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
               environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the
                 <codeph>hlm generate</codeph> command is executed, the changes will be
               included.</li>
-          </ol></p> The command creates a random password in the following
-        directory<codeblock>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/persistent_state/private_data.yml</codeblock>Open
+          </ol></p>After the HP Helion OpenStack cloud is deployed, you can find the random password
+        in the following
+        directory:<codeblock>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/persistent_state/private_data.yml</codeblock>Open
         the <codeph>private_data.yml</codeph> file to locate the random password in the
           <codeph>icinga_root_pwd</codeph> variable<p>You access the Icinga web portal using
             <codeph>http://&lt;CLM-IP>:82/icinga-web/</codeph>. Use <codeph>root</codeph> as a user
@@ -194,14 +194,14 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
         <p conref="../PostInstallPatches/CGH-2-patches-rabbitmq-012.dita#topic10581pdprabbit/intro2"/>
         <p>You should have downloaded and extracted the <b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/013"/>
-          patch during the prerequisites. Extract the <codeph>knc-log.rotate.patch</codeph> and
+          patch during the prerequisites. Extract the <codeph>knc-logrotate.patch</codeph> and
           readme files. <ol id="ol_xrn_lcc_w5">
-            <li>On the lifecycle manager VM, copy the <codeph>knc-log.rotate.patch</codeph> file to
+            <li>On the lifecycle manager VM, copy the <codeph>knc-logrotate.patch</codeph> file to
               the <codeph>~/</codeph> directory. </li>
             <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
               directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
             <li> Execute the following command to deploy the patch:
-              <codeblock>patch -p1 &lt; ../knc-log.rotate.patch</codeblock></li>
+              <codeblock>patch -p1 &lt; ../knc-logrotate.patch</codeblock></li>
             <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
               <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
             <li>Execute the following command to integrate the changes into the
@@ -230,8 +230,10 @@ HCG 2.0 WR003 Patch007 is covered in KVM install-->
             <codeph>elk2.patch</codeph>, <codeph>elk3.patch</codeph> and readme files. </p>
         <p>
           <ol id="ol_y2c_rcc_w5">
-            <li>On the licyclemanager VM, copy the three <codeph>elk#.patch</codeph> files to the
+            <li>On the lifecycle manager VM, copy the three <codeph>elk#.patch</codeph> files to the
                 <codeph>/root/kenobi-node-configuration</codeph> location. </li>
+            <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+              directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
             <li>Execute the following commands to import the patch files:
               <codeblock>patch -p1 --binary &lt; elk1.patch
 patch -p0 &lt; elk2.patch
