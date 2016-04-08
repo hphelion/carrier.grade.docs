@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpkvm6">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 7 </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section id="issues">
+      <p>This patch fixes a buffer overflow condition on systems running Linux. The condition is due
+        to multiple stack-based buffer overflows in the <systemoutput>send_dg</systemoutput> and
+          <systemoutput>send_vc</systemoutput> functions in the libresolv library in the GNU C
+        Library (called <systemoutput>glibc</systemoutput> or <systemoutput>libc6</systemoutput>).
+        The Common Vulnerabilities and Exposures (CVE®) <xref
+          href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
+          scope="external">bulletin CVE-2015-7547</xref> describes the condition. </p>
+    </section>
+      <section>
+      <note> You can use the Horizon UI to see if the patch has been deployed. Select the
+          <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+          <b>Inventory</b>. Click the <b>Patches</b> table for the
+          <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>. Or use the CLI on the active KVM
+        controller: <codeph>sudo sw-patch query</codeph>.</note>
+    </section>
+    <section>
+      <title>Prerequisites</title>
+      <p>You must install the following patches before installing this patch:<ul id="ul_cqr_spt_jv">
+          <li><xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch
+                (<codeph>HCG2.0_WR002_Patch005</codeph>)</xref>
+          </li>
+          <li><xref href="CGH-2-patches-pci-bus.dita#topic10581pdpp">PCI Bus Patch
+                (<codeph>HCG2.0_WR003_Patch007</codeph>)</xref>
+          </li>
+          <li><xref href="CGH-2-patches-wr-3-017.dita#topic10581pdpkvm3">KVM Custom Patch 3
+                (<codeph>HCG_2.0 WR004 Patch017</codeph>)</xref></li>
+          <li><xref href="CGH-2-patches-wr-4-019.dita#topic10581pdpkvm4">KVM Custom Patch 4
+                (<codeph>HCG_2.0 WR005 Patch019</codeph>)</xref>
+          </li>
+          <li><xref href="CGH-2-patches-wr-5-025.dita#topic10581pdpkvm5">KVM Custom Patch 5
+                (<codeph>HCG_2.0 WR006 Patch025</codeph>)</xref>
+          </li>
+        </ul></p>
+    </section>
+    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. </li>
+        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+          page.</li>
+        <li>Download the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/026"/>
+          file and the associated checksum and signature files.</li>
+        <li>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</li>
+        <li>Extract the compressed files until the <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>
+          and readme files are available.</li>
+      </ol></section>
+    <bodydiv id="install">
+      <section>
+        <title>Uninstall the previous patch</title>
+        <p>If you downloaded <b>Helion Carrier Grade 2.0 WR007 Patch027</b> and previously installed
+          the <b>TS_HP_15_Custom_PATCH_0006.patch</b>, uninstall the patch:<ol id="ol_ebr_ktv_4v">
+            <li>SSH into active controller in the KVM region. <p>For example:
+                  <codeph>controller-0</codeph>
+              </p></li>
+            <li>Execute the following command to determine if the patch was applied:
+              <codeblock>sudo sw-patch query</codeblock>If you have already applied the
+              TS_HP_15_Custom_PATCH_0006.patch, you should see the patch state as
+                <codeph>Applied</codeph></li>
+            <li>Execute the following command to remove the
+              patch:<codeblock>sudo sw-patch remove TS_HP_15_Custom_PATCH_0006.patch</codeblock>You
+              will see TS_HP_15_Custom_PATCH_0006.patch removed from the repository. </li>
+            <li>Execute the following command to view the status of the patch:
+              <codeblock>sudo sw-patch query</codeblock>The TS_HP_15_Custom_PATCH_0006.patch will be
+              in the <codeph>Partial-Remove</codeph> state. </li>
+            <li>Execute the following command to view the patching status of all
+              hosts:<codeblock>sudo sw-patch query-hosts</codeblock>The controller hosts reboot
+              state will be <codeph>Yes</codeph>.</li>
+            <li>Execute the following command to patch and reboot the standby KVM region controller
+              <codeblock>system host-patch-reboot controller-#</codeblock>Where <codeph>#</codeph>
+              is the number of the standby controller.  Wait until the standby controller node comes
+              up. </li>
+            <li>Execute the following command to make the active controller standby:
+              <codeblock>system host-swact &lt;active controller></codeblock> Example:
+              <codeblock>system host-swact controller-0</codeblock></li>
+            <li>Execute the following command to patch and reboot the standby KVM region controller
+              <codeblock>system host-patch-reboot controller-#</codeblock>Where <codeph>#</codeph>
+              is the number of the standby controller.  Wait until the standby controller node comes
+              up. </li>
+            <li>Execute the following command to patch and reboot
+              compute-0.<codeblock>system host-patch-reboot compute-0</codeblock>Wait for the
+              compute node to get back to <codeph>unlocked and available</codeph> state. Check from
+              cli using "system host-list" command. </li>
+            <li>Execute the following command to command and see if the "Reboot Required" column for
+              compute-0 node is <codeph>yes</codeph> or <codeph>no</codeph>. <ul id="ul_mw5_hwv_4v">
+                <li>If <codeph>yes</codeph>,
+                  execute:<codeblock>system host-reboot compute-0</codeblock>Wait for the compute
+                  node to return to <codeph>online</codeph>, <codeph>locked</codeph>, and
+                    <codeph>disabled</codeph> state. </li>
+                <li>Then execute <codeblock>system host-unlock compute-0</codeblock>Wait for the
+                  compute node to return to the <codeph>unlocked</codeph>, <codeph>enabled</codeph>
+                  and <codeph>available</codeph> state.</li>
+              </ul></li>
+            <li>Repeat the previous step for each compute node </li>
+            <li>Execute the following command to verify that all nodes are unlocked and the
+              TS_HP_15_Custom_PATCH_0006.patch is in <codeph>Available</codeph> state:
+              <codeblock>sudo sw-patch query-hosts</codeblock></li>
+            <li>Execute the following command to delete the TS_HP_15_Custom_PATCH_0006.patch
+              <codeblock>sw-patch delete TS_HP_15_Custom_PATCH_0006.patch</codeblock>If the delete
+              is successful, the <codeph>sw-patch query-hosts</codeph> will not list the patch.
+            </li>
+          </ol></p>
+      </section>
+    <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
+        id="ol_bcm_yg4_j5">
+        <li>On the active controller for the KVM region, create a directory for the
+            patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
+        <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
+            <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
+            id="ul_ald_spz_35">
+            <li><codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph></li>
+          </ul></li>
+        <li>Execute the following commands to upload the patch to the database:
+          <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0006.patch</codeblock></li>
+        <li>Execute the following commands to check if the patch is available for
+            installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
+              href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
+              id="image_tft_ncg_x5"/></p></li>
+        <li>Execute the following commands to check the current state of all the
+          hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b>
+          state will be <b>Yes</b>. For example:<p><image
+              href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png" id="image_j4z_gyf_x5"
+              width="500"/></p></li>
+        <li>Execute the following commands to apply the
+          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0006.patch
+source /etc/nova/openrc</codeblock></li>
+        <li>Execute the following command to patch and reboot the standby controller:
+            <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+              <codeph>controller-1</codeph> is the standby
+            controller:</p><codeblock>system host-patch-reboot controller-1</codeblock><p>Wait until
+            the standby controller comes up after patching. </p></li>
+        <li>Execute the following command to switch the active controller from the specified
+          controller: <codeblock>system host-swact controller-# </codeblock><p>For example, if the
+            active controller is
+            <codeph>controller-0</codeph>:<codeblock>system host-swact controller-0</codeblock></p><p>This
+            command makes <codeph>controller-1</codeph> the active controller and makes
+              <codeph>controller-0</codeph> the standby.</p></li>
+        <li>Exit the SSH session. </li>
+      </ol><b>Patch the new standby controller</b><p>Log onto the newly active controller and patch
+        the standby controller.</p><ol id="ol_ovz_4s4_j5">
+        <li>SSH into the newly active controller. <p>For example:
+          <codeph>controller-1</codeph>.</p></li>
+        <li>Execute the following command: <codeblock>source /etc/nova/openrc</codeblock></li>
+        <li>Execute the following command to patch and reboot the standby controller:
+            <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+              <codeph>controller-0</codeph> is the standby
+          controller:</p><codeblock>system host-patch-reboot controller-0</codeblock></li>
+      </ol><p><b>Patch the compute nodes</b></p><p>From the active controller, perform the following
+        steps:</p><ol id="ol_z3h_xs4_j5">
+        <li>Execute the following command to patch and reboot the <codeph>compute-0</codeph>:
+          <codeblock>system host-patch-reboot compute-0</codeblock></li>
+        <li>Execute the following command to patch and reboot <codeph>compute-1</codeph>:
+          <codeblock>system host-patch-reboot compute-1</codeblock></li>
+        <li>Apply the patch to any remaining compute nodes. You can use the <codeph>check sudo
+            sw-patch query-hosts</codeph> command to verify that the patch is applied on all the
+          hosts.</li>
+      </ol></section>
+    </bodydiv>
+      <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/kvm">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+    
+      
+  </body>
+</topic>
