@@ -23,7 +23,12 @@
           href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
           scope="external">bulletin CVE-2015-7547</xref> describes the condition. </p>
       <p>This patch replaces <b>TS_HP_15_Custom_PATCH_0006.patch</b> you might have downloaded in
-          <b>Helion Carrier Grade 2.0 WR007 Patch026</b> and previously installed. </p>
+          <b>Helion Carrier Grade 2.0 WR007 Patch026</b> and previously installed. If you previously
+        installed patch <b>TS_HP_15_Custom_PATCH_0006.patch</b>, you must remove the patch and
+        install the new patch. </p>
+      <p>If you have not previously installed the patch, proceed with installing the new patch.  </p>
+      <p>If you have a single compute in an availability zone, see the instructions in the
+        troubleshooting section.</p>
     </section>
     <section>
       <note> You can use the Horizon UI to see if the patch has been deployed. Select the
@@ -72,8 +77,8 @@
         <li>Extract the compressed files until the <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>
           and readme files are available.</li>
       </ol></section>
-    <bodydiv id="install">
-      <section>
+    <bodydiv >
+      <section id="uninstall">
         <title>Uninstall the previous patch</title>
         <p>If you downloaded <b>Helion Carrier Grade 2.0 WR007 Patch026</b> and previously installed
           the <b>TS_HP_15_Custom_PATCH_0006.patch</b>, uninstall the patch:<ol id="ol_ebr_ktv_4v">
@@ -103,33 +108,48 @@
             <li>Execute the following command to patch and reboot the standby KVM region controller
               <codeblock>system host-patch-reboot controller-#</codeblock>Where <codeph>#</codeph>
               is the number of the standby controller.  Wait until the standby controller node comes
-              up. </li>
-            <li>Execute the following command to patch and reboot
-              compute-0.<codeblock>system host-patch-reboot compute-0</codeblock>Wait for the
-              compute node to get back to <codeph>unlocked and available</codeph> state. Check from
-              cli using "system host-list" command. </li>
-            <li>Execute the following command to command and see if the "Reboot Required" column for
-              compute-0 node is <codeph>Yes</codeph>.
-                <codeblock>sudo sw-patch query-hosts</codeblock><ul id="ul_mw5_hwv_4v">
-                <li>If <codeph>Yes</codeph>,
-                  execute:<codeblock>system host-reboot compute-0</codeblock>Use the <codeph>system
-                    host-list</codeph> command to monitor Wait for the compute node to return to
-                    <codeph>locked</codeph> and <codeph>online</codeph>, state. </li>
-                <li>Then execute: <codeblock>system host-unlock compute-0</codeblock>Wait for the
-                  compute node to return to the <codeph>unlocked</codeph>, <codeph>enabled</codeph>
-                  and <codeph>available</codeph> states.</li>
-              </ul></li>
-            <li>Repeat the previous step for each compute node </li>
+              up. <p> Example: <codeblock>system host-patch-reboot controller-0</codeblock></p></li>
+            <li>Execute the following command: <ol id="ol_a2s_zsw_4v">
+                <li>Patch and reboot
+                    compute-0.<codeblock>system host-patch-reboot compute-0</codeblock><note>Wait
+                    for the compute node to get back to <codeph>unlocked and available</codeph>
+                    state. Check from cli using <codeph>system host-list</codeph> command. Execute
+                    the following command to see if the "Reboot Required" column for compute-0 node
+                    is <codeph>No</codeph>.<codeblock>sudo sw-patch query-hosts</codeblock> If the
+                      <b>Reboot Required</b> column is set to No, go to Step 10. If yes, follow Step
+                    b.</note></li>
+                <li>If Reboot Required column is <codeph>Yes</codeph>: execute the following
+                    steps:<ul id="ul_jxd_ryw_4v">
+                    <li>Reboot the compute
+                      node:<codeblock>system host-reboot compute-0</codeblock>Use the <codeph>system
+                        host-list</codeph> command to monitor the reboot. Wait for the compute node
+                      to return to <codeph>online</codeph>, <codeph>locked</codeph> and
+                        <codeph>disabled</codeph>, state. </li>
+                  </ul><ul id="ul_wsj_dtw_4v">
+                    <li>Execute the following command to see if the <b>Reboot Required</b> column
+                      for compute-0 node is
+                        <codeph>No</codeph>.<codeblock>sudo sw-patch query-hosts</codeblock><p>If
+                        the <b>Reboot Required</b> is still <codeph>Yes</codeph>, execute the
+                          <codeph>system host-reboot compute-0</codeph> command again.</p></li>
+                    <li>Use the <codeph>system host-list</codeph> command to monitor the reboot.
+                      Wait for the compute node to return to <codeph>online</codeph>,
+                        <codeph>locked</codeph> and <codeph>disabled</codeph>, state. </li>
+                    <li>Then execute: <codeblock>system host-unlock compute-0</codeblock>Wait for
+                      the compute node to return to the <codeph>unlocked</codeph>,
+                        <codeph>enabled</codeph> and <codeph>available</codeph> states.</li>
+                  </ul></li>
+              </ol></li>
+            <li>Repeat the previous step for each compute node. </li>
             <li>Execute the following command to verify that all nodes are unlocked and the
               TS_HP_15_Custom_PATCH_0006.patch is in <codeph>Available</codeph> state:
               <codeblock>sudo sw-patch query-hosts</codeblock></li>
             <li>Execute the following command to delete the TS_HP_15_Custom_PATCH_0006.patch
-              <codeblock>sw-patch delete TS_HP_15_Custom_PATCH_0006.patch</codeblock>If the delete
-              is successful, the <codeph>sw-patch query-hosts</codeph> will not list the patch.
-            </li>
+              <codeblock>sudo sw-patch delete TS_HP_15_Custom_PATCH_0006.patch</codeblock>If the
+              delete is successful, the <codeph>sudo sw-patch query</codeph> will not list the
+              patch. </li>
           </ol></p>
       </section>
-      <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
+      <section id="install"><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
           id="ol_bcm_yg4_j5">
           <li>On the active controller for the KVM region, create a directory for the
             patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
@@ -179,9 +199,10 @@ source /etc/nova/openrc</codeblock></li>
             <codeblock>system host-patch-reboot compute-0</codeblock></li>
           <li>Execute the following command to patch and reboot <codeph>compute-1</codeph>:
             <codeblock>system host-patch-reboot compute-1</codeblock></li>
-          <li>Apply the patch to any remaining compute nodes. You can use the <codeph>check sudo
-              sw-patch query-hosts</codeph> command to verify that the patch is applied on all the
-            hosts.</li>
+          <li>Apply the patch to any remaining compute nodes. <p>
+              <note>Use the <codeph>sudo sw-patch query-hosts</codeph> command to check if all the
+                nodes are unlocked and the patch 6 is in <codeph>Applied</codeph> state. </note>
+            </p></li>
         </ol></section>
     </bodydiv>
     <section>
