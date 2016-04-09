@@ -115,9 +115,9 @@
                     for the compute node to get back to <codeph>unlocked and available</codeph>
                     state. Check from cli using <codeph>system host-list</codeph> command. Execute
                     the following command to see if the "Reboot Required" column for compute-0 node
-                    is <codeph>No</codeph>.<codeblock>sudo sw-patch query-hosts</codeblock> If the
-                      <b>Reboot Required</b> column is set to No, go to Step 10. If yes, follow Step
-                    b.</note></li>
+                    is <codeph>No</codeph>.<codeblock>sudo sw-patch query-hosts</codeblock>set
+                      <codeph>No</codeph>, go to Step 10. <p> If the <b>Reboot Required</b> column
+                      is yes, follow Step b.</p></note></li>
                 <li>If Reboot Required column is <codeph>Yes</codeph>: execute the following
                     steps:<ul id="ul_jxd_ryw_4v">
                     <li>Reboot the compute
@@ -126,14 +126,16 @@
                       to return to <codeph>online</codeph>, <codeph>locked</codeph> and
                         <codeph>disabled</codeph>, state. </li>
                   </ul><ul id="ul_wsj_dtw_4v">
-                    <li>Execute the following command to see if the <b>Reboot Required</b> column
-                      for compute-0 node is
-                        <codeph>No</codeph>.<codeblock>sudo sw-patch query-hosts</codeblock><p>If
-                        the <b>Reboot Required</b> is still <codeph>Yes</codeph>, execute the
-                          <codeph>system host-reboot compute-0</codeph> command again.</p></li>
-                    <li>Use the <codeph>system host-list</codeph> command to monitor the reboot.
-                      Wait for the compute node to return to <codeph>online</codeph>,
-                        <codeph>locked</codeph> and <codeph>disabled</codeph>, state. </li>
+                    <li>Execute the following command to see status of the <b>Reboot Required</b>
+                      column for compute-0.<codeblock>sudo sw-patch query-hosts</codeblock><p>If the
+                          <b>Reboot Required</b> is <codeph>No</codeph>, perform the task in the
+                        following bullet.</p><p>If the <b>Reboot Required</b> is still
+                          <codeph>Yes</codeph>, execute the <codeph>system host-reboot
+                          compute-0</codeph> command again.</p></li>
+                    <li>When the <b>Reboot Required</b> is <codeph>No</codeph>, use the
+                        <codeph>system host-list</codeph> command to monitor the reboot. Wait for
+                      the compute node to return to <codeph>online</codeph>, <codeph>locked</codeph>
+                      and <codeph>disabled</codeph>, state. </li>
                     <li>Then execute: <codeblock>system host-unlock compute-0</codeblock>Wait for
                       the compute node to return to the <codeph>unlocked</codeph>,
                         <codeph>enabled</codeph> and <codeph>available</codeph> states.</li>
