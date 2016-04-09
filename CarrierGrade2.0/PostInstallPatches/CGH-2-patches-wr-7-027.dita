@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
-<topic xml:lang="en-us" id="topic10581pdpkvm6">
+<topic xml:lang="en-us" id="topic10581pdpkvm7">
   <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 7 </title>
   <prolog>
     <metadata>
@@ -24,9 +24,11 @@
           scope="external">bulletin CVE-2015-7547</xref> describes the condition. </p>
       <p>This patch replaces <b>TS_HP_15_Custom_PATCH_0006.patch</b> you might have downloaded in
           <b>Helion Carrier Grade 2.0 WR007 Patch026</b> and previously installed. If you previously
-        installed patch <b>TS_HP_15_Custom_PATCH_0006.patch</b>, you must remove the patch and
-        install the new patch. </p>
-      <p>If you have not previously installed the patch, proceed with installing the new patch.  </p>
+        installed patch <b>TS_HP_15_Custom_PATCH_0006.patch</b>, you must <xref
+          href="#topic10581pdpkvm7/uninstall" format="dita">remove the patch and install the new
+          patch</xref>. </p>
+      <p>If you have not previously installed the patch, proceed with <xref
+          href="#topic10581pdpkvm7/install" format="dita">installing the new patch</xref>. </p>
       <p>If you have a single compute in an availability zone, see the instructions in the
         troubleshooting section.</p>
     </section>
@@ -56,7 +58,7 @@
           </li>
         </ul></p>
     </section>
-    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+    <section id="download"><title>Download the patch</title><p>If you have not downloaded the patch, launch the
           <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
           scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
           href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
