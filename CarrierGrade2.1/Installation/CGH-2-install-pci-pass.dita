@@ -30,25 +30,33 @@
         <p>
             <ol id="ol_k3j_q22_2v">
                 <li>
-                    <xref href="../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl">Launch
-                        the HPE Helion OpenStack Carrier Grade Horizon Dashboard</xref>.</li>
+                    <xref
+                        href="../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+                        >Launch the HPE Helion OpenStack Carrier Grade Horizon
+                    Dashboard</xref>.</li>
                 <li><xref
                         href="../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita#jow1432757989702"
                         >Select the <codeph>regionone</codeph> region</xref>.</li>
                 <li>Lock the compute node you want to configure. </li>
                 <li>Configure the Ethernet interface to be used as a PCI passthrough interface.
-                        <p>Select the System Inventory window from the Admin panel, click the Hosts
-                        tab, click the name of the compute node where the PCI interface is
-                        available, click the Interfaces tab, and finally click the Edit Interface
-                        button associated with the interface you want to configure. Fill in the
-                        window as illustrated below:</p><image
+                        <p>Select the <b>System Inventory</b> page from the <b>Admin</b> panel.
+                        Then, click the <b>Hosts</b> tab and click the name of the compute node
+                        where the PCI interface is available, click the Interfaces tab, and finally
+                        click the Edit Interface button associated with the interface you want to
+                        configure. <note>The interface can also be configured from the CLI as
+                            illustrated
+                            below:<codeblock>system host-if-modify -nt pci-passthrough -p group0-data0 compute-0 eth8</codeblock></note></p><p>Fill
+                        in the window as illustrated below:</p><image
                         href="../../media/carrier.grade.docs/2.1/CGH-21-installation-pci-pass1.png"
-                        id="image_fvv_gg2_2v" width="400"/><p>In this example, Ethernet interface
-                        eth8 is assigned the network type pci-passthrough, and configured as
-                        connected to provider network group0-data0. Click the Save button to
-                        proceed. </p>The interface can also be configured from the CLI as
-                    illustrated
-                    below:<codeblock>system host-if-modify -nt pci-passthrough -p group0-data0 compute-0 eth8</codeblock></li>
+                        id="image_fvv_gg2_2v" width="400"/><p><b>Post-requisite:</b> Access switches
+                        must be properly configured to ensure that virtual machines using
+                        PCI-Passthrough interfaces have the expected connectivity. In a common
+                        scenario, the virtual machine using these interfaces connects to external
+                        end points only, that is, it does not connect to other virtual machines in
+                        the same cluster. </p><p>In this case: Ethernet interface eth8 is assigned
+                        the network type <codeph>pci-passthrough</codeph>, and configured as
+                        connected to provider network <codeph>group0-data0</codeph>. </p></li>
+                <li>Click <b>Save</b> to proceed. </li>
                 <li>Create the net0 tenant network: <p>Select the Networks window from the Admin
                         panel, click the Networks tab, and then click the Create Network button.
                         Fill in the Create Network window as illustrated below. You must ensure
@@ -69,7 +77,7 @@
                         well. However, this opens the possibility for guest applications to join
                         other tenant networks using tagged packets with different VLAN IDs, which
                         might compromise the security of the system.</p>See <i>L2 Access
-                        Switches</i>  in the <xref
+                        Switches</i> in the <xref
                         href="http://docs.hpcloud.com/pdf/static/CGH-21-KVM-Admin.pdf" format="html"
                         scope="external">KVM Region Administration Guide</xref> for other details
                     regarding the configuration of the access switch. </li>

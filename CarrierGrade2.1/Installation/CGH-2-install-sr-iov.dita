@@ -35,29 +35,39 @@
                 <li>Log in as the admin user to the web management interface. </li>
                 <li>Lock the compute node you want to configure. </li>
                 <li>Configure the Ethernet interface to be used as a SR-IOV interface. <p>Select the
-                        System Inventory window from the Admin panel, click the Hosts tab, click the
-                        name of the compute node where the PCI interface is available, click the
-                        Interfaces tab, and finally click the Edit Interface button associated with
-                        the interface you want to configure. Fill in the window as illustrated
-                        below:</p><image
+                            <b>System Inventory</b> page from the <b>Admin</b> panel. Then, click
+                        the <b>Hosts</b> tab and click the name of the compute node where the PCI
+                        interface is available, click the <b>Interfaces</b> tab, and finally click
+                        the <b>Edit Interface</b> button associated with the interface you want to
+                        configure. </p><p>
+                        <note>The interface can also be configured from the CLI as illustrated
+                            below:
+                            <codeblock>system host-if-modify -nt pci-sriov -N 4 -p group0-data0 compute-0 eth8</codeblock></note>
+                    </p><p>Fill in the window as illustrated below:</p><image
                         href="../../media/carrier.grade.docs/2.1/CGH-21-installation-sriov1.png"
-                        id="image_g5x_vj2_2v" width="400"/><p> In this example, Ethernet interface
-                        eth8 is assigned the network type pci-sriov, enabled to use 4 VFs, and
-                        configured as connected to provider network group0-data0. Click the Save
-                        button to proceed.</p><p>The Maximum number of VFs displayed in this form is
-                        a read-only item which is auto-discovered by the system by inspecting the
-                        specific NIC model. This value is reported as 0 when the selected interface
-                        does not support SRIOV.</p> The interface can also be configured from the
-                    CLI as illustrated below:
-                        <codeblock>system host-if-modify -nt pci-sriov -N 4 -p group0-data0 compute-0 eth8</codeblock><b>Note:</b>
-                    By default, a VM that requires an SR-IOV interface is instantiated only if a
-                    host NUMA node with a directly attached PCI interface is available. You can
-                    specify best-effort instantiation by using an extra specification. For more
-                    information, see <i>Specifying Best Effort for PCI NUMA Node Affinity</i> in the
-                        <xref href="http://docs.hpcloud.com/pdf/static/CGH-21-KVM-Admin.pdf"
-                        format="html" scope="external">KVM Region Administration Guide</xref>. </li>
-                <li>Create the tenant1-net1 tenant network. You must ensure that: <ul
-                        id="ul_udm_332_2v">
+                        id="image_g5x_vj2_2v" width="400"/><p><b>Post-requisite:</b> Access switches
+                        must be properly configured to ensure that virtual machines using SRIOV
+                        Ethernet interfaces have the expected connectivity. In a common scenario,
+                        the virtual machine using these interfaces connects to external end points
+                        only, that is, it does not connect to other virtual machines in the same
+                        cluster. In this case: Ethernet interface <codeph>eth8</codeph> is assigned
+                        the network type <codeph>pci-sriov</codeph>, enabled to use 4 VFs, and
+                        configured as connected to provider network <codeph>group0-data0</codeph>.
+                    </p>The Maximum number of VFs displayed in this form is a read-only item which
+                    is auto-discovered by the system by inspecting the specific NIC model. This
+                    value is reported as 0 when the selected interface does not support SRIOV.<p>
+                        <note>By default, a VM that requires an SR-IOV interface is instantiated
+                            only if a host NUMA node with a directly attached PCI interface is
+                            available. You can specify best-effort instantiation by using an extra
+                            specification. For more information, see <i>Specifying Best Effort for
+                                PCI NUMA Node Affinity</i> in the <xref
+                                href="http://docs.hpcloud.com/pdf/static/CGH-21-KVM-Admin.pdf"
+                                format="html" scope="external">KVM Region Administration
+                                Guide</xref>. </note>
+                    </p></li>
+                <li>Click <b>Save</b> to proceed.</li>
+                <li>Create the <codeph>tenant1-net1</codeph> tenant network. You must ensure that:
+                        <ul id="ul_udm_332_2v">
                         <li>The tenant1 tenant has access to the tenant network, either assigning it
                             as the owner, or by enabling the tenant network's shared flag. </li>
                         <li>The segmentation ID is set to 20. </li>
