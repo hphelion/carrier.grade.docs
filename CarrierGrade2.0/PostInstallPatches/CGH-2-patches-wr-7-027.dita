@@ -98,34 +98,37 @@
               <codeblock>sudo sw-patch query</codeblock>The TS_HP_15_Custom_PATCH_0006.patch will be
               in the <codeph>Partial-Remove</codeph> state. </li>
             <li>Execute the following command to view the patching status of all
-              hosts:<codeblock>sudo sw-patch query-hosts</codeblock>The controller hosts reboot
-              state will be <codeph>Yes</codeph>.</li>
-            <li>Execute the following command to reboot the standby KVM region controller
+              hosts:<codeblock>sudo sw-patch query-hosts</codeblock>The controller and compute hosts
+              reboot state will be <codeph>Yes</codeph>.</li>
+            <li>Execute the following command to patch and reboot the standby KVM region controller
               <codeblock>system host-patch-reboot controller-#</codeblock>Where <codeph>#</codeph>
-              is the number of the standby controller.  Wait until the standby controller node comes
-              up. </li>
+              is the number of the standby controller. Wait until the standby controller node comes
+              up. <p>Example:<codeblock>system host-patch-reboot controller-1</codeblock></p><p>This
+                example assumes controller-1 is standby.</p></li>
             <li>Execute the following command to make the active controller standby:
               <codeblock>system host-swact &lt;active controller></codeblock> Example:
               <codeblock>system host-swact controller-0</codeblock></li>
             <li>Execute the following command to patch and reboot the standby KVM region controller
               <codeblock>system host-patch-reboot controller-#</codeblock>Where <codeph>#</codeph>
-              is the number of the standby controller.  Wait until the standby controller node comes
-              up. <p> Example: <codeblock>system host-patch-reboot controller-0</codeblock></p></li>
+              is the number of the standby controller. Wait until the standby controller node comes
+              up. <p> Example:
+                <codeblock>system host-patch-reboot controller-0</codeblock></p><p>This example
+                assumes controller-0 is active.</p></li>
             <li>Execute the following command: <ol id="ol_a2s_zsw_4v">
                 <li>Patch and reboot
                     compute-0.<codeblock>system host-patch-reboot compute-0</codeblock><note>Wait
                     for the compute node to get back to <codeph>unlocked and available</codeph>
                     state. Check from cli using <codeph>system host-list</codeph> command. Execute
                     the following command to see if the "Reboot Required" column for compute-0 node
-                    is <codeph>No</codeph>.<codeblock>sudo sw-patch query-hosts</codeblock>set
+                    is <codeph>No</codeph>.<codeblock>sudo sw-patch query-hosts</codeblock>If set to
                       <codeph>No</codeph>, go to Step 10. <p> If the <b>Reboot Required</b> column
                       is yes, follow Step b.</p></note></li>
                 <li>If Reboot Required column is <codeph>Yes</codeph>: execute the following
                     steps:<ul id="ul_jxd_ryw_4v">
                     <li>Reboot the compute
                       node:<codeblock>system host-reboot compute-0</codeblock>Use the <codeph>system
-                        host-list</codeph> command to monitor the reboot. Wait for the compute node
-                      to return to <codeph>online</codeph>, <codeph>locked</codeph> and
+                        host-list</codeph> command to monitor the reboot status. Wait for the
+                      compute node to return to <codeph>online</codeph>, <codeph>locked</codeph> and
                         <codeph>disabled</codeph>, state. </li>
                   </ul><ul id="ul_wsj_dtw_4v">
                     <li>Execute the following command to see status of the <b>Reboot Required</b>
@@ -177,15 +180,18 @@
             patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0006.patch
 source /etc/nova/openrc</codeblock></li>
           <li>Execute the following command to patch and reboot the standby controller:
-              <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
-                <codeph>controller-1</codeph> is the standby
-              controller:</p><codeblock>system host-patch-reboot controller-1</codeblock><p>Wait
-              until the standby controller comes up after patching. </p></li>
+              <codeblock>system host-patch-reboot &lt;standby-controller></codeblock><p>For example
+              if <codeph>controller-1</codeph> is the standby
+            controller:</p><codeblock>system host-patch-reboot controller-1</codeblock></li>
+          <li>You can execute the following command to monitor the reboot status:
+            <codeblock>system host-unlock compute-0</codeblock>Wait for the compute node to return
+            to the <codeph>unlocked</codeph>, <codeph>enabled</codeph> and
+              <codeph>available</codeph> states.</li>
           <li>Execute the following command to switch the active controller from the specified
-            controller: <codeblock>system host-swact controller-# </codeblock><p>For example, if the
-              active controller is
+            controller: <codeblock>system host-swact &lt;active-controller> </codeblock><p>For
+              example, if the active controller is
               <codeph>controller-0</codeph>:<codeblock>system host-swact controller-0</codeblock></p><p>This
-              command makes <codeph>controller-1</codeph> the active controller and makes
+              example makes <codeph>controller-1</codeph> the active controller and makes
                 <codeph>controller-0</codeph> the standby.</p></li>
           <li>Exit the SSH session. </li>
         </ol><b>Patch the new standby controller</b><p>Log onto the newly active controller and
@@ -194,16 +200,14 @@ source /etc/nova/openrc</codeblock></li>
               <codeph>controller-1</codeph>.</p></li>
           <li>Execute the following command: <codeblock>source /etc/nova/openrc</codeblock></li>
           <li>Execute the following command to patch and reboot the standby controller:
-              <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
-                <codeph>controller-0</codeph> is the standby
+              <codeblock>system host-patch-reboot &lt;standby-controller></codeblock><p>For example
+              if <codeph>controller-0</codeph> is the standby
             controller:</p><codeblock>system host-patch-reboot controller-0</codeblock></li>
         </ol><p><b>Patch the compute nodes</b></p><p>From the active controller, perform the
           following steps:</p><ol id="ol_z3h_xs4_j5">
           <li>Execute the following command to patch and reboot the <codeph>compute-0</codeph>:
             <codeblock>system host-patch-reboot compute-0</codeblock></li>
-          <li>Execute the following command to patch and reboot <codeph>compute-1</codeph>:
-            <codeblock>system host-patch-reboot compute-1</codeblock></li>
-          <li>Apply the patch to any remaining compute nodes. <p>
+          <li>Repeat the previous step for each compute node. <p>
               <note>Use the <codeph>sudo sw-patch query-hosts</codeph> command to check if all the
                 nodes are unlocked and the patch 6 is in <codeph>Applied</codeph> state. </note>
             </p></li>
