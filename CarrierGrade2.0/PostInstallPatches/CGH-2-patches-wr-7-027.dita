@@ -22,23 +22,23 @@
         The Common Vulnerabilities and Exposures (CVE®) <xref
           href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
           scope="external">bulletin CVE-2015-7547</xref> describes the condition. </p>
-      <p>This patch replaces <b>TS_HP_15_Custom_PATCH_0006.patch</b> you might have downloaded in
-          <b>Helion Carrier Grade 2.0 WR007 Patch026</b> and previously installed. If you previously
-        installed patch <b>TS_HP_15_Custom_PATCH_0006.patch</b>, you must <xref
-          href="#topic10581pdpkvm7/uninstall" format="dita">remove the patch and install the new
-          patch</xref>. </p>
+      <p>
+        <note type="important">This patch replaces <b>TS_HP_15_Custom_PATCH_0006.patch</b> you might have downloaded
+          in <b>Helion Carrier Grade 2.0 WR007 Patch026</b> and previously installed. If you
+          previously installed patch <b>TS_HP_15_Custom_PATCH_0006.patch</b>, you must <xref
+            href="#topic10581pdpkvm7/uninstall" format="dita">remove the patch and install the new
+            patch</xref>.</note>
+      </p>
       <p>If you have not previously installed the patch, proceed with <xref
           href="#topic10581pdpkvm7/install" format="dita">installing the new patch</xref>. </p>
       <p>If you have a single compute in an availability zone, see the instructions in the
         troubleshooting section.</p>
     </section>
-    <section>
-      <note> You can use the Horizon UI to see if the patch has been deployed. Select the
-          <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
-          <b>Inventory</b>. Click the <b>Patches</b> table for the
-          <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>. Or use the CLI on the active KVM
-        controller: <codeph>sudo sw-patch query</codeph>.</note>
-    </section>
+    <section>You can use the Horizon UI to see if the patch has been deployed. Select the
+        <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+        <b>Inventory</b>. Click the <b>Patches</b> table for the
+        <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>. Or use the CLI on the active KVM
+      controller: <codeph>sudo sw-patch query</codeph>.</section>
     <section>
       <title>Prerequisites</title>
       <p>You must install the following patches before installing this patch:<ul id="ul_cqr_spt_jv">
@@ -98,20 +98,22 @@
               <codeblock>sudo sw-patch query</codeblock>The TS_HP_15_Custom_PATCH_0006.patch will be
               in the <codeph>Partial-Remove</codeph> state. </li>
             <li>Execute the following command to view the patching status of all
-              hosts:<codeblock>sudo sw-patch query-hosts</codeblock>The controller and compute hosts
-              reboot state will be <codeph>Yes</codeph>.</li>
+              hosts:<codeblock>sudo sw-patch query-hosts</codeblock>The reboot state for the
+              controllers and compute hosts will be <codeph>Yes</codeph>.</li>
             <li>Execute the following command to patch and reboot the standby KVM region controller
-              <codeblock>system host-patch-reboot controller-#</codeblock>Where <codeph>#</codeph>
-              is the number of the standby controller. Wait until the standby controller node comes
-              up. <p>Example:<codeblock>system host-patch-reboot controller-1</codeblock></p><p>This
-                example assumes controller-1 is standby.</p></li>
+              <codeblock>system host-patch-reboot &lt;standby-controller></codeblock>Where
+                <codeph>&lt;standby-controller></codeph> is the name/number of the standby
+              controller. Wait until the standby controller node comes up.
+                <p>Example:<codeblock>system host-patch-reboot controller-1</codeblock></p><p>This
+                example assumes controller-1 is standby. </p></li>
             <li>Execute the following command to make the active controller standby:
-              <codeblock>system host-swact &lt;active controller></codeblock> Example:
-              <codeblock>system host-swact controller-0</codeblock></li>
+                <codeblock>system host-swact &lt;active-controller></codeblock><p>Where
+                  <codeph>&lt;active-controller></codeph> is the name/number of the active
+                controller.</p>Example: <codeblock>system host-swact controller-0</codeblock></li>
             <li>Execute the following command to patch and reboot the standby KVM region controller
-              <codeblock>system host-patch-reboot controller-#</codeblock>Where <codeph>#</codeph>
-              is the number of the standby controller. Wait until the standby controller node comes
-              up. <p> Example:
+              <codeblock>system host-patch-reboot &lt;standby-controller></codeblock>Where
+                <codeph>&lt;standby-controller></codeph> is the number of the standby controller.
+              Wait until the standby controller node comes up. <p> Example:
                 <codeblock>system host-patch-reboot controller-0</codeblock></p><p>This example
                 assumes controller-0 is active.</p></li>
             <li>Execute the following command: <ol id="ol_a2s_zsw_4v">
