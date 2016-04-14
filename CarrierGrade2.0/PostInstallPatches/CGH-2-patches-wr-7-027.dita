@@ -112,10 +112,10 @@
                 controller.</p>Example: <codeblock>system host-swact controller-0</codeblock></li>
             <li>Execute the following command to patch and reboot the standby KVM region controller
               <codeblock>system host-patch-reboot &lt;standby-controller></codeblock>Where
-                <codeph>&lt;standby-controller></codeph> is the number of the standby controller.
-              Wait until the standby controller node comes up. <p> Example:
+                <codeph>&lt;standby-controller></codeph> is the name or number of the standby
+              controller. Wait until the standby controller node comes up. <p> Example:
                 <codeblock>system host-patch-reboot controller-0</codeblock></p><p>This example
-                assumes controller-0 is active.</p></li>
+                assumes controller-0 is stand-by.</p></li>
             <li>Execute the following command: <ol id="ol_a2s_zsw_4v">
                 <li>Patch and reboot
                     compute-0.<codeblock>system host-patch-reboot compute-0</codeblock><note>Wait
@@ -159,8 +159,8 @@
               patch. </li>
           </ol></p>
       </section>
-      <section id="install"><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
-          id="ol_bcm_yg4_j5">
+      <section id="install"><title>Install the patch</title><p><b>Patch the standby
+          controller</b></p><ol id="ol_bcm_yg4_j5">
           <li>On the active controller for the KVM region, create a directory for the
             patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
           <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
@@ -174,21 +174,22 @@
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
                 id="image_tft_ncg_x5"/></p></li>
+          <li>Execute the following commands to apply the
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0006.patch</codeblock></li>
           <li>Execute the following commands to check the current state of all the
             hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b>
             state will be <b>Yes</b>. For example:<p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png"
                 id="image_j4z_gyf_x5" width="500"/></p></li>
-          <li>Execute the following commands to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0006.patch
-source /etc/nova/openrc</codeblock></li>
+          <li>Execute the following commands to source the <codeph>openrc</codeph>
+            file:<codeblock>source /etc/nova/openrc</codeblock></li>
           <li>Execute the following command to patch and reboot the standby controller:
-              <codeblock>system host-patch-reboot &lt;standby-controller></codeblock><p>For example
-              if <codeph>controller-1</codeph> is the standby
+              <codeblock>system host-list</codeblock><p>For example if <codeph>controller-1</codeph>
+              is the standby
             controller:</p><codeblock>system host-patch-reboot controller-1</codeblock></li>
-          <li>You can execute the following command to monitor the reboot status:
-            <codeblock>system host-unlock compute-0</codeblock>Wait for the compute node to return
-            to the <codeph>unlocked</codeph>, <codeph>enabled</codeph> and
+          <li>You can execute the following command to monitor the reboot status of the standby
+            controller: <codeblock>sudo sw-patch query-hosts</codeblock>Wait for the stand-by
+            controller node to return to the <codeph>unlocked</codeph>, <codeph>enabled</codeph> and
               <codeph>available</codeph> states.</li>
           <li>Execute the following command to switch the active controller from the specified
             controller: <codeblock>system host-swact &lt;active-controller> </codeblock><p>For
