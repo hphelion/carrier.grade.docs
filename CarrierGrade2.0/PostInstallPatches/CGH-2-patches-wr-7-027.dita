@@ -184,12 +184,12 @@
           <li>Execute the following commands to source the <codeph>openrc</codeph>
             file:<codeblock>source /etc/nova/openrc</codeblock></li>
           <li>Execute the following command to patch and reboot the standby controller:
-              <codeblock>system host-list</codeblock><p>For example if <codeph>controller-1</codeph>
-              is the standby
+              <codeblock>system host-patch-reboot &lt;standby-controller> </codeblock><p>For example
+              if <codeph>controller-1</codeph> is the standby
             controller:</p><codeblock>system host-patch-reboot controller-1</codeblock></li>
           <li>You can execute the following command to monitor the reboot status of the standby
-            controller: <codeblock>sudo sw-patch query-hosts</codeblock>Wait for the stand-by
-            controller node to return to the <codeph>unlocked</codeph>, <codeph>enabled</codeph> and
+            controller: <codeblock>sudo host-list</codeblock>Wait for the stand-by controller node
+            to return to the <codeph>unlocked</codeph>, <codeph>enabled</codeph> and
               <codeph>available</codeph> states.</li>
           <li>Execute the following command to switch the active controller from the specified
             controller: <codeblock>system host-swact &lt;active-controller> </codeblock><p>For
