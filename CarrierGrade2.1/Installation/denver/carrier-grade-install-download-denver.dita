@@ -43,6 +43,13 @@
                                                                                 files.</p>
                                                                 </li>
                                                         </ul></li>
+                                        <li>Download the following Standard Region patches:<ul
+                                                  id="ul_rw5_5mh_qv">
+                                                  <li><b>Helion Carrier Grade 2.1
+                                                  OVSBR001_Patch001</b></li>
+                                                  <li><b>Helion Carrier Grade 2.1
+                                                  OVSSEC001_Patch002</b></li>
+                                                </ul></li>
                                                 <li>Download the following KVM Region patches:<ul
                                                         id="ul_njt_3l1_kv">
                                                         <li><b id="025">Helion Carrier Grade 2.0 WR006
@@ -57,82 +64,82 @@
                 <section
                         conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/checksum"/>
                 <section id="extract"><title>Extract the downloaded files</title><p>After
-                        downloading the files from HDN, extract the move the files as
-                        indicated in this section. It is important to the installation
-                        process for the installer files to be in the correct locations.<ol
-                                id="ol_e4x_3w1_fv">
-                                <li>Extrct the <codeph>hcg21_kvm_avs.tar.gz</codeph> file.
-                                        The compressed file contains the
-                                        <codeph>hcg21_kvm_avs.tar</codeph> file.</li>
-                                <li>Extract the <codeph>hcg21_kvm_avs.tar</codeph> file. The
-                                        compressed file contains the
-                                        <codeph>hcg21_kvm_avs</codeph> directory.</li>
-                        </ol></p><p><b>Standard Region installation files</b></p><p>After
+                                downloading the files from HDN, extract the move the files as
+                                indicated in this section. It is important to the installation
+                                process for the installer files to be in the correct locations.<ol
+                                        id="ol_e4x_3w1_fv">
+                                        <li>Extrct the <codeph>hcg21_kvm_avs.tar.gz</codeph> file.
+                                                The compressed file contains the
+                                                  <codeph>hcg21_kvm_avs.tar</codeph> file.</li>
+                                        <li>Extract the <codeph>hcg21_kvm_avs.tar</codeph> file. The
+                                                compressed file contains the
+                                                  <codeph>hcg21_kvm_avs</codeph> directory.</li>
+                                </ol></p><p><b>Standard Region installation files</b></p><p>After
                                 downloading and extracting the <codeph>hcg21_kvm_avs.tar.gz</codeph>
                                 files, the Standard Region installation files are contained in the
-                                <codeph>hcg21_kvm_avs</codeph> directory. Copy the files to
+                                        <codeph>hcg21_kvm_avs</codeph> directory. Copy the files to
                                 the required locations in the following table. </p><p>
-                                        <table id="table_rkj_yyk_2t">
-                                                <tgroup cols="3">
-                                                        <colspec colnum="1" colname="col2"/>
-                                                        <colspec colnum="2" colname="col3"/>
-                                                        <colspec colnum="3" colname="col4"/>
-                                                        <thead>
-                                                                <row>
-                                                                        <entry><b>File Name</b></entry>
-                                                                        <entry><b>Copy to location on the Lifecycle
-                                                                                Manager</b></entry>
-                                                                        <entry><b>Notes</b></entry>
-                                                                </row>
-                                                        </thead>
-                                                        <tbody>
-                                                                <row>
-                                                                        <entry><codeph>cg-hlm.qcow2</codeph></entry>
-                                                                        <entry>
-                                                                                <p><codeph>/var/lib/libvirt/images</codeph></p>
-                                                                                <p> </p>
-                                                                                <p>Can copy this to any other directory and update
-                                                                                        the group_vars/all file with that dir folder
-                                                                                        path</p>
-                                                                                <p> </p>
-                                                                        </entry>
-                                                                        <entry/>
-                                                                </row>
-                                                                <row>
-                                                                        <entry>
-                                                                                <p><codeph>cg-hos-misc.tar.gz</codeph></p>
-                                                                                <p><codeph>cg-hos-src.tar.gz</codeph></p>
-                                                                        </entry>
-                                                                        <entry>
-                                                                                <p><codeph>~/cg</codeph></p>
-                                                                                <p> </p>
-                                                                                <p><b>Create the <codeph>cg</codeph> folder if not
-                                                                                        present</b></p>
-                                                                        </entry>
-                                                                        <entry> </entry>
-                                                                </row>
-                                                                <row>
-                                                                        <entry><codeph>
-                                                                                cg-infra-src.tar.gz</codeph></entry>
-                                                                        <entry>
-                                                                                <p><codeph>/root</codeph>
-                                                                                </p>
-                                                                                <p> </p>
-                                                                        </entry>
-                                                                        <entry> </entry>
-                                                                </row>
-                                                        </tbody>
-                                                </tgroup>
-                                        </table>
-                                </p><note>The <codeph>hcg21_kvm_avs</codeph> directory also contains the HPE
-                                        Linux installation file, called
+                                <table id="table_rkj_yyk_2t">
+                                        <tgroup cols="3">
+                                                <colspec colnum="1" colname="col2"/>
+                                                <colspec colnum="2" colname="col3"/>
+                                                <colspec colnum="3" colname="col4"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry><b>File Name</b></entry>
+                                                  <entry><b>Copy to location on the Lifecycle
+                                                  Manager</b></entry>
+                                                  <entry><b>Notes</b></entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><codeph>cg-hlm.qcow2</codeph></entry>
+                                                  <entry>
+                                                  <p><codeph>/var/lib/libvirt/images</codeph></p>
+                                                  <p> </p>
+                                                  <p>Can copy this to any other directory and update
+                                                  the group_vars/all file with that dir folder
+                                                  path</p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry/>
+                                                  </row>
+                                                  <row>
+                                                  <entry>
+                                                  <p><codeph>cg-hos-misc.tar.gz</codeph></p>
+                                                  <p><codeph>cg-hos-src.tar.gz</codeph></p>
+                                                  </entry>
+                                                  <entry>
+                                                  <p><codeph>~/cg</codeph></p>
+                                                  <p> </p>
+                                                  <p><b>Create the <codeph>cg</codeph> folder if not
+                                                  present</b></p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>
+                                                  cg-infra-src.tar.gz</codeph></entry>
+                                                  <entry>
+                                                  <p><codeph>/root</codeph>
+                                                  </p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><note>The <codeph>hcg21_kvm_avs</codeph> directory also contains the HPE
+                                Linux installation file, called
                                         <codeph>hpelinux-hcg-kvm-amd64-20160224.iso.iso</codeph>.
-                                        This ISO contains all required files to install HPE Linux and all
-                                        Linux packages required for HPE Helion Carrier Grade. You should
-                                        have deployed HPE Linux in the <xref
-                                                href="CGH-install-prereqs-denver.dita#topic7148cipd/linux"
-                                                >Prerequisites</xref>. </note><p id="kvm-avs"><b>KVM Region
-                                                        installation files</b></p>After downloading and extracting
+                                This ISO contains all required files to install HPE Linux and all
+                                Linux packages required for HPE Helion Carrier Grade. You should
+                                have deployed HPE Linux in the <xref
+                                        href="CGH-install-prereqs-denver.dita#topic7148cipd/linux"
+                                        >Prerequisites</xref>. </note><p id="kvm-avs"><b>KVM Region
+                                        installation files</b></p>After downloading and extracting
                         the <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following files for
                         installing the KVM Region are in the <codeph>hcg21_kvm_avs/WR</codeph> directory.<p>
                                 <table id="table_ejh_qtj_k5">
@@ -140,71 +147,97 @@
                                                 <colspec colnum="1" colname="col2" colwidth="3.26*"/>
                                                 <colspec colnum="2" colname="col3" colwidth="2.13*"/>
                                                 <thead>
-                                                        <row>
-                                                                <entry>File Name</entry>
-                                                                <entry>To be copied to the KVM Host</entry>
-                                                        </row>
+                                                  <row>
+                                                  <entry>File Name</entry>
+                                                  <entry>To be copied to the KVM Host</entry>
+                                                  </row>
                                                 </thead>
                                                 <tbody>
-                                                        <row>
-                                                                <entry><codeph>bootimage_avs_only.iso</codeph></entry>
-                                                                <entry><systemoutput>/root</systemoutput> on
-                                                                        <systemoutput>controller-0</systemoutput> in the
-                                                                        KVM Region.</entry>
-                                                        </row>
-                                                        <row>
-                                                                <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
-                                                                <entry><systemoutput>/root</systemoutput> on
-                                                                        <systemoutput>controller-0</systemoutput> in the
-                                                                        KVM Region. SDK files to be used as
-                                                                        needed.</entry>
-                                                        </row>
-                                                        <row>
-                                                                <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
-                                                                <entry><systemoutput>/root</systemoutput> on
-                                                                        <systemoutput>controller-0</systemoutput> in the
-                                                                        KVM Region. Sample guest operating system files to
-                                                                        be used as needed.</entry>
-                                                        </row>
+                                                  <row>
+                                                  <entry><codeph>bootimage_avs_only.iso</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM Region.</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM Region. SDK files to be used as
+                                                  needed.</entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
+                                                  <entry><systemoutput>/root</systemoutput> on
+                                                  <systemoutput>controller-0</systemoutput> in the
+                                                  KVM Region. Sample guest operating system files to
+                                                  be used as needed.</entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p><b>Standard Region Patches</b></p>After downloading the Standard
+                        Region patches, extract the files.<p>
+                                <table frame="all" rowsep="1" colsep="1" id="table_efh_2nh_qv">
+                                        <tgroup cols="2">
+                                                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                                                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>Download file</entry>
+                                                  <entry>Extracted file</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><b>Helion Carrier Grade 2.1
+                                                  OVSBR001_Patch001</b></entry>
+                                                  <entry><codeph>infra-playbooks-ovs.patch</codeph><p><codeph>knc-ovs-bridge.patch</codeph></p></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>Helion Carrier Grade 2.1
+                                                  OVSSEC001_Patch002</b></entry>
+                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
+                                                  </row>
                                                 </tbody>
                                         </tgroup>
                                 </table>
                         </p><p><b>KVM Region Patches</b></p>After downloading and extracting the
-                        <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following files for
+                                <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following files for
                         installing the KVM Region are in the
-                        <codeph>hcg21_kvm_avs/WR/mandatory-patches</codeph> directory of the
+                                <codeph>hcg21_kvm_avs/WR/mandatory-patches</codeph> directory of the
                         download files.<p>
                                 <table frame="all" rowsep="1" colsep="1" id="kvm_patches">
                                         <tgroup cols="2">
                                                 <colspec colname="c1" colnum="1" colwidth="1.0*"/>
                                                 <colspec colname="c2" colnum="2" colwidth="1.0*"/>
                                                 <thead>
-                                                        <row>
-                                                                <entry>Download file</entry>
-                                                                <entry>Patch file</entry>
-                                                        </row>
+                                                  <row>
+                                                  <entry>Download file</entry>
+                                                  <entry>Patch file</entry>
+                                                  </row>
                                                 </thead>
                                                 <tbody>
-                                                        <row>
-                                                                <entry><b>HCG2.0_WR002_Patch005.tar.gz</b></entry>
-                                                                <entry><codeph id="001"
-                                                                        >TS_HP_15_Custom_PATCH_0001_2.patch</codeph></entry>
-                                                        </row>
-                                                        <row>
-                                                                <entry><b>HCG2.0_WR003_Patch007.tar.gx</b></entry>
-                                                                <entry><codeph id="002"
-                                                                        >TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
-                                                        </row>
-                                                        <row>
-                                                                <entry><b>HCG2.0_WR004_Patch017.tar.gz</b></entry>
-                                                                <entry><codeph id="003"
-                                                                        >TS_HP_15_Custom_PATCH_0003.patch</codeph></entry>
-                                                        </row>
-                                                        <row>
-                                                                <entry><b>HCG2.0_WR005_Patch019.tar.gz</b></entry>
-                                                                <entry><codeph id="004"
-                                                                        >TS_HP_15_Custom_PATCH_0004.patch</codeph></entry>
-                                                        </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR002_Patch005.tar.gz</b></entry>
+                                                  <entry><codeph id="001"
+                                                  >TS_HP_15_Custom_PATCH_0001_2.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR003_Patch007.tar.gx</b></entry>
+                                                  <entry><codeph id="002"
+                                                  >TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR004_Patch017.tar.gz</b></entry>
+                                                  <entry><codeph id="003"
+                                                  >TS_HP_15_Custom_PATCH_0003.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR005_Patch019.tar.gz</b></entry>
+                                                  <entry><codeph id="004"
+                                                  >TS_HP_15_Custom_PATCH_0004.patch</codeph></entry>
+                                                  </row>
                                                 </tbody>
                                         </tgroup>
                                 </table>
@@ -214,24 +247,24 @@
                                                 <colspec colname="c1" colnum="1" colwidth="1.0*"/>
                                                 <colspec colname="c2" colnum="2" colwidth="1.0*"/>
                                                 <thead>
-                                                        <row>
-                                                                <entry>Download file</entry>
-                                                                <entry>Patch file</entry>
-                                                        </row>
+                                                  <row>
+                                                  <entry>Download file</entry>
+                                                  <entry>Patch file</entry>
+                                                  </row>
                                                 </thead>
                                                 <tbody>
-                                                        <row>
-                                                                <entry><b>HCG2.0_WR006_Patch025.tar.gz</b></entry>
-                                                                <entry><codeph id="005"
-                                                                        >TS_HP_15_Custom_PATCH_0005.patch</codeph>
-                                                                </entry>
-                                                        </row>
-                                                        <row>
-                                                                <entry><b>HCG2.0_WR007_Patch027.tar.gz</b></entry>
-                                                                <entry><codeph id="006"
-                                                                        >TS_HP_15_Custom_PATCH_0006.patch</codeph>
-                                                                </entry>
-                                                        </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR006_Patch025.tar.gz</b></entry>
+                                                  <entry><codeph id="005"
+                                                  >TS_HP_15_Custom_PATCH_0005.patch</codeph>
+                                                  </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG2.0_WR007_Patch027.tar.gz</b></entry>
+                                                  <entry><codeph id="006"
+                                                  >TS_HP_15_Custom_PATCH_0006.patch</codeph>
+                                                  </entry>
+                                                  </row>
                                                 </tbody>
                                         </tgroup>
                                 </table>

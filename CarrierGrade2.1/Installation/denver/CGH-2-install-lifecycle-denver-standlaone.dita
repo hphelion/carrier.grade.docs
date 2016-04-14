@@ -26,7 +26,7 @@
         the ISO and copy the files to a location where the installation files can pick them up.</p>
       <p>
         <ol>
-          <li>Use the following commands to mount the ISO file .
+          <li>Use the following commands to mount the ISO file on the lifecycle manager host.
             <codeblock>mkdir &lt;local_file> 
 mount -oro ~cghelion/hpelinux-hcg-kvm-amd64-20160224.iso.iso &lt;local_file> </codeblock>Where:
               <codeph>&lt;local file></codeph> is the path to the file where you mounted the ISO.
@@ -58,8 +58,34 @@ tar cf - local_repo | ( cd /opt/; tar xf - )</codeblock><p>The
 deb [trusted=yes] file:/opt/local_repo/ cattleprod contrib main non-free</codeblock></li>
           <li>Execute the following command to update the apt package index
             files:<codeblock>apt-get update</codeblock></li>
+          <li>Install patch package on the KVM host:
+            <codeblock>apt-get install patch</codeblock></li>
         </ol>
       </p>
+    </section>
+    <section>
+      <title>Install the OVS bridge patch for the lifecycle manager host</title>
+      <p>The OVS bridge patch supports the OVS bridge by updating
+          <codeph>infra-ansible-playbooks</codeph> folder and updates lifecycle manager node XML
+        file. </p>
+      <p>Before deploying the patch, make sure the
+          <systemoutput>/etc/network/interfaces</systemoutput> file is updated correctly based on
+        your configuration and the ovs-network bridge is created, as described in <xref
+          href="../prereqs/carrier-grade-install-network-prepare.dita#topic7646cginpovs">Preparing
+          the OVS Network for Installation</xref>. The <codeph>cg-infra-src.tar.gz</codeph> file
+        must be in the root folder of the lifecycle manager host. You should have extracted and
+        copied the file in <xref href="carrier-grade-install-download-denver.dita#topic7148cgidd"
+          >Download the Installation Packages</xref>.</p>
+      <p>To deploy the patch: <ol id="ol_xz1_cyh_qv">
+          <li>Log into the lifecycle manager host using your credentials. </li>
+          <li>Copy the infra-playbooks-ovs.patch patch to the ~/ directory. </li>
+          <li>Change to the <codeph>infra-ansible-playbooks</codeph> directory.
+            <codeblock>cd ~/infra-ansible-playbooks</codeblock></li>
+          <li>Execute the following command to deploy the
+              patch:<codeblock> patch -p1 -b &lt; ../infra-playbooks-ovs.patch </codeblock><p>The
+                <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file is appended with
+              the following entry: <codeph>ovs_on_kvm: 1</codeph></p></li>
+        </ol></p>
     </section>
     <bodydiv id="hlm">
       <section id="prepare">
@@ -197,6 +223,29 @@ kvm_hosts:
             deploys and configures the lifecycle manager VM. After deployment, you can add the
             lifecycle manager host to a KVM cluster
               manually.<p><!--<ul id="ul_ozg_p5q_y5"><li><b>Use the HCG Dashboard UI to deploy the cloud:</b><p>Use this option if you intend to deploy the Standard Region cloud using the HCG Dashboard UI. <codeblock>ansible-playbook -i hosts setup_hlm_for_UI.yml</codeblock></p></li><li><p><b>Use the CLI to deploy the cloud</b></p><p>Use the following command if you intend to deploy the Standard Region cloud using the command line:<codeblock>ansible-playbook -i hosts setup_vcloud.yml</codeblock></p><p>This command deploys and configures the lifecycle manager VM. After deployment, you can add the lifecycle manager host to OpenSAF cluster manually. </p></li></ul>--></p></li>
+        </ol>
+      </section>
+      <section>
+        <title>Install the OVS bridge patch for the lifecycle manager VM</title>
+        <p>After the lifecycle manager VM is up and running, deploy the OVS bridge patch on the
+          VM.</p>
+        <ol id="ol_qyv_hzh_qv">
+          <li>From the lifecycle manager host, log into the lifecycle manager VM.
+            <codeblock>ssh cghelion@&lt;CLM_IP></codeblock>Where: <codeph>CLM_IP</codeph> is the IP
+            address for the lifecycle manager VM and can be found in the
+              <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
+              <codeph>hlm_clmstaticip</codeph> field.<p>Use the default credentials:
+            </p><codeblock>User Name: cghelion
+Password: cghelion1.</codeblock></li>
+          <li>Copy the knc-ovs-bridge.patch file to the  ~/ location. </li>
+          <li>Change to the <codeph>kenobi-node-configuration</codeph> directory.
+            <codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li>Execute the following command to deploy the patch:
+            <codeblock>patch -p1 -b &lt; ../knc-ovs-bridge.patch</codeblock></li>
+          <li>Change to the <systemoutput>~/cg-hlm/hlm-build</systemoutput> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>hlm_prepare-env.sh</codeblock></li>
         </ol>
       </section>
       <section conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/disk-size"/>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
-  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic7646cginp">
-<title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Step 1a: Preparing the Network
-        for Installation</title>
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic7646cginpovs">
+<title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Step 1a: Preparing the OVS
+        Network for Installation</title>
 <prolog>
     <metadata>
         <othermeta name="layout" content="default"/>
@@ -29,7 +29,118 @@
                     Diagram</xref></p>
 
         <p><b><u>Example</u></b></p>
-            <!--<table id="table_p3v_nq1_y5"><tgroup cols="4"><colspec colnum="1" colname="col2" colwidth="294pt"/><colspec colnum="2" colname="col3" colwidth="75pt"/><colspec colnum="3" colname="col4" colwidth="102.75pt"/><colspec colnum="4" colname="col5" colwidth="66.75pt"/><tbody><row><entry><b>Helion Carrier Grade Baremetal Reservation </b></entry><entry/><entry><b>R6N6640</b></entry><entry/></row><row><entry><b>VLAN Function</b></entry><entry><b>VLAN ID</b></entry><entry><b>Network Range</b></entry><entry><b>Gateway</b></entry></row><row><entry>untagged PXE</entry><entry>3534</entry><entry>10.244.44.0/24</entry><entry>10.244.44.1</entry></row><row><entry>tagged eth0 CLM</entry><entry>3535</entry><entry>10.244.45.0/24</entry><entry>10.244.45.1</entry></row><row><entry>tagged eth0 CAN</entry><entry>3536</entry><entry>10.244.46.0/24</entry><entry>10.244.46.1</entry></row><row><entry>tagged eth0 EXT</entry><entry>3537</entry><entry>10.244.47.0/24</entry><entry>10.244.47.1</entry></row><row><entry>tagged eth0 BLS</entry><entry>101</entry><entry> </entry><entry> </entry></row><row><entry>tagged eth0 DCM</entry><entry>3538</entry><entry>10.244.48.0/24</entry><entry>10.244.48.1</entry></row><row><entry>untagged eth1 TUL</entry><entry>102</entry><entry> </entry><entry> </entry></row><row><entry>VXLAN-TUL</entry><entry>3539</entry><entry>10.244.49.0/24</entry><entry>10.244.49.1</entry></row><row><entry>BM-CLM</entry><entry>103</entry><entry> </entry><entry> </entry></row><row><entry>BM-CTL</entry><entry>104</entry><entry> </entry><entry> </entry></row><row><entry>WR PXE</entry><entry>105</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>106</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>107</entry><entry> </entry><entry> </entry></row><row><entry>WR Provider</entry><entry>108</entry><entry> </entry><entry> </entry></row></tbody></tgroup></table>-->
+            <table id="table_p3v_nq1_y5">
+                <tgroup cols="4">
+                    <colspec colnum="1" colname="col2" colwidth="294pt"/>
+                    <colspec colnum="2" colname="col3" colwidth="75pt"/>
+                    <colspec colnum="3" colname="col4" colwidth="102.75pt"/>
+                    <colspec colnum="4" colname="col5" colwidth="66.75pt"/>
+                    <tbody>
+                        <row>
+                            <entry><b>Helion Carrier Grade Baremetal Reservation </b></entry>
+                            <entry/>
+                            <entry><b>R6N6640</b></entry>
+                            <entry/>
+                        </row>
+                        <row>
+                            <entry><b>VLAN Function</b></entry>
+                            <entry><b>VLAN ID</b></entry>
+                            <entry><b>Network Range</b></entry>
+                            <entry><b>Gateway</b></entry>
+                        </row>
+                        <row>
+                            <entry>untagged eth0 HOS PXE</entry>
+                            <entry>201</entry>
+                            <entry>10.20.1.0/24</entry>
+                            <entry>10.20.1.1</entry>
+                        </row>
+                        <row>
+                            <entry>tagged eth0 CLM</entry>
+                            <entry>3001</entry>
+                            <entry>10.20.31.0/24</entry>
+                            <entry>10.20.31.1</entry>
+                        </row>
+                        <row>
+                            <entry>tagged eth0 CAN</entry>
+                            <entry>202</entry>
+                            <entry>10.20.2.0/24</entry>
+                            <entry>10.20.2.1</entry>
+                        </row>
+                        <row>
+                            <entry>tagged eth0 EXT</entry>
+                            <entry>203</entry>
+                            <entry>10.20.3.0/24</entry>
+                            <entry>10.20.3.1</entry>
+                        </row>
+                        <row>
+                            <entry>tagged eth0 BLS</entry>
+                            <entry>204</entry>
+                            <entry>10.20.4.0/24</entry>
+                            <entry>10.20.4.1</entry>
+                        </row>
+                        <row>
+                            <entry>tagged eth0 DCM</entry>
+                            <entry>205</entry>
+                            <entry>10.20.5.0/24</entry>
+                            <entry>10.20.5.1</entry>
+                        </row>
+                        <row>
+                            <entry>HOS TUL</entry>
+                            <entry>206</entry>
+                            <entry>10.20.5.0/24</entry>
+                            <entry>10.20.6.1</entry>
+                        </row>
+                        <row>
+                            <entry>VXLAN-TUL</entry>
+                            <entry>3002</entry>
+                            <entry>10.20.32.0/24</entry>
+                            <entry>10.20.32.1</entry>
+                        </row>
+                        <row>
+                            <entry>untagged eth0</entry>
+                            <entry>3003</entry>
+                            <entry>10.20.33.0/24</entry>
+                            <entry>10.20.33.1</entry>
+                        </row>
+                        <row>
+                            <entry>WR Provider</entry>
+                            <entry>3004</entry>
+                            <entry>10.20.34.0/24</entry>
+                            <entry>10.20.34.1</entry>
+                        </row>
+                        <row>
+                            <entry>WR Provider</entry>
+                            <entry>3005</entry>
+                            <entry>10.20.35.0/24</entry>
+                            <entry>10.20.35.1</entry>
+                        </row>
+                        <row>
+                            <entry>WR Provider</entry>
+                            <entry>3006</entry>
+                            <entry>10.20.36.0/24</entry>
+                            <entry>10.20.36.1</entry>
+                        </row>
+                        <row>
+                            <entry>WR Provider</entry>
+                            <entry>3034</entry>
+                            <entry>10.20.64.0/24</entry>
+                            <entry>10.20.64.1</entry>
+                        </row>
+                        <row>
+                            <entry>WR Provider</entry>
+                            <entry>3035</entry>
+                            <entry>10.20.65.0/24</entry>
+                            <entry>10.20.65.1</entry>
+                        </row>
+                        <row>
+                            <entry>WR Provider</entry>
+                            <entry>3036</entry>
+                            <entry>10.20.66.0/24</entry>
+                            <entry>10.20.66.1</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
 </section>
         <section id="vlanconfig">
             <title>Configure VLAN networking on the lifecycle manager host</title>
@@ -47,72 +158,58 @@
                     root:<codeblock>sudo su -</codeblock></li>
                 <li>Edit <systemoutput>/etc/network/interfaces</systemoutput> file to provide
                     network details on the each interface:
-                    <codeblock># The loopback network interface
+                    <codeblock>#interfaces
 auto lo
 iface lo inet loopback
 
-auto eth0
-iface eth0 inet manual
-post-up ifconfig $IFACE up
-pre-down ifconfig $IFACE down
-vlan-raw-device eth0
+auto br0
+allow-ovs br0
+iface br0 inet manual
+              ovs_type OVSBridge
+              ovs_ports eth2 br-clm br-bls br-can br-pxe
 
-auto eth0.3001
-iface eth0.3001  inet manual
-post-up ifconfig $IFACE up
-pre-down ifconfig $IFACE down
-vlan-raw-device eth0
-
-auto eth0.204
-iface eth0.204  inet manual
-post-up ifconfig $IFACE up
-pre-down ifconfig $IFACE down
-vlan-raw-device eth0
-
-auto eth0.202
-iface eth0.202  inet manual
-post-up ifconfig $IFACE up
-pre-down ifconfig $IFACE down
-vlan-raw-device eth0
+auto eth2
+allow-br0 eth2
+iface eth2 inet manual
+              ovs_bridge br0
+              ovs_type OVSPort
+              pre-up ( ifconfig eth2 0.0.0.0 up )
 
 auto br-clm
+allow-br0 br-clm
 iface br-clm inet static
-address 10.20.31.12
-netmask 255.255.255.0
-gateway 10.20.31.1
-bridge_ports eth0.3001
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0
-
-auto br-bls
-iface br-bls inet manual
-bridge_ports eth0.204
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0
-
-auto br-can
-iface br-can inet manual
-bridge_ports eth0.202
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0
+              ovs_type OVSIntPort
+              ovs_bridge br0
+              ovs_options tag=3025
+              ovs_extra set interface ${IFACE} type=internal
+              address 10.20.55.10
+              netmask 255.255.255.0
+              gateway 10.20.55.1
+              post-up ( /bin/ping -c 3 10.20.55.1 )
 
 auto br-pxe
+allow-br0 br-pxe
 iface br-pxe inet manual
-bridge_ports eth0
-bridge_stp off
-bridge_fd 9
-bridge_hello 2
-bridge_maxage 12
-bridge_maxwait 0</codeblock></li>
+              ovs_type OVSIntPort
+              ovs_bridge br0
+              ovs_options tag=225
+              ovs_extra set interface ${IFACE} type=internal
+
+auto br-bls
+allow-br0 br-bls
+iface br-bls inet manual
+              ovs_type OVSIntPort
+              ovs_bridge br0
+              ovs_options tag=228
+              ovs_extra set interface ${IFACE} type=internal
+
+auto br-can
+allow-br0 br-can
+iface br-can inet manual
+              ovs_type OVSIntPort
+              ovs_bridge br0
+              ovs_options tag=226
+              ovs_extra set interface ${IFACE} type=internal</codeblock></li>
             </ol>
             <p  id="bonded"><b>Bonded NIC environment</b></p>
             <p>In a bonded NIC environment: </p>
@@ -122,75 +219,61 @@ bridge_maxwait 0</codeblock></li>
                         root:<codeblock>sudo su -</codeblock></li>
                     <li>Edit <systemoutput>/etc/network/interfaces</systemoutput> file to provide
                         network details on the each interface (IP addresses masked for security):
-                        <codeblock>auto lo
- iface lo inet loopback
+                        <codeblock>#interfaces
+auto lo
+iface lo inet loopback
 
-auto bond1
- iface bond1 inet manual
- slaves eth0 eth1
- bond_mode active-backup
- bond_miimon 100
- bond_downdelay 200
- bond_updelay 200
- bond_lcap_rate faste
- bond_xmit_hash_policy layer2+3
+auto br0
+allow-ovs br0
+iface br0 inet manual
+    ovs_type OVSBridge
+    ovs_ports bondkvm br-clm br-bls br-can br-pxe
 
-auto bond1.1591
- iface bond1.1591 inet manual
- post-up ifconfig $IFACE up
- pre-down ifconfig $IFACE down
- vlan-raw-device bond1
-
-auto bond1.133
- iface bond1.133 inet manual
- post-up ifconfig $IFACE up
- pre-down ifconfig $IFACE down
- vlan-raw-device bond1
-
-auto bond1.1592
- iface bond1.1592 inet manual
- post-up ifconfig $IFACE up
- pre-down ifconfig $IFACE down
- vlan-raw-device bond1
+auto bondkvm
+allow-br0 bondkvm
+iface bondkvm inet manual
+    ovs_bridge br0
+    ovs_type OVSBond
+    ovs_bonds eth0 eth1
+    pre-up ( ifconfig eth0 0.0.0.0 up &amp;&amp; ifconfig eth1 0.0.0.0 up )
+    post-down ( ifconfig bondkvm down &amp;&amp; ifconfig eth0 down &amp;&amp; ifconfig eth1 down )
+    ovs_options bond_mode=balance-tcp lacp=active other_config:lacp-time=fast  trunks=3013,216,214 tag=213 vlan_mode=native-untagged
 
 auto br-clm
- iface br-clm inet static
- address 10.200.91.11
- netmask 255.255.255.0
- gateway 10.200.91.1
- bridge_ports bond1.1591
- bridge_stp off
- bridge_fd 9
- bridge_hello 2
- bridge_maxage 12
- bridge_maxwait 0
+allow-br0 br-clm
+iface br-clm inet static
+    ovs_type OVSIntPort
+    ovs_bridge br0
+    ovs_options tag=3013
+    ovs_extra set interface ${IFACE} type=internal
+    address 10.20.43.5
+    netmask 255.255.255.0
+    gateway 10.20.43.1
+    post-up ( /bin/ping -c 3 10.20.43.1 )
+
+auto br-pxe
+allow-br0 br-pxe
+iface br-pxe inet manual
+    ovs_type OVSIntPort
+    ovs_bridge br0
+    ovs_options tag=213
+    ovs_extra set interface ${IFACE} type=internal
 
 auto br-bls
- iface br-bls inet manual
- bridge_ports bond1.133
- bridge_stp off
- bridge_fd 9
- bridge_hello 2
- bridge_maxage 12
- bridge_maxwait 0
+allow-br0 br-bls
+iface br-bls inet manual
+    ovs_type OVSIntPort
+    ovs_bridge br0
+    ovs_options tag=216
+    ovs_extra set interface ${IFACE} type=internal
 
- auto br-can
- iface br-can inet manual
- bridge_ports bond1.1592
- bridge_stp off
- bridge_fd 9
- bridge_hello 2
- bridge_maxage 12
- bridge_maxwait 0
-
- auto br-pxe
- iface br-pxe inet manual
- bridge_ports bond1
- bridge_stp off
- bridge_fd 9
- bridge_hello 2
- bridge_maxage 12
- bridge_maxwait 0</codeblock></li>
+auto br-can
+allow-br0 br-can
+iface br-can inet manual
+    ovs_type OVSIntPort
+    ovs_bridge br0
+    ovs_options tag=214
+    ovs_extra set interface ${IFACE} type=internal</codeblock></li>
                 </ol>
             </p>
         </section>
@@ -201,69 +284,55 @@ auto br-bls
             <p>Perform the following steps to enable networks that will be associated with lifecycle manager VM.</p>
             <ol>
                 <li>Launch a terminal and log in to your lifecycle manager host as root:<p>
-                    <codeblock>sudo su -</codeblock>
-                </p></li>
-                <li>Create the <codeph>br-pxe</codeph> network by creating an XML definition
-                        file:<ol id="ol_qys_c4d_3v">
-                        <li>Manually create the XML file, here named
-                            <codeph>br-pxe.xml</codeph>:<codeblock>cat br-pxe.xml 
-&lt;network>
-&lt;name&gt;br-pxe&lt;/name&gt;
-&lt;forward mode='bridge'/&gt;
-&lt;bridge name='br-pxe'/&gt;
-&lt;/network&gt;</codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
-                        <li>Execute the following commands, using the name of your XML file, to
-                            create and start the network and configure the network to
-                            auto-start:<codeblock>virsh net-define br-pxe.xml
-virsh net-start br-pxe
-virsh net-autostart br-pxe</codeblock></li>
-                    </ol></li>
-                <li>Create the <codeph>br-clm</codeph> network by creating an XML definition
-                        file:<ol id="ol_xrq_14d_3v">
-                        <li>Manually create the XML file, here named
-                            <codeph>br-clm.xml</codeph>:<codeblock>cat br-clm.xml 
-&lt;network>
-&lt;name&gt;br-clm&lt;/name&gt;
-&lt;forward mode='bridge'/&gt;
-&lt;bridge name='br-clm'/&gt;
-&lt;/network&gt;</codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
-                        <li>Execute the following commands, using the name of your XML file, to
-                            create and start the network and configure the network to
-                            auto-start:<codeblock>virsh net-define br-clm.xml
-virsh net-start br-clm
-virsh net-autostart br-clm</codeblock></li>
-                    </ol></li>
-                <li>Create the <codeph>br-bls</codeph> network by creating an XML definition
-                        file:<ol id="ol_ekx_xnd_3v">
-                        <li>Manually create the XML file, here named
-                            <codeph>br-bls.xml</codeph>:<codeblock>cat br-bls.xml 
-&lt;network>
-&lt;name&gt;br-bls&lt;/name&gt;
-&lt;forward mode='bridge'/&gt;
-&lt;bridge name='br-bls'/&gt;
-&lt;/network&gt;</codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
-                        <li>Execute the following commands, using the name of your XML file, to
-                            create and start the network and configure the network to
-                            auto-start:<codeblock>virsh net-define br-bls.xml
-virsh net-start br-bls
-virsh net-autostart br-bls</codeblock></li>
-                    </ol></li>
-                <li>Create the <codeph>br-can</codeph> network by creating an XML definition file:<p>
-                        <ol id="ol_xbx_4nd_3v">
-                            <li>Manually create the XML file, here named
-                                <codeph>br-can.xml</codeph>:<codeblock>cat br-can.xml 
-&lt;network>
-&lt;name&gt;br-can&lt;/name&gt;
-&lt;forward mode='bridge'/&gt;
-&lt;bridge name='br-can'/&gt;
-&lt;/network&gt;</codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
-                            <li>Execute the following commands, using the name of your XML file, to
-                                create and start the network and configure the network to
-                                auto-start:<codeblock>virsh net-define br-can.xml
-virsh net-start br-can
-virsh net-autostart br-can</codeblock></li>
-                        </ol>
+                        <codeblock>sudo su -</codeblock>
                     </p></li>
+                <li>Create the network bridges by creating an XML definition file, called
+                        <codeph>ovs-network.xml</codeph>.<p>This will create and configure the
+                        network bridge and the PXE, CLM, CAN, BLS, and CTL
+                    networks:</p><codeblock>&lt;network>
+  &lt;name>ovs-network&lt;/name>
+  &lt;uuid>a2c0bd9e-79ad-4f0d-9ed9-a00ca95a4c37&lt;/uuid>
+  &lt;forward mode='bridge'/>
+  &lt;bridge name='br0'/>
+  &lt;virtualport type='openvswitch'/>
+  &lt;portgroup name='pg-pxe' default='yes'>
+    &lt;vlan>
+      &lt;tag id='226'/>
+    &lt;/vlan>
+  &lt;/portgroup>
+  &lt;portgroup name='pg-clm'>
+    &lt;vlan>
+      &lt;tag id='217'/>
+    &lt;/vlan>
+  &lt;/portgroup>
+  &lt;portgroup name='pg-can'>
+    &lt;vlan>
+      &lt;tag id='218'/>
+    &lt;/vlan>
+  &lt;/portgroup>
+  &lt;portgroup name='pg-bls'>
+    &lt;vlan>
+      &lt;tag id='219'/>
+    &lt;/vlan>
+  &lt;/portgroup>
+  &lt;portgroup name='pg-ctl'>
+    &lt;vlan trunk='yes'>
+      &lt;tag id='217'/>
+      &lt;tag id='218'/>
+      &lt;tag id='219'/>
+      &lt;tag id='226' nativeMode='untagged'/>
+    &lt;/vlan>
+  &lt;/portgroup>
+&lt;/network></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
+                <li>Execute the following command to start the default virbr0 network and configure
+                    the network to
+                    auto-start<codeblock>virsh net-start default
+virsh net-autostart default</codeblock></li>
+                <li>Execute the following commands, using the name of your XML file, to create and
+                    start the networks and configure the network to
+                    auto-start:<codeblock>virsh net-define ovs-network.xml
+virsh net-start ovs-network
+virsh net-autostart ovs-network</codeblock></li>
                 <!--<li>Create the <codeph>br-dcm</codeph> network by creating an XML definition file:<p>a. Manually create the XML file, using the name <codeph>br-dcm.xml</codeph>:</p><codeblock><codeph>cat br-dcm.xml
 &lt;network&gt;
 &lt;name&gt;br-dcm&lt;/name&gt;
@@ -273,46 +342,13 @@ virsh net-autostart br-can</codeblock></li>
 &lt;/network&gt;</codeph></codeblock><p>b. Execute the following commands to create and start the network and configure the network to auto-start:</p><codeblock><codeph>virsh net-define br-dcm.xml
 virsh net-start br-dcm
 virsh net-autostart br-dcm</codeph></codeblock></li>-->
-                <li>Execute the following command to start the default virbr0 network and configure
-                    the network to
-                    auto-start<codeblock>virsh net-start default
-virsh net-autostart default</codeblock></li>
                 <li>Use the <codeph>virsh net-list</codeph> command to view information on the new
                     networks:<codeblock><codeph>virsh net-list
                         
-Name        State       Autostart       Persistent
+Name             State       Autostart       Persistent
 ----------------------------------------------------------
-br-bls      active      yes             yes
-br-clm      active      yes             yes
-br-can      active      yes             yes
-br-pxe      active      yes             yes
-default     active      yes             yes</codeph></codeblock></li>
-                <li>Execute the following command to make sure the <codeph>br-clm</codeph> network
-                    has been assigned an IP
-                        address:<codeblock><codeph>ifconfig br-clm</codeph></codeblock><p>Run
-                        following command if the <codeph>br-clm</codeph> does not indicate the IP
-                        address has been
-                    assigned:</p><codeblock><codeph>ifdown br-clm
-ifdown &lt;interface&gt;
-ifup br-clm
-ifup &lt;yourinterface&gt;</codeph></codeblock></li>
-                <li>Execute the following command to make sure the <codeph>br-clm</codeph> network
-                    was assigned the IP address of the primary
-                    interface.<codeblock><codeph>ifconfig | more</codeph></codeblock></li>
-                <li>Reboot the system.</li>
-                <li>Execute the following command to make sure the primary interface does not have
-                    an IP address and confirm the IP address of the <codeph>br-clm</codeph>
-                    network:<codeblock><codeph>ifconfig | more</codeph></codeblock></li>
-                <li>Execute the following command to view the routing table. Make sure all of the networks are
-                    configured as expected.<codeblock><codeph>route -n</codeph></codeblock></li>
-                
-                <li>Execute the following command to make sure the VLAN ID is as expected.
-                        <codeblock>brctl show</codeblock><p>The output should appear similar to the
-                        following:</p><codeblock>bridge name     bridge id               STP enabled     interfaces
-br-bls          8000.5cb9017aa370       no              eth0.210
-br-can          8000.5cb9017aa370       no              eth0.208
-br-clm          8000.5cb9017aa370       no              eth0.3007
-br-pxe          8000.5cb9017aa370       no              eth0</codeblock></li>
+ovs-network      active      yes             yes
+default          active      yes             yes</codeph></codeblock></li>
             </ol>
         </section>
     
