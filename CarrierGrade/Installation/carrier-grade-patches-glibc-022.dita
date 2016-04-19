@@ -2,8 +2,8 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdp22">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 1.1: Deploy the HPE Linux
-    Patch</title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 1.1: Deploy the HPE Linux Patch  in
+    the non-KVM region</title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -16,13 +16,13 @@
   </prolog>
   <body>
     <section>The HPE Linux glibc patch fixes a buffer overflow condition on systems running HPE
-      Linux. The condition is due to multiple stack-based buffer overflows in the
-        <codeph>send_dg</codeph> and <codeph>send_vc</codeph> functions in the libresolv library in
-      the GNU C Library (called <codeph>glibc</codeph> or <codeph>libc6</codeph>). The Common
-      Vulnerabilities and Exposures (CVE®) <xref
-        href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
-        scope="external">bulletin CVE-2015-7547</xref> describes the condition.   <p>Files
-        added\impacted by this patch: </p><ul id="ul_ppq_2wr_fv">
+      Linux in the non-KVM region. The condition is due to multiple stack-based buffer overflows in
+      the <codeph>send_dg</codeph> and <codeph>send_vc</codeph> functions in the libresolv library
+      in the GNU C Library <xref href="carrier-grade-patches-glibc-022.dita"/>(called
+        <codeph>glibc</codeph> or <codeph>libc6</codeph>). The Common Vulnerabilities and Exposures
+      (CVE®) <xref href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547"
+        format="html" scope="external">bulletin CVE-2015-7547</xref> describes the condition.
+        <p>Files added\impacted by this patch: </p><ul id="ul_ppq_2wr_fv">
         <li>libc6 </li>
         <li>libc-bin </li>
         <li>libc-dev-bin </li>

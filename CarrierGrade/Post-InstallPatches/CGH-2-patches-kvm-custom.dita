@@ -21,35 +21,12 @@
         <b>Inventory</b>. Click the <b>Patches</b> table for the
         <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>. Or use the CLI on the active KVM
       controller: <codeph>sudo sw-patch query</codeph>.</p>
-    <p><b>Important!</b> If you have deployed <codeph>HCG2.0_WR001_Patch001</codeph>, you must
-      remove this patch before proceeding. See <xref href="#topic10581pdpk/remove" format="dita"
-      />.</p>
-    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
-          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
-          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
-          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
-      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
-        <li>Click <b>Sign In</b> to log in using your account. </li>
-        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
-          page.</li>
-        <li>Download the <b
-            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/005"/>
-          file and the associated checksum and signature files.</li>
-        <li>Verify the <xref
-            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
-            >downloaded signature</xref> and the <xref
-            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
-            >downloaded checksums</xref>.</li>
-        <li>Extract the compressed files until the
-            <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>, readme.txt and usecase.txt files
-          are available.</li>
-      </ol></section>
-    <section><title>Install the patch</title><p>If <codeph>HCG2.0_WR001_Patch001</codeph> is not
-        installed, use the following steps to install the patch.</p><p><b>Important!</b> If you have
-        deployed <codeph>HCG2.0_WR001_Patch001</codeph>, you must remove this patch before
-        proceeding. See <xref href="#topic10581pdpk/remove" format="dita"/>.</p>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><title>Install the patch</title><p>If <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph> is not installed, use the following steps
+        to install the patch.</p>
+      <p>Extract the compressed files you downloaded until the
+          <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>, readme.txt and usecase.txt files are
+        available.</p>
     </section>
       <section>
       <title>Patch the
@@ -101,43 +78,6 @@ source /etc/nova/openrc</codeblock></li>
           <codeblock>system host-patch-reboot compute-1</codeblock></li>
       </ol></section>
     <section id="remove">
-      <title>Remove Patch001</title>
-      <p>If you have deployed <codeph>HCG2.0_WR001_Patch001</codeph>, use the following steps to
-        remove that patch.</p>
-      <p><b>Note:</b> You can refer to the <xref
-          href="../AdminGuide/carrier-grade-admin-guide.dita#topic15959cgag">KVM Region
-          Administrator Guide</xref> for more information on removing patches.</p>
-        <ol id="ol_erq_vmx_w5">
-          <li>SSH into active controller in the KVM region. <p>For example:
-                <codeph>controller-0</codeph>
-            </p></li>
-          <li>Execute the following command to determine if the patch was applied: <p>
-              <codeblock>sudo sw-patch query</codeblock>
-            </p>If applied, you should see the patch state as <b>Applied</b>.<p><image
-                href="../../media/carrier.grade.docs/CGH-2-patch17-qry.png" width="500"
-                id="image_zcn_zyf_x5"/></p></li>
-          <li>Execute the following command to remove the
-            patch:<codeblock>sudo sw-patch remove HCG2.0_WR001_Patch001</codeblock></li>
-          <li>If you execute another query command, the <b>Patch State</b> will be
-              <b>Partial-Remove</b>.<codeblock>sudo sw-patch query</codeblock></li>
-          <li>Execute the following commands to check the current state of all the hosts:
-          <codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b> state
-          will be <b>Yes</b>. For example:<p><image
-              href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png" id="image_j4z_gyf_x5"
-              width="500"/></p></li>
-          <li>Execute the following command to reboot the stanby
-              controller:<codeblock>system host-patch-reboot controller-#</codeblock><p>For example
-              if <codeph>controller-1</codeph> is the standby
-              controller:</p><codeblock>system host-patch-reboot controller-1</codeblock><p>Wait
-              until the standby controller comes up after patching. </p></li>
-          <li>Execute the following command to switch the active controller from the specified
-            controller: <codeblock>system host-swact controller-#  </codeblock><p>For example, if
-              the active controller is
-              <codeph>controller-0</codeph>:<codeblock>system host-swact controller-0</codeblock></p><p>This
-              command makes <codeph>controller-1</codeph> the active controller and makes
-                <codeph>controller-0</codeph> the standby.</p></li>
-          <li>Exit the SSH session.</li> 
-          </ol>
       
         <p><b>Patch the new standby controller</b></p>
         <p>Log onto the newly

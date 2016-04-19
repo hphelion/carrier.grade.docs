@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 1.1: Required Patches</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>Occasionally, you will be asked to deploy a patch to your running HP Helion OpenStack Carrier
+      Grade environment.</p>
+    <p>All patch files can be downloaded from the <xref
+        href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html" scope="external"
+        >Helion Distribution Network (HDN)</xref>. You must <xref
+        href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+        >obtain a user account on HDN</xref> in order to download these files.</p>
+    <p>Some patches must be installed prior to deploying yout cloud and some patches must be
+      installed after the cloud is fully installed and running. Consult the following table for the
+      patches you need to apply and when they must be applied.</p>
+    <section>
+      <title>Post-deployment patches </title>
+      <p>If your HP Helion OpenStack Carrier Grade cloud is fully deployed, you must install the
+        following patches based on your cloud topology, unless you have installed them during
+        installation. The following table shows the patches that need to be installed, the name of
+        the download file, and which deployments need the patch. </p>
+      <p>Some patches can be deployed during the installation. If you installed a patch during
+        installation, you do not need to install the patch again. Currently, all patches except
+          <b>HCG_2.0_DCN002_Patch006</b> can be installed pre-deployment. </p>
+      <p>
+        <table frame="all" rowsep="1" colsep="1" id="hos">
+          <tgroup cols="2">
+            <colspec colname="c1" colnum="1" colwidth="2.45*"/>
+            <colspec colname="newCol2" colnum="2" colwidth="4.54*"/>
+            <colspec colname="newCol10" colnum="3" colwidth="1*"/>
+            <thead>
+              <row>
+                <entry>Patch</entry>
+                <entry>Download File</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry/>
+                <entry/>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </p>
+    </section>
+    <section>
+      <title>KVM Region Patches</title>
+      <p>The following patches are to be applied to the servers in the KVM region.</p>
+      <p>Some patches can be deployed during the installation. If you installed a patch during
+        installation, you do not need to install the patch again. </p>
+      <p>
+        <table frame="all" rowsep="1" colsep="1" id="kvm">
+          <tgroup cols="2">
+            <colspec colname="c1" colnum="1" colwidth="1.91*"/>
+            <colspec colname="newCol2" colnum="2" colwidth="3.1*"/>
+            <thead>
+              <row>
+                <entry>Patch</entry>
+                <entry>Download File</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry><xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Patch
+                    1_2</xref></entry>
+                <entry>TS_HP_15_Custom_PATCH_0001_2.patch</entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-pci-bus.dita#topic10581pdpp">KVM Region Patch
+                    2</xref></entry>
+                <entry valign="middle">TS_HP_15_Custom_PATCH_0002.patch</entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-wr-3-017.dita#topic10581pdpkvm3">KVM Region Patch
+                    3</xref></entry>
+                <entry>TS_HP_15_Custom_PATCH_0003.patch</entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-wr-4-019.dita#topic10581pdpkvm4">KVM Region Patch
+                    4</xref></entry>
+                <entry>TS_HP_15_Custom_PATCH_0004.patch</entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-wr-5-025.dita#topic10581pdpkvm5">KVM Region Patch
+                    5</xref></entry>
+                <entry>TS_HP_15_Custom_PATCH_0005.patch</entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-wr-6-027.dita#topic10581pdpkvm6">KVM Region Patch
+                    6</xref></entry>
+                <entry>TS_HP_15_Custom_PATCH_0006.patch</entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-wr-7-028.dita#topic10581pdpkvm7">KVM Region Patch
+                    7</xref></entry>
+                <entry>TS_HP_15_Custom_PATCH_0007.patch</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </p>
+    </section>
+    <p><!--After new WR patch see if "KVM Region compute node cannot be unlocked multiple times" troubleshooting item should be removed.--></p>
+    <section id="launch"><title>Launch the the Software Updates and Licensing site</title><p>To downloaded the
+        patches, launch the <xref href="http://www.hpe.com/downloads/software" format="html"
+          scope="external">Software Updates &amp; Licensing</xref> site. You must obtain a Service
+        Agreement ID (SAID) in order to download these files. </p>In a browser, navigate to the
+        <xref href="http://www.hpe.com/downloads/software" format="html" scope="external">Software
+        Updates &amp; Licensing</xref> site. <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-install-download-patches.png" width="200"
+              id="image_jvd_q55_qv"/></p></li>
+        <li>After signing in, enter your Service Agreement ID (SAID) in the <b>Software updates and
+            licensing</b> page and accept the license agreement.<p><image
+              href="../../media/carrier.grade.docs/CGH-2-install-download-patches2.png"
+              id="image_mhp_f55_qv" width="400"/></p></li>
+        <li>Click <b>View Available Products</b> to locate and download a patch you need.</li>
+      </ol></section>
+  </body>
+</topic>
