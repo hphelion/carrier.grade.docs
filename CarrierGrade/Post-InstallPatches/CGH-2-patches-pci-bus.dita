@@ -16,15 +16,17 @@
   <body>
     <p>This patch fixes the PCI Bus Assignment for VM Guest. This patch is applicable for all cloud
       topologies. </p>
-    <p>If you did not deploy this patch, <codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph> during
+    <p>If you did not deploy this patch, <codeph>TS_15.05_PATCH_0002.patch.new</codeph> during
       installation, perform the following steps. </p>
-    <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
+    <section>You can use the Horizon UI to see if the patch has been deployed. Select the
         <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
-        <b>Inventory</b>. Click the <b>Patches</b> table.</p>
+        <b>Inventory</b>. Click the <b>Patches</b> table for the
+        <codeph>TS_15.05_PATCH_0002.patch.new</codeph>. Or use the CLI on the active KVM controller:
+        <codeph>sudo sw-patch query</codeph>.</section>
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
-    <section><title>Install the patch</title><p>If <codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph>
-        is not installed, use the following steps to install the patch.</p><p>Extract the compressed
-        files you downloaded until the <codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph>, readme.txt
+    <section><title>Install the patch</title><p>If <codeph>TS_15.05_PATCH_0002.patch.new</codeph> is
+        not installed, use the following steps to install the patch.</p><p>Extract the compressed
+        files you downloaded until the <codeph>TS_15.05_PATCH_0002.patch.new</codeph>, readme.txt
         and usecase.txt files are available.</p>Execute the following commands: <p><b>Patch the
           standby controller</b></p><p><b>Important:</b> Make sure the <xref
           href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch</xref> has
@@ -34,16 +36,16 @@
         <li>Create a directory for the patch, if the directory does not
           exist:<codeblock>mkdir -p /tmp/patches</codeblock></li>
         <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:<ul>
-            <li><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></li>
+            <li><codeph>TS_15.05_PATCH_0002.patch.new</codeph></li>
           </ul></li>
         <li>Execute the following commands:
-          <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0002.patch                </codeblock></li>
+          <codeblock>sudo sw-patch upload /tmp/patches/TS_15.05_PATCH_0002.patch.new                </codeblock></li>
         <li>Execute the following command to verify that the patch is
           available:<codeblock>sudo sw-patch query</codeblock></li>
         <li>Execute the following command to verify the current state of all the
           hosts:<codeblock>sudo sw-patch query-hosts</codeblock></li>
         <li>Execute the following command to deploy the
-          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0002.patch</codeblock></li>
+          patch:<codeblock>sudo sw-patch apply TS_15.05_PATCH_0002.patch.new</codeblock></li>
         <li>Execute the following command to set the environment variables in the OpenStack RC
           file:<codeblock>source /etc/nova/openrc</codeblock></li>
         <li>Execute the following command to patch and reboot the standby controller:

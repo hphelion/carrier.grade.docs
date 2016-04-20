@@ -2,8 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdpk">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 1.1: Deploy the KVM Region Patch
-    1_2 </title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 1.1: Deploy the KVM Region Patch 1 </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -19,13 +18,13 @@
       <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
         <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
         <b>Inventory</b>. Click the <b>Patches</b> table for the
-        <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>. Or use the CLI on the active KVM
-      controller: <codeph>sudo sw-patch query</codeph>.</p>
+        <codeph>TS_15.05_PATCH_0001.patch.new</codeph>. Or use the CLI on the active KVM controller:
+        <codeph>sudo sw-patch query</codeph>.</p>
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
-    <section><title>Install the patch</title><p>If <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph> is not installed, use the following steps
-        to install the patch.</p>
+    <section><title>Install the patch</title><p>If <codeph>TS_15.05_PATCH_0001.patch.new</codeph> is not installed, use the following steps to
+        install the patch.</p>
       <p>Extract the compressed files you downloaded until the
-          <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>, readme.txt and usecase.txt files are
+          <codeph>TS_15.05_PATCH_0001.patch.new</codeph>, readme.txt and usecase.txt files are
         available.</p>
     </section>
       <section>
@@ -36,10 +35,10 @@
           </p></li>
         <li>Create a directory for the patch, if not
           present:<codeblock>mkdir -p /tmp/patches</codeblock></li>
-        <li>Copy the <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph> patch file to the
+        <li>Copy the <codeph>TS_15.05_PATCH_0001.patch.new</codeph> patch file to the
             <codeph>/tmp/patches</codeph> directory.</li>
         <li>Execute the following command to upload the patch to the repository:
-          <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0001_2.patch</codeblock></li>
+          <codeblock>sudo sw-patch upload /tmp/patches/TS_15.05_PATCH_0001.patch.new</codeblock></li>
         <li>Execute the following command to check if the patch is available for
             installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
               href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
@@ -47,7 +46,7 @@
         <li>Execute the following command to check the current state of all the
           hosts:<codeblock>sudo sw-patch query-hosts</codeblock></li>
         <li>Execute the following commands to apply the
-          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0001_2.patch
+          patch:<codeblock>sudo sw-patch apply TS_15.05_PATCH_0001.patch.new
 source /etc/nova/openrc</codeblock></li>
         <li>Execute the following command to patch and reboot the standby controller:
             <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
@@ -94,7 +93,7 @@ source /etc/nova/openrc</codeblock></li>
           <li>Execute the following command to make sure all the nodes are unlocked and in the
               <b>Available</b> state: <codeblock>sudo sw-patch query-hosts</codeblock></li>
           <li>Execute the following command to remove Patch001 from the database:
-            <codeblock>sw-patch delete TS_HP_15_Custom_PATCH_0001</codeblock></li>
+          <codeblock>sw-patch delete TS_15.05_PATCH_0001.patch.new</codeblock></li>
           <li>Execute the following command to determine if the patch was deleted:<p>
               <codeblock>sudo sw-patch query</codeblock>
             </p>The <codeph>TS_HP_15_Custom_PATCH_0001</codeph> patch should not appear in the

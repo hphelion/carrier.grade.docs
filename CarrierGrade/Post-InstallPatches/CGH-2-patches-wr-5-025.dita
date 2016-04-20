@@ -38,7 +38,7 @@
         <note> You can use the Horizon UI to see if the patch has been deployed. Select the
             <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
             <b>Inventory</b>. Click the <b>Patches</b> table for the
-            <codeph>TS_HP_15_Custom_PATCH_0005.patch</codeph>. Or use the CLI on the active KVM
+            <codeph>TS_15.05_PATCH_0005.patch.new</codeph>. Or use the CLI on the active KVM
           controller: <codeph>sudo sw-patch query</codeph>.</note>
       </p>
     </section>
@@ -58,11 +58,11 @@
         </ul></section>
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
     <bodydiv id="install">
-      <section><title>Install the patch</title><p>If
-            <codeph>TS_HP_15_Custom_PATCH_0005.patch</codeph> is not installed, use the following
-          steps to install the patch.</p><p>Extract the compressed files you downloaded until the
-            <codeph>TS_HP_15_Custom_PATCH_0005.patch</codeph>, readme.txt and usecase.txt files are
-          available.</p><p><b>Patch the standby controller</b></p><ol id="ol_bcm_yg4_j5">
+      <section><title>Install the patch</title><p>If <codeph>TS_15.05_PATCH_0006.patch.new</codeph>
+          is not installed, use the following steps to install the patch.</p><p>Extract the
+          compressed files you downloaded until the <codeph>TS_15.05_PATCH_0006.patch.new</codeph>,
+          readme.txt and usecase.txt files are available.</p><p><b>Patch the standby
+          controller</b></p><ol id="ol_bcm_yg4_j5">
           <li>SSH into active controller in the KVM region. <p>For example:
                 <codeph>controller-0</codeph>
             </p></li>
@@ -70,10 +70,10 @@
           <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
               <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
               id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0005.patch</codeph></li>
+              <li><codeph>TS_15.05_PATCH_0006.patch.new</codeph></li>
             </ul></li>
           <li>Execute the following commands to upload the patch to the database:
-            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0005.patch</codeblock></li>
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_15.05_PATCH_0006.patch.new</codeblock></li>
           <li>Execute the following commands to check if the patch is available for
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
@@ -84,7 +84,7 @@
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png"
                 id="image_j4z_gyf_x5" width="500"/></p></li>
           <li>Execute the following commands to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0005.patch
+            patch:<codeblock>sudo sw-patch apply TS_15.05_PATCH_0006.patch.new
 source /etc/nova/openrc</codeblock></li>
           <li>Execute the following command to patch and reboot the standby controller:
               <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if

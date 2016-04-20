@@ -28,8 +28,8 @@
     <section>You can use the Horizon UI to see if the patch has been deployed. Select the
         <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
         <b>Inventory</b>. Click the <b>Patches</b> table for the
-        <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>. Or use the CLI on the active KVM
-      controller: <codeph>sudo sw-patch query</codeph>.</section>
+        <codeph>TS_15.05_PATCH_0006.patch.new</codeph>. Or use the CLI on the active KVM controller:
+        <codeph>sudo sw-patch query</codeph>.</section>
     <section>
       <title>Prerequisites</title>
       <p>You must install the following patches before installing this patch:<ul id="ul_cqr_spt_jv">
@@ -52,25 +52,25 @@
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
     <bodydiv>
       <section id="install"><title>Install the patch</title><p>If
-            <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph> is not installed, use the following
-          steps to install the patch.</p><p>Extract the compressed files you downloaded until the
-            <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph>, readme.txt and usecase.txt files are
+            <codeph>TS_15.05_PATCH_0006.patch.new</codeph> is not installed, use the following steps
+          to install the patch.</p><p>Extract the compressed files you downloaded until the
+            <codeph>TS_15.05_PATCH_0006.patch.new</codeph>, readme.txt and usecase.txt files are
           available.</p><p><b>Patch the standby controller</b></p><ol id="ol_bcm_yg4_j5">
           <li>On the active controller for the KVM region, create a directory for the
             patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
           <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
               <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
               id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph></li>
+              <li><codeph>TS_15.05_PATCH_0006.patch.new</codeph></li>
             </ul></li>
           <li>Execute the following commands to upload the patch to the database:
-            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0006.patch</codeblock></li>
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_15.05_PATCH_0006.patch.new</codeblock></li>
           <li>Execute the following commands to check if the patch is available for
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
                 id="image_tft_ncg_x5"/></p></li>
           <li>Execute the following commands to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0006.patch</codeblock></li>
+            patch:<codeblock>sudo sw-patch apply TS_15.05_PATCH_0006.patch.new</codeblock></li>
           <li>Execute the following commands to check the current state of all the
             hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b>
             state will be <b>Yes</b>. For example:<p><image
