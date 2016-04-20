@@ -32,14 +32,12 @@
       </ul></section>
     <section>
       <title>Prerequisites</title>
-      <p>You must install the following patches before installing this patch:<ul id="ul_cqr_spt_jv">
-          <li><xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch
-                (<codeph>HCG2.0_WR002_Patch005</codeph>)</xref>
-          </li>
-          <li><xref href="CGH-2-patches-pci-bus.dita#topic10581pdpp">PCI Bus Patch
-                (<codeph>HCG2.0_WR003_Patch007</codeph>)</xref>
-          </li>
-          <li><xref href="CGH-2-patches-wr-3-017.dita#topic10581pdpkvm3">KVM Custom Patch 3
+      <p>You must install the following patches before installing this patch. You should have
+        installed KVM Region patches 1 and 2 during deployment of the KVM Region:<ul
+          id="ul_cqr_spt_jv">
+          <li>KVM Region Patch 1 (<codeph>HCG2.0_WR002_Patch005</codeph>)</li>
+          <li>KVM Region Patch 2 (<codeph>HCG2.0_WR003_Patch007</codeph>)</li>
+          <li><xref href="CGH-2-patches-wr-3-017.dita#topic10581pdpkvm3">KVM Region Patch 3
                 (<codeph>HCG_2.0 WR004 Patch017</codeph>)</xref></li>
           <li><xref href="CGH-2-patches-wr-4-019.dita#topic10581pdpkvm4">KVM Custom Patch 4
                 (<codeph>HCG_2.0 WR005 Patch019</codeph>)</xref>
@@ -47,11 +45,15 @@
           <li><xref href="CGH-2-patches-wr-5-025.dita#topic10581pdpkvm5">KVM Custom Patch 5
                 (<codeph>HCG_2.0 WR006 Patch025</codeph>)</xref>
           </li>
-        <li><xref href="CGH-2-patches-wr-6-027.dita#topic10581pdpkvm6">KVM Custom Patch 6
-          (<codeph>HCG_2.0 WR007 Patch026</codeph>)</xref>
-        </li>
+          <li><xref href="CGH-2-patches-wr-6-027.dita#topic10581pdpkvm6">KVM Custom Patch 6
+                (<codeph>HCG_2.0 WR007 Patch026</codeph>)</xref>
+          </li>
         </ul></p>
     </section>
+    <p><b>Note:</b> You can use the Horizon UI to see if the patches have been deployed. Select the
+        <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+        <b>Inventory</b>. Click the <b>Patches</b> table. Or use the CLI on the active KVM
+      controller: <codeph>sudo sw-patch query</codeph>.</p>
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
     <section><title>Install the patch</title><p>If <codeph>TS_HP_15_Custom_PATCH_0007.patch</codeph>
         is not installed, use the following steps to install the patch.</p><p>Extract the compressed

@@ -23,11 +23,6 @@
             <codeph>HP_15_Custom_PATCH_0002</codeph> patch;</li>
         <li>Closing the Linux Grub backspace vulnerability.</li>
       </ul></p>
-      <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
-        <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
-        <b>Inventory</b>. Click the <b>Patches</b> table for the
-        <codeph>TS_15.05_PATCH_0003.patch.new</codeph>. Or use the CLI on the active KVM controller:
-        <codeph>sudo sw-patch query</codeph>.</p>
     <section><title>Prerequisites</title>You must install the following patches before installing
       this patch:<ul id="ul_cqr_spt_jv">
         <li><xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch
@@ -36,8 +31,21 @@
         <li><xref href="CGH-2-patches-pci-bus.dita#topic10581pdpp">PCI Bus Patch
               (<codeph>HCG2.0_WR003_Patch007</codeph>)</xref>
         </li>
-      </ul></section>
+      </ul><p><b>Note:</b> You can use the Horizon UI to see if the patches have been deployed.
+        Select the <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+          <b>Inventory</b>. Click the <b>Patches</b> table. Or use the CLI on the active KVM
+        controller: <codeph>sudo sw-patch query</codeph>.</p></section>
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section>
+      <title>Uninstall previous patches</title>
+      <p>During the deployment of the KVM region, you might have installed two patches: <ul
+          id="ul_owz_kfg_sv">
+          <li>TS_15.05_DESIGN_PATCH_HEAT.patch</li>
+          <li>TS_15.05_DESIGN_PATCH_HORIZON.patch</li>
+        </ul>Before installing KVM Region Patch 3, you must <xref
+          href="CGH-patches-remove-kvm.dita#topic10581pdpkvm3">uninstall these patches</xref>. Patch
+        3 addresses the same issues as these patches.</p>
+    </section>
     <section><title>Install the patch</title><p>If <codeph>TS_15.05_PATCH_0003.patch.new</codeph> is
         not installed, use the following steps to install the patch.</p><p>Extract the compressed
         files you downloaded until the <codeph>TS_15.05_PATCH_0003.patch.new</codeph>, readme.txt
