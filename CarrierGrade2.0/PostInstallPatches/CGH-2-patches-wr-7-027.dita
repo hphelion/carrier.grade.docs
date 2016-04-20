@@ -92,8 +92,8 @@
               TS_HP_15_Custom_PATCH_0006.patch, you should see the patch state as
                 <codeph>Applied</codeph></li>
             <li>Execute the following command to remove the
-              patch:<codeblock>sudo sw-patch remove TS_HP_15_Custom_PATCH_0006.patch</codeblock>You
-              will see TS_HP_15_Custom_PATCH_0006.patch removed from the repository. </li>
+              patch:<codeblock>sudo sw-patch remove TS_HP_15_Custom_PATCH_0006</codeblock>You will
+              see TS_HP_15_Custom_PATCH_0006.patch removed from the repository. </li>
             <li>Execute the following command to view the status of the patch:
               <codeblock>sudo sw-patch query</codeblock>The TS_HP_15_Custom_PATCH_0006.patch will be
               in the <codeph>Partial-Remove</codeph> state. </li>
@@ -154,9 +154,8 @@
               TS_HP_15_Custom_PATCH_0006.patch is in <codeph>Available</codeph> state:
               <codeblock>sudo sw-patch query-hosts</codeblock></li>
             <li>Execute the following command to delete the TS_HP_15_Custom_PATCH_0006.patch
-              <codeblock>sudo sw-patch delete TS_HP_15_Custom_PATCH_0006.patch</codeblock>If the
-              delete is successful, the <codeph>sudo sw-patch query</codeph> will not list the
-              patch. </li>
+              <codeblock>sudo sw-patch delete TS_HP_15_Custom_PATCH_0006</codeblock>If the delete is
+              successful, the <codeph>sudo sw-patch query</codeph> will not list the patch. </li>
           </ol></p>
       </section>
       <section id="install"><title>Install the patch</title><p><b>Patch the standby
@@ -175,7 +174,7 @@
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
                 id="image_tft_ncg_x5"/></p></li>
           <li>Execute the following commands to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0006.patch</codeblock></li>
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0006</codeblock></li>
           <li>Execute the following commands to check the current state of all the
             hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b>
             state will be <b>Yes</b>. For example:<p><image
