@@ -39,34 +39,52 @@
                 
                 <p id="intro">This document describes the prerequisite steps to download the installation files required to install HP Helion OpenStack Carrier Grade.</p>
                 <p/>
-                <section id="launch"><title>Launch the Software Updates and Licensing
-                                site</title><p>To downloaded the patches, launch the Software
-                                Updates &amp; Licensing site. You must obtain a Service Agreement ID
-                                (SAID) in order to download these files. </p>In a browser, navigate
-                        to the <xref href="http://www.hpe.com/downloads/software" format="html"
-                                scope="external">Software Updates &amp; Licensing</xref> site. <ol>
-                                <li>Click <b>Sign In</b> to log in using your account. <p><image
-                                                  href="../../../media/carrier.grade.docs/CGH-2-install-download-patches.png"
-                                                  width="200" id="image_jvd_q55_qv"/></p></li>
-                                <li>After signing in, enter your Service Agreement ID (SAID) in the
-                                                <b>Software updates and licensing</b> page and
-                                        accept the license agreement.<p><image
-                                                  href="../../../media/carrier.grade.docs/CGH-2-install-download-patches2.png"
-                                                  id="image_mhp_f55_qv" width="400"/></p></li>
-                                <li>Click <b>View Available Products</b> to access the list of
-                                        products associated with your SAID. </li>
-                                <li>Under <b>Infrastructure Management</b>, select the product
-                                        associated with <b>2.0</b>.<p><image
-                                                  href="../../../media/carrier.grade.docs/CGH-2-install-download-patches-select.png"
-                                                  width="400" id="image_bqz_ncm_sv"/></p></li>
-                                <li>For the 2.0 version of the software click <b>Get
-                                                  Software</b>.<p><image
-                                                  href="../../../media/carrier.grade.docs/CGH-2-install-download-installer-select-2.png"
-                                                  width="400" id="image_p4l_fpm_sv"/></p></li>
-                                <li>Select the patch file and click <b>Download</b>.<p><image
-                                                  href="../../../media/carrier.grade.docs/CGH-2-install-download-installer-select-3.png"
-                                                  width="400" id="image_dv5_zdm_sv"/></p></li>
-                        </ol></section>
+                <section id="depot">
+                        <title>Launch the Software Depot</title>
+                        <p>Launch the the <xref href="http://www.hpe.com/Helion/CarrierGrade"
+                                        format="html" scope="external">Software Depot for HP Helion
+                                        Carrier Grade</xref>. You must obtain an HP Passport user
+                                account in order to download these files. </p>
+                        <p>
+                                <ol id="hpelinux">
+                                        <li>Click <b>Sign In</b> to log in using your HP Passport
+                                                account. <p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-signin.png"
+                                                  width="600" id="image_znx_k1q_mv"/></p></li>
+                                        <li>After signing in, click the <b>Select</b> button on the
+                                                right side of the page.<p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-select.png"
+                                                  width="600" id="image_ylt_h4p_mv"/></p></li>
+                                        <li>Enter your personal information and address and accept
+                                                the license agreement and click <b>Next</b>.</li>
+                                        <li>For the software you want to download, listed below,
+                                                select the download method:<ul id="ul_cn1_ptp_mv">
+                                                  <li><b>Use HPE Download Manager</b>. Use the HPE
+                                                  Download Manager to specify where the installation
+                                                  package will be saved.</li>
+                                                  <li><b>Use Standard Download</b>. Use the standard
+                                                  download method for your browser.</li>
+                                                </ul><p>For example:</p><p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-download.png"
+                                                  width="600" id="image_mtk_15p_mv"/></p><note>If
+                                                  you selected to use the HPE Download Manager, and
+                                                  this is the first time you have download the HPE
+                                                  Software Depot from the current computer, you will
+                                                  need to install the HPE Download Manager:<ol
+                                                  id="ol_uxx_jsp_mv">
+                                                  <li>In the Open HP_Download_Manager.exe dialog
+                                                  box, click <b>Save As</b>.</li>
+                                                  <li>Locate and double-click the downloaded
+                                                  <codeph>HP_Download_Manager.exe</codeph>
+                                                  file.</li>
+                                                  <li>Accept the license agreement and click
+                                                  <b>Next</b> to use the wizard to install.</li>
+                                                  </ol></note><p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-download-mgr.png"
+                                                  id="image_hd4_2fn_sv"/></p></li>
+                                </ol>
+                        </p>
+                </section>
                 
                 <section>In a browser, navigate to <xref
                                 href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
@@ -77,41 +95,56 @@
                                         the left side of the page.</li>
                                 <li id="download-vrs">Click the <b>Downloads</b> tab and locate the
                                         following download. <ul id="ul_zll_rjv_g5">
-                                                <li><b><b id="productShow_appName">Helion Carrier
-                                                  Grade 2.0 DCN Part 1 of 1</b></b> Installation
-                                                  files for the HP Helion OpenStack Carrier Grade
-                                                  Tahoe, Memphis, and Sacramento deployments. This
-                                                  link will download the
+                                                <li><b>HCG 2.0 KVM ESX Ironic VRS Part 1 of 1</b>
+                                                  Installation files for the HP Helion OpenStack
+                                                  Carrier Grade Tahoe, Memphis, and Sacramento
+                                                  deployments. This link will download the
                                                   <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
                                                   file. </li>
-                                                <li><b>Helion Carrier Grade 2.0 DCN Part 1 of 1
-                                                  Checksum</b>. The SHA256 checksum for HP Helion
+                                                <li><b>HCG 2.0 KVM ESX Ironic VRS Part 1 of 1
+                                                  sha256</b>. The SHA256 checksum for HP Helion
                                                   Carrier Grade 2.0 VRS. This link will download the
                                                   <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz.sha256</codeph>
                                                   file.</li>
-                                                <li><b>Helion Carrier Grade 2.0 DCN Part 1 of 1
-                                                  Signature</b>. The signature file for HP Helion
-                                                  Carrier Grade 2.0 VRS. This link will download the
+                                                <li><b>HCG 2.0 KVM ESX Ironic VRS Part 1 of 1
+                                                  sig</b>. The signature file for HP Helion Carrier
+                                                  Grade 2.0 VRS. This link will download the
                                                   <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz.sig</codeph>
+                                                  file.</li>
+                                                <li><b>HCG 2.0 KVM ESX Ironic VRS Part 2 of 2</b>
+                                                  Installation files for the HP Helion OpenStack
+                                                  Carrier Grade Tahoe, Memphis, and Sacramento
+                                                  deployments. This link will download the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
+                                                  file. </li>
+                                                <li><b>HCG 2.0 KVM ESX Ironic VRS Part 2 of 2
+                                                  sha</b>. The SHA256 checksum for HP Helion Carrier
+                                                  Grade 2.0 VRS. This link will download the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz.sha256</codeph>
+                                                  file.</li>
+                                                <li><b>HCG 2.0 KVM ESX Ironic VRS Part 2 of 2
+                                                  sig</b>. The signature file for HP Helion Carrier
+                                                  Grade 2.0 VRS. This link will download the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz.sig</codeph>
                                                   file.</li>
                                                 <li><b>GPG Keys to Verify Signature Files</b> The
                                                   public keys for HP Helion Carrier Grade 2.0.</li>
                                         </ul></li>
                                 <li id="download-avs">Click the <b>Downloads</b> tab and locate the
                                         following download. <ul id="ul_erk_kwh_k5">
-                                                <li><b>Helion Carrier Grade 2.0.0 AVS</b>
-                                                  Installation files for the HP Helion OpenStack
-                                                  Carrier Grade Tahoe, Memphis, and Sacramento
-                                                  deployments. This link will download the
+                                                <li><b>HCG 2.0 KVM AVS</b> Installation files for
+                                                  the HP Helion OpenStack Carrier Grade Tahoe,
+                                                  Memphis, and Sacramento deployments. This link
+                                                  will download the
                                                   <codeph>hcg2_kvm_avs.tar.gz</codeph> file. </li>
-                                                <li><b>Helion Carrier Grade 2.0 AVS Checksum</b>.
-                                                  The SHA256 checksum for HP Helion Carrier Grade
-                                                  2.0 VRS. This link will download the
+                                                <li><b>HCG 2.0 KVM AVS sha256</b>. The SHA256
+                                                  checksum for HP Helion Carrier Grade 2.0 VRS. This
+                                                  link will download the
                                                   <codeph>hcg2_kvm_avs.tar.gz.sha256</codeph>
                                                   file.</li>
-                                                <li><b>Helion Carrier Grade 2.0 AVS Signature</b>.
-                                                  The signature file for HP Helion Carrier Grade 2.0
-                                                  VRS. This link will download the
+                                                <li><b>HCG 2.0 KVM AVS sig</b>. The signature file
+                                                  for HP Helion Carrier Grade 2.0 VRS. This link
+                                                  will download the
                                                   <codeph>hcg2_kvm_avs.tar.gz.sig</codeph>
                                                   file.</li>
                                                 <li><b>GPG keys to verify signature files</b> The
