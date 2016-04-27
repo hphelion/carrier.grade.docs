@@ -24,6 +24,37 @@
     <p>Some patches must be installed prior to deploying yout cloud and some patches must be
       installed after the cloud is fully installed and running. Consult the following table for the
       patches you need to apply and when they must be applied.</p>
+    <p/>
+    <section>
+      <title>Standard Region Patches</title>
+      <p>The following patches are to be applied to the servers in the standard region.</p>
+      <p>Some patches can be deployed during the installation. If you installed a patch during
+        installation, you do not need to install the patch again. </p>
+      <p>
+        <table frame="all" rowsep="1" colsep="1" id="table_bjh_kb2_5v">
+          <tgroup cols="2">
+            <colspec colname="c1" colnum="1" colwidth="1.91*"/>
+            <colspec colname="newCol2" colnum="2" colwidth="3.1*"/>
+            <thead>
+              <row>
+                <entry>Patch</entry>
+                <entry>Download File</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry><xref href="CGH-21-patches-ovssec-001.dita">OVS Security Patch 2</xref></entry>
+                <entry><b id="025">Helion Carrier Grade 2.1 OVSSEC001_Patch002</b></entry>
+              </row>
+              <row>
+                <entry>Helion OpenStack Horizon Patch </entry>
+                <entry><b>Helion Carrier Grade 2.1_Horizon001_Patch003</b></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </p>
+    </section>
     <section>
       <title>KVM Region Patches</title>
       <p>The following patches are to be applied to the servers in the KVM region.</p>
@@ -56,8 +87,11 @@
                   /></entry>
               </row>
               <row>
-                <entry>KVM Region Patch 7</entry>
-                <entry/>
+                <entry><xref href="CGH-21-patches-wr-08-029.dita#topic10581pdpkvm215">KVM Region
+                    Patch 7</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/029"
+                  /></entry>
               </row>
             </tbody>
           </tgroup>
@@ -65,6 +99,13 @@
       </p>
     </section>
     <p><!--After new WR patch see if "KVM Region compute node cannot be unlocked multiple times" troubleshooting item should be removed.--></p>
+    <p/>
+    <section>
+      <title>KVM Region Patches</title>
+      <p>The following patches are to be applied to the servers in the KVM region.</p>
+      <p>Some patches can be deployed during the installation. If you installed a patch during
+        installation, you do not need to install the patch again. </p>
+    </section>
     <p/>
     <section id="launch"><title>Launch the the Software Updates and Licensing site</title><p>To
         downloaded the patches, launch the <xref href="http://www.hpe.com/downloads/software"
