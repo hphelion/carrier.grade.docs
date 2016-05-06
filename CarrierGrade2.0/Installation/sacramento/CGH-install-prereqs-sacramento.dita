@@ -317,6 +317,29 @@ StrictHostKeyChecking no </codeblock></li>
                 <section
                         conref="../sacramento/CGH-2-install-sacramento.dita#topic10581c2is/conref-vmware-workaround"
                         id="conref-vmware-workaround"/>
+                <section id="update-tor">
+                        <title>Update the ToR Switch Firmware</title>
+                        <p>If you are deploying a 5930 as a hardware VTEP:</p>
+                        <p>Before configuring the top-of-rack switch, you need to make sure the
+                                firmware is up-to-date with the latest version. Perform the
+                                following one-time task to update the ToR switch firmware:</p>
+                        <ol id="ol_w52_4yr_zt">
+                                <li>Download and update firmware for the HP FlexFabric 5930 Switch
+                                        assigned to the rack hosting compute nodes. <p>Follow the
+                                                instructions with the download to perform the
+                                                update.</p></li>
+                                <li>Execute the following command to validate that the firmware has
+                                        been updated successfully:
+                                        <codeblock>display boot-loader</codeblock>The output appears
+                                        similar to the following if the firmware version is
+                                                <codeph>5930-D2423-1111</codeph>:<codeblock>Software images on slot 1: 
+Current software images: 
+  flash:/5930-cmw710-boot-d2423.bin 
+  flash:/5930-cmw710-system-d2423.bin 
+  flash:/5930-cmw710-devkit-d2423.bin 
+  flash:/5930-cmw710-manufacture-d2423.bin</codeblock></li>
+                        </ol>
+                </section>
                 <section id="next-step">
                         <title>Next Step</title>
                         <p><xref

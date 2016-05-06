@@ -54,13 +54,6 @@
             the: <ul id="ul_a4z_bsv_fv">
               <li>lifecycle manager VM;</li>
               <li>three HP Helion OpenStack Carrier Grade controllers in the non-KVM region.</li>
-            </ul></p><p><b>For KVM + ESX Deployments,</b> you must copy six the (6) new Debian
-              (<codeph>.deb</codeph>) files to the::<ul id="ul_tlf_hnw_fv">
-              <li>lifecycle manager VM;</li>
-              <li>three HP Helion OpenStack Carrier Grade controllers in the non-KVM region;</li>
-              <li>DCN host;</li>
-              <li>VRS-G node;</li>
-              <li>ESX Compute Proxy host.</li>
             </ul></p></li>
       </ol></section>
     <section>
@@ -89,26 +82,6 @@
             <codeph>/tmp/</codeph> directory on each controller.</li>
         <li>Execute the following command on each
           controller:<codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb  8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
-      </ol>
-      <p><b>Patch the other controllers</b></p>
-      <p>For KVM + ESX deployments, use the following steps to deploy the patch onto the DCN Host,
-        the VRS-G node, and ESX Compute Proxy node. </p>
-      <ol id="ol_dkx_vqv_fv">
-        <li>From the lifecycle manager VM, SSH into the DCN host.</li>
-        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
-            <codeph>/tmp/</codeph> directory.</li>
-        <li>Execute the following command to patch the DCN host:
-          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
-        <li>From the lifecycle manager VM, SSH into the VRS-G node.</li>
-        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
-            <codeph>/tmp/</codeph> directory.</li>
-        <li>Execute the following command to patch the VRS-G node:
-          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
-        <li>From the lifecycle manager VM, SSH into the ESX Compute Proxy node.</li>
-        <li>Verify that the (6) new Debian (<codeph>.deb</codeph>) files have been copied to the
-            <codeph>/tmp/</codeph> directory.</li>
-        <li>Execute the following command to patch the Compute Proxy node:
-          <codeblock>dpkg -i /tmp/libc6_2.19-18+deb8u3_amd64.deb /tmp/libc-bin_2.19-18+deb8u3_amd64.deb /tmp/libc-dev-bin_2.19-18+deb8u3_amd64.deb /tmp/libc6-dev_2.19-18+deb8u3_amd64.deb /tmp/locales_2.19-18+deb8u3_all.deb /tmp/multiarch-support_2.19-18+deb8u3_amd64.deb</codeblock></li>
       </ol>
     </section>
   </body>
