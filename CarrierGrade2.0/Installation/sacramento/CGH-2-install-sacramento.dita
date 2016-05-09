@@ -161,6 +161,13 @@ Password: cghelion</codeblock>
           "count": 2,
           "file": ".hos/ccp-vrsg.json"
         }</codeblock></li>
+          <li>If you are deploying a 5930 as a hardware VTEP, remove the following section under
+              <codeph>control
+            planes</codeph>:<codeblock>},
+        {
+          "count": 2,
+          "file": ".hos/ccp-vrsg.json"</codeblock>
+            Removing these lines will prevent the installation of the VRS-G.</li>
         </ol>
       </p>
     </section>
