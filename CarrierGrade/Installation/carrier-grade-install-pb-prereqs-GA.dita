@@ -582,7 +582,7 @@ WR/extras/HP-HCG-sample-guest-15.05-b9.img.md5</codeblock></li>
                         
                 </section>
                 <section id="download-esx">
-                        <title>Download the DCN and ESX packages for KVM + ESX</title>
+                        <title>Download the ESX packages for KVM + ESX</title>
                         <p><b>Note:</b> This is applicable only for KVM + ESX Cloud Deployment. </p>
                         <p>To integrate VMware ESX<tm tmtype="reg"/> storage, deploy the KVM + ESX
                                 topology, download the following additional packages.</p>
@@ -591,111 +591,13 @@ WR/extras/HP-HCG-sample-guest-15.05-b9.img.md5</codeblock></li>
                         <p>Download all required ESX packages needed to deploy the ESX environment,
                                 including the VMware vSphere Distributed Switch (VDS) .</p>
                         <p><b>DCN components</b></p>
-                        <p>Download all required DCN packages needed to deploy the DCN
-                                environment.</p>
-                        <ol>
-                                <li> DCN has a well-defined process for Pre-Sales and Post-Sales
-                                        process to download DCN bits and obtain license. Use one of
-                                        the following processes to download DCN bits and obtain
-                                        license: <ul>
-                                                <li>External customers will follow the DCN
-                                                  Post-Sales Process:<ol>
-                                                  <li>You purchase a DCN license through the
-                                                  Post-Sales process.</li>
-                                                  <li>After you purchase the license, you will
-                                                  receive an email with all the instructions on how
-                                                  to obtain DCN installation packages and required
-                                                  license.</li>
-                                                  <li>Follow the instructions in the email to
-                                                  download all the required DCN packages listed
-                                                  above form the link provided in the email.</li>
-                                                  </ol></li>
-                                        </ul><ul id="ul_whv_rcf_bt">
-                                                <li>Internal HPE partners will follow DCN Pre-Sales
-                                                  Process:<ol id="ol_xhv_rcf_bt">
-                                                  <li>Internal HPE partners can contact HPE Helion
-                                                  OpenStack Carrier Grade team for help.</li>
-                                                  <li>Internal HPE partners can refer to HPE Helion
-                                                  OpenStack Carrier Grade Engineering Wiki under the
-                                                  <i>HOS CG 1.1 GA: ESX (non-KVM region) DCN package
-                                                  details</i> section.</li>
-                                                  </ol></li>
-                                        </ul></li>
-                                <li>Move or copy the compressed installation packages to the KVM
-                                                host.<ul id="ul_cqm_tzc_ws">
-                                                <li>DCN-VRS-GW-3.0R7</li>
-                                                <li>DCN-VSC-3.0R7</li>
-                                                <li>DCN-VRS-VMware-3.0R7.zip (copy to VSD
-                                                  server)</li>
-                                                <li>DCN-VSD-QCOW-3.0R8 (copy to VSD server)</li>
-                                        </ul></li>
-                                <li>Create the <codeph>~/cg/dcn</codeph> directory on the HLM
-                                        host.</li>
-                                <li>Extract the compressed download packages. <table>
-                                                <tgroup cols="3">
-                                                  <colspec colnum="1" colname="col2"
-                                                  colwidth="1.89*"/>
-                                                  <colspec colnum="2" colname="col3"
-                                                  colwidth="2.77*"/>
-                                                  <colspec colnum="3" colname="col4" colwidth="1*"/>
-                                                  <thead>
-                                                  <row>
-                                                  <entry>File Name</entry>
-                                                  <entry>List of files to be used after
-                                                  Extraction</entry>
-                                                  <entry>Copy the files to directory on HLM
-                                                  Host</entry>
-                                                  </row>
-                                                  </thead>
-                                                  <tbody>
-                                                  <row>
-                                                  <entry>DCN-VRS-GW-3.0R7</entry>
-                                                  <entry>
-                                                  <p>
-                                                  <codeph>DCN-VRS-3.0.7-125-ubuntu.14.04.tar.gz
-                                                  </codeph></p>
-                                                  <p>Untarring this file will extract::</p>
-                                                  <p><codeph>nuage-openvswitch-common_3.0.7-125_amd64.deb</codeph></p>
-                                                  <p><codeph>nuage-openvswitch-switch_3.0.7-125_amd64.deb</codeph></p>
-                                                  <p><codeph>nuage-python-openvswitch_3.0.7-125_all.deb</codeph></p>
-                                                  </entry>
-                                                  <entry>~/cg/dcn</entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry>DCN-VRS-VMware-3.0R7</entry>
-                                                  <entry/>
-                                                  <entry>~/cg/dcn</entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry>DCN-VSC-3.0R7</entry>
-                                                  <entry>
-                                                  <p><codeph> DCN-VSC-07-OEM-125.tar.gz</codeph></p>
-                                                  <p>Untarring this file will extract::</p>
-                                                  <p><codeph>…/single_disk/vsc_singledisk.qcow2</codeph></p>
-                                                  <p>Copy this file to
-                                                  <codeph>~/cg/dcn</codeph>.</p>
-                                                  </entry>
-                                                  <entry>~/cg/dcn</entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry> DCN-VRS-VMware-3.0R7.zip</entry>
-                                                  <entry>Unzipping this file extracts the VRS VM
-                                                  template for the VRSvApp installation.</entry>
-                                                  <entry>Any location. Copy to VSD VM.</entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry>DCN-VSD-QCOW-3.0R8.zip</entry>
-                                                  <entry>
-                                                  <p><codeph>CloudMgmt-vmware.tar.gz</codeph></p>
-                                                  <p>Then untarring this file will extract a patch
-                                                  file for the vSphere Distributed Switch. </p>
-                                                  </entry>
-                                                  <entry>Any location. Copy to VSD VM.</entry>
-                                                  </row>
-                                                  </tbody>
-                                                </tgroup>
-                                        </table></li>
-                        </ol>
+                        <p>
+                                <note>DCN 3.0 will no longer be available for download and HP Helion
+                                        OpenStack Carrier Grade 1.1 with DCN is not considered a
+                                        valid deployment anymore. Customers are recommended to use
+                                        HP Helion OpenStack Carrier Grade 2.0 with DCN 3.2
+                                        instead.DCN</note>
+                        </p>
                 </section>
                 <section id="prepbare">
                         <title>Preparing the baremetal systems</title>
