@@ -52,8 +52,6 @@
                                         /><?oxy_insert_end?></li>
                                 <li><xref href="#topic7148/ssh" format="dita"/></li>
                                 <li><xref href="#topic7148/getinstall" format="dita"/></li>
-                                <li><xref href="#topic7148/download-esx" format="dita"/> This is
-                                        applicable only for KVM + ESX Cloud Deployment. </li>
                                 <li><xref href="#topic7148/verify" format="dita"/></li>
                                 <li><xref href="#topic7148/checksum" format="dita"/></li>
                                 <li><xref href="#topic7148/prepbare" format="dita"/></li>
@@ -327,7 +325,6 @@ StrictHostKeyChecking no </codeblock></li>
                                                 <li><b>GPG keys to verify signature files</b>. The
                                                   file is named
                                                   <codeph>GPG-HPCSS-Public-Keys.tar</codeph>.</li>
-                                                <!--<li><b>vCenter Proxy Appliance</b>. For the KVM + ESX deployment, download this file, named <codeph>overcloud_vcenter_compute_proxy.tar</codeph>. Also download the Signature files. This file will need to be moved to the system that hosts the VMware vCenter client. You can move the file to that system or download the file later.</li><li><b id="productShow_appName">VCN OVSvApp Appliance</b>.  For the KVM + ESX deployment, download this file, named   Also download the Signature files. HPE Virtual Cloud Networking's Open vSwitch vApp (OVSvApp) must be installed for HPE Helion OpenStack environment to provision VMs in your VMware vCenter environment. Once deployed, OVSvApp appliance enables networking between the tenant Virtual Machines (VMs).</li>-->
                                         </ul></li>
                                 <li>Download the required KVM region patches:<ul id="ul_gfl_wmw_rv">
                                                 <li>HCG 1.1 TS 15.05 Patch 001 </li>
@@ -581,6 +578,7 @@ WR/extras/HP-HCG-sample-guest-15.05-b9.img.md5</codeblock></li>
                                         </table>
                         
                 </section>
+
                 <section id="download-esx">
                         <title>Download the ESX packages for KVM + ESX</title>
                         <p><b>Note:</b> This is applicable only for KVM + ESX Cloud Deployment. </p>
@@ -599,6 +597,7 @@ WR/extras/HP-HCG-sample-guest-15.05-b9.img.md5</codeblock></li>
                                         instead.DCN</note>
                         </p>
                 </section>
+
                 <section id="prepbare">
                         <title>Preparing the baremetal systems</title>
                         <p>Perform the following tasks on each server you will use as a compute

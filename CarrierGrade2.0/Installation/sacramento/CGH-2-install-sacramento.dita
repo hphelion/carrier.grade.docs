@@ -148,8 +148,12 @@ Password: cghelion</codeblock>
           <codeph>/var/hlm/clouds/&lt;cloudname&gt;</codeph> directory of the lifecycle manager to
         define the number of ESX compute proxies required in your environment. You need one proxy
         per vCenter; make sure this value is set to
-        2<!--set this value to the number of vCenters you have.-->, as shown in the following
-        example.</p>
+        2<!--set this value to the number of vCenters you have.-->.</p>
+      <p>Also, the standard installation of HP Helion OpenStack Carrier Grade uses the HPE
+        Distributed Cloud Networking (DCN) to pass traffic through the Virtual Routing Services
+        Gateway (VRS-G). You can optionally configure HP Helion OpenStack Carrier Grade to use the
+        HP FlexFabric 5930 top-of-rack switch to pass traffic by removing lines from the the
+          <codeph>definition.json</codeph> file.</p>
       <p>
         <ol id="ol_zzr_khl_zs">
           <li>Set the <codeph>count</codeph> value to 2 for an HA installation under <codeph>control
@@ -161,6 +165,15 @@ Password: cghelion</codeblock>
           "count": 2,
           "file": ".hos/ccp-vrsg.json"
         }</codeblock></li>
+          <li>If you are deploying a 5930 as a hardware VTEP, remove the following section under
+              <codeph>control planes</codeph>.<p>
+              <note type="important">If you are not using a hardware VTEP and want to use VRS-G, do
+                not perform this step.</note>
+            </p><codeblock>},
+        {
+          "count": 2,
+          "file": ".hos/ccp-vrsg.json"</codeblock>
+            Removing these lines will prevent the installation of the VRS-G.</li>
         </ol>
       </p>
     </section>
