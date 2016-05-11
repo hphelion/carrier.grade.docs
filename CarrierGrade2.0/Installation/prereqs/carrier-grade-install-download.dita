@@ -3,7 +3,7 @@
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic7148cgid">
         <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Prerequisites - Download
-                the Installation Packages </title>
+                the Installation Packages (ConRef)</title>
         <titlealts>
                 <searchtitle>HP Helion OpenStack Carrier Grade Installation
                         Prerequisites</searchtitle>
@@ -223,10 +223,13 @@
                                                  <li id="li-029"><b id="029">Helion Carrier Grade 2.0 WR008 Patch029</b>.
                                                   This patch addresses a security issue in the KVM
                                                   region. Replaces Patch029.</li>
+                                                  <li id="li-030"><b id="030">Helion Carrier Grade
+                                                  2.0 WR009 Patch030</b>. This patch addresses a
+                                                  number of issues in the KVM region. </li>
                                                 <li id="li-028"><b id="028">Helion Carrier Grade 2.0
                                                   HCG-OVS001 Patch028</b>. This patch fixes the
                                                   buffer overflow in openvswitch debian versions
-                                                  2.2.x through 2.3.x allows for Remote Code
+                                                  2.2.x through 2.3.x allows for Remot Code
                                                   Execution, and in 2.4.0 - 2.4.8 allows for Denial
                                                   of Service and possible RCE.</li>
                                         </ul></li>
@@ -261,28 +264,29 @@
                         </ul>
                 </p>
                 <section>
-                        <ol>
-                                <li id="download-patches-tahoe">Download the following mandatory patches:<!--Tahoe patches--><ul
-                                                id="ul_bz2_nrl_s5">
-                                        <li conref="#topic7148cgid/li-003"/>
-                                        <li conref="#topic7148cgid/li-005"/>                                       
-                                        <li conref="#topic7148cgid/li-007"/>
-                                        <li conref="#topic7148cgid/li-008"/>
-                                        <li conref="#topic7148cgid/li-009"/>                                               
-                                        <li conref="#topic7148cgid/li-010"/>
-                                        <li conref="#topic7148cgid/li-012"/>
-                                        <li conref="#topic7148cgid/li-013"/>
-                                        <li conref="#topic7148cgid/li-014"/>
-                                        <li conref="#topic7148cgid/li-015"/>
-                                        <li conref="#topic7148cgid/li-017"/>
-                                        <li conref="#topic7148cgid/li-018"/>
-                                        <li conref="#topic7148cgid/li-019"/>
-                                        <li conref="#topic7148cgid/li-023"/>
-                                        <li conref="#topic7148cgid/li-024"/>
-                                        <li conref="#topic7148cgid/li-025"/>
-                                        <li conref="#topic7148cgid/li-026"/>
-                                        <li conref="#topic7148cgid/li-028"/>
-                                        <li conref="#topic7148cgid/li-029"/>
+                        <ol id="ol_a2y_ztv_xv">
+                                <li id="download-patches-tahoe">Download the following mandatory
+                                                patches:<!--Tahoe patches--><ul id="ul_bz2_nrl_s5">
+                                                <li conref="#topic7148cgid/li-003"/>
+                                                <li conref="#topic7148cgid/li-005"/>
+                                                <li conref="#topic7148cgid/li-007"/>
+                                                <li conref="#topic7148cgid/li-008"/>
+                                                <li conref="#topic7148cgid/li-009"/>
+                                                <li conref="#topic7148cgid/li-010"/>
+                                                <li conref="#topic7148cgid/li-012"/>
+                                                <li conref="#topic7148cgid/li-013"/>
+                                                <li conref="#topic7148cgid/li-014"/>
+                                                <li conref="#topic7148cgid/li-015"/>
+                                                <li conref="#topic7148cgid/li-017"/>
+                                                <li conref="#topic7148cgid/li-018"/>
+                                                <li conref="#topic7148cgid/li-019"/>
+                                                <li conref="#topic7148cgid/li-023"/>
+                                                <li conref="#topic7148cgid/li-024"/>
+                                                <li conref="#topic7148cgid/li-025"/>
+                                                <li conref="#topic7148cgid/li-026"/>
+                                                <li conref="#topic7148cgid/li-028"/>
+                                                <li conref="#topic7148cgid/li-029"/>
+                                                <li conref="#topic7148cgid/li-030"/>
                                         </ul></li>
                                 <li id="download-patches-avs">Download the following mandatory
                                         patches: <!--Denver patches--><ul id="ul_om1_bvz_k5">
@@ -307,8 +311,12 @@
                                                 <li conref="#topic7148cgid/li-025"/>
                                                 <li conref="#topic7148cgid/li-026"/>
                                                 <li conref="#topic7148cgid/li-029"/>
+                                                <li conref="#topic7148cgid/li-030"/>
                                         </ul></li>
                         </ol>
+                        <p/>
+                </section>
+                <section>
                         <p>
                                 <b>Note:</b> When downloading installation files, always download
                                 and verify the signature file before installing. </p>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
-<topic xml:lang="en-us" id="topic10581pdpkvm8">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 7 </title>
+<topic xml:lang="en-us" id="topic10581pdpkvm5">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 8 </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -16,7 +16,16 @@
   <body>
     <section id="fixes">
       <p>This patch addresses a number of issues in the KVM region, including:<ul id="ul_jxm_nkt_jv">
-          <li>In Horizon UI, clicking on "Resource Usage" panel results in a crash.</li>
+          <li>Nova-compute instability due to slow dns lookups </li>
+          <li>Compute node is stuck in reboot loop </li>
+          <li>Compute-huge-goenabled fails  </li>
+          <li>Resource Usage panel->Usage Report Tab does not load properly </li>
+          <li>Inability in deleting neutron ports that were associated with external networks of
+            Distributed Router </li>
+          <li> Booting from image (creates new volume) fails when non-default Availability Zone
+            specified </li>
+          <li> Launching a VM causes nova-compute to go down due to dnsmasq corruption (no
+            mgmt/infra mac on pxeboot LAG).</li>
         </ul></p>
     </section>
     <section>
@@ -24,7 +33,7 @@
         <note> You can use the Horizon UI to see if the patch has been deployed. Select the
             <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
             <b>Inventory</b>. Click the <b>Patches</b> table for the
-            <codeph>TS_HP_15_Custom_PATCH_0007.patch</codeph>. Or use the CLI on the active KVM
+            <codeph>TS_HP_15_Custom_PATCH_0008.patch</codeph>. Or use the CLI on the active KVM
           controller: <codeph>sudo sw-patch query</codeph>.</note>
       </p>
     </section>
@@ -45,6 +54,8 @@
               (<codeph>HCG_2.0 WR006 Patch025</codeph>)</xref></li>
         <li><xref href="CGH-2-patches-wr-7-027.dita#topic10581pdpkvm7">KVM Custom Patch 6
               (<codeph>HCG_2.0 WR007 Patch027</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-8-029.dita#topic10581pdpkvm8">KVM Custom Patch 7
+              (<codeph>HCG_2.0 WR008 Patch029</codeph>)</xref></li>
         </ul></section>
       <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
             <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
@@ -57,7 +68,7 @@
           <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
             page.</li>
           <li>Download the <b
-              conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/029"
+              conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/030"
             /> file and the associated checksum and signature files.</li>
           <li>Verify the <xref
               href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
@@ -65,7 +76,7 @@
               href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
               >downloaded checksums</xref>.</li>
           <li>Extract the compressed files until the
-            <codeph>TS_HP_15_Custom_PATCH_0007.patch</codeph> and readme files are available.</li>
+            <codeph>TS_HP_15_Custom_PATCH_0008.patch</codeph> and readme files are available.</li>
         </ol></section>
     <bodydiv id="install">
       <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
@@ -77,10 +88,10 @@
           <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
               <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
               id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0007.patch</codeph></li>
+              <li><codeph>TS_HP_15_Custom_PATCH_0008.patch</codeph></li>
             </ul></li>
           <li>Execute the following commands to upload the patch to the database:
-            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0007.patch</codeblock></li>
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0008.patch</codeblock></li>
           <li>Execute the following commands to check if the patch is available for
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
@@ -91,7 +102,7 @@
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png"
                 id="image_j4z_gyf_x5" width="500"/></p></li>
           <li>Execute the following commands to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0007.patch
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0008.patch
 source /etc/nova/openrc</codeblock></li>
           <li>Execute the following command to patch and reboot the standby controller:
               <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
