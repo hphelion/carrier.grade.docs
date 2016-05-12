@@ -57,15 +57,16 @@
       <p>The VRSvApp you obtained from DCN must be installed. For more information, see <xref
           href="../CGH-2-install-vsvapp.dita#topic10581c2iv">Deploying the VRS vApp</xref></p>
     </section>
-    <section id="conref-vsd">
-      <title>Verify VSD is running</title>
-      <p>Make sure the VSD node is installed by logging into the VSD VM using SSH and running the
-        following command:</p>
-      <codeblock>service vsd status</codeblock>
-      <p>You should see the status from the VSD VM similar to the following:</p>
-      <p>
-        <image href="../../../media/CGH-install-virsh-vsd.png" width="400" id="image_gbd_x2f_zt"/></p>
-    </section>
+    <section id="conref-vsd"><title>Verify VSD is running</title><p>Make sure the VSD node is
+          installed by logging into the VSD VM using SSH. </p><b>For DCN 3.2R7</b>, run the
+        following command:<codeblock>monit -g vsd-core summary</codeblock><p>You should see the
+          status from the VSD VM similar to the following:</p><p>
+          <image href="../../../media/CGH-install-virsh-vsd-r7.png" width="400"
+            id="image_glw_vsj_yv"/></p><p><b>For DCN 3.2R4</b>, run the following
+          command:</p><codeblock>service vsd status</codeblock><p>You should see the status from the
+          VSD VM similar to the following:</p><p>
+          <image href="../../../media/CGH-install-virsh-vsd.png" width="400" id="image_gbd_x2f_zt"
+          /></p></section>
     <section id="conref-vsd-license"><title>Apply the VSD License</title>You should have recevied a
       license file when you purchased DCN. You need to apply that license on the lifecycle manager
       host. For more information, see <xref

@@ -80,6 +80,25 @@
 HCG 2.0 WR002 Patch005 is covered in KVM install-->
       <!--HCG_2.0_DCN002_Patch006 is postinstall
 HCG 2.0 WR003 Patch007 is covered in KVM install-->
+      <section>
+        <title>Deploy the NEU-DCNR7-PREDEPLOY-HCG Patch</title>
+      </section>
+      <p><note type="important">If you are using DCN 3.2R4, do not install this patch. Only
+          deployments using HPE DCN 3.2R7 need to install this patch.  </note>The instructions below
+        are applicable for pre-cloud deployment <ol id="ol_j2p_t5j_yv">
+          <li>Copy the <codeph>NEU-DCNR7-PREDEPLOY-HCG-1746.patch</codeph> to the  ~/ location on
+            the lifecycle manager. </li>
+          <li>Update the <codeph>kenobi-node-configuration</codeph> file
+            <codeblock>cd ~/kenobi-node-configuration 
+patch -p1 &lt; ../NEU-DCNR7-PREDEPLOY-HCG-1746.patch </codeblock></li>
+          <li>Run the following
+            commandf:<codeblock>cd ~/cg-hlm/hlm-build 
+./hlm_prepare_env.sh</codeblock></li>
+          <li>Copy the <codeph>configobj-5.0.5.tar.gz</codeph> and
+              <codeph>nuage-openstack-upgrade-1859.tar.gz</codeph> files to the
+              <codeph>/root/dcn</codeph> folder in the lifecycle manager VM.  </li>
+          <li>Define the cloud and so on</li>
+        </ol></p>
       <section id="icinga"><title>Deploy the Icinga Random Password patch</title>This patch creates
         a random password for Icinga.  <!--<b>HCG2.0_Icinga001_Patch008</b>--><p>You should have
           downloaded <b

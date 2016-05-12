@@ -129,6 +129,7 @@
                                                   file.</li>
                                                 <li><b>GPG Keys to Verify Signature Files</b> The
                                                   public keys for HP Helion Carrier Grade 2.0.</li>
+                                                <li>DCN </li>
                                         </ul></li>
                                 <li id="download-avs">Click the <b>Downloads</b> tab and locate the
                                         following download. <ul id="ul_erk_kwh_k5">
@@ -544,25 +545,69 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                                   to copy these patches.</p>
                                         </itemgroup></li>
                         </ol></section>
-                <section id="dcn-extract">
-                        <title>Extract the DCN components</title>
-                        <p id="dcn">HP Distributed Cloud Networking (DCN) must be fully installed and
+                <section id="dcn-extract"><title>Extract the DCN components</title><p id="dcn">HP
+                                Distributed Cloud Networking (DCN) must be fully installed and
                                 operational before installing HP Helion OpenStack Carrier Grade. The
-                                currently supported version is <b id="dcn-version">3.2R4</b>. For
-                                DCN installation instructions, see <xref
+                                currently supported version is <b id="dcn-version">3.2R4</b> and
+                                        <b>3.2R7</b>. For DCN installation instructions, see <xref
                                         href="http://h20566.www2.hpe.com/portal/site/hpsc/template.PAGE/public/psi/manualsResults/?javax.portlet.begCacheTok=com.vignette.cachetoken&amp;javax.portlet.endCacheTok=com.vignette.cachetoken&amp;javax.portlet.prp_e97ce00a6f76436cc859bfdeb053ce01=wsrp-navigationalState%3Daction%253Dmanualslist%257Ccontentid%253DUser-Guide-%252528how-to-use%252529%257Clang%253Den&amp;javax.portlet.tpst=e97ce00a6f76436cc859bfdeb053ce01&amp;sp4ts.oid=7268885&amp;ac.admitted=1451937596553.125225703.1938120508"
-                                        format="html" scope="external" id="dcn-docs">HPE Distributed Cloud
-                                        Networking documentation</xref>.</p>
-                        <p>The installation download packages contain files needed to integrate HP
-                                Helion OpenStack Carrier Grade and DCN.</p>
-                        <p>Extract the downloaded files from the <codeph>DCN-1</codeph> and
-                                        <codeph>DCN-2</codeph> directories as indicated in the
-                                following table.</p>
-                        <table id="table_mlr_bcz_st">
+                                        format="html" scope="external" id="dcn-docs">HPE Distributed
+                                        Cloud Networking documentation</xref>.<ol id="ol_f43_wqj_yv">
+                                        <li>Extract the VSD components from the installation
+                                                download package as shown below.</li>
+                                        <li>Extract the other required DCN installation files as
+                                                shown below:<ul id="ul_bpr_zqj_yv">
+                                                  <li>3.2R4</li>
+                                                  <li>3.2R7</li>
+                                                </ul></li>
+                                </ol></p><b>VSD Components</b><p>The installation download packages
+                                contain files needed to integrate HP Helion OpenStack Carrier Grade
+                                and VSD.</p><p>Extract the downloaded files from the
+                                        <codeph>DCN-1</codeph> and <codeph>DCN-2</codeph>
+                                directories as indicated in the following table.</p><p>
+                                <table id="table_b3q_mqj_yv">
+                                        <tgroup cols="3">
+                                                <colspec colnum="1" colname="col2" colwidth="1.71*"/>
+                                                <colspec colnum="2" colname="col3" colwidth="1*"/>
+                                                <colspec colname="newCol2" colnum="3"
+                                                  colwidth="1.2*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>File Name</entry>
+                                                  <entry>To be copied to the lifecycle
+                                                  manager</entry>
+                                                  <entry>Notes</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry>itoolbox1.ova</entry>
+                                                  <entry>
+                                                  <p>You will use this file when installing the
+                                                  VRSvApp later in the installation process. You can
+                                                  leave these files in the download location. </p>
+                                                  </entry>
+                                                  <entry>Optional.<p/></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry>TEMPL-CPV9.ova</entry>
+                                                  <entry>Any location on any server that can be
+                                                  accessed by the VMware vCenter client.</entry>
+                                                  <entry>Not required for Tahoe</entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p><b>DCN 3.2R4</b></p><p>The installation download packages contain
+                                files needed to integrate HP Helion OpenStack Carrier Grade and
+                                DCN.</p><p>Extract the downloaded files from the
+                                        <codeph>DCN-1</codeph> and <codeph>DCN-2</codeph>
+                                directories as indicated in the following table.</p><table
+                                id="table_mlr_bcz_st">
                                 <tgroup cols="3">
-                                        <colspec colnum="1" colname="col2" colwidth="1.52*"/>
+                                        <colspec colnum="1" colname="col2" colwidth="1.71*"/>
                                         <colspec colnum="2" colname="col3" colwidth="1*"/>
-                                        <colspec colname="newCol2" colnum="3" colwidth="1*"/>
+                                        <colspec colname="newCol2" colnum="3" colwidth="1.2*"/>
                                         <thead>
                                                 <row>
                                                   <entry>File Name</entry>
@@ -598,33 +643,76 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                                   <entry/>
                                                 </row>
                                                 <row>
-                                                  <entry>itoolbox1.ova</entry>
-                                                  <entry morerows="1">
+                                                  <entry>VRS_3.2.6-0b008b5_11252015.ovf<p>VRS_3.2.6-0b008b5_11252015-disk1.vmdk</p></entry>
+                                                  <entry>
                                                   <p>You will use this file when installing the
                                                   VRSvApp later in the installation process. You can
                                                   leave these files in the download location. </p>
                                                   </entry>
-                                                  <entry>Optional.<p/></entry>
-                                                </row>
-                                                <row>
-                                                  <entry>VRS_3.2.6-0b008b5_11252015.ovf<p>VRS_3.2.6-0b008b5_11252015-disk1.vmdk</p></entry>
-                                                  <entry>Not required for Tahoe</entry>
-                                                </row>
-                                                <row>
-                                                  <entry>TEMPL-CPV9.ova</entry>
-                                                  <entry>Any location on any server that can be
-                                                  accessed by the VMware vCenter client.</entry>
                                                   <entry>Not required for Tahoe</entry>
                                                 </row>
                                         </tbody>
                                 </tgroup>
-                        </table>
-                        <p>Also, extract the <codeph>vsc_singledisk.qcow2</codeph> file from the
-                                        <codeph>HCG_2.0_DCN001_Patch004.tar.gz</codeph> file and
-                                copy the file to <codeph>~/cg/dcn</codeph> directory. Use this
+                        </table><p>Also, extract the <codeph>vsc_singledisk.qcow2</codeph> file from
+                                the <codeph>HCG_2.0_DCN001_Patch004.tar.gz</codeph> file and copy
+                                the file to <codeph>~/cg/dcn</codeph> directory. Use this
                                         <codeph>vsc_singledisk.qcow2</codeph> file in place of the
-                                file in the download package. </p>
-                </section>
+                                file in the download package. </p><p><b>DCN 3.2R7</b></p><p>The DCN
+                                3.2R7 download package contains files needed to integrate HP Helion
+                                OpenStack Carrier Grade and DCN.</p><p>Extract the downloaded files
+                                as indicated in the following table.</p><table id="table_xnl_bqj_yv">
+                                <tgroup cols="3">
+                                        <colspec colname="newCol3" colnum="1" colwidth="2.12*"/>
+                                        <colspec colnum="2" colname="col3" colwidth="1*"/>
+                                        <colspec colname="newCol2" colnum="3" colwidth="1.2*"/>
+                                        <thead>
+                                                <row>
+                                                  <entry>DCN 3.2R7 File Name </entry>
+                                                  <entry>To be copied to the lifecycle
+                                                  manager</entry>
+                                                  <entry>Notes</entry>
+                                                </row>
+                                        </thead>
+                                        <tbody>
+                                                <row>
+                                                  <entry>
+                                                  <p>nuage-python-openvswitch_3.2.7-267.1_all.deb</p>
+                                                  <p>nuage-openvswitch-switch_3.2.7-267.1_amd64.deb</p>
+                                                  <p>nuage-openvswitch-common_3.2.7-267.1_amd64.deb</p>
+                                                  <p>nuage-openstack-neutron_2015.1.1859_all.deb</p>
+                                                  <p>nuagenetlib_2015.1.3.2.7.266_all.deb</p>
+                                                  <p>vsc_singledisk.qcow2 </p>
+                                                  </entry>
+                                                  <entry>
+                                                  <p>/root/cg/dcn</p>
+                                                  <p><b>Create <codeph>dcn</codeph> folder under
+                                                  <codeph>/root/cg</codeph> if you don’t have in the
+                                                  lifecycle manager</b></p>
+                                                  </entry>
+                                                  <entry/>
+                                                </row>
+                                                <row>
+                                                  <entry>VSD-3.2.7_269-hp.qcow2
+                                                  <p>VSD-3.2.7_269-hp.ova</p></entry>
+                                                  <entry>
+                                                  <p>/var/lib/libvirt/images</p>
+                                                  </entry>
+                                                  <entry/>
+                                                </row>
+                                                <row>
+                                                  <entry> md5sum
+                                                  <p>VRS_3.2.7-0267.1_04142016.mf</p><p>VRS_3.2.7-0267.1_04142016.ovf</p><p>VRS_3.2.7-0267.1_04142016-disk1.vmdk
+                                                  </p></entry>
+                                                  <entry>
+                                                  <p>You will use this file when installing the
+                                                  VRSvApp later in the installation process. You can
+                                                  leave these files in the download location. </p>
+                                                  </entry>
+                                                  <entry>Not required for Tahoe</entry>
+                                                </row>
+                                        </tbody>
+                                </tgroup>
+                        </table></section>
                 <section id="avs">
                         <b>Extract and copy the HP Helion OpenStack Carrier Grade installation files
                                 and patches</b><p>Extract the downloaded files:</p><ol

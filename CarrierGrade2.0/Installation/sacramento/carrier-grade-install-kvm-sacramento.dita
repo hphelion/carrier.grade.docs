@@ -76,7 +76,7 @@ system host-patch-reboot compute-1</codeblock></li><li>Make controller-0 active:
         <li>Copy the following patches file to the <codeph>/tmp/patches</codeph> directory: <table
             frame="all" rowsep="1" colsep="1" id="table_wf2_1pt_jv">
             <tgroup cols="2">
-              <colspec colname="c1" colnum="1" colwidth="306px"/>
+              <colspec colname="c1" colnum="1" colwidth="324px"/>
               <colspec colname="c2" colnum="2" colwidth="250px"/>
               <thead>
                 <row>
@@ -120,11 +120,20 @@ system host-patch-reboot compute-1</codeblock></li><li>Make controller-0 active:
                   </entry>
                   <entry>HCG2.0_WR008_Patch029.tar.gz</entry>
                 </row>
+                <row>
+                  <entry>
+                    <p><codeph>TS_HP_15_Custom_PATCH_VRS_0001.patch</codeph>
+                    </p>
+                  </entry>
+                  <entry>DCN 3.2R7 download</entry>
+                </row>
               </tbody>
             </tgroup>
-          </table><p>You should have downloaded this patch file in the Prerequisites. The download
-            file contains a README file that lists the issues fixed/addressed in each
-          patch.</p></li>
+          </table><p>
+            <note type="important">The TS_HP_15_Custom_PATCH_VRS_0001.patch  patch is required for
+              DCN 3.2R7 environments only.</note>
+          </p><p>You should have downloaded this patch file in the Prerequisites. The download file
+            contains a README file that lists the issues fixed/addressed in each patch.</p></li>
         <li>Execute the following command to registers all patches in the specific directory into an
           internal database:
             <codeblock>sudo sw-patch upload-dir /tmp/patches                </codeblock><p>Once
