@@ -69,10 +69,19 @@ sudo sw-patch query-hosts
 sudo sw-patch apply TS_HP_15_Custom_PATCH_0001_2.patch
 source /etc/nova/openrc</codeblock><p>The <codeph>upload-dir</codeph> command registers all patches in the specific directory into an internal database. Once registered, you can delete the patch files from the controller as the patches have been added to the database.</p></li><li>Patch the standby controller:<codeblock>system host-patch-reboot &lt;standby-controller> </codeblock>Assuming controller-0 is active controller:<codeblock>system host-patch-reboot controller-1</codeblock></li><li>After the patched controller node comes up, switch the active controller:<codeblock>system host-swact &lt;active-controller></codeblock><p>Assuming controller-0 is active controller:<codeblock>system host-swact controller-0</codeblock></p></li><li>Exit the SSH session and login to the newly active controller.</li><li>Execute the following commands:<codeblock>source /etc/nova/openrc</codeblock></li><li>Patch the standby controller:<codeblock>system host-patch-reboot &lt;standby-controller> </codeblock></li><li>Reboot the compute nodes:<codeblock>system host-patch-reboot compute-0
 system host-patch-reboot compute-1</codeblock></li><li>Make controller-0 active:<codeblock>system host-swact controller-1</codeblock></li></ol></p></section>-->
-  <section id="kvm-custom-patch"><title>Step 2: Apply KVM region patches</title>Perform the following steps
-      to deploy two required patches.<ol>
-        <li>On KVM region <codeph>controller-0</codeph>, create a directory for the
-          patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
+  <section id="kvm-custom-patch"><title>Step 2: Apply KVM region patches</title>Perform the
+      following steps to deploy the required patches. These steps are valid for any new install
+      where software is loaded onto controller-0 and config_region script has not been executed on
+      the Controller-0 in the KVM region.<note>The upload-dir operation registers all patches in the
+        specific directory into the database. Once registered, you do not need to retain the files
+        anymore; they are available in the database. The <codeph>apply --all</codeph> operation
+        tells the system to apply all registered patches to the nodes in this cluster . The
+          <codeph>install-local</codeph> operation tells the system to install all necessary patches
+        on the un-configured local node.</note><ol>
+        <li>Log into KVM region <codeph>controller-0</codeph> .<note>Run the steps from console
+            only.</note></li>
+        <li>Change the password when/if prompted.</li>
+        <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
         <li>Copy the following patches file to the <codeph>/tmp/patches</codeph> directory: <table
             frame="all" rowsep="1" colsep="1" id="table_wf2_1pt_jv">
             <tgroup cols="2">
@@ -121,11 +130,15 @@ system host-patch-reboot compute-1</codeblock></li><li>Make controller-0 active:
                   <entry>HCG2.0_WR008_Patch029.tar.gz</entry>
                 </row>
                 <row>
-                  <entry>
-                    <p><codeph>TS_HP_15_Custom_PATCH_VRS_0001.patch</codeph>
-                    </p>
-                  </entry>
-                  <entry>DCN 3.2R7 download</entry>
+                  <entry><codeph>TS_HP_15_Custom_PATCH_0008.patch</codeph></entry>
+                  <entry>HCG2.0_WR009_Patch030.tar.gz</entry>
+                </row>
+                <row>
+                <entry>
+                  <p><codeph>TS_HP_15_Custom_PATCH_VRS_0001.patch</codeph>
+                  </p>
+                </entry>
+                <entry>DCN 3.2R7 download</entry>
                 </row>
               </tbody>
             </tgroup>
@@ -146,6 +159,7 @@ system host-patch-reboot compute-1</codeblock></li><li>Make controller-0 active:
             is complete</i> message. This will take few minutes and you will be prompted for
           reboot.</li>
         <li>Reboot the controller:<codeblock>sudo reboot</codeblock></li>
+        <li>Continue setting up controller-0 and the rest of the cloud as normal.</li>
       </ol></section>
     <section id="install-cloud">
       <title>Step 3: Configure the KVM region cloud</title>
