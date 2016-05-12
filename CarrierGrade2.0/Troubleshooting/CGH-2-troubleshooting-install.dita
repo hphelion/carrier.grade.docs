@@ -17,7 +17,8 @@
   <body>
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
-      <ul id="ul_xzh_nmc_mt">
+      <ul id="ul_c4h_3nd_yv">
+        <li><xref href="#topic10581c2ti/KVM" format="dita"/></li>
         <li><xref href="#topic10581c2ti/provision" format="dita"/></li>
         <li><xref href="#topic10581c2ti/ansible-accelerate" format="dita"/></li>
         <li><xref href="#topic10581c2ti/fail-apache" format="dita"/></li>
@@ -26,6 +27,44 @@
         <li><xref href="#topic10581c2ti/vm" format="dita"/></li>
         <li><xref href="#topic10581c2ti/vrs" format="dita"/></li>
       </ul>
+    </section>
+    <section id="KVM">
+      <title>KVM patch deployment failures and error messages</title>
+      <p>If any error messages are displayed during the execution of the command  <codeph>system
+          host-patch-reboot &lt;compute-name></codeph> on compute node, follow the instructions
+        below. </p>
+      <p>
+        <note>These steps are applicable for any KVM patch update process. This can happen when the
+          VM's on the compute fails to migrate or if you have any cinder volume or instances in
+          error state.</note>
+      </p>
+      
+        <p><b>Resolution</b></p>
+      
+      <p>Execute the following commands:</p>
+      <p><codeblock>system host-lock –f &lt;compute-0> </codeblock>#Force-lock will be performed if
+        VM's are running. </p>
+      <p>
+        <note type="important">Wait for the compute node to get back to online state. Check from cli
+          using <codeph>system host-list</codeph> command. This will take some time and it depends
+          on number of VM's running on that specific compute node.</note>
+      </p>
+      <p>
+        <codeblock>system host-reboot &lt;compute-0> </codeblock>
+      </p>
+      <p>
+        <note type="important">Wait until compute-0 node boots up and in online state. Check from
+          cli using <codeph>system host-list</codeph> command. <p> Run <codeph>sudo sw-patch
+              query-hosts</codeph> command and if the <b>Reboot Required</b> column for that
+            specific compute node is listed as <b>yes</b>, then issue <codeph>system host-reboot
+              &lt;compute-0></codeph> command again. If you see <b>no</b>, then proceed with next
+            step]</p></note>
+      </p>
+      <codeblock> system host-unlock &lt;compute-0></codeblock>
+      
+        <note type="important">Wait for the node to come back to <b>unlocked</b>, <b>enabled</b> and
+            <b>available</b> state.</note>
+      
     </section>
     <section id="provision"><title>Node fails to boot during HLM provision</title>
       <b>System Behavior/Message</b>
@@ -55,7 +94,7 @@ ok: [BASE-CCP-T1-M3-NETCLM]</codeblock></li>
 OSError: [Errno 17] File exists: '/root/.fireball.keys'</codeblock></li>
         </ul>
       </p><p> These are errors internal to Ansible and are random in
-          occurrence.</p><p><b>Resolution</b></p><i><b>Secnario 1</b></i><p>If you experience one of
+          occurrence.</p><p><b>Resolution</b></p><i><b>Scenario 1</b></i><p>If you experience one of
         these errors on any tiers except the HP Helion OpenStack controller tiers (which is
           <codeph>T1</codeph> in the Denver deployment and <codeph>T2</codeph> in Tahoe, Memphis and
         Sacramento deployments), do the following:</p><p>
@@ -67,7 +106,7 @@ OSError: [Errno 17] File exists: '/root/.fireball.keys'</codeblock></li>
           <li>Execute the following command to restart the
             installation:<codeblock>hlm deploy -c &lt;cloudname> -r</codeblock></li>
         </ol>
-      </p><p><i><b>Secnario 2</b></i></p><p>If you hit this issue at the very beginning of the HP
+      </p><p><i><b>Scenario 2</b></i></p><p>If you hit this issue at the very beginning of the HP
         Helion OpenStack controller tiers (which is <codeph>T1</codeph> in the Denver deployment and
           <codeph>T2</codeph> in Tahoe, Memphis and Sacramento deployments), <b>before</b> the
           <codeph>FND-MDB</codeph> or the <codeph>FND-RMQ</codeph> roles have run, do the
@@ -78,10 +117,11 @@ OSError: [Errno 17] File exists: '/root/.fireball.keys'</codeblock></li>
           nodes:<codeblock>hlm deploy -c &lt;cloudname> -t accelerate-mode</codeblock></li>
         <li>Execute the following command to restart the
           installation:<codeblock>hlm deploy -c &lt;cloudname> -r</codeblock></li>
-      </ol><p><i><b>Secnario 3</b></i></p><p>If you hit this issue at HP Helion OpenStack controller
-        tiers (which is <codeph>T1</codeph> in the Denver deployment and <codeph>T2</codeph> in
-        Tahoe, Memphis and Sacramento deployments), <b>after</b> the <codeph>FND-MDB</codeph> or the
-          <codeph>FND-RMQ</codeph> roles have run, follow the steps in Scenario 1.</p></section>
+      </ol><p><i><b>Secenario 3</b></i></p><p>If you hit this issue at HP Helion OpenStack
+        controller tiers (which is <codeph>T1</codeph> in the Denver deployment and
+          <codeph>T2</codeph> in Tahoe, Memphis and Sacramento deployments), <b>after</b> the
+          <codeph>FND-MDB</codeph> or the <codeph>FND-RMQ</codeph> roles have run, follow the steps
+        in Scenario 1.</p></section>
     <section id="fail-apache"><title>HP Helion OpenStack Carrier Grade installation (hlm deploy) fails at the Reload
         apache2 configuration task</title><p><b>System Behavior/Message</b></p><p>The installation
         of HPE Helion OpenStack Carrier Grade (the hlm deploy command) fails, with the following

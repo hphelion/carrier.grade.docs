@@ -17,14 +17,47 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
+        <li><xref href="#topic10581c2t/KVM" format="dita"/></li>
         <li><xref href="#topic10581c2t/boot" format="dita"/></li>
         <li><xref href="#topic10581c2t/logs" format="dita"/></li>
         <li><xref href="#topic10581c2t/keystone" format="dita"/></li>
         <li><xref href="#topic10581c2t/kvm" format="dita"/></li>
         <li><xref href="#topic10581c2t/backup" format="dita"/></li>
-        <!--<li><xref href="#topic10581c2t/baremetal" format="dita"/></li>-->
-        <!--<li><xref href="#topic10581c2t/no-instance" format="dita">Unable to create an instance in the Standard Region</xref></li>-->
       </ul>
+    </section>
+    <section id="KVM">
+      <title>KVM patch deployment failures and error messages</title>
+      <p>If any error messages are displayed during the execution of the command <codeph>system
+          host-patch-reboot &lt;compute-name></codeph> on compute node, follow the instructions
+        below. </p>
+      <p>
+        <note>These steps are applicable for any KVM patch update process. This can happen when the
+          VM's on the compute fails to migrate or if you have any cinder volume or instances in
+          error state.</note>
+      </p>
+      <p><b>Resolution</b></p>
+      <p>Execute the following commands:</p>
+      <p><codeblock>system host-lock –f &lt;compute-0> </codeblock>#Force-lock will be performed if
+        VM's are running. </p>
+      <p>
+        <note type="important">Wait for the compute node to get back to online state. Check from cli
+          using <codeph>system host-list</codeph> command. This will take some time and it depends
+          on number of VM's running on that specific compute node.</note>
+      </p>
+      <p>
+        <codeblock>system host-reboot &lt;compute-0> </codeblock>
+      </p>
+      <p>
+        <note type="important">Wait until compute-0 node boots up and in online state. Check from
+          cli using <codeph>system host-list</codeph> command. <p> Run <codeph>sudo sw-patch
+              query-hosts</codeph> command and if the <b>Reboot Required</b> column for that
+            specific compute node is listed as <b>yes</b>, then issue <codeph>system host-reboot
+              &lt;compute-0></codeph> command again. If you see <b>no</b>, then proceed with next
+            step]</p></note>
+      </p>
+      <codeblock> system host-unlock &lt;compute-0></codeblock>
+      <note type="important">Wait for the node to come back to <b>unlocked</b>, <b>enabled</b> and
+          <b>available</b> state.</note>
     </section>
     <section id="boot"><title>Instance launch fails when <i>Boot from image (creates a new
           volume)</i> is chosen as instance boot source</title><b>System
