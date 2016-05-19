@@ -14,32 +14,5 @@
       <othermeta name="product-version1" content="HPE Helion OpenStack Carreir Grade 1.1"/>
     </metadata>
   </prolog>
-  <body>
-    <!-- From Hrushi email 2/17/15     -->
-    <p>The following steps represent a general procedure for resetting an entire RabbitMQ cluster
-      (that cannot be otherwise recovered). There may be a specific set of steps to follow for a
-      particular RabbitMQ cluster problem. </p>
-    <ol id="ol_ks5_tw5_1v">
-      <li>Perform the following tasks on each RabbitMQ node to make sure each node is removed from
-        the cluster.  For HPE Helion OpenStack Carrier Grade with a fully HA configuration will have
-        three nodes.<ol id="ol_ls5_tw5_1v">
-          <li>Execute the following command to stop the RabbitMQ Erlang
-            application<codeblock>sudo rabbitmqctl stop_app</codeblock></li>
-          <li>Execute the following command to sync all data in the cluster and remove the node from
-            the cluster. This task cleans the local RabbitMQ Mnesia
-            database.<codeblock>sudo rabbitmqctl reset</codeblock></li>
-          <li>Execute the following command to kill all RabbitMQ
-            processes<codeblock>sudo pkill rabbitmq</codeblock></li>
-        </ol></li>
-      <li>Select one of the controller nodes (for example: controller0) and start up rabbitmq
-        service:<codeblock>sudo service rabbitmq-server start</codeblock></li>
-      <li>On the other two controller nodes (for example: controller1 and controller2), start up the
-        RabbitMQ service and form a cluster by joining with
-          controller0:<codeblock>sudo service rabbitmq-server start
-sudo rabbitmqctl stop_app
-sudo rabbitmqctl join_cluster rabbit@[controller#_hostname]
-sudo rabbitmqctl start_app</codeblock><p>Where
-          controller#_hostname is the controller number and the name of the host system. </p></li>
-    </ol>
-  </body>
+  <body><!-- From Hrushi email 2/17/15     --></body>
 </topic>

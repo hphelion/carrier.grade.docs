@@ -2,8 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic5937recover">
-  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Restart HCG Controller
-    VMs</title>
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Restart Services </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -48,7 +47,9 @@ hlm start -c &lt;cloudname&gt; -t &lt;role&gt;</codeblock><p>Where
             Name></codeph> is the role name associated with the service, from the following
           table.</p></li>
     </ol>
-    <p><b>NOTE:</b> This can also be done from the HCG-Dashboard using "Manage" option</p>
+    <p>
+      <note>This can also be done from the HCG-Dashboard using "Manage" option.</note>
+    </p>
     <table conref="../../HLMCLI/CGH-2-hlm-cli.dita#topic10581c2hc/role" id="table_wvp_zrd_bv">
       <tgroup cols="1">
         <tbody>
@@ -72,188 +73,5 @@ ansible-playbook -i hosts start-CCP-&lt;tier&gt;.yml --limit=&lt;controllerName&
             <codeblock>ansible-playbook -i hosts start-CCP-T1.yml --limit=BASE-CCP-T1-M1-NETCLM -t KEY-API</codeblock></p></li>
       </ol>
     </section>
-    <p><b>Restart the MySQL Cluster:</b></p>
-    <p>A default deployment of HPE Helion OpenStack Carrier Grade includes a MySQL database instance
-      on each controller, configured as a MySQL cluster. </p>
-    <p>There are three ways to recover failed MySQL cluster.</p>
-    <p>The recovery options should be followed in the order they are specified</p>
-    <p><b>Option 1</b></p>
-    <ol id="ul_t5m_vqd_bv">
-      <li>Log into the lifecycle manager host.</li>
-      <li>Execute the following command for each Standard Region controller to determine if the
-        MySQL cluster is
-          running:<codeblock>ssh cghelion@&lt;IP of Controller&gt; "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock><p>If
-          the cluster is down you should see:</p><p><image
-            href="../../../media/carrier.grade.docs/2.1/carrier-grade-restart-mysql.png"
-            id="image_qfr_ytd_bv"/></p></li>
-      <li>Execute the following commands to recover the MySQL
-        Cluster:<codeblock>hlm stop -c &lt;cloud-name&gt; -t FND-MDB
-hlm start -c &lt;cloud-name&gt; -t FND-MDB</codeblock></li>
-      <li>Execute the following command to verify that the MySQL Cluster is up and running:
-            <codeblock>ssh cghelion@&lt;IP of Controller&gt; "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock><p><image
-            href="../../../media/carrier.grade.docs/2.1/carrier-grade-restart-mysql2.png"
-            id="image_in5_dvd_bv"/></p></li>
-    </ol>
-    <p><b>Option 2</b></p>
-    <p>If Option 1 fails to bring back the cluster, execute the following steps on the lifecycle
-      manager:</p>
-    <ol id="ol_w2n_4vd_bv">
-      <li>Execute the following command to stop MySQL on all controller
-        nodes:<codeblock>/etc/init.d/mysql stop</codeblock></li>
-      <li>Find the sequence number on all
-          nodes:<codeblock>sudo cat /var/lib/mysql/grastate.dat
-
-GALERA saved state
-version: 2.1
-uuid:    5bd38b4a-70e9-11e4-ad52-7647a787e29a
-seqno:   1419441      ------>  sequence number
-cert_index:</codeblock><p>The
-          seqno may be specified as -1.</p><p>
-          <codeblock>sudo cat /mnt/state/var/lib/mysql/grastate.dat
-
-# GALERA saved state
-version: 2.1
-uuid: 5bd38b4a-70e9-11e4-ad52-7647a787e29a
-seqno: -1
-cert_index:</codeblock>
-        </p><p>In this case run the following command to find the sequence number (mysql service
-          must be stopped to run this):</p><p>
-          <codeblock>sudo /usr/bin/mysqld_safe --wsrep-recover
-141127 12:30:18 mysqld_safe Logging to '/mnt/state/var/log/mysql/error.log'.
-141127 12:30:18 mysqld_safe Starting mysqld daemon with databases from /mnt/state/var/lib/mysql/
-141127 12:30:18 mysqld_safe Skipping wsrep-recover for 5bd38b4a-70e9-11e4-ad52-7647a787e29a:
-1420242 pair141127 12:30:18 mysqld_safe Assigning 5bd38b4a-70e9-11e4-ad52-7647a787e29a:1420242 to wsrep_start_position ---> 1420242 is the sequence number
-141127 12:30:21 mysqld_safe mysqld from pid file /var/run/mysqld/mysqld.pid ended</codeblock>
-        </p></li>
-      <li>Start MySQL on the node with the highest sequence number (in case all the nodes except one
-        results in -1 in sequence number, start the one that has
-        number:<codeblock>sudo /etc/init.d/mysql bootstrap-pxc</codeblock></li>
-      <li>Start mysql on the other controller
-        nodes<codeblock>sudo /etc/init.d/mysql start</codeblock></li>
-    </ol>
-    <p><b>Option 3</b></p>
-    <p>If Option 2 fails to bring back the cluster, execute the following steps:</p>
-    <p>
-      <ol id="ol_mbm_byd_bv">
-        <li>Log into the failed controller. </li>
-        <li>Execute the following command to purge
-          MySQL:<codeblock>apt-get purge xinetd
-apt-get purge python-mysqldb
-backup /var/lib/mysql
-apt-get purge percona-xtradb-cluster-server-5.5</codeblock></li>
-        <li>On lifecycle manager, edit the
-            <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
-          file to comment the working controller. For
-          example:<codeblock>[BASE-CCP-T1]
-#BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.200.51.103
-BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.200.51.104
-BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.200.51.105
-
-[BASE-CCP-T1]
-#BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.200.51.103
-BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.200.51.104
-BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.200.51.105</codeblock></li>
-        <li>Execute the following
-          command:<codeblock>hlm deploy –c &lt;cloudname&gt; -t FND-MDB</codeblock></li>
-        <li>Modify the <codeph>/etc/mysql/my.cnf</codeph> to make sure the <i>wsrep_cluster_address
-          </i> variable contains all the nodes participating in the MySQL cluster. <p>If any of the
-            node is found to be missing add it to the <i>wsrep_cluster_address </i> variable. For
-            example:</p><p><i>wsrep_cluster_address =
-              gcomm://BASE-CCP-T1-M1-NETCLM,BASE-CCP-T1-M2-NETCLM,BASE-CCP-T1-M3-NETCLM</i></p></li>
-        <li>Execute the following command to restart MySQL on the failed nodes:
-          <codeblock>service mysql restart</codeblock></li>
-      </ol>
-    </p>
-    <p><b>RabbitMQ Cluster:</b></p>
-    <ul id="ul_lvm_vqd_bv">
-      <li>
-        <p>To check if RabbitMQ cluster is running perform the following on all three Standard Region controller nodes IP from HLM
-          :</p>
-      </li>
-    </ul>
-    <pre>    ssh cghelion@&lt;IP of Controller&gt; "sudo rabbitmqctl cluster_status"</pre>
-    <p>
-      <image
-        href="https://wiki.hpcloud.net/download/attachments/56149786/Untitled6.jpg?version=1&amp;modificationDate=1454116070000&amp;api=v2"
-        width="500" id="image_mvm_vqd_bv"/></p>
-    <p> </p>
-    <ul id="ul_nvm_vqd_bv">
-      <li>To Restart RabbitMQ cluster do on
-          HLM:<pre>    hlm stop -c&lt;your-cloud-name&gt; -t FND-RMQ</pre><p>
-        and</p><pre>    hlm start -c &lt;your-cloud-name&gt; -t FND-RMQ</pre></li>
-    </ul>
-    <p> </p>
-    <ul id="ul_ovm_vqd_bv">
-      <li>ssh cghelion@&lt;IP of Controller&gt; "sudo rabbitmqctl cluster_status"</li>
-    </ul>
-    <p><image
-        href="https://wiki.hpcloud.net/download/attachments/56149786/stateyes.png?version=1&amp;modificationDate=1454359121000&amp;api=v2"
-        id="image_pvm_vqd_bv"/></p>
-    <p><b><u>Failure simulation:</u></b></p>
-    <p> </p>
-    <p><b> MySQL Cluster</b></p>
-    <p>You can simulate failure situation on three Standard Region Controller nodes by shutting them down
-      via virsh command:</p>
-    <p> </p>
-    <p>you should see them disabled :</p>
-    <p><image
-        href="https://wiki.hpcloud.net/download/attachments/56149786/Untitled1.jpg?version=1&amp;modificationDate=1454114972000&amp;api=v2"
-        id="image_qvm_vqd_bv"/></p>
-    <p>Then bring them back:</p>
-    <p>
-      <image
-        href="https://wiki.hpcloud.net/download/attachments/56149786/Untitled3.jpg?version=1&amp;modificationDate=1454114979000&amp;api=v2"
-        id="image_rvm_vqd_bv"/></p>
-    <ul id="ul_svm_vqd_bv">
-      <li>check if Mysql Cluster is down by running the command with the controller IP from HLM
-        :</li>
-    </ul>
-    <pre>     ssh cghelion@10.20.20.102 "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"  </pre>
-    <ul id="ul_tvm_vqd_bv">
-      <li>
-        <p>to recover MySQL Cluster do :</p>
-      </li>
-    </ul>
-    <pre>    hlm stop -c&lt;your-cloud-name&gt; -t FND-MDB</pre>
-    <p> and</p>
-    <pre>    hlm start -c &lt;your-cloud-name&gt; -t FND-MDB</pre>
-    <ul id="ul_uvm_vqd_bv">
-      <li>
-        <p>check that MySQL CLuster is up and running by doing the same command during first step:
-        </p>
-      </li>
-    </ul>
-    <pre>ssh cghelion@10.20.20.102 "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"  </pre>
-    <p><b> </b></p>
-    <p><b>RabbitMQ:</b></p>
-    <ul id="ul_vvm_vqd_bv">
-      <li><p>shutting down and restarting all three controllers won't take RabbitMQ's cluster down:
-          but here are the steps to check if it is up and running:
-          </p><pre>ssh cghelion@10.20.20.102 "sudo rabbitmqctl cluster_status"</pre><p> </p><image
-          href="https://wiki.hpcloud.net/download/attachments/56149786/Untitled6.jpg?version=1&amp;modificationDate=1454116070000&amp;api=v2"
-          id="image_wvm_vqd_bv"/></li>
-      <li>
-        <p>if the RabbitMQ Cluster is down: </p>
-        <p>do :</p>
-        <pre>hlm stop -c &lt;cloud-name&gt; -t  FND-RMQ</pre>
-      </li>
-    </ul>
-    <p> and Start with:</p>
-    <pre>     hlm start -c &lt;cloud-name&gt; -t FND-RMQ</pre>
-    <p> </p>
-    <ul id="ul_xvm_vqd_bv">
-      <li>check again with the first command</li>
-    </ul>
-    <p>
-      <image
-        href="https://wiki.hpcloud.net/download/attachments/56149786/stateyes.png?version=1&amp;modificationDate=1454359121000&amp;api=v2"
-        id="image_yvm_vqd_bv"/></p>
-    <p><b>To Restart all services do (this will interrupt services for user because it is done on
-        all nodes should be used carefully) from :</b></p>
-    <p> cd to
-        <b>/var/hlm/cloud/&lt;cloud_name&gt;/desired_state/&lt;cloud_name&gt;/001/base/stage/ansible</b></p>
-    <p> run:</p>
-    <pre>       ansible-playbook -i hosts stop.yml --skip-tags "FND-MDB,FND-RMQ"</pre>
-    <pre>       ansible-playbook -i hosts start.yml --skip-tags "FND-MDB,FND-RMQ"</pre>
   </body>
 </topic>
