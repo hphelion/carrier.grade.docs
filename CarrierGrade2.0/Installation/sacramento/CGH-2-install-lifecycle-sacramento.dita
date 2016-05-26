@@ -138,9 +138,10 @@ upstream_ntp_servers:
                 <codeph>&lt;ip-address></codeph> is the gateway and <codeph>&lt;eth></codeph> is the
               Ethernet interface.</p><p>For
               example:<codeblock>route add default gw 192.168.122.1 dev eth0</codeblock></p></li>
-          <li>Make sure that the vNet corresponding to eth0 is part of virbr0 bridge on the KVM
-            Host.</li>
-          <li>Verify that all iLO ips of the controller blades/DLs are pingable from KVM Host.</li>
+          <li>Make sure that the vNet corresponding to eth0 is part of virbr0 bridge on the
+            lifecycle manager host.</li>
+          <li>Verify that all iLO ips of the controller blades/DLs are pingable from lifecycle
+            manager host.</li>
         </ol>
       </p>
     </section>

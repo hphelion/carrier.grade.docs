@@ -18,9 +18,9 @@
  <!--./CarrierGrade/Installation/carrier-grade-install-pb-network-prepare.md-->
  <!--permalink: /helion/openstack/carrier/install/pb/network/prepare/--></p>
 <p>Before installing HPE Helion OpenStack Carrier Grade, you are responsible for preparing the network for all installations.</p>
-<section id="configure-vlan-networking-on-the-kvm-host"> <title>Configure VLAN networking on the KVM host</title>
+<section id="configure-vlan-networking-on-the-kvm-host"> <title>Configure VLAN networking on the lifecycle manager host</title>
 <ol>
-                <li>Launch a terminal and log in to your KVM host as root:
+                <li>Launch a terminal and log in to your lifecycle manager host as root:
                     <codeblock>sudo su -</codeblock></li>
 <li>Edit <codeph>/etc/network/interfaces</codeph> file to provide network details on the each interface:<codeblock><codeph>auto lo
 iface lo inet loopback
@@ -139,7 +139,7 @@ ovs_version: "2.0.2"
 <p>The installation process will create a virtual machine for HPE Helion Lifecycle Management.</p>
 <p>Perform the following steps to enable networks that will be associated with HLM VM.</p>
 <ol>
-<li>Launch a terminal and log in to your KVM host as root:<p>sudo su -</p></li>
+<li>Launch a terminal and log in to your lifecycle manager host as root:<p>sudo su -</p></li>
 <li>Create the <codeph>br-clm</codeph> network by creating an XML definition file:<p>a. Manually
                         create the XML
                         file:</p><codeblock><codeph>cat br-clm.xml
@@ -309,7 +309,7 @@ ifup br-dcm
                         >prerequisites</xref>.</b></p>
 <!-- Hide this; might not be needed 
 
-1. On the KVM host, change to the `/root/infra-ansible-playbooks/roles/HLM-CFG/` directory.
+1. On the lifecycle manager host, change to the `/root/infra-ansible-playbooks/roles/HLM-CFG/` directory.
 
         cd /root/infra-ansible-playbooks/roles/HLM-CFG/
 

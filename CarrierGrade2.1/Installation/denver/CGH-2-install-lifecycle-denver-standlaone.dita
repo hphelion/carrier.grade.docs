@@ -58,7 +58,7 @@ tar cf - local_repo | ( cd /opt/; tar xf - )</codeblock><p>The
 deb [trusted=yes] file:/opt/local_repo/ cattleprod contrib main non-free</codeblock></li>
           <li>Execute the following command to update the apt package index
             files:<codeblock>apt-get update</codeblock></li>
-          <li>Install patch package on the KVM host:
+          <li>Install patch package on the lifecycle manager host:
             <codeblock>apt-get install patch</codeblock></li>
         </ol>
       </p>
