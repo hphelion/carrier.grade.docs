@@ -61,12 +61,39 @@
           installed by logging into the VSD VM using SSH. </p><b>For DCN 3.2R7</b>, run the
         following command:<codeblock>monit -g vsd-core summary</codeblock><p>You should see the
           status from the VSD VM similar to the following:</p><p>
-          <image href="../../../media/CGH-install-virsh-vsd-r7.png" width="400"
-            id="image_glw_vsj_yv"/></p><p><b>For DCN 3.2R4</b>, run the following
+          <codeblock>The Monit daemon 5.15 uptime: 10d 21h 3m
+
+Program 'vsd-core-status'           Status ok
+Process 'mediator'                  Running
+Program 'mediator-status'           Status ok
+Program 'keyserver-status'          Status ok
+Process 'jboss'                     Running
+Program 'jboss-status'              Status ok
+Program 'ejbca-status'              Status ok
+[root@vsd1 ~]# monit -g vsd-common summary
+The Monit daemon 5.15 uptime: 10d 21h 3m
+
+Program 'vsd-common-status'         Status ok
+Process 'mysql'                     Running
+Program 'mysql-status'              Status ok
+Process 'ejabberd'                  Running
+Program 'ejabberd-status'           Status ok
+[root@vsd1 ~]# monit -g vsd-stats summary
+The Monit daemon 5.15 uptime: 10d 21h 3m
+
+Program 'vsd-stats-status'          Status ok
+Process 'tca-daemon'                Running
+Program 'tca-daemon-status'         Status ok
+Process 'stats-collector'           Running
+Program 'stats-collector-status'    Status ok
+Process 'opentsdb'                  Running
+Program 'opentsdb-status'           Status ok
+Process 'hbase'                     Running
+Program 'hbase-status'              Status ok</codeblock>
+        </p><p><b>For DCN 3.2R4</b>, run the following
           command:</p><codeblock>service vsd status</codeblock><p>You should see the status from the
-          VSD VM similar to the following:</p><p>
-          <image href="../../../media/CGH-install-virsh-vsd.png" width="400" id="image_gbd_x2f_zt"
-          /></p></section>
+          VSD VM similar to the following:</p><p><image href="../../../media/CGH-2-vsd-verify.png"
+            id="image_wty_ygl_2t"/></p></section>
     <section id="conref-vsd-license"><title>Apply the VSD License</title>You should have recevied a
       license file when you purchased DCN. You need to apply that license on the lifecycle manager
       host. For more information, see <xref

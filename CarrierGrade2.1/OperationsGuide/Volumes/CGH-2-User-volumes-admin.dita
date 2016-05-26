@@ -24,6 +24,137 @@
 <li>Click <b>Create Volume Type</b> to confirm.</li>
 </ol>
 </section>
+        <section id="associate_volumetype"><title>Associate the Volume Type to the
+                Backend</title><sectiondiv outputclass="insideSection">
+                <p>After the volume type{s} have been created, you can assign extra specification
+                    attributes to the volume types. Each Block Storage backend option has unique
+                    attributes that can be used. See the following pages for the specific attributes
+                    for the backend that you are using:</p>
+                <ul id="ul_mmv_j1m_bw">
+                    <li>VSA</li>
+                    <li>3PAR</li>
+                </ul>
+                <p>To map a volume type to a backend, do the following:</p>
+                <ol id="ol_nmv_j1m_bw">
+                    <li><xref href="../Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+                            >Launch the HP Helion OpenStack Carrier Grade Horizon
+                        Dashboard</xref>.</li>
+                    <li>Ensure that you are scoped to your <b>admin</b> Project. Then under the
+                            <b>Admin</b> menu in the navigation pane, click on <b>Volumes</b> under
+                        the <b>System</b> subheading. </li>
+                    <li>Click the <b>Volume Type</b> tab to list the volume types. </li>
+                    <li>In the <b>Actions</b> column of the Volume Type you created earlier, click
+                        the drop-down option and select <b>View Extra Specs</b> which will bring up
+                        the <b>Volume Type Extra Specs</b> options. </li>
+                    <li>Click the <b>Create</b> button on the <b>Volume Type Extra Specs</b> screen. </li>
+                    <li>In the <b>Key</b> field, enter one of the key values in the table in the
+                        next section. In the <b>Value</b> box, enter its corresponding value. Once
+                        you have completed that, click the <b>Create</b> button to create the extra
+                        volume type specs. </li>
+                </ol>
+                <p>Once the volume type is mapped to a backend, you can create volumes with this
+                    volume type.</p>
+            </sectiondiv><b id="vsa-specs">Extra Specification Options for VSA</b><sectiondiv
+                outputclass="insideSection">
+                <p>VSA supports volumes creation with additional attributes. All these attributes
+                    can be specified using the extra specs options for your volume type. The
+                    administrator is expected to define appropriate extra spec for VSA volume type
+                    as per the guidelines provided at <xref
+                        href="http://docs.openstack.org/liberty/config-reference/content/hp-lefthand-supported-ops-rest.html"
+                        format="html" scope="external">here</xref>.</p>
+                <p>The following Cinder Volume Type extra-specs options enable control over the VSA
+                    storage provisioning type (thin or full) and specify protection for your volume
+                    backend. We strongly recommend using r-10-2 as your RAID level for a production
+                    environment to avoid a single point of failure. You can do this by using a
+                        <codeph>hplh:data_pl</codeph> value of <codeph>r-10-2</codeph>.</p>
+                <p>
+                    <table frame="all" rowsep="1" colsep="1" id="table_ntq_swv_yt">
+                        <tgroup cols="3">
+                            <colspec colname="c1" colnum="1"/>
+                            <colspec colname="c2" colnum="2"/>
+                            <colspec colname="c3" colnum="3"/>
+                            <thead>
+                                <row>
+                                    <entry>Key</entry>
+                                    <entry>Value</entry>
+                                    <entry>Description</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>volume_backend_name</entry>
+                                    <entry><i>volume backend name</i></entry>
+                                    <entry>The name of the backend to which you want to associate
+                                        the volume type, which you also specified earlier in the
+                                            <codeph>cinder.conf.j2</codeph> file.</entry>
+                                </row>
+                                <row>
+                                    <entry>hplh:provisioning (optional)</entry>
+                                    <entry>thin or full</entry>
+                                    <entry/>
+                                </row>
+                                <row>
+                                    <entry>hplh:data_pl (optional)</entry>
+                                    <entry>r-0, r-5, r-10-2, r-10-3, r-10-4, or r-6</entry>
+                                    <entry>
+                                        <p>The protection level options enable different data
+                                            protection configurations. Supported data protection
+                                            options are:</p>
+                                        <ul id="ul_omv_j1m_bw">
+                                            <li>r-0, Network RAID-0 (None)</li>
+                                            <li>r-5, Network RAID-5 (Single- Parity)</li>
+                                            <li>r-10-2, Network RAID-10 (2-Way Mirror)</li>
+                                            <li>r-10-3, Network RAID-10 (3-Way Mirror)</li>
+                                            <li>r-10-4, Network RAID-10 (4-Way Mirror)</li>
+                                            <li>r-6, Network RAID-6 (Dual Parity)</li>
+                                        </ul>
+                                    </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </p>
+                <p>Here is what a completed list of extra specs may look like:</p>
+            </sectiondiv><b id="3par-specs">Extra Specification Options for 3PAR</b>
+            <p>3PAR supports volumes creation with additional attributes. These attributes can be
+                specified using the extra specs options for your volume type. The administrator is
+                expected to define appropriate extra spec for 3PAR volume type as per the guidelines
+                provided at <xref
+                    href="http://docs.openstack.org/liberty/config-reference/content/hp-3par-supported-ops.html"
+                    format="html" scope="external">here</xref>.</p><p>The following Cinder Volume
+                Type extra-specs options enable control over the 3PAR storage provisioning type:</p><p>
+                <table frame="all" rowsep="1" colsep="1" id="3par">
+                    <tgroup cols="3">
+                        <colspec colname="c1" colnum="1"/>
+                        <colspec colname="c2" colnum="2"/>
+                        <colspec colname="c3" colnum="3"/>
+                        <thead>
+                            <row>
+                                <entry>Key</entry>
+                                <entry>Value</entry>
+                                <entry>Description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>volume_backend_name</entry>
+                                <entry><i>volume backend name</i></entry>
+                                <entry>The name of the backend to which you want to associate the
+                                    volume type, which you also specified earlier in the
+                                        <codeph>cinder.conf.j2</codeph> file.</entry>
+                            </row>
+                            <row>
+                                <entry>hp3par:provisioning (optional)</entry>
+                                <entry>thin, full, or dedup</entry>
+                                <entry/>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </p><p>See <xref href="http://www8.hp.com/h20195/v2/GetPDF.aspx%2F4AA5-1930ENW.pdf"
+                    scope="external" format="html">OpenStack HPE 3PAR StoreServ Block Storage Driver
+                    Configuration Best Practices</xref> for more details.</p><p>Here is what a
+                completed list of extra specs may look like:</p></section>
 <section id="delete-a-volume-type"> <title>Delete a volume type</title>
 <ol>
         <li><xref href="../Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl">Launch the HP

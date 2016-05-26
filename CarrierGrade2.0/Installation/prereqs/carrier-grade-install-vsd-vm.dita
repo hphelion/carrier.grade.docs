@@ -53,10 +53,48 @@ GATEWAY=10.20.5.1</codeblock></p></li>
                 <li>Start a console session to the VSD VM from lifecycle manager host using the following command:
                         <codeblock>virsh console &lt;vsdname&gt; </codeblock><p>Where
                             <codeph>&lt;vsdname></codeph> is the name of your VSD.</p></li>
-                <li>Execute the following command to confirm that you can access VSD.
-                        <codeblock>service vsd status </codeblock><p>You should see the status as
-                        shown:</p><p><image href="../../../media/CGH-2-vsd-verify.png"
-                            id="image_wty_ygl_2t"/></p></li>
+                <li>Execute the following command to confirm that you can access VSD. <ul
+                        id="ul_o5s_wgy_bw">
+                        <li>If you are running DCN <b
+                                conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-version-7"
+                            />, execute the following
+                                :<codeblock>monit -g vsd-core summary</codeblock><p>You should see
+                                the status as
+                            shown:</p><codeblock>The Monit daemon 5.15 uptime: 10d 21h 3m
+
+Program 'vsd-core-status'           Status ok
+Process 'mediator'                  Running
+Program 'mediator-status'           Status ok
+Program 'keyserver-status'          Status ok
+Process 'jboss'                     Running
+Program 'jboss-status'              Status ok
+Program 'ejbca-status'              Status ok
+[root@vsd1 ~]# monit -g vsd-common summary
+The Monit daemon 5.15 uptime: 10d 21h 3m
+
+Program 'vsd-common-status'         Status ok
+Process 'mysql'                     Running
+Program 'mysql-status'              Status ok
+Process 'ejabberd'                  Running
+Program 'ejabberd-status'           Status ok
+[root@vsd1 ~]# monit -g vsd-stats summary
+The Monit daemon 5.15 uptime: 10d 21h 3m
+
+Program 'vsd-stats-status'          Status ok
+Process 'tca-daemon'                Running
+Program 'tca-daemon-status'         Status ok
+Process 'stats-collector'           Running
+Program 'stats-collector-status'    Status ok
+Process 'opentsdb'                  Running
+Program 'opentsdb-status'           Status ok
+Process 'hbase'                     Running
+Program 'hbase-status'              Status ok</codeblock></li>
+                        <li>If you are running  DCN <b
+                                conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-version"
+                            />, execute:  <codeblock>service vsd status </codeblock>You should see
+                            the status as shown:<p><image href="../../../media/CGH-2-vsd-verify.png"
+                                    id="image_wty_ygl_2t"/></p></li>
+                    </ul></li>
             </ol></section>
             <section id="vsd-apply-license">
             <title>Applying the VSD license</title>
@@ -98,18 +136,21 @@ VSD Server : auto</codeblock></li>
                     dashboard.</li>
                 <li>Click the <b>Settings</b> tab. </li>
                 <li>Click the User icon on the left panel. <p><image
-                            href="../../../media/CGH-2vsd-user.png" id="image_dzw_dll_2t" width="350"
-                        /></p></li>
-                <li>Right-click the <i>csproot</i> user and click <b>Add</b>.</li>
-                <li>To create a user for the plug-in, click the <b>Open VSP Configuration </b>tab
-                    on the top right corner of the dashboard.</li>
-                <li>Click the <b>CSP Users </b>tab and click <b>+</b>.</li>
+                            href="../../../media/CGH-2-vsd-user.png" id="image_vgl_xkl_2t"
+                            width="350"/></p></li>
+                <li>To create a user for the plug-in, right-click the <i>csproot</i> user and click
+                        <b>Add</b>.</li>
                 <li>Create a user named <i>OSadmin</i> with the password <i>OSadmin</i>. The name
-                    and password are case-sensitive. <p><image href="../../../media/CGH-2-vsd-user.png"
-                            id="image_vgl_xkl_2t" width="350"/></p></li>
+                    and password are case-sensitive. </li>
                 <li>Click <b>Create</b>.</li>
-                <li>Click the Groups icon to add the user to the CMS Group.</li>
+                <li>Click the Groups icon to add the user to the CMS Group.<p><image
+                            href="../../../media/CGH-2-vsd-grouo.png" width="350"
+                            id="image_tlt_2ly_bw"/></p></li>
                 <li>Select the <b>CMS Group</b>, then click <b>OSadmin</b> to add the user.</li>
+                <li>Click the select user icon, circled below. <p><image
+                            href="../../../media/CGH-2-install-VSD-group-user.png" width="600"
+                            id="image_ww1_m21_cw"/></p></li>
+                <li>Select the user to add and click <b>Select</b>. </li>
             </ol>
         </section><section>
             <p>Return to the Installation Prerequisites for:</p>
