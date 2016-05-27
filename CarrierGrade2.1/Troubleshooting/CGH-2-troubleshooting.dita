@@ -17,29 +17,32 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
+        
         <li>
-          <p>After restarting a service or rebooting the controller nodes, Horizon UI is
-            inaccessible or the icons in Horizon are missing. </p>
-        </li>
-        <li><xref href="#topic10581c2t/KVM" format="dita"/></li>
-        <li><xref href="#topic10581c2t/boot" format="dita"/></li>
+          <xref href="#topic10581c2t/service" format="dita"/></li>
+              <li><xref href="#topic10581c2t/KVM" format="dita"/></li>
+                <li><xref href="#topic10581c2t/boot" format="dita"/></li>
         <li><xref href="#topic10581c2t/logs" format="dita"/></li>
         <li><xref href="#topic10581c2t/keystone" format="dita"/></li>
         <li><xref href="#topic10581c2t/kvm" format="dita"/></li>
         <li><xref href="#topic10581c2t/backup" format="dita"/></li>
       </ul>
-    </section>
-    <p><b>After restarting a service or rebooting the controller nodes, Horizon UI is inaccessible
-        or the icons in Horizon are missing</b></p>
+      
+      </section>
+    <section id="service"> 
+        <title>After restarting a service or rebooting the controller nodes, Horizon UI is inaccessible
+          or the icons in Horizon are missing</title>
     <p>If you see few icons not being loaded properly in Horizon UI , it is likely because the
       service went into an inconsistent state. In that case, go to HCG Dashboard <b>Manage Cloud</b>
       page and restart HOS Horizon followed by <codeph>wr_horizon</codeph> service and then try
       logging into Horizon again.</p>
-    <section id="KVM">
-      <title>KVM patch deployment failures and error messages</title>
+    </section>
+      <section id="KVM"> 
+        <title>KVM patch deployment failures and error messages</title>
       <p>If any error messages are displayed during the execution of the command <codeph>system
           host-patch-reboot &lt;compute-name></codeph> on compute node, follow the instructions
         below. </p>
+      
       <p>
         <note>These steps are applicable for any KVM patch update process. This can happen when the
           VM's on the compute fails to migrate or if you have any cinder volume or instances in
