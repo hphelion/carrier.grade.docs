@@ -27,8 +27,8 @@ hlm start -c &lt;cloud-name&gt; -t FND-MDB</codeblock></li>
     </ol>
     <p><b>Manual Recovery</b></p>
     <p><b>Option 1</b></p>
-    <p>If Option 1 fails to bring back the cluster, execute the following steps on the lifecycle
-      manager:</p>
+    <p>If Automated Recovery fails to bring back the cluster, execute the following steps on the
+      lifecycle manager:</p>
     <ol id="ol_w2n_4vd_bv">
       <li>Execute the following command to stop MySQL on all controller
         nodes:<codeblock>/etc/init.d/mysql stop</codeblock></li>
@@ -64,7 +64,7 @@ cert_index:</codeblock>
         nodes<codeblock>sudo /etc/init.d/mysql start</codeblock></li>
     </ol>
     <p><b>Option 2</b></p>
-    <p>If Option 2 fails to bring back the cluster, execute the following steps:</p>
+    <p>If Option 1 fails to bring back the cluster, execute the following steps:</p>
     <p>
       <ol id="ol_mbm_byd_bv">
         <li>Log into the failed controller. </li>
