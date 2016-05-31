@@ -29,15 +29,16 @@
       </ul>
       
       </section>
-    <section id="service"> 
-        <title>After restarting a service or rebooting the controller nodes, Horizon UI is inaccessible
-          or the icons in Horizon are missing</title>
-    <p>If you see few icons not being loaded properly in Horizon UI , it is likely because the
-      service went into an inconsistent state. In that case, go to HCG Dashboard <b>Manage Cloud</b>
-      page and restart HOS Horizon followed by <codeph>wr_horizon</codeph> service and then try
-      logging into Horizon again.</p>
-    </section>
-      <section id="KVM"> 
+    <section id="service"><title>After restarting a service or rebooting the controller nodes,
+        Horizon UI is inaccessible or the icons in Horizon are missing</title><p>If you see few
+        icons not being loaded properly in Horizon UI , it is likely because the service went into
+        an inconsistent state. In that case, go to HCG Dashboard <b>Manage Cloud</b> page and
+        restart Horizon followed by <codeph>Windriver Horizon</codeph> service and then try logging
+          into Horizon again.</p><p><image href="../Images/CGH-2.1-troublesoot-HorizonUI.PNG" id="image_yzq_fmn_dw" width="700"/></p>
+        </section>
+      
+   
+    <section id="KVM"> 
         <title>KVM patch deployment failures and error messages</title>
       <p>If any error messages are displayed during the execution of the command <codeph>system
           host-patch-reboot &lt;compute-name></codeph> on compute node, follow the instructions
