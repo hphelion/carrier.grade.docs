@@ -17,8 +17,26 @@
   <body>
     <p conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/download"/>
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/cobbler"/>
+    
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/ssl-patch"/>
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/icinga"/>
+    <section id="9">
+      <title>Deploy the Horizon Switcher patch</title>
+      <p>You should have downloaded <b>HCG2.0_Horizon002_Patch009</b> during the prerequisites.
+        Extract the <codeph id="name">horizon-region-switcher.patch</codeph> and readme files.</p>
+      <p>To deploy the patch:<ol id="ol_qv1_g5m_s5">
+          <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
+          <li>Change to the <codeph>kenobi-node-configuration</codeph>
+            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li>Execute the following command to install the patch
+            <codeblock>patch -p1  &lt; ../horizon-region-switcher.patch</codeblock></li>
+          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>./hlm_prepare-env.sh</codeblock>When you execute the <codeph>hlm
+              generate</codeph> command is executed, the changes will be included. </li>
+        </ol></p>
+    </section>
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/010"/>
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/012"/>
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/13"/>
@@ -26,11 +44,29 @@
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/15"/>
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/23"/>
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/24"/>
-    
+    <section>
+      <title>Deploy the NEU-DCNR7-PREDEPLOY-HCG Patch</title>
+    </section>
+    <p><note type="important">If you are using DCN 3.2R4, do not install this patch. Only
+        deployments using HPE DCN 3.2R7 need to install this patch. </note>The instructions below
+      are applicable for pre-cloud deployment <ol id="ol_gnp_2jt_bw">
+        <li>Copy the <codeph>NEU-DCNR7-PREDEPLOY-HCG-1746.patch</codeph> to the ~/ location on the
+          lifecycle manager. </li>
+        <li>Update the <codeph>kenobi-node-configuration</codeph> file
+          <codeblock>cd ~/kenobi-node-configuration 
+patch -p1 &lt; ../NEU-DCNR7-PREDEPLOY-HCG-1746.patch </codeblock></li>
+        <li>Run the following
+          command:<codeblock>cd ~/cg-hlm/hlm-build 
+./hlm_prepare_env.sh</codeblock></li>
+        <li>Copy the <codeph>configobj-5.0.5.tar.gz</codeph> and
+            <codeph>nuage-openstack-upgrade-1859.tar.gz</codeph> files to the
+            <codeph>/root/dcn</codeph> folder in the lifecycle manager VM. </li>
+      </ol></p>
+    <p/>
     <section id="next-step">
       <title>Next Step</title>
       <p><xref href="CGH-2-install-dcn-memphis.dita#topic10581c2vsdm">Configuring the DCN
-        Components</xref></p>
+          Components</xref></p>
     </section>
   </body>
 </topic>

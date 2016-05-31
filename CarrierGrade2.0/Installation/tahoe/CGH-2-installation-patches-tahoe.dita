@@ -27,6 +27,24 @@
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/15"/>
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/23"/>
     <section conref="../CGH-2-installation-patches.dita#topic10581cgiptch/24"/>
+    <section>
+      <title>Deploy the NEU-DCNR7-PREDEPLOY-HCG Patch</title>
+    </section>
+    <p><note type="important">If you are using DCN 3.2R4, do not install this patch. Only
+        deployments using HPE DCN 3.2R7 need to install this patch. </note>The instructions below
+      are applicable for pre-cloud deployment <ol id="ol_gnp_2jt_bw">
+        <li>Copy the <codeph>NEU-DCNR7-PREDEPLOY-HCG-1746.patch</codeph> to the ~/ location on the
+          lifecycle manager. </li>
+        <li>Update the <codeph>kenobi-node-configuration</codeph> file
+          <codeblock>cd ~/kenobi-node-configuration 
+patch -p1 &lt; ../NEU-DCNR7-PREDEPLOY-HCG-1746.patch </codeblock></li>
+        <li>Run the following
+          command:<codeblock>cd ~/cg-hlm/hlm-build 
+./hlm_prepare_env.sh</codeblock></li>
+        <li>Copy the <codeph>configobj-5.0.5.tar.gz</codeph> and
+            <codeph>nuage-openstack-upgrade-1859.tar.gz</codeph> files to the
+            <codeph>/root/dcn</codeph> folder in the lifecycle manager VM. </li>
+      </ol></p>
     <section id="next-step">
       <title>Next Step</title>
       <p><xref href="CGH-2-install-dcn-tahoe.dita#topic10581c2vsdt">Configuring the DCN

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdph2">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Horizon Patch
+    (031)</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section id="horizon-patch">
+      <p><b>Prerequisites</b>:  This patch must be applied only after the HP Helion OpenStack
+        Carrier Grade is fully deployed for all topologies [Denver/Tahoe/Memphis/Sacramento]. </p>
+      <p>This patch addresses a number of issues in the KVM region, including:<ul id="ul_jxm_nkt_jv">
+          <li>Horizon crashes when clicking the <b>Download CSV Summary</b> button under Resource
+            Usage panel.</li>
+          <li>Horizon crashes when installing KVM region patch 8 from Horizon dashboard.</li>
+        </ul></p>
+    </section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section>
+      <p><b> Downloading the Horizon Patch</b></p>
+      <p>Download the <codeph>Horizon003_Patch031</codeph> patch and extract the
+          <codeph>HCG-horizon-updatedclients</codeph> directory.</p>
+      <p>The patch is in a compressed file. The README with the patch download contains information
+        on files changed by these patches.</p>
+      <title>Deploying the Horizon Patch for the lifecycle manager host</title>
+    </section>
+    <p>
+      <ol id="ol_pz4_nb3_qv">
+        <li>SSH into the lifecycle manager host as the root user. </li>
+        <li>Log into the lifecycle manager VM as
+            root.<pre>ssh &lt;lifecycle manager_VM_IP></pre><p>where: <codeph>lifecycle
+              manager_VM_IP</codeph> is the CLM IP of the lifecycle manager. </p>Locate the IP
+          address for the lifecycle manager in the
+            <systemoutput>/root/infra-ansible-playbooks/group_vars/all</systemoutput> file under
+            <systemoutput>hlm_clmstaticip</systemoutput> field.</li>
+        <li>Perform the following steps to apply the HCG-WR-HORIZON-CRASH:<ol id="ul_yym_kfk_bw">
+            <li>Copy the complete HCG-WR-HORIZON-CRASH folder in the
+                <codeph>/var/hlm/clouds/&lt;cloudname>/patches/</codeph>directory on lifecycle
+              manager VM.</li>
+            <li>Change to the
+              folder:<codeblock>cd /var/hlm/clouds/&lt;cloudname>/patches/HCG-WR-HORIZON-CRASH</codeblock></li>
+            <li>Add necessary permissions to scripts : <codeblock>chmod +x *.sh</codeblock></li>
+            <li>Apply patch changes:
+              <codeblock>./apply_patch_hor_disconnect_postdeploy.sh</codeblock></li>
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>~/cg-hlm/hlm-build/hlm_prepare-env.sh</codeblock></li>
+            <li>Run the Configuration
+              Processor:<codeblock>hlm generate -c &lt;cloudname></codeblock></li>
+            <li>Redeploy the FND-CLU
+              role:<codeblock>hlm deploy -c &lt;cloudname> -t "FND-CLU"</codeblock></li>
+          </ol></li>
+        <li>Perform the following steps to rollback the patch - HCG-WR-HORIZON-CRASH:
+            <codeblock>cd /var/hlm/clouds/&lt;cloudname>/patches/HCG-WR-HORIZON-CRASH</codeblock><ol
+            id="ul_kmd_cnk_bw">
+            <li>Rollback patch
+              changes.<codeblock>./rollback_patch_hor_disconnect_postdeploy.sh </codeblock></li>
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>~/cg-hlm/hlm-build/hlm_prepare-env.sh </codeblock></li>
+            <li>Run Config Processor: <codeblock> hlm generate -c &lt;cloudname> </codeblock></li>
+            <li>Redeploy FND-CLU
+              role:<codeblock>hlm deploy -c &lt;cloudname> -t "FND-CLU"</codeblock></li>
+          </ol></li>
+      </ol>
+    </p>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+  </body>
+</topic>
