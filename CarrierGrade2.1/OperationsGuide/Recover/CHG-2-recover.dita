@@ -29,55 +29,50 @@
       server. In the event that server goes down, you will need to manually restart the MySQL
       servers after the server is restarted. You might also need to restart RabbitMQ.</p>
     <section>
-      <title>Restarting MySQL</title>
-      <p>If the server hosting the controller VMs goes down, the MySQL server on each controller
-        will need to be manually restarted. HPE Helion OpenStack Carrier Grade includes an Ansible
-        playbook that will:<ul id="ul_tqm_lrg_t5">
+      <title>Restarting MySQL</title><p>If the server hosting the controller VMs goes down, the
+        MySQL server on each controller will need to be manually restarted. HPE Helion OpenStack
+        Carrier Grade includes an Ansible playbook that will:<ul id="ul_tqm_lrg_t5">
           <li>shut down all MySQL servers</li>
           <li>perform a <codeph>mysql stop</codeph> command to clear potential errors</li>
           <li>query the status of the MySQL cluster to determine the last MySQL server to fail</li>
           <li>bootstrap that MySQL server</li>
           <li>restart the other MySQL servers</li>
-        </ul></p>
-      <p>
-        <ol id="ol_wpw_frg_t5">
-          <li>Log into the lifecycle manager. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
-              HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
-              lifecycle manager in the <codeph>~/infra-ansible-playbooks/group_vars/all</codeph>
-              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Stop then start the
-            service:<codeblock>hlm stop -c &lt;cloud name> -t FND-MDB 
+        </ul></p><p/> To restart MySQL manually on a controller, execute the following steps:<ol
+        id="ol_wpw_frg_t5">
+        <li>Log into the lifecycle manager. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
+            HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+            lifecycle manager in the <codeph>~/infra-ansible-playbooks/group_vars/all</codeph> file
+            under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+        <li>Stop then start the
+          service:<codeblock>hlm stop -c &lt;cloud name> -t FND-MDB 
 hlm start -c &lt;cloud name> -t FND-MDB </codeblock></li>
-          <li>Log into the controller
-            <codeblock>ssh cghelion@&lt;IP of Controller> </codeblock></li>
-          <li>Execute the following command to determine the status of the MySQL
-            cluster:<codeblock>"sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock>This
-            command should return a cluster status where all VMs are listed. </li>
-        </ol>
-      </p>
-    </section>
+        <li>Log into the controller <codeblock>ssh cghelion@&lt;IP of Controller> </codeblock></li>
+        <li>Execute the following command to determine the status of the MySQL
+          cluster:<codeblock>"sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock>This
+          command should return a cluster status where all VMs are listed. </li>
+      </ol></section>
     <section>
-      <title>Restarting RabbitMQ</title>
+      <b> </b></section>
+    <section><b>Restarting RabbitMQ </b>
       <p>If the server hosting the controller VMs goes down, the RabbitMQ message broker service
-        might need to be manually restarted.</p>
-      <p>
-        <ol>
-          <li>Log into the lifecycle manager. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
-              HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
-              lifecycle manager in the <codeph>~/infra-ansible-playbooks/group_vars/all</codeph>
-              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Stop then start the
-            service:<codeblock>hlm stop -c &lt;cloud name> -t FND-RMQ 
+        might need to be manually restarted.</p> To restart RabbitMQ manually on a controller,
+      execute the following steps:</section>
+    <section>
+      <ol id="ol_xyv_tt5_zv">
+        <li>Log into the lifecycle manager. <codeblock>ssh &lt;HLM_VM_IP></codeblock><p>where:
+            HLM_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+            lifecycle manager in the <codeph>~/infra-ansible-playbooks/group_vars/all</codeph> file
+            under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+        <li>Stop then start the
+          service:<codeblock>hlm stop -c &lt;cloud name> -t FND-RMQ 
 hlm start -c &lt;cloud name> -t FND-RMQ </codeblock></li>
-          <li>Log into the controller
-            <codeblock>ssh cghelion@&lt;IP of Controller> </codeblock></li>
-          <li>Execute the following command to determine the status of the RabbitMQ
-            cluster:<codeblock>"sudo rabbitmqctl cluster_status"</codeblock></li>
-          <li>Execute the following command to determine the status of the RabbitMQ
-            cluster:<codeblock>"sudo rabbitmqctl cluster_status"</codeblock>This command should
-            return a cluster status where all VMs are listed.</li>
-        </ol>
-      </p>
+        <li>Log into the controller <codeblock>ssh cghelion@&lt;IP of Controller> </codeblock></li>
+        <li>Execute the following command to determine the status of the RabbitMQ
+          cluster:<codeblock>"sudo rabbitmqctl cluster_status"</codeblock>This command should return
+          a cluster status where all VMs are listed.</li>
+      </ol>
     </section>
   </body>
 </topic>
+    
+
