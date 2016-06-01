@@ -15,14 +15,14 @@
         MySQL cluster is
           running:<codeblock>ssh cghelion@&lt;IP of Controller&gt; "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock><p>If
           the cluster is down you should see:</p><image
-            href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGrade2.1/Images/carrier-grade-restart-mysql1.png"
+            href="C:/Users/phaneend/git/carrier.grade.docs/media/carrier.grade.docs/2.1/CGH-2.1-restart-mysql-1.png"
             id="image_l3d_qjd_1w"></image></li>
       <li>Execute the following commands to recover the MySQL
         Cluster:<codeblock>hlm stop -c &lt;cloud-name&gt; -t FND-MDB
 hlm start -c &lt;cloud-name&gt; -t FND-MDB</codeblock></li>
       <li>Execute the following command to verify that the MySQL Cluster is up and running:
             <codeblock>ssh cghelion@&lt;IP of Controller&gt; "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock><p><image
-              href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGrade2.1/Images/carrier-grade-restart-mysql2.png"
+              href="C:/Users/phaneend/git/carrier.grade.docs/media/carrier.grade.docs/2.1/CGH-2.1-restart-mysql-2.png"
             id="image_in5_dvd_bv"/></p></li>
     </ol>
     <p><b>Manual Recovery</b></p>
@@ -109,7 +109,7 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.200.51.105</codeblock></li>
     <p/>
     <p>
       <image
-        href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGrade2.1/Images/carrier-grade-restart-rabbitmq1.png"
+        href="C:/Users/phaneend/git/carrier.grade.docs/media/carrier.grade.docs/2.1/CGH-2.1-restart-rabbitmq-1.png"
         width="500" id="image_mvm_vqd_bv"/></p>
     <p> </p>
     <ul id="ul_nvm_vqd_bv">
@@ -122,7 +122,7 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.200.51.105</codeblock></li>
       <li>ssh cghelion@&lt;IP of Controller&gt; "sudo rabbitmqctl cluster_status"</li>
     </ul>
     <p><image
-      href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGrade2.1/Images/carrier-grade-restart-rabbitmq2.png"
+      href="C:/Users/phaneend/git/carrier.grade.docs/media/carrier.grade.docs/2.1/CGH-2.1-restart-rabbitmq-2.png"
         id="image_pvm_vqd_bv"/></p>
     <p/>
     <p><b>Manual Recovery</b></p>
