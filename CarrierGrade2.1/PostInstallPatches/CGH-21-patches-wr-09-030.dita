@@ -58,27 +58,20 @@
             <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
             <b>Inventory</b>. Click the <b>Patches</b> table for the patches. Or use the CLI on the
           active KVM controller: <codeph>sudo sw-patch query</codeph>.</note></section>
-      <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
-            <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-            scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
-            href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
-            >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
-        navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-          scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
-          <li>Click <b>Sign In</b> to log in using your account. </li>
-          <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
-            page.</li>
-          <li>Download the <b
-              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/030"
-            /> file and the associated checksum and signature files.</li>
-          <li>Verify the <xref
-              href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
-              >downloaded signature</xref> and the <xref
-              href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
-              >downloaded checksums</xref>.</li>
-          <li>Extract the compressed files until the
-              <codeph>TS_HP_15_Custom_PATCH_0008.patch</codeph> and readme files are available.</li>
-        </ol></section>
+      <section conref="CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
+      <section>
+        <title>Downloading the Horizon Patch</title>
+        <p>Download the <b
+            conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/030"
+          /> file and the associated checksum and signature files. Extract the compressed files
+          until the <codeph>TS_HP_15_Custom_PATCH_0008.patch</codeph> and readme files are
+          available.</p>
+        <p>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</p>
+      </section>
       <bodydiv id="install">
         <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
             id="ol_bcm_yg4_j5">
