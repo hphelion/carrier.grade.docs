@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
 <topic id="topic_vzc_ft5_zv">
-  <title>Recovery of MySQL and RabbitMQ</title>
+  <title>PE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Recovery of MySQL and
+    RabbitMQ</title>
   <body>
     <p><b>Recovery of MySQL</b></p>
     <p>A default deployment of HPE Helion OpenStack Carrier Grade includes a MySQL database instance
@@ -15,14 +16,14 @@
         MySQL cluster is
           running:<codeblock>ssh cghelion@&lt;IP of Controller&gt; "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock><p>If
           the cluster is down you should see:</p><image
-            href="C:/Users/phaneend/git/carrier.grade.docs/media/carrier.grade.docs/2.1/CGH-2.1-restart-mysql-1.png"
+            href="../../media/carrier.grade.docs/2.1/CGH-2.1-restart-mysql-1.png"
             id="image_l3d_qjd_1w"></image></li>
       <li>Execute the following commands to recover the MySQL
         Cluster:<codeblock>hlm stop -c &lt;cloud-name&gt; -t FND-MDB
 hlm start -c &lt;cloud-name&gt; -t FND-MDB</codeblock></li>
       <li>Execute the following command to verify that the MySQL Cluster is up and running:
             <codeblock>ssh cghelion@&lt;IP of Controller&gt; "sudo mysql keystone -e \"show status where Variable_name in ('wsrep_cluster_size','wsrep_cluster_status','wsrep_incoming_addresses');"\"</codeblock><p><image
-              href="C:/Users/phaneend/git/carrier.grade.docs/media/carrier.grade.docs/2.1/CGH-2.1-restart-mysql-2.png"
+              href="../../media/carrier.grade.docs/2.1/CGH-2.1-restart-mysql-2.png"
             id="image_in5_dvd_bv"/></p></li>
     </ol>
     <p><b>Manual Recovery</b></p>
@@ -108,23 +109,18 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.200.51.105</codeblock></li>
     <pre>    ssh cghelion@&lt;IP of Controller&gt; "sudo rabbitmqctl cluster_status"</pre>
     <p/>
     <p>
-      <image
-        href="C:/Users/phaneend/git/carrier.grade.docs/media/carrier.grade.docs/2.1/CGH-2.1-restart-rabbitmq-1.png"
-        width="500" id="image_mvm_vqd_bv"/></p>
-    <p> </p>
+      <image href="../../media/carrier.grade.docs/2.1/CGH-2.1-restart-rabbitmq-1.png" width="500"
+        id="image_mvm_vqd_bv"/></p>
     <ul id="ul_nvm_vqd_bv">
       <li>To recover RabbitMQ cluster, execute the following commands on
           HLM:<pre>    hlm stop -c&lt;your-cloud-name&gt; -t FND-RMQ</pre><p>
         and</p><pre>    hlm start -c &lt;your-cloud-name&gt; -t FND-RMQ</pre></li>
     </ul>
-    <p> </p>
     <ul id="ul_ovm_vqd_bv">
       <li>ssh cghelion@&lt;IP of Controller&gt; "sudo rabbitmqctl cluster_status"</li>
     </ul>
-    <p><image
-      href="C:/Users/phaneend/git/carrier.grade.docs/media/carrier.grade.docs/2.1/CGH-2.1-restart-rabbitmq-2.png"
+    <p><image href="../../media/carrier.grade.docs/2.1/CGH-2.1-restart-rabbitmq-2.png"
         id="image_pvm_vqd_bv"/></p>
-    <p/>
     <p><b>Manual Recovery</b></p>
     <p>The following steps represent a general procedure for resetting an entire RabbitMQ cluster
       (that cannot be otherwise recovered). There may be a specific set of steps to follow for a
