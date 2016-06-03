@@ -248,46 +248,18 @@ StrictHostKeyChecking no </codeblock></li>
                                 organization's existing directory service and user account
                                 management processes.</p>
                 </section>
-                <section id="launch"><title>Launch the Software Updates and Licensing
-                                site</title><p>To downloaded the patches, launch the Software
-                                Updates &amp; Licensing site. You must obtain a Service Agreement ID
-                                (SAID) in order to download these files. </p>In a browser, navigate
-                        to the <xref href="http://www.hpe.com/downloads/software" format="html"
-                                scope="external">Software Updates &amp; Licensing</xref> site. <ol
-                                id="ol_bgn_1vm_sv">
-                                <li>Click <b>Sign In</b> to log in using your account. <p><image
-                                                  href="../../media/carrier.grade.docs/CGH-2-install-download-patches.png"
-                                                  width="200" id="image_jvd_q55_qv"/></p></li>
-                                <li>After signing in, enter your Service Agreement ID (SAID) in the
-                                                <b>Software updates and licensing</b> page and
-                                        accept the license agreement.<p><image
-                                                  href="../../media/carrier.grade.docs/CGH-2-install-download-patches2.png"
-                                                  id="image_mhp_f55_qv" width="400"/></p></li>
-                                <li>Click <b>View Available Products</b> to access the list of
-                                        products associated with your SAID. </li>
-                                <li>Under <b>Infrastructure Management</b>, select the product
-                                        associated with <b>1.1</b>.<p><image
-                                                  href="../../media/carrier.grade.docs/CGH-install-download-patches-select.png"
-                                                  width="400" id="image_bqz_ncm_sv"/></p></li>
-                                <li>For the product associated with version 1.1 click <b>Get
-                                                Software</b>.<p><image
-                                                  href="../../media/carrier.grade.docs/CGH-install-download-installer-select-2.png"
-                                                  width="400" id="image_p4l_fpm_sv"/></p></li>
-                                <li>Select the product name to locate HCG 1.1.0. <p><image
-                                                  href="../../media/carrier.grade.docs/CGH-install-download-installer-select-3.png"
-                                                  width="400" id="image_dv5_zdm_sv"/></p></li>
-                                <li>Select <b>HCG 1.1.0</b> and click <b>Download</b>.</li>
-                        </ol></section>
+                <section
+                        conref="../../CarrierGrade2.0/Installation/prereqs/carrier-grade-install-download.depot.dita#topic7148cgid/depot"/>
                 <section id="getinstall">
                         <title>Download and unpack the installation packages</title>
                         <p>Before you begin, you must download the required HPE Helion OpenStack
-                                installation package(s).</p>
+                                installation package(s) from the Software Depot, as shown above.</p>
                         <ol id="ol_zv1_jwm_sv">
                                 <li>Click the following links on the page and download the required
                                         files. Also download the associated Checksum and Signature
                                         files for each. <ul id="ul_aw1_jwm_sv">
-                                                <li><codeph>hcg_1.1.0.tar</codeph>. <b>Helion
-                                                  Carrier Grade 1.1.0</b>.</li>
+                                                <li><codeph>HCG 1.1.0 (Z7550-01935.tar)</codeph>.
+                                                  <b>Helion Carrier Grade 1.1.0</b>.</li>
                                                 <li><codeph>hcg_1.1.0_horizon_patch1</codeph>.
                                                   <b>Horizon Patch Tar File for Helion Carrier
                                                   Grade</b>. </li>
@@ -339,6 +311,63 @@ StrictHostKeyChecking no </codeblock></li>
                                                 signature and checksums</xref>. </li>
                         </ol>
                 </section>
+                <section
+                        conref="../../CarrierGrade2.1/PostInstallPatches/CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
+                <section><title>Download the patches</title>In the Software Updates and Licensing
+                        site, as shown above: <ol id="ol_fq1_fsl_2w">
+                                <li>Click the following links on the page and download the required
+                                        files. Also download the associated Checksum and Signature
+                                        files for each. <ul id="ul_gq1_fsl_2w">
+                                                <li><codeph>hcg_1.1.0_horizon_patch1</codeph>.
+                                                  <b>Horizon Patch Tar File for Helion Carrier
+                                                  Grade</b>. </li>
+                                                <li><codeph>HCG 1.1 WR license
+                                                  patch</codeph><b>Helion Carrier Grade 1.1.0
+                                                  Windriver License patch signature file</b> and the
+                                                  <b>Helion Carrier Grade 1.1.0 Windriver License
+                                                  patch</b> signature file signature and <b>Helion
+                                                  Carrier Grade 1.1.0 Windriver License patch</b>
+                                                  signature file checksum files.</li>
+                                                <li><codeph>HCG 1.1 ldap patch 1.1</codeph>.
+                                                  <b>Helion Carrier Grade 1.1.0 ldap patch</b>. </li>
+                                                <li><codeph>HCG 1.1 compute proxy patch</codeph>.
+                                                  The <b>Compute Proxy patch.</b>.</li>
+                                                <li>
+                                                  <codeph>HCG 1.1 gre patch 1.1</codeph>. <b>Helion
+                                                  Carrier Grade 1.1.0 Gre patch</b>. </li>
+                                                <li><codeph>HCG 1.1 secure HLM ports patch
+                                                  1.1</codeph>. <b>Helion Carrier Grade 1.1.0 secure
+                                                  HLM ports patch</b>.</li>
+                                                <li><codeph>HCG 1.1 random-password</codeph>.
+                                                  <b>Helion Carrier Grade 1.1.0 random password</b>. </li>
+                                                <li><codeph>HCG 1.1 horizon web patch 1.1</codeph>.
+                                                  <b>Helion Carrier Grade 1.1.0 Horizon Web
+                                                  patch</b>.</li>
+                                                <li><codeph>HCG 1.1 ceilometer patch1</codeph>.
+                                                  <b>Helion Carrier Grade 1.1.0 ceilometer
+                                                  patch1</b>.</li>
+                                                <li><codeph>HCG 1.1 HCG1.1 hLinux001
+                                                  Patch001</codeph>. The <b>Helion Carrier Grade 1.1
+                                                  hLinux001 Patch001</b> patch.</li>
+                                                <li><codeph>HCG 1.1 cg hos nic
+                                                  bonding.patch</codeph>. The <b>NIC Bonding
+                                                  Patch.</b>.</li>
+                                                <li><b>GPG keys to verify signature files</b>. The
+                                                  file is named
+                                                  <codeph>GPG-HPCSS-Public-Keys.tar</codeph>.</li>
+                                        </ul></li>
+                                <li>Download the required KVM region patches:<ul id="ul_hq1_fsl_2w">
+                                                <li>HCG 1.1 TS 15.05 Patch 001 </li>
+                                                <li>HCG 1.1 TS 15.05 Patch 002 </li>
+                                                <li>HCG 1.1 TS 15.05 Patch 003 </li>
+                                                <li>HCG 1.1 TS 15.05 Patch 004 </li>
+                                                <li>HCG 1.1 TS 15.05 Patch 005 </li>
+                                                <li>HCG 1.1 TS 15.05 Patch 006 </li>
+                                                <li>HCG 1.1 TS 15.05 Patch 007</li>
+                                        </ul></li>
+                                <li><xref href="#topic7148/verify" format="dita">Verify the
+                                                signature and checksums</xref>. </li>
+                        </ol></section>
                 <section id="verify">
                         <title>Verify the downloaded signature</title>
                         <p>After downloading the installation packages, you should verify the

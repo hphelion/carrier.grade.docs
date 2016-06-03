@@ -30,16 +30,13 @@
         <li>locales </li>
         <li>multiarch-support </li>
       </ul></section>
-    <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
-          <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-          scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
-          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
-          >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
-      navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-        scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
-        <li>Click <b>Sign In</b> to log in using your account. </li>
-        <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
-          page.</li>
+    <section
+      conref="../../CarrierGrade2.1/PostInstallPatches/CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
+    <section><title>Download the Patch</title>Download the <b>Helion Carrier Grade 1.1 hLinux001
+        Patch001</b> file and the associated checksum and signature files. Extract the compressed
+      files until the <codeph>TS_HP_15_Custom_PATCH_0005.patch</codeph> and readme files are
+        available.<p>Verify the downloaded signature and the downloaded checksums. </p><p>In the
+        Software Depot, as shown above:</p><ol id="ul_lvg_jb2_xs">
         <li>Download the <b id="productShow_appName">Helion Carrier Grade 1.1 hLinux001 Patch001</b>
           patch and the associated checksum and signature files.</li>
         <li>Verify the downloaded signature and the downloaded checksums.</li>
@@ -55,7 +52,8 @@
               <li>lifecycle manager VM;</li>
               <li>three HP Helion OpenStack Carrier Grade controllers in the non-KVM region.</li>
             </ul></p></li>
-      </ol></section>
+      </ol>
+    </section>
     <section>
       <p><b>Patch the lifecycle manager VM and non-KVM controllers</b></p>
       <p>After copying the patch files, use the following steps to deploy the patch onto the
