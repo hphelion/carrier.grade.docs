@@ -8,17 +8,19 @@
 </metadata>
 </prolog>
 <body>
-<p>A volume type defines the characteristics of a volume. It usually maps to a set of capabilities
-      of the storage back-end driver that is used for this volume. For example:
-        <i>Backup</i>,<i>SSD</i>, and so forth.</p>
-<section id="create-a-volume-type"> <title>Create a volume type</title>
-<ol>
-        <li><xref href="../Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl">Launch the HP
-            Helion OpenStack Carrier Grade Horizon Dashboard</xref>.</li>
-        <li><xref href="../Dashboard/CGH-2-User-region-selector.dita#jow1432757989702">Select the
-                        appropriate region and project</xref>.</li>
+        <p>A volume type defines the characteristics of a volume. It usually maps to a set of
+            capabilities of the storage back-end driver that is used for this volume. For example:
+                <i>Backup</i>,<i>SSD</i>, and so forth.</p>
+        <section id="create-a-volume-type">
+            <title>Create a volume type</title>
+            <ol>
+                <li><xref href="../Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl">Launch
+                        the HP Helion OpenStack Carrier Grade Horizon Dashboard</xref>.</li>
+                <li><xref href="../Dashboard/CGH-2-User-region-selector.dita#jow1432757989702"
+                        >Select the appropriate region and project</xref>.</li>
                 <li>Click the <b>Admin</b> dashboard, then the <b>System</b> panel, then the
                         <b>Volumes</b> tab. </li>
+<<<<<<< HEAD
 <li>In the <b>Volume Types</b> section of the table, click <b>Create Volume Type</b>.</li>
 <li>In the <b>Create Volume Type</b> dialog box, enter a name for the volume type.</li>
 <li>Click <b>Create Volume Type</b> to confirm.</li>
@@ -26,16 +28,36 @@
 </section>
         <section id="associate_volumetype"><title>Associate the Volume Type to the
                 Backend</title><sectiondiv outputclass="insideSection">
+=======
+                <li>In the <b>Volume Types</b> section of the table, click <b>Create Volume
+                    Type</b>.</li>
+                <li>In the <b>Create Volume Type</b> dialog box, enter a name for the volume
+                    type.</li>
+                <li>Click <b>Create Volume Type</b> to confirm.</li>
+            </ol>
+        </section>
+        <section id="associate_volumetype">
+            <title outputclass="headerH">Associate the Volume Type to the Backend</title>
+            <sectiondiv outputclass="insideSection">
+>>>>>>> swarna-1685
                 <p>After the volume type{s} have been created, you can assign extra specification
                     attributes to the volume types. Each Block Storage backend option has unique
                     attributes that can be used. See the following pages for the specific attributes
                     for the backend that you are using:</p>
+<<<<<<< HEAD
                 <ul id="ul_mmv_j1m_bw">
+=======
+                <ul id="ul_eyx_mrz_bw">
+>>>>>>> swarna-1685
                     <li>VSA</li>
                     <li>3PAR</li>
                 </ul>
                 <p>To map a volume type to a backend, do the following:</p>
+<<<<<<< HEAD
                 <ol id="ol_nmv_j1m_bw">
+=======
+                <ol id="ol_fyx_mrz_bw">
+>>>>>>> swarna-1685
                     <li><xref href="../Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
                             >Launch the HP Helion OpenStack Carrier Grade Horizon
                         Dashboard</xref>.</li>
@@ -54,8 +76,16 @@
                 </ol>
                 <p>Once the volume type is mapped to a backend, you can create volumes with this
                     volume type.</p>
+<<<<<<< HEAD
             </sectiondiv><b id="vsa-specs">Extra Specification Options for VSA</b><sectiondiv
                 outputclass="insideSection">
+=======
+            </sectiondiv>
+        </section>
+        <section id="extraspecs_vsa">
+            <title outputclass="headerH">Extra Specification Options for VSA</title>
+            <sectiondiv outputclass="insideSection">
+>>>>>>> swarna-1685
                 <p>VSA supports volumes creation with additional attributes. All these attributes
                     can be specified using the extra specs options for your volume type. The
                     administrator is expected to define appropriate extra spec for VSA volume type
@@ -100,7 +130,11 @@
                                         <p>The protection level options enable different data
                                             protection configurations. Supported data protection
                                             options are:</p>
+<<<<<<< HEAD
                                         <ul id="ul_omv_j1m_bw">
+=======
+                                        <ul id="ul_gyx_mrz_bw">
+>>>>>>> swarna-1685
                                             <li>r-0, Network RAID-0 (None)</li>
                                             <li>r-5, Network RAID-5 (Single- Parity)</li>
                                             <li>r-10-2, Network RAID-10 (2-Way Mirror)</li>
@@ -115,6 +149,7 @@
                     </table>
                 </p>
                 <p>Here is what a completed list of extra specs may look like:</p>
+<<<<<<< HEAD
             </sectiondiv><b id="3par-specs">Extra Specification Options for 3PAR</b>
             <p>3PAR supports volumes creation with additional attributes. These attributes can be
                 specified using the extra specs options for your volume type. The administrator is
@@ -162,6 +197,61 @@
         <li><xref href="../Dashboard/CGH-2-User-region-selector.dita#jow1432757989702">Select the
             appropriate region and project</xref>.</li>
         <li>Based on whether you are <xref
+=======
+            </sectiondiv>
+        </section>
+        <section id="extraspecs_3par">
+            <title outputclass="headerH">Extra Specification Options for 3PAR</title>
+            <sectiondiv outputclass="insideSection">
+                <p>3PAR supports volumes creation with additional attributes. These attributes can
+                    be specified using the extra specs options for your volume type. The
+                    administrator is expected to define appropriate extra spec for 3PAR volume type
+                    as per the guidelines provided at <xref
+                        href="http://docs.openstack.org/liberty/config-reference/content/hp-3par-supported-ops.html"
+                        format="html" scope="external">here</xref>.</p>
+                <p>The following Cinder Volume Type extra-specs options enable control over the 3PAR
+                    storage provisioning type:</p>
+                <p>
+                    <table frame="all" rowsep="1" colsep="1" id="3par">
+                        <tgroup cols="3">
+                            <colspec colname="c1" colnum="1"/>
+                            <colspec colname="c2" colnum="2"/>
+                            <colspec colname="c3" colnum="3"/>
+                            <thead>
+                                <row>
+                                    <entry>Key</entry>
+                                    <entry>Value</entry>
+                                    <entry>Description</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>volume_backend_name</entry>
+                                    <entry><i>volume backend name</i></entry>
+                                    <entry>The name of the backend to which you want to associate
+                                        the volume type, which you also specified earlier in the
+                                            <codeph>cinder.conf.j2</codeph> file.</entry>
+                                </row>
+                                <row>
+                                    <entry>hp3par:provisioning (optional)</entry>
+                                    <entry>thin, full, or dedup</entry>
+                                    <entry/>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </p>
+            </sectiondiv>
+        </section>
+        <section>
+            <title>Delete a volume type</title>
+            <ol id="ol_fsj_rrz_bw">
+                <li><xref href="../Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl">Launch
+                        the HP Helion OpenStack Carrier Grade Horizon Dashboard</xref>.</li>
+                <li><xref href="../Dashboard/CGH-2-User-region-selector.dita#jow1432757989702"
+                        >Select the appropriate region and project</xref>.</li>
+                <li>Based on whether you are <xref
+>>>>>>> swarna-1685
                         href="../Dashboard/CGH-2-User-Dashboard-how-works.dita#topic6108c2udhw"
                         >working on a project or the domain</xref>:<ul id="ul_z3q_yft_jt">
                         <li>Click the <b>Admin</b> dashboard, then the <b>System</b> panel, then the
@@ -169,11 +259,17 @@
                         <li>Click the <b>Project</b> dashboard, then the <b>Compute</b> panel, then
                             the <b>Volumes</b> tab. </li>
                     </ul></li>
-<li>In the <b>Volume Types</b> section of the table, select the volume type or types that you want
-          to delete.</li>
-<li>Click <b>Delete Volume Types</b>.</li>
-<li>In the <b>Confirm Delete Volume Types</b> dialog box, click <b>Delete Volume Types</b>.</li>
-</ol>
-</section>
-</body>
+                <li>In the <b>Volume Types</b> section of the table, select the volume type or types
+                    that you want to delete.</li>
+                <li>Click <b>Delete Volume Types</b>.</li>
+                <li>In the <b>Confirm Delete Volume Types</b> dialog box, click <b>Delete Volume
+                        Types</b>.</li>
+            </ol>
+        </section>
+        <note><codeph>Raid-5</codeph> thin is recommended for the data protection level of HCG
+            production instance volumes on StoreVirtual. <codeph>Raid-10-2 </codeph>thin is
+            recommended for high write IO instances. </note>
+        <note type="warning">Users should not boot instances from images, but only from volumes.
+        </note>
+    </body>
 </topic>
