@@ -27,6 +27,99 @@
       patches you need to apply and when they must be applied.</p>
     <section>
       <title>Post-deployment patches </title>
+      <p>If you installed all of the patches <xref
+          href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/pre"
+          >listed in the prerequisites</xref>, you need to install the following patches after te
+        HPE Helion OpenStack Carrier Grade cloud is installed. </p>
+    </section>
+    <section>
+      <p>
+        <table frame="all" rowsep="1" colsep="1" id="table_qzt_qnw_2w">
+          <tgroup cols="6">
+            <colspec colname="c1" colnum="1" colwidth="2.45*"/>
+            <colspec colname="newCol2" colnum="2" colwidth="4.54*"/>
+            <colspec colname="c2" colnum="3" colwidth="1.04*"/>
+            <colspec colname="c3" colnum="4" colwidth="1*"/>
+            <colspec colname="c4" colnum="5" colwidth="1.29*"/>
+            <colspec colname="c5" colnum="6" colwidth="1.57*"/>
+            <colspec colname="newCol10" colnum="7" colwidth="1*"/>
+            <thead>
+              <row>
+                <entry>Patch</entry>
+                <entry>Download File</entry>
+                <entry>Denver</entry>
+                <entry>Tahoe</entry>
+                <entry>Memphis</entry>
+                <entry>Sacramento</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry><xref href="CGH-2-patches-horizon.dita#topic10581pdph">Horizon
+                  patch</xref></entry>
+                <entry><b
+                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/002"
+                  /></entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-cinder-016.dita#topic10581pdpc">Cinder
+                  Patch</xref></entry>
+                <entry><b
+                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/016"
+                  /><!--Patch018 is in VSD config--></entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-glibc-022.dita#topic10581pdp22">HPE Linux Patch
+                  </xref></entry>
+                <entry><b
+                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/022"
+                  /></entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+              </row>
+              <row>
+                <entry>HCG-OVS Patch</entry>
+                <entry><b
+                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/028"
+                  /></entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+              </row>
+              <row>
+                <entry><b>Horizon003_Patch031</b></entry>
+                <entry><b>HCG2.0_Horizon003_Patch031</b></entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+              </row>
+              <row>
+                <entry><b>DBConnections Patch</b></entry>
+                <entry><b>HCG2.0_DBConnections001_Patch034</b></entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </p>
+    </section>
+    <section>
+      <title>Full list of post-deployment patches </title>
       <p>If your HP Helion OpenStack Carrier Grade cloud is fully deployed, you must install the
         following patches based on your cloud topology, unless you have installed them <xref
           href="../Installation/CGH-2-installation-patches.dita#topic10581cgiptch">during

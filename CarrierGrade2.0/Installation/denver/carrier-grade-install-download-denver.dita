@@ -21,7 +21,6 @@
                 </metadata>
         </prolog>
         <body>
-               
                 <p
                         conref="../prereqs/../prereqs/carrier-grade-install-download.dita#topic7148cgid/intro"/>
                 <section conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/depot"/>
@@ -52,29 +51,18 @@
                                 />
                         </ol>
                 </section>
-                        
-                        <p><b>Note:</b> When downloading installation files, always download and
-                                verify the signature file before installing. </p>
-             
-                <section
-                        conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"/>
-                <section id="checksum">
-                        <title>Verify the downloaded checksums</title>
-                        <p>You should also use a checksum verification tool, such as sha256sum,
-                                which should come installed with Ubuntu.</p>
-                        <ol id="ol_icb_k4f_xs">
-                                <li>Run the checksum tool against the download
-                                        package:<codeblock>sha256sum &lt;path-to-file>/hcg2_kvm_avs.tar</codeblock></li>
-                                <li>Compare the output of the checksum tool to the download checksum
-                                        file.
-                                        <codeblock>sha256sum.exe hcg2_kvm_esx_ironic_vrs.tar
-4ba8ce74525332ed732ed2d6adeca5692e31ef5ee089074ec25bf0b3d7be1882  hcg2_kvm_avs.tar.gz</codeblock>Note
-                                        that the checksum file contains the date that the file was
-                                        generated, the checksum string, and the name of the file
-                                        that was used, similar to the
-                                        following:<codeblock>Fri Dec  4 12:22:40 PST 2015
-4ba8ce74525332ed732ed2d6adeca5692e31ef5ee089074ec25bf0b3d7be1882  hcg2_kvm_avs.tar.gz</codeblock></li>
-                        </ol>
+                <p>]</p>
+                <p><b>Note:</b> When downloading installation files, always download and verify the
+                        signature file before installing. </p>
+                <section>
+                        <title>Verify the downloaded signature and checksums</title>
+                        <p>After downloading the installation packages, you should verify the
+                                signature of the download. You should also use a checksum
+                                verification tool, such as sha256sum, which should come installed
+                                with Ubuntu.</p>
+                        <p>For more information, see <xref
+                                        href="../prereqs/carrier-grade-install-checksum-denver.dita#topic7148cgidvd"
+                                        >Verify the Downloads</xref>.</p>
                 </section>
                 <section conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid/avs"/>
                 <section id="next-step">
