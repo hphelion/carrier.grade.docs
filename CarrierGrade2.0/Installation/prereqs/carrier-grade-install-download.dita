@@ -43,23 +43,51 @@
                 <section id="depot">
                         <title>Launch the Software Depot
                                 <!--Referenced by Download the Installation Packages for all deployments--></title>
-                        <p>Launch the the <xref href="http://www.hpe.com/Helion/CarrierGrade"
+                        <p id="hpelinux-intro">Launch the the <xref href="http://www.hpe.com/Helion/CarrierGrade"
                                         format="html" scope="external">Software Depot for HP Helion
                                         Carrier Grade</xref>. You must obtain an HP Passport user
                                 account in order to download these files. </p>
                         <p>
                                 <ol id="hpelinux">
-                                        <li>Click <b>Sign In</b> to log in using your HP Passport
+                                        <li id="hpelinux1">Click <b>Sign In</b> to log in using your HP Passport
                                                 account. <p><image
                                                   href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-signin.png"
                                                   width="600" id="image_znx_k1q_mv"/></p></li>
-                                        <li>After signing in, click the <b>Select</b> button on the
+                                        <li id="hpelinux2">After signing in, click the <b>Select</b> button on the
                                                 right side of the page.<p><image
                                                   href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-select.png"
                                                   width="600" id="image_ylt_h4p_mv"/></p></li>
-                                        <li>Enter your personal information and address and accept
+                                        <li id="hpelinux3">Enter your personal information and address and accept
                                                 the license agreement and click <b>Next</b>.</li>
-                                        <li>For the software you want to download, listed below,
+                                        <li id="hpelinux4">Click the <b>Downloads</b> tab and locate the following
+                                                  download.<!-- Referenced by Download the Installation Packages Tahoe, Memphis, Sacramento--><ul
+                                                  id="ul_zll_rjv_g5">
+                                                  <li><b>HCG 2.0 KVM ESX Ironic VRS</b>.
+                                                  Installation files for the HP Helion OpenStack
+                                                  Carrier Grade Tahoe, Memphis, and Sacramento
+                                                  deployments. This link will download the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
+                                                  file. <p>Also download the <b>HCG 2.0 KVM ESX
+                                                  Ironic VRS sha256</b> and <b>HCG 2.0 KVM ESX
+                                                  Ironic VRS sig</b> files. </p></li>
+                                                  <li><b id="dcn-R7-download">HPE DCN 3.2R7 files
+                                                  and Patches</b>. Required files for installing HPE
+                                                  DCN 3.2R7 and all of the currently required
+                                                  patches (as of June 3, 2016).
+                                                  <!--Get the right name!--><p>Also download the
+                                                  <b>HCG 2.0 KVM ESX Ironic VRS Part 2 of 2
+                                                  sha256</b> and <b>HCG 2.0 KVM ESX Ironic VRS Part
+                                                  2 of 2 sig</b> files. </p><note>If you are using
+                                                  HPE DCN 3.2R4, download the <b>HCG 2.0 KVM ESX
+                                                  Ironic VRS Part 2 of 2</b> to obtain the files for
+                                                  installing the 3.2R4 version of DCN/ This link
+                                                  will download the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
+                                                  file. You can also download the HPE DCN 3.2R7 file
+                                                  to get all of the patches you will need to
+                                                  install.</note></li>
+                                                </ul></li>
+                                        <li id="hpelinux5">For the software you want to download, listed below,
                                                 select the download method:<ul id="ul_cn1_ptp_mv">
                                                   <li><b>Use HPE Download Manager</b>. Use the HPE
                                                   Download Manager to specify where the installation
@@ -84,67 +112,33 @@
                                                   </ol></note><p><image
                                                   href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-download-mgr.png"
                                                   id="image_hd4_2fn_sv"/></p></li>
+                                        <li id="hpelinux6"><b>GPG Keys to Verify Signature Files</b> The public keys for HP Helion Carrier Grade 2.0.</li>
+                                                <li id="hpelinux7">Optionally, download the <b>Helion Carrier Grade 2.0 Infoblox Plugin</b>. Also, download the checksum and signature files.</li> 
+                                        
                                 </ol>
                         </p>
                 </section>
-                <section>
-                        <ol id="ul_lvg_jb2_xs">
-                                <li id="download-vrs">Click the <b>Downloads</b> tab and locate the
-                                        following
-                                                download.<!-- Referenced by Download the Installation Packages Tahoe, Memphis, Sacramento--><ul
-                                                id="ul_zll_rjv_g5">
-                                                <li><b>HCG 2.0 KVM ESX Ironic VRS</b>. Installation
-                                                  files for the HP Helion OpenStack Carrier Grade
-                                                  Tahoe, Memphis, and Sacramento deployments. This
-                                                  link will download the
-                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
-                                                  file. <p>Also download the <b>HCG 2.0 KVM ESX
-                                                  Ironic VRS sha256</b> and <b>HCG 2.0 KVM ESX
-                                                  Ironic VRS sig</b> files. </p></li>
-                                                <li><b id="dcn-R7-download">HPE DCN 3.2R7 files and
-                                                  Patches</b>. Required files for installing HPE DCN
-                                                  3.2R7 and all of the currently required patches
-                                                  (as of June 3, 2016).
-                                                  <!--Get the right name!--><p>Also download the
-                                                  <b>HCG 2.0 KVM ESX Ironic VRS Part 2 of 2
-                                                  sha256</b> and <b>HCG 2.0 KVM ESX Ironic VRS Part
-                                                  2 of 2 sig</b> files. </p><note>If you are using
-                                                  HPE DCN 3.2R4, download the <b>HCG 2.0 KVM ESX
-                                                  Ironic VRS Part 2 of 2</b> to obtain the files for
-                                                  installing the 3.2R4 version of DCN/ This link
-                                                  will download the
-                                                  <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
-                                                  file. You can also download the HPE DCN 3.2R7 file
-                                                  to get all of the patches you will need to
-                                                  install.</note></li>
-                                                <!--<li><b>GPG Keys to Verify Signature Files</b> The public keys for HP Helion Carrier Grade 2.0.</li> Where are these?-->
-                                        </ul></li>
-                                <li id="download-avs">Click the <b>Downloads</b> tab and locate the
-                                        following download.<!-- Referenced by Download the Installation Packages Denver-->
-                                        <ul id="ul_erk_kwh_k5">
-                                                <li><b>HCG 2.0 KVM AVS</b> Installation files for
-                                                  the HP Helion OpenStack Carrier Grade Tahoe,
-                                                  Memphis, and Sacramento deployments. This link
-                                                  will download the
+                <ol id="ul_lvg_jb2_xs">
+                        <li id="hpelinux4-avs">Click the <b>Downloads</b> tab and locate the
+                                following download.<!-- Referenced by Download the Installation Packages Denver-->
+                                <ul id="ul_erk_kwh_k5">
+                                        <li ><b>HCG 2.0 KVM AVS</b> Installation files for the HP
+                                                Helion OpenStack Carrier Grade Denver deployment.
+                                                This link will download the
                                                   <codeph>hcg2_kvm_avs.tar.gz</codeph> file. <p>Also
                                                   download the <b>HCG 2.0 KVM AVS sha256</b> and
                                                   <b>HCG 2.0 KVM AVS sig</b> files. </p></li>
-                                                <li><b><b conref="#topic7148cgid/dcn-R7-download"
-                                                  /></b> Optionally download this package to get of
-                                                  the currently required patches (as of June 3,
-                                                  2016). <!--Get the right name!--></li>
-                                                <!--<li><b>GPG keys to verify signature files</b> The public keys for HP Helion Carrier Grade 2.0.</li>-->
-                                        </ul></li>
-                                <li id="dowload-infoblox">Optionally, download the <b>Helion Carrier
-                                                Grade 2.0 Infoblox Plugin</b>. Also, download the
-                                        checksum and signature files.</li>
-                        </ol>
-                        <p>
-                                <b>Note:</b> When downloading installation files, always download
-                                and verify the associated checksum and signature files before
-                                installing. </p>
-                        <p>Post-install patches; linked to in Post Install page, not pre-reqs</p>
-                </section>
+                                        <li><b><b conref="#topic7148cgid/dcn-R7-download"/></b>
+                                                Optionally download this package to get of the
+                                                currently required patches (as of June 3, 2016).
+                                                <!--Get the right name!--></li>
+                                        <!--<li><b>GPG keys to verify signature files</b> The public keys for HP Helion Carrier Grade 2.0.</li>-->
+                                </ul></li>
+                </ol>
+                <p>
+                        <b>Note:</b> When downloading installation files, always download and verify
+                        the associated checksum and signature files before installing. </p>
+                <p>Post-install patches; linked to in Post Install page, not pre-reqs</p>
                 <p>
                         <ul id="ul_f1p_tsq_w5">
                                 <li id="li-002"><b id="002">Helion Carrier Grade 2.0 Horizon001
@@ -173,9 +167,12 @@
                 </section>
                 <section id="extract"><title>Extract and copy the HP Helion OpenStack Carrier Grade
                                 installation files and patches
-                                <!-- referenced by Downoad the Installation Packages for Tahoe, Memphis, Sacramento--></title>After
+                                <!-- referenced by Downoad the Installation Packages for Tahoe, Memphis, Sacramento--></title>
+                        <sectiondiv id="avs-only">
+                        <p>After
                         downloading the <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph> file (using
-                        the <b>HCG 2.0 KVM ESX Ironic VRS</b> link, above):<ol id="ol_kck_hlw_f">
+                                the <b>HCG 2.0 KVM ESX Ironic VRS</b> link, above):</p>
+                                <ol id="ol_kck_hlw_f">
                                 <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
                                         file. The extraction creates the
                                                 <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
@@ -389,7 +386,8 @@
                                                 </tbody>
                                         </tgroup>
                                 </table>
-                        </p><p><b>vrsg-curl-script</b></p><p>The
+                                </p></sectiondiv>
+                                <p><b>vrsg-curl-script</b></p><p>The
                                         <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/vrsg-curl-script/</codeph>
                                 folder in the <b>HPE DCN 3.2R7 files and Patches</b> download file
                                 contains cURL scripts required during installation process. You will
