@@ -69,8 +69,10 @@
             Integration Node VM:<ol id="ol_mkw_drl_xt">
                 <li>Launch the vCenter client, at <codeph>https://&lt;vcenter
                         IP&gt;:9443/vsphere-client</codeph>.</li>
-                <li>Import the <codeph>VSD-3.2.4_134-hp.ova</codeph> file into vCenter server.
-                    Importing the OVA file creates the vCenter Integration Node VM. During the
+                <li>Import the <codeph>VSD-3.2.7_269-hp.ova</codeph> file into vCenter server. <p>
+                        <note>For HPE DCN 3.2R4, the file is <codeph>VSD-3.2.4_134-hp.ova</codeph>
+                            .</note>
+                    </p>Importing the OVA file creates the vCenter Integration Node VM. During the
                     installation, you will select a network for the VM. Select the DVRS Datapath
                     (TUL) network.</li>
                 <li>Import the <codeph>itoolbox1.ova</codeph> template file.<p>You should have <xref
@@ -183,6 +185,9 @@ option routers 10.20.94.209;   ###TUL network Gateway####
                     <li>Copy the following VRSvApp template files to the DocumentRoot of the toolbox
                         VM (<codeph>/var/www/html</codeph> is the default location): <ul
                             id="ul_dks_ndj_h5">
+                            <li><codeph>VRS_3.2.7-0267.1_04142016.ovf</codeph></li>
+                            <li><codeph>VRS_3.2.7-0267.1_04142016-disk1.vmdk</codeph></li>
+                        </ul><p>For HPE DCN 3.2R4:</p><ul id="ul_oyt_2kd_fw">
                             <li><codeph>VRS_3.2.4-135_10062015.ovf</codeph></li>
                             <li><codeph>VRS_3.2.4-135_10062015-disk1.vmdk</codeph>
                             </li>
@@ -219,9 +224,11 @@ option routers 10.20.94.209;   ###TUL network Gateway####
                             id="image_tlj_slp_wt"/></p></li>
                 <li>Create a new vCenter in the VRS Deployer using your ESX vCenter details. Provide
                     a name, description, your vCenter IP, vCenter user, vCenter password, and path
-                    to the <codeph>VRS_3.2.4-135_10062015.ovf</codeph> file. <p>The template must be
-                        available over an HTTP server, and must allow connection from vCenter and
-                        from the Nuage-enabled hypervisors.</p><p><image
+                    to the <codeph>VRS_3.2.7-0267.1_04142016.ovf</codeph> file <p>
+                        <note>For HPE DCN 3.2R4, enter the path to the
+                                <codeph>VRS_3.2.4-135_10062015.ovf</codeph> file. </note>
+                    </p><p>The template must be available over an HTTP server, and must allow
+                        connection from vCenter and from the Nuage-enabled hypervisors.</p><p><image
                             href="../../media/CGH-2-install-vsdvm-new-vcenter.png"
                             id="image_uxp_4mp_wt" width="300"/></p></li>
                 <li>Add the Data Center to that vCenter you created:<p><image

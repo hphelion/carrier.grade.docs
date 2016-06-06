@@ -177,26 +177,29 @@ Password: cghelion</codeblock>
     </section>
     <section id="cURL-patch">
       <title>Install a cURL script to enable floating IPs</title>
-      <p>You should have downloaded the <b
-          conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"/>
-        file during the prerequisites. If you have not downloaded the patch, launch the <xref
-          href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-          scope="external">Helion Distribution Network (HDN)</xref> and locate the patch file and
-        the associated checksum and signature files. You must <xref
-          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
-          >obtain a user account on HDN</xref> in order to download these files. </p>
-      <ol id="ol_vjv_252_x5">
-        <li>On the system where the patch file is located, extract the compressed files until the
-            <codeph>HCG-CurlScript</codeph> directory is available. </li>
-        <li>Copy the complete <codeph>HCG-CurlScript</codeph> directory to
-            <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on lifecycle manager
-          host. <p>Where <codeph>&lt;cloud name></codeph> is the name of your cloud.</p></li>
-        <li>Execute following command to apply patch
-          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-CurlScript -t localhost</codeblock></li>
-        <li>Once the patch is deployed, the <codeph>vrsg_curl_script.tar</codeph> is installed in
-          the <codeph>/opt</codeph> directory on lifecycle manager VM. </li>
+      <p>You downloaded the <codeph>curl-vrsg-ha-fip.sh</codeph> cURL script in the <b
+          conref="prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-R7-download"/>
+        directory. </p>
+      <note><p><b>For HPE DCN 3.2R4:</b> You should have downloaded the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"
+          /></p> file during the prerequisites.<ol id="ol_vjv_252_x5">
+          <li>On the system where the patch file is located, extract the compressed files until the
+              <codeph>HCG-CurlScript</codeph> directory is available. </li>
+          <li>Copy the complete <codeph>HCG-CurlScript</codeph> directory to
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on lifecycle manager
+            host. <p>Where <codeph>&lt;cloud name></codeph> is the name of your cloud.</p></li>
+          <li>Execute following command to apply patch
+            <codeblock>hlm patch -c &lt;cloud-name> -n HCG-CurlScript -t localhost</codeblock>Once
+            the patch is deployed, the <codeph>vrsg_curl_script.tar</codeph> is installed in the
+              <codeph>/opt</codeph> directory on lifecycle manager VM. </li>
+        </ol></note>
+      <p>To deploy the cURL script:</p>
+      <ol id="ol_nct_kmd_fw">
+        <li>Copy the <codeph>curl-vrsg-ha-fip.sh</codeph> script to the <codeph>/opt</codeph>
+          directory on lifecycle manager VM.</li>
         <li>Execute the following command to extract the <codeph>vrsg_curl_script.tar</codeph> file:
-            <codeblock>tar -vxf vrsg_curl_script.tar</codeblock><p>The following files are
+            <codeblock>tar -vxf curl-vrsg-ha-fip.sh</codeblock><p>For DCN
+            3.2R4:</p><codeblock>tar -vxf vrsg_curl_script.tar</codeblock><p>The following files are
             extracted:</p><ul id="ul_dss_2p2_x5">
             <li>curl_vrsg_ha.sh -- The cURL script for a high availability environment -- production
               deployments are high availability; </li>

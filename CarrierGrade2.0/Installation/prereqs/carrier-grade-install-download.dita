@@ -505,7 +505,7 @@
                                                 </tbody>
                                         </tgroup>
                                 </table>
-                        </p><p><b>DCN Integrations</b></p>The the
+                        </p><p><b>DCN Integrations</b></p>The
                                 <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/dcn/</codeph>
                         directory contains files needed to integrate HP Helion OpenStack Carrier
                         Grade and HPE DCN.<p>Extract the downloaded files as indicated in the
@@ -558,7 +558,15 @@
                                                 </row>
                                         </tbody>
                                 </tgroup>
-                        </table></section>
+                        </table><p><b>cURL scripts</b></p>The
+                                <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/vrsg-curl-script/</codeph>
+                        directory contains cURL scripts needed to integrate HP Helion OpenStack
+                        Carrier Grade and HPE DCN.<p>Extract the downloaded files:<ul
+                                        id="ul_e4r_qld_fw">
+                                        <li><codeph>curl-vrsg-ha-fip.sh</codeph></li>
+                                        <li><codeph>curl-vrsg-hwvtep.sh</codeph></li>
+                                        <li><codeph>curl-vrsg-nonha-fip.sh</codeph></li>
+                                </ul></p></section>
                 <section id="r4"><title>Extract the HPE DCN 3.2R4
                                 components<!-- referenced by Downoad the Installation Packages for Tahoe, Memphis, Sacramento--></title><p>Extract
                                 the downloaded files from the <codeph>DCN-1</codeph> and
@@ -876,63 +884,55 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                 <li id="li-008"><b id="008">HCG2.0_Icinga001_Patch008</b>. This
                                         patch creates a random password to log into the Icinga
                                         interface.</li>
-                                <li id="li-010"><b id="010">Helion Carrier Grade 2.0
-                                                Keystone001_Patch010</b>. This patch fixes a problem
-                                        with the HP Helion OpenStack Carrier Grade certificate. </li>
-                                <li id="li-011"><b id="011">Helion Carrier Grade 2.0 Stackrc001
-                                                Patch011</b> -- Sacramento only. This patch fixes
-                                        issue where the baremetal service (Ironic) is not able to
-                                        use the CAN endpoint. </li>
-                                <li id="li-012"><b id="012">Helion Carrier Grade 2.0 RMQ001
-                                                Patch012</b>. This patch fixes a problem with the
-                                        logging of the RabbitMQ service.</li>
-                                <li id="li-013"><b id="013">Helion Carrier Grade 2.0 Log001
-                                                Patch013</b>. This patch fixes a problem with the
-                                        RabbitMQ service installed on HP Helion OpenStack
-                                        CarrierGrade.</li>
-                                <li id="li-014"><b id="014">Helion Carrier Grade 2.0 ELK001
-                                                Patch014</b>. This patch addresses several ELK
-                                        (ElasticSearch, Logstash, Kibana) related issues. </li>
-                                <li id="li-015"><b id="015">Helion Carrier Grade 2.0 LOG002
-                                                Patch015</b>. This is an optional patch to change
-                                        the logging of the services from INFO or DEBUG to
-                                        WARNING.</li>
-                                <li id="li-017"><b id="017">Helion Carrier Grade 2.0 WR004
-                                                Patch017</b>. This patch addresses a number of
-                                        issues in the KVM region.</li>
-                                <li id="li-018"><b id="018">Helion Carrier Grade 2.0 DCN003
-                                                Patch018</b>. This patch installs a cURL script that
-                                        can be used to enable floating IP addressing on the VRS-G
-                                        node.</li>
-                                <li id="li-019"><b id="019">Helion Carrier Grade 2.0 WR005
-                                                Patch019</b>. This patch addresses a number of
-                                        issues in the KVM region.</li>
-                                <li id="li-023"><b id="023">Helion Carrier Grade 2.0 Accelerate001
-                                                Patch023</b>. This patch resolves the issue
-                                                <codeph>Failed to launch the accelerated
-                                                daemon</codeph> encountered during the <codeph>hlm
-                                                deploy</codeph> process during installation.</li>
-                                <li id="li-024"><b id="024">Helion Carrier Grade 2.0 BMEndpoint001
-                                                Patch024</b>. This patch resolves the issue with
-                                        Horizon accessing Baremetal region to updates the creation
-                                        of a certificate that can be updated in future patches. </li>
-                                <li id="li-025"><b id="025">Helion Carrier Grade 2.0 WR006
-                                                Patch025</b>. This patch addresses a number of
-                                        issues in the KVM region.</li>
-                                <li id="li-026"><b id="026">Helion Carrier Grade 2.0 WR007
-                                                Patch027</b>. This patch addresses a security issue
-                                        in the KVM region. Replaces Patch026.</li>
-                                <li id="li-029"><b id="029">Helion Carrier Grade 2.0 WR008
-                                                Patch029</b>. This patch addresses a security issue
-                                        in the KVM region. Replaces Patch029.</li>
-                                <li id="li-030"><b id="030">Helion Carrier Grade 2.0 WR009
-                                                Patch030</b>. This patch addresses a number of
-                                        issues in the KVM region. </li>
-                                <li id="li-028"><b id="028">Helion Carrier Grade 2.0 HCG-OVS001
-                                                Patch028</b>. This patch fixes the buffer overflow
-                                        in openvswitch debian versions 2.2.x through 2.3.x allows
-                                        for Remot Code Execution, and in 2.4.0 - 2.4.8 allows for
-                                        Denial of Service and possible RCE.</li>
+                                <li id="li-010"><b id="010">HCG 2.0 Keystone001_Patch010</b>. This
+                                        patch fixes a problem with the HP Helion OpenStack Carrier
+                                        Grade certificate. </li>
+                                <li id="li-011"><b id="011">HCG 2.0 Stackrc001 Patch011</b> --
+                                        Sacramento only. This patch fixes issue where the baremetal
+                                        service (Ironic) is not able to use the CAN endpoint. </li>
+                                <li id="li-012"><b id="012">HCG 2.0 RMQ001 Patch012</b>. This patch
+                                        fixes a problem with the logging of the RabbitMQ
+                                        service.</li>
+                                <li id="li-013"><b id="013">HCG 2.0 Log001 Patch013</b>. This patch
+                                        fixes a problem with the RabbitMQ service installed on HP
+                                        Helion OpenStack CarrierGrade.</li>
+                                <li id="li-014"><b id="014">HCG 2.0 ELK001 Patch014</b>. This patch
+                                        addresses several ELK (ElasticSearch, Logstash, Kibana)
+                                        related issues. </li>
+                                <li id="li-015"><b id="015">HCG 2.0 LOG002 Patch015</b>. This is an
+                                        optional patch to change the logging of the services from
+                                        INFO or DEBUG to WARNING.</li>
+                                <li id="li-017"><b id="017">HCG 2.0 WR004 Patch017</b>. This patch
+                                        addresses a number of issues in the KVM region.</li>
+                                <li id="li-018"><b id="018">HCG 2.0 DCN003 Patch018</b>. This patch
+                                        installs a cURL script that can be used to enable floating
+                                        IP addressing on the VRS-G node.</li>
+                                <li id="li-019"><b id="019">HCG 2.0 WR005 Patch019</b>. This patch
+                                        addresses a number of issues in the KVM region.</li>
+                                <li id="li-023"><b id="023">HCG 2.0 Accelerate001 Patch023</b>. This
+                                        patch resolves the issue <codeph>Failed to launch the
+                                                accelerated daemon</codeph> encountered during the
+                                                <codeph>hlm deploy</codeph> process during
+                                        installation.</li>
+                                <li id="li-024"><b id="024">HCG 2.0 BMEndpoint001 Patch024</b>. This
+                                        patch resolves the issue with Horizon accessing Baremetal
+                                        region to updates the creation of a certificate that can be
+                                        updated in future patches. </li>
+                                <li id="li-025"><b id="025">HCG 2.0 WR006 Patch025</b>. This patch
+                                        addresses a number of issues in the KVM region.</li>
+                                <li id="li-026"><b id="026">HCG 2.0 WR007 Patch027</b>. This patch
+                                        addresses a security issue in the KVM region. Replaces
+                                        Patch026.</li>
+                                <li id="li-029"><b id="029">HCG 2.0 WR008 Patch029</b>. This patch
+                                        addresses a security issue in the KVM region. Replaces
+                                        Patch029.</li>
+                                <li id="li-030"><b id="030">HCG 2.0 WR009 Patch030</b>. This patch
+                                        addresses a number of issues in the KVM region. </li>
+                                <li id="li-028"><b id="028">HCG 2.0 HCG-OVS001 Patch028</b>. This
+                                        patch fixes the buffer overflow in openvswitch debian
+                                        versions 2.2.x through 2.3.x allows for Remot Code
+                                        Execution, and in 2.4.0 - 2.4.8 allows for Denial of Service
+                                        and possible RCE.</li>
                                 <!--Helion Carrier Grade 2.0 Horizon003 Patch031 is post-install only; do not download here-->
                         </ul>
                 </section>
