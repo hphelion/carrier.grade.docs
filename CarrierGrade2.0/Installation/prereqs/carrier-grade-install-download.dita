@@ -39,7 +39,6 @@
                 <p id="intro">This document describes the prerequisite steps to download the
                         installation files required to install HP Helion OpenStack Carrier
                         Grade.</p>
-                <p/>
                 <section id="depot">
                         <title>Launch the Software Depot
                                 <!--Referenced by Download the Installation Packages for all deployments--></title>
@@ -165,29 +164,34 @@
                                 <b>Note:</b> When downloading installation files, always download
                                 and verify the signature file before installing. </p>
                 </section>
-                <section id="extract"><title>Extract and copy the HP Helion OpenStack Carrier Grade
-                                installation files and patches
+                <section id="extract">
+                        <title>Extract and copy the HP Helion OpenStack Carrier Grade installation
+                                files and patches
                                 <!-- referenced by Downoad the Installation Packages for Tahoe, Memphis, Sacramento--></title>
                         <sectiondiv id="avs-only">
-                        <p>After
-                        downloading the <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph> file (using
-                                the <b>HCG 2.0 KVM ESX Ironic VRS</b> link, above):</p>
+                                <p>After downloading the
+                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph> file
+                                        (using the <b>HCG 2.0 KVM ESX Ironic VRS</b> link,
+                                        above):</p>
                                 <ol id="ol_kck_hlw_f">
-                                <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
-                                        file. The extraction creates the
-                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
-                                        file.</li>
-                                <li>Extract the
-                                                <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
-                                        file. The extraction creates the
-                                                <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
-                                        file.</li>
-                                <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph> and
-                                                <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
-                                        files. A number of files and folders are extracted.</li>
-                                <li>Copy or move the extracted files as indicated in the following
-                                        tables. <table id="table_rkj_yyk_2t">
-                                                <tgroup cols="3">
+                                        <li>Extract the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
+                                                file. The extraction creates the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
+                                                file.</li>
+                                        <li>Extract the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
+                                                file. The extraction creates the
+                                                  <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
+                                                file.</li>
+                                        <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
+                                                and
+                                                  <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
+                                                files. A number of files and folders are
+                                                extracted.</li>
+                                        <li>Copy or move the extracted files as indicated in the
+                                                following tables. <table id="table_rkj_yyk_2t">
+                                                  <tgroup cols="3">
                                                   <colspec colnum="1" colname="col2"/>
                                                   <colspec colnum="2" colname="col3"/>
                                                   <colspec colnum="3" colname="col4"/>
@@ -241,13 +245,14 @@
                                                   <entry>For Sacramento deployments only.</entry>
                                                   </row>
                                                   </tbody>
-                                                </tgroup>
-                                        </table><p id="kvm"><b>KVM Region Installation
-                                        files</b></p>The following files for installing the KVM
-                                        region are in the <b>WR</b> folder in the extracted download
-                                        package. Extract these files to any location on the sever
-                                        and make note of the location. <p>
-                                                <table id="topic7148__table_yhb_zny_zs">
+                                                  </tgroup>
+                                                </table><itemgroup id="kvm"><b>KVM Region
+                                                  Installation files</b>The following files for
+                                                  installing the KVM region are in the <b>WR</b>
+                                                  folder in the extracted download package. Extract
+                                                  these files to any location on the sever and make
+                                                  note of the location. <p>
+                                                  <table id="topic7148__table_yhb_zny_zs">
                                                   <tgroup cols="1">
                                                   <colspec colnum="1" colname="col2"
                                                   colwidth="3.26*"/>
@@ -268,11 +273,11 @@
                                                   </row>
                                                   </tbody>
                                                   </tgroup>
-                                                </table>
-                                        </p><itemgroup id="patches">
-                                                <p><b> Mandatory patches</b></p>
-                                                <p>The <b>mandatory_patches</b> directory
-                                                  contains:<ul id="ul_o1k_trn_g5">
+                                                  </table>
+                                                  </p></itemgroup>
+                                                <itemgroup id="patches"><b> Mandatory
+                                                  patches</b><p>The <b>mandatory_patches</b>
+                                                  directory contains:<ul id="ul_o1k_trn_g5">
                                                   <li><b>providernet-tab-missing-in-horizon</b>.
                                                   This directory contains the Horizon Provider
                                                   Network Patch patch. </li>
@@ -281,24 +286,26 @@
                                                   files:
                                                   <codeph>cg-hlm-cobbler-random.patch</codeph> and
                                                   <codeph>knc-cobbler-random.patch</codeph>.</li>
-                                                  </ul></p>
-                                                <p>You will be shown during the installation where
-                                                  to copy these patches.</p>
-                                        </itemgroup></li>
-                        </ol><p id="pre"><b>pre-install-patches</b></p><p>The
-                                        <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/pre-install-patches/pre-hlinux-patches</codeph>
-                                folder in the <b>HPE DCN 3.2R7 files and Patches</b> download file
-                                contains patches that must be installed during the installation
-                                process. You will be shown during the installation where to copy
-                                these patches.:</p><p><table id="table_ofv_ryv_2w">
-                                        <tgroup cols="1">
-                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
-                                                <thead>
+                                                  </ul></p><p>You will be shown during the
+                                                  installation where to copy these
+                                                  patches.</p></itemgroup><itemgroup id="pre"
+                                                  ><b>pre-install-patches</b><p>The
+                                                  <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/pre-install-patches/pre-hlinux-patches</codeph>
+                                                  folder in the <b>HPE DCN 3.2R7 files and
+                                                  Patches</b> download file contains patches that
+                                                  must be installed during the installation process.
+                                                  You will be shown during the installation where to
+                                                  copy these patches.:</p><p><table
+                                                  id="table_ofv_ryv_2w">
+                                                  <tgroup cols="1">
+                                                  <colspec colnum="1" colname="col2"
+                                                  colwidth="3.26*"/>
+                                                  <thead>
                                                   <row>
                                                   <entry>pre-hlinux-patches folder</entry>
                                                   </row>
-                                                </thead>
-                                                <tbody>
+                                                  </thead>
+                                                  <tbody>
                                                   <row>
                                                   <entry><codeph>HCG2.0_Accelerate001_Patch023.tar.gz</codeph></entry>
                                                   </row>
@@ -332,27 +339,33 @@
                                                   <row>
                                                   <entry><codeph>neu-dcnr7-predeploy.tar.gz</codeph></entry>
                                                   </row>
-                                                </tbody>
-                                        </tgroup>
-                                </table>The directory also contains signature and SHA256 files to
-                                verify the download. For more information, see <xref
-                                        href="../prereqs/carrier-grade-install-checksum-sacramento.dita#topic7148cgidv"
-                                        >Verify the Downloads</xref>.
-                                </p><p><b>pre-wr-patches</b></p><p>The
-                                        <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/pre-install-patches/pre-wr-patches</codeph>
-                                folder in the <b>HPE DCN 3.2R7 files and Patches</b> download file
-                                contains patches that must be installed during the KVM region
-                                installation process. You will be shown during the installation
-                                where to copy these patches.:</p><p>
-                                <table id="table_x2r_yjw_2w">
-                                        <tgroup cols="1">
-                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
-                                                <thead>
+                                                  </tbody>
+                                                  </tgroup>
+                                                  </table>The directory also contains signature and
+                                                  SHA256 files to verify the download. For more
+                                                  information, see <xref
+                                                  href="../prereqs/carrier-grade-install-checksum-sacramento.dita#topic7148cgidv"
+                                                  >Verify the Downloads</xref>.
+                                                  </p></itemgroup><itemgroup id="pre-kvm">
+                                                  <p><b>pre-wr-patches</b></p>
+                                                  <p>The
+                                                  <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/pre-install-patches/pre-wr-patches</codeph>
+                                                  folder in the <b>HPE DCN 3.2R7 files and
+                                                  Patches</b> download file contains patches that
+                                                  must be installed during the KVM region
+                                                  installation process. You will be shown during the
+                                                  installation where to copy these patches.:</p>
+                                                  <p>
+                                                  <table id="table_x2r_yjw_2w">
+                                                  <tgroup cols="1">
+                                                  <colspec colnum="1" colname="col2"
+                                                  colwidth="3.26*"/>
+                                                  <thead>
                                                   <row>
                                                   <entry>pre-hlinux-patches folder</entry>
                                                   </row>
-                                                </thead>
-                                                <tbody>
+                                                  </thead>
+                                                  <tbody>
                                                   <row>
                                                   <entry><codeph>HCG2.0_WR002_Patch005.tar.gz</codeph></entry>
                                                   </row>
@@ -383,58 +396,14 @@
                                                   <row>
                                                   <entry><codeph>HCG2.0_WR011_Patch033.tar.gz</codeph></entry>
                                                   </row>
-                                                </tbody>
-                                        </tgroup>
-                                </table>
-                                </p></sectiondiv>
-                                <p><b>vrsg-curl-script</b></p><p>The
-                                        <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/vrsg-curl-script/</codeph>
-                                folder in the <b>HPE DCN 3.2R7 files and Patches</b> download file
-                                contains cURL scripts required during installation process. You will
-                                be shown during the installation where to copy these patches:</p><p>
-                                <table id="table_rrq_tkw_2w">
-                                        <tgroup cols="1">
-                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
-                                                <thead>
-                                                  <row>
-                                                  <entry>pre-hlinux-patches folder</entry>
-                                                  </row>
-                                                </thead>
-                                                <tbody>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR002_Patch005.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR003_Patch007.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR004_Patch017.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR005_Patch019.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR006_Patch025.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR007_Patch027.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR008_Patch029.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR009_Patch030.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR010_Patch032.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR011_Patch033.tar.gz</codeph></entry>
-                                                  </row>
-                                                </tbody>
-                                        </tgroup>
-                                </table>
-                        </p></section>
+                                                  </tbody>
+                                                  </tgroup>
+                                                  </table>
+                                                  </p>
+                                                </itemgroup></li>
+                                </ol>
+                        </sectiondiv>
+                </section>
                 <p>
                         <codeblock>=======================================================================================</codeblock>
                 </p>
@@ -689,34 +658,10 @@
                                                   </tbody>
                                                   </tgroup>
                                                 </table>
-                                        </p><p id="kvm-avs"><b>KVM Region Installation
-                                        files</b></p>The following files for installing the KVM
-                                        region are in the <b>WR</b> folder in the extracted download
-                                        package. Extract these files to any location on the sever
-                                        and make note of the location. <p>
-                                                <table id="table_ejh_qtj_k5">
-                                                  <tgroup cols="1">
-                                                  <colspec colnum="1" colname="col2"
-                                                  colwidth="3.26*"/>
-                                                  <thead>
-                                                  <row>
-                                                  <entry>File Name</entry>
-                                                  </row>
-                                                  </thead>
-                                                  <tbody>
-                                                  <row>
-                                                  <entry><codeph>bootimage_avs_only.iso</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
-                                                  </row>
-                                                  </tbody>
-                                                  </tgroup>
-                                                </table>
-                                        </p><itemgroup conref="#topic7148cgid/patches"/></li>
+                                        </p><itemgroup conref="#topic7148cgid/kvm"/><itemgroup
+                                                conref="#topic7148cgid/patches"/><itemgroup
+                                                conref="#topic7148cgid/pre"/><itemgroup
+                                                conref="#topic7148cgid/pre-kvm"/></li>
                         </ol></section>
                 <section/>
                 <section id="verify">
