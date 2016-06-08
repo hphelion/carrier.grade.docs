@@ -25,124 +25,6 @@
     <p>Some patches must be installed prior to deploying yout cloud and some patches must be
       installed after the cloud is fully installed and running. Consult the following table for the
       patches you need to apply and when they must be applied.</p>
-    <section>
-      <title>Post-deployment patches </title>
-      <p>If you installed all of the patches <xref
-          href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/pre"
-          >listed in the prerequisites</xref>, you need to install the following patches after te
-        HPE Helion OpenStack Carrier Grade cloud is installed. </p>
-      <p/>
-    </section>
-    <section>
-      <p>
-        <table frame="all" rowsep="1" colsep="1" id="table_qzt_qnw_2w">
-          <tgroup cols="9">
-            <colspec colname="c1" colnum="1" colwidth="2.45*"/>
-            <colspec colname="newCol2" colnum="2" colwidth="4.54*"/>
-            <colspec colname="newCol3" colnum="3" colwidth="1*"/>
-            <colspec colname="newCol4" colnum="4" colwidth="1*"/>
-            <colspec colname="newCol5" colnum="5" colwidth="1*"/>
-            <colspec colname="c2" colnum="6" colwidth="1.04*"/>
-            <colspec colname="c3" colnum="7" colwidth="1*"/>
-            <colspec colname="c4" colnum="8" colwidth="1.29*"/>
-            <colspec colname="c5" colnum="9" colwidth="1.57*"/>
-            <colspec colname="newCol10" colnum="10" colwidth="1*"/>
-            <thead>
-              <row>
-                <entry>Patch</entry>
-                <entry>Download File</entry>
-                <entry>Pre-Install</entry>
-                <entry>Post-Install</entry>
-                <entry>In Download?</entry>
-                <entry>Denver</entry>
-                <entry>Tahoe</entry>
-                <entry>Memphis</entry>
-                <entry>Sacramento</entry>
-              </row>
-            </thead>
-            <tbody>
-              <row>
-                <entry><xref href="CGH-2-patches-horizon.dita#topic10581pdph">Horizon
-                  patch</xref></entry>
-                <entry><b
-                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/002"
-                  /></entry>
-                <entry/>
-                <entry/>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-              </row>
-              <row>
-                <entry><xref href="CGH-2-patches-cinder-016.dita#topic10581pdpc">Cinder
-                  Patch</xref></entry>
-                <entry><b
-                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/016"
-                  /><!--Patch018 is in VSD config--></entry>
-                <entry/>
-                <entry/>
-                <entry/>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-              </row>
-              <row>
-                <entry><xref href="CGH-2-patches-glibc-022.dita#topic10581pdp22">HPE Linux Patch
-                  </xref></entry>
-                <entry><b
-                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/022"
-                  /></entry>
-                <entry/>
-                <entry/>
-                <entry/>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-              </row>
-              <row>
-                <entry>HCG-OVS Patch</entry>
-                <entry><b
-                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/028"
-                  /></entry>
-                <entry/>
-                <entry/>
-                <entry/>
-                <entry align="center" valign="middle"/>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-              </row>
-              <row>
-                <entry><b>Horizon003_Patch031</b></entry>
-                <entry><b>HCG2.0_Horizon003_Patch031</b></entry>
-                <entry/>
-                <entry/>
-                <entry/>
-                <entry align="center" valign="middle"/>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-              </row>
-              <row>
-                <entry><b>DBConnections Patch</b></entry>
-                <entry><b>HCG2.0_DBConnections001_Patch034</b></entry>
-                <entry/>
-                <entry/>
-                <entry/>
-                <entry align="center" valign="middle"/>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-              </row>
-            </tbody>
-          </tgroup>
-        </table>
-      </p>
-    </section>
     <section id="patches-all"><title>Standard region patches </title><p>Some patches can be deployed
           <xref href="../Installation/CGH-2-installation-patches.dita#topic10581cgiptch">during
           installation</xref>. If you installed a patch during installation, you do not need to
@@ -158,36 +40,35 @@
         <li><b>Post-install.</b> This field indicates if the patch must be installed after the HP
           Helion OpenStack Carrier Grade cloud is fully deployed. If a check mark appears in both
           pre- and post-install, the patch can be installed at either time.</li>
-        <li><b>In Download</b>. This column indicates if the patch is included in the <b
-            conref="../../CarrierGrade2.0/Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-R7-download"
-          /> available for download. If you downloaded this file during the prerequisites, or at any
-          time, you do not need to download the patch.</li>
         <li><b>Deployments.</b> These fields indicate which topology requires the patch. If your
           topology is not selected, you do not need to install the patch.</li>
         <li><b>Installed.</b> Because HP Helion OpenStack Carrier Grade does not have a mechanism
           for tracking installed patches, you can print out this page and put a checkmark in this
           column to indicate that the patch is installed. </li>
-      </ul><p>
-        <table frame="all" rowsep="1" colsep="1" id="hos">
-          <tgroup cols="10">
+      </ul><p><b
+          conref="../../CarrierGrade2.0/Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-R7-download"
+        /></p>The following files are in the <b
+        conref="../../CarrierGrade2.0/Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-R7-download"
+      /> available for download. If you downloaded this file during the prerequisites, or at any
+      time, you do not need to download the patch: <p>
+        <table frame="all" rowsep="1" colsep="1" id="table_s2p_myq_fw">
+          <tgroup cols="9">
             <colspec colname="c1" colnum="1" colwidth="2.45*"/>
             <colspec colname="newCol2" colnum="2" colwidth="4.54*"/>
             <colspec colname="newCol3" colnum="3" colwidth="1*"/>
             <colspec colname="newCol4" colnum="4" colwidth="1*"/>
-            <colspec colname="newCol5" colnum="5" colwidth="1*"/>
-            <colspec colname="c2" colnum="6" colwidth="1.04*"/>
-            <colspec colname="c3" colnum="7" colwidth="1*"/>
-            <colspec colname="c4" colnum="8" colwidth="1.29*"/>
-            <colspec colname="c5" colnum="9" colwidth="1.57*"/>
-            <colspec colname="newCol11" colnum="10" colwidth="1*"/>
-            <colspec colname="newCol10" colnum="11" colwidth="1*"/>
+            <colspec colname="c2" colnum="5" colwidth="1.04*"/>
+            <colspec colname="c3" colnum="6" colwidth="1*"/>
+            <colspec colname="c4" colnum="7" colwidth="1.29*"/>
+            <colspec colname="c5" colnum="8" colwidth="1.57*"/>
+            <colspec colname="newCol11" colnum="9" colwidth="1*"/>
+            <colspec colname="newCol10" colnum="10" colwidth="1*"/>
             <thead>
               <row>
                 <entry>Patch</entry>
                 <entry>Download File</entry>
                 <entry>Pre-Install</entry>
                 <entry>Post-Install</entry>
-                <entry>In Download?</entry>
                 <entry>Denver</entry>
                 <entry>Tahoe</entry>
                 <entry>Memphis</entry>
@@ -197,12 +78,22 @@
             </thead>
             <tbody>
               <row>
+                <entry>Providernet Patch</entry>
+                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+              </row>
+              <row>
                 <entry><xref href="CGH-2-patches-horizon.dita#topic10581pdph">Horizon
                   patch</xref></entry>
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/002"
                   /></entry>
-                <entry/>
                 <entry/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -216,24 +107,9 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/003"
                   /><!--<p>Patch002 is KVM; Patch004 is obsolete; Patch005 is KVM;</p>--></entry>
-                <entry/>
-                <entry/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry/>
-              </row>
-              <row>
-                <entry><xref href="CGH-2-patches-vsc.dita#topic10581pdpv">VSC patch</xref></entry>
-                <entry><b
-                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/006"
-                        /><p><b><i>*Not required for DCN 3.2R7</i></b></p></entry>
-                <entry/>
-                <entry/>
-                <entry/>
-                <entry align="center" valign="middle"/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -245,8 +121,7 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/008"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -260,8 +135,7 @@
                 <entry valign="middle"><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/009"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -275,8 +149,7 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/010"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -290,8 +163,7 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/011"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle"/>
                 <entry align="center" valign="middle"/>
@@ -305,8 +177,7 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/012"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -320,8 +191,7 @@
                 <entry valign="middle"><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/013"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -330,26 +200,10 @@
                 <entry/>
               </row>
               <row>
-                <entry/>
-                <entry valign="middle"/>
-                <entry/>
-                <entry/>
-                <entry/>
+                <entry>ELK Patch</entry>
+                <entry valign="middle"><b>HCG2.0_ELK001_Patch014</b></entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle"/>
-                <entry align="center" valign="middle"/>
-                <entry align="center" valign="middle"/>
-                <entry align="center" valign="middle"/>
-                <entry/>
-              </row>
-              <row>
-                <entry><xref href="CGH-2-patches-debug-015.dita#topic10581pdpdebug">Debug
-                    Patch</xref></entry>
-                <entry valign="middle"><b
-                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/015"
-                  /></entry>
-                <entry/>
-                <entry/>
-                <entry/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -363,53 +217,7 @@
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/016"
                   /><!--Patch018 is in VSD config--></entry>
                 <entry/>
-                <entry/>
                 <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry/>
-              </row>
-              <row>
-                <entry><xref href="CGH-2-patches-dcn-020.dita#topic10581pdp20">DCN Subnet
-                    Patch</xref></entry>
-                <entry><b
-                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/020"
-                        /><p><b><i>*Not required for DCN 3.2R7</i></b></p></entry>
-                <entry/>
-                <entry/>
-                <entry/>
-                <entry align="center" valign="middle"/>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry/>
-              </row>
-              <row>
-                <entry><xref href="CGH-2-patches-infoblox-021.dita#topic10581pdp21">Infoblox
-                    Patch</xref></entry>
-                <entry><b
-                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/021"
-                  /></entry>
-                <entry/>
-                <entry/>
-                <entry/>
-                <entry align="center" valign="middle"/>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry align="center" valign="middle">✔</entry>
-                <entry/>
-              </row>
-              <row>
-                <entry><xref href="CGH-2-patches-glibc-022.dita#topic10581pdp22">HPE Linux Patch
-                  </xref></entry>
-                <entry><b
-                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/022"
-                  /></entry>
-                <entry/>
-                <entry/>
-                <entry/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -422,8 +230,6 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/023"
                   /></entry>
-                <entry/>
-                <entry/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -437,8 +243,6 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/024"
                   /></entry>
-                <entry/>
-                <entry/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -452,7 +256,6 @@
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/028"
                   /></entry>
                 <entry/>
-                <entry/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle"/>
                 <entry align="center" valign="middle">✔</entry>
@@ -464,6 +267,54 @@
                 <entry><b>Horizon003_Patch031</b></entry>
                 <entry><b>HCG2.0_Horizon003_Patch031</b></entry>
                 <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </p><b>Patches to Download</b><p>The following files are not in the <b
+          conref="../../CarrierGrade2.0/Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-R7-download"
+        /> and must be downloaded from the  <xref href="http://www.hpe.com/downloads/software"
+          format="html" scope="external">Software Updates &amp; Licensing</xref> site. See any of
+        the patch download pages for information on using this site. For example, <xref
+          href="../Installation/sacramento/carrier-grade-install-download-patch-sacramento.dita#topic7148cgisptch"
+          >Download the Sacramento Patches</xref>. </p><p>
+        <table frame="all" rowsep="1" colsep="1" id="hos">
+          <tgroup cols="9">
+            <colspec colname="c1" colnum="1" colwidth="2.45*"/>
+            <colspec colname="newCol2" colnum="2" colwidth="4.54*"/>
+            <colspec colname="newCol3" colnum="3" colwidth="1*"/>
+            <colspec colname="newCol4" colnum="4" colwidth="1*"/>
+            <colspec colname="c2" colnum="5" colwidth="1.04*"/>
+            <colspec colname="c3" colnum="6" colwidth="1*"/>
+            <colspec colname="c4" colnum="7" colwidth="1.29*"/>
+            <colspec colname="c5" colnum="8" colwidth="1.57*"/>
+            <colspec colname="newCol11" colnum="9" colwidth="1*"/>
+            <colspec colname="newCol10" colnum="10" colwidth="1*"/>
+            <thead>
+              <row>
+                <entry>Patch</entry>
+                <entry>Download File</entry>
+                <entry>Pre-Install</entry>
+                <entry>Post-Install</entry>
+                <entry>Denver</entry>
+                <entry>Tahoe</entry>
+                <entry>Memphis</entry>
+                <entry>Sacramento</entry>
+                <entry>Installed</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry><xref href="CGH-2-patches-vsc.dita#topic10581pdpv">VSC patch</xref></entry>
+                <entry><b
+                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/006"
+                        /><p><b><i>*Not required for DCN 3.2R7</i></b></p></entry>
                 <entry/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle"/>
@@ -473,11 +324,88 @@
                 <entry/>
               </row>
               <row>
+                <entry><xref href="CGH-2-patches-debug-015.dita#topic10581pdpdebug">Debug
+                    Patch</xref></entry>
+                <entry valign="middle"><b
+                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/015"
+                  /></entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+              </row>
+              <row>
+                <entry>VRS cURL Script Patch</entry>
+                <entry valign="middle"/>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-dcn-020.dita#topic10581pdp20">DCN Subnet
+                    Patch</xref></entry>
+                <entry><b
+                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/020"
+                        /><p><b><i>*Not required for DCN 3.2R7</i></b></p></entry>
+                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-infoblox-021.dita#topic10581pdp21">Infoblox
+                    Patch</xref></entry>
+                <entry><b
+                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/021"
+                  /></entry>
+                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle"/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+              </row>
+              <row>
+                <entry>CVE-2015-7547 glibc resolver Patch </entry>
+                <entry><b>HCG2.0_hLinux001_patch022</b></entry>
+                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+              </row>
+              <row>
+                <entry><xref href="CGH-2-patches-glibc-022.dita#topic10581pdp22">HPE Linux Patch
+                  </xref></entry>
+                <entry><b
+                    conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/022"
+                  /></entry>
+                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
+                <entry/>
+              </row>
+              <row>
                 <entry><b>DBConnections Patch</b></entry>
                 <entry><b>HCG2.0_DBConnections001_Patch034</b></entry>
                 <entry/>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -488,7 +416,6 @@
                 <entry><b>DCNR7 Predeploy Patch</b></entry>
                 <entry><b>neu-dcnr7-predeploy</b></entry>
                 <entry align="center" valign="middle">✔</entry>
-                <entry/>
                 <entry/>
                 <entry align="center" valign="middle"/>
                 <entry align="center" valign="middle">✔</entry>
@@ -508,15 +435,16 @@
       <p>
         <table frame="all" rowsep="1" colsep="1" id="kvm">
           <tgroup cols="9">
-            <colspec colname="c1" colnum="1" colwidth="1.91*"/>
-            <colspec colname="newCol2" colnum="2" colwidth="3.1*"/>
-            <colspec colname="newCol3" colnum="3" colwidth="1*"/>
-            <colspec colname="newCol4" colnum="4" colwidth="1*"/>
-            <colspec colname="newCol5" colnum="5" colwidth="1*"/>
-            <colspec colname="c2" colnum="6" colwidth="1*"/>
-            <colspec colname="c3" colnum="7" colwidth="1.15*"/>
-            <colspec colname="c4" colnum="8" colwidth="1.3*"/>
-            <colspec colname="c5" colnum="9" colwidth="1.59*"/>
+            <colspec colname="c1" colnum="1" colwidth="4.06*"/>
+            <colspec colname="newCol2" colnum="2" colwidth="6.7*"/>
+            <colspec colname="newCol3" colnum="3" colwidth="2.02*"/>
+            <colspec colname="newCol4" colnum="4" colwidth="2.13*"/>
+            <colspec colname="newCol5" colnum="5" colwidth="3.21*"/>
+            <colspec colname="c2" colnum="6" colwidth="2.32*"/>
+            <colspec colname="c3" colnum="7" colwidth="2.45*"/>
+            <colspec colname="c4" colnum="8" colwidth="2.79*"/>
+            <colspec colname="c5" colnum="9" colwidth="3.38*"/>
+            <colspec colnum="10" colname="c10" colwidth="1*"/>
             <thead>
               <row>
                 <entry>Patch</entry>
@@ -537,8 +465,8 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/005"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -551,8 +479,8 @@
                 <entry valign="middle"><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/007"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -565,8 +493,8 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -579,8 +507,8 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/019"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -593,8 +521,8 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/025"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -607,8 +535,8 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/026"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -621,8 +549,8 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/029"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -635,8 +563,8 @@
                 <entry><b
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/030"
                   /></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -649,7 +577,8 @@
                     conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/031"
                   /></entry>
                 <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry/>
                 <entry align="center" valign="middle">✔</entry>
                 <entry align="center" valign="middle">✔</entry>
@@ -659,8 +588,8 @@
               <row>
                 <entry/>
                 <entry><b>HCG 2.0 WR010 Patch032</b></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry/>
                 <entry align="center" valign="middle"/>
                 <entry align="center" valign="middle"/>
@@ -670,8 +599,8 @@
               <row>
                 <entry/>
                 <entry><b>HCG 2.0 WR011 Patch033</b></entry>
-                <entry/>
-                <entry/>
+                <entry align="center" valign="middle">✔</entry>
+                <entry align="center" valign="middle">✔</entry>
                 <entry/>
                 <entry align="center" valign="middle"/>
                 <entry align="center" valign="middle"/>
