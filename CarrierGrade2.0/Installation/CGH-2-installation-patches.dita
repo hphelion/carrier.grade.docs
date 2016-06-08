@@ -28,12 +28,14 @@
     <p><!--Horizon001 Patch002 post-deployment only--></p>
     <bodydiv id="all">
       <section id="cobbler"><title>Deploy the Horizon Provider Network patch
-          <!--providernet patch--></title>You should have downloaded the following patch file <xref
-          href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/extract">
-          during the prerequisites</xref>:<ul id="ul_awq_db1_f5">
-          <li>providernet-tab-missing-in-horizon.patch </li>
-        </ul><note>This patch is required to be installed to fix an issue in the Denver topology and
-          to maintain the complete patch sequence for all topologies.</note><p>Because of a
+          <!--providernet patch--></title>You should have downloaded the
+          <codeph>providernet-tab-missing-in-horizon.patch</codeph> patch file <xref
+          href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/extract"
+          >during the prerequisites</xref>. These files are in the
+          <codeph>/mandatory_patches/providernet-tab-missing-in-horizon</codeph> directory in the
+          <codeph>hcg2_kvm_avs.tar</codeph> and <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
+          files:<note>This patch is required to be installed to fix an issue in the Denver topology
+          and to maintain the complete patch sequence for all topologies.</note><p>Because of a
           configuration issue with the Ansible roles, the Provider Networks tab in the Horizon
           interface will be hidden unless you deploy the following patch. <!--HCG-991--></p><p>The
           README with the patch download contains information on files changed by these
@@ -57,10 +59,11 @@
           <!-- "security patch"--></title><p>Cobbler is a build and deployment system that the HP
           Helion OpenStack Carrier Grade installation process uses. For security, you must generate
           a random password that will be passed to the installation process, rather than entering an
-          explicit password through the <codeph>group_vars/all</codeph> file.</p><p>You downloaded
-          the patch files, <codeph>knc-cobbler-random.patch</codeph> and
+          explicit password through the <codeph>group_vars/all</codeph> file.</p><p>You downloaded the patch files, <codeph>knc-cobbler-random.patch</codeph> and
             <codeph>cg-hlm-cobbler-random.patch</codeph>, during the prerequisites. The file is in
-          the installation package in the <b>security_patches</b> directory.</p><p>
+          the installation package in the <codeph>/mandatory_patches/security_patches</codeph>
+          directory in the <codeph>hcg2_kvm_avs.tar</codeph> and
+            <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph> files:</p><p>
           <ol id="ol_cqf_s4k_f5">
             <li>Copy the patch files to the <codeph>~/</codeph> directory. </li>
             <li>Change to the ~/cg-hlm directory: <codeblock>cd ~/cg-hlm</codeblock></li>
