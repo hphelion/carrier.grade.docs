@@ -24,13 +24,23 @@
           <li>Horizon crashes when installing KVM region patch 8 from Horizon dashboard.</li>
         </ul></p>
     </section>
-    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
     <section>
-      <p><b> Downloading the Horizon Patch</b></p>
-      <p>Download the <codeph>Horizon003_Patch031</codeph> patch and extract the
-          <codeph>HCG-horizon-updatedclients</codeph> directory.</p>
-      <p>The patch is in a compressed file. The README with the patch download contains information
-        on files changed by these patches.</p>
+      <title>Download the patch</title>
+      <ol id="ul_lvg_jb2_xs">
+        <li>Launch <xref href="CGH-2-post-install-patching.dita#topic10581pdp/launch">the Software
+            Updates and Licensing site</xref>.</li>
+        <li>Download the <b>Horizon003_Patch031</b> patch and the associated checksum and signature
+          files.</li>
+        <li>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>.</li>
+        <li>Extract the compressed file until the <codeph>HCG-horizon-updatedclients</codeph>
+          directory and README are available: </li>
+      </ol>
+    </section>
+    <section>
       <title>Deploying the Horizon Patch for the lifecycle manager host</title>
     </section>
     <p>
