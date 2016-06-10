@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
-<topic xml:lang="en-us" id="topic10581pdpkvm216">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the Horizon Patch 031 </title>
+<topic xml:lang="en-us" id="topic10581pdph3">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the DBConnections Patch
+    (034) </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -14,22 +15,26 @@
     </metadata>
   </prolog>
   <body>
-    <p><b>Prerequisites</b>: - This patch must be applied only after the HP Helion OpenStack Carrier
-      Grade is fully deployed for all topologies (Denver/Tahoe/Memphis/Sacramento). The patch can be
-      applied to HCG 2.0 and HCG 2.1.</p>
-    <p>This patch addresses a number of issues in the KVM region, including:<ul id="ul_jxm_nkt_jv">
-        <li>HOS Horizon crashes when clicking on "Download CSV Summary" button under Resource Usage
-          panel.</li>
-        <li>HOS Horizon crashes when installing WR patch8 from Horizon dashboard.</li>
-      </ul></p>
-    <section conref="CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
-    <p><b>Downloading the Horizon Patch</b></p>
-    <p>Download the patch Horizon003_Patch031 and extract the
+    <section id="horizon-patch">
+      <p><b>Prerequisites</b>: - This patch must be applied only after the HP Helion OpenStack
+        Carrier Grade cloud has already been deployed for all topologies
+        (Denver/Tahoe/Memphis/Sacramento). The patch can be applied to HCG 2.0 and HCG 2.1.</p>
+      <p>This patch includes the fixes for the following issue in the standard region:<ul
+          id="ul_jxm_nkt_jv">
+          <li>Some services failed as active connections to Mysql exceeded the allowed number.</li>
+        </ul></p>
+    </section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section>
+      <p><b> </b></p>
+    </section>
+    <p><b>Downloading the Database Connection Patch</b></p>
+    <p>Download the patch DBConnections001_Patch034 and extract the
         <codeph>HCG-horizon-updatedclients</codeph> directory.</p>
     <p>The patch is in a compressed file. The README with the patch download contains information on
       files changed by these patches.</p>
     <section>
-      <title>Deploying the Horizon Patch for the lifecycle manager host</title>
+      <title>Deploying the Database Connection Patch for the lifecycle manager host</title>
     </section>
     <p>
       <ol id="ol_pz4_nb3_qv">
@@ -40,37 +45,41 @@
           address for the lifecycle manager in the
             <systemoutput>/root/infra-ansible-playbooks/group_vars/all</systemoutput> file under
             <systemoutput>hlm_clmstaticip</systemoutput> field.</li>
-        <li>Perform the following Steps to apply HCG-WR-HORIZON-CRASH:<ul id="ul_yym_kfk_bw">
-            <li>Copy the complete folder HCG-WR-HORIZON-CRASH under
+        <li>Perform the following Steps to apply Database Connection Patch:<ul id="ul_yym_kfk_bw">
+            <li>Copy the complete folder <codeph>HCG-DBConnections</codeph> under
                 <codeph>/var/hlm/clouds/&lt;cloudname>/patches/ </codeph>directory on HLM VM.</li>
-            <li>cd <codeph>/var/hlm/clouds/&lt;cloudname>/patches/HCG-WR-HORIZON-CRAS</codeph>.</li>
+            <li>cd <codeph>/var/hlm/clouds/&lt;cloudname>/patches/HCG-DBConnections</codeph>.</li>
             <li>Add necessary permissions to scripts : <codeblock>chmod +x *.sh</codeblock></li>
           </ul><ul id="ul_fv1_vlk_bw">
-            <li>Apply patch changes:
-              <codeblock>./apply_patch_hor_disconnect_postdeploy.sh</codeblock></li>
+            <li>Apply patch changes: <codeblock>./apply_patch_db_connections.sh</codeblock></li>
           </ul><ul id="ul_xws_xlk_bw">
             <li>Execute the following command to integrate the changes into the
               environment:<codeblock>~/cg-hlm/hlm-build/hlm_prepare-env.sh</codeblock></li>
           </ul><ul id="ul_d1c_1mk_bw">
             <li>Run Config Processor:<codeblock>hlm generate -c &lt;cloudname></codeblock></li>
           </ul><ul id="ul_eg3_1mk_bw">
-            <li>Redeploy FND-CLU
-              role:<codeblock>hlm deploy -c &lt;cloudname> -t "FND-CLU"</codeblock></li>
+            <li>Redeploy FND-MDB
+              role:<codeblock>hlm deploy -c &lt;cloudname> -t "FND-MDB"</codeblock></li>
           </ul></li>
-        <li>Perform the following steps to rollback the patch - HCG-WR-HORIZON-CRASH:
-            <codeblock>cd /var/hlm/clouds/&lt;cloudname>/patches/HCG-WR-HORIZON-CRASH</codeblock><ul
+        <li>Perform the following steps to rollback the patch - HCG-DBConnections:
+            <codeblock>cd /var/hlm/clouds/&lt;cloudname>/patches/HCG-DBConnections</codeblock><ul
             id="ul_kmd_cnk_bw">
             <li>Rollback patch
-              changes.<codeblock>./rollback_patch_hor_disconnect_postdeploy.sh </codeblock></li>
+              changes.<codeblock>./rollback_patch_db_connections.sh </codeblock></li>
           </ul><ul id="ul_vdw_cnk_bw">
             <li>Execute the following command to integrate the changes into the
               environment:<codeblock>~/cg-hlm/hlm-build/hlm_prepare-env.sh </codeblock></li>
           </ul><ul id="ul_rd4_dnk_bw">
             <li>Run Config Processor: <codeblock> hlm generate -c &lt;cloudname> </codeblock></li>
             <li>Redeploy FND-CLU
-              role:<codeblock>hlm deploy -c &lt;cloudname> -t "FND-CLU"</codeblock></li>
+              role:<codeblock>hlm deploy -c &lt;cloudname> -t "FND-MDB"</codeblock></li>
           </ul></li>
       </ol>
     </p>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
   </body>
 </topic>
