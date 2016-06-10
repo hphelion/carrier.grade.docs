@@ -110,17 +110,13 @@ interface FortyGigE1/0/4
   <section id="fip">
       <title>Run a cURL script to enable floating IPs</title>
       <p>You should have downloaded the <b
-          conref="../../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/017"
-        /> file during the prerequisites. If you have not downloaded the patch, launch the <xref
-          href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-          scope="external">Helion Distribution Network (HDN)</xref> and locate the patch file and
-        the associated checksum and signature files. You must <xref
-          href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
-          >obtain a user account on HDN</xref> in order to download these files. See <xref
-          href="../../Installation/carrier-grade-install-config-dcn.dita#topic10581cgicd/cURL-patch"
-        />.</p>
+          conref="../../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-R7-download"
+        /> file during the prerequisites. </p>
       <ol>
-        <li>On lifecycle manager host, change to the <codeph>/opt</codeph> directory.</li>
+        <li>On lifecycle manager host, copy the <codeph>curl-vrsg-hwvtep.sh</codeph> file in the
+            <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/vrsg-curl-script</codeph>
+          directory of the download to the <codeph>/opt</codeph> directory.</li>
+        <li>Change to the <codeph>/opt</codeph> directory.</li>
         <li>Modify the cURL script for your environment:<ul id="ul_bzs_r1c_1t">
             <li>GW_NAME is the IP address of the Virtual Station Interface (VSI) on the ToR
               switch.</li>
@@ -143,7 +139,7 @@ UPLINK_GW_MAC="bc:ea:fa:1d:b0:80"       # mac address of the core switch 10.1.2.
           </ul></li>
         <li>Save and close the script.</li>
         <li>Execute the cURL script <p>
-            <codeblock>bash +x curl_vrsg_single.sh</codeblock>
+            <codeblock>bash +x curl-vrsg-hwvtep.sh</codeblock>
           </p></li>
       </ol>
     </section>
