@@ -66,12 +66,12 @@ ifconfig eth0 up</codeblock></li>
     <section id="kvm-custom-patch"><title> Step 2: Apply KVM Region patches</title>Perform the
       following steps to deploy two required patches. These steps are valid for any new install
       where software is loaded onto controller-0 and config_region script has not been executed on
-      the Controller-0 in the KVM region.<note>The upload-dir operation registers all patches in the
-        specific directory into the database. Once registered, you do not need to retain the files
-        anymore; they are available in the database. The <keyword>apply --all</keyword> operation
-        tells the system to apply all registered patches to the nodes in this cluster . The
-          <keyword>install-local</keyword> operation tells the system to install all necessary
-        patches on the un-configured local node.</note><ol>
+      the Controller-0 in the KVM region.<note>The <keyword>upload-dir</keyword> operation registers
+        all patches in the specific directory into the database. Once registered, you do not need to
+        retain the files anymore; they are available in the database. The <keyword>apply
+          --all</keyword> operation tells the system to apply all registered patches to the nodes in
+        this cluster . The <keyword>install-local</keyword> operation tells the system to install
+        all necessary patches.</note><ol>
         <li>Log into KVM Region <codeph>controller-0</codeph>.</li>
         <li>Change the password when/if prompted.<note>Run the steps from console only.</note></li>
         <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpkvm530">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 10 </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section id="fixes">
+      <p>This patch is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies. It
+        addresses the following issue in the KVM region:<ul id="ul_jxm_nkt_jv">
+          <li>Controllers auto-swact observed during CHO (continuous Hours of Operations).</li>
+        </ul></p>
+    </section>
+    <section>
+      <p>
+        <note> You can use the Horizon UI to see if the patch has been deployed. Select the
+            <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+            <b>Inventory</b>. Click the <b>Patches</b> table for the
+            <codeph>TS_HP_15_Custom_PATCH_0010.patch</codeph> or use the CLI on the active KVM
+          controller: <codeph>sudo sw-patch query</codeph>.</note>
+      </p>
+    </section>
+      <section>
+      <title>Prerequisites</title>
+      <ol>
+        <li>The KVM region has already been configured and runnning. </li>
+        <li>You must install the following patches before installing this patch:</li>
+      </ol>
+      <ul id="ul_cqr_spt_jv">
+        <li><xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch
+              (<codeph>HCG2.0_WR002_Patch005</codeph>)</xref>
+        </li>
+        <li><xref href="CGH-2-patches-pci-bus.dita#topic10581pdpp">PCI Bus Patch
+              (<codeph>HCG2.0_WR003_Patch007</codeph>)</xref>
+        </li>
+        <li><xref href="CGH-2-patches-wr-3-017.dita#topic10581pdpkvm3">KVM Custom Patch 3
+              (<codeph>HCG_2.0 WR004 Patch017</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-4-019.dita#topic10581pdpkvm4">KVM Custom Patch 4
+              (<codeph>HCG_2.0 WR005 Patch019</codeph>)</xref>
+        </li>
+        <li><xref href="CGH-2-patches-wr-5-025.dita#topic10581pdpkvm5">KVM Custom Patch 5
+              (<codeph>HCG_2.0 WR006 Patch025</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-7-027.dita#topic10581pdpkvm7">KVM Custom Patch 6
+              (<codeph>HCG_2.0 WR007 Patch027</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-8-029.dita#topic10581pdpkvm8">KVM Custom Patch 7
+              (<codeph>HCG_2.0 WR008 Patch029</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-9-030.dita#topic10581pdpkvm530">KVM Custom Patch 8
+              (<codeph>HCG_2.0 WR009 Patch030</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-10-032.dita#topic10581pdpkvm530">KVM Custom Patch 9
+              (<codeph>HCG_2.0 WR010 Patch032)</codeph></xref></li>
+      </ul>
+    </section>
+      <section><title>Download the patch</title><p>If you have not downloaded the patch, launch the
+            <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+            scope="external">Helion Distribution Network (HDN)</xref>. You must <xref
+            href="https://idm.pod1.prod-core.hpwsportal.com/webid/" format="html" scope="external"
+            >obtain a user account on HDN</xref> in order to download these files. </p>In a browser,
+        navigate to <xref href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
+          scope="external">Helion Download Network(HDN)</xref>. <ol id="ul_lvg_jb2_xs">
+          <li>Click <b>Sign In</b> to log in using your account. </li>
+          <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of the
+            page.</li>
+          <li>Download the <b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/033"/>
+          file and the associated checksum and signature files.</li>
+          <li>Verify the <xref
+              href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+              >downloaded signature</xref> and the <xref
+              href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+              >downloaded checksums</xref>.</li>
+          <li>Extract the compressed files until the
+            <codeph>TS_HP_15_Custom_PATCH_0010.patch</codeph> and readme files are available.</li>
+        </ol></section>
+    <bodydiv id="install">
+      <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
+          id="ol_bcm_yg4_j5">
+          <li>SSH into active controller in the KVM region. <p>For example:
+                <codeph>controller-0</codeph> (active controller).</p></li>
+          <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
+          <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
+              <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
+              id="ul_ald_spz_35">
+              <li><codeph>TS_HP_15_Custom_PATCH_0010.patch</codeph></li>
+            </ul></li>
+          <li>Execute the following commands to upload the patch to the database:
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0010.patch</codeblock></li>
+          <li>Execute the following commands to check if the patch is available for
+              installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
+                href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
+                id="image_tft_ncg_x5"/></p></li>
+          <li>Execute the following commands to check the current state of all the
+            hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b>
+            state will be <b>Yes</b>. For example:<p><image
+                href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png"
+                id="image_j4z_gyf_x5" width="500"/></p></li>
+          <li>Execute the following commands to apply the
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0010.patch [This patch will be in "Partial-Apply" state]
+source /etc/nova/openrc or sudo -i</codeblock></li>
+          <li>Execute the following command to patch and reboot the standby controller:
+              <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+                <codeph>controller-1</codeph> is the standby controller and
+                <codeph>controller-0</codeph> is the active
+              controller:</p><codeblock>system host-patch-reboot controller-1</codeblock><p>Wait
+              until the standby controller comes up after patching and is in <b>Available</b> state.
+              This can be verified using<codeph> system host-list</codeph> command. </p></li>
+          <li>Execute the following command to switch the active controller from the specified
+            controller: <codeblock>system host-swact controller-# </codeblock><p>For example, if the
+              active controller is
+              <codeph>controller-0</codeph>:<codeblock>system host-swact controller-0</codeblock></p><p>This
+              command makes <codeph>controller-1</codeph> the active controller and makes
+                <codeph>controller-0</codeph> the standby.</p></li>
+          <li>Exit the SSH session. </li>
+        </ol><b>Patch the new standby controller</b><p>Log onto the newly active controller and
+          patch the standby controller.</p><ol id="ol_ovz_4s4_j5">
+          <li>SSH into the newly active controller. <p>For example:
+              <codeph>controller-1</codeph>.</p></li>
+          <li>Execute the following command: <codeblock>source /etc/nova/openrc</codeblock></li>
+          <li>Execute the following command to patch and reboot the standby controller:
+              <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+                <codeph>controller-0</codeph> is the standby
+            controller:</p><codeblock>system host-patch-reboot controller-0</codeblock></li>
+        </ol><p><b>Patch the compute nodes</b></p><p>From the active controller, perform the
+          following steps:</p><p>
+          <note>The <codeph>TS_HP_15_Custom_PATCH_0010.patch</codeph> is applicable only for
+            controller nodes.</note>
+        </p><ol id="ol_z3h_xs4_j5">
+          <li>Use the <codeph>check sudo sw-patch query-hosts</codeph> command to check if all the
+            nodes are unlocked and the<b> Patch 10 </b> is in <b>Applied </b>state.</li>
+        </ol></section>
+    </bodydiv>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/kvm">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+    
+      
+  </body>
+</topic>
