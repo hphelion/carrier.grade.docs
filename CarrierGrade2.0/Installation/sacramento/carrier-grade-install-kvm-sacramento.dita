@@ -82,8 +82,9 @@ system host-patch-reboot compute-1</codeblock></li><li>Make controller-0 active:
             only.</note></li>
         <li>Change the password when/if prompted.</li>
         <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
-        <li>Copy the following patches file to the <codeph>/tmp/patches</codeph> directory: <table
-            frame="all" rowsep="1" colsep="1" id="table_wf2_1pt_jv">
+        <li>Copy the following patches file to the <codeph>/tmp/patches</codeph> directory. For
+          information on the issues fixed with each patch, refer to the README that comes with each
+          patch: <table frame="all" rowsep="1" colsep="1" id="table_wf2_1pt_jv">
             <tgroup cols="2">
               <colspec colname="c1" colnum="1" colwidth="324px"/>
               <colspec colname="c2" colnum="2" colwidth="250px"/>
@@ -139,6 +140,7 @@ system host-patch-reboot compute-1</codeblock></li><li>Make controller-0 active:
                     </p>
                   </entry>
                   <entry>DCN 3.2R7 download</entry>
+<<<<<<< HEAD
                 </row>
                 <row>
                   <entry><codeph>TS_HP_15_Custom_PATCH_0009.patch</codeph></entry>
@@ -147,12 +149,20 @@ system host-patch-reboot compute-1</codeblock></li><li>Make controller-0 active:
                 <row>
                   <entry><codeph>TS_HP_15_Custom_PATCH_0010.patch</codeph></entry>
                   <entry>HCG2.0_WR011_Patch033.tar.gz</entry>
+=======
+>>>>>>> 74a18cdaf49d0216ecb312779a8041b215b7e12a
                 </row>
               </tbody>
             </tgroup>
           </table><p>
             <note type="important">The TS_HP_15_Custom_PATCH_VRS_0001.patch patch is required for
+<<<<<<< HEAD
               DCN 3.2R7 environments only.</note>
+=======
+              DCN 3.2R7 environments only. Locate the <codeph>hcg2_dcn_32r7.tar.gz</codeph> file you
+              downloaded in the <b>Download the Installation Packages</b> steps and extract the
+              patch file. </note>
+>>>>>>> 74a18cdaf49d0216ecb312779a8041b215b7e12a
           </p><p>You should have downloaded this patch file in the Prerequisites. The download file
             contains a README file that lists the issues fixed/addressed in each patch.</p></li>
         <li>Execute the following command to registers all patches in the specific directory into an

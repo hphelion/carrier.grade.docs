@@ -39,28 +39,57 @@
                 <p id="intro">This document describes the prerequisite steps to download the
                         installation files required to install HP Helion OpenStack Carrier
                         Grade.</p>
-                <p/>
                 <section id="depot">
                         <title>Launch the Software Depot
                                 <!--Referenced by Download the Installation Packages for all deployments--></title>
-                        <p>Launch the the <xref href="http://www.hpe.com/Helion/CarrierGrade"
-                                        format="html" scope="external">Software Depot for HP Helion
-                                        Carrier Grade</xref>. You must obtain an HP Passport user
-                                account in order to download these files. </p>
-                        <p>
+                        <p id="hpelinux-intro">Launch the the <xref
+                                        href="http://www.hpe.com/Helion/CarrierGrade" format="html"
+                                        scope="external">Software Depot for HP Helion Carrier
+                                        Grade</xref>. You must obtain an HP Passport user account in
+                                order to download these files. </p>
+                        <p><b id="dcn-R7-download">HPE DCN 3.2R7 files
+                                and Patches</b>
                                 <ol id="hpelinux">
-                                        <li>Click <b>Sign In</b> to log in using your HP Passport
-                                                account. <p><image
+                                        <li id="hpelinux1">Click <b>Sign In</b> to log in using your
+                                                HP Passport account. <p><image
                                                   href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-signin.png"
                                                   width="600" id="image_znx_k1q_mv"/></p></li>
-                                        <li>After signing in, click the <b>Select</b> button on the
-                                                right side of the page.<p><image
+                                        <li id="hpelinux2">After signing in, click the <b>Select</b>
+                                                button on the right side of the page.<p><image
                                                   href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-select.png"
                                                   width="600" id="image_ylt_h4p_mv"/></p></li>
-                                        <li>Enter your personal information and address and accept
-                                                the license agreement and click <b>Next</b>.</li>
-                                        <li>For the software you want to download, listed below,
-                                                select the download method:<ul id="ul_cn1_ptp_mv">
+                                        <li id="hpelinux3">Enter your personal information and
+                                                address and accept the license agreement and click
+                                                  <b>Next</b>.</li>
+                                        <li id="hpelinux4">Click the <b>Downloads</b> tab and locate
+                                                the following
+                                                  download.<!-- Referenced by Download the Installation Packages Tahoe, Memphis, Sacramento--><ul
+                                                  id="ul_zll_rjv_g5">
+                                                  <li><b>HCG 2.0 KVM ESX Ironic VRS</b>. Contains
+                                                  installation files for the HP Helion OpenStack
+                                                  Carrier Grade Tahoe, Memphis, and Sacramento
+                                                  deployments. This link will download the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
+                                                  file. <p>Also download the <b>HCG 2.0 KVM ESX
+                                                  Ironic VRS sha256</b> and <b>HCG 2.0 KVM ESX
+                                                  Ironic VRS sig</b> files. </p></li>
+                                                  <li>
+                                                  <p><b>HCG 2.0 KVM ESX Ironic VRS Part 2 of 2</b>.
+                                                  <i>If you are using HPE DCN 3.2R4</i>, download
+                                                  the this file to obtain the files for installing
+                                                  the 3.2R4 version of DCN/ This link will download
+                                                  the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
+                                                  file. <note>Not required for HPE DCN 3.2R7
+                                                  installations.</note>Also download the <b>HCG 2.0
+                                                  KVM ESX Ironic VRS Part 2 of 2 sha256</b> and
+                                                  <b>HCG 2.0 KVM ESX Ironic VRS Part 2 of 2 sig</b>
+                                                  files. </p>
+                                                  </li>
+                                                </ul></li>
+                                        <li id="hpelinux5">For the software you want to download,
+                                                listed below, select the download method:<ul
+                                                  id="ul_cn1_ptp_mv">
                                                   <li><b>Use HPE Download Manager</b>. Use the HPE
                                                   Download Manager to specify where the installation
                                                   package will be saved.</li>
@@ -84,67 +113,29 @@
                                                   </ol></note><p><image
                                                   href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-download-mgr.png"
                                                   id="image_hd4_2fn_sv"/></p></li>
+                                        <li id="hpelinux6"><b>GPG Keys to Verify Signature Files</b>
+                                                The public keys for HP Helion Carrier Grade
+                                                2.0.</li>
                                 </ol>
                         </p>
                 </section>
-                <section>
-                        <ol id="ul_lvg_jb2_xs">
-                                <li id="download-vrs">Click the <b>Downloads</b> tab and locate the
-                                        following
-                                                download.<!-- Referenced by Download the Installation Packages Tahoe, Memphis, Sacramento--><ul
-                                                id="ul_zll_rjv_g5">
-                                                <li><b>HCG 2.0 KVM ESX Ironic VRS</b>. Installation
-                                                  files for the HP Helion OpenStack Carrier Grade
-                                                  Tahoe, Memphis, and Sacramento deployments. This
-                                                  link will download the
-                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
-                                                  file. <p>Also download the <b>HCG 2.0 KVM ESX
-                                                  Ironic VRS sha256</b> and <b>HCG 2.0 KVM ESX
-                                                  Ironic VRS sig</b> files. </p></li>
-                                                <li><b id="dcn-R7-download">HPE DCN 3.2R7 files and
-                                                  Patches</b>. Required files for installing HPE DCN
-                                                  3.2R7 and all of the currently required patches
-                                                  (as of June 3, 2016).
-                                                  <!--Get the right name!--><p>Also download the
-                                                  <b>HCG 2.0 KVM ESX Ironic VRS Part 2 of 2
-                                                  sha256</b> and <b>HCG 2.0 KVM ESX Ironic VRS Part
-                                                  2 of 2 sig</b> files. </p><note>If you are using
-                                                  HPE DCN 3.2R4, download the <b>HCG 2.0 KVM ESX
-                                                  Ironic VRS Part 2 of 2</b> to obtain the files for
-                                                  installing the 3.2R4 version of DCN/ This link
-                                                  will download the
-                                                  <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
-                                                  file. You can also download the HPE DCN 3.2R7 file
-                                                  to get all of the patches you will need to
-                                                  install.</note></li>
-                                                <!--<li><b>GPG Keys to Verify Signature Files</b> The public keys for HP Helion Carrier Grade 2.0.</li> Where are these?-->
-                                        </ul></li>
-                                <li id="download-avs">Click the <b>Downloads</b> tab and locate the
-                                        following download.<!-- Referenced by Download the Installation Packages Denver-->
-                                        <ul id="ul_erk_kwh_k5">
-                                                <li><b>HCG 2.0 KVM AVS</b> Installation files for
-                                                  the HP Helion OpenStack Carrier Grade Tahoe,
-                                                  Memphis, and Sacramento deployments. This link
-                                                  will download the
+                <ol id="ul_lvg_jb2_xs">
+                        <li id="hpelinux4-avs">Click the <b>Downloads</b> tab and locate the
+                                following download.<!-- Referenced by Download the Installation Packages Denver-->
+                                <ul id="ul_erk_kwh_k5">
+                                        <li><b>HCG 2.0 KVM AVS</b> Installation files for the HP
+                                                Helion OpenStack Carrier Grade Denver deployment.
+                                                This link will download the
                                                   <codeph>hcg2_kvm_avs.tar.gz</codeph> file. <p>Also
                                                   download the <b>HCG 2.0 KVM AVS sha256</b> and
                                                   <b>HCG 2.0 KVM AVS sig</b> files. </p></li>
-                                                <li><b><b conref="#topic7148cgid/dcn-R7-download"
-                                                  /></b> Optionally download this package to get of
-                                                  the currently required patches (as of June 3,
-                                                  2016). <!--Get the right name!--></li>
-                                                <!--<li><b>GPG keys to verify signature files</b> The public keys for HP Helion Carrier Grade 2.0.</li>-->
-                                        </ul></li>
-                                <li id="dowload-infoblox">Optionally, download the <b>Helion Carrier
-                                                Grade 2.0 Infoblox Plugin</b>. Also, download the
-                                        checksum and signature files.</li>
-                        </ol>
-                        <p>
-                                <b>Note:</b> When downloading installation files, always download
-                                and verify the associated checksum and signature files before
-                                installing. </p>
-                        <p>Post-install patches; linked to in Post Install page, not pre-reqs</p>
-                </section>
+                                        <!--<li><b>GPG keys to verify signature files</b> The public keys for HP Helion Carrier Grade 2.0.</li>-->
+                                </ul></li>
+                </ol>
+                <p>
+                        <b>Note:</b> When downloading installation files, always download and verify
+                        the associated checksum and signature files before installing. </p>
+                <p><!--Post-install patches; linked to in Post Install page, not pre-reqs--></p>
                 <p>
                         <ul id="ul_f1p_tsq_w5">
                                 <li id="li-002"><b id="002">Helion Carrier Grade 2.0 Horizon001
@@ -171,26 +162,34 @@
                                 <b>Note:</b> When downloading installation files, always download
                                 and verify the signature file before installing. </p>
                 </section>
-                <section id="extract"><title>Extract and copy the HP Helion OpenStack Carrier Grade
-                                installation files and patches
-                                <!-- referenced by Downoad the Installation Packages for Tahoe, Memphis, Sacramento--></title>After
-                        downloading the <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph> file (using
-                        the <b>HCG 2.0 KVM ESX Ironic VRS</b> link, above):<ol id="ol_kck_hlw_f">
-                                <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
-                                        file. The extraction creates the
-                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
-                                        file.</li>
-                                <li>Extract the
-                                                <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
-                                        file. The extraction creates the
-                                                <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
-                                        file.</li>
-                                <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph> and
-                                                <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
-                                        files. A number of files and folders are extracted.</li>
-                                <li>Copy or move the extracted files as indicated in the following
-                                        tables. <table id="table_rkj_yyk_2t">
-                                                <tgroup cols="3">
+                <section id="extract">
+                        <title>Extract and copy the HP Helion OpenStack Carrier Grade installation
+                                files and patches
+                                <!-- referenced by Downoad the Installation Packages for Tahoe, Memphis, Sacramento--></title>
+                        <sectiondiv id="avs-only">
+                                <p>After downloading the
+                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph> file
+                                        (using the <b>HCG 2.0 KVM ESX Ironic VRS</b> link,
+                                        above):</p>
+                                <ol id="ol_kck_hlw_f">
+                                        <li>Extract the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
+                                                file. The extraction creates the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
+                                                file.</li>
+                                        <li>Extract the
+                                                  <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
+                                                file. The extraction creates the
+                                                  <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
+                                                file.</li>
+                                        <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
+                                                and
+                                                  <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
+                                                files. A number of files and folders are
+                                                extracted.</li>
+                                        <li>Copy or move the extracted files as indicated in the
+                                                following tables. <table id="table_rkj_yyk_2t">
+                                                  <tgroup cols="3">
                                                   <colspec colnum="1" colname="col2"/>
                                                   <colspec colnum="2" colname="col3"/>
                                                   <colspec colnum="3" colname="col4"/>
@@ -244,13 +243,14 @@
                                                   <entry>For Sacramento deployments only.</entry>
                                                   </row>
                                                   </tbody>
-                                                </tgroup>
-                                        </table><p id="kvm"><b>KVM Region Installation
-                                        files</b></p>The following files for installing the KVM
-                                        region are in the <b>WR</b> folder in the extracted download
-                                        package. Extract these files to any location on the sever
-                                        and make note of the location. <p>
-                                                <table id="topic7148__table_yhb_zny_zs">
+                                                  </tgroup>
+                                                </table><itemgroup id="kvm"><b>KVM Region
+                                                  Installation files</b>The following files for
+                                                  installing the KVM region are in the <b>WR</b>
+                                                  folder in the extracted download package. Extract
+                                                  these files to any location on the sever and make
+                                                  note of the location. <p>
+                                                  <table id="topic7148__table_yhb_zny_zs">
                                                   <tgroup cols="1">
                                                   <colspec colnum="1" colname="col2"
                                                   colwidth="3.26*"/>
@@ -271,11 +271,11 @@
                                                   </row>
                                                   </tbody>
                                                   </tgroup>
-                                                </table>
-                                        </p><itemgroup id="patches">
-                                                <p><b> Mandatory patches</b></p>
-                                                <p>The <b>mandatory_patches</b> directory
-                                                  contains:<ul id="ul_o1k_trn_g5">
+                                                  </table>
+                                                  </p></itemgroup>
+                                                <itemgroup id="patches"><b> Mandatory
+                                                  patches</b><p>The <b>mandatory_patches</b>
+                                                  directory contains:<ul id="ul_o1k_trn_g5">
                                                   <li><b>providernet-tab-missing-in-horizon</b>.
                                                   This directory contains the Horizon Provider
                                                   Network Patch patch. </li>
@@ -284,24 +284,26 @@
                                                   files:
                                                   <codeph>cg-hlm-cobbler-random.patch</codeph> and
                                                   <codeph>knc-cobbler-random.patch</codeph>.</li>
-                                                  </ul></p>
-                                                <p>You will be shown during the installation where
-                                                  to copy these patches.</p>
-                                        </itemgroup></li>
-                        </ol><p id="pre"><b>pre-install-patches</b></p><p>The
-                                        <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/pre-install-patches/pre-hlinux-patches</codeph>
-                                folder in the <b>HPE DCN 3.2R7 files and Patches</b> download file
-                                contains patches that must be installed during the installation
-                                process. You will be shown during the installation where to copy
-                                these patches.:</p><p><table id="table_ofv_ryv_2w">
-                                        <tgroup cols="1">
-                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
-                                                <thead>
+                                                  </ul></p><p>You will be shown during the
+                                                  installation where to copy these
+                                                  patches.</p></itemgroup><itemgroup id="pre"
+                                                  ><b>pre-install-patches</b><p>The
+                                                  <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/pre-install-patches/pre-hlinux-patches</codeph>
+                                                  folder in the <b>HPE DCN 3.2R7 files and
+                                                  Patches</b> download file contains patches that
+                                                  must be installed during the installation process.
+                                                  You will be shown during the installation where to
+                                                  copy these patches.:</p><p><table
+                                                  id="table_ofv_ryv_2w">
+                                                  <tgroup cols="1">
+                                                  <colspec colnum="1" colname="col2"
+                                                  colwidth="3.26*"/>
+                                                  <thead>
                                                   <row>
                                                   <entry>pre-hlinux-patches folder</entry>
                                                   </row>
-                                                </thead>
-                                                <tbody>
+                                                  </thead>
+                                                  <tbody>
                                                   <row>
                                                   <entry><codeph>HCG2.0_Accelerate001_Patch023.tar.gz</codeph></entry>
                                                   </row>
@@ -335,27 +337,33 @@
                                                   <row>
                                                   <entry><codeph>neu-dcnr7-predeploy.tar.gz</codeph></entry>
                                                   </row>
-                                                </tbody>
-                                        </tgroup>
-                                </table>The directory also contains signature and SHA256 files to
-                                verify the download. For more information, see <xref
-                                        href="../prereqs/carrier-grade-install-checksum-sacramento.dita#topic7148cgidv"
-                                        >Verify the Downloads</xref>.
-                                </p><p><b>pre-wr-patches</b></p><p>The
-                                        <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/pre-install-patches/pre-wr-patches</codeph>
-                                folder in the <b>HPE DCN 3.2R7 files and Patches</b> download file
-                                contains patches that must be installed during the KVM region
-                                installation process. You will be shown during the installation
-                                where to copy these patches.:</p><p>
-                                <table id="table_x2r_yjw_2w">
-                                        <tgroup cols="1">
-                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
-                                                <thead>
+                                                  </tbody>
+                                                  </tgroup>
+                                                  </table>The directory also contains signature and
+                                                  SHA256 files to verify the download. For more
+                                                  information, see <xref
+                                                  href="../prereqs/carrier-grade-install-checksum-sacramento.dita#topic7148cgidv"
+                                                  >Verify the Downloads</xref>.
+                                                  </p></itemgroup><itemgroup id="pre-kvm">
+                                                  <p><b>pre-wr-patches</b></p>
+                                                  <p>The
+                                                  <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/pre-install-patches/pre-wr-patches</codeph>
+                                                  folder in the <b>HPE DCN 3.2R7 files and
+                                                  Patches</b> download file contains patches that
+                                                  must be installed during the KVM region
+                                                  installation process. You will be shown during the
+                                                  installation where to copy these patches.:</p>
+                                                  <p>
+                                                  <table id="table_x2r_yjw_2w">
+                                                  <tgroup cols="1">
+                                                  <colspec colnum="1" colname="col2"
+                                                  colwidth="3.26*"/>
+                                                  <thead>
                                                   <row>
                                                   <entry>pre-hlinux-patches folder</entry>
                                                   </row>
-                                                </thead>
-                                                <tbody>
+                                                  </thead>
+                                                  <tbody>
                                                   <row>
                                                   <entry><codeph>HCG2.0_WR002_Patch005.tar.gz</codeph></entry>
                                                   </row>
@@ -386,57 +394,14 @@
                                                   <row>
                                                   <entry><codeph>HCG2.0_WR011_Patch033.tar.gz</codeph></entry>
                                                   </row>
-                                                </tbody>
-                                        </tgroup>
-                                </table>
-                        </p><p><b>vrsg-curl-script</b></p><p>The
-                                        <codeph>/hcg2_dcn_32r7.tar/hcg2_dcn_32r7/hcg2_dcn_32r7/vrsg-curl-script/</codeph>
-                                folder in the <b>HPE DCN 3.2R7 files and Patches</b> download file
-                                contains cURL scripts required during installation process. You will
-                                be shown during the installation where to copy these patches:</p><p>
-                                <table id="table_rrq_tkw_2w">
-                                        <tgroup cols="1">
-                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
-                                                <thead>
-                                                  <row>
-                                                  <entry>pre-hlinux-patches folder</entry>
-                                                  </row>
-                                                </thead>
-                                                <tbody>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR002_Patch005.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR003_Patch007.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR004_Patch017.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR005_Patch019.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR006_Patch025.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR007_Patch027.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR008_Patch029.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR009_Patch030.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR010_Patch032.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0_WR011_Patch033.tar.gz</codeph></entry>
-                                                  </row>
-                                                </tbody>
-                                        </tgroup>
-                                </table>
-                        </p></section>
+                                                  </tbody>
+                                                  </tgroup>
+                                                  </table>
+                                                  </p>
+                                                </itemgroup></li>
+                                </ol>
+                        </sectiondiv>
+                </section>
                 <p>
                         <codeblock>=======================================================================================</codeblock>
                 </p>
@@ -462,6 +427,9 @@
                                 </ul>
                         </p>
                 </section>
+                <p>
+                        <codeblock>=====================================================================================</codeblock>
+                </p>
                 <section id="r7"><title>Extract the HPE DCN 3.2R7
                                 components<!-- referenced by Downoad the Installation Packages for Tahoe, Memphis, Sacramento--></title><p>The
                                                 <b><b conref="#topic7148cgid/dcn-R7-download"/></b>
@@ -567,6 +535,9 @@
                                         <li><codeph>curl-vrsg-hwvtep.sh</codeph></li>
                                         <li><codeph>curl-vrsg-nonha-fip.sh</codeph></li>
                                 </ul></p></section>
+                <p>
+                        <codeblock>=====================================================================================</codeblock>
+                </p>
                 <section id="r4"><title>Extract the HPE DCN 3.2R4
                                 components<!-- referenced by Downoad the Installation Packages for Tahoe, Memphis, Sacramento--></title><p>Extract
                                 the downloaded files from the <codeph>DCN-1</codeph> and
@@ -691,36 +662,14 @@
                                                   </tbody>
                                                   </tgroup>
                                                 </table>
-                                        </p><p id="kvm-avs"><b>KVM Region Installation
-                                        files</b></p>The following files for installing the KVM
-                                        region are in the <b>WR</b> folder in the extracted download
-                                        package. Extract these files to any location on the sever
-                                        and make note of the location. <p>
-                                                <table id="table_ejh_qtj_k5">
-                                                  <tgroup cols="1">
-                                                  <colspec colnum="1" colname="col2"
-                                                  colwidth="3.26*"/>
-                                                  <thead>
-                                                  <row>
-                                                  <entry>File Name</entry>
-                                                  </row>
-                                                  </thead>
-                                                  <tbody>
-                                                  <row>
-                                                  <entry><codeph>bootimage_avs_only.iso</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
-                                                  </row>
-                                                  <row>
-                                                  <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
-                                                  </row>
-                                                  </tbody>
-                                                  </tgroup>
-                                                </table>
-                                        </p><itemgroup conref="#topic7148cgid/patches"/></li>
+                                        </p><itemgroup conref="#topic7148cgid/kvm"/><itemgroup
+                                                conref="#topic7148cgid/patches"/><itemgroup
+                                                conref="#topic7148cgid/pre"/><itemgroup
+                                                conref="#topic7148cgid/pre-kvm"/></li>
                         </ol></section>
-                <section/>
+                <p>
+                        <codeblock>=================================================================================</codeblock>
+                </p>
                 <section id="verify">
                         <title>Verify the downloaded
                                 signature<!-- referenced by Verify the Downloads and Verify the Downloads for Denver--></title>
@@ -805,6 +754,9 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                 <li>Perform this verification for each file you downloaded. </li>
                         </ol>
                 </section>
+                <p>
+                        <codeblock>====================================================================================</codeblock>
+                </p>
                 <section id="checksum">
                         <title>Verify the downloaded
                                 checksums<!-- referenced by Verify the Downloads--></title>
@@ -824,6 +776,9 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
 774cf8be645cbd868acd0b2a8de811de86e283b17cbad849c313ef38c1af33f5  hcg2_kvm_esx_ironic_vrs.tar.gz</codeblock></li>
                         </ol>
                 </section>
+                <p>
+                        <codeblock>====================================================================================</codeblock>
+                </p>
                 <section id="checksum-den">
                         <title>Verify the downloaded checksums
                                 <!-- referenced by Verify the Downloads for Denver--></title>
@@ -843,8 +798,10 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
 4ba8ce74525332ed732ed2d6adeca5692e31ef5ee089074ec25bf0b3d7be1882  hcg2_kvm_avs.tar.gz</codeblock></li>
                         </ol>
                 </section>
+                <codeblock>=======================================================================================</codeblock>
                 <section>
-                        <p><b id="debian">Obtain Required Debian Packages</b></p>
+                        <p><b id="debian">Obtain Required Debian Packages</b>
+                                <!--Need this??--></p>
                         <p>Download the following Debian packages from a trusted source:</p>
                         <ul
                                 conref="../sacramento/CGH-2-install-lifecycle-sacramento.dita#topic10581c2ils/ul_wwn_13h_xt"
@@ -866,11 +823,9 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                         You must obtain a user account in order to download these files. </p>
                 <section>
                         <ol>
-                                <li>Download the following mandatory
-                                        patches:<!-- Referenced by Memphis and Sacramento patch docs and the Denver and Tahoe patch lists below.--></li>
-                        </ol>
-                        <ul id="ul_nbs_gvh_k5">
-                                <!--Helion Carrier Grade 2.0 Horizon001 Patch002 is post-install only; do not download here-->
+                                <li id="download-patches">Download the following mandatory
+                                        patches:
+                                        <ul>
                                 <li id="li-003"><b id="003">Helion Carrier Grade 2.0 Heat001
                                                 Patch003</b>. This patch addresses a number of
                                         issues.</li>
@@ -937,10 +892,14 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                         patch fixes the buffer overflow in openvswitch debian
                                         versions 2.2.x through 2.3.x allows for Remot Code
                                         Execution, and in 2.4.0 - 2.4.8 allows for Denial of Service
-                                        and possible RCE.</li>
+                                        and possible RCE.</li></ul>
                                 <!--Helion Carrier Grade 2.0 Horizon003 Patch031 is post-install only; do not download here-->
-                        </ul>
+                        </li></ol>
                 </section>
+                
+                <p>
+                        <codeblock>=======================================================================================</codeblock>
+                </p>
                 <section>
                         <ol id="ol_a2y_ztv_xv">
                                 <li id="download-patches-tahoe">Download the following mandatory
@@ -967,6 +926,11 @@ Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 8F0C</codeblock></l
                                                 <li conref="#topic7148cgid/li-029"/>
                                                 <li conref="#topic7148cgid/li-030"/>
                                         </ul></li>
+                        </ol>
+                        <p>
+                                <codeblock>=======================================================================================</codeblock>
+                        </p>
+                        <ol id="ol_tgq_11p_fw">
                                 <li id="download-patches-avs">Download the following mandatory
                                         patches: <!--Referenced by Denver patch docs--><ul
                                                 id="ul_om1_bvz_k5">
