@@ -103,7 +103,7 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.200.51.105</codeblock></li>
     <ul id="ul_lvm_vqd_bv">
       <li>
         <p>To check if RabbitMQ cluster is running perform the following on all three Standard
-          Region controller nodes IP from HLM :</p>
+          Region controller nodes IP from the lifecycle manager:</p>
       </li>
     </ul>
     <pre>    ssh cghelion@&lt;IP of Controller&gt; "sudo rabbitmqctl cluster_status"</pre>
@@ -112,8 +112,8 @@ BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.200.51.105</codeblock></li>
       <image href="../../media/carrier.grade.docs/2.1/CGH-2.1-restart-rabbitmq-1.png" width="500"
         id="image_mvm_vqd_bv"/></p>
     <ul id="ul_nvm_vqd_bv">
-      <li>To recover RabbitMQ cluster, execute the following commands on
-          HLM:<pre>    hlm stop -c&lt;your-cloud-name&gt; -t FND-RMQ</pre><p>
+      <li>To recover RabbitMQ cluster, execute the following commands on the
+        lifecycle manager:<pre>    hlm stop -c&lt;your-cloud-name&gt; -t FND-RMQ</pre><p>
         and</p><pre>    hlm start -c &lt;your-cloud-name&gt; -t FND-RMQ</pre></li>
     </ul>
     <ul id="ul_ovm_vqd_bv">

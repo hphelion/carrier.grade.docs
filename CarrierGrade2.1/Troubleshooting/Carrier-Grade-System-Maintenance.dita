@@ -4,7 +4,7 @@
   <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: System Maintenance</title>
   <body>
     <p><b>Procedure for gracefully shutting down and recovering 2.1 cloud </b></p>
-    <p>Backup HLM data, HOS Controller MySQL database and WR Controller system files using Attis
+    <p>Backup lifecycle manager data, HOS Controller MySQL database and WR Controller system files using Attis
       service - these tasks are performed if we encounter any unforeseen failures at a later point
       in time. </p>
     <ol id="ol_ks5_tw5_1v">
@@ -18,8 +18,8 @@
           <li>Power down WR Active Controller.</li>
           <li> Power down KVM host.</li>
           <li> Power on KVM host. Verify OVS bridges are up and active on KVM host before bringing
-            up the HLM and Controller VMs.</li>
-          <li>Power on the VMs in this order - HLM, Controller1, Controller2, Controller3.</li>
+            up the lifecycle manager VM and Controller VMs.</li>
+        <li>Power on the VMs in this order - lifecycle manager VM, Controller1, Controller2, Controller3.</li>
           <li>Power on WR Active Controller. Ensure that nova services are running before starting
             WR Computes and WR Standby Controller by running "nova service-list" command.</li>
           <li>Power on and unlock WR Computes and Standy Controller.</li>
@@ -27,10 +27,10 @@
       <li><b>Recovery steps:</b><ol id="ol_zdk_hmp_1w">
           <li>Verify status of RabbitMQ cluster on all controllers.</li>
           <li> If RabbitMQ cluster is broken, following commands need to be run from
-            HLM.<codeblock>hlm stop –c &lt;cloud-name> -t “FND-RMQ” </codeblock><codeblock> hlm start –c &lt;cloud-name> -t “FND-RMQ” </codeblock></li>
+            lifecycle manager.<codeblock>hlm stop –c &lt;cloud-name> -t “FND-RMQ” </codeblock><codeblock> hlm start –c &lt;cloud-name> -t “FND-RMQ” </codeblock></li>
           <li> Verify status of MySQL cluster on all controllers.</li>
           <li>If MySQL cluster is broken, following commands need to be run from
-            HLM.<codeblock>hlm stop –c &lt;cloud-name> -t “FND-MDB” </codeblock><codeblock>hlm start –c &lt;cloud-name> -t “FND-MDB” </codeblock></li>
+            lifecycle manager.<codeblock>hlm stop –c &lt;cloud-name> -t “FND-MDB” </codeblock><codeblock>hlm start –c &lt;cloud-name> -t “FND-MDB” </codeblock></li>
           <li>Alternatively, MySQL cluster can also be recovered using Attis service if database was
             backed up earlier as in Step 1.</li>
         </ol></li>
