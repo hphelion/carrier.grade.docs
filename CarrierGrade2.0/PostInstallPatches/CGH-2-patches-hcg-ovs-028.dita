@@ -81,7 +81,7 @@
           <codeblock>hlm patch -c MyCloud -n HCG-ovs -t BASE-CCP-T1</codeblock></li>
         <li>Execute the following command on the DCN host to make sure all the bridges are running
           with upgraded version.<codeblock>ovs-vsctl show</codeblock></li>
-        <li>Execute the following command from the DCN host to restart the VSC
+          <li>Execute the following command from the lifecycle manager VM DCN host to restart the VSC
           VM:<codeblock>virsh start vsc</codeblock></li>
         <li>After few minutes, execute the following command to launch the VSC console:
           <codeblock>virsh console vsc</codeblock></li>
@@ -107,7 +107,7 @@ BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.244.45.102
             bridges are listed:<codeblock>ovs-vsctl show</codeblock></li>
           <li>Execute the following command to stop the VSC VM before the patch
             update:<codeblock>virsh destroy vsc</codeblock></li>
-          <li>Execute the following command from HLM VM to apply patch on the DCN Host based on your
+          <li>Execute the following command from the lifecycle manager VM to apply patch on the DCN Host based on your
             topology
             <codeblock>hlm patch -c &lt;cloud-name> -n HCG-ovs -t &lt;tier></codeblock>Example to
             apply patch on DCN Host:
@@ -131,7 +131,7 @@ show vswitch-controller vsd </codeblock></li>
 BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.244.45.103</codeblock></li>
           <li>SSH into the primary DCN node and execute the following command to make sure your
             bridges are listed:<codeblock>ovs-vsctl show</codeblock></li>
-          <li>Execute the following command to stop the VSC VM before the patch
+          <li>Execute the following command from the lifecycle manager VM to stop the VSC VM before the patch
             update:<codeblock>virsh destroy vsc</codeblock></li>
           <li>Execute the following command from HLM VM to apply patch on the DCN Host based on your
             topology
