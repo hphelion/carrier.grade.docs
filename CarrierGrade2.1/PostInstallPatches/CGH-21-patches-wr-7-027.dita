@@ -19,9 +19,21 @@
     <section>
       <title>Prerequisites</title>
       <p>You must install the following patches before installing this patch:<ul id="ul_cqr_spt_jv">
-          <li><xref href="CGH-21-patches-wr-5-025.dita#topic10581pdpkvm215">KVM Custom Patch 5
-                (<codeph>HCG_2.0 WR006 Patch025</codeph>)</xref>
-          </li>
+          <li>KVM Region Custom Patch (<codeph
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/001"
+            />)</li>
+          <li>PCI Bus Patch (<codeph
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/002"
+            />)</li>
+          <li>KVM Custom Patch 3 (<codeph
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/003"
+            />)</li>
+          <li>KVM Custom Patch 4 (<codeph
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/004"
+            />)</li>
+          <li>KVM Custom Patch 5 (<codeph
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/005"
+            />)</li>
         </ul></p>
       <note>You can use the Horizon UI to see if the patch has been deployed. Select the
           <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
@@ -30,19 +42,19 @@
     </section>
     <bodydiv>
       <section conref="CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
-      <bodydiv
-        conref="../../CarrierGrade2.0/PostInstallPatches/CGH-2-patches-wr-5-025.dita#topic10581pdpkvm5/install"
-      />
+      <section>
+        <title>Downloading the Horizon Patch</title>
+        <p>Download the <b
+            conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/027"
+          /> file and the associated checksum and signature files. </p>
+        <p>Verify the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
+            >downloaded signature</xref> and the <xref
+            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
+            >downloaded checksums</xref>. Extract the compressed files until the
+            <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph> and readme files are available.</p>
+      </section>
     </bodydiv>
-    <section><title>Downloading the Horizon Patch</title>Download the <b
-        conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/026"/>
-      file and the associated checksum and signature files. Extract the compressed files until the
-        <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph> and readme files are available.<p>Verify
-        the <xref
-          href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
-          >downloaded signature</xref> and the <xref
-          href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
-          >downloaded checksums</xref>.</p></section>
     <section
       conref="../../CarrierGrade2.0/PostInstallPatches/CGH-2-patches-wr-7-027.dita#topic10581pdpkvm7/uninstall"/>
     <section
