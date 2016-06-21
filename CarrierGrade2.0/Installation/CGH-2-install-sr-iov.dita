@@ -121,7 +121,7 @@ nova boot &lt;vm-name> --image &lt;image-name> --flavor &lt;flavor-name> --nic p
 nova boot sriov-fixed --image wrl --flavor 2 --nic port-id=abd5b42a-e8f5-4297-91ba-707c01195cc7 </codeblock></li>
                     <li><b>Option B</b> Launch a VM with vif-model as <i>pci-sriov</i>. See the
                         example below:
-                                <codeblock>nova boot &lt;vm-name> --image &lt;image-name> --flavor &lt;flavor-name> --nic port-id=&lt;port-uuid></codeblock><p><b>Example:</b></p><codeblock>nova boot sriov-vif-model --image wr-new --flavor m1.small --nic net-id=125e6f3c-e1aa-49c8-a20a-0ede67d9b6fe,vif-model=pci-sriov</codeblock></li>
+                                <codeblock>nova boot &lt;vm-name> --image &lt;image-name> --flavor &lt;flavor-name> --nic port-id=&lt;port-uuid>,vif-model=&lt;model></codeblock><p><b>Example:</b></p><codeblock>nova boot sriov-vif-model --image wr-new --flavor m1.small --nic net-id=125e6f3c-e1aa-49c8-a20a-0ede67d9b6fe,vif-model=pci-sriov</codeblock></li>
                 </ul></p><p><b>NOTE:</b> The SR-IOV vNIC is not assigned an IP address
                 automatically. The IP will be provided through the ToR switch and orchestrated by
                 NFV-D. If you do not use the Orchestrator must manually assign IP. </p>Also see the
