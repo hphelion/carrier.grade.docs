@@ -85,14 +85,14 @@
             installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
               href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
               id="image_tft_ncg_x5"/></p></li>
+        <li>Execute the following commands to apply the
+          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0004
+source /etc/nova/openrc</codeblock></li>
         <li>Execute the following commands to check the current state of all the
           hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b>
           state will be <b>Yes</b>. For example:<p><image
               href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png" id="image_j4z_gyf_x5"
               width="500"/></p></li>
-        <li>Execute the following commands to apply the
-          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0004.patch
-source /etc/nova/openrc</codeblock></li>
         <li>Execute the following command to patch and reboot the standby controller:
             <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
               <codeph>controller-1</codeph> is the standby

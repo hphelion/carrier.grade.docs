@@ -54,10 +54,10 @@
           <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0002.patch                </codeblock></li>
         <li>Execute the following command to verify that the patch is
           available:<codeblock>sudo sw-patch query</codeblock></li>
+        <li>Execute the following command to deploy the
+          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0002</codeblock></li>
         <li>Execute the following command to verify the current state of all the
           hosts:<codeblock>sudo sw-patch query-hosts</codeblock></li>
-        <li>Execute the following command to deploy the
-          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0002.patch</codeblock></li>
         <li>Execute the following command to set the environment variables in the OpenStack RC
           file:<codeblock>source /etc/nova/openrc</codeblock></li>
         <li>Execute the following command to patch and reboot the standby controller:
