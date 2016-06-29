@@ -222,11 +222,13 @@ sudo /etc/init.d/mysql start</codeblock></li>
           </ul></li>
         <li>Make sure that RabbitMQ is in sync with the cluster. </li>
         <li>Run the command <codeph>sudo rabbitmqctl cluster_status</codeph>.</li>
-        <li>It should display all the three controllers in sync as follows: <image
+        <li>It should display all the three controllers in sync as follows: <p><image
+              id="image_fm1_xv4_lw"/></p><image
             href="../../media/carrier.grade.docs/CGH-troubleshooting-system-maintenance-1.png"
             id="image_gd3_3dj_lw"/></li>
         <li>Power on DCN host from iLO. SSH to DCN node and start the VSC vm using command
-            <codeph>virsh start vsc</codeph>.<image id="image_e5l_yfj_lw"
+            <codeph>virsh start vsc</codeph>. <p><image id="image_ays_wv4_lw"/></p><image
+            id="image_e5l_yfj_lw"
             href="../../media/carrier.grade.docs/CGH-troubleshooting-system-maintenance-2.png"
             /><note>The remaining three steps mentioned below (step 10 to step 12) is NOT applicable
             for Denver topology.</note></li>
@@ -253,7 +255,7 @@ show vswitch-controller vswitches</codeblock><p><u><i>WindRiver
       <ol id="ol_wg2_bhj_lw">
         <li>Power on the Vcenter server.</li>
         <li>Power on the ESX servers from iLO OR login to the Vcenter server to power on the ESX
-            servers.<image id="image_zzk_fhj_lw"
+          servers. <p><image id="image_z3j_sv4_lw"/></p><image id="image_zzk_fhj_lw"
             href="../../media/carrier.grade.docs/CGH-troubleshooting-system-maintenance-3.png"
           /></li>
         <li>Start the VRS agents VMs first from Vcenter [give it ample time to boot up].</li>
