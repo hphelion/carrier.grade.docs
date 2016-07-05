@@ -11,8 +11,8 @@
       Denver, Sacramento, Tahoe, and Memphis.</p>
     <p/>
     <p><u>POWER DOWN PROCEDURE</u></p>
-    <p><b><b>Backup Process</b>:</b>:<note>Before shutting down the cloud, <b> remember to take a
-          backup</b>:<p>
+    <p><b><b><u>Backup Process</u></b>:</b>:<note>Before shutting down the cloud, <b> remember to
+          take a backup</b>:<p>
           <ul id="ul_ttz_x1f_mw">
             <li>Make sure you <xref
                 href="../OperationsGuide/Backup/CGH-2--backup-configure.dita#topic10581c2bc/location"
@@ -33,7 +33,7 @@ attis backup --config-id &lt;Config_ID_of_ WR_Appliance_system_files_Backup></co
       <codeblock>attis backup --config-id &lt;Config_ID_of_VSD_Appliance_DB_Backup>
 attis backup --config-id &lt;Config_ID_of_VSC_Appliance_config_files_Backup>         </codeblock>
     </p>
-    <p>Attis command that is applicable ONLY for Sacramento topology  - </p>
+    <p>Attis command that is applicable ONLY for Sacramento topology - </p>
     <p>
       <codeblock>attis backup --config-id &lt;Config_ID_of_BM_Controller_Data_Backup> </codeblock>
     </p>
@@ -42,7 +42,47 @@ attis backup --config-id &lt;Config_ID_of_VSC_Appliance_config_files_Backup>    
         Cloud</xref> section.</p>
     <p/>
     <p>
-      <b>Shutdown sequence</b></p>
+      <b><u>Shutdown Sequence</u></b></p>
+    <p><b>Shutdown of Denver Cloud </b></p>
+    <p>Power down the servers/vms in the same order/sequence specified below: </p>
+    <ol id="ol_imh_lm2_mw">
+      <li><xref href="#topic_rqp_ktj_jw/ol_n2l_pl1_lw" format="dita"><i>WindRiver or KVM
+          Region</i></xref></li>
+      <li><xref href="#topic_rqp_ktj_jw/ol_c3b_jm1_lw" format="dita"><i>Standard - Non KVM
+            Region</i></xref><p>
+          <note>Skip step 1, 2, and 7 in the <i>Standard - Non KVM Region </i> above as it is not
+            applicable for powering down the Denver cloud.</note>
+        </p></li>
+    </ol>
+    <p><b>Shutdown of Tahoe Cloud </b></p>
+    <p>Power down the servers/vms in the same order/sequence specified below: </p>
+    <ol id="ol_w3r_hq2_mw">
+      <li><xref href="#topic_rqp_ktj_jw/ol_n2l_pl1_lw" format="dita"><i>WindRiver or KVM
+          Region</i></xref></li>
+      <li><xref href="#topic_rqp_ktj_jw/ol_c3b_jm1_lw" format="dita"><i>Standard - Non KVM
+            Region</i></xref></li>
+    </ol>
+    <p><b>Shutdown of Memphis Cloud </b></p>
+    <p>Power down the servers/vms in the same order/sequence specified below: </p>
+    <ol id="ol_pmh_qq2_mw">
+      <li><xref href="#topic_rqp_ktj_jw/ol_n2l_pl1_lw" format="dita"><i>WindRiver or KVM
+          Region</i></xref></li>
+      <li><i><xref href="#topic_rqp_ktj_jw/ol_kn4_2gg_lw" format="dita">ESX Region</xref></i></li>
+      <li><xref href="#topic_rqp_ktj_jw/ol_c3b_jm1_lw" format="dita"><i>Standard - Non KVM
+            Region</i></xref></li>
+    </ol>
+    <p><b>Shutdown of Sacramento Cloud </b></p>
+    <p>Power down the servers/vms in the same order/sequence specified below: </p>
+    <ol id="ol_t2p_pr2_mw">
+      <li><i><xref href="#topic_rqp_ktj_jw/ol_sfg_ynn_lw" format="dita">Baremetal
+        region</xref></i></li>
+      <li><xref href="#topic_rqp_ktj_jw/ol_n2l_pl1_lw" format="dita"><i>WindRiver or KVM
+          Region</i></xref></li>
+      <li><i><xref href="#topic_rqp_ktj_jw/ol_kn4_2gg_lw" format="dita">ESX Region</xref></i></li>
+      <li><xref href="#topic_rqp_ktj_jw/ol_c3b_jm1_lw" format="dita"><i>Standard - Non KVM
+            Region</i></xref></li>
+    </ol>
+    <p/>
     <p><i><u><b>Sequence 1: WindRiver or KVM Region </b></u></i></p>
     <p>
       <ol id="ol_n2l_pl1_lw">
@@ -72,8 +112,8 @@ attis backup --config-id &lt;Config_ID_of_VSC_Appliance_config_files_Backup>    
             stop</codeph>.</li>
         <li>Shutdown the node using <codeph>shutdown –h now</codeph>.</li>
         <li>Login to iToolbox VM via vcenter.</li>
-        <li>Stop dhcpd and apache services. <codeph>service dhcpd stop</codeph>. <codeph>service
-            httpd stop</codeph></li>
+        <li>Stop dhcpd and apache services. <codeph>service dhcpd stop ; service httpd
+          stop</codeph></li>
         <li>Shutdown the node using<codeph> shutdown –h now</codeph>.</li>
         <li>Shutdown the ESX hosts either from vsphere client OR from iLO.</li>
         <li>Login to Vcenter and shutdown. <codeph>shutdown –h now</codeph>.</li>
@@ -131,152 +171,16 @@ $ sudo /usr/bin/mysqld_safe --wsrep-recover
       <li>Power off KVM/ HLM host node using command <codeph>shutdown –h now</codeph> or from
         iLO.</li>
     </ol>
-    <p><u><i><b>Sequence 4: Baremetal region </b></i></u></p>
+    <p><u><i><b>Sequence 4: Baremetal Region </b></i></u></p>
     <ol id="ol_sfg_ynn_lw">
       <li> Shutdown the baremetal compute nodes from either iLO or from the node itself.</li>
       <li>Shutdown the baremetal controller node form either iLO or from the node itself.
           <note>Baremetal region is applicable ONLY to Sacramento topology. Skip the ‘Baremetal
           Region’ power down sequence steps if you are using either Denver, Tahoe OR Memphis
           topologies.</note></li>
-      <li>Continue with the shutdown sequence of <xref href="#topic_rqp_ktj_jw/ol_kn4_2gg_lw"
-          format="dita">ESX region</xref>.</li>
     </ol>
-    <p><b>Shutdown of Denver Cloud </b></p>
-    <p>Power down the servers/vms in the same order/sequence specified below: </p>
-    <ol id="ol_imh_lm2_mw">
-      <li><xref href="#topic_rqp_ktj_jw/ol_n2l_pl1_lw" format="dita"><i>WindRiver or KVM
-          Region</i></xref></li>
-      <li><xref href="#topic_rqp_ktj_jw/ol_c3b_jm1_lw" format="dita"><i>Standard - Non KVM
-            Region</i></xref><p>
-          <note>Skip step 1, 2, and 7 in the <i>Standard - Non KVM Region </i> above as it is not
-            applicable for powering down the Denver cloud.</note>
-        </p></li>
-    </ol>
-    <p><b>Shutdown of Tahoe Cloud </b></p>
-    <p>Power down the servers/vms in the same order/sequence specified below: </p>
-    <ol id="ol_w3r_hq2_mw">
-      <li><xref href="#topic_rqp_ktj_jw/ol_n2l_pl1_lw" format="dita"><i>WindRiver or KVM
-          Region</i></xref></li>
-      <li><xref href="#topic_rqp_ktj_jw/ol_c3b_jm1_lw" format="dita"><i>Standard - Non KVM
-            Region</i></xref></li>
-    </ol>
-    <p><b>Shutdown of Memphis Cloud </b></p>
-    <p>Power down the servers/vms in the same order/sequence specified below: </p>
-    <ol id="ol_pmh_qq2_mw">
-      <li><xref href="#topic_rqp_ktj_jw/ol_n2l_pl1_lw" format="dita"><i>WindRiver or KVM
-          Region</i></xref></li>
-      <li><i><xref href="#topic_rqp_ktj_jw/ol_kn4_2gg_lw" format="dita">ESX Region</xref></i></li>
-      <li><xref href="#topic_rqp_ktj_jw/ol_c3b_jm1_lw" format="dita"><i>Standard - Non KVM
-            Region</i></xref></li>
-    </ol>
-    <p><b>Shutdown of Sacramento Cloud </b></p>
-    <p>Power down the servers/vms in the same order/sequence specified below: </p>
-    <ol id="ol_t2p_pr2_mw">
-      <li><i><xref href="#topic_rqp_ktj_jw/ol_sfg_ynn_lw" format="dita">Baremetal
-        region</xref></i></li>
-      <li><xref href="#topic_rqp_ktj_jw/ol_n2l_pl1_lw" format="dita"><i>WindRiver or KVM
-          Region</i></xref></li>
-      <li><i><xref href="#topic_rqp_ktj_jw/ol_kn4_2gg_lw" format="dita">ESX Region</xref></i></li>
-      <li><xref href="#topic_rqp_ktj_jw/ol_c3b_jm1_lw" format="dita"><i>Standard - Non KVM
-            Region</i></xref></li>
-    </ol>
-    <p/>
-    <p><u>POWER UP SEQUENCE </u></p>
-    <p><b><b><i><u>Powering Up Server Hosting HLM VM and VSD</u></i>
-        </b></b></p>
-    <p>
-      <ol id="ol_t5t_k13_lw">
-        <li>Power on KVM Host from iLO.</li>
-        <li>Start VSD and HLM VM using commands <codeph>virsh start hlm</codeph> and <codeph>virsh
-            start vsd</codeph>.</li>
-        <li>Make sure you can SSH and ping both HLM and VSD VM.</li>
-        <li>SSH to VSD VM and check the if the services are running fine. <codeph>Service vsd
-            status</codeph>.<note>If the service is displayed as a failed status, make sure the
-            server is synced with NTP. Use command <codeph>ntpstat</codeph>. If NTP is not synced,
-            wait until the nodes are synced with NTP.</note><note>If the VSD service fails to start
-            any service like Percona, MySQL, and Jboss, try to start the service manually by command
-              <codeph>monit start &lt;service_name></codeph>. eg: <codeph>monit start
-            jboss</codeph>.</note></li>
-      </ol>
-    </p>
-    <p><i><u><b>Sequence 1: Non KVM Region</b></u></i></p>
-    <p><ol id="ol_gc1_d43_lw">
-        <li>Power on the controllers - Check the iLO console to confirm all controllers are
-          rebooted.</li>
-        <li>Make sure all 3 controllers are accessible [ping /SSH].</li>
-        <li>Login to all 3 controllers in sequence and check if its synced properly with NTP server
-          using the commands <codeph>sudo ntpq -p</codeph> and <codeph>sudo date</codeph>.</li>
-        <li>Check the MySQL sequence number in all controllers with command
-            <codeph>sudo/usr/bin/mysqld_safe --wsrep-recover</codeph>.</li>
-        <li>If the sequence number is same in all controllers, start MySQL cluster in sequence
-          starting from controller 1, 2 and 3: <ul id="ul_wvf_tbj_lw">
-            <li>In controller 1
-              <codeblock>sudo /etc/init.d/mysql bootstrap-pxc
-sudo /etc/init.d/mysql start</codeblock></li>
-            <li>In Controller 2 :<codeblock>sudo /etc/init.d/mysql start</codeblock></li>
-          </ul><ul id="ul_ogc_wbj_lw">
-            <li>In Controller 3:<codeblock>sudo /etc/init.d/mysql start</codeblock></li>
-          </ul></li>
-        <li>Make sure that RabbitMQ is in sync with the cluster. </li>
-        <li>Run the command <codeph>sudo rabbitmqctl cluster_status</codeph>.</li>
-        <li>It should display all the three controllers in sync as follows: <p><image
-              href="../../media/carrier.grade.docs/CGH-troubleshooting-system-maintenance-1.png"
-              id="image_od2_nx4_lw"/></p></li>
-        <li>Power on DCN host from iLO. SSH to DCN node and start the VSC vm using command
-            <codeph>virsh start vsc</codeph>. <p><image id="image_e5l_yfj_lw"
-              href="../../media/carrier.grade.docs/CGH-troubleshooting-system-maintenance-2.png"
-            /></p><note>The remaining three steps mentioned below (step 10 to step 12) is NOT
-            applicable for Denver topology.</note></li>
-        <li>Power on VRS-G node from iLO and make sure its accessible via ping and SSH. </li>
-        <li>Login to the DCN host and connect to VSC VM using command <codeph>virsh console
-            vsc.</codeph></li>
-        <li>Login to VSC VM using <codeph>admin/admin</codeph>.</li>
-        <li>Once you are inside VSC VM, execute the following commands to verify VSC and
-                  VRS-G:<codeblock>admin display-config
-show vswitch-controller vsd
-show vswitch-controller xmpp-server
-show vswitch-controller vswitches</codeblock><p><u><i><b>Sequence
-                  2 : WindRiver or KVM Region</b>
-              </i></u></p><p>
-            <ol id="ol_tfh_r3j_lw">
-              <li>Power on WR controller node using iLO.</li>
-              <li>Once WR active controller comes up, power on WR standby controller through iLO. </li>
-              <li>Once the WR standby controller comes ‘online’, unlock them from <codeph>Edit
-                  Host</codeph> command button drop down.</li>
-              <li>Login to WR dashboard, power on all the compute nodes and ‘unlock’ them from
-                  <codeph>Edit Host</codeph> command button drop down.</li>
-            </ol>
-          </p></li>
-      </ol><u><i><b>Sequence 3 : ESX Region</b></i></u></p>
-    <p>
-      <ol id="ol_wg2_bhj_lw">
-        <li>Power on the Vcenter server.</li>
-        <li>Power on the ESX servers from iLO OR login to the Vcenter server to power on the ESX
-              servers.<p><image id="image_zzk_fhj_lw"
-              href="../../media/carrier.grade.docs/CGH-troubleshooting-system-maintenance-3.png"
-            /></p></li>
-        <li>Start the VRS agents VMs from Vcenter [give it ample time to boot up].</li>
-        <li>Start the itool box VM, vsd, compute proxy VMs in ESX from Vcenter.</li>
-        <li>Login to the VSD VM and make sure it's synced properly with NTP server using command
-            <codeph>ntpq –p</codeph>.</li>
-        <li>Once it's synced to the NTP server, make sure all services are running fine using
-          command <codeph>service vsd status</codeph> OR <codeph>monit summary</codeph>. <note>If
-            any of the service is shown as failed OR not monitored, start the same using command
-              <codeph>monit start &lt;service_name></codeph>.</note></li>
-        <li>Once the compute proxy powered on, ensure that it's accessible from the HLM VM via
-            <codeph>ping/ssh</codeph>.</li>
-        <li>SSH to compute proxy and make sure that the nova service is running <codeph>service
-            nova-compute status</codeph> .</li>
-        <li>Check and confirm ‘ifconfig’ output has eth0 and eth0.vlanid interfaces where the IP is
-          assigned to the eth0.vlanid interface.</li>
-      </ol>
-    </p>
-    <p><u><i><b>Sequence 4 : Baremetal Region</b></i></u>
-      <ol id="ol_z4v_mjj_lw">
-        <li>Poweron the baremetal controller node from iLO.</li>
-        <li>Poweron the baremetal compute nodes from iLO. </li>
-      </ol></p>
-    <p/>
+    <p><u>POWER UP PROCEDURE </u></p>
+    <p><b><u>Power Up Sequence</u></b></p>
     <p><b>Powering on Denver Cloud </b></p>
     <p>Power up the servers/vms in the same order/sequence specified below: </p>
     <ol id="ol_i4k_bzg_mw">
@@ -332,6 +236,100 @@ show vswitch-controller vswitches</codeblock><p><u><i><b>Sequence
       </li>
     </ol>
     <p/>
+    <p><b><b><i><u>Sequence 1: Powering Up Server Hosting HLM VM and VSD</u></i>
+        </b></b></p>
+    <p>
+      <ol id="ol_t5t_k13_lw">
+        <li>Power on KVM Host from iLO.</li>
+        <li>Start VSD and HLM VM using commands <codeph>virsh start hlm</codeph> and <codeph>virsh
+            start vsd</codeph>.</li>
+        <li>Make sure you can SSH and ping both HLM and VSD VM.</li>
+        <li>SSH to VSD VM and check the if the services are running fine. <codeph>Service vsd
+            status</codeph>.<note>If the service is displayed as a failed status, make sure the
+            server is synced with NTP. Use command <codeph>ntpstat</codeph>. If NTP is not synced,
+            wait until the nodes are synced with NTP.</note><note>If the VSD service fails to start
+            any service like Percona, MySQL, and Jboss, try to start the service manually by command
+              <codeph>monit start &lt;service_name></codeph>. eg: <codeph>monit start
+            jboss</codeph>.</note></li>
+      </ol>
+    </p>
+    <p><i><u><b>Sequence 2: Standard - Non KVM Region</b></u></i></p>
+    <p><ol id="ol_gc1_d43_lw">
+        <li>Power on the controllers - Check the iLO console to confirm all controllers are
+          rebooted.</li>
+        <li>Make sure all 3 controllers are accessible [ping /SSH].</li>
+        <li>Login to all 3 controllers in sequence and check if its synced properly with NTP server
+          using the commands <codeph>sudo ntpq -p</codeph> and <codeph>sudo date</codeph>.</li>
+        <li>Check the MySQL sequence number in all controllers with command
+            <codeph>sudo/usr/bin/mysqld_safe --wsrep-recover</codeph>.</li>
+        <li>If the sequence number is same in all controllers, start MySQL cluster in sequence
+          starting from controller 1, 2 and 3: <ul id="ul_wvf_tbj_lw">
+            <li>In Controller 1:
+              <codeblock>sudo /etc/init.d/mysql bootstrap-pxc
+sudo /etc/init.d/mysql start</codeblock></li>
+            <li>In Controller 2 :<codeblock>sudo /etc/init.d/mysql start</codeblock></li>
+          </ul><ul id="ul_ogc_wbj_lw">
+            <li>In Controller 3:<codeblock>sudo /etc/init.d/mysql start</codeblock></li>
+          </ul></li>
+        <li>Make sure that RabbitMQ is in sync with the cluster. </li>
+        <li>Run the command <codeph>sudo rabbitmqctl cluster_status</codeph>.</li>
+        <li>It should display all the three controllers in sync as follows: <p><image
+              href="../../media/carrier.grade.docs/CGH-troubleshooting-system-maintenance-1.png"
+              id="image_od2_nx4_lw"/></p></li>
+        <li>Power on DCN host from iLO. SSH to DCN node and start the VSC vm using command
+            <codeph>virsh start vsc</codeph>. <p><image id="image_e5l_yfj_lw"
+              href="../../media/carrier.grade.docs/CGH-troubleshooting-system-maintenance-2.png"
+            /></p><note>The remaining three steps mentioned below (step 10 to step 12) is NOT
+            applicable for Denver topology.</note></li>
+        <li>Power on VRS-G node from iLO and make sure its accessible via ping and SSH. </li>
+        <li>Login to the DCN host and connect to VSC VM using command <codeph>virsh console
+            vsc.</codeph></li>
+        <li>Login to VSC VM using <codeph>admin/admin</codeph>.</li>
+        <li>Once you are inside VSC VM, execute the following commands to verify VSC and
+                  VRS-G:<codeblock>admin display-config
+show vswitch-controller vsd
+show vswitch-controller xmpp-server
+show vswitch-controller vswitches</codeblock><p><b><i><u>Sequence
+                  3 : WindRiver or KVM Region</u></i></b>
+          </p><p>
+            <ol id="ol_tfh_r3j_lw">
+              <li>Power on WR controller node using iLO.</li>
+              <li>Once WR active controller comes up, power on WR standby controller through iLO. </li>
+              <li>Once the WR standby controller comes ‘online’, unlock them from <codeph>Edit
+                  Host</codeph> command button drop down.</li>
+              <li>Login to WR dashboard, power on all the compute nodes and ‘unlock’ them from
+                  <codeph>Edit Host</codeph> command button drop down.</li>
+            </ol>
+          </p></li>
+      </ol><u><i><b>Sequence 4 : ESX Region</b></i></u></p>
+    <p>
+      <ol id="ol_wg2_bhj_lw">
+        <li>Power on the Vcenter server.</li>
+        <li>Power on the ESX servers from iLO OR login to the Vcenter server to power on the ESX
+              servers.<p><image id="image_zzk_fhj_lw"
+              href="../../media/carrier.grade.docs/CGH-troubleshooting-system-maintenance-3.png"
+            /></p></li>
+        <li>Start the VRS agents VMs from Vcenter [give it ample time to boot up].</li>
+        <li>Start the itool box VM, vsd, compute proxy VMs in ESX from Vcenter.</li>
+        <li>Login to the VSD VM and make sure it's synced properly with NTP server using command
+            <codeph>ntpq –p</codeph>.</li>
+        <li>Once it's synced to the NTP server, make sure all services are running fine using
+          command <codeph>service vsd status</codeph> OR <codeph>monit summary</codeph>. <note>If
+            any of the service is shown as failed OR not monitored, start the same using command
+              <codeph>monit start &lt;service_name></codeph>.</note></li>
+        <li>Once the compute proxy powered on, ensure that it's accessible from the HLM VM via
+            <codeph>ping/ssh</codeph>.</li>
+        <li>SSH to compute proxy and make sure that the nova service is running <codeph>service
+            nova-compute status</codeph> .</li>
+        <li>Check and confirm ‘ifconfig’ output has eth0 and eth0.vlanid interfaces where the IP is
+          assigned to the eth0.vlanid interface.</li>
+      </ol>
+    </p>
+    <p><u><i><b>Sequence 5 : Baremetal Region</b></i></u>
+      <ol id="ol_z4v_mjj_lw">
+        <li>Poweron the baremetal controller node from iLO.</li>
+        <li>Poweron the baremetal compute nodes from iLO. </li>
+      </ol></p>
     <p><u>RECOVERY SEQUENCE</u></p>
     <p>For information on recovering RabbitMQ and MySQL clusters, refer to <xref
         href="../OperationsGuide/Backup/CGH-2-recovery-of-MySQL-and-RabbitMQ.dita#topic_z3v_rwn_lw"
