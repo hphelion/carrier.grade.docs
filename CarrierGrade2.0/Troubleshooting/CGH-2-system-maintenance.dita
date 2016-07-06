@@ -289,18 +289,15 @@ sudo /etc/init.d/mysql start</codeblock></li>
                   VRS-G:<codeblock>admin display-config
 show vswitch-controller vsd
 show vswitch-controller xmpp-server
-show vswitch-controller vswitches</codeblock><p><b><i><u>Sequence
-                  3 : WindRiver or KVM Region</u></i></b>
-          </p><p>
-            <ol id="ol_tfh_r3j_lw">
-              <li>Power on WR controller node using iLO.</li>
-              <li>Once WR active controller comes up, power on WR standby controller through iLO. </li>
-              <li>Once the WR standby controller comes ‘online’, unlock them from <codeph>Edit
-                  Host</codeph> command button drop down.</li>
-              <li>Login to WR dashboard, power on all the compute nodes and ‘unlock’ them from
-                  <codeph>Edit Host</codeph> command button drop down.</li>
-            </ol>
-          </p></li>
+show vswitch-controller vswitches</codeblock><p><b><u><i>Sequence
+                  3 : WindRiver or KVM Region </i></u></b></p></li>
+      </ol><ol id="ol_oym_5ns_nw">
+        <li>Power on WR controller node using iLO.</li>
+        <li>Once WR active controller comes up, power on WR standby controller through iLO. </li>
+        <li>Once the WR standby controller comes ‘online’, unlock them from Edit Host command button
+          drop down.</li>
+        <li>Login to WR dashboard, power on all the compute nodes and ‘unlock’ them from Edit Host
+          command button drop down.</li>
       </ol><u><i><b>Sequence 4 : ESX Region</b></i></u></p>
     <p>
       <ol id="ol_wg2_bhj_lw">
