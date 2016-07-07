@@ -19,7 +19,9 @@
       <ul id="ul_xzh_nmc_mt">
         
         <li>
-          <xref href="#topic10581c2t/service" format="dita"/></li>
+          <xref href="#topic10581c2t/storage" format="dita">Changing the storage size allotments of
+            the KVM controller nodes caused DRBD sync issue</xref></li>
+        <li><xref href="#topic10581c2t/service" format="dita"/></li>
               <li><xref href="#topic10581c2t/KVM" format="dita"/></li>
                 <li><xref href="#topic10581c2t/boot" format="dita"/></li>
         <li><xref href="#topic10581c2t/logs" format="dita"/></li>
@@ -29,6 +31,24 @@
       </ul>
       
       </section>
+    <section id="storage">
+      <title>Changing the storage size allotments of the KVM controller nodes caused DRBD sync
+        issue</title>
+      <p>When you try changing the allotments for controller-based storage at any time after
+        installation, for e.g. while creating new volumes with images. In that case, the disk size
+        in your system configuration plan might be updated with the new volume and image storage,
+        you may still experience errors or failures in controller-0 and controller-1 nodes:</p>
+      <p>
+        <ul id="ul_qbj_m5w_nw">
+          <li>DRBD may not be synced properly.</li>
+          <li>The <codeph>/opt/cgcs(drbd3)</codeph> may still be pointing to an old image storage.
+                <p><b>Resolution</b></p><note type="important">Changes to the storage allotments
+              require a reinstallation of the HP Helion OpenStack Carrier Grade host software on the
+              controllers, even if the primary disk is not replaced. It is recommended that you
+              re-install the KVM controllers when you encounter the issue. </note></li>
+        </ul>
+      </p>
+    </section>
     <section id="service"><title>After restarting a service or rebooting the controller nodes,
         Horizon UI is inaccessible or the icons in Horizon are missing</title><p>If you see few
         icons not being loaded properly in Horizon UI , it is likely because the service went into

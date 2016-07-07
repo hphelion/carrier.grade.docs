@@ -286,19 +286,23 @@ sudo /etc/init.d/mysql start</codeblock></li>
             vsc.</codeph></li>
         <li>Login to VSC VM using <codeph>admin/admin</codeph>.</li>
         <li>Once you are inside VSC VM, execute the following commands to verify VSC and
-                  VRS-G:<codeblock>admin display-config
+          VRS-G:<codeblock>admin display-config
 show vswitch-controller vsd
 show vswitch-controller xmpp-server
-show vswitch-controller vswitches</codeblock><p><b><u><i>Sequence
-                  3 : WindRiver or KVM Region </i></u></b></p></li>
-      </ol><ol id="ol_oym_5ns_nw">
+show vswitch-controller vswitches</codeblock></li>
+      </ol><b><u><i>Sequence 3 : WindRiver or KVM Region </i></u></b>
+    </p>
+    <p>
+      <ol>
         <li>Power on WR controller node using iLO.</li>
         <li>Once WR active controller comes up, power on WR standby controller through iLO. </li>
         <li>Once the WR standby controller comes ‘online’, unlock them from Edit Host command button
           drop down.</li>
         <li>Login to WR dashboard, power on all the compute nodes and ‘unlock’ them from Edit Host
           command button drop down.</li>
-      </ol><u><i><b>Sequence 4 : ESX Region</b></i></u></p>
+      </ol>
+    </p>
+    <p><u><i><b>Sequence 4 : ESX Region</b></i></u></p>
     <p>
       <ol id="ol_wg2_bhj_lw">
         <li>Power on the Vcenter server.</li>
