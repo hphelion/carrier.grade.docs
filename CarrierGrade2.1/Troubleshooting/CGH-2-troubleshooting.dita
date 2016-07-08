@@ -42,10 +42,10 @@
         <ul id="ul_qbj_m5w_nw">
           <li>DRBD may not be synced properly.</li>
           <li>The <codeph>/opt/cgcs(drbd3)</codeph> may still be pointing to an old image storage.
-                <p><b>Resolution</b></p><note type="important">Changes to the storage allotments
-              require a reinstallation of the HP Helion OpenStack Carrier Grade host software on the
-              controllers, even if the primary disk is not replaced. It is recommended that you
-              re-install the KVM controllers when you encounter the issue. </note></li>
+                <p><b>Resolution</b></p><note type="important">As of this release, there are known
+              limitations around changing the storage allotments during post cloud deployment. It
+              may require a reinstallation of the HP Helion OpenStack Carrier Grade host software on
+              the KVM region controllers. </note></li>
         </ul>
       </p>
     </section>

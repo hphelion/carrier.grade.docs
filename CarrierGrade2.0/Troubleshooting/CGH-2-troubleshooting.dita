@@ -17,6 +17,8 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
+        <li><xref href="#topic10581c2t/storage" format="dita">Changing the storage size allotments
+            of the KVM controller nodes caused DRBD sync issue</xref></li>
         <li><xref href="#topic10581c2t/volume" format="dita"/></li>
         <li><xref href="#topic10581c2t/logs" format="dita"/></li>
         <li><xref href="#topic10581c2t/keystone" format="dita"/></li>
@@ -35,7 +37,25 @@
       <p>Also see <xref href="CGH-2-troubleshooting-install.dita#topic10581c2ti">Installation
           Troubleshooting</xref>. </p>
     </section>
-    <section id="volume"><title>Instance launch fails when <i>Boot from image (creates a new volume)</i> is
+    <section id="storage">
+      <title>Changing the storage size allotments of the KVM controller nodes caused DRBD sync
+        issue</title>
+      <p>When you try changing the allotments for controller-based storage at any time after
+        installation, for e.g. while creating new volumes with images. In that case, the disk size
+        in your system configuration plan might be updated with the new volume and image storage,
+        you may still experience errors or failures in controller-0 and controller-1 nodes:</p>
+      <p>
+        <ul id="ul_qbj_m5w_nw">
+          <li>DRBD may not be synced properly.</li>
+          <li>The <codeph>/opt/cgcs(drbd3)</codeph> may still be pointing to an old image storage.
+            <p><b>Resolution</b></p><note type="important">As of this release, there are known
+              limitations around changing the storage allotments during post cloud deployment. It
+              may require a reinstallation of the HP Helion OpenStack Carrier Grade host software on
+              the KVM region controllers. </note></li>
+        </ul>
+      </p>
+    </section>
+        <section id="volume"><title>Instance launch fails when <i>Boot from image (creates a new volume)</i> is
         chosen as instance boot source</title><b>System Behavior/Message</b><p>Launching an instance
         might fail when you select <b>Boot from image (creates a new volume)</b> as the <b>Instance
           Boot Source</b> if the Compute (Nova) service has availability zones but the Block Storage
