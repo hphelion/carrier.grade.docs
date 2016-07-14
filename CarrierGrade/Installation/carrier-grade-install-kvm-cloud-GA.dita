@@ -39,30 +39,35 @@ ifconfig eth0 up</codeblock></li>
     <section><title>Download and install the required patches</title>
       <p>The following patches must be installed in the KVM region</p>
       <p><b>Install the KVM region license</b></p>
-      <p>The servers in the KVM region require a specific license file to be installed. You must
-        download this file from the <xref
-          href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-          scope="external">HPE Helion Download Network(HDN)</xref>. </p>
-      <p>Before installing the patch, make sure the KVM region controller-0 was properly installed
-        by the HPE Helion OpenStack Carrier Grade installation. </p>
-      <ol id="ol_mdt_dd3_ys">
-        <li>In a browser, navigate to <xref
-          href="https://helion.hpwsportal.com/catalog.html#/Home/Show" format="html"
-          scope="external">HPE Helion Download Network(HDN)</xref>. <ul id="ul_lvg_jb2_xs">
-            <li>Click <b>Sign In</b> to log in using your account. </li>
-            <li>After signing in, click the <b>Downloads</b> link in the menu on the left side of
-              the page.</li>
-            <li>On the <b>Downloads</b> page, locate HPE Helion OpenStack Carrier Grade and click
-              <b>Download</b>.</li>
-          </ul></li>
-        <li>Download and extract the <b id="productShow_appName">Helion Carrier Grade 1.1.0
-          Windriver License patch signature file</b> and the associated signature and checksum
-          files.  For information on performing verifications of the download, see the
-          Prerequistues. </li>
-        <li>Copy the <codeph>license.lic</codeph> file to KVM region <codeph>controller0</codeph> node to the 
-          <codeph>/home/wrsroot/</codeph> directory.</li>
-        <li>Restart <codeph>controller-0</codeph> to load the license file.</li>
-      </ol>
+      <p>The servers in the KVM region require a specific license file to be installed.</p>
+      <p>1. Copy the following files to the /home/wrsroot/ directory of the controller-0. </p>
+      <p>
+        <ul id="ul_pwg_cxr_pw">
+          <li><codeph>license.lic</codeph>
+          </li>
+        </ul>
+      </p>
+      <ul id="ul_kvg_cxr_pw">
+        <li>
+          <p><codeph>region_config</codeph>
+          </p>
+        </li>
+        <li>
+          <p><codeph>cakey.pem</codeph>
+          </p>
+        </li>
+      </ul>
+      <p>These files will be available in the HLM node:</p>
+      <ul id="ul_ubv_pwr_pw">
+        <li><codeph>license.lic</codeph> is located in the /root/cg-hlm/windriver-files directory on
+          the HLM host.</li>
+        <li><codeph>region_config</codeph>  is located in the
+            <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/windriver-config</codeph>
+          directory on the HLM host. </li>
+        <li><codeph>cakey.pem</codeph> is located in the
+            <codeph>/var/hlm/clouds/&lt;cloud-name>/desired_state/&lt;cloud-name>/001/base/stage/windriver-config</codeph>
+          directory on the HLM host. </li>
+      </ul>
       
       <p><b>Apply KVM region patches</b></p>
     <ol>
@@ -75,12 +80,6 @@ ifconfig eth0 up</codeblock></li>
             <li>TS_15.05_PATCH_0005.patch.new</li>
             <li>TS_15.05_PATCH_0006.patch.new</li>
             <li>TS_15.05_PATCH_0007.patch.new</li>
-          </ul></li>
-        <li>Copy the following files to the <codeph>/home/wrsroot/</codeph> directory of the
-          controller-0. The files are located in the <codeph>~/&lt;cloud name>/clouds/&lt;cloud
-            name>/001/stage/windriver-config</codeph> directory on the HLM VM.<ul id="ul_mpn_hnr_bt">
-            <li>region_config </li>
-            <li>cakey.pem</li>
           </ul></li>
         <li> Copy the following file to <codeph>/opt/branding</codeph> on the
             <codeph>controller-0</codeph>. The file is located in the
