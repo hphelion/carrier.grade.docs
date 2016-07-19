@@ -2,7 +2,8 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdpkvm215">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the OVS Bridge Patch 1 </title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the OVS Security Patch
+    001 </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -21,6 +22,35 @@
       traffic to an API endpoint will allow malicious behavior. </p>
     <p>Files added\impacted: openvswitch-common openvswitch-switch </p>
     <p><b>Prerequisites</b>: - ovs-bridge patch is applied already on lifecycle manager host.</p>
+   
+     <section conref="CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
+      <section>
+        <title>Start the patch download</title>
+        <p>To download the patch you need from the Software Updates and Licensing site, shown above: </p>
+        <ol id="ol_eyd_y4m_pw">
+          <li>Select the required patch file (e.g. <b
+            conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/sec"
+          />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-3.png"
+              width="400" id="image_fyd_y4m_pw"/></p></li>
+          <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>update-ovs-switch.sh</codeph> and readme files are
+          available. The readme with the patch download contains information on files changed by
+          these patches.<note>The <b>Software Licensing</b> site lists and displays patch file names
+            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+              <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+          <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+            <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-4.png"
+              width="400" id="image_w3v_zj5_pw"/></p><note>For validating the integrity of the
+                downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+                and verify if the fingerprint of the file matches the version available on the
+                server.</note></li>
+        </ol>
+      
+    </section>
     <section>
       <title>Deploy the OVS Security Patch for the lifecycle manager host</title>
     </section>

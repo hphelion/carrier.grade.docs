@@ -29,21 +29,23 @@
                                                   <li>
                                                   <p><b>HCG 2.1</b>. This link downloads the
                                                   <codeph>hcg21_kvm_avs.tar.gz</codeph> file to
-                                                  instal the Standard Region and KVM Region.
-                                                  Alsodownload the associated checksum and signature
-                                                  files.</p>
+                                                  install the Standard Region and KVM Region. </p>
                                                   </li>
                                                 </ul></li>
                                         <li>Download the following Standard Region patches:<ul
                                                   id="ul_rw5_5mh_qv">
-                                                  <li><b>HCG 2.1 OVS Bridge Patch</b></li>
-                                                <li><b id="4">HCG-Cumulative-Icinga-Patch004</b></li>
+                                                <li><b id="sec">HCG 2.1 OVS Security Patch</b></li>
+                                                <li><b id="4">HCG 2.1 Icinga001 Patch004</b></li>
+                                                <li><b id="34">HCG 2.1 DB Connections Patch034</b></li>
+                                                <li><b id="031">HCG 2.1 Horizon Patch </b></li>
+                                                <li><b id="3">HCG 2.1 Horizon Patch003</b></li>
                                                 </ul></li>
                                         <li>Download the following KVM Region patches:<ul
                                                   id="ul_njt_3l1_kv">
-                                                  <li><b id="025">HCG 2.0 WR006 Patch025</b></li>
-                                                <li><b id="027">HCG 2.0 WR007 Patch027</b><!--This patch replaces Patch026--></li>
-                                                  <li><b id="029">HCG 2.0 WR008 Patch029</b></li>
+                                                  <li><b id="025">HCG 2.1 WR006 Patch025</b></li>
+                                                <li><b id="027">HCG 2.1 WR007
+                                                  Patch027</b><!--This patch replaces Patch026--></li>
+                                                  <li><b id="029">HCG 2.1 WR008 Patch029</b></li>
                                                   <li><b id="030">HCG 2.1 WR009 Patch030</b></li>
                                                 <li><b id="032">HCG 2.1 WR010 Patch032</b></li>
                                                 <li><b id="033">HCG 2.1 WR11 Patch33</b></li>
@@ -52,10 +54,6 @@
                                                 </ul></li>
                                 </ol></p>
                 </section>
-                <section
-                        conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/verify"/>
-                <section
-                        conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/checksum"/>
                 <section id="extract"><title>Extract the downloaded files</title><p>After
                                 downloading the files from the <xref
                                         href="http://www.hpe.com/downloads/software" format="html"
@@ -201,22 +199,22 @@
                                                 </thead>
                                                 <tbody>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR002_Patch005.tar.gz</b></entry>
+                                                  <entry><b>HCG2.1_WR002_Patch005.tar.gz</b></entry>
                                                   <entry><codeph id="001"
                                                   >TS_HP_15_Custom_PATCH_0001_2.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR003_Patch007.tar.gx</b></entry>
+                                                  <entry><b>HCG2.1_WR003_Patch007.tar.gz</b></entry>
                                                   <entry><codeph id="002"
                                                   >TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR004_Patch017.tar.gz</b></entry>
+                                                  <entry><b>HCG2.1_WR004_Patch017.tar.gz</b></entry>
                                                   <entry><codeph id="003"
                                                   >TS_HP_15_Custom_PATCH_0003.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR005_Patch019.tar.gz</b></entry>
+                                                  <entry><b>HCG2.1_WR005_Patch019.tar.gz</b></entry>
                                                   <entry><codeph id="004"
                                                   >TS_HP_15_Custom_PATCH_0004.patch</codeph></entry>
                                                   </row>
@@ -239,44 +237,44 @@
                                                 </thead>
                                                 <tbody>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR006_Patch025.tar.gz</b></entry>
+                                                  <entry><b>HCG_2.1_WR006_Patch025.tar.gz</b></entry>
                                                   <entry><codeph id="005"
                                                   >TS_HP_15_Custom_PATCH_0005.patch</codeph>
                                                   </entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR007_Patch027.tar.gz</b></entry>
+                                                  <entry><b>HCG_2.1_WR007_Patch027.tar.gz</b></entry>
                                                   <entry><codeph id="006"
                                                   >TS_HP_15_Custom_PATCH_0006.patch</codeph>
                                                   </entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR008_Patch029.tar.gz</b></entry>
+                                                  <entry><b>HCG_2.1_WR008_Patch029.tar.gz</b></entry>
                                                   <entry><codeph id="007"
                                                   >TS_HP_15_Custom_PATCH_0007.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR009_Patch030.tar.gz</b></entry>
+                                                  <entry><b>HCG_2.1_WR009_Patch030.tar.gz</b></entry>
                                                   <entry><codeph id="008"
                                                   >TS_HP_15_Custom_PATCH_0008.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR010_Patch032.tar.gz</b></entry>
+                                                  <entry><b>HCG_2.1_WR010_Patch032.tar.gz</b></entry>
                                                   <entry><codeph id="009"
                                                   >TS_HP_15_Custom_PATCH_0009.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR011_Patch033.tar.gz</b></entry>
+                                                  <entry><b>HCG_2.1_WR011_Patch033.tar.gz</b></entry>
                                                   <entry><codeph id="010"
                                                   >TS_HP_15_Custom_PATCH_0010.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR012_Patch035.tar.gz</b></entry>
+                                                  <entry><b>HCG_2.1_WR012_Patch035.tar.gz</b></entry>
                                                   <entry><codeph id="011"
                                                   >TS_HP_15_Custom_PATCH_0011.patch</codeph></entry>
                                                   </row>
                                                   <row>
-                                                  <entry><b>HCG2.0_WR013_Patch036.tar.gz</b></entry>
+                                                  <entry><b>HCG_2.1_WR013_Patch036.tar.gz</b></entry>
                                                   <entry><codeph id="012"
                                                   >TS_HP_15_Custom_PATCH_0012.patch</codeph></entry>
                                                   </row>

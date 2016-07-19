@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpkvm216">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the Horizon Patch 031 </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p><b>Prerequisites</b>: - This patch must be applied only after the HP Helion OpenStack Carrier
+      Grade is fully deployed for all topologies (Denver/Tahoe/Memphis/Sacramento). The patch can be
+      applied to HCG 2.0 and HCG 2.1.</p>
+    <p>This patch addresses a number of issues in the KVM region, including:<ul id="ul_jxm_nkt_jv">
+        <li>HOS Horizon crashes when clicking on "Download CSV Summary" button under Resource Usage
+          panel.</li>
+        <li>HOS Horizon crashes when installing WR patch8 from Horizon dashboard.</li>
+      </ul></p>
+    <section conref="CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
+    <section>
+      <title>Locate the patch and start the download</title>
+      <p>To download the patch you need from the Software Updates and Licensing site, shown above: </p>
+      <ol id="ol_eyd_y4m_pw">
+        <li>Locate the product name associated with the HCG 2.1 patches. </li>
+        <li>Select the required patch file (e.g. <b
+            conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/031"
+          />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-3.png"
+              width="400" id="image_fyd_y4m_pw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b>) until
+          the <codeph>HCG-WR-HORIZON-CRASH\rollback_patch_hor_disconnect_postdeploy.sh</codeph>,
+            <codeph>HCG-WR-HORIZON-CRASH\apply_patch_hor_disconnect_postdeploy.sh</codeph> and the
+          readme files are available. The readme with the patch download contains information on
+          files changed by these patches.<note>The <b>Software Licensing</b> site lists and displays
+            patch file names individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and
+            HCG_2.1) under <b>Software Specification</b> and <b>Download filename</b>. Reagrdless of
+            their version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-4.png"
+              width="400" id="image_w3v_zj5_pw"/></p><note>For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol>
+    </section>
+    <section>
+      <title>Deploying the Horizon Patch for the lifecycle manager host</title>
+    </section>
+    <p>
+      <ol id="ol_pz4_nb3_qv">
+        <li>SSH into the lifecycle manager host as the root user. </li>
+        <li>Log into the lifecycle manager VM as
+            root.<pre>ssh &lt;lifecycle manager_VM_IP></pre><p>where: <codeph>lifecycle
+              manager_VM_IP</codeph> is the CLM IP of the lifecycle manager. </p>Locate the IP
+          address for the lifecycle manager in the
+            <systemoutput>/root/infra-ansible-playbooks/group_vars/all</systemoutput> file under
+            <systemoutput>hlm_clmstaticip</systemoutput> field.</li>
+        <li>Perform the following Steps to apply HCG-WR-HORIZON-CRASH:<ul id="ul_yym_kfk_bw">
+            <li>Copy the complete folder HCG-WR-HORIZON-CRASH under
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches/ </codeph>directory on the lifecycle manager VM.</li>
+            <li>cd <codeph>/var/hlm/clouds/&lt;cloudname>/patches/HCG-WR-HORIZON-CRAS</codeph>.</li>
+            <li>Add necessary permissions to scripts : <codeblock>chmod +x *.sh</codeblock></li>
+          </ul><ul id="ul_fv1_vlk_bw">
+            <li>Apply patch changes:
+              <codeblock>./apply_patch_hor_disconnect_postdeploy.sh</codeblock></li>
+          </ul><ul id="ul_xws_xlk_bw">
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>~/cg-hlm/hlm-build/hlm_prepare-env.sh</codeblock></li>
+          </ul><ul id="ul_d1c_1mk_bw">
+            <li>Run Config Processor:<codeblock>hlm generate -c &lt;cloudname></codeblock></li>
+          </ul><ul id="ul_eg3_1mk_bw">
+            <li>Redeploy FND-CLU
+              role:<codeblock>hlm deploy -c &lt;cloudname> -t "FND-CLU"</codeblock></li>
+          </ul></li>
+        <li>Perform the following steps to rollback the patch - HCG-WR-HORIZON-CRASH:
+            <codeblock>cd /var/hlm/clouds/&lt;cloudname>/patches/HCG-WR-HORIZON-CRASH</codeblock><ul
+            id="ul_kmd_cnk_bw">
+            <li>Rollback patch
+              changes.<codeblock>./rollback_patch_hor_disconnect_postdeploy.sh </codeblock></li>
+          </ul><ul id="ul_vdw_cnk_bw">
+            <li>Execute the following command to integrate the changes into the
+              environment:<codeblock>~/cg-hlm/hlm-build/hlm_prepare-env.sh </codeblock></li>
+          </ul><ul id="ul_rd4_dnk_bw">
+            <li>Run Config Processor: <codeblock> hlm generate -c &lt;cloudname> </codeblock></li>
+            <li>Redeploy FND-CLU
+              role:<codeblock>hlm deploy -c &lt;cloudname> -t "FND-CLU"</codeblock></li>
+          </ul></li>
+      </ol>
+    </p>
+  </body>
+</topic>

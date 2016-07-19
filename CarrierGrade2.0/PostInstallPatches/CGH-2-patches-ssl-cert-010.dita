@@ -23,26 +23,32 @@
       <title>Prerequisite</title>
       <p>This patch requires the <xref href="CGH-2-patches-ssl.dita#topic10581pdps">SSL patch
           (HCG2.0_Heat001_Patch003)</xref> to be applied first.</p>
+      <p/>
     </section>
-    <section>
-      <title>Download the patch</title>
-      <ol id="ul_lvg_jb2_xs">
-        <li>Launch <xref href="CGH-2-post-install-patching.dita#topic10581pdp/launch">the Software
-            Updates and Licensing site</xref>.</li>
-        <li>Download the <b
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_kxt_s2g_rw">
+        <li>Select the required patch file (e.g.<b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/010"/>
-          patch and the associated checksum and signature files.</li>
-        <li>Verify the <xref
-            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
-            >downloaded signature</xref> and the <xref
-            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
-            >downloaded checksums</xref>.</li>
-        <li>Extract the compressed files until the <codeph id="patch"
-          >kcp-ssl-cert-v3.patch</codeph>, <codeph id="patch2">knc-ssl-cert-v3.patch</codeph>, and
-          readme files are available. <p>The README with the patch download contains information on
-            files changed by these patches.</p></li>
-      </ol>
-    </section>
+          ) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_lxt_s2g_rw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>kcp-ssl-cert-v3.patch</codeph>,
+            <codeph>knc-ssl-cert-v3.patch</codeph> and readme files are available. The readme with
+          the patch download contains information on files changed by these patches.<note>The
+              <b>Software Licensing</b> site lists and displays patch file names individually for
+            all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under <b>Software
+              Specification</b> and <b>Download filename</b>. Regardless of their version number,
+            these files are referencing to the same files as extracted in the readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_mxt_s2g_rw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
     <section>
       <title>Install the patch</title>
       <p>
@@ -51,8 +57,9 @@
               lifecycle manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
               lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
               file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
-          <li>Copy the <codeph conref="#topic10581pdpssl/patch2"/> and <codeph
-              conref="#topic10581pdpssl/patch"/> files to the <codeph>~/</codeph> directory. </li>
+          <li>Copy the <systemoutput>knc-ssl-cert-v3.patch</systemoutput> and
+              <systemoutput>kcp-ssl-cert-v3.patch</systemoutput> files to the <codeph>~/</codeph>
+            directory. </li>
           <li>Change to the <codeph>~/kenobi-configuration-processor</codeph>
             directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
           <li> Execute the following command to deploy the patch:

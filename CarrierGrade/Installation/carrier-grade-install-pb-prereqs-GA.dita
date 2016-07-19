@@ -256,8 +256,7 @@ StrictHostKeyChecking no </codeblock></li>
                                 installation package(s) from the Software Depot, as shown above.</p>
                         <ol id="ol_zv1_jwm_sv">
                                 <li>Click the following links on the page and download the required
-                                        files. Also download the associated Checksum and Signature
-                                        files for each. <ul id="ul_aw1_jwm_sv">
+                                        files. <ul id="ul_aw1_jwm_sv">
                                                 <li><codeph>HCG 1.1.0 (Z7550-01935.tar)</codeph>.
                                                   <b>Helion Carrier Grade 1.1.0</b>.</li>
                                                 <li><codeph>hcg_1.1.0_horizon_patch1</codeph>.
@@ -278,8 +277,8 @@ StrictHostKeyChecking no </codeblock></li>
                                                   <codeph>HCG 1.1 gre patch 1.1</codeph>. <b>Helion
                                                   Carrier Grade 1.1.0 Gre patch</b>. </li>
                                                 <li><codeph>HCG 1.1 secure HLM ports patch
-                                                  1.1</codeph>.  <b>Helion Carrier Grade 1.1.0
-                                                  secure HLM ports patch</b>.</li>
+                                                  1.1</codeph>. <b>Helion Carrier Grade 1.1.0 secure
+                                                  HLM ports patch</b>.</li>
                                                 <li><codeph>HCG 1.1 random-password</codeph>.
                                                   <b>Helion Carrier Grade 1.1.0 random password</b>. </li>
                                                 <li><codeph>HCG 1.1 horizon web patch 1.1</codeph>.
@@ -289,14 +288,11 @@ StrictHostKeyChecking no </codeblock></li>
                                                   <b>Helion Carrier Grade 1.1.0 ceilometer
                                                   patch1</b>.</li>
                                                 <li><codeph>HCG 1.1 HCG1.1 hLinux001
-                                                  Patch001</codeph>.  The <b>Helion Carrier Grade
-                                                  1.1 hLinux001 Patch001</b> patch.</li>
+                                                  Patch001</codeph>. The <b>Helion Carrier Grade 1.1
+                                                  hLinux001 Patch001</b> patch.</li>
                                                 <li><codeph>HCG 1.1 cg hos nic
                                                   bonding.patch</codeph>. The <b>NIC Bonding
                                                   Patch.</b>.</li>
-                                                <li><b>GPG keys to verify signature files</b>. The
-                                                  file is named
-                                                  <codeph>GPG-HPCSS-Public-Keys.tar</codeph>.</li>
                                         </ul></li>
                                 <li>Download the required KVM region patches:<ul id="ul_gfl_wmw_rv">
                                                 <li>HCG 1.1 TS 15.05 Patch 001 </li>
@@ -307,8 +303,6 @@ StrictHostKeyChecking no </codeblock></li>
                                                 <li>HCG 1.1 TS 15.05 Patch  006 </li>
                                                 <li>HCG 1.1 TS 15.05 Patch  007</li>
                                         </ul></li>
-                                <li><xref href="#topic7148/verify" format="dita">Verify the
-                                                signature and checksums</xref>. </li>
                         </ol>
                 </section>
                 <section id="launch">
@@ -348,8 +342,7 @@ StrictHostKeyChecking no </codeblock></li>
                 <section><title>Download the patches</title>In the Software Updates and Licensing
                         site, as shown above: <ol id="ol_fq1_fsl_2w">
                                 <li>Click the following links on the page and download the required
-                                        files. Also download the associated Checksum and Signature
-                                        files for each. <ul id="ul_gq1_fsl_2w">
+                                        files. <ul id="ul_gq1_fsl_2w">
                                                 <li><codeph>hcg_1.1.0_horizon_patch1</codeph>.
                                                   <b>Horizon Patch Tar File for Helion Carrier
                                                   Grade</b>. </li>
@@ -384,9 +377,6 @@ StrictHostKeyChecking no </codeblock></li>
                                                 <li><codeph>HCG 1.1 cg hos nic
                                                   bonding.patch</codeph>. The <b>NIC Bonding
                                                   Patch.</b>.</li>
-                                                <li><b>GPG keys to verify signature files</b>. The
-                                                  file is named
-                                                  <codeph>GPG-HPCSS-Public-Keys.tar</codeph>.</li>
                                         </ul></li>
                                 <li>Download the required KVM region patches:<ul id="ul_hq1_fsl_2w">
                                                 <li>HCG 1.1 TS 15.05 Patch 001 </li>
@@ -397,111 +387,7 @@ StrictHostKeyChecking no </codeblock></li>
                                                 <li>HCG 1.1 TS 15.05 Patch 006 </li>
                                                 <li>HCG 1.1 TS 15.05 Patch 007</li>
                                         </ul></li>
-                                <li><xref href="#topic7148/verify" format="dita">Verify the
-                                                signature and checksums</xref>. </li>
                         </ol></section>
-                <section id="verify">
-                        <title>Verify the downloaded signature</title>
-                        <p>After downloading the installation packages, you should verify the
-                                signature of the download. You can use the GPG utility, which is
-                                already installed on the lifecycle manager host. Signed by the signature file.</p>
-                        <p>A set of GPG public keys are available on <xref
-                                        href="https://helion.hpwsportal.com/catalog.html#/Home/Show"
-                                        format="html" scope="external">Helion Download
-                                        Network(HDN)</xref> . If you did not download the public
-                                keys in the previous section, click the <b>GPG keys to verify
-                                        signature files</b> link in HDN to download the
-                                        <codeph>cg-hos.tar.gz.gpg</codeph> file. </p>
-                        <ol>
-                                <li>Copy the <codeph>GPG-HPCSS-Public-Keys.tar</codeph> file to the
-                                                <codeph>/root/cg/</codeph> directory. You wlll need
-                                        to create this
-                                        directory:<codeblock>mkdir /root/cg/</codeblock></li>
-                                <li>Extract the <codeph>GPG-HPCSS-Public-Keys.tar</codeph>
-                                        file.<codeblock> tar xvf GPG-HPCSS-Public-Keys.tar </codeblock></li>
-                                <li>Copy the public keys to the lifecycle manager host server, extract the keys
-                                        from the compressed files. <p>The following keys are
-                                                included in the download:</p><ul id="ul_uzg_xmq_bt">
-                                                <li>Hewlett Packard EnterpriseCompanyRSA(HPCodesigningService)-1.pub</li>
-                                                <li>Hewlett Packard EnterpriseCompanyRSA(HPCodesigningService)-2.pub</li>
-                                                <li>Hewlett Packard EnterpriseCompanyRSA(HPCodesigningService)-3.pub</li>
-                                                <li>Hewlett Packard EnterpriseCompanyRSA(HPCodesigningService)-4.pub</li>
-                                                <li>Hewlett Packard EnterpriseCompanyRSA(HPCodesigningService)-5.pub</li>
-                                                <li>hpPublicKey.pub</li>
-                                                <li>hpPublicKey2048.pub</li>
-                                        </ul></li>
-                                <li>Execute the following command to import the keys:
-                                                <codeblock>gpg --import "&lt;filename>"</codeblock><p>Where
-                                                &lt;filename> is the name of the extracted
-                                                file.</p><p>The keys are then imported into the gpgp
-                                                key share:
-                                                <codeblock>gpg --import hpPublicKey.pub 
-gpg --import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-1.pub 
-gpg --import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-2.pub 
-gpg --import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-3.pub 
-gpg --import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-4.pub 
-gpg --import Hewlett Packard EnterpriseCompanyRSA\(HPCodesigningService\)-5.pub 
-gpg --import hpPublicKey2048.pub </codeblock></p></li>
-                                <li>Use the following command to view the keys in the key store:
-                                                <codeblock>gpg --list-keys</codeblock><p>The key
-                                                store appears similar to the
-                                        following:</p><codeblock>/home/cghelion/.gnupg/pubring.gpg
-  ----------------------------
-pub   2048R/F7191CB9 2014-12-19
-pub   1024D/2689B887 2005-03-11 [expired: 2015-03-09]
-uid                  Hewlett Packard Enterprise Company (HPE Codesigning Service)
-pub   2048R/B1275EA3 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 1
-pub   2048R/B564A643 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 2
-pub   2048R/FF94BC78 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 3
-pub   2048R/BA849975 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 4
-pub   2048R/C6978F0C 2014-11-19 [expires: 2024-11-16]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 5
-pub   2048R/5CE2D476 2012-12-04 [expires: 2022-12-02]
-uid                  Hewlett Packard Enterprise Company RSA (HPE Codesigning Service)        </codeblock></li>
-                                <li>Use the following command to verify the signature:
-                                                <codeblock>gpg --verify ./hcg_1.1.0.tar.sig ./hcg_1.1.0.tar  </codeblock><p>The
-                                                output for the command appears similar to the
-                                                following. This indicates the signature is verified:
-                                                  <b>Good signature from "Hewlett Packard Enterprise Company
-                                                  RSA (HPE Codesigning
-                                        Service)</b>.</p><codeblock>gpg: Signature made Wed 22 Jul 2015 01:23:24 PM EDT using RSA key ID C6978F0C
-gpg: Good signature from "Hewlett Packard Enterprise Company RSA (HPE Codesigning Service) - 5"
-gpg: WARNING: This key is not certified with a trusted signature!
-gpg: There is no indication that the signature belongs to the owner.
-Primary key fingerprint: 2545 62E5 28F9 FE92 B85D  8200 FDF9 4EBB C697 8F0C</codeblock></li>
-                                <li>Perform this verification for each file you downloaded.</li>
-                        </ol>
-                </section>
-                <section id="checksum">
-                        <title>Verify the downloaded checksums</title>
-                        <p>You should also use a checksum verification tool, such as sha256sum,
-                                which should come installed with Ubuntu.<ol id="ol_icb_k4f_xs">
-                                        <li>Run the checksum tool against the
-                                                  <codeph>hcg_1.1.0.tar</codeph> file.
-                                                <codeblock>sha256sum &lt;path-to-file>/hcg_1.1.0.tar</codeblock></li>
-                                        <li>Compare the output of the checksum tool to the
-                                                  <codeph>hcg_1.1.0.tar.sha256</codeph> file.
-                                                <codeblock>sha256sum.exe hcg_1.1.0.tar
-97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg_1.1.0.tar                                                </codeblock>Note
-                                                that the chechsum file contains the date that the
-                                                file was generated, the checksum string, and the
-                                                name of the file that was
-                                                used:<codeblock>Fri Jul 31 10:55:37 EDT 2015
-97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg_1.1.0.tar</codeblock></li>
-                                        <li>Run the checksum tool against the
-                                                  <codeph>hcg_1.1.0_horizon_patch1.tar</codeph>
-                                                file.
-                                                <codeblock>sha256sum &lt;path-to-file>/hcg_1.1.0_horizon_patch1.tar  </codeblock></li>
-                                        <li>Compare the output of the checksum tool to the
-                                                  <codeph>hcg_1.1.0.tar.sha256</codeph> file.
-                                                <codeblock>sha256sum.exe hcg_1.1.0.tar
-97f5b83c7aa0410ecc90f870f22bf8a691f8491a69c2ec26e0e71a24 hcg_1.1.0.tar                                                </codeblock></li>
-                                </ol></p>
-                </section>
                 <section id="extract">
                         <title>Extract and copy the installation files and patches</title>
                         <ol>

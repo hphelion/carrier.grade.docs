@@ -43,16 +43,29 @@
     <bodydiv>
       <section conref="CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
       <section>
-        <title>Downloading the Horizon Patch</title>
-        <p>Download the <b
-            conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/027"
-          /> file and the associated checksum and signature files. </p>
-        <p>Verify the <xref
-            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
-            >downloaded signature</xref> and the <xref
-            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
-            >downloaded checksums</xref>. Extract the compressed files until the
-            <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph> and readme files are available.</p>
+        <title>Start the patch download</title>
+        <p>To download the patch you need from the Software Updates and Licensing site, shown above: </p>
+        <ol id="ol_eyd_y4m_pw">
+          <li>Select the required patch file (e.g. <b
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/027"
+            />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+                href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-3.png"
+                width="400" id="image_fyd_y4m_pw"/></p></li>
+          <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+              <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0006.patch</codeph> and readme
+            files are available.<note>The <b>Software Licensing</b> site lists and displays patch
+              file names individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and
+              HCG_2.1) under <b>Software Specification</b> and <b>Download filename</b>. Regardless
+              of their version number, these files are referencing to the same files as extracted in
+              the readme. </note></li>
+          <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+                <p><image
+                href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-4.png"
+                width="400" id="image_w3v_zj5_pw"/></p><note>For validating the integrity of the
+              downloaded file, you can run the MD5 checksum verification on the downloaded patch
+              file and verify if the fingerprint of the file matches the version available on the
+              server.</note></li>
+        </ol>
       </section>
     </bodydiv>
     <section

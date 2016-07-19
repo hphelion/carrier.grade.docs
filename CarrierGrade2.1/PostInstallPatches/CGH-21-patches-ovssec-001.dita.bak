@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpkvm215">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the OVS Security Patch
+    001 </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>HCG-ovs patch fixes the buffer overflow in versions 2.2.x through 2.3.x allows for Remote
+      Code Execution, and in 2.4.0 - 2.4.8 allows for Denial of Service and possible RCE. Because
+      these packets are picked up by OVS before reaching alternate filtering mechanisms such as
+      iptables, which renders on-host controls ineffective. It is confirmed that sending this
+      traffic to an API endpoint will allow malicious behavior. </p>
+    <p>Files added\impacted: openvswitch-common openvswitch-switch </p>
+    <p><b>Prerequisites</b>: - ovs-bridge patch is applied already on lifecycle manager host.</p>
+   
+     <section conref="CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
+      <section>
+        <title>Locate the patch and start the download</title>
+        <p>To download the patch you need from the Software Updates and Licensing site, shown above: </p>
+        <ol id="ol_eyd_y4m_pw">
+          <li>Locate the product name associated with the HCG 2.1 patches. </li>
+          <li>Select the required patch file (e.g. <b
+            conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/sec"
+          />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-3.png"
+              width="400" id="image_fyd_y4m_pw"/></p></li>
+          <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b>) until
+          the <codeph>update-ovs-switch.sh</codeph> and readme files are available. The readme with
+          the patch download contains information on files changed by these patches.<note>The
+              <b>Software Licensing</b> site lists and displays patch file names individually for
+            all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under <b>Software
+              Specification</b> and <b>Download filename</b>. Reagrdless of their version number,
+            these files are referencing to the same files as extracted in the readme. </note></li>
+          <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+            <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-4.png"
+              width="400" id="image_w3v_zj5_pw"/></p><note>For validating the integrity of the
+                downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+                and verify if the fingerprint of the file matches the version available on the
+                server.</note></li>
+        </ol>
+      
+    </section>
+    <section>
+      <title>Deploy the OVS Security Patch for the lifecycle manager host</title>
+    </section>
+    <p>
+      <ol id="ol_pz4_nb3_qv">
+        <li>Log into the lifecycle manager host using your credentials. </li>
+        <li>Copy the patch files to the in ~/ directory: <ul id="ul_yrk_tb3_qv">
+            <li><codeph>openvswitch-common_2.4.90-1+hlinux2_amd64.deb</codeph></li>
+            <li><codeph>openvswitch-switch_2.4.90-1+hlinux2_amd64.deb</codeph><codeph>update-ovs-switch.sh</codeph></li>
+          </ul></li>
+        <li>Login into the lifecycle manager host through iLO console </li>
+        <li>Shutdown all the running VMs. <p>In case of KVM cluster move all the running VMs on the
+            other KVM.</p></li>
+        <li>Execute the following to upgrade openvswitch-common
+          <codeblock>dpkg -i ~/openvswitch-common_2.4.90-1+hlinux2_amd64.deb</codeblock></li>
+        <li>Execute the following command to stop the openvswitch service
+          <codeblock>service openvswitch-switch stop</codeblock></li>
+        <li>Execute the following the command to upgrade openvswitch-switch
+            <codeblock>dpkg -i ~/openvswitch-switch_2.4.90-1+hlinux2_amd64.deb</codeblock><note>In
+            some cases you might see failure messages which can be ignored. </note></li>
+        <li>Execute the following script to update the openvswitch-switch command
+          <codeblock>source ~/update-ovs-switch.sh</codeblock></li>
+        <li> Execute the following command to run system daemon reload
+          <codeblock>systemctl daemon-reload</codeblock></li>
+        <li>Execute the following command to start the openvswitch service service
+          <codeblock>openvswitch-switch start</codeblock></li>
+        <li>Start all the VMs that were shutdown. In case of KVM cluster move back the VMs that
+          where previously moved, then repeat the process to update the other KVM(s). </li>
+        <li>Once the HOS controller VMs are up, restore MySQL by running the below
+          commands:<codeblock>hlm stop -c &lt;cloud name> -t FND-MDB
+hlm start -c &lt;cloud name> -t FND-MDB </codeblock>For
+          more information, see  <xref
+            href="../OperationsGuide/Recover/CHG-2-recover.dita#topic5937rabbit">Restart MySQL and
+            RabbitMQ</xref> to make sure MySQL and RabbitMQ services are running. </li>
+      </ol>
+    </p>
+    <section>
+      <title>Deploy the OVS Security Patch for the lifecycle manager VM</title>
+      <ol>
+        <li>On the lifecycle manager host, copy the patch files to the
+            <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory.</li>
+        <li>Execute following command to apply the
+          patch:<codeblock>hlm patch -c &lt;cloud-name> -n HCG-ovs -t &lt;tier> </codeblock> For
+          example: <codeblock>hlm patch -c &lt;cloud-name> -n HCG-ovs -t localhost</codeblock></li>
+      </ol>
+    </section>
+  </body>
+</topic>

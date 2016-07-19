@@ -20,30 +20,33 @@
     <section>
       <title>Prerequisites</title>
       <p>This patch requires the <xref href="CGH-2-patches-ssl.dita#topic10581pdps">SSL Patch
-          [HCG2.0_Heat001_Patch003]</xref> and <xref
+          [HCG2.0 Heat001 Patch003]</xref> and <xref
           href="CGH-2-patches-ssl-cert-010.dita#topic10581pdpssl">SSL Certificate Alternative Name
-          [HCG2.0_Keystone001_Patch010]</xref> patches to be applied first. </p>
+          [HCG2.0 Keystone001 Patch010]</xref> patches to be applied first. </p>
     </section>
-    <section>
-      <title>Download the patch</title>
-      <ol id="ul_lvg_jb2_xs">
-        <li>Launch <xref href="CGH-2-post-install-patching.dita#topic10581pdp/launch">the Software
-            Updates and Licensing site</xref>.</li>
-        <li>Download the <b id="024">HCG 2.0 BMEndpoint001 Patch024</b> patch and the associated
-          checksum and signature files.</li>
-        <li>Verify the <xref
-            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/verify"
-            >downloaded signature</xref> and the <xref
-            href="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/checksum"
-            >downloaded checksums</xref>.</li>
-        <li>Extract the compressed file until the
-            <codeph>knc-ssl-baremetal-can-endpoint.patch</codeph> file and README are available: <ol
-            id="ol_kkb_3v5_cv">
-            <li>Extract the <codeph>HCG2.0_BMEndpoint001_Patch024.tar.gz</codeph> compressed file. </li>
-            <li>Extract the <codeph>HCG2.0_BMEndpoint001_Patch024.tar</codeph> compressed file.</li>
-          </ol></li>
-      </ol>
-    </section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_vdr_yxz_pw">
+        <li>Select the required patch file (e.g.<b>HCG 2.0 BMEndpoint001 Patch024</b> ) from the
+            <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_wdr_yxz_pw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>), until the <codeph>knc-ssl-baremetal-can-endpoint.patch</codeph> and readme
+          files are available. The readme with the patch download contains information on files
+          changed by these patches.<note>The <b>Software Licensing</b> site lists and displays patch
+            file names individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and
+            HCG_2.1) under <b>Software Specification</b> and <b>Download filename</b>. Regardless of
+            their version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_xdr_yxz_pw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
     <section>
       <title>Install the patch</title>
     </section>
