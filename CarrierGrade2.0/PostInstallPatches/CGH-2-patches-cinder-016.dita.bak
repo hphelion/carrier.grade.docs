@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpc">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Cinder
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section id="horizon-patch">
+      <p>This patch addresses a specific issue where a 3PAR volume cannot be deleted after the
+        instance has been deleted. </p>
+      <p>After live migration of an instance that is booted from a 3PAR cinder volume, a user cannot
+        delete a volume after the instance has been deleted. If there are any volumes in the above
+        state, this patch will not delete those volumes. You will still need to manually delete the
+        volumes. After adding this patch you will be able to manually delete these volumes.
+        <!--HCG-990 HCG-1013-->
+      </p>
+    </section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_kxt_s2g_rw">
+        <li>Select the required patch file (e.g.<b>HCG 2.0 Cinder001 Patch016</b> ) from the
+            <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_lxt_s2g_rw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>HCG-cinder_live_migration</codeph> directory is
+          available. The directory contains the <codeph>metatdata.tar.gz</codeph> and readme files.
+          The readme with the patch download contains information on files changed by these
+            patches.<note>The <b>Software Licensing</b> site lists and displays patch file names
+            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+              <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_mxt_s2g_rw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+      <p>
+        <ol id="ol_p13_ghm_s5">
+          <li>Log onto the lifecycle manager host.<codeblock>ssh &lt;lifecycle manager_IP></codeblock></li>
+          <li>Copy the complete <codeph>HCG-cinder_live_migration</codeph> directory to
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory on the lifecycle
+            manager host. </li>
+          <li> Execute the following command to deploy the patch:
+              <codeblock>hlm patch -c &lt;cloud-name> -n HCG-cinder_live_migration -t &lt;controller tier></codeblock><p>Where
+              &lt;cloud name> is the name of your cloud and <codeph>controller tier</codeph> is the
+              tier on which the various controllers are running. The tier information can be found
+              in the
+                <codeph>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</codeph>
+              file.</p><p>For
+              example:<codeblock>hlm patch -c cloud1 -n HCG-cinder_live_migration -t BASE-CCP-T1</codeblock></p></li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+  </body>
+</topic>

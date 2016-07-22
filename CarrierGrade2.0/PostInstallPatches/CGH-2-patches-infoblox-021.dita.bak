@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp21">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Infoblox
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section><note>This patch is not required for Denver deployments.</note> <p>This is optional patch and
+        is applicable only when using Infoblox as an IP address management application
+        (<i>IPAM</i>).</p>
+      <p>This patch addresses the following issues:</p><ul id="ul_pft_vzz_2v">
+        <li>Support <codeph>subnet_shared_for_creation</codeph> and
+            <codeph>subnet_shared_for_deletion</codeph> options in
+            <codeph>infoblox_conditional.conf</codeph> file. </li>
+        <li>Support for deleting subnets (<codeph>neutron subnet-delete</codeph>) gracefully and
+          exiting proprly without a NetView instnace being present on the Infoblox appliance.
+          <!--HCG-1431--></li>
+        <li>Fixing an issue that caused the <codeph>neutron port-delete</codeph> to fail inside the
+          IPAM plugin code while executing following
+          commands:<!--HCG-1232--><codeblock>neutron port-create &lt;network id> --vnic-type direct
+neutron port-delete &lt;port id></codeblock></li>
+      </ul></section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_kxt_s2g_rw">
+        <li>Select the required patch file (e.g.<b>HCG 2.0 Infoblox001 Patch021</b> ) from the
+            <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_lxt_s2g_rw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>hp-poc-20160229.patch</codeph> and readme files are
+          available. The readme with the patch download contains information on files changed by
+          these patches.<note>The <b>Software Licensing</b> site lists and displays patch file names
+            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+              <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_mxt_s2g_rw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+      <p>
+        <ol id="ol_p13_ghm_s5">
+          <li>SSH into the lifecycle manager host as the root user. </li>
+          <li>Log into the lifecycle manager VM as root.
+              <codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle
+              manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>SSH into a controller using the CLM IP of the controller. Log in as the
+              <codeph>cghelion</codeph> user. No password is
+              required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on
+              the lifecycle manager VM in the
+                <codeph>/var/hlm/clouds/lr4tb2c1b41/desired_state/lr4tb2c1b41/001/base/stage/ansible/hosts</codeph>
+              file. Look in the <codeph>[BASE-CCP-T1]</codeph>
+              section:<codeblock>BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.20.37.102 
+BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.20.37.103 
+BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p></li>
+          <li>. Copy the <codeph>hp-poc-20160229.patch</codeph> file to the <codeph>/tmp/</codeph>
+            directory on the controller. </li>
+          <li>Execute following command to apply patch:
+            <codeblock>patch -p1 &lt; /tmp/hp-poc-20160229.patch</codeblock></li>
+          <li>Edit the <codeph>/etc/neutron/infoblox_conditional.conf</codeph> on the controller to
+            add the following parameter in the section with <codeph>"network_view":
+              "management"</codeph>.<codeblock>"subnet_shared_for_deletion": true</codeblock><p>Refer
+              to the  <codeph>infoblox_conditional_sample.conf</codeph> file included in the patch
+              download files. For
+              example:<codeblock>{ 
+  "condition": "subnet_range:10.86.35.0/24", 
+  "is_external": false, 
+  "network_view": "management", 
+  "disable_dhcp": true, 
+  "dhcp_members": "infoblox.localdomain", 
+  "require_dhcp_relay": false, 
+  "subnet_shared_for_deletion": true, 
+  "domain_suffix_pattern": "{subnet_name}.cloud.global.com", 
+  "hostname_pattern": "{instance_name}-{ip_address}" 
+},</codeblock></p></li>
+          <li>Execute the following command to restart the Networking (Neutron)
+            service:<codeblock>service neutron-server restart</codeblock></li>
+          <li>Repeat these steps on all three controllers in the Standard Region.</li>
+          <li>For Sacramento deployments, repeat these steps on the controller in the Baremetal
+            Region.</li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+  </body>
+</topic>

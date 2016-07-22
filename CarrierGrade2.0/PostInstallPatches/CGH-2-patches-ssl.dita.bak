@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdps">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the SSL Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section id="ssl">
+      <p>This patch addresses a number of issues. </p>
+      <p>If you can view statistics in <codeph>regionkvm</codeph> using the Horizon UI, from the
+          <b>Stats</b> tab on the <b>Resource Usage Overview</b> page,  you applied  this patch
+        during installation, disregard these steps. Select the <codeph>regionkvm</codeph>, then
+        click <b>Admin</b>, then <b>System</b>, and <b>Resrouce Usage</b>. Click the <b>Stats</b>
+        table. <!--HCG-998--></p>
+    </section>
+    <p/>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_hst_1kg_rw">
+        <li>Select the required patch file (e.g.<b>HCG 2.0 Heat001 Patch003</b> ) from the
+            <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_ist_1kg_rw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>kcp-ssl-implementation.patch</codeph>,
+            <codeph>knc-ssl-implementation.patch</codeph> and <codeph>readme.txt</codeph> files are
+          available.. The readme with the patch download contains information on files changed by
+          these patches.<note>The <b>Software Licensing</b> site lists and displays patch file names
+            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+              <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_jst_1kg_rw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+      <p>Execute the following commands:<ol id="ol_j42_qhz_35">
+          <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where:
+              lifecycle manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Copy the patch file to <codeph>~/</codeph> on the lifecycle manager. </li>
+          <li>Change to the <codeph>kenobi-configuration-processor</codeph>
+            directory:<codeblock>cd ~/kenobi-configuration-processor</codeblock></li>
+          <li>Execute the following command to install the patch
+            <codeblock>patch -p1 &lt; ../kcp-ssl-implementation.patch</codeblock></li>
+          <li>Change to the <codeph>kenobi-node-configuration</codeph>
+            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li>Execute the following command to install the second patch
+            <codeblock>patch -p1 &lt; ../knc-ssl-implementation.patch</codeblock></li>
+          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          <li>Execute the following
+              command:<codeblock>hlm generate -c &lt;cloud name></codeblock><p>Where
+                <codeph>&lt;cloud name></codeph> is the name of your cloud. </p></li>
+          <li>Execute the following command to create haproxy, stunnel and horizon roles
+            <codeblock>hlm deploy -c &lt;cloud name> -t "FND-CLU FND-STN HZN-WEB WR-HZN" </codeblock></li>
+          <li>Change to the following directory:
+            <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud name>/001/base/stage/windriver-config </codeblock></li>
+          <li>Copy contents of <codeph>cakey.pem</codeph> file in that directory to the
+              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph> directory on
+            KVM region <codeph>controller-0</codeph>. Make sure you make a backup copy of the
+              <codeph>server-cert.pem</codeph> before the copy operation.</li>
+          <li>Execute the following command on KVM region <codeph>controller-0</codeph> to restart
+            the haproxy service: <codeblock>service haproxy restart</codeblock></li>
+          <li>Log onto the KVM region <codeph>controller-1</codeph>, the standby controller.</li>
+          <li>Copy contents of <codeph>cakey.pem</codeph> file on the lifecycle manager to the
+              <codeph>server-cert.pem</codeph> in the <codeph>/etc/ssl/private</codeph> directory on
+            KVM region <codeph>controller-0</codeph>. Make sure you make a backup copy of the
+              <codeph>server-cert.pem</codeph> before the copy operation.</li>
+        </ol></p>
+    </section>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+  </body>
+</topic>

@@ -31,21 +31,24 @@
         <li>multiarch-support </li>
       </ul></section>
     <section conref="../Post-InstallPatches/CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
-    <section><title>Download the Patch</title>Download the <b>Helion Carrier Grade 1.1 hLinux001
-        Patch001</b> file. Extract the compressed files until the
-        <codeph>TS_HP_15_Custom_PATCH_0005.patch</codeph> and readme files are available.<p>In the
-        Software Depot, as shown above:</p><ol id="ul_lvg_jb2_xs">
-        <li>Download the <b id="productShow_appName">Helion Carrier Grade 1.1 hLinux001 Patch001</b>
-          patch. </li>
-        <li>Extract the compressed file until the <b>new-debian</b> and <b>old-debian</b>
-          directories and README are available: <ol id="ol_kkb_3v5_cv">
-            <li>Extract the <codeph>HCG1.1_hLinux001_Patch001.tar.gz</codeph> compressed file. </li>
-            <li>Extract the <codeph>HCG1.1_hLinux001_Patch001.tar</codeph> compressed file.</li>
-          </ol></li>
+    <section>
+      <p><b>Start the patch download</b></p>
+      <ol id="ol_eyd_y4m_pw">
+        <li>Select the required patch file (e.g. <b><b>HCG 1.1 hLinux001 Patch001</b>
+          </b>) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-install-download-patches-select-1.png"
+              width="400" id="image_wdr_yxz_pw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <b>new-debian</b> and <b>old-debian</b> directories and readme
+          files are available.<note>The <b>Software Licensing</b> site lists and displays patch file
+            names individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1)
+            under <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing the same files as extracted in the
+            readme. </note></li>
         <li>Copy all six the (6) new Debian (<codeph>.deb</codeph>) files from <b>new-debian</b>
           directory to <codeph>/tmp</codeph> directory on the following servers:<p><b>For KVM
               Deployments,</b> you must copy six the (6) new Debian (<codeph>.deb</codeph>) files to
-            the: <ul id="ul_a4z_bsv_fv">
+            the: <ul id="ul_cqp_yry_rw">
               <li>lifecycle manager VM;</li>
               <li>three HP Helion OpenStack Carrier Grade controllers in the non-KVM region.</li>
             </ul></p></li>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp28">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the HCG-OVS
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>The HCG-OVS patch fixes the buffer overflow in openvswitch debian versions 2.2.x through
+      2.3.x allows for Remote Code Execution, and in 2.4.0 - 2.4.8 allows for Denial of Service and
+      possible RCE. Because these packets are picked up by OVS before reaching alternate filtering
+      mechanisms such as iptables, which renders on-host controls ineffective. It is confirmed that
+      sending this traffic to an API endpoint will allow malicious behavior. </p>
+    <p>Files added\impacted: <ul id="ul_z3s_wpx_rv">
+        <li>openvswitch-common </li>
+        <li>openvswitch-switch </li>
+      </ul></p>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_vdr_yxz_pw">
+        <li>Select the required patch file (e.g.<b>HCG 2.0 OVSSEC001 Patch002</b>) from the
+            <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_wdr_yxz_pw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>update-ovs-switch.sh</codeph> and readme files are
+          available. The readme with the patch download contains information on files changed by
+          these patches.<note>The <b>Software Licensing</b> site lists and displays patch file names
+            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+              <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_xdr_yxz_pw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+
+    <section><title>Install the patch on the lifecycle manager</title>Execute following command to
+      apply patch on lifecycle manager VM and on other cloud nodes based on your topology. <p>
+        <ol>
+          <li>Log onto the lifecycle manager
+              VM.<codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle
+              manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Copy the complete <codeph>HCG2.0_OVSSEC001_Patch028</codeph> directory to the
+              <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph> directory.</li>
+          <li>Execute the following
+              command:<codeblock>hlm patch -c &lt;cloud-name> -n HCG-ovs -t &lt;tier></codeblock><p>Where
+                <codeph>&lt;cloud name></codeph> is the name of your cloud and
+                <systemoutput>controller tier</systemoutput> is the tier on which the various
+              controllers are running. The tier information can be found in the
+                <systemoutput>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/stage/ansible/hosts</systemoutput>
+              file.</p>Example to apply patch on the lifecycle manager VM:
+            <codeblock>hlm patch -c MyCloud -n HCG-ovs -t localhost</codeblock>After patching, new
+            openvswitch debian v 2.4.90 files will be available in the
+              <codeph>/var/cache/hlm/repo/debian/</codeph> on the lifecycle manager VM. </li>
+        </ol>
+      </p></section>
+    <section><title>Patch the DCN Hosts </title><p>After patching the lifecycle manager VM, patch
+        the DCN nodes, depending on whether your cloud uses a highly-available DCN
+        configuration.</p><b>Non-HA DCN Setup</b><ol id="ol_ehv_j2y_rv">
+        <li>Log into the DCN host.</li>
+        <li>Execute the following command: to make sure your bridges are
+          listed.<codeblock>ovs-vsctl show</codeblock></li>
+        <li>Execute the following command to stop the VSC VM before the executing the patch
+            <codeblock>virsh destroy vsc</codeblock><note>This will disrupt the traffic flow in and
+            out of the DCN node. </note></li>
+        <li>Execute following command from HLM VM to apply patch on the DCN Host based on your
+          topology
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-ovs -t &lt;tier></codeblock>Example to
+          apply patch on DCN Host:
+          <codeblock>hlm patch -c MyCloud -n HCG-ovs -t BASE-CCP-T1</codeblock></li>
+        <li>Execute the following command on the DCN host to make sure all the bridges are running
+          with upgraded version.<codeblock>ovs-vsctl show</codeblock></li>
+          <li>Execute the following command from the lifecycle manager VM DCN host to restart the VSC
+          VM:<codeblock>virsh start vsc</codeblock></li>
+        <li>After few minutes, execute the following command to launch the VSC console:
+          <codeblock>virsh console vsc</codeblock></li>
+        <li>Execute the following command to make sure the VRS and VRS-G nodes are discovered from
+          VSC VM:
+          <codeblock>show vswitch-controller vswitches
+show vswitch-controller vsd </codeblock></li>
+      </ol><b>HA DCN Setup</b><p>To update the DCN nodes in an high availability configuration, you
+        must apply the patch to each DCN node individually.<ol id="ol_l3q_3qz_rv">
+          <li>Log onto the lifecycle manager
+              VM.<codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle
+              manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Edit the <codeph>hosts</codeph> file available in the below location:
+            <codeblock>vi /var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloud_name>/001/base/stage/ansible/hosts</codeblock></li>
+          <li>Comment the secondary DCN node in hosts file like below. This will allow patching the
+            primary DCN node.
+            <codeblock>[BASE-CCP-T1] 
+BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.244.45.102 
+# BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.244.45.103</codeblock></li>
+          <li>SSH into the primary DCN node and execute the following command to make sure your
+            bridges are listed:<codeblock>ovs-vsctl show</codeblock></li>
+          <li>Execute the following command to stop the VSC VM before the patch
+            update:<codeblock>virsh destroy vsc</codeblock></li>
+          <li>Execute the following command from the lifecycle manager VM to apply patch on the DCN Host based on your
+            topology
+            <codeblock>hlm patch -c &lt;cloud-name> -n HCG-ovs -t &lt;tier></codeblock>Example to
+            apply patch on DCN Host:
+            <codeblock>hlm patch -c MyCloud -n HCG-ovs -t BASE-CCP-T1</codeblock></li>
+          <li>Execute the following command on the DCN host to make sure all the bridges are running
+            with upgraded version.<codeblock>ovs-vsctl show</codeblock></li>
+          <li>Execute the following command from the DCN host to restart the VSC
+            VM:<codeblock>virsh start vsc</codeblock></li>
+          <li>After few minutes, execute the following command to launch the VSC console:
+            <codeblock>virsh console vsc</codeblock></li>
+          <li>Execute the following command to make sure the VRS and VRS-G nodes are discovered from
+            VSC VM:
+            <codeblock>show vswitch-controller vswitches
+show vswitch-controller vsd </codeblock></li>
+          <li>Edit the <codeph>hosts</codeph> file available in the below location:
+            <codeblock>vi /var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloud_name>/001/base/stage/ansible/hosts</codeblock></li>
+          <li>Comment the primary DCN node in hosts file and un-comment the secondary node, as
+            shown. This will allow patching the secondary DCN node.
+            <codeblock>[BASE-CCP-T1] 
+# BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.244.45.102 
+BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.244.45.103</codeblock></li>
+          <li>SSH into the primary DCN node and execute the following command to make sure your
+            bridges are listed:<codeblock>ovs-vsctl show</codeblock></li>
+          <li>Execute the following command from the lifecycle manager VM to stop the VSC VM before the patch
+            update:<codeblock>virsh destroy vsc</codeblock></li>
+          <li>Execute the following command from HLM VM to apply patch on the DCN Host based on your
+            topology
+            <codeblock>hlm patch -c &lt;cloud-name> -n HCG-ovs -t &lt;tier></codeblock>Example to
+            apply patch on DCN Host:
+            <codeblock>hlm patch -c MyCloud -n HCG-ovs -t BASE-CCP-T1</codeblock></li>
+          <li>Execute the following command on the DCN host to make sure all the bridges are running
+            with upgraded version.<codeblock>ovs-vsctl show</codeblock></li>
+          <li>Execute the following command from the DCN host to restart the VSC
+            VM:<codeblock>virsh start vsc</codeblock></li>
+          <li>After few minutes, execute the following command to launch the VSC console:
+            <codeblock>virsh console vsc</codeblock></li>
+          <li>Execute the following command to make sure the VRS and VRS-G nodes are discovered from
+            VSC VM:
+            <codeblock>show vswitch-controller vswitches
+show vswitch-controller vsd </codeblock></li>
+        </ol></p></section>
+    <section>
+      <title>Patching the baremetal controller host on Sacramento topology</title>
+      <p>For Saramento deployments only, perform the following steps on the baremetal region
+        controller:</p>
+      <ol id="ol_mkd_fsz_rv">
+        <li>SSH into the baremetal controller.</li>
+        <li>Execute the following command: to make sure your bridges are
+          listed.<codeblock>ovs-vsctl show</codeblock></li>
+        <li>Execute following command from HLM VM to apply patch on the DCN Host based on your
+          topology
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-ovs -t &lt;tier></codeblock>Example to
+          apply patch on BM Controller Host:
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-ovs -t BASE-RCP02-T1</codeblock></li>
+        <li>Execute the following command on the DCN host to make sure all the bridges are running
+          with upgraded version.<codeblock>ovs-vsctl show </codeblock></li>
+      </ol>
+    </section>
+<section>    
+    <title>Next Step</title><p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos"
+          >Return to Post-Installation Patches</xref></p></section>
+  </body>
+</topic>

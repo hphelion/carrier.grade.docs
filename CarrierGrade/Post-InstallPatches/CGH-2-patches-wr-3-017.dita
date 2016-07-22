@@ -19,8 +19,8 @@
         <li>Correcting an issue that caused VM migration problems while applying a patch to a live
           cloud;</li>
         <li>Correcting an issue that caused controllers to automatically swacting;</li>
-        <li>Fixing an issue that caused compute nodes to degrade after applying the
-            <codeph>HP_15_Custom_PATCH_0002</codeph> patch;</li>
+        <li>Fixing an issue that caused compute nodes to degrade after applying the <codeph>HCG 1.1
+            TS 15.05 PATCH 0002</codeph> patch;</li>
         <li>Closing the Linux Grub backspace vulnerability.</li>
       </ul></p>
     <section><title>Prerequisites</title>You must install the following patches before installing
@@ -36,10 +36,27 @@
           <b>Inventory</b>. Click the <b>Patches</b> table. Or use the CLI on the active KVM
         controller: <codeph>sudo sw-patch query</codeph>.</p></section>
     <section conref="../Post-InstallPatches/CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
-    <section><title>Download the Patch</title>In the Software Depot, as shown above, download the
-        <b>HCG 1.1 TS 15.05 Patch 003 </b> file. Extract the compressed files until the
-        <codeph>TS_HP_15_Custom_PATCH_0003.patch.new</codeph> and readme files are
-      available.</section>
+    <p><b>Start the patch download</b></p>
+    <ol id="ol_eyd_y4m_pw">
+      <li>Select the required patch file (e.g. <b>HCG 1.1 TS 15.05 Patch 0003 </b>) from the
+          <b>Downloads</b> list and then click <b>Download</b>. <p><image
+            href="../../media/carrier.grade.docs/CGH-install-download-patches-select-1.png"
+            width="400" id="image_wdr_yxz_pw"/></p></li>
+      <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+          <b>.tar</b>) until the <codeph>TS_15.05_PATCH_0003.patch.new</codeph> and readme files are
+          available.<note>The <b>Software Licensing</b> site lists and displays patch file names
+          individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+            <b>Software Specification</b> and <b>Download filename</b>. Regardless of their version
+          number, these files are referencing the same files as extracted in the readme.
+        </note></li>
+      <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+            <p><image
+            href="../../media/carrier.grade.docs/CGH-install-download-patches-select-2.png"
+            width="400" id="image_w3v_zj5_pw"/></p><note> For validating the integrity of the
+          downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+          and verify if the fingerprint of the file matches the version available on the
+          server.</note></li>
+    </ol>
     <section>
       <title>Uninstall previous patches</title>
       <p>During the deployment of the KVM region, you might have installed two patches: <ul

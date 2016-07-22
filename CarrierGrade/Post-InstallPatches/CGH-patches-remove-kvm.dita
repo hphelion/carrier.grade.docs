@@ -27,7 +27,7 @@
             </p></li>
           <li>Execute the following command to determine if the patch was applied:
             <codeblock>sudo sw-patch query</codeblock>If you have already applied the
-            TS_HP_15_Custom_PATCH_0006.patch, you should see the patch state as
+              <codeph>TS_15.05_PATCH_0006.patch.new</codeph>, you should see the patch state as
               <codeph>Applied</codeph></li>
           <li>Execute the following command to remove the
             patch:<codeblock>sudo sw-patch remove TS_15.05_DESIGN_PATCH_HEAT
@@ -89,11 +89,12 @@ sudo sw-patch remove TS_15.05_DESIGN_PATCH_HORIZON</codeblock>You
             </ol></li>
           <li>Repeat the previous step for each compute node. </li>
           <li>Execute the following command to verify that all nodes are unlocked and the
-            TS_HP_15_Custom_PATCH_0006.patch is in <codeph>Available</codeph> state:
+              <codeph>TS_15.05_PATCH_0006.patch.new</codeph> is in <codeph>Available</codeph> state:
             <codeblock>sudo sw-patch query-hosts</codeblock></li>
-          <li>Execute the following command to delete the TS_HP_15_Custom_PATCH_0006.patch
-            <codeblock>sudo sw-patch delete TS_HP_15_Custom_PATCH_0006</codeblock>If the delete is
-            successful, the <codeph>sudo sw-patch query</codeph> will not list the patch. </li>
+          <li>Execute the following command to delete the
+              <codeph>TS_15.05_PATCH_0006.patch.new</codeph>.
+            <codeblock>sudo sw-patch delete TS_15.05_PATCH_0006.patch.new</codeblock>If the delete
+            is successful, the <codeph>sudo sw-patch query</codeph> will not list the patch. </li>
         </ol></section>
     </bodydiv>
     <section>

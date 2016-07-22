@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp22">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the HPE Linux
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section>The HPE Linux glibc patch fixes a buffer overflow condition on systems running HPE
+      Linux. The condition is due to multiple stack-based buffer overflows in the
+        <codeph>send_dg</codeph> and <codeph>send_vc</codeph> functions in the libresolv library in
+      the GNU C Library (called <codeph>glibc</codeph> or <codeph>libc6</codeph>). The Common
+      Vulnerabilities and Exposures (CVE®) <xref
+        href="https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-7547" format="html"
+        scope="external">bulletin CVE-2015-7547</xref> describes the condition.  </section>
+    <section>Files added\impacted by this patch: <ul id="ul_ppq_2wr_fv">
+        <li>libc6 </li>
+        <li>libc-bin </li>
+        <li>libc-dev-bin </li>
+        <li>libc6-dev </li>
+        <li>locales </li>
+        <li>multiarch-support </li>
+      </ul><p>Installed the patch on each HPE Linux node in the non-KVM Region, as listed below for
+        each deployment type, using the following format:
+        <codeblock>hlm patch -c &lt;cloud name> -n HCG-glibc -t &lt;tier></codeblock>Where:
+        &lt;tier> is the tier on which the various controllers are running. The tier information can
+        be found in <codeph>/var/hlm/clouds/&lt;cloud name>/desired_state/&lt;cloud
+          name>/001/base/stage/ansible/hosts</codeph> file on the lifecycle manager VM.
+      </p></section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_kxt_s2g_rw">
+        <li>Select the required patch file (e.g.<b>HCG 2.0 hLinux001 Patch022</b> ) from the
+            <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_lxt_s2g_rw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>HCG-glibc\metadata.tar.gz</codeph> and readme files are
+          available. The readme with the patch download contains information on files changed by
+          these patches.<note>The <b>Software Licensing</b> site lists and displays patch file names
+            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+              <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_mxt_s2g_rw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+    <section>
+      <title>Copy the patch</title>
+      <p>
+        <ol id="ol_p13_ghm_s5">
+          <li>SSH into the lifecycle manager host as the root user. </li>
+          <li>Log into the lifecycle manager VM as root.
+              <codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle
+              manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Copy the patch to the <codeph>/var/hlm/clouds/&lt;cloudname>/patches</codeph>
+            directory on the lifecycle manager VM.</li>
+        </ol>
+      </p>
+    </section>
+    <section>
+    <p><b>Denver</b></p>
+    <p>After copying the patch, use the following steps to deploy the patch on a Denver
+      Deployment:</p>
+    <ol id="ol_w15_xxr_fv">
+      <li id="all-1">Change to the patch directory
+          <codeblock>cd /var/hlm/clouds/&lt;cloud name>/patches</codeblock></li>
+      <li id="all-4">Execute the following command to patch the lifecycle manager VM:
+          <codeblock>hlm patch -c &lt;cloud name> -n HCG-glibc -t localhost</codeblock></li>
+      <li id="all-5">Execute the following command to patch the Standard Region
+          controller:<codeblock>hlm patch -c &lt;cloud name> -n HCG-glibc -t BASE-CCP-T2</codeblock></li>
+    </ol>
+  </section>
+    <section>
+      <title>Tahoe</title>
+
+    <p>After copying the patch:</p>
+    <ol id="ol_v2r_qyr_fv">
+      <li conref="#topic10581pdp22/all-1"/>
+      <li conref="#topic10581pdp22/all-4"/>
+      <li conref="#topic10581pdp22/all-5"/>
+      <li id="dcn">Execute the following command to patch the DCN host:
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-T1</codeblock></li>
+        <li id="vrsg">Execute the following command to patch the VRS-G node:
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-VRG</codeblock></li>
+    </ol>
+    </section>
+    <section><title>Memphis</title>After copying the patch:<ol id="ol_kdj_2bs_fv">
+        <li conref="#topic10581pdp22/all-1"/>
+        <li conref="#topic10581pdp22/all-4"/>
+        <li conref="#topic10581pdp22/all-5"/>
+        <li conref="#topic10581pdp22/dcn"/>
+      <li conref="#topic10581pdp22/vrsg"/>
+        <li id="esx">Execute the following command to patch the ESX Compute Proxy host:
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-CCP-CPX</codeblock></li>
+      </ol></section>
+      <section><title>Sacramento</title>After copying the patch:<ol>
+        <li conref="#topic10581pdp22/all-1"/>
+        <li conref="#topic10581pdp22/all-4"/>
+        <li conref="#topic10581pdp22/all-5"/>
+        <li conref="#topic10581pdp22/dcn"/>
+        <li conref="#topic10581pdp22/vrsg"/>
+        <li conref="#topic10581pdp22/esx"/>
+        <li id="bm">Execute the following command to patch the baremetal controller:
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-glibc -t BASE-RCP02-T1</codeblock></li>
+      </ol></section>
+    <section>
+      <title>Patch Rollback</title>
+      <p>To rollback the patch on a particular node, use the following
+        command:<codeblock>hlm patch -c &lt;cloudname> -n HCG-glibc -t &lt;tier> -r </codeblock></p>
+      <p>Where: <codeph>&lt;tier></codeph> is the node you want to roll back.</p>
+    </section>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+  </body>
+</topic>

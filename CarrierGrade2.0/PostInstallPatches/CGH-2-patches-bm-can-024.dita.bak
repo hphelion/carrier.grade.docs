@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp24">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Baremetal CAN
+    Endpoint Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>This patch resolves the issue with Horizon accessing Baremetal CAN endpoints by creating a
+      certificate, which can be updated in future patches. </p>
+    <section>
+      <title>Prerequisites</title>
+      <p>This patch requires the <xref href="CGH-2-patches-ssl.dita#topic10581pdps">SSL Patch
+          [HCG2.0 Heat001 Patch003]</xref> and <xref
+          href="CGH-2-patches-ssl-cert-010.dita#topic10581pdpssl">SSL Certificate Alternative Name
+          [HCG2.0 Keystone001 Patch010]</xref> patches to be applied first. </p>
+    </section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_vdr_yxz_pw">
+        <li>Select the required patch file (e.g.<b>HCG 2.0 BMEndpoint001 Patch024</b> ) from the
+            <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_wdr_yxz_pw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>), until the <codeph>knc-ssl-baremetal-can-endpoint.patch</codeph> and readme
+          files are available. The readme with the patch download contains information on files
+          changed by these patches.<note>The <b>Software Licensing</b> site lists and displays patch
+            file names individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and
+            HCG_2.1) under <b>Software Specification</b> and <b>Download filename</b>. Regardless of
+            their version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_xdr_yxz_pw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+    </section>
+    <ol>
+      <li>Log onto the lifecycle manager
+          VM.<codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where: lifecycle
+          manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+          lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+          file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+      <li>Copy the <codeph>knc-ssl-baremetal-can-endpoint.patch</codeph> file to the
+          <codeph>~/</codeph> directory. </li>
+      <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+        directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+      <li> Execute the following command to deploy the patch:
+        <codeblock>patch -p1 -b &lt; ../knc-ssl-baremetal-can-endpoint.patch</codeblock></li>
+      <li>Run hlm generate <codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+      <li>Run <codeph>haproxy</codeph>, <codeph>stunnel</codeph> and <codeph>horizon</codeph> roles
+        <codeblock>hlm deploy -c &lt;cloud name> -t "FND-CLU"</codeblock></li>
+      <li>Change to the <codeph>windriver-config</codeph> folder
+        <codeblock>cd /var/hlm/clouds/&lt;cloud name>/desired_state wrloc=$(find . -name windriver-config -type d| head -n 1); cd $wrloc </codeblock></li>
+      <li>SSH into the standby KVM Region controllers.</li>
+      <li>Make a backup of the <codeph>server-cert.pem</codeph> file available in the
+          <codeph>/etc/ssl/private/</codeph> directory.</li>
+      <li>Copy contents of the <codeph>cakey.pem</codeph> onto <codeph>server-cert.pem</codeph>
+        available in the <codeph>/etc/ssl/private/</codeph> directory. </li>
+      <li>SSH into the active KVM Region controllers.</li>
+      <li>Make a backup of the <codeph>server-cert.pem</codeph> file available in the
+          <codeph>/etc/ssl/private/</codeph> directory.</li>
+      <li>Copy contents of the <codeph>cakey.pem</codeph> onto <codeph>server-cert.pem</codeph>
+        available in the <codeph>/etc/ssl/private/</codeph> directory. </li>
+      <li>Restart <codeph>haproxy</codeph> on the active KVM controller
+        <codeblock>service haproxy restart </codeblock></li>
+    </ol>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+  </body>
+</topic>

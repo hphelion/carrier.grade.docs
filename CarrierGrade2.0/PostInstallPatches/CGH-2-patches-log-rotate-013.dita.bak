@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdplr">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Log Rotate
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section id="horizon-patch">
+      <p id="intro1">This patch changes the <xref href="http://www.linuxcommand.org/man_pages/logrotate8.html"
+          format="html" scope="external">Linux logrotate program</xref> to run hourly and configures
+        logging of other services that where previously not being rotated by logrotate. Increasing
+        this frequency reduces the disk space used by the log files The logrotate program archives
+        specified logs and creates new logs to replace the archived logs. The logrotate logs are
+        saved in the <codeph>/var/log/</codeph> directory. </p>
+      <p id="intro2">If the logrotate configuration files, <codeph>/etc/logrotate.d</codeph> or <codeph>
+          /etc/logrotate.conf</codeph>, specify an hourly rotation interval, this patch was applied
+        during installation. You can disregard these steps.   </p>
+    </section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_kxt_s2g_rw">
+        <li>Select the required patch file (e.g.<b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/013"/>
+          ) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_lxt_s2g_rw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>knc-log.rotate.patch</codeph> and readme files are
+          available. The readme with the patch download contains information on files changed by
+          these patches.<note>The <b>Software Licensing</b> site lists and displays patch file names
+            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+              <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_mxt_s2g_rw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+      <p>
+        <ol id="ol_p13_ghm_s5">
+          <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where:
+              lifecycle manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Copy the <codeph>knc-log.rotate.patch file</codeph> to the <codeph>~/</codeph>
+            directory. </li>
+          <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li> Execute the following command to deploy the patch:
+            <codeblock>patch -p1 &lt; ../knc-log.rotate.patch</codeblock></li>
+          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          <li>Execute the following
+            command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+          <li>Execute the following command run Ansible roles and Conclude role on all the tiers:
+              <ul id="ul_amv_2sb_w5">
+              <li>For Sacramento
+                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU NEU-API DCN-NEU ML2-SRIOV NEU-API-BAR Conclude"</codeblock></li>
+              <li>For Memphis and Tahoe
+                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU NEU-API DCN-NEU ML2-SRIOV Conclude"</codeblock></li>
+              <li> For Denver
+                deployments:<codeblock>hlm deploy -c &lt;cloud name> -t "ATTIS BVR-LOG ELK-SCH FND-MDB IC2-WEB SWF-CMN FND-CLU Conclude"</codeblock></li>
+            </ul></li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+  </body>
+</topic>

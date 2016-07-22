@@ -64,22 +64,21 @@
               (<codeph>HCG_2.0 WR011 Patch035)</codeph></xref></li>
       </ul>
     </section>
-    <section><title>Launch the Software Updates and Licensing site to download patches</title>Launch
-        <xref href="CGH-2-post-install-patching.dita#topic10581pdp/launch">the Software Updates and
-        Licensing site</xref>.</section>
-    <section><b>Locate the patch and start the download</b><p>To download the patch you need from
-        the Software Updates and Licensing site, shown above: </p><ol id="ol_eyd_y4m_pw">
-        <li>Locate the product name associated with the HCG 2.0 patches. </li>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section>
+      <p>
+        <b>Start the patch download</b></p>
+      <ol id="ol_eyd_y4m_pw">
         <li>Select the required patch file (e.g.<b
             conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/036"
-          />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
-              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
-              width="400" id="image_fyd_y4m_pw"/></p></li>
-        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b>) until
-          the <codeph>TS_HP_15_Custom_PATCH_0012.patch</codeph> and readme files are
-            available.<note>The <b>Software Licensing</b> site lists and displays patch file names
-            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
-              <b>Software Specification</b> and <b>Download filename</b>. Reagrdless of their
+        />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+          href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+          width="400" id="image_wdr_yxz_pw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0012.patch</codeph> and readme
+          files are available.<note>The <b>Software Licensing</b> site lists and displays patch file
+            names individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1)
+            under <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
             version number, these files are referencing to the same files as extracted in the
             readme. </note></li>
         <li>Check if the MD5 checksum verification file is extracted along with the patch file.
@@ -89,7 +88,8 @@
             downloaded file, you can run the MD5 checksum verification on the downloaded patch file
             and verify if the fingerprint of the file matches the version available on the
             server.</note></li>
-      </ol></section>
+      </ol>
+    </section>
     <bodydiv id="install">
       <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
           id="ol_bcm_yg4_j5">

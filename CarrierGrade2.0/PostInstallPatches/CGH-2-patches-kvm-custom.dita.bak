@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpk">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 1.1: Deploy the KVM Region Patch
+    1_2 </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>This patch addresses a number of issues in the KVM region.</p>
+      <p><b>Note:</b> You can use the Horizon UI to see if the patch has been deployed. Select the
+        <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
+        <b>Inventory</b>. Click the <b>Patches</b> table for the
+        <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph>. Or use the CLI on the active KVM
+      controller: <codeph>sudo sw-patch query</codeph>.</p>
+    <p><b>Important!</b> If you have deployed <codeph>HCG2.0_WR001_Patch001</codeph>, you must
+      remove this patch before proceeding. See <xref href="#topic10581pdpk/remove" format="dita"
+      />.</p>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_vdr_yxz_pw">
+        <li>Select the required patch file (e.g.<b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/005"
+          />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_wdr_yxz_pw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b>) until
+          the <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph> and readme files are
+            available.<note>The <b>Software Licensing</b> site lists and displays patch file names
+            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+              <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_xdr_yxz_pw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+    <section><title>Install the patch</title><p>If <codeph>HCG2.0_WR001_Patch001</codeph> is not
+        installed, use the following steps to install the patch.</p><p><b>Important!</b> If you have
+        deployed <codeph>HCG2.0_WR001_Patch001</codeph>, you must remove this patch before
+        proceeding. See <xref href="#topic10581pdpk/remove" format="dita"/>.</p>
+    </section>
+      <section>
+      <title>Patch the
+        standby controller</title><ol id="ol_bcm_yg4_j5">
+        <li>SSH into active controller in the KVM region. <p>For example:
+              <codeph>controller-0</codeph>
+          </p></li>
+        <li>Create a directory for the patch, if not
+          present:<codeblock>mkdir -p /tmp/patches</codeblock></li>
+        <li>Copy the <codeph>TS_HP_15_Custom_PATCH_0001_2.patch</codeph> patch file to the
+            <codeph>/tmp/patches</codeph> directory.</li>
+        <li>Execute the following command to upload the patch to the repository:
+          <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0001_2.patch</codeblock></li>
+        <li>Execute the following command to check if the patch is available for
+            installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
+              href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
+              id="image_tft_ncg_x5"/></p></li>
+        <li>Execute the following commands to apply the
+          patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0001_2
+source /etc/nova/openrc</codeblock></li>
+        <li>Execute the following command to check the current state of all the
+          hosts:<codeblock>sudo sw-patch query-hosts</codeblock></li>
+        <li>Execute the following command to patch and reboot the standby controller:
+            <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+              <codeph>controller-1</codeph> is the standby
+            controller:</p><codeblock>system host-patch-reboot controller-1</codeblock><p>Wait until
+            the standby controller comes up after patching. </p></li>
+        <li>Execute the following command to switch the active controller from the specified
+          controller: <codeblock>system host-swact controller-# </codeblock><p>For example, if the
+            active controller is
+            <codeph>controller-0</codeph>:<codeblock>system host-swact controller-0</codeblock></p><p>This
+            command makes <codeph>controller-1</codeph> the active controller and makes
+              <codeph>controller-0</codeph> the standby.</p></li>
+        <li>Exit the SSH session. </li>
+      </ol><b>Patch the new standby controller</b><p>Log onto the newly active controller and patch
+        the standby controller.</p><ol id="ol_ovz_4s4_j5">
+        <li>SSH into the newly active controller. <p>For example:
+          <codeph>controller-1</codeph>.</p></li>
+        <li>Execute the following command: <codeblock>source /etc/nova/openrc</codeblock></li>
+        <li>Execute the following command to patch and reboot the standby controller:
+            <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+              <codeph>controller-0</codeph> is the standby
+          controller:</p><codeblock>system host-patch-reboot controller-0</codeblock></li>
+      </ol><p><b>Patch the compute nodes</b></p><p>From the active controller, perform the following
+        steps:</p><ol id="ol_z3h_xs4_j5">
+        <li>Execute the following command to patch and reboot the <codeph>compute-0</codeph>:
+          <codeblock>system host-patch-reboot compute-0</codeblock></li>
+        <li>Execute the following command to patch and reboot <codeph>compute-1</codeph>:
+          <codeblock>system host-patch-reboot compute-1</codeblock></li>
+      </ol></section>
+    <section id="remove">
+      <title>Remove Patch001</title>
+      <p>If you have deployed <codeph>HCG2.0_WR001_Patch001</codeph>, use the following steps to
+        remove that patch.</p>
+      <p><b>Note:</b> You can refer to the <xref
+          href="../AdminGuide/carrier-grade-admin-guide.dita#topic15959cgag">KVM Region
+          Administrator Guide</xref> for more information on removing patches.</p>
+        <ol id="ol_erq_vmx_w5">
+          <li>SSH into active controller in the KVM region. <p>For example:
+                <codeph>controller-0</codeph>
+            </p></li>
+          <li>Execute the following command to determine if the patch was applied: <p>
+              <codeblock>sudo sw-patch query</codeblock>
+            </p>If applied, you should see the patch state as <b>Applied</b>.<p><image
+                href="../../media/carrier.grade.docs/CGH-2-patch17-qry.png" width="500"
+                id="image_zcn_zyf_x5"/></p></li>
+          <li>Execute the following command to remove the
+            patch:<codeblock>sudo sw-patch remove HCG2.0_WR001_Patch001</codeblock></li>
+          <li>If you execute another query command, the <b>Patch State</b> will be
+              <b>Partial-Remove</b>.<codeblock>sudo sw-patch query</codeblock></li>
+          <li>Execute the following commands to check the current state of all the hosts:
+          <codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b> state
+          will be <b>Yes</b>. For example:<p><image
+              href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png" id="image_j4z_gyf_x5"
+              width="500"/></p></li>
+          <li>Execute the following command to reboot the stanby
+              controller:<codeblock>system host-patch-reboot controller-#</codeblock><p>For example
+              if <codeph>controller-1</codeph> is the standby
+              controller:</p><codeblock>system host-patch-reboot controller-1</codeblock><p>Wait
+              until the standby controller comes up after patching. </p></li>
+          <li>Execute the following command to switch the active controller from the specified
+            controller: <codeblock>system host-swact controller-#  </codeblock><p>For example, if
+              the active controller is
+              <codeph>controller-0</codeph>:<codeblock>system host-swact controller-0</codeblock></p><p>This
+              command makes <codeph>controller-1</codeph> the active controller and makes
+                <codeph>controller-0</codeph> the standby.</p></li>
+          <li>Exit the SSH session.</li> 
+          </ol>
+      
+        <p><b>Patch the new standby controller</b></p>
+        <p>Log onto the newly
+              active controller and patch the standby controller.</p>
+            <ol>
+          <li>SSH into the newly active controller: <p>For example:
+              <codeph>controller-1</codeph>.</p></li>
+          <li>Execute the following command to patch and reboot the new standby controller:
+            <codeblock>system host-patch-reboot &lt;controller-#></codeblock></li>
+          <li>Execute the following command to patch and reboot the <codeph>compute-0</codeph>:
+            <codeblock>system host-patch-reboot compute-0</codeblock></li>
+          <li>Execute the following command to patch and reboot <codeph>compute-1</codeph>:
+            <codeblock>system host-patch-reboot compute-1</codeblock></li>
+          <li>Execute the following command to make sure all the nodes are unlocked and in the
+              <b>Available</b> state: <codeblock>sudo sw-patch query-hosts</codeblock></li>
+          <li>Execute the following command to remove Patch001 from the database:
+            <codeblock>sw-patch delete TS_HP_15_Custom_PATCH_0001</codeblock></li>
+          <li>Execute the following command to determine if the patch was deleted:<p>
+              <codeblock>sudo sw-patch query</codeblock>
+            </p>The <codeph>TS_HP_15_Custom_PATCH_0001</codeph> patch should not appear in the
+                list.<p><image href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch.png"
+                width="500" id="image_zhk_rbg_x5"/></p></li>
+        </ol>
+    </section>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/kvm">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+    
+      
+  </body>
+</topic>

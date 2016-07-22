@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpi">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the Icinga Random
+    Password Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>The patch creates a random password for the Icinga service.</p>
+    <p>If the <codeph>private_data.yml</codeph> file exists in the following directory, this patch
+      was applied during installation, you can disregard these
+      steps.<codeblock>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/persistent_state/private_data.yml</codeblock></p>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_hst_1kg_rw">
+        <li>Select the required patch file (e.g.<b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/008"/>
+          ) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_ist_1kg_rw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>icinga-random-password.patch</codeph> and
+            <codeph>Readme-post-deploy.txt</codeph> files are available. The readme with the patch
+          download contains information on files changed by these patches.<note>The <b>Software
+              Licensing</b> site lists and displays patch file names individually for all the three
+            versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under <b>Software Specification</b> and
+              <b>Download filename</b>. Regardless of their version number, these files are
+            referencing to the same files as extracted in the readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_jst_1kg_rw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+      <ol id="ol_qbh_tpm_s5">
+        <li>Log onto the lifecycle manager VM. <codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where:
+            lifecycle manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+            lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+            file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+        <li>Copy the <codeph>icinga-random-password.patch</codeph> to the <codeph>~/</codeph>
+          directory. </li>
+        <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+          directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+        <li> Execute the following command to deploy the patch:
+          <codeblock>patch -p1 &lt; ../icinga-random-password.patch</codeblock></li>
+        <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph>
+          directory.<codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+        <li>Execute the following command to integrate the changes into the
+          environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+        <li>Execute the following
+          command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+        <li>Execute the following command to redeploy Icinga roles:
+            <codeblock>hlm deploy -c &lt;cloud name> -t "IC2-SVC IC2-WEB" </codeblock><p>Where
+            &lt;cloud name> is the name of your cloud.</p></li>
+      </ol>
+    </section>
+    <section id="icinga-pass">
+      <title>Locate the random password</title>
+      <p>The command creates a random password in the following
+        directory<codeblock>/var/hlm/clouds/&lt;cloudname>/desired_state/&lt;cloudname>/001/base/persistent_state/private_data.yml</codeblock></p>
+      <p>Where <codeph>&lt;cloud name></codeph> is the name of your cloud.</p>
+      <p>Open the <codeph>private_data.yml</codeph> file to locate the random password in the
+          <codeph>icinga_root_pwd</codeph> variable</p>
+      <p>You access the Icinga web portal using <codeph>http://&lt;CLM-IP>:82/icinga-web/</codeph>.
+        Use <codeph>root</codeph> as a user name and the random password to log in. </p>
+      <p>To change the password:</p>
+      <p>
+        <ol id="ol_et5_2rm_s5">
+          <li>Click the <b>Root</b> menu in the top right. </li>
+          <li>Select <b>Preferences</b>, then <b>Password</b>. </li>
+          <li> Enter a new password and click <b>Save </b>.</li>
+          <li>Log out by clicking the <b>Root</b> menu, then <b>Logout</b>. </li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+  </body>
+</topic>

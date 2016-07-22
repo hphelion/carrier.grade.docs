@@ -52,8 +52,6 @@
                                         /><?oxy_insert_end?></li>
                                 <li><xref href="#topic7148/ssh" format="dita"/></li>
                                 <li><xref href="#topic7148/getinstall" format="dita"/></li>
-                                <li><xref href="#topic7148/verify" format="dita"/></li>
-                                <li><xref href="#topic7148/checksum" format="dita"/></li>
                                 <li><xref href="#topic7148/prepbare" format="dita"/></li>
                         </ul>
                         <p>The lifecycle manager host must have Ubuntu Server 14.04.2 LTS installed
@@ -255,59 +253,16 @@ StrictHostKeyChecking no </codeblock></li>
                         <p>Before you begin, you must download the required HPE Helion OpenStack
                                 installation package(s) from the Software Depot, as shown above.</p>
                         <ol id="ol_zv1_jwm_sv">
-                                <li>Click the following links on the page and download the required
+                                <li>Click the following link on the page and download the required
                                         files. <ul id="ul_aw1_jwm_sv">
                                                 <li><codeph>HCG 1.1.0 (Z7550-01935.tar)</codeph>.
                                                   <b>Helion Carrier Grade 1.1.0</b>.</li>
-                                                <li><codeph>hcg_1.1.0_horizon_patch1</codeph>.
-                                                  <b>Horizon Patch Tar File for Helion Carrier
-                                                  Grade</b>. </li>
-                                                <li><codeph>HCG 1.1 WR license patch</codeph><b
-                                                  id="productShow_appName">Helion Carrier Grade
-                                                  1.1.0 Windriver License patch signature file</b>
-                                                  and the <b>Helion Carrier Grade 1.1.0 Windriver
-                                                  License patch</b> signature file signature and
-                                                  <b>Helion Carrier Grade 1.1.0 Windriver License
-                                                  patch</b> signature file checksum files.</li>
-                                                <li><codeph>HCG 1.1 ldap patch 1.1</codeph>.
-                                                  <b>Helion Carrier Grade 1.1.0 ldap patch</b>. </li>
-                                                <li><codeph>HCG 1.1 compute proxy patch</codeph>.
-                                                  The <b>Compute Proxy patch.</b>.</li>
-                                                <li>
-                                                  <codeph>HCG 1.1 gre patch 1.1</codeph>. <b>Helion
-                                                  Carrier Grade 1.1.0 Gre patch</b>. </li>
-                                                <li><codeph>HCG 1.1 secure HLM ports patch
-                                                  1.1</codeph>. <b>Helion Carrier Grade 1.1.0 secure
-                                                  HLM ports patch</b>.</li>
-                                                <li><codeph>HCG 1.1 random-password</codeph>.
-                                                  <b>Helion Carrier Grade 1.1.0 random password</b>. </li>
-                                                <li><codeph>HCG 1.1 horizon web patch 1.1</codeph>.
-                                                  <b>Helion Carrier Grade 1.1.0 Horizon Web
-                                                  patch</b>.</li>
-                                                <li><codeph>HCG 1.1 ceilometer patch1</codeph>.
-                                                  <b>Helion Carrier Grade 1.1.0 ceilometer
-                                                  patch1</b>.</li>
-                                                <li><codeph>HCG 1.1 HCG1.1 hLinux001
-                                                  Patch001</codeph>. The <b>Helion Carrier Grade 1.1
-                                                  hLinux001 Patch001</b> patch.</li>
-                                                <li><codeph>HCG 1.1 cg hos nic
-                                                  bonding.patch</codeph>. The <b>NIC Bonding
-                                                  Patch.</b>.</li>
-                                        </ul></li>
-                                <li>Download the required KVM region patches:<ul id="ul_gfl_wmw_rv">
-                                                <li>HCG 1.1 TS 15.05 Patch 001 </li>
-                                                <li>HCG 1.1 TS 15.05 Patch 002 </li>
-                                                <li>HCG 1.1 TS 15.05 Patch  003 </li>
-                                                <li>HCG 1.1 TS 15.05 Patch  004 </li>
-                                                <li>HCG 1.1 TS 15.05 Patch  005 </li>
-                                                <li>HCG 1.1 TS 15.05 Patch  006 </li>
-                                                <li>HCG 1.1 TS 15.05 Patch  007</li>
                                         </ul></li>
                         </ol>
                 </section>
                 <section id="launch">
-                        <title>Launch the Software Updates and Licensing site to download
-                                patches</title>
+                        <title><u>Launch the Software Updates and Licensing site to download
+                                        patches</u></title>
                         <p>If you did not download the <b
                                         conref="../../CarrierGrade2.0/Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/dcn-R7-download"
                                 />, you need to manually download the patches from the <xref
@@ -346,13 +301,7 @@ StrictHostKeyChecking no </codeblock></li>
                                                 <li><codeph>hcg_1.1.0_horizon_patch1</codeph>.
                                                   <b>Horizon Patch Tar File for Helion Carrier
                                                   Grade</b>. </li>
-                                                <li><codeph>HCG 1.1 WR license
-                                                  patch</codeph><b>Helion Carrier Grade 1.1.0
-                                                  Windriver License patch signature file</b> and the
-                                                  <b>Helion Carrier Grade 1.1.0 Windriver License
-                                                  patch</b> signature file signature and <b>Helion
-                                                  Carrier Grade 1.1.0 Windriver License patch</b>
-                                                  signature file checksum files.</li>
+                                                <li><codeph>HCG 1.1 WR license patch</codeph></li>
                                                 <li><codeph>HCG 1.1 ldap patch 1.1</codeph>.
                                                   <b>Helion Carrier Grade 1.1.0 ldap patch</b>. </li>
                                                 <li><codeph>HCG 1.1 compute proxy patch</codeph>.

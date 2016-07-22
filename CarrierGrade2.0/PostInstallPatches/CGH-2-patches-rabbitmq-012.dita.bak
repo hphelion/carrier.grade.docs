@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdprabbit">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the RabbitMQ
+    Patch</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section id="horizon-patch">
+      <p id="introl">This patch fixes a problem with the logging of the RabbitMQ service installed on HP Helion
+        OpenStack CarrierGrade. RabbitMQ was consuming excessive memory. After deploying this patch,
+        the memory for the Elasticsearch service will be set to 50% of free memory. If the free
+        memory exceeds 32g then the memory will be set to 32g as recommended by Elasticsearch
+        guidelines. </p>
+      <p id="intro2">In addition to this, this patch includes script file which will be responsible
+        for cleanup of Logstash log greater than 8 days. The script file can be found on controller
+        under <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> in which one can modify cleanup
+        schedule by changing the <codeph>DAYS</codeph> variable.</p>
+      <p>If any of your HP Helion OpenStack controllers has the
+          <systemoutput>elastic_cleanup.sh</systemoutput> script in the
+          <systemoutput>/var/lib/hlm/</systemoutput> directory, this patch was installed during
+        installation. You can disregard these steps. </p>
+    </section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section><b>Start the patch download</b><p>To download the patch you need from the Software
+        Updates and Licensing site, shown above: </p><ol id="ol_kxt_s2g_rw">
+        <li>Select the required patch file (e.g.<b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/012"/>
+          ) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_lxt_s2g_rw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>rabbitmq.patch</codeph> and readme files are available.
+          The readme with the patch download contains information on files changed by these
+            patches.<note>The <b>Software Licensing</b> site lists and displays patch file names
+            individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1) under
+              <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
+            version number, these files are referencing to the same files as extracted in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_mxt_s2g_rw"/></p><note> For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol></section>
+    <section>
+      <title>Install the patch</title>
+      <p>
+        <ol id="ol_p13_ghm_s5">
+          <li>Log onto the lifecycle manager VM.<codeblock>ssh &lt;lifecycle manager_VM_IP></codeblock><p>where:
+              lifecycle manager_VM_IP is the CLM IP of the lifecycle manager. Locate the IP address for the
+              lifecycle manager in the <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+              file under <codeph>hlm_clmstaticip</codeph> field.</p></li>
+          <li>Copy the <codeph>rabbitmq.patch</codeph> file to the <codeph>~/</codeph> directory. </li>
+          <li>Change to the <codeph>~/kenobi-node-configuration</codeph>
+            directory:<codeblock>cd ~/kenobi-node-configuration</codeblock></li>
+          <li> Execute the following command to deploy the patch:
+            <codeblock>patch -p1 &lt; ../rabbitmq.patch</codeblock></li>
+          <li>Change to the <codeph>~/cg-hlm/hlm-build</codeph> directory
+            <codeblock>cd ~/cg-hlm/hlm-build</codeblock></li>
+          <li>Execute the following command to integrate the changes into the
+            environment:<codeblock>./hlm_prepare-env.sh</codeblock></li>
+          <li>Execute the following
+            command:<codeblock>hlm generate -c &lt;cloud name></codeblock></li>
+          <li>Execute the following command on all tiers:
+            <codeblock>hlm deploy -c &lt;cloud name> -t "ELK-SCH"</codeblock></li>
+          <li>Log into one of the controller nodes in the non-KVM region.</li>
+          <li>Restart RabbitMQ:<codeblock>service rabbitmq-server restart</codeblock></li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/hos">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+  </body>
+</topic>
