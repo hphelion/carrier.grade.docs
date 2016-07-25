@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdpkvm530">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 12 </title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 13 </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -17,8 +17,11 @@
     <section id="fixes">
       <p>This patch is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies. It
         addresses the following issue in the KVM region:<ul id="ul_jxm_nkt_jv">
-          <li>Inadvertent deletion of VMs.</li>
-          <li> Removal of VM caused lingering ports and floating IPs.</li>
+          <li>Compute nodes (in this case, two) failed to recover while using Force Lock option
+            during patch application process.</li>
+          <li> Logging of additional VIMs is now available.</li>
+          <li>Migrating halted instances from the compute nodes using Lock option caused
+            issues.</li>
         </ul></p>
     </section>
     <section>
@@ -26,7 +29,7 @@
         <note> You can use the Horizon UI to see if the patch has been deployed. Select the
             <codeph>regionkvm</codeph>, then click <b>Admin</b>, then <b>System</b>, and
             <b>Inventory</b>. Click the <b>Patches</b> table for the
-            <codeph>TS_HP_15_Custom_PATCH_0012.patch</codeph> or use the CLI on the active KVM
+            <codeph>TS_HP_15_Custom_PATCH_0013.patch</codeph> or use the CLI on the active KVM
           controller: <codeph>sudo sw-patch query</codeph>.</note>
       </p>
     </section>
@@ -40,8 +43,8 @@
         <li><xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch
               (<codeph>HCG 2.0 WR002 Patch005</codeph>)</xref>
         </li>
-        <li><xref href="CGH-2-patches-pci-bus.dita#topic10581pdpp">PCI Bus Patch
-              (<codeph>HCG 2.0 WR003 Patch007</codeph>)</xref>
+        <li><xref href="CGH-2-patches-pci-bus.dita#topic10581pdpp">PCI Bus Patch (<codeph>HCG 2.0
+              WR003 Patch007</codeph>)</xref>
         </li>
         <li><xref href="CGH-2-patches-wr-3-017.dita#topic10581pdpkvm3">KVM Custom Patch 3
               (<codeph>HCG 2.0 WR004 Patch017</codeph>)</xref></li>
@@ -61,7 +64,9 @@
         <li><xref href="CGH-2-patches-wr-11-033.dita#topic10581pdpkvm530">KVM Custom Patch 10
               (<codeph>HCG 2.0 WR011 Patch033)</codeph></xref></li>
         <li><xref href="CGH-2-patches-wr-12-035.dita#topic10581pdpkvm530">KVM Custom Patch 11
-              (<codeph>HCG_2.0 WR011 Patch035)</codeph></xref></li>
+              (<codeph>HCG 2.0 WR011 Patch035)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-13-036.dita#topic10581pdpkvm530">KVM Custom Patch 12
+              (<codeph>HCG 2.0 WR012 Patch036)</codeph></xref></li>
       </ul>
     </section>
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
@@ -70,17 +75,17 @@
         <b>Start the patch download</b></p>
       <ol id="ol_eyd_y4m_pw">
         <li>Select the required patch file (e.g.<b
-            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/036"
-        />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
-          href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
-          width="400" id="image_wdr_yxz_pw"/></p></li>
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/038"
+          />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_wdr_yxz_pw"/></p></li>
         <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
-            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0012.patch</codeph> and readme
+            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0013.patch</codeph> and readme
           files are available.<note>The <b>Software Licensing</b> site lists and displays patch file
             names individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1)
             under <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
-            version number, these files are referencing the same files as extracted in the
-            readme. </note></li>
+            version number, these files are referencing the same files as extracted in the readme.
+          </note></li>
         <li>Check if the MD5 checksum verification file is extracted along with the patch file.
               <p><image
               href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
@@ -99,16 +104,16 @@
           <li>Copy the following patch file to the <codeph>/tmp/patches</codeph> directory:
               <!--per https://wiki.hpcloud.net/pages/viewpage.action?pageId=56143898--><ul
               id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0012.patch</codeph></li>
+              <li><codeph>TS_HP_15_Custom_PATCH_0013.patch</codeph></li>
             </ul></li>
           <li>Execute the following commands to upload the patch to the database:
-            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0012.patch</codeblock></li>
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0013.patch</codeblock></li>
           <li>Execute the following commands to check if the patch is available for
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
                 id="image_tft_ncg_x5"/></p></li>
           <li>Execute the following commands to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0012 [This patch will be in "Partial-Apply" state]
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0013 [This patch will be in "Partial-Apply" state]
 source /etc/nova/openrc or sudo -i</codeblock></li>
           <li>Execute the following commands to check the current state of all the
             hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Your host <b>Reboot Required</b>
@@ -145,7 +150,7 @@ source /etc/nova/openrc or sudo -i</codeblock></li>
             <codeblock>system host-patch-reboot compute-1</codeblock></li>
           <li>Repeat the previous step for each compute node that participates in the cloud. <p>
               <note>Use the <codeph>sudo sw-patch query-hosts</codeph> command to check if all the
-                nodes are unlocked and the patch 12 is in <codeph>Applied</codeph> state. </note>
+                nodes are unlocked and the patch 13 is in <codeph>Applied</codeph> state. </note>
             </p></li>
         </ol></section>
     </bodydiv>
