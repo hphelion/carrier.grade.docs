@@ -47,13 +47,60 @@
                                 <title>Download the HPE Linux </title>
                                 <p>The lifecycle manager host must have HPE Linux installed before
                                         performing the HPE Helion OpenStack Carrier Grade
-                                        installation. Download the source files for installing HPE
-                                        Linux on the Non-KVM Region systems.  </p>
-                                <p>In Software Depot, locate the following download: </p>
-                                <p>You can also <xref
-                                                href="carrier-grade-install-download-denver.dita#topic7148cgidd"
-                                                >download the other installation packages</xref> at
-                                        this time or later in the installation process.</p>
+                                        installation. </p>
+                        </section><section>
+                                <p><u>Launch the Software Depot to download installation
+                                                packages</u></p>
+                                <p>Launch the <xref href="http://www.hpe.com/Helion/CarrierGrade"
+                                                format="html" scope="external">Software Depot for HP
+                                                Helion Carrier Grade</xref>. You must obtain an HP
+                                        Passport user account in order to download these files. </p>
+                                <p>
+                                        <ol id="hpelinux">
+                                                <li>Click <b>Sign In</b> to log in using your HP
+                                                  Passport account. <p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-signin.png"
+                                                  width="600" id="image_znx_k1q_mv"/></p></li>
+                                                <li>After signing in, click the <b>Select</b> button
+                                                  on the right side of the page.<p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-select.png"
+                                                  width="600" id="image_ylt_h4p_mv"/></p></li>
+                                                <li>Enter your personal information and address and
+                                                  accept the license agreement and click
+                                                  <b>Next</b>.</li>
+                                                <li>See the <b>Download and unpack the installation
+                                                  packages </b>section below for the packages you
+                                                  need.</li>
+                                                <li>From the list of software, select the download
+                                                  method:<ul id="ul_cn1_ptp_mv">
+                                                  <li><b>Use HPE Download Manager</b>. Use the HPE
+                                                  Download Manager to specify where the installation
+                                                  package will be saved.</li>
+                                                  <li><b>Use Standard Download</b>. Use the standard
+                                                  download method for your browser.</li>
+                                                  </ul><p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-download.png"
+                                                  width="600" id="image_mtk_15p_mv"/></p><note>If
+                                                  you selected to use the HPE Download Manager, and
+                                                  this is the first time you have download the HPE
+                                                  Software Depot from the current computer, you will
+                                                  need to install the HPE Download Manager:<ol
+                                                  id="ol_uxx_jsp_mv">
+                                                  <li>In the Open HP_Download_Manager.exe dialog
+                                                  box, click <b>Save As</b>.</li>
+                                                  <li>Locate and double-click the downloaded
+                                                  <codeph>HP_Download_Manager.exe</codeph>
+                                                  file.</li>
+                                                  <li>Accept the license agreement and click
+                                                  <b>Next</b> to use the wizard to install.</li>
+                                                  </ol></note></li>
+                                        </ol>
+                                </p>
+                                <p><u>Download the installation files</u></p>
+                                <p>In Software Depot: <ol id="ol_myr_zkn_xw">
+                                                <li>Locate the following files to download: </li>
+                                        </ol></p>
+                        </section><section>
                                 <p>
                                         <ol
                                                 conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/hpelinux"
@@ -95,7 +142,27 @@ fi
 </codeblock><p><b>Note:</b> Make sure you add a space between <codeph>.</codeph> and <codeph>/</codeph>.</p></li><li>Restart XDRP:<codeblock><codeph>sudo /etc/init.d/xrdp restart
 
 </codeph></codeblock><p>When you XRDP to the lifecycle manager host, the screen appears similar to the following image:</p><image href="../../../media/CGH-install-xrdp.png" id="image_pln_cdm_vs"/> </li></ol></p></section><section id="ntp"><title>Install and configure NTP</title><p>You must configure the lifecycle manager host as an NTP client.</p><p>You can install NTP on the lifecycle manager host and configure it as an NTP server. Or, you can use a pre-existing NTP server that is reachable from the management network. </p><p>For information on configuring the lifecycle manager host as an NTP client, see <xref href="../prereqs/carrier-grade-install-NTP.dita#topic4740/client"/>.</p><p>For information on installing NTP on the lifecycle manager host, see <xref href="../prereqs/carrier-grade-install-NTP.dita">Installing an NTP Server</xref>.</p></section>--><p/><b>Download
-                                the OVS Bridge Patch</b><section id="ssh">
+                                the OVS Bridge Patch</b><section
+                                conref="../../PostInstallPatches/CGH-21-post-install-patching.dita#topic10581pdp21/launch"
+                                        ><title>Start the patch download</title><p>To download the
+                                        patch you need from the Software Updates and Licensing site,
+                                        shown above: </p></section><p><b>Start the patch
+                                        download</b></p>Select <b>the HCG 2.1 OVS Bridge</b> Patch
+                        from the <b>Downloads</b> list and then click <b>Download</b><p><image
+                                        id="image_thg_bv5_xw"
+                                        href="../../../media/carrier.grade.docs/2.1/CGH-21-OVS-Bridge-patches-select-1.png"
+                                        width="500"/></p>Un-tar the downladed files (compressed
+                        patch files with extension <b>tar.gz</b> and <b>.tar</b>) until the
+                                        <p><codeph>infra-playbooks-ovs.patch </codeph>(patch to be
+                                applied on KVM Host) , <codeph>knc-ovs-bridge.patch</codeph> (patch
+                                to be applied on HLM VM) and readme files are available. The readme
+                                with the patch download contains information on files changed by
+                                these patches. Check if the MD5 checksum verification file is
+                                extracted along with the patch file. </p><note>For validating the
+                                integrity of the downloaded file, you can run the MD5 checksum
+                                verification on the downloaded patch file and verify if the
+                                fingerprint of the file matches the version available on the
+                                server.</note><section id="ssh">
                                 <title>Configure SSH</title>
                                 <p>On the lifecycle manager host, the OpenSSH server must be running
                                         and the firewall configuration should allow access to the
@@ -105,7 +172,8 @@ fi
                                                   <li>In the <codeph>~/.ssh/config</codeph> file
                                                   (create the file if it does not exist) add
                                                   following
-                                                  lines<codeblock>Host * StrictHostKeyChecking no </codeblock></li>
+                                                  lines<codeblock>Host *
+StrictHostKeyChecking no </codeblock></li>
                                                   <li>Save the file,</li>
                                                 </ol></li>
                                         <li>Configure the public key. <ol id="ol_hbt_d5q_mv">
