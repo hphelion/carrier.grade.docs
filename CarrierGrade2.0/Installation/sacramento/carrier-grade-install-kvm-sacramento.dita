@@ -29,16 +29,52 @@
     </section>
     <section id="controller-0">
       <title>Step 1: Bring Up Controller-0 in the KVM Region</title>
-      <ol id="ol_mf2_knq_35">
-        <li>Make sure the server you will use for controller-0 is powered on and the other servers
-          to be used in KVM region are shutdown.</li>
-        <li>Launch the iLO interface for the server.</li>
-        <li>Execute the following command to use the <codeph>bootimage_full.iso</codeph> to boot the
-          controller node.<codeblock>mount bootimage_full.iso</codeblock></li>
-        <li>Follow the install wizard. Select the Graphics mode for the controller only. Do not
-          select <codeph>Controller+Compute</codeph>.<p>After the installation is complete, you will
-            need to reboot the server. After the reboot:</p></li>
+      <p>For installing controller-0 on a baremetal system with no OS:</p>
+      <ol id="ol_nw2_wr1_bx">
+        <li> On your IE browser ( recommended IE 11), enter the IP address to access the iLO
+          console.</li>
+        <li>Login with your unique iLO user name and password associated with your server.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-login-install-KVM-1.png"
+              width="600" id="image_ow2_wr1_bx"/></p></li>
+        <li>The initial overview of the iLO console is displayed.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-initial-system-overview-install-KVM-2.png"
+              width="600" id="image_pw2_wr1_bx"/></p></li>
+        <li>Select <b>Remote Console</b> on the left hand side of the ILO interface and click
+            <b>Launch</b>.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-remote-console-menu-install-KVM-3.png"
+              width="600" id="image_qw2_wr1_bx"/></p></li>
+        <li>A "Security Warning" window appears, click <b>Run</b> to run the iLO application.<image
+            href="../../../media/carrier.grade.docs/2.1/CGH-2.1-IE-application-sec-warn-install-KVM-4.png"
+            width="600" id="image_rw2_wr1_bx"/></li>
+        <li>The "iLO Integrated Remote Console" application window is displayed.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-remote-console-initial-screen-Install-KVM-5.png"
+              width="600" id="image_sw2_wr1_bx"/></p></li>
+        <li>Select the "Virtual Drives" to mount the image file (CD-ROM/DVD).<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-remote-console-select-VirtDrive-install-KVM-6.png"
+              width="600" id="image_tw2_wr1_bx"/></p></li>
+        <li>Select the ISO image (bootimage_avs_only) and click <b>Open</b>.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-select-virtCD-image-file-install-KVM-8.png"
+              width="600" id="image_uw2_wr1_bx"/></p></li>
+        <li>Execute the following command to use the <codeph>bootimage_avs_only.iso</codeph> to boot
+          the controller node.<codeblock>mount bootimage_avs_only.iso</codeblock></li>
+        <li>After mounting the boot image, select the "Momentary Press" (shutting off) under "Power
+          Switch" menu.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-remote-console-poweronsyst-install-KVM-9.png"
+              width="600" id="image_vw2_wr1_bx"/></p></li>
+        <li>Follow the installer wizard. Select the <codeph>Serial Controller Node Install</codeph>
+          for the controller only. Do not select <codeph>Controller+Compute</codeph>.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-WR-installer-screen-install-KVM-10.png"
+              width="600" id="image_ww2_wr1_bx"/></p></li>
+        <li>If the ISO image does not automatically boot from CD-ROM, choose the <codeph>One Time
+            Boot to CD-ROM</codeph> from the default boot override options.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-syst-bios-bootmenu-install-KVM-11.png"
+              width="600" id="image_xw2_wr1_bx"/></p></li>
+        <li>Early ISO processor initialization in progress...<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-system-bios-install-KVM-12.png"
+              width="600" id="image_yw2_wr1_bx"/></p></li>
       </ol>
+      <p>After the installation is complete, you will need to reboot the server. After the
+        reboot:</p>
       <ol id="controller-0-2">
         <li>Log in as user name <codeph>wrsroot</codeph> and password <codeph>wrsroot</codeph>. Make
           sure you change the password.</li>

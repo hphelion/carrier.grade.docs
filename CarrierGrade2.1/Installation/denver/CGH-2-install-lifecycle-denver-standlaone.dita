@@ -63,30 +63,6 @@ deb [trusted=yes] file:/opt/local_repo/ cattleprod contrib main non-free</codebl
         </ol>
       </p>
     </section>
-    <section>
-      <title>Install the OVS bridge patch for the lifecycle manager host</title>
-      <p>The OVS bridge patch supports the OVS bridge by updating
-          <codeph>infra-ansible-playbooks</codeph> folder and updates lifecycle manager node XML
-        file. </p>
-      <p>Before deploying the patch, make sure the
-          <systemoutput>/etc/network/interfaces</systemoutput> file is updated correctly based on
-        your configuration and the ovs-network bridge is created, as described in <xref
-          href="../prereqs/carrier-grade-install-network-prepare.dita#topic7646cginpovs">Preparing
-          the OVS Network for Installation</xref>. The <codeph>cg-infra-src.tar.gz</codeph> file
-        must be in the root folder of the lifecycle manager host. You should have extracted and
-        copied the file in <xref href="carrier-grade-install-download-denver.dita#topic7148cgidd"
-          >Download the Installation Packages</xref>.</p>
-      <p>To deploy the patch: <ol id="ol_xz1_cyh_qv">
-          <li>Log into the lifecycle manager host using your credentials. </li>
-          <li>Copy the infra-playbooks-ovs.patch patch to the ~/ directory. </li>
-          <li>Change to the <codeph>infra-ansible-playbooks</codeph> directory.
-            <codeblock>cd ~/infra-ansible-playbooks</codeblock></li>
-          <li>Execute the following command to deploy the
-              patch:<codeblock> patch -p1 -b &lt; ../infra-playbooks-ovs.patch </codeblock><p>The
-                <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file is appended with
-              the following entry: <codeph>ovs_on_kvm: 1</codeph></p></li>
-        </ol></p>
-    </section>
     <bodydiv id="hlm">
       <section id="prepare">
         <title>Prepare the system for deployment</title>
@@ -210,6 +186,30 @@ kvm_hosts:
               <codeph>&lt;user></codeph> is the <codeph>root_user</codeph> created in the
               <codeph>group_vars/all-virtual</codeph> file.</li>
         </ol>
+      </section>
+      <section>
+        <title>Install the OVS bridge patch for the lifecycle manager host</title>
+        <p>The OVS bridge patch supports the OVS bridge by updating
+            <codeph>infra-ansible-playbooks</codeph> folder and updates lifecycle manager node XML
+          file. </p>
+        <p>Before deploying the patch, make sure the
+            <systemoutput>/etc/network/interfaces</systemoutput> file is updated correctly based on
+          your configuration and the ovs-network bridge is created, as described in <xref
+            href="../prereqs/carrier-grade-install-network-prepare.dita#topic7646cginpovs">Preparing
+            the OVS Network for Installation</xref>. The <codeph>cg-infra-src.tar.gz</codeph> file
+          must be in the root folder of the lifecycle manager host. You should have extracted and
+          copied the file in <xref href="carrier-grade-install-download-denver.dita#topic7148cgidd"
+            >Download the Installation Packages</xref>.</p>
+        <p>To deploy the patch: <ol id="ol_xz1_cyh_qv">
+            <li>Log into the lifecycle manager host using your credentials. </li>
+            <li>Copy the infra-playbooks-ovs.patch patch to the ~/ directory. </li>
+            <li>Change to the <codeph>infra-ansible-playbooks</codeph> directory.
+              <codeblock>cd ~/infra-ansible-playbooks</codeblock></li>
+            <li>Execute the following command to deploy the
+                patch:<codeblock> patch -p1 -b &lt; ../infra-playbooks-ovs.patch </codeblock><p>The
+                  <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file is appended
+                with the following entry: <codeph>ovs_on_kvm: 1</codeph></p></li>
+          </ol></p>
       </section>
       <section>
         <title>Deploy the Lifecycle Manager Virtual Machine</title>
