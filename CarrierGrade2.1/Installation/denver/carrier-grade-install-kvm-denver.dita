@@ -45,10 +45,10 @@
             <b>Launch</b>.<p><image id="image_hdz_2c1_bx"
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-remote-console-menu-install-KVM-3.png"
               width="600"/></p></li>
-        <li>A "Security Warning" window appears, click <b>Run</b> to run the iLO application.<image
-            id="image_kqm_qd1_bx"
-            href="../../../media/carrier.grade.docs/2.1/CGH-2.1-IE-application-sec-warn-install-KVM-4.png"
-            width="600"/></li>
+        <li>A "Security Warning" window appears, click Run to run the iLO remote console
+              application.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-IE-application-sec-warn-install-KVM-4.png"
+              width="600" id="image_km5_4md_bx"/></p></li>
         <li>The "iLO Integrated Remote Console" application window is displayed.<p><image
               id="image_dy2_jf1_bx"
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-remote-console-initial-screen-Install-KVM-5.png"
@@ -61,23 +61,27 @@
               id="image_bct_gl1_bx"
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-select-virtCD-image-file-install-KVM-8.png"
               width="600"/></p></li>
-        <li>Execute the following command to use the <codeph>bootimage_avs_only.iso</codeph> to boot
-          the controller node.<codeblock>mount bootimage_avs_only.iso</codeblock></li>
         <li>After mounting the boot image, select the "Momentary Press" (shutting off) under "Power
-          Switch" menu.<p><image id="image_al4_b41_bx"
+          Switch" menu.<p>
+            <note>The server that is used for controller-0 should not be powered on until after the
+              virtual CD-ROM image file is mounted through ILO using the controls and features of
+              the Virtual Drive menu in the ILO remote console. Use the "Power Switch" menu at the
+              top of the remote console app to power on the system, allow the BIOS post and then
+              boot to the ISO image of the KVM region installer. </note>
+          </p><p><image id="image_al4_b41_bx"
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-remote-console-poweronsyst-install-KVM-9.png"
               width="600"/></p></li>
-        <li>Follow the installer wizard. Select the <codeph>Serial Controller Node Install</codeph>
-          for the controller only. Do not select <codeph>Controller+Compute</codeph>.<p><image
-              id="image_mtj_fp1_bx"
+        <li>Follow the installer wizard. Select the "Graphics Text Controller Node Install" for the
+          controller only. Do not select Controller+Compute. <p><image id="image_mtj_fp1_bx"
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-WR-installer-screen-install-KVM-10.png"
               width="600"/></p></li>
-        <li>If the ISO image does not automatically boot from CD-ROM, choose the <codeph>One Time
-            Boot to CD-ROM</codeph> from the default boot override options.<p><image
-              id="image_php_qp1_bx"
+        <li>If the server does not automatically boot from CD-ROM, press F11 during the BIOS post to
+          get to the Boot Options menu and further choose the "One Time Boot to CD-ROM" from the
+          options in the default boot menu.<p><image id="image_php_qp1_bx"
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-syst-bios-bootmenu-install-KVM-11.png"
               width="600"/></p></li>
-        <li>Early ISO processor initialization in progress...<p><image id="image_zfp_1q1_bx"
+        <li>Once the system is turned on, the following text is displayed from the BIOS post
+              operations.<p><image id="image_zfp_1q1_bx"
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-system-bios-install-KVM-12.png"
               width="600"/></p><p>After the installation is complete, you will need to reboot the
             server. After the reboot:</p><ol id="controller-0-2">
