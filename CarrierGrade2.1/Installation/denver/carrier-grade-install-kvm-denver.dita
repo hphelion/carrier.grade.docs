@@ -61,8 +61,7 @@
               id="image_bct_gl1_bx"
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-select-virtCD-image-file-install-KVM-8.png"
               width="600"/></p></li>
-        <li>After mounting the boot image, select the "Momentary Press" (shutting off) under "Power
-          Switch" menu.<p>
+        <li>After mounting the boot image, select the "Momentary Press" under "Power Switch" menu.<p>
             <note>The server that is used for controller-0 should not be powered on until after the
               virtual CD-ROM image file is mounted through ILO using the controls and features of
               the Virtual Drive menu in the ILO remote console. Use the "Power Switch" menu at the
@@ -83,8 +82,12 @@
         <li>Once the system is turned on, the following text is displayed from the BIOS post
               operations.<p><image id="image_zfp_1q1_bx"
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-system-bios-install-KVM-12.png"
-              width="600"/></p><p>After the installation is complete, you will need to reboot the
-            server. After the reboot:</p><ol id="controller-0-2">
+              width="600"/></p><note>If you pressed F11 to navigate to the boot menu and chose to
+            boot the ISO mounted image through the virtual drive, then you will be directed to the
+            KVM region installer wizard as shown in the Step 10 where you can select the "Graphics
+            Text Controller Node Install" for the controller only.</note><p>After the installation
+            is complete, you will need to reboot the server. After the reboot:</p><ol
+            id="controller-0-2">
             <li>Log in as user name <codeph>wrsroot</codeph> and password <codeph>wrsroot</codeph>.
               Make sure you change the password.</li>
             <li>Temporarily assign an IP address to the <codeph>PXE NIC - eth0</codeph>. Use the IP
