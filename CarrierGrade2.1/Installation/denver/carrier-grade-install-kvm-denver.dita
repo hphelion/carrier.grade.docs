@@ -124,47 +124,60 @@ ifconfig eth0 up</codeblock></li>
         <li>Log into KVM Region <codeph>controller-0</codeph>.</li>
         <li>Change the password when/if prompted.<note>Run the steps from console only.</note></li>
         <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
-        <li>Copy the following patches files to the <codeph>/tmp/patches</codeph> directory: <p>
-            <ul id="ul_lvq_fmb_kv">
-              <li>After downloading and extracting the <codeph>hcg21_kvm_avs.tar.gz</codeph> file,
-                the following files for installing the KVM Region are in the
-                  <codeph>hcg21_kvm_avs/WR/mandatory-patches</codeph> directory of the download files.<p>
-                  <table
-                    conref="carrier-grade-install-download-denver.dita#topic7148cgidd/kvm_patches"
-                    id="table_awq_5m1_kv">
-                    <tgroup cols="1">
-                      <tbody>
-                        <row>
-                          <entry/>
-                        </row>
-                      </tbody>
-                    </tgroup>
-                  </table>
-                </p></li>
-              <li>You should have downloaded the following patch files from the <xref
-                  href="http://www.hpe.com/downloads/software" format="html" scope="external"
-                  >Software Updates &amp; Licensing</xref> site:<p>
-                  <table
-                    conref="carrier-grade-install-download-denver.dita#topic7148cgidd/kvm_patches_hdn"
-                    id="table_d1g_bmb_kv">
-                    <tgroup cols="1">
-                      <tbody>
-                        <row>
-                          <entry/>
-                        </row>
-                      </tbody>
-                    </tgroup>
-                  </table>
-                </p></li>
-            </ul>
+        <li>Download and extract the <codeph>hcg21_kvm_avs.tar.gz</codeph> file:</li>
+        <li>The following <b>.tar</b> files for installing the KVM Region will be present in the
+            <codeph>hcg21_kvm_avs/WR/mandatory-patches</codeph> directory of the download files.<p>
+            <table conref="carrier-grade-install-download-denver.dita#topic7148cgidd/kvm_patches"
+              id="table_awq_5m1_kv">
+              <tgroup cols="1">
+                <tbody>
+                  <row>
+                    <entry/>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table>
           </p></li>
-        <li>Execute the following command to registers all patches in the specific directory into an
-          internal database:
+        <li>Download the remaining <b>.tar</b> files from the <xref
+            href="http://www.hpe.com/downloads/software" format="html" scope="external">Software
+            Updates &amp; Licensing</xref> site:<table
+            conref="carrier-grade-install-download-denver.dita#topic7148cgidd/kvm_patches_hdn"
+            id="table_d1g_bmb_kv">
+            <tgroup cols="1">
+              <tbody>
+                <row>
+                  <entry/>
+                </row>
+              </tbody>
+            </tgroup>
+          </table></li>
+        <li>After downloading the <b>.tar.gz</b> files, ensure the associated patch files with
+            <b>.patch</b> extension are extracted from it.</li>
+        <li>Copy the extracted patch files to the <codeph>/tmp/patches</codeph> directory. </li>
+        <li>Execute the following command to registers all patch files in the specific directory
+          into an internal database:
             <codeblock>sudo sw-patch upload-dir /tmp/patches                </codeblock><p>Once
             registered, you can delete the patch files from the controller as the patches have been
             added to the database.</p></li>
-        <li>Execute the following command to apply all registered patches to the nodes in this
-          cluster:<codeblock>sudo sw-patch apply --all</codeblock></li>
+        <li>Execute the following command to load all registered patches into the patch
+          repository:<codeblock>sudo sw-patch apply --all</codeblock></li>
+        <li>The output from this command will be displayed as the following:
+          <codeblock>root@localhost:~# sw-patch apply --all 
+            TS_HP_15_Custom_PATCH_0001 is now in the repo 
+            TS_HP_15_Custom_PATCH_0002 is now in the repo
+            TS_HP_15_Custom_PATCH_0003 is now in the repo
+            TS_HP_15_Custom_PATCH_0004 is now in the repo
+            TS_HP_15_Custom_PATCH_0005 is now in the repo
+            TS_HP_15_Custom_PATCH_0006 is now in the repo
+            TS_HP_15_Custom_PATCH_0007 is now in the repo
+            TS_HP_15_Custom_PATCH_0008 is now in the repo
+            TS_HP_15_Custom_PATCH_0009 is now in the repo
+            TS_HP_15_Custom_PATCH_0010 is now in the repo
+            TS_HP_15_Custom_PATCH_0011 is now in the repo
+            TS_HP_15_Custom_PATCH_0012 is now in the repo
+            TS_HP_15_Custom_PATCH_0013 is now in the repo
+            TS_HP_15_Custom_PATCH_0014 is now in the repo
+            TS_HP_15_Custom_PATCH_0015 is now in the repo         </codeblock></li>
         <li>Execute the following command to deploy the
           patch:<codeblock>sudo sw-patch install-local</codeblock>Wait for the <i>Patch installation
             is complete</i> message. This will take few minutes and you will be prompted for
