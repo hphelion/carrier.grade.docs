@@ -152,7 +152,11 @@ ifconfig eth0 up</codeblock></li>
             </tgroup>
           </table></li>
         <li>After downloading the <b>.tar.gz</b> files, ensure the associated patch files with
-            <b>.patch</b> extension are extracted from it.</li>
+            <b>.patch</b> extension are extracted from it.<p>An example of how to use 'tar' command
+            to extract the files from the tar.gz file :</p><p>
+            <codeblock>[root@localhost]# tar xzvf ../HCG2.0_WR002_Patch005.tar.gz
+ Readme.txt TS_HP_15_Custom_PATCH_0001_2.patch TS_HP_15_Custom_PATCH_0001_2.patch.md5</codeblock>
+          </p></li>
         <li>Copy the extracted patch files to the <codeph>/tmp/patches</codeph> directory. </li>
         <li>Execute the following command to registers all patch files in the specific directory
           into an internal database:
