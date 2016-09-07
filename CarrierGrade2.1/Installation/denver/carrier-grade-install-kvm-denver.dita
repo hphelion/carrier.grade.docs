@@ -205,15 +205,125 @@ ifconfig eth0 up</codeblock></li>
             /></p></li>
         <li>After <codeph>controller-0</codeph> is deployed, add and configure the remaining nodes
           as <codeph>controller-1</codeph> and <codeph>compute-'n'</codeph>. When adding a
-          controller, the name is assigned in order. Unique controller names are
-              ignored.<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
-system host-add --hostname &lt;unique-compute-name&gt; --personality compute --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;ilo_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt;  --bm_password &lt;ilo_password&gt;</codeblock><p><b>Note:</b>
-            If you include <codeph>-c tty0</codeph> to either of these commands, the system console
-            will be set to <codeph>tty0</codeph> which is the first virtual terminal on the screen
-            of a Linux system. If you do not specify this value, the default setting of the console
-            will be <codeph>ttyS0</codeph>, which is a serial port. You will not be able to see
-            console messages as the system is being installed or booted up after the install unless
-            you are using serial port connections for all servers.</p></li>
+          controller, the name is assigned in order. Unique controller names are ignored.<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
+system host-add --hostname &lt;unique-compute-name&gt; --personality compute --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;ilo_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt;  --bm_password &lt;ilo_password&gt;</codeblock>
+          <p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-Configure%20the%20KVM%20Region%20cloud.png"
+              width="800" id="image_lkm_2ck_fx"/></p>
+          <note>If you include <codeph>-c tty0</codeph> to either of these commands, the system
+            console will be set to <codeph>tty0</codeph> which is the first virtual terminal on the
+            screen of a Linux system. If you do not specify this value, the default setting of the
+            console will be <codeph>ttyS0</codeph>, which is a serial port. You will not be able to
+            see console messages as the system is being installed or booted up after the install
+            unless you are using serial port connections for all servers</note><note>If the console
+            output setting needs to be changed after a node has already been defined using the above
+              <codeph>system host-add</codeph> syntax, it can be accomplished in two ways: Either
+            delete and re-add the node or just alter the console setting for that node. To delete
+            the node the <codeph>system host-list</codeph> command should be used to confirm the
+            node ids and
+            names.<codeblock>[root@controller-0 ~(keystone_admin)]# system host-list
++----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | 
+availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | 
+available    |
+| 3  | controller-1 | controller  | unlocked       | enabled     | 
+available    |
+| 5  | compute-0    | compute     | locked         | disabled    | 
+online       |
++----+--------------+-------------+----------------+-------------+--------------+</codeblock></note><p>Confirm
+            the <b>host ID</b> or <b>hostname</b> and then use the <codeph>system
+              host-delete</codeph> command to delete the node definition. This can be done using the
+              <b>host ID</b> or the
+            hostname.<codeblock>[root@controller-0 ~(keystone_admin)]# system host-delete 5 Deleted host 5
+
+[root@controller-0 ~(keystone_admin)]# system host-delete compute-1 Deleted host compute-1
+</codeblock></p><p>You
+            can also change  the actual setting of the console output using the <codeph>system
+              host-update</codeph> command. Even in this case, the actual <b>host ID</b> or
+              <b>hostname</b> will be used along with the name of the attribute that will be
+            updated. During this time, the console attribute setting changes from the default value
+            of <b>ttyS0,115200</b> to
+            <b>tty0</b>.</p><codeblock>[root@controller-0 ~(keystone_admin)]# system host-update compute-1
+console=tty0
++---------------------+--------------------------------------+
+| Property            | Value                                |
++---------------------+--------------------------------------+
+| action              | none                                 |
+| administrative      | locked                               |
+| availability        | offline                              |
+| bm_ip               | 10.1.69.27                           |
+| bm_mac              | 10:60:4b:a0:e4:7d                    |
+| bm_type             | ilo4                                 |
+| bm_username         | cghelion                             |
+| boot_device         | sda                                  |
+| capabilities        | {}                                   |
+| console             | tty0                                 |
+| created_at          | 2016-09-07T19:34:08.593609+00:00     |
+| cstatus             | None                                 |
+| hostname            | compute-1                            |
+| iconfig_applied     | None                                 |
+| iconfig_fini        | None                                 |
+| iconfig_target      | None                                 |
+| id                  | 8                                    |
+| install_output      | text                                 |
+| invprovision        | None                                 |
+| location            | {}                                   |
+| mgmt_ip             | None                                 |
+| mgmt_mac            | 14:58:d0:52:ab:02                    |
+| operational         | disabled                             |
+| personality         | compute                              |
+| reserved            | False                                |
+| rootfs_device       | sda                                  |
+| serialid            | None                                 |
+| task                | None                                 |
+| ttys_dcd            | None                                 |
+| updated_at          | None                                 |
+| uptime              | 0                                    |
+| uuid                | 1ae1d25f-8797-4ec5-b5c4-fbd7f4d4a7d0 |
+| vim_progress_status | None                                 |
++---------------------+--------------------------------------+</codeblock><p>The
+            current values of all the attributes of a particular host can be viewed using the
+              <codeph>system host-show</codeph>
+          command.</p><codeblock>[root@controller-0 ~(keystone_admin)]# system host-show compute-1
++---------------------+--------------------------------------+
+| Property            | Value                                |
++---------------------+--------------------------------------+
+| action              | none                                 |
+| administrative      | locked                               |
+| availability        | offline                              |
+| bm_ip               | 10.1.69.27                           |
+| bm_mac              | 10:60:4b:a0:e4:7d                    |
+| bm_type             | ilo4                                 |
+| bm_username         | cghelion                             |
+| boot_device         | sda                                  |
+| capabilities        | {u'bm_region': u'External'}          |
+| console             | tty0                                 |
+| created_at          | 2016-09-07T19:34:08.593609+00:00     |
+| cstatus             | None                                 |
+| hostname            | compute-1                            |
+| iconfig_applied     | None                                 |
+| iconfig_fini        | None                                 |
+| iconfig_target      | None                                 |
+| id                  | 8                                    |
+| install_output      | text                                 |
+| invprovision        |                                      |
+| location            | {}                                   |
+| mgmt_ip             | None                                 |
+| mgmt_mac            | 14:58:d0:52:ab:02                    |
+| operational         | disabled                             |
+| personality         | compute                              |
+| reserved            | False                                |
+| rootfs_device       | sda                                  |
+| serialid            | None                                 |
+| task                | None                                 |
+| ttys_dcd            | None                                 |
+| updated_at          | 2016-09-07T19:34:40.369802+00:00     |
+| uptime              | 0                                    |
+| uuid                | 1ae1d25f-8797-4ec5-b5c4-fbd7f4d4a7d0 |
+| vim_progress_status | None                                 |
++---------------------+--------------------------------------+</codeblock></li>
         <li>In the iLO web interface, set the controller and compute nodes to one-time PXE booting
           from the network.</li>
         <li>Restart the nodes.</li>
