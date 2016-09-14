@@ -205,12 +205,12 @@ ifconfig eth0 up</codeblock></li>
             /></p></li>
         <li>After <codeph>controller-0</codeph> is deployed, add and configure the remaining nodes
           as <codeph>controller-1</codeph> and <codeph>compute-'n'</codeph>. When adding a
-          controller, the name is assigned in order. Unique controller names are ignored.<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
-system host-add --hostname &lt;unique-compute-name&gt; --personality compute --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;ilo_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt;  --bm_password &lt;ilo_password&gt;</codeblock>
-                      <p><image
+          controller, the name is assigned in order. Unique controller names are
+              ignored.<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
+system host-add --hostname &lt;unique-compute-name&gt; --personality compute --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;ilo_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt;  --bm_password &lt;ilo_password&gt;</codeblock><p><image
               href="../../../media/carrier.grade.docs/2.1/CGH-2.1-Configure-the-KVM-Region-cloud.png"
-              width="800" id="image_lkm_2ck_fx"/></p>
-          <note>If you include <codeph>-c tty0</codeph> to either of these commands, the system
+              width="800" id="image_lkm_2ck_fx"/>
+          </p><note>If you include <codeph>-c tty0</codeph> to either of these commands, the system
             console will be set to <codeph>tty0</codeph> which is the first virtual terminal on the
             screen of a Linux system. If you do not specify this value, the default setting of the
             console will be <codeph>ttyS0</codeph>, which is a serial port. You will not be able to
@@ -220,27 +220,16 @@ system host-add --hostname &lt;unique-compute-name&gt; --personality compute --m
               <codeph>system host-add</codeph> syntax, it can be accomplished in two ways: Either
             delete and re-add the node or just alter the console setting for that node. To delete
             the node the <codeph>system host-list</codeph> command should be used to confirm the
-            node ids and
-            names.<codeblock>[root@controller-0 ~(keystone_admin)]# system host-list
-+----+--------------+-------------+----------------+-------------+--------------+
-| id | hostname     | personality | administrative | operational | 
-availability |
-+----+--------------+-------------+----------------+-------------+--------------+
-| 1  | controller-0 | controller  | unlocked       | enabled     | 
-available    |
-| 3  | controller-1 | controller  | unlocked       | enabled     | 
-available    |
-| 5  | compute-0    | compute     | locked         | disabled    | 
-online       |
-+----+--------------+-------------+----------------+-------------+--------------+</codeblock></note><p>Confirm
-            the <b>host ID</b> or <b>hostname</b> and then use the <codeph>system
-              host-delete</codeph> command to delete the node definition. This can be done using the
-              <b>host ID</b> or the
-            hostname.<codeblock>[root@controller-0 ~(keystone_admin)]# system host-delete 5 Deleted host 5
-
-[root@controller-0 ~(keystone_admin)]# system host-delete compute-1 Deleted host compute-1
-</codeblock></p><p>You
-            can also change  the actual setting of the console output using the <codeph>system
+            node ids and names.<p><image
+                href="../../../media/carrier.grade.docs/2.1/CGH-2.1-system-host-list-install-kvm.png"
+                width="800" id="image_wbb_1k3_hx"/></p></note><p>Confirm the <b>host ID</b> or
+              <b>hostname</b> and then use the <codeph>system host-delete</codeph> command to delete
+            the node definition. This can be done using the <b>host ID</b> or the
+            hostname.<codeblock>[root@controller-0 ~(keystone_admin)]# system host-delete 5 
+Deleted host 5
+[root@controller-0 ~(keystone_admin)]# system host-delete compute-1 
+Deleted host compute-1</codeblock></p><p>You
+            can also change the actual setting of the console output using the <codeph>system
               host-update</codeph> command. Even in this case, the actual <b>host ID</b> or
               <b>hostname</b> will be used along with the name of the attribute that will be
             updated. During this time, the console attribute setting changes from the default value
