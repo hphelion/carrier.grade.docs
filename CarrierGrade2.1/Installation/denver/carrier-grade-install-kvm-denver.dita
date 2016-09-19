@@ -150,7 +150,11 @@ ifconfig eth0 up</codeblock></li>
                 </row>
               </tbody>
             </tgroup>
-          </table></li>
+          </table><p>
+            <note type="caution">Do not install KVM<b> patch 14-15 and patch 16</b> from Horizon.
+              Install ONLY from CLI. The nodes go to unstable state if patch is installed from
+              Horizon and the nodes have to be recovered during that time. </note>
+          </p></li>
         <li>After downloading the <b>.tar.gz</b> files, ensure the associated patch files with
             <b>.patch</b> extension are extracted from it.<p>An example of how to use 'tar' command
             to extract the files from the tar.gz file
@@ -205,12 +209,12 @@ ifconfig eth0 up</codeblock></li>
             /></p></li>
         <li>After <codeph>controller-0</codeph> is deployed, add and configure the remaining nodes
           as <codeph>controller-1</codeph> and <codeph>compute-'n'</codeph>. When adding a
-          controller, the name is assigned in order. Unique controller names are
-              ignored.<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
-system host-add --hostname &lt;unique-compute-name&gt; --personality compute --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;ilo_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt;  --bm_password &lt;ilo_password&gt;</codeblock><p><image
-              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-Configure-the-KVM-Region-cloud.png"
-              width="800" id="image_lkm_2ck_fx"/>
-          </p><note>If you include <codeph>-c tty0</codeph> to either of these commands, the system
+          controller, the name is assigned in order. Unique controller names are ignored.<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
+system host-add --hostname &lt;unique-compute-name&gt; --personality compute --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;ilo_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt;  --bm_password &lt;ilo_password&gt;</codeblock>
+          <image
+            href="../../../media/carrier.grade.docs/2.1/CGH-2.1-Configure-the-KVM-Region-cloud.png"
+            width="800" id="image_lkm_2ck_fx"/>
+          <note>If you include <codeph>-c tty0</codeph> to either of these commands, the system
             console will be set to <codeph>tty0</codeph> which is the first virtual terminal on the
             screen of a Linux system. If you do not specify this value, the default setting of the
             console will be <codeph>ttyS0</codeph>, which is a serial port. You will not be able to
@@ -234,8 +238,7 @@ Deleted host compute-1</codeblock></p><p>You
               <b>hostname</b> will be used along with the name of the attribute that will be
             updated. During this time, the console attribute setting changes from the default value
             of <b>ttyS0,115200</b> to
-            <b>tty0</b>.</p><codeblock>[root@controller-0 ~(keystone_admin)]# system host-update compute-1
-console=tty0
+            <b>tty0</b>.</p><codeblock>[root@controller-0 ~(keystone_admin)]# system host-update compute-1 console=tty0
 +---------------------+--------------------------------------+
 | Property            | Value                                |
 +---------------------+--------------------------------------+
