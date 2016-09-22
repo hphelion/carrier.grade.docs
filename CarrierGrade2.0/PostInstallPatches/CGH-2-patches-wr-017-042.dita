@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdpkvm530">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 16 </title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 17 </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -17,7 +17,7 @@
     <bodydiv>
       <p><b>Patch Highlights</b></p>
       <ul id="ul_um4_5cs_dx">
-        <li>This WR patch <codeph>[TS_HP_15_Custom_PATCH_0016.patch]</codeph> can be applied on Pre
+        <li>This WR patch <codeph>[TS_HP_15_Custom_PATCH_0017.patch]</codeph> can be applied on Pre
           or Post Cloud Deployment. </li>
       </ul>
     </bodydiv>
@@ -25,29 +25,29 @@
       <li>Pre Cloud Deployment means config_region is not run on the Controller-0 in the KVM region.
         Post Cloud Deployment means the KVM region is already configured and running.</li>
       <li>It is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies. </li>
-      <li>This WR Patch 16 addresses the following issues in KVM region:<ul id="ul_mt1_zw4_3x">
-          <li> Unresponsiveness of instances to reboot when the heartbeat was killed and the active
-            alarm lingered during the process.</li>
-          <li> Swact failure due to unapplied configurations.</li>
-          <li> Ability to modify a flavor in Horizon dashboard when the VM is running.</li>
-          <li>Inability to delete and recover VMs from error state. </li>
-          <li>Bugs in the VIM networking audit. </li>
-          <li>VIM robustness.</li>
-          <li><codeph>hbsAgent</codeph> occasionally segfaults over a host delete operation.</li>
-          <li><codeph>hwmond</codeph> occasionally segfaults over a host delete operation.</li>
+      <li>This WR Patch 17 addresses the following issues in KVM region:<ul id="ul_mt1_zw4_3x">
+          <li> HP custom upgrade support patch (TiS 15.09 to 15.12) - <codeph>part 2</codeph>. </li>
+          <li>VMs failed during pre-live migration after extended MNFA recovery -
+              <codeph>hwmond</codeph> failure.</li>
+          <li> Nova-api-proxy failed to start - the address was already in use. </li>
+          <li>VMs suspended action and periodically failed due to libvirt internal error -
+              <codeph>unexpected async job 3</codeph>. </li>
+          <li>The system inventory host action requested a maintenance timeout. </li>
+          <li>Heat suspended action and failed due to internal error - <codeph>unexpected async job
+              3</codeph>.</li>
         </ul></li>
     </ul>
     <bodydiv>
-      <note type="caution">Do not install KVM<b> patch 14-15 and patch 16</b> from Horizon. Install
-        ONLY from CLI. The nodes go to unstable state if patch is installed from Horizon and the
-        nodes have to be recovered during that time. </note>
+      <note type="caution">Do not install patch from Horizon. Install ONLY from CLI. The nodes go to
+        unstable state if patch is installed from Horizon and the nodes have to be recovered during
+        that time. </note>
       <note> You can use the CLI on the active KVM controller: <codeph>sudo sw-patch query</codeph>
         to see if the patch has been deployed properly.</note>
     </bodydiv>
       <section>
       <title>Prerequisites</title>
       <ol id="ol_u4x_xvx_2x">
-        <li> This patch requires the previous 15 KVM patches to be applied. If you are installing
+        <li> This patch requires the previous 16 KVM patches to be applied. If you are installing
           all the KVM patches for the first time, load all the patches in sequence by following the
           steps provided below.</li>
       </ol>
@@ -83,6 +83,8 @@
               Patch038)</codeph></xref></li>
         <li><xref href="CGH-2-patches-wr-14-038.dita">KVM Custom Patch 14-15 (<codeph>HCG 2.0
               WR014_WR015 Patch040)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-14-038.dita">KVM Custom Patch 16 (<codeph>HCG 2.0 WR016
+              Patch041)</codeph></xref></li>
       </ul>
     </section>
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
@@ -91,12 +93,12 @@
         <b>Start the patch download</b></p>
       <ol id="ol_eyd_y4m_pw">
         <li>Select the required patch file (e.g.<b
-            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/041"
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/042"
           />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
               href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
               width="400" id="image_wdr_yxz_pw"/></p></li>
         <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
-            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0016.patch</codeph> and readme
+            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0017.patch</codeph> and readme
           files are available.<note>The <b>Software Licensing</b> site lists and displays patch file
             names individually for all the three versions of HCG ( HCG_1.1, HCG_2.0 and HCG_2.1)
             under <b>Software Specification</b> and <b>Download filename</b>. Regardless of their
@@ -119,16 +121,16 @@
           <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
           <li>Copy the patch file to the <codeph>/tmp/patches</codeph> directory: <ul
               id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0016.patch</codeph></li>
+              <li><codeph>TS_HP_15_Custom_PATCH_0017.patch</codeph></li>
             </ul></li>
           <li>Execute the following command to upload the patch to the database:
-            <codeblock>sudo sw-patch upload /tmp/patches/<codeph>TS_HP_15_Custom_PATCH_0016.patch</codeph></codeblock></li>
+            <codeblock>sudo sw-patch upload /tmp/patches/<codeph>TS_HP_15_Custom_PATCH_0017.patch</codeph></codeblock></li>
           <li>Execute the following command to check if the patch is available for
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
                 id="image_tft_ncg_x5"/></p></li>
           <li>Execute the following command to apply the
-            patch:<codeblock>sudo sw-patch apply <codeph>TS_HP_15_Custom_PATCH_0016</codeph>
+            patch:<codeblock>sudo sw-patch apply <codeph>TS_HP_15_Custom_PATCH_0017</codeph>
 [The patch state of both the patches will be in "Partial-Apply" state]</codeblock></li>
           <li>Execute the following command to check the current state of all the
             hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Now "Patch Current" state of the
@@ -167,7 +169,7 @@
             <codeblock>system host-patch-reboot compute-1</codeblock></li>
           <li>Repeat the previous step for each compute node that participates in the cloud. <p>
               <note>Use the <codeph>sudo sw-patch query-hosts</codeph> command to check if all the
-                nodes are unlocked and the patch 16 is in <codeph>Applied</codeph> state. </note>
+                nodes are unlocked and the patch 17 is in <codeph>Applied</codeph> state. </note>
             </p></li>
         </ol></section>
     </bodydiv>
