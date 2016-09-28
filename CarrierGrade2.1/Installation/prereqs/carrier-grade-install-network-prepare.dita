@@ -171,7 +171,7 @@ allow-br0 eth2
 iface eth2 inet manual
               ovs_bridge br0
               ovs_type OVSPort
-              ovs_options trunks=3025,225,228,226 tag=225 vlan_mode=native-untagged
+              ovs_options trunks=3001,204,202,201 tag=204 vlan_mode=native-untagged
               pre-up ( ifconfig eth2 0.0.0.0 up )
 
 auto br-clm
@@ -179,19 +179,19 @@ allow-br0 br-clm
 iface br-clm inet static
               ovs_type OVSIntPort
               ovs_bridge br0
-              ovs_options tag=3025
+              ovs_options tag=3001
               ovs_extra set interface ${IFACE} type=internal
-              address 10.20.55.10
+              address 10.20.31.10
               netmask 255.255.255.0
-              gateway 10.20.55.1
-              post-up ( /bin/ping -c 3 10.20.55.1 )
+              gateway 10.20.31.1
+              post-up ( /bin/ping -c 3 10.20.31.1 )
 
 auto br-pxe
 allow-br0 br-pxe
 iface br-pxe inet manual
               ovs_type OVSIntPort
               ovs_bridge br0
-              ovs_options tag=225
+              ovs_options tag=201
               ovs_extra set interface ${IFACE} type=internal
 
 auto br-bls
@@ -199,7 +199,7 @@ allow-br0 br-bls
 iface br-bls inet manual
               ovs_type OVSIntPort
               ovs_bridge br0
-              ovs_options tag=228
+              ovs_options tag=204
               ovs_extra set interface ${IFACE} type=internal
 
 auto br-can
@@ -207,7 +207,7 @@ allow-br0 br-can
 iface br-can inet manual
               ovs_type OVSIntPort
               ovs_bridge br0
-              ovs_options tag=226
+              ovs_options tag=202
               ovs_extra set interface ${IFACE} type=internal</pre></li>
             </ol>
             <p  id="bonded"><b>Bonded NIC environment</b></p>
@@ -236,26 +236,26 @@ iface bondkvm inet manual
     ovs_bonds eth0 eth1
     pre-up ( ifconfig eth0 0.0.0.0 up &amp;&amp; ifconfig eth1 0.0.0.0 up )
     post-down ( ifconfig bondkvm down &amp;&amp; ifconfig eth0 down &amp;&amp; ifconfig eth1 down )
-    ovs_options bond_mode=balance-tcp lacp=active other_config:lacp-time=fast  trunks=3013,216,214 tag=213 vlan_mode=native-untagged
+    ovs_options bond_mode=balance-tcp lacp=active other_config:lacp-time=fast  trunks=3001,204,202 tag=201 vlan_mode=native-untagged
 
 auto br-clm
 allow-br0 br-clm
 iface br-clm inet static
     ovs_type OVSIntPort
     ovs_bridge br0
-    ovs_options tag=3013
+    ovs_options tag=3001
     ovs_extra set interface ${IFACE} type=internal
-    address 10.20.43.5
+    address 10.20.31.10
     netmask 255.255.255.0
-    gateway 10.20.43.1
-    post-up ( /bin/ping -c 3 10.20.43.1 )
+    gateway 10.20.31.1
+    post-up ( /bin/ping -c 3 10.20.31.1 )
 
 auto br-pxe
 allow-br0 br-pxe
 iface br-pxe inet manual
     ovs_type OVSIntPort
     ovs_bridge br0
-    ovs_options tag=213
+    ovs_options tag=201
     ovs_extra set interface ${IFACE} type=internal
 
 auto br-bls
@@ -263,7 +263,7 @@ allow-br0 br-bls
 iface br-bls inet manual
     ovs_type OVSIntPort
     ovs_bridge br0
-    ovs_options tag=216
+    ovs_options tag=204
     ovs_extra set interface ${IFACE} type=internal
 
 auto br-can
@@ -271,7 +271,7 @@ allow-br0 br-can
 iface br-can inet manual
     ovs_type OVSIntPort
     ovs_bridge br0
-    ovs_options tag=214
+    ovs_options tag=202
     ovs_extra set interface ${IFACE} type=internal</codeblock></li>
                 </ol>
             </p>
@@ -295,30 +295,30 @@ iface br-can inet manual
   &lt;virtualport type='openvswitch'/>
   &lt;portgroup name='pg-pxe' default='yes'>
     &lt;vlan>
-      &lt;tag id='226'/>
+      &lt;tag id='201'/>
     &lt;/vlan>
   &lt;/portgroup>
   &lt;portgroup name='pg-clm'>
     &lt;vlan>
-      &lt;tag id='217'/>
+      &lt;tag id='3001'/>
     &lt;/vlan>
   &lt;/portgroup>
   &lt;portgroup name='pg-can'>
     &lt;vlan>
-      &lt;tag id='218'/>
+      &lt;tag id='202'/>
     &lt;/vlan>
   &lt;/portgroup>
   &lt;portgroup name='pg-bls'>
     &lt;vlan>
-      &lt;tag id='219'/>
+      &lt;tag id='204'/>
     &lt;/vlan>
   &lt;/portgroup>
   &lt;portgroup name='pg-ctl'>
     &lt;vlan trunk='yes'>
-      &lt;tag id='217'/>
-      &lt;tag id='218'/>
-      &lt;tag id='219'/>
-      &lt;tag id='226' nativeMode='untagged'/>
+      &lt;tag id='3001'/>
+      &lt;tag id='204'/>
+      &lt;tag id='202'/>
+      &lt;tag id='201' nativeMode='untagged'/>
     &lt;/vlan>
   &lt;/portgroup>
 &lt;/network></codeblock><!--<virtualport type='openvswitch'/>; hide for 2.1--></li>
