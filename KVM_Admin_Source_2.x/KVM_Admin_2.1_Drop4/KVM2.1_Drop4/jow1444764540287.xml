@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1444764540287" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="234">Identifying the Software Version and Patch Level</title>
+    <shortdesc ixia_locid="235">You can obtain current software version and patch information from the web
+        administration interface or the CLI.  </shortdesc>
+    <prolog>
+        <author ixia_locid="236">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="237">
+            <p ixia_locid="238">To find the software version from the CLI, use the <cmdname ixia_locid="239">system show</cmdname>
+                command.<codeblock ixia_locid="240"><systemoutput ixia_locid="241">~(keystone_admin)$ </systemoutput><userinput ixia_locid="242">sudo system show</userinput>
+<systemoutput ixia_locid="243">+------------------+---------------------------------------+
+| Property         | Value                                 |
++------------------+---------------------------------------+
+| name             | 002d034a-9b61-417e-8540-01a5dc5b90ae  |
+| description      | None                                  |
+| location         | None                                  |
+| contact          | None                                  |
+| software_version | 15.09 3.10.84-ovp-rt89-r5_preempt-rt  |
+| uuid             | dd452ace-592a-4a50-b24d-2a2e1bb31557  |
+| created_at       | 2015-10-13T18:17:47.905750+00:00      |
+| updated_at       | 2015-10-13T19:42:47.676030+00:00      |
++------------------+---------------------------------------+
+</systemoutput></codeblock></p>
+            <p ixia_locid="244">To list applied patches from the CLI, use the <cmdname ixia_locid="245">sw-patch query</cmdname>
+                command. For more about working with patches, see <xref href="psa1410446455735.xml" ixia_locid="246"/></p>
+            <p ixia_locid="247">To obtain this information using the web administration interface,
+                follow these steps:</p>
+        </context>
+        <steps>
+            <step id="step_N1004A_N10047_N1001C_N10001" ixia_locid="248">
+                <cmd conref="jow1426453628262.xml#jow1426453628262/open_system_inventory_tab" ixia_locid="249"/>
+            </step>
+            <step id="step_N10053_N10047_N1001C_N10001" ixia_locid="250">
+                <cmd ixia_locid="251">Select the <uicontrol ixia_locid="252">Systems</uicontrol> tab to view the software
+                    version.</cmd>
+                <info ixia_locid="253">
+                    <p ixia_locid="254">The software version is shown in the <nameliteral ixia_locid="255">Version</nameliteral>
+                        field.</p>
+                    <fig id="fig_rj4_zqb_rt" ixia_locid="256">
+                        <image href="jow1404333751864.image" id="image_brf_1rb_rt" ixia_locid="257">
+                            <alt ixia_locid="258">tis-inventory-systems.png</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N1007C_N10047_N1001C_N10001" ixia_locid="259">
+                <cmd ixia_locid="260">Select the <uicontrol ixia_locid="262">Patches</uicontrol> tab to view patch
+                    information.</cmd>
+                <info ixia_locid="261">
+                    <fig id="fig_yrl_jf3_rq" ixia_locid="231">
+                        <image href="psa1420750069946.image" id="image_uv3_4f3_rq" ixia_locid="232" width="550">
+                            <alt ixia_locid="233">TiS patches available</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>
