@@ -104,9 +104,14 @@
                                     802.3ad (LACP) specification.</p>
                                 <p ixia_locid="73">You can modify the transmit policy using the
                                     xmit-hash-policy option. For details, see <xref href="#jow1404333496893/xmit-hash-policy" ixia_locid="75"/>.</p>
-                                <p ixia_locid="78">In order to support booting over an aggregated management
-                                    interface, the far-end switch ports must be configured in
-                                    passive LACP mode.</p>
+                                <p ixia_locid="78">In order to support booting over an aggregated
+                                    management interface, the PXE booting nic (normally eth0) in far
+                                    end switch ports must be configured and set in "lacp edge-port"
+                                    on eth0 and "lacp edge-port" “lacp mode passive” on eth1. When
+                                    we set this option on the switch, the desired interface (eth0)
+                                    on the switch will go active first and PXE boot normally. These
+                                    settings ensure that the first interface is forced to go active
+                                    first.</p>
                             </entry>
                             <entry ixia_locid="79">
                                 <p ixia_locid="80">Management, infrastructure, and data interfaces
