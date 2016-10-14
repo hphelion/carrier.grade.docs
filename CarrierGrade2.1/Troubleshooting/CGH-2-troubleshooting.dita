@@ -17,20 +17,27 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
-        
-        <li>
-          <xref href="#topic10581c2t/storage" format="dita">Changing the storage size allotments of
-            the KVM controller nodes caused DRBD sync issue</xref></li>
+        <li> <xref href="#topic10581c2t/launching" format="dita">Launching an image failed and error message displayed </xref> </li>
+        <li><xref href="#topic10581c2t/storage" format="dita">Changing the storage size allotments
+            of the KVM controller nodes caused DRBD sync issue</xref></li>
         <li><xref href="#topic10581c2t/service" format="dita"/></li>
-              <li><xref href="#topic10581c2t/KVM" format="dita"/></li>
-                <li><xref href="#topic10581c2t/boot" format="dita"/></li>
+        <li><xref href="#topic10581c2t/KVM" format="dita"/></li>
+        <li><xref href="#topic10581c2t/boot" format="dita"/></li>
         <li><xref href="#topic10581c2t/logs" format="dita"/></li>
         <li><xref href="#topic10581c2t/keystone" format="dita"/></li>
         <li><xref href="#topic10581c2t/kvm" format="dita"/></li>
         <li><xref href="#topic10581c2t/backup" format="dita"/></li>
       </ul>
-      
-      </section>
+    </section>
+    <section id="launching"><title> Launching an image failed and error message displayed </title>
+     <b>System Behavior/Message</b>
+      <p>Launching an image failed and following error message displayed "Image Launch Failure:
+        aborted: Failure prepping block device".</p>
+      <b>Cause</b>
+      <p> The disk size required by the image doesn't meet the flavor or launch settings.</p>
+      <b>Resolution</b>
+      <p>Run <codeph>qemu-img info /tmp/rhel67.img</codeph> to find the required image size and set
+        the minimum disk size to meet or exceed that size on the image settings.</p></section>
     <section id="storage">
       <title>Changing the storage size allotments of the KVM controller nodes caused DRBD sync
         issue</title>
@@ -60,14 +67,11 @@
       <image href="../../media/carrier.grade.docs/2.1/CGH-2.1-troubleshoot-HorizonUI-2.PNG"
         width="700"/>
     </section>
-      
-   
-    <section id="KVM"> 
-        <title>KVM patch deployment failures and error messages</title>
+    <section id="KVM">
+      <title>KVM patch deployment failures and error messages</title>
       <p>If any error messages are displayed during the execution of the command <codeph>system
           host-patch-reboot &lt;compute-name></codeph> on compute node, follow the instructions
         below. </p>
-      
       <p>
         <note>These steps are applicable for any KVM patch update process. This can happen when the
           VM's on the compute fails to migrate or if you have any cinder volume or instances in
@@ -115,18 +119,17 @@
       <title>Centralized logging take too much space</title>
       <p><b>System Behavior/Message</b></p>
       <p id="logs1">If the logs created by the <xref
-        href="../OperationsGuide/Logging/CHG-2-logging-overview.dita#topic5937">Centralized
-        Logging service</xref> take up too much space on the Standard Region controllers, you can
+          href="../OperationsGuide/Logging/CHG-2-logging-overview.dita#topic5937">Centralized
+          Logging service</xref> take up too much space on the Standard Region controllers, you can
         manually adjust the number of days that logs are retained. By default, a cron job,
-        <codeph>elastic_cleanup.sh</codeph>, deletes these logs after 8 days. This means all the
+          <codeph>elastic_cleanup.sh</codeph>, deletes these logs after 8 days. This means all the
         logs older than 8 days will be deleted when the cron job runs daily.</p>
       <p><b>Resolution</b></p>
-      <p id="logs2">You can change how long logs are retained  by editing the cron script file,
+      <p id="logs2">You can change how long logs are retained by editing the cron script file,
           <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> file. Set the <codeph>DAYS</codeph>
-        parameter in  to some lower number (For example, <codeph>DAYS=3</codeph>).
+        parameter in to some lower number (For example, <codeph>DAYS=3</codeph>).
         <!--HCG-1396--></p>
     </section>
-    
     <section id="keystone">
       <title>Cannot use admin commands in OpenStack Identity CLI</title>
       <p><b>System Behavior/Message</b></p>

@@ -17,6 +17,10 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
+        <li><xref href="#topic10581c2t/Ejabberd" format="dita">Ejabberd service failed</xref></li>
+        <li><xref href="#topic10581c2t/launching" format="dita">Launching an image failed and error
+            message displayed </xref>
+        </li>
         <li><xref href="#topic10581c2t/storage" format="dita">Changing the storage size allotments
             of the KVM controller nodes caused DRBD sync issue</xref></li>
         <li><xref href="#topic10581c2t/volume" format="dita"/></li>
@@ -37,6 +41,24 @@
       <p>Also see <xref href="CGH-2-troubleshooting-install.dita#topic10581c2ti">Installation
           Troubleshooting</xref>. </p>
     </section>
+        
+    <section id="Ejabberd"><title>Ejabberd service failed</title><p><b>System
+        Behavior/Message</b></p><p>Ejabberd service failed after running for sometime or during the
+        deployment it failed to start successfully. </p><p>For more information, see: Attached
+        vendor info and patch.</p>
+      <b>Cause </b>
+      <p>Nuage Ejabberd service issue.</p>
+      <b>Resolution</b>Attached <xref href="16-0907%5B2%5D.pdf" format="pdf">guide</xref> and <xref
+        href="3.2.9_2_license.tar" format="tar">3.2.9_2_license.tar</xref> patch file for HCG 2.0 is
+      required from Nuage to resolve this issue.</section>
+    <section id="launching"><title>Launching an image failed and error message displayed
+          </title><p><b>System Behavior/Message</b></p><p>Launching an image failed and following
+        error message displayed "Image Launch Failure: aborted: Failure prepping block device".</p>
+      <b>Cause</b>
+      <p> The disk size required by the image doesn't meet the flavor or launch settings.</p>
+      <b>Resolution</b>
+      <p>Run <codeph>qemu-img info /tmp/rhel67.img</codeph> to find the required image size and set
+        the minimum disk size to meet or exceed that size on the image settings.</p></section>
     <section id="storage">
       <title>Changing the storage size allotments of the KVM controller nodes caused DRBD sync
         issue</title>
