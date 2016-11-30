@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic7148cipd">
+        <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Step 1 - Preparing
+                the Installation Environment</title>
+        <titlealts>
+                <searchtitle>HPE Helion OpenStack Carrier Grade Installation
+                        Prerequisites</searchtitle>
+        </titlealts>
+        <prolog>
+                <metadata>
+                        <othermeta name="layout" content="default"/>
+                        <othermeta name="product-version"
+                                content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                        <othermeta name="role" content="Storage Administrator"/>
+                        <othermeta name="role" content="Storage Architect"/>
+                        <othermeta name="role" content="Michael B"/>
+                        <othermeta name="product-version1"
+                                content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                </metadata>
+        </prolog>
+        <body>
+                <bodydiv id="prereqs"
+                                ><p><!--https://wiki.hpcloud.net/display/HCG/HCG+2.1+RCP+AVS+Denver+Cloud+KVM+Network+Configuration--></p><p>This
+                                document describes the prerequisite steps required to install HP
+                                Helion OpenStack Carrier Grade.</p><section id="hardware">
+                                <title>Hardware and software requirements</title>
+                                <p>Before you start, if you have not done so already, make sure your
+                                        environment meets the hardware and software requirements.
+                                        See the <xref
+                                                href="../carrier-grade-support-matrix2.dita#topic1773cgsm2"
+                                                >HPE Helion OpenStack Support Matrix</xref>.</p>
+                        </section><section id="kvm">
+                                <title>Preparing the lifecycle manager host</title>
+                                <p>Perform the following tasks on the lifecycle manager host:</p>
+                                <ul id="ul_ktm_3fb_y5">
+                                        <li><xref href="#topic7148cipd/linux" format="dita">Install
+                                                  HPE Linux</xref></li>
+                                        <!--<li><xref href="#topic7148cipd/proxy" format="dita"/></li>-->
+                                        <!--<li><xref href="#topic7148cipd/packages" format="dita"/></li>-->
+                                        <!--<li><xref href="#topic7148cipd/configure-the-xrdp-remote-desktop-display" format="dita"/></li><li><xref href="#topic7148cipd/ntp" format="dita"/></li>-->
+                                        <li><xref href="#topic7148cipd/ssh" format="dita"/></li>
+                                        <!--<li><xref href="#topic7148cipd/ldap" format="dita"/></li>-->
+                                </ul>
+                        </section><section id="linux">
+                                <title>Download the HPE Linux </title>
+                                <p>The lifecycle manager host must have HPE Linux installed before
+                                        performing the HPE Helion OpenStack Carrier Grade
+                                        installation. </p>
+                        </section><section>
+                                <p><u>Launch the Software Depot to download installation
+                                                packages</u></p>
+                                <p>Launch the <xref href="http://www.hpe.com/Helion/CarrierGrade"
+                                                format="html" scope="external">Software Depot for HP
+                                                Helion Carrier Grade</xref>. You must obtain an HP
+                                        Passport user account in order to download these files. </p>
+                                <p>
+                                        <ol id="hpelinux">
+                                                <li>Click <b>Sign In</b> to log in using your HP
+                                                  Passport account. <p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-signin.png"
+                                                  width="600" id="image_znx_k1q_mv"/></p></li>
+                                                <li>After signing in, click the <b>Select</b> button
+                                                  on the right side of the page.<p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-select.png"
+                                                  width="600" id="image_ylt_h4p_mv"/></p></li>
+                                                <li>Enter your personal information and address and
+                                                  accept the license agreement and click
+                                                  <b>Next</b>.</li>
+                                                <li>See the <b>Download and unpack the installation
+                                                  packages </b>section below for the packages you
+                                                  need.</li>
+                                                <li>From the list of software, select the download
+                                                  method:<ul id="ul_cn1_ptp_mv">
+                                                  <li><b>Use HPE Download Manager</b>. Use the HPE
+                                                  Download Manager to specify where the installation
+                                                  package will be saved.</li>
+                                                  <li><b>Use Standard Download</b>. Use the standard
+                                                  download method for your browser.</li>
+                                                  </ul><p><image
+                                                  href="../../../media/carrier.grade.docs/2.1/carrier-grade-depot-download.png"
+                                                  width="600" id="image_mtk_15p_mv"/></p><note>If
+                                                  you selected to use the HPE Download Manager, and
+                                                  this is the first time you have download the HPE
+                                                  Software Depot from the current computer, you will
+                                                  need to install the HPE Download Manager:<ol
+                                                  id="ol_uxx_jsp_mv">
+                                                  <li>In the Open HP_Download_Manager.exe dialog
+                                                  box, click <b>Save As</b>.</li>
+                                                  <li>Locate and double-click the downloaded
+                                                  <codeph>HP_Download_Manager.exe</codeph>
+                                                  file.</li>
+                                                  <li>Accept the license agreement and click
+                                                  <b>Next</b> to use the wizard to install.</li>
+                                                  </ol></note></li>
+                                        </ol>
+                                </p>
+                                <p><u>Download the installation files</u></p>
+                                <p>In Software Depot: <ol id="ol_myr_zkn_xw">
+                                                <li>Locate the following files to download: </li>
+                                        </ol></p>
+                        </section><section>
+                                <p>
+                                        <ol
+                                                conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/hpelinux"
+                                                id="ol_lx4_bfh_cv">
+                                                <li/>
+                                        </ol>
+                                </p>
+                        </section><!--<section id="pub-key"> <title>Obtain a public key</title>
+<p>On the lifecycle manager host, the user <codeph>root</codeph> must have a public key.</p>
+<ol>
+<li>Launch a terminal and log in to your lifecycle manager host as root:<p>sudo su -</p></li>
+<li>Use the following command to create the key. Accept the default
+          values.<p>~/.ssh/id_rsa</p></li>
+<li>Install the public key into the authorized keys on the KVM
+            Host:<codeblock><codeph>ssh-copy-id &lt;IP_address&gt;
+</codeph></codeblock><p>Enter the
+            IP address of the default network gateway on the lifecycle manager host.</p></li>
+</ol>
+</section>
+--><!--<section id="proxy"><title>Configure proxy information</title><p>Before you begin your installation on the lifecycle manager host, configure the proxy information for your environment using the following steps:</p><ol id="ol_ltm_3fb_y5"><li>Launch a terminal and log in to your lifecycle manager host as root:<codeblock><codeph>sudo su -
+</codeph></codeblock></li><li>Edit the <codeph>/etc/environment</codeph> file to add the following lines, using values specific to your environment. <p><b>Note:</b> The <codeph>export no-proxy</codeph> command is optional per Lakshmi email 10/9/15</p><codeblock><codeph>vsc_config_restore.yml ATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export http_proxy=http://&lt;web_proxy_IP&gt;/
+export https_proxy=http://&lt;web_proxy_IP&gt;/
+export no_proxy=localhost,127.0.0.1,&lt;IP_address>,&lt;provider_network></codeph></codeblock><p>Where:</p><codeblock>&lt;web_proxy_IP> is your web proxy IP address.
+&lt;IP_address> is the IP address of the lifecycle manager host</codeblock></li><li>Source the <codeph>environment</codeph> file:<codeblock><codeph>source /etc/environment
+</codeph></codeblock></li></ol></section>--><!--<section id="packages"><title>Install additional packages</title><p>The HPE Helion OpenStack Carrier Grade installation process requires a number of additional Linux packages. All of these packages are included in the <codeph>HelionOpenStack-2.1.iso</codeph> you downloaded and were be deployed to the proper locations when you mounted the ISO. However, you need to install ifenslave package.</p><p>To install the package on the lifecycle manager host: <ol id="ol_gvk_h54_cv"><li>SSH into the lifecycle manager host.</li><li>Execute the following command:<codeblock>apt-get install ifenslave</codeblock></li></ol></p><p>The ifenslave tool is used to attach and detach slave network devices to a bonding device.</p>Leave this in case needed later: After installing the base version of the HPE Linux operating system on the lifecycle manager host the following packages need to be installed:<p><ul id="ul_dlb_fr1_y5"><li>ethtool </li><li>sudo </li><li>vnc4server </li><li>qemu-system </li><li>libvirt-bin </li><li>python-libvirt </li><li>sshpass </li><li>ansible </li><li>ifenslave </li><li>bridge-utils</li></ul></p><p><ol id="ol_gbb_ls1_y5"><li>Execute the following command on the lifecycle manager host to install these packages:<codeblock>apt-get install ethtool sudo vnc4server qemu-system libvirt-bin python-libvirt sshpass ansible ifenslave bridge-utils</codeblock></li><li>Reboot the server</li><li>Log out and re-login to the lifecycle manager host to activate the proxy configuration.</li></ol></p></section>--><!--<section id="configure-the-xrdp-remote-desktop-display"><title>Configure the XRDP remote desktop display</title><p>Configure XRDP on the lifecycle manager host for the remote desktop connection to access the server remotely as follows.</p><ol id="ol_ntm_3fb_y5"><li>Edit the <codeph>sesman.ini</codeph> file: <ol id="ol_otm_3fb_y5"><li>Open the file: <codeblock>vi /etc/xrdp/sesman.ini </codeblock></li><li>Update the <codeph>MaxSessions=1</codeph> to <codeph>MaxSessions=50</codeph>.</li><li>Save and close the file.</li></ol></li><li>Execute the following command to configure the system to use XRDP:<codeblock><codeph>echo "xfce4-session" &gt; ~/.xinitrc
+</codeph></codeblock></li><li>Execute the following command to restart the XDRP service: <codeblock>sudo /etc/init.d/xrdp restart</codeblock></li></ol><p>If the XDRP display does not work as expected, (you see a gray screen): <ol id="ol_hnf_vpk_yt"><li>Update the <codeph>startwm.sh</codeph> file:<codeblock><codeph>vi /etc/xrdp/startwm.sh
+
+#!/bin/sh
+
+if [ -r /etc/default/locale ]; then
+. /etc/default/locale
+export LANG LANGUAGE
+fi
+
+#. /etc/X11/Xsession
+. /usr/bin/startxfce4
+</codeph>
+</codeblock><p><b>Note:</b> Make sure you add a space between <codeph>.</codeph> and <codeph>/</codeph>.</p></li><li>Restart XDRP:<codeblock><codeph>sudo /etc/init.d/xrdp restart
+
+</codeph></codeblock><p>When you XRDP to the lifecycle manager host, the screen appears similar to the following image:</p><image href="../../../media/CGH-install-xrdp.png" id="image_pln_cdm_vs"/> </li></ol></p></section><section id="ntp"><title>Install and configure NTP</title><p>You must configure the lifecycle manager host as an NTP client.</p><p>You can install NTP on the lifecycle manager host and configure it as an NTP server. Or, you can use a pre-existing NTP server that is reachable from the management network. </p><p>For information on configuring the lifecycle manager host as an NTP client, see <xref href="../prereqs/carrier-grade-install-NTP.dita#topic4740/client"/>.</p><p>For information on installing NTP on the lifecycle manager host, see <xref href="../prereqs/carrier-grade-install-NTP.dita">Installing an NTP Server</xref>.</p></section>--><p/><b>Download
+                                the OVS Bridge Patch</b><section
+                                conref="../../PostInstallPatches/CGH-21-post-install-patching.dita#topic10581pdp21/launch"
+                                        ><title>Start the patch download</title><p>To download the
+                                        patch you need from the Software Updates and Licensing site,
+                                        shown above: </p></section><p><b>Start the patch
+                                        download</b></p>Select <b>the HCG 2.1 OVS Bridge</b> Patch
+                        from the <b>Downloads</b> list and then click <b>Download</b><p><image
+                                        id="image_thg_bv5_xw"
+                                        href="../../../media/carrier.grade.docs/2.1/CGH-21-OVS-Bridge-patches-select-1.png"
+                                        width="500"/></p>Un-tar the downladed files (compressed
+                        patch files with extension <b>tar.gz</b> and <b>.tar</b>) until the
+                                        <p><codeph>infra-playbooks-ovs.patch </codeph>(patch to be
+                                applied on KVM Host) , <codeph>knc-ovs-bridge.patch</codeph> (patch
+                                to be applied on HLM VM) and readme files are available. The readme
+                                with the patch download contains information on files changed by
+                                these patches. Check if the MD5 checksum verification file is
+                                extracted along with the patch file. </p><note>For validating the
+                                integrity of the downloaded file, you can run the MD5 checksum
+                                verification on the downloaded patch file and verify if the
+                                fingerprint of the file matches the version available on the
+                                server.</note><section id="ssh">
+                                <title>Configure SSH</title>
+                                <p>On the lifecycle manager host, the OpenSSH server must be running
+                                        and the firewall configuration should allow access to the
+                                        SSH ports.</p>
+                                <ol id="ol_ptm_3fb_y5">
+                                        <li>Disable strict host key checking: <ol id="ol_cxy_4rk_yt">
+                                                  <li>In the <codeph>~/.ssh/config</codeph> file
+                                                  (create the file if it does not exist) add
+                                                  following
+                                                  lines<codeblock>Host *
+StrictHostKeyChecking no </codeblock></li>
+                                                  <li>Save the file,</li>
+                                                </ol></li>
+                                        <li>Configure the public key. <ol id="ol_hbt_d5q_mv">
+                                                  <li>Enter the following
+                                                  command:<codeblock>ssh-keygen -t rsa </codeblock></li>
+                                                  <li>Press Enter to use default path
+                                                  (<codeph>~/.ssh/id_rsa</codeph>)</li>
+                                                  <li>Press Enter when prompted for the
+                                                  <codeph>passphrase</codeph>.</li>
+                                                  <li>Press Enter to confirm the empty
+                                                  <codeph>passphrase</codeph>.</li>
+                                                </ol><p>The output of the public key will display,
+                                                  similar to the
+                                                  following:</p><codeblock><codeph>ssh-copy-id 192.168.122.1 </codeph></codeblock><p>If
+                                                  you get a <i>permission denied</i> error, make
+                                                  sure you are logged in as root.</p></li>
+                                        <li>Configure passwordless SSH access <ol id="ol_h13_kqk_yt">
+                                                  <li>Edit the <codeph>/etc/ssh/sshd_config</codeph>
+                                                  file.</li>
+                                                  <li>Set the following values:
+                                                  <codeblock># Authentication:
+LoginGraceTime 120
+PermitRootLogin yes
+StrictModes yes </codeblock></li>
+                                                  <li>Execute the following command to copy the
+                                                  public key on the local host to the
+                                                  authorized_keys file on the remote host. This
+                                                  command also changes the permissions of the remote
+                                                  user's home, <b>~/.ssh</b>, and
+                                                  <b>~/.ssh/authorized_keys</b> to remove group
+                                                  writability.<codeblock>ssh-copy-id &lt;IP_Address></codeblock>Where
+                                                  IP_Address is is the gateway of the default
+                                                  network on the lifecycle manager.<p><b>Note:</b>
+                                                  If you get a permission denied error, make sure
+                                                  you are logged in as root. Then repreat the
+                                                  <codeph>ssh-copy-id</codeph> command.</p></li>
+                                                </ol></li>
+                                        <li>Restart the SSH
+                                                service:<codeblock>service ssh restart</codeblock></li>
+                                </ol>
+                        </section><!--<section id="ldap"><title>Integrate LDAP</title><p><b>OPTIONAL:</b> The HPE Helion OpenStack Identity service can use Lightweight Directory Access Protocol (LDAP) to integrate your organization's existing directory service and user account management processes.</p><p>See <xref href="../prereqs/carrier-grade-install-ldap-enabling.dita#topic10581cgile">Enabling LDAP</xref></p></section>--></bodydiv>
+                <section><title>Next Step</title>Before installing HPE Helion OpenStack Carrier
+                        Grade, you are responsible for preparing the network for all
+                        installations.<p>See <xref
+                                href="../prereqs/carrier-grade-install-network-prepare.dita#topic7646cginp"
+                                >Preparing the Network for Installation</xref></p></section>
+        </body>
+</topic>

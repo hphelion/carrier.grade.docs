@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2idui">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Deploy the Standard
+        Region using the HCG Dashboard (Standalone Denver Deployment) </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+    </metadata>
+  </prolog>
+  <body>
+        <p><!--https://wiki.hpcloud.net/pages/viewpage.action?pageId=56149826--></p>
+        <p><b>If you are deploying a HPE Helion OpenStack Carrier Grade onto a standalone KVM, follow
+                the steps n this section.</b></p>
+        <p><b>Note:</b> If you plan to deploy a KVM cluster with multiple servers for Service
+            Availability (SA), see <xref
+                href="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa">Deploying the
+                Standard Region in a KVM Cluster</xref>.</p>
+        <p>After the lifecycle manager is installed, the next task in installing the Denver topology
+            is to deploy the HPE Helion OpenStack cloud. Follow the steps in this section to use the
+            HCG Dashboard UI to perform the required tasks. Or, you can <xref
+                href="CGH-2-install-denver-standalone-cli.dita#topic10581c2idclinsa">use the HLM
+                CLI</xref> to perform these tasks.</p>
+        <p>The HCG Dashboard UI is a cloud management tool that allows users to define, deploy,
+            manage, and monitor a HPE Helion OpenStack cloud. The tool helps you provide and validate
+            the cloud definitions required to deploy your cloud and guide you through the
+            deployment. </p>
+        <p><b>Launch the HCG Dashboard</b></p>
+        <p>The HCG Dashboard will be available as soon as the lifecycle manager is deployed. The
+            dashboard service runs on port 8080 and can be accessed using
+                <codeph>http://&lt;CLM_IP>:8080/</codeph>.</p>
+        <p conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/clmip"/>
+        <p>
+            <ol>
+                <li>Launch a browser and navigate to <codeph>http://&lt;CLM_IP>:8080/</codeph>.</li>
+                <li>Log into the HCG Dashboard. By default use <ul id="ul_qyn_brf_cv">
+                        <li>username: <codeph>cghelion</codeph>
+                        </li>
+                        <li>password: <codeph>cghelion</codeph></li>
+                    </ul><p>If this is the first time you have logged in, you will be prompted to
+                        change the password before you can continue. Once password is updated, you
+                        will need to log in again with newly created password.</p></li>
+            </ol>
+        </p>
+        <section>
+            <title>Specify the cloud definition</title>
+            <p>Use the <b>Cloud Input</b> wizard on the UI to:<ol id="ol_byp_hrf_cv">
+                    <li>Specify a name for the cloud: <p
+                            conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/cloudname"
+                        /></li>
+                    <li>Specify the Standard Region servers and map the servers to the
+                        controllers.</li>
+                    <li>Validate the Standard Region servers for connectivity and credentials.</li>
+                    <li>Specify network information for all required networks (CLM, API, BLS). If
+                        you do not have segment IDs, enter <codeph>-1</codeph>. </li>
+                    <li>Validate the network information you provided.</li>
+                    <li>Specify all required variables.</li>
+                    <li>Specify information for any VSA and HP 3PAR storage backend
+                                configuration.<p><b>Note: </b> There is no validation integrated for
+                            storage configuration with cloud. </p></li>
+                    <li>Validate the DNS Server IP and NTP Server IP. </li>
+                    <li>Click <b>Finish</b> to save all data in JSON files that will be used during
+                        the deployment.</li>
+                </ol></p>
+        </section>
+        <section conref="CGH-2-install-lifecycle-denver-cluster.dita#topic10581c2ild/disk-size"/>
+        <section><title>Deploy the cloud </title>After you enter all necessary information for your
+            cloud, you will be redirected to a page where you can see description and current status
+            of your cloud. The page appears similar to the following:<p><image
+                    href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard.png"
+                    width="500" id="image_lw5_msf_cv"/></p><ol id="ol_i2y_yxf_cv">
+                <li>Click <b>DEPLOY</b> to start deploying the cloud.<p><image
+                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy.png"
+                            width="500" id="image_xh4_jyl_x5"/></p>The deployment consists of four
+                    phases: provision, generate, netinit and deploy. As the phases progress, you
+                    will see the name of your cloud and current status at the top of the page and
+                    the marker on the wizard will move to the process as it completes.<p>To execute
+                        a particular process, you can click on a step and click <b>Run</b>. Once you
+                        hit the <b>Run</b> button, you will see your process being executed as shown
+                        below.</p><b>Note:</b> To execute a process, all previous processes must be
+                    completed. <p>The process runs asynchronously in background. So while a process
+                        is running, if you close your session or browser, you can still return to
+                        the same page again to check status of your process.</p>Also, when your
+                    process is running, you can look at the current log content by clicking on the
+                    "logs" tab and selecting a log file pertaining to that process as seen
+                            below:<p><image
+                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-logs.png"
+                            width="500" id="image_znz_lyl_x5"/></p>Once the process completes, you
+                    will be notified whether it passed or failed as seen below:<p><image
+                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deployed.png"
+                            width="500" id="image_s5p_nyl_x5"/></p></li>
+            </ol></section>
+        <section
+            conref="CGH-2-install-denver-standard-cluster.dita#topic10581c2idclisa/ldap-keystone"
+            id="ldap-keystone"/>
+        <section>
+            <title>Manage the cloud</title>
+            <p>After the cloud is deployed, you can use the <b>Manage Cloud</b> wizard in the HCG
+                Dashboard to reset services including: <ul id="ul_ptt_3tf_cv">
+                    <li>MySQL</li>
+                    <li>RabbitMQ</li>
+                    <li>NTP</li>
+                    <li>Apache</li>
+                    <li>OpenStack services (Keystone, Glance, Swift, Cinder) </li>
+                    <li>Centralized Logging services (ElasticSearch, Logstash, Kibana, Beaver,
+                        Icinga and Attis) </li>
+                </ul></p>
+            <p>You can also edit an existing cloud definition for the Inventory Nodes.</p>
+        </section>
+        <section>
+            <title>Next Step</title>
+            <p><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd"
+                    >Launching the Horizon Interface</xref></p>
+        </section>
+    </body>
+</topic>

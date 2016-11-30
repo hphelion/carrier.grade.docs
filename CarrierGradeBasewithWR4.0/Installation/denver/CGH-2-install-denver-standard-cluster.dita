@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2idclisa">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Deploy the Standard
+        Region in a KVM Cluster (Denver Deployment)</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+    </metadata>
+  </prolog>
+  <body>
+        <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
+        <p><b>If you are deploying a KVM cluster with multiple servers for Service Availability
+                (SA), follow the steps in this section.</b></p>
+        <p>After the lifecycle manager VM is installed, the next task in installing the Denver topology
+            is to deploy the Standard Region, which includes an HPE Helion OpenStack cloud. This
+            section describes how to use the lifecycle manager CLI to deploy the Standard
+            Region.</p>
+        <section id="launch">
+            <title>Launch the HPE Helion OpenStack cloud</title>
+            <p>Use the following steps on the lifecycle manager host to log on to the lifecycle
+                manager:</p>
+            <ol id="ol_ncd_wff_zt">
+                <li>From the lifecycle manager host, log into the lifecycle manager VM.
+                        <codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p id="clmip">Where:
+                            <codeph>CLM_IP</codeph> is the IP address for the lifecycle manager VM
+                        and can be found in the
+                            <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph> file under
+                            <codeph>hlm_clmstaticip</codeph> field.</p><p>Use the default
+                        credentials: </p><p>
+                        <codeblock>User Name: cghelion
+Password: cghelion</codeblock>
+                    </p></li>
+                <li>Execute the following command to switch to the root
+                    user:<codeblock>sudo su -</codeblock></li>
+                <li>Change to the home directory.<codeblock>cd ~</codeblock></li>
+            </ol>
+        </section>
+        <section id="define">
+            <title>Provision the new cloud</title>
+            <ol id="ol_kwm_c1k_zt">
+                <li>Execute the following command to provision and configure the HPE Helion
+                    OpenStack cloud. <p>
+                        <codeblock>hlm define &lt;cloud-name&gt; -t denver_rcp</codeblock>
+                    </p><p>Where:: <codeph>&lt;cloudname></codeph> is the name of the cloud to
+                        create.</p><p id="cloudname">The cloud name can be any combination of up to
+                        40 digits and/or letters:<ul id="cloudname0">
+                            <li>No special characters or spaces allowed;</li>
+                            <li id="cloudname2">Must be greater than 0 characters;</li>
+                            <li id="cloudname3">No restriction on the number of letters or digits (0 or more).</li>
+                        </ul></p><p>The command creates the
+                            <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory, which
+                        contains several JSON template files. </p></li>
+            </ol>
+        </section>
+        <section id="jsons">
+            <title>Configuring JSON files </title>
+            <p>The HPE Helion OpenStack deployment requires several JSON files.</p>
+            <p><b>Important:</b> Do not store backup of the JSON files inside your cloud directory
+                or any where inside the <codeph>/var/hlm/clouds</codeph> directory. You can create a
+                backup folder on <codeph>/root/</codeph> directory or on a remote system.
+                <!--HCG-681--></p>
+        </section>
+        <section id="node-prov"><title>Edit the node-provision.json file </title><p
+                id="node-prov-intro">Modify the <codeph>node-provision.json</codeph> file in the
+                    <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory of the lifecycle
+                manager. This file supplies input values to the hprovision script, later in the
+                installation.</p><ol id="ol_sds_ms3_y5">
+                <li id="node-prov1">Copy node-provision.json from the lifecycle manager host to
+                    cloud folder on the lifecycle manager
+                        VM:<codeblock>~/ scp /cg/node-provision.json root@&lt;CLM_IP>:/var/hlm/clouds/&lt;cloudname&gt;</codeblock><p>Where:
+                            <ul id="ul_k3h_dt3_y5">
+                            <li><codeph>&lt;cloudname></codeph> is the name of the cloud you created
+                                with the <codeph>hlm define</codeph> command.</li>
+                            <li><codeph>CLM_IP</codeph> is located in the IP address for the
+                                lifecycle manager VM in the
+                                    <codeph>/root/infra-ansible-playbooks/group_vars/all</codeph>
+                                file under <codeph>hlm_clmstaticip</codeph> field.</li>
+                        </ul></p></li>
+                <li id="node-prov2">Edit the following fields in the
+                        <codeph>node-provision.json</codeph> file: <table id="table_ycw_qrn_xs">
+                        <tgroup cols="2">
+                            <colspec colname="col1" colsep="1" rowsep="1"/>
+                            <colspec colname="col2" colsep="1" rowsep="1"/>
+                            <thead>
+                                <row>
+                                    <entry colsep="1" rowsep="1">Field</entry>
+                                    <entry colsep="1" rowsep="1">Description</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>Pxe-mac-address</entry>
+                                    <entry>MAC address of the interface you want to PXE boot onto.
+                                        This is not same as iLO MAC address.</entry>
+                                </row>
+                                <row>
+                                    <entry>pm_ip</entry>
+                                    <entry>Power management IP (iLO ip)</entry>
+                                </row>
+                                <row>
+                                    <entry>pm_user</entry>
+                                    <entry>Power management user (iLO username)</entry>
+                                </row>
+                                <row>
+                                    <entry>pm_pass</entry>
+                                    <entry>Power management password (iLO password)</entry>
+                                </row>
+                                <row>
+                                    <entry>failure_zone, vendor, model, os_partition_size,
+                                        data_partition_size</entry>
+                                    <entry>Enter the same value as for these fields an in the
+                                            <codeph>nodes.json</codeph> file used during cloud
+                                        deployment </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table></li>
+                <li>Set <codeph>opensaf</codeph> field in the <codeph>node-provision.json</codeph>
+                    file to <codeph>1</codeph> if the cluster is administered by OpenSAF and 0 if
+                    the cluster is administered by a different package. The value must be the same
+                    for each controller:<codeblock>"opensaf": 1</codeblock></li>
+                <li>Set the <codeph>kvm_pass_enc</codeph> to <codeph>0</codeph>  in the
+                        <codeph>node-provision.json</codeph> file if you are entering the
+                        <codeph>pm_pass</codeph> in clear text in the file. Set to
+                        <codeph>1</codeph> if <codeph>pm_password</codeph> was encrypted by the UI.  </li>
+            </ol> Click here to see a <xref
+                href="../json/carrier-grade-install-kvm-only-json.dita#topic10581cgikoj">sample
+                node-provision.json file</xref>. </section>
+        <section>
+            <title>Create a JSON file </title>
+            <p>Create a <codeph>KVM_hosts.json</codeph> file and enter the following values,
+                configured for your environment (IP addresses masked for security):
+                <codeblock>[
+    {
+        "name": "rack1-ctrl1", 
+        "kvm_ip": "10.207.121.249", 
+        "kvm_user": "root", 
+        "kvm_pass": "password_inclear",
+	    "kvm_pass_enc": 0, 
+        "opensaf": 1,
+        "opensaf_dir": "/data1/opensaf"
+    }, 
+    {
+        "name": "rack1-ctrl2", 
+        "kvm_ip": "10.207.121.250", 
+        "kvm_user": "root", 
+        "kvm_pass": "U2FsdGVkX1+aXu9V7hHddpL+wPacWFfpxyLGW0Yx1KQ=", 
+	    "kvm_pass_enc": 1, 
+        "opensaf": 1,
+        "opensaf_dir": "/data1/opensaf"
+    }
+]</codeblock></p>
+            <p>Where:</p>
+            <p>
+                <ul id="ul_k3f_pyn_cv">
+                    <li><codeph>kvm_ip</codeph> is the CLM IP address</li>
+                    <li><codeph>kvm_user</codeph> is the user to SSH into the lifecycle manager
+                        host. </li>
+                    <li><codeph>kvm_pass</codeph> is the password to SSH into the lifecycle manager
+                        host.</li>
+                    <li><codeph>kvm_pass_enc</codeph> if you are entering the KVM password in clear
+                        text in the file. Set to <codeph>1</codeph> if KVM password was encrypted by
+                        the UI.</li>
+                    <li><codeph>opensaf</codeph> should be set to <codeph>1</codeph> if the cluster
+                        is administered by OpenSAF and 0 if the cluster is administered by a
+                        different package. The value must be the same for each controller.</li>
+                    <li><codeph>opensaf_dir</codeph> is the path of the directory shared by each
+                        node of the cluster in the format <codeph>/data1/opensaf</codeph>, if it is
+                        not an OpenSAF cluster it can be set to “” (should be same value for each
+                        Node entry in KVM_Hosts.json) </li>
+                </ul>
+            </p>
+        </section>
+        <section id="pxe-boot">
+            <title>Configure PXE boot</title>
+            <p>After you edit the <codeph>node-provision.json</codeph> file, you must enable
+                one-time PXE boot on the servers to set the correct boot order. Execute the
+                following on the lifecycle manager:</p>
+            <ol id="ol_d5m_dhf_zt">
+                <li>Copy the <codeph>ilopxebootonce.py</codeph> from the
+                        <codeph>/root/cg-hlm/dev-tools/ilopxebootonce.py</codeph> to the
+                        <codeph>&lt;cloudname></codeph> directory where you have the
+                        <codeph>node-provision.json</codeph> file.</li>
+                <li>Execute the following script:
+                    <codeblock>python ilopxebootonce.py node-provision.json</codeblock></li>
+            </ol>
+            <p>After the script is run, the <codeph>Current One-Time Boot Option</codeph> is set to
+                    <codeph>Network Device 1</codeph> on all the servers listed in
+                    <codeph>node-provision.json</codeph> file.</p>
+        </section>
+        <section id="environment">
+            <title>Edit the environment.json file</title>
+            <p>Modify the <codeph>environment.json</codeph> file in the
+                    <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory of the lifecycle
+                manager. Configure the VLANs and network addresses as appropriate for your
+                environment. Set the following for the CLM, CAN, and BLS
+                network:<codeblock>"cidr": 
+          "start-address": </codeblock> The three
+                controller nodes should have CLM, CAN, <!--EXT,-->BLS on
+                eth0<!-- and TUL on eth1-->.
+                <!--Hiding for RC0 
+              <p>The two compute nodes should have CLM, EXT, BLS on eth0 and TUL on eth1.</p>
+           -->
+            </p>
+            <p>
+                <b>Example:</b>
+            </p>
+            <p>In the following example, the IP addresses have been masked for security: </p>
+            <p><codeblock>{
+    "product": {
+        "version": 1
+    },
+
+    "node-type": [
+        {
+            "name": "CCN",
+            "interface-map": [
+                {
+                    "name": "INTF0",
+                    "ethernet-port-map": {
+                        "interface-ports": [ "eth1" ]
+                    },
+                    "logical-network-map": [
+                        {
+                            "name": "CLM",
+                            "type": "vlan",
+                            "segment-id": "",
+                            "network-address": {
+                                "cidr": "10.207.x.x/24",
+                                "start-address": "10.207.x.x",
+                                "gateway": "10.207.x.x"
+                            }
+                        }
+                    ]
+		  },
+		  {
+                    "name": "INTF1",
+                    "ethernet-port-map": {
+                        "interface-ports": [ "eth2" ]
+                    },
+                    "logical-network-map": [
+                        {
+                            "name": "CAN",
+                            "type": "vlan",
+                            "segment-id": "",
+                            "network-address": {
+                                "cidr": "10.207.x.x/24",
+                                "start-address": "10.207.x.x",
+                                "gateway": "10.207.x.x"
+                            }
+                        }
+		     ]
+		  },
+		  {
+                    "name": "INTF2",
+                    "ethernet-port-map": {
+                        "interface-ports": [ "eth3" ]
+                    },
+                    "logical-network-map": [
+                        {
+                            "name": "BLS",
+                            "type": "vlan",
+                            "segment-id": "",
+                            "network-address": {
+                                "cidr": "10.207.x.x/24",
+                                "start-address": "10.207.x.x",
+                                "gateway": "10.207.x.x"
+                            }
+                        }
+		     ]
+                }
+            ]
+        }
+    ]
+}
+</codeblock>
+                <b>NOTE:</b> The configuration processor assigns the first address of the CLM
+                address range to itself for serving python and debian repositories. Make sure that
+                you set the first IP address of the CLM range for the eth2 (CLM) address of the HLM
+                host.</p>
+        </section>
+        <section id="lnet">
+            <title>Edit the lnet-control.json file <!--NEED THIS??--></title>
+            <p>Modify the <codeph>lnet-control.json</codeph> file in the
+                    <codeph>/var/hlm/clouds/&lt;cloudname></codeph> directory of the lifecycle
+                manager.</p>
+        </section>
+        <section id="ansible">
+            <title>Edit the ansible.json file</title>
+            <p>Modify the <codeph>ansible.json</codeph> file in the
+                    <codeph>/var/hlm/clouds/&lt;cloudname>/vars</codeph> directory of the lifecycle
+                manager. Make sure the DNS and NTP server details in the
+                    <codeph>properties</codeph> section are correct for your environment. </p>
+            <p>In the following example, the IP addresses have been masked for security: </p>
+            <p>
+                <codeblock>{
+    "product": {
+        "version": 1
+    },
+
+    "property-groups": [
+        {
+            "name": "ansible-vars",
+            "properties": {
+                "dns_domain_name": "helion.cg",
+                "dns_address": "10.x.x.x",
+                "ext_dns_ip": "10.x.x.x",
+                "upstream_ntp_servers": [
+                    "10.x.x.x",
+                    "16.x.x.x",
+                    "2.debian.pool.ntp.org"
+                ],
+                "ssl_cert_file": "ca.crt",
+                "ssl_key_file": "cakey.pem",
+                "ssl_passphrase": "cghelion"
+            }
+        }
+    ]
+}
+</codeblock>
+            </p>
+        </section>
+        <section id="wr">
+            <title>Edit the wr.json file</title>
+            <p>Modify the <codeph>wr.json</codeph> file in the
+                    <codeph>/var/hlm/clouds/&lt;cloudname>/vars/</codeph> directory of the lifecycle
+                manager with values appropriate for your environment. Make sure the CLM, BLS and CAN
+                IP addresses in the <codeph>network</codeph> section are correct for your
+                environment.</p>
+            <p>In the following example, the IP addresses have been masked for security: </p>
+            <p>
+                <codeblock>{
+    "product": {
+        "version": 1
+    },
+
+    "property-groups": [
+        {
+            "name": "wr-vars",
+            "properties": {
+                "database_storage": 50,
+                "backup_storage": 300,
+                "shared_instance_storage": 250,
+                "region_name": "regionone",
+                "logical_interface": [
+                    {
+                        "lag_interface": "N",
+                        "lag_mode": 4,
+                        "interface_mtu": 1500,
+                        "interface_ports": [
+                            "eth0"
+                        ],
+                        "network": [
+                            {
+                                "ip_start_address": "10.x.x.x",
+                                "ip_end_address": "10.x.x.x",
+                                "name": "CLM"
+                            },
+                            {
+                                "ip_start_address": "172.x.x.x",
+                                "ip_end_address": "172.x.x.x",
+                                "name": "BLS"
+                            },
+                            {
+                                "ip_start_address": "10.x.x.x",
+                                "ip_end_address": "10.x.x.x",
+                                "name": "CAN"
+                            }
+                        ]
+                    }
+                ],
+                "pxeboot_cidr": "10.x.x.x/24",
+             "license_file_name": "license.lic",
+                "physnet_VLAN_range_mappings": ["physnet1:1000:1999","physnet2:2000:2020"],
+                "pci_vendor_id": ["8086:10ca","8086:10ed"]
+            }
+        }
+    ]
+}</codeblock>
+            </p>
+        </section>
+        <section id="verify-json">
+            <title>Verify the JSON files</title>
+            <p>After editing the JSON files, validate each JSON file to make sure there are no
+                syntax errors using the tool of your preference. For example, using the Python
+                json.tool: </p>
+            <codeblock>python -m json.tool &lt;filename>.json</codeblock>
+        </section>
+        <section id="provision">
+            <title>Provision the cloud nodes and bring the cloud nodes up</title>
+            <ol id="ol_f1b_cmf_zt">
+                <li>On the lifecycle manager, use one of the following commands to start the
+                    provisioning of the HPE Helion OpenStack cloud:
+                        <codeblock>hlm provision -c &lt;cloudname&gt; -r</codeblock><p>Where
+                            <codeph>&lt;cloudname></codeph> is the name of the cloud you created
+                        with the <codeph>hlm define</codeph> command. The script takes approximately
+                        15 to 30 minutes. <b><!--TIME ANY DIFFERENT??--></b></p><image
+                        href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-provision.png"
+                        id="image_ogm_cs1_t5" width="600"/><p id="provision1a">This script prepares
+                        the servers for the HPE Helion OpenStack Carrier Grade cloud installation
+                        including the HPE Linux operating system. The script also PXE boots the
+                        nodes specified in <codeph>node-provision.json</codeph> file and tracks the
+                        PXE boot completion process. The script also creates the
+                            <codeph>nodes.json</codeph> file in the directory. </p><p
+                        id="provision1b">You can log in to the iLO server management tool for each
+                        of the nodes to monitor the boot process. Consult your iLO documentation for
+                        information on how to log into iLO. </p></li>
+                <li id="provision2">Make sure the nodes are booted up using iLO. For
+                            example:<p><image href="../../../media/CGH-2-install-cobbler.png"
+                            width="600" id="image_c5k_d4b_kt"/></p>Once the baremetal nodes are
+                    provisioned, make sure the <codeph>nodes.json</codeph> file is generated to the
+                        <codeph>var/hlm/clouds/&lt;cloudname&gt;/</codeph> directory. The
+                        <codeph>nodes.json</codeph> file will have entries for three controllers. </li>
+                <li id="provision3">Verify that each node in the <codeph>nodes.json</codeph> file is
+                    installed and active. <ol id="ol_g1b_cmf_zt">
+                        <li>Ping the proxy node from the lifecycle manager using the IP address
+                            specified in the <codeph>nodes.json</codeph> file.</li>
+                        <li>SSH to the compute proxy node from the lifecycle manager using the IP
+                            address specified in the <codeph>nodes.json</codeph> file.</li>
+                    </ol></li>
+            </ol>
+        </section>
+        <section id="back-end">
+            <title>Configure the back-end drivers </title>
+            <p id="cinderintro">Configure the back-end drivers to enable management of the OpenStack
+                Block Storage volumes on HPE StoreVirtual VSA and/or HPE StoreServ (3PAR) storage
+                arrays. The HPE Block Storage (Cinder) service allows you to configure multiple
+                storage back-ends. A sample file provides all the variables needed to use VSA and/or
+                3PAR attached to the KVM Region. You need to edit this file for your environment and
+                save as <codeph>cinder_conf</codeph>. </p>
+            <p>Use the following steps to configure back-end support:</p>
+            <ol id="ul_btr_l52_xs">
+                <li>Change to the <codeph>/cinder/blocks</codeph> directory:
+                    <codeblock>cd /var/hlm/clouds/&lt;cloudname>/services/cinder/blocks</codeblock>
+                    Where <codeph>&lt;cloudname></codeph> is the name you assigned to the cloud. The
+                    directory contains several sample Cinder configuration files that you can edit,
+                    depending upon which storage method(s) you are using.</li>
+                <li>Edit the <codeph>cinder_conf.multiBackendSample</codeph> file. <p>Use the
+                            <codeph>enabled_backends</codeph> variable to list each of the back-ends
+                        you are using.
+                        <!--You must specify at least one back-end for the Standard Region and one or more for the KVM Region.--></p><table
+                        id="backend">
+                        <tgroup cols="3">
+                            <colspec colname="col1" colsep="1" rowsep="1"/>
+                            <colspec colname="col2" colsep="1" rowsep="1"/>
+                            <colspec colname="col3" colsep="1" rowsep="1"/>
+                            <thead>
+                                <row>
+                                    <entry colsep="1" rowsep="1">Region/Hypervisor</entry>
+                                    <entry colsep="1" rowsep="1">Volume Backend</entry>
+                                    <entry colsep="1" rowsep="1">Backend Name</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>KVM</entry>
+                                    <entry>3PAR </entry>
+                                    <entry>hp3par</entry>
+                                </row>
+                                <row>
+                                    <entry>KVM</entry>
+                                    <entry>StoreVirtual</entry>
+                                    <entry>hplefthand</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table><p>You can use 3PAR and/or StoreVirtual in the KVM Region or select both
+                        if you have respective storage arrays. </p><p><b>Note:</b> The HP 3PAR Web
+                        Services API server must be enabled and running on the HP 3PAR storage
+                        system. For more information, see the OpenStack documentation at: <xref
+                            href="http://docs.openstack.org/liberty/config-reference/content/enable-hp-3par-fibre-channel.html"
+                            format="html" scope="external">Enable the HP 3PAR Fibre Channel and
+                            iSCSI drivers</xref>.</p><p id="storage">A typical configuration file
+                        that enables both VSA and 3PAR back-ends appears similar to the following
+                        example:</p><codeblock>[DEFAULT]
+enabled_backends=hp3par, hplefthand
+...                                
+          
+[hp3par]
+volume_backend_name=&lt;mybackendname1>
+hp3par_api_url=https://&lt;management_ip>:8080/api/v1
+hp3par_username=&lt;username>
+hp3par_password=&lt;password>
+hp3par_cpg=&lt;cpg>
+san_ip=&lt;san_ip>
+san_login=&lt;username>
+san_password=&lt;password>
+hp3par_iscsi_ips=&lt;iscsi_target_ips seperated by ,>
+volume_driver=cinder.volume.drivers.san.hp.hp_3par_iscsi.HP3PARISCSIDriver
+hp3par_debug=False
+hp3par_iscsi_chap_enabled=false
+hp3par_snapshot_retention=48
+hp3par_snapshot_expiration=72
+                            
+[hplefthand]
+volume_backend_name=&lt;mybackendname2>
+hplefthand_username = &lt;username>
+hplefthand_password = &lt;password>
+hplefthand_clustername = &lt;Cluster Name>
+hplefthand_api_url = https://&lt;Iscsi Virtual IP address>/lhos 
+volume_driver = cinder.volume.drivers.san.hp.hp_lefthand_iscsi.HPLeftHandISCSIDriver
+hplefthand_debug = false</codeblock></li>
+                <li>Save the file to <codeph>cinder_conf</codeph>.</li>
+            </ol>
+        </section>
+        <section id="config-proc">
+            <title>Deploy the HPE Helion OpenStack cloud</title>
+            <ol id="ol_bst_mmf_zt">
+                <li>Run the HPE Helion OpenStack Carrier Grade configuration processor:
+                        <codeblock>hlm generate –c &lt;cloudname&gt;</codeblock><p>Where
+                            <codeph>&lt;cloudname></codeph> is the name of the cloud you created
+                        with the <codeph>hlm define</codeph> command.</p><p>This command runs the
+                        configuration processor, a script (<codeph>hcfgproc</codeph>) that is
+                        incorporated into the installation environment. This command generates the
+                        necessary configuration for the cloud. </p><p>When the command completes
+                        without errors, you will a message:</p><p><image
+                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-generate.png"
+                            width="600" id="image_ah5_ys1_t5"/></p></li>
+                <li>Review the
+                        <codeph>/var/hlm/clouds/rcpvm/desired_state/rcpvm/001/base/stage/CloudDiagram.txt</codeph>
+                    file, <codeph>hosts.hf</codeph> file, and
+                        <codeph>/etc/network/interfaces.d/eth.cfg</codeph> file to review the
+                    network settings that were deployed.</li>
+                <li>Initialize network interfaces on all the cloud nodes using the following
+                    command: <codeblock>hlm netinit –c &lt;cloudname&gt;</codeblock><p>Where
+                            <codeph>&lt;cloudname></codeph> is the name of the cloud you created
+                        with the <codeph>hlm define</codeph> command.</p><p>After this command
+                        completes, all cloud nodes and CLM network interfaces are configured.
+                    </p></li>
+            </ol>
+        </section>
+        <section id="hdeploy">
+            <title>Deploy HPE Helion OpenStack</title>
+            <ol id="ol_jxp_dnf_zt">
+                <li>Use the following command to deploy the HPE Helion OpenStack cloud:
+                    <codeblock>hlm deploy -c &lt;cloudname&gt; -t "rcp-libvirtmon-opensaf"</codeblock>Where
+                        <codeph>&lt;cloudname></codeph> is the name of the cloud you created with
+                    the <codeph>hlm define</codeph> command.<p>This command takes a significant
+                        period of time. When this command completes without errors or warnings, the
+                        Standard Region cloud installation is complete. Use the following sections
+                        to configure the Horizon interface and configures virtual
+                            networking.</p><p><image
+                            href="../../../media/carrier.grade.docs/2.1/carrier-grade-install-deploy.png"
+                            width="400" id="image_hf1_2t1_t5"/>
+                    </p></li>
+                <li>Enter <codeph>exit</codeph> to leave the root shell.<p/></li>
+            </ol>
+        </section>
+        <section><title>Manually launch Libirt monitoring</title>Libvirt monitoring is started
+            automatically during the cloud deployment process.<p>You can manually invoke Libvirt, if
+                needed, using the CLI: <ol id="ol_x2y_1sp_1v">
+                    <li>Execute the following commands to remove the existing association
+                        using:<codeblock>delfromimm -p -d CCN1
+delfromimm -p -d CCN2
+delfromimm -p -d CCN3</codeblock></li>
+                    <li>Execute the following command on HLM to launch libvirtmon on the Controller
+                        nodes:<codeblock>hlm deploy -c &lt;cloudname&gt; -t "rcp-libvirtmon-opensaf"</codeblock></li>
+                </ol></p></section>
+        <section>
+            <title>Verify Libvirt monitoring</title>
+            <p>You can verify that the HPE Helion OpenStack controllers (in the Standard Region) are
+                being monitored by Libvirt. Use the HPE Helion OpenStack Carrier Grade Libvirt CLI
+                    commands.<ol id="ol_l5w_pwg_1v">
+                    <li>On the lifecycle manager host, execute the following commands: <ul
+                            id="ul_adb_swg_1v">
+                            <li>Display list of VMs monitored by
+                                Libvirtmon:<codeblock>kvmha -l</codeblock></li>
+                            <li>Display the curent state:
+                                <codeblock>kvmha -d &lt;VM-name&gt; -c status</codeblock>Where
+                                    <codeph>VM-name</codeph> is the name of the VM to display.</li>
+                        </ul></li>
+                </ol></p>
+        </section>
+        <!--<section><title>Change the gateway address WHERE IS THIS SET?? Hide this section. Was removed in wiki.</title><p>If the IP address for your gateway is different from the CLM gateway, you need to assign the CLM IP address as the gateway address on all the controllers: (it's required only if your gateway is not CLM) </p><p><ol id="ol_rql_553_y5"><li>SSH to each controllers. <b>IP addresses??</b></li><li>Execute the following command: <codeblock>route delete default
+route add default gw &lt;CLM_IP> </codeblock><p>Where <codeph>&lt;CLM_IP></codeph> is the CLM IP address.</p></li></ol></p></section>-->
+        <section id="trouble"><title>Installation Troubleshooting</title> If you receive the
+            following error during installation:
+            <codeblock>Failed to fetch http://hlinux-deejay.us.rdlabs.hpecorp.net/hLinux/dists/cattleprod/InRelease 
+Unable to find expected entry 'main/binary-i386/Packages' in Release file (Wrong sources.list entry or malformed file)
+Some index files failed to download. They have been ignored, or old ones used instead.</codeblock>Run
+            the following command:
+            <!--AND RERUN ANSIBLE?--><codeblock>dpkg --remove-architecture i386 </codeblock></section>
+        <!--<section id="ldap-keystone"><title>Configure LDAP to enable CLI and use Keystone v3</title><p>By default, the HPE Helion OpenStack Carrier Grade services are configured to use Keystone v2 authorization. The services need to be modified to use Keystone v3. Users will not be able to execute OpenStack CLI commands until the specific changes are made on all three controller nodes in the Standard Region. </p><p>For information, see <xref href="../carrier-grade-install-config-ldap3.dita#topic10581cgicl">Configuring LDAP CLI Support</xref></p></section>-->
+        <section id="next-step">
+            <title>Next Step</title>
+            <p><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd"
+                    >Launching the Horizon Interface</xref></p>
+        </section>
+    </body>
+</topic>

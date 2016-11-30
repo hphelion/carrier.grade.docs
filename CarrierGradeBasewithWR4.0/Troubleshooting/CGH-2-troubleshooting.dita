@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2t">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Troubleshooting</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>This topic describes all the known issues that you might encounter:</p>
+    <section>
+      <ul id="ul_xzh_nmc_mt">
+        <li> <xref href="#topic10581c2t/launching" format="dita">Launching an image failed and error message displayed </xref> </li>
+        <li><xref href="#topic10581c2t/storage" format="dita">Changing the storage size allotments
+            of the KVM controller nodes caused DRBD sync issue</xref></li>
+        <li><xref href="#topic10581c2t/service" format="dita"/></li>
+        <li><xref href="#topic10581c2t/KVM" format="dita"/></li>
+        <li><xref href="#topic10581c2t/boot" format="dita"/></li>
+        <li><xref href="#topic10581c2t/logs" format="dita"/></li>
+        <li><xref href="#topic10581c2t/keystone" format="dita"/></li>
+        <li><xref href="#topic10581c2t/kvm" format="dita"/></li>
+        <li><xref href="#topic10581c2t/backup" format="dita"/></li>
+      </ul>
+    </section>
+    <section id="launching"><title> Launching an image failed and error message displayed </title>
+     <b>System Behavior/Message</b>
+      <p>Launching an image failed and following error message displayed "Image Launch Failure:
+        aborted: Failure prepping block device".</p>
+      <b>Cause</b>
+      <p> The disk size required by the image doesn't meet the flavor or launch settings.</p>
+      <b>Resolution</b>
+      <p>Run <codeph>qemu-img info /tmp/rhel67.img</codeph> to find the required image size and set
+        the minimum disk size to meet or exceed that size on the image settings.</p></section>
+    <section id="storage">
+      <title>Changing the storage size allotments of the KVM controller nodes caused DRBD sync
+        issue</title>
+      <p>When you try changing the allotments for controller-based storage at any time after
+        installation, for e.g. while creating new volumes with images. In that case, the disk size
+        in your system configuration plan might be updated with the new volume and image storage,
+        you may still experience errors or failures in controller-0 and controller-1 nodes:</p>
+      <p>
+        <ul id="ul_qbj_m5w_nw">
+          <li>DRBD may not be synced properly.</li>
+          <li>The <codeph>/opt/cgcs(drbd3)</codeph> may still be pointing to an old image storage.
+                <p><b>Resolution</b></p><note type="important">As of this release, there are known
+              limitations around changing the storage allotments during post cloud deployment. It
+              may require a reinstallation of the HP Helion OpenStack Carrier Grade host software on
+              the KVM region controllers. </note></li>
+        </ul>
+      </p>
+    </section>
+    <section id="service"><title>After restarting a service or rebooting the controller nodes,
+        Horizon UI is inaccessible or the icons in Horizon are missing</title><p>If you see few
+        icons not being loaded properly in Horizon UI , it is likely because the service went into
+        an inconsistent state. In that case, go to HCG Dashboard <b>Manage Cloud</b> page and
+        restart <b>Horizon</b> followed by <b>Windriver Horizon</b> service and then try logging
+        into Horizon again.</p><p><image
+          href="../../media/carrier.grade.docs/2.1/CGH-2.1-troubleshoot-HorizonUI-1.PNG"
+          id="image_yzq_fmn_dw" width="700"/></p>
+      <image href="../../media/carrier.grade.docs/2.1/CGH-2.1-troubleshoot-HorizonUI-2.PNG"
+        width="700"/>
+    </section>
+    <section id="KVM">
+      <title>KVM patch deployment failures and error messages</title>
+      <p>If any error messages are displayed during the execution of the command <codeph>system
+          host-patch-reboot &lt;compute-name></codeph> on compute node, follow the instructions
+        below. </p>
+      <p>
+        <note>These steps are applicable for any KVM patch update process. This can happen when the
+          VM's on the compute fails to migrate or if you have any cinder volume or instances in
+          error state.</note>
+      </p>
+      <p><b>Resolution</b></p>
+      <p>Execute the following commands:</p>
+      <p><codeblock>system host-lock –f &lt;compute-0> </codeblock>#Force-lock will be performed if
+        VM's are running. </p>
+      <p>
+        <note type="important">Wait for the compute node to get back to online state. Check from cli
+          using <codeph>system host-list</codeph> command. This will take some time and it depends
+          on number of VM's running on that specific compute node.</note>
+      </p>
+      <p>
+        <codeblock>system host-reboot &lt;compute-0> </codeblock>
+      </p>
+      <p>
+        <note type="important">Wait until compute-0 node boots up and in online state. Check from
+          cli using <codeph>system host-list</codeph> command. <p> Run <codeph>sudo sw-patch
+              query-hosts</codeph> command and if the <b>Reboot Required</b> column for that
+            specific compute node is listed as <b>yes</b>, then issue <codeph>system host-reboot
+              &lt;compute-0></codeph> command again. If you see <b>no</b>, then proceed with next
+            step]</p></note>
+      </p>
+      <codeblock> system host-unlock &lt;compute-0></codeblock>
+      <note type="important">Wait for the node to come back to <b>unlocked</b>, <b>enabled</b> and
+          <b>available</b> state.</note>
+    </section>
+    <section id="boot"><title>Instance launch fails when <i>Boot from image (creates a new
+          volume)</i> is chosen as instance boot source</title><b>System
+        Behavior/Message</b><p>Launching an instance might fail when you select <b>Boot from image
+          (creates a new volume)</b> as the <b>Instance Boot Source</b> if the Compute (Nova)
+        service has availability zones but the Block Storage (Cinder) service does not have
+        availability zones. This is a known OpenStack bug and fixed in Kilo/Liberty.
+        <!--HCG-1725--></p><p>For more information, see: <xref
+          href="https://bugs.launchpad.net/nova/+bug/1496235" format="html" scope="external"
+          >https://bugs.launchpad.net/nova/+bug/1496235</xref></p><b>Resolution</b><p>Create a
+        bootable volume or use an existing bootable volume, then select that volume as the source
+        when launching an instance.</p><p>From Horizon, select <b>Boot from Volume</b> from the
+          <b>Instance Boot Source</b> drop down option and then select a bootable
+          volume.</p><p><image href="../../media/carrier.grade.docs/CGH-2-troublesoot-volume.png"
+          id="image_mwm_lwy_kv" width="600"/></p></section>
+    <section id="logs">
+      <title>Centralized logging take too much space</title>
+      <p><b>System Behavior/Message</b></p>
+      <p id="logs1">If the logs created by the <xref
+          href="../OperationsGuide/Logging/CHG-2-logging-overview.dita#topic5937">Centralized
+          Logging service</xref> take up too much space on the Standard Region controllers, you can
+        manually adjust the number of days that logs are retained. By default, a cron job,
+          <codeph>elastic_cleanup.sh</codeph>, deletes these logs after 8 days. This means all the
+        logs older than 8 days will be deleted when the cron job runs daily.</p>
+      <p><b>Resolution</b></p>
+      <p id="logs2">You can change how long logs are retained by editing the cron script file,
+          <codeph>/var/lib/hlm/elastic_cleanup.sh</codeph> file. Set the <codeph>DAYS</codeph>
+        parameter in to some lower number (For example, <codeph>DAYS=3</codeph>).
+        <!--HCG-1396--></p>
+    </section>
+    <section id="keystone">
+      <title>Cannot use admin commands in OpenStack Identity CLI</title>
+      <p><b>System Behavior/Message</b></p>
+      <p>Using the OpenStack CLI, the user cannot perform any administrative action related to the
+        Identity (Keystone) service. For example: project list, tenant list, tenant create.
+        <!--HCG-1072--></p>
+      <p><b>Cause</b>: </p>
+      <p>There are two reasons:</p>
+      <ul id="ul_ljr_vv4_1v">
+        <li>Keystone v2 does not support admin actions on identity service over CAN (Public URL)
+          network.</li>
+        <li>Kilo-based python-openstackclient does not support the environment variable named
+            <codeph>OS_INTERFACE</codeph> to indicate which URL to enforce. Keystone v3 does support
+          this environment variable.</li>
+      </ul>
+      <p><b>Resolution</b></p>
+      <p>Use the Keystone v3 endpoint in your <codeph>stackrc</codeph> file as below:</p>
+      <pre>export OS_USERNAME=admin
+export OS_PASSWORD=r54DQY
+export OS_TENANT_NAME=admin
+export OS_PROJECT_NAME=admin
+export OS_PROJECT_DOMAIN_NAME=Default
+export OS_USER_DOMAIN_ID=default
+export OS_IDENTITY_API_VERSION=3
+export OS_AUTH_VERSION=3
+export OS_REGION_NAME=memphis
+export OS_AUTH_URL=https://10.x.x.x:5000/v3
+export OS_CACERT=/home/cghelion/ca.crt
+export OS_INTERFACE=public</pre>
+      <p>Also, make sure you are using the Liberty-based python-openstackclient (openstack 1.7.0). </p>
+      <p>For example, if you are running OpenStack CLIs on an Ubuntu guest:<ol id="ol_xdr_nw4_1v">
+          <li>Update the package repository of the Ubuntu client to point to OpenStack Liberty
+            repository:<codeblock>apt-get install ubuntu-cloud-keyring
+echo "deb http://ubuntu-cloud.archive.canonical.com/ubuntu" \ "trusty-updates/kilo main" &gt; /etc/apt/sources.list.d/cloudarchive-kilo.list
+apt-get update &amp;&amp; apt-get dist-upgrade</codeblock></li>
+          <li>Install python OpenStack
+            Client<codeblock>apt-get install python-openstackclient</codeblock></li>
+        </ol></p>
+    </section>
+    <section id="kvm"><title>KVM Region compute node cannot be unlocked multiple
+          times</title><p><b>System Behavior/Message</b></p><p>After unlocking a compute node in the
+        KVM Region for the first time, the node keeps rebooting during subsequent locks. </p><p>The
+        unlock and the reboot process gets stuck at <codeph>compute-huge.sh restart</codeph> and
+        times out after 300 seconds causing compute node to reboot. The process is trying to access
+          <xref href="http://pxecontroller" format="html" scope="external"
+          >http://pxecontroller</xref> . Due to a bug, this host name is not pingable as there is no
+        PXE IP on any of the interfaces. <!--HCG-1352-->
+      </p><b>Resolution</b><p>Provide a route from CLM network to PXE such that pxecontroller is
+        reachable from CLM network. </p></section>
+    <!--<section id="baremetal"><title>Baremetal Control plane RDBMS recovery after reboot</title><p>https://rndwiki.corp.hpecorp.net/confluence/pages/viewpage.action?title=Baremetal+Control+plane+RDBMS+recovery+after+reboot++-+HCG2.0&amp;spaceKey=cloudos</p></section><p><b>System Behavior/Message</b></p><p>The controller in the baremetal region of the Sacaramento deployment is designed to be a single control plane. If the controller reboots, the MySQL database installed into the controller crashes and the <codeph>mysql</codeph> service does not restart. </p><p><b>Resolution</b></p><p>Perform the following steps:</p><p><ol id="ol_avt_1r1_d5"><li>From the lifecycle manager VM, log in to the baremetal controller after reboot.<codeblock>ssh cghelion@&lt;BM_Controller_IP&gt;</codeblock><p>The <codeph>BM_Controller_IP</codeph> address can be obtained from the <codeph>nodes.json</codeph> file in <codeph>/var/hlm/clouds/&lt;cloud_name>/</codeph> directory on the lifecycle manager.</p></li><li>Switch to the root user:<pre>sudo su -</pre></li><li>Execute the following command to manually restart the <codeph>mysql</codeph> service:<codeblock>/etc/init.d/mysql bootstrap-pxc</codeblock></li></ol></p><section><b>Validation</b><ol id="ol_c5j_qr1_d5"><li>Execute the following command to check status of mysql service: <codeblock>service mysql status</codeblock>This status should be <codeph>active</codeph>. </li><li>Log in to MySQL. <pre>sudo su -</pre></li><li>Execute the following command to log into the MySQL database: <codeblock>mysql</codeblock></li><li>Exit after logging in:<codeblock>exit</codeblock></li><li>Check that the previous data is intact: Example commands: <ul id="ol_d5j_qr1_d5"><li><b>ironic node-list</b> should display the nodes registered before reboot</li><li><b>neutron net-list</b> should display the created networks</li></ul></li></ol></section>-->
+    <!--<section id="no-instance"><title><b>Unable to create an instance in the Standard Region</b></title><p>When trying to create a virtual machine instance in the Standard Region, the user receives a <codeph>No valid host found</codeph> error. Check that all ESX host machines in the cluster are configured with the ESX compute proxy. If one or more hosts in the cluster is configured with the proxy, disconnect the host(s) from the cluster or <xref href="../Installation/carrier-grade-install-esx-proxy.dita#topic10581cgiep">install the ESX compute proxy</xref>. CG-1413</p></section>-->
+    <section id="backup">
+      <title>Backup storage size should be at least 120GB</title>
+      <p>If you experience the following error, you can edit the <codeph>region_config</codeph> file
+        for the KVM Region to increase the default storage.</p>
+      <p><image href="../../media/CGH-trouble-storage.png" width="400" id="image_ehc_qjc_mt"/></p>
+      <p>
+        <ol id="ol_vcj_rjc_mt">
+          <li>Log into the KVM Region controller-0.</li>
+          <li>Edit the <codeph>./&lt;cloud name&gt;/clouds/&lt;cloud
+              name&gt;/001/stage/windriver-config/region_config</codeph> file to update the
+              <codeph>backup_storage</codeph> value to 120 or higher.</li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>See Also</title>
+      <p>For troubleshooting tips related to the HPE Helion OpenStack cloud, see <xref
+          href="http://docs.hpcloud.com/#helion/troubleshooting/troubleshooting_index.html"
+          format="html" scope="external">HP Helion OpenStack: Troubleshooting</xref>. </p>
+    </section>
+  </body>
+</topic>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2abr">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Backup and Restore</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    
+    <p>HPE Helion OpenStack Carrier Grade includes a backup and restore application called Attis
+      which you can use to backup and restore essential system files and databases of the running
+      cloud. Attis is automatically installed on each of the controller nodes in the Standard Region.
+      Attis uses a command line interface. For more information, see <xref
+        href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
+      CLI</xref>.</p>
+    <p>
+      <note type="important">Before you start your first backup, you must use the Attis CLI to
+        specify where HPE Helion OpenStack Carrier Grade will store backup files. For more
+        information, see <xref href="CGH-2--backup-configure.dita#topic10581c2bc">Configuring the
+          Backup and Restore Location </xref></note>
+    </p>
+    <section id="resp">
+    <title>Attis Administrator Responsibilities for Protecting Credentials</title>
+    <p>Attis performs encrypted backup and restore of system data. The key for encryption and
+        decryption is stored in the Attis configuration file on each controller node in
+          <codeph>~/crypt_key</codeph>. If this key is lost, your backups can not be restored.
+        Consider storing the backup encryption key separately from your cloud infrastructure, in
+        addition to the copy stored on each controller node.</p>
+    <p>Be aware that keys and passwords for other OpenStack services are stored in configuration
+        files on cloud infrastructure nodes, protected by filesystem controls. Protect servers from
+        unauthorized access and protect against exposure of credentials in configuration files.
+        Attis backups contain copies of these credentials as well, protected using backup
+        encryption, but exposure of the Attis backup key could result in unauthorized exposure of
+        credentials stored in backups.</p>
+    </section>
+    <section id="what">
+      <title>What gets backed up</title>
+      <p>The following components can be backed up and restored:<ul id="ul_pzx_1b3_k5">
+          <li>Lifecycle manager data [opt and root files]</li>
+          <li>Percona® XtraDB® cluster on controllers in Standard Region</li>
+          <!--<li>Percona® XtraDB® cluster on VSD</li><li>System files on VSC</li>-->
+          <li>System files in KVM Region </li>
+          <!--<li>MySQL database and Neutron, Nova, Ironic files under /etc on the baremetal controller (Sacramento deployments only)</li>-->
+        </ul></p>
+    </section>
+    <section>
+      <title>Authenticate</title>
+      <p>Each Attis session, you must authenticate before executing any commands </p>
+      <ol id="ol_lbs_sfk_p5">
+        <li>Log one of the Standard Region controllers as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li id="authenticate">Authenticate using export variables:
+          <codeblock>source stackrc</codeblock>or<codeblock>export OS_TENANT_NAME=&lt;The name of your project/tenant> 
+export OS_USERNAME=&lt;Your OpenStack username> 
+export OS_PASSWORD=&lt;Your OpenStack password> 
+export OS_AUTH_URL=&lt;The address of the Identity API served through keystone></codeblock>Optionally
+          you can pass the authentication values when you execute a CLI command, for
+          example:<codeblock>--os-tenant-name "admin" --os-username "admin" --os-password "1234" --os-auth-url "http://127.0.0.1:5000/v2.0"</codeblock></li>
+      </ol>
+    </section>
+    <section id="attis-id">
+      <title>Obtain the Attis config ID</title>
+      <p>Most of the Attis backup and restore commands require a config ID. You can obtain the ID
+        using the <codeph>attis config</codeph> command.</p>
+      <ol id="ol_qsq_dtj_p5">
+        <li>Log one of the Standard Region controllers as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="#topic10581c2abr/authenticate"/>
+        <li>Execute the following command:<codeblock>attis config</codeblock><p>The output appears
+            similar to the
+            following:</p><codeblock>+----------------------------+--------------------------------------+---------+---------------------------+---------+
+| id                         | name                                 | type    | appliance                 | timeout |
++----------------------------+--------------------------------------+---------+---------------------------+---------+
+| 4c490c33-2f09-ca1aebf5a20d | Cloud_Controller_Appliance_DB_Backup | backup  | cloudcontrollerappliances | 3600    |
+| f6b9215a-a5f2-07843de71e9a | HLM_Appliance_Data_Backup            | backup  | hlmappliances             | 3600    |
+| 30490651-f820-d40f7f65c290 | HLM_Appliance_Data_Restore           | restore | hlmappliances             | 3600    |
+| c9c69606-8fe3-b3e0419ad231 | HLM_Appliance_opt_files_Backup       | backup  | hlmappliances             | 3600    |
+| 17edcc39-5f5c-39cc48c92895 | HLM_Appliance_opt_files_Restore      | restore | hlmappliances             | 3600    |
+| 720264d5-fd17-f0a5e9b88ab3 | HLM_Appliance_root_files_Backup      | backup  | hlmappliances             | 3600    |
+| c0e33946-6641-6ad688d2cf37 | HLM_Appliance_root_files_Restore     | restore | hlmappliances             | 3600    |
+<!--| b71d6f61-7347-e3929ac1e4a4 | VSC_Appliance_config_files_Backup    | backup  | vscappliances             | 3600    |
+| b71e32b0-7347-e3929ac1e4a4 | VSC_Appliance_config_files_Restore   | restore | vscappliances             | 3600    |
+| 098316b0-66c3-e3929ac1e4a4 | VSD_Appliance_DB_Backup              | backup  | vsdappliances             | 3600    |
+| f4ec104f-6936-e3929ac1e4a4 | VSD_Appliance_DB_Restore             | restore | vsdappliances             | 3600    |-->
+| 13b370f8-79f1-d72dee4aa55b | WR_Appliance_system_files_Backup     | backup  | wrappliances              | 3600    |
+| 1cdcf21c-79f1-c76cce2f76d6 | WR_Appliance_system_files_Restore    | restore | wrappliances              | 3600    |
++----------------------------+--------------------------------------+---------+---------------------------+---------+</codeblock><p>Use
+            the ID associated with the appropriate configuration file:</p><p>
+            <ul id="ul_tmd_15j_p5">
+              <li><codeph>Cloud_Controller_Appliance_DB</codeph> - Use this configuration file when
+                backing up the MySQL database on a controller.</li>
+              <li><codeph>HLM_Appliance_Data</codeph> - Use this configuration when backing up or
+                restoring the lifecycle manager</li>
+              <li><codeph>HLM_Appliance_opt_files</codeph> - Use this configuration when backing up
+                or restoring the files in the <codeph>opt</codeph> directory on the lifecycle
+                manager.</li>
+              <li><codeph>HLM_Appliance_root_files</codeph> - Use this configuration when backing up
+                or restoring the files in the <codeph>root</codeph> directory on the lifecycle
+                manager.</li>
+              <!--<li><codeph>VSC_Appliance_config_files</codeph> - Use this configuration when backing up or restoring the VSC system files. </li><li><codeph>VSD_Appliance_DB</codeph> - Use this configuration when backing up or restoring the VSD database.</li>-->
+              <li><codeph>WR_Appliance_system_files</codeph> - Use this configuration when backing
+                up or restoring the KVM-region system files.</li>
+            </ul>
+          </p></li>
+      </ol>
+    </section>
+    <p>See:</p>
+    <p><xref href="CGH-2-attis-backup.dita#topic10581c2ab">Backing Up the Cloud</xref></p>
+    <p><xref href="CGH-2-attis-restore.dita#topic10581c2ar">Restoring the Cloud</xref></p>
+    <p><xref href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis CLI for Backing Up and
+        Restoring</xref></p>
+  </body>
+</topic>

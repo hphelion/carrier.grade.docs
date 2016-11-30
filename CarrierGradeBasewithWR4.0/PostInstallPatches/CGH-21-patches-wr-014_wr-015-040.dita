@@ -2,7 +2,8 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdpkvm215">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the KVM Region Patch 19 </title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the KVM Region Patch
+    14-15 </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -17,8 +18,9 @@
     <bodydiv>
       <p><b>Patch Highlights</b></p>
       <ul id="ul_um4_5cs_dx">
-        <li>This KVM patch <codeph>[TS_HP_15_Custom_PATCH_0019.patch]</codeph> can be applied on Pre
-          or Post Cloud Deployment. </li>
+        <li>This cumulative WR patch <codeph>[TS_HP_15_Custom_PATCH_0014.patch]</codeph> &amp;
+            <codeph>[TS_HP_15_Custom_PATCH_0015.patch]</codeph> can be applied on Pre or Post Cloud
+          Deployment. </li>
       </ul>
     </bodydiv>
     <ul id="ul_tm4_5cs_dx">
@@ -27,21 +29,24 @@
             KVM region. Post Cloud Deployment means the KVM region is already configured and
             running.</li>
           <li>It is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies. </li>
-      <li>This WR Patch 19 addresses the following issues in KVM region:<ul id="ul_mt1_zw4_3x">
-          <li> High latency/downtime seen during live migration of VMs using virtio. </li>
-          <li>VMs go to an error state and the iSCSI initiator/credentials did not match.</li>
-        </ul></li>
     </ul>
     <bodydiv>
+      <ul id="ul_yk4_5cs_dx">
+        <li>It doesn't have any fixes but supports future KVM region upgrade functionality.</li>
+        <li>
+          <codeph>TS_HP_15_Custom_PATCH_0014.patch</codeph> applies non-removable changes. </li>
+        <li>It is mandatory and is required for installation of subsequent patches.</li>
+      </ul>
       <note type="caution">Do not install patch from Horizon. Install ONLY from CLI. The nodes go to
         unstable state if patch is installed from Horizon and the nodes have to be recovered during
-        that time. </note>
+        that time. <b>Patch 0014</b> cannot be removed so execute your patch upgrade strategy with
+        great care. Ensure you have a full backup of the cloud before executing this patch.</note>
       <note> You can use the CLI on the active KVM controller: <codeph>sudo sw-patch query</codeph>
         to see if the patch has been deployed properly.</note>
       <section>
         <title>Prerequisites </title>
         <ol id="ol_lmp_mbj_fw">
-          <li>You should have installed the following 18 patches during the <xref
+          <li>You should have installed the following patches during the <xref
               href="../Installation/denver/carrier-grade-install-kvm-denver.dita#topic1107cgikd"
               >installation of the KVM Region</xref>. If you are installing all the KVM patches for
             the first time, load all the patches in sequence by following the steps provided
@@ -87,34 +92,23 @@
           <li>KVM Custom Patch 13 (<codeph
               conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/013"
             />)</li>
-          <li>KVM Custom Patch 14-15 (<codeph
-              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/014-015"
-            />)</li>
-          <li>KVM Custom Patch 16 (<codeph
-              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/016"
-            />)</li>
-          <li>KVM Custom Patch 17 (<codeph
-              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/017"
-            />)</li>
-          <li>KVM Custom Patch 18 (<codeph
-              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/018"
-            />)</li>
         </ul>
       </section>
       <section conref="CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
       <section><b>Start the patch download</b><p>To download the patch you need from the Software
           Updates and Licensing site, shown above: </p><ol id="ol_eyd_y4m_pw">
           <li>Select the required patch file (e.g.<b
-              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/044"
+              conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/040"
             />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
                 href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-3.png"
                 width="400" id="image_fyd_y4m_pw"/></p></li>
           <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
-              <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0019.patch</codeph> and readme
-            files are available.<note type="important">The tar files specified under <b>Download
-                filename</b>on the <b>Software Licensing</b> site are listed separately for HCG_2.0
-              and HCG_2.1 versions but when downloaded and extracted both the versions refer to a
-              common tar file in the readme. </note></li>
+              <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0014.patch</codeph> and
+              <codeph>TS_HP_15_Custom_PATCH_0015.patch</codeph> and readme files are
+              available.<note>The tar files specified under <b>Download filename</b>on the
+                <b>Software Licensing</b> site are listed separately for HCG_2.0 and HCG_2.1
+              versions but when downloaded and extracted both the versions refer to a common tar
+              file in the readme. </note></li>
           <li>Check if the MD5 checksum verification file is extracted along with the patch file.
                 <p><image
                 href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-4.png"
@@ -128,25 +122,28 @@
           <li>SSH into active controller in the KVM region. <p>For example:
                 <codeph>controller-0</codeph> (active controller).</p></li>
           <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
-          <li>Copy the patch file to the <codeph>/tmp/patches</codeph> directory: <ul
+          <li>Copy both the patch files to the <codeph>/tmp/patches</codeph> directory: <ul
               id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0019.patch</codeph></li>
+              <li><codeph>TS_HP_15_Custom_PATCH_0014.patch</codeph></li>
+              <li><codeph>TS_HP_15_Custom_PATCH_0015.patch</codeph></li>
             </ul></li>
-          <li>Execute the following command to upload the patch to the database:
-            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0019.patch </codeblock></li>
-          <li>Execute the following command to check if the patch is available for
+          <li>Execute the following commands to upload both the patches to the database:
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0014.patch 
+sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0015.patch </codeblock></li>
+          <li>Execute the following commands to check if both the patches are available for
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
                 id="image_tft_ncg_x5"/></p></li>
-          <li>Execute the following command to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0019
-[The patch state of the patch will be in "Partial-Apply" state]</codeblock></li>
-          <li>Execute the following command to check the current state of all the
+          <li>Execute the following commands to apply the
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0014
+sudo sw-patch apply TS_HP_15_Custom_PATCH_0015 
+[The patch state of both the patches will be in "Partial-Apply" state]</codeblock></li>
+          <li>Execute the following commands to check the current state of all the
             hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Now "Patch Current" state of the
             nodes will be seen as "<b>No</b>" and "Reboot Required" as "<b>Yes</b>". For
                 example:<p><image href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png"
                 id="image_j4z_gyf_x5" width="500"/></p></li>
-          <li>Execute the following command to source the <codeph>openrc</codeph>
+          <li>Execute the following commands to source the <codeph>openrc</codeph>
             file:<codeblock>source /etc/nova/openrc or sudo -i</codeblock></li>
           <li>Execute the following command to patch and reboot the standby controller:
               <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
@@ -178,7 +175,8 @@
             <codeblock>system host-patch-reboot compute-1</codeblock></li>
           <li>Repeat the previous step for each compute node that participates in the cloud. <p>
               <note>Use the <codeph>sudo sw-patch query-hosts</codeph> command to check if all the
-                nodes are unlocked and the <b>patch 19</b> is in <codeph>Applied</codeph> state. </note>
+                nodes are unlocked and the patch 14 &amp; patch 15  are in <codeph>Applied</codeph>
+                state. </note>
             </p></li>
         </ol></section>
     </bodydiv>

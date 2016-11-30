@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpkvm215">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploy the Horizon Patch 3 </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>This patch includes updated python-ceilometerclient and python-neutronclient for Horizon to
+      support KVM region patch 7 fixes. </p>
+    <p>This patch addresses a number of issues in the KVM region, including:<ul id="ul_jxm_nkt_jv">
+        <li>In Horizon UI, clicking on "Resource Usage" panel results in a crash</li>
+      </ul></p>
+    <p>Prerequisites: - HPE Helion OpenStack Carrier Grade 2.1 cloud has already been deployed  </p>
+    <section conref="CGH-21-post-install-patching.dita#topic10581pdp21/launch"/>
+    <section>
+      <title>Start the patch download</title>
+      <p>To download the patch you need from the Software Updates and Licensing site, shown above: </p>
+      <ol id="ol_eyd_y4m_pw">
+        <li>Select the required patch file (e.g. <b
+            conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/3"
+          />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-3.png"
+              width="400" id="image_fyd_y4m_pw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>HCG-horizon-updatedclients</codeph> directory and readme
+          files are available. The readme with the patch download contains information on files
+          changed by these patches.<note>The tar files specified under <b>Download filename</b>on
+            the <b>Software Licensing</b> site are listed separately for HCG_2.0 and HCG_2.1
+            versions but when downloaded and extracted both the versions refer to a common tar file
+            in the readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch file.
+              <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-4.png"
+              width="400" id="image_w3v_zj5_pw"/></p><note>For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol>
+    </section>
+    <section>
+      <title>Deploy the Horizon Patch for the lifecycle manager host</title>
+    </section>
+    <p>
+      <ol id="ol_pz4_nb3_qv">
+        <li>SSH into the lifecycle manager host as the root user. </li>
+        <li>Log into the lifecycle manager VM as
+            root.<pre>ssh &lt;lifecycle manager_VM_IP></pre><p>where: <codeph>lifecycle
+              manager_VM_IP</codeph> is the CLM IP of the lifecycle manager. </p>Locate the IP
+          address for the lifecycle manager in the
+            <systemoutput>/root/infra-ansible-playbooks/group_vars/all</systemoutput> file under
+            <systemoutput>hlm_clmstaticip</systemoutput> field.</li>
+        <li>Copy the <codeph>HCG-horizon-updatedclients</codeph> directory to the
+            <systemoutput>/var/hlm/clouds/&lt;cloudname>/patches</systemoutput> directory on the
+          lifecycle manager VM.</li>
+        <li>Execute following command to apply patch:
+          <codeblock>hlm patch -c &lt;cloud-name> -n HCG-horizon-updatedclients -t &lt;tier> </codeblock>Example:
+          <codeblock>hlm patch -c cloud1 -n HCG-horizon-updatedclients -t BASE-CCP-T1 </codeblock></li>
+      </ol>
+    </p>
+  </body>
+</topic>

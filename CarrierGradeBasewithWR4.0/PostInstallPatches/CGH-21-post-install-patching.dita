@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdp21">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Required Patches</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>Occasionally, you will be asked to deploy a patch to your running HP Helion OpenStack Carrier
+      Grade environment.</p>
+    <p>All patch files can be downloaded from the <xref href="http://www.hpe.com/downloads/software"
+        format="html" scope="external">Software Updates &amp; Licensing</xref> site. You must obtain
+      a Service Agreement ID (SAID) in order to download these files. </p>
+    <p>Some patches must be installed prior to deploying your cloud and some patches must be
+      installed after the cloud is fully installed and running. Consult the following table for the
+      patches you need to apply and when they must be applied.</p>
+    <p/>
+    <section>
+      <title>Standard Region Patches</title>
+      <p>The following patches are to be applied to the servers in the standard region.</p>
+      <p>Some patches can be deployed during the installation. If you installed a patch during
+        installation, you do not need to install the patch again. </p>
+      <p>
+        <table frame="all" rowsep="1" colsep="1" id="table_bjh_kb2_5v">
+          <tgroup cols="2">
+            <colspec colname="c1" colnum="1" colwidth="1.91*"/>
+            <colspec colname="newCol2" colnum="2" colwidth="3.1*"/>
+            <thead>
+              <row>
+                <entry>Patch</entry>
+                <entry>Download File</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry><xref href="CGH-21-patches-ovssec-001.dita">OVS Security Patch 2</xref></entry>
+                <entry><b id="025">HCG 2.1 OVS Security Patch</b></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-Horizon001_Patch003.dita#topic10581pdpkvm215"
+                    >Helion OpenStack Horizon Patch</xref>
+                </entry>
+                <entry><b>HCG 2.1 Horizon001 Patch003</b></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-Horizon003_Patch031.dita#topic10581pdpkvm216"
+                    >Helion OpenStack Horizon Patch</xref>
+                </entry>
+                <entry><b>HCG 2.1 Horizon Patch</b></entry>
+              </row>
+              <row>
+                <entry><xref
+                    href="CGH-21-patches-DBConnections001_Patch034.dita#topic10581pdpkvm216"
+                    >Database Connection Patch</xref></entry>
+                <entry><b>HCG 2.1 DB Connections Patch034</b></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-Icinga001_Patch004.dita#topic10581pdpkvm215">HCG
+                    Cumulative Icinga Patch</xref></entry>
+                <entry><b>HCG 2.1 Icinga001 Patch004</b></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </p>
+    </section>
+    <section>
+      <title>KVM Region Patches</title>
+      <p>The following patches are to be applied to the servers in the KVM region.</p>
+      <p>Some patches can be deployed during the installation. If you installed a patch during
+        installation, you do not need to install the patch again. </p>
+      <p>
+        <table frame="all" rowsep="1" colsep="1" id="kvm">
+          <tgroup cols="2">
+            <colspec colname="c1" colnum="1" colwidth="1.91*"/>
+            <colspec colname="newCol2" colnum="2" colwidth="3.1*"/>
+            <thead>
+              <row>
+                <entry>Patch</entry>
+                <entry>Download File</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-5-025.dita#topic10581pdpkvm215">KVM Region
+                    Patch 5</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/025"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-7-027.dita#topic10581pdpkvm217">KVM Region
+                    Patch 6</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/027"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-08-029.dita#topic10581pdpkvm215">KVM Region
+                    Patch 7</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/029"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-09-030.dita#topic10581pdpkvm215">KVM Region
+                    Patch 8</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/030"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-010-032.dita#topic10581pdpkvm215">KVM Region
+                    Patch 9</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/032"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-011-033.dita#topic10581pdpkvm215">KVM Region
+                    Patch 10</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/033"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-012-035.dita#topic10581pdpkvm215">KVM Region
+                    Patch 11</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/035"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-013-036.dita#topic10581pdpkvm215">KVM Region
+                    Patch 12</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/036"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-014-038.dita#topic10581pdpkvm215">KVM Region
+                    Patch 13</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/038"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-014_wr-015-040.dita">KVM Region Patch
+                    14-15</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/040"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-016-041.dita">KVM Region Patch
+                  16</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/041"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-017-042.dita">KVM Region Patch
+                  17</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/042"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-018-043.dita#topic10581pdpkvm215">KVM Region
+                    Patch 18</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/043"
+                  /></entry>
+              </row>
+              <row>
+                <entry><xref href="CGH-21-patches-wr-019-044.dita#topic10581pdpkvm215">KVM Region
+                    Patch 19</xref></entry>
+                <entry><b
+                    conref="../Installation/denver/carrier-grade-install-download-denver.dita#topic7148cgidd/044"
+                  /></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </p>
+    </section>
+    <p><!--After new WR patch see if "KVM Region compute node cannot be unlocked multiple times" troubleshooting item should be removed.--></p>
+    <p/>
+    <section>
+      <title>KVM Region Patches</title>
+      <p>The following patches are to be applied to the servers in the KVM region.</p>
+      <p>Some patches can be deployed during the installation. If you installed a patch during
+        installation, you do not need to install the patch again. </p>
+    </section>
+    <section id="launch">
+      <title>Launch the Software Updates and Licensing site to download patches</title>
+      <p> In a browser, navigate to the <xref href="http://www.hpe.com/downloads/software"
+          format="html" scope="external">Software Updates &amp; Licensing</xref> site. You must
+        obtain a Service Agreement ID (SAID) in order to download these files. </p>
+      <ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-install-download-patches.png" width="200"
+              id="image_jvd_q55_qv"/></p></li>
+        <li>After signing in, enter your Service Agreement ID (SAID) in the <b>Software updates and
+            licensing</b> page, </li>
+        <li>Accept the license agreement and click <b>View available products</b>.<p><image
+              href="../../media/carrier.grade.docs/CGH-2-install-download-patches2.png"
+              id="image_mhp_f55_qv" width="400"/></p></li>
+        <li>Under <b>Infrastructure Management Software</b>, click <b>Get software
+              updates</b>.<p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select.png"
+              width="400" id="image_i2v_wcm_2w"/></p></li>
+        <li>On the product list page, locate the product version and then click <b>Get
+          Software</b>corresponding to it.<p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-2-1-install-download-patches-select-2a.png"
+              width="400" id="image_q4w_b2m_2w"/></p></li>
+      </ol>
+    </section>
+    <section><title>Start the patch download</title><p>To download the patch you need from the
+        Software Updates and Licensing site, shown above: </p><ol id="ol_e4m_d1c_rw">
+        <li>Select the required patch file from the <b>Downloads</b> list and click <b>Download</b>
+          to continue.  <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-3.png"
+              width="400" id="image_dv5_zdm_sv"/></p></li>
+      </ol>As required, you can select any of the specified download methods:<ul id="ul_cn1_ptp_mv">
+        <li><b>Use HPE Download Manager</b>. Click the <b>Use the HPE Download Manager</b> link to
+          specify where the installation package will be saved.</li>
+        <li><b>Use Standard Download</b>. Click the <b>Download</b> link to use the standard
+          download method for your browser.</li>
+        <li><b>Use the download cart</b>. Click the <b>Add to download cart</b> to download
+          later.</li>
+      </ul></section>
+  </body>
+</topic>

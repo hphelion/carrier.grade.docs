@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic7148cgid21">
+        <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Prerequisites - Download
+                the Installation Packages Conref </title>
+        <titlealts>
+                <searchtitle>HPE Helion OpenStack Carrier Grade Installation
+                        Prerequisites</searchtitle>
+        </titlealts>
+        <prolog>
+                <metadata>
+                        <othermeta name="layout" content="default"/>
+                        <othermeta name="product-version"
+                                content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                        <othermeta name="role" content="Storage Administrator"/>
+                        <othermeta name="role" content="Storage Architect"/>
+                        <othermeta name="role" content="Michael B"/>
+                        <othermeta name="product-version1"
+                                content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                </metadata>
+        </prolog>
+        <body>
+                <p>This document is a repository for the download information to be
+                        shared among the deployment instructions:<ul id="ul_ylb_14q_k5">
+                                <li><xref
+                                        href="../denver/carrier-grade-install-download-denver.dita#topic7148cgidd"
+                                /></li>
+                                <!--<li><xref href="../tahoe/carrier-grade-install-download-tahoe.dita#topic7148cgidt"/></li><li><xref href="../memphis/carrier-grade-install-download-memphis.dita#topic7148cgidm"/></li><li><xref href="../sacramento/carrier-grade-install-download-sacramento.dita#topic7148cgids"/></li>-->
+                        </ul></p>
+                
+                <p id="intro">This document describes the prerequisite steps to download the installation files required to install HPE Helion OpenStack Carrier Grade.</p>
+                <section
+                        conref="../../../CarrierGrade2.0/Installation/prereqs/carrier-grade-install-download.depot.dita#topic7148cgid/depot"/>
+                <section id="download">
+                        <title>Download the installation files</title>
+                        <p>In Software Depot: <ol id="ol_wpm_c2h_cv">
+                                        <li>Locate the following files to download: </li>
+                                </ol></p>
+                </section>
+                <section>
+                        <ul id="ul_zll_rjv_g5">
+                                <li><b><b id="productShow_appName">Helion Carrier Grade 2.0 DCN Part
+                                                  1 of 1</b></b> Installation files for the HPE
+                                        Helion OpenStack Carrier Grade Tahoe, Memphis, and
+                                        Sacramento deployments. This link will download the
+                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
+                                        file. </li>
+                        </ul>
+                        <ol id="ul_lvg_jb2_xs">
+                                <li id="download-avs">Click the <b>Downloads</b> tab and locate the
+                                        following download. <ul id="ul_erk_kwh_k5">
+                                                <li><b>Helion Carrier Grade 2.0.0 AVS</b>
+                                                  Installation files for the HPE Helion OpenStack
+                                                  Carrier Grade Tahoe, Memphis, and Sacramento
+                                                  deployments. This link will download the
+                                                  <codeph>hcg2_kvm_avs.tar.gz</codeph> file. </li>
+                                        </ul></li>
+                                <!--<li id="dowload-infoblox">Optionally, download the <b>Helion Carrier
+                                                Grade 2.0 Infoblox Plugin</b>. <ul
+                                                id="ul_nbs_gvh_k5">
+                                               
+                                                <li><b>Helion Carrier Grade 2.0 DCN001 Patch004</b>.
+                                                  This link will downoad the <codeph>Helion Carrier
+                                                          Grade 2.0 DCN001 Patch004</codeph> file. </li>
+                                        </ul></li>-->
+                        </ol>
+                        <p> </p>
+                </section>
+                <section id="linux">
+                        <title>Download the HPE Linux Source</title>
+                        <p>The lifecycle manager host must have HPE Linux installed before
+                                performing the HPE Helion OpenStack Carrier Grade installation. </p>
+                </section>
+                <section
+                        conref="../../../CarrierGrade2.0/Installation/prereqs/carrier-grade-install-download.depot.dita#topic7148cgid/depot"/>
+                <section>
+                        <title>Download the installation files</title>
+                        <p>In Software Depot, locate the following download: </p>
+                </section>
+                <section>
+                        <p>
+                                <ol id="hpelinux">
+                                        <li><b>Helion Carrier Grade 2.1 AVS</b>. This link downloads
+                                                the <codeph>hcg21_kvm_avs.tar.gz</codeph> file. Also
+                                                download the associated checksum and signature
+                                                files. </li>
+                                        <li>Extrct the <codeph>hcg21_kvm_avs.tar.gz</codeph> file.
+                                                The compressed file contains the
+                                                  <codeph>hcg21_kvm_avs.tar</codeph> file.</li>
+                                        <li>Extract the <codeph>hcg21_kvm_avs.tar</codeph> file. The
+                                                compressed file contains the
+                                                  <codeph>hcg21_kvm_avs</codeph> directory. </li>
+                                        <li>Change to the the <codeph>hcg21_kvm_avs</codeph>
+                                                directory. The HPE Linux installation file is called
+                                                  <codeph>hpelinux-hcg-kvm-amd64-20160224.iso.iso</codeph>.
+                                                This ISO contains all required files to install HPE
+                                                Linux and all Linux packages required for HPE Helion
+                                                Carrier Grade.</li>
+                                        <li>Use the Vitrual Media feature of the iLO remote console
+                                                to mount the
+                                                  <systemoutput>hpelinux-hcg-kvm-amd64-20160224.iso.iso</systemoutput>
+                                                image to the system that will host the lifecycle
+                                                manager. Mounting the ISO makes the contents
+                                                available for the install. </li>
+                                        <li>Use the installation wizard to install HPE Linux.</li>
+                                </ol>
+                        </p>
+                </section>
+                <section>
+                        <ol>
+                                <li id="download-patches-avs">Download the following patches:
+                                                <!--Denver patches--><ul id="ul_om1_bvz_k5">
+                                                <li><b>Helion Carrier Grade 2.1 Horizon001
+                                                  Patch002</b>. This link will download the
+                                                  <codeph>HCG2.1_Horizon001_Patch002.tar.gz</codeph>
+                                                  file.</li>
+                                                <li><b>Helion Carrier Grade 2.1 Heat001
+                                                  Patch003</b>. This link will download the
+                                                  <codeph>HCG2.0_Heat001_Patch003.tar.gz</codeph>
+                                                  file. </li>
+                                                <!--<li>wrong place<b>Helion Carrier Grade 2.0 WR002
+                                                  Patch005</b>.This link will download the
+                                                  <codeph>HCG2.0_WR002_Patch005.tar.gz</codeph>
+                                                  file.</li>-->
+                                                <li><b>Helion Carrier Grade 2.1 Horizon003
+                                                  Patch031</b>. This link will download the
+                                                  <codeph>HCG2.0_Horizon003_Patch031.tar.gz</codeph>
+                                                  file.</li>
+                                        </ul></li>
+                        </ol>
+                        <p>
+                                <b>Download the installation files</b></p>
+                        <ol id="ol_qd2_zg1_xw">
+                                <li><b>Helion OpenStack 2.1</b>. This link downloads the
+                                                <codeph>HelionOpenStack-2.1.iso</codeph> file. </li>
+                                <li>Download the following KVM Region patches:<ul id="ul_jzb_j31_xw">
+                                                <li><b>HCG 2.1 WR002 Patch005</b></li>
+                                                <li><b>HCG 2.1 WR003 Patch007</b></li>
+                                                <li><b>HCG 2.1 WR004 Patch017</b></li>
+                                                <li><b>HCG 2.1 WR005 Patch019</b></li>
+                                                <li><b>HCG 2.1 WR006 Patch025</b></li>
+                                                <li><b>HCG 2.1 WR007 Patch027</b></li>
+                                                <li><b>HCG 2.1 WR008 Patch029</b></li>
+                                        </ul></li>
+                        </ol>
+                </section>
+                <p>You will install these patches during the installation of the KVM Region. </p>
+                <section id="extract"><title>Extract and copy the HPE Helion OpenStack Carrier Grade
+                                installation files and patches</title>Extract the downloaded files
+                        from the <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph> file:<ol
+                                id="ol_kck_hlw_f5">
+                                <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar.gz</codeph>
+                                        file. The exraction creates the
+                                                <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph>
+                                        file.</li>
+                                <li>Extract the
+                                                <codeph>hcg2_kvm_esx_ironic_vrs_part2of2.tar.gz</codeph>
+                                        file. The extraction creates the
+                                                <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
+                                        file.</li>
+                                <li>Extract the <codeph>hcg2_kvm_esx_ironic_vrs.tar</codeph> and
+                                                <codeph>hcg2_kvm_esx_ironic_part2of2.vrs.tar</codeph>
+                                        files. A number of files and folders are extracted.</li>
+                                <li>Copy or move the extracted files as indicated in the following
+                                        tables. <table id="table_rkj_yyk_2t">
+                                                <tgroup cols="3">
+                                                  <colspec colnum="1" colname="col2"/>
+                                                  <colspec colnum="2" colname="col3"/>
+                                                  <colspec colnum="3" colname="col4"/>
+                                                  <thead>
+                                                  <row>
+                                                  <entry><b>File Name</b></entry>
+                                                  <entry><b>Copy to location on the Lifecycle
+                                                  Manager</b></entry>
+                                                  <entry><b>Notes</b></entry>
+                                                  </row>
+                                                  </thead>
+                                                  <tbody>
+                                                  <row>
+                                                  <entry><xref
+                                                  href="http://15.214.241.88/cg-hos-builds/cg-hlm.qcow2"
+                                                  format="html" scope="external"
+                                                  >cg-hlm.qcow2</xref></entry>
+                                                  <entry>
+                                                  <p>/var/lib/libvirt/images</p>
+                                                  <p> </p>
+                                                  <p>Can copy this to any other directory and update
+                                                  the group_vars/all file with that dir folder
+                                                  path</p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry/>
+                                                  </row>
+                                                  <row>
+                                                  <entry>
+                                                  <p>cg-hos-misc.tar.gz</p>
+                                                  <p>cg-hos-src.tar.gz</p>
+                                                  </entry>
+                                                  <entry>
+                                                  <p>/root/cg</p>
+                                                  <p> </p>
+                                                  <p><b>Create cg folder if not present</b></p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry> cg-infra-src.tar.gz</entry>
+                                                  <entry>
+                                                  <p>/root </p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                  <!--<row><entry>cg-ironic-deploy-images.tar.gz</entry><entry>/root/cg</entry><entry>For Sacramento deployments only.</entry></row>-->
+                                                  </tbody>
+                                                </tgroup>
+                                        </table><p id="kvm"><b>KVM Region Installation
+                                        files</b></p>The following files for installing the KVM
+                                        region are in the <b>WR</b> folder in the extracted download package.<p>
+                                                <table id="topic7148__table_yhb_zny_zs">
+                                                  <tgroup cols="1">
+                                                  <colspec colnum="1" colname="col2"
+                                                  colwidth="3.26*"/>
+                                                  <thead>
+                                                  <row>
+                                                  <entry>File Name</entry>
+                                                  </row>
+                                                  </thead>
+                                                  <tbody>
+                                                  <row>
+                                                  <entry><codeph>bootimage_full.iso</codeph></entry>
+                                                  </row>
+                                                  <!--<row><entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry><entry><systemoutput>/root</systemoutput> on <systemoutput>controller-0</systemoutput> in the KVM region. SDK files to be used as needed.</entry></row>-->
+                                                  <!--<row><entry><codeph>WR-15.09-sample-guest.img</codeph></entry><entry><systemoutput>/root</systemoutput> on <systemoutput>controller-0</systemoutput> in the KVM region. Sample guest operating system files to be used as needed.</entry></row>-->
+                                                  </tbody>
+                                                  </tgroup>
+                                                </table>
+                                        </p></li>
+                        </ol></section>
+                <p>In Software Depot, locate the following download: </p>
+                <!--<section id="dcn-extract"><title>Extract the DCN components</title><p id="dcn">HP Distributed Cloud Networking (DCN) must be fully installed and operational before installing HPE Helion OpenStack Carrier Grade. The currently supported version is <b id="dcn-version">3.2R4</b>. For DCN installation instructions, see <xref href="http://h20566.www2.hpe.com/portal/site/hpsc/template.PAGE/public/psi/manualsResults/?javax.portlet.begCacheTok=com.vignette.cachetoken&amp;javax.portlet.endCacheTok=com.vignette.cachetoken&amp;javax.portlet.prp_e97ce00a6f76436cc859bfdeb053ce01=wsrp-navigationalState%3Daction%253Dmanualslist%257Ccontentid%253DUser-Guide-%252528how-to-use%252529%257Clang%253Den&amp;javax.portlet.tpst=e97ce00a6f76436cc859bfdeb053ce01&amp;sp4ts.oid=7268885&amp;ac.admitted=1451937596553.125225703.1938120508" format="html" scope="external" id="dcn-docs">HPE Distributed Cloud Networking documentation</xref>.</p><p>The installation download packages contain files needed to integrate HPE Helion OpenStack Carrier Grade and DCN.</p><p>Extract the downloaded files from the <codeph>DCN-1</codeph> and <codeph>DCN-2</codeph> directories as indicated in the following table.</p><table id="table_mlr_bcz_st"><tgroup cols="3"><colspec colnum="1" colname="col2" colwidth="1.52*"/><colspec colnum="2" colname="col3" colwidth="1*"/><colspec colname="newCol2" colnum="3" colwidth="1*"/><thead><row><entry>File Name</entry><entry>To be copied to the lifecycle manager</entry><entry>Notes</entry></row></thead><tbody><row><entry><p>nuage-metadata-agent_3.2.4-133_all.deb</p><p>nuagenetlib_0.0.0-1729-kilo_all.deb</p><p>nuage-openstack-neutron_2015.1.1745_all.deb</p><p>nuage-openvswitch-common_3.2.6-0b008b5_amd64.deb</p><p>nuage-openvswitch-switch_3.2.6-0b008b5_amd64.deb</p><p>nuage-python-openvswitch_3.2.6-0b008b5_all.deb</p><p>vsc_singledisk.qcow2</p></entry><entry><p>/root/cg/dcn</p><p><b>Create <codeph>dcn</codeph> folder under <codeph>/root/cg</codeph> if you don’t have in the lifecycle manager</b></p></entry><entry/></row><row><entry><p>vsd.xml</p><p>VSD-3.2.4_134-hp.ova</p>VSD-3.2.4_134-hp.qcow2</entry><entry><p>/var/lib/libvirt/images</p></entry><entry/></row><row><entry>itoolbox1.ova</entry><entry morerows="1"><p>You will use this file when installing the VRSvApp later in the installation process. You can leave these files in the download location. </p></entry><entry>Optional.<p/></entry></row><row><entry>VRS_3.2.6-0b008b5_11252015.ovf<p>VRS_3.2.6-0b008b5_11252015-disk1.vmdk</p></entry><entry>Not required for Tahoe</entry></row><row><entry>TEMPL-CPV9.ova</entry><entry>Any location on any server that can be accessed by the VMware vCenter client.</entry><entry>Not required for Tahoe</entry></row></tbody></tgroup></table><p>Also, extract the <codeph>vsc_singledisk.qcow2</codeph> file from the <codeph>HCG_2.0_DCN001_Patch004.tar.gz</codeph> file and copy the file to <codeph>~/cg/dcn</codeph> directory. Use this <codeph>vsc_singledisk.qcow2</codeph> file in place of the file in the download package. </p></section>-->
+                <section id="avs">
+                        <b>Extract and copy the HPE Helion OpenStack Carrier Grade installation files
+                                and patches</b><p>Extract the downloaded files:</p><ol
+                                id="ol_qkx_cmw_f5">
+                                <li>Extract the <codeph>hcg2_kvm_avs.tar.gz</codeph> file. The
+                                        exraction creates the <codeph>hcg2_kvm_avs.tar</codeph>
+                                        file.</li>
+                                <li>Extract the <codeph>hcg2_kvm_avs.tar.gz</codeph> file.</li>
+                                <li>Copy or move the extracted files as indicated in the following
+                                        tables. <p>
+                                                <table conref="#topic7148cgid21/table_rkj_yyk_2t"
+                                                  id="table_cvn_s5n_g5">
+                                                  <tgroup cols="1">
+                                                  <tbody>
+                                                  <row>
+                                                  <entry/>
+                                                  </row>
+                                                  </tbody>
+                                                  </tgroup>
+                                                </table>
+                                        </p><p id="kvm-avs"><b>KVM Region Installation
+                                        files</b></p>The following files for installing the KVM
+                                        region are in the <b>WR</b> folder in the extracted download package.<p>
+                                                <table id="table_ejh_qtj_k5">
+                                                  <tgroup cols="1">
+                                                  <colspec colnum="1" colname="col2"
+                                                  colwidth="3.26*"/>
+                                                  <thead>
+                                                  <row>
+                                                  <entry>File Name</entry>
+                                                  </row>
+                                                  </thead>
+                                                  <tbody>
+                                                  <row>
+                                                  <entry><codeph>bootimage_avs_only.iso</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
+                                                  </row>
+                                                  </tbody>
+                                                  </tgroup>
+                                                </table>
+                                        </p></li>
+                        </ol></section>
+                <section>
+                        <p><b id="debian">Obtain Required Debian Packages</b></p>
+                        <p>Download the following Debian packages from a trusted source:</p>
+                        <p>
+                                <ul id="ul_wwn_13h_xt">
+                                        <li>libprotobuf-c0_0.14-1+b1_amd64.deb</li>
+                                        <li>python-setproctitle_1.1.8-1_amd64.deb</li>
+                                </ul>
+                        </p>
+                        <p>Move the downloaded files to the to the <codeph>/root/cg/dcn</codeph>
+                                directory on the lifecycle manager host:</p>
+                </section>
+                <section id="next-step">
+                        <title>Next Step</title>
+                        <p>Deploy the Lifecycle Manager:<ul id="ul_vsj_jry_bv">
+                                        <li><xref
+                                                  href="../denver/CGH-2-install-denver-cluster.dita#topic10581c2ild"
+                                                  >In a KVM Cluster</xref></li>
+                                        <li>On a Standalone KVM</li>
+                                </ul></p>
+                </section>
+        </body>
+</topic>

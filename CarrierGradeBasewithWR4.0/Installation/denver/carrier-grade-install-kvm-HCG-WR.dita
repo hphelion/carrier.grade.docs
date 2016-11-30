@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic1107cgikd">
+<title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 4.0 Base with WR: Step 4 - Deploying
+    the KVM Region</title>
+<prolog>
+  <metadata>
+    <othermeta name="layout" content="default"/>
+    <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+    <othermeta name="role" content="Storage Administrator"/>
+    <othermeta name="role" content="Storage Architect"/>
+    <othermeta name="role" content="Michael B"/>
+    <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+  </metadata>
+</prolog>
+<body>
+    <section id="intro">
+      <p>After the lifecycle manager VM is up and running and HPE Helion OpenStack is installed, use
+        the following steps to deploy the KVM Region. </p>
+      <p>The process for installing the KVM Region involves the following tasks:<ul
+          id="ul_fj4_mct_g5">
+          <li><xref href="#topic1107cgikd/controller-0" format="dita">Step 1: Bring Up Controller-0
+              in the KVM Region</xref></li>
+          <li><xref href="#topic1107cgikd/kvm-custom-patch" format="dita"/></li>
+          <li><xref href="#topic1107cgikd/custom-branding" format="dita">Step 3: Applying
+              Customer-Specific Branding</xref></li>
+        <li><xref href="#topic1107cgikd/configure-kvm" format="dita">Step 4: Configure the KVM
+              Region Cloud</xref></li>
+        <li><xref href="#topic1107cgikd/Configure-network" format="dita">Step 5: Configure Provider
+              Networks Using CLI or Horizon Dashboard</xref></li>
+        </ul></p>
+    </section>
+    <section id="controller-0">
+      <title>Step 1: Bring Up Controller-0 in the KVM Region</title>
+      <p>For installing controller-0 on a baremetal system with no OS:</p>
+      <ol id="ol_mf2_knq_35">
+        <li> On your IE browser ( recommended IE 11), enter the IP address to access the iLO
+          console.</li>
+        <li>Login with your unique iLO user name and password associated with your server.<p><image
+              id="image_utc_bqz_1x"
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-login-install-KVM-1.png"
+              width="600"/></p></li>
+        <li>The initial overview of the iLO console is displayed.<p><image id="image_n35_gb1_bx"
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-initial-system-overview-install-KVM-2.png"
+              width="600"/></p></li>
+        <li>Select <b>Remote Console</b> on the left hand side of the ILO interface and click
+            <b>Launch</b>.<p><image id="image_hdz_2c1_bx"
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-remote-console-menu-install-KVM-3.png"
+              width="600"/></p></li>
+        <li>A "Security Warning" window appears, click Run to run the iLO remote console
+              application.<p><image
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-IE-application-sec-warn-install-KVM-4.png"
+              width="600" id="image_km5_4md_bx"/></p></li>
+        <li>The "iLO Integrated Remote Console" application window is displayed.<p><image
+              id="image_dy2_jf1_bx"
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-ILO-remote-console-initial-screen-Install-KVM-5.png"
+              width="600"/></p></li>
+        <li>Select the "Virtual Drives" to mount the image file (CD-ROM/DVD).<p><image
+              id="image_cs5_zj1_bx"
+              href="../../../media/carrier.grade.docs/2.1/CGH-2.1-remote-console-select-VirtDrive-install-KVM-6.png"
+              width="600"/></p></li>
+        <li>Select the <codeph>Titanium-Server-host-installer-16.10-b5.iso</codeph> and click
+            <b>Open</b>.<note>Refer to<b>
+              <xref href="../../PDF/titanium_server_planning_1610.pdf" format="pdf"
+                >titanium_server_planning_1610.pdf</xref></b> and preferably <b><xref
+                href="../../PDF/titanium_server_installation_for_systems_with_dedicated_storage_1610.pdf"
+                format="pdf"
+                >titanium_server_installation_for_systems_with_dedicated_storage_1610.pdf</xref></b>
+            for server/network planning and installation respectively. For other modes of
+            installation, refer to the installation documents.</note></li>
+        <li>After mounting the iso file, select the "Momentary Press" under "Power Switch"
+          menu.</li>
+        <li>If you pressed F11 to navigate to the boot menu and chose to boot the ISO file through
+          the virtual drive, then you will be directed to the KVM region installer wizard.<p>After
+            the installation is complete, you will need to reboot the server. After the
+            reboot:</p><ol id="controller-0-2">
+            <li>Log in as user name <codeph>wrsroot</codeph> and password <codeph>wrsroot</codeph>.
+              Make sure you change the password.</li>
+            <li>Temporarily assign an IP address to the <codeph>PXE NIC - eth0</codeph>. Use the IP
+              you have reserved for the KVM PXE.
+              <codeblock>ip addr add &lt;CIDR> dev eth0
+ifconfig eth0 up</codeblock></li>
+            <li> Set the default gateway to the PXE network gateway
+              <codeblock>route add default gw &lt;CIDR_gateway_IP&gt;</codeblock></li>
+            <li>Copy the following KVM region license files from the lifecycle manager VM to the
+                <codeph>/home/wrsroot/</codeph> directory of the <codeph>controller-0</codeph>. <ul
+                id="ul_mpn_hnr_bt">
+                <li><codeph>license.lic</codeph> Located in the
+                    <codeph>~/cg-hlm/windriver-files</codeph> directory</li>
+                <li><codeph>region_config</codeph> Located in the
+                    /<codeph>var/hlm/clouds/&lt;cloud-name&gt;/desired_state/&lt;cloud-name&gt;/001/base/stage/windriver-config</codeph>
+                  directory</li>
+                <li><codeph>cakey.pem</codeph> Located in the
+                    <codeph>/var/hlm/clouds/&lt;cloud-name&gt;/desired_state/&lt;cloud-name&gt;/001/base/stage/windriver-config</codeph>
+                  directory</li>
+              </ul><p>These files are loaded to the lifecycle manager VM during the installation
+                process.</p></li>
+          </ol></li>
+      </ol>
+    </section>
+    <section id="kvm-custom-patch"><title> Step 2: Apply Horizon Patch</title>Perform the following
+      steps to deploy the Horizon patch. These steps are valid for any new install where software is
+      loaded onto controller-0 and config_region script has not been executed on the Controller-0 in
+      the KVM region.</section>
+    <section>
+      <note type="important"><b>Use the CLI with the KVM Region </b><p>When working with the servers
+          in the KVM region, do not use the Horizon interface. Please use the <xref
+            href="http://docs.openstack.org/cli-reference/content/" format="html" scope="external"
+            >OpenStack command-line interface CLI commands</xref>. </p></note>
+    </section>
+    <section id="custom-branding"><title>Step 3 : Applying Customer-Specific Branding</title>
+      <p>You can apply customer-specific branding by including a branding tarball.</p>
+    
+      <p>For more information on creating the branding tarball, see the instructions in the
+          <filepath>HPE specific branding tarball hos_theme_v1.1.tgz</filepath> in the HP Helion
+        OpenStack Carrier Grade SDK tarball.</p>
+      <p>This component contains instructions and examples for adding custom branding to the
+        Horizon GUI. You can modifythe existing style sheet, font, and image files to develop
+        your own branding, and then apply the branding by installinga tarball that includes the
+        modified files along with a manifest.</p>
+      <p>The branding tarball can be applied at various stages. The steps for each stage are
+        described below.</p>
+      <note id="note_N1002B_N1001F_N1001C_N10001">The recommended method is to install the tarball
+        before running the controller configuration script.</note>
+      
+      <ol>
+        <li>Log into the active controller using the CLI.</li>
+        
+        <li>Delete any previous tarball from the <filepath>/opt/branding</filepath>
+          directory.</li>
+        
+        <li>Copy the new branding tarball to the <filepath>/opt/branding</filepath>
+          directory. </li>
+        
+        <li>Install the branding. <p>To install the branding as part of initial system
+          configuration, run the configuration controller script. </p><p>If you have
+            already run the controller configuration script, you can install the branding as
+            follows:</p><ol>
+              <li>Ensure that any previous tarballs are deleted from the
+                <filepath>/opt/branding</filepath> directory.</li>
+              <li>Ensure that the new branding tarball is copied to the
+                <filepath>/opt/branding</filepath> directory.</li>
+              <li>Execute the following command:
+                <codeblock>sudo service horizon restart </codeblock><p>This processes
+                  the branding files on the active controller. </p></li>
+              <li>Lock the inactive controller.</li>
+              <li>Unlock the inactive controller.</li>
+            </ol></li></ol>
+    </section>
+   
+    <section id="configure-kvm">
+      <title>Step 4: Configure the KVM Region cloud</title>
+      <ol id="ol_vl1_5fj_y5">
+        <li>In the iLO web interface, launch a console session to the <codeph>controller-0</codeph>
+          node.</li>
+        <li>Execute the following command to install the KVM Region cloud:<p><b>Important:</b>
+            Always execute this command from a console window, not an SSH
+              session</p><codeblock>sudo config_region region_config</codeblock><p><image
+              href="../../../media/CGH-install-KVM.png" width="500" id="image_wl1_5fj_y5"
+          /></p>Ignore the message which displays during <codeph>config_region</codeph> process.
+              <codeblock>Step 9 of 29 [####  ]dm-6 WRITE SAME failed. Manually zeroing. </codeblock><p><image
+              href="../../../media/CGH-install-kvm-error.png" width="500" id="image_xl1_5fj_y5"
+            /></p></li>
+        <li>After <codeph>controller-0</codeph> is deployed, add and configure the remaining nodes
+          as <codeph>controller-1</codeph> and <codeph>compute-'n'</codeph>. When adding a
+          controller, the name is assigned in order. Unique controller names are ignored.<codeblock>system host-add --hostname controller-1 --personality controller --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;bm_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt; --bm_password &lt;ilo_password&gt;
+system host-add --hostname &lt;unique-compute-name&gt; --personality compute --mgmt_mac &lt;mgmt_mac&gt; --bm_mac &lt;ilo_mac&gt; --bm_ip &lt;ilo_ip&gt; --bm_type ilo4 --bm_username &lt;ilo_user&gt;  --bm_password &lt;ilo_password&gt;</codeblock>
+          <image
+            href="../../../media/carrier.grade.docs/2.1/CGH-2.1-Configure-the-KVM-Region-cloud.png"
+            width="800" id="image_lkm_2ck_fx"/>
+          <note>If you include <codeph>-c tty0</codeph> to either of these commands, the system
+            console will be set to <codeph>tty0</codeph> which is the first virtual terminal on the
+            screen of a Linux system. If you do not specify this value, the default setting of the
+            console will be <codeph>ttyS0</codeph>, which is a serial port. You will not be able to
+            see console messages as the system is being installed or booted up after the install
+            unless you are using serial port connections for all servers</note><note>If the console
+            output setting needs to be changed after a node has already been defined using the above
+              <codeph>system host-add</codeph> syntax, it can be accomplished in two ways: Either
+            delete and re-add the node or just alter the console setting for that node. To delete
+            the node the <codeph>system host-list</codeph> command should be used to confirm the
+            node ids and names.<p><image
+                href="../../../media/carrier.grade.docs/2.1/CGH-2.1-system-host-list-install-kvm.png"
+                width="800" id="image_wbb_1k3_hx"/></p></note><p>Confirm the <b>host ID</b> or
+              <b>hostname</b> and then use the <codeph>system host-delete</codeph> command to delete
+            the node definition. This can be done using the <b>host ID</b> or the
+            hostname.<codeblock>[root@controller-0 ~(keystone_admin)]# system host-delete 5 
+Deleted host 5
+[root@controller-0 ~(keystone_admin)]# system host-delete compute-1 
+Deleted host compute-1</codeblock></p><p>You
+            can also change the actual setting of the console output using the <codeph>system
+              host-update</codeph> command. Even in this case, the actual <b>host ID</b> or
+              <b>hostname</b> will be used along with the name of the attribute that will be
+            updated. During this time, the console attribute setting changes from the default value
+            of <b>ttyS0,115200</b> to
+            <b>tty0</b>.</p><codeblock>[root@controller-0 ~(keystone_admin)]# system host-update compute-1 console=tty0
++---------------------+--------------------------------------+
+| Property            | Value                                |
++---------------------+--------------------------------------+
+| action              | none                                 |
+| administrative      | locked                               |
+| availability        | offline                              |
+| bm_ip               | 10.1.69.27                           |
+| bm_mac              | 10:60:4b:a0:e4:7d                    |
+| bm_type             | ilo4                                 |
+| bm_username         | cghelion                             |
+| boot_device         | sda                                  |
+| capabilities        | {}                                   |
+| console             | tty0                                 |
+| created_at          | 2016-09-07T19:34:08.593609+00:00     |
+| cstatus             | None                                 |
+| hostname            | compute-1                            |
+| iconfig_applied     | None                                 |
+| iconfig_fini        | None                                 |
+| iconfig_target      | None                                 |
+| id                  | 8                                    |
+| install_output      | text                                 |
+| invprovision        | None                                 |
+| location            | {}                                   |
+| mgmt_ip             | None                                 |
+| mgmt_mac            | 14:58:d0:52:ab:02                    |
+| operational         | disabled                             |
+| personality         | compute                              |
+| reserved            | False                                |
+| rootfs_device       | sda                                  |
+| serialid            | None                                 |
+| task                | None                                 |
+| ttys_dcd            | None                                 |
+| updated_at          | None                                 |
+| uptime              | 0                                    |
+| uuid                | 1ae1d25f-8797-4ec5-b5c4-fbd7f4d4a7d0 |
+| vim_progress_status | None                                 |
++---------------------+--------------------------------------+</codeblock><p>The
+            current values of all the attributes of a particular host can be viewed using the
+              <codeph>system host-show</codeph>
+          command.</p><codeblock>[root@controller-0 ~(keystone_admin)]# system host-show compute-1
++---------------------+--------------------------------------+
+| Property            | Value                                |
++---------------------+--------------------------------------+
+| action              | none                                 |
+| administrative      | locked                               |
+| availability        | offline                              |
+| bm_ip               | 10.1.69.27                           |
+| bm_mac              | 10:60:4b:a0:e4:7d                    |
+| bm_type             | ilo4                                 |
+| bm_username         | cghelion                             |
+| boot_device         | sda                                  |
+| capabilities        | {u'bm_region': u'External'}          |
+| console             | tty0                                 |
+| created_at          | 2016-09-07T19:34:08.593609+00:00     |
+| cstatus             | None                                 |
+| hostname            | compute-1                            |
+| iconfig_applied     | None                                 |
+| iconfig_fini        | None                                 |
+| iconfig_target      | None                                 |
+| id                  | 8                                    |
+| install_output      | text                                 |
+| invprovision        |                                      |
+| location            | {}                                   |
+| mgmt_ip             | None                                 |
+| mgmt_mac            | 14:58:d0:52:ab:02                    |
+| operational         | disabled                             |
+| personality         | compute                              |
+| reserved            | False                                |
+| rootfs_device       | sda                                  |
+| serialid            | None                                 |
+| task                | None                                 |
+| ttys_dcd            | None                                 |
+| updated_at          | 2016-09-07T19:34:40.369802+00:00     |
+| uptime              | 0                                    |
+| uuid                | 1ae1d25f-8797-4ec5-b5c4-fbd7f4d4a7d0 |
+| vim_progress_status | None                                 |
++---------------------+--------------------------------------+</codeblock></li>
+        <li>In the iLO web interface, set the controller and compute nodes to one-time PXE booting
+          from the network.</li>
+        <li>Restart the nodes.</li>
+        <li>Monitor to monitor the status of nodes being PXE booted:
+          <codeblock>system host-list </codeblock><codeblock>+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | locked         | disabled    | online       |
+| 3  | comp1        | compute     | locked         | disabled    | online       |
+| 4  | comp2        | compute     | locked         | disabled    | online       |
+| 5  | comp3        | compute     | locked         | disabled    | online       |
++----+--------------+-------------+----------------+-------------+--------------+</codeblock>After
+          a succesful PXE boot, the <b>Operational State</b> should be <b>Disabled</b> and the
+            <b>Availability State</b> should be <b>Online</b>.</li>
+        <li>Execute the following command from controller-0 console to unlock
+          controller-1:<codeblock>system host-unlock controller-1</codeblock></li>
+      </ol>
+    </section>
+  <section id="Configure-network">
+      <title>Configure KVM Region Virtual Networks</title>
+      <p>After the HPE Helion OpenStack Carrier Grade cloud is fully deployed, perform the following
+        tasks to configure virutal networking in the KVM region.</p>
+      <p>In general, you need to:<ul id="ul_s1q_2ss_2v">
+          <li>create provider networks</li>
+          <li>
+            <p>add segmentation ranges (VLAN ID ranges) in provider nets</p>
+          </li>
+          <li>
+            <p>create the management and data networks</p>
+          </li>
+          <li>
+            <p>unlock computes</p>
+          </li>
+        </ul></p>
+      <p>You can perform these tasks using the KVM region CLI or the Horizon web interface:</p>
+      <p>
+        <ul>
+          <li><xref href="carrier-grade-install-denver-kvm-networking-cli.dita#topic10581cgidppncli"
+              >Using the CLI</xref></li>
+          <li><xref href="carrier-grade-install-denver-kvm-networking-ui.dita#topic10581cgidppnui"
+              >Using the Horizon Dashboard</xref></li>
+        </ul>
+      </p>
+    </section>
+    <section>
+      <!--Hide for 2.1 <li><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd">Access the Horizon dashboard</xref> using the CAN network IP (HTTPS). </li><li>Select <b>regionone</b> in the <xref href="../../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita#jow1432757989702">region selector</xref>.</li><li>Click <b>Admin</b> then <b>Inventory</b> to monitor the status of nodes being PXE booted. After a succesful PXE boot, the <b>Operational State</b> should be <b>Disabled</b> and the <b>Availability State</b> should be <b>Online</b>. <p><b>Note:</b>The Horizon Dashboard will be running on the first IP address of the CLM network range (refer to the <codeph>ip_start_address</codeph> value provided for the CLM network in the <codeph>definition.json</codeph> during the Standard Region deployment). </p><p>The log-in credentials for Horizon are as follows:</p><codeblock>username: admin 
+password:  &lt;random></codeblock><p>The Horizon password is randomly generated during the installation. You can locate the password in the <codeph>stackrc</codeph> file on any of the Standard Region controllers.</p></li>-->
+    </section>
+  <section id="next-step">
+    <title>Next Steps</title>
+    <p><xref href="carrier-grade-install-launch-horizon-denver.dita#topic10581cgilhd">Launch the
+          Horizon Interface</xref></p>
+  </section>
+  
+  </body>
+</topic>

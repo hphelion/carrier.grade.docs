@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE topic   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+
+
+<topic
+    domains="(topic reference topic)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   "
+    id="jow1432757989702a" xml:lang="en-us">
+
+
+    <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Working in Domains or
+        Projects Based on User Type</title>
+
+
+    <body>
+
+
+        <section><p>When working in HPE Helion OpenStack Carrier Grade Horizon interface,
+                    <b>admin</b> users can make changes that affect a specific project or all
+                projects in the domain. <ul id="ul_q5f_shf_2v">
+                    <li>Project panel -- Changes made though the <b>Project</b> panel affect only
+                        the currently selected project. A non-admin can access only the
+                            <b>Project</b> panel. Projects are organizational units in the cloud to
+                        which you can assign users. Projects are also known as tenants or accounts.
+                        <!--last two sentences from http://docs.openstack.org/user-guide-admin/manage_projects_users_and_roles.html--></li>
+                    <li>Admin panel -- Changes made throught the <b>Admin</b> panel generally affect
+                        all projects within the cloud domain. An admin can access the <b>Admin</b>
+                        panel. A domain is an Identity API v3 entity. Represents a collection of
+                        projects, groups and users that defines administrative boundaries for
+                        managing OpenStack Identity entities.
+                        <!--last two sentences from http://docs.openstack.org/user-guide-admin/common/glossary.html--></li>
+                </ul></p>When working in HPE Helion OpenStack Carrier Grade, you can log in as an
+                <b>admin</b> user or a <b>non-admin user</b>. <ul>
+                <li>admin user -- an admin user can work with the entire domain: all projects, all
+                    users. An admin can access the Admin panel. Changes in the admin panel generally
+                    affect all projects.</li>
+                <li>non-admin user -- a non-admin user can work with projects assigned to that user.
+                    A non-admin can access only the Project panel. Changes in the project affect
+                    only the currently selected project.<p>In the Horizon interface, you can use a
+                        selector to move between the projects.</p><image
+                        href="../../../media/CGH-2-region-selector.png" id="image_iyh_rsw_ft"
+                        width="350" height="141"/></li>
+            </ul><p><!--Update this image for 2.2--></p></section>
+
+
+    </body>
+
+
+</topic>

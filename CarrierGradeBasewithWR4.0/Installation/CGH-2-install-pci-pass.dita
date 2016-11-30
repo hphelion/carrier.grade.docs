@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2ipp">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1:
+        Configuring PCI-Passthrough</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+        <p><!--Copied from WR Admin Guide, drop 4--></p>
+        <p>A <xref href="CGH-2-install-sriov-pci.dita#topic10581c2isio">passthrough Ethernet
+                interface</xref> is a physical PCI Ethernet NIC on a compute node to which a virtual
+            machine is granted direct access. This minimizes packet processing delays but at the
+            same time demands special operational considerations. <!--From WR Admin Guide--></p>
+        <p><b>Assumption: </b></p>
+        <ul id="ol_oyr_5t4_tt">
+            <li>You have HPE Helion OpenStack Carrier Grade is installed and running</li>
+            <li>You have identified the NIC ports to be used for PCI Passthrough devices from each
+                compute node</li>
+        </ul>
+        <p>To configure PCI-Passsthrough:</p>
+        <p>
+            <ol id="ol_k3j_q22_2v">
+                <li>
+                    <xref
+                        href="../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+                        >Launch the HPE Helion OpenStack Carrier Grade Horizon
+                    Dashboard</xref>.</li>
+                <li><xref
+                        href="../OperationsGuide/Dashboard/CGH-2-User-region-selector.dita#jow1432757989702"
+                        >Select the <codeph>regionone</codeph> region</xref>.</li>
+                <li>Lock the compute node you want to configure. </li>
+                <li>Configure the Ethernet interface to be used as a PCI passthrough interface.
+                        <p>Select the <b>System Inventory</b> page from the <b>Admin</b> panel.
+                        Then, click the <b>Hosts</b> tab and click the name of the compute node
+                        where the PCI interface is available, click the <b>Interfaces</b> tab, and
+                        finally click the <b>Edit Interface</b> button associated with the interface
+                        you want to configure. <note>The interface can also be configured from the
+                            CLI as illustrated
+                            below:<codeblock>system host-if-modify -nt pci-passthrough -p group0-data0 compute-0 eth8</codeblock></note></p><p>Fill
+                        in the window as illustrated below:</p><image
+                        href="../../media/carrier.grade.docs/2.1/CGH-21-installation-pci-pass1.png"
+                        id="image_fvv_gg2_2v" width="400"/><p><b>Post-requisite:</b> Access switches
+                        must be properly configured to ensure that virtual machines using
+                        PCI-Passthrough interfaces have the expected connectivity. In a common
+                        scenario, the virtual machine using these interfaces connects to external
+                        end points only, that is, it does not connect to other virtual machines in
+                        the same cluster. </p><p>In this case: Ethernet interface eth8 is assigned
+                        the network type <codeph>pci-passthrough</codeph>, and configured as
+                        connected to provider network <codeph>group0-data0</codeph>. </p></li>
+                <li>Click <b>Save</b> to proceed. </li>
+                <li>Create the net0 tenant network: <p>Select the Networks window from the Admin
+                        panel, click the Networks tab, and then click the Create Network button.
+                        Fill in the Create Network window as illustrated below. You must ensure
+                        that:</p><ul id="ul_ejk_z22_2v">
+                        <li>The tenant1 tenant has access to the tenant network, either assigning it
+                            as the owner, as in the illustration (using Project), or by enabling the
+                            shared flag. </li>
+                        <li>The segmentation ID is set to 10.</li>
+                    </ul><image
+                        href="../../media/carrier.grade.docs/2.1/CGH-21-installation-pci-pass2.png"
+                        width="400" id="image_qjt_mg2_2v"/><p>Click the Create Network button to
+                        proceed. </p></li>
+                <li>Configure the access switch. <p>Configure the physical port on the access switch
+                        used to connect to Ethernet interface eth8 as an access port with default
+                        VLAN ID of 10. Traffic across the connection is therefore untagged, and
+                        effectively integrated into the targeted tenant network. </p><p>You can also
+                        use a trunk port on the access switch so that it handles tagged packets as
+                        well. However, this opens the possibility for guest applications to join
+                        other tenant networks using tagged packets with different VLAN IDs, which
+                        might compromise the security of the system.</p>See <i>L2 Access
+                        Switches</i> in the <xref
+                        href="http://docs.hpcloud.com/pdf/static/CGH-21-KVM-Admin.pdf" format="html"
+                        scope="external">KVM Region Administration Guide</xref> for other details
+                    regarding the configuration of the access switch. </li>
+                <li>Unlock the compute node. </li>
+                <li>Launch the virtual machine: <ol id="ol_hkm_rf2_2v">
+                        <li>Log in as user user1 to the web management interface. </li>
+                        <li>Configure the network interfaces for the new virtual machine. <p><image
+                                    href="../../media/carrier.grade.docs/2.1/CGH-21-installation-pci-pass3.png"
+                                    width="400" id="image_n4r_sg2_2v"/></p><p>Open the Launch
+                                Instance dialog by clicking the Launch Interface button on the
+                                Instances window. Configure the necessary options for the new
+                                virtual machine. In particular, click the Networking tab and add a
+                                PCI passthrough interface on the tenant network net0, as illustrated
+                                below. Add other network interfaces as needed.</p> Click the Launch
+                            button to proceed. </li>
+                    </ol><p>Passthrough interfaces can be attached from the CLI when booting a new
+                        virtual machine, as illustrated below:
+                        <codeblock>nova boot --nic net-id=704e9f3b,vif-model=pci-passthrough --flavor small --image cgcs-guest my-new-vm </codeblock></p><b>Note:</b>
+                    By default, a VM that requires a PCI passthrough interface is instantiated only
+                    if a host NUMA node with a directly attached PCI interface is available. You can
+                    specify best-effort instantiation by using an extra specification. For more
+                    information, see <i>Specifying Best Effort for PCI NUMA Node Affinity</i> in the
+                        <xref href="http://docs.hpcloud.com/pdf/static/CGH-21-KVM-Admin.pdf"
+                        format="html" scope="external">KVM Region Administration Guide</xref>. </li>
+            </ol>
+        </p>
+        <p>The new virtual machine instance is up now. It has a PCI passthrough connection to the
+            net0 tenant network identified with VLAN ID 10. In this case:<ul id="ul_xz1_wf2_2v">
+                <li>Traffic between the virtual machine and the access switch can be tagged or
+                    untagged.</li>
+                <li>The connecting port on the access switch is part of a port-based VLAN.</li>
+                <li>If the port is tagged, the allowed VLAN ID range must not overlap with VLAN ID
+                    ranges used by the AVS ports.</li>
+                <li>The port-based VLAN provides the required connectivity to external switching and
+                    routing equipment needed by guest applications to establish connections to the
+                    intended end points. </li>
+            </ul></p>
+        <p>For connectivity to other virtual machines in the cluster the following configuration is
+            also required: <ul id="ul_sjh_xf2_2v">
+                <li>The VLAN ID used for the tenant network, 10 in this example, and the default
+                    port VLAN ID of the access port on the switch are the same. This ensures that
+                    incoming traffic from the virtual machine is tagged internally by the switch as
+                    belonging to VLAN ID 10, and switched to the appropriate exit ports.</li>
+                <li>The target virtual machines are reachable through another port on the compute
+                    node, which is managed by the AVS. </li>
+                <li>That other port is configured as usual, as a VLAN trunk port, and the tenant
+                    network's VLAN ID (10) is included in the tagged range. This ensures that VLAN
+                    10 is common to both the passthrough/SR-IOV interface and the AVS port. </li>
+            </ul></p>
+        <p><b>Related links</b></p>
+        <p>For more information, see <xref href="https://wiki.openstack.org/wiki/Pci_passthrough"
+                format="html" scope="external">PCI Passthrough</xref> in the OpenStack wiki.</p>
+    </body>
+</topic>

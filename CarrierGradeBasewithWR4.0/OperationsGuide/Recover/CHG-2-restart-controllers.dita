@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic5937recover">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Restart Services </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack 1.1"/>
+      <othermeta name="role" content="Systems Administrator"/>
+      <othermeta name="role" content="Cloud Architect"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Network Administrator"/>
+      <othermeta name="role" content="Service Developer"/>
+      <othermeta name="role" content="Cloud Administrator"/>
+      <othermeta name="role" content="Application Developer"/>
+      <othermeta name="role" content="Network Engineer"/>
+      <othermeta name="role" content="Paul F"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack"/>
+      <othermeta name="product-version2" content="HPE Helion OpenStack 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>This page contains details on how to restart services on HCG controller/s VMs in the event if
+      the services do not come up correctly or they go into inactive state</p>
+    <section>
+      <title>Restart all services</title>
+      <p>To restart all services on all controllers in the correct order:<ol id="ol_itj_zqd_bv">
+          <li>Log into the lifecycle manager host.</li>
+          <li>Execute the following
+              command:<codeblock>hlm stop -c &lt;cloudname&gt; 
+hlm start -c &lt;cloud name&gt;</codeblock><p>Where
+                <codeph>&lt;cloud name></codeph> is the name of your cloud.</p></li>
+        </ol></p>
+    </section>
+    <section>
+      <title>Restart a particular service</title>
+      <p>To restart a specific service on all controllers:</p>
+    </section>
+    <ol>
+      <li>Log into the lifecycle manager host.</li>
+      <li>Execute the following
+          command:<codeblock>hlm stop -c &lt;cloudname&gt; -t &lt;role&gt;
+hlm start -c &lt;cloudname&gt; -t &lt;role&gt;</codeblock><p>Where
+            <codeph>&lt;cloud name></codeph> is the name of your cloud and <codeph>&lt;Role
+            Name></codeph> is the role name associated with the service, from the following
+          table.</p></li>
+    </ol>
+    <p>
+      <note>This can also be done from the HCG-Dashboard using "Manage" option.</note>
+    </p>
+    <table conref="../../HLMCLI/CGH-2-hlm-cli.dita#topic10581c2hc/role" id="table_wvp_zrd_bv">
+      <tgroup cols="1">
+        <tbody>
+          <row>
+            <entry/>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <section>
+      <title>Restart particular service on particular controller</title>
+      <p>To restart a specific service on a specfic server:</p>
+      <ol id="ol_a2s_csd_bv">
+        <li>Log into the lifecycle manager host.</li>
+        <li>Execute the following
+            commands:<codeblock>ansible-playbook -i hosts stop-CCP-&lt;tier&gt;.yml --limit=&lt;controllerName&gt; -t &lt;RoleName&gt;
+ansible-playbook -i hosts start-CCP-&lt;tier&gt;.yml --limit=&lt;controllerName&gt; -t &lt;RoleName&gt;</codeblock><p>Where
+              <codeph>&lt;cloud name></codeph> is the name of your cloud and <codeph>&lt;Role
+              Name></codeph> is the role name associated with the service, from the <b>Service to
+              Role Name Mapping </b> table. </p><p>For example:
+            <codeblock>ansible-playbook -i hosts start-CCP-T1.yml --limit=BASE-CCP-T1-M1-NETCLM -t KEY-API</codeblock></p></li>
+      </ol>
+    </section>
+  </body>
+</topic>

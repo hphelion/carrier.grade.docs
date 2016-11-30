@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581cgidppnui">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 4.0 Base with WR: Configuring the
+    Provider Networks Using Horizon</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+    </metadata>
+  </prolog>
+  <body>
+    <section>
+      <p>After the HPE Helion OpenStack Carrier Grade cloud is fully deployed, perform the following
+        tasks in the Horizon UI.</p>
+      <title>Create the Provider network</title>
+      <p>
+        <ol id="ol_fcr_tkr_35">
+          <li>Launch the <xref
+              href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+              >Helion dashboard</xref> and log in as an admin user.</li>
+          <li>Click <b>Admin</b>, navigate to <b>Platform</b> and then select the <b>Provider
+              Networks</b> tab.<p><image
+                href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-provider-network.png"
+                width="600" id="image_otr_12p_cy"/></p></li>
+          <li>Click the <b>Create Provider Network</b> button to create the provider
+                network.<p><image
+                  href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-create-Provider-network.png"
+                width="600" id="image_rgf_p2p_cy"/></p><table frame="all" rowsep="1" colsep="1"
+              id="table_pzm_sc5_2v">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.0*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>DescriptionExample</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Name</entry>
+                    <entry>Name of the provider network</entry>
+                    <entry>pnet1</entry>
+                  </row>
+                  <row>
+                    <entry>Description</entry>
+                    <entry>Description for the provider network (optional)</entry>
+                    <entry>providernet1</entry>
+                  </row>
+                  <row>
+                    <entry>Type</entry>
+                    <entry>Type of the provider network</entry>
+                    <entry>vlan</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Create Provider Network</b>.</li>
+          <li>In the <b>Action</b> drop-down for the new network, click <b>Create Segmentation
+              Range</b>.<p><image
+                href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-action-menu.png"
+                width="600" id="image_hjg_jfp_cy"/></p></li>
+          <li>In the <b>Segmentation Ranges</b> dialog, add the VLAN ID range to a provider
+                network.<p><image
+                  href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-Create-segmentation.png"
+                width="600" id="image_ott_4fp_cy"/></p><table frame="all" rowsep="1" colsep="1"
+              id="table_rhr_vd5_2v">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="4.06*"/>
+                <colspec colname="c3" colnum="3" colwidth="2.09*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>DescriptionExample</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Name</entry>
+                    <entry>Name of the segmentation range</entry>
+                    <entry>segment1</entry>
+                  </row>
+                  <row>
+                    <entry>Description</entry>
+                    <entry>Description for the segmentation range (optional)</entry>
+                    <entry>segment under pnet1</entry>
+                  </row>
+                  <row>
+                    <entry>Project</entry>
+                    <entry>Project where you created the provider network</entry>
+                    <entry>admin</entry>
+                  </row>
+                  <row>
+                    <entry>Minimum</entry>
+                    <entry>Minimum value of the range</entry>
+                    <entry>3001</entry>
+                  </row>
+                  <row>
+                    <entry>Maximum</entry>
+                    <entry>Maximum value of the range</entry>
+                    <entry>3004</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Create Segmentation Range</b> to commit the changes.</li>
+        </ol>
+      </p>
+    </section>
+    <section>
+      <title>Create Networks</title>
+      <p>Use the following steps to create the required network.</p>
+      <ol id="ol_d51_3mr_35">
+        <li>After the provider network is created, click <b>Admin</b>, navigate to <b>System</b>,
+          then <b>Networks</b> tab and create the necessary networks.<p><image
+              href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-Horizon-Network.png"
+              width="600" id="image_pd5_1cp_cy"/></p></li>
+        <li>Click <b>Create Network</b> button to start creating the network. <p><image
+          href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-create-network.png"
+              width="600" id="image_s4c_hhp_cy"/></p><table frame="all" rowsep="1" colsep="1"
+            id="table_bpd_h25_2v">
+            <tgroup cols="3">
+              <colspec colname="c1" colnum="1" colwidth="1*"/>
+              <colspec colname="c2" colnum="2" colwidth="4.06*"/>
+              <colspec colname="c3" colnum="3" colwidth="2.09*"/>
+              <thead>
+                <row>
+                  <entry>Field</entry>
+                  <entry>DescriptionExample</entry>
+                  <entry>Example</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry>Name</entry>
+                  <entry>Name of the network</entry>
+                  <entry>net1</entry>
+                </row>
+                <row>
+                  <entry>Project</entry>
+                  <entry>Description for the segmentation range (optional)</entry>
+                  <entry>admin</entry>
+                </row>
+                <row>
+                  <entry>Provider network type</entry>
+                  <entry>Project where you are creating the provider network</entry>
+                  <entry>vlan</entry>
+                </row>
+                <row>
+                  <entry>Admin State</entry>
+                  <entry>This field indicates the state of the Admin</entry>
+                  <entry>UP</entry>
+                </row>
+                <row>
+                  <entry>QoS Policy</entry>
+                  <entry>This field indicates whether there is any configured network QoS
+                    Policy</entry>
+                  <entry>Yes</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table></li>
+        <li>Click <b>Submit</b> to create a new network. </li>
+        <li>On the Networks table, click the name of the new network to open the <b>Network
+            Overview</b> page.<p><image
+              href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-network-details.png"
+              width="600" id="image_ktc_qqp_cy"/></p></li>
+        <li>Click <b>Create Subnet</b> on the network overview page. <p><image
+              href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-subnet-1.png"
+              width="600" id="image_nzl_3rp_cy"/></p><table frame="all" rowsep="1" colsep="1"
+            id="table_ibx_dh5_2v">
+            <tgroup cols="3">
+              <colspec colname="c1" colnum="1" colwidth="1*"/>
+              <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+              <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+              <thead>
+                <row>
+                  <entry>Field</entry>
+                  <entry>Description</entry>
+                  <entry>Example</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry>Subnet Name</entry>
+                  <entry>Name for the subnet</entry>
+                  <entry>subnet1</entry>
+                </row>
+                <row>
+                  <entry>Network Address</entry>
+                  <entry>CIDR</entry>
+                  <entry>10.20.30.0/24</entry>
+                </row>
+                <row>
+                  <entry>IP Version</entry>
+                  <entry>Type of the provider network</entry>
+                  <entry>IPv4</entry>
+                </row>
+                <row>
+                  <entry>Gateway IP</entry>
+                  <entry>Gateway for the CIDR (optional)</entry>
+                  <entry>10.20.30.1</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table></li>
+        <li>Click <b>Next</b>.<p><image
+              href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-subnet-2.png"
+              width="600" id="image_xbj_vtp_cy"/></p></li>
+        <li>On the <b>Subnet Details</b> tab, specify an IP address allocation pool.<table
+            frame="all" rowsep="1" colsep="1" id="table_u3w_l35_2v">
+            <tgroup cols="3">
+              <colspec colname="c1" colnum="1" colwidth="1*"/>
+              <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+              <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+              <thead>
+                <row>
+                  <entry>Field</entry>
+                  <entry>Description</entry>
+                  <entry>Example</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry>Allocation Pools</entry>
+                  <entry>Specify the range of IPs that can be implemented</entry>
+                  <entry>10.20.30.20,10.20.30.50</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table></li>
+        <li>Click <b>Create</b>.</li>
+      </ol>
+    </section>
+    <section>
+      <title>Creating a virtual router</title>
+      <p>From the <xref
+          href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+          >Horizon dashboard</xref>, as an admin user: <ol>
+          <li>Click <b>Project</b>, then <b>Routers</b>. <p><image
+                href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-Router.png"
+                width="600" id="image_vdt_qvp_cy"/></p></li>
+          <li>Click <b>Create Router</b>.<p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-network-router.png"
+                width="600" id="image_lyg_x2z_gv"/></p><table frame="all" rowsep="1" colsep="1"
+              id="table_fb3_d45_2v">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>Description</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Router Name</entry>
+                    <entry>Specify a name for the router</entry>
+                    <entry>router1</entry>
+                  </row>
+                  <row>
+                    <entry>External Network</entry>
+                    <entry>Linking the router to the external network</entry>
+                    <entry>external</entry>
+                  </row>
+                  <row>
+                    <entry>Router Type</entry>
+                    <entry>Select centralized/distributed for the type of router.</entry>
+                    <entry>centralized/distributed</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Create Router</b>.</li>
+          <li>After the router is created, click the name of the router. </li>
+          <li>Click the <b>Interface</b> tab and click <b>Add Interface</b>.<p><image
+                href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-Router-details.png"
+                width="600" id="image_qhy_1wp_cy"/></p><p><image
+                href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-add-Interface.png"
+                width="600" id="image_dvl_hwp_cy"/></p></li>
+          <li>Enter information for the interface.<p><image
+                href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-Add-Interface-2.png"
+                width="600" id="image_zjv_mwp_cy"/></p><table frame="all" rowsep="1" colsep="1"
+              id="table_n51_5bv_gv">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>Description</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Subnet</entry>
+                    <entry>Select the subnet</entry>
+                    <entry>ext: 10.20.59.0/24 (ext)</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Submit</b>.</li>
+        </ol></p>
+    </section>
+    <section>
+      <title>Create the network interfaces</title>
+      <p>This section describes how to create and configure interfaces to the management,
+        infrastructure and data networks:</p>
+      <ul id="ul_ypf_bzy_gv">
+        <li><xref href="#topic10581cgidppnui/non" format="dita">For a Non-Bonded Environment</xref>
+        </li>
+        <li><xref href="#topic10581cgidppnui/bonded" format="dita">For a Bonded
+          Environment</xref></li>
+      </ul>
+      <p id="non">
+        <b>For a Non-Bonded Environment</b></p>
+      <p>From the <xref
+          href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+          >Helion dashboard</xref>, as an admin user, add the interface from a compute node to the
+        infrastructure (infra) network and the data network:<ol id="ol_q3v_1s5_2v">
+          <li>Click <b>Admin</b>, then <b>Platform</b>, then <b>Host Inventory</b>.</li>
+          <li>Click the <b>Hosts</b> tab. <p><image
+                href="C:/Users/phaneend/git/carrier.grade.docs/CarrierGradeBasewithWR4.0/Images/HCG-WR-Host-Inventory.png"
+                width="600" id="image_dhv_s2q_cy"/></p></li>
+          <li>For the compute you want to configure, from the <b>Actions</b> menu, select <b>Lock
+              Host</b>. Wait until the compute is locked.</li>
+          <li>Click the name of the computer you want to configure  The <b>Inventory Detail</b> page
+            displays.</li>
+          <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>. The Create Interface
+            button displays only when that host system is locked.</li>
+          <li>Enter the <b>Create Interface</b> screen</li>
+          <li>Enter information for the interface.<p><image
+                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-infra.png"
+                width="600" id="image_yjq_fyy_gv"/></p><table frame="all" rowsep="1" colsep="1"
+              id="table_bpv_4s5_2v">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>Description</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Interface Name</entry>
+                    <entry>Specify a name for the interface</entry>
+                    <entry>infra</entry>
+                  </row>
+                  <row>
+                    <entry>Interface Type</entry>
+                    <entry>Select the type of interface.</entry>
+                    <entry>vlan</entry>
+                  </row>
+                  <row>
+                    <entry>Network type</entry>
+                    <entry>Network type of the interface</entry>
+                    <entry>infra</entry>
+                  </row>
+                  <row>
+                    <entry>VLAN ID</entry>
+                    <entry>Select the VLAN ID for the infra interfce</entry>
+                    <entry>207</entry>
+                  </row>
+                  <row>
+                    <entry>Interfaces</entry>
+                    <entry/>
+                    <entry>pxeboot0</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Create Interface</b>.</li>
+          <li>On the <b>Interfaces</b> tab, repeat these steps to create an interface to the data
+            network using the following values.<p><image
+                href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-data.png"
+                width="600" id="image_kcy_5wz_gv"/></p><table frame="all" rowsep="1" colsep="1"
+              id="table_vs2_3tb_fv">
+              <tgroup cols="3">
+                <colspec colname="c1" colnum="1" colwidth="1*"/>
+                <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                <thead>
+                  <row>
+                    <entry>Field</entry>
+                    <entry>Description</entry>
+                    <entry>Example</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Interface Name</entry>
+                    <entry>Specify a name for the interface</entry>
+                    <entry>data</entry>
+                  </row>
+                  <row>
+                    <entry>Network type</entry>
+                    <entry>Network type of the interface</entry>
+                    <entry>data</entry>
+                  </row>
+                  <row>
+                    <entry>Interface Type</entry>
+                    <entry>Select the type of router.</entry>
+                    <entry>ae</entry>
+                  </row>
+                  <row>
+                    <entry>Interfaces</entry>
+                    <entry/>
+                    <entry>eth1/eth2</entry>
+                  </row>
+                  <row>
+                    <entry>Provider network</entry>
+                    <entry>Attaching the provider net to the interface</entry>
+                    <entry>pnet1</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table></li>
+          <li>Click <b>Create Interface</b>.</li>
+          <li>Return to the Host Inventory page by clicking <b>Inventory</b> (click <b>Admin</b>,
+            Platform, then <b>Host Inventory</b>).</li>
+          <li>For the compute you configured, from the <b>Actions</b> menu, select <b>Unlock
+              Host</b>. Wait until the compute is unlocked.</li>
+          <li>Lock the other compute and repeat the steps in this section to add interfaces to the
+            infrastructure (infra) network and the data network.</li>
+        </ol></p>
+      <p id="bonded"><b>For bonded NIC environments</b></p>
+      <p>If you are using a bonded NIC environment, after configuring and unlocking the compute
+        nodes, perform these steps:</p>
+      <p>From the <xref
+          href="../../OperationsGuide/Dashboard/CGH-2-User-Dashboard-launch.dita#topic1160c2udl"
+          >Helion dashboard</xref>, as an admin user, add the infra interface:<ol id="ol_h5m_hgz_gv">
+          <li>Click <b>Admin</b>, then <b>Platform</b>, then <b>Host Inventory</b>.</li>
+          <li>Click the <b>Hosts</b> tab. <p><image
+                href="../../../media/carrier.grade.docs/CGH-2-install-denver-interface-hosts.png"
+                width="600" id="image_i5m_hgz_gv"/></p></li>
+          <li>For the compute you configured, from the <b>Actions</b> menu, select <b>Lock Host</b>.
+            Wait until the compute is locked.</li>
+          <li>Create a bonded interface:<ol id="ol_v5b_vjz_gv">
+              <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.<p><image
+                    href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-mgmt.png"
+                    width="600" id="image_ktd_cxz_gv"/></p></li>
+              <li>Enter the <b>Create Interface</b> screen</li>
+              <li>Enter information for the interface.<p><image
+                    href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-infra.png"
+                    width="600" id="image_nm4_fxz_gv"/></p><table frame="all" rowsep="1" colsep="1"
+                  id="table_k5m_hgz_gv">
+                  <tgroup cols="3">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                    <thead>
+                      <row>
+                        <entry>Field</entry>
+                        <entry>Description</entry>
+                        <entry>Example</entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry>Interface Name</entry>
+                        <entry>Specify a name for the interface</entry>
+                        <entry>infra</entry>
+                      </row>
+                      <row>
+                        <entry>Interface Type</entry>
+                        <entry>Select the type of router.</entry>
+                        <entry>vlan</entry>
+                      </row>
+                      <row>
+                        <entry>Network type</entry>
+                        <entry>Network type of the interface</entry>
+                        <entry>infra</entry>
+                      </row>
+                      <row>
+                        <entry>VLAN ID</entry>
+                        <entry>Select the VLAN ID for the infra interfce</entry>
+                        <entry>207</entry>
+                      </row>
+                      <row>
+                        <entry>Interfaces</entry>
+                        <entry/>
+                        <entry>pxeboot0</entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table></li>
+              <li>Click <b>Create Interface</b>.</li>
+            </ol></li>
+          <li>Create an interface to the management network:<ol id="ol_s4d_3kz_gv">
+              <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
+              <li>Enter the <b>Create Interface</b> screen</li>
+              <li>Enter information for the interface.<p><image
+                    href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-mgmt.png"
+                    width="600" id="image_kp5_hxz_gv"/></p><table frame="all" rowsep="1" colsep="1"
+                  id="table_l5m_hgz_gv">
+                  <tgroup cols="3">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                    <thead>
+                      <row>
+                        <entry>Field</entry>
+                        <entry>Description</entry>
+                        <entry>Example</entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry>Interface Name</entry>
+                        <entry>Specify a name for the interface</entry>
+                        <entry>mgmt</entry>
+                      </row>
+                      <row>
+                        <entry>Network type</entry>
+                        <entry>Network type of the interface</entry>
+                        <entry>mgmt</entry>
+                      </row>
+                      <row>
+                        <entry>Interface Type</entry>
+                        <entry>Select the type of router.</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>VLAN ID</entry>
+                        <entry>VLAN for the intra interface</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>Interfaces</entry>
+                        <entry/>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>Provider network</entry>
+                        <entry>Attaching the provider net to the interface</entry>
+                        <entry/>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table></li>
+              <li>Click <b>Create Interface</b>.</li>
+            </ol></li>
+          <li>Create an interface to the infrastructure network:<ol id="ol_g4t_kkz_gv">
+              <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
+              <li>Enter the <b>Create Interface</b> screen</li>
+              <li>Enter information for the interface.<p><image
+                    href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-infra.png"
+                    width="600" id="image_rrm_mxz_gv"/></p><table frame="all" rowsep="1" colsep="1"
+                  id="table_h4t_kkz_gv">
+                  <tgroup cols="3">
+                    <colspec colname="c1" colnum="1" colwidth="1*"/>
+                    <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                    <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                    <thead>
+                      <row>
+                        <entry>Field</entry>
+                        <entry>Description</entry>
+                        <entry>Example</entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry>Interface Name</entry>
+                        <entry>Specify a name for the interface</entry>
+                        <entry>infra</entry>
+                      </row>
+                      <row>
+                        <entry>Network type</entry>
+                        <entry>Network type of the interface</entry>
+                        <entry>infra</entry>
+                      </row>
+                      <row>
+                        <entry>Interface Type</entry>
+                        <entry>Select the type of router.</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>VLAN ID</entry>
+                        <entry>VLAN for the intra interface</entry>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>Interfaces</entry>
+                        <entry/>
+                        <entry/>
+                      </row>
+                      <row>
+                        <entry>Provider network</entry>
+                        <entry>Attaching the provider net to the interface</entry>
+                        <entry/>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table></li>
+              <li>Click <b>Create Interface</b>.</li>
+            </ol></li>
+          <li>Create an interface to the data network:<p>
+              <ol id="ol_udc_4kz_gv">
+                <li>On the <b>Interfaces</b> tab, click <b>Create interface</b>.</li>
+                <li>Enter the <b>Create Interface</b> screen</li>
+                <li>Enter information for the interface.<p><image
+                      href="../../../media/carrier.grade.docs/2.1/CGH-2-install-denver-interfce-data.png"
+                      width="600" id="image_lmc_qxz_gv"/></p><table frame="all" rowsep="1"
+                    colsep="1" id="table_vdc_4kz_gv">
+                    <tgroup cols="3">
+                      <colspec colname="c1" colnum="1" colwidth="1*"/>
+                      <colspec colname="c2" colnum="2" colwidth="3.09*"/>
+                      <colspec colname="c3" colnum="3" colwidth="1.69*"/>
+                      <thead>
+                        <row>
+                          <entry>Field</entry>
+                          <entry>Description</entry>
+                          <entry>Example</entry>
+                        </row>
+                      </thead>
+                      <tbody>
+                        <row>
+                          <entry>Interface Name</entry>
+                          <entry>Specify a name for the interface</entry>
+                          <entry>data</entry>
+                        </row>
+                        <row>
+                          <entry>Network type</entry>
+                          <entry>Network type of the interface</entry>
+                          <entry>data</entry>
+                        </row>
+                        <row>
+                          <entry>Interface Type</entry>
+                          <entry>Select the type of router.</entry>
+                          <entry/>
+                        </row>
+                        <row>
+                          <entry>VLAN ID</entry>
+                          <entry>VLAN for the intra interface</entry>
+                          <entry/>
+                        </row>
+                        <row>
+                          <entry>Interfaces</entry>
+                          <entry/>
+                          <entry/>
+                        </row>
+                        <row>
+                          <entry>Provider network</entry>
+                          <entry>Attaching the provider net to the interface</entry>
+                          <entry/>
+                        </row>
+                      </tbody>
+                    </tgroup>
+                  </table></li>
+                <li>Click <b>Create Interface</b>.</li>
+              </ol>
+            </p></li>
+          <li>For the compute you configured, from the <b>Actions</b> menu, select <b>Unlock
+              Host</b>. Wait until the compute is unlocked.</li>
+          <li>Lock the other compute and repeat the steps in this section to add interfaces to the
+            infrastructure (infra) network and the data network.</li>
+        </ol></p>
+    </section>
+  </body>
+</topic>

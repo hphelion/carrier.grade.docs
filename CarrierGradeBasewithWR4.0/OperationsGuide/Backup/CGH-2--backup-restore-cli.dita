@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2brc">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Backup and Restore
+    CLI</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    
+    <p>HPE Helion OpenStack Carrier Grade includes a backup and restore application called Attis
+      which you can use to backup and restore essential system files and components of the Standard Region
+      cloud. Attis is automatically installed on each of the controller nodes in the Standard Region.
+      Attis uses a command line interface.</p>
+    <p>The following document describes the full Attis CLI for backing up and restoring. You can
+      also use the built-in Attis help system by entering <systemoutput>attis help</systemoutput>
+      before any command when working with the CLI. For example:</p>
+    <p>
+      <codeblock>attis help storage</codeblock>
+    </p>
+    <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/resp"/>
+    <section>
+      <title>Synopsis</title>
+    </section>
+    <p>
+      <codeblock>attis [command] --version -v --log-file [LOG_FILE] -q -h --debug</codeblock>
+    </p>
+    <p><b>Optional arguments</b></p>
+    <p>
+      <ul id="ul_ivp_wr3_pt">
+        <li><codeph>--version</codeph> Shows the Attis version number and exits. </li>
+        <li><codeph>-v, --verbose</codeph> Increases verbosity of output. Can be repeated. </li>
+        <li><codeph>--log-file LOG_FILE</codeph> Specifies a file to log output. Enter a path and
+          file name for the log file. </li>
+        <li><codeph>-q, --quiet</codeph> Suppresses output except warnings and errors. </li>
+        <li><codeph>-h, --help</codeph> Shows help message and exits. </li>
+        <li><codeph>--debug</codeph> Shows tracebacks on errors.</li>
+      </ul>
+    </p>
+    <p><b>Commands</b></p>
+    <p>
+      <ul id="ul_at4_3m3_k5">
+        <li><systemoutput>backup</systemoutput>. Triggers the backup service.</li>
+        <li><systemoutput>backuplog</systemoutput>. Shows backup logs.</li>
+        <li><systemoutput>complete</systemoutput>. Prints bash completion command</li>
+        <li><systemoutput>config</systemoutput>. Shows stored configuration for Attis service.</li>
+        <li><systemoutput>help</systemoutput>. Shows detailed help for another command.</li>
+        <li><systemoutput>job</systemoutput>. Shows previous Attis backup/restore jobs.</li>
+        <li><systemoutput>queue</systemoutput>. Shows dispatcher queues.</li>
+        <li><systemoutput>restore</systemoutput>. Triggers the Attis restore service.</li>
+        <li><systemoutput>storage</systemoutput>. Shows storage configuration for the Attis
+          service.</li>
+        <li><systemoutput>task</systemoutput>. Shows previous Attis backup/restore tasks.</li>
+      </ul>
+    </p>
+    <section>
+      <title>Important commands</title>
+    
+    <p><b>Back up</b></p>
+    <p>The following command triggers the backup service. Use <codeph>attis help backup</codeph> for
+      more information.</p>
+    <codeblock>attis backup [-h] [--config-id CONFIG_ID] [--config-path CONFIG_PATH]                   
+        [--os-tenant-name TENANT_NAME] [--os-username USERNAME]                   
+        [--os-password PASSWORD] [--os-auth-url AUTH_URL]
+                        [--backup-type BACKUP_TYPE] </codeblock>
+    <p><b>Arguments:</b>
+    </p>
+    <p>
+      <ul id="ul_t3w_x53_pt">
+        <li><codeph>--config-id CONFIG_ID</codeph> Backup using configuration with id. Refer to
+          attis config. </li>
+        <li><codeph>--config-path CONFIG_PATH</codeph> Backup using configuration from path. Default
+          config location: <codeph>/etc/attis/config_template</codeph>. </li>
+        <li><codeph>--os-tenant-name TENANT_NAME</codeph> Specifies the project (tenant) name of the
+          user used to execute the back up. </li>
+        <li><codeph>--os-username USERNAME</codeph> Specifies the user name to execute the back up </li>
+        <li><codeph>--os-password PASSWORD</codeph> Specifies the password of the user used to
+          execute the back up </li>
+        <li><codeph>--os-auth-url AUTH_URL</codeph> Specifies the Keystone authentication URL.</li>
+        <li><codeph>--backup-type BACKUP_TYPE</codeph> Backup type is full or incremental. Default
+          is full backup.</li>
+      </ul>
+    </p>
+    <p><b>Restore</b></p>
+    <p>The following command triggers a restore. Use <codeph>attis help restore</codeph> for more
+      information.</p>
+    <codeblock>attis restore [-h] [--config-id CONFIG_ID] [--config-path CONFIG_PATH]                    
+        [--backup-id BACKUP_ID] [--os-tenant-name TENANT_NAME]                    
+        [--os-username USERNAME] [--os-password PASSWORD]
+      [--os-auth-url AUTH_URL] </codeblock>
+    <p><b>Arguments</b></p>
+    <p>
+      <ul id="ul_rrj_fw3_pt">
+        <li><codeph>--config-id CONFIG_ID</codeph>. Restores using configuration with id. Refer to
+          attis config </li>
+        <li><codeph>--config-path CONFIG_PATH</codeph>. Restores using configuration from path.
+          Example config location:<codeph>
+            /opt/stack/attis-api/etc/attis/config_template/cloudcontrollerappliancedbrestore_scp.json</codeph>
+        </li>
+        <li><codeph>--backup-id BACKUP_ID</codeph>. Specifies the ID of the backup to use with the
+          restore. </li>
+        <li><codeph>--os-tenant-name TENANT_NAME</codeph>. Specifies the project (tenant) name of
+          the user used to execute the restore. </li>
+        <li><codeph>--os-username USERNAME</codeph>. Specifies the user name to execute the restore </li>
+        <li><codeph>--os-password PASSWORD</codeph>. Specifies the password of the user used to
+          execute the restore </li>
+        <li><codeph>--os-auth-url AUTH_URL</codeph>. Specifies the Keystone authentication URL.</li>
+      </ul>
+    </p>
+    <p><b>Storage</b></p>
+    <p>The following command shows stored storage configuration for the Attis service. Use
+        <codeph>attis help storage</codeph> for more information. </p>
+    <p><b>Synopsis</b></p>
+    <p>
+      <codeblock>attis storage --update '{"parameter":"new value", "parameter":"new value"}' --id &lt;storage_id from the table></codeblock>
+    </p>
+    <p><b>Arguments</b></p>
+    <p>
+      <ul id="ul_cdh_yvl_pt">
+        <li><codeph>--id ID</codeph> Shows storage with specified id, including its parameters and
+          values </li>
+        <li><codeph>--type TYPE</codeph> Shows storage with specified type </li>
+        <li><codeph>--update UPDATE</codeph> Updates storage parameters with new values. Arguments
+          should be dictionary format, for example: <codeph>'{"storage_path":
+            "/tmp/mybackup"}'</codeph></li>
+        <li><codeph>--use USE</codeph> Uses the specified storage type. The default is
+            <codeph>SCP</codeph>. </li>
+        <li><codeph>--os-tenant-name TENANT_NAME</codeph>. Specifies the project (tenant) name of
+          the user used to execute the storage command. </li>
+        <li><codeph>--os-username USERNAME</codeph>. Specifies the user name to execute the storage
+          command.</li>
+        <li><codeph>--os-password PASSWORD</codeph>. Specifies the password of the user used to
+          execute the storage command.</li>
+        <li><codeph>--os-auth-url AUTH_URL</codeph>. Specifies the Keystone authentication URL.</li>
+      </ul>
+    </p>
+  </section>
+    <section id="examples">
+      <title>Examples commands</title>
+      <p>The following table lists some typical Attis CLI commands.</p>
+      <table id="table_q5x_5t3_pt">
+        <tgroup cols="2">
+          <colspec colnum="1" colname="col1"/>
+          <colspec colnum="2" colname="col2"/>
+          <tbody>
+            <row>
+              <entry><b>Command</b></entry>
+              <entry><b>Action</b></entry>
+            </row>
+            <row>
+              <entry>attis job</entry>
+              <entry>shows a list of jobs</entry>
+            </row>
+            <row>
+              <entry>attis job --id JOB_ID</entry>
+              <entry>shows detail job of id JOB_ID, including sub-tasks</entry>
+            </row>
+            <row>
+              <entry>attis job --name JOB_NAME</entry>
+              <entry>shows a list of jobs with name JOB_NAME</entry>
+            </row>
+            <row>
+              <entry>attis job --last N</entry>
+              <entry>shows a list of jobs only in the last N days</entry>
+            </row>
+            <row>
+              <entry>attis job --latest</entry>
+              <entry>shows the latest job</entry>
+            </row>
+            <row>
+              <entry>attis config</entry>
+              <entry>shows a list of configs</entry>
+            </row>
+            <row>
+              <entry>attis config --id CONFIG_ID</entry>
+              <entry>shows detail configs of id CONFIG_ID, including config parameters</entry>
+            </row>
+            <row>
+              <entry>attis config --type TYPE</entry>
+              <entry>shows a list of configs with type TYPE (backup/restore)</entry>
+            </row>
+            <row>
+              <entry>attis config --id CONFIG_ID --update '{"timeout": 1200}'</entry>
+              <entry>
+                <p>updates config from the specified config with new</p>
+                <p> values. arguments should be dictionary format</p>
+              </entry>
+            </row>
+            <row>
+              <entry>attis config --id CONFIG_ID --update-parameter
+                '{"Percona_XtraDB_Backup_dbuser": "myuser", "Percona_XtraDB_Backup_dbpassword":
+                "mypassword"}'</entry>
+              <entry>
+                <p>updates config parameters from the specified config</p>
+                <p> with new values. arguments should be dictionary</p>
+                <p> format</p>
+              </entry>
+            </row>
+            <row>
+              <entry>attis backuplog</entry>
+              <entry>shows a list of backup logs</entry>
+            </row>
+            <row>
+              <entry>attis backuplog --id BACKUP_LOG_ID</entry>
+              <entry>shows a list of backup logs with id BACKUP_LOG_ID</entry>
+            </row>
+            <row>
+              <entry>attis backuplog --name BACKUP_LOG_NAME</entry>
+              <entry>shows a list of backup logs with name BACKUP_LOG_NAME</entry>
+            </row>
+            <row>
+              <entry>attis backuplog --last N</entry>
+              <entry>shows a list of backup logs in the last N days</entry>
+            </row>
+            <row>
+              <entry>attis backuplog --latest</entry>
+              <entry>shows the latest backup log</entry>
+            </row>
+            <row>
+              <entry>attis backup --config-id CONFIG_ID</entry>
+              <entry>executes backup job with parameters fetched from config id CONFIG_ID</entry>
+            </row>
+            <row>
+              <entry>attis backup --config-id CONFIG_ID --backup_type BACKUP_TYPE</entry>
+              <entry>executes an incremental or full (default) BACKUP_TYPE, with parameters fetched
+                from confid CONFIG_ID</entry>
+            </row>
+            <row>
+              <entry>attis restore --config-id CONFIG_ID --backup-id BACKUP_ID</entry>
+              <entry>executes restore job using config id CONF_ID and BACKUP_ID, which is backup_id
+                from "attis backuplog"</entry>
+            </row>
+            <row>
+              <entry>attis storage</entry>
+              <entry>shows a list of available storage</entry>
+            </row>
+            <row>
+              <entry>attis storage --id STORAGE_ID</entry>
+              <entry>shows the detail of the storage configuration with the specified STORAGE_ID,
+                including parameters</entry>
+            </row>
+            <row>
+              <entry>attis storage --type STORAGE_TYPE</entry>
+              <entry>shows the storage configuration with the specified STORAGE_TYPE</entry>
+            </row>
+            <row>
+              <entry>attis storage --id STORAGE_ID --update '{"storage_path":""}'</entry>
+              <entry>updates parameters from the specified storage with new values (arguments should
+                be dictionary format)</entry>
+            </row>
+            <row>
+              <entry>attis storage --use STORAGE_TYPE</entry>
+              <entry>tells Attis to use the specified STORAGE_TYPE for storing backups</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </body>
+</topic>

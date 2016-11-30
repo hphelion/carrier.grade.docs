@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581cgilhd">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Accessing Cloud
+    Components</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>This page describes how to access the various components in your HPE Helion OpenStack Carrier
+      Grade cloud:  </p>
+      <ul id="ul_p2b_vpr_y5">
+        <li><xref href="#topic10581cgilhd/host" format="dita"/></li>
+      <li><xref href="#topic10581cgilhd/lm-vm" format="dita"/></li>
+      <li><xref href="#topic10581cgilhd/controller" format="dita"/></li>
+      <li><xref href="#topic10581cgilhd/horizon" format="dita"/></li>
+      <li><xref href="#topic10581cgilhd/dashboard" format="dita"/></li>
+      <li><xref href="#topic10581cgilhd/ilo" format="dita"/></li>
+      </ul>
+      <section id="host">
+        <title>Access the lifecycle manager host</title>
+        <p>To access the lifecycle manager host:<ol id="ol_wk1_3gr_y5">
+            <li>SSH into the lifecycle manager host using the CLM IP of the host. Log in as the
+                <codeph>root</codeph> user. The default password is
+              <codeph>cghelion</codeph>.<codeblock>ssh root@&lt;CLM_IP>
+login as: root
+root@10.x.x.x's password:</codeblock>When
+              you log in, the prompt appears similar to the
+              following:<codeblock>root@system_name:~#</codeblock></li>
+          </ol></p>
+      </section><section id="lm-vm"><title>Access the lifecycle manager VM</title>To access the lifecycle manager
+        VM:<ol id="ol_nxd_mgr_y5">
+        <li>SSH into the lifecycle manager host as the <codeph>root</codeph> user. </li>
+        <li>SSH into the lifecycle VM as the root user. The default password is
+            <codeph>cghelion</codeph>.<codeblock>ssh root@&lt;CLM_IP>
+login as: root
+root@10.x.x.x's password:</codeblock><p>The
+            CLM_IP is located on the lifecycle manager host in the
+              <codeph>~/infra-ansible-playbooks/group_vars/all</codeph> file under
+              <codeph>hlm_clmstaticip</codeph> field.</p>When you log in, the prompt appears similar
+          to the following:<codeblock>root@cg-hlm:~#</codeblock></li>
+      </ol></section><section id="controller">
+        <title>Access a controller node</title>
+        <p>To access a controller node:<ol id="ol_tby_t2r_y5">
+            <li>SSH into the lifecycle manager host as the root user. </li>
+            <li>SSH into the lifecycle VM as the root user. The default password is
+                <codeph>cghelion</codeph>.</li>
+            <li>SSH into a controller using the CLM IP of the controller. Log in as the
+              <codeph>cghelion</codeph> user. No password is
+              required.<codeblock>ssh cghelion@&lt;CLM_IP></codeblock><p>The CLM IP is located on
+              the lifecycle manager VM in the <codeph>/var/hlm/clouds/&lt;cloud
+                name>/desired_state/&lt;cloud name>/001/base/stage/ansible/hosts</codeph> file. Look
+              in the <codeph>[BASE-CCP-T1]</codeph>
+              section:<codeblock>BASE-CCP-T1-M1-NETCLM ansible_ssh_host=10.20.37.102 
+BASE-CCP-T1-M2-NETCLM ansible_ssh_host=10.20.37.103 
+BASE-CCP-T1-M3-NETCLM ansible_ssh_host=10.20.37.104 </codeblock></p>When
+            you log in, the prompt appears similar to the following, depending upon the system you
+            are using:<codeblock>cghelion@BASE-CCP-T1-M1-NETCLM:~$</codeblock></li>
+          </ol></p>
+      </section>
+    <section id="horizon"><title>Access the Horizon Dashboard</title><p>At this point, you can log into
+        the Horizon interface, a web-interface you can use to manage and maintain HPE Helion
+        OpenStack Carrier Grade. Use the <xref
+          href="Installation/denver/carrier-grade-technical-overview-denver.dita#topic3485cgtod">CAN
+          IP address</xref> to launch Horizon. You can locate the CAN IP address in the
+          <codeph>~/stackrc</codeph> file on any of the controller nodes in the Standard Region. The
+        CAN IP address contains port <codeph>5000</codeph>. </p>
+       
+        <p>For example:
+        <codeblock>export OS_PASSWORD=qekuTPcc26Ig
+export OS_USERNAME=admin
+export OS_TENANT_NAME=admin
+export OS_AUTH_URL=https://10.2.4.1:5000/v2.0
+export OS_CACERT=/etc/stunnel/ssl/hlm/certs/ca.crt
+export OS_REGION_NAME=tahoe
+unset OS_PROJECT_DOMAIN_NAME
+unset OS_PROJECT_NAME
+unset OS_USER_DOMAIN_ID
+unset OS_IDENTITY_API_VERSION
+unset OS_AUTH_VERSION</codeblock></p>
+          <p>In
+        this case, the CAN IP address is located in the
+          <codeph>OS_AUTH_URL=https://10.2.4.1:5000/v2.0</codeph> line. You would log in using
+          <codeph>https://10.2.4.1</codeph>.</p><p>Enter the IP in the browser to access the log-in
+        page:<codeblock>https://&lt;CAN_IP>:8000</codeblock></p><p>By default, the user name is
+          <codeph>admin</codeph>. You can find the installation password for <codeph>admin</codeph>
+        in the <codeph>~/stackrc</codeph> file from any of the controller nodes.
+        <codeblock>export OS_PASSWORD=qekuTPcc26
+          export OS_USERNAME=admin</codeblock></p>
+      </section>
+    <section id="dashboard">
+        <title>Access the HCG Dashboard UI</title>
+        <p>The HCG Dashboard UI can be accessed using any supported web browser using the CLM IP
+        address of the lifecycle manager VM and port 8000.
+        <codeblock>http://&lt;CLM_IP>:8000</codeblock></p>
+      </section>
+    <section id="ilo">
+      <title>Access the iLO console</title>
+      <p>iLO is HPE Integrated Lights-Out, a server management tool embedded with the ProLiant
+        servers. </p>
+      <p>The iLO interface can be accessed using any supported web browser using the iLO IP address
+        and port 80. Consult your iLO documentation for information on how to locate the iLO IP
+        address, user name, and password. <codeblock>https://&lt;iLO_IP>:80</codeblock></p>
+    </section>
+    <!--<section>Access the VSD Architect</section>-->
+    
+  </body>
+</topic>

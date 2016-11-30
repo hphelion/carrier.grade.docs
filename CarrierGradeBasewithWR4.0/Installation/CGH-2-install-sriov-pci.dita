@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2isio">
+    <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Configuring SR-IOV or
+        PCI-Passthrough</title>
+    <prolog>
+        <metadata>
+            <othermeta name="layout" content="default"/>
+            <othermeta name="product-version" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+            <othermeta name="role" content="Storage Administrator"/>
+            <othermeta name="role" content="Storage Architect"/>
+            <othermeta name="role" content="Michael B"/>
+            <othermeta name="product-version1" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+        </metadata>
+    </prolog>
+    <body>
+        <p>You can connect a VM directly to a physical interface using PCI passthrough or
+            SR-IOV.</p>
+        <section  id="sriov">
+            <title>SR-IOV</title>
+            <p>A PCI-SIG Single Root I/O Virtualization and Sharing (SR-IOV) Ethernet interface is a
+                physical PCI Ethernet NIC that implements hardware-based virtualization mechanisms
+                to expose multiple virtual network interfaces that can be used by one or more
+                virtual machines simultaneously.</p>
+            <p>With SR-IOV based NICs, the traditional virtual bridge is no longer required. Each
+                SR-IOV port is associated with a virtual function (VF).</p>
+            <p>When compared with a PCI Passthtrough Ethernet interface, a SR-IOV Ethernet
+                interface: <!--From WR admin--><ul id="ul_kqs_vcr_35">
+                    <li>Provides benefits similar to those of a PCI Passthtrough Ethernet interface,
+                        including lower latency packet processing. </li>
+                    <li>Scales up more easily in a virtualized environment by providing multiple VFs
+                        that can be attached to multiple virtual machine interfaces.</li>
+                    <li>Shares the same limitations, including the lack of support for LAG, QoS,
+                        ACL, and live migration.</li>
+                    <li>Has the same requirements regarding the VLAN configuration of the access
+                        switches.</li>
+                </ul></p>
+            <p>The process for configuring SR-IOV includes creating a VLAN provider network and
+                subnet, then attaching VMs to that network. See <xref
+                    href="CGH-2-install-sr-iov.dita#topic10581c2isi">Configuring SR-IOV</xref>.</p>
+        </section>
+        <section id="pci">
+            <title>PCI Passthrough Ethernet Interfaces </title>
+            <p>A passthrough Ethernet interface is a physical PCI Ethernet NIC on a compute node to
+                which a virtual machine is granted direct access. This minimizes packet processing
+                delays but at the same time demands special operational considerations.
+                <!--From WR Admin Guide--></p>
+            <p>For all purposes, a PCI passthrough interface behaves as if it were physically
+                attached to the virtual machine. Therefore any potential throughput limitations
+                coming from the virtualized environment, such as the ones introduced by internal
+                copying of data buffers, are eliminated. However, by bypassing the virtualized
+                environment, the use of PCI passthrough Ethernet devices introduces several
+                restrictions that must be taken into consideration. </p>
+            <p>They include: <ul id="ul_t34_xdr_35">
+                    <li>no support for LAG, QoS, ACL, or host interface monitoring </li>
+                    <li>no support for live migration </li>
+                    <li>no access to the compute node's AVS switch </li>
+                </ul></p>
+            <p>A passthrough interface
+                bypasses the compute node's AVS switch completely, and is attached
+                instead directly to the provider network's access switch. Therefore,
+                proper routing of traffic to connect the passthrough interface to a
+                particular tenant network depends entirely on the VLAN tagging options
+                configured on both the passthrough interface and the access port on the
+                switch. </p><p>The access switch routes incoming traffic based on a VLAN ID, which ultimately determines the
+                tenant network to which the traffic belongs. The VLAN ID is either explicit, as
+                found in incoming tagged packets, or implicit, as defined by the access port's
+                default VLAN ID when the incoming packets are untagged. In both cases the access
+                switch must be configured to process the proper VLAN ID, which therefore has to be
+                known in advance. See <xref href="CGH-2-install-pci-pass.dita#topic10581c2ipp"
+                    >Configuring PCI-Passthrough</xref>.</p>
+        </section>
+
+<section>
+        <p><b>Related links</b></p>
+        <p>For more information, see <xref
+                href="https://wiki.openstack.org/wiki/SR-IOV-Passthrough-For-Networking"
+                format="html" scope="external">SR-IOV Passthrough for Networking</xref> in the
+            OpenStack wiki.</p>
+</section>
+    </body>
+
+</topic>

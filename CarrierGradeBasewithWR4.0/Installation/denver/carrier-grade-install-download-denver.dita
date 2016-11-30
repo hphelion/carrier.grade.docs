@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd">
+<topic xml:lang="en-us" id="topic7148cgidd">
+        <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Step 2 - Download
+                the Installation Packages</title>
+        <titlealts>
+                <searchtitle>HPE Helion OpenStack Carrier Grade Installation
+                        Prerequisites</searchtitle>
+        </titlealts>
+        <prolog>
+                <metadata>
+                        <othermeta name="layout" content="default"/>
+                        <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                        <othermeta name="role" content="Storage Administrator"/>
+                        <othermeta name="role" content="Storage Architect"/>
+                        <othermeta name="role" content="Michael B"/>
+                        <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                </metadata>
+        </prolog>
+        <body>
+                <p><!--https://wiki.hpcloud.net/display/HCG/HCG2.1+RCP+WR+AVS+Denver+Cloud+HLM+and+HCG+Controller+Install+Wiki--></p>
+                <p conref="../prereqs/carrier-grade-install-download.dita#topic7148cgid21/intro"/>
+                <section
+                        conref="../../../CarrierGrade2.0/Installation/prereqs/carrier-grade-install-download.depot.dita#topic7148cgid/depot"/>
+                <section id="download">
+                        <title>Download the installation files</title>
+                        <p>In Software Depot: <ol id="ol_wpm_c2h_cv">
+                                        <li>Locate the following download: <ul id="ul_pq4_jvd_dv">
+                                                  <li>
+                                                  <p><b>HCG 2.1</b>. This link downloads the
+                                                  <codeph>hcg21_kvm_avs.tar.gz</codeph> file to
+                                                  install the Standard Region and KVM Region. </p>
+                                                  </li>
+                                                </ul><b>Download the patches</b><p>All patch files
+                                                  can be downloaded from the <xref
+                                                  href="http://www.hpe.com/downloads/software"
+                                                  format="html" scope="external">Software Updates
+                                                  &amp; Licensing</xref> site. You must obtain a
+                                                  Service Agreement ID (SAID) in order to download
+                                                  these files. </p><p>In Software Licensing:
+                                                </p></li>
+                                        <li>Download the following Standard Region patches:<ul
+                                                  id="ul_rw5_5mh_qv">
+                                                  <li><b>HCG 2.1 OVS Bridge Patch</b></li>
+                                                  <li><b id="sec">HCG 2.1 OVS Security
+                                                  Patch</b></li>
+                                                  <li><b id="4">HCG 2.1 Icinga001 Patch004</b></li>
+                                                  <li><b id="34">HCG 2.1 DB Connections
+                                                  Patch034</b></li>
+                                                <li><b id="39">HCG 2.1 Logstash001 Patch039</b></li>
+                                                  <li><b id="031">HCG 2.1 Horizon Patch </b></li>
+                                                  <li><b id="3">HCG 2.1 Horizon Patch003</b></li>
+                                                </ul></li>
+                                        <li>Download the following KVM Region patches:<ul
+                                                  id="ul_njt_3l1_kv">
+                                                  <li><b id="025">HCG 2.1 WR006 Patch025</b></li>
+                                                  <li><b id="027">HCG 2.1 WR007
+                                                  Patch027</b><!--This patch replaces Patch026--></li>
+                                                  <li><b id="029">HCG 2.1 WR008 Patch029</b></li>
+                                                  <li><b id="030">HCG 2.1 WR009 Patch030</b></li>
+                                                  <li><b id="032">HCG 2.1 WR010 Patch032</b></li>
+                                                  <li><b id="033">HCG 2.1 WR11 Patch33</b></li>
+                                                  <li><b id="035">HCG 2.1 WR012 Patch035</b></li>
+                                                  <li><b id="036">HCG 2.1 WR013 Patch036</b></li>
+                                                <li><b id="038">HCG 2.1 WR014 Patch038</b></li>
+                                                <li><b id="040">HCG 2.1 WR014_WR015 Patch040</b></li>
+                                                <li><b id="041">HCG 2.1 WR016 Patch041</b></li>
+                                                <li><b id="042">HCG 2.1 WR017 Patch042</b></li>
+                                                <li><b id="043">HCG 2.1 WR018 Patch043</b></li>
+                                                <li><b id="044">HCG 2.1 WR019 Patch044</b></li>
+                                                </ul></li>
+                                </ol></p>
+                </section>
+                <section id="extract"><title>Extract the downloaded files</title><p>After
+                                downloading the files from the <xref
+                                        href="http://www.hpe.com/downloads/software" format="html"
+                                        scope="external">Software Updates &amp; Licensing</xref>
+                                site, extract and move the files as indicated in this section. It is
+                                important to the installation process for the installer files to be
+                                in the correct locations.<ol id="ol_e4x_3w1_fv">
+                                        <li>Extract the <codeph>hcg21_kvm_avs.tar.gz</codeph> file.
+                                                The compressed file contains the
+                                                  <codeph>hcg21_kvm_avs.tar</codeph> file.</li>
+                                        <li>Extract the <codeph>hcg21_kvm_avs.tar</codeph> file. The
+                                                compressed file contains the
+                                                  <codeph>hcg21_kvm_avs</codeph> directory.</li>
+                                </ol></p><p><b>Standard Region installation files</b></p><p>After
+                                downloading and extracting the <codeph>hcg21_kvm_avs.tar.gz</codeph>
+                                files, the Standard Region installation files are contained in the
+                                        <codeph>hcg21_kvm_avs</codeph> directory. Copy the files to
+                                the required locations in the following table. </p><p>
+                                <table id="table_rkj_yyk_2t">
+                                        <tgroup cols="3">
+                                                <colspec colnum="1" colname="col2"/>
+                                                <colspec colnum="2" colname="col3"/>
+                                                <colspec colnum="3" colname="col4"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry><b>File Name</b></entry>
+                                                  <entry><b>Copy to location on the Lifecycle
+                                                  Manager</b></entry>
+                                                  <entry><b>Notes</b></entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><codeph>cg-hlm.qcow2</codeph></entry>
+                                                  <entry>
+                                                  <p><codeph>/var/lib/libvirt/images</codeph></p>
+                                                  <p> </p>
+                                                  <p>Can copy this to any other directory and update
+                                                  the group_vars/all file with that dir folder
+                                                  path</p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry/>
+                                                  </row>
+                                                  <row>
+                                                  <entry>
+                                                  <p><codeph>cg-hos-misc.tar.gz</codeph></p>
+                                                  <p><codeph>cg-hos-src.tar.gz</codeph></p>
+                                                  </entry>
+                                                  <entry>
+                                                  <p><codeph>~/cg</codeph></p>
+                                                  <p> </p>
+                                                  <p><b>Create the <codeph>cg</codeph> folder if not
+                                                  present</b></p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>
+                                                  cg-infra-src.tar.gz</codeph></entry>
+                                                  <entry>
+                                                  <p><codeph>/root</codeph>
+                                                  </p>
+                                                  <p> </p>
+                                                  </entry>
+                                                  <entry> </entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><note>The <codeph>hcg21_kvm_avs</codeph> directory also contains the HPE
+                                Linux installation file, called
+                                        <codeph>hpelinux-hcg-kvm-amd64-20160224.iso.iso</codeph>.
+                                This ISO contains all required files to install HPE Linux and all
+                                Linux packages required for HPE Helion Carrier Grade. You should
+                                have deployed HPE Linux in the <xref
+                                        href="CGH-install-prereqs-denver.dita#topic7148cipd/linux"
+                                        >Prerequisites</xref>. </note><p id="kvm-avs"><b>KVM Region
+                                        installation files</b></p>After downloading and extracting
+                        the <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following files for
+                        installing the KVM Region are in the <codeph>hcg21_kvm_avs/WR</codeph> directory.<p>
+                                <table id="table_ejh_qtj_k5">
+                                        <tgroup cols="1">
+                                                <colspec colnum="1" colname="col2" colwidth="3.26*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>File Name</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><codeph>bootimage_avs_only.iso</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>HCG2.0GA-guest-SDK.tar.gz</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><codeph>WR-15.09-sample-guest.img</codeph></entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p><b>Standard Region Patches</b></p>After downloading the Standard
+                        Region patches, extract the files.<p>
+                                <table frame="all" rowsep="1" colsep="1" id="table_efh_2nh_qv">
+                                        <tgroup cols="2">
+                                                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                                                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>Download file</entry>
+                                                  <entry>Extracted file</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><b>HCG 2.1 OVS Bridge Patch</b></entry>
+                                                  <entry><codeph>infra-playbooks-ovs.patch</codeph><p><codeph>knc-ovs-bridge.patch</codeph></p></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG 2.1 OVS Security Patch</b></entry>
+                                                  <entry><codeph>TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p><b>KVM Region Patches</b></p>After downloading and extracting the
+                                <codeph>hcg21_kvm_avs.tar.gz</codeph> file, the following files for
+                        installing the KVM Region are in the
+                                <codeph>hcg21_kvm_avs/WR/mandatory-patches</codeph> directory of the
+                        download files.<p>
+                                <table frame="all" rowsep="1" colsep="1" id="kvm_patches">
+                                        <tgroup cols="2">
+                                                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                                                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>Download file</entry>
+                                                  <entry>Patch file</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR002_Patch005.tar.gz</b></entry>
+                                                  <entry><codeph id="001"
+                                                  >TS_HP_15_Custom_PATCH_0001_2.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR003_Patch007.tar.gz</b></entry>
+                                                  <entry><codeph id="002"
+                                                  >TS_HP_15_Custom_PATCH_0002.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR004_Patch017.tar.gz</b></entry>
+                                                  <entry><codeph id="003"
+                                                  >TS_HP_15_Custom_PATCH_0003.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR005_Patch019.tar.gz</b></entry>
+                                                  <entry><codeph id="004"
+                                                  >TS_HP_15_Custom_PATCH_0004.patch</codeph></entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p>You should have downloaded the following patch files from the <xref
+                                        href="http://www.hpe.com/downloads/software" format="html"
+                                        scope="external">Software Updates &amp; Licensing</xref>
+                                site:</p><p>
+                                <table frame="all" rowsep="1" colsep="1" id="kvm_patches_hdn">
+                                        <tgroup cols="2">
+                                                <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+                                                <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+                                                <thead>
+                                                  <row>
+                                                  <entry>Download file</entry>
+                                                  <entry>Patch file</entry>
+                                                  </row>
+                                                </thead>
+                                                <tbody>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR006_Patch025.tar.gz</b></entry>
+                                                  <entry><codeph id="005"
+                                                  >TS_HP_15_Custom_PATCH_0005.patch</codeph>
+                                                  </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR007_Patch027.tar.gz</b></entry>
+                                                  <entry><codeph id="006"
+                                                  >TS_HP_15_Custom_PATCH_0006.patch</codeph>
+                                                  </entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR008_Patch029.tar.gz</b></entry>
+                                                  <entry><codeph id="007"
+                                                  >TS_HP_15_Custom_PATCH_0007.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR009_Patch030.tar.gz</b></entry>
+                                                  <entry><codeph id="008"
+                                                  >TS_HP_15_Custom_PATCH_0008.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR010_Patch032.tar.gz</b></entry>
+                                                  <entry><codeph id="009"
+                                                  >TS_HP_15_Custom_PATCH_0009.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR011_Patch033.tar.gz</b></entry>
+                                                  <entry><codeph id="010"
+                                                  >TS_HP_15_Custom_PATCH_0010.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR012_Patch035.tar.gz</b></entry>
+                                                  <entry><codeph id="011"
+                                                  >TS_HP_15_Custom_PATCH_0011.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR013_Patch036.tar.gz</b></entry>
+                                                  <entry><codeph id="012"
+                                                  >TS_HP_15_Custom_PATCH_0012.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR014_Patch038.tar.gz</b></entry>
+                                                          <entry><codeph id="013"
+                                                                  >TS_HP_15_Custom_PATCH_0013.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR014_WR015_Patch040.tar.gz</b></entry>
+                                                          <entry><codeph id="014-015"
+                                                  >TS_HP_15_Custom_PATCH_0014.patch,
+                                                  TS_HP_15_Custom_PATCH_0015.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR016_Patch041.tar.gz</b></entry>
+                                                          <entry><codeph id="016">TS_HP_15_Custom_PATCH_0016.patch
+                                                  </codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR017_Patch042.tar.gz</b></entry>
+                                                          <entry><codeph id="017">TS_HP_15_Custom_PATCH_0017.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR018_Patch043.tar.gz</b></entry>
+                                                          <entry><codeph id="018">TS_HP_15_Custom_PATCH_0018.patch</codeph></entry>
+                                                  </row>
+                                                  <row>
+                                                  <entry><b>HCG_2.1_WR019_Patch044.tar.gz</b></entry>
+                                                          <entry><codeph id="019">TS_HP_15_Custom_PATCH_0019.patch</codeph></entry>
+                                                  </row>
+                                                </tbody>
+                                        </tgroup>
+                                </table>
+                        </p><p>You will be shown where to copy these files during the KVM Region
+                                installation.</p></section>
+                <section id="next-step">
+                        <title>Next Step</title>
+                </section>
+                <ul id="ul_kp5_fyn_1v">
+                        <li><xref href="CGH-2-install-denver-standard.dita#topic10581c2id">Deploy
+                                the Standard Region</xref>
+                        </li>
+                </ul>
+        </body>
+</topic>

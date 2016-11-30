@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic3485cgtoi">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Service Architecture and
+    Interfaces </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <p>This page introduces you to the service architecture diagrams and interface details for the
+      HPE Helion OpenStack Carrier Grade environment that you will be installing.</p>
+    <section id="diagrams">
+      <title>Service Architecture Diagrams</title>
+      <!--<p><b>VRS: Tahoe/Memphis/Sacramento deployments</b></p><p>The following diagram represents the control plane interfaces for the <xref href="sacramento/carrier-grade-technical-overview-sacramento.dita#topic3485cgtos/deploy-arch">Sacramento</xref> deployment. The <xref href="memphis/carrier-grade-technical-overview-memphis.dita#topic3485cgtom/deploy-arch">Memphis</xref> and <xref href="tahoe/carrier-grade-technical-overview-tahoe.dita#topic3485cgtot/deploy-arch">Tahoe</xref> deployments are based on this model, without the baremetal region. </p><p>See the legend below for more information and <xref href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.</p><p> <image href="../../media/CGH-2-control-plane-intf.png" id="image_mrd_1jc_f5"/></p><p><b>Data Plane Interfaces </b></p>The following diagram represents the data plane interfaces for the Sacramento deployment. The Memphis and Tahoe deployments are based on this model, without the baremetal region. See the legend below for more information and <xref href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.<p/><image href="../../media/CGH-2-data-plane-intf.png" id="image_tlh_2jc_f5"/><p><b>Legend</b></p><p>Dotted lines show different security domains.</p><p>Lines between components show interactions. Colors of these lines help classify the interactions into the following categories:</p><ul id="ul_yls_r3c_f5"><li><b>Purple:</b> Lifecycle manager, bi-directional</li><li><b>Gold:</b> Distributed Cloud Networking (DCN), bi-directional</li><li><b>Red:</b> API access to the cloud</li><li><b>Green:</b> Storage</li><li><b>Black:</b> Compute control, bi-directional</li><li><b>Blue:</b> Shared component access</li></ul>-->
+      <p><b>AVS: Denver deployment</b></p>
+      <p><b>Control and Data Plane Interfaces</b></p>
+      <p> The following diagram represents the control and data plane interfaces for HPE Helion
+        Carrier Grade. See the legend below for more information and <xref
+          href="#topic3485cgtoi/interfaces" format="dita"/> for details on each interface.<image
+          href="../../media/CGH-2-ctrl-data-plane-intf.png" id="image_yyy_hjc_f5"/></p>
+      <p><b>Legend</b></p>
+      <p>Dotted lines show different security domains.</p>
+      <p>Lines between components show interactions. Colors of these lines help classify the
+        interactions into the following categories:</p>
+      <ul id="ul_x2y_yz3_f5">
+        <li><b>Purple:</b> Lifecycle manager, bi-directional</li>
+        <li><b>Gold:</b> Networking, bi-directional</li>
+        <li><b>Red:</b> API access to the cloud</li>
+        <li><b>Green:</b> Storage</li>
+        <li><b>Black:</b> Compute control, bi-directional</li>
+        <li><b>Blue:</b> Shared component access</li>
+      </ul>
+    </section>
+    <section id="interfaces">
+      <title>Interfaces</title>
+      <p>See the Serivce Architecture Diagrams above.</p>
+      <table id="table_zls_r3c_f5">
+        <tgroup cols="11">
+          <colspec colnum="1" colname="col1"/>
+          <colspec colnum="2" colname="col2"/>
+          <colspec colnum="3" colname="col3"/>
+          <colspec colnum="4" colname="col4"/>
+          <colspec colnum="5" colname="col5"/>
+          <colspec colnum="6" colname="col6"/>
+          <colspec colnum="7" colname="col7"/>
+          <colspec colnum="8" colname="col8"/>
+          <colspec colnum="9" colname="col9"/>
+          <colspec colnum="10" colname="col10"/>
+          <colspec colnum="11" colname="col11"/>
+          <thead>
+            <row>
+              <entry>Interface</entry>
+              <entry>Network name</entry>
+              <entry>Network protocol</entry>
+              <entry>Requestor</entry>
+              <entry>Request</entry>
+              <entry>Request credentials</entry>
+              <entry>Request authorization</entry>
+              <entry>Listener</entry>
+              <entry>Response</entry>
+              <entry>Response credentials</entry>
+              <entry>Description of operation</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry><b>Interface</b></entry>
+              <entry><b>Network name</b></entry>
+              <entry><b>Network protocol</b></entry>
+              <entry><b>Requestor</b></entry>
+              <entry><b>Request</b></entry>
+              <entry><b>Request credentials</b></entry>
+              <entry><b>Request authorization</b></entry>
+              <entry><b>Listener</b></entry>
+              <entry><b>Response</b></entry>
+              <entry><b>Response credentials</b></entry>
+              <entry><b>Description of operation</b></entry>
+            </row>
+            <row>
+              <entry>7</entry>
+              <entry>BLS</entry>
+              <entry>HTTP</entry>
+              <entry>Non-KVM region Controller</entry>
+              <entry>VSA control</entry>
+              <entry>username, password</entry>
+              <entry>storage admin</entry>
+              <entry>StoreVirtual, 3PAR</entry>
+              <entry>Authorized/Unauthorized</entry>
+              <entry>none</entry>
+              <entry>Volume Create/Delete</entry>
+            </row>
+            <row>
+              <entry>9</entry>
+              <entry>BLS</entry>
+              <entry>iSCSI, CHAP</entry>
+              <entry>KVM-region Compute</entry>
+              <entry>Storage access</entry>
+              <entry>username, password</entry>
+              <entry>storage admin</entry>
+              <entry>StoreVirtual, 3PAR</entry>
+              <entry>Storage blocks</entry>
+              <entry>none</entry>
+              <entry>Volume attach</entry>
+            </row>
+            <row>
+              <entry>11a</entry>
+              <entry>CLM</entry>
+              <entry>HTTP</entry>
+              <entry>KVM region Controller</entry>
+              <entry>Management control</entry>
+              <entry>username, password or Keystone token</entry>
+              <entry>service accounts</entry>
+              <entry>KVM region Compute</entry>
+              <entry>Inter-service response</entry>
+              <entry>none</entry>
+              <entry>Inter-service communication</entry>
+            </row>
+            <row>
+              <entry>11b</entry>
+              <entry>CLM</entry>
+              <entry>RPC/HTTP</entry>
+              <entry>KVM region Compute</entry>
+              <entry>Management control</entry>
+              <entry>username, password or Keystone token</entry>
+              <entry>service accounts</entry>
+              <entry>KVM region Controller</entry>
+              <entry>Inter-service response</entry>
+              <entry>none</entry>
+              <entry>Inter-service communication, rabbitmq and SQL updates</entry>
+            </row>
+            <row>
+              <entry>12</entry>
+              <entry>CLM</entry>
+              <entry>HTTP</entry>
+              <entry>KVM region Controller</entry>
+              <entry>OpenStack service request</entry>
+              <entry>username, password or Keystone token</entry>
+              <entry>Keystone and policy.json</entry>
+              <entry>Non-KVM region Controller</entry>
+              <entry>OpenStack service response</entry>
+              <entry>none</entry>
+              <entry>Keystone, Glance, Cinder, Swift, Neutron. HCG 2.0 change.</entry>
+            </row>
+            <row>
+              <entry>13</entry>
+              <entry>CLM</entry>
+              <entry>HTTP or RPC</entry>
+              <entry>KVM region Compute</entry>
+              <entry>OpenStack service request</entry>
+              <entry>username, password or Keystone token</entry>
+              <entry>service accounts</entry>
+              <entry>Non-KVM region Controller</entry>
+              <entry>OpenStack service response</entry>
+              <entry>none</entry>
+              <entry>Keystone</entry>
+            </row>
+            <row>
+              <entry>41</entry>
+              <entry>TUL</entry>
+              <entry>Any</entry>
+              <entry>KVM region Compute (AVS)</entry>
+              <entry>Data</entry>
+              <entry>none</entry>
+              <entry>none</entry>
+              <entry>KVM region Compute (AVS)</entry>
+              <entry>Any</entry>
+              <entry>none</entry>
+              <entry>Bidirectional; Tenant Networks are isolated through VxLANs tunnels or VLAN
+                segmentation</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+    <p>Return to the Technical Overview for:<ul id="ul_cch_jv4_45">
+        <li><xref
+            href="denver/carrier-grade-technical-overview-denver.dita#topic3485cgtod/deploy-arch"
+            >Denver</xref></li>
+        <!--<li><xref href="tahoe/carrier-grade-technical-overview-tahoe.dita#topic3485cgtot/deploy-arch">Tahoe</xref></li><li><xref href="memphis/carrier-grade-technical-overview-memphis.dita#topic3485cgtom/deploy-arch">Memphis</xref></li><li><xref href="sacramento/carrier-grade-technical-overview-sacramento.dita#topic3485cgtos/deploy-arch">Sacramento</xref></li>-->
+      </ul></p>
+  </body>
+</topic>

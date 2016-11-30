@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2ab">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Backing Up the Cloud</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    
+    <p>HPE Helion OpenStack Carrier Grade includes a backup and restore application called Attis
+      which you can use to backup and restore essential system files and databases of the running
+      cloud. Attis is automatically installed on each of the controller nodes in the Standard Region.
+      Attis uses a command line interface. For more information, see <xref
+        href="CGH-2--backup-restore-cli.dita#topic10581c2brc">Attis Backup and Restore
+      CLI</xref>.</p>
+    <p>
+      <note type="important"> Before you start your first backup, make sure Attis is properly
+        configured. For more information, see <xref
+          href="CGH-2--backup-configure.dita#topic10581c2bc">Configuring the Backup and Restore
+          Environment </xref></note>
+    </p>
+    <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/resp"/>
+    <section id="when"><title>When to perform backups</title>We recommend performing regular
+      backups, preferably hourly, and especially after changing the configuration and before and
+      after updating HPE Helion OpenStack Carrier Grade software. Additionally, you should create a
+      backup from the lifecycle manager VM as follows:<ul id="ul_qzx_1b3_k5">
+        <li>when the HPE Helion OpenStack Carrier Grade installation is complete</li>
+        <li>when any change is made to the HPE Helion OpenStack Carrier Grade components</li>
+      </ul></section>
+    <section id="overview"><title>How to perform backups</title><ul id="ul_kgy_3t3_k5">
+        <li><xref href="#topic10581c2ab/hlm" format="dita"/></li>
+        <li><xref href="#topic10581c2ab/database" format="dita"/></li>
+        <li><xref href="#topic10581c2ab/kvm" format="dita"/></li>
+        
+      </ul>
+    </section>
+    <section conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/attis-id"/>
+      <section id="hlm">
+      <title>Backing up the lifecycle manager</title>
+      <p>You can use Attis to back up any of the following the lifecycle manager data: </p>
+      <ul id="ul_rxc_h23_k5">
+        <li>All files under the <systemoutput>/opt/</systemoutput> folder on the lifecycle manager
+          host. This backs up all the installed code configuration and also <codeph>h*</codeph>
+          installation scripts.</li>
+        <li>All files under the <systemoutput>~/</systemoutput> folder on the lifecycle manager
+          host. This backs up all the source code, packages, linux netboot, infra-ansible-playbooks,
+          SSH keys, and cloud folders.</li>
+        <li>All files under <systemoutput>/root</systemoutput> and
+          <systemoutput>/opt</systemoutput>.</li>
+      </ul>
+      <p>Attis implements a tree-structure for certain backup/restore configurations. For example,
+        to back up the <codeph>/opt</codeph> and <codeph>/root</codeph> folders on the lifecycle
+        manager host: </p>
+      <p>
+        <ol id="ol_m4k_1yc_p5">
+          <li>Log in to lifecycle manager host as the <codeph>cghelion</codeph> user.</li>
+          <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+          <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
+          <li>Execute the following command to start the
+            backup:<codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_Data_Backup&gt;</codeblock>To
+            only back up only the <codeph>/opt</codeph> files, execute the following
+            command:<codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_opt_files_Backup&gt;</codeblock></li>
+        </ol>
+      </p>
+    </section>
+    <section id="database"><title>Backup Cloud Controller Database</title><p>You can use Attis to
+        back up the three node MySQL cluster (Percona XtraDB Cluster) that runs in cloud controller
+        nodes.</p>For disaster recovery, you should take full backups of the MySQL cluster
+      frequently, such as on a daily basis. Backing up the node on any single controller will back
+      up the full cluster.<ol>
+        <li>Log in to one of the Standard Region controllers as the <codeph>cghelion</codeph>
+          user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
+        <li>Execute the following command to start the
+          backup:<codeblock>attis backup --config-id &lt;Config_ID_of_Cloud_Controller_Appliance_DB_Backup&gt;</codeblock></li>
+      </ol>If an entire cluster goes down, due to an issue (such as data corruption or MySQL
+      defect), and the cluster does not come back up, you can use the backup to restore the cluster
+      to a previous well-known state (backup) and start the cluster from that point.<p>
+        <note type="important">If you perform a controller database backup within 60 minutes of
+          restoring the controller database, the backup job will remain in the <b>waiting</b> state
+          until you delete the <b>in progress</b> controller database backup job in the Attis queue
+          You can use the CLI command: <codeph>attis queue</codeph> to view the queue.</note>
+      </p><p>If you want to back up the controller database withing 60 minutes of a restore, you
+        must delete the <codeph>cloudcontrollerdbbackup</codeph> job in the Attis queue before
+        performing the back up:
+        <codeblock>mysql 
+mysql&gt; use attis; delete from Queue where job_name="cloudcontrollerappliancedbbackup";</codeblock></p><p>This
+        situation occurs because when Attis restores the controller database, Attis also restores
+        the <b>in progress</b> job which triggers the controller database backup. That <b>in
+          progress</b> job prevents any incoming back up job to be executed by Attis until the <b>in
+          progress</b> job times out after 3600 seconds (60 minutes) by default. </p></section>
+    
+    
+    <section id="kvm">
+      <title>Backup KVM Region system files </title>
+      <p>You can use Attis to back up the KVM Region system files.</p>
+      <p>To backup the KVM Region system files:</p>
+      <ol id="ol_zrk_4zc_p5">
+        <li>Log into the active KVM Region controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"/>
+        <li>Execute the following command to perform the back
+          up.<codeblock>attis backup --config-id &lt;Config_ID_of_ WR_Appliance_system_files_Backup&gt;</codeblock></li>
+      </ol>
+    </section>
+    <!--     <section id="baremetal">
+      <title>Backup Baremetal Controller database and files</title>
+      <p>You can use Attis to back up the baremetal controllers in a Sacaramento deployment.</p>
+      <p>To backup the baremetal controllers: </p>
+      <ol id="ol_h5c_zzc_p5">
+        <li>Log into the active baremetal controller as the <codeph>cghelion</codeph> user.</li>
+        <li>Change to the root user:<codeblock>sudo -i</codeblock></li>
+        <li conref="CGH-2-attis-backup-restore.dita#topic10581c2abr/authenticate"><p/><p/><p/></li>
+        <li>Execute the following
+          command:<codeblock>attis backup -config-id &lt;Config_ID_of_ BM_Controller_Data_Backup&gt;</codeblock></li>
+      </ol>
+      <p>After remove comment, change <dash> to <dash><dash></p>
+    </section>-->
+
+    </body>
+</topic>

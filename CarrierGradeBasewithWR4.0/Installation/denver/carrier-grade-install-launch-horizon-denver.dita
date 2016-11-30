@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581cgilhd">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 4.0 Base with WR: Step 4 -
+    Launching the Horizon Interface</title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+    </metadata>
+  </prolog>
+  <body>
+    <bodydiv id="horizon">
+      <p>After the KVM Region is deployed, you can launch the Horizon interface to verify that the
+        installation was successful.</p>
+      <section>
+        <title>Import the Horizon browser certificate</title>
+        <p>You need to import the Horizon security certificate (<codeph>ca.crt</codeph>) into your
+          browser. The <codeph>ca.crt</codeph> is available in the lifecycle manager in the
+            <codeph>/var/hlm/clouds/&lt;cloudname></codeph> folder. You can use any file transfer
+          program to move the certificate file from the lifecycle manager to the local system.</p>
+        <p>Use the instructions provided by the browser manufacturer to import the
+            <codeph>ca.crt</codeph> file. For a list of browsers supported by OpenStack, see <xref
+            href="https://wiki.openstack.org/wiki/Horizon/BrowserSupport" format="html"
+            scope="external">https://wiki.openstack.org/wiki/Horizon/BrowserSupport</xref>.</p>
+        <p>Also, clear the cache of the browser.</p>
+      </section>
+      <section>
+        <title>Login to Horizon</title>
+        <p>At this point, you can log into the Horizon interface, a web-interface you can use to
+          manage and maintain HPE Helion OpenStack Carrier Grade. Use the <xref
+            href="carrier-grade-technical-overview-denver.dita#topic3485cgtod">CAN IP address</xref>
+          to launch Horizon. You can locate the CAN IP address in the <codeph>~/stackrc</codeph>
+          file on any of the controller nodes. The CAN IP address contains port
+            <codeph>5000</codeph>. </p>
+        <p>To access the CAN IP:<ol id="ol_tby_t2r_y5">
+            <li>SSH into the lifecycle manager host as the root user. The default password is
+                <codeph>cghelion</codeph>.<codeblock>ssh root@&lt;CLM_IP></codeblock><p>where:
+                CLM_IP is located in the IP address for the lifecycle manager in the
+                  <codeph>~/infra-ansible-playbooks/group_vars/all</codeph> file under
+                  <codeph>hlm_clmstaticip</codeph> field.</p></li>
+            <li>SSH into the lifecycle VM as the root user. The default password is
+                <codeph>cghelion</codeph>.</li>
+            <li>SSH into a controller as the <codeph>cghelion</codeph> user. No password is
+              required.</li>
+            <li>Change to the root user.<codeblock>sudo -i</codeblock></li>
+            <li>View the <codeph>stackrc</codeph> file: <codeblock>cat ~/stackrc</codeblock>
+              <p>For example:</p>
+              <codeblock>export OS_PASSWORD=qekuTPcc26Ig
+export OS_USERNAME=admin
+export OS_TENANT_NAME=admin
+export OS_AUTH_URL=https://10.2.4.1:5000/v2.0
+export OS_CACERT=/etc/stunnel/ssl/hlm/certs/ca.crt
+export OS_REGION_NAME=tahoe
+unset OS_PROJECT_DOMAIN_NAME
+unset OS_PROJECT_NAME
+unset OS_USER_DOMAIN_ID
+unset OS_IDENTITY_API_VERSION
+unset OS_AUTH_VERSION </codeblock><p>In
+                this case, the CAN IP address is located in the
+                  <codeph>OS_AUTH_URL=https://10.2.4.1:5000/v2.0</codeph> line. You would log in
+                using <codeph>https://10.2.4.1</codeph>. </p><p>Enter the IP in the browser to
+                access the log-in page:<codeblock>https://&lt;CAN_IP>:8000 </codeblock></p><p>By
+                default, the user name is <codeph>admin</codeph>. You can find the installation
+                password for <codeph>admin</codeph> in the <codeph>~/stackrc</codeph> file from
+                any of the controller nodes.  </p><p>The Horizon interface appears similar to the
+                following: </p><p><image href="../../../media/CGH-install-horizon.png"
+                  id="image_rcc_td1_1t"/>
+                </p>
+            </li>
+          </ol></p></section>
+    </bodydiv>
+    <section id="next-step">
+      <title>Next Step</title>
+      <p><xref href="carrier-grade-install-denver-kvm-networking.dita#topic10581cgidppn">Configure
+          KVM Region Virtual Networks</xref></p>
+    </section>
+    
+  </body>
+</topic>

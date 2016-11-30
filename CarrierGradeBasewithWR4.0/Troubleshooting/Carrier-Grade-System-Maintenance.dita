@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="topic_vzc_ft5_zv">
+  <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: System Maintenance</title>
+  <body>
+    <p/>
+    <p><u>PROCEDURE FOR GRACEFULLY SHUTTING DOWN AND RECOVERING 2.1 CLOUD</u><b> </b></p>
+    <p>Backup lifecycle manager data, HOS Controller MySQL database and WR Controller system files using Attis
+      service - these tasks are performed if we encounter any unforeseen failures at a later point
+      in time. </p>
+    <ol id="ol_ks5_tw5_1v">
+      <li><b>Execute attis commands on HOS
+        controller.</b><codeblock>attis backup --config-id &lt;Config_ID_of_HLM_Appliance_Data_Backup></codeblock><codeblock>attis backup --config-id &lt;Config_ID_of_Cloud_Controller_Appliance_DB_Backup></codeblock><codeblock>attis backup --config-id &lt;Config_ID_of_WR_Appliance_system_files_Backup></codeblock>For
+        more information on backup and restore, refer to <xref
+          href="../OperationsGuide/Backup/CGH-2-attis-backup-restore.dita#topic10581c2abr/what"
+        />.</li>
+      <li><b>Power down and Power up sequence:</b><ol id="ol_vbw_dlp_1w">
+          <li>Lock and power down WR Computes and Standy Controller.</li>
+          <li>Power down WR Active Controller.</li>
+          <li> Power down KVM host.</li>
+          <li> Power on KVM host. Verify OVS bridges are up and active on KVM host before bringing
+            up the lifecycle manager VM and Controller VMs.</li>
+        <li>Power on the VMs in this order - lifecycle manager VM, Controller1, Controller2, Controller3.</li>
+          <li>Power on WR Active Controller. Ensure that nova services are running before starting
+            WR Computes and WR Standby Controller by running "nova service-list" command.</li>
+          <li>Power on and unlock WR Computes and Standy Controller.</li>
+        </ol></li>
+      <li><b>Recovery steps:</b><ol id="ol_zdk_hmp_1w">
+          <li>Verify status of RabbitMQ cluster on all controllers.</li>
+          <li> If RabbitMQ cluster is broken, following commands need to be run from
+            lifecycle manager.<codeblock>hlm stop –c &lt;cloud-name> -t “FND-RMQ” </codeblock><codeblock> hlm start –c &lt;cloud-name> -t “FND-RMQ” </codeblock></li>
+          <li> Verify status of MySQL cluster on all controllers.</li>
+          <li>If MySQL cluster is broken, following commands need to be run from
+            lifecycle manager.<codeblock>hlm stop –c &lt;cloud-name> -t “FND-MDB” </codeblock><codeblock>hlm start –c &lt;cloud-name> -t “FND-MDB” </codeblock></li>
+          <li>Alternatively, MySQL cluster can also be recovered using Attis service if database was
+            backed up earlier as in Step 1.</li>
+        </ol></li>
+    </ol>
+    <p>For more information on the recovery process, refer to <xref
+        href="../AdminGuide/Carrier-Grade-recovery-of-MySQL-and-RabbitMQ.dita#topic_vzc_ft5_zv"
+      />.</p>
+  </body>
+</topic>

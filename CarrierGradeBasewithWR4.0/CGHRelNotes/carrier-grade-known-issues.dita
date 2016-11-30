@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic6108cgrn">
+    <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Known Issues and Work
+        Arounds</title>
+    <prolog>
+        <metadata>
+            <othermeta name="layout" content="default"/>
+            <othermeta name="product-version" content="HPE Helion Openstack Carreir Grade 1.1"/>
+            <othermeta name="role" content="Storage Administrator"/>
+            <othermeta name="role" content="Storage Architect"/>
+            <othermeta name="role" content="Michael B"/>
+            <othermeta name="product-version1" content="HPE Helion Openstack Carreir Grade 1.1"/>
+        </metadata>
+    </prolog>
+    <body>
+        <p>Known Issues and Work around:</p>
+        <p>
+            <ul id="ul_bkf_ht1_2v">
+                <li>In HOS Horizon GUI, when you click on <b>Download CSV Summary</b> under
+                        <b>Resource Usage</b> panel, the <b>Usage Report</b> tab might disconnect
+                    Horizon. This can happen if the items displayed in the <b>Usage Report</b> are
+                    more than 30.</li>
+                <li>Currently, in HCG dashboard, there is no provision to rerun or execute a
+                    particular role if cloud deploy fails. </li>
+                <li>Helion dashboard crashes when UI has failed cloudtemplate. Workaround is to delete
+                    the failed cloud template using the HLM CLI and re-login to the dashboard. For
+                    example: <codeblock>rm -r /var/hlm/clouds/&lt;cloudname&gt;</codeblock></li>
+                <li>When Pipelines or Retention period settings are changed through Horizon, it
+                    takes a long time to apply the settings and will crash eventually. Try to
+                    re-login to get to Horizon dashboard.</li>
+                <li>Newly created tenants not getting listed in the dropdown menu from Horizon.
+                    Workaround is to logout of Horizon and log back.</li>
+                <li>Network address field shows default values when we edit the cloud from UI. But
+                    wr.json file shows the right updated entries.</li>
+                <li>Horizon becomes inaccessible after restarting iptables services <p>Workaround to
+                        fix this issue is the execute following commands on all the 3 Standard Region
+                        controllers:<codeblock>ifdown eth2 ; ifup eth2
+service haproxy restart
+service keepalived restart </codeblock></p>Note:
+                    eth2 is CAN network<p>If you see few icons not being loaded in horizon after
+                        above workaround, it is likely because service went in to an inconsistent
+                        state. In that case, go to HCG Dashboard's "manage cloud" page and restart
+                        "wr_horizon" service and then try logging into horizon again.</p><p>To Get
+                        to HCG dashboard <xref href="http://%3cHLM" format="html" scope="external"
+                            >http://&lt;HLM</xref> CLM IP>:8000</p></li>
+                <li>If you should configure your lifecycle manager as an NFS server, for example as
+                    a <xref
+                        href="../OperationsGuide/Backup/CGH-2-attis-backup-restore.dita#topic10581c2abr"
+                        >backup location for the Attis service</xref>, you will need to open ports
+                    in the firewall. The HPE Helion OpenStack Carrier Grade installation process
+                    configures and starts the firewall on the lifecycle manager host. <!--HCG-1535-->
+                    <p>You will need to open ports: <ul id="ul_p1l_jsz_dv">
+                            <li>111</li>
+                            <li>2049</li>
+                            <li>4001</li>
+                        </ul></p>For rpcmount, edit the
+                        <codeph>/etc/default/nfs-kernel-server</codeph> file to specify a
+                    port:<codeblock>#RPCMOUNTDOPTS="--manage-gids"
+RPCMOUNTDOPTS="-p 4001 -g"</codeblock>Then,
+                    stop and restart services in the following
+                    order:<codeblock>/etc/init.d/rpcbind stop
+/etc/init.d/nfs-common stop
+/etc/init.d/nfs-kernel-server stop
+/etc/init.d/rpcbind start
+/etc/init.d/nfs-kernel-server start
+/etc/init.d/nfs-common start</codeblock></li>
+            </ul>
+        </p>
+    </body>
+</topic>

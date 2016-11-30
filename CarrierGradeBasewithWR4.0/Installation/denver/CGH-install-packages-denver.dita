@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic7148cipdp">
+        <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1 Beta: Step 1a: Installing
+                Required Packages</title>
+        <titlealts>
+                <searchtitle>HPE Helion OpenStack Carrier Grade Installation
+                        Prerequisites</searchtitle>
+        </titlealts>
+        <prolog>
+                <metadata>
+                        <othermeta name="layout" content="default"/>
+                        <othermeta name="product-version"
+                                content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                        <othermeta name="role" content="Storage Administrator"/>
+                        <othermeta name="role" content="Storage Architect"/>
+                        <othermeta name="role" content="Michael B"/>
+                        <othermeta name="product-version1"
+                                content="HPE Helion OpenStack Carrier Grade 2.0"/>
+                </metadata>
+        </prolog>
+        <body>
+                
+                        <p><!--https://wiki.hpcloud.net/display/HCG/Adding+extra+hLinux+packages+to+KVM+host+off+site--></p><p>In
+                                order to install the list of required packages when building the
+                                lifecycle manager host to host the Standard Region of HP
+                                Helion OpenStack Carrier Grade, you will need to create local file
+                                repositories to supply these packages. </p><p>You can download two
+                                ISO files that contain all of the required packages: the <i>blaster
+                                        install</i> file and the <i>extrapackages</i> file. You will
+                                need to create two separate local file repositories for these
+                                files.</p>
+                <section><title>Creating local file repository for the <i>blaster install</i> file
+                        </title>The contents of the HPE Linux <i>blaster install</i> ISO file should
+                        be copied to a local filesystem and then the
+                                <codeph>/etc/apt/sources.list</codeph> file modified to reference
+                        the local filesystem copy of the ISO packages repository. <p>To do
+                                this:</p><ol id="ol_xgd_pth_y5">
+                                <li>Use the Vitrual CD feature of the ILO remote console to make the
+                                        blaster ISO contents available. Once this is done the system
+                                        will make the ISO available through
+                                                <codeph>/dev/sr0</codeph>. The following log
+                                        messages appear in the <codeph>dmesg</codeph> kernel
+                                        log:<codeblock>root@kvmhost: # dmesg | tail -100
+kernel: [341466.871783] scsi 3:0:0:0: CD-ROM HP Virtual DVD-ROM PQ: 0 ANSI: 0 CCS
+kernel: [341466.872152] scsi 3:0:0:0: Attached scsi generic sg3 type 5
+kernel: [341466.908971] sr0: scsi3-mmc drive: 12x/12x cd/rw tray
+kernel: [341466.908976] cdrom: Uniform CD-ROM driver Revision: 3.20</codeblock></li>
+                                <li>Mount the <codeph>/dev/sr0</codeph> directory to
+                                                <codeph>/media/cdrom0</codeph> using the following
+                                        command:<codeblock>mkdir /mnt/local_repo
+mount -oro /dev/sr0 /mnt/local_repo/</codeblock></li>
+                                <li>Change to the <codeph>mnt</codeph> directory:
+                                        <codeblock>cd /mnt</codeblock></li>
+                                <li>Execute the following command to extraact and copy all of the
+                                        files from the blaster ISO to the local
+                                        filesystem:<codeblock>tar cf - local_repo | ( cd /opt/; tar xf - )</codeblock></li>
+                                <li>Modify the <codeph>/etc/apt/sources.list</codeph> file to make
+                                        this local file repository available to the <b>apt-get</b>
+                                        command by making the <codeph>sources.list</codeph> file
+                                        look like
+                                        this:<codeblock>#deb-src cdrom:[hLinux _cattleprod_ - Official amd64 blaster NETINST 20151009-hlm%]/ cattleprod contrib main non-free
+#deb cdrom:[hLinux _cattleprod_ - Official amd64 blaster NETINST 20151009-hlm%]/ cattleprod contrib main non-free
+deb <xref href="http://file/media/cdrom/" format="html" scope="external">file:/opt/local_repo/</xref> cattleprod contrib main non-free</codeblock></li>
+                                <li>Execute the following command to update the apt package index
+                                        files:<codeblock>apt-get update</codeblock></li>
+                        </ol></section>
+                <section><title>How to make extra packages available locally for lifecycle manager
+                                host configuration</title>The extra packages necessary to install
+                                <b>virt-manager</b> and <b>sshpass</b> on the lifecycle manager host
+                        that does not have access to the internal HPE Linux repository can be found
+                        on <codeph>15.242.209.8</codeph> in a directory called
+                                <codeph>log_prob/</codeph> and the file name is
+                                <codeph>Extra-hLinux-Packages.tar</codeph>.<p>When you extract the
+                                compressed file, a directory called <codeph>extraPackages</codeph>
+                                is created.</p><p>This tar ball already has a Packages.gz file in
+                                the extraPackages directory but I have also included the directions
+                                below for generating that just in case. <b>Note:</b> This
+                                Packages.gz file contained in the above tarball is 24kb to 25kb in
+                                size.</p><p>Sometimes you have lots of .deb package files that you
+                                would like to use APT to install so that the dependencies would be
+                                automatically solved.</p><p>To do that create a directory and put
+                                the .debs you want to index in it . For example (the directory
+                                /somewhere is JUST a suggestion, not cast in
+                                stone):<codeblock># mkdir /somewhere</codeblock></p><p>Unpack the
+                                        <codeph>Extra-hLinux-Packages.tar</codeph> in this
+                                        <codeph>/somewhere/ </codeph>directory/ </p><p>Make sure
+                                your <codeph>/somewhere</codeph> directory has appropriate
+                                permissions as well as for all of the files in
+                                /somewhere/extraPackages/</p><p><b>Optional:</b>You may modify the
+                                definitions set on the package's control file directly for your
+                                repository using an<systemoutput>override</systemoutput>file. Inside
+                                this file you may want to define some options to override the ones
+                                that come with the package. It looks like
+                                follows:<codeblock>package priority section</codeblock></p><p>package
+                                is the name of the package, priority is low, medium or high and
+                                section is the section to which it belongs. The file name does not
+                                matter, you'll have to pass it as an argument for
+                                        <codeph>dpkg-scanpackageslater</codeph>. If you do not want
+                                to write an<systemoutput>override</systemoutput> file, just use
+                                        <codeph>/dev/null</codeph>. when calling
+                                        <codeph>dpkg-scanpackages</codeph>.</p><p>Still in the
+                                        <codeph>/somewhere</codeph> directory do:</p><p>Without
+                                override
+                                file:<codeblock># dpkg-scanpackages extraPackages /dev/null | gzip &gt; extraPackages/Packages.gz</codeblock></p><p>With
+                                override
+                                file:<codeblock># dpkg-scanpackages extraPackages file | gzip &gt; extraPackages/Packages.gz</codeblock></p><p>In
+                                the above line, "file" is
+                                the<systemoutput>override</systemoutput>file, the command generates
+                                a file <codeblock>Packages.gz</codeblock>that contains various
+                                information about the packages, which are used by APT. To use the
+                                packages, finally, add the following line to the
+                                /etc/apt/sources.list file:deb
+                                file:<codeblock>/somewhere/extraPackages/ ./</codeblock></p><p>After
+                                that just use the APT commands as usual.</p></section>
+                <section>Return to the prerequisites.</section>
+        </body>
+</topic>

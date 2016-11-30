@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2idui">
+    <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Managing Your Cloud with the
+        HCG Dashboard</title>
+    <prolog>
+        <metadata>
+            <othermeta name="layout" content="default"/>
+            <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+            <othermeta name="role" content="Storage Administrator"/>
+            <othermeta name="role" content="Storage Architect"/>
+            <othermeta name="role" content="Michael B"/>
+            <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+        </metadata>
+    </prolog>
+    <body>
+        <p><!--https://wiki.hpcloud.net/pages/viewpage.action?pageId=56149826--></p>
+        <p>The HCG Dashboard UI is a cloud management tool that allows users to define, deploy,
+            manage, and monitor a HPE Helion OpenStack cloud. The tool helps you provide and validate
+            the cloud definitions required to deploy your cloud and guide you through the
+            deployment. </p>
+        <p>Click the <b>List of Clouds</b> link to open the <b>List of Cloud Definitions</b> table
+            where you can see a list of cloud definitions and the current status of any cloud
+            associated with the definition.</p>
+        <p>You can also use the <b>List of Cloud Definitions</b> table to open the <b>Input for
+                Cloud</b> table to edit the cloud definition or open the <b>Deploy Cloud</b> table
+            to deploy that cloud definition. </p>
+        <p>See:</p>
+        <p>
+            <ul id="ul_crk_4y2_gv">
+                <li><xref href="#topic10581c2idui/restart" format="dita"/></li>
+                <li><xref href="#topic10581c2idui/edit" format="dita"/></li>
+                <li><xref href="#topic10581c2idui/deploy" format="dita"/></li>
+            </ul>
+        </p>
+        <p><image href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-list.png"
+                width="720" id="image_fk2_15d_gv"/></p>
+        <section conref="carrier-grade-dashboard-overviewi.dita#topic10581c2idui/launch"/>
+        <section id="restart">
+            <title>Restart services</title>
+            <p>After a cloud is deployed, you can use the <b>List of Clouds</b> table to reset
+                services including: </p>
+            <ul id="ul_ptt_3tf_cv">
+                <li>IP Tables</li>
+                <li>NTP</li>
+                <li>MySQL</li>
+                <li>RabbitMQ</li>
+                <li>Apache</li>
+                <li>OpenStack services (Keystone, Glance, Swift, Cinder) </li>
+                <li>Attis</li>
+                <li>Horizon</li>
+                <li>Centralized Logging services (Beaver, Logstash, ElasticSearch, Kibana, Icinga)
+                </li>
+            </ul>
+            <p>To restart services:<ol id="ol_wx3_jpd_gv">
+                    <li>Launch the HCG Dashboard.</li>
+                    <li>Click <b>List of Clouds</b> in the <b>Cloud</b> panel. The <b>List of Cloud
+                            Definitions</b> table opens.</li>
+                    <li>For the cloud you want to work with, click <b>Manage</b>. The <b>Manage
+                            services</b> table opens.<p><image
+                                href="../../media/carrier.grade.docs/2.1/CGH-2-dashboard-manage.png"
+                                width="720" id="image_fdn_qnd_gv"/></p></li>
+                    <li>Restart the services as needed:<ul id="ul_fnz_pqd_gv">
+                            <li><b>Restart the services in the Standard Region.</b> Click the
+                                    <b>Restart All</b> button to restart the listed services on the
+                                Standard Region controllers.<p><image
+                                        href="../../media/carrier.grade.docs/2.1/CGH-2-dashboard-manage-restart-all.png"
+                                        width="720" id="image_dwn_3rd_gv"/></p></li>
+                            <li><b>Restart a service on all controllers in the Standard Region.</b>
+                                For the service you want to restart, click the restart button in the
+                                    <b>Action</b> column.<p><image
+                                        href="../../media/carrier.grade.docs/2.1/CGH-2-dashboard-manage-restart-service.png"
+                                        width="720" id="image_k2m_jrd_gv"/></p></li>
+                            <li><b>Restart a service on one Standard Region controller.</b> Click
+                                the Node list to select the controller. Then, click the restart
+                                button in the <b>Action</b> column. <p><image
+                                        href="../../media/carrier.grade.docs/2.1/CGH-2-dashboard-manage-restart-ctrl.png"
+                                        width="720" id="image_cyw_vrd_gv"/></p></li>
+                        </ul></li>
+                </ol></p>
+        </section>
+        <section id="edit">
+            <title>Edit a cloud definition</title>
+            <p>To edit the cloud definition for an existing cloud, click the <b>Edit</b> button next
+                to the cloud definition.</p>
+            <p>
+                <image
+                    href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-list-edit.png"
+                    width="820" id="image_hcf_sx2_gv"/>
+            </p>
+            <p>The <b>Input for Cloud</b> table appears, where you can <xref
+                    href="carrier-grade-dashboard-definition.dita#topic10581c2idui">edit the values
+                    as needed</xref>. </p>
+        </section>
+        <section id="deploy">
+            <title>Deploy a cloud definition</title>
+            <p>To deploy a cloud definition for an existing cloud, click the <b>Deploy</b> button
+                next to the cloud definition.</p>
+            <p>
+                <image
+                    href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-list-deploy.png"
+                    width="820" id="image_hjk_zx2_gv"/>
+            </p>
+            <p>The cloud deploy table appears, where you can <xref
+                    href="carrier-grade-dashboard-deploying.dita#topic10581c2idui">deploy the
+                    definition</xref>. </p>
+        </section>
+        
+        
+    </body>
+</topic>

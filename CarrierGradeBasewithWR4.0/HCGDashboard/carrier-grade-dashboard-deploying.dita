@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581c2idui">
+    <title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.1: Deploying a Cloud Definition
+        Using the HCG Dashboard</title>
+    <prolog>
+        <metadata>
+            <othermeta name="layout" content="default"/>
+            <othermeta name="product-version" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+            <othermeta name="role" content="Storage Administrator"/>
+            <othermeta name="role" content="Storage Architect"/>
+            <othermeta name="role" content="Michael B"/>
+            <othermeta name="product-version1" content="HPE Helion OpenStack Carrier Grade 2.0"/>
+        </metadata>
+    </prolog>
+    <body>
+        <p><!--https://wiki.hpcloud.net/pages/viewpage.action?pageId=56149826--></p>
+        <p>The HCG Dashboard UI is a cloud management tool that allows users to define, deploy,
+            manage, and monitor a HPE Helion OpenStack cloud. The tool helps you provide and validate
+            the cloud definitions required to deploy your cloud and guide you through the
+            deployment. </p>
+        <p>Click the <b>Deploy Cloud</b> link to open the cloud deployment table where you can
+            deploy an <xref href="carrier-grade-dashboard-definition.dita#topic10581c2idui">existing
+                cloud definition</xref>. </p><p><image
+            href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy.png"
+            width="720" id="image_xh4_jyl_x5"/></p>
+        <section conref="carrier-grade-dashboard-overviewi.dita#topic10581c2idui/launch"/>
+        <section>
+            <title>Deploy a cloud definition</title>
+            <p>To deploy an existing cloud definition:</p>
+            <ol id="deploy-steps">
+                <li>Click the <b>Deploy Cloud</b> link.</li>
+                <li>Make sure the correct cloud definition is selected. If not, click the <b>Choose
+                        a different cloud</b> button to open the <b>List of Cloud Definitions</b>
+                    table and <xref href="carrier-grade-dashboard-managing.dita#topic10581c2idui"
+                        >select the correct definition</xref>. <p><image
+                            href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy-1.png"
+                            id="image_lzy_sq2_gv" width="400"/></p></li>
+                <li>Click <b>Run</b> to start deploying the cloud. The deployment consists of four
+                    phases: <b>Provision</b>, <b>Generate</b>, <b>Netinit</b> and <b>Deploy</b>. As
+                    the phases progress, you will see the name of your cloud and current status at
+                    the top of the page and the marker on the wizard will move to the process as it
+                            completes.<p><image
+                            href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deployed.png"
+                            width="720" id="image_s5p_nyl_x5"/><note>If you receive an error during
+                            the <b>Deploy</b> phase, rerun <b>Deploy</b>. </note>The process runs in
+                        background. So while a process is running, if you close your session or
+                        browser, you can still return to the same page again to check status of your
+                        process. Once the process completes, you will be notified whether it passed
+                        or failed as seen below:</p><p><image
+                            href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deployed-status.png"
+                            width="400" id="image_yrd_kdw_hv"/></p><p>As the processes are running,
+                        you can look at the current log content by clicking on the <b>Logs</b> tab.
+                            </p><p><image
+                            href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-logs.png"
+                            width="720" id="image_znz_lyl_x5"/></p><p>Click the name of a log to
+                        view the contents in a separate window. For example:</p><p><image
+                            href="../../media/carrier.grade.docs/2.1/carrier-grade-dashboard-deploy-log.png"
+                            width="720" id="image_i2d_1df_gv"/></p><note>To execute a particular
+                        process, you can click on a step and click <b>Run</b>. All previous
+                        processes must be completed. </note></li>
+            </ol>
+        </section>
+    </body>
+</topic>
