@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
 <map xml:lang="en" linking="none" locktitle="no" otherprops="&quot;&quot;"
-  title="HPE Helion OpenStack Carrier Grade 4.0 Base with Wind River">
+  title="HPE Helion OpenStack Carrier Grade 4.0 ">
   <!--PDFTITLE "HPE Helion OpenStack Carrier Grade 2.1 Documentation"-->
   <topicmeta>
     <copyright>
@@ -22,16 +22,16 @@
   <!--Dev Plat-->
   <!-- Euca -->
   <!-- CGH -->
-  <topicref href="carrier-grade-base-4.0-with-WR-index.dita" otherprops=""
-    navtitle="HPE Helion Openstack CArrier Grade Basde 4.0 with Wind River" locktitle="yes">
-    <topicref href="CarrierGrade2.1/Overview/carrier-grade-overview.dita" navtitle="Overview"
-      locktitle="yes" otherprops="overview">
-      <topicref href="CarrierGrade2.1/Overview/carrier-grade-overview-kvm.dita"
+  <topicref href="CarrierGradeBasewithWR4.0/carrier-grade-base-4.0-with-WR-index.dita" otherprops=""
+    navtitle="HPE Helion Openstack Carrier Grade 4.0 " locktitle="yes">
+    <topicref href="CarrierGradeBasewithWR4.0/Overview/carrier-grade-overview.dita"
+      navtitle="Overview" locktitle="yes" otherprops="overview">
+      <topicref href="CarrierGradeBasewithWR4.0/Overview/carrier-grade-overview-kvm.dita"
         navtitle="KVM Region Overview" locktitle="yes"/>
       <topicref
-        href="CarrierGrade2.1/Installation/denver/carrier-grade-technical-overview-denver.dita"
+        href="CarrierGradeBasewithWR4.0/Installation/denver/carrier-grade-technical-overview-denver.dita"
         navtitle="Technical Overview" locktitle="yes"/>
-      <topicref href="CarrierGrade2.1/Overview/carrier-grade.services-overview.dita"
+      <topicref href="CarrierGradeBasewithWR4.0/Overview/carrier-grade.services-overview.dita"
         navtitle="Services Overview" locktitle="yes" otherprops="overviewsvc">
         <topicref
           href="CarrierGrade2.1/ServicesOverviews/carrier-grade-services-compute-overview.dita"
@@ -59,18 +59,20 @@
           navtitle="Horizon Service Overview" locktitle="yes"/>
       </topicref>
     </topicref>
-    <topicref href="CarrierGrade2.1/CGHRelNotes/carrier-grade-release-notes.dita"
+    <topicref href="CarrierGradeBasewithWR4.0/CGHRelNotes/carrier-grade-release-notes.dita"
       navtitle="Release Notes" locktitle="yes" otherprops="relnotes">
       <topicref href="CarrierGrade2.1/CGHRelNotes/carrier-grade-known-issues.dita"
         navtitle="Known Issues and Work Arounds" locktitle="yes"/>
     </topicref>
-    <topicref href="carrier-grade-base-4.0-with-WR-installation-guide.ditamap" format="ditamap"
-      navtitle="Installation" locktitle="yes"/>
+    <topicref
+      href="CarrierGradeBasewithWR4.0/carrier-grade-base-4.0-with-WR-installation-guide.ditamap"
+      format="ditamap" navtitle="Installation" locktitle="yes"/>
     <topicref navtitle="Post-Install Patches"
-      href="CarrierGrade2.1/PostInstallPatches/CGH-21-post-install-patching.dita" locktitle="yes"/>
-    <topicref href="CarrierGrade2.1/carrier-grade-administration.dita" navtitle="Administration"
-      locktitle="yes" otherprops="admin-guide">
-      <topicref href="CarrierGrade2.1/HCGDashboard/carrier-grade-dashboard-overviewi.dita"
+      href="CarrierGradeBasewithWR4.0/PostInstallPatches/CGH-21-post-install-patching.dita"
+      locktitle="yes"/>
+    <topicref href="CarrierGradeBasewithWR4.0/AdminGuide/carrier-grade-admin-guide.dita"
+      navtitle="Administration" locktitle="yes" otherprops="admin-guide">
+      <topicref href="HCGDashboard/carrier-grade-dashboard-overviewi.dita"
         navtitle="Administer Your Cloud Using the HCG Dashboard" locktitle="yes">
         <topicref href="CarrierGrade2.1/HCGDashboard/carrier-grade-dashboard-definition.dita"
           navtitle="Creating a Cloud Definition with the HCG Dashboard" locktitle="yes"/>
@@ -79,54 +81,34 @@
         <topicref href="CarrierGrade2.1/HCGDashboard/carrier-grade-dashboard-managing.dita"
           navtitle="Managing Your Cloud with the HCG Dashboard" locktitle="yes"/>
       </topicref>
-      <topicref href="CarrierGrade2.1/AdminGuide/carrier-grade-admin-guide.dita"
+      <topicref href="AdminGuide/carrier-grade-admin-guide.dita"
         navtitle="KVM Region Administrator Guide" locktitle="yes"/>
-      <topicref href="CarrierGrade2.1/OperationsGuide/Logging/CHG-2-logging-overview.dita"
-        navtitle="Centralized Logging" locktitle="yes"/>
-      <topicref href="CarrierGrade2.1/OperationsGuide/Backup/CGH-2-attis-backup-restore.dita"
-        navtitle="Backup and Restore" locktitle="yes" otherprops="backup">
-        <topicref href="CarrierGrade2.1/OperationsGuide/Backup/CGH-2--backup-configure.dita"
-          navtitle="Configuring the Backup and Restore Environment" locktitle="yes"/>
-        <topicref href="CarrierGrade2.1/OperationsGuide/Backup/CGH-2-attis-backup.dita"
-          navtitle="Backing Up Your Cloud" locktitle="yes"/>
-        <topicref href="CarrierGrade2.1/OperationsGuide/Backup/CGH-2-attis-restore.dita"
-          navtitle="Restoring Your Cloud" locktitle="yes"/>
-        <topicref href="CarrierGrade2.1/OperationsGuide/Backup/CGH-2--backup-restore-cli.dita"
-          navtitle="Attis Backup and Restore CLI Reference" locktitle="yes"/>
-      </topicref>
-      <topicref href="CarrierGrade2.1/OperationsGuide/Recover/CHG-2-restart-controllers.dita"
-        navtitle="Restart Services" locktitle="yes"/>
-      <topicref href="CarrierGrade2.1/OperationsGuide/Recover/CHG-2-recover.dita"
-        navtitle="Restart MySQL and RabbitMQ" locktitle="yes"/>
-      <topicref href="CarrierGrade2.1/AdminGuide/Carrier-Grade-recovery-of-MySQL-and-RabbitMQ.dita"
-        navtitle="Recovery of MySQL and RabbitMQ" locktitle="yes"/>
-      <topicref href="CarrierGrade2.1/API/carrier-grade-api.dita" navtitle="API and SDK Reference"
+      <topicref href="API/carrier-grade-api.dita" navtitle="API and SDK Reference" locktitle="yes"/>
+      <topicref href="HLMCLI/CGH-2-hlm-cli.dita" navtitle="Lifecycle Manager CLI Reference"
         locktitle="yes"/>
-      <topicref href="CarrierGrade2.1/HLMCLI/CGH-2-hlm-cli.dita"
-        navtitle="Lifecycle Manager CLI Reference" locktitle="yes"/>
     </topicref>
-    <topicref href="CarrierGrade2.1/OperationsGuide/CGH-2-User-Overview-TOC.dita"
+    <topicref href="CarrierGradeBasewithWR4.0/OperationsGuide/CGH-2-User-Overview-TOC.dita"
       navtitle="Operations" locktitle="yes" otherprops="operations-guide">
-      <topicref href="carrier-grade-base-4.0-with%20WR-User-guide-Operations.ditamap"
+      <topicref
+        href="CarrierGradeBasewithWR4.0/carrier-grade-base-4.0-with-WR-User-guide-Operations.ditamap"
         navtitle="Operations Guide" locktitle="yes" format="ditamap"/>
     </topicref>
-    <topicref href="CarrierGrade2.1/Troubleshooting/CGH-2-troubleshooting.dita"
+    <topicref href="CarrierGradeBasewithWR4.0/Troubleshooting/CGH-2-troubleshooting.dita"
       navtitle="Troubleshooting" locktitle="yes" otherprops="troubleshooting"/>
-    <topicref href="CarrierGrade2.1/carrier-grade-license.dita"
+    <topicref href="CarrierGradeBasewithWR4.0/carrier-grade-license.dita"
       navtitle="Open Source and Third-Party Software License Agreements" locktitle="yes"
       otherprops="software-license-agreements">
-      <topicref href="CarrierGrade2.1/carrier-grade-license-osrb.dita"
-        navtitle="HPE Helion OpenStack Carrier Grade Base 4.0 with WR: Open Source and Third-Party Software License Agreement"
+      <topicref href="carrier-grade-license-osrb.dita"
+        navtitle="HPE Helion OpenStack Carrier Grade 4.0 : Open Source and Third-Party Software License Agreement"
         locktitle="yes"/>
     </topicref>
-    <topicref href="CarrierGrade2.1/carrier-grade-end-user-license.dita"
+    <topicref href="CarrierGradeBasewithWR4.0/carrier-grade-end-user-license.dita"
       navtitle="Software License Terms" locktitle="yes" otherprops="software-license-terms">
-      <topicref href="CarrierGrade2.1/carrier-grade-eula.dita" toc="yes"
-        navtitle="HPE Helion OpenStack Carrier Grade Base 4.0 with WR: Software License Terms"
-        locktitle="yes"/>
+      <topicref href="carrier-grade-eula.dita" toc="yes"
+        navtitle="HPE Helion OpenStack Carrier Grade 4.0 : Software License Terms" locktitle="yes"/>
     </topicref>
-    <topicref href="CarrierGrade2.1/carrier-grade-admin-placeholder.dita" navtitle="Reference Files"
-      locktitle="yes" toc="no"/>
+    <topicref href="CarrierGradeBasewithWR4.0/carrier-grade-admin-placeholder.dita"
+      navtitle="Reference Files" locktitle="yes" toc="no"/>
     <!--    <topicref href="CarrierGrade2.1/DeploymentScenarios3/jow1410640041471.xml">
       <topicref href="CarrierGrade2.1/DeploymentScenarios3/jow1410638776646.xml"/>
       <topicref href="CarrierGrade2.1/DeploymentScenarios3/jow1410638924240.xml"/>
