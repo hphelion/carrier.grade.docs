@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="topic_gs1_2hg_2y">
+  <title>HPE Helion OpenStack Carrier Grade 4.0: Cloud Installation</title>
+  <body>
+    <section id="kvm-install-overview">
+      <p>Start with this document for complete instructions on how to install your HPE Helion
+        OpenStack cloud, including prerequisites and cloud deployment options.</p>
+      <p>
+        <b>Step 1 : Prerequisites / Pre-Installation Checklist </b></p>
+      <p><xref href="#topic_gs1_2hg_2y/packages" format="dita">Downloading the installation packages
+        </xref></p>
+      <p><b>Step 2 : </b><b>Cloud Installation</b></p>
+      <p><xref href="#topic_gs1_2hg_2y/custom-branding" format="dita">Applying the
+        Tarball</xref></p>
+    </section>
+    <section id="packages"><title>Download the installation packages </title><p>Before you get
+        started, learn how the Helion OpenStack Carrier Grade 4.0 cloud is configured, deployed, and
+        managed in the <xref
+          href="../carrier-grade-base-4.0-with-WR-index.dita#topic2685/learnabout">Deployment
+          Overview</xref> section.</p>To download the installation packages, perform the following
+        steps:<p>Launch the Software Updates and Licensing site to download the installation
+        packages:</p><p> In a browser, navigate to the <xref
+          href="http://www.hpe.com/downloads/software" format="html" scope="external">Software
+          Updates &amp; Licensing</xref> site. You must obtain a Service Agreement ID (SAID) in
+        order to download these files. </p><ol id="ul_lvg_jb2_xs">
+        <li>Click <b>Sign In</b> to log in using your account. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-install-download-patches.png" width="200"
+              id="image_jvd_q55_qv"/></p></li>
+        <li>After signing in, enter your Service Agreement ID (SAID) in the <b>Software updates and
+            licensing</b> page, </li>
+        <li>Accept the license agreement and click <b>View available products</b>.<p><image
+              href="../../media/carrier.grade.docs/CGH-2-install-download-patches2.png"
+              id="image_mhp_f55_qv" width="400"/></p></li>
+        <li>Under <b>Infrastructure Management Software</b>, click <b>Get software
+              updates</b>.<p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select.png"
+              width="400" id="image_i2v_wcm_2w"/></p></li>
+        <li>On the product list page, locate the product version and then click <b>Get
+          Software</b>corresponding to it.<p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-2-1-install-download-patches-select-2a.png"
+              width="400" id="image_q4w_b2m_2w"/></p></li>
+        <li>Select the required file (<b>hcg4_kvm_avs.tar.gz</b>) from the <b>Downloads</b> list and
+          click <b>Download</b> to continue. <p><image
+              href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select-3.png"
+              width="400" id="image_dv5_zdm_sv"/></p></li>
+        <li>The file (with extension <b>Z7550-02110.tar.gz</b> ) and its related contents are
+          downloaded.</li>
+        <li>When you extract the file, you will see the following files and folders dowloaded with
+            it:<ul id="ul_lmq_rk5_2y">
+            <li>Installer Files (Contains Disc Image File (ISO) with MD5 File, and SIG
+                  File)<p><image href="../Images/HCG-WR-installer-tar-file-1.png" width="800"
+                  id="image_idg_hn5_2y"/></p></li>
+            <li>Mandatory Patches Folder ( Contains Patch Files with MD5 File, and SIG File and
+              Readme Text File)<p><image href="../Images/HCG-WR-installer-tar-file-2.png"
+                  width="800" id="image_mml_zq5_2y"/></p></li>
+          </ul><note> When you download and extract an installer or a patch file from the portal,
+            you will see a MD5 file extracted along with the patch file. For validating the
+            integrity of the downloaded file, you can run the MD5 checksum verification on the
+            downloaded patch file and verify if the fingerprint ( the generated value) of the file
+            matches the version available on the server or the portal.</note></li>
+      </ol></section>
+    <section>After the download proces is complete, you now have all the required files to proceed
+      with the cloud installation below:</section>
+    <section id="custom-branding">
+      <title>Applying the Tarball</title>
+      <p>Helion OpenStack 4.0 offers various deployment options. You can refer to the <xref
+          href="../carrier-grade-base-4.0-with-WR-index.dita#topic2685">deployment guides</xref> to
+        explore more about the available options that match your requirement. With any selected
+        deployment option, it is still REQUIRED that you apply a specific branding by including a
+        branding tarball during installation and configuration of controller-0.</p>
+      <p>For more information on creating the branding tarball, see the instructions in the
+          <filepath>hos_theme_v1.1.tgz</filepath> in the HP Helion OpenStack Carrier Grade SDK
+        tarball.</p>
+      <p>This component contains instructions and examples for adding custom branding to the Horizon
+        GUI. You can modify the existing style sheet, font, and image files to develop your own
+        branding, and then apply the branding by installing a tarball that includes the modified
+        files along with a manifest.</p>
+      <p>The branding tarball can be applied at various stages. The steps for each stage are
+        described below.</p>
+      <note id="note_N1002B_N1001F_N1001C_N10001">The recommended method is to install the tarball
+        before running the controller configuration script.</note>
+      <ol id="ol_dqr_vtg_2y">
+        <li>Log into the active controller using the CLI.</li>
+        <li>Delete any previous tarball from the <filepath>/opt/branding</filepath> directory.</li>
+        <li>Copy the new branding tarball <b>hcg4_horizon001_patch001.tgz</b> to the
+            <filepath>/opt/branding</filepath> directory. </li>
+        <li>Install the branding. <p>To install the branding as part of initial system
+            configuration, run the configuration controller script. </p><p>If you have already run
+            the controller configuration script, you can install the branding as follows:</p><ol
+            id="ol_eqr_vtg_2y">
+            <li>Ensure that any previous tarballs are deleted from the
+                <filepath>/opt/branding</filepath> directory.</li>
+            <li>Ensure that the new branding tarball is copied to the
+                <filepath>/opt/branding</filepath> directory.</li>
+            <li>Execute the following command:
+                <codeblock>sudo service horizon restart </codeblock><p>This processes the branding
+                files on the active controller. </p></li>
+            <li>Lock the inactive controller.</li>
+            <li>Unlock the inactive controller.</li>
+          </ol></li>
+      </ol>
+    </section>
+  </body>
+</topic>
