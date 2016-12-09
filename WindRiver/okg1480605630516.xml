@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="okg1480605630516" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Creating a Glance Image Using the Heat Template with the cache_raw Option</title>
+    <shortdesc ixia_locid="2">Glance supports multiple ways of getting an image. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <draft-comment author="eknowlto" ixia_locid="18">CGTS-5446</draft-comment>
+        </context>
+        <section id="section_N10023_N1001C_N10001" ixia_locid="5">
+            <p ixia_locid="6">These include:</p>
+            <ol id="ul_cpf_lw2_xx">
+                <li ixia_locid="7">
+                    <p ixia_locid="8">From a file. </p>
+                </li>
+                <li ixia_locid="9">
+                    <p ixia_locid="10">Copied from an URL. In this case Glance downloads the image from the remote
+                        location and stores it locally. </p>
+                </li>
+                <li ixia_locid="11">
+                    <p ixia_locid="12">Directly as an external image (that is, an HTTP URL). In this case, Glance
+                        just stores the external URL and does not download the image at all (that
+                        is, no space is used at all but the image is downloaded from the external
+                        location each time it is used). </p>
+                </li>
+            </ol>
+            <p ixia_locid="13">Supported options:</p>
+            <p ixia_locid="14">Option 1 and  option 3 are both supported by CLI and by Heat.  Option 2 is supported
+                only by the CLI when <varname ixia_locid="15">–copy-from</varname> is specified. </p>
+            <p ixia_locid="16">In RAW Caching, Titanium Server supports options 1 and 2, but does not support
+                external images (option 3). </p>
+            <p ixia_locid="17"> </p>
+        </section>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ckg1475662751103" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Patch Orchestration Overview</title>
+ <shortdesc ixia_locid="2">Titanium Server supports patch orchestration, which allows an entire
+  Titanium Server system to be patched with a single operation. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+    <p ixia_locid="13">Patch orchestration is configured and run through the CLI, the Horizon GUI,
+      or the VIM REST API. </p>
+    <p ixia_locid="15">Patch orchestration will automatically iterate through all nodes of the system and install
+      the applied patch(es) to each node: first the Controller Nodes, then the Storage Nodes and
+      finally, the Compute Nodes. During the patching of Compute Nodes, the migration of VMs off of
+      Compute Nodes being patched is managed automatically by Patch Orchestration. The Controller
+      Nodes are always patched in serial; however, the Storage Nodes and Compute Nodes can
+      configurably be patched in parallel in order to reduce the overall time of installing the
+      patch.</p>
+    <p ixia_locid="16">Patch orchestration can install one or more applied patches at the same time, and can install
+      Reboot-Required Patches and/or In-Service Patches at the same time. Patch orchestration will
+      only lock/unlock (that is, reboot) nodes to install a patch if at least one Reboot-Required
+      patch has been applied. </p>
+    <p ixia_locid="17">The user first creates a patch orchestration strategy, or plan, for the automated patching
+      procedure which contains a number of parameters for customizing the particular behavior of the
+      patching orchestration. This includes parameters to specify which Node types should be
+      patched, serial or parallel patching of nodes, and default action for moving VMs off of the
+      Compute Nodes being patched. Based on these parameters, the state of Nodes and Server Group
+      definitions, patch orchestration creates a number of stages for the overall patch strategy;
+      where each stage generally consists of migrating VMs, locking node(s), installing patch(es)
+      and unlocking node(s) for some subset of the overall nodes.</p>
+    <p ixia_locid="18"> After creating the patch orchestration strategy, the user can either apply the entire
+      strategy to install the patch across the entire system automatically, or apply an individual
+      stage at a time to control and monitor its progress manually.</p>
+    <p ixia_locid="19">For reboot-required patching, there are two modes for moving VMs off of the Compute Nodes
+      being patched. First, start-stop, where instances are stopped before a host is patched;
+      typically, used for VMs that do not support migration or migration takes too long a time. In
+      order to ensure this does not impact the high level service being provided by the VM, the VM
+      should be protected and grouped into an anti-affinity server group with its standby VM.
+      Second, migrate, where instances are either live migrated or cold migrated off a host before
+      the host is patched. Currently, only start-stop mode supports parallel Compute Node patch
+      installation.</p>
+  <p ixia_locid="14">Patch orchestration can only be done on a system that meets the following
+      conditions: <ul id="ul_e1y_t4c_nx">
+        <li ixia_locid="5">
+          <p ixia_locid="6">The system is clear of alarms (with the exception of alarms for locked
+            hosts, stopped instances, and patch applications in progress). </p>
+        </li>
+        <li ixia_locid="7">
+          <p ixia_locid="8">All hosts must be unlocked-enabled-available. </p>
+        </li>
+        <li ixia_locid="9">
+          <p ixia_locid="20">All instances must either be enabled or shut down. No instances that
+            are members of a server group can be shut down. </p>
+        </li>
+        <li ixia_locid="26">
+          <p ixia_locid="27">Two controller nodes must be available.</p>
+        </li>
+        <li ixia_locid="21">
+          <p ixia_locid="22">All storage nodes must be available.</p>
+        </li>
+        <li ixia_locid="23">
+          <p ixia_locid="24">When installing reboot required patches with VM behavior of
+              <nameliteral ixia_locid="25">migrate</nameliteral>, there must be spare compute
+            capacity to migrate VMs off of the compute node(s) being patched.</p>
+        </li>
+      </ul></p>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="fcq1473601345370" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Configuring SDN Controller Connection Parameters</title>
+    <shortdesc ixia_locid="2">To use an SDN controller, you must configure basic service parameters
+        for the connection.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="360"><draft-comment author="jowens" ixia_locid="6">US84057 new topic.
+                    Aiming for an informative title, rather than "Configuring SDN Service
+                    Parameters"</draft-comment>A configured SDN controller is required before you
+                can unlock compute nodes. </p>
+            <note id="note_N10027_N10022_N1001F_N10001" ixia_locid="319">
+                <p ixia_locid="320">You must use the CLI to configure the service parameters.</p>
+            </note>
+        </context>
+        <steps>
+            <step conref="jow1404766496848.xml#jow1404766496848/source-nova-openrc" id="step_N10042_N1003F_N1001F_N10001" ixia_locid="311">
+                <cmd ixia_locid="312"/>
+            </step>
+            <step id="step_N1004B_N1003D_N1001F_N10001" ixia_locid="321">
+                <cmd ixia_locid="322">Configure the Neutron ml2 driver.</cmd>
+                <info ixia_locid="323">
+                    <p ixia_locid="324">For OpenDaylight, use the following command:</p>
+                    <codeblock ixia_locid="325"><systemoutput ixia_locid="326">~(keystone_admin)$ </systemoutput><userinput ixia_locid="327">system service-parameter-add network ml2 \
+mechanism_drivers="vswitch,sriovnicswitch,opendaylight"</userinput>
+<systemoutput ixia_locid="328">+----------+--------------------------------------+
+| Property | Value                                |
++----------+--------------------------------------+
+| uuid     | 2e92b41d-82ff-423c-ae7d-b62a8a9d06dc |
+| service  | network                              |
+| section  | ml2                                  |
+| name     | mechanism_drivers                    |
+| value    | vswitch,sriovnicswitch,opendaylight  |
++----------+--------------------------------------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N1006A_N1003D_N1001F_N10001" ixia_locid="329">
+                <cmd ixia_locid="330">Configure the ml2 plugin with the URL of the SDN controller.</cmd>
+                <info ixia_locid="331">
+                    <p ixia_locid="332">For OpenDaylight, use a command of the following form:</p>
+                    <codeblock ixia_locid="361"><systemoutput ixia_locid="362">~(keystone_admin)$ </systemoutput><userinput ixia_locid="363">system service-parameter-add network ml2_odl url=http://<varname ixia_locid="336">odl-controller-host</varname>:8181/controller/nb/v2/neutron</userinput>
+                        </codeblock>
+                    <p ixia_locid="337">where <varname ixia_locid="338">odl-controller-host</varname> is the URL of the SDN
+                        controller.</p>
+                </info>
+                <stepxmp ixia_locid="339">
+                    <p ixia_locid="385">For example, for OpenDaylight:</p>
+                    <codeblock ixia_locid="341"><systemoutput ixia_locid="342">~(keystone_admin)$ </systemoutput><userinput ixia_locid="343">system service-parameter-add network ml2_odl url=http://192.168.12.30:8181/controller/nb/v2/neutron</userinput>
+<systemoutput ixia_locid="344">+----------+----------------------------------------------------+
+| Property | Value                                              |
++----------+----------------------------------------------------+
+| uuid     | 89376838-4218-4425-8e78-bd0cc033483f               |
+| service  | network                                            |
+| section  | ml2_odl                                            |
+| name     | url                                                |
+| value    | http://192.168.12.30:8181/controller/nb/v2/neutron |
++----------+----------------------------------------------------+</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100A8_N1003D_N1001F_N10001" ixia_locid="345">
+                <cmd ixia_locid="346">Configure the credentials for ml2 access to the SDN controller.</cmd>
+                <info ixia_locid="347">
+                    <p ixia_locid="386">For example, for OpenDaylight:</p>
+                    <codeblock ixia_locid="348"><systemoutput ixia_locid="349">~(keystone_admin)$ </systemoutput><userinput ixia_locid="350">system service-parameter-add network ml2_odl username=<varname ixia_locid="351">username</varname></userinput>
+<systemoutput ixia_locid="352">+----------+----------------------------------------------------+
+| Property | Value                                              |
++----------+----------------------------------------------------+
+| uuid     | 478dd1ce-b1c6-4179-9ea3-e99fc4548eaf               |
+| service  | network                                            |
+| section  | ml2_odl                                            |
+| name     | username                                           |
+| value    | ml2_user                                           |
++----------+----------------------------------------------------+</systemoutput>
+<userinput ixia_locid="353">system service-parameter-add network ml2_odl password=<varname ixia_locid="354">password</varname></userinput>
+<systemoutput ixia_locid="382">+----------+----------------------------------------------------+
+| Property | Value                                              |
++----------+----------------------------------------------------+
+| uuid     | ffe32e64-163e-4ec2-8a22e-aba823d2467a              |
+| service  | network                                            |
+| section  | ml2_odl                                            |
+| name     | password                                           |
+| value    | t#raCt66fR                                         |
++----------+----------------------------------------------------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N100F2_N1003F_N1001F_N10001" importance="optional" ixia_locid="364">
+                <cmd ixia_locid="365">Enable support for Layer 3 network management.</cmd>
+                <info ixia_locid="366">
+                    <p ixia_locid="367">You can optionally enable SDN for L3 network services. Otherwise the L3
+                        services are managed by Titanium Server.</p>
+                    <note id="note_N10106_N100FD_N100F2_N1003F_N1001F_N10001" ixia_locid="380">
+                        <p ixia_locid="381">For SDN L3 management, each compute node must be connected to an external
+                            network.</p>
+                    </note>
+                    <p ixia_locid="368">For eexample, to enable L3 management by the SDN controller
+                        for OpenDaylight, use the following command: </p>
+                    <codeblock ixia_locid="369"><systemoutput ixia_locid="370">~(keystone_admin)$ </systemoutput><userinput ixia_locid="371">system service-parameter-add \
+network default service_plugins=networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin</userinput>
+<systemoutput ixia_locid="383">+----------+-----------------------------------------------------+
+| Property | Value                                               |
++----------+-----------------------------------------------------+
+| uuid     | 936c5180-65b5-4af1-96e2-6bb3de85963d                |
+| service  | network                                             |
+| section  | default                                             |
+| name     | service_plugins                                     |
+| value    | networking_odl.l3.l3_odl.OpenDaylightL3RouterPlugin |
++----------+-----------------------------------------------------+</systemoutput>
+                        </codeblock>
+                </info>
+            </step>
+            <step id="step_N10115_N1003F_N1001F_N10001" ixia_locid="372">
+                <cmd ixia_locid="373">Apply the service parameters.</cmd>
+                <info ixia_locid="374">
+                    <p ixia_locid="375">You must apply the basic service parameters before configuring any additional
+                        parameters, including the list of SDN controllers. </p>
+                    <codeblock ixia_locid="376"><systemoutput ixia_locid="377">~(keystone_admin)$ </systemoutput><userinput ixia_locid="378">system service-parameter-apply network</userinput>
+<systemoutput ixia_locid="384">
+Applying network service parameters</systemoutput>
+                        </codeblock>
+                    <p ixia_locid="379">Wait until any system configuration alarms are cleared and the configuration
+                        is fully applied. </p>
+                </info>
+            </step>
+        </steps>
+        <result id="result_N100CE_N1001F_N10001" ixia_locid="356">
+            <p ixia_locid="357">A connection from Titanium Server is configured.</p>
+            <note id="note_N100D7_N100CF_N1001F_N10001" ixia_locid="358">
+                <p ixia_locid="359">Connection to the specified URL is not attempted at this time.</p>
+            </note>
+        </result>
+        <postreq id="postreq_N10039_N1001B_N10001" ixia_locid="9">
+            <p ixia_locid="10">The SDN controller must also be included in the list of known SDN controllers. See
+                    <xref href="nxm1473601269565.xml" ixia_locid="11"/>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

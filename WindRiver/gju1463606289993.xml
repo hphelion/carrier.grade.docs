@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="gju1463606289993" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Networks for a Titanium Server CPE System</title>
+ <shortdesc ixia_locid="2">For a Titanium Server CPE system, Wind River recommends a minimal network
+  configuration.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">Titanium Server CPE uses a small hardware footprint consisting of two hosts,
+   plus a network switch for connectivity. Network loading is typically low. The following network
+   configuration typically meets the requirements of such a system:</p>
+  <ul id="ul_j2d_thb_1w">
+   <li ixia_locid="5">
+    <p ixia_locid="6">An internal management network</p>
+   </li>
+   <li ixia_locid="7">
+    <p ixia_locid="8">An OAM network, optionally consolidated on the management interface</p>
+   </li>
+   <li ixia_locid="9">
+    <p ixia_locid="10">One or more data networks, optionally consolidated on the management
+     interface</p>
+   </li>
+  </ul>
+  <note id="note_N10063_N1001F_N10001" ixia_locid="16">
+   <p ixia_locid="17">You can enable secure HTTPS connectivity on the OAM network during system
+    installation. For more information, see <ph ixia_locid="18" otherprops="printonly"><cite ixia_locid="19">Titanium Server System Administration: </cite>
+    </ph><cite ixia_locid="20"><ph ixia_locid="21"><xref href="mnh1464027762153.xml" ixia_locid="22"/>.</ph></cite></p>
+  </note>
+ </conbody>
+</concept-wr>

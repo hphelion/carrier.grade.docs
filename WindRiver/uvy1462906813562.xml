@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="uvy1462906813562" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+
+ -->
+    <title ixia_locid="1">Storage Planning</title>
+    <shortdesc ixia_locid="2"> Titanium Server uses storage resources on the controller and compute
+        hosts, as well as on storage hosts if they are present.</shortdesc>
+    <prolog>
+        <author ixia_locid="52">Jim Owens</author>
+        <author ixia_locid="3">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="79">The storage resources are related to system requirements and the type of storage being
+            configured. </p>
+        <p ixia_locid="77">For detailed storage requirement calculations, refer to the <cite ixia_locid="78">Titanium Server System Engineering Guidelines</cite>.</p>
+        <section id="section_N10036_N10024_N10001" ixia_locid="80">
+            <title ixia_locid="81">Storage Flexibility on Titanium Server</title>
+            <p ixia_locid="82">Titanium Server provides a range of storage options for flexibility and for scaling.
+                Multiple storage services are supported simultaneously, including:</p>
+            <ul id="ul_n2h_xhy_kx">
+                <li ixia_locid="83">
+                    <p ixia_locid="84">Cinder</p>
+                </li>
+                <li ixia_locid="85">
+                    <p ixia_locid="86">Nova</p>
+                </li>
+                <li ixia_locid="87">
+                    <p ixia_locid="88">Swift</p>
+                </li>
+                <li ixia_locid="89">
+                    <p ixia_locid="90">Glance</p>
+                </li>
+            </ul>
+            <p ixia_locid="91">The figure below shows the storage options and backends. </p>
+            <fig id="fig_iwc_5p2_lx" ixia_locid="92">
+                <title ixia_locid="133">Titanium Server Storage Options and Backends</title><image href="dif1476903614503.image" id="image_mbx_4kf_lx" ixia_locid="130">
+                    <alt ixia_locid="131">Titanium Server Storage Options</alt>
+                </image></fig>
+            <p ixia_locid="95">As shown in the figure above, the backends for each of these storage services
+                include: </p>
+            <draft-comment author="jmaran" ixia_locid="132">Might consider creating a table for the following
+                information.</draft-comment>
+            <ul id="ul_npq_kqy_kx">
+                <li ixia_locid="96">
+                    <p ixia_locid="97">Cinder - persistent HA-protected block storage for virtual disks</p>
+                    <ul id="ul_zl4_zp2_lx">
+                        <li ixia_locid="98">
+                            <p ixia_locid="99">Backends:</p>
+                            <ul id="ul_zgh_1q2_lx">
+                                <li ixia_locid="100">
+                                    <p ixia_locid="101">LVM on Controller Nodes</p>
+                                </li>
+                                <li ixia_locid="102">
+                                    <p ixia_locid="103">CEPH on Storage Nodes</p>
+                                </li>
+                                <li ixia_locid="104">
+                                    <p ixia_locid="105">Remote EMC SAN Cluster</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="106">
+                    <p ixia_locid="107">Nova - ephemeral block storage for virtual disks</p>
+                    <ul id="ul_g4j_hq2_lx">
+                        <li ixia_locid="108">
+                            <p ixia_locid="109">Backends:</p>
+                            <ul id="ul_p5x_hq2_lx">
+                                <li ixia_locid="110">
+                                    <p ixia_locid="111">LVM on Compute Nodes</p>
+                                </li>
+                                <li ixia_locid="112">
+                                    <p ixia_locid="113">COW-Image on Compute Nodes</p>
+                                </li>
+                                <li ixia_locid="114">
+                                    <p ixia_locid="115">CEPH on Storage Nodes</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="116">
+                    <p ixia_locid="117">Glance</p>
+                    <ul id="ul_mtt_yr2_lx">
+                        <li ixia_locid="118">
+                            <p ixia_locid="119">Backends:</p>
+                            <ul id="ul_dp3_zr2_lx">
+                                <li ixia_locid="120">
+                                    <p ixia_locid="121">LVM</p>
+                                </li>
+                                <li ixia_locid="122">
+                                    <p ixia_locid="123">CEPH</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="124">
+                    <p ixia_locid="125">Swift</p>
+                    <ul id="ul_z35_zr2_lx">
+                        <li ixia_locid="126">
+                            <p ixia_locid="127">Backends:</p>
+                            <ul id="ul_aj5_zr2_lx">
+                                <li ixia_locid="128">
+                                    <p ixia_locid="129">CEPH</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+    <related-links>
+        <link href="jow1404333787180.xml" ixia_locid="134"/>
+    </related-links>
+</concept-wr>

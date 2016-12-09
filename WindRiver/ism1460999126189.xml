@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ism1460999126189" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="356">Guest VLAN Support</title>
+ <shortdesc ixia_locid="357">Titanium Server guests can make use of Titanium Server-defined VLANs to encapsulate IP
+  traffic from a single or multiple IP subnets on a virtual Ethernet interface.</shortdesc>
+ <prolog>
+  <author ixia_locid="358">Jim Owens</author>
+  <author ixia_locid="359">Ron Stone</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="250"> Titanium Server tenants can define one or more VLAN-tagged IP subnets on a
+   single tenant network to allow their guests’ traffic to be encapsulated on VLAN IDs of their
+   choice. These Titanium Server-defined VLAN-tagged IP subnets have access to all of the services
+   of the virtualized network infrastructure, such as DHCP, virtual routing, meta-data server, and
+   so on.</p>
+  <draft-comment author="rstone" ixia_locid="354">US60634 adds</draft-comment>
+  <p ixia_locid="353">Alternately, Titanium Server guests can make use of transparent VLANs, in
+   which packets are encapsulated within a provider network segment without removing or modifying
+   the guest VLAN tag(s). VLAN Transparent provides more flexibility with respect to how VLAN tagged
+   packets are handled without requiring that you pre-define which VLAN instances will be used. A
+   guest can send/receive VLAN tagged packets (802.1q) and/or double VLAN tagged packets (802.1ad)
+   without first defining a VLAN-tagged subnet in Titanium Server. In addition, a VLAN transparent
+   network will also propagate VLAN priority information (802.1p) to the destination VM instance.
+   However, as a consequence of allowing arbitrary VLAN instances, you lose the ability to access
+   DHCP servers, virtual routers, or meta-data servers over those VLAN-tagged networks. </p>
+  <p ixia_locid="355">Support for Guest VLANs is a key capability that facilitates the porting of
+   current user applications running on dedicated physical servers using VLANs to a virtualized
+   environment.</p>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="npl1472144660413" xml:lang="en-us">
+<!--16.x version        
+-->
+    <title ixia_locid="1">Configuring Enabled User Emulation</title>
+    <shortdesc ixia_locid="2">For LDAP-backed Keystone, special steps may be required to enable
+        users in Keystone, depending on the LDAP implementation.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001D_N1001A_N10001" ixia_locid="4">
+            <p ixia_locid="16"><draft-comment author="jowens" ixia_locid="6">CGTS-4885 new
+                    topic</draft-comment>Some LDAP implementations, such as OpenLDAP, do not have an
+                attribute for enabling users. You can emulate one for use with Keystone by
+                designating an LDAP group to identify enabled users, and then populating the group.
+                You can then set service parameters to specify the group in Keystone and enable its
+                use.</p>
+            <note id="note_N10033_N10022_N1001F_N10001" ixia_locid="37">
+                <p ixia_locid="11">If the LDAP implementation includes a Boolean attribute for
+                    enabling users, you can use the <parmname ixia_locid="12">set_user_enabled</parmname> service parameter to identify the attribute for
+                    use in Keystone. For details, see the public OpenStack documentation
+                        (<draft-comment author="jmaran" ixia_locid="47">The following external link would be
+                        difficult for a printed PDF user to follow.</draft-comment>for example,
+                        <xref format="html" href="http://docs.openstack.org/developer/keystone/configuration.html#configuring-the-ldap-identity-provider" ixia_locid="10" scope="external">Configuring an Identity
+                    Provider</xref>).</p>
+                <p ixia_locid="13">If the LDAP implementation uses an integer-based attribute for
+                    enabling users, you can configure Keystone to use the integer-based attribute.
+                    For details, see the public OpenStack documentation.</p>
+            </note>
+        </context>
+        <steps>
+            <step id="step_N10057_N10054_N1001F_N10001" ixia_locid="19">
+                <cmd ixia_locid="20">Enable the use of a group to emulate an <nameliteral ixia_locid="38">enabled</nameliteral> attribute for users.</cmd>
+                <info ixia_locid="21">
+                    <codeblock ixia_locid="22"><systemoutput ixia_locid="23">~[keystone_admin]$ </systemoutput><userinput ixia_locid="24">system service-parameter-add identity ldap user_enabled_emulation=True</userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N10075_N10051_N1001F_N10001" ixia_locid="41">
+                <cmd ixia_locid="42">If required, create a <nameliteral ixia_locid="48">groupOfNames</nameliteral>
+                    object to contain the users.</cmd>
+                <info ixia_locid="43">
+                    <p ixia_locid="44">This is required for a read-only LDAP-backed Keystone
+                        configuration. The LDAP server administrator must create the object.</p>
+                </info>
+            </step>
+            <step id="step_N1002F_N1002C_N1001A_N10001" ixia_locid="7">
+                <cmd ixia_locid="8">Specify the group in Keystone.</cmd>
+                <info ixia_locid="25">
+                    <p ixia_locid="26">For example:</p>
+                    <codeblock ixia_locid="28"><systemoutput ixia_locid="29">~[keystone_admin]$ </systemoutput><userinput ixia_locid="30">system service-parameter-add identity ldap \
+user_enabled_emulation_dn="cn=enabled_users,ou=Users,dc=openstack,dc=org"</userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N10096_N10054_N1001F_N10001" ixia_locid="33">
+                <cmd ixia_locid="34">To enable users, add them to the group.</cmd>
+                <info ixia_locid="45">
+                    <p ixia_locid="46">You can also disable users by removing them from the group.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

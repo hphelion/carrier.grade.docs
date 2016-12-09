@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="sla1470841399223" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="55">Installing Third-Party OpenStack Cloud as Primary Region</title>
+ <shortdesc ixia_locid="56">A third-party OpenStack Cloud as the Primary Region with Titanium Server
+  as the Secondary Region is one of two regions configuration options. </shortdesc>
+ <prolog>
+  <author ixia_locid="57">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="59">Install the Third Party OpenStack Cloud following the documentation provided with the Third
+   Party OpenStack Cloud. Note that the installation must meet the requirements given in <xref href="ach1469625944660.xml" ixia_locid="60"/>. </p>
+  <p ixia_locid="51">The third-party OpenStack Primary Region’s Keystone service must be configured
+   with a tenant, users, services, and service endpoints (public, internal, and admin URLs) for both
+   the third-party OS Primary Region services and each of the Titanium Server Secondary Region
+   services. </p>
+  <p ixia_locid="53">The Titanium Server secondary region auto-provisions the Third Party Primary
+   Region’s Keystone through the <cmdname ixia_locid="54">config_region</cmdname> script and the
+   INI-formatted region config file. For details on data filling the region config file (which
+   includes the Titanium Server Secondary Region’s service access and endpoint data to be configured
+   in the Primary Region), refer to the <filepath ixia_locid="10">REGION_CONFIG_DATA.xslx</filepath>
+   spreadsheet, available in <xref href="vqz1472582405090.xml" ixia_locid="58"/>.</p>
+ </conbody>
+</concept-wr>

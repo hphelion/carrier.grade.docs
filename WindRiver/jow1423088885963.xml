@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1423088885963" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Allocating Host Memory for VM Pages or Platform Use</title>
+    <shortdesc ixia_locid="2">You can edit the platform and VM page memory allocations for a NUMA
+        node from the Web administration interface using the <uicontrol ixia_locid="90">Memory</uicontrol> tab on
+        the <wintitle ixia_locid="4">Host Inventory</wintitle> pane.</shortdesc>
+    <prolog>
+        <author ixia_locid="5">Jim Owens</author>
+        <author ixia_locid="88">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N1002C_N10029_N10001" ixia_locid="10">
+            <p ixia_locid="11">Before requesting huge pages on a host, ensure that the host has
+                enough available memory. For details, see <xref href="jow1423087781001.xml" ixia_locid="12"/>. If a huge page request cannot be allocated from the available
+                memory, an informative message is displayed.</p>
+        </prereq>
+        <steps>
+            <step id="step_N10033_N10030_N10024_N10001" ixia_locid="87">
+                <cmd ixia_locid="9">On the <uicontrol ixia_locid="13">Inventory</uicontrol> pane, lock the host you
+                    want to edit.</cmd>
+            </step>
+            <step id="step_N1004B_N10039_N10029_N10001" ixia_locid="14">
+                <cmd ixia_locid="15">Click <uicontrol ixia_locid="16">Host Name</uicontrol> to open
+                    the settings for the host.</cmd>
+            </step>
+            <step id="step_N10058_N10039_N10029_N10001" ixia_locid="17">
+                <cmd ixia_locid="18">On the <uicontrol ixia_locid="19">Memory</uicontrol> tab, click
+                        <uicontrol ixia_locid="20">Update Memory</uicontrol>.</cmd>
+                <info ixia_locid="55">
+                    <fig id="fig_gcz_rdf_2r" ixia_locid="56">
+                        <image href="jow1424729372811.image" id="image_kg3_sdf_2r" ixia_locid="57">
+                            <alt ixia_locid="58">Update Memory button</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N1006A_N10039_N10029_N10001" ixia_locid="21">
+                <cmd ixia_locid="22">Use the <wintitle ixia_locid="23">Update Memory
+                        Allocation</wintitle> dialog box to set the memory allocations for each NUMA
+                    node. </cmd>
+                <info ixia_locid="24">
+                    <p ixia_locid="62">For each available NUMA node, three fields are supplied, as
+                        illustrated in the following example screen for two NUMA nodes.</p>
+                    <fig id="fig_u13_tdf_2r" ixia_locid="59">
+                        <image href="jow1424729464258.image" id="image_tcp_tdf_2r" ixia_locid="60">
+                            <alt ixia_locid="61">tis-hugepage-memory-dialog</alt>
+                        </image>
+                    </fig>
+                    <dl>
+                        <dlentry ixia_locid="73">
+                            <dt ixia_locid="75">Platform Memory for Node <i ixia_locid="77">n</i></dt>
+                            <dd ixia_locid="79">
+                                <p ixia_locid="81">The amount of memory to reserve for platform use
+                                    on the NUMA Node, in MiB. To see the minimum requirement, hover
+                                    over the information icon next to the field. </p>
+                                <fig id="fig_wc1_f4q_ps" ixia_locid="83">
+                                    <image href="jow1436294915672.image" id="image_drk_k4q_ps" ixia_locid="84">
+                                        <alt ixia_locid="85">TiS minimum platform memory tooltip</alt>
+                                    </image>
+                                </fig>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="74">
+                            <dt ixia_locid="76"># of VM 2M Hugepages Node <i ixia_locid="78">n</i></dt>
+                            <dd ixia_locid="80">
+                                <p ixia_locid="82">The number of 2 MiB huge pages to reserve for VM
+                                    use on the NUMA Node. If no 2 MiB pages are required, type
+                                    0.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="32">
+                            <dt ixia_locid="33"># of VM 1G Hugepages Node <i ixia_locid="66">n</i></dt>
+                            <dd ixia_locid="34">
+                                <p ixia_locid="35">The number of 1 GiB huge pages to reserve for VM
+                                    use on the NUMA Node. If no 1 GiB pages are required, type
+                                    0.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                    <p ixia_locid="67">To see how many huge pages of a given size you can
+                        successfully request on a node (assuming that pages of another size are not
+                        also requested), hover over the information icon next to the field.</p>
+                    <fig id="fig_zdt_vzd_cs" ixia_locid="69">
+                        <image href="jow1432129731308.image" id="image_blt_xzd_cs" ixia_locid="70">
+                            <alt ixia_locid="71">TiS Update Hugepage Memory: Maximum Pages info</alt>
+                        </image>
+                    </fig>
+                    <p ixia_locid="72">Any unused memory is automatically allocated as 4 KiB pages
+                        of regular memory for VMs. You must use the Memory Page Size extra spec, or
+                        suitable image metadata, to use these 4 KiB pages as the backing mechanism
+                        for VM memory allocation requests. <draft-comment author="jmaran" ixia_locid="91">Updated
+                            xref to inter-book format (added doc-level
+                        &lt;cite&gt;).</draft-comment>See <ph ixia_locid="92" otherprops="printonly."><cite ixia_locid="93">Titanium
+                                Server Cloud Administration: </cite></ph><cite ixia_locid="94"><ph ixia_locid="95"><xref href="jow1424723681500.xml" ixia_locid="89"/></ph></cite> for
+                        details.</p>
+                </info>
+            </step>
+            <step id="step_N100D6_N10039_N10029_N10001" ixia_locid="47">
+                <cmd ixia_locid="48">Click <uicontrol ixia_locid="49">Save</uicontrol>.</cmd>
+            </step>
+            <step id="step_N100EB_N10039_N10029_N10001" ixia_locid="52">
+                <cmd ixia_locid="53">Unlock the host and wait for it to be reported as
+                        <nameliteral ixia_locid="54">Available</nameliteral>.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="wib1463582694200" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="53">The Internal Management Network</title>
+ <shortdesc ixia_locid="54">The internal management network must be implemented as a single,
+  dedicated, Layer 2 broadcast domain for the exclusive use of each Titanium Server cluster. Sharing
+  of this network by more than one Titanium Server cluster is only supported in a Multi-Region
+  Configuration.</shortdesc>
+ <prolog>
+  <author ixia_locid="55">Jim Owens</author>
+  <author ixia_locid="56">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="7">During the Titanium Server software installation process, several network
+   services such as BOOTP, DHCP, and PXE, are expected to run over the internal management network.
+   These services are used to bring up the different hosts to an operational state. Therefore, it is
+   mandatory that this network be operational and available in advance, to ensure a successful
+   installation.</p>
+  <p ixia_locid="34">On each host, the internal management network can be implemented using a 1 Gb
+   or 10 Gb Ethernet port. In either case, requirements for this port are:</p>
+  <ul id="ul_uh1_pqs_hp">
+   <li ixia_locid="35">
+    <p ixia_locid="36">it must be capable of PXE-booting</p>
+   </li>
+   <li ixia_locid="37">
+    <p ixia_locid="38">it can be used by the motherboard as a primary boot device</p>
+   </li>
+  </ul>
+  <note id="note_N1005F_N1002D_N1001F_N10001" ixia_locid="50">
+   <p ixia_locid="51"><draft-comment author="jowens" ixia_locid="52">US61937 added</draft-comment>If
+    required, the internal management network can be configured as a VLAN-tagged network. In this
+    case, a separate IPv4 PXE boot network must be implemented as the untagged network on the same
+    physical interface. This configuration must also be used if the management network must support
+    IPv6.</p>
+  </note>
+ </conbody>
+</concept-wr>

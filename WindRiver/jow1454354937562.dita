@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454354937562" xml:lang="en-us"><title ixia_locid="1">Throughput Dimensioning</title><shortdesc ixia_locid="2">The throughput capabilities of AVS are highly dependent on the CPU
+        assignments, NUMA placement and the guest application traffic profile.</shortdesc><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="5">The performance of AVS is also highly dependent on the packet size of the traffic
+            being exchanged with the guest and the physical network. Smaller packet sizes result in
+            higher overhead, therefore the overall data rate is lower than that of larger packet
+            sizes that have less overhead. The packet data must also be copied into the guest VM
+            memory from AVS and vice versa. Therefore to obtain higher traffic rates, it may be
+            necessary to increase the number of CPUs assigned to both AVS and the guest, depending
+            on which is the limiting factor in the packet processing. Typically the guest VM has
+            higher overhead on a per-packet basis due to data copy overhead and on the actual
+            payload processing of the packet, compared to AVS which typically does not inspect the
+            payload of the traffic beyond the layer 2 headers. The only exception to this is when
+            security groups are being leveraged to provide ACL services. In this configuration, AVS
+            will inspect up to the layer 4 headers of IP traffic.</p></conbody>
+    <related-links>
+        <link href="jow1454354938132.dita" ixia_locid="6"/>
+        <link href="jow1454354938702.dita" ixia_locid="7"/>
+        <link href="jow1454354939252.dita" ixia_locid="8"/>
+    </related-links></concept-wr>

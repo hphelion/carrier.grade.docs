@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1443819706243" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">CLI Commands for Managing Sensors</title>
+ <shortdesc ixia_locid="2">You can use the command-line interface to list sensor information and
+  change sensor settings.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="6">US64069 new
+   topic</draft-comment>The following CLI commands are available for working with sensors. For
+   complete syntax information, refer to the help command.<ul id="ul_lrw_g5f_4t">
+    <li ixia_locid="61">
+     <p ixia_locid="8"><cmdname ixia_locid="9">system host-sensor-list</cmdname></p>
+    </li>
+    <li ixia_locid="10">
+     <p ixia_locid="11"><cmdname ixia_locid="12">system host-sensor-modify</cmdname></p>
+     <p ixia_locid="13">You can modify sensors using the <parmname ixia_locid="14">suppress</parmname> parameter (<option ixia_locid="15">True</option> or <option ixia_locid="16">False</option>).</p>
+    </li>
+    <li ixia_locid="17">
+     <p ixia_locid="18"><cmdname ixia_locid="19">system host-sensor-show</cmdname></p>
+    </li>
+    <li ixia_locid="20">
+     <p ixia_locid="21"><cmdname ixia_locid="22">system host-sensorgroup-list</cmdname></p>
+    </li>
+    <li ixia_locid="23">
+     <p ixia_locid="24"><cmdname ixia_locid="25">system host-sensorgroup-modify</cmdname></p>
+     <p ixia_locid="26">You can modify sensor groups using the following parameters:</p>
+     <ul id="ul_kny_cxf_4t">
+      <li ixia_locid="27">
+       <p ixia_locid="28"><parmname ixia_locid="29">actions_critical_group</parmname> (valid values
+        are <option ixia_locid="30">alarm</option> or <option ixia_locid="31">ignore</option>)</p>
+      </li>
+      <li ixia_locid="32">
+       <p ixia_locid="33"><parmname ixia_locid="34">actions_major_group</parmname> (valid values are
+         <option ixia_locid="35">alarm</option> or <option ixia_locid="36">ignore</option>)</p>
+      </li>
+      <li ixia_locid="37">
+       <p ixia_locid="38"><parmname ixia_locid="39">actions_minor_group</parmname> (valid values are
+         <option ixia_locid="40">alarm</option> or <option ixia_locid="41">ignore</option>)</p>
+      </li>
+      <li ixia_locid="42">
+       <p ixia_locid="43"><parmname ixia_locid="44">audit interval_group</parmname> (time in
+        seconds)</p>
+      </li>
+      <li ixia_locid="45">
+       <p ixia_locid="46"><parmname ixia_locid="47">suppress</parmname> (<option ixia_locid="48">True</option> or <option ixia_locid="49">False</option>)</p>
+      </li>
+     </ul>
+    </li>
+    <li ixia_locid="50">
+     <p ixia_locid="51"><cmdname ixia_locid="52">system host-sensorgroup-show</cmdname></p>
+    </li>
+   </ul></p>
+  <p ixia_locid="53">For
+   example:<codeblock ixia_locid="54"><systemoutput ixia_locid="55">~(keystone_admin)$ </systemoutput><userinput ixia_locid="62">system host-sensor-modify controller-0 \
+d9af9433-44dd-4526-b0fd-8d7a0cdb877b suppress=True</userinput></codeblock></p>
+  <p ixia_locid="63">For more information about sensors and sensor groups, see <xref href="jow1443819549360.xml" ixia_locid="66"/>.</p>
+ </conbody>
+</concept-wr>

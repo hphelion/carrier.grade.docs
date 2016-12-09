@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="oee1470162436520" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Installing In-Service Patches Using the CLI</title>
+    <shortdesc ixia_locid="2">The procedure for applying an in-service patch is similar to that as a
+        reboot-required patch, except that the host does not need to be locked and unlocked as part
+        of applying the patch. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <draft-comment author="eknowlto" ixia_locid="5">US78836</draft-comment>
+        </context>
+        <steps>
+            <step id="step_N1002E_N1002B_N1001C_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Upload the patch.</cmd>
+                <stepxmp ixia_locid="8">
+                    <codeblock ixia_locid="9"><systemoutput ixia_locid="10">$</systemoutput> <userinput ixia_locid="11">sudo sw-patch upload INSVC_HORIZON_SYSINV.patch
+</userinput>
+<systemoutput ixia_locid="12">INSVC_HORIZON_SYSINV is now available</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10049_N1002B_N1001C_N10001" ixia_locid="13">
+                <cmd ixia_locid="14">Confirm that the patch is available.</cmd>
+                <stepxmp ixia_locid="15">
+                    <codeblock ixia_locid="16"><systemoutput ixia_locid="17">$</systemoutput> <userinput ixia_locid="18">sudo sw-patch query</userinput>
+<systemoutput ixia_locid="19">      Patch ID        RR  Release  Patch State
+====================  ==  =======  ===========
+INSVC_HORIZON_SYSINV  N    16.00    Available</systemoutput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10065_N1002B_N1001C_N10001" ixia_locid="20">
+                <cmd ixia_locid="21">Check the status of the hosts. </cmd>
+                <stepxmp ixia_locid="22">
+                    <codeblock ixia_locid="23"><systemoutput ixia_locid="24">$</systemoutput> <userinput ixia_locid="25">sudo sw-patch query-hosts</userinput>
+<systemoutput ixia_locid="26">  Hostname      IP Address    Patch Current  Reboot Required  Release  State
+============  ==============  =============  ===============  =======  =====
+compute-0     192.168.204.24       Yes             No          16.00   idle
+controller-0  192.168.204.3        Yes             No          16.00   idle
+controller-1  192.168.204.4        Yes             No          16.00   idle</systemoutput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10081_N1002B_N1001C_N10001" ixia_locid="27">
+                <cmd ixia_locid="28">Apply the patch</cmd>
+                <stepxmp ixia_locid="29">
+                    <codeblock ixia_locid="30"><systemoutput ixia_locid="31">$</systemoutput> <userinput ixia_locid="32">sudo sw-patch apply INSVC_HORIZON_SYSINV</userinput>
+<systemoutput ixia_locid="33">INSVC_HORIZON_SYSINV is now in the repo</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="34">
+                    <p ixia_locid="35">The  patch state transitions to Partial-Apply:</p>
+                    <codeblock ixia_locid="36"><systemoutput ixia_locid="37">$</systemoutput> <userinput ixia_locid="38">sudo sw-patch query</userinput>
+<systemoutput ixia_locid="39">      Patch ID        RR  Release   Patch State
+====================  ==  =======  =============
+INSVC_HORIZON_SYSINV  N    16.00   Partial-Apply</systemoutput></codeblock>
+                    <p ixia_locid="40">Because it's an in-service patch, the hosts report that they
+                        are not patch current, but they do not require a reboot.</p>
+                    <codeblock ixia_locid="41"><systemoutput ixia_locid="42">$</systemoutput> <userinput ixia_locid="43">sudo sw-patch query-hosts</userinput>
+<userinput ixia_locid="44">  Hostname      IP Address    Patch Current  Reboot Required  Release  State
+============  ==============  =============  ===============  =======  =====
+compute-0     192.168.204.24       No              No          16.00   idle
+controller-0  192.168.204.3        No              No          16.00   idle
+controller-1  192.168.204.4        No              No          16.00   idle</userinput>
+</codeblock>
+                </info>
+            </step>
+            <step id="step_N100C5_N1002B_N1001C_N10001" ixia_locid="45">
+                <cmd ixia_locid="46">Install the patch on controller-1.</cmd>
+                <stepxmp ixia_locid="47">
+                    <codeblock ixia_locid="48"><systemoutput ixia_locid="49">$</systemoutput> <userinput ixia_locid="50">sudo sw-patch host-install controller-1</userinput>
+.............
+Installation was successful.</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100DD_N1002B_N1001C_N10001" ixia_locid="51">
+                <cmd ixia_locid="52">Query the hosts to to check status. </cmd>
+                <stepxmp ixia_locid="53">
+                    <codeblock ixia_locid="54"><systemoutput ixia_locid="55">$</systemoutput> <userinput ixia_locid="56">sudo sw-patch query-hosts</userinput>
+<systemoutput ixia_locid="57">  Hostname      IP Address    Patch Current  Reboot Required  Release  State
+============  ==============  =============  ===============  =======  =====
+compute-0     192.168.204.24       No              No          16.00   idle
+controller-0  192.168.204.3        No              No          16.00   idle
+controller-1  192.168.204.4        Yes             No          16.00   idle</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="58">
+                    <p ixia_locid="59">The controller-1 host reports it is now patch current and
+                        does not require a reboot, without having been locked or rebooted</p>
+                </info>
+            </step>
+            <step id="step_N10100_N1002B_N1001C_N10001" ixia_locid="60">
+                <cmd ixia_locid="61">Install the patch on compute-0. </cmd>
+                <stepxmp ixia_locid="62">
+                    <codeblock ixia_locid="63"><systemoutput ixia_locid="64">$</systemoutput> <userinput ixia_locid="65">sudo sw-patch host-install compute-0</userinput>
+<systemoutput ixia_locid="66">....
+Installation was successful.</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N1011B_N1002B_N1001C_N10001" ixia_locid="67">
+                <cmd ixia_locid="68">Install the patch on controller-0. </cmd>
+                <stepxmp ixia_locid="69">
+                    <codeblock ixia_locid="70"><systemoutput ixia_locid="86">~(keystone_admin)]$</systemoutput> <userinput ixia_locid="87">sudo sw-patch host-install controller-0</userinput>
+<systemoutput ixia_locid="88">............
+Installation was successful.
+</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="77">
+                    <p ixia_locid="78">You can query the hosts to confirm that all nodes are now
+                        patch current, and that the patch has transitioned to the Applied state.</p>
+                    <codeblock ixia_locid="79"><systemoutput ixia_locid="80">$</systemoutput> <userinput ixia_locid="81">sudo sw-patch query-hosts</userinput>
+<systemoutput ixia_locid="82">  Hostname      IP Address    Patch Current  Reboot Required  Release  State
+============  ==============  =============  ===============  =======  =====
+compute-0     192.168.204.24       Yes             No          16.00   idle
+controller-0  192.168.204.3        Yes             No          16.00   idle
+controller-1  192.168.204.4        Yes             No          16.00   idle</systemoutput>
+
+<systemoutput ixia_locid="83">$</systemoutput> <userinput ixia_locid="84">sudo sw-patch query</userinput>
+<systemoutput ixia_locid="85">      Patch ID        RR  Release  Patch State
+====================  ==  =======  ===========
+INSVC_HORIZON_SYSINV  N    16.00     Applied</systemoutput></codeblock>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

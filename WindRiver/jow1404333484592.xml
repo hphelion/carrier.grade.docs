@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333484592" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1">Software Installation Workflow</title>
+    <shortdesc ixia_locid="2">Installing the Titanium Server software involves initializing and
+            configuring<ph ixia_locid="209" product="tis_cpe"> a combined controller/compute node</ph><ph ixia_locid="210" product="tis_std"> a controller node</ph>, and then using this node to initialize and
+            configure<ph ixia_locid="211" product="tis_cpe"> a second controller/compute node</ph><ph ixia_locid="212" product="tis_std"> other hosts</ph>.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+        <author ixia_locid="4">Pedro Sanchez</author>
+        <author ixia_locid="5">Tom Towle</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="207" product="tis_std">Normally, the controller is initialized using a local
+            device, and the remaining hosts are initialized from the controller using PXE boot. If
+            you prefer, you can also initialize the controller using PXE boot. For more information,
+            see <xref href="jow1440534908675.xml" ixia_locid="208"/>.</p>
+        <p ixia_locid="203" product="tis_std">For a standard system with<ph ixia_locid="205" product="tis_lvm"> Controller</ph><ph ixia_locid="206" product="tis_ceph">
+                Dedicated</ph> storage, the following procedure is recommended:<ol id="ol_k4k_tjn_fs">
+                <li ixia_locid="188">
+                    <p ixia_locid="189"><draft-comment author="jowens" dir="ltr" ixia_locid="190" translate="no">CGTS-4485 power off all hosts to
+                        start</draft-comment>Power off all nodes in the cluster.</p>
+                </li>
+                <li ixia_locid="106">
+                    <p ixia_locid="108">Install the first controller node.</p>
+                </li>
+                <li ixia_locid="110">
+                    <p ixia_locid="112">Install the second controller node, and then configure its
+                            interfaces<ph ixia_locid="202" product="tis_lvm"> and Cinder
+                            storage</ph>.</p>
+                </li>
+                <li ixia_locid="114" product="tis_ceph">
+                    <p ixia_locid="116">Install the storage nodes.</p>
+                </li>
+                <li ixia_locid="122">
+                    <p ixia_locid="124">Configure provider networks (required in order to add data
+                        interfaces on the compute nodes).</p>
+                </li>
+                <li ixia_locid="118">
+                    <p ixia_locid="120">Install each compute node, and configure its interfaces and
+                        local storage.</p>
+                </li>
+            </ol></p>
+        <p ixia_locid="204" product="tis_cpe">For a CPE system, the following procedure is
+                recommended:<ol id="ol_knr_pvg_yr">
+                <li ixia_locid="194">
+                    <p ixia_locid="195"><draft-comment author="jowens" dir="ltr" ixia_locid="196" translate="no">CGTS-4485 power off all hosts to
+                        start</draft-comment>Power off both nodes.</p>
+                </li>
+                <li ixia_locid="76">
+                    <p ixia_locid="80">Install the first controller/compute node.</p>
+                </li>
+                <li ixia_locid="91">
+                    <p ixia_locid="92">Configure provider networks (required in order to add data
+                        interfaces for the compute function).</p>
+                </li>
+                <li ixia_locid="93">
+                    <p ixia_locid="94">Configure the first controller/compute node with data
+                        interfaces.</p>
+                </li>
+                <li ixia_locid="160">
+                    <p ixia_locid="161"><draft-comment author="jowens" dir="ltr" ixia_locid="162" translate="no">US68057 added step</draft-comment>Configure local storage
+                        for the compute function on the first controller/compute node.</p>
+                </li>
+                <li ixia_locid="77">
+                    <p ixia_locid="81">Install the second controller/compute node, and then
+                        configure its interfaces, Cinder storage, and local storage.</p>
+                </li>
+            </ol></p>
+        <note id="note_N10069_N10029_N10001" ixia_locid="61">
+            <p ixia_locid="62">To ensure you can correctly identify hosts as you install them, power
+                on and configure each new host one at a time.</p>
+        </note>
+        <p ixia_locid="52">To prevent a host from repeatedly booting over the network, you may need
+            to adjust the boot order for the host. For more information, see <xref href="jow1404333486758.xml" ixia_locid="215"/>. Terminal-server access to the hosts may be required
+            to adjust the BIOS boot settings</p>
+        <p ixia_locid="36">After each host is configured, you can unlock it to make it operational. </p>
+        <p ixia_locid="172"><draft-comment author="jowens" dir="ltr" ixia_locid="173" translate="no">US68057, US64033 add the steps to unlock controllers</draft-comment>To unlock a<ph ixia_locid="213" product="tis_std"> controller/compute</ph><ph ixia_locid="214" product="tis_std"> controller</ph>
+            node, you must do the following:</p>
+        <ol id="ol_lvs_5z5_m5">
+            <li ixia_locid="174">
+                <p ixia_locid="175">Manually configure the OAM network interface, and the
+                    infrastructure network interface if used. This is required for the secondary
+                    controller only.</p>
+            </li>
+            <li ixia_locid="176" product="tis_lvm">
+                <p ixia_locid="177">Manually configure the Cinder storage. This is required for the
+                    secondary controller only.</p>
+            </li>
+            <li ixia_locid="178" product="tis_cpe">
+                <p ixia_locid="179">Configure the data interfaces. This is required for each of the
+                    controllers.</p>
+            </li>
+            <li ixia_locid="180" product="tis_cpe">
+                <p ixia_locid="181">Configure local storage for the compute function. This is
+                    required for each of the controllers.</p>
+            </li>
+        </ol>
+        <p ixia_locid="37" product="tis_std">To unlock a compute node, you must do the following:<ol id="ol_ucc_jzr_v4">
+                <li ixia_locid="38">
+                    <p ixia_locid="40">Define at least one provider network. You must do this before
+                        you can configure the compute node data interfaces.</p>
+                </li>
+                <li ixia_locid="32">
+                    <p ixia_locid="33">Configure the data interfaces.</p>
+                </li>
+                <li ixia_locid="42">
+                    <p ixia_locid="43">Optionally, configure the infrastructure interface. This is
+                        required only if an infrastructure network is defined.</p>
+                </li>
+                <li ixia_locid="182">
+                    <p ixia_locid="183"><draft-comment author="jowens" dir="ltr" ixia_locid="184" translate="no">US68057 add step for nova-local
+                            configuration</draft-comment>Configure local storage on the compute
+                        node.</p>
+                </li>
+            </ol></p>
+        <p ixia_locid="26" product="tis_ceph">To unlock a storage node, you must do the
+                following:<ol id="ol_br5_yhs_v4">
+                <li ixia_locid="39">
+                    <p ixia_locid="41">Configure the storage volumes.</p>
+                </li>
+                <li ixia_locid="45">
+                    <p ixia_locid="46">Configure the infrastructure interface.</p>
+                </li>
+            </ol></p>
+        <p ixia_locid="200">For complete installation instructions, refer to <cite ixia_locid="201">Titanium Server Installation</cite> for your system (CPE system, system with
+            controller storage, or system with dedicated storage).</p>
+    </conbody>
+</concept-wr>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003755250" xml:lang="en-us"><title ixia_locid="1">Hardware Requirements for OSDs</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">For a Ceph cluster OSD, a minimum specification of 300 GB 10K RPM SAS disks is
+            mandatory. Faster SAS disks, such as 15K RPM SAS or SSDs are recommended. Two to eight
+            OSDs per storage node (4 to 16 OSDs total) are currently supported.</p><p ixia_locid="5">SSD OSDs are highly recommended for more disk throughput, especially for VM disk
+            operations with many VMs writing in parallel or if VMs have high disk throughput. An
+            aggregate of 2000 IOPS and 200 MB/sec throughput (as measured by an IOPS tool executing
+            random reads) for all VMs is a recommended point where using SSDs instead of SAS disks
+            should be considered.</p></conbody></concept-wr>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003730394" xml:lang="en-us"><title ixia_locid="1">Image Conversion Dimensioning for Controller Node Storage</title><shortdesc ixia_locid="2">The image conversion partition is used by Cinder for temporary storage for
+        image conversions.</shortdesc><prolog>
+        <author ixia_locid="37">Jim Owens</author><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+        <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="36">CGTS-3888 Add letters to
+                equations, move backup to last; CGTS-4186 correct qemu-img command, create
+                shortdesc</draft-comment>The default value of the volume is 20 GB. It should be
+            increased if any of the following conditions are met.</p>
+        <ul id="ul_pjv_crz_55">
+            <li ixia_locid="5">
+                <p ixia_locid="38">Standard Configuration with Controller Storage and Titanium Server
+                    CPE</p>
+                <ul id="ul_tvf_q5j_yx">
+                    <li ixia_locid="39">
+                        <p ixia_locid="40">Creation of multiple Cinder volumes from qcow2 images in
+                            parallel.</p>
+                    </li>
+                </ul>
+            </li>
+            <li ixia_locid="7">
+                <p ixia_locid="8">Standard Configuration with Dedicated Storage</p>
+                <ul id="ul_vvm_drz_55">
+                    <li ixia_locid="9">
+                        <p ixia_locid="10">Creation of multiple Cinder volumes from qcow2 images in
+                            parallel when the images have not been cached as raw images at image
+                            create time using the --cache-raw option. This also applies if volumes
+                            are created immediately after image creation with the --cache-raw option
+                            before the images are cached.</p>
+                    </li>
+                    <li ixia_locid="11">
+                        <p ixia_locid="12">Creation of very large images from qcow2 image files with
+                            the --cache-raw option. Note that if creating multiple images in
+                            parallel the caching is performed serially so only the largest image
+                            matters.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <note id="note_N10042_N10013_N10001" ixia_locid="13">
+            <p ixia_locid="14">Use of the --cache-raw option is highly recommended when creating
+                qcow2 images in the Standard Configuration with Dedicated Storage. This will speed
+                up volume creation significantly.</p>
+        </note>
+        <p ixia_locid="15">To determine the logical disk capacity requirement for image conversion,
+            calculate the total expected image conversion space required plus some growth
+            margin.</p>
+        <p ixia_locid="16">Standard Configuration with Dedicated Storage:</p>
+        <sl>
+            <sli ixia_locid="31">Y = Image Conversion Requirement = 2 * SimultaneousVolumeCreations
+                * AvgImageDiskSize + 2 * MaxImageDiskSize + Margin</sli>
+        </sl>
+        <p ixia_locid="34">Standard Configuration with Controller Storage: </p>
+        <sl>
+            <sli ixia_locid="32">Y = Image Conversion Requirement = SimultaneousVolumeCreations *
+                AvgImageDiskSize + Margin</sli>
+        </sl>
+        <p ixia_locid="35">Where: </p>
+        <sl>
+            <sli ixia_locid="23">MaxImageDiskSize = Size of largest qcow2 image on disk (per
+                “qemu-img info &lt;file&gt;”) that will be cached as a raw image.</sli>
+            <sli ixia_locid="25"> AvgImageDiskSize = Average image size on disk being created (per
+                “qemu-img info &lt;file&gt;”). Recommend using MaxImageDiskSize </sli>
+            <sli ixia_locid="27"> Margin = User-defined margin (recommend at least 25%) </sli>
+            <sli ixia_locid="33"> SimultaneousVolumeCreations = Maximum simultaneous volume
+                creations using uncached qcow2 images or before the images are cached. </sli>
+        </sl>
+        <note id="note_N10070_N10013_N10001" ixia_locid="29">
+            <p ixia_locid="30">SimultaneousVolumeCreations is limited by the number of Cinder
+                workers. Cinder workers is set to the number of cores on the controller node or 20,
+                whichever is less.</p>
+        </note>
+    </conbody></concept-wr>

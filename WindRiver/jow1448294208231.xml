@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                             (topic indexing-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1448294208231" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="139">Storage Profiles</title>
+ <shortdesc ixia_locid="140">A storage profile is a named configuration for a list of storage
+  resources on a storage node or compute node.</shortdesc>
+ <prolog>
+  <author ixia_locid="141">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <draft-comment author="jowens" dir="ltr" ixia_locid="142" translate="no">US66653 new topic created to hold existing content, formerly held
+   as section</draft-comment>
+  <draft-comment author="eknowlto" dir="ltr" ixia_locid="143" translate="no">US68398 - integrated compute node storage profile details </draft-comment>
+  <p ixia_locid="144">Storage profiles for storage nodes are created using the <uicontrol ixia_locid="145">Create Storage
+    Profile</uicontrol> button on the storage node <wintitle ixia_locid="146">Inventory Detail</wintitle> page. </p>
+  <p ixia_locid="147">Storage profiles for compute nodes are created using the <uicontrol ixia_locid="148">Create Storage
+    Profile</uicontrol> button on the compute node <wintitle ixia_locid="149">Inventory Detail</wintitle> page. </p>
+  <p ixia_locid="125">Storage profiles are shown on the <uicontrol ixia_locid="126">Storage
+        Profiles</uicontrol> tab on the <wintitle ixia_locid="127">Host Inventory</wintitle>
+      page.</p>
+  <p ixia_locid="114">Each storage resource consists of the following elements:</p>
+  <dl>
+   <dlentry ixia_locid="150">
+    <dt ixia_locid="151">Name</dt>
+    <dd ixia_locid="152">
+     <p ixia_locid="153">This is the name given to the profile when it is created. </p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="115">
+    <dt ixia_locid="116">Disk Configuration</dt>
+    <dd ixia_locid="117">
+     <p ixia_locid="118">A Linux block storage device, such as <filepath ixia_locid="119">/dev/sdb</filepath>, identifying an entire hard drive.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="120">
+    <dt ixia_locid="121">Storage Configuration</dt>
+    <dd ixia_locid="122">
+     <p ixia_locid="154"><draft-comment author="jowens" dir="ltr" ixia_locid="163" translate="no">CGTS-3814 (PGA) updated screen shot for
+       concurrent_disk_operations; updated and revised text accordingly</draft-comment>This field
+      provides details on the storage type. The details differ depending on the intended type of
+      node for the profile.</p>
+     <p ixia_locid="123">Profiles for storage nodes indicate the type of storage backend, such as
+       <nameliteral ixia_locid="124">osd</nameliteral>.</p>
+     <p ixia_locid="155">Profiles for compute nodes<ph ixia_locid="164" product="tis_cpe">, and
+              for controller/compute nodes in Titanium Server CPE systems,</ph> provide details for
+            the <nameliteral ixia_locid="156">nova-local</nameliteral> volume group used for
+            instance local storage. The details include the local storage backing type (LVM or
+            CoW-Image), and for LVM-backed local storage, the size of the Instances LV volume. The
+            maximum number of concurrent disk operations supported is also shown; this is for
+            information only, and is not user-adjustable.</p>
+    </dd>
+   </dlentry>
+  </dl>
+    <note conref="xew1477516815308.xml#xew1477516815308/storage-profile-restrictions" id="note_N100CA_N1001F_N10001" ixia_locid="169"/>
+  <p ixia_locid="130">The example <wintitle ixia_locid="158">Storage Profiles</wintitle> screen
+      below lists a storage profile that uses the hard drive <filepath ixia_locid="159">/dev/sdb</filepath> for image-backed <nameliteral ixia_locid="165">nova-local</nameliteral>
+      storage, suitable for compute hosts, and a storage profile that uses hard drives <filepath ixia_locid="166">/dev/sda</filepath>, <filepath ixia_locid="167">/dev/sdb</filepath>, and
+        <filepath ixia_locid="168">/dev/sdc</filepath> for <nameliteral ixia_locid="162">osd</nameliteral> storage, suitable for storage hosts. </p>
+  <fig id="fig_N1028F_N1024B_N10020_N10001" ixia_locid="128">
+   <image href="ekn1454013345240.image" id="image_bny_1vg_m4" ixia_locid="129" placement="inline"/>
+  </fig>
+  <p ixia_locid="55">To delete storage profiles, select the check boxes next to the profile names,
+   and then click <uicontrol ixia_locid="56">Delete Storage Profiles</uicontrol>. This does not
+   affect hosts where the profiles have already been applied.</p>
+ </conbody>
+</concept-wr>

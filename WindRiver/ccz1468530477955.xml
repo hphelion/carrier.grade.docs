@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ccz1468530477955" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="163">PCI Passthrough Ethernet Interface Devices</title>
+ <shortdesc ixia_locid="164">For all purposes, a PCI passthrough interface behaves as if it were physically attached
+  to the virtual machine.</shortdesc>
+ <prolog>
+  <author ixia_locid="165">Your Name</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="6">Therefore, any potential throughput limitations coming from the virtualized
+   environment, such as the ones introduced by internal copying of data buffers, are eliminated.
+   However, by bypassing the virtualized environment, the use of PCI passthrough Ethernet devices
+   introduces several restrictions that must be taken into consideration. They include:</p>
+  <ul id="ul_mjs_m52_tp">
+   <li ixia_locid="7">
+    <p ixia_locid="8">no support for LAG, QoS, ACL, or host interface monitoring</p>
+   </li>
+   <li ixia_locid="9">
+    <p ixia_locid="10">no support for live migration</p>
+   </li>
+   <li ixia_locid="11">
+    <p ixia_locid="12">no access to the compute node's AVS switch</p>
+   </li>
+  </ul>
+  <p ixia_locid="14">A passthrough interface bypasses the compute node's AVS switch completely, and
+   is attached instead directly to the provider network's access switch. Therefore, proper routing
+   of traffic to connect the passthrough interface to a particular tenant network depends entirely
+   on the VLAN tagging options configured on both the passthrough interface and the access port on
+   the switch.</p>
+  <p ixia_locid="15">The access switch routes incoming traffic based on a VLAN ID, which ultimately
+   determines the tenant network to which the traffic belongs. The VLAN ID is either explicit, as
+   found in incoming tagged packets, or implicit, as defined by the access port's default VLAN ID
+   when the incoming packets are untagged. In both cases the access switch must be configured to
+   process the proper VLAN ID, which therefore has to be known in advance.</p>
+  <draft-comment author="rstone" ixia_locid="158">CGTS-2187 adds; JO edited</draft-comment>
+  <note id="note_N1006A_N1002C_N10029_N10001" ixia_locid="159" type="caution">
+   <p ixia_locid="160">On cold migration, a PCI passthrough interface receives a new MAC address,
+    and therefore a new <nameliteral ixia_locid="161">eth</nameliteral>x interface. The IP address
+    is retained.</p>
+  </note>
+  <p ixia_locid="153"><draft-comment author="jowens" ixia_locid="162">US64378 "interface" was
+    "device"</draft-comment>To review the current PCI passthrough and SR-IOV interface assignments
+   for a given provider network, see <ph ixia_locid="166" otherprops="printonly"><cite ixia_locid="167">Titanium Server System Administration: </cite></ph><cite ixia_locid="168"><ph ixia_locid="169"><xref href="jow1439301559036.xml" ixia_locid="170"/></ph></cite>.</p>
+  <p ixia_locid="16">In the following example a new virtual machine is launched by user <nameliteral ixia_locid="17">user1</nameliteral> on tenant <nameliteral ixia_locid="18">tenant1</nameliteral>, with a passthrough interface connected to the tenant network <nameliteral ixia_locid="19">net0</nameliteral> identified with VLAN ID 10.</p>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1413726521641" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">System Configuration Management Overview</title>
+ <shortdesc ixia_locid="2">Much of the system configuration data is specified as bootstrap-type
+  configuration data defined during software installation, using the <nameliteral ixia_locid="5">config_controller</nameliteral> script. After installation, you can change this system
+  configuration data, as well as additional system configuration data, using the web administration
+  interface or the CLI.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+  <author ixia_locid="59">Randall Budd</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="60">There are a few exceptions to bootstrap system configuration data, specified at install time,
+   that can NOT be changed afterwards; one should ensure these configurations are correct otherwise
+   a system re-install is required. This configuration data includes: product type (Standard vs
+   CPE), presence of a pxeboot network, management network subnet and subnet range, infrastructure
+   network subnet and subnet range, and use of secure external connections.</p>
+ </conbody>
+</concept-wr>

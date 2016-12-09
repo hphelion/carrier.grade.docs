@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="dhn1460999703328" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="351">REST API Support</title>
+  <shortdesc ixia_locid="352">Titanium Server supports external REST APIs through its OAM floating IP
+    address.</shortdesc>
+  <prolog>
+    <author ixia_locid="353">Jim Owens</author>
+    <author ixia_locid="354">Pedro Sanchez</author>
+  </prolog>
+  <refbody>
+    <section id="section_N10023_N10020_N10001" ixia_locid="355">
+      <p ixia_locid="260">The following REST APIs are supported:</p>
+      <ul id="ul_ylk_dcv_ds">
+        <li ixia_locid="331">
+          <p ixia_locid="332">OpenStack REST APIS</p>
+          <p ixia_locid="356"><draft-comment author="jowens" ixia_locid="357">CGTS-4048 indicate
+              limits on OpenStack support</draft-comment>Titanium Server supports selected OpenStack
+            REST API functionality, including:</p>
+          <ul id="ul_jry_kvz_cs">
+            <li ixia_locid="333">
+              <p ixia_locid="338">Block Storage API (with Titanium Server extensions)</p>
+            </li>
+            <li ixia_locid="334">
+              <p ixia_locid="339">Compute API (with Titanium Server extensions)</p>
+            </li>
+            <li ixia_locid="335">
+              <p ixia_locid="340">Identity API</p>
+            </li>
+            <li ixia_locid="336">
+              <p ixia_locid="341">Image Service API</p>
+            </li>
+            <li ixia_locid="263">
+              <p ixia_locid="264">Networking API (with Titanium Server extensions)</p>
+            </li>
+            <li ixia_locid="337">
+              <p ixia_locid="342">Orchestration API</p>
+            </li>
+            <li ixia_locid="265">
+              <p ixia_locid="266">Telemetry API (with Titanium Server extensions)</p>
+            </li>
+          </ul>
+          <p ixia_locid="358">For a complete list of supported and unsupported OpenStack REST APIs, refer to the REST
+            API documentation included with the Titanium Server Software Development Kit.</p>
+        </li>
+        <li ixia_locid="345">
+          <p ixia_locid="346">Titanium Server REST APIs</p>
+          <ul id="ul_xgp_scv_ds">
+            <li ixia_locid="347">
+              <p ixia_locid="348">SysInv API</p>
+            </li>
+            <li ixia_locid="349">
+              <p ixia_locid="350">Patching API</p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <note id="note_N1053E_N104EC_N104E8_N104DF_N104D3_N10040_N1002C_N10024_N10001" ixia_locid="343">
+        <p ixia_locid="344">Titanium Server extensions use the OpenStack Extension Mechanism to
+          ensure compatibility with existing clients.</p>
+      </note>
+      <p ixia_locid="268">HTTP or HTTPS protocol can be supported for these external REST APIs.</p>
+    </section>
+  </refbody>
+</reference-wr>

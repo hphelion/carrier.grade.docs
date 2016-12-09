@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1443470081421" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Storage on Compute Hosts</title>
+ <shortdesc ixia_locid="2">Compute hosts provide local ephemeral storage for virtual machine (VM)
+    disks. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+    <p ixia_locid="72">This is the default type of storage for VM swap and ephemeral disks, and for
+      boot-from-image root disks; you must configure this storage at installation before you can
+      unlock a compute host. You can change the configuration after installation; for more
+      information, <draft-comment author="jmaran" ixia_locid="163">The following xref is local in
+        the system admin guide, inter-book in the planning guide. Leaving in local format for now. –
+        JM: Reversed decisionn due to unusable links in planning guide PDF. Updating to inter-book
+        format.</draft-comment>see <ph ixia_locid="168" otherprops="printonly"><cite ixia_locid="169">Titanium Server System
+          Administration: </cite></ph><cite ixia_locid="170"><ph ixia_locid="171"><xref href="jow1418924302353.xml" ixia_locid="73"/></ph></cite>. <draft-comment author="jmaran" ixia_locid="164">Consider making the
+        following two sentences and actual &lt;note&gt;.</draft-comment>Note that live migration is
+      not always supported for VM disks using this type of storage. For more information, see<xref href="ksh1464711502906.xml" ixia_locid="102"/> .</p>
+  <p ixia_locid="135"><draft-comment author="jowens" ixia_locid="5">US65502 new topic; US69978
+        updated</draft-comment>On compute nodes, dedicated local storage space is required by the
+        <nameliteral ixia_locid="124">nova</nameliteral> service. For flexibility and scalability,
+      this space is implemented as a local volume group, called <nameliteral ixia_locid="114">nova-local</nameliteral>. The group can include one or more non-root disks as physical
+      resources. Depending on whether LVM-backed or CoW-image-backed local storage is configured on
+      the compute host, <nameliteral ixia_locid="162">nova-local</nameliteral> contains one or more
+      volumes.</p>
+    <note id="note_N10033_N10024_N10001" ixia_locid="131">
+      <p ixia_locid="132">As an alternative to LVM-backed local storage, compute hosts can be
+        configured to offer image-backed local storage. <draft-comment author="jmaran" ixia_locid="165">The following xref is local in the system admin guide, inter-book in the
+          planning guide. Leaving in local format for now.  – JM: Reversed decisionn due to unusable
+          links in planning guide PDF. Updating to inter-book format.</draft-comment>For more
+        information, see <ph ixia_locid="172" otherprops="printonly"><cite ixia_locid="173">Titanium Server System Administration:
+          </cite></ph><cite ixia_locid="174"><ph ixia_locid="175"><xref href="jow1426181291481.xml" ixia_locid="134"/></ph></cite>.</p>
+    </note>
+    <p ixia_locid="148">The first volume in <nameliteral ixia_locid="149">nova-local</nameliteral>
+      is called the <i ixia_locid="150">instances logical volume</i>, or <nameliteral ixia_locid="166">Instances
+        LV</nameliteral>. It contains the <filepath ixia_locid="152">/etc/nova/instances</filepath>
+      file system, and is used for the following:</p>
+    <ul id="ul_mrd_bxv_q5">
+      <li ixia_locid="139">
+        <p ixia_locid="140">the nova image cache, containing images downloaded from Glance</p>
+      </li>
+      <li ixia_locid="141">
+        <p ixia_locid="142">various small nova control and log files, such as the <filepath ixia_locid="143">libvirt.xml</filepath> file, which is used to pass parameters to
+            <nameliteral ixia_locid="144">libvirt</nameliteral> at launch, and the <filepath ixia_locid="145">console.log</filepath> file</p>
+      </li>
+      <li ixia_locid="146">
+        <p ixia_locid="147">on a host configured for CoW-image-backed local storage, the CoW image
+          files that constitute the local disks for VMs</p>
+      </li>
+    </ul>
+    <p ixia_locid="153">For CoW-image-backed local storage, the <nameliteral ixia_locid="154">Instances LV</nameliteral> is the only
+      volume in <nameliteral ixia_locid="155">nova-local</nameliteral>. For LVM-backed local storage, additional
+      volumes are required to realize local disks for VMs. To reserve space for these volumes, the
+      size of the <nameliteral ixia_locid="156">Instances LV</nameliteral> must be appropriately configured.</p>
+    <p ixia_locid="157">By default, no size is specified for the <nameliteral ixia_locid="158">Instances LV</nameliteral>. The minimum
+      required space is 2 GB for a <nameliteral ixia_locid="159">nova-local</nameliteral> volume group with a total
+      size less that 80 GB, and 5 GB for a <nameliteral ixia_locid="160">nova-local</nameliteral> volume group larger
+      or equal than 80 GB; you must specify at least this amount. You can allocate more
+        <nameliteral ixia_locid="161">Instances LV</nameliteral> space to support the anticipated number of
+      boot-from-image VMs, up to 50% of the maximum available storage of the local volume group. At
+      least 50% free space in the volume group is required to provide space for allocating logical
+      volume disks for launched instances. The value provided for the <uicontrol ixia_locid="127">Instance LV Size</uicontrol> is limited by this maximum.</p>
+  <p ixia_locid="120"><draft-comment author="jowens" ixia_locid="130">US68057 replace local
+        cross-reference with Install Guide citation</draft-comment>Instructions for allocating the
+        <uicontrol ixia_locid="121">Instances LV Size</uicontrol> using the Web administration
+      interface or the CLI are included in <cite ixia_locid="129">Titanium Server
+        Installation</cite> as part of configuring the compute nodes. <draft-comment author="jmaran" ixia_locid="167">The following xref is local in the system admin guide, inter-book in the
+        planning guide. Leaving in local format for now. – JM: Reversed decisionn due to unusable
+        links in planning guide PDF. Updating to inter-book format.</draft-comment>For the command
+      syntax, see <ph ixia_locid="176" otherprops="printonly"><cite ixia_locid="177">Titanium Server System Administration:
+        </cite></ph><cite ixia_locid="178"><ph ixia_locid="179"><xref href="jow1426181291481.xml" ixia_locid="128"/></ph></cite>.</p>
+  <note id="note_N10059_N10022_N1001F_N10001" ixia_locid="108" type="caution">
+   <p ixia_locid="109">If less than the minimum required space is available, the compute host cannot
+    be unlocked.</p>
+  </note>
+    <section id="section_N10100_N1001F_N10001" ixia_locid="91"/>
+ </conbody>
+</concept-wr>

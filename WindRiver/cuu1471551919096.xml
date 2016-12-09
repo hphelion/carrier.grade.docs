@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="cuu1471551919096" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Linux Account Password Rules</title>
+  <shortdesc ixia_locid="2"> Titanium Server enforces a set of strength requirements for new or
+    changed passwords.</shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+      <ul id="ul_jwb_g15_zw">
+        <li ixia_locid="5">
+          <draft-comment author="jowens" ixia_locid="6">US84144 new topic</draft-comment>
+          <p ixia_locid="7">The password must be at least seven characters long.</p>
+        </li>
+        <li ixia_locid="8">
+          <p ixia_locid="9">The password must contain:<ul id="ul_jgm_r15_zw">
+              <li ixia_locid="10">
+                <p ixia_locid="11">at least one lower-case character</p>
+              </li>
+              <li ixia_locid="12">
+                <p ixia_locid="13">at least one upper-case character</p>
+              </li>
+              <li ixia_locid="14">
+                <p ixia_locid="15">at least one numeric character</p>
+              </li>
+              <li ixia_locid="16">
+                <p ixia_locid="17">at least one special character</p>
+              </li>
+            </ul></p>
+        </li>
+        <li ixia_locid="18">
+          <p ixia_locid="19">Dictionary words or simple number sequences (for example, 123 or 321) are not
+            allowed</p>
+        </li>
+        <li ixia_locid="20">
+          <p ixia_locid="21">A changed password must differ from the previous password by at least
+            three characters</p>
+        </li>
+        <li ixia_locid="22">
+          <p ixia_locid="23">A changed password must not be a simple reversal of the previous
+            password. For example, if nEtw!rk5 is the current password, 5kr!wtEn is not allowed as
+            the new password.</p>
+        </li>
+        <li ixia_locid="24">
+          <p ixia_locid="25">A changed password using only character case differences is not
+            allowed. For example, if nEtw!rk5 is the current password, Netw!RK5 is not allowed as
+            the new password.</p>
+        </li>
+        <li ixia_locid="26">
+          <p ixia_locid="27">A changed password cannot use the older password that immediately
+            preceded the current password. For example, if the password was previously changed from
+            oP3n!sRC to the current password nEtw!rk5, then the new password cannot be oP3n!sRC. </p>
+        </li>
+        <li ixia_locid="29">
+          <p ixia_locid="30">After five consecutive incorrect password attempts, the user is locked
+            out for 5 minutes.</p>
+        </li>
+      </ul>
+    </section>
+  </refbody>
+</reference-wr>

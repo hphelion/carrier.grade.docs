@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="moy1472235394840" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1"> Overview of Upgrade Abort Procedure</title>
+ <shortdesc ixia_locid="2">You can abort an upgrade procedure if necessary. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">There are two cases for aborting an upgrade: </p>
+  <ul id="ul_q5f_vmz_bx">
+   <li ixia_locid="5">
+    <p ixia_locid="6">Before controller-0 has been upgraded (that is, only controller-1 has been upgraded): In this
+     case the upgrade can be aborted and the system will remain in service during the abort. </p>
+   </li>
+   <li ixia_locid="7">
+    <p ixia_locid="8">After controller-0 has been upgraded (that is, both controllers have been upgraded): In this
+     case the upgrade can only be aborted with a complete outage and a re-install of all hosts. This
+     would only be done as a last resort, if there was absolutely no other way to recover the
+     system. </p>
+   </li>
+  </ul>
+ </conbody>
+</concept-wr>

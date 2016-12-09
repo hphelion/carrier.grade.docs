@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="fxe1467380583192" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="258">Designating Shared Physical CPUs on a Compute Host Using the CLI</title>
+    <shortdesc ixia_locid="259">You can use the CLI to set up shared physical CPUs.</shortdesc>
+    <prolog>
+        <author ixia_locid="260">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="261">
+            <p ixia_locid="262"/>
+            <p ixia_locid="232">To add or remove a shared physical CPU from the CLI, use a command
+                of the following form:</p>
+            <codeblock ixia_locid="233"><systemoutput ixia_locid="235">~(keystone_admin)$ </systemoutput><userinput ixia_locid="237">system host-cpu-modify -f shared -p<varname ixia_locid="239">processor</varname> <varname ixia_locid="240">use_shared</varname> <varname ixia_locid="241">hostname</varname></userinput></codeblock>
+            <p ixia_locid="242">where</p>
+            <parml>
+                <plentry ixia_locid="243">
+                    <pt ixia_locid="244">processor</pt>
+                    <pd ixia_locid="245">
+                        <p ixia_locid="246">is the number of the physical processor (0 or 1)</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="247">
+                    <pt ixia_locid="248">use_shared</pt>
+                    <pd ixia_locid="249">
+                        <p ixia_locid="250">specifies whether to use a shared physical CPU (0 for
+                            no, 1 for yes)</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="251">
+                    <pt ixia_locid="252">hostname</pt>
+                    <pd ixia_locid="253">
+                        <p ixia_locid="254">is the name of the compute host</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="255">For example, to set up a shared physical CPU on processor
+                    <nameliteral ixia_locid="256">0</nameliteral> of <nameliteral ixia_locid="257">compute-0</nameliteral>:</p>
+            <codeblock ixia_locid="234"><systemoutput ixia_locid="236">~(keystone_admin)$ </systemoutput><userinput ixia_locid="238">system host-cpu-modify -f shared -p0 1 compute-0</userinput></codeblock>
+        </context>
+    </taskbody>
+</task-wr>

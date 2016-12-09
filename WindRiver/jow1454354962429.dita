@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454354962429" xml:lang="en-us"><title ixia_locid="1">PCI PT Dimensioning: Test Details</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+        <ul id="ul_mgr_ysc_w5">
+            <li ixia_locid="4">
+                <p ixia_locid="5">CPU</p>
+                <ul id="ul_qhr_ysc_w5">
+                    <li ixia_locid="6">
+                        <p ixia_locid="7">Intel(R) Xeon(R) CPU E5-2640 v3 @ 2.60GHz</p>
+                    </li>
+                </ul>
+            </li>
+            <li ixia_locid="8">
+                <p ixia_locid="9">RAM</p>
+                <ul id="ul_a3r_ysc_w5">
+                    <li ixia_locid="10">
+                        <p ixia_locid="11">DDR4-2133</p>
+                    </li>
+                </ul>
+            </li>
+            <li ixia_locid="12">
+                <p ixia_locid="13">Physical ports</p>
+                <ul id="ul_u3r_ysc_w5">
+                    <li ixia_locid="14">
+                        <p ixia_locid="15">2- 82599 ports on separate PCI buses</p>
+                    </li>
+                </ul>
+            </li>
+            <li ixia_locid="16">
+                <p ixia_locid="17">VM</p>
+                <ul id="ul_ojr_ysc_w5">
+                    <li ixia_locid="18">
+                        <p ixia_locid="19">DPDK application running in the guest performing L2 switching</p>
+                    </li>
+                    <li ixia_locid="20">
+                        <p ixia_locid="21">VM collocated on same socket as NICs</p>
+                    </li>
+                    <li ixia_locid="22">
+                        <p ixia_locid="23">VM backed by 1G huge pages in the host</p>
+                    </li>
+                    <li ixia_locid="24">
+                        <p ixia_locid="25">One and two forwarding cores measured</p>
+                    </li>
+                </ul>
+            </li>
+            <li ixia_locid="26">
+                <p ixia_locid="27">IXIA Test</p>
+                <ul id="ul_sb5_dtc_w5">
+                    <li ixia_locid="28">
+                        <p ixia_locid="29"> RFC2544 Bi-directional traffic @ 0.01% loss tolerance</p>
+                    </li>
+                </ul>
+            </li>
+        </ul><fig id="fig_N1009B_N10013_N10001" ixia_locid="30"><title ixia_locid="31">PCI-passthrough throughput - % 20Ge</title>
+            <image href="jow1454354958743.image" id="image_s2z_wsc_w5" ixia_locid="32">
+                <alt ixia_locid="33">media/image6.png</alt>
+            </image></fig></conbody></concept-wr>

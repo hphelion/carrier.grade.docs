@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="gfm1472579009873" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Provisioning Storage on a Compute Host Using the CLI</title>
+    <shortdesc ixia_locid="2">You must configure the storage resources on a host before you can
+        unlock it. If you prefer, you can use the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Jim Owens</author>
+        <author ixia_locid="5">Tom Towle</author>
+        <author ixia_locid="6">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <steps>
+            <step id="step_N1002F_N1002C_N10029_N10001" ixia_locid="756">
+                <cmd ixia_locid="661"><draft-comment author="jowens" ixia_locid="695">US68057 added
+                        a step; CGTS-3558 emphasize non-root disk for local
+                    storage</draft-comment>Add the <nameliteral ixia_locid="662">nova-local</nameliteral> local volume group.</cmd>
+                <info ixia_locid="663">
+                    <codeblock ixia_locid="664"><systemoutput ixia_locid="665">~(keystone_admin)$ </systemoutput><userinput ixia_locid="666">system host-lvg-add compute-0 nova-local</userinput>
+<systemoutput ixia_locid="706">+-----------------+------------------------------------------------------------+
+| Property        | Value                                                      |
++-----------------+------------------------------------------------------------+
+| lvm_vg_name     | nova-local                                                 |
+| vg_state        | adding                                                     |
+| uuid            | 5b8f0792-25b5-4e43-8058-d274bf8fa51c                       |
+| ihost_uuid      | 327b2136-ffb6-4cd5-8fed-d2ec545302aa                       |
+| lvm_vg_access   | None                                                       |
+| lvm_max_lv      | 0                                                          |
+| lvm_cur_lv      | 0                                                          |
+| lvm_max_pv      | 0                                                          |
+| lvm_cur_pv      | 0                                                          |
+| lvm_vg_size     | 0                                                          |
+| lvm_vg_total_pe | 0                                                          |
+| lvm_vg_free_pe  | 0                                                          |
+| created_at      | 2015-12-23T16:30:25.524251+00:00                           |
+| updated_at      | None                                                       |
+| parameters      | {u'instance_backing': u'lvm', u'instances_lv_size_mib': 0} |
++-----------------+------------------------------------------------------------+
+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N1005B_N1002C_N10029_N10001" ixia_locid="757">
+                <cmd ixia_locid="668">Assign a physical volume to provide <nameliteral ixia_locid="669">nova-local</nameliteral> storage.</cmd>
+                <info ixia_locid="670">
+                    <p ixia_locid="671">To list the available physical volumes, use the <cmdname ixia_locid="672">system host-disk-list</cmdname> command.</p>
+                    <codeblock ixia_locid="673"><systemoutput ixia_locid="674">~(keystone_admin)$ </systemoutput><userinput ixia_locid="675">system host-disk-list compute-0</userinput>
+<systemoutput ixia_locid="707">
++------+-------------+------------+-------------+----------+------------+
+| uuid | device_node | device_num | device_type | size_mib | serial_id  |
++------+-------------+------------+-------------+----------+------------+
+| 2a.. | /dev/sda    | 2048       | disk        | 20480    | VBba4fe... |
++------+-------------+------------+-------------+----------+------------+
+| 2f.. | /dev/sdb    | 2048       | disk        | 20480    | VBba47c... |
++------+-------------+------------+-------------+----------+------------+
+</systemoutput>
+</codeblock>
+                    <p ixia_locid="676">To assign a disk for <nameliteral ixia_locid="677">nova-local</nameliteral> storage, specify the disk <nameliteral ixia_locid="678">uuid</nameliteral>. For example, if the <nameliteral ixia_locid="708">uuid</nameliteral> is <nameliteral ixia_locid="709">2f1cdf25-73d5-4e3f-ac7d-269c7fbb8647</nameliteral>:</p>
+                    <codeblock ixia_locid="679"><systemoutput ixia_locid="680">~(keystone_admin)$ </systemoutput><userinput ixia_locid="681">system host-pv-add compute-0 nova-local 2f1cdf25-73d5-4e3f-ac7d-269c7fbb8647</userinput>
+<systemoutput ixia_locid="710">+-------------------+--------------------------------------+
+| Property          | Value                                |
++-------------------+--------------------------------------+
+| uuid              | f0bce808-81d6-4084-b874-1beb1f697056 |
+| pv_state          | adding                               |
+| pv_type           | partition                            |
+| idisk_uuid        | 2f1cdf25-73d5-4e3f-ac7d-269c7fbb8647 |
+| idisk_device_node | /dev/sdb                             |
+| lvm_pv_name       | /dev/sdb7                            |
+| lvm_vg_name       | nova-local                           |
+| lvm_pv_uuid       | None                                 |
+| lvm_pv_size       | 0                                    |
+| lvm_pe_total      | 0                                    |
+| lvm_pe_alloced    | 0                                    |
+| ihost_uuid        | 327b2136-ffb6-4cd5-8fed-d2ec545302aa |
+| created_at        | 2015-12-23T16:45:40.776426+00:00     |
+| updated_at        | None                                 |
++-------------------+--------------------------------------+
+</systemoutput><!-- use a real uuid from prev output; get and add output --></codeblock>
+                    <note id="note_N100B2_N10067_N1005A_N1002C_N10029_N10001" ixia_locid="746" type="caution">
+                        <p ixia_locid="747">Always use non-root disks for <nameliteral ixia_locid="748">nova-local</nameliteral> storage. Use of the root
+                            disk for this purpose is not a supported configuration.</p>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N100C7_N1002C_N10029_N10001" ixia_locid="758">
+                <cmd ixia_locid="684"><draft-comment author="jowens" ixia_locid="711">US69978 update
+                        for instance backing choice</draft-comment>Specify the local storage
+                    space.</cmd>
+                <info ixia_locid="685">
+                    <p ixia_locid="712"><draft-comment author="jowens" ixia_locid="749">CGTS-2902(-related) add concurrent ops parm</draft-comment>You can
+                        implement local storage space for instances using LVM RAW disks or CoW image
+                        files. For LVM RAW disks, you must provide the storage size.</p>
+                    <codeblock ixia_locid="713"><systemoutput ixia_locid="714">~(keystone_admin)$ </systemoutput><userinput ixia_locid="715">system host-lvg-modify [-b <varname ixia_locid="716">instance_backing</varname>] \
+[-c <varname ixia_locid="755">concurrent_disk_operations</varname>] [-s <varname ixia_locid="689">size</varname>] <varname ixia_locid="717">hostname</varname> <varname ixia_locid="718">lvgname</varname></userinput><!-- add example and output --></codeblock>
+                    <p ixia_locid="719">where</p>
+                    <parml>
+                        <plentry ixia_locid="720">
+                            <pt ixia_locid="721">instance_backing</pt>
+                            <pd ixia_locid="722">
+                                <p ixia_locid="723">specifies the storage method (<option ixia_locid="724">lvm</option>, <option ixia_locid="725">image</option>, or <option ixia_locid="759">remote</option>). The default is
+                                        <nameliteral ixia_locid="726">image</nameliteral>.</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="750">
+                            <pt ixia_locid="751">concurrent_disk_operations</pt>
+                            <pd ixia_locid="752">
+                                <p ixia_locid="753">is the number of I/O intensive disk operations,
+                                    such as glance image downloads or image format conversions, that
+                                    can occur at the same time</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="727">
+                            <pt ixia_locid="728">size</pt>
+                            <pd ixia_locid="729">
+                                <p ixia_locid="730">is the size in MiB for LVM RAW storage. This
+                                    parameter is not required for CoW image storage. </p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="731">
+                            <pt ixia_locid="732">hostname</pt>
+                            <pd ixia_locid="733">
+                                <p ixia_locid="734">is the name or id of the host (for example,
+                                        <nameliteral ixia_locid="735">compute-0</nameliteral>) </p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="736">
+                            <pt ixia_locid="737">lvgname</pt>
+                            <pd ixia_locid="738">
+                                <p ixia_locid="739">is the name or uuid of the local volume group
+                                        (<nameliteral ixia_locid="740">nova-local</nameliteral>).
+                                </p>
+                            </pd>
+                        </plentry>
+                    </parml>
+                    <p ixia_locid="741">For example:</p>
+                    <codeblock ixia_locid="742"><systemoutput ixia_locid="743">~(keystone_admin)$ </systemoutput><userinput ixia_locid="744">system host-lvg-modify -s 2048 compute-0 nova-local</userinput>
+<systemoutput ixia_locid="745">+-----------------+---------------------------------------------------------------+
+| Property        | Value                                                         |
++-----------------+---------------------------------------------------------------+
+| lvm_vg_name     | nova-local                                                    |
+| vg_state        | adding                                                        |
+| uuid            | 5b8f0792-25b5-4e43-8058-d274bf8fa51c                          |
+| ihost_uuid      | 327b2136-ffb6-4cd5-8fed-d2ec545302aa                          |
+| lvm_vg_access   | None                                                          |
+| lvm_max_lv      | 0                                                             |
+| lvm_cur_lv      | 0                                                             |
+| lvm_max_pv      | 0                                                             |
+| lvm_cur_pv      | 0                                                             |
+| lvm_vg_size     | 0                                                             |
+| lvm_vg_total_pe | 0                                                             |
+| lvm_vg_free_pe  | 0                                                             |
+| created_at      | 2015-12-23T16:30:25.524251+00:00                              |
+| updated_at      | None                                                          |
+| parameters      | {u'instance_backing': u'lvm', u'instances_lv_size_mib': 2048, |
+|                 |  u'concurrent_disk_operations': 2}                            | 
++-----------------+---------------------------------------------------------------+
+</systemoutput></codeblock>
+                    <p ixia_locid="690">For storage size considerations, see <ph ixia_locid="760" otherprops="printonly"><cite ixia_locid="761">Titanium Server System Administration:
+                            </cite></ph><cite ixia_locid="762"><ph ixia_locid="763"><xref href="jow1443470081421.xml" ixia_locid="764"/></ph></cite>.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1459876276202" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="195">Configuring the NTP Server Using the CLI</title>
+ <shortdesc ixia_locid="196">You can use the CLI to view or change the NTP Server
+    Configuration.</shortdesc>
+ <prolog>
+  <author ixia_locid="197">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="21">To view the existing NTP server configuration, use the following command.</p>
+  <codeblock ixia_locid="24"><systemoutput ixia_locid="191">~(keystone_admin)$ </systemoutput><userinput ixia_locid="32">system ntp-show</userinput>
+<systemoutput ixia_locid="188">+--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 7d4ae6d4-f43f-4735-8ee5-ce261f4f8aa7 |
+| ntpservers   | None                                 |
+| isystem_uuid | 106c2b53-175d-4271-af54-d43b02bb03fb |
+| created_at   | 2016-10-24T19:26:56.731230+00:00     |
+| updated_at   | None                                 |
++--------------+--------------------------------------+</systemoutput></codeblock>
+  <p ixia_locid="36">To change the NTP server IP addresses, use the following command syntax. The
+    <option ixia_locid="39">ntpservers</option> option takes a comma-delimited list of NTP server
+   names.</p>
+  <codeblock ixia_locid="42"><systemoutput ixia_locid="193">~(keystone_admin)$ </systemoutput><userinput ixia_locid="58">system ntp-modify \
+ntpservers=<varname ixia_locid="68">server_1[,server_2][,server_3]</varname> action=apply</userinput></codeblock>
+  <p ixia_locid="69">For example:</p>
+  <codeblock ixia_locid="43"><systemoutput ixia_locid="194">~(keystone_admin)$ </systemoutput><userinput ixia_locid="59">system ntp-modify \
+ntpservers=0.north-america.pool.ntp.org,\
+0.north-america.pool.ntp.org,0.north-america.pool.ntp.org \
+action=apply</userinput></codeblock>
+  <p ixia_locid="70">After changing the NTP server configuration, you must lock and unlock both
+   controllers. This process requires a swact on the controllers.</p>
+ </conbody>
+</concept-wr>

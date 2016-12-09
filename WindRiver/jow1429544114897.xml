@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1429544114897" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="308">Specifying the VCPU Model for a VM</title>
+    <shortdesc ixia_locid="309">You can select a particular VCPU model for a VM in order to leverage
+        advanced CPU features such as SSE4.2, AES, or AVX on the compute nodes.</shortdesc>
+    <prolog>
+        <author ixia_locid="310">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="311">
+            <p ixia_locid="323"><draft-comment author="jowens" ixia_locid="345">US58589 Broadwell
+                    and Broadwell-noTSX added</draft-comment>When a virtual machine is launched, a
+                Nova scheduler filter restricts the target compute nodes to those with available
+                cores of the requested model or better. If no such compute node is available, the
+                error <term ixia_locid="88">No valid host was found</term> is reported. </p>
+            <p ixia_locid="324">If no <nameliteral ixia_locid="341">VCPU Model</nameliteral> extra
+                spec is added, then by default the QEMU virtual processor is used.</p>
+            <p ixia_locid="320">The following selections are available:</p>
+            <ul id="ul_wmm_b45_tr">
+                <li ixia_locid="315">
+                    <p ixia_locid="317">Intel Core i7 9xx (Nehalem Class Core i7)</p>
+                    <p ixia_locid="342">(This is offered by default when the extra spec is added using the web
+                        administration interface.)</p>
+                </li>
+                <li ixia_locid="81">
+                    <p ixia_locid="82">Intel Westmere E56xx/L56xx/X56xx (Nehalem-C)</p>
+                </li>
+                <li ixia_locid="83">
+                    <p ixia_locid="84">Intel Xeon E312xx (Sandy Bridge)</p>
+                </li>
+                <li ixia_locid="85">
+                    <p ixia_locid="86">Intel Core Processor (Haswell)</p>
+                </li>
+                <li ixia_locid="346">
+                    <p ixia_locid="347">Intel Core Processor (Broadwell-noTSX)</p>
+                </li>
+                <li ixia_locid="348">
+                    <p ixia_locid="349">Intel Core Processor (Broadwell)</p>
+                </li>
+            </ul>
+            <note id="note_N10066_N1005D_N1003B_N10022_N1001F_N10001" ixia_locid="325">
+                <p ixia_locid="326">For some selections, limitations apply:</p>
+                <ul id="ul_kyc_ymm_js">
+                    <li ixia_locid="327">
+                        <p ixia_locid="328">The default QEMU processor is based on the Intel Core
+                            Duo CPU, which does not support extended instruction sets such as SSSE3
+                            or SSSE4.2 used for DPDK networking or other advanced features.</p>
+                    </li>
+                    <li ixia_locid="329">
+                        <p ixia_locid="330">The Haswell model does not currently support
+                            transactional synchronization extensions (TSX).</p>
+                    </li>
+                </ul>
+            </note>
+            <p ixia_locid="319">To add this extra spec to a flavor using the web administration
+                interface, use the <uicontrol ixia_locid="314">VCPU Model</uicontrol> selection in
+                the <uicontrol ixia_locid="316">Create Flavor Extra Spec</uicontrol> drop-down menu.
+                To access this menu, see <xref href="jow1429538642910.xml" ixia_locid="318"/>. </p>
+            <p ixia_locid="95">You can also specify the extra spec from the CLI using the following
+                command:</p>
+            <codeblock ixia_locid="97"><systemoutput ixia_locid="198">~(keystone_admin)$ </systemoutput><userinput ixia_locid="101">nova flavor-key <varname ixia_locid="301">flavor_name</varname> set hw:cpu_model=<varname ixia_locid="302">cpu_model</varname></userinput></codeblock>
+            <p ixia_locid="331">where <varname ixia_locid="303">cpu_model</varname> is one of the
+                following:</p>
+            <ul id="ul_np4_13b_ks">
+                <li ixia_locid="333">
+                    <p ixia_locid="334"><option ixia_locid="304">Nehalem</option></p>
+                </li>
+                <li ixia_locid="335">
+                    <p ixia_locid="336"><option ixia_locid="305">Westmere</option></p>
+                </li>
+                <li ixia_locid="337">
+                    <p ixia_locid="338"><option ixia_locid="306">SandyBridge</option></p>
+                </li>
+                <li ixia_locid="350">
+                    <p ixia_locid="351"><option ixia_locid="352">Haswell</option></p>
+                </li>
+                <li ixia_locid="353">
+                    <p ixia_locid="354"><option ixia_locid="355">Broadwell-noTSX</option></p>
+                </li>
+                <li ixia_locid="356">
+                    <p ixia_locid="357"><option ixia_locid="358">Broadwell</option></p>
+                </li>
+            </ul>
+            <note id="note_N10106_N10022_N1001F_N10001" ixia_locid="343">
+                <p ixia_locid="344">If any other value is supplied, it is ignored and the default QEMU model is
+                    used.</p>
+            </note>
+            <p ixia_locid="332">If the <parmname ixia_locid="321">hw:cpu_model</parmname> parameter
+                is not supplied with the <cmdname ixia_locid="322">nova flavor-key</cmdname>
+                command, then the default QEMU model is used.</p>
+        </context>
+    </taskbody>
+</task-wr>

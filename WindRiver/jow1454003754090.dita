@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003754090" xml:lang="en-us">
+    <title ixia_locid="1">Primary Disk Requirements for Storage Nodes</title>
+    <shortdesc ixia_locid="2"/>
+    <prolog>
+        <author ixia_locid="3">Craig Griffin</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="4">The primary disk on the storage node is used for boot, rootfs, logging,
+            and scratch storage. A minimum primary disk size of 120 GB is mandatory with at least
+            10K RPM (SAS) or SSD drives.</p>
+        <p ixia_locid="5">The storage node primary disk is divided into a number of partitions. The
+            following table shows the partitioning of the disk. The partition sizes are not
+            configurable.</p>
+        <table id="table_N10024_N10019_N10001">
+            <title id="title__Toc441623518" ixia_locid="6">Storage Node Primary Disk Partitions and Sizes</title>
+            <tgroup cols="3">
+                <colspec colname="1" colwidth="1728*"/>
+                <colspec colname="2" colwidth="1360*"/>
+                <colspec colname="3" colwidth="3500*"/>
+                <thead>
+                    <row>
+                        <entry ixia_locid="7">
+                            <p ixia_locid="8">Partition</p>
+                        </entry>
+                        <entry ixia_locid="9">
+                            <p ixia_locid="10">Size</p>
+                        </entry>
+                        <entry ixia_locid="11">
+                            <p ixia_locid="12">Comments</p>
+                        </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    
+                    <row>
+                        <entry ixia_locid="13">
+                            <p ixia_locid="14">rootfs</p>
+                        </entry>
+                        <entry ixia_locid="15">
+                            <p ixia_locid="16">19.5 GB</p>
+                        </entry>
+                        <entry ixia_locid="17">
+                            <p ixia_locid="18">Fixed</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="19">
+                            <p ixia_locid="20">boot</p>
+                        </entry>
+                        <entry ixia_locid="21">
+                            <p ixia_locid="22">500 MB</p>
+                        </entry>
+                        <entry ixia_locid="23">
+                            <p ixia_locid="24">Fixed</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="25">
+                            <p ixia_locid="26">scratch</p>
+                        </entry>
+                        <entry ixia_locid="27">
+                            <p ixia_locid="28">7.5 GB</p>
+                        </entry>
+                        <entry ixia_locid="29">
+                            <p ixia_locid="30">Fixed</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="31">
+                            <p ixia_locid="32">log</p>
+                        </entry>
+                        <entry ixia_locid="33">
+                            <p ixia_locid="34">7.5 GB</p>
+                        </entry>
+                        <entry ixia_locid="35">
+                            <p ixia_locid="36">Fixed</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="37">
+                            <p ixia_locid="38">platform</p>
+                        </entry>
+                        <entry ixia_locid="39">
+                            <p ixia_locid="40">2 GB</p>
+                        </entry>
+                        <entry ixia_locid="41">
+                            <p ixia_locid="42">Fixed</p>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </conbody>
+</concept-wr>

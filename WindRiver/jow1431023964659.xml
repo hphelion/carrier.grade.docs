@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE referable-content PUBLIC "-//IXIA//DTD DITA Referable-Content//EN" "../../system/dtd/ixia/referable-content.dtd">
+<referable-content id="jow1431023964659" xml:lang="en-us">
+<title ixia_locid="179">[RC] dl: Interface Settings (TiS)</title>
+<rcbody>
+        <dl id="interface_settings">
+            <dlentry ixia_locid="12">
+                <dt ixia_locid="13">Interface Name</dt>
+                <dd ixia_locid="14">
+                    <p ixia_locid="15">A name used to identify the interface.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="16">
+                <dt ixia_locid="17">Network Type</dt>
+                <dd ixia_locid="18">
+                    <p ixia_locid="180">The type of network to which the interface is attached.</p>
+                    <note id="note_N1003C_N10033_N1002A_N10012_N1000F_N10001" ixia_locid="225">
+                        <p ixia_locid="226">This selection supports multiple network types on the
+                            same <i ixia_locid="227">logical</i> interface. Titanium Server also supports multiple
+                            network types on the same <i ixia_locid="228">physical</i> interface, using VLAN
+                            interfaces.</p>
+                    </note>
+                    <p ixia_locid="229">You can select multiple checkboxes, but the only valid
+                        multiple selection is <uicontrol ixia_locid="176">data</uicontrol> in
+                        addition to either <uicontrol ixia_locid="177">mgmt</uicontrol> or
+                            <uicontrol ixia_locid="178">infra</uicontrol> on the interface connected
+                        to the management or infrastructure network.</p>
+                    <p ixia_locid="158">Depending on the interface, the checkbox options can
+                        include:</p>
+                    <dl>
+                        <dlentry ixia_locid="104">
+                            <dt ixia_locid="105">none</dt>
+                            <dd ixia_locid="106">
+                                <p ixia_locid="107">Clears the Network Type setting.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="260">
+                            <dt ixia_locid="109">infra</dt>
+                            <dd ixia_locid="110">
+                                <p ixia_locid="111">Attaches the interface to an infrastructure
+                                    network.</p>
+                                <p ixia_locid="112">When a compute or storage node is added to
+                                    Titanium Server, an interface must be attached to the
+                                    infrastructure network before the node can be unlocked.</p>
+                                <p ixia_locid="171">You can edit the infrastructure interface to add
+                                    a <uicontrol ixia_locid="173">data</uicontrol> network and
+                                    provider network. This allows both infrastructure and data
+                                    traffic to be carried on the interface.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="115">
+                            <dt ixia_locid="116">oam</dt>
+                            <dd ixia_locid="117">
+                                <p ixia_locid="161">Attaches the interface to the OAM network. </p>
+                                <p ixia_locid="162">The OAM network is used by controller nodes for
+                                    administrator remote access. It is not applicable to compute or
+                                    storage nodes.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="119">
+                            <dt ixia_locid="120">mgmt</dt>
+                            <dd ixia_locid="121">
+                                <p ixia_locid="163">Attaches the interface to the internal
+                                    management network.</p>
+                                <p ixia_locid="164">When a compute or storage node is added to
+                                    Titanium Server, the interface used for PXE boot is assigned
+                                    automatically to the internal management network. In the
+                                    settings for this interface, <uicontrol ixia_locid="166">mgmt</uicontrol> is already selected. For other interfaces,
+                                    this selection is not used.</p>
+                                <p ixia_locid="172">You can edit the management interface to add a
+                                        <uicontrol ixia_locid="174">data</uicontrol> network and
+                                    provider network. This allows both management and data traffic
+                                    to be carried on the interface.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="126">
+                            <dt ixia_locid="127">pci-passthrough</dt>
+                            <dd ixia_locid="128">
+                                <!-- p ixia_locid="150">Provides for a direct connection to physical
+                                    interface hardware and the attached provider network from a
+                                    virtual machine. A single VM can directly access the physical
+                                    interface. For more information, see <ph ixia_locid="230" otherprops="printonly"><cite ixia_locid="231">Titanium
+                                            Server Cloud Administration:</cite>
+                                    </ph><cite ixia_locid="232"><ph ixia_locid="233"><xref href="psa1413402160578.xml" ixia_locid="234"/></ph></cite>.</p -->
+                                <p ixia_locid="150">Provides for a direct connection to physical
+                                    interface hardware and the attached provider network from a
+                                    virtual machine. A single VM can directly access the physical
+                                    interface. <draft-comment author="jmaran" ixia_locid="262">RC XREF: I have
+                                        updated this xref to a live link but xrefs are not
+                                        recommended in referable content topics. Suggest removing
+                                        the xref or eliminating the text from referable
+                                        content.</draft-comment>For more information, see <ph ixia_locid="263" otherprops="printonly"><cite ixia_locid="231">Titanium
+                                            Server Cloud Administration: </cite></ph><cite ixia_locid="264"><ph ixia_locid="265"><xref href="psa1413402160578.xml" ixia_locid="266"/></ph></cite>.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="131">
+                            <dt ixia_locid="132">data</dt>
+                            <dd ixia_locid="133">
+                                <p ixia_locid="147">Attaches the interface to a provider
+                                    network.</p>
+                                <p ixia_locid="148">You can add a data interface to a management or
+                                    infrastructure interface by editing the interface and selecting
+                                        <uicontrol ixia_locid="137">data</uicontrol> in addition to
+                                        <uicontrol ixia_locid="168">mgmt</uicontrol> or <uicontrol ixia_locid="175">infra</uicontrol>.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="138">
+                            <dt ixia_locid="139">pci-sriov</dt>
+                            <dd ixia_locid="140">
+                                <!-- p ixia_locid="141">Provides for a direct connection to a virtual
+                                    unit of physical interface hardware, and the attached provider
+                                    network, from a virtual machine. Multiple VMs can directly
+                                    access and share the same physical interface. For more
+                                    information, see <ph ixia_locid="235" otherprops="printonly"><cite ixia_locid="236">Titanium Server Cloud Administration:</cite>
+                                    </ph><cite ixia_locid="237"><ph ixia_locid="238"><xref href="psa1428687672712.xml" ixia_locid="239"/></ph></cite>.</p -->
+                                <p ixia_locid="141"><draft-comment author="jmaran" ixia_locid="267">RC XREF: I have
+                                        updated this xref to a live link but xrefs are not
+                                        recommended in referable content topics. Suggest removing
+                                        the xref or eliminating the text from referable
+                                        content.</draft-comment>Provides for a direct connection to
+                                    a virtual unit of physical interface hardware, and the attached
+                                    provider network, from a virtual machine. Multiple VMs can
+                                    directly access and share the same physical interface. For more
+                                    information, see <ph ixia_locid="268" otherprops="printonly"><cite ixia_locid="269">Titanium Server Cloud Administration:
+                                        </cite></ph><cite ixia_locid="270"><ph ixia_locid="271"><xref href="psa1428687672712.xml" ixia_locid="272"/></ph></cite>.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="20">
+                <dt ixia_locid="21">Interface Type</dt>
+                <dd ixia_locid="22">
+                    <p ixia_locid="23">(Shown only when the <uicontrol ixia_locid="152">Network
+                            Type</uicontrol> is set to <uicontrol ixia_locid="153">mgmt</uicontrol>,
+                            <uicontrol ixia_locid="154">oam</uicontrol>, <uicontrol ixia_locid="155">data</uicontrol>, or <uicontrol ixia_locid="156">infra</uicontrol>) The
+                        type of interface (Ethernet, aggregated Ethernet, or VLAN).</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="24">
+                <dt ixia_locid="25">Aggregated Ethernet - Mode</dt>
+                <dd ixia_locid="26">
+                    <p ixia_locid="27">(Shown only when the <uicontrol ixia_locid="28">Interface
+                            Type</uicontrol> is set to <nameliteral ixia_locid="29">aggregated
+                            ethernet</nameliteral>) The operational mode for link aggregation.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="186">
+                <dt ixia_locid="187">Aggregated Ethernet - Tx Policy</dt>
+                <dd ixia_locid="188">
+                    <p ixia_locid="189">(Shown only when the <nameliteral ixia_locid="190">Aggregated Ethernet - Mode</nameliteral> is
+                        set to <nameliteral ixia_locid="191">balanced</nameliteral> or
+                            <nameliteral ixia_locid="192">802.3ad</nameliteral>) The transmit policy for link
+                        aggregation.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="31">
+                <dt ixia_locid="32">Vlan ID</dt>
+                <dd ixia_locid="33">
+                    <p ixia_locid="34"><draft-comment author="jowens" ixia_locid="194">US62814
+                            removed statement about when Vlan ID is shown. It seems to be shown for
+                            any Network Type. -- 2015-10-27 restored the statement, on later
+                            evidence that Vlan ID is not always shown.</draft-comment>(Shown only
+                        when the <uicontrol ixia_locid="195">Interface Type</uicontrol> is set to
+                            <nameliteral ixia_locid="196">vlan</nameliteral>) A unique VLAN identifier for the
+                        network.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="261">
+                <dt ixia_locid="38">Port(s)</dt>
+                <dd ixia_locid="39">
+                    <p ixia_locid="40">The physical port or ports used for the interface.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="41">
+                <dt ixia_locid="42">Provider Networks</dt>
+                <dd ixia_locid="43">
+                    <p ixia_locid="44">(Shown only when the Network Type is set to <nameliteral ixia_locid="45">data</nameliteral>, <nameliteral ixia_locid="46">pci-passthrough</nameliteral>, or <nameliteral ixia_locid="193">pci-sriov</nameliteral>)
+                        The available provider networks. To attach the interface to a provider
+                        network, select the provider network. </p>
+                    <note id="note_N101F2_N101DA_N101D1_N10045_N10036_N10033_N10001" ixia_locid="169">
+                        <p ixia_locid="170">You cannot attach to a VLAN provider network using a
+                            VLAN data interface.</p>
+                    </note>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="48">
+                <dt ixia_locid="49">MTU</dt>
+                <dd ixia_locid="50">
+                    <!-- p ixia_locid="51">The maximum transmission unit for the interface. For more
+                        information, see <ph ixia_locid="240" otherprops="printonly"><cite ixia_locid="241">Titanium Server Planning:</cite>
+                        </ph><cite ixia_locid="242"><ph ixia_locid="243"><xref href="jow1404333732592.xml" ixia_locid="244"/></ph></cite>.</p -->
+                    <p ixia_locid="51"><draft-comment author="jmaran" ixia_locid="273">RC XREF: I have updated this
+                            xref to a live link but xrefs are not recommended in referable content
+                            topics. Suggest removing the xref or eliminating the text from referable
+                            content.</draft-comment>The maximum transmission unit for the interface.
+                        For more information, see <ph ixia_locid="274" otherprops="printonly"><cite ixia_locid="241">Titanium Server Planning: </cite></ph><cite ixia_locid="275"><ph ixia_locid="276"><xref href="jow1404333732592.xml" ixia_locid="277"/></ph></cite>.</p>
+                    <note id="note_N10274_N1024F_N10246_N10012_N1000F_N10001" ixia_locid="296">
+                        <p ixia_locid="297"><draft-comment author="jowens" ixia_locid="298">CGTS-4671</draft-comment>You cannot change the MTU for an
+                            infrastructure interface. The value from the network resource is always
+                            used.</p>
+                    </note>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="53">
+                <dt ixia_locid="54">IPv4 Addressing Mode</dt>
+                <dd ixia_locid="55">
+                    <!-- p ixia_locid="56">(Shown only when the <uicontrol ixia_locid="197">Network
+                            Type</uicontrol> is set to <nameliteral ixia_locid="57">data</nameliteral>) The method for assigning an IP address to the
+                        interface for use with VXLAN networks. For more information about VXLAN
+                        networks, see <ph ixia_locid="245" otherprops="printonly"><cite ixia_locid="246">Titanium Server Planning:</cite>
+                        </ph><cite ixia_locid="247"><ph ixia_locid="248"><xref href="jow1425583896631.xml" ixia_locid="249"/></ph></cite>. The
+                        available options are <nameliteral ixia_locid="59">static</nameliteral> or
+                            <nameliteral ixia_locid="60">disabled</nameliteral>.</p -->
+                    <p ixia_locid="56">(Shown only when the <uicontrol ixia_locid="197">Network
+                            Type</uicontrol> is set to <nameliteral ixia_locid="57">data</nameliteral>) The method for assigning an IP address to the
+                        interface for use with VXLAN networks. <draft-comment author="jmaran" ixia_locid="278">RC
+                            XREF: I have updated this xref to a live link (and corrected source doc
+                            reference) but xrefs are not recommended in referable content topics.
+                            Suggest removing the xref or eliminating the text from referable
+                            content.</draft-comment>For more information about VXLAN networks, see
+                            <ph ixia_locid="279" otherprops="printonly"><cite ixia_locid="280">Titanium Server System
+                                Administration: </cite></ph><cite ixia_locid="281"><ph ixia_locid="282"><xref href="jow1425583896631.xml" ixia_locid="283"/></ph></cite>.</p>
+                    <dl>
+                        <dlentry ixia_locid="61">
+                            <dt ixia_locid="62">Disabled</dt>
+                            <dd ixia_locid="63">
+                                <p ixia_locid="64">Do not assign an IPv4 address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="198">
+                            <dt ixia_locid="199">Static</dt>
+                            <dd ixia_locid="200">
+                                <p ixia_locid="201">Use a static IPv4 address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="202">
+                            <dt ixia_locid="203">Pool</dt>
+                            <dd ixia_locid="204">
+                                <p ixia_locid="205"><draft-comment author="jowens" ixia_locid="206">US65058
+                                        added</draft-comment>Use an address from a pool of IPv4
+                                    addresses that has been defined and associated with the data
+                                    interface.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="207">
+                <dt ixia_locid="208">IPv4 Address Pool</dt>
+                <dd ixia_locid="209">
+                    <p ixia_locid="210">(Shown only when the <uicontrol ixia_locid="211">IPv4 Addressing Mode</uicontrol> is set to
+                            <nameliteral ixia_locid="212">pool</nameliteral>) The pool from which to assign an IPv4
+                        address.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="69">
+                <dt ixia_locid="70">IPv6 Addressing Mode</dt>
+                <dd ixia_locid="71">
+                    <!-- p ixia_locid="72">(Shown only when the <uicontrol ixia_locid="213">Network
+                            Type</uicontrol> is set to <nameliteral ixia_locid="73">data</nameliteral>) The method for assigning an IP address to the
+                        interface for use with VXLAN networks. For more information about VXLAN
+                        networks, see <ph ixia_locid="250" otherprops="printonly"><cite ixia_locid="251">Titanium Server Planning:</cite>
+                        </ph><cite ixia_locid="252"><ph ixia_locid="253"><xref href="jow1425583896631.xml" ixia_locid="254"/></ph></cite>.</p -->
+                    <p ixia_locid="72">(Shown only when the <uicontrol ixia_locid="213">Network
+                            Type</uicontrol> is set to <nameliteral ixia_locid="73">data</nameliteral>) The method for assigning an IP address to the
+                        interface for use with VXLAN networks. <draft-comment author="jmaran" ixia_locid="284">RC
+                            XREF: I have updated this xref to a live link (and corrected source doc
+                            reference) but xrefs are not recommended in referable content topics.
+                            Suggest removing the xref or eliminating the text from referable
+                            content.</draft-comment>For more information about VXLAN networks, see
+                            <ph ixia_locid="285" otherprops="printonly"><cite ixia_locid="286">Titanium Server System
+                                Administration: </cite></ph><cite ixia_locid="287"><ph ixia_locid="288"><xref href="jow1425583896631.xml" ixia_locid="289"/></ph></cite>.</p>
+                    <dl>
+                        <dlentry ixia_locid="75">
+                            <dt ixia_locid="76">Disabled</dt>
+                            <dd ixia_locid="77">
+                                <p ixia_locid="78">Do not assign an IPv6 address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="79">
+                            <dt ixia_locid="80">Static</dt>
+                            <dd ixia_locid="81">
+                                <p ixia_locid="82">Use a static IPv6 address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="214">
+                            <dt ixia_locid="215">Pool</dt>
+                            <dd ixia_locid="216">
+                                <p ixia_locid="217"><draft-comment author="jowens" ixia_locid="218">US65058
+                                        added</draft-comment>Use an address from a pool of IPv6
+                                    addresses that has been defined and associated with the data
+                                    interface. </p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="83">
+                            <dt ixia_locid="84">Automatic Assignment</dt>
+                            <dd ixia_locid="85">
+                                <p ixia_locid="86">Use an automatically assigned IPv6 address.
+                                    <!-- JO 2015-03-21 need input --></p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="87">
+                            <dt ixia_locid="88">Link Local</dt>
+                            <dd ixia_locid="89">
+                                <p ixia_locid="90">Use a link local IPv6 address.
+                                    <!-- JO 2015-03-21 need input --></p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="219">
+                <dt ixia_locid="220">IPv6 Address Pool</dt>
+                <dd ixia_locid="221">
+                    <p ixia_locid="222">(Shown only when the <uicontrol ixia_locid="223">IPv6 Addressing Mode</uicontrol> is set to
+                            <nameliteral ixia_locid="224">pool</nameliteral>) The pool from which to assign an IPv6
+                        address.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="93">
+                <dt ixia_locid="94">Virtual Functions</dt>
+                <dd ixia_locid="95">
+                    <!-- p ixia_locid="96">(Shown only when the Network Type is set to <nameliteral ixia_locid="97">pci-sriov</nameliteral>) The number of virtual
+                        interfaces to use. For more information, see <ph ixia_locid="255" otherprops="printonly"><cite ixia_locid="256">Titanium Server
+                                Planning:</cite>
+                        </ph><cite ixia_locid="257"><ph ixia_locid="258"><xref href="psa1428687672712.xml" ixia_locid="259"/></ph></cite>.</p -->
+                    <p ixia_locid="96">(Shown only when the Network Type is set to <nameliteral ixia_locid="97">pci-sriov</nameliteral>) The number of virtual
+                        interfaces to use. <draft-comment author="jmaran" ixia_locid="290">RC XREF: I have updated
+                            this xref to a live link (and corrected source doc reference) but xrefs
+                            are not recommended in referable content topics. Suggest removing the
+                            xref or eliminating the text from referable content.</draft-comment>For
+                        more information, see <ph ixia_locid="291" otherprops="printonly"><cite ixia_locid="292">Titanium Server Cloud Administration: </cite></ph><cite ixia_locid="293"><ph ixia_locid="294"><xref href="psa1428687672712.xml" ixia_locid="295"/></ph></cite>.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="98">
+                <dt ixia_locid="99">Maximum Virtual Functions</dt>
+                <dd ixia_locid="100">
+                    <p ixia_locid="101">(Shown only when the Network Type is set to <nameliteral ixia_locid="102">pci-sriov</nameliteral>) </p>
+                    <p ixia_locid="103">the maximum number of virtual interfaces available.</p>
+                </dd>
+            </dlentry>
+        </dl>
+    </rcbody>
+</referable-content>

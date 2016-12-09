@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="wmn1475417603225" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">The Provider Network Topology View</title>
+ <shortdesc ixia_locid="2">The Provider Network Topology view shows provider networks and compute
+  host data interface connections for the system using a color-coded graphical display. Active alarm
+  information is also shown in real time. You can select individual hosts or networks to highlight
+  their connections and obtain more details. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="41">To display this view, select <menucascade ixia_locid="42">
+    <uicontrol ixia_locid="56">Admin</uicontrol>
+    <uicontrol ixia_locid="43">Platform</uicontrol>
+    <uicontrol ixia_locid="44">Provider Network Topology</uicontrol>
+   </menucascade>.</p>
+  <fig id="fig_at2_fzh_mx" ixia_locid="4">
+   <image href="sqw1475425312420.image" id="image_njn_jzh_mx" ixia_locid="5">
+    <alt ixia_locid="6">Titanium Server Provider Network Topology view</alt>
+   </image>
+  </fig>
+  <section id="section_N1002F_N1001C_N10001" ixia_locid="7">
+   <title ixia_locid="8">Selection and Navigation</title>
+   <p ixia_locid="9"><draft-comment author="jowens" ixia_locid="10">US75601 new Provider Network
+     Topology View topic</draft-comment>The Provider Network Topology view shows all compute hosts
+    and provider networks graphically in a framed topology window, and lists them by name in the
+     <uicontrol ixia_locid="11">Compute Hosts</uicontrol> and <uicontrol ixia_locid="12">Provider
+     Networks</uicontrol> lists to the left of the window. You can select an entity using the window
+    or the lists. The selected entity is highlighted in both places.</p>
+   <p ixia_locid="13">If the topology of the system is too large to fit in the window, you can drag inside the
+    window to see other areas.  You can also bring an entity into view by selecting it from the
+    lists. The view is panned automatically to show the entity.</p>
+  </section>
+  <section id="section_N1004E_N1001C_N10001" ixia_locid="14">
+   <title ixia_locid="15">Additional Details for Entities</title>
+   <p ixia_locid="16">When you select an entity, associated entities are highlighted in the <uicontrol ixia_locid="17">Compute
+     Hosts</uicontrol> list or the <uicontrol ixia_locid="18">Provider Networks</uicontrol> list. For example, if
+    you select the <nameliteral ixia_locid="19">group0-data0</nameliteral> provider network, all hosts attached to
+    it are highlighted in the <uicontrol ixia_locid="20">Compute Hosts</uicontrol> list.</p>
+   <p ixia_locid="21">Additional information for the selected entity is available in tabbed pages
+    below the topology window. </p>
+   <ul id="ul_z5z_czh_mx">
+    <li ixia_locid="22">
+     <p ixia_locid="23">For a compute host, the additional information includes the <uicontrol ixia_locid="48">Overview</uicontrol>, <uicontrol ixia_locid="49">Interfaces</uicontrol>, and
+       <uicontrol ixia_locid="50">LLDP</uicontrol> tabs from the <wintitle ixia_locid="55">Host Inventory
+       Detail</wintitle>, as well as a <uicontrol ixia_locid="51">Related Alarms</uicontrol> tab
+      that lists any active alarms associated with the host. </p>
+    </li>
+    <li ixia_locid="28">
+     <p ixia_locid="29">For a provider network, the additional information includes the
+       <uicontrol ixia_locid="52">Provider Network Detail</uicontrol> tab from the Provider Network Overview, and a
+       <uicontrol ixia_locid="53">Related Alarms</uicontrol> tab that lists any active alarms associated with the
+      provider network. </p>
+    </li>
+   </ul>
+  </section>
+  <section id="section_N1009C_N1001C_N10001" ixia_locid="32">
+   <title ixia_locid="33">Alarm Reporting</title>
+   <p ixia_locid="34">Active alarms for entities are displayed in real time in the topology window,
+    using icons superimposed on the entities. The alarms are color-coded for severity using the same
+    colors as the Global Alarm Banner. Details for the alarms are listed in the <uicontrol ixia_locid="54">Related
+     Alarms</uicontrol> tab for the entity. </p>
+   <fig id="fig_jmb_cvp_mx" ixia_locid="45">
+    <image href="eal1475518780745.image" id="image_ydk_xvp_mx" ixia_locid="46">
+     <alt ixia_locid="47">TiS Provider Network Topology alarm icons</alt>
+    </image>
+   </fig>
+  </section>
+  <section id="section_N100AD_N1001C_N10001" ixia_locid="36">
+   <title ixia_locid="37">Labels for Network Connections</title>
+   <p ixia_locid="38">Network connections in the topology window may be labeled with the data
+    interface name (displayed above the connection line) and LLDP neighbor information (displayed
+    below the connection line). You can show or hide the labels using a button above the lists
+     (<uicontrol ixia_locid="39">Show Labels</uicontrol> or <uicontrol ixia_locid="40">Hide
+     Labels</uicontrol>).</p>
+  </section>
+ </conbody>
+</concept-wr>

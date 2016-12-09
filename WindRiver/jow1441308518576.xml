@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1441308518576" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Adding Hosts in Bulk</title>
+    <shortdesc ixia_locid="2">You can add an arbitrary number of hosts using a single CLI
+        command.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="5">
+                <draft-comment author="jowens" ixia_locid="6">US62814 new topic</draft-comment>
+            </p>
+        </context>
+        <steps>
+            <step id="step_N10030_N1002D_N1001B_N10001" ixia_locid="7">
+                <cmd ixia_locid="8">Prepare an XML file that describes the hosts to be added.</cmd>
+                <info ixia_locid="9">
+                    <p ixia_locid="10">For more information, see <xref href="ekn1460141591614.xml" ixia_locid="104"/>.</p>
+                    <draft-comment author="rstone" ixia_locid="89">US63902 adds</draft-comment>
+                    <p ixia_locid="90">You can create a configuration file using the <cmdname ixia_locid="92">config_gui</cmdname> utility provided with the Titanium
+                        Server Guest Software Development Kit. For more information, see the <ph ixia_locid="98" otherprops="printonly"><cite ixia_locid="99">Titanium Server Software Development Kit:
+                            </cite></ph><cite ixia_locid="100"><ph ixia_locid="101"><xref href="rst1443453440317.xml" ixia_locid="102"/></ph></cite>.</p>
+                    <p ixia_locid="96">You can also create the XML configuration file from an
+                        existing, running configuration using the <cmdname ixia_locid="97">system
+                            host-bulk-export</cmdname> command. For more information, see <xref href="ekn1452016148428.xml" ixia_locid="103"/>.</p>
+                </info>
+            </step>
+            <step id="step_N1004F_N10035_N1001F_N10001" ixia_locid="12">
+                <cmd ixia_locid="13">Run the <cmdname ixia_locid="14">system host-bulk-add</cmdname> utility.</cmd>
+                <info ixia_locid="15">
+                    <p ixia_locid="16">The command syntax
+                        is:<codeblock ixia_locid="17"><systemoutput ixia_locid="93">~[keystone_admin]$ </systemoutput><userinput ixia_locid="19">system host-bulk-add <varname ixia_locid="91">xml_file</varname></userinput></codeblock>where
+                            <varname ixia_locid="21">xml_file</varname> is the name of the prepared XML file.</p>
+                </info>
+                <stepresult ixia_locid="95"/>
+            </step>
+            <step id="step_N10077_N10035_N1001F_N10001" ixia_locid="23">
+                <cmd ixia_locid="24">Power on the hosts to be added, if required.</cmd>
+                <info ixia_locid="25">
+                    <note id="note_N10080_N1007D_N10076_N10035_N1001F_N10001" ixia_locid="26">
+                        <p ixia_locid="27"><draft-comment author="jowens" ixia_locid="88">US65621
+                                added</draft-comment>Hosts equipped with board management modules
+                            can be powered on automatically using settings in the XML file.</p>
+                    </note>
+                </info>
+            </step>
+        </steps>
+        <result id="result_N1008B_N1001F_N10001" ixia_locid="28">
+            <p ixia_locid="29">The hosts are configured. The utility provides a summary report, as shown in the
+                following example: </p>
+            <codeblock ixia_locid="30"><systemoutput ixia_locid="31">Success:
+compute-0
+compute-1
+Error:
+controller-1: Host-add Rejected: Host with mgmt_mac 08:00:28:A9:54:19 already exists
+                    </systemoutput></codeblock>
+        </result>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="bcr1473342191677" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="249">Configuring Aggregated Ethernet Interfaces Using the CLI </title>
+    <shortdesc ixia_locid="250">You can use the CLI to attach aggregated Ethernet interfaces to
+        networks.</shortdesc>
+    <prolog>
+        <author ixia_locid="251">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001D_N1001A_N10001" ixia_locid="252">
+            <p ixia_locid="253"><draft-comment author="jowens" ixia_locid="254">CGTS-4597 added: up to 4 in a LAG
+                    group</draft-comment>Titanium Server supports up to four ports in a LAG group. </p>
+            <p ixia_locid="255">To create an aggregated Ethernet interface and attach it to a
+                network, use a command of the following form:</p>
+            <codeblock ixia_locid="111"><systemoutput ixia_locid="69">~(keystone_admin)$ </systemoutput><userinput ixia_locid="112">system host-if-add <varname ixia_locid="113">hostname</varname> -m <varname ixia_locid="114">mtu</varname> \
+-a <varname ixia_locid="115">aemode</varname> -x <varname ixia_locid="116">policy</varname> <varname ixia_locid="117">ifname</varname> \
+ ae "<varname ixia_locid="118">providernetworklist</varname>" <varname ixia_locid="119">ethname1</varname> <varname ixia_locid="120">ethname2</varname></userinput> </codeblock>
+            <p ixia_locid="121">where</p>
+            <parml>
+                <plentry ixia_locid="122">
+                    <pt ixia_locid="123">ifname</pt>
+                    <pd ixia_locid="124">
+                        <p ixia_locid="125">is a name for the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="126">
+                    <pt ixia_locid="127">mtu</pt>
+                    <pd ixia_locid="128">
+                        <p ixia_locid="129">is the MTU for the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="130">
+                    <pt ixia_locid="131">aemode</pt>
+                    <pd ixia_locid="132">
+                        <p ixia_locid="133">is the link aggregation mode</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="134">
+                    <pt ixia_locid="135">policy</pt>
+                    <pd ixia_locid="136">
+                        <p ixia_locid="137">is the balanced tx distribution hash policy</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="138">
+                    <pt ixia_locid="139">hostname</pt>
+                    <pd ixia_locid="140">
+                        <p ixia_locid="141">is the name or UUID of the host</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="142">
+                    <pt ixia_locid="143">providernetworklist</pt>
+                    <pd ixia_locid="144">
+                        <p ixia_locid="145">is a list of provider networks to attach to, separated
+                            by spaces</p>
+                        <note id="note_N101E4_N101DB_N101D2_N1016B_N10123_N1001E_N10001" ixia_locid="246">
+                            <p ixia_locid="247">For networks other than data networks, the value
+                                    <nameliteral ixia_locid="248">none</nameliteral> is
+                                required.</p>
+                        </note>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="146">
+                    <pt ixia_locid="147">ethname1, ethname2</pt>
+                    <pd ixia_locid="148">
+                        <p ixia_locid="149">are the names or UUIDs of the member interfaces</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="150">For example, to attach an aggregated Ethernet interface named
+                    <nameliteral ixia_locid="151">ae0</nameliteral> to provider networks
+                    <nameliteral ixia_locid="152">provider-net-a</nameliteral> and <nameliteral ixia_locid="153">provider-net-b</nameliteral>, using member interfaces
+                    <nameliteral ixia_locid="154">enp0s9</nameliteral> and <nameliteral ixia_locid="155">enp0s10</nameliteral> on <nameliteral ixia_locid="156">compute-0</nameliteral>:</p>
+            <codeblock ixia_locid="157"><systemoutput ixia_locid="70">~(keystone_admin)$ </systemoutput><userinput ixia_locid="158">system host-if-add compute-0 -a balanced \
+-x layer2 ae0 ae "provider-net-a provider-net-b" enp0s9 enp0s10</userinput></codeblock>
+            <p ixia_locid="159">For more about link aggregation modes and policies, see <xref href="jow1404333496893.xml" ixia_locid="160"/>.</p>
+        </context>
+    </taskbody>
+</task-wr>

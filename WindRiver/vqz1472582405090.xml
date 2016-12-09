@@ -1,0 +1,1134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="vqz1472582405090" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">The REGION_CONFIG_DATA Spreadsheet</title>
+  <shortdesc ixia_locid="2">You can use this reference when provisioning the Primary Region to grant access to
+    Secondary Region services. </shortdesc>
+  <prolog>
+    <author ixia_locid="3">Edward Knowlton</author>
+  </prolog>
+  <refbody>
+    <table id="table_lqt_csc_dx">
+      <tgroup cols="4">
+        <colspec colname="col1" colnum="1" colwidth="1.16*"/>
+        <colspec colname="col2" colnum="2" colwidth="1.24*"/>
+        <colspec colname="col3" colnum="3" colwidth="1*"/>
+        <colspec colname="col4" colnum="4" colwidth="1.09*"/>
+        <tbody>
+          <row>
+            <entry ixia_locid="4"/>
+            <entry ixia_locid="5">
+              <p ixia_locid="653">Attribute</p>
+            </entry>
+            <entry ixia_locid="9">
+              <p ixia_locid="10">Value</p>
+            </entry>
+            <entry ixia_locid="11">
+              <p ixia_locid="12">Comments</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="13">
+              <p ixia_locid="14">STORAGE</p>
+            </entry>
+            <entry ixia_locid="15"/>
+            <entry ixia_locid="16"/>
+            <entry ixia_locid="17"/>
+          </row>
+          <row>
+            <entry ixia_locid="18"/>
+            <entry ixia_locid="19">
+              <p ixia_locid="20">DATABASE_STORAGE</p>
+            </entry>
+            <entry ixia_locid="21">
+              <p ixia_locid="22">&lt;Size in GB&gt;</p>
+            </entry>
+            <entry ixia_locid="23">
+              <p ixia_locid="24">Postgres database size</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="25"/>
+            <entry ixia_locid="26">
+              <p ixia_locid="27">BACKUP_STORAGE</p>
+            </entry>
+            <entry ixia_locid="28">
+              <p ixia_locid="29">&lt;Size in GB&gt;</p>
+            </entry>
+            <entry ixia_locid="30">
+              <p ixia_locid="31">Must be at least DATABASE_STORAGE + 20</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="32"/>
+            <entry ixia_locid="33"/>
+            <entry ixia_locid="34"/>
+            <entry ixia_locid="35"/>
+          </row>
+          <row>
+            <entry ixia_locid="36"/>
+            <entry ixia_locid="37">
+              <p ixia_locid="38">IMAGE_STORAGE</p>
+            </entry>
+            <entry ixia_locid="39">
+              <p ixia_locid="40">&lt;Size in GB&gt;</p>
+            </entry>
+            <entry ixia_locid="41">
+              <p ixia_locid="42">Storage for nova instances launched from glance images</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="43"/>
+            <entry ixia_locid="44">
+              <p ixia_locid="45">IMAGE_CONVERSIONS_VOLUME</p>
+            </entry>
+            <entry ixia_locid="46">
+              <p ixia_locid="47">&lt;Size in GB&gt;</p>
+            </entry>
+            <entry ixia_locid="48"/>
+          </row>
+          <row>
+            <entry ixia_locid="49"/>
+            <entry ixia_locid="50">
+              <p ixia_locid="51">CINDER_BACKEND</p>
+            </entry>
+            <entry ixia_locid="52">
+              <p ixia_locid="53">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="54">
+              <p ixia_locid="55">lvm/ceph</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="56"/>
+            <entry ixia_locid="57">
+              <p ixia_locid="58">CINDER_DEVICE</p>
+            </entry>
+            <entry ixia_locid="59">
+              <p ixia_locid="60">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="61"/>
+          </row>
+          <row>
+            <entry ixia_locid="62"/>
+            <entry ixia_locid="63">
+              <p ixia_locid="64">CINDER_STORAGE</p>
+            </entry>
+            <entry ixia_locid="65">
+              <p ixia_locid="66">&lt;Size in GB&gt;</p>
+            </entry>
+            <entry ixia_locid="67"/>
+          </row>
+          <row>
+            <entry ixia_locid="68"/>
+            <entry ixia_locid="69"/>
+            <entry ixia_locid="70"/>
+            <entry ixia_locid="71"/>
+          </row>
+          <row>
+            <entry ixia_locid="72">
+              <p ixia_locid="73">DNS</p>
+            </entry>
+            <entry ixia_locid="74"/>
+            <entry ixia_locid="75"/>
+            <entry ixia_locid="76">
+              <p ixia_locid="77">Optional </p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="78"/>
+            <entry ixia_locid="79">
+              <p ixia_locid="80">NAMESERVER_1</p>
+            </entry>
+            <entry ixia_locid="81">
+              <p ixia_locid="82">&lt;IPv4 address&gt;</p>
+            </entry>
+            <entry ixia_locid="83">
+              <p ixia_locid="84">Reachable through the default GW </p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="85"/>
+            <entry ixia_locid="86">
+              <p ixia_locid="87">NAMESERVER_2</p>
+            </entry>
+            <entry ixia_locid="88">
+              <p ixia_locid="89">&lt;IPv4 address&gt;</p>
+            </entry>
+            <entry ixia_locid="90"/>
+          </row>
+          <row>
+            <entry ixia_locid="91"/>
+            <entry ixia_locid="92">
+              <p ixia_locid="93">NAMESERVER_3</p>
+            </entry>
+            <entry ixia_locid="94">
+              <p ixia_locid="95">&lt;IPv4 address&gt;</p>
+            </entry>
+            <entry ixia_locid="96"/>
+          </row>
+          <row>
+            <entry ixia_locid="97"/>
+            <entry ixia_locid="98"/>
+            <entry ixia_locid="99"/>
+            <entry ixia_locid="100"/>
+          </row>
+          <row>
+            <entry ixia_locid="101">
+              <p ixia_locid="102">NTP</p>
+            </entry>
+            <entry ixia_locid="103"/>
+            <entry ixia_locid="104"/>
+            <entry ixia_locid="105">
+              <p ixia_locid="106">Optional</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="107"/>
+            <entry ixia_locid="108">
+              <p ixia_locid="109">NTP_SERVER_1</p>
+            </entry>
+            <entry ixia_locid="110">
+              <p ixia_locid="111">&lt;IPv4 address&gt; or &lt;FQDN&gt;</p>
+            </entry>
+            <entry ixia_locid="112">
+              <p ixia_locid="113">Reachable through the default GW </p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="114"/>
+            <entry ixia_locid="115">
+              <p ixia_locid="116">NTP_SERVER_2</p>
+            </entry>
+            <entry ixia_locid="117">
+              <p ixia_locid="118">&lt;IPv4 address&gt; or &lt;FQDN&gt;</p>
+            </entry>
+            <entry ixia_locid="119"/>
+          </row>
+          <row>
+            <entry ixia_locid="120"/>
+            <entry ixia_locid="121"/>
+            <entry ixia_locid="122">
+              <p ixia_locid="123">&lt;IPv4 address&gt; or &lt;FQDN&gt;</p>
+            </entry>
+            <entry ixia_locid="124"/>
+          </row>
+          <row>
+            <entry ixia_locid="125"/>
+            <entry ixia_locid="126"/>
+            <entry ixia_locid="127"/>
+            <entry ixia_locid="128"/>
+          </row>
+          <row>
+            <entry ixia_locid="129">
+              <p ixia_locid="130">LOGICAL_INTERFACE_1</p>
+            </entry>
+            <entry ixia_locid="131"/>
+            <entry ixia_locid="132"/>
+            <entry ixia_locid="133"/>
+          </row>
+          <row>
+            <entry ixia_locid="134"/>
+            <entry ixia_locid="135">
+              <p ixia_locid="136">LAG_INTERFACE</p>
+            </entry>
+            <entry ixia_locid="137">
+              <p ixia_locid="138">&lt;Y/N&gt;</p>
+            </entry>
+            <entry ixia_locid="139"/>
+          </row>
+          <row>
+            <entry ixia_locid="140"/>
+            <entry ixia_locid="141">
+              <p ixia_locid="142">LAG_MODE</p>
+            </entry>
+            <entry ixia_locid="143">
+              <p ixia_locid="144">One of 1) 802.3ad (LACP) policy 2) Active-backup policy 3)
+                Balanced XOR policy</p>
+            </entry>
+            <entry ixia_locid="145">
+              <p ixia_locid="146">Interface for pxebooting can only be LACP</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="147"/>
+            <entry ixia_locid="148">
+              <p ixia_locid="149">INTERFACE MTU</p>
+            </entry>
+            <entry ixia_locid="150">
+              <p ixia_locid="151">&lt;mtu size&gt; </p>
+            </entry>
+            <entry ixia_locid="152"/>
+          </row>
+          <row>
+            <entry ixia_locid="153"/>
+            <entry ixia_locid="154">
+              <p ixia_locid="155">INTERFACE_PORTS</p>
+            </entry>
+            <entry ixia_locid="156">
+              <p ixia_locid="157">&lt;comma separated list of ethernet interfaces&gt; </p>
+            </entry>
+            <entry ixia_locid="158"/>
+          </row>
+          <row>
+            <entry ixia_locid="159">
+              <p ixia_locid="160">….</p>
+            </entry>
+            <entry ixia_locid="161"/>
+            <entry ixia_locid="162"/>
+            <entry ixia_locid="163"/>
+          </row>
+          <row>
+            <entry ixia_locid="164">
+              <p ixia_locid="165">LOGICAL_INTERFACE_N</p>
+            </entry>
+            <entry ixia_locid="166"/>
+            <entry ixia_locid="167"/>
+            <entry ixia_locid="168"/>
+          </row>
+          <row>
+            <entry ixia_locid="169"/>
+            <entry ixia_locid="170">
+              <p ixia_locid="171">LAG_INTERFACE</p>
+            </entry>
+            <entry ixia_locid="172">
+              <p ixia_locid="173">&lt;Y/N&gt;</p>
+            </entry>
+            <entry ixia_locid="174"/>
+          </row>
+          <row>
+            <entry ixia_locid="175"/>
+            <entry ixia_locid="176">
+              <p ixia_locid="177">LAG_MODE</p>
+            </entry>
+            <entry ixia_locid="178">
+              <p ixia_locid="179">One of 1) 802.3ad (LACP) policy 2) Active-backup policy 3)
+                Balanced XOR policy</p>
+            </entry>
+            <entry ixia_locid="180">
+              <p ixia_locid="181">Interface for pxebooting can only be LACP</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="182"/>
+            <entry ixia_locid="183">
+              <p ixia_locid="184">INTERFACE MTU</p>
+            </entry>
+            <entry ixia_locid="185">
+              <p ixia_locid="186">&lt;mtu size&gt; </p>
+            </entry>
+            <entry ixia_locid="187"/>
+          </row>
+          <row>
+            <entry ixia_locid="188"/>
+            <entry ixia_locid="189">
+              <p ixia_locid="190">INTERFACE_PORTS</p>
+            </entry>
+            <entry ixia_locid="191">
+              <p ixia_locid="192">&lt;comma separated list of ethernet interfaces&gt; </p>
+            </entry>
+            <entry ixia_locid="193"/>
+          </row>
+          <row>
+            <entry ixia_locid="194"/>
+            <entry ixia_locid="195"/>
+            <entry ixia_locid="196"/>
+            <entry ixia_locid="197"/>
+          </row>
+          <row>
+            <entry ixia_locid="198">
+              <p ixia_locid="199">MGMT_NETWORK</p>
+            </entry>
+            <entry ixia_locid="200"/>
+            <entry ixia_locid="201"/>
+            <entry ixia_locid="202"/>
+          </row>
+          <row>
+            <entry ixia_locid="203"/>
+            <entry ixia_locid="204">
+              <p ixia_locid="205">VLAN</p>
+            </entry>
+            <entry ixia_locid="206">
+              <p ixia_locid="207">&lt;vlan id&gt;</p>
+            </entry>
+            <entry ixia_locid="208"/>
+          </row>
+          <row>
+            <entry ixia_locid="209"/>
+            <entry ixia_locid="210">
+              <p ixia_locid="211">IP_START_ADDRESS</p>
+            </entry>
+            <entry ixia_locid="212">
+              <p ixia_locid="213">&lt;IPv4 address&gt; </p>
+            </entry>
+            <entry ixia_locid="214">
+              <p ixia_locid="215">1st address floating IP </p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="216"/>
+            <entry ixia_locid="217">
+              <p ixia_locid="218">IP_END_ADDRESS</p>
+            </entry>
+            <entry ixia_locid="219">
+              <p ixia_locid="220">&lt;IPv4 address&gt; </p>
+            </entry>
+            <entry ixia_locid="221"/>
+          </row>
+          <row>
+            <entry ixia_locid="222"/>
+            <entry ixia_locid="223">
+              <p ixia_locid="224">CIDR</p>
+            </entry>
+            <entry ixia_locid="225">
+              <p ixia_locid="226">&lt;network/mask&gt;</p>
+            </entry>
+            <entry ixia_locid="227">
+              <p ixia_locid="228">Subnet</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="656">
+              <draft-comment author="jowens" ixia_locid="657">CGTS-5681</draft-comment>
+            </entry>
+            <entry ixia_locid="658">
+              <p ixia_locid="659">MULTICAST_CIDR</p>
+            </entry>
+            <entry ixia_locid="660">
+              <p ixia_locid="661">&lt;network/mask&gt;</p>
+            </entry>
+            <entry ixia_locid="662"/>
+          </row>
+          <row>
+            <entry ixia_locid="229"/>
+            <entry ixia_locid="230">
+              <p ixia_locid="231">LOGICAL_INTERFACE</p>
+            </entry>
+            <entry ixia_locid="232">
+              <p ixia_locid="233">&lt;logical-interface&gt;</p>
+            </entry>
+            <entry ixia_locid="234">
+              <p ixia_locid="235">Reference LOGICAL_INTERFACE_N instead of using the name</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="236"/>
+            <entry ixia_locid="237">
+              <p ixia_locid="238">GATEWAY</p>
+            </entry>
+            <entry ixia_locid="239">
+              <p ixia_locid="240">&lt;IPv4 address&gt; </p>
+            </entry>
+            <entry ixia_locid="241">
+              <p ixia_locid="242">Only one of OAM GATEWAY or MGMT GATEWAY can be specified.</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="243"/>
+            <entry ixia_locid="244">
+              <p ixia_locid="245">DYNAMIC_ALLOCATION</p>
+            </entry>
+            <entry ixia_locid="246"/>
+            <entry ixia_locid="247">
+              <p ixia_locid="248">y/n</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="249"/>
+            <entry ixia_locid="250"/>
+            <entry ixia_locid="251"/>
+            <entry ixia_locid="252"/>
+          </row>
+          <row>
+            <entry ixia_locid="253">
+              <p ixia_locid="254">INFRA_NETWORK</p>
+            </entry>
+            <entry ixia_locid="255"/>
+            <entry ixia_locid="256"/>
+            <entry ixia_locid="257"/>
+          </row>
+          <row>
+            <entry ixia_locid="258"/>
+            <entry ixia_locid="259">
+              <p ixia_locid="260">VLAN</p>
+            </entry>
+            <entry ixia_locid="261">
+              <p ixia_locid="262">&lt;vlan id&gt;</p>
+            </entry>
+            <entry ixia_locid="263"/>
+          </row>
+          <row>
+            <entry ixia_locid="264"/>
+            <entry ixia_locid="265">
+              <p ixia_locid="266">IP_START_ADDRESS</p>
+            </entry>
+            <entry ixia_locid="267">
+              <p ixia_locid="268">&lt;IPv4 address&gt; </p>
+            </entry>
+            <entry ixia_locid="269"/>
+          </row>
+          <row>
+            <entry ixia_locid="270"/>
+            <entry ixia_locid="271">
+              <p ixia_locid="272">IP_END_ADDRESS</p>
+            </entry>
+            <entry ixia_locid="273">
+              <p ixia_locid="274">&lt;IPv4 address&gt; </p>
+            </entry>
+            <entry ixia_locid="275"/>
+          </row>
+          <row>
+            <entry ixia_locid="276"/>
+            <entry ixia_locid="277">
+              <p ixia_locid="278">CIDR</p>
+            </entry>
+            <entry ixia_locid="279">
+              <p ixia_locid="280">&lt;network/mask&gt;</p>
+            </entry>
+            <entry ixia_locid="281"/>
+          </row>
+          <row>
+            <entry ixia_locid="282"/>
+            <entry ixia_locid="283">
+              <p ixia_locid="284">LOGICAL_INTERFACE</p>
+            </entry>
+            <entry ixia_locid="285">
+              <p ixia_locid="286">&lt;logical-interface&gt;</p>
+            </entry>
+            <entry ixia_locid="287">
+              <p ixia_locid="288">Reference LOGICAL_INTERFACE_N instead of using the name</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="289"/>
+            <entry ixia_locid="290"/>
+            <entry ixia_locid="291"/>
+            <entry ixia_locid="292"/>
+          </row>
+          <row>
+            <entry ixia_locid="293">
+              <p ixia_locid="294">OAM_NETWORK</p>
+            </entry>
+            <entry ixia_locid="295"/>
+            <entry ixia_locid="296"/>
+            <entry ixia_locid="297"/>
+          </row>
+          <row>
+            <entry ixia_locid="298"/>
+            <entry ixia_locid="299">
+              <p ixia_locid="300">VLAN</p>
+            </entry>
+            <entry ixia_locid="301">
+              <p ixia_locid="302">&lt;vlan id&gt;</p>
+            </entry>
+            <entry ixia_locid="303"/>
+          </row>
+          <row>
+            <entry ixia_locid="304"/>
+            <entry ixia_locid="305">
+              <p ixia_locid="306">IP_START_ADDRESS</p>
+            </entry>
+            <entry ixia_locid="307">
+              <p ixia_locid="308">&lt;IPv4 address&gt; </p>
+            </entry>
+            <entry ixia_locid="309" morerows="1">
+              <p ixia_locid="310">3 contiguous addresses: floating ip, unit 0 ip, unit1 ip </p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="311"/>
+            <entry ixia_locid="312">
+              <p ixia_locid="313">IP_END_ADDRESS</p>
+            </entry>
+            <entry ixia_locid="314">
+              <p ixia_locid="315">&lt;IPv4 address&gt; </p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="663"/>
+            <entry ixia_locid="664">
+              <p ixia_locid="665">CIDR</p>
+            </entry>
+            <entry ixia_locid="666">
+              <p ixia_locid="667">&lt;network/mask&gt;</p>
+            </entry>
+            <entry ixia_locid="668"/>
+          </row>
+          <row>
+            <entry ixia_locid="669">
+              <draft-comment author="jowens" ixia_locid="670">CGTS-5681</draft-comment>
+            </entry>
+            <entry ixia_locid="671">
+              <p ixia_locid="672">MULTICAST_CIDR</p>
+            </entry>
+            <entry ixia_locid="673">
+              <p ixia_locid="674">&lt;network/mask&gt;</p>
+            </entry>
+            <entry ixia_locid="675"/>
+          </row>
+          <row>
+            <entry ixia_locid="322"/>
+            <entry ixia_locid="323">
+              <p ixia_locid="324">GATEWAY</p>
+            </entry>
+            <entry ixia_locid="325">
+              <p ixia_locid="326">&lt;IPv4 address&gt; </p>
+            </entry>
+            <entry ixia_locid="327">
+              <p ixia_locid="328">Only one of OAM GATEWAY or MGMT GATEWAY can be specified.</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="329"/>
+            <entry ixia_locid="330">
+              <p ixia_locid="331">LOGICAL_INTERFACE</p>
+            </entry>
+            <entry ixia_locid="332">
+              <p ixia_locid="333">&lt;logical-interface&gt;</p>
+            </entry>
+            <entry ixia_locid="334">
+              <p ixia_locid="335">Reference LOGICAL_INTERFACE_N instead of using the name</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="336"/>
+            <entry ixia_locid="337"/>
+            <entry ixia_locid="338"/>
+            <entry ixia_locid="339"/>
+          </row>
+          <row>
+            <entry ixia_locid="340">
+              <p ixia_locid="341">REGION2_PXEBOOT_NETWORK</p>
+            </entry>
+            <entry ixia_locid="342"/>
+            <entry ixia_locid="343"/>
+            <entry ixia_locid="344"/>
+          </row>
+          <row>
+            <entry ixia_locid="345"/>
+            <entry ixia_locid="346">
+              <p ixia_locid="347">PXEBOOT_CIDR</p>
+            </entry>
+            <entry ixia_locid="348">
+              <p ixia_locid="349">&lt;network/mask&gt;</p>
+            </entry>
+            <entry ixia_locid="350">
+              <p ixia_locid="351">Unique subnet for region 2 </p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="352"/>
+            <entry ixia_locid="353"/>
+            <entry ixia_locid="354"/>
+            <entry ixia_locid="355"/>
+          </row>
+          <row>
+            <entry ixia_locid="356">
+              <p ixia_locid="357">SHARED_SERVICES</p>
+            </entry>
+            <entry ixia_locid="358"/>
+            <entry ixia_locid="359"/>
+            <entry ixia_locid="360"/>
+          </row>
+          <row>
+            <entry ixia_locid="361"/>
+            <entry ixia_locid="362">
+              <p ixia_locid="363">REGION_NAME</p>
+            </entry>
+            <entry ixia_locid="364">
+              <p ixia_locid="365">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="366">
+              <p ixia_locid="367">Name of region 1 (e.g. "RegionOne")</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="368"/>
+            <entry ixia_locid="369">
+              <p ixia_locid="370">KEYSTONE_ADMINURL</p>
+            </entry>
+            <entry ixia_locid="371">
+              <p ixia_locid="372">&lt;url&gt;</p>
+            </entry>
+            <entry ixia_locid="373"/>
+          </row>
+          <row>
+            <entry ixia_locid="374"/>
+            <entry ixia_locid="375">
+              <p ixia_locid="376">ADMIN_TENANT_NAME</p>
+            </entry>
+            <entry ixia_locid="377">
+              <p ixia_locid="378">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="379"/>
+          </row>
+          <row>
+            <entry ixia_locid="380"/>
+            <entry ixia_locid="381">
+              <p ixia_locid="382">ADMIN_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="383">
+              <p ixia_locid="384">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="385"/>
+          </row>
+          <row>
+            <entry ixia_locid="386"/>
+            <entry ixia_locid="387">
+              <p ixia_locid="388">ADMIN_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="389">
+              <p ixia_locid="390">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="391"/>
+          </row>
+          <row>
+            <entry ixia_locid="392"/>
+            <entry ixia_locid="393">
+              <p ixia_locid="394">KEYSTONE_SERVICE_NAME</p>
+            </entry>
+            <entry ixia_locid="395">
+              <p ixia_locid="396">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="397">
+              <p ixia_locid="398"><draft-comment author="jowens" ixia_locid="655">US80866 openstack service list
+                  changed to openstack service list (throughout table)</draft-comment>Service name
+                in service catalog (openstack service list).</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="399"/>
+            <entry ixia_locid="400">
+              <p ixia_locid="401">KEYSTONE_SERVICE_TYPE</p>
+            </entry>
+            <entry ixia_locid="402">
+              <p ixia_locid="403">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="404">
+              <p ixia_locid="405">Service type in service catalog (openstack service list).</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="406"/>
+            <entry ixia_locid="407">
+              <p ixia_locid="408">SERVICE_TENANT_NAME</p>
+            </entry>
+            <entry ixia_locid="409">
+              <p ixia_locid="410">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="411">
+              <p ixia_locid="412"><draft-comment author="jowens" ixia_locid="654">US80866 keystone tenant-list
+                  changed to openstack project list</draft-comment>Tenant name for openstack users
+                (openstack project list).</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="413"/>
+            <entry ixia_locid="414">
+              <p ixia_locid="415">CINDER_SERVICE_NAME</p>
+            </entry>
+            <entry ixia_locid="416">
+              <p ixia_locid="417">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="418">
+              <p ixia_locid="419">Service name in service catalog (openstack service list).</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="420"/>
+            <entry ixia_locid="421">
+              <p ixia_locid="422">CINDER_SERVICE_TYPE</p>
+            </entry>
+            <entry ixia_locid="423">
+              <p ixia_locid="424">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="425">
+              <p ixia_locid="426">Service type in service catalog (openstack service list).</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="427"/>
+            <entry ixia_locid="428">
+              <p ixia_locid="429">CINDER_V2_SERVICE_NAME</p>
+            </entry>
+            <entry ixia_locid="430">
+              <p ixia_locid="431">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="432">
+              <p ixia_locid="433">Service name in service catalog (openstack service list).</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="434"/>
+            <entry ixia_locid="435">
+              <p ixia_locid="436">CINDER_V2_SERVICE_TYPE</p>
+            </entry>
+            <entry ixia_locid="437">
+              <p ixia_locid="438">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="439">
+              <p ixia_locid="440">Service type in service catalog (openstack service list).</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="441"/>
+            <entry ixia_locid="442">
+              <p ixia_locid="443">GLANCE_SERVICE_NAME</p>
+            </entry>
+            <entry ixia_locid="444">
+              <p ixia_locid="445">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="446">
+              <p ixia_locid="447">Service name in service catalog (openstack service list).</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="448"/>
+            <entry ixia_locid="449">
+              <p ixia_locid="450">GLANCE_SERVICE_TYPE</p>
+            </entry>
+            <entry ixia_locid="451">
+              <p ixia_locid="452">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="453">
+              <p ixia_locid="454">Service type in service catalog (openstack service list).</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="455"/>
+            <entry ixia_locid="456">
+              <p ixia_locid="457">HORIZON_HOST_REMOTE</p>
+            </entry>
+            <entry ixia_locid="458">
+              <p ixia_locid="459">&lt;IPv4 address&gt;OAM IP for region one controller.</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="462"/>
+            <entry ixia_locid="463"/>
+            <entry ixia_locid="464"/>
+            <entry ixia_locid="465"/>
+          </row>
+          <row>
+            <entry ixia_locid="466">
+              <p ixia_locid="467">REGION_2_SERVICES</p>
+            </entry>
+            <entry ixia_locid="468"/>
+            <entry ixia_locid="469"/>
+            <entry ixia_locid="470"/>
+          </row>
+          <row>
+            <entry ixia_locid="471"/>
+            <entry ixia_locid="472">
+              <p ixia_locid="473">CREATE</p>
+            </entry>
+            <entry ixia_locid="474">
+              <p ixia_locid="475">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="476">
+              <p ixia_locid="477">N/Y. When it is set to Y, config_region creates the shared
+                keystone of users, service tenant, services, and endpoints that required in the
+                primary region. If N, config_region only validate the keystone configuration.</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="478"/>
+            <entry ixia_locid="479">
+              <p ixia_locid="480">REGION_NAME</p>
+            </entry>
+            <entry ixia_locid="481">
+              <p ixia_locid="482">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="483"/>
+          </row>
+          <row>
+            <entry ixia_locid="484"/>
+            <entry ixia_locid="485">
+              <p ixia_locid="486">NOVA_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="487">
+              <p ixia_locid="488">&lt;string&gt;</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="489"/>
+            <entry ixia_locid="490">
+              <p ixia_locid="491">NOVA_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="492">
+              <p ixia_locid="493">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="494"/>
+          </row>
+          <row>
+            <entry ixia_locid="495"/>
+            <entry ixia_locid="496">
+              <p ixia_locid="497">NEUTRON_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="498">
+              <p ixia_locid="499">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="500"/>
+          </row>
+          <row>
+            <entry ixia_locid="501"/>
+            <entry ixia_locid="502">
+              <p ixia_locid="503">NEUTRON_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="504">
+              <p ixia_locid="505">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="506"/>
+          </row>
+          <row>
+            <entry ixia_locid="507"/>
+            <entry ixia_locid="508">
+              <p ixia_locid="509">SYSINV_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="510">
+              <p ixia_locid="511">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="512"/>
+          </row>
+          <row>
+            <entry ixia_locid="513"/>
+            <entry ixia_locid="514">
+              <p ixia_locid="515">SYSINV_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="516">
+              <p ixia_locid="517">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="518"/>
+          </row>
+          <row>
+            <entry ixia_locid="519"/>
+            <entry ixia_locid="520">
+              <p ixia_locid="521">PATCHING_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="522">
+              <p ixia_locid="523">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="524"/>
+          </row>
+          <row>
+            <entry ixia_locid="525"/>
+            <entry ixia_locid="526">
+              <p ixia_locid="527">PATCHING_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="528">
+              <p ixia_locid="529">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="530"/>
+          </row>
+          <row>
+            <entry ixia_locid="531"/>
+            <entry ixia_locid="532">
+              <p ixia_locid="533">HEAT_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="534">
+              <p ixia_locid="535">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="536"/>
+          </row>
+          <row>
+            <entry ixia_locid="537"/>
+            <entry ixia_locid="538">
+              <p ixia_locid="539">HEAT_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="540">
+              <p ixia_locid="541">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="542"/>
+          </row>
+          <row>
+            <entry ixia_locid="543"/>
+            <entry ixia_locid="544">
+              <p ixia_locid="545">HEAT_ADMIN_DOMAIN</p>
+            </entry>
+            <entry ixia_locid="546">
+              <p ixia_locid="547">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="548"/>
+          </row>
+          <row>
+            <entry ixia_locid="549"/>
+            <entry ixia_locid="550">
+              <p ixia_locid="551">HEAT_ADMIN_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="552">
+              <p ixia_locid="553">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="554"/>
+          </row>
+          <row>
+            <entry ixia_locid="555"/>
+            <entry ixia_locid="556">
+              <p ixia_locid="557">HEAT_ADMIN_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="558">
+              <p ixia_locid="559">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="560"/>
+          </row>
+          <row>
+            <entry ixia_locid="561"/>
+            <entry ixia_locid="562">
+              <p ixia_locid="563">CEILOMETER_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="564">
+              <p ixia_locid="565">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="566"/>
+          </row>
+          <row>
+            <entry ixia_locid="567"/>
+            <entry ixia_locid="568">
+              <p ixia_locid="569">CEILOMETER_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="570">
+              <p ixia_locid="571">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="572"/>
+          </row>
+          <row>
+            <entry ixia_locid="573"/>
+            <entry ixia_locid="574">
+              <p ixia_locid="575">NFV_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="576">
+              <p ixia_locid="577">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="578"/>
+          </row>
+          <row>
+            <entry ixia_locid="579"/>
+            <entry ixia_locid="580">
+              <p ixia_locid="581">NFV_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="582">
+              <p ixia_locid="583">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="584"/>
+          </row>
+          <row>
+            <entry ixia_locid="585"/>
+            <entry ixia_locid="586">
+              <p ixia_locid="587">AODH_USER_NAME</p>
+            </entry>
+            <entry ixia_locid="588">
+              <p ixia_locid="589">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="590"/>
+          </row>
+          <row>
+            <entry ixia_locid="591"/>
+            <entry ixia_locid="592">
+              <p ixia_locid="593">AODH_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="594">
+              <p ixia_locid="595">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="596"/>
+          </row>
+          <row>
+            <entry ixia_locid="597"/>
+            <entry ixia_locid="598"/>
+            <entry ixia_locid="599"/>
+            <entry ixia_locid="600"/>
+          </row>
+          <row>
+            <entry ixia_locid="601">
+              <p ixia_locid="602">LICENSING</p>
+            </entry>
+            <entry ixia_locid="603"/>
+            <entry ixia_locid="604"/>
+            <entry ixia_locid="605"/>
+          </row>
+          <row>
+            <entry ixia_locid="606"/>
+            <entry ixia_locid="607"/>
+            <entry ixia_locid="608"/>
+            <entry ixia_locid="609"/>
+          </row>
+          <row>
+            <entry ixia_locid="610"/>
+            <entry ixia_locid="611">
+              <p ixia_locid="612">LICENSE_FILE_NAME</p>
+            </entry>
+            <entry ixia_locid="613">
+              <p ixia_locid="614">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="615">
+              <p ixia_locid="616">Can be filename or full path to file.</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="617">
+              <p ixia_locid="618">SECURITY</p>
+            </entry>
+            <entry ixia_locid="619"/>
+            <entry ixia_locid="620"/>
+            <entry ixia_locid="621"/>
+          </row>
+          <row>
+            <entry ixia_locid="622"/>
+            <entry ixia_locid="623"/>
+            <entry ixia_locid="624"/>
+            <entry ixia_locid="625"/>
+          </row>
+          <row>
+            <entry ixia_locid="626"/>
+            <entry ixia_locid="627">
+              <p ixia_locid="628">ENABLE_HTTPS</p>
+            </entry>
+            <entry ixia_locid="629">
+              <p ixia_locid="630">&lt;Y/N&gt;</p>
+            </entry>
+            <entry ixia_locid="631">
+              <p ixia_locid="632">Whether to enable HTTPS</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="633"/>
+            <entry ixia_locid="634">
+              <p ixia_locid="635">SELF_SIGNED</p>
+            </entry>
+            <entry ixia_locid="636">
+              <p ixia_locid="637">&lt;Y/N&gt;</p>
+            </entry>
+            <entry ixia_locid="638">
+              <p ixia_locid="639">Use self signed certificate</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="640"/>
+            <entry ixia_locid="641">
+              <p ixia_locid="642">CERTIFICATE_FILE_NAME</p>
+            </entry>
+            <entry ixia_locid="643">
+              <p ixia_locid="644">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="645">
+              <p ixia_locid="646">Can be filename or full path to file. Only required if
+                SELF_SIGNED=N.</p>
+            </entry>
+          </row>
+          <row>
+            <entry ixia_locid="647">
+              <p ixia_locid="648">CERTIFICATE_PASSWORD</p>
+            </entry>
+            <entry ixia_locid="649">
+              <p ixia_locid="650">&lt;string&gt;</p>
+            </entry>
+            <entry ixia_locid="651">
+              <p ixia_locid="652">Required if CERTIFICATE_FILE_NAME is password protected.</p>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </refbody>
+</reference-wr>

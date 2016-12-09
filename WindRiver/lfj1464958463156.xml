@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="lfj1464958463156" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Secondary Region</title>
+ <shortdesc ixia_locid="2">The Secondary Region system provides regional controller and compute
+  resources, coordinated by the Primary Region.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">The Secondary Region includes all OpenStack Services supported by the particular
+   OpenStack Cloud, except for those services that the Primary Region is sharing with this Secondary
+   Region.</p>
+  <p ixia_locid="44">The local services of the Secondary Region must be configured to obtain
+   authenticated tokens and service endpoint URLs from the Primary Region Keystone service. The
+   Primary Region’s Keystone service requires a tenant, users, services, and service endpoints for
+   all services running in both regions.</p>
+  <draft-comment author="eknowlto" ixia_locid="45">Note added for CGTS-4231</draft-comment>
+  <note id="note_N100D8_N1001F_N10001" ixia_locid="46">
+   <p ixia_locid="47">There are no edit/delete protections on the Keystone entities that are created
+    for the Secondary Region, as there are for those in the Primary Region. It is critical that
+    these are not modified or deleted by the user.</p>
+  </note>
+ </conbody>
+</concept-wr>

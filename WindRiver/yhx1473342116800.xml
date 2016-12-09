@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="yhx1473342116800" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="339">Configuring Ethernet Interfaces Using the CLI</title>
+    <shortdesc ixia_locid="340">You can use the CLI to attach Ethernet interfaces to
+        networks.</shortdesc>
+    <prolog>
+        <author ixia_locid="341">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001D_N1001A_N10001" ixia_locid="342">
+            <p ixia_locid="73"><draft-comment author="jowens" ixia_locid="301">US65058 added address
+                    pool options</draft-comment>Ethernet interfaces are created automatically. To
+                attach one to a network, use a command of the following form:</p>
+            <codeblock ixia_locid="74"><systemoutput ixia_locid="299">~(keystone_admin)$ </systemoutput><userinput ixia_locid="75">system host-if-modify -n <varname ixia_locid="76">ifname</varname> -m <varname ixia_locid="77">mtu</varname> \
+-nt <varname ixia_locid="78">networktype</varname> <varname ixia_locid="79">hostname</varname> <varname ixia_locid="80">ethname</varname> [-p <varname ixia_locid="249">providernetworklist</varname>] \
+[--ipv4-mode=ip4_mode [ipv4-pool addr_pool]] [--ipv6-mode=ip6_mode [ipv6-pool addr_pool]]</userinput></codeblock>
+            <p ixia_locid="81">where</p>
+            <parml>
+                <plentry ixia_locid="82">
+                    <pt ixia_locid="83">ifname</pt>
+                    <pd ixia_locid="84">
+                        <p ixia_locid="85">is a name for the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="229">
+                    <pt ixia_locid="231">mtu</pt>
+                    <pd ixia_locid="233">
+                        <p ixia_locid="235">is the MTU for the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="237">
+                    <pt ixia_locid="239">networktype</pt>
+                    <pd ixia_locid="241">
+                        <p ixia_locid="93">is the type of network to attach to</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="94">
+                    <pt ixia_locid="95">hostname</pt>
+                    <pd ixia_locid="96">
+                        <p ixia_locid="97">is the name or UUID of the host</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="98">
+                    <pt ixia_locid="99">ethname</pt>
+                    <pd ixia_locid="100">
+                        <p ixia_locid="101">is the name or UUID of the Ethernet interface to use</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="302">
+                    <pt ixia_locid="303">providernetworklist</pt>
+                    <pd ixia_locid="304">
+                        <p ixia_locid="305">is a list of provider networks, delimited by quotes and
+                            separated by spaces; for example, "provider-net-a provider-net-b". To
+                            specify a single provider network, omit the quotes. This parameter is
+                            required only if the <varname ixia_locid="268">networktype</varname> is
+                            set to <option ixia_locid="269">data</option>.</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="306">
+                    <pt ixia_locid="307">ip4_mode</pt>
+                    <pd ixia_locid="308">
+                        <p ixia_locid="309">is the mode for assigning IPv4 addresses to a data
+                            interface (<option ixia_locid="310">static</option> or <option ixia_locid="311">pool</option>), for use with VXLANs </p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="312">
+                    <pt ixia_locid="313">ip6_mode</pt>
+                    <pd ixia_locid="314">
+                        <p ixia_locid="315">is the mode for assigning IPv6 addresses to a data
+                            interface (<option ixia_locid="316">static</option> or <option ixia_locid="317">pool</option>), for use with VXLANs </p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="318">
+                    <pt ixia_locid="319">addr_pool</pt>
+                    <pd ixia_locid="320">
+                        <p ixia_locid="321">is the name of an IPv4 or IPv6 address pool, for use
+                            with the <option ixia_locid="322">pool</option> mode of IP address
+                            assignment for data interfaces used with VXLANs</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="323">For valid values, see <xref href="jow1426955886080.xml" ixia_locid="324"/>.</p>
+            <p ixia_locid="102">For example, to attach an interface named <nameliteral ixia_locid="103">enp0s3</nameliteral> to the OAM network, using Ethernet
+                interface <nameliteral ixia_locid="104">enp0s3</nameliteral> on <nameliteral ixia_locid="105">controller-1</nameliteral>:</p>
+            <codeblock ixia_locid="326"><systemoutput ixia_locid="327">~(keystone_admin)$ </systemoutput><userinput ixia_locid="328">system host-if-modify -n enp0s3 \
+-nt oam controller-1 enp0s3</userinput>
+<systemoutput ixia_locid="329">+------------------+----------------------------------------+
+| Property         | Value                                  |
++------------------+----------------------------------------+
+| ifname           | enp0s3                                 |
+| networktype      | oam                                    |
+| iftype           | ethernet                               |
+| ports            | [u'enp0s3']                            |
+| providernetworks | None                                   |
+| imac             | 08:00:27:58:0c:e5                      |
+| imtu             | 1500                                   |
+| aemode           | None                                   |
+| schedpolicy      | None                                   |
+| txhashpolicy     | None                                   |
+| uuid             | 14300770-13bf-48fd-b9af-756ec7d8adc1   |
+| ihost_uuid       | e1c47086-3230-4b92-91d0-208c55130a52   |
+| vlan_id          | None                                   |
+| uses             | []                                     |
+| used_by          | []                                     |
+| created_at       | 2015-12-10T14:24:25.967362+00:00       |
+| updated_at       | 2015-12-10T17:01:08.761323+00:00       |
+| sriov_numvfs     | 0                                      |
+| accelerated      | [u'True']                              |
++------------------+----------------------------------------+</systemoutput></codeblock>
+            <p ixia_locid="330">To attach an interface named <nameliteral ixia_locid="331">enp0s9</nameliteral> to a VLAN provider network named <nameliteral ixia_locid="332">providernet-a</nameliteral>, using Ethernet interface
+                    <nameliteral ixia_locid="333">enp0s9</nameliteral> on<nameliteral ixia_locid="334"> compute-0</nameliteral>:</p>
+            <codeblock ixia_locid="335"><systemoutput ixia_locid="336">~(keystone_admin)$ </systemoutput><userinput ixia_locid="337">system host-if-modify -n enp0s9 \
+-nt data compute-0 enp0s9 -p providernet-a</userinput>
+<systemoutput ixia_locid="338">+------------------+----------------------------------------+
+| Property         | Value                                  |
++------------------+----------------------------------------+
+| ifname           | enp0s9                                 |
+| networktype      | data                                   |
+| iftype           | ethernet                               |
+| ports            | [u'enp0s9']                            |
+| providernetworks | providernet-a                          |
+| imac             | 08:00:27:66:38:c6                      |
+| imtu             | 1500                                   |
+| aemode           | None                                   |
+| schedpolicy      | None                                   |
+| txhashpolicy     | None                                   |
+| uuid             | 4ff97cc5-8e59-4763-9a85-c4be3996ddbe   |
+| ihost_uuid       | 327b2136-ffb6-4cd5-8fed-d2ec545302aa   |
+| vlan_id          | None                                   |
+| uses             | []                                     |
+| used_by          | []                                     |
+| created_at       | 2015-12-23T13:04:49.768322+00:00       |
+| updated_at       | 2015-12-23T16:16:19.540661+00:00       |
+| sriov_numvfs     | 0                                      |
+| ipv4_mode        | disabled                               |
+| ipv6_mode        | disabled                               |
+| accelerated      | [u'True']                              |
++------------------+----------------------------------------+
+</systemoutput></codeblock>
+        </context>
+    </taskbody>
+</task-wr>

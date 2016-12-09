@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="dny1463591372775" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Viewing Suppressed Alarms Using the CLI</title>
+    <shortdesc ixia_locid="2">You can view a list of currently suppressed alarms using the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="66">Jim Owens</author>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4"/>
+        <section id="section_N10030_N1001F_N10001" ixia_locid="34">
+            <ul id="ul_uwd_tgz_bw">
+                <li ixia_locid="35">
+                    <p ixia_locid="36"><draft-comment author="eknowlto" ixia_locid="33">US79047-Alarm Suppression; (JO) CGTS-4967 add --nopaging, --uuid,
+                            --include-unsuppressed options, correct example
+                        output</draft-comment>Use the <cmdname ixia_locid="8">system
+                            event-suppress-list</cmdname> CLI command to view a list of all
+                        currently suppressed alarms.</p>
+                    <p ixia_locid="10">This command shows all alarm IDs along with their suppression
+                        status. </p>
+                    <codeblock ixia_locid="37"><systemoutput ixia_locid="38">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="39">system event-suppress-list \
+[--nopaging] [--uuid] [--include-unsuppressed]</userinput></codeblock>
+                    <p ixia_locid="40">where</p>
+                    <parml>
+                        <plentry ixia_locid="41">
+                            <pt ixia_locid="42"><parmname ixia_locid="43">--nopaging</parmname></pt>
+                            <pd ixia_locid="44">
+                                <p ixia_locid="45">disables paged output</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="55">
+                            <pt ixia_locid="56"><parmname ixia_locid="57">--uuid</parmname></pt>
+                            <pd ixia_locid="58">
+                                <p ixia_locid="59">includes the alarm UUIDs in the output</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="60">
+                            <pt ixia_locid="61"><parmname ixia_locid="62">--include-unsuppressed</parmname></pt>
+                            <pd ixia_locid="63">
+                                <p ixia_locid="64">includes unsuppressed alarm IDs in the output</p>
+                            </pd>
+                        </plentry>
+                    </parml>
+                </li>
+            </ul>
+            <p ixia_locid="51"><draft-comment author="jowens" ixia_locid="65">CGTS-4521 updated colum
+                    heading</draft-comment>For example:</p>
+            <codeblock ixia_locid="52"><systemoutput ixia_locid="53">[wrsroot@controller-0 ~(keystone_admin)]</systemoutput> <userinput ixia_locid="54">system event-suppress-list</userinput>
+<systemoutput ixia_locid="14">
++----------+-------------+
+| Event ID | Status      |
++----------+-------------+
+| 100.101  | suppressed  |
+| 100.103  | suppressed  |
+| 100.105  | suppressed  |
+
+      ...
++----------+-------------+</systemoutput></codeblock>
+        </section>
+    </taskbody>
+</task-wr>

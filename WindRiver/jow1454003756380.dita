@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003756380" xml:lang="en-us"><title ixia_locid="1">Scaling Rules/Recommendations for Storage Nodes</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">Three key performance parameters to be considered when engineering the OSD cluster
+            are the required capacity, I/O operations per second (IOPS), and data throughput. The
+            deployment choices that contribute to these parameters are disk size, disk speed, disk
+            controller performance, and the number of disks. Processor speed, cores, and memory may
+            contribute but to a lesser degree.</p><p ixia_locid="5">In general, scaling the cluster by adding more OSDs is preferable to scaling through the use of larger or faster devices.  This is because adding OSDs not only increases capacity but also performance by providing more devices to spread reads and writes across.  The following sections provide guidance on selecting the number of OSDs for a specific hardware configuration.  </p></conbody></concept-wr>

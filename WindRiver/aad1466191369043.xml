@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="aad1466191369043" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="322">NUMA Node Affinity Management</title>
+ <shortdesc ixia_locid="323">By default, the memory and CPU resources defined for a flavor are assigned to a single
+  virtual NUMA node, which is mapped to an available host NUMA node when an instance is launched or
+  migrated. </shortdesc>
+ <prolog>
+  <author ixia_locid="324">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="5">You can specify the use of multiple NUMA nodes using either flavor extra
+   specifications (which take the general form <nameliteral ixia_locid="93">hw:specification</nameliteral>), or image properties (which take the general form <nameliteral ixia_locid="94">hw_specification</nameliteral>).</p>
+  <p ixia_locid="6">If you specify the use of multiple NUMA nodes, then by default, the available
+   CPU and memory resources for the flavor are distributed equally among the NUMA nodes. You can
+   customize the distribution of resources. For example, given a flavor with two NUMA nodes, three
+   vCPUs, and 1024 MB of RAM, you can assign one vCPU and 512 MB to virtual NUMA node 0, and two
+   VCPUs and 512 MB to virtual NUMA node 1. The ability to allocate resources is useful when pinning
+   virtual NUMA nodes to host NUMA nodes to optimize VM performance.</p>
+  <p ixia_locid="77">Normally the memory required for a virtual NUMA node is pinned to a single host
+   NUMA node to ensure high performance. For applications where high performance is not a concern,
+   you can relax the memory allocation requirements so that the memory for a virtual NUMA node can
+   be drawn from more than one host NUMA node if necessary.</p>
+  <p ixia_locid="261">When deploying network guest images operating on the data path, it is
+   advisable to co-locate the virtual machines, the AVS switch, physical ports, and all other
+   networking elements on the same node.</p>
+  <p ixia_locid="262">Use of this option should be limited to cases where fine-tuning of the data
+   path on guest applications is important.</p>
+  <note conref="jow1453048538675.xml#jow1453048538675/note_N10013_N10011_N10001" id="note_N1004A_N10022_N1001F_N10001" ixia_locid="321"/>
+ </conbody>
+</concept-wr>

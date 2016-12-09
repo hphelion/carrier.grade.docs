@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="xms1466026140926" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">The PXE Boot Network</title>
+ <shortdesc ixia_locid="2">You can set up a PXE Boot network for booting all nodes,  in order to
+  configure the management network differently.</shortdesc>
+ <prolog>
+  <author ixia_locid="5">Edward Knowlton</author>
+  <author ixia_locid="3">Jim Owens </author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">By default, the internal management network is used for PXE booting of new
+   hosts, and therefore must be untagged. It is also limited to IPv4, because the Titanium Server
+   installer does not support IPv6 UEFI booting. If, for deployment reasons, the internal management
+   network needs to be on a VLAN-tagged network, or if it must support IPv6, you can configure the
+   optional untagged PXE boot network for PXE booting of new hosts using IPv4. </p>
+ </conbody>
+</concept-wr>

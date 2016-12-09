@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="kzj1477760386805" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="84">Troubleshooting Notes for Cache Tiering</title>
+ <shortdesc ixia_locid="85">Incorrect cache pool tuning can result in a variety of monitoring and performance
+  issues. </shortdesc>
+ <prolog>
+  <author ixia_locid="86">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <ul id="ul_twp_lnw_tx">
+   <li ixia_locid="87">
+    <p ixia_locid="88">Promotion, flushing, or eviction operations occur before the associated thresholds are
+     crossed</p>
+    <p ixia_locid="89">This can appear to happen because the cache tiering agent relies on statistics for individual
+     placement groups within the pool, rather than on the statistics for the pool as a whole as
+     shown in the <cmdname ixia_locid="90">ceph df detail</cmdname> command. No corrective action is required.</p>
+   </li>
+   <li ixia_locid="91">
+    <p ixia_locid="92">Backing tier pool quota changes are denied</p>
+    <p ixia_locid="93">This can happen because of a discrepancy between the backing data and the cache data during
+     regular operations, due to normal transaction delays.</p>
+    <p ixia_locid="94">You can correct this by tuning the pool parameters to lower the backing tier pool usage below
+     the desired quota.</p>
+   </li>
+   <li ixia_locid="95">
+    <p ixia_locid="96">I/O activity is blocked by a full backing pool</p>
+    <p ixia_locid="97">Blocked I/O activity can present itself in a variety of ways, such as failed
+          instance launches, failed volume creations, VM freezes, or other issues related to storage
+          access. This can happen when high activity levels cause a backlog of objects to be deleted
+          in the backing tier, and the unreleased objects consume all available space.</p>
+    <p ixia_locid="98">You can correct this by manually purging the cache, and then reinstating the
+          caching parameters, in particular the <nameliteral ixia_locid="99">target_max_object</nameliteral> parameter, using more appropriate values.</p>
+    <note id="note_N10056_N10043_N1001F_N1001C_N10001" ixia_locid="100" type="caution">
+     <p ixia_locid="101">Purging the cache can take several hours, depending on the size of the
+            cache tier pool, the amount of data to be flushed or evicted, and the current cache
+            client I/O rate. </p>
+    </note>
+    <p ixia_locid="102">The following example flushes or evicts the cache so that the backing pool
+          is updated on the outstanding transactions taken by the caching pool.</p>
+    <note id="note_N1006A_N10043_N1001F_N1001C_N10001" ixia_locid="104">
+     <p ixia_locid="105">Prior to performing this operation, save the current values so that you can use them to
+      re-enable the cache.</p>
+    </note>
+    <codeblock ixia_locid="81"><systemoutput ixia_locid="106">~(keystone_admin)$ </systemoutput><userinput ixia_locid="107">ceph osd pool set <varname ixia_locid="108">pool</varname> target_max_bytes 0</userinput>
+<systemoutput ixia_locid="109">~(keystone_admin)$ </systemoutput><userinput ixia_locid="110">ceph osd pool set <varname ixia_locid="111">pool</varname> target_max_objects 1</userinput>
+<systemoutput ixia_locid="112">~(keystone_admin)$ </systemoutput><userinput ixia_locid="113">ceph osd pool set <varname ixia_locid="114">pool</varname> cache_min_flush_age 0</userinput>
+<systemoutput ixia_locid="115">~(keystone_admin)$ </systemoutput><userinput ixia_locid="116">ceph osd pool set <varname ixia_locid="117">pool</varname> cache_min_evict_age 0</userinput>
+<systemoutput ixia_locid="118">~(keystone_admin)$ </systemoutput><userinput ixia_locid="119">ceph osd pool set <varname ixia_locid="120">pool</varname> cache_target_dirty_ratio 0</userinput>
+<systemoutput ixia_locid="121">~(keystone_admin)$ </systemoutput><userinput ixia_locid="122">ceph osd pool set <varname ixia_locid="123">pool</varname> cache_target_full_ratio 0</userinput></codeblock>
+   </li>
+   <li ixia_locid="124">
+    <p ixia_locid="125">Writes are allowed in excess of the backing pool quota</p>
+    <p ixia_locid="126">To ensure that the cache tier does not provide additional storage beyond the backing pool
+     limits prior to flushing, configure the cache tier for write-through operation. </p>
+   </li>
+  </ul>
+ </conbody>
+</concept-wr>

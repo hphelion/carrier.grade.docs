@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003784687" xml:lang="en-us"><title ixia_locid="1">System Limits</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">This section captures key system limits. The overall limits are described in <xref format="dita" href="#jow1454003784687/table_N10020_N10019_N10001" ixia_locid="278"/>, with a more
+            verbose explanation for some limits in the following sections.</p>
+        <table id="table_N10020_N10019_N10001">
+            <title id="title__Toc441623519" ixia_locid="5">System Limits Summary</title>
+            <tgroup cols="5">
+                <colspec colname="1" colwidth="1458*"/>
+                <colspec colname="2" colwidth="3330*"/>
+                <colspec colname="3" colwidth="957*"/>
+                <colspec colname="4" colwidth="1915*"/>
+                <colspec colname="5" colwidth="1916*"/>
+                <thead>
+                    <row>
+                        <entry ixia_locid="6">
+                            <p ixia_locid="7">Category </p>
+                        </entry>
+                        <entry ixia_locid="8">
+                            <p ixia_locid="9">Capacity</p>
+                        </entry>
+                        <entry ixia_locid="10">
+                            <p ixia_locid="11">Tested</p>
+                        </entry>
+                        <entry ixia_locid="12">
+                            <p ixia_locid="13">Theoretical Limit</p>
+                        </entry>
+                        <entry ixia_locid="14">
+                            <p ixia_locid="15">Comment</p>
+                        </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry ixia_locid="26">
+                            <p ixia_locid="27">Compute Node</p>
+                        </entry>
+                        <entry ixia_locid="28">
+                            <p ixia_locid="29">Max VMs per compute node</p>
+                        </entry>
+                        <entry ixia_locid="30">
+                            <p ixia_locid="31">20</p>
+                        </entry>
+                        <entry ixia_locid="32">
+                            <p ixia_locid="33">NA</p>
+                        </entry>
+                        <entry ixia_locid="34">
+                            <p ixia_locid="35">Resource, configuration, and VM-dependent</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="36">
+                            <p ixia_locid="37">Hardware</p>
+                        </entry>
+                        <entry ixia_locid="38">
+                            <p ixia_locid="39">Max compute nodes in Standard Configuration with
+                                Dedicated Storage</p>
+                        </entry>
+                        <entry ixia_locid="40">
+                            <p ixia_locid="41">100</p>
+                        </entry>
+                        <entry ixia_locid="42">
+                            <p ixia_locid="43">NA</p>
+                        </entry>
+                        <entry ixia_locid="44">
+                            <p ixia_locid="45">100 is maximum supported in this release</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="46">
+                            <p ixia_locid="47">Hardware</p>
+                        </entry>
+                        <entry ixia_locid="48">
+                            <p ixia_locid="49">Max controller nodes</p>
+                        </entry>
+                        <entry ixia_locid="50">
+                            <p ixia_locid="51">2</p>
+                        </entry>
+                        <entry ixia_locid="52">
+                            <p ixia_locid="53">2</p>
+                        </entry>
+                        <entry ixia_locid="54">
+                            <p ixia_locid="55">Two required for redundancy</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="56">
+                            <p ixia_locid="57">Hardware</p>
+                        </entry>
+                        <entry ixia_locid="58">
+                            <p ixia_locid="59">Max storage nodes</p>
+                        </entry>
+                        <entry ixia_locid="60">
+                            <p ixia_locid="61">2</p>
+                        </entry>
+                        <entry ixia_locid="62">
+                            <p ixia_locid="63">8</p>
+                        </entry>
+                        <entry ixia_locid="64">
+                            <p ixia_locid="65">Standard Configuration with Dedicated Storage
+                                only</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="66">
+                            <p ixia_locid="67">Networking</p>
+                        </entry>
+                        <entry ixia_locid="68">
+                            <p ixia_locid="69">Max (tenant) networks per system</p>
+                        </entry>
+                        <entry ixia_locid="70">
+                            <p ixia_locid="71">450</p>
+                        </entry>
+                        <entry ixia_locid="72">
+                            <p ixia_locid="73">NA</p>
+                        </entry>
+                        <entry ixia_locid="74"/>
+                    </row>
+                    <row>
+                        <entry ixia_locid="75">
+                            <p ixia_locid="76">Networking</p>
+                        </entry>
+                        <entry ixia_locid="77">
+                            <p ixia_locid="78">Max provider networks per system</p>
+                        </entry>
+                        <entry ixia_locid="79">
+                            <p ixia_locid="80">42</p>
+                        </entry>
+                        <entry ixia_locid="81">
+                            <p ixia_locid="82">NA</p>
+                        </entry>
+                        <entry ixia_locid="83"/>
+                    </row>
+                    <row>
+                        <entry ixia_locid="84">
+                            <p ixia_locid="85">Networking</p>
+                        </entry>
+                        <entry ixia_locid="86">
+                            <p ixia_locid="87">Max virtual routers and DHCP servers per system</p>
+                        </entry>
+                        <entry ixia_locid="88">
+                            <p ixia_locid="89">20</p>
+                        </entry>
+                        <entry ixia_locid="90">
+                            <p ixia_locid="277">NA</p>
+                        </entry>
+                        <entry ixia_locid="91">
+                            <p ixia_locid="196">Assumes provider access partitioned to avoid 250
+                                per compute node limit</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="109">
+                            <p ixia_locid="110">Networking</p>
+                        </entry>
+                        <entry ixia_locid="111">
+                            <p ixia_locid="112">Max subnets per system</p>
+                        </entry>
+                        <entry ixia_locid="113">
+                            <p ixia_locid="114">850</p>
+                        </entry>
+                        <entry ixia_locid="115">
+                            <p ixia_locid="116">NA</p>
+                        </entry>
+                        <entry ixia_locid="117">
+                            <p ixia_locid="197">Assumes provider access partitioned to avoid 250 per
+                                compute node limit</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="118">
+                            <p ixia_locid="119">Networking</p>
+                        </entry>
+                        <entry ixia_locid="120">
+                            <p ixia_locid="121">Max subnets sharing a compute node</p>
+                        </entry>
+                        <entry ixia_locid="122">
+                            <p ixia_locid="123">250</p>
+                        </entry>
+                        <entry ixia_locid="124">
+                            <p ixia_locid="125">NA</p>
+                        </entry>
+                        <entry ixia_locid="126">
+                            <p ixia_locid="275">Limited by the maximum number of vSwitch ports per
+                                node</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="198">
+                            <p ixia_locid="199">vSwitch</p>
+                        </entry>
+                        <entry ixia_locid="200">
+                            <p ixia_locid="201">Max virtual routers/DHCP servers sharing a compute
+                                node</p>
+                        </entry>
+                        <entry ixia_locid="202">
+                            <p ixia_locid="203">250</p>
+                        </entry>
+                        <entry ixia_locid="204">
+                            <p ixia_locid="205">NA</p>
+                        </entry>
+                        <entry ixia_locid="206">
+                            <p ixia_locid="276">Limited by the maximum number of vSwitch ports per
+                                node</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="208">
+                            <p ixia_locid="209">vSwitch</p>
+                        </entry>
+                        <entry ixia_locid="210">
+                            <p ixia_locid="211">Max entries in MAC address Table in node</p>
+                        </entry>
+                        <entry ixia_locid="212">
+                            <p ixia_locid="213">2700</p>
+                        </entry>
+                        <entry ixia_locid="214">
+                            <p ixia_locid="215">262144</p>
+                        </entry>
+                        <entry ixia_locid="216">
+                            <p ixia_locid="217">1024 per network segment</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="218">
+                            <p ixia_locid="219">vSwitch</p>
+                        </entry>
+                        <entry ixia_locid="220">
+                            <p ixia_locid="221">Max ports per node</p>
+                        </entry>
+                        <entry ixia_locid="222">
+                            <p ixia_locid="223">254</p>
+                        </entry>
+                        <entry ixia_locid="224">
+                            <p ixia_locid="145">254</p>
+                        </entry>
+                        <entry ixia_locid="225">
+                            <p ixia_locid="226">Includes virtual and physical ports</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="227">
+                            <p ixia_locid="228">vSwitch</p>
+                        </entry>
+                        <entry ixia_locid="229">
+                            <p ixia_locid="230">Max AVS physical ports per node</p>
+                        </entry>
+                        <entry ixia_locid="231">
+                            <p ixia_locid="232">4</p>
+                        </entry>
+                        <entry ixia_locid="233"/>
+                        <entry ixia_locid="234"/>
+                    </row>
+                    <row>
+                        <entry ixia_locid="147">
+                            <p ixia_locid="148">vSwitch</p>
+                        </entry>
+                        <entry ixia_locid="149">
+                            <p ixia_locid="150">Max ports per VM</p>
+                        </entry>
+                        <entry ixia_locid="151">
+                            <p ixia_locid="152">8</p>
+                        </entry>
+                        <entry ixia_locid="153">
+                            <p ixia_locid="154">8</p>
+                        </entry>
+                        <entry ixia_locid="155">
+                            <p ixia_locid="156">KVM limit</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="157">
+                            <p ixia_locid="158">vSwitch</p>
+                        </entry>
+                        <entry ixia_locid="159">
+                            <p ixia_locid="160">Max security rules per node</p>
+                        </entry>
+                        <entry ixia_locid="161">
+                            <p ixia_locid="162">16384</p>
+                        </entry>
+                        <entry ixia_locid="163">
+                            <p ixia_locid="164">32512</p>
+                        </entry>
+                        <entry ixia_locid="165">
+                            <p ixia_locid="166">128 rules per port</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="167">
+                            <p ixia_locid="168">Storage Node</p>
+                        </entry>
+                        <entry ixia_locid="169">
+                            <p ixia_locid="170">Max OSDs</p>
+                        </entry>
+                        <entry ixia_locid="171">
+                            <p ixia_locid="172">16</p>
+                        </entry>
+                        <entry ixia_locid="173"/>
+                        <entry ixia_locid="174">
+                            <p ixia_locid="175">8 OSDs per Storage Node</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="176">
+                            <p ixia_locid="177">Storage Node</p>
+                        </entry>
+                        <entry ixia_locid="178">
+                            <p ixia_locid="179">Min OSDs</p>
+                        </entry>
+                        <entry ixia_locid="180">
+                            <p ixia_locid="181">4</p>
+                        </entry>
+                        <entry ixia_locid="182"/>
+                        <entry ixia_locid="183">
+                            <p ixia_locid="184">2 OSDs per Storage Node</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="235">
+                            <p ixia_locid="236">Virtual Machines</p>
+                        </entry>
+                        <entry ixia_locid="237">
+                            <p ixia_locid="238">Max Number of Virtual Machines</p>
+                        </entry>
+                        <entry ixia_locid="239">
+                            <p ixia_locid="240">1000</p>
+                        </entry>
+                        <entry ixia_locid="241">
+                            <p ixia_locid="242">NA</p>
+                        </entry>
+                        <entry ixia_locid="243">
+                            <p ixia_locid="244">Resource, configuration, and VM-dependent</p>
+                            <p ixia_locid="195">1000 is maximum supported in this release</p>
+                        </entry>
+                    </row>
+                    
+                    <row>
+                        <entry ixia_locid="279">
+                            <p ixia_locid="280">Heat Template</p>
+                        </entry>
+                        <entry ixia_locid="281">
+                            <p ixia_locid="282">Max Heat resources</p>
+                        </entry>
+                        <entry ixia_locid="283">
+                            <p ixia_locid="284">1000</p>
+                        </entry>
+                        <entry ixia_locid="285">
+                            <p ixia_locid="286">NA</p>
+                        </entry>
+                        <entry ixia_locid="287">
+                            <p ixia_locid="288">Max resources in a single Heat stack</p>
+                        </entry>
+                    </row>
+                    
+                    <row>
+                        <entry ixia_locid="289">
+                            <p ixia_locid="290">Heat Template</p>
+                        </entry>
+                        <entry ixia_locid="291">
+                            <p ixia_locid="292">Max VMs using local storage</p>
+                        </entry>
+                        <entry ixia_locid="293">
+                            <p ixia_locid="294">80</p>
+                        </entry>
+                        <entry ixia_locid="295">
+                            <p ixia_locid="296">NA</p>
+                        </entry>
+                        <entry ixia_locid="297">
+                            <p ixia_locid="298">Over 10 compute nodes</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="255">
+                            <p ixia_locid="256">Heat Template</p>
+                        </entry>
+                        <entry ixia_locid="257">
+                            <p ixia_locid="258">Max VMs using Cinder volumes (dedicated storage)</p>
+                        </entry>
+                        <entry ixia_locid="259">
+                            <p ixia_locid="260">40</p>
+                        </entry>
+                        <entry ixia_locid="261">
+                            <p ixia_locid="262">NA</p>
+                        </entry>
+                        <entry ixia_locid="263">
+                            <p ixia_locid="264">Backed by storage node with a single raw cache image
+                                used</p>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry ixia_locid="265">
+                            <p ixia_locid="266">Heat Template</p>
+                        </entry>
+                        <entry ixia_locid="267">
+                            <p ixia_locid="268">Max VMs using Cinder volumes (controller
+                                storage)</p>
+                        </entry>
+                        <entry ixia_locid="269">
+                            <p ixia_locid="270">10</p>
+                        </entry>
+                        <entry ixia_locid="271">
+                            <p ixia_locid="272">NA</p>
+                        </entry>
+                        <entry ixia_locid="273">
+                            <p ixia_locid="274">Backed by the controller</p>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table></conbody></concept-wr>

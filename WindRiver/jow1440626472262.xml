@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1440626472262" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Performing Packet Tracing on vSwitch Interfaces</title>
+    <shortdesc ixia_locid="2">You can use the <cmdname ixia_locid="7">vtrace</cmdname> command to
+        perform packet tracing on a vSwitch logical interface. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="6">US53369 topic
+                    added</draft-comment>The <nameliteral ixia_locid="8">vtrace</nameliteral>
+                command initiates a packet-trace capture on a logical interface. To use it, you must
+                log on with root privileges to the host running the vSwitch instance.<note id="note_N1003A_N1002B_N10026_N10023_N10001" ixia_locid="9" type="caution">
+                    <p ixia_locid="10">This command can cause significant packet loss on the trace
+                        port. Avoid using it on live systems with high rates of traffic.</p>
+                </note></p>
+            <p ixia_locid="11">When <cmdname ixia_locid="12">vtrace</cmdname> is used, all transmit and receive packets passing
+                through the logical interface are mirrored to a dynamically created Linux host
+                interface. The utility uses the vSwitch packet tracing API to enable tracing, and
+                invokes <nameliteral ixia_locid="13">tcpdump</nameliteral> on the host interface. You can use any
+                    <nameliteral ixia_locid="14">tcpdump</nameliteral> option except <option ixia_locid="15">-i</option> to filter
+                and analyze the captured data.</p>
+            <p ixia_locid="16">To initiate a packet trace, use the following
+                command:<codeblock ixia_locid="17"><systemoutput ixia_locid="18">$ </systemoutput><userinput ixia_locid="19">sudo vtrace <varname ixia_locid="20">interface-uuid</varname> <varname ixia_locid="21">tcpdump-options</varname> <varname ixia_locid="22">filter-expression</varname></userinput></codeblock></p>
+            <p ixia_locid="23">where</p>
+            <parml>
+                <plentry ixia_locid="24">
+                    <pt ixia_locid="25">interface-uuid</pt>
+                    <pd ixia_locid="26">
+                        <p ixia_locid="27">is the UUID of the logical interface. You can obtain this using the
+                                <cmdname ixia_locid="28">vshell interface-list</cmdname> command.</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="29">
+                    <pt ixia_locid="30">tcpdump-options</pt>
+                    <pd ixia_locid="31">
+                        <p ixia_locid="32">are the options for the packet trace. For details, refer
+                            to the public documentation for <nameliteral ixia_locid="41">tcpdump</nameliteral>.</p>
+                        <note id="note_N100B2_N100A9_N100A0_N10084_N10027_N10024_N10001" ixia_locid="38">
+                            <p ixia_locid="39">Do not use the <option ixia_locid="40">-i</option> option.</p>
+                        </note>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="34">
+                    <pt ixia_locid="35">filter-expression</pt>
+                    <pd ixia_locid="36">
+                        <p ixia_locid="37">is an expression for filtering packet trace results. For
+                            details, refer to the public documentation for
+                                <nameliteral ixia_locid="42">tcpdump</nameliteral>.</p>
+                    </pd>
+                </plentry>
+            </parml>
+        </context>
+    </taskbody>
+</task-wr>

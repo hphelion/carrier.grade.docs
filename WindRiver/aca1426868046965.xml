@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="aca1426868046965" xml:lang="en-us">
+<!-- Modification History
+Draft Template. ACASE March 20, 2015
+ -->
+  <title ixia_locid="1">wrs-server-group—Server Group Messaging</title>
+ <shortdesc ixia_locid="2">This component contains APIs for the Titanium Server "server group" peer
+  monitoring service. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Annemarie Case</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">Server Group Messaging is a service to provide simple, low-bandwidth datagram
+   messaging and notifications for servers that are part of the same server group. This messaging
+   channel is available regardless of whether IP networking is functional within the server, and it
+   requires no knowledge within the server about the other members of the group. The service
+   provides three types of messaging:</p>
+  <ul id="ul_ipy_xjd_lr">
+   <li ixia_locid="5">
+    <p ixia_locid="6">Broadcast: enables a server to send a datagram (up to 3050 bytes) to all other
+     servers within the server group</p>
+   </li>
+   <li ixia_locid="7">
+    <p ixia_locid="8">Notification: provides servers with information about changes to the state of
+     other servers within the server group</p>
+   </li>
+   <li ixia_locid="9">
+    <p ixia_locid="10">Status: enables a server to query the current state of all servers within the
+     server group (including itself)</p>
+   </li>
+  </ul>
+  <p ixia_locid="11">This service is not intended for high-bandwidth or low-latency operations. It
+   is best-effort and not guaranteed. For improved reliability, applications should do end-to-end
+   ACKs and retries.</p>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003784117" xml:lang="en-us"><title ixia_locid="1">Huge Pages</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">Memory not reserved for platform use on the compute node is made available as
+            backing memory for VM virtual memory allocation requests. By default, the VM memory is
+            partitioned as 2 MB hugepages but this can be changed on a per-NUMA Node basis into
+            pools of 4 KB, 2 MB, and 1 GB huge pages. Larger pages can reduce page management
+            overhead and improve system performance for systems with large amounts of virtual memory
+            and many running instances.</p><p ixia_locid="5">Memory page sizes for VMs can be specified using flavor extra specs or image metadata.  With this option, small (4KB), large (largest available), any (same as large), 2 MB, or 1 GB page sizes for a VM can be specified.  Explicit page size request definition is recommended because use of “large” or “any” may cause migration issues if the page size configuration on the destination node is different.</p></conbody></concept-wr>

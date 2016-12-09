@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="siv1474312502430" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Cache Tiering</title>
+ <shortdesc ixia_locid="2">You can use cache tiering to improve read-write performance for
+  frequently accessed objects.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="29"><draft-comment author="jowens" ixia_locid="14">US84106 new
+    topic</draft-comment>When cache tiering is enabled, Ceph storage for the cluster is divided into
+   a <term ixia_locid="5">cache tier</term> and a <term ixia_locid="6">storage tier</term>. Each
+   tier uses a pool of dedicated storage hosts, designated as either <nameliteral ixia_locid="27">Ceph caching</nameliteral> or <nameliteral ixia_locid="28">Ceph backing</nameliteral> hosts at
+   installation. For valid cluster configurations, see <xref href="hyq1477749742436.xml" ixia_locid="187"/>.</p>
+  <note id="note_N10042_N1001F_N10001" ixia_locid="31">
+   <p ixia_locid="32">SSD-backed journals cannot be used on a storage host assigned to the caching
+    tier.</p>
+  </note>
+  <p ixia_locid="30">The cache tier is implemented on storage hosts with SSDs to provide fast
+   read-write performance. Data is migrated to the cache tier when it is needed, maintained there
+   for read-write operations, and removed when it is no longer required. Modified objects are
+   removed to the storage tier (<term ixia_locid="22">flushed</term>), and unmodified objects are
+   discarded (<term ixia_locid="23">evicted</term>). These operations are managed automatically by
+   the <term ixia_locid="7">Ceph objecter</term>, which determines which tier to use for an object,
+   and the <term ixia_locid="8">cache tiering agent</term>, which handles data migration between the
+   tiers.</p>
+  <p ixia_locid="24">The decision to flush modified objects takes into account the percentage of total available
+   space used by modified objects (the <term ixia_locid="25">dirty ratio</term>). The decision to evict unmodified
+   objects takes into account the percentage of total available space used by unmodified objects
+   (the <term ixia_locid="26">cache_target_full_ratio</term>).</p>
+  <p ixia_locid="9">Normally cache tiering operates in <term ixia_locid="10">writeback mode</term>,
+   in which data is migrated to the cache tier when needed, and then written back to the storage
+   tier. It can also operate in <term ixia_locid="11">read-proxy mode</term>, in which data is never
+   migrated to the cache tier; if it is not already in the cache tier, then the storage tier is used
+   for read-write operations. Read-proxy mode is useful for draining a cache in order to disable
+   it.</p>
+  <note id="note_N1003F_N1001C_N10001" ixia_locid="12" type="caution">
+   <p ixia_locid="188">Cache tiering can degrade performance in systems where many objects are
+    accessed frequently, by introducing thrashing. It is more useful in situations where only a few
+    objects receive a high number of requests. To ensure that cache tiering is appropriate for your
+    requirements, review the Ceph public documentation for caveats surrounding the use of this
+    feature:  </p>
+   <p ixia_locid="189"><xref format="html" href="http://docs.ceph.com/docs/master/rados/operations/cache-tiering/?highlight=tier#a-word-of-caution)" ixia_locid="186" scope="external">http://docs.ceph.com/docs/master/rados/operations/cache-tiering/?highlight=tier#a-word-of-caution)</xref></p>
+  </note>
+  <p ixia_locid="17">Cache tiering uses <term ixia_locid="18">hit sets</term> to determine whether an object belongs in the cache
+   tier. A hit set is a set of all recent access requests. When configuring a cache tier, you can
+   specify hit set parameters, including the length of time covered by the hit set (the <term ixia_locid="19">hit
+    set period</term>), the number of hit sets to retain for analysis (the <term ixia_locid="20">hit set
+    count</term>), and the filtering method for identifying eligible objects (the <term ixia_locid="21">hit set
+    type</term>). </p>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1446663498738" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="253">Querying Ceilometer Meters Using the CLI</title>
+    <shortdesc ixia_locid="254">If you prefer, you can use the CLI to query Ceilometer.</shortdesc>
+    <prolog>
+        <author ixia_locid="255">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="256">
+            <p ixia_locid="257"><draft-comment author="jowens" ixia_locid="258">US64389 new topic. Some material, notably about
+                    metadata, was originally in Resource Usage.</draft-comment>For web
+                administration interface instructions, see <xref href="jow1446663451951.xml" ixia_locid="259"/>.</p>
+            <p ixia_locid="260">To view a set of samples for a meter, use a command of the following
+                form:</p>
+            <codeblock ixia_locid="273"><systemoutput ixia_locid="274">~(keystone_admin)$ </systemoutput><userinput ixia_locid="275">ceilometer sample-list [-m <varname ixia_locid="264">name</varname>] [-l <varname ixia_locid="276">number</varname>] [-q <varname ixia_locid="277">query</varname>]</userinput></codeblock>
+            <p ixia_locid="369">where</p>
+            <parml>
+                <plentry ixia_locid="278">
+                    <pt ixia_locid="279"><varname ixia_locid="280">name</varname></pt>
+                    <pd ixia_locid="281">
+                        <p ixia_locid="282">is the name of the Ceilometer meter</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="283">
+                    <pt ixia_locid="284"><varname ixia_locid="285">number</varname></pt>
+                    <pd ixia_locid="286">
+                        <p ixia_locid="287">is the maximum number of samples to return</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="288">
+                    <pt ixia_locid="289"><varname ixia_locid="290">query</varname></pt>
+                    <pd ixia_locid="291">
+                        <p ixia_locid="292">is a list of metadata filters to apply to the samples, in the form
+                            'metadata_type=filter_value; metadata_type=filter_value; ...'</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="293">For example:</p>
+            <codeblock ixia_locid="294"><systemoutput ixia_locid="295">~(keystone_admin)$ </systemoutput><userinput ixia_locid="296">ceilometer sample-list -m vcpu_util -l 10 \
+-q 'metadata.display_name=clearwater-ip-pbx-1'</userinput>
+<systemoutput ixia_locid="297">+--------------+-----------+-------+---------------+------+---------------------+
+| Resource ID  | Name      | Type  | Volume        | Unit | Timestamp           |
++--------------+-----------+-------+---------------+------+---------------------+
+| d9ae484c-... | vcpu_util | gauge | 20.4          | %    | 2015-11-18T14:39:31 |
+| d9ae484c-... | vcpu_util | gauge | 20.7          | %    | 2015-11-18T14:39:01 |
+| d9ae484c-... | vcpu_util | gauge | 21.0333333333 | %    | 2015-11-18T14:38:31 |
+| d9ae484c-... | vcpu_util | gauge | 21.5333333333 | %    | 2015-11-18T14:38:01 |
+| d9ae484c-... | vcpu_util | gauge | 20.2333333333 | %    | 2015-11-18T14:37:31 |
+| d9ae484c-... | vcpu_util | gauge | 19.8          | %    | 2015-11-18T14:37:01 |
+| d9ae484c-... | vcpu_util | gauge | 19.5333333333 | %    | 2015-11-18T14:36:31 |
+| d9ae484c-... | vcpu_util | gauge | 19.6333333333 | %    | 2015-11-18T14:36:01 |
+| d9ae484c-... | vcpu_util | gauge | 20.6666666667 | %    | 2015-11-18T14:35:31 |
+| d9ae484c-... | vcpu_util | gauge | 19.4666666667 | %    | 2015-11-18T14:35:01 |
++--------------+-----------+-------+---------------+------+---------------------+</systemoutput></codeblock>
+            <p ixia_locid="373"><draft-comment author="rstone" ixia_locid="372">CGTS-3181 adds
+                    metertype-list</draft-comment>To list the types of meters, use the following
+                command:</p>
+            <codeblock ixia_locid="374"><systemoutput ixia_locid="375">~(keystone_admin)$ </systemoutput><userinput ixia_locid="376">ceilometer metertype-list</userinput></codeblock>
+            <p ixia_locid="377">This command outputs the <term ixia_locid="378">type</term> and
+                measurement <term ixia_locid="379">unit</term> for each meter.</p>
+            <p ixia_locid="380">Valid types include:</p>
+            <dl>
+                <dlentry ixia_locid="381">
+                    <dt ixia_locid="382"><term ixia_locid="383">delta</term></dt>
+                    <dd ixia_locid="384">
+                        <p ixia_locid="385">These meters measure change over time, such as
+                            bandwidth.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="386">
+                    <dt ixia_locid="387"><term ixia_locid="388">cumulative</term></dt>
+                    <dd ixia_locid="389">
+                        <p ixia_locid="390">These meters increase over time, such as instance
+                            hours.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="391">
+                    <dt ixia_locid="392"><term ixia_locid="393">gauge</term></dt>
+                    <dd ixia_locid="394">
+                        <p ixia_locid="395">These meters measure discrete items such as image
+                            uploads and floating IP addresses, as well as fluctuating values such as
+                            disk I/O.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="396">Valid units may be percentages, bytes, nanoseconds or packets,
+                depending on the meter. For more information, see <xref format="html" href="http://docs.openstack.org/admin-guide-cloud/telemetry-measurements.html" ixia_locid="422" scope="external"/>.</p>
+            <p ixia_locid="417">For example:</p>
+            <codeblock ixia_locid="418"><systemoutput ixia_locid="419">~(keystone_admin)$ </systemoutput><userinput ixia_locid="420">ceilometer metertype-list</userinput>
+<systemoutput ixia_locid="421">
++-----------------------------------+-------------+-----------+
+| Name 			                 | Type 	   | Unit      |
++-----------------------------------+-------------+-----------+
+| avg.vswitch.engine.util  	     | delta       | %         |
+| avg.vswitch.port.receive.bytes    | cumulative  | B         |
+| avg.vswitch.port.receive.packets  | cumulative  | packet    |
+| avg.vswitch.port.receive.util     | gauge 	  | %         |
+| avg.vswitch.port.transmit.bytes   | cumulative  | B         |
+| avg.vswitch.port.transmit.errors  | cumulative  | packet    |
+| avg.vswitch.port.transmit.packets | cumulative  | packet    |
+| avg.vswitch.port.transmit.util    | gauge       | %	     |
+| cpu 				              | cumulative  | ns        |
+| cpu_util 	      		       | gauge 	  | % 	    |
+| disk.allocation 		          | gauge 	  | B         |
+| disk.capacity 		            | gauge 	  | B         |
+| disk.device.allocation 	       | gauge 	  | B	     |
+| disk.device.capacity 	         | gauge	   | B	     |
+...</systemoutput></codeblock>
+            <p ixia_locid="267">For a list of supported meters, see <xref href="jow1446143437121.xml" ixia_locid="252"/>. To list the available meters and
+                their resource IDs from the CLI, use the following command:</p>
+            <codeblock ixia_locid="59"><systemoutput ixia_locid="268">~(keystone_admin)$ </systemoutput><userinput ixia_locid="61">ceilometer meter-list</userinput></codeblock>
+            <p ixia_locid="269"> To list the metadata associated with a meter, use a command of the
+                following form:</p>
+            <codeblock ixia_locid="298"><systemoutput ixia_locid="299">~(keystone_admin)$ </systemoutput><userinput ixia_locid="300">ceilometer resource-show <varname ixia_locid="270">resource_id</varname></userinput></codeblock>
+            <p ixia_locid="271">where <varname ixia_locid="272">resource_id</varname> is the resource ID of the
+                metric. </p>
+            <p ixia_locid="301">To list current statistics for a meter, including the average, minimum, maximum, and
+                summed values, use a command of the following form: </p>
+            <codeblock ixia_locid="370"><systemoutput ixia_locid="371">~(keystone_admin)$ </systemoutput><userinput ixia_locid="304">ceilometer statistics -m <varname ixia_locid="305">meter</varname> -p <varname ixia_locid="306">period</varname> -q <varname ixia_locid="307">query</varname> \
+-g <varname ixia_locid="308">field</varname> -a <varname ixia_locid="309">funcs</varname></userinput></codeblock>
+            <p ixia_locid="310">where</p>
+            <parml>
+                <plentry ixia_locid="311">
+                    <pt ixia_locid="312"><varname ixia_locid="313">meter</varname></pt>
+                    <pd ixia_locid="314">
+                        <p ixia_locid="315">is the name of the Ceilometer meter</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="316">
+                    <pt ixia_locid="317"><varname ixia_locid="318">period</varname></pt>
+                    <pd ixia_locid="319">
+                        <p ixia_locid="320">is the period in seconds for which to include samples</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="321">
+                    <pt ixia_locid="322"><varname ixia_locid="323">query</varname></pt>
+                    <pd ixia_locid="324">
+                        <p ixia_locid="325">is a list of metadata filters to apply to the samples, in the form
+                            'metadata_type=filter_value; metadata_type=filter_value; ...'</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="326">
+                    <pt ixia_locid="327"><varname ixia_locid="328">field</varname></pt>
+                    <pd ixia_locid="329">
+                        <p ixia_locid="330">is the grouping used when displaying the samples (for example, by tenant
+                            or by resource)</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="331">
+                    <pt ixia_locid="332"><varname ixia_locid="333">funcs</varname></pt>
+                    <pd ixia_locid="334">
+                        <p ixia_locid="341">is a list of statistical functions to display, in the
+                            form '<parmname ixia_locid="342">func</parmname> [-<parmname ixia_locid="343">param</parmname>];
+                                <parmname ixia_locid="344">func</parmname> [-<parmname ixia_locid="345">param</parmname>]; ...'</p>
+                        <p ixia_locid="363">If this option is not specified, then
+                                <nameliteral ixia_locid="364">min</nameliteral>, <nameliteral ixia_locid="365">max</nameliteral>,
+                                <nameliteral ixia_locid="366">avg</nameliteral>, and <nameliteral ixia_locid="367">sum</nameliteral>
+                            are shown by default.</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="336">For example:</p>
+            <codeblock ixia_locid="337"><systemoutput ixia_locid="338">~(keystone_admin)$ </systemoutput><userinput ixia_locid="339">ceilometer statistics -m vcpu_util -p 10 \
+-q 'metadata.display_name=clearwater-ip-pbx-1'</userinput>
+<systemoutput ixia_locid="340">+--------+---------------------+---------------------+------+---------------+
+| Period | Period Start        | Period End          | Max  | Min           |
++--------+---------------------+---------------------+------+---------------+
+| 0      | 2015-11-17T14:01:30 | 2015-11-18T14:41:01 | 64.1 | 11.8666666667 |
++--------+---------------------+---------------------+------+---------------+ ...
+
+---------------+---------------+-------+----------+
+ Avg           | Sum           | Count | Duration |
+---------------+---------------+-------+----------+
+ 20.5642892608 | 60870.2962121 | 2960  | 88771.0  |
+---------------+---------------+-------+----------+ ...
+
+---------------------+---------------------+
+ Duration Start      | Duration End        |
+---------------------+---------------------+
+ 2015-11-17T14:01:30 | 2015-11-18T14:41:01 |
+---------------------+---------------------+</systemoutput></codeblock>
+            <p ixia_locid="368">For more information about Ceilometer statistics, refer to the public Openstack
+                documentation.</p>
+        </context>
+    </taskbody>
+</task-wr>

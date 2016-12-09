@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="rtt1479843799021" xml:lang="en-us">
+<!-- This version is for 16.10.        
+-->
+    <title ixia_locid="1">Configuring the Keystone Token Expiration Time</title>
+    <shortdesc ixia_locid="2">You can change the default Keystone token expiration setting. This may
+        be required to provide sustained access for operations that take more than an
+        hour.</shortdesc>
+    <prolog>
+        <author ixia_locid="40">Jim Owens</author>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="41">CGTS-5153 / US89717 new
+                    topic</draft-comment>By default, the Keystone token expiration time is set to
+                3600 seconds (1 hour). This is the amount of time a token remains valid. The new
+                setting must be between 3600 seconds and 14400 seconds. </p>
+        </context>
+        <steps>
+            <step id="step_N1002B_N10028_N1001C_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">On the active controller, become the Keystone admin user.</cmd>
+                <stepxmp ixia_locid="8">
+                    <codeblock ixia_locid="9"/>
+                </stepxmp>
+            </step>
+            <step id="step_N1003B_N10028_N1001C_N10001" ixia_locid="10">
+                <cmd ixia_locid="11">Ensure that the <parmname ixia_locid="12">token_expiration</parmname> parameter is defined for
+                    the identity service.</cmd>
+                <stepxmp ixia_locid="13">
+                    <codeblock ixia_locid="14"><systemoutput ixia_locid="15">$</systemoutput> <userinput ixia_locid="16">system service-parameter-list | grep token_expiration</userinput>
+
+| 712e4a45-777c-4e83-9d56-5042cde482f7 | identity | config | token_expiration | 3600                                   
+    </codeblock>
+                </stepxmp>
+                <substeps id="substeps_wsy_knl_zx">
+                    <substep ixia_locid="17">
+                        <cmd ixia_locid="18">If the parameter is not listed, use the following
+                                <cmdname ixia_locid="19">add</cmdname> command to modify the
+                                <parmname ixia_locid="20">token_expiration</parmname>:</cmd>
+                        <stepxmp ixia_locid="21">
+                            <codeblock ixia_locid="22"><systemoutput ixia_locid="23">$</systemoutput> <userinput ixia_locid="24">system service-parameter-add identity config token_expiration=7200</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1007A_N10028_N1001C_N10001" ixia_locid="25">
+                <cmd ixia_locid="26">Modify the service parameter using the following command:</cmd>
+                <stepxmp ixia_locid="27">
+                    <codeblock ixia_locid="28"><systemoutput ixia_locid="29">$</systemoutput> <userinput ixia_locid="30">system service-parameter-modify identity config token_expiration=7200</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10091_N10028_N1001C_N10001" ixia_locid="31">
+                <cmd ixia_locid="32">Apply the configuration change.</cmd>
+                <stepxmp ixia_locid="33">
+                    <codeblock ixia_locid="34"><systemoutput ixia_locid="35">$</systemoutput> <userinput ixia_locid="36">system service-parameter-apply identity</userinput>
+
+<systemoutput ixia_locid="37">Applying identity service parameters</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="38">
+                    <p ixia_locid="39">Allow a few minutes for the change to take an effect.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

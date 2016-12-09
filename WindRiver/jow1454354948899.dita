@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454354948899" xml:lang="en-us"><title ixia_locid="1">SR-IOV Dimensioning</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">This section describes the dimensioning of SR-IOV PCI passthrough devices to
+            provide direct I/O to a guest VM, bypassing the virtual switch. SR-IOV allows a device
+            such as a network adapter to separate access to its resources among various PCIe
+            hardware functions (VFs), allowing for multiple guests to share the same underlying NIC
+            without multiplexing from a virtual switch (that is, AVS). The limitations of this
+            configuration is that advanced features of AVS are not applied to traffic that has
+            direct communication with the guest VM, such as QoS and ACLs. In addition, the SR-IOV
+            port is not directly integrated with other tenant network such as virtual routers and
+            DHCP services.</p>
+                        <section id="section_N1001D_N10016_N10001" ixia_locid="10">
+                                    <title ixia_locid="11">Supported SR-IOV NICs</title>
+                                    <p ixia_locid="12">For a list of supported NIC devices that can be configured
+                                                for SR-IOV PCI passthrough, refer to <ph ixia_locid="5" otherprops="printonly"><cite ixia_locid="6">Titanium Server Planning:
+                                                  </cite></ph><cite ixia_locid="7"><ph ixia_locid="8"><xref href="kdl1464894372485.dita" ixia_locid="9"/></ph></cite>.</p>
+                        </section></conbody></concept-wr>

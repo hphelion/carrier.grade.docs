@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="rst1442611751868" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Changing the MTU of the OAM Interface</title>
+    <shortdesc ixia_locid="2">You can change the MTU value of the OAM interface from the Web
+        administration interface.</shortdesc>
+    <prolog>
+        <author ixia_locid="51">Jim Owens</author>
+        <author ixia_locid="3">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="41"><draft-comment author="rstone" ixia_locid="40">Topic created for
+                    CGTS-1944. JO: updated for CGTS-3407, CGTS-3476, CGTS-1306</draft-comment>If you
+                prefer, you can use the CLI; see <xref href="rst1442868407518.xml" ixia_locid="52"/>. </p>
+            <p ixia_locid="53">Controller configuration changes require each controller to be
+                locked. This requires a swact during the procedure.</p>
+        </context>
+        <steps>
+            <step id="step_N10029_N10026_N1001B_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Lock the standby controller.</cmd>
+                <substeps id="substeps_gx5_1bc_kt">
+                    <substep ixia_locid="8">
+                        <cmd ixia_locid="9">From <menucascade ixia_locid="10">
+                                <uicontrol ixia_locid="57">Admin</uicontrol>
+                                <uicontrol ixia_locid="11">Platform</uicontrol>
+                                <uicontrol ixia_locid="12">Host Inventory</uicontrol>
+                            </menucascade>, select the <uicontrol ixia_locid="13">Hosts</uicontrol>
+                            tab.</cmd>
+                    </substep>
+                    <substep ixia_locid="14">
+                        <cmd ixia_locid="15">From the <uicontrol ixia_locid="16">Edit</uicontrol>
+                            menu for the standby controller, select <uicontrol ixia_locid="17">Lock
+                                Host</uicontrol>.</cmd>
+                        <info ixia_locid="18">
+                            <fig id="fig_N1005E_N1005B_N1004C_N10030_N10029_N10026_N1001B_N10001" ixia_locid="19">
+                                <image href="rst1442611298701.image" ixia_locid="20"/>
+                            </fig>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1006D_N10026_N1001B_N10001" ixia_locid="21">
+                <cmd ixia_locid="22">Edit the OAM interface to change the MTU value.</cmd>
+                <substeps id="substeps_jks_chy_kt">
+                    <substep ixia_locid="42">
+                        <cmd ixia_locid="43">Click the name of the standby controller, then select
+                            the <uicontrol ixia_locid="44">Interfaces</uicontrol> tab and click
+                                <uicontrol ixia_locid="45">Edit</uicontrol> for the OAM
+                            interface.</cmd>
+                    </substep>
+                    <substep ixia_locid="46">
+                        <cmd ixia_locid="47">In the <wintitle ixia_locid="48">Edit
+                                Interface</wintitle> dialog, edit the <uicontrol ixia_locid="49">MTU</uicontrol> field, and then click <uicontrol ixia_locid="50">Save</uicontrol>. </cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10076_N10026_N1001B_N10001" ixia_locid="23">
+                <cmd ixia_locid="24">Unlock the standby controller.</cmd>
+                <info ixia_locid="25">
+                    <p ixia_locid="26">From the <uicontrol ixia_locid="27">Edit</uicontrol> menu for
+                        the standby controller, select <uicontrol ixia_locid="28">Unlock
+                            Host</uicontrol>.</p>
+                </info>
+            </step>
+            <step id="step_N1008F_N10026_N1001B_N10001" ixia_locid="29">
+                <cmd ixia_locid="30">Swact the hosts.</cmd>
+                <info ixia_locid="31">
+                    <p ixia_locid="54">From the <uicontrol ixia_locid="55">Edit</uicontrol> menu for the active controller, select
+                            <uicontrol ixia_locid="56">Swact Host</uicontrol>.</p>
+                    <fig id="fig_N10096_N10093_N1008C_N10026_N1001B_N10001" ixia_locid="32">
+                        <image href="psa1420751608971.image" ixia_locid="33"/>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N100A6_N10026_N1001B_N10001" ixia_locid="34">
+                <cmd ixia_locid="35">Lock the new standby controller.</cmd>
+            </step>
+            <step id="step_N100AF_N10026_N1001B_N10001" ixia_locid="36">
+                <cmd ixia_locid="37">Modify the MTU of the OAM interface on the new standby
+                    controller.</cmd>
+            </step>
+            <step id="step_N100B8_N10026_N1001B_N10001" ixia_locid="38">
+                <cmd ixia_locid="39">Unlock the standby controller.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

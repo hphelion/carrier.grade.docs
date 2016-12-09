@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454354941502" xml:lang="en-us"><title ixia_locid="1">Maximum security rules per node</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">Security groups are enforced by AVS on a per-virtual port (vNIC) basis for both
+            ingress and egress traffic. For a given port, 128 rules including both ingress and
+            egress rules can be configured. In addition, each AVS instance supports a maximum of
+            16384 rules in total. Increasing the number of security group rules for a given guest
+            has a direct impact on performance; therefore it is recommended to use wildcard matching
+            and port ranges whenever possible. In addition, security group rules are compressed;
+            therefore rules that have overlapping match criteria (for example, address ranges), can
+            be optimized to reduce the performance penalty for a larger number of rule sets.</p></conbody></concept-wr>

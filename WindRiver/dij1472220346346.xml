@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="dij1472220346346" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Rolling Back a Software Upgrade After the Second Controller
+        Upgrade</title>
+    <shortdesc ixia_locid="2">After the second controller is upgraded, you can still roll back a
+        software upgrade, however, the rollback will impact the hosting of applications.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5">The upgrade is aborted as follows: </p>
+        </context>
+        <steps>
+            <step id="step_N1002B_N10028_N1001C_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Run the <cmdname ixia_locid="8">upgrade-abort</cmdname> command to abort the upgrade.  </cmd>
+                <stepxmp ixia_locid="9">
+                    <codeblock ixia_locid="10"><systemoutput ixia_locid="11">$</systemoutput> <userinput ixia_locid="12">system upgrade-abort</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="13">
+                    <p ixia_locid="14">Once this is done there is no going back; the upgrade must be completely
+                        aborted.</p>
+                </info>
+            </step>
+            <step id="step_N1004E_N10028_N1001C_N10001" ixia_locid="15">
+                <cmd ixia_locid="16"> Make controller-1 active. </cmd>
+                <stepxmp ixia_locid="17">
+                    <codeblock ixia_locid="18"><systemoutput ixia_locid="19">$</systemoutput> <userinput ixia_locid="20">system host-swact controller-0</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="21"/>
+            </step>
+            <step id="step_N10068_N10028_N1001C_N10001" ixia_locid="22">
+                <cmd ixia_locid="23">Lock controller-0.</cmd>
+                <stepxmp ixia_locid="124">
+                    <codeblock ixia_locid="125"><systemoutput ixia_locid="126">$</systemoutput> <userinput ixia_locid="127">system host-lock controller-0</userinput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10071_N10028_N1001C_N10001" ixia_locid="128">
+                <cmd ixia_locid="129">Wipe the disk and power down all storage (if applicable) and compute hosts.  </cmd>
+                <substeps id="substeps_ynt_fyy_bx">
+                    <substep ixia_locid="28">
+                        <cmd ixia_locid="29">Execute <cmdname ixia_locid="30">wipedisk</cmdname> from the shell on each storage or
+                            compute host. </cmd>
+                    </substep>
+                    <substep ixia_locid="31">
+                        <cmd ixia_locid="32">Power down each host.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1009A_N10028_N1001C_N10001" ixia_locid="33">
+                <cmd ixia_locid="34"> Lock all storage (if applicable) and compute hosts. </cmd>
+                <stepxmp ixia_locid="35">
+                    <codeblock ixia_locid="36"><systemoutput ixia_locid="37">$</systemoutput> <userinput ixia_locid="38">system host-lock <varname ixia_locid="130">hostID</varname></userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100B1_N10028_N1001C_N10001" ixia_locid="39">
+                <cmd ixia_locid="40"> Downgrade controller-0. </cmd>
+                <stepxmp ixia_locid="41">
+                    <codeblock ixia_locid="42"><systemoutput ixia_locid="43">$</systemoutput> <userinput ixia_locid="44">system host-downgrade controller-0</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="45">
+                    <p ixia_locid="46">The host is re-installed with the previous release load. </p>
+                </info>
+            </step>
+            <step id="step_N100D4_N10028_N1001C_N10001" ixia_locid="48">
+                <cmd ixia_locid="49">Unlock controller-0.</cmd>
+                <stepxmp ixia_locid="131">
+                    <codeblock ixia_locid="132"><systemoutput ixia_locid="133">$</systemoutput> <userinput ixia_locid="134">system host-unlock controller-0</userinput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100DD_N10028_N1001C_N10001" ixia_locid="50">
+                <cmd ixia_locid="51">Swact to controller-0. </cmd>
+                <stepxmp ixia_locid="52">
+                    <codeblock ixia_locid="53"><systemoutput ixia_locid="54">$</systemoutput> <userinput ixia_locid="55">system host-swact controller-1</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="56">
+                    <p ixia_locid="57">Swacting back to controller-0 will switch back to using the
+                        previous release databases, which were frozen at the time of the swact to
+                        controller-1. This is essentially the same result as a system restore.</p>
+                </info>
+            </step>
+            <step id="step_N10100_N10028_N1001C_N10001" ixia_locid="59">
+                <cmd ixia_locid="60"> Lock and downgrade controller-1. </cmd>
+                <stepxmp ixia_locid="61">
+                    <codeblock ixia_locid="62"><systemoutput ixia_locid="63">$</systemoutput> <userinput ixia_locid="64">system host-downgrade controller-1</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="65">
+                    <p ixia_locid="66">The host is re-installed with the previous release load.</p>
+                </info>
+            </step>
+            <step id="step_N10123_N10028_N1001C_N10001" ixia_locid="68">
+                <cmd ixia_locid="69"> Unlock controller-1.</cmd>
+                <stepxmp ixia_locid="135">
+                    <codeblock ixia_locid="136"><systemoutput ixia_locid="137">$</systemoutput> <userinput ixia_locid="138">system host-unlock controller-1</userinput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N1012C_N10028_N1001C_N10001" ixia_locid="70">
+                <cmd ixia_locid="71"> Power up and unlock the storage hosts one at a time (if using ceph storage
+                    backend).  The hosts are re-installed with the release N load. </cmd>
+            </step>
+            <step id="step_N10135_N10028_N1001C_N10001" ixia_locid="72">
+                <cmd ixia_locid="73"> Restore glance images.  </cmd>
+                <info ixia_locid="74">
+                    <ul id="ul_ghy_skz_bx">
+                        <li ixia_locid="75">
+                            <p ixia_locid="76">For a system with controller storage (LVM storage
+                                backend), no work is required; the images should be available. </p>
+                        </li>
+                        <li ixia_locid="77">
+                            <p ixia_locid="78">For a system with dedicated storage (Ceph storage
+                                backend), follow the system restore documentation to restore the
+                                glance images using the <cmdname ixia_locid="79">image-backup</cmdname> script. If the glance images were not
+                                backed up prior to the upgrade, then the images must all be deleted
+                                and then re-created. </p>
+                        </li>
+                    </ul>
+                </info>
+            </step>
+            <step id="step_N1015B_N10028_N1001C_N10001" ixia_locid="80">
+                <cmd ixia_locid="81">Restore cinder volumes.</cmd>
+                <info ixia_locid="82">
+                    <ul id="ul_pss_ykz_bx">
+                        <li ixia_locid="83">
+                            <p ixia_locid="84">For a system with controller storage (LVM storage
+                                backend), no work is required; the images should be available. </p>
+                        </li>
+                        <li ixia_locid="85">
+                            <p ixia_locid="86">For a system with dedicated storage (Ceph storage
+                                backend), follow the system restore documentation to restore the
+                                glance images using the <cmdname ixia_locid="87">image-backup</cmdname> script. If the glance images were not
+                                backed up prior to the upgrade, then the images must all be deleted
+                                and then re-created. </p>
+                        </li>
+                    </ul>
+                </info>
+            </step>
+            <step id="step_N10181_N10028_N1001C_N10001" ixia_locid="88">
+                <cmd ixia_locid="89"> Power up and unlock the compute hosts one at a time.   </cmd>
+                <info ixia_locid="90">
+                    <p ixia_locid="91">The hosts are re-installed with the previous release load. As
+                        each compute host goes online, instances will be automatically recovered by
+                        the system. </p>
+                    <p ixia_locid="93">Note that instances using only Cinder volumes should be
+                        recoverable. Instances that were booted from a glance image will be rebuilt
+                        from the image; all data on local disks will be lost.</p>
+                </info>
+            </step>
+            <step id="step_N1019A_N10028_N1001C_N10001" ixia_locid="94">
+                <cmd ixia_locid="95">Complete the upgrade. </cmd>
+                <stepxmp ixia_locid="96">
+                    <codeblock ixia_locid="97"><systemoutput ixia_locid="98">$</systemoutput> <userinput ixia_locid="99">system upgrade-complete</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="100">
+                    <p ixia_locid="101">This cleans up the upgrade release, configuration,
+                        databases, and so forth. </p>
+                </info>
+            </step>
+            <step id="step_N101BD_N10028_N1001C_N10001" ixia_locid="103">
+                <cmd ixia_locid="104">Delete the upgrade release load. </cmd>
+                <stepxmp ixia_locid="106">
+                    <codeblock ixia_locid="107"><systemoutput ixia_locid="108">$</systemoutput> <userinput ixia_locid="109">system load-delete</userinput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

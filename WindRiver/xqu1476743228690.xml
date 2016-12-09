@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="xqu1476743228690" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Swift Object Storage</title>
+ <shortdesc ixia_locid="2">Systems with dedicated storage hosts can provide object storage using
+  OpenStack Swift. VMs and system users can use this to store and exchange Ceph-backed
+  files.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="28"><draft-comment author="jowens" ixia_locid="5">US85034 new
+   topic</draft-comment>Swift object storage uses <term ixia_locid="12">Swift containers</term>.
+   These are similar to directories in a file system, except that they cannot be nested. However,
+   each Swift container can contain areas called <term ixia_locid="31">folders</term>, which you can use to organize
+   content. Hierarchies of folders are supported.</p>
+  <p ixia_locid="30">VMs and OpenStack users (including OpenStack services) can create Swift
+   containers for public or private use, and then access them for file uploads and downloads.</p>
+  <p ixia_locid="14">In Titanium Server, a storage pool implemented on Ceph-backed storage hosts is
+   used to hold Swift containers and objects. The pool is created when the Swift service is started.
+   For VMs, this offers a place to store files that persist independently and can be exchanged with
+   other VMs or with the Titanium Server platform.</p>
+  <p ixia_locid="15">You can add Swift support from the command line at any time after installation.
+    <draft-comment author="jmaran" ixia_locid="32">The following xref is local when this topic appears in the sys
+    admin guide, but inter-book from the planning guide and the tenant user's
+   guide.</draft-comment>For more information, see <ph ixia_locid="18" otherprops="printonly"><cite ixia_locid="19">Titanium Server System Administration:</cite></ph><cite ixia_locid="20"><ph ixia_locid="21"><xref href="qqw1476744613849.xml" ixia_locid="10"/></ph></cite>.</p>
+  <p ixia_locid="17">System administrators and tenant users can manage Swift containers and their
+   contents from the CLI or the Web administration interface. VMs can use a Swift client or the
+   Swift REST API to manage and access Swift containers and objects.  For more information, consult
+   the public OpenStack documentation<cite ixia_locid="24">.</cite></p>
+ </conbody>
+</concept-wr>

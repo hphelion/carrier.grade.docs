@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="ekn1460141591614" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Bulk Host XML File Format</title>
+  <shortdesc ixia_locid="2">Hosts for bulk addition are described using an XML document.</shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+      <draft-comment author="jowens" ixia_locid="5">US62814 new topic</draft-comment>
+      <p ixia_locid="6">The document root is <nameliteral ixia_locid="7">hosts</nameliteral>. Within the root, each host is
+        described using a <nameliteral ixia_locid="8">host</nameliteral> node. To provide details, child elements
+        are used, corresponding to the parameters for the <cmdname ixia_locid="9">host-add</cmdname> command.</p>
+      <p ixia_locid="10">The following elements are accepted. Each element takes a text string. For
+        valid values, refer to the CLI documentation. </p>
+      <simpletable frame="all" id="simpletable_tc3_w15_ht" relcolwidth="1.0* 1.0*">
+        <sthead>
+          <stentry ixia_locid="12">
+            <p ixia_locid="13">Element</p>
+          </stentry>
+          <stentry ixia_locid="14">
+            <p ixia_locid="15">Remarks</p>
+          </stentry>
+        </sthead>
+        <strow>
+          <stentry ixia_locid="16">
+            <p ixia_locid="17">hostname</p>
+          </stentry>
+          <stentry ixia_locid="18">
+            <p ixia_locid="19">A unique name for the host.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="20">
+            <p ixia_locid="21">personality</p>
+          </stentry>
+          <stentry ixia_locid="22">
+            <p ixia_locid="23">The type of host.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="24">
+            <p ixia_locid="25">mgmt_mac</p>
+          </stentry>
+          <stentry ixia_locid="26">
+            <p ixia_locid="27">The MAC address of the management interface.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="28">
+            <p ixia_locid="29">mgmt_ip</p>
+          </stentry>
+          <stentry ixia_locid="30">
+            <p ixia_locid="31">The IP address of the management interface.</p>
+          </stentry>
+        </strow>
+        
+        <strow>
+          <stentry ixia_locid="32">
+            <p ixia_locid="33">bm_mac</p>
+          </stentry>
+          <stentry ixia_locid="34">
+            <p ixia_locid="35">The MAC address of the board management module, if present.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="36">
+            <p ixia_locid="37">bm_ip</p>
+          </stentry>
+          <stentry ixia_locid="38">
+            <p ixia_locid="39">The IP address of the board management module, if present.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="40">
+            <p ixia_locid="41">bm_type</p>
+          </stentry>
+          <stentry ixia_locid="42">
+            <p ixia_locid="43">The board management module type.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="44">
+            <p ixia_locid="45">bm_username</p>
+          </stentry>
+          <stentry ixia_locid="46">
+            <p ixia_locid="47">The username for board management module authentication.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="83">
+            <p ixia_locid="84">bm_password</p>
+          </stentry>
+          <stentry ixia_locid="85">
+            <p ixia_locid="86">The password for board management module authentication.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="87">
+            <p ixia_locid="89">power_on</p>
+            <draft-comment author="jowens" ixia_locid="88">US65621 added</draft-comment>
+          </stentry>
+          <stentry ixia_locid="90">
+            <p ixia_locid="91">An empty element. If present, powers on the host automatically using
+              the specified board management module.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="59">
+            <p ixia_locid="60">install_output</p>
+            <draft-comment author="jowens" ixia_locid="79">US62816 added</draft-comment>
+          </stentry>
+          <stentry ixia_locid="61">
+            <p ixia_locid="62">The display mode to use during installation (text or graphical). The
+              default is <nameliteral ixia_locid="63">text</nameliteral>.</p>
+            <note id="note_N108C1_N108A9_N1089D_N10858_N107F0_N107DF_N100F5_N10029_N10001" ixia_locid="935">
+              <p ixia_locid="936"><draft-comment author="jowens" ixia_locid="1038">CGTS-5076
+                  graphical installation disabled</draft-comment>The <option ixia_locid="937">graphical</option> option currently has no effect. Text-based installation is
+                used regardless of this setting.</p>
+            </note>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="64">
+            <p ixia_locid="65">console</p>
+            <draft-comment author="jowens" ixia_locid="80">US62816 added</draft-comment>
+          </stentry>
+          <stentry ixia_locid="66">
+            <p ixia_locid="67">If present, this element specifies the port, and if applicable the
+              baud, for displaying messages. If the element is empty or not present, the default
+              setting <nameliteral ixia_locid="68">ttyS0,115200</nameliteral> is used.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="69">
+            <p ixia_locid="70">rootfs_device</p>
+            <draft-comment author="jowens" ixia_locid="81">US62816 added</draft-comment>
+          </stentry>
+          <stentry ixia_locid="71">
+            <p ixia_locid="72">The device to use for the rootfs partition, relative to <filepath ixia_locid="73">/dev</filepath>.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="92">
+            <p ixia_locid="94">boot_device</p>
+            <draft-comment author="jowens" ixia_locid="93">US62816 added</draft-comment>
+          </stentry>
+          <stentry ixia_locid="95">
+            <p ixia_locid="96">The device to use for the boot partition, relative to
+              <filepath ixia_locid="78">/dev</filepath>.</p>
+          </stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="97">
+            <p ixia_locid="99">location</p>
+            <draft-comment author="jowens" ixia_locid="98">US65621 / CGTS-2605 added</draft-comment>
+          </stentry>
+          <stentry ixia_locid="100">
+            <p ixia_locid="101">A description of the host location.</p>
+          </stentry>
+        </strow>
+      </simpletable>
+      <p ixia_locid="52">The following sample describes a controller, three compute nodes, and two
+        storage nodes:</p>
+      <codeblock ixia_locid="53">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;hosts&gt;
+	&lt;host&gt;
+		&lt;personality&gt;controller&lt;/personality&gt;
+		&lt;mgmt_mac&gt;08:00:27:19:b0:c5&lt;/mgmt_mac&gt;
+        &lt;install_output&gt;text&lt;/install_output&gt;
+        &lt;location&gt;System12/A4&lt;/location&gt;
+	&lt;/host&gt;
+	&lt;host&gt;
+		&lt;hostname&gt;compute-0&lt;/hostname&gt;
+		&lt;personality&gt;compute&lt;/personality&gt;
+		&lt;mgmt_mac&gt;08:00:27:dc:42:46&lt;/mgmt_mac&gt;
+		&lt;mgmt_ip&gt;192.168.204.50&lt;/mgmt_ip&gt;
+        &lt;install_output&gt;text&lt;/install_output&gt;
+        &lt;console&gt;&lt;/console&gt;
+	&lt;/host&gt;
+	&lt;host&gt;
+		&lt;hostname&gt;compute-1&lt;/hostname&gt;
+		&lt;personality&gt;compute&lt;/personality&gt;
+		&lt;mgmt_mac&gt;08:00:27:87:82:3E&lt;/mgmt_mac&gt;
+		&lt;mgmt_ip&gt;192.168.204.51&lt;/mgmt_ip&gt;
+        &lt;rootfs_device&gt;sda&lt;/rootfs_device&gt;
+        &lt;install_output&gt;text&lt;/install_output&gt;
+	&lt;/host&gt;
+	&lt;host&gt;
+		&lt;hostname&gt;compute-2&lt;/hostname&gt;
+		&lt;personality&gt;compute&lt;/personality&gt;
+		&lt;mgmt_mac&gt;08:00:27:b9:16:0d&lt;/mgmt_mac&gt;
+		&lt;mgmt_ip&gt;192.168.204.52&lt;/mgmt_ip&gt;
+		
+        &lt;rootfs_device&gt;sda&lt;/rootfs_device&gt;
+        &lt;install_output&gt;text&lt;/install_output&gt;
+        &lt;console&gt;&lt;/console&gt;
+        &lt;power_on/&gt;
+		&lt;bm_mac&gt;08:00:27:b9:16:ac&lt;/bm_mac&gt;
+		&lt;bm_ip&gt;192.168.204.60&lt;/bm_ip&gt;
+		&lt;bm_type&gt;ilo4&lt;/bm_type&gt;
+		&lt;bm_username&gt;tsmith1&lt;/bm_username&gt;
+		&lt;bm_password&gt;mypass1&lt;/bm_password&gt;
+		
+	&lt;/host&gt;
+	&lt;host&gt;
+		&lt;personality&gt;storage&lt;/personality&gt;
+		&lt;mgmt_mac&gt;08:00:27:dd:e3:3f&lt;/mgmt_mac&gt;
+	&lt;/host&gt;
+	&lt;host&gt;
+		&lt;personality&gt;storage&lt;/personality&gt;
+		&lt;mgmt_mac&gt;08:00:27:8e:f1:b8&lt;/mgmt_mac&gt;
+        
+	&lt;/host&gt;
+&lt;/hosts&gt;</codeblock>
+    </section>
+  </refbody>
+</reference-wr>

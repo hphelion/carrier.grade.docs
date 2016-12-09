@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1446663451951" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="253">Querying Ceilometer Meters</title>
+    <shortdesc ixia_locid="254">You can query Ceilometer meters using several
+        approaches.</shortdesc>
+    <prolog>
+        <author ixia_locid="255">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="256">
+            <p ixia_locid="257"><draft-comment author="jowens" ixia_locid="258">US64389 new topic, using material
+                    formerly in "Resource Usage"</draft-comment>As an alternative to the web
+                administration interface, you can use the CLI to make queries. See <xref href="jow1446663498738.xml" ixia_locid="259"/>.</p>
+            <p ixia_locid="260">For additional information about Ceilometer meters, see <xref href="jow1404333645456.xml" ixia_locid="261"/>.</p>
+        </context>
+        <steps>
+            <step id="step_N1003F_N1003C_N1001C_N10001" ixia_locid="262">
+                <cmd ixia_locid="263">From the menu pane, select <menucascade ixia_locid="264">
+                        <uicontrol ixia_locid="265">Admin</uicontrol>
+                        <uicontrol ixia_locid="278">System</uicontrol>
+                        <uicontrol ixia_locid="266">Resource Usage</uicontrol>
+                    </menucascade>.</cmd>
+            </step>
+            <step id="step_N10054_N1003C_N1001C_N10001" ixia_locid="267">
+                <cmd ixia_locid="268">Select the tab for the type of query you want to use.</cmd>
+                <choices id="choices_rlj_2hf_xt">
+                    <choice ixia_locid="269">
+                        <p ixia_locid="270">To see statistics for a standard set of meters, select
+                            the <uicontrol ixia_locid="271">Usage Reports</uicontrol> tab.<note id="note_N10068_N10061_N1005E_N1005A_N10053_N1003C_N1001C_N10001" ixia_locid="272">
+                                <p ixia_locid="273">The data is refreshed when the tab is selected.
+                                    Depending on system size and current loads, this may take a few
+                                    seconds.</p>
+                            </note></p>
+                        <fig id="fig_N10086_N1006E_N1006A_N10060_N10043_N1001F_N10001" ixia_locid="277">
+                        <image href="jow1445955149577.image" id="image_rgq_khf_xt" ixia_locid="243">
+                            <alt ixia_locid="244">TiS Resource Usage: Usage Report tab</alt>
+                        </image>
+                        </fig>
+                    </choice>
+                    <choice ixia_locid="274">
+                        <p ixia_locid="275">To obtain statistics for a specific meter, select the
+                                <uicontrol ixia_locid="276">Stats</uicontrol> tab.</p>
+                        <fig id="fig_N100B3_N1006E_N1001C_N10001" ixia_locid="37">
+                            <image href="jow1404333641017.image" id="image_bsy_t3s_j4" ixia_locid="38" placement="inline"/>
+                        </fig>
+                        <p ixia_locid="39">The following fields are available for reporting a
+                            specific meter:<dl>
+                                <dlentry ixia_locid="40">
+                                    <dt ixia_locid="41">Metric</dt>
+                                    <dd ixia_locid="42">
+                                        <p ixia_locid="43">The Ceilometer meter you want to query.
+                                            Meters are grouped by service, as follows:</p>
+                                        <ul id="ul_btj_sjs_j4">
+                                            <li ixia_locid="44">
+                                                <p ixia_locid="45">Compute (Nova)</p>
+                                            </li>
+                                            <li ixia_locid="46">
+                                                <p ixia_locid="47">Network (Neutron)</p>
+                                            </li>
+                                            <li ixia_locid="48">
+                                                <p ixia_locid="49">Image (Glance)</p>
+                                            </li>
+                                            <li ixia_locid="50">
+                                                <p ixia_locid="51">Volume (Cinder)</p>
+                                            </li>
+                                            <li ixia_locid="56">
+                                                <p ixia_locid="57">Switching (AVS)</p>
+                                            </li>
+                                        </ul>
+                                        <p ixia_locid="251">For a list of supported meters, see
+                                                <xref href="jow1446143437121.xml" ixia_locid="252"/>.</p>
+                                    </dd>
+                                </dlentry>
+                                <dlentry ixia_locid="62">
+                                    <dt ixia_locid="63">Value</dt>
+                                    <dd ixia_locid="64">
+                                        <p ixia_locid="65">The particular statistic you want to
+                                            visualize. Select among <option ixia_locid="167">Average</option>, <option ixia_locid="168">Minimum</option>, <option ixia_locid="169">Maximum</option>, and <option ixia_locid="170">Summation</option>.</p>
+                                    </dd>
+                                </dlentry>
+                                <dlentry ixia_locid="66">
+                                    <dt ixia_locid="67">Group by</dt>
+                                    <dd ixia_locid="68">
+                                        <p ixia_locid="69">How to group the displayed charts, as
+                                            follows:</p>
+                                        <dl>
+                                            <dlentry ixia_locid="70">
+                                                <dt ixia_locid="71">None</dt>
+                                                <dd ixia_locid="72">
+                                                  <p ixia_locid="73">The selected statistic is
+                                                  presented as a single line chart reporting the
+                                                  aggregate over all resources and projects
+                                                  (tenants).</p>
+                                                </dd>
+                                            </dlentry>
+                                            <dlentry ixia_locid="74">
+                                                <dt ixia_locid="75">Projects (Tenants)</dt>
+                                                <dd ixia_locid="76">
+                                                  <p ixia_locid="77">The selected statistic is
+                                                  presented as a multiple line charts over all
+                                                  resources, one line per tenant.</p>
+                                                </dd>
+                                            </dlentry>
+                                            <dlentry ixia_locid="78">
+                                                <dt ixia_locid="79">Resource</dt>
+                                                <dd ixia_locid="80">
+                                                  <p ixia_locid="81">The selected statistic is
+                                                  presented as a multiple line charts over all
+                                                  resources, one line per resource (hosts,
+                                                  instances, and so on).</p>
+                                                </dd>
+                                            </dlentry>
+                                        </dl>
+                                    </dd>
+                                </dlentry>
+                                <dlentry ixia_locid="171">
+                                    <dt ixia_locid="172">Period</dt>
+                                    <dd ixia_locid="173">
+                                        <p ixia_locid="174">The period of time to be covered by the
+                                            report. They include <option ixia_locid="197">last 15
+                                                minutes</option>, <option ixia_locid="198">last 30
+                                                minutes</option>, <option ixia_locid="199">last
+                                                hour</option>, <option ixia_locid="176">last
+                                                day</option>, <option ixia_locid="177">last
+                                                week</option>, <option ixia_locid="178">last 15
+                                                days</option>, <option ixia_locid="179">last 30
+                                                days</option>, <option ixia_locid="180">last
+                                                year</option>, and <option ixia_locid="181">other</option>. When selecting <option ixia_locid="182">other</option>, two new fields
+                                            become available, <option ixia_locid="183">Date
+                                                From</option> and <option ixia_locid="184">Date
+                                                To</option>, allowing you to specify a specific time
+                                            period.</p>
+                                    </dd>
+                                </dlentry>
+                                <dlentry ixia_locid="82">
+                                    <dt ixia_locid="83">Metadata</dt>
+                                    <dd ixia_locid="84">
+                                        <p ixia_locid="85">Metadata represents additional attributes
+                                            collected with a meter. In this menu, you can select the
+                                            specific attribute you want the report on.</p>
+                                    </dd>
+                                </dlentry>
+                                <dlentry ixia_locid="90">
+                                    <dt ixia_locid="91">Filter</dt>
+                                    <dd ixia_locid="92">
+                                        <p ixia_locid="93">Use this field to limit the report to
+                                            show meter samples whose metadata attribute equals the
+                                            specified value. The filter field is applied only when a
+                                            specific metadata attribute is selected.</p>
+                                    </dd>
+                                </dlentry>
+                            </dl></p>
+                    </choice>
+                </choices>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="wqz1471612601421" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Overview of Titanium Server Security</title>
+ <shortdesc ixia_locid="2">Titanium Server provides a broad number of features related to system security. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <ul id="ul_gtd_ybz_zw">
+   <li ixia_locid="4">
+    <p ixia_locid="5">Titanium Server protects the availability and reliability of platform
+     infrastructure nodes by:</p>
+    <ul id="ul_a3g_fcz_zw">
+     <li ixia_locid="6">
+      <p ixia_locid="7">monitoring and recovering critical platform processes on all nodes</p>
+     </li>
+     <li ixia_locid="8">
+      <p ixia_locid="9">monitoring and reacting to resources on all nodes.</p>
+     </li>
+    </ul>
+   </li>
+   <li ixia_locid="10">
+    <p ixia_locid="11">Titanium Server protects the connectivity and availability of the platform
+     cluster by:</p>
+    <ul id="ul_z4x_gcz_zw">
+     <li ixia_locid="12">
+      <p ixia_locid="13">implementing a robust 1:1 HA Controller Node Cluster</p>
+     </li>
+     <li ixia_locid="14">
+      <p ixia_locid="15">real-time monitoring and reacting to connectivity between all platform
+       nodes</p>
+     </li>
+     <li ixia_locid="80">
+      <p ixia_locid="81">optional HTTPS protocol on an OAM network</p>
+     </li>
+     <li ixia_locid="82">
+      <p ixia_locid="83">configurable firewall on an OAM network</p>
+     </li>
+    </ul>
+   </li>
+   <li ixia_locid="16">
+    <p ixia_locid="17">Titanium Server protects the availability and reliability of the Hypervisor
+     using:</p>
+    <ul id="ul_gzv_hcz_zw">
+     <li ixia_locid="18">
+      <p ixia_locid="19">real-time monitoring and recovery of the KVM/QEMU Hosting Container</p>
+     </li>
+    </ul>
+   </li>
+   <li ixia_locid="20">
+    <p ixia_locid="21">Titanium Server protects and ensures the authenticity of Titanium Server code
+     base through:</p>
+    <ul id="ul_yns_3cz_zw">
+     <li ixia_locid="22">
+      <p ixia_locid="23">Controller Node Services Program Store signature validation </p>
+     </li>
+    </ul>
+   </li>
+   <li ixia_locid="24">
+    <p ixia_locid="25">Titanium Server controls access to tenant data and prevents tampering:</p>
+    <ul id="ul_ws5_jcz_zw">
+     <li ixia_locid="26">
+      <p ixia_locid="27">Guest VM volumes are accessible only through private closed network</p>
+     </li>
+     <li ixia_locid="28">
+      <p ixia_locid="29">Guest VM volumes are mountable by one and only one VM</p>
+     </li>
+    </ul>
+   </li>
+  </ul>
+  <section id="section_N100C2_N1001F_N10001" ixia_locid="30">
+   <title ixia_locid="31">Confidentiality</title>
+   <ul>
+    <li ixia_locid="32">
+     <p ixia_locid="33">Titanium Server protects internal Titanium Server private information:</p>
+     <ul id="ul_ogg_l2z_zw">
+      <li ixia_locid="34">
+       <p ixia_locid="35">a Keyring Database is used for storage of encrypted passwords</p>
+      </li>
+     </ul>
+    </li>
+    <li ixia_locid="36">
+     <p ixia_locid="37">Titanium Server ensures authenticity and privacy of tenant and
+      infrastructure communication:</p>
+     <ul id="ul_lbx_l2z_zw">
+      <li ixia_locid="38">
+       <p ixia_locid="39">ACL filters of authenticity of connectivity to Guest VMs</p>
+      </li>
+      <li ixia_locid="40">
+       <p ixia_locid="41">optional VM Source MAC Filtering (anti-MAC-spoofing)</p>
+      </li>
+      <li ixia_locid="42">
+       <p ixia_locid="43">quality-of-service (QoS) for protection of connectivity to Guest VMs,
+        dropping lower priority traffic in denial-of-service (DoS) attacks</p>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </section>
+  <section id="section_N10116_N1001F_N10001" ixia_locid="46">
+   <title ixia_locid="47">AAA</title>
+   <draft-comment author="jmaran" ixia_locid="84">What is the "AAA" title???</draft-comment>
+   <ul>
+    <li ixia_locid="48">
+     <p ixia_locid="49">Linux Access</p>
+     <ul id="ul_c11_c2z_zw">
+      <li ixia_locid="50">
+       <p ixia_locid="51">Local LDAP for Centralized Management of Linux User Accounts</p>
+       <ul id="ul_phr_d2z_zw">
+        <li ixia_locid="52">
+         <p ixia_locid="53">User Account Distribution across all nodes</p>
+        </li>
+       </ul>
+      </li>
+      <li ixia_locid="54">
+       <p ixia_locid="55">support for secure passwords (for example, mininmum length, upper/lower
+        characters, numbers, and special characters)</p>
+      </li>
+      <li ixia_locid="56">
+       <p ixia_locid="57">support for password aging</p>
+      </li>
+      <li ixia_locid="58">
+       <p ixia_locid="59">restricted access to the root account after initial installation</p>
+      </li>
+      <li ixia_locid="60">
+       <p ixia_locid="61">restricted shell for non-root accounts</p>
+      </li>
+      <li ixia_locid="62">
+       <p ixia_locid="63">configurable pre-login and post-login warning messages</p>
+      </li>
+      <li ixia_locid="64">
+       <p ixia_locid="65">auto-logout of local and SSH connections after a period of inactivity</p>
+      </li>
+      <li ixia_locid="66">
+       <p ixia_locid="67">account usage is logged for liability purposes</p>
+      </li>
+     </ul>
+    </li>
+    <li ixia_locid="68">
+     <p ixia_locid="69">OpenStack Access</p>
+     <ul id="ul_kgg_f2z_zw">
+      <li ixia_locid="70">
+       <p ixia_locid="71">SSL support for both Web server and OpenStack REST APIs to for
+        authentication and data encryption</p>
+      </li>
+      <li ixia_locid="72">
+       <p ixia_locid="73">auto-logout of GUI after a period of inactivity </p>
+      </li>
+      <li ixia_locid="74">
+       <p ixia_locid="75">leverages Keystone key management infrastructure</p>
+       <ul id="ul_sbn_g2z_zw">
+        <li ixia_locid="76">
+         <p ixia_locid="77">supporting a default local database backend</p>
+        </li>
+        <li ixia_locid="78">
+         <p ixia_locid="79">supporting a remote LDAP backend</p>
+        </li>
+       </ul>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </section>
+ </conbody>
+</concept-wr>

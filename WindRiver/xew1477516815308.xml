@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE referable-content PUBLIC "-//IXIA//DTD DITA Referable-Content//EN" "../../system/dtd/ixia/referable-content.dtd">
+<referable-content id="xew1477516815308" xml:lang="en-us">
+<title ixia_locid="1">[RC:note] TiS Restrictions for applying storage profiles</title>
+<rcbody>
+        <note id="storage-profile-restrictions" ixia_locid="2">
+            <p ixia_locid="3"><draft-comment author="jowens" ixia_locid="9">CGTS-4138 added</draft-comment>Storage
+                profiles for compute-based or CPE ephemeral storage (that is, storage profiles
+                containing volume group and physical volume information) can be applied in two
+                scenarios:</p>
+            <ul id="ul_fpn_wwp_tx">
+                <li ixia_locid="4">
+                    <p ixia_locid="5">on initial installation where a nova-local volume group has not been
+                        previously provisioned</p>
+                </li>
+                <li ixia_locid="6">
+                    <p ixia_locid="7">on a previously provisioned host where the nova-local volume
+                        group has been marked for removal</p>
+                </li>
+            </ul>
+            <p ixia_locid="8"> On a previously provisioned host, delete the nova-local volume group prior to
+                applying the profile.</p>
+        </note>
+    </rcbody>
+</referable-content>

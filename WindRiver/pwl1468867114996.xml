@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="pwl1468867114996" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="249">Adding a Gateway to a Virtual Router Using the CLI</title>
+    <shortdesc ixia_locid="250">You can configure a gateway for a virtual router using CLI commands.</shortdesc>
+    <prolog>
+        <author ixia_locid="251">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001D_N1001A_N10001" ixia_locid="195">
+            <p ixia_locid="208">To use the CLI, become the appropriate keystone user. The examples
+                in this section assume you are the <nameliteral ixia_locid="248">admin</nameliteral>
+                user.</p>
+            <p ixia_locid="135">To add a gateway interface, use a command of the following form:</p>
+            <codeblock ixia_locid="120">
+<systemoutput ixia_locid="122">~(keystone_admin)$ </systemoutput><userinput ixia_locid="124">neutron router-gateway-set <varname ixia_locid="126">router_id</varname> <varname ixia_locid="128">externalnet_id</varname> \
+[--disable-snat] [--fixed-ip <varname ixia_locid="151">gateway_addr</varname>]</userinput></codeblock>
+            <p ixia_locid="130">Where:</p>
+            <parml>
+                <plentry ixia_locid="209">
+                    <pt ixia_locid="210"><varname ixia_locid="132">router_id</varname></pt>
+                    <pd ixia_locid="211">
+                        <p ixia_locid="212">is the name or UUID of the router</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="213">
+                    <pt ixia_locid="214"><varname ixia_locid="134">externalnet_id</varname></pt>
+                    <pd ixia_locid="215">
+                        <p ixia_locid="216"> is the name or UUID of a tenant network configured to
+                            provide external connections</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="217">
+                    <pt ixia_locid="218"><varname ixia_locid="152">gateway_addr</varname></pt>
+                    <pd ixia_locid="219">
+                        <p ixia_locid="220">is the gateway interface IP address. If <varname ixia_locid="153">gateway_addr</varname> is not specified, the server
+                            allocates the next available external IP address.</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <note id="note_N100B2_N10022_N1001F_N10001" ixia_locid="221">
+                <p ixia_locid="222">The <option ixia_locid="239">fixed-ip</option> and <option ixia_locid="240">disable-snat</option> options require administrator
+                    privileges. For more about the SNAT option, see <xref href="jow1438192116883.xml" ixia_locid="241"/>.</p>
+            </note>
+        </context>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="abm1467740986660" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="86">Viewing Resource Usage for PCI Interfaces</title>
+    <shortdesc ixia_locid="87">Information about PCI passthrough and SR-IOV usage for NICs is available on the
+            <wintitle ixia_locid="81">Provider Network Overview</wintitle> page.</shortdesc>
+    <prolog>
+        <author ixia_locid="89">Jim Owens</author>
+        <author ixia_locid="88">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="section_N10068_N1001F_N10001" ixia_locid="71">
+            <p ixia_locid="90">For more about the <wintitle ixia_locid="91">Provider Network Overview</wintitle> page, see <xref href="jow1439301559036.xml" ixia_locid="92"/>.</p>
+            <note id="note_N1007C_N1006A_N1001F_N10001" ixia_locid="82">
+                <p ixia_locid="83"><draft-comment author="jowens" ixia_locid="84">US64378 add xref
+                        to Devices topic</draft-comment>For information about PCI passthrough or
+                    SR-IOV devices other than NICs, see <xref href="jow1452023307712.xml" ixia_locid="85"/>.</p>
+            </note>
+            <p ixia_locid="5">To view information about PCI interface resources for a provider
+                network from the CLI, use the following command:</p>
+            <codeblock ixia_locid="73"><systemoutput ixia_locid="74">~(keystone_admin)$ </systemoutput><userinput ixia_locid="75">nova providernet-show <varname ixia_locid="76">providernet</varname></userinput>
+</codeblock>
+            <p ixia_locid="77">where <varname ixia_locid="78">providernet</varname> is the UUID of
+                the provider network.</p>
+            <p ixia_locid="13">For example:</p>
+            <codeblock ixia_locid="14"><systemoutput ixia_locid="15">~(keystone_admin)$ </systemoutput><userinput ixia_locid="16">nova providernet-show a507bb89-8e78-48e4-8c8a-d8bac14fc097</userinput>
+<systemoutput ixia_locid="17">+--------------------+--------------------------------------+
+| Property           | Value                                |
++--------------------+--------------------------------------+
+| id                 | a507bb89-8e78-48e4-8c8a-d8bac14fc097 |
+| name               | group0-ext0                          |
+| pci_pfs_configured | 1                                    |
+| pci_pfs_used       | 1                                    |
+| pci_vfs_configured | 0                                    |
+| pci_vfs_used       | 0                                    |
++--------------------+--------------------------------------+
+</systemoutput></codeblock>
+            <p ixia_locid="18">Where:<dl>
+                    <dlentry ixia_locid="19">
+                        <dt ixia_locid="20">pci_pfs_configured</dt>
+                        <dd ixia_locid="21">
+                            <p ixia_locid="22">is the number of PCI passthrough interfaces attached
+                                to the provider network</p>
+                        </dd>
+                    </dlentry>
+                    <dlentry ixia_locid="23">
+                        <dt ixia_locid="24">pci_pfs_used</dt>
+                        <dd ixia_locid="25">
+                            <p ixia_locid="26">is the number of PCI passthrough interfaces allocated
+                                to instances</p>
+                        </dd>
+                    </dlentry>
+                    <dlentry ixia_locid="27">
+                        <dt ixia_locid="28">pci_vfs_configured</dt>
+                        <dd ixia_locid="29">
+                            <p ixia_locid="30">is the number of SR-IOV interfaces attached to the
+                                provider network</p>
+                        </dd>
+                    </dlentry>
+                    <dlentry ixia_locid="31">
+                        <dt ixia_locid="32">pci_vfs_used</dt>
+                        <dd ixia_locid="33">
+                            <p ixia_locid="34">is the number of SR-IOV interfaces allocated to
+                                instances</p>
+                        </dd>
+                    </dlentry>
+                </dl></p>
+        </context>
+    </taskbody>
+</task-wr>

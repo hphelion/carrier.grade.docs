@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003728714" xml:lang="en-us"><title ixia_locid="1">Database Dimensioning</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4"><draft-comment author="jowens" ixia_locid="7">CGTS-3888 Add letters to equations,
+                move backup to last</draft-comment>The database dimensioning default is 40 GB (20 GB
+            * 2 for upgrades). The database size is primarily driven by the number of telemetry
+            service meters and these are related to the number of compute nodes and VMs. The
+            following formula should be used to determine if a larger database partition is
+            required. If the number of meters is known, 200 KB per meter can be used to calculate a
+            database size.</p><p ixia_locid="5">
+            <sl>
+                <sli ixia_locid="6">D = Database Storage = 2 * (5 GB base + VMs *25 MB +
+                    ComputeNodes * 10 MB)</sli>
+            </sl>
+        </p></conbody></concept-wr>

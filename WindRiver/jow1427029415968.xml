@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1427029415968" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Network Interface Provisioning Using the CLI</title>
+ <shortdesc ixia_locid="2">You can use CLI commands to create and attach network
+  interfaces.</shortdesc>
+ <prolog>
+  <author ixia_locid="3"/>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="339">US82332 update interface
+    names</draft-comment>For more information about interface provisioning, or help using the Web
+   administration interface, see <xref href="jow1426948577755.xml" ixia_locid="272"/>.</p>
+  <p ixia_locid="273">To list attached interfaces, use the <cmdname ixia_locid="340">system host-if-list</cmdname>
+   command.</p>
+  <codeblock ixia_locid="275"><systemoutput ixia_locid="276">~(keystone_admin)$ </systemoutput><userinput ixia_locid="277">system host-if-list controller-0</userinput>
+<systemoutput ixia_locid="278">...+--------+------...+----------+---------+-------------+------------+-------------+...
+...| name   | netwo...| type     | vlan id | ports       | uses i/f   | used by i/f |...
+...+--------+------...+----------+---------+-------------+------------+-------------+...
+...| infra0 | infra...| vlan     | 22      | []          | [u'mgmt0'] | []          |...
+...| oam0   | oam  ...| ethernet | None    | [u'enp0s3'] | []         | []          |...
+...| mgmt0  | mgmt ...| ethernet | None    | [u'enp0s8'] | []         | [u'infra0'] |...
+...+--------+------...+----------+---------+-------------+------------+-------------+...</systemoutput>
+</codeblock>
+  <p ixia_locid="38"> To see all available interfaces, add the <option ixia_locid="279">-a</option>
+   flag.</p>
+  <codeblock ixia_locid="41"><systemoutput ixia_locid="280">~(keystone_admin)$ </systemoutput><userinput ixia_locid="281">system host-if-list -a controller-0</userinput>
+<systemoutput ixia_locid="282">...+--------+------...+----------+---------+--------------+------------+-------------+...
+...| name   | netwo...| type     | vlan id | ports        | uses i/f   | used by i/f |...
+...+--------+------...+----------+---------+--------------+------------+-------------+...
+...| eth3   | None ...| ethernet | None    | [u'enp0s10'] | []         | []          |...
+...| infra0 | infra...| vlan     | 22      | []           | [u'mgmt0'] | []          |...
+...| eth2   | None ...| ethernet | None    | [u'enp0s9']  | []         | []          |...
+...| oam0   | oam  ...| ethernet | None    | [u'enp0s3']  | []         | []          |...
+...| mgmt0  | mgmt ...| ethernet | None    | [u'enp0s8']  | []         | [u'infra0'] |...
+...+--------+------...+----------+---------+--------------+------------+-------------+...</systemoutput></codeblock>
+  <p ixia_locid="283"><draft-comment author="jowens" ixia_locid="284">US62814 added host-addr add info</draft-comment>To assign an IP
+   address to an interface, use the <cmdname ixia_locid="285">system host-addr-add</cmdname> command. This is
+   required for the management and infrastructure networks if static IP address assignment is in
+   use.</p>
+  <codeblock ixia_locid="286"><systemoutput ixia_locid="287">~(keystone_admin)$ </systemoutput><userinput ixia_locid="46">system host-addr-add <varname ixia_locid="47">node</varname> <varname ixia_locid="288">ifname</varname> <varname ixia_locid="49">ip_address</varname> <varname ixia_locid="50">prefix</varname></userinput></codeblock>
+  <p ixia_locid="51">where</p>
+  <parml>
+   <plentry ixia_locid="52">
+    <pt ixia_locid="53">node</pt>
+    <pd ixia_locid="54">
+     <p ixia_locid="289">is the name or UUID of the compute node</p>
+    </pd>
+   </plentry>
+   <plentry ixia_locid="56">
+    <pt ixia_locid="290">ifname</pt>
+    <pd ixia_locid="291">
+     <p ixia_locid="292">is the name of the interface</p>
+    </pd>
+   </plentry>
+   <plentry ixia_locid="60">
+    <pt ixia_locid="61">ip_address</pt>
+    <pd ixia_locid="293">
+     <p ixia_locid="294">is an IPv4 or IPv6 address</p>
+    </pd>
+   </plentry>
+   <plentry ixia_locid="295">
+    <pt ixia_locid="296">prefix</pt>
+    <pd ixia_locid="297">
+     <p ixia_locid="298">is the netmask length for the address</p>
+    </pd>
+   </plentry>
+  </parml>
+  <section id="section_N10391_N1001E_N10001" ixia_locid="243">
+   <title ixia_locid="244">Combined Data and Management or Infrastructure Interfaces</title>
+   <p ixia_locid="245">You can add a data interface to a management or infrastructure interface using a command of
+    the following form:</p>
+   <codeblock ixia_locid="230"><systemoutput ixia_locid="232">~(keystone_admin)$ </systemoutput><userinput ixia_locid="234">system host-if-modify –nt “mgmt,data” –p group0-data0 compute-0 mgmt0</userinput></codeblock>
+   <p ixia_locid="236">This example adds a data network to the <nameliteral ixia_locid="238">mgmt0</nameliteral> interface on <nameliteral ixia_locid="240">compute-0</nameliteral>, for the
+    provider network <nameliteral ixia_locid="242">group0-data0</nameliteral>.</p>
+  </section>
+ </conbody>
+</concept-wr>

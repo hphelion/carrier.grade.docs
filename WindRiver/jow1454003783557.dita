@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003783557" xml:lang="en-us"><title ixia_locid="1">Resource Placement</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">For VMs requiring maximum determinism and throughput, the VM must be placed in the same NUMA node as all of its resources, including VM memory, AVS, NICs, and any other resource such as SR-IOV or PCI-Passthrough devices.  VNF 1 and VNF 2 in the example figure are examples of VMs deployed for maximum throughput with AVS or SR-IOV.</p><p ixia_locid="5">A VM such as VNF 6 in <xref href="jow1454003781257.dita#jow1454003781257/numa_architecture" ixia_locid="25"/> will not have the
+            same performance as VNF 1 and VNF 2 because access to the AVS is occurring across NUMA
+            nodes. There are multiple ways to maximize performance for VNF 6 in this case:</p>
+        <ul id="ul_tcb_ssz_55">
+            <li ixia_locid="6">
+                <p ixia_locid="7">Use vswitch_numa_affinity flavor extra specs to force VNF 6 to be
+                    scheduled on NUMA nodes where AVS is running. This is the recommended option.
+                    The affinity may be <nameliteral ixia_locid="26">strict</nameliteral> or
+                        <nameliteral ixia_locid="27">prefer</nameliteral>:</p>
+                <ul id="ul_usz_5sz_55">
+                    <li ixia_locid="8">
+                        <p ixia_locid="9"><nameliteral ixia_locid="28">Strict</nameliteral> affinity guarantees
+                            scheduling on the same NUMA node as an AVS vSwitch or the VM will not be
+                            scheduled.</p>
+                    </li>
+                    <li ixia_locid="10">
+                        <p ixia_locid="11"><nameliteral ixia_locid="29">Prefer</nameliteral> affinity uses best
+                            effort so it will only schedule the VM on a non-AVS NUMA node if no NUMA
+                            nodes with AVS switches have available cores. Note that
+                                <nameliteral ixia_locid="30">prefer</nameliteral> mode does not provide the same
+                            performance or determinism guarantees as
+                                <nameliteral ixia_locid="31">strict</nameliteral> mode if it schedules the VM on an
+                            non-AVS NUMA node but it may be good enough for some applications.</p>
+                    </li>
+                </ul>
+            </li>
+            <li ixia_locid="12">
+                <p ixia_locid="13">Configure AVS to run on both NUMA nodes 0 and 1. This reduces the number of cores
+                    available to run VMs on NUMA node 1 but only provides maximum performance if AVS
+                    connects to NICs on both sockets.</p>
+            </li>
+            <li ixia_locid="14">
+                <p ixia_locid="15">Pin the VM to NUMA node 0 using flavor extra specs or image properties. This
+                    forces the scheduler to schedule the VM on NUMA node 0. However, this requires
+                    prior knowledge of which cores AVS is running on and will not run VMs on NUMA
+                    node 1 of any Compute Node even if AVS is running in that zone so it is not
+                    recommended.</p>
+            </li>
+        </ul><p ixia_locid="16">If accessing PCIe devices directly from a VM using PCI-Passthrough or SR-IOV, maximum performance can only be achieved by pinning the VM cores to the same NUMA node as the PCIe device.  For example, VNF1 and VNF2 will have optimum SR-IOV performance if deployed on NUMA node 0 and VNF6 will have maximum PCI-Passthrough performance if deployed in NUMA node 1.  Options for controlling access to PCIe devices are:</p>
+        <ul id="ul_ogh_xsz_55">
+            <li ixia_locid="17">
+                <p ixia_locid="18">Use pci_numa_affinity flavor extra specs to force VNF6 to be
+                    scheduled on NUMA nodes where the PCI device is running. This is the recommended
+                    option because it does not require prior knowledge of which socket a PCI device
+                    resides on. The affinity may be <nameliteral ixia_locid="32">strict</nameliteral> or
+                        <nameliteral ixia_locid="33">prefer</nameliteral>:</p>
+                <ul id="ul_tks_zsz_55">
+                    <li ixia_locid="19">
+                        <p ixia_locid="20"><nameliteral ixia_locid="34">Strict</nameliteral> affinity guarantees
+                            scheduling on the same NUMA node as a PCIe Device or the VM will not be
+                            scheduled.</p>
+                    </li>
+                    <li ixia_locid="21">
+                        <p ixia_locid="22"><nameliteral ixia_locid="35">Prefer</nameliteral> affinity uses best
+                            effort so it will only schedule the VM on a NUMA node if no NUMA nodes
+                            with that PCIe device are available. Note that prefer mode does not
+                            provide the same performance or determinism guarantees as strict, but
+                            may be good enough for some applications.</p>
+                    </li>
+                </ul>
+            </li>
+            <li ixia_locid="23">
+                <p ixia_locid="24">Pin the VM to the NUMA node 0 with the PCI device using flavor extra specs or
+                    image properties. This will force the scheduler to schedule the VM on NUMA node
+                    0. However, this requires knowledge of which cores the applicable PCIe devices
+                    run on and does not work well unless all nodes have that type of PCIe node
+                    attached to the same socket.</p>
+            </li>
+        </ul></conbody></concept-wr>

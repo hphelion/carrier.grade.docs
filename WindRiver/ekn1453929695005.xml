@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ekn1453929695005" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Configuring PCI Addresses for Guest VNICs</title>
+    <shortdesc ixia_locid="2">You can configure virtual PCI addresses  for guest VNICs. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5">The CLI command <cmdname ixia_locid="6">nova boot</cmdname> provides
+                support for configuring virtual guest NIC devices. The format for the argument is: </p>
+            <codeblock ixia_locid="29">&lt;domain&gt;:&lt;bus&gt;:&lt;slot&gt;.&lt;function&gt;</codeblock>
+            <p ixia_locid="7">This enables you to specify the bus and the slot and allows you to
+                address a wide range of devices within a guest. If a bus number greater than 0 is
+                specified, the corresponding PCI bridges will be configured in the guest. </p>
+            <draft-comment author="eknowlto" ixia_locid="8">Disposition/Status: New topic - US70040</draft-comment>
+            <p ixia_locid="9">Limitations:</p>
+            <ul id="ul_zn1_vws_55">
+                <li ixia_locid="10">
+                    <p ixia_locid="11">It is not possible to specify a domain value other than 0 and a function
+                        value other than 0.</p>
+                </li>
+                <li ixia_locid="12">
+                    <p ixia_locid="13">It is not possible to address a bus value higher than 8.    </p>
+                </li>
+                <li ixia_locid="14">
+                    <p ixia_locid="15">Slots 0 and 1 are reserved for PCI bus 0. </p>
+                </li>
+                <li ixia_locid="16">
+                    <p ixia_locid="17">Slot 0 is reserved for any PCI bus greater than 0. </p>
+                </li>
+                <li ixia_locid="18">
+                    <p ixia_locid="19">For AVP NICs, use of a bus other than 0 is not currently supported.</p>
+                </li>
+                <li ixia_locid="20">
+                    <p ixia_locid="21">This feature only supports PCI devices of type NIC. Other PCI devices that
+                        can be specified with a flavor are not supported.</p>
+                </li>
+            </ul>
+            <ul id="ul_lkl_3yx_55">
+                <li ixia_locid="22">
+                    <p ixia_locid="23">Configure virtual PCI slots using the <parmname ixia_locid="24">vif-pci-address</parmname>
+                        parameter of the <cmdname ixia_locid="25">nova boot</cmdname> command, as shown below.</p>
+                </li>
+            </ul>
+            <codeblock ixia_locid="26"><systemoutput ixia_locid="27">$</systemoutput> <userinput ixia_locid="28">nova boot --flavor=small.prefer \
+--nic net-id=$NET0ID,vif-model=avp,vif-pci-address=0000:00:09.0 \
+--nic net-id=$NET1ID,vif-model=virtio,vif-pci-address=0000:02:01.0 \
+--nic net-id=$NET2ID,vif-model=virtio,vif-pci-address=0000:02:02.0 \
+--image=cust-guest wrl-2</userinput></codeblock>
+        </context>
+    </taskbody>
+</task-wr>

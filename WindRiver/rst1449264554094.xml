@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "../../system/dtd/client/wr_topic/generaltask-wr.dtd">
+<task-wr id="rst1449264554094" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Verifying the Controller Identity for Secure SSH Access</title>
+    <shortdesc ixia_locid="2"><draft-comment author="rstone" ixia_locid="3">CGTS-3175 adds topic.
+            CGTS-3387 added proviso for root access. / JO: CGTS-3387 topic
+        updated</draft-comment>For secure SSH access to the controller, you must verify a
+        fingerprint offered at login.
+        <!-- For ssh access using the <nameliteral ixia_locid="548"
+            >root</nameliteral> account, a keypair is also required. --></shortdesc>
+    <prolog>
+        <author ixia_locid="549">Jim Owens</author>
+        <author ixia_locid="5">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10029_N10026_N10001" ixia_locid="6">
+            <p ixia_locid="550">When you connect to a controller using SSH, you are asked to verify
+                an ECDSA fingerprint. <draft-comment author="jmaran" ixia_locid="553">Define
+                ECDSA???</draft-comment></p>
+            <codeblock ixia_locid="28"><userinput ixia_locid="29">ssh user@<varname ixia_locid="30">serverIP_or_FQDN</varname></userinput>
+<systemoutput ixia_locid="31">The authenticity of host '10.10.200.3 (10.10.200.3)' can't be established.
+ECDSA key fingerprint is 8d:26:8e:a0:e4:47:5e:11:2c:52:27:90:c8:19:4e:4f.
+Are you sure you want to continue connecting (yes/no)? </systemoutput>
+</codeblock>
+            <p ixia_locid="551">For security, Wind River strongly advises you to compare this
+                fingerprint with the known fingerprint of the host before proceeding. To obtain the
+                fingerprint of the host, log in at the console of either controller and use the
+                following command:</p>
+            <codeblock ixia_locid="15"><userinput ixia_locid="16">ssh-keygen -l -f /etc/ssh/ssh_host_ecdsa_key.pub | grep ECDSA</userinput>
+<systemoutput ixia_locid="17">256 8d:26:8e:a0:e4:47:5e:11:2c:52:27:90:c8:19:4e:4f  root@localhost (ECDSA)</systemoutput></codeblock>
+            <p ixia_locid="552">Copy this fingerprint and save it for reference.</p>
+            <!-- p ixia_locid="553">For ssh access using the <nameliteral ixia_locid="554">root</nameliteral> account, you must also
+                prepare and install a keypair.</p -->
+        </context>
+        <!-- steps>
+            <step id="step_N1006F_N1006C_N1002E_N10001" ixia_locid="555">
+                <cmd ixia_locid="556">At the remote console, log in as <nameliteral ixia_locid="557">root</nameliteral>.</cmd>
+            </step>
+            <step id="step_N1007C_N1006C_N1002E_N10001" ixia_locid="558">
+                <cmd ixia_locid="521">Create an RSA keypair.</cmd>
+                <info ixia_locid="522">
+                    <codeblock ixia_locid="559"><systemoutput ixia_locid="509">$ </systemoutput><userinput ixia_locid="526">ssh-keygen -t rsa</userinput>
+<systemoutput ixia_locid="560">ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/demo/.ssh/id_rsa):</systemoutput></codeblock>
+                    <p ixia_locid="561">Provide a file name for the key.</p>
+                    <codeblock ixia_locid="562"><systemoutput ixia_locid="563">Enter passphrase (empty for no passphrase): 
+</systemoutput></codeblock>
+                    <p ixia_locid="564">Provide a passphrase. This is optional, but more secure. If you create a
+                        passphrase, you will need to enter it every time you log in.</p>
+                    <codeblock ixia_locid="565"><systemoutput ixia_locid="566">Enter same passphrase again: 
+</systemoutput></codeblock>
+                    <p ixia_locid="567">Confirm the passphrase.</p>
+                    <codeblock ixia_locid="568"><systemoutput ixia_locid="569">Your identification has been saved in /home/demo/.ssh/id_rsa.
+Your public key has been saved in /home/demo/.ssh/id_rsa.pub.
+The key fingerprint is:
+4a:dd:0a:c6:35:4e:3f:ed:27:38:8c:74:44:4d:93:67 demo@a
+The key's randomart image is:
+
+
+
+
+NOTE: AJO added spaces between - characters so that I could comment out this section
+
+
+
+
++- -[ RSA 2048]- - - -+
+|          .oo.   |
+|         .  o.E  |
+|        + .  o   |
+|     . = = .     |
+|      = S = .    |
+|     o + = +     |
+|      . o + o .  |
+|           . o   |
+|                 |
++- - - - - - - - - - - - - - - - -+</systemoutput></codeblock>
+                </info>
+                <stepresult ixia_locid="570">
+                    <p ixia_locid="571">The keypair is created.</p>
+                </stepresult>
+            </step>
+            <step id="step_N100DC_N1004F_N10032_N10001" ixia_locid="515">
+                <cmd ixia_locid="516">Manually copy the public key to <filepath ixia_locid="572">/etc/ssh</filepath>
+                    on the controller (using a USB flash drive, for example).</cmd>
+            </step>
+        </steps -->
+        <!-- result id="result_N100AA_N10026_N10001" ixia_locid="38">
+            <p ixia_locid="39">The ssh credentials are set up. You can now log in from the remote
+                host using the following command:</p>
+            <codeblock ixia_locid="540"><systemoutput ixia_locid="541">$ </systemoutput><userinput ixia_locid="542">ssh -i <varname ixia_locid="543">privateKey</varname> wrsroot@<varname ixia_locid="544">serverIP</varname></userinput></codeblock>
+            <p ixia_locid="573">where <varname ixia_locid="574">privateKey</varname> is the name of the key file. If you created a
+                passphrase, you are asked to provide it.</p>
+            <p ixia_locid="575">To allow login from another remote host, copy your private key to that host.</p>
+        </result -->
+    </taskbody>
+</task-wr>

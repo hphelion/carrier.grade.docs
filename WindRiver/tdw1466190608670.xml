@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="tdw1466190608670" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="118">Storage on Storage Hosts</title>
+ <shortdesc ixia_locid="119">Storage hosts provide persistent and highly available storage for
+  virtual machine (VM) images and disk volumes.</shortdesc>
+ <prolog>
+  <author ixia_locid="121">Jim Owens</author>
+  <author ixia_locid="120">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="96"><draft-comment author="jowens" ixia_locid="122">US84106 added section to hold existing journal
+    functions content; added new section for tiering</draft-comment>They can also be used to provide
+   remote ephemeral storage for virtual machine disks, making live migration possible for VM
+   ephemeral and swap disks, as well as boot-from-image root disks. </p>
+  <p ixia_locid="98"><draft-comment author="jowens" ixia_locid="99">US78833 / US77367 add
+    xref.</draft-comment>To use storage hosts, a Titanium Server system with Ceph-backed storage is
+   required. You can configure this at installation using the controller configuration script. On
+   systems with controller-based storage, you can also add support for Ceph-backed storage later
+   from the CLI; <draft-comment author="jmaran" ixia_locid="157">Updated following reference to
+    inter-book format.</draft-comment>for more information, see <ph ixia_locid="158" otherprops="printonly"><cite ixia_locid="159">Titanium Server System Administration:
+    </cite></ph><cite ixia_locid="160"><ph ixia_locid="161"><xref href="cny1464872771057.xml" ixia_locid="109"/></ph></cite>. </p>
+  <p ixia_locid="103">Storage hosts are paired for redundancy. On a system using Ceph-backed
+   storage, at least one pair is required , and up to four pairs are supported. You can add up to
+   eight object storage devices (OSDs) per storage host for data storage. <draft-comment author="jmaran" ixia_locid="154">The next three xrefs ("Provisioning Storage...", "Replacing
+    Storage...", and "Ceph Storage Pools") are all local references in the system admin guide but
+    are inter-book for the planning document. Changing them to local format to be consistent with
+    previous practices. – JM: Reversed decision due to unusable links in planning guide. Changed all
+    three to inter-book link format.</draft-comment>For more information, see <ph ixia_locid="162" otherprops="printonly"><cite ixia_locid="163">Titanium Server System Administration:
+    </cite></ph><cite ixia_locid="164"><ph ixia_locid="165"><xref href="zkn1464874715372.xml" ixia_locid="116"/></ph></cite>.</p>
+  <p ixia_locid="85">Space on the storage hosts must be configured at installation before you can
+   unlock the hosts. You can change the configuration after installation by adding resources to
+   existing storage hosts (see <ph ixia_locid="166" otherprops="printonly"><cite ixia_locid="167">Titanium Server System
+     Administration: </cite></ph><cite ixia_locid="168"><ph ixia_locid="169"><xref href="jow1414074138348.xml" ixia_locid="75"/></ph></cite>) or adding more storage hosts (see the installation procedure in the <cite ixia_locid="79">Titanium Server Installation</cite> document that pertains to your Titanium
+   Server configuration). </p>
+  <p ixia_locid="86">Titanium Server creates default Ceph storage pools for images, volumes,
+   ephemeral data, and object data. You can modify the storage pools after installation. For more
+   information, see <ph ixia_locid="170" otherprops="printonly"><cite ixia_locid="171">Titanium
+     Server System Administration: </cite></ph><cite ixia_locid="172"><ph ixia_locid="173"><xref href="jhh1464706651355.xml" ixia_locid="101"/></ph></cite>.</p>
+  <p ixia_locid="135">Storage hosts can achieve faster data access using SSD-backed transaction
+   journals (<term ixia_locid="182">journal functions</term>) or additional hosts in a caching tier configuration, or
+   both. Caching tier hosts overlay fast SSD-backed storage pools over the slower HDD-backed storage
+   pools used in the standard backing tier. </p>
+  <note id="note_N10087_N10023_N10001" ixia_locid="136">
+   <p ixia_locid="137">SSD-backed journals cannot be used on a storage host assigned to the caching
+        tier.</p>
+  </note>
+  <section id="section_N1008F_N10023_N10001" ixia_locid="138">
+   <title ixia_locid="139">Journal Functions</title>
+   <p ixia_locid="110"><draft-comment author="jowens" ixia_locid="105">US78837 describe Ceph
+          journals</draft-comment>Each OSD on a storage host has an associated Ceph transaction
+        journal, which tracks changes to be committed to disk for data storage and replication, and
+        if required, for data recovery. This is a full Ceph journal, containing both metadata and
+        data. By default, it is collocated on the OSD, which typically uses slower but less
+        expensive HDD-backed storage. For faster commits and improved reliability, you can use a
+        dedicated solid-state drive (SSD) installed on the host and assigned as a <term ixia_locid="111">journal function</term>. You can dedicate more than one SSD as a journal
+        function.</p>
+   <note id="note_N100A6_N1006C_N10024_N10001" ixia_locid="112">
+    <p ixia_locid="113">You can also assign an SSD for use as an OSD, but you cannot assign the same
+     SSD as a journal function.</p>
+   </note>
+   <p ixia_locid="114">If a journal function is available, you can configure individual OSDs to use
+    journals located on the journal function. Each journal is implemented as a partition. You can
+    adjust the size and location of the journals. <draft-comment author="jmaran" ixia_locid="155">The next xref is a local reference in the system admin guide but an inter-book for the
+     planning document. Changing it to local format to be consistent with previous practices. – JM:
+     Reversed decision due to unusable link in planning guide. Changed to inter-book
+     format.</draft-comment>For more information, see <ph ixia_locid="187" otherprops="printonly"><cite ixia_locid="188">Titanium
+      Server System Administration: </cite></ph><cite ixia_locid="189"><ph ixia_locid="190"><xref href="xkq1467317438934.xml" ixia_locid="144"/></ph></cite>. </p>
+   <p ixia_locid="115">For OSDs implemented on rotational disks, Wind River strongly recommends that
+    you use a journal function. For OSDs implemented on SSDs, collocated journals can be used with
+    no performance cost.</p>
+  </section>
+  <section id="section_N100CC_N10023_N10001" ixia_locid="145">
+   <title ixia_locid="146">Cache Tier</title>
+   <p ixia_locid="147">For systems where the same few data objects are accessed frequently, you can
+    improve read-write times by implementing a cache tier. This uses a dedicated set of Ceph-caching
+    storage hosts equipped with SSDs, in addition to a set of Ceph-backing storage hosts.
+     <draft-comment author="jmaran" ixia_locid="156">The next xref is a local reference in the
+     system admin guide but an inter-book for the planning document. Changing it to local format to
+     be consistent with previous practices. – JM: Reversed decision due to unusable link in planning
+     guide. Changed to inter-book format.</draft-comment>For more information, see <ph ixia_locid="178" otherprops="printonly"><cite ixia_locid="179">Titanium Server System Administration: </cite></ph><cite ixia_locid="180"><ph ixia_locid="181"><xref href="siv1474312502430.xml" ixia_locid="152"/></ph></cite>.</p>
+   <note id="note_N10139_N1010F_N10024_N10001" ixia_locid="183">
+    <p ixia_locid="184">Since all disks on a caching host are SSDs, journal functions are neither required nor
+     supported on caching-tier hosts.</p>
+   </note>
+   <p ixia_locid="185">Titanium Server's cache tiering support is based on the Ceph cache tiering functionality. To
+    ensure cache tiering is appropriate for your requirements, review the Ceph public documentation
+    for caveats surrounding the use of this feature (<xref format="html" href="http://docs.ceph.com/docs/master/rados/operations/cache-tiering/?highlight=tier#a-word-of-caution)" ixia_locid="186" scope="external">http://docs.ceph.com/docs/master/rados/operations/cache-tiering/?highlight=tier#a-word-of-caution)</xref>.</p>
+      <p ixia_locid="191">For valid Titanium Server storage cluster configurations when using cache tiering, see <ph ixia_locid="192" otherprops="printonly"><cite ixia_locid="193">Titanium Server System
+            Administration: </cite></ph><cite ixia_locid="194"><ph ixia_locid="195"><xref href="hyq1477749742436.xml" ixia_locid="196"/></ph></cite>
+      </p>
+  </section>
+ </conbody>
+</concept-wr>

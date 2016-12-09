@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1411066086436" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Backing Up In-Use Cinder Volumes</title>
+    <shortdesc ixia_locid="2">You can back up Cinder volumes in the <i ixia_locid="3">in-use</i>
+        state.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="5">
+            <p ixia_locid="6">A Cinder volume in the <i ixia_locid="68">in-use</i> state is
+                associated with an existing instance, either as the instance's disk image or as an
+                attached storage resource. The instance can be either running or shut down. If the
+                instance is running, you must take a snapshot of the volume first, and then export
+                it to the controller's file system. An effective and reliable strategy is to take
+                snapshots of all <i ixia_locid="151">in-use</i> volumes, regardless of whether the
+                associated instances are running. If you prefer, you can use the <cmdname ixia_locid="149">nova list</cmdname> command with the option <option ixia_locid="150">--all-tenants</option> to identify which instances are running,
+                and then take snapshots selectively.</p>
+            <codeblock ixia_locid="152"><systemoutput ixia_locid="153">~[keystone_admin]$ </systemoutput><userinput ixia_locid="154">nova list --all-tenants</userinput>
+<systemoutput ixia_locid="155">
++--------+--------+-----------+--------+------------+-------------+----------+
+| ID     | Name   | Tenant ID | Status | Task State | Power State | Networks |                                                                                                        |
++--------+--------+-----------+--------+------------+-------------+----------+
+| 1f6... | t1-vm1 | 5e38b9... | ACTIVE | -          | Running     | tenan... |
+| b92... | t1-vm2 | 5e38b9... | ACTIVE | -          | Running     | tenan... |
++--------+--------+-----------+--------+------------+-------------+----------+
+</systemoutput></codeblock>
+        </context>
+        <steps>
+            <step id="step_N1005A_N10057_N10024_N10001" ixia_locid="156">
+                <cmd ixia_locid="19">Log in as Keystone user <nameliteral ixia_locid="157">admin</nameliteral> to the active controller.</cmd>
+                <info ixia_locid="158">
+                    <p ixia_locid="159">Log in as user <nameliteral ixia_locid="160">wrsroot</nameliteral> to the active controller and source the script
+                            <filepath ixia_locid="161">/etc/nova/openrc</filepath> to obtain
+                        administrative privileges as described <draft-comment author="jmaran" ixia_locid="181">Fixed
+                            out-of-scope link. Updated to 16.x topic.</draft-comment>in <xref href="ekn1460051057968.xml" ixia_locid="182"/>.</p>
+                </info>
+            </step>
+            <step id="step_N1002E_N1002B_N10020_N10001" ixia_locid="70">
+                <cmd ixia_locid="72">Identify the volume you want to back up.</cmd>
+                <substeps id="substeps_aqf_dsz_lp">
+                    <substep ixia_locid="13">
+                        <cmd ixia_locid="14">List Cinder volumes from all tenants.</cmd>
+                        <stepxmp ixia_locid="15">
+                            <codeblock ixia_locid="16"><systemoutput ixia_locid="133">~(keystone_admin)$ </systemoutput><userinput ixia_locid="163">cinder list --all-tenants</userinput>
+<systemoutput ixia_locid="134">+--------------+-----------+--------------+... +----------+--------------+
+|     ID       |   Status  | Display Name |... | Bootable | Attached to  |
++--------------+-----------+--------------+... +----------+--------------+
+| 53ad007a-... |   in-use  |   volume-1   |... |  false   | c820df55-... |
+| 578da734-... |   in-use  |              |... |  true    | c820df55-... |
+| 593111d8-... | available |   volume-2   |... |  true    |              |
++--------------+-----------+--------------+... +----------+--------------+</systemoutput></codeblock>
+                        </stepxmp>
+                        <info ixia_locid="164">
+                            <p ixia_locid="21">Cinder volumes are also listed on the <wintitle ixia_locid="22">Volumes</wintitle> page of the Web
+                                administration interface.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="165">
+                        <cmd ixia_locid="24">Identify the volume to back up.</cmd>
+                        <info ixia_locid="25">
+                            <p ixia_locid="26">In the list above, two volumes are listed in the <i ixia_locid="73">in-use</i> state:</p>
+                            <ul id="ul_lfh_xv2_mp">
+                                <li ixia_locid="74">
+                                    <p ixia_locid="75">A volume named <nameliteral ixia_locid="27">volume-1</nameliteral> with ID
+                                            <nameliteral ixia_locid="76">53ad007a-...</nameliteral>, attached to the
+                                        running image  <nameliteral ixia_locid="77">c820df55-...</nameliteral>. The
+                                        bootable flag is <i ixia_locid="78">false</i>, which indicates that
+                                        this is not a disk image.</p>
+                                </li>
+                                <li ixia_locid="79">
+                                    <p ixia_locid="80">An unnamed volume with ID <nameliteral ixia_locid="81">578da734-...</nameliteral>, attached to
+                                        the running image <nameliteral ixia_locid="82">c820df55-...</nameliteral>. The bootable flag is <i ixia_locid="83">true</i>, which indicates that this is
+                                        the instance's disk image. Unnamed volumes are dynamically
+                                        created when the option <option ixia_locid="84">Instance
+                                            Boot Source</option> in the <wintitle ixia_locid="85">Launch Instance</wintitle> window of the Web
+                                        administration interface is set to <i ixia_locid="86">Boot
+                                            from image (creates a new volume)</i> or <i ixia_locid="87">Boot from volume snapshot (creates a new
+                                            volume)</i>.</p>
+                                </li>
+                            </ul>
+                            <draft-comment author="jmaran" ixia_locid="183">I think italics are being overused in
+                                this topic. Typically, we use them for emphasis but here they are
+                                being used for selections. I would recommend &lt;nameliteral&gt; or
+                                possibly &lt;option&gt;. I've left them for now for the sake of
+                                consistency with other topics. </draft-comment>
+                            <p ixia_locid="88">This example uses the unnamed disk image to
+                                illustrate the backup procedure, but you must back up all <i ixia_locid="89">in-use</i> volumes appropriately.</p>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N100E9_N10035_N10023_N10001" ixia_locid="90">
+                <cmd ixia_locid="91">Create a volume snapshot.</cmd>
+                <stepxmp ixia_locid="92">
+                    <codeblock ixia_locid="93"><systemoutput ixia_locid="135">~(keystone_admin)$ </systemoutput><userinput ixia_locid="95">cinder snapshot-create --force True --display-name test-vm-snapshot \
+578da734-a416-47e7-97de-137aa10b90f8</userinput>
+<systemoutput ixia_locid="136">+---------------------+--------------------------------------+
+|       Property      |                Value                 |
++---------------------+--------------------------------------+
+|      created_at     |      2014-09-19T14:18:47.269583      |
+| display_description |                 None                 |
+|     display_name    |           test-vm-snapshot           |
+|          id         | 53b5237c-5cd0-4939-ad6b-cf612e449216 |
+|       metadata      |                  {}                  |
+|         size        |                  1                   |
+|        status       |               creating               |
+|      volume_id      | 578da734-a416-47e7-97de-137aa10b90f8 |
++---------------------+--------------------------------------+</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="97">
+                    <p ixia_locid="98">The status of the new snapshot is <i ixia_locid="99">creating</i>, which means that it is in process. You must wait until it
+                        becomes <i ixia_locid="129">available</i> before proceeding.</p>
+                    <p ixia_locid="100">You can verify the status of all Cinder snapshots using the
+                        following command:</p>
+                    <codeblock ixia_locid="101"><systemoutput ixia_locid="137">~(keystone_admin)$ </systemoutput><userinput ixia_locid="103">cinder snapshot-list --all-tenants</userinput>
+<systemoutput ixia_locid="138">+--------------+--------------+-----------+------------------+------+
+|    ID        | Volume ID    |   Status  |   Display Name   | Size |
++--------------+--------------+-----------+------------------+------+
+| 53b5237c-... | 578da734-... | available | test-vm-snapshot |  1   |
++--------------+--------------+-----------+------------------+------+</systemoutput></codeblock>
+                    <p ixia_locid="105">In this example, the state of the snapshot
+                            <nameliteral ixia_locid="106">test-vm-snapshot</nameliteral> is <i ixia_locid="107">available</i>
+                        already.</p>
+                </info>
+            </step>
+            <step id="step_N1012C_N10035_N10023_N10001" ixia_locid="108">
+                <cmd ixia_locid="109">Export the snapshot to the controller's file system.</cmd>
+                <stepxmp ixia_locid="110">
+                    <codeblock ixia_locid="111"><systemoutput ixia_locid="139">~(keystone_admin)$ </systemoutput><userinput ixia_locid="113">cinder snapshot-export test-vm-snapshot</userinput>
+<systemoutput ixia_locid="140">+---------------------+--------------------------------------+
+|       Property      |                Value                 |
++---------------------+--------------------------------------+
+| display_description |                 None                 |
+|          id         | 53b5237c-5cd0-4939-ad6b-cf612e449216 |
+|        status       |              exporting               |
+|      updated_at     |      2014-09-19T14:18:47.393220      |
+|     volume_size     |                  1                   |
+|     volume_type     |                 None                 |
++---------------------+--------------------------------------+</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="115">
+                    <p ixia_locid="116">The status of the snapshot is <i ixia_locid="117">exporting</i>, which means that it is not yet ready on the controller's
+                        file system. As before, you can use the <cmdname ixia_locid="130">cinder
+                            snapshot-show </cmdname>
+                        <varname ixia_locid="145">UUID</varname> command to verify the current
+                        status, and wait until the snapshot's state is <i ixia_locid="119">available</i> again.</p>
+                </info>
+                <stepresult ixia_locid="44">
+                    <p ixia_locid="45">When the export operation completes, the backup file is
+                        ready, as illustrated in the following example:</p>
+                    <codeblock ixia_locid="46"><systemoutput ixia_locid="141">~(keystone_admin)$ </systemoutput><userinput ixia_locid="48">ls -lh /opt/backups</userinput>
+<systemoutput ixia_locid="142">total 258M
+drwx------ 2 root root  16K Sep 10 17:42 lost+found
+drwxr-xr-x 2 root root 4.0K Sep 19 14:30 temp
+-rw-r--r-- 1 root root 258M Sep 19 14:30 volume-578da734-a416-47e7-97de-137aa10b90f8-20140919-142732.tgz</systemoutput></codeblock>
+                    <p ixia_locid="120">Note that the UUID used in the file name is the volume's and
+                        not the snapshot's.</p>
+                </stepresult>
+            </step>
+            <step id="step_N100E2_N10036_N10024_N10001" ixia_locid="50">
+                <cmd ixia_locid="51">Transfer the backup file to an external storage resource.</cmd>
+                <info ixia_locid="52">
+                    <p ixia_locid="53">The following example uses the <cmdname ixia_locid="54">scp</cmdname> command to transfer the backup file to a server named
+                            <nameliteral ixia_locid="56">backups-server.wrs.com</nameliteral> in the
+                        directory <filepath ixia_locid="55">/backups/titanium</filepath>:</p>
+                </info>
+                <stepxmp ixia_locid="57">
+                    <codeblock ixia_locid="58"><systemoutput ixia_locid="143">~(keystone_admin)$ </systemoutput><userinput ixia_locid="166">scp /opt/backups/volume-578da734-a416-47e7-97de-137aa10b90f8-20140919-142732.tgz \
+admin@backups-server.wrs.com:/backups/titanium</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N101AE_N10035_N10023_N10001" ixia_locid="121">
+                <cmd ixia_locid="122">Delete the snapshot.</cmd>
+                <stepxmp ixia_locid="123">
+                    <codeblock ixia_locid="170"><systemoutput ixia_locid="171">~(keystone_admin)$ </systemoutput><userinput ixia_locid="172">cinder snapshot-delete test-vm-snapshot</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="127">
+                    <p ixia_locid="173"><draft-comment author="jowens" ixia_locid="174">CGTS-4227 add force delete
+                            instructions</draft-comment>You can confirm that the snapshot is deleted
+                        using <cmdname ixia_locid="147">cinder snapshot-list
+                        --all-tenants</cmdname>.</p>
+                    <p ixia_locid="175">If a standard deletion  fails, you can force deletion using
+                        the following command:</p>
+                    <codeblock ixia_locid="176"><systemoutput ixia_locid="177">~(keystone_admin)$ </systemoutput><userinput ixia_locid="178">cinder snapshot-force-delete <varname ixia_locid="179">snapshot-id</varname> [<varname ixia_locid="180">snapshot-id</varname>]</userinput></codeblock>
+                    <p ixia_locid="148">Once the snapshot is exported, you should remove it from the
+                        Cinder repositories to free up disk space.</p>
+                </info>
+            </step>
+            <step id="step_N1010C_N10036_N10024_N10001" ixia_locid="167">
+                <cmd importance="optional" ixia_locid="168">Delete the backup file.</cmd>
+                <info ixia_locid="169">
+                    <p ixia_locid="64">You may want to free up disk space on the controller to
+                        accommodate additional Cinder volume backups.</p>
+                </info>
+            </step>
+        </steps>
+        <result id="result_N1011B_N10024_N10001" ixia_locid="65">
+            <p ixia_locid="66">The volume backup is complete. Repeat this procedure with all other
+                Cinder volumes in the <i ixia_locid="67">in-use</i> state in the system.</p>
+        </result>
+    </taskbody>
+</task-wr>

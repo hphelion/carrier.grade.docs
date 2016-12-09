@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="mlk1461010545518" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="257">High Availability</title>
+ <shortdesc ixia_locid="258">Titanium Server provides a number of features to support highly
+  available hosting of virtual machines. </shortdesc>
+ <prolog>
+  <author ixia_locid="259">Jim Owens</author>
+  <author ixia_locid="260">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="37">Titanium Server includes the following extensions to OpenStack to support high
+   availability:</p>
+  <dl>
+   <dlentry ixia_locid="38">
+    <dt ixia_locid="39">1:1 OpenStack controller services</dt>
+    <dd ixia_locid="40">
+     <p ixia_locid="41">Automatic configuration of the OpenStack controller services in 1:1
+      active/standby mode across two controller nodes. </p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="42">
+    <dt ixia_locid="43">Fast detection of compute host failures</dt>
+    <dd ixia_locid="44">
+     <p ixia_locid="45">Implemented by using a highly efficient and highly scalable heartbeat
+      protocol between the controller and compute nodes.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="46">
+    <dt ixia_locid="47">Fast recovery of virtual machines instances upon detection of a compute node
+     failure</dt>
+    <dd ixia_locid="48">
+     <p ixia_locid="49">Extensions to Nova services that automatically re-schedule impacted virtual
+      machine instances to available alternative compute nodes in the cluster.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="50">
+    <dt ixia_locid="51">Fast recovery of tenant network services upon detection of a compute node
+     failure</dt>
+    <dd ixia_locid="52">
+     <p ixia_locid="53">Extensions to Neutron that automatically re-schedule impacted network
+      services such as DHCP, L3 Routing, and User/Meta data server, for all affected tenant
+      networks. This covers tenant networks spanning multiple compute nodes.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="54">
+    <dt ixia_locid="55">Fast and enhanced detection of virtual machines failures</dt>
+    <dd ixia_locid="56">
+     <p ixia_locid="57">Failure of any KVM/QEMU instance is automatically detected and reported by a
+      modified nova-compute service, and recovery is automatically handled by the VIM.</p>
+     <p ixia_locid="58">Additionally, modified guests can make use of the Titanium Server Guest
+      Heartbeat Library to register application-specific health check callbacks with the virtual
+      machine. This registration allows the compute node to monitor the health of the guest
+      application. The frequency of the health checks is determined at registration time. The
+      semantics of the health check, that is, determining when the application is in a good or a bad
+      state, is under the control of the application itself.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="59">
+    <dt ixia_locid="60">Automatic recovery of failed virtual machine instances</dt>
+    <dd ixia_locid="61">
+     <p ixia_locid="62">Extensions to Nova that automatically re-start a failed virtual machine on
+      the same compute node. If the re-start operation fails, the virtual machine is re-scheduled to
+      use an alternative compute node.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="63">
+    <dt ixia_locid="64">Enhanced virtual machine server groups</dt>
+    <dd ixia_locid="65">
+     <p ixia_locid="66">Titanium Server enhances virtual machine server groups by adding the
+      following attributes:</p>
+     <ul id="ul_s5y_kbq_nn">
+      <li ixia_locid="69">
+       <p ixia_locid="70">maximum number of virtual machine instances</p>
+      </li>
+      <li ixia_locid="71">
+       <p ixia_locid="72">best effort or strict affinity policy</p>
+      </li>
+     </ul>
+     <p ixia_locid="256">Virtual machines in the same server group can also use a Titanium Server
+      server group messaging API for low-bandwidth communications.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="74">
+    <dt ixia_locid="75">Live migration support with DPDK-accelerated networking</dt>
+    <dd ixia_locid="76">
+     <p ixia_locid="77">Live migration support for virtual machines, using the high-performance
+      networking options included with Titanium Server.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="78">
+    <dt ixia_locid="79">Graceful shutdown (and other operations) of virtual machines</dt>
+    <dd ixia_locid="80">
+     <p ixia_locid="81">Nova extensions that turn the default shutdown operation of virtual machines
+      into an ACPI shutdown. Guest applications can therefore register shutdown scripts using
+      standard ACPI mechanisms to execute operations such as closing files, updating persistent
+      databases, or cleanly disconnecting from subscribed services.</p>
+     <p ixia_locid="82">Optionally, guest applications can use the Titanium Server Guest Heartbeat
+      Library to register to receive process management requests such as shutdown, live-migrate,
+      pause, auto-scale, and others. The guest applications can then reject the requests based
+      upon application-specific state directives, or prepare for a graceful execution.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="83">
+    <dt ixia_locid="84">Link Aggregation (LAG) support</dt>
+    <dd ixia_locid="85">
+     <p ixia_locid="86">Support for LAG (with LACP), also known as Aggregate Ethernet, on controller
+      and compute nodes for link protection.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="231">
+    <dt ixia_locid="232">Protected HA Middleware</dt>
+    <dd ixia_locid="233">
+     <p ixia_locid="234">Titanium Server Service Manager protects all critical processes. In the
+      event of a process failure, individual processes can be independently restarted.</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <p ixia_locid="261"><draft-comment author="jowens" ixia_locid="262">CGTS-4077 describe recovery modes</draft-comment>For hardware
+   recovery, Titanium Server supports both single-fault and multiple-fault scenarios.</p>
+  <ul id="ul_m42_fmw_rv">
+   <li ixia_locid="263">
+    <p ixia_locid="264">If a single node fails, Titanium Server detects the fault and immediately initiates recovery,
+     including VM evacuation if the fault is on a compute host. </p>
+   </li>
+   <li ixia_locid="265">
+    <p ixia_locid="266">If multiple nodes fail, for example due to a rack power outage, Titanium
+     Server enters <term ixia_locid="267">Multi Node Recovery Mode</term>. In this mode, the system
+     is allowed to stabilize before VM recovery is attempted, minimizing the risk of thrashing.
+     Administrators are advised to suspend manual activity on the system during this period. Error
+     messages and customer log entries are provided as notification that the system has entered or
+     exited Multi Node Recovery Mode.</p>
+   </li>
+  </ul>
+ </conbody>
+</concept-wr>

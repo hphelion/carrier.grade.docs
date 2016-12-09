@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="tro1476823702517" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Swift Upload File Size Considerations </title>
+  <shortdesc ixia_locid="2">For uploads using the CLI, the file size is limited by the PUT maximum,
+    but you can use an option to split the file into segments. For uploads using the web
+    administration interface, additional limitations apply.</shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+      <p ixia_locid="7"><draft-comment author="jowens" ixia_locid="6">US85034 new
+          topic</draft-comment>The default maximum PUT size is 50GB. For larger files, you can use
+        the -S option on the <cmdname ixia_locid="23">swift upload</cmdname> command to upload the file in
+        segments:</p>
+      <codeblock ixia_locid="9"><systemoutput ixia_locid="10">~(keystone_admin)$</systemoutput><userinput ixia_locid="11">swift upload -S <varname ixia_locid="12">segment_size</varname> <varname ixia_locid="13">filepath</varname></userinput> </codeblock>
+      <p ixia_locid="14">where <varname ixia_locid="15">segment_size</varname> is the maximum
+        segment size in bytes.</p>
+      <p ixia_locid="24">For upload using the web administration interface, the split option is not
+        available, and an additional limitation is imposed by the scratch space. The maximum upload
+        size is the available scratch space (7.81 GB or less) or the maximum PUT size, whichever is
+        less.</p>
+      <p ixia_locid="25">You can view the available scratch space as follows:</p>
+      <codeblock ixia_locid="17"><systemoutput ixia_locid="18">$ </systemoutput><userinput ixia_locid="19">cd /scratch/lighttpd</userinput>
+<systemoutput ixia_locid="20">$ </systemoutput><userinput ixia_locid="21">df -k | grep scratch</userinput>
+<systemoutput ixia_locid="22">Filesystem                                1K-blocks    Used Available Use% Mounted on
+/dev/mapper/cgts--vg-scratch--lv            7932336   36024   7470328   1% /scratch</systemoutput></codeblock>
+    </section>
+  </refbody>
+</reference-wr>

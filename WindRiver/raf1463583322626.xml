@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="raf1463583322626" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="48">The Board Management Network</title>
+ <shortdesc ixia_locid="49">This network is optionally available to manage hosts equipped with board management
+  modules.</shortdesc>
+ <prolog>
+  <author ixia_locid="50">Jim Owens</author>
+  <author ixia_locid="51">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="30">The board management network implementation depends on the system
+   configuration. </p>
+  <dl>
+   <dlentry ixia_locid="39">
+    <dt ixia_locid="40">Internal access</dt>
+    <dd ixia_locid="41">
+     <p ixia_locid="42">On a system configured for internal access to the board management network,
+      the board management modules are connected to VLAN-tagged ports on the internal L2 switch, and
+      the controller is attached to the VLAN using the internal management network interface. For
+      more about the internal L2 switch, refer to <xref href="jow1404333563170.xml" ixia_locid="32"/>.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="43">
+    <dt ixia_locid="44">External access</dt>
+    <dd ixia_locid="45">
+     <p ixia_locid="46">On a system configured for external access to the board management network,
+      the board management modules are assigned IP addresses accessible from the OAM network, and
+      the controller uses the OAM network to connect to them.</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <p ixia_locid="47">The system configuration is determined at installation. If a board management
+   network is specified during the controller configuration script, then the network is configured
+   for internal access. Otherwise, the board management network uses external access.</p>
+ </conbody>
+</concept-wr>

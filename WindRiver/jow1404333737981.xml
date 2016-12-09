@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333737981" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <title ixia_locid="1">OAM Network Planning</title>
+    <shortdesc ixia_locid="2">The OAM (operations, administration, and management) network enables
+        the Web administration interface, the command-line management clients, SNMP interface, and
+        the REST APIs to manage the Titanium Server cluster.</shortdesc>
+    <prolog>
+        <author ixia_locid="18">Jim Owens</author>
+        <author ixia_locid="3">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="389">The OAM Network is also used for OpenFlow and OVSDB connectivity to an SDN Controller in
+            Titanium Server SDN Configurations, and for syslog connectivity to a Remote Log Server
+            if Titanium Server remote logging is configured. </p>
+        <p ixia_locid="19">On systems where an optional board management network is configured for external access,
+            the OAM network also provides access to the board management modules.</p>
+        <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="377">US62821 state that IPv6 is
+                supported.</draft-comment>The OAM network supports IPv4 or IPv6 addressing. Consider
+            the following guidelines:</p>
+        <ul id="ul_uj3_yk2_4n">
+            <li ixia_locid="5">
+                <p ixia_locid="373">Deploy proper firewall mechanisms to access this network. Ensuring
+                    that access to the Titanium Server management interfaces is not compromised
+                    should be of primary concern.</p>
+                <p ixia_locid="374"><draft-comment author="jowens" ixia_locid="375">US65292 added
+                        para about default firewall and optional rules file:</draft-comment>Titanium
+                    Server includes a default firewall for the OAM network, using the <nameliteral ixia_locid="376">Netfilter</nameliteral> framework. You can optionally
+                    configure the system to support additional rules. For more information, see
+                        <xref href="jow1443627833422.xml" ixia_locid="390"/>.</p>
+                <draft-comment author="jmaran" ixia_locid="391">The Firewall Options topic referenced above is also
+                    included in the System Administration guide. May want to consider removing that
+                    topic from this guide as it seems to be detailed information so perhaps not
+                    needed in this planning guide. If topic is removed from this guide, the xref
+                    here needs to change to include a &lt;cite&gt; for the Titanium Server System
+                    Administration doc.</draft-comment>
+            </li>
+            <li ixia_locid="7">
+                <p ixia_locid="8">Consider whether the OAM network needs access to the open
+                    Internet. Limiting access to an internal network might be advisable, keeping in
+                    mind that access to configured DNS and NTP servers may still be needed.</p>
+            </li>
+            <li ixia_locid="9">
+                <p ixia_locid="10">VLAN tagging is supported, enabling this network to share an
+                    interface with the internal management or infrastructure networks.</p>
+            </li>
+            <li ixia_locid="378">
+                <p ixia_locid="379"><draft-comment author="jowens" ixia_locid="380">US62821 bullet
+                        added</draft-comment>The IP addresses of the DNS and NTP servers must match
+                    the IP address plan (IPv4 or IPv6) of the OAM network.</p>
+            </li>
+            <li ixia_locid="11">
+                <p ixia_locid="12">For an IPv4 address plan:</p>
+                <ul id="ul_ipp_qs2_4n">
+                    <li ixia_locid="13">
+                        <p ixia_locid="14">The OAM floating IP address is the only address that
+                            needs to be visible externally. Therefore you must plan for valid
+                            definitions of its IPv4 subnet and default gateway.</p>
+                    </li>
+                    <li ixia_locid="15">
+                        <p ixia_locid="16">The physical IPv4 addresses for the controllers don't
+                            need to be visible externally, unless you plan to use them during SSH
+                            sessions to prevent potential service breaks during the connection. You
+                            still need to plan for their IPv4 subnet, but you can limit access to
+                            them as required.</p>
+                    </li>
+                    <li ixia_locid="381">
+                        <p ixia_locid="382"><draft-comment author="jowens" ixia_locid="383">US62821
+                                bullet added</draft-comment>Outgoing packets from the active or
+                            secondary controller use the controller's IPv4 physical address, not the
+                            OAM floating IP address, as the source address. </p>
+                    </li>
+                </ul>
+            </li>
+            <li ixia_locid="384">
+                <p ixia_locid="385"><draft-comment author="jowens" ixia_locid="386">US62821 bullet
+                        and sub-bullet added</draft-comment>For an IPv6 address plan:</p>
+                <ul id="ul_gqn_s1m_vt">
+                    <li ixia_locid="387">
+                        <p ixia_locid="388">Outgoing packets from the active controller use the OAM
+                            floating IP address as the source address. Outgoing packets from the
+                            secondary controller use the secondary controller's IPv6 physical IP
+                            address.</p>
+                    </li>
+                </ul>
+            </li>
+            <li ixia_locid="20">
+                <p conref="jow1419267499106.xml#jow1419267499106/multicast_in_use" ixia_locid="21"/>
+            </li>
+            <li ixia_locid="392">
+                <p ixia_locid="393"><draft-comment author="jowens" ixia_locid="394">CGTS-5681 added</draft-comment>For multi-region
+                    deployments, you can define a restricted multicast addressing range on the OAM
+                    network during system installation.</p>
+            </li>
+        </ul>
+    </conbody>
+</concept-wr>

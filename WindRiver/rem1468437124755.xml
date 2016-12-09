@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="rem1468437124755" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="537">Specifying a Live Migration Timeout Using the CLI</title>
+    <shortdesc ixia_locid="538">You can specify the number of seconds to wait for a live migration to complete using
+        the CLI</shortdesc>
+    <prolog>
+        <author ixia_locid="539">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <steps id="steps_sks_ncs_pw">
+            <step id="step_N10035_N10032_N1001C_N10001" ixia_locid="471">
+                <cmd ixia_locid="472">Set the timer from the command line:</cmd>
+                <info ixia_locid="473">
+                    <p ixia_locid="474">The following examples set the timeout to 400 seconds.</p>
+                </info>
+                <choices id="choices_iks_2wn_ht">
+                    <choice ixia_locid="475">
+                        <p ixia_locid="476">As <term ixia_locid="535">admin</term>, add an extra
+                            spec to a flavor by:</p>
+                        <codeblock ixia_locid="477"><systemoutput ixia_locid="483">~(keystone)admin)$ </systemoutput><userinput ixia_locid="484">nova flavor-key <varname ixia_locid="478">flavorName</varname> set hw:wrs:live_migration_timeout=400</userinput></codeblock>
+                    </choice>
+                    <choice ixia_locid="479">
+                        <p ixia_locid="480">As <term ixia_locid="536">admin</term> or a tenant,
+                            update the metadata of an image by:</p>
+                        <codeblock ixia_locid="481"><systemoutput ixia_locid="485">~(keystone)admin)$ </systemoutput><userinput ixia_locid="486">glance image-update --property hw_wrs_live_migration_timeout=400 <varname ixia_locid="482">imageName</varname></userinput></codeblock>
+                    </choice>
+                </choices>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

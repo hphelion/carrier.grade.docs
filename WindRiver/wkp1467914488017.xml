@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="wkp1467914488017" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="701">Local Volume Groups</title>
+ <shortdesc ixia_locid="702">Local volume groups are used to designate one or more physical volumes on a compute host
+  as collective storage space. </shortdesc>
+ <prolog>
+    <author ixia_locid="722">Jim Owens</author>
+  <author ixia_locid="703">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+    <p ixia_locid="8"><draft-comment author="jowens" ixia_locid="82">US68057, US69978 updated
+        section. US74975 added info for remote Ceph-backed option. </draft-comment>Local volume
+      groups are used to designate one or more physical volumes on a compute host as collective
+      storage space. Titanium Server uses one local volume group, called <nameliteral ixia_locid="692">nova-local</nameliteral>. This provides cache and file storage for the nova
+      service, as well as disk storage for use by VMs. You can use the Web administration or the CLI
+      to create this mandatory local volume group, and to change the settings.</p>
+    <note id="note_N10038_N10022_N1001F_N10001" ixia_locid="696">
+      <p ixia_locid="697"><draft-comment author="jowens" ixia_locid="698">CGTS-3558 use non-root
+          disks</draft-comment>Use non-root disks exclusively for <nameliteral ixia_locid="699">nova-local</nameliteral> storage. Using a root disk to provide <nameliteral ixia_locid="700">nova-local</nameliteral> storage is not a supported configuration.</p>
+    </note>
+    <p ixia_locid="712">The exact storage implementation depends on the <uicontrol ixia_locid="666">Instance Backing</uicontrol> type. You can set this individually for each host to use local
+        <draft-comment author="jmaran" ixia_locid="723">Define LVM and CoW???</draft-comment>LVM or CoW-image
+      backing, or remote Ceph backing on a system that uses storage hosts. </p>
+    <p ixia_locid="713">LVM and CoW backing use an <term ixia_locid="693">instances logical
+        volume</term>, or <nameliteral ixia_locid="694">Instances LV</nameliteral> on the local
+      compute node to hold the nova image cache and various nova control files. For CoW image
+      backing, the <nameliteral ixia_locid="695">Instances LV</nameliteral> is also used to hold
+      CoW-image disk files for use as VM disk storage. For LVM backing, separate volumes are used to
+      provide VM disk storage. To ensure that enough space remains for this purpose, you must limit
+      the <uicontrol ixia_locid="667">Instances LV Size</uicontrol>; suggested sizes are indicated
+      in the Web administration interface. For more information about the Instances LV, see <xref href="jow1443470081421.xml" ixia_locid="688"/>.</p>
+    <p ixia_locid="714">Ceph backing uses a Ceph storage pool, configured from the storage-host
+      resources on a Ceph system. For more information, see <xref href="jhh1464706651355.xml" ixia_locid="719"/>.</p>
+    <p ixia_locid="720">Compute hosts are grouped into host aggregates based on whether they offer
+      LVM, CoW, or Ceph-backed storage. The host aggregates are used for instantiation scheduling.
+        <draft-comment author="jmaran" ixia_locid="724">Updated the doc-level &lt;cite&gt; to correct
+        guide.</draft-comment>For more information, see <ph ixia_locid="182" otherprops="printonly"><cite ixia_locid="183">Titanium Server Tenant User's Guide:</cite>
+      </ph><cite ixia_locid="184"><ph ixia_locid="185"><xref href="jow1426182913166.xml" ixia_locid="669"/></ph></cite>. </p>
+    <p ixia_locid="721">You can control whether a VM is instantiated with LVM, CoW, or Ceph-backed
+      storage by setting a flavor extra specification. For more information, see <xref href="zjx1464641246986.xml" ixia_locid="670"/>.</p>
+  </conbody>
+</concept-wr>

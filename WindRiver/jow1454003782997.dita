@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003782997" xml:lang="en-us"><title ixia_locid="1">Hyperthreading</title><shortdesc ixia_locid="2">Hyperthreading is an Intel processor technology that presents a single
+        physical core as two logical cores, each with its own architectural state but with shared
+        execution engine, caches, and bus interface. </shortdesc><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">The resource sharing allows a logical processor to process instructions when the
+            other logical processor on the core is stalled waiting for data from memory. While
+            hyperthreading presents a single physical core as two logical cores, it critical to be
+            aware that it is a single processing pipeline whose performance gain is very dependent
+            on the OS and applications. In some cases hyperthreading can actually cause a decrease
+            in performance.</p><p ixia_locid="5">Hyperthreading should be used with an understanding of the applications that will share the physical cores and the requirements of the VMs deployed on it.  Some general guidelines are:</p>
+        <ul id="ul_o4k_msz_55">
+            <li ixia_locid="6">
+                <p ixia_locid="7">Each logical core depends on the other logical core stalls to acquire execution
+                    cycles so hyperthreading performance and latency are inherently not
+                    deterministic. Performance-critical VMs must not share a physical core with
+                    other VMs if hyperthreading is enabled.</p>
+            </li>
+            <li ixia_locid="8">
+                <p ixia_locid="9">Hyperthreading works best when applications have frequent cache
+                    misses and external memory accesses because that provides the execution time for
+                    the other thread. If there are not a lot of processor stalls creating gaps for
+                    the other thread to execute in, the performance gain is less and can even result
+                    in no gain. </p>
+            </li>
+            <li ixia_locid="10">
+                <p ixia_locid="11">Hyperthreading works worst when two logical cores start competing for the same
+                    cache lines and cause cache thrashing. VMs with high rates of cached memory
+                    access should not share physical core with any other VM.</p>
+            </li>
+            <li ixia_locid="12">
+                <p ixia_locid="13">Low performance VMs and management VMs can share a physical core with another
+                    VM.</p>
+            </li>
+        </ul><p ixia_locid="14">Titanium Server supports enabling or disabling hyperthreading. If hyperthreading
+            is used, Titanium provides a CPU thread policy extra spec to optimize performance or
+            optimize resources when using a dedicated CPU policy. Two options for the policy are
+            provided:</p>
+        <ul id="ul_rbv_4sz_55">
+            <li ixia_locid="15">
+                <p ixia_locid="16">Isolate – Enforces the used of only one hyperthread logical core in each physical
+                    core. The sibling logical core will be unused by any other VM.</p>
+            </li>
+            <li ixia_locid="17">
+                <p ixia_locid="18">Require- Requires that both siblings logical cores on the same physical core be
+                    assigned to the VM so that no other VMs will be scheduled to use the thread on
+                    that physical core. This feature is useful if the VM itself is optimized to
+                    leverage hyperthreading to improve performance.</p>
+                <note id="note_N10069_N10060_N10052_N10016_N10001" ixia_locid="19">
+                    <p ixia_locid="20">The CPU thread policies mitigate the effects of using hyperthreading. For
+                        maximum throughput and determinism, hyperthreading should be disabled.</p>
+                </note>
+            </li>
+        </ul></conbody></concept-wr>

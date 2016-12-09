@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003729824" xml:lang="en-us"><title ixia_locid="1">Glance Dimensioning for Controller Node Storage</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+        <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="13">CGTS-3888 Add letters to
+                equations, move backup to last</draft-comment>The <filepath ixia_locid="14">/opt/cgcs</filepath>
+            partition is used by various controller applications as data storage that is replicated
+            between the controller nodes. For the Standard Configuration with Controller Storage and
+            Titanium Server CPE configuration the partition is also used for used for Glance image
+            storage and is therefore a configurable size. For the Standard Configuration with
+            Dedicated Storage the size is fixed at 10 GB. To determine the logical disk capacity
+            requirement for images, calculate the total expected image requirement plus some growth
+            margin.</p>
+        <sl>
+            <sli ixia_locid="6">X = Image Storage Requirement = N * AvgImageSize + Margin</sli>
+        </sl>
+        <p ixia_locid="12">Where:</p>
+        <sl>
+            <sli ixia_locid="7">N = number of images</sli>
+            <sli ixia_locid="9">AvgImageSize = Average image size</sli>
+            <sli ixia_locid="11">Margin = User-defined margin (recommend at least 25%)</sli>
+        </sl>
+    </conbody></concept-wr>

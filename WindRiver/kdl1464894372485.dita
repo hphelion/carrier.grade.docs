@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr domains="(topic reference reference-wr)                            (topic hi-d)                             (topic indexing-d)                            (topic pr-d)                             (topic sw-d)                            (topic ui-d)                             (topic wr-sw-d)                            (topic xml-d)   " id="kdl1464894372485" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Titanium Server Hardware Requirements</title>
+  <shortdesc ixia_locid="2">Titanium Server has been tested to work with specific hardware
+    configurations.</shortdesc>
+  <prolog>
+    <author ixia_locid="398">Jim Owens</author>
+    <author ixia_locid="3">Ron Stone</author>
+  </prolog>
+  <refbody>
+    <section id="section_hw_reqs_intro" ixia_locid="4">
+      <draft-comment author="rstone" dir="ltr" ixia_locid="321" translate="no">CGTS-3145 adds topic. JO added altered tables
+        to simplify, avoid repetition </draft-comment>
+      <draft-comment author="jmaran" ixia_locid="4924">Commented out a number of xrefs in this topic that seemed to be
+        pointing to the topic itself. Might have been section references that didn't port correctly
+        but I'm not sure.</draft-comment>
+      <p ixia_locid="4593">If the minimum hardware requirements are not met, system performance cannot
+        be guaranteed.</p>
+      <p ixia_locid="4594">For system engineering considerations related to hardware, refer to the
+          <cite ixia_locid="4595">Titanium Server System Engineering Guidelines</cite>.</p>
+    </section>
+    <section id="section_N10044_N10024_N10001" ixia_locid="4730">
+      <title ixia_locid="4731">Controller, Compute, and Storage Hosts</title>
+      <!--Commented the following out because it was showing as reference to this same topic ("Titanium Server Hardware Requirements"). <p ixia_locid="4725"><draft-comment author="jowens" dir="ltr" ixia_locid="4744" translate="no">US65868 Supported Hard Disk Geometries info moved from Release Notes</draft-comment>Hardware requirements for Titanium Server hosts are listed in the following table. For specific hardware recommendations, see <xref href="kdl1464894372485.dita#kdl1464894372485/section_if_scenarios" ixia_locid="4840"/>. </p>-->
+      <table colsep="1" frame="sides" id="table_nvy_52x_p5" rowsep="1">
+        <title ixia_locid="917">Hardware Requirements — Systems with Dedicated Controllers</title>
+        <tgroup cols="4">
+          <colspec colname="c1" colnum="1" colwidth="7*"/>
+          <colspec colname="c2" colnum="2" colwidth="10*"/>
+          <colspec colname="c3" colnum="3" colwidth="10*"/>
+          <colspec colname="c4" colnum="4" colwidth="10*"/>
+          <thead>
+            <row>
+              <entry ixia_locid="399">
+                <p ixia_locid="4596">Minimum Requirement</p>
+              </entry>
+              <entry ixia_locid="400">
+                <p ixia_locid="401">Controller</p>
+              </entry>
+              <entry ixia_locid="402">
+                <p ixia_locid="403">Storage</p>
+              </entry>
+              <entry ixia_locid="404">
+                <p ixia_locid="405">Compute</p>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry ixia_locid="406">
+                <p ixia_locid="407">Minimum Qty of Servers</p>
+              </entry>
+              <entry ixia_locid="408">
+                <p ixia_locid="409">2 (required)</p>
+              </entry>
+              <entry ixia_locid="412">
+                <p ixia_locid="413">2-8 (if Ceph storage used)</p>
+              </entry>
+              <entry ixia_locid="415">
+                <p ixia_locid="416">2 ‒ 100</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4628">
+                <p ixia_locid="4629">Minimum Processor Class</p>
+              </entry>
+              <entry ixia_locid="4630" nameend="c4" namest="c2">
+                <p ixia_locid="4631">Dual-CPU Intel® Xeon® E5 26xx Family (SandyBridge) 8
+                  cores/socket</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4632">
+                <p ixia_locid="4633">Minimum Processor Speed</p>
+              </entry>
+              <entry ixia_locid="4634" nameend="c3" namest="c2">
+                <p ixia_locid="4635">2.5 GHz</p>
+              </entry>
+              <entry ixia_locid="423">
+                <p ixia_locid="424">1.8 GHz</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="425">
+                <p ixia_locid="426">Minimum Memory</p>
+              </entry>
+              <entry ixia_locid="427">
+                <p ixia_locid="428">64 GB </p>
+              </entry>
+              <entry ixia_locid="429">
+                <p ixia_locid="430">64 GB </p>
+              </entry>
+              <entry ixia_locid="431">
+                <p ixia_locid="432">32 GB</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="433" morerows="1">
+                <p ixia_locid="434">Minimum Primary Disk (two-disk hardware RAID suggested)</p>
+              </entry>
+              <entry ixia_locid="4896">
+                <p ixia_locid="4897">500 GB - SSD</p>
+              </entry>
+              <entry ixia_locid="439" nameend="c4" namest="c3">
+                <p ixia_locid="440">120 GB (min. 10K RPM)</p>
+              </entry>
+            </row>
+            <row>
+              
+              <entry ixia_locid="4898" nameend="c4" namest="c2">
+                <note id="note_N1017E_N10178_N10175_N100B7_N1006B_N1005F_N10044_N10024_N10001" ixia_locid="4899">
+                  <p ixia_locid="4900"><draft-comment author="jowens" dir="ltr" ixia_locid="4901" translate="no">CGTS-4159 specified hardware
+                      RAID and added note</draft-comment>Software RAID is not supported.</p>
+                </note>
+              </entry>
+              
+            </row>
+            <row>
+              <entry ixia_locid="443">
+                <p ixia_locid="444">Additional Disks</p>
+              </entry>
+              <entry ixia_locid="445">
+                <p ixia_locid="446">1x 500 GB (min. 10K RPM)</p>
+              </entry>
+              <entry ixia_locid="447">
+                <p ixia_locid="448">500 GB (min. 10K RPM) for OSD storage</p>
+                <p ixia_locid="4902">one or more SSDs (recommended for Ceph journals); min. 1024 MiB
+                  per journal</p>
+              </entry>
+              <entry ixia_locid="449">
+                <p ixia_locid="451">500 GB (min. 10K RPM) — 1 or more (for local storage)</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4736" morerows="1">
+                <p ixia_locid="4737">Network Ports</p>
+              </entry>
+              <entry ixia_locid="4638" nameend="c4" namest="c2">
+                <p ixia_locid="4640">(Typical
+                  deployment.<!-- For more information, see <xref href="kdl1464894372485.dita#kdl1464894372485/section_if_scenarios" ixia_locid="4841"/>.-->)</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4775">
+                <ul id="ul_jh1_vpm_v5">
+                  <li ixia_locid="4776">
+                    <p ixia_locid="4777">Mgmt: 2 x 10GE LAG </p>
+                  </li>
+                  <li ixia_locid="4778">
+                    <p ixia_locid="4779"> Infra: 2 x 10GE LAG </p>
+                  </li>
+                  <li ixia_locid="4836">
+                    <p ixia_locid="4837">OAM: 2 x 1GE LAG</p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="4780">
+                <ul id="ul_jh1_vpm_v52">
+                  <li ixia_locid="4781">
+                    <p ixia_locid="4782">Mgmt: 2 x 10GE LAG </p>
+                  </li>
+                  <li ixia_locid="4783">
+                    <p ixia_locid="4784"> Infra: 2 x 10GE LAG </p>
+                  </li>
+                  
+                </ul>
+              </entry>
+              <entry ixia_locid="4648">
+                <ul id="ul_s1n_krm_v5">
+                  <li ixia_locid="4649">
+                    <p ixia_locid="4650">Mgmt: 2 x 10GE LAG </p>
+                  </li>
+                  <li ixia_locid="4651">
+                    <p ixia_locid="4652"> Infra: 2 x 10GE LAG </p>
+                  </li>
+                  <li ixia_locid="4653">
+                    <p ixia_locid="4654">Data: 2 x 1GE LAG</p>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4618">
+                <p ixia_locid="4619">USB Interface</p>
+              </entry>
+              <entry ixia_locid="4620">
+                <p ixia_locid="4621">1</p>
+              </entry>
+              <entry ixia_locid="626" nameend="c4" namest="c3">
+                <p ixia_locid="4724">not required</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4613">
+                <p ixia_locid="4614">Power Profile</p>
+              </entry>
+              <entry ixia_locid="4615" nameend="c4" namest="c2">
+                <p ixia_locid="4616">Max Performance </p>
+                <p ixia_locid="4617">Min Proc Idle Power:No C States </p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4622">
+                <p ixia_locid="4623">Boot Order</p>
+              </entry>
+              <entry ixia_locid="4624">
+                <p ixia_locid="4625">HD, PXE, USB</p>
+              </entry>
+              <entry ixia_locid="4626" nameend="c4" namest="c3">
+                <p ixia_locid="4627">HD, PXE</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4597">
+                <p ixia_locid="4598"><draft-comment author="jowens" ixia_locid="4905">US80802 UEFI
+                    support</draft-comment>BIOS Mode</p>
+              </entry>
+              <entry ixia_locid="4906" nameend="c4" namest="c2">
+                <p ixia_locid="4907">BIOS or UEFI</p>
+                <note id="note_N105B3_N1059E_N10027_N1000F_N10001" ixia_locid="4915">
+                  <p ixia_locid="4916">UEFI Secure Boot and UEFI PXE boot over IPv6 are not
+                    supported. On systems with an IPv6 management network, you can use a separate
+                    IPv4 network for PXE boot. For more information, see <xref href="xms1466026140926.xml" ixia_locid="4917"/>.</p>
+                </note>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4601">
+                <p ixia_locid="4602">Intel Hyperthreading</p>
+              </entry>
+              <entry ixia_locid="4603" nameend="c4" namest="c2">
+                <p ixia_locid="4604">Disabled or Enabled</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4607">
+                <p ixia_locid="4608">Intel Virtualization (VTD, VTX)</p>
+              </entry>
+              <entry ixia_locid="4609" nameend="c3" namest="c2">
+                <p ixia_locid="4610">Disabled</p>
+              </entry>
+              <entry ixia_locid="4611">
+                <p ixia_locid="4612">Enabled</p>
+              </entry>
+            </row>
+            
+            
+            
+            
+           
+            
+           
+            
+           
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+    <section id="section_N102D0_N10024_N10001" ixia_locid="4732">
+      <title ixia_locid="4733">Combined Controller-Compute Hosts</title>
+      <p ixia_locid="4727"><draft-comment author="jowens" dir="ltr" ixia_locid="4745" translate="no">US65868 Supported Hard Disk Geometries info moved from Release
+        Notes</draft-comment>Hardware requirements for a Titanium Server CPE configuration are
+        listed in the following
+        table.<!-- For specific hardware recommendations, see <xref href="kdl1464894372485.dita#kdl1464894372485/section_if_scenarios" ixia_locid="4785"/>.--></p>
+      <table colsep="1" frame="sides" id="table_cb2_lfx_p5" rowsep="1">
+        <!--Titanium Server CPE-->
+        <title ixia_locid="918">Hardware Requirements — Titanium Server CPE Configuration</title>
+        <tgroup cols="2">
+          <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+          <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+          <thead>
+            <row>
+              <entry ixia_locid="466">
+                <p ixia_locid="4655">Minimum Requirement</p>
+              </entry>
+              <entry ixia_locid="467">
+                <p ixia_locid="468">Controller + Compute</p>
+                <p ixia_locid="469">(Combined Server)</p>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry ixia_locid="470">
+                <p ixia_locid="471">Minimum Qty of Servers</p>
+              </entry>
+              <entry ixia_locid="472">
+                <p ixia_locid="473">2</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="474">
+                <p ixia_locid="475">Minimum Processor Class</p>
+              </entry>
+              <entry ixia_locid="476">
+                <p ixia_locid="4681">Dual-CPU Intel® Xeon® E5 26xx Family (SandyBridge) 8
+                  cores/socket</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="478">
+                <p ixia_locid="479">Minimum Memory</p>
+              </entry>
+              <entry ixia_locid="480">
+                <p ixia_locid="481">64 GB</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="482">
+                <p ixia_locid="483">Minimum Primary Disk</p>
+              </entry>
+              <entry ixia_locid="484">
+                <p ixia_locid="485">500 GB - SSD</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="486">
+                <p ixia_locid="487">Additional Disks</p>
+              </entry>
+              <entry ixia_locid="488">
+                <ul id="ul_sxz_lqm_v5">
+                  <li ixia_locid="4683">
+                    <p ixia_locid="4684">1 x 500 GB (min. 10K RPM) for Cinder storage</p>
+                  </li>
+                  <li ixia_locid="4685">
+                    <p ixia_locid="4686">1 or more x 500 GB (min. 10K RPM) for local storage</p>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4738">
+                <p ixia_locid="4739">Network Ports</p>
+              </entry>
+              <entry ixia_locid="4581" nameend="c4" namest="c2">
+                <p ixia_locid="4542">(Typical
+                  deployment.<!-- For more information, see <xref href="kdl1464894372485.dita#kdl1464894372485/section_if_scenarios" ixia_locid="4688"/>.-->)</p>
+                <ul id="ul_jh1_vpm_v51">
+                  <li ixia_locid="4689">
+                    <p ixia_locid="4591">Mgmt: 2 x 10GE LAG </p>
+                  </li>
+                  <li ixia_locid="4838">
+                    <p ixia_locid="4839">OAM: 2 x 1GE LAG</p>
+                  </li>
+                  <li ixia_locid="4690">
+                    <p ixia_locid="4592"> Infra: 2 x 10GE LAG </p>
+                  </li>
+                  <li ixia_locid="4691">
+                    <p ixia_locid="4692">Data: 2 x 1GE LAG</p>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4673">
+                <p ixia_locid="4674">USB Interface</p>
+              </entry>
+              <entry ixia_locid="4675">
+                <p ixia_locid="4676">1</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4668">
+                <p ixia_locid="4669">Power Profile</p>
+              </entry>
+              <entry ixia_locid="4670">
+                <p ixia_locid="4671">Max Performance </p>
+                <p ixia_locid="4672">Min Proc Idle Power:No C States </p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4677">
+                <p ixia_locid="4678">Boot Order</p>
+              </entry>
+              <entry ixia_locid="4679">
+                <p ixia_locid="4680">HD, PXE, USB</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4656">
+                <p ixia_locid="4657"><draft-comment author="jowens" ixia_locid="4912">US80802 UEFI
+                    support</draft-comment>BIOS Mode</p>
+              </entry>
+              <entry ixia_locid="4913" nameend="c4" namest="c2">
+                <p ixia_locid="4914">BIOS or UEFI</p>
+                <note id="note_N104D2_N104C7_N104B3_N1038C_N1035B_N1034C_N1032F_N10024_N10001" ixia_locid="4918">
+                  <p ixia_locid="4919">UEFI Secure Boot and UEFI PXE boot over IPv6 are not
+                    supported. On systems with an IPv6 management network, you can use a separate
+                    IPv4 network for PXE boot. For more information, see <xref href="xms1466026140926.xml" ixia_locid="4920"/>.</p>
+                </note>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4660">
+                <p ixia_locid="4661">Intel Hyperthreading</p>
+              </entry>
+              <entry ixia_locid="4662">
+                <p ixia_locid="4663">Disabled or Enabled</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4664">
+                <p ixia_locid="4665">Intel Virtualization (VTD, VTX)</p>
+              </entry>
+              <entry ixia_locid="4666">
+                <p ixia_locid="4667">Enabled</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+    <section id="section_N10496_N10024_N10001" ixia_locid="4734">
+      <title ixia_locid="4735">Verified Commercial Hardware</title>
+      <p ixia_locid="4729"><draft-comment author="jowens" dir="ltr" ixia_locid="4904" translate="no">US78837 do we need to
+          add approved SSDs for Ceph journals?</draft-comment>Verified and approved hardware
+        components for use with Titanium Server are listed in the following table.</p>
+      <table colsep="1" frame="sides" id="verified_components" rowsep="1">
+        <title ixia_locid="919">Verified Components</title>
+        <tgroup cols="4">
+          <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+          <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+          <thead>
+            <row>
+              <entry ixia_locid="4740"><p ixia_locid="4741">Component</p></entry>
+              <entry ixia_locid="4742"><p ixia_locid="4743">Approved Hardware</p></entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry ixia_locid="4746">
+                <p ixia_locid="4747">Hardware Platforms</p>
+              </entry>
+              <entry ixia_locid="4748">
+                <ul id="ul_fch_ywm_v51">
+                  <li ixia_locid="4749">
+                    <p ixia_locid="4750">Hewlett-Packard</p>
+                    <ul id="ul_wdd_4l1_w5">
+                      <li ixia_locid="4751">
+                        <p ixia_locid="127">HP360 Proliant DL360P Gen8 Server</p>
+                      </li>
+                      <li ixia_locid="4752">
+                        <p ixia_locid="111">HP360 Proliant DL360P Gen9 Server</p>
+                      </li>
+                      <li ixia_locid="4753">
+                        <p ixia_locid="113">HP380 Proliant DL380P Gen8 Server</p>
+                      </li>
+                      <li ixia_locid="4754">
+                        <p ixia_locid="151">HP380 Proliant DL380P Gen9 Server</p>
+                      </li>
+                      <li ixia_locid="4755">
+                        <p ixia_locid="153">c7000 Enclosure with HP460 Proliant BL460 Gen9
+                          Server</p>
+                        <note id="note_N1053A_N10532_N1050A_N10501_N104FD_N104F9_N104EC_N104E9_N104C1_N104B5_N104A6_N10024_N10001" ixia_locid="154" type="caution">
+                          <p ixia_locid="155">LAG support is dependent on the switch cards deployed
+                            with the c7000 enclosure. To determine whether LAG can be configured,
+                            consult the switch card documentation.</p>
+                        </note>
+                      </li>
+                    </ul>
+                  </li>
+                  <li ixia_locid="4756">
+                    <p ixia_locid="4757">Dell </p>
+                    <ul id="ul_mhj_4l1_w5">
+                      <li ixia_locid="4758">
+                        <p ixia_locid="131">Dell PowerEdge R720</p>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4759">
+                <p ixia_locid="4760">Supported Reference Platforms</p>
+              </entry>
+              <entry ixia_locid="4761">
+                <ul id="ul_mjd_z5f_1t">
+                  <li ixia_locid="144">
+                    <p ixia_locid="145">Intel Iron Pass</p>
+                  </li>
+                  <li ixia_locid="146">
+                    <p ixia_locid="147">Intel Canoe Pass</p>
+                  </li>
+                  <li ixia_locid="188">
+                    <p ixia_locid="189">Intel Grizzly Pass</p>
+                  </li>
+                  <li ixia_locid="166">
+                    <p ixia_locid="190">Intel Wildcat Pass</p>
+                  </li>
+                </ul>
+              </entry>
+              
+            </row>
+            <row>
+              <entry ixia_locid="4762">
+                <p ixia_locid="4763">Disk Controllers</p>
+              </entry>
+              <entry ixia_locid="4764">
+                <ul id="ul_fch_ywm_v5">
+                  <li ixia_locid="4765">
+                    <p ixia_locid="4766">HP SAS Controllers</p>
+                    <ul id="ul_h1x_w5d_w5">
+                      <li ixia_locid="4767">
+                        <p ixia_locid="4768">P440ar </p>
+                      </li>
+                      <li ixia_locid="4786">
+                        <p ixia_locid="4787">P420i</p>
+                      </li>
+                    </ul>
+                  </li>
+                  <li ixia_locid="4695">
+                    <p ixia_locid="518">LSI 2308 </p>
+                  </li>
+                  <li ixia_locid="4696">
+                    <p ixia_locid="519">LSI 3008</p>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4852">
+                <p ixia_locid="4853"><draft-comment author="jowens" dir="ltr" ixia_locid="4888" translate="no">CGTS-4143 added
+                    Fortville</draft-comment>NICs Verified for PXE Boot, Management, and OAM
+                  Networks </p>
+              </entry>
+              <entry ixia_locid="4854">
+                <ul id="ul_fnd_h3k_ns">
+                  <li ixia_locid="4842">
+                    <p ixia_locid="4843">Intel I210 (Springville) 1G</p>
+                  </li>
+                  <li ixia_locid="77">
+                    <p ixia_locid="78">Intel I350 (Powerville) 1G</p>
+                  </li>
+                  <li ixia_locid="4855">
+                    <p ixia_locid="4856">Intel 82599 (Niantic) 10G</p>
+                  </li>
+                  <li ixia_locid="4889">
+                    <p ixia_locid="4890">Intel X540 10G</p>
+                  </li>
+                  <li ixia_locid="4891">
+                    <p ixia_locid="4892">Intel X710/XL710 (Fortville) 10G</p>
+                  </li>
+                  <li ixia_locid="4859">
+                    <p ixia_locid="4860">Emulex XE102 10G</p>
+                  </li>
+                  <li ixia_locid="69">
+                    <p ixia_locid="70">Broadcom BCM5719 1G</p>
+                  </li>
+                  <li ixia_locid="4861">
+                    <p ixia_locid="4862">Broadcom BCM57810 10G</p>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+            
+            <row>
+              <entry ixia_locid="4863">
+                <p ixia_locid="4864"><draft-comment author="jowens" dir="ltr" ixia_locid="4893" translate="no">CGTS-4143 added
+                    Fortville</draft-comment>NICs Verified for Infrastructure Network</p>
+              </entry>
+              <entry ixia_locid="4865">
+                <ul id="ul_fnd_h3k_ns2">
+                  <li ixia_locid="4866">
+                    <p ixia_locid="4867">Intel 82599 (Niantic) 10G</p>
+                  </li>
+                  <li ixia_locid="4868">
+                    <p ixia_locid="4869">Intel X540 10G</p>
+                  </li>
+                  <li ixia_locid="4894">
+                    <p ixia_locid="4895">Intel X710/XL710 (Fortville) 10G</p>
+                  </li>
+                  <li ixia_locid="4870">
+                    <p ixia_locid="4871">Emulex XE102 10G</p>
+                  </li>
+                  <li ixia_locid="4872">
+                    <p ixia_locid="4873">Broadcom BCM57810 10G</p>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="577">
+                <p ixia_locid="578">NICs Verified for Data Interfaces (Compute Nodes)</p>
+              </entry>
+              <entry ixia_locid="579">
+                <p ixia_locid="4874">The following NICs are supported by DPDK:</p>
+                <ul id="ul_trc_fxm_v5">
+                  <li ixia_locid="4706">
+                    <p ixia_locid="582">Intel I350 (Powerville) 1G </p>
+                  </li>
+                  <li ixia_locid="4707">
+                    <p ixia_locid="583">Intel 82599 (Niantic) 10G </p>
+                  </li>
+                  <li ixia_locid="4769">
+                    <p ixia_locid="4770">Intel X710/XL710 (Fortville) 10 G</p>
+                  </li>
+                  <li ixia_locid="4710">
+                    <p ixia_locid="586">Mellanox Technologies <ul id="ul_iy2_rfx_p5">
+                        <li ixia_locid="587">
+                          <p ixia_locid="588">MT27500 Family</p>
+                        </li>
+                        <li ixia_locid="589">
+                          <p ixia_locid="590">[ConnectX-3]  10G/40G</p>
+                        </li>
+                      </ul></p>
+                  </li>
+                </ul>
+                <p id="p_N1003A_N1000F_N10001" ixia_locid="4846">The following NICs have been
+                  verified in non-accelerated mode for use with data interfaces in a low-speed
+                  configuration that bridges between the AVS and the kernel (Low Speed Integration).
+                  This configuration is recommended only for very low data rates, since switched
+                  traffic must pass through a Linux kernel bridge to access the device.<ul id="ul_vpq_ffb_pt">
+                    <li ixia_locid="4847">
+                      <p ixia_locid="93">Emulex XE-102 10G</p>
+                    </li>
+                    <li ixia_locid="94">
+                      <p ixia_locid="85">Broadcom (BCM57810) 10G</p>
+                    </li>
+                    <li ixia_locid="4848">
+                      <p ixia_locid="4849">Broadcom (BCM5719) 1G</p>
+                    </li>
+                  </ul></p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="595">
+                <p ixia_locid="596">PCI passthrough or PCI SR-IOV NICs</p>
+              </entry>
+              <entry ixia_locid="597">
+                <p id="p_N10011_N1000F_N10001" ixia_locid="80">
+                  <ul id="DPDK-NICs">
+                    <li ixia_locid="34">
+                      <p ixia_locid="36">Intel 82599 (Niantic) 10 G</p>
+                    </li>
+                    <li ixia_locid="89">
+                      <draft-comment author="jowens" dir="ltr" ixia_locid="88" translate="no">US53861 Intel X710, XL710
+                        added</draft-comment>
+                      <p ixia_locid="90">Intel X710/XL710 (Fortville) 10G</p>
+                    </li>
+                  </ul>
+                  <note id="ul_bx4_xz4_n4" ixia_locid="4850">
+                    <p ixia_locid="4851">The maximum number of VFs per NIC is 32.</p>
+                  </note>
+                </p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="601">
+                <p ixia_locid="602"><draft-comment author="jowens" dir="ltr" ixia_locid="603" translate="no">US64378
+                    added</draft-comment>PCI SR-IOV Hardware Accelerators</p>
+              </entry>
+              <entry ixia_locid="604">
+                <ul id="ul_snn_lxm_v5">
+                  <li ixia_locid="4716">
+                    <p ixia_locid="607">Intel Coleto Creek 8925/8950 chipset w/QuickAssist</p>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="4921">
+                <p ixia_locid="4922">Board Management Controllers</p>
+              </entry>
+              <entry ixia_locid="610">
+                <ul id="ul_wh2_mxm_v5">
+                  <li ixia_locid="4717">
+                    <p ixia_locid="4923">HP iLO3 </p>
+                  </li>
+                  <li ixia_locid="4718">
+                    <p ixia_locid="612">HP iLO4 </p>
+                  </li>
+                </ul>
+              </entry>
+            </row>
+            
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+    <section id="section_if_scenarios" ixia_locid="275">
+      <title ixia_locid="276">Interface Configuration Scenarios</title>
+      <p ixia_locid="277"><draft-comment author="jowens" dir="ltr" ixia_locid="4875" translate="no">CGTS-4012 clarified scenarios, removed "small" scenario</draft-comment>Titanium Server
+        supports the use of consolidated interfaces for the management, infrastructure, OAM, and
+        data networks. Some typical configurations are shown in the following table. For best
+        performance, Wind River recommends dedicated interfaces.</p>
+      <p ixia_locid="279">LAG is optional in all instances.</p>
+      <table colsep="1" frame="sides" id="table_if_scenarios" rowsep="1">
+        <tgroup cols="4">
+          <colspec colname="newCol1" colnum="1" colwidth="1*"/>
+          <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+          <colspec colname="c3" colnum="3" colwidth="1.0*"/>
+          <colspec colname="c4" colnum="4" colwidth="1.0*"/>
+          <thead>
+            <row>
+              <entry ixia_locid="379">
+                <p ixia_locid="380">Scenario</p>
+              </entry>
+              <entry ixia_locid="281">
+                <p ixia_locid="282">Controller</p>
+              </entry>
+              <entry ixia_locid="283">
+                <p ixia_locid="284">Storage</p>
+              </entry>
+              <entry ixia_locid="285">
+                <p ixia_locid="286">Compute</p>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <!-- Extra small -->
+            <row>
+              <entry ixia_locid="381"/>
+              <entry ixia_locid="289"/>
+              <entry ixia_locid="293"/>
+              <entry ixia_locid="295"/>
+            </row>
+            
+            <!-- Medium -->
+            <row>
+              <entry ixia_locid="385">
+                <ul id="ul_lsr_nzr_3v">
+                  <li ixia_locid="4880">
+                    <p ixia_locid="4881">Physical interfaces on servers limited to two pairs</p>
+                  </li>
+                  <li ixia_locid="4882">
+                    <p ixia_locid="4883">Estimated aggregate average VM storage traffic less than
+                      5G</p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="310">
+                <p ixia_locid="311">2x 10GE LAG:</p>
+                <ul id="ul_mf1_qvd_w5">
+                  <li ixia_locid="4804">
+                    <p ixia_locid="4805">Mgmt (untagged) </p>
+                  </li>
+                  <li ixia_locid="4806">
+                    <p ixia_locid="4807">Infra (tagged)</p>
+                  </li>
+                </ul>
+                <p ixia_locid="313">2x 1GE LAG:</p>
+                <ul id="ul_z24_svd_w5">
+                  <li ixia_locid="4808">
+                    <p ixia_locid="4809">OAM (untagged) </p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="314">
+                <p ixia_locid="315">2x 10GE LAG:</p>
+                <ul id="ul_qfx_4vd_w5">
+                  <li ixia_locid="4810">
+                    <p ixia_locid="4811">Mgmt (untagged) </p>
+                  </li>
+                  <li ixia_locid="4812">
+                    <p ixia_locid="4813">Infra (tagged )</p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="316">
+                <p ixia_locid="317">2x 10GE LAG:</p>
+                <ul id="ul_an4_5vd_w5">
+                  <li ixia_locid="4814">
+                    <p ixia_locid="4815">Mgmt (untagged) </p>
+                  </li>
+                  <li ixia_locid="4816">
+                    <p ixia_locid="4817">Infra (tagged)</p>
+                  </li>
+                </ul>
+                <p ixia_locid="318">2x 10GE LAG</p>
+                <ul id="ul_atb_wvd_w5">
+                  <li ixia_locid="4818">
+                    <p ixia_locid="4819">Data (tagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="319">[ … more data interfaces … ]</p>
+              </entry>
+            </row>
+            <!-- Large -->
+            <row>
+              <entry ixia_locid="387">
+                <ul id="ul_zvy_4zr_3v">
+                  <li ixia_locid="4884">
+                    <p ixia_locid="4885">No specific limit on number of physical interfaces</p>
+                  </li>
+                  <li ixia_locid="4886">
+                    <p ixia_locid="4887">Estimated aggregate average VM storage traffic greater than
+                      5G</p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="322">
+                <p ixia_locid="323">2x 1GE LAG:</p>
+                <ul id="ul_zd1_zvd_w5">
+                  <li ixia_locid="4820">
+                    <p ixia_locid="4821">Mgmt (untagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="324">2x 10GE LAG:</p>
+                <ul id="ul_oy1_1wd_w5">
+                  <li ixia_locid="4822">
+                    <p ixia_locid="4823">Infra (tagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="325">2x 1GE LAG:</p>
+                <ul id="ul_ybc_bwd_w5">
+                  <li ixia_locid="4824">
+                    <p ixia_locid="4825">OAM (untagged) </p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="326">
+                <p ixia_locid="327">2x 1GE LAG</p>
+                <ul id="ul_k2x_bwd_w5">
+                  <li ixia_locid="4826">
+                    <p ixia_locid="4827">Mgmt (untagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="328">2x 10GE LAG:</p>
+                <ul id="ul_ryl_cwd_w5">
+                  <li ixia_locid="4828">
+                    <p ixia_locid="4829">Infra (tagged) </p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="329">
+                <p ixia_locid="330">2x 1GE LAG</p>
+                <ul id="ul_enj_dwd_w5">
+                  <li ixia_locid="4830">
+                    <p ixia_locid="4831">Mgmt (untagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="331">2x 10GE LAG:</p>
+                <ul id="ul_ktw_dwd_w5">
+                  <li ixia_locid="4832">
+                    <p ixia_locid="4833">Infra (tagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="332">2x 10GE LAG:</p>
+                <ul id="ul_ijs_2wd_w5">
+                  <li ixia_locid="4834">
+                    <p ixia_locid="4835">Data (tagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="333">[ … more data interfaces … ]</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </refbody>
+</reference-wr>

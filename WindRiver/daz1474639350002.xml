@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="daz1474639350002" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Options for VM Customization</title>
+ <shortdesc ixia_locid="2">You can use flavors, flavor extra specifications, and image metadata to
+  allocate host resources for a VM, and to fine-tune the use of host resources.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="14"><draft-comment author="jowens" ixia_locid="5">new topic for
+    restructuring</draft-comment>Administrators can define the basic resources available to VMs by
+   creating and using <term ixia_locid="15">flavors</term>. Each flavor defines the virtual CPU,
+   RAM, and disk resources to be allotted when a VM is launched. For more information, see <xref href="jow1404333663095.xml" ixia_locid="22"/></p>
+  <p ixia_locid="16">To adjust how VMs use host resources such as NUMA nodes, physical interfaces,
+   or selected PCI devices, administrators can add <term ixia_locid="17">extra specifications</term>
+   to the flavors. For more information, see <xref href="jow1429538642910.xml" ixia_locid="23"/></p>
+  <p ixia_locid="20">In many cases, administrators or tenants can use <term ixia_locid="19">image
+    metadata</term> as an alternative to flavor extra specs. This can be useful where the added
+   capability is required for only a few particular instances. For more information, see <xref href="smj1474984971094.xml" ixia_locid="24"/></p>
+  <note id="note_N10053_N1001F_N10001" ixia_locid="25">
+   <p ixia_locid="21">If an extra spec method and an image metadata method are both applied to the
+    same instance, and the settings conflict, the method that is given priority depends on the
+    specific capability. In cases where the flavor extra spec overrides the image metadata, an
+    administator can use this to help manage tenant resource usage.</p>
+  </note>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="jow1453577548979" xml:lang="en-us">
+<!-- 16.x version
+    
+-->
+  <title ixia_locid="1">Commands for Managing LDAP-backed Keystone</title>
+  <shortdesc ixia_locid="2">Titanium Server provides several commands for managing an LDAP-backed Keystone
+    configuration.</shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+      <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="6">US71877 new
+          topic</draft-comment>To obtain command syntax information, use the<option ixia_locid="7">
+          help</option> option. For example:</p>
+      <codeblock ixia_locid="8"><systemoutput ixia_locid="9">~(keystone_admin)$ </systemoutput><userinput ixia_locid="10">system help service-parameter-add</userinput>
+<systemoutput ixia_locid="11">usage: system service-parameter-add &lt;service&gt; &lt;section&gt; &lt;name=value&gt;
+                                    [&lt;name=value&gt; ...]
+
+Add a Service Parameter.
+
+Positional arguments:
+  &lt;service&gt;     Name of service [REQUIRED]
+  &lt;section&gt;     Name of section [REQUIRED]
+  &lt;name=value&gt;  Service Parameter attributes to add</systemoutput></codeblock>
+      <dl>
+        <dlentry ixia_locid="12">
+          <dt ixia_locid="13"><cmdname ixia_locid="14">system service-parameter-add</cmdname></dt>
+          <dd ixia_locid="15">
+            <p ixia_locid="16">Adds a service parameter. For example:</p>
+            <codeblock ixia_locid="17"><systemoutput ixia_locid="18">~(keystone_admin)$ </systemoutput><userinput ixia_locid="19">system service-parameter-add identity ldap \
+parm1=value1 parm2=value2</userinput>
+<systemoutput ixia_locid="20">+----------+--------------------------------------+
+| Property | Value                                |
++----------+--------------------------------------+
+| uuid     | 012c9b19-170e-4b91-9354-5a64bd4e02c4 |
+| service  | identity                             |
+| section  | ldap                                 |
+| name     | parm1                                |
+| value    | value1                               |
++----------+--------------------------------------+
++----------+--------------------------------------+
+| Property | Value                                |
++----------+--------------------------------------+
+| uuid     | 00292bee-2711-4bc9-86d8-400bc13955d6 |
+| service  | identity                             |
+| section  | ldap                                 |
+| name     | parm2                                |
+| value    | value2                               |
++----------+--------------------------------------+</systemoutput></codeblock>
+          </dd>
+        </dlentry>
+        <dlentry ixia_locid="21">
+          <dt ixia_locid="22"><cmdname ixia_locid="23">system service-parameter-apply</cmdname></dt>
+          <dd ixia_locid="24">
+            <p ixia_locid="25">Applies service parameters.</p>
+          </dd>
+        </dlentry>
+        <dlentry ixia_locid="26">
+          <dt ixia_locid="27"><cmdname ixia_locid="28">system service-parameter-delete</cmdname></dt>
+          <dd ixia_locid="29">
+            <p ixia_locid="30">Deletes a service parameter.</p>
+          </dd>
+        </dlentry>
+        <dlentry ixia_locid="31">
+          <dt ixia_locid="32"><cmdname ixia_locid="33">system service-parameter-list</cmdname></dt>
+          <dd ixia_locid="34">
+            <p ixia_locid="35">Lists service parameters. </p>
+            <codeblock ixia_locid="36"><systemoutput ixia_locid="37">
++--------------------------------------+----------+---------+-------+--------+
+| uuid                                 | service  | section | name  | value  |
++--------------------------------------+----------+---------+-------+--------+
+| 012c9b19-170e-4b91-9354-5a64bd4e02c4 | identity | ldap    | parm1 | value1 |
+| 00292bee-2711-4bc9-86d8-400bc13955d6 | identity | ldap    | parm2 | value2 |
++--------------------------------------+----------+---------+-------+--------+</systemoutput></codeblock>
+          </dd>
+        </dlentry>
+        <dlentry ixia_locid="38">
+          <dt ixia_locid="39"><cmdname ixia_locid="40">system service-parameter-modify</cmdname></dt>
+          <dd ixia_locid="41">
+            <p ixia_locid="42">Modifies service parameter attributes.</p>
+          </dd>
+        </dlentry>
+        <dlentry ixia_locid="43">
+          <dt ixia_locid="44"><cmdname ixia_locid="45">system service-parameter-show</cmdname></dt>
+          <dd ixia_locid="46">
+            <p ixia_locid="47">Shows a service parameter. For
+              example:<codeblock ixia_locid="48"><systemoutput ixia_locid="49">~(keystone_admin)$ </systemoutput><userinput ixia_locid="50">system service-parameter-show \
+012c9b19-170e-4b91-9354-5a64bd4e02c4</userinput>
+<systemoutput ixia_locid="51">+----------+--------------------------------------+
+| Property | Value                                |
++----------+--------------------------------------+
+| uuid     | 012c9b19-170e-4b91-9354-5a64bd4e02c4 |
+| service  | identity                             |
+| group    | LDAP                                 |
+| name     | parm1                                |
+| value    | value1                               |
++----------+--------------------------------------+</systemoutput></codeblock></p>
+          </dd>
+        </dlentry>
+      </dl>
+      <p ixia_locid="52">For information about configuring an LDAP backend for Keystone, see <xref href="qcj1465221711259.xml" ixia_locid="53"/>.</p>
+    </section>
+  </refbody>
+</reference-wr>

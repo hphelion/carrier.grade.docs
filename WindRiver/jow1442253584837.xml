@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1442253584837" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="59">Accessing PXE Boot Server Files for a Custom Configuration</title>
+    <shortdesc ixia_locid="60">If you prefer, you can create a custom PXE boot configuration using the installation
+        files provided with Titanium Server.</shortdesc>
+    <prolog>
+        <author ixia_locid="61">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="62">
+            <p ixia_locid="63"><draft-comment author="jowens" ixia_locid="9">US62850 new topic. This
+                    covers Option 2 provided in the source material. </draft-comment>You can use the
+                setup script included with the ISO image to copy the boot configuration files and
+                distribution content to a working directory. You can use the contents of the working
+                directory to construct a PXE boot environment according to your own requirements or
+                preferences.</p>
+            <p ixia_locid="64">For more information about using a PXE boot server, see  <xref href="jow1440534908675.xml" ixia_locid="65"/>.</p>
+        </context>
+        <steps id="steps_www_gcz_3t">
+            <step id="step_N10036_N10033_N10021_N10001" ixia_locid="10">
+                <cmd ixia_locid="11">Copy the ISO image from the source (product DVD, USB device, or
+                    WindShare) to a temporary location on the PXE boot server.</cmd>
+                <info ixia_locid="21">
+                    <p ixia_locid="22">This example assumes that the copied image file is <filepath ixia_locid="23">tmp/TS-host-installer-1.0.iso</filepath>. </p>
+                </info>
+            </step>
+            <step id="step_N10085_N1006B_N10024_N10001" ixia_locid="24">
+                <cmd ixia_locid="25"><draft-comment author="jowens" ixia_locid="72">CGTS-4924 add missing mount
+                        point</draft-comment>Mount the ISO image and make it executable.</cmd>
+                <stepxmp ixia_locid="26">
+                    <codeblock ixia_locid="27"><systemoutput ixia_locid="28">$ </systemoutput><userinput ixia_locid="29">mount -o loop /tmp/TS-host-installer-1.0.iso /media/iso</userinput>
+<systemoutput ixia_locid="30">$ </systemoutput><userinput ixia_locid="31">mount -o remount,exec,dev /media/iso</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N1007A_N10037_N1001C_N10001" ixia_locid="66">
+                <cmd ixia_locid="67">Create and populate a working directory.</cmd>
+                <info ixia_locid="68">
+                    <p ixia_locid="69">Use a command of the following form:<codeblock ixia_locid="39"><systemoutput ixia_locid="40">$ </systemoutput><userinput ixia_locid="41">/media/iso/pxeboot_setup.sh -u http://<varname ixia_locid="42">ip-addr</varname>/<varname ixia_locid="43">symlink</varname> -t <varname ixia_locid="44">working-dir</varname></userinput></codeblock>where:<parml>
+                            <plentry ixia_locid="46">
+                                <pt ixia_locid="47">ip-addr</pt>
+                                <pd ixia_locid="48">
+                                    <p ixia_locid="49">is the Apache listening address.</p>
+                                </pd>
+                            </plentry>
+                            <plentry ixia_locid="50">
+                                <pt ixia_locid="51">symlink</pt>
+                                <pd ixia_locid="52">
+                                    <p ixia_locid="53">is a name for a symbolic link to be created
+                                        under the Apache document root directory, pointing to the
+                                        directory specified by <varname ixia_locid="54">working-dir</varname>.</p>
+                                </pd>
+                            </plentry>
+                            <plentry ixia_locid="55">
+                                <pt ixia_locid="56">working-dir</pt>
+                                <pd ixia_locid="57">
+                                    <p ixia_locid="58">is the path to the working directory.</p>
+                                </pd>
+                            </plentry>
+                        </parml></p>
+                </info>
+            </step>
+            <step id="step_N100F4_N1003E_N1001F_N10001" ixia_locid="70">
+                <cmd ixia_locid="71">Copy the required files from the working directory to your custom PXE boot
+                    server directory.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

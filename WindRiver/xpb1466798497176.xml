@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="xpb1466798497176" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Centralized Log Collection and Analysis</title>
+ <shortdesc ixia_locid="2">You can configure Titanium Server to send detailed system logs from all
+  hosts to a remote log server for centralized review and analysis.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="31">You can also set up your own dashboards for viewing log details.</p>
+  <p ixia_locid="7"><draft-comment author="jowens" ixia_locid="8">US77159 / US83068 new
+    topic</draft-comment>When centralized logging is enabled, logs written to the <filepath ixia_locid="9">/var/log</filepath> directory on each host are also sent to a remote log server.
+   System logs used for troubleshooting and advanced analysis are included, along with the customer
+   logs normally accessed from the CLI or web administration interface. By centralizing the logs,
+   advanced users can apply powerful searches and advanced visualizations to examine the behavior of
+   the system.</p>
+  <p ixia_locid="10"><draft-comment author="jowens" ixia_locid="30">US80148 mention TLS
+    option</draft-comment> Each host sends logs through the Active Controller to a remote log server
+   over the OAM network using either TCP or UDP. For added security, you can optionally configure a
+   TLS connection. At the log server, an ELK (Elasticsearch, Kibana, Logstash) stack collects and
+   presents the information.</p>
+  <dl>
+   <dlentry ixia_locid="11">
+    <dt ixia_locid="12">Logstash</dt>
+    <dd ixia_locid="13">
+     <p ixia_locid="14">collects the logs</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="15">
+    <dt ixia_locid="16">Elasticsearch</dt>
+    <dd ixia_locid="17">
+     <p ixia_locid="18"> provides a search engine</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="19">
+    <dt ixia_locid="20">Kibana</dt>
+    <dd ixia_locid="21">
+     <p ixia_locid="22">provides web-based visualization</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <p ixia_locid="23">The ELK stack is a widely-used source log analytics engine, with ample
+   documentation and tutorials on the Internet. The Titanium Server SDK includes custom searches and
+   filters for use with a Titanium Server system.</p>
+  <p ixia_locid="24">To set up and use a log server, see <ph ixia_locid="26" otherprops="printonly"><cite ixia_locid="27">Titanium Server System Administration:</cite>
+   </ph>
+   <cite ixia_locid="28"><ph ixia_locid="29"><xref href="jmz1468001809611.xml" ixia_locid="25"/></ph></cite>.</p>
+ </conbody>
+</concept-wr>

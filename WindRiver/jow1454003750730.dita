@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003750730" xml:lang="en-us"><title ixia_locid="1">Maximum Number of VMs per Compute Node</title><shortdesc ixia_locid="2">The maximum number of VMs per compute node is not a fixed number but based
+        on resources, VM sizes, resource locations (e.g. NUMA nodes), and policies.</shortdesc><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">Titanium Server will not schedule VMs if the resources and other conditions
+            associated with the VM cannot be met. Factors that determine the number of VMs supported
+            on a given compute node at a specific time are:</p>
+        <ul id="ul_d1f_wrz_55">
+            <li ixia_locid="5">
+                <p ixia_locid="6">The number of cores and memory on the compute node as well as
+                    local VM storage if VMs are booted locally. </p>
+            </li>
+            <li ixia_locid="7">
+                <p ixia_locid="8">The sizes of individual VMs to be scheduled on the compute node
+                    (cores, memory, and local storage).</p>
+            </li>
+            <li ixia_locid="9">
+                <p ixia_locid="10">Availability of resources such as NUMA memory and PCI-Passthrough
+                    or SR-IOV devices and policies such as <nameliteral ixia_locid="15">strict</nameliteral> or
+                        <nameliteral ixia_locid="16">prefer</nameliteral> for scheduling.</p>
+            </li>
+            <li ixia_locid="11">
+                <p ixia_locid="12">Use of Shared CPU policy for VMs or Shared vCPU cores on VMs</p>
+            </li>
+        </ul><p ixia_locid="13">For details of VM scheduling, see <xref href="jow1454003781257.dita" ixia_locid="17"/>.</p><p ixia_locid="14">It is highly recommended that excess capacity in the form of additional Compute
+            Nodes be deployed to accommodate the loss of one or more compute nodes and successful
+            migration/evacuation of all VMs to the remaining compute nodes. For the Titanium Server
+            CPE configuration, 100% excess capacity is required for full redundancy in case one
+            controller node with compute function fails.</p></conbody></concept-wr>

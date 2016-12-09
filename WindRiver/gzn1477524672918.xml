@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="gzn1477524672918" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Performance Enhanced Standard virtio - Support for vhost-net/vhost-user </title>
+ <shortdesc ixia_locid="2">Unmodified guests can use Linux networking and virtio drivers. This
+  provides a mechanism to bring existing applications into the production environment
+  immediately.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">For virtio interfaces, Titanium Server supports vhost-user transparently by
+   default. This allows QEMU and AVS to share virtio queues through shared memory, resulting in
+   improved performance over standard virtio. The transparent implementation provides a simplified
+   alternative to the open-source AVP kernel and AVP-PMD drivers included with Titanium Server. The
+   availability of vhost-user also offers additional performance enhancements through optional
+   multi-queue support for virtio interfaces.</p>
+  <p ixia_locid="5">For backwards compatibility, Guest OS can still be configured to leverage the
+   open-sourceAccelerated Virtual Port (AVP-KMOD) drivers available at
+   https://github.com/Wind-River/titanium-server. </p>
+ </conbody>
+</concept-wr>

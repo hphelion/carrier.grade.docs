@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ekn1460034772091" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Querying vSwitch</title>
+    <shortdesc ixia_locid="2">You can use the <cmdname ixia_locid="7">vshell</cmdname> command-line
+        utility to query the internal state of the virtual switch on a compute host.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="8"><draft-comment author="jowens" ixia_locid="6">US53369 topic
+                    added</draft-comment>The <cmdname ixia_locid="9">vshell</cmdname> utility
+                reports information for the vSwitch running on a compute host. This can be useful
+                for debugging network-related issues.</p>
+            <p ixia_locid="10">You can run the utility from the active controller, or locally on the
+                compute host. You must be logged in with root privileges. </p>
+            <p ixia_locid="11">To run <cmdname ixia_locid="12">vshell</cmdname>, use the following syntax:</p>
+            <codeblock ixia_locid="13"><systemoutput ixia_locid="14">$ </systemoutput><userinput ixia_locid="15">sudo vshell [-H <varname ixia_locid="16">hostname</varname>] <varname ixia_locid="17">command</varname></userinput></codeblock>
+            <p ixia_locid="18">Where:<parml>
+                    <plentry ixia_locid="19">
+                        <pt ixia_locid="20"><varname ixia_locid="21">hostname</varname></pt>
+                        <pd ixia_locid="22">
+                            <p ixia_locid="23">is the name of the host, if the utility is run from
+                                the controller.</p>
+                        </pd>
+                    </plentry>
+                    <plentry ixia_locid="24">
+                        <pt ixia_locid="25"><varname ixia_locid="26">command</varname></pt>
+                        <pd ixia_locid="27">
+                            <p ixia_locid="28">is the vshell command to run. </p>
+                        </pd>
+                    </plentry>
+                </parml>
+            </p>
+        </context>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="hhz1463773967575" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Changing Ceph Storage Pool Sizes Using the CLI</title>
+    <shortdesc ixia_locid="2">You can use the CLI to adjust the storage pool quotas on a Ceph-based
+        system.</shortdesc>
+    <prolog>
+        <author ixia_locid="68">Jim Owens</author>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N1002B_N1001D_N10001" ixia_locid="65">
+            <draft-comment author="jmaran" ixia_locid="213">It seems really awkward to have the
+                prerequisites with no follow on tasks. Perhaps too much has been included in the
+                context here? You can use &lt;steps-unordered&gt; to create steps that can be
+                performed in any order. Or this topic could possibly be re-written as a
+                reference.</draft-comment>
+            <p ixia_locid="67">Before changing storage pool sizes, review the <wintitle ixia_locid="212">Fault Management</wintitle> page and ensure that any existing
+                system alarms are cleared.</p>
+        </prereq>
+        <context id="context_N10026_N10023_N10001" ixia_locid="69">
+            <p ixia_locid="199"><draft-comment author="jowens" ixia_locid="71">separate CLI topic
+                    created; includes updated commands for US74975. US85034 storagepool commands
+                    replaced by storage-backend; mention object pool </draft-comment>On a system
+                that uses a Ceph storage backend, storage pools for images and volumes are
+                configured from the available space on the storage hosts during installation, using
+                a default value of 20 GB. </p>
+            <p ixia_locid="200">For more information about storage pools, see <xref href="jhh1464706651355.xml" ixia_locid="72"/>.</p>
+            <p ixia_locid="73">If you prefer, you can use the Web administration interface to make
+                changes; see <xref href="gut1462475554017.xml" ixia_locid="74"/>.</p>
+            <p ixia_locid="201">To view pool sizes, use the following command:</p>
+            <codeblock ixia_locid="10"><systemoutput ixia_locid="11">$</systemoutput> <userinput ixia_locid="12">system storage-backend-show ceph
+</userinput>
+<systemoutput ixia_locid="13">+--------------------+--------------------------------------+
+| Property           | Value                                |
++--------------------+--------------------------------------+
+| cinder_pool_gib    | 10                                   |
+| glance_pool_gib    | 20                                   |
+| ephemeral_pool_gib | 0                                    |
+| object_pool_gib    | 0                                    |
+| ceph_total_space   | 30                                   |
+| object_gateway     | False                                |
+| created_at         | 2016-03-15T04:54:44.311120+00:00     |
+| updated_at         | 2016-03-15T08:00:18.031909+00:00     |
++--------------------+--------------------------------------+</systemoutput>
+</codeblock>
+            <p ixia_locid="202">To set pool quotas, use a command of the following form:</p>
+            <codeblock ixia_locid="186"><systemoutput ixia_locid="187">~(keystone_admin)$ </systemoutput><userinput ixia_locid="188">system storage-backend-modify ceph \
+[glance_pool_gib=<varname ixia_locid="203">size</varname>] \
+[cinder_pool_gib=<varname ixia_locid="204">size</varname>] \
+[ephemeral_pool_gib=<varname ixia_locid="208">size</varname>] \
+[object_pool_gib=<varname ixia_locid="209">size</varname></userinput>
+</codeblock>
+            <p ixia_locid="206">Where <varname ixia_locid="198">size</varname> is the size of the
+                associated storage pool in GiB. You must ensure that the pools for Glance + Cinder +
+                Ephemeral + Object = 100% of available storage.</p>
+            <p ixia_locid="207">For example:</p>
+            <codeblock ixia_locid="20"><systemoutput ixia_locid="21">$</systemoutput> <userinput ixia_locid="22">system storage-backend-modify ceph cinder_pool_gib=20 glance_pool_gib=10
+</userinput>
+<systemoutput ixia_locid="23">+--------------------+--------------------------------------+
+| Property           | Value                                |
++--------------------+--------------------------------------+
+| cinder_pool_gib    | 20                                   |
+| glance_pool_gib    | 10                                   |
+| ephemeral_pool_gib | 0                                    |
+| object_pool_gib    | 0                                    |
+| ceph_total_space   | 30                                   |
+| object_gateway     | False                                |
+| created_at         | 2016-03-15T04:54:44.311120+00:00     |
+| updated_at         | 2016-03-15T08:00:18.031909+00:00     |
++--------------------+--------------------------------------+
+</systemoutput></codeblock>
+        </context>
+    </taskbody>
+</task-wr>

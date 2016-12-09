@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="bfh1466190844731" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Storage on Controller Hosts</title>
+ <shortdesc ixia_locid="2">Controller hosts provide storage for the system database, and for system
+  backup operations. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <section id="section_N10031_N10024_N10001" ixia_locid="87">
+   <p ixia_locid="89">On systems with controller storage, they also provide persistent storage for
+    virtual machine images, using a secondary disk.</p>
+   <p ixia_locid="90">Controller storage is configured initially at installation, using the
+    controller configuration script. To utilize the maximum available space on the storage media,
+    Wind River recommends that you use the default settings. You can change the allocations at any
+    time after installation.</p>
+   <p ixia_locid="389"><draft-comment author="jowens" ixia_locid="390">US74975 created concept topic
+     to support task topics for Horizon and CLI; added Ceph Mon Storage</draft-comment>Controller
+    hosts provide the following types of storage:</p>
+   <draft-comment author="jmaran" ixia_locid="408">I'd consider changing the &lt;dd&gt;s below to full sentences with
+    proper capitalization or perhaps use a table. Something seems odd about the fragments in the
+    &lt;dd&gt;. (Just my opinion).</draft-comment>
+   <dl>
+    <dlentry ixia_locid="224">
+     <dt ixia_locid="225">Database storage</dt>
+     <dd ixia_locid="226">
+      <p ixia_locid="108">the storage allotment for the OpenStack database</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="227">
+     <dt ixia_locid="228">Image storage</dt>
+     <dd ixia_locid="229">
+      <p ixia_locid="112">for a system that provides LVM-backed controller storage for VMs, the size
+       of the partition to use for image storage</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="230">
+     <dt ixia_locid="231">Backup storage</dt>
+     <dd ixia_locid="232">
+      <p ixia_locid="116">the storage allotment for backup operations</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="376">
+     <dt ixia_locid="377">Volume storage</dt>
+     <dd ixia_locid="378">
+      <p ixia_locid="379"><draft-comment author="jowens" ixia_locid="380">CGTS-3736 The GUI says
+        "Cinder storage" but the config script says "Volume storage"</draft-comment>for a system
+       that provides LVM-backed controller storage for VMs, the storage allotment for all Cinder
+       volumes used by guest instances; also called <term ixia_locid="402">Cinder storage</term></p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="391">
+     <dt ixia_locid="392">Image Conversion Space</dt>
+     <dd ixia_locid="393">
+      <p ixia_locid="394"><draft-comment author="jowens" ixia_locid="395">CGTS-3736
+        added</draft-comment>the storage allotment for image caching and temporary image
+       conversion</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="396">
+     <dt ixia_locid="397">Ceph Mon Storage</dt>
+     <dd ixia_locid="398">
+      <p ixia_locid="399"><draft-comment author="jowens" ixia_locid="400">US74975
+        added</draft-comment>for a system using Ceph storage, the storage allotment on the
+       controller for Ceph monitoring</p>
+     </dd>
+    </dlentry>
+   </dl>
+   <note id="note_N10096_N10022_N1001F_N10001" ixia_locid="210">
+    <p ixia_locid="119">For clusters using a Ceph backend, volume storage and image storage are
+     allotted on storage nodes, not on the controller node. To change the Cinder volume storage for
+     a Ceph backend, <draft-comment author="jmaran" ixia_locid="409">The next two xrefs are local in
+      the system administration guide but not in the planning guide. Leaving as local formatting for
+      now. – JM: Reversing decision due to unusable link in planning doc PDF. Changing to inter-book
+      format.</draft-comment>see <ph ixia_locid="410" otherprops="printonly"><cite ixia_locid="411">Titanium Server System
+       Administration: </cite></ph><cite ixia_locid="412"><ph ixia_locid="413"><xref href="jow1414074138348.xml" ixia_locid="239"/></ph></cite>.</p>
+   </note>
+   <p ixia_locid="25">The storage allotments are configured initially during software installation.
+    You can change them using the Web administration interface or the CLI. For more information, see
+     <ph ixia_locid="414" otherprops="printonly"><cite ixia_locid="415">Titanium Server System Administration:
+       </cite></ph><cite ixia_locid="416"><ph ixia_locid="417"><xref href="ers1464645579505.xml" ixia_locid="401"/></ph></cite>).</p>
+   <p ixia_locid="247">To accommodate changes, there must be enough disk space on the controller,
+    including headroom needed to complete the operation. The headroom required is 45 GiB on the
+    primary disk for a cluster using controller storage with an LVM backend, or 65 GiB for a cluster
+    using dedicated storage with a Ceph backend. This is in addition to the space required for any
+    new allotments. The requested changes are checked against available space on the affected disks;
+    if there is not enough, the changes are disallowed.</p>
+   <p ixia_locid="403">To provide more space, you can replace the affected disk or disks. Database,
+    image, and backup storage use space on the primary disk. Cinder volume storage (on a cluster
+    with an LVM backend) uses space on a disk selected by device node number during controller
+    configuration. The replacement disk must occupy the same device node number. Changes to the
+    Cinder volume storage can also affect the primary disk because of the headroom requirement. </p>
+   <p ixia_locid="404"><draft-comment author="jowens" ixia_locid="405">US78833 / US77367 mention
+     that ceph mon storage can use a secondary disk</draft-comment>Ceph monitor storage uses the
+    primary disk by default. If a Ceph backend is added to an existing system, and there is
+    insufficient space on the primary disk for the requested Ceph monitor storage, you can specify a
+    secondary disk. Note that this requires a controller re-installation.</p>
+   <p ixia_locid="304"><draft-comment author="jowens" ixia_locid="346">US64033 removed caution that
+     controller configurations must be identical</draft-comment>To pass the disk-space checks, any
+    replacement disks must be installed before the allotments are changed.</p>
+  </section>
+  <section id="section_N1010F_N1001F_N10001" ixia_locid="406">
+   <title ixia_locid="407">Storage for System Use</title>
+   <p ixia_locid="5">Internal database storage is provided using DRBD-synchronized partitions on the
+    controller primary disks. The size of the database grows with the number of system resources
+    created by the system administrator and the tenants. This includes objects of all kinds such as
+    compute nodes, provider networks, images, flavors, tenant networks, subnets, virtual machine
+    instances, and NICs. As a reference point, consider the following deployment scenario:</p>
+   <ul id="ul_drv_fjf_4n">
+    <li ixia_locid="6">
+     <p ixia_locid="7">two controllers</p>
+    </li>
+    <li ixia_locid="8">
+     <p ixia_locid="9">four compute nodes with dual Intel(R) Xeon(R) CPU E5-2670 v2 @ 2.50GHz
+      each.</p>
+    </li>
+    <li ixia_locid="10">
+     <p ixia_locid="11">40 virtual machine instances</p>
+    </li>
+    <li ixia_locid="12">
+     <p ixia_locid="13">120 tenant networks</p>
+    </li>
+    <li ixia_locid="14">
+     <p ixia_locid="15">steady collection of power management statistics</p>
+    </li>
+   </ul>
+   <p ixia_locid="16">The size of the database in this case is approximately 9 GB. With a suggested
+    default of 20 GB, there is still plenty of room to grow. However, you should periodically
+    monitor the size of the database to ensure that it does not become a bottleneck when delivering
+    new services.</p>
+   <p ixia_locid="48">For more information, see <cite ixia_locid="49">Titanium Server System
+     Engineering Guidelines</cite>.</p>
+  </section>
+ </conbody>
+</concept-wr>

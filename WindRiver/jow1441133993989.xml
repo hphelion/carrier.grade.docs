@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1441133993989" xml:lang="en-us">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="192">Adding a Gateway to a Virtual Router</title>
+    <shortdesc ixia_locid="193">You can configure a gateway for a virtual router as a tenant or an
+        administrator. Users with administrator privileges have access to additional
+        controls.</shortdesc>
+    <prolog>
+        <author ixia_locid="194">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <steps>
+            <step id="step_N10066_N10063_N1001C_N10001" ixia_locid="72">
+                <cmd ixia_locid="73">Log in as the user associated with the tenant.</cmd>
+            </step>
+            <step id="step_N1006F_N10063_N1001C_N10001" ixia_locid="136">
+                <cmd ixia_locid="138">Open the <wintitle ixia_locid="225">Routers</wintitle> page.</cmd>
+                <choices id="choices_sf5_jkn_ft">
+                    <choice ixia_locid="226">
+                        <p ixia_locid="227">To open the page with tenant privileges, select <menucascade ixia_locid="228">
+                                <uicontrol ixia_locid="229">Project</uicontrol>
+                                <uicontrol ixia_locid="230">Network</uicontrol>
+                                <uicontrol ixia_locid="231">Routers</uicontrol>
+                            </menucascade>.</p>
+                    </choice>
+                    <choice ixia_locid="232">
+                        <p ixia_locid="233">To open the page with administrator privileges, select <menucascade ixia_locid="234">
+                                <uicontrol ixia_locid="235">Admin</uicontrol>
+                                <uicontrol ixia_locid="236">System</uicontrol>
+                                <uicontrol ixia_locid="237">Routers</uicontrol>
+                            </menucascade>.</p>
+                    </choice>
+                </choices>
+            </step>
+            <step id="step_N1008B_N10063_N1001C_N10001" ixia_locid="81">
+                <cmd ixia_locid="82">In the list of existing routers, click the name of the router
+                    to be configured.</cmd>
+                <info ixia_locid="83">
+                    <p ixia_locid="84">The <wintitle ixia_locid="85">Router Details</wintitle> page
+                        appears.</p>
+                    <fig id="fig_N100C4_N100B5_N100AE_N100AA_N100A3_N10034_N1001C_N10001" ixia_locid="42">
+                        <image href="jow1441134829532.image" id="image_qyv_pxh_ft" ixia_locid="196">
+                            <alt ixia_locid="197">TiS Add Gateway</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N101A2_N100BA_N1001F_N10001" ixia_locid="145">
+                <cmd ixia_locid="146">On the <uicontrol ixia_locid="198">Interfaces</uicontrol> tab,
+                    click <uicontrol ixia_locid="147">Set Gateway</uicontrol>.</cmd>
+                <info ixia_locid="148">
+                    <note id="note_N101CE_N101CA_N101B4_N100CF_N1001F_N10001" ixia_locid="171">
+                        <p ixia_locid="172">If a gateway has already been added, a <uicontrol ixia_locid="173">Clear Gateway</uicontrol> button is present
+                            instead.</p>
+                        <p ixia_locid="175"> </p>
+                    </note>
+                    <p ixia_locid="141">The <wintitle ixia_locid="143">Set Gateway</wintitle> dialog
+                        box appears. </p>
+                    <fig id="fig_N10159_N1014A_N10143_N1011B_N10114_N10034_N1001C_N10001" ixia_locid="137">
+                        <image href="jow1441136505281.image" id="image_k1p_kb3_ft" ixia_locid="202">
+                            <alt ixia_locid="203">Tis Set Gateway admin</alt>
+                        </image>
+                    </fig>
+                    <dl>
+                        <dlentry ixia_locid="176">
+                            <dt ixia_locid="177"><uicontrol ixia_locid="242">External Network</uicontrol></dt>
+                            <dd ixia_locid="178">
+                                <p ixia_locid="179">Select a tenant network configured to provide
+                                    external access.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="184">
+                            <dt ixia_locid="185"><uicontrol ixia_locid="243">Router Name</uicontrol></dt>
+                            <dd ixia_locid="186">
+                                <p ixia_locid="187">This field is shown for information only.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="188">
+                            <dt ixia_locid="189"><uicontrol ixia_locid="244">Router ID</uicontrol></dt>
+                            <dd ixia_locid="190">
+                                <p ixia_locid="191">This field is shown for information only.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="180">
+                            <dt ixia_locid="181"><uicontrol ixia_locid="245">IP Address (optional)</uicontrol></dt>
+                            <dd ixia_locid="182">
+                                <p ixia_locid="183">This field is shown only for users with
+                                    administrator privileges. You can optionally specify an IP
+                                    address for the gateway interface. By default, the server
+                                    allocates the next available external IP address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="204">
+                            <dt ixia_locid="205"><uicontrol ixia_locid="246">Enable SNAT</uicontrol></dt>
+                            <dd ixia_locid="206">
+                                <p ixia_locid="238">This control is shown only for users with
+                                    administrator privileges. For more about the SNAT option, see
+                                        <xref href="jow1438192116883.xml" ixia_locid="247"/>.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                    <p ixia_locid="199">To save the gateway gettings and close the dialog box, click
+                            <uicontrol ixia_locid="200">Set Gateway</uicontrol>.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

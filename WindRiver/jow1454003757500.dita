@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003757500" xml:lang="en-us"><title ixia_locid="1">Glance Dimensioning for Storage Nodes</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+    <p ixia_locid="4">To determine the logical disk capacity requirement for images, calculate the
+      total storage required for images plus some margin to handle growth. </p>
+    <sl>
+      <sli ixia_locid="17">Glance Storage Requirement = N * AvgImageSize + N * AvgCachedImageSize +
+        Margin</sli>
+    </sl>
+    <p ixia_locid="19">Where:</p>
+    <sl id="ul_thn_rxg_v5">
+      <sli ixia_locid="18">N = Total number of images</sli>
+      <sli ixia_locid="9">AvgImageSize = average size of all images on disk (e.g. from “qemu-img
+        info &lt;file&gt;”)</sli>
+      <sli ixia_locid="11">AvgCachedImageSize = average size of all images on disk if --cache-raw is
+        used</sli>
+      <sli ixia_locid="13">Margin = User-defined margin (recommend at least 25%)</sli>
+    </sl>
+    <note id="note_N10034_N10013_N10001" ixia_locid="15">
+      <p ixia_locid="16">AvgCachedImageSize only applies to the Standard Configuration with
+        Dedicated Storage and for images when the --cache-raw option is used. Use of --cache-raw is
+        highly recommended for volume creation performance of qcow2 images.</p>
+    </note>
+  </conbody></concept-wr>

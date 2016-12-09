@@ -1,0 +1,1606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="xyj1463581505181" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Supported Openstack Features</title>
+  <shortdesc ixia_locid="2">This section documents the supported and unsupported items within the
+    upstream opensource OpenStack REST APIs.</shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N10022_N1001F_N10001" ixia_locid="4">
+      <p ixia_locid="5">Supported indicates that the functionality works and has been explicitly verified.</p>
+      <p ixia_locid="6">Unsupported indicates that the functionality either will not work or has not been
+        explicitly verified.</p>
+    </section>
+    <section id="section_N1002F_N1001F_N10001" ixia_locid="7">
+      <title ixia_locid="8">Compute API v2.1</title>
+    </section>
+    <table id="table_jfj_rqq_3x">
+      <tgroup cols="2">
+        <colspec colname="col1" colnum="1"/>
+        <colspec colname="col2" colnum="2"/>
+        <thead>
+          <row rowsep="1">
+            <entry ixia_locid="691">
+              <p ixia_locid="692">Supported REST APIs</p>
+            </entry>
+            <entry ixia_locid="693"/>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry ixia_locid="9">
+              <p ixia_locid="10">API versions</p>
+            </entry>
+            <entry ixia_locid="11">
+              <p ixia_locid="12">/</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="13">
+              <p ixia_locid="694">Limits</p>
+            </entry>
+            <entry ixia_locid="695">
+              <p ixia_locid="16">/v2.1/{tenant_id}/limits</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="17">
+              <p ixia_locid="18">Extensions</p>
+            </entry>
+            <entry ixia_locid="19">
+              <p ixia_locid="20">/v2.1/{tenant_id}/extensions[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="21">
+              <p ixia_locid="22">Servers</p>
+            </entry>
+            <entry ixia_locid="23">
+              <p ixia_locid="24">/v2.1/{tenant_id}/servers</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="25"/>
+            <entry ixia_locid="26">
+              <p ixia_locid="27">/v2.1/{tenant_id}/servers/detail</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="28"/>
+            <entry ixia_locid="29">
+              <p ixia_locid="30">/v2.1/{tenant_id}/servers/{server_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="31">
+              <p ixia_locid="32">Server metadata</p>
+            </entry>
+            <entry ixia_locid="33">
+              <p ixia_locid="34">/v2.1/{tenant_id}/servers/metadata[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="35">
+              <p ixia_locid="36">Server addresses </p>
+            </entry>
+            <entry ixia_locid="37">
+              <p ixia_locid="38">/v2.1/{tenant_id}/servers/ips</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="39">
+              <p ixia_locid="40">Server actions </p>
+            </entry>
+            <entry ixia_locid="41">
+              <p ixia_locid="42">/v2.1/{tenant_id}/servers/action</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="43">
+              <p ixia_locid="44">Flavors </p>
+            </entry>
+            <entry ixia_locid="45">
+              <p ixia_locid="46">/v2.1/flavors</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="47"/>
+            <entry ixia_locid="48">
+              <p ixia_locid="49">/v2.1/flavors/detail</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="50"/>
+            <entry ixia_locid="51">
+              <p ixia_locid="52">/v2.1/flavors/{flavor_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="53">
+              <p ixia_locid="54">Images </p>
+            </entry>
+            <entry ixia_locid="55">
+              <p ixia_locid="56">/v2.1/images</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="57"/>
+            <entry ixia_locid="58">
+              <p ixia_locid="59">/v2.1/images/detail</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="60"/>
+            <entry ixia_locid="61">
+              <p ixia_locid="62">/v2.1/images/{image_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="63">
+              <p ixia_locid="64">Image metadata </p>
+            </entry>
+            <entry ixia_locid="65">
+              <p ixia_locid="66">/v2.1/images/{image_id}/metadata[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="69">
+              <p ixia_locid="70">Servers with block device mapping format</p>
+            </entry>
+            <entry ixia_locid="71">
+              <p ixia_locid="72">/v2.1/{tenant_id}/servers</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="73">
+              <p ixia_locid="74">Servers with configuration drive</p>
+            </entry>
+            <entry ixia_locid="75">
+              <p ixia_locid="76">/v2.1/{tenant_id}/servers</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="77"/>
+            <entry ixia_locid="78">
+              <p ixia_locid="79">/v2.1/{tenant_id}/servers/{server_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="80"/>
+            <entry ixia_locid="81">
+              <p ixia_locid="82">/v2.1/{tenant_id}/servers/{server_id}/detail</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="83">
+              <p ixia_locid="84">Servers console </p>
+            </entry>
+            <entry ixia_locid="85">
+              <p ixia_locid="86">/v2.1/{tenant_id}/servers/{server_id}/action</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="87">
+              <p ixia_locid="88">Servers console output </p>
+            </entry>
+            <entry ixia_locid="89">
+              <p ixia_locid="90">/v2.1/{tenant_id}/servers/{server_id}/action</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="91">
+              <p ixia_locid="92">Servers extended attributes</p>
+            </entry>
+            <entry ixia_locid="93">
+              <p ixia_locid="94">/v2.1/{tenant_id}/servers</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="95"/>
+            <entry ixia_locid="96">
+              <p ixia_locid="97">/v2.1/{tenant_id}/servers/{server_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="98">
+              <p ixia_locid="99">Servers with extended availability zones</p>
+            </entry>
+            <entry ixia_locid="100">
+              <p ixia_locid="101">/v2.1/{tenant_id}/servers/{server_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="102"/>
+            <entry ixia_locid="103">
+              <p ixia_locid="104">/v2.1/{tenant_id}/servers/detail</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="105">
+              <p ixia_locid="106">Servers extended status</p>
+            </entry>
+            <entry ixia_locid="107">
+              <p ixia_locid="108">/v2.1/{tenant_id}/servers/{server_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="109"/>
+            <entry ixia_locid="110">
+              <p ixia_locid="111">/v2.1/{tenant_id}/servers/detail </p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="112">
+              <p ixia_locid="113">Servers with IP type </p>
+            </entry>
+            <entry ixia_locid="114">
+              <p ixia_locid="115">/v2.1/{tenant_id}/servers/{server_id}/action</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="116"/>
+            <entry ixia_locid="117">
+              <p ixia_locid="118">/v2.1/{tenant_id}/servers/detail</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="119">
+              <p ixia_locid="120">Servers multiple create </p>
+            </entry>
+            <entry ixia_locid="121">
+              <p ixia_locid="122">/v2.1/{tenant_id}/servers</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="123">
+              <p ixia_locid="124">Servers with scheduler hints</p>
+            </entry>
+            <entry ixia_locid="125">
+              <p ixia_locid="126">/v2.1/{tenant_id}/servers</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="127">
+              <p ixia_locid="128">Servers administrative actions</p>
+            </entry>
+            <entry ixia_locid="129">
+              <p ixia_locid="130">/v2.1/{tenant_id}/servers/{server_id}/action</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="131"/>
+            <entry ixia_locid="132">
+              <p ixia_locid="133">Exceptions: (i.e. NOT Supported)</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="134"/>
+            <entry ixia_locid="135">
+              <p ixia_locid="136">Reset networking on server</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="137"/>
+            <entry ixia_locid="138">
+              <p ixia_locid="139">Inject network information</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="140"/>
+            <entry ixia_locid="141">
+              <p ixia_locid="142">Create server backup</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="143">
+              <p ixia_locid="144">Servers deferred delete</p>
+            </entry>
+            <entry ixia_locid="145">
+              <p ixia_locid="146">/v2.1/{tenant_id}/servers/{server_id}/action</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="147">
+              <p ixia_locid="148">Servers start and stop </p>
+            </entry>
+            <entry ixia_locid="149">
+              <p ixia_locid="150">/v2.1/{tenant_id}/servers/{server_id}/action</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="151">
+              <p ixia_locid="152">Servers and images with disk config</p>
+            </entry>
+            <entry ixia_locid="153">
+              <p ixia_locid="154">/v2.1/{tenant_id}/servers/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="155"/>
+            <entry ixia_locid="156">
+              <p ixia_locid="157">/v2.1/{tenant_id}/images/[*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="158">
+              <p ixia_locid="159">Servers availability zones</p>
+            </entry>
+            <entry ixia_locid="160">
+              <p ixia_locid="161">/v2.1/{tenant_id}/servers</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="162"/>
+            <entry ixia_locid="163">
+              <p ixia_locid="164">/v2.1/os-availability-zone[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="165">
+              <p ixia_locid="166">Servers virtual interfaces</p>
+            </entry>
+            <entry ixia_locid="167">
+              <p ixia_locid="168">/v2.1/{tenant_id}/servers/{server_id}/os-virtual-interfaces</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="169">
+              <p ixia_locid="170">Servers with volume attachments</p>
+            </entry>
+            <entry ixia_locid="171">
+              <p ixia_locid="172">/v2.1/{tenant_id}/servers/{server_id}/os-volume_attachments[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="173">
+              <p ixia_locid="174">Server boot from volume </p>
+            </entry>
+            <entry ixia_locid="175">
+              <p ixia_locid="176">/v2.1/{tenant_id}/os-volumes_boot</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="177">
+              <p ixia_locid="178">Flavors create and delete</p>
+            </entry>
+            <entry ixia_locid="179">
+              <p ixia_locid="180">/v2.1/{tenant_id}/flavors[/{flavor_id}]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="181">
+              <p ixia_locid="182">Flavors with extra-specs </p>
+            </entry>
+            <entry ixia_locid="183">
+              <p ixia_locid="184">/v2.1/{tenant_id}/flavors/{flavor_id}/os-extra_specs[/{key_id}]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="185">
+              <p ixia_locid="186">Images with size attribute </p>
+            </entry>
+            <entry ixia_locid="187">
+              <p ixia_locid="188">/v2.1/{tenant_id}/images/detail</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="189"/>
+            <entry ixia_locid="190">
+              <p ixia_locid="191">/v2.1/{tenant_id}/images/{image_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="192">
+              <p ixia_locid="193">Limits with project usage</p>
+            </entry>
+            <entry ixia_locid="194">
+              <p ixia_locid="195">/v2.1/{tenant_id}/limits</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="196">
+              <p ixia_locid="197">Limits with project usage for administrators</p>
+            </entry>
+            <entry ixia_locid="198">
+              <p ixia_locid="199">/v2.1/{tenant_id}/limits/{tenant_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="200">
+              <p ixia_locid="201">Host aggregates </p>
+            </entry>
+            <entry ixia_locid="202">
+              <p ixia_locid="203">/v2.1/{tenant_id}/os-aggregates[/{aggregate_id}]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="204"/>
+            <entry ixia_locid="205">
+              <p ixia_locid="206">/v2.1/{tenant_id}/os-aggregates/{aggregate_id}/action</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="207">
+              <p ixia_locid="208">Fixed IPs </p>
+            </entry>
+            <entry ixia_locid="209">
+              <p ixia_locid="210">/v2.1/{tenant_id}/os-fixed-ips/{fixed_ip}[/action]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="211">
+              <p ixia_locid="212">Fixed IP DNS records </p>
+            </entry>
+            <entry ixia_locid="213">
+              <p ixia_locid="214">/v2.1/{tenant_id}/os-floating-ip-dns[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="215">
+              <p ixia_locid="216">Floating IP pools </p>
+            </entry>
+            <entry ixia_locid="217">
+              <p ixia_locid="218">/v2.1/{tenant_id}/os-floating-ip-pools</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="219">
+              <p ixia_locid="220">Floating IPs </p>
+            </entry>
+            <entry ixia_locid="221">
+              <p ixia_locid="222">/v2.1/{tenant_id}/os-floating-ips[/{id}]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="223"/>
+            <entry ixia_locid="224">
+              <p ixia_locid="225">/v2.1/{tenant_id}/servers/{server_id}/action</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="226">
+              <p ixia_locid="227">Floating IPs bulk </p>
+            </entry>
+            <entry ixia_locid="228">
+              <p ixia_locid="229">/v2.1/{tenant_id}/os-floating-ips-bulk[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="230">
+              <p ixia_locid="231">Hypervisors </p>
+            </entry>
+            <entry ixia_locid="232">
+              <p ixia_locid="233">/v2.1/{tenant_id}/os-hypervisors[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="234">
+              <p ixia_locid="235">Hypervisor with status </p>
+            </entry>
+            <entry ixia_locid="236">
+              <p ixia_locid="237">/v2.1/{tenant_id}/os-hypervisor-status/detail</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="238">
+              <p ixia_locid="239">Key Pairs </p>
+            </entry>
+            <entry ixia_locid="240">
+              <p ixia_locid="241">/v2.1/{tenant_id}/os-key pairs[/{key pair_name}]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="242">
+              <p ixia_locid="243">Migrations </p>
+            </entry>
+            <entry ixia_locid="244">
+              <p ixia_locid="245">/v2.1/{tenant_id}/os-migrations</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="246">
+              <p ixia_locid="247">Networks </p>
+            </entry>
+            <entry ixia_locid="248">
+              <p ixia_locid="249">/v2.1/{tenant_id}/os-networks[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="250">
+              <p ixia_locid="251">Quota class </p>
+            </entry>
+            <entry ixia_locid="252">
+              <p ixia_locid="253">/v2.1/os-quota-class-sets/{class_id}</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="254">
+              <p ixia_locid="255">Quota sets </p>
+            </entry>
+            <entry ixia_locid="256">
+              <p ixia_locid="257">/v2.1/{tenant_id}/os-quota-sets/{tenant_id}[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="258">
+              <p ixia_locid="259">Security groups </p>
+            </entry>
+            <entry ixia_locid="260">
+              <p ixia_locid="261">/v2.1/{tenant_id}/os-security-groups[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="262">
+              <p ixia_locid="263">Rules for security group </p>
+            </entry>
+            <entry ixia_locid="264">
+              <p ixia_locid="265">/v2.1/{tenant_id}/os-security-group-rules[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="266">
+              <p ixia_locid="267">Rules for default security group</p>
+            </entry>
+            <entry ixia_locid="268">
+              <p ixia_locid="269">/v2.1/{tenant_id}/os-security-group-default-rules[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="270">
+              <p ixia_locid="271">Server Groups </p>
+            </entry>
+            <entry ixia_locid="272">
+              <p ixia_locid="273">/v2.1/{tenant_id}/os-server-groups[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="274">
+              <p ixia_locid="275">Volume extension</p>
+            </entry>
+            <entry ixia_locid="276">
+              <p ixia_locid="277">/v2.1/{tenant_id}/os-volumes[/*]</p>
+            </entry>
+          </row>
+          <row rowsep="1">
+            <entry ixia_locid="278"/>
+            <entry ixia_locid="279">
+              <p ixia_locid="280">/v2.1/{tenant_id}/os-snapshots[/*]</p>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <section id="section_N10172_N1001F_N10001" ixia_locid="67">
+      <p ixia_locid="737"/>
+      <p ixia_locid="738"/>
+    </section>
+    <section id="section_N107F1_N1001F_N10001" ixia_locid="391">
+      <title ixia_locid="392">Networking API v2.0</title>
+      <table id="table_mt4_1wq_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="702">
+                <p ixia_locid="703">Supported REST APIs</p>
+              </entry>
+              <entry ixia_locid="704"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="393">
+                <p ixia_locid="394">Networking</p>
+              </entry>
+              <entry ixia_locid="395">
+                <p ixia_locid="396">/v2.0/networks[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="397"/>
+              <entry ixia_locid="398">
+                <p ixia_locid="399">/v2.0/subnets[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="400"/>
+              <entry ixia_locid="401">
+                <p ixia_locid="402">/v2.0/ports[/*]</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="739"/>
+      <p ixia_locid="740"/>
+    </section>
+    <section id="section_N10844_N1001F_N10001" ixia_locid="403">
+      <title ixia_locid="404">Networking API v2.0 extensions</title>
+      <table id="table_ns5_qwq_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="705">
+                <p ixia_locid="706">Supported REST APIs</p>
+              </entry>
+              <entry ixia_locid="707"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="405">
+                <p ixia_locid="406">Extensions</p>
+              </entry>
+              <entry ixia_locid="407">
+                <p ixia_locid="408">/v2.0/extensions[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="409">
+                <p ixia_locid="410">Quotas extension </p>
+              </entry>
+              <entry ixia_locid="411">
+                <p ixia_locid="412">/v2.0/quotas[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="413">
+                <p ixia_locid="414">Networks provider extended attributes </p>
+              </entry>
+              <entry ixia_locid="415">
+                <p ixia_locid="416">/v2.0/networks[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="417">
+                <p ixia_locid="418">Networks multiple provider extension </p>
+              </entry>
+              <entry ixia_locid="419">
+                <p ixia_locid="420">/v2.0/networks[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="421">
+                <p ixia_locid="422">VLAN transparency extension </p>
+              </entry>
+              <entry ixia_locid="423">
+                <p ixia_locid="424">/v2.0/networks[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="425">
+                <p ixia_locid="426">Ports binding extended attributes</p>
+              </entry>
+              <entry ixia_locid="427">
+                <p ixia_locid="428">/v2.0/ports[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="429">
+                <p ixia_locid="430">Security groups and rules </p>
+              </entry>
+              <entry ixia_locid="431">
+                <p ixia_locid="432">/v2.0/security-groups[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="433"/>
+              <entry ixia_locid="434">
+                <p ixia_locid="435">/v2.0/security-group-rules[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="436">
+                <p ixia_locid="437">Layer-3 newtorking </p>
+              </entry>
+              <entry ixia_locid="438">
+                <p ixia_locid="439">/v2.0/routers[/*]</p>
+                <p ixia_locid="440">EXCEPTION: (not supported)</p>
+                <p ixia_locid="441">/v2.0/routers: ha attribute</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="442"/>
+              <entry ixia_locid="443">
+                <p ixia_locid="444">NOTE: Titanium Server Router Instances are HA protected across
+                  compute nodes.</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="445"/>
+              <entry ixia_locid="446">
+                <p ixia_locid="447">/v2.0/floatingips[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="448">
+                <p ixia_locid="449">Extra routes </p>
+              </entry>
+              <entry ixia_locid="450">
+                <p ixia_locid="451">/v2.0/networks[/*]</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="741"/>
+      <p ixia_locid="742"/>
+      
+      <table id="table_ejs_lzq_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="708">
+                <p ixia_locid="709">Unsupported REST APIs</p>
+              </entry>
+              <entry ixia_locid="710"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="454">
+                <p ixia_locid="455">Metering labels and rules</p>
+              </entry>
+              <entry ixia_locid="456">
+                <p ixia_locid="457">/v2.0/metering[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="458">
+                <p ixia_locid="459">Load-Balancer-as-a-Service</p>
+              </entry>
+              <entry ixia_locid="460">
+                <p ixia_locid="461">/v2.0/lb[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="462"/>
+              <entry ixia_locid="463">
+                <p ixia_locid="464">/v2.0/lbaas[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="465">
+                <p ixia_locid="466">Virtual-Private-Network-as-a-Service </p>
+              </entry>
+              <entry ixia_locid="467">
+                <p ixia_locid="468">/v2.0/vpn[/*]</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="743"/>
+      <p ixia_locid="744"/>
+    </section>
+    <section id="section_N109B7_N1001F_N10001" ixia_locid="469">
+      <title ixia_locid="470">Block Storage API v2.0</title>
+      <table id="table_nt3_nbr_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="761">
+                <p ixia_locid="762">Supported REST APIs</p>
+              </entry>
+              <entry ixia_locid="763"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="764">
+                <p ixia_locid="472">API Versions </p>
+              </entry>
+              <entry ixia_locid="765">
+                <p ixia_locid="474">/</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="766">
+                <p ixia_locid="476">API extensions </p>
+              </entry>
+              <entry ixia_locid="767">
+                <p ixia_locid="478">/v2/{tenant_id}/extensions[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="768">
+                <p ixia_locid="480">Volumes </p>
+              </entry>
+              <entry ixia_locid="769">
+                <p ixia_locid="482">/v2/{tenant_id}/volumes[/{volume_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="770"/>
+              <entry ixia_locid="771">
+                <p ixia_locid="485">/v2/{tenant_id}/volumes/detail</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="772">
+                <p ixia_locid="487">Volume actions </p>
+              </entry>
+              <entry ixia_locid="773">
+                <p ixia_locid="489">/v2/{tenant_id}//volumes/{volume_id}/action</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="774">
+                <p ixia_locid="491">Volume types </p>
+              </entry>
+              <entry ixia_locid="775">
+                <p ixia_locid="493">/v2/{tenant_id}/types[/{volume_type_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="776">
+                <p ixia_locid="495">Snapshots </p>
+              </entry>
+              <entry ixia_locid="777">
+                <p ixia_locid="497">/v2/{tenant_id}/snapshots[/{snapshot_id}[/metadata]]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="778"/>
+              <entry ixia_locid="779">
+                <p ixia_locid="500">/v2/{tenant_id}/snapshots/detail</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="780">
+                <p ixia_locid="502">Quota sets extension </p>
+              </entry>
+              <entry ixia_locid="781">
+                <p ixia_locid="504">/v2/{tenant_id}/os-quota-sets[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="782">
+                <p ixia_locid="506">Limits extension </p>
+              </entry>
+              <entry ixia_locid="783">
+                <p ixia_locid="508">/v2/{tenant_id}/limits</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="784">
+                <p ixia_locid="510">Backups </p>
+              </entry>
+              <entry ixia_locid="785">
+                <p ixia_locid="512">/v2/{tenant_id}/backups[/{backup_id}[/restore]]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="786"/>
+              <entry ixia_locid="787">
+                <p ixia_locid="515">/v2/{tenant_id}/backups/detail</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="788">
+                <p ixia_locid="517">Backup actions </p>
+              </entry>
+              <entry ixia_locid="789">
+                <p ixia_locid="519">/v2/{tenant_id}/backups/{backup_id}/action</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="790">
+                <p ixia_locid="521">Volume image metadata extension </p>
+              </entry>
+              <entry ixia_locid="791">
+                <p ixia_locid="523">/v2/{tenant_id}/os-vol-image-meta</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="792">
+                <p ixia_locid="525">Volume type access </p>
+              </entry>
+              <entry ixia_locid="793">
+                <p ixia_locid="527">/v2/{tenant_id}/volumes</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="745"/>
+      <p ixia_locid="746"/>
+      
+      <table id="table_anw_xbr_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="714">
+                <p ixia_locid="715">Unsupported REST APIs</p>
+              </entry>
+              <entry ixia_locid="716"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="530">
+                <p ixia_locid="531">Quality of service (QoS) specifications</p>
+              </entry>
+              <entry ixia_locid="532">
+                <p ixia_locid="533">/v2/{tenant_id}/qos-specs[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="534">
+                <p ixia_locid="535">Volume manage extension</p>
+              </entry>
+              <entry ixia_locid="536">
+                <p ixia_locid="537">/v2/{tenant_id}/os-volume-manage</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="747"/>
+      <p ixia_locid="748"/>
+    </section>
+    <section id="section_N10B3B_N1001F_N10001" ixia_locid="538">
+      <title ixia_locid="539">Identity API v2.0</title>
+      <p ixia_locid="961">This API is not supported.</p>
+      <p ixia_locid="749"/>
+      <p ixia_locid="750"/>
+    </section>
+    <section id="section_N10BA7_N1001F_N10001" ixia_locid="555">
+      <title ixia_locid="556">Identity Admin API v2.0</title>
+      <p ixia_locid="557">This API is not supported.</p>
+      <p ixia_locid="962"/>
+      <p ixia_locid="963"/>
+    </section>
+    <section id="section_N10BB4_N1001F_N10001" ixia_locid="558">
+      <title ixia_locid="559">Identity API v2.0 extensions</title>
+      <p ixia_locid="964">This API is not supported.</p>
+      <p ixia_locid="809"/>
+      <p ixia_locid="810"/>
+    </section>
+    <section id="section_N10BC1_N1001F_N10001" ixia_locid="561">
+      <title ixia_locid="562">Identity API v3.0</title>
+      <table id="table_pyf_ycd_5x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="811">
+                <p ixia_locid="812">Supported REST APIs</p>
+              </entry>
+              <entry ixia_locid="813"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="814">
+                <p ixia_locid="815">Authentication and token mgmt </p>
+              </entry>
+              <entry ixia_locid="816">
+                <p ixia_locid="817">/v3/auth/tokens</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="818"/>
+              <entry ixia_locid="819">
+                <p ixia_locid="820">/v3/auth/catalog </p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="821"/>
+              <entry ixia_locid="822">
+                <p ixia_locid="823"> /v3/auth/projects </p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="824"/>
+              <entry ixia_locid="825">
+                <p ixia_locid="826">/v3/auth/domains</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="827">
+                <p ixia_locid="828">Credentials </p>
+              </entry>
+              <entry ixia_locid="829">
+                <p ixia_locid="830">/v3/credentials[/{credential_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="831">
+                <p ixia_locid="832">Domains </p>
+              </entry>
+              <entry ixia_locid="833">
+                <p ixia_locid="834">/v3/domains[/{domain_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="835">
+                <p ixia_locid="836">Groups </p>
+              </entry>
+              <entry ixia_locid="837">
+                <p ixia_locid="838">/v3/groups[/{group_id}] </p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="839"/>
+              <entry ixia_locid="840">
+                <p ixia_locid="841">/v3/groups/{group_id}/users[/{user_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="842">
+                <p ixia_locid="843">Policies </p>
+              </entry>
+              <entry ixia_locid="844">
+                <p ixia_locid="845">/v3/policies[/{policy_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="846">
+                <p ixia_locid="847">Projects </p>
+              </entry>
+              <entry ixia_locid="848">
+                <p ixia_locid="849">/v3/projects[/{project_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="850">
+                <p ixia_locid="851">Regions </p>
+              </entry>
+              <entry ixia_locid="852">
+                <p ixia_locid="853">/v3/regions[/{region_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="854">
+                <p ixia_locid="855">Roles </p>
+              </entry>
+              <entry ixia_locid="856">
+                <p ixia_locid="857">/v3/roles[/{role_id}] </p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="858"/>
+              <entry ixia_locid="859">
+                <p ixia_locid="860">/v3/domains/{domain_id}/groups/{group_id}/roles[/{role_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="861"/>
+              <entry ixia_locid="862">
+                <p ixia_locid="863"> /v3/projects/{project_id}/groups/{group_id}/roles[/{role_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="864"/>
+              <entry ixia_locid="865">
+                <p ixia_locid="866"> /v3/roles/{prior_role_id/implies[/{implies_role_id}] </p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="867"/>
+              <entry ixia_locid="868">
+                <p ixia_locid="869">/v3/role_assignments</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="870"/>
+              <entry ixia_locid="871">
+                <p ixia_locid="872">/v3/role_inferences</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="873">
+                <p ixia_locid="874">Service catalog and endpoints </p>
+              </entry>
+              <entry ixia_locid="875">
+                <p ixia_locid="876">/v3/services[/{service_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="877" rowsep="1"/>
+              <entry ixia_locid="878">
+                <p ixia_locid="879"> /v3/endpoints[/{endpoint_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="882">
+                <p ixia_locid="883">Users </p>
+              </entry>
+              <entry ixia_locid="884">
+                <p ixia_locid="885">/v3/users[/{user_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="886"/>
+              <entry ixia_locid="887">
+                <p ixia_locid="888">/v3/users/{users_id}/groups</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="889"/>
+              <entry ixia_locid="890">
+                <p ixia_locid="891">/v3/users/{users_id}/projects </p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="892"/>
+              <entry ixia_locid="893">
+                <p ixia_locid="894">/v3/users/{users_id}/password</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="899"/>
+      <p ixia_locid="900"/>
+      <table id="table_ilh_52d_5x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="901">
+                <p ixia_locid="902">Unsupported REST APIs</p>
+              </entry>
+              <entry ixia_locid="903"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="904">
+                <p ixia_locid="905"> Domain configuration </p>
+              </entry>
+              <entry ixia_locid="906">
+                <p ixia_locid="907">/v3/domains/config/default</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="908">
+                <p ixia_locid="909"> </p>
+              </entry>
+              <entry ixia_locid="910">
+                <p ixia_locid="911"> /v3/domains/config/{group}/default</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="912">
+                <p ixia_locid="913"> </p>
+              </entry>
+              <entry ixia_locid="914">
+                <p ixia_locid="915"> /v3/domains/config/{group}/{option}/default</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="916"/>
+              <entry ixia_locid="917">
+                <p ixia_locid="918"> /v3/domains/{domain_id}/config[/{group}[/{option}]]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="919">
+                <p ixia_locid="920">OS-INHERIT API </p>
+              </entry>
+              <entry ixia_locid="921">
+                <p ixia_locid="922">/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles[/{role_id}]/inherited_to_projects
+                </p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="923"/>
+              <entry ixia_locid="924">
+                <p ixia_locid="925">/v3/role_assignments</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+    <section id="section_N10BCE_N1001F_N10001" ixia_locid="564">
+      <title ixia_locid="565">Identity API v3.0 extensions</title>
+      <p ixia_locid="566">This API is NOT Supported.</p>
+    </section>
+    <section id="section_N10BDB_N1001F_N10001" ixia_locid="567">
+      <title ixia_locid="568">Image Service API v1.0</title>
+      <table id="table_gws_xrr_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="720">
+                <p ixia_locid="721">Supported REST APIs</p>
+              </entry>
+              <entry ixia_locid="722"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="569">
+                <p ixia_locid="570">API Versions </p>
+              </entry>
+              <entry ixia_locid="571">
+                <p ixia_locid="572">/</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="573">
+                <p ixia_locid="574">Images </p>
+              </entry>
+              <entry ixia_locid="575">
+                <p ixia_locid="576">/v1/images[/{image_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="577"/>
+              <entry ixia_locid="578">
+                <p ixia_locid="579">/v1/images/detail</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="751"/>
+      <p ixia_locid="752"/>
+      
+      <table id="table_csm_bsr_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="926">
+                <p ixia_locid="927">Unsupported REST APIs</p>
+              </entry>
+              <entry ixia_locid="928"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="929">
+                <p ixia_locid="930">Members</p>
+              </entry>
+              <entry ixia_locid="931">
+                <p ixia_locid="585">/v1/images/{image_id}/members[/{owner_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="932">
+                <p ixia_locid="933">Shared images </p>
+              </entry>
+              <entry ixia_locid="934">
+                <p ixia_locid="589">/v1/images/{owner}</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="753"/>
+      <p ixia_locid="754"/>
+    </section>
+    <section id="section_N10C79_N1001F_N10001" ixia_locid="590">
+      <title ixia_locid="591">Object Storage API v1.0</title>
+      <table id="table_mzz_2fd_5x" rowsep="1">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="935">
+                <p ixia_locid="936">Supported REST APIs</p>
+              </entry>
+              <entry ixia_locid="937">
+                <p ixia_locid="938">/info</p>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="939">
+                <p ixia_locid="940">Discoverability </p>
+              </entry>
+              <entry ixia_locid="941">
+                <p ixia_locid="942">/info</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="943">
+                <p ixia_locid="944">Accounts  </p>
+              </entry>
+              <entry ixia_locid="945">
+                <p ixia_locid="946">/v1/{account}</p>
+                <p ixia_locid="947">NOTE: no support for custom metadata; only supports a subset of Swift ACLs.</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="948">
+                <p ixia_locid="949">Containers </p>
+              </entry>
+              <entry ixia_locid="950">
+                <p ixia_locid="951">/v1/{account}[/{container}]</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="952">
+                <p ixia_locid="953">Objects </p>
+              </entry>
+              <entry ixia_locid="954">
+                <p ixia_locid="955">/v1/{account}[/{container}[/{object}]] </p>
+                <p ixia_locid="956">NOTE: no support for expiring objects, no support for object versioning, no
+                  support for CORS, no support for Static Website</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="957">
+                <p ixia_locid="958">Endpoints </p>
+              </entry>
+              <entry ixia_locid="959">
+                <p ixia_locid="960">/v1/endpoints</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="755"/>
+      <p ixia_locid="756"/>
+    </section>
+    <section id="section_N10C86_N1001F_N10001" ixia_locid="593">
+      <title ixia_locid="594">Orchestration API v1.0</title>
+      <table id="table_sls_qsr_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="726">
+                <p ixia_locid="727">Supported REST APIs</p>
+              </entry>
+              <entry ixia_locid="728"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="595">
+                <p ixia_locid="596">API versions </p>
+              </entry>
+              <entry ixia_locid="597">
+                <p ixia_locid="598">/</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="599">
+                <p ixia_locid="600">Stacks </p>
+              </entry>
+              <entry ixia_locid="601">
+                <p ixia_locid="602">/v1/{tenant_id}/stacks[/{stack_name}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="603"/>
+              <entry ixia_locid="604">
+                <p ixia_locid="605">/v1/{tenant_id}/stacks/{stack_name}/resources</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="606"/>
+              <entry ixia_locid="607">
+                <p ixia_locid="608">/v1/{tenant_id}/stacks/{stack_name}/{stack_id}</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="609"/>
+              <entry ixia_locid="610">
+                <p ixia_locid="611">/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/snapshots[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="612"/>
+              <entry ixia_locid="613">
+                <p ixia_locid="614">EXCEPTION: (not supported)</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="615"/>
+              <entry ixia_locid="616">
+                <p ixia_locid="617">/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/abandon</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="618">
+                <p ixia_locid="619">Stack actions </p>
+              </entry>
+              <entry ixia_locid="620">
+                <p ixia_locid="621">/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/actions</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="622">
+                <p ixia_locid="623">Stack resources </p>
+              </entry>
+              <entry ixia_locid="624">
+                <p ixia_locid="625">/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="626">
+                <p ixia_locid="627">Stack events </p>
+              </entry>
+              <entry ixia_locid="628">
+                <p ixia_locid="629">/v1/{tenant_id}/stacks/{stack_name}[/{stack_id}]/events[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="630"/>
+              <entry ixia_locid="631">
+                <p ixia_locid="632">EXCEPTION: (not supported)</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="633"/>
+              <entry ixia_locid="634">
+                <p ixia_locid="635">/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/resources/{resource_name}/events[/{event_id}]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="636">
+                <p ixia_locid="637">Manage service </p>
+              </entry>
+              <entry ixia_locid="638">
+                <p ixia_locid="639">/v1/{tenant_id}/services</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="640">
+                <p ixia_locid="641">Templates </p>
+              </entry>
+              <entry ixia_locid="642">
+                <p ixia_locid="643">/v1/{tenant_id}/stacks/{stack_name}/{stack_id}/template</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="644"/>
+              <entry ixia_locid="645">
+                <p ixia_locid="646">/vi/{tenant_id}/validate</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="647"/>
+              <entry ixia_locid="648">
+                <p ixia_locid="649">EXCEPTION: (not supported)</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="650"/>
+              <entry ixia_locid="651">
+                <p ixia_locid="652">/vi/{tenant_id}/template_versions</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="653"/>
+              <entry ixia_locid="654">
+                <p ixia_locid="655">/vi/{tenant_id}/resource_types/{type_name}/template</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="656">
+                <p ixia_locid="657">Software configuration</p>
+              </entry>
+              <entry ixia_locid="658">
+                <p ixia_locid="659">/v1/{tenant_id}/software_configs[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="660"/>
+              <entry ixia_locid="661">
+                <p ixia_locid="662">/v1/{tenant_id}/software_deployments[/*]</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="757"/>
+      <p ixia_locid="758"/>
+      
+      <table id="table_fw5_ysr_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="729">
+                <p ixia_locid="730">Unsupported REST APIs</p>
+              </entry>
+              <entry ixia_locid="731"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="665">
+                <p ixia_locid="666">Build info</p>
+              </entry>
+              <entry ixia_locid="667">
+                <p ixia_locid="668">/v1/{tenant_id}/build_info</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <p ixia_locid="759"/>
+      <p ixia_locid="760"/>
+    </section>
+    <section id="section_N10E2D_N1001F_N10001" ixia_locid="669">
+      <title ixia_locid="670">Telemetry API v2.0</title>
+      <table id="table_zdc_ctr_3x">
+        <tgroup cols="2">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <thead>
+            <row rowsep="1">
+              <entry ixia_locid="732">
+                <p ixia_locid="733">Supported REST APIs</p>
+              </entry>
+              <entry ixia_locid="734"/>
+            </row>
+          </thead>
+          <tbody>
+            <row rowsep="1">
+              <entry ixia_locid="671">
+                <p ixia_locid="672">Alarms</p>
+              </entry>
+              <entry ixia_locid="673">
+                <p ixia_locid="674">/v2/alarms[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="675">
+                <p ixia_locid="676">Meters </p>
+              </entry>
+              <entry ixia_locid="677">
+                <p ixia_locid="678">/v2/meters[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="679">
+                <p ixia_locid="680">Samples </p>
+              </entry>
+              <entry ixia_locid="681">
+                <p ixia_locid="682">/v2/samples[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="683">
+                <p ixia_locid="684">Resources </p>
+              </entry>
+              <entry ixia_locid="685">
+                <p ixia_locid="686">/v2/resources[/*]</p>
+              </entry>
+            </row>
+            <row rowsep="1">
+              <entry ixia_locid="687">
+                <p ixia_locid="688">Capabilities </p>
+              </entry>
+              <entry ixia_locid="689">
+                <p ixia_locid="690">/v2/capabilities</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </refbody>
+</reference-wr>

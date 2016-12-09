@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1410446976545" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Patch Status and Lifecycle</title>
+    <shortdesc ixia_locid="2">After adding a patch to the patch storage area, you must move it to
+        the software updates repository, which manages patch distribution for the cluster. From
+        there, you can install patches to the hosts that require them. </shortdesc>
+    <prolog>
+        <author ixia_locid="392">Edward Knowlton</author>
+        <author ixia_locid="245">Jim Owens</author>
+        <author ixia_locid="3">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="5">Some of the available patches may be required on controller hosts
+                only, while others may be required on compute or storage hosts. When you
+                    <term ixia_locid="250">apply</term> an available patch, it is added to the software updates
+                repository, ready for installation on any host type that requires it.  You can then
+                install all applicable patches to each host in turn.</p>
+            <p ixia_locid="251">To keep track of patch installation, you can use the <cmdname ixia_locid="253">sw-patch query</cmdname> command.</p>
+            <codeblock ixia_locid="254"><systemoutput ixia_locid="256">~(keystone_admin)$ </systemoutput><userinput ixia_locid="258">sudo sw-patch query</userinput>
+<systemoutput ixia_locid="260">
+   Patch ID                Release  Patch State
+=========================  =======  ===========
+TITANIUM_15.12_PATCH_0001   15.12     Applied
+TITANIUM_15.12_PATCH_0002   15.12     Available
+TITANIUM_15.12_PATCH_0003   15.12     Available
+</systemoutput></codeblock>
+            <p ixia_locid="252">This shows the <nameliteral ixia_locid="262">Patch State</nameliteral> for each of the
+                patches in the patch storage area:</p>
+            <dl>
+                <dlentry ixia_locid="9">
+                    <dt ixia_locid="10"><i ixia_locid="11">Available</i></dt>
+                    <dd ixia_locid="13">
+                        <p ixia_locid="263">A patch in the <i ixia_locid="264">Available</i> state has been added to the patch storage
+                            area, but has not yet been added to the software updates repository or
+                            installed on the hosts.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="265">
+                    <dt ixia_locid="267"><i ixia_locid="319">Partial-Apply</i></dt>
+                    <dd ixia_locid="269">
+                        <p ixia_locid="16">A patch in the <i ixia_locid="39">Partial-Apply</i> state
+                            has been added to the software updates repository using the <cmdname ixia_locid="15">sw-patch apply</cmdname> command, but has not been
+                            installed on all hosts that require it. It may have been installed on
+                            some but not others, or it may not have been installed on any hosts.
+                                <draft-comment author="eknowlto" ixia_locid="391">US78836</draft-comment>Patches that
+                            require a reboot can not be installed on an unlocked node. In-service
+                            patches can be installed on unlocked nodes. </p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="266">
+                    <dt ixia_locid="268"><i ixia_locid="21">Applied</i></dt>
+                    <dd ixia_locid="270">
+                        <p ixia_locid="41">A patch in the <i ixia_locid="40">Applied</i> state has
+                            been installed on all hosts that require it.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="273">You can use the <cmdname ixia_locid="274">sw-patch
+                    query-hosts</cmdname> command to see which hosts are fully patched (<nameliteral ixia_locid="275">Patch Current</nameliteral>). This also shows which hosts
+                require reboot, either because they are not fully patched, or because they are fully
+                patched but not yet rebooted.</p>
+            <codeblock ixia_locid="276"><systemoutput ixia_locid="278">~(keystone_admin)$ </systemoutput><userinput ixia_locid="281">sudo sw-patch query-hosts</userinput>
+<systemoutput ixia_locid="283">﻿
+  Hostname      IP Address    Patch Current  Reboot Required  Release  State
+============  ==============  =============  ===============  =======  =====
+compute-0     192.168.204.12       Yes             Yes         15.12   idle
+controller-0  192.168.204.3        No              Yes         15.12   idle
+controller-1  192.168.204.4        Yes             Yes         15.12   idle
+</systemoutput></codeblock>
+        </context>
+    </taskbody>
+</task-wr>

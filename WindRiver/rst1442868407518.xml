@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="rst1442868407518" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="36">Changing the MTU of the OAM Interface Using the CLI</title>
+    <shortdesc ixia_locid="2">You can change the MTU value of the OAM interface using the
+        CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="85">Jim Owens</author>
+        <author ixia_locid="39">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10026_N10023_N10001" ixia_locid="86">
+            <p ixia_locid="41"><draft-comment author="rstone" ixia_locid="87">Topic created for
+                    CGTS-1944. JO: updated for CGTS-3407, CGTS-3476, CGTS-1306</draft-comment>If you
+                prefer, you can use the Web administration interface; see <xref href="rst1442611751868.xml" ixia_locid="88"/>.</p>
+            <p ixia_locid="89">Controller configuration changes require each controller to be locked. This requires
+                a swact.</p>
+        </context>
+        <steps>
+            <step id="step_N10036_N10033_N10023_N10001" ixia_locid="43">
+                <cmd ixia_locid="44">Lock the standby controller.</cmd>
+                <stepxmp ixia_locid="45">
+                    <codeblock ixia_locid="46"><systemoutput ixia_locid="47">~(keystone_admin)$ </systemoutput><userinput ixia_locid="48">system host-lock controller-1</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N1004C_N10033_N10023_N10001" ixia_locid="49">
+                <cmd ixia_locid="50">Use the <cmdname ixia_locid="90">system host-if-modify</cmdname> command to
+                    specify the interface and the new MTU value on the standby controller.</cmd>
+                <info ixia_locid="91">
+                    <p ixia_locid="92">This example assumes the OAM interface uses <nameliteral ixia_locid="93">eth6</nameliteral>. </p>
+                </info>
+                <stepxmp ixia_locid="51">
+                    <codeblock ixia_locid="52"><systemoutput ixia_locid="53">~(keystone_admin)$ </systemoutput><userinput ixia_locid="54">system host-if-modify controller-1 eth6 --imtu 1600</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10063_N10033_N10023_N10001" ixia_locid="56">
+                <cmd ixia_locid="57">Unlock the standby controller.</cmd>
+                <stepxmp ixia_locid="96">
+                    <codeblock ixia_locid="59"><systemoutput ixia_locid="60">~(keystone_admin)$ </systemoutput><userinput ixia_locid="61">system host-unlock controller-1</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10079_N10033_N10023_N10001" ixia_locid="62">
+                <cmd ixia_locid="63">Swact the controllers. </cmd>
+                <stepxmp ixia_locid="64">
+                    <codeblock ixia_locid="65"><systemoutput ixia_locid="66">~(keystone_admin)$ </systemoutput><userinput ixia_locid="67">system host-swact controller-1</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N1008F_N10033_N10023_N10001" ixia_locid="68">
+                <cmd ixia_locid="69">Lock the new standby controller.</cmd>
+                <stepxmp ixia_locid="70">
+                    <codeblock ixia_locid="71"><systemoutput ixia_locid="72">~(keystone_admin)$ </systemoutput><userinput ixia_locid="73">system host-lock controller-0</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100A5_N10033_N10023_N10001" ixia_locid="74">
+                <cmd ixia_locid="75">Modify the MTU of the corresponding interface on the standby
+                    controller.</cmd>
+                <stepxmp ixia_locid="76">
+                    <codeblock ixia_locid="77"><systemoutput ixia_locid="78">~(keystone_admin)$ </systemoutput><userinput ixia_locid="55">system host-if-modify controller-0 eth6 --imtu 1600</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100BC_N10033_N10023_N10001" ixia_locid="79">
+                <cmd ixia_locid="80">Unlock the standby controller. </cmd>
+                <stepxmp ixia_locid="81">
+                    <codeblock ixia_locid="82"><systemoutput ixia_locid="83">~(keystone_admin)$ </systemoutput><userinput ixia_locid="84">system host-unlock controller-0</userinput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

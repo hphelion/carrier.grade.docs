@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1404333830215" xml:lang="en-us">
+    <!-- Modification History
+2014-06-27 Additional Information section to mention REAME files etc. (proposed)
+
+ -->
+    <title ixia_locid="1">Titanium Server Release Overview</title>
+    <shortdesc ixia_locid="2">Wind River Titanium Server is a high-performance, high-availability,
+        cloud operating system that enables telecommunications operators to use
+        Commercial-off-the-shelf (COTS) hardware to manage Virtualized Network Functions (VNF)
+        within a carrier grade Network Function Virtualization (NFV) architecture.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+        <author ixia_locid="4">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="52">Titanium Server brings together the flexibility and scalability of the IT
+            cloud, and the high-availability and performance demanded by the Telecommunications
+            industry, into a unique carrier grade, industry-leading solution to deliver a
+            price-performance ratio well above alternative solutions. Titanium Server is aligned
+            with the ETSI-NFV architecture</p>
+        <p ixia_locid="7">For more information on using Titanium Server, see <cite ixia_locid="265">Titanium Server Installation</cite> for your system, and <cite ixia_locid="9">Titanium Server System Administration</cite>. For information on using the Titanium
+            Server Developer API, including API definitions and usage descriptions, see the Titanium
+            Server SDK in the file <filepath ixia_locid="54">Titanium-Server-SDK.tgz</filepath>.</p>
+        <section id="section_N100F5_N10024_N10001" ixia_locid="56">
+            <title ixia_locid="57">Supported System Configuration</title>
+            <p ixia_locid="37">Titanium Server has been verified to work using the following system
+                configuration:</p>
+            <ul id="ul_drv_fjf_4n">
+                <li ixia_locid="38">
+                    <p ixia_locid="39">two (2) controllers </p>
+                </li>
+                <li ixia_locid="210">
+                    <p ixia_locid="211">up to eight (8) storage nodes</p>
+                    <ul id="ul_pdg_twc_w5">
+                        <li ixia_locid="212">
+                            <p ixia_locid="213">up to eight OSDs per storage node</p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="42">
+                    <p ixia_locid="43">up to 100 compute nodes with dual Intel(R) Xeon(R) CPUs</p>
+                    <note id="note_N10140_N10137_N1011F_N10110_N10024_N10001" ixia_locid="110">
+                        <p ixia_locid="108">For predictable performance, it is recommended to
+                            disable hyper-threading in the BIOS of all nodes in the cluster</p>
+                    </note>
+                </li>
+                <li ixia_locid="83">
+                    <p ixia_locid="87">up to 1000 virtual machine instances (10 VMs per compute node
+                        on average; max 20 VMs per compute node)</p>
+                </li>
+                <li ixia_locid="91">
+                    <p ixia_locid="93">maximum eight vNICs per guest</p>
+                </li>
+            </ul>
+            <ul id="ul_pk2_vmb_w5">
+                <li ixia_locid="234">
+                    <p ixia_locid="235">The following has been validated for parallel VM launches. For more
+                        information, refer to the <cite ixia_locid="236">Titanium Server System Engineering
+                            Guidelines</cite>.</p>
+                    <ul id="ul_mm2_vmb_w5">
+                        <li ixia_locid="237">
+                            <p ixia_locid="238">Up to 80 VMs using local storage over 10 compute nodes.</p>
+                        </li>
+                        <li ixia_locid="239">
+                            <p ixia_locid="240">Up to 40 VMs using Cinder volumes backed by the storage node. A
+                                single raw cached image used.</p>
+                        </li>
+                        <li ixia_locid="241">
+                            <p ixia_locid="242">Up to 10 VMs using Cinder volumes backed by the controller cinder
+                                backend.</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <p ixia_locid="112">For information about the minimum system requirements for Titanium
+                Server, refer to <cite ixia_locid="266">Titanium Server Installation</cite> for your
+                system.</p>
+        </section>
+        <section id="section_N1013C_N10024_N10001" ixia_locid="60">
+            <title ixia_locid="61">Supported Guest OSs</title>
+            <p ixia_locid="62"><draft-comment author="jowens" ixia_locid="243">CGTS-4256 updated with Ubuntu 14.04,
+                    CentOS 7, RHEL 7.2, OpenSUSE 11.3</draft-comment>The following Guest OSs are
+                supported by Titanium Server:</p>
+            <ul id="ul_wvt_3tb_gs">
+                <li ixia_locid="97">
+                    <p ixia_locid="98">Wind River Linux 5.0</p>
+                </li>
+                <li ixia_locid="95">
+                    <p ixia_locid="96">Wind River Linux 6.0</p>
+                </li>
+                <li ixia_locid="244">
+                    <p ixia_locid="245">CentOS 6.4</p>
+                </li>
+                <li ixia_locid="246">
+                    <p ixia_locid="247">CentOS 7</p>
+                </li>
+                <li ixia_locid="248">
+                    <p ixia_locid="249">RHEL 6.5</p>
+                </li>
+                <li ixia_locid="250">
+                    <p ixia_locid="251">RHEL 7.2</p>
+                </li>
+                <li ixia_locid="252">
+                    <p ixia_locid="253">OpenSUSE 11.3</p>
+                </li>
+                <li ixia_locid="254">
+                    <p ixia_locid="255">OpenSUSE 12.3</p>
+                </li>
+                <li ixia_locid="256">
+                    <p ixia_locid="257">Ubuntu 14.04</p>
+                </li>
+            </ul>
+            <p ixia_locid="109">Requirements for specific guest OSs are included in the SDK README files.</p>
+        </section>
+        <!-- section id="section_N1013A_N10024_N10001" ixia_locid="58">
+            <title ixia_locid="59">Performance Considerations</title>
+            <p ixia_locid="50">The nature of the guest applications, their processing and storage
+                demands, and other configuration factors can affect the overall performance of the
+                Titanium Server cluster.</p>
+        </section -->
+        <section id="section_N10164_N10024_N10001" ixia_locid="258">
+            <title ixia_locid="259">Supported SDN Controllers</title>
+            <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="6">US84057
+                    placeholder</draft-comment>For demonstration purposes, Titanium Server currently
+                supports integration with the OpenDaylight SDN controller running the Beryllium
+                release.</p>
+        </section>
+        <section id="section_N1028F_N10024_N10001" ixia_locid="156">
+            <title ixia_locid="157">Security Recommendations</title>
+            <ul id="ul_r4y_qjw_4t">
+                <li ixia_locid="158">
+                    <p ixia_locid="159">The HTTPS X.509 certificate that Titanium Server uses for
+                        authentication is not signed by a known authority. For increased security,
+                        obtain, install, and use a certificate that has been signed by a certificate
+                        authority.</p>
+                </li>
+                <!-- li ixia_locid="160">
+                    <p ixia_locid="161">By default, Titanium Server supports medium (key length
+                        56&#8211;112 bit) and weak (RC4) SSL encryption. For increased security, configure
+                        Titanium Server to use strong encryption exclusively.</p>
+                </li -->
+            </ul>
+        </section>
+        <section id="section_N1014B_N10024_N10001" ixia_locid="215">
+            <title ixia_locid="216">Upgrade Notes</title>
+            <p ixia_locid="261">In-service upgrades are supported from Titanium Server R2 / 15.12 to
+                Titanium Server R3 / 16.10.</p>
+            <note id="note_N101A1_N10192_N10024_N10001" ixia_locid="262">
+                <p ixia_locid="263">To upgrade to R3 / 16.10, you must be at R2 / 15.12 Patch 20 or higher.</p>
+            </note>
+            <p ixia_locid="264">For more information, refer to <cite ixia_locid="260">Titanium
+                    Server Software Management</cite>.</p>
+        </section>
+    </conbody>
+</concept-wr>

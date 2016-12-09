@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="leh1463606429329" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Networks for a Standard System with Dedicated Storage</title>
+ <shortdesc ixia_locid="2">For a system that uses dedicated storage, Wind River recommends a full
+  network configuration.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">Titanium Server systems with dedicated storage include storage hosts to provide
+   Ceph-backed block storage. Network loading is moderate to high, depending on the number of
+   compute hosts, VMs, and storage clusters. The following network configuration typically meets the
+   requirements of such a system:</p>
+  <ul id="ul_j2d_thb_1w">
+   <li ixia_locid="5">
+    <p ixia_locid="6">An internal management network</p>
+   </li>
+   <li ixia_locid="7">
+    <p ixia_locid="8">An infrastructure network (required for systems with storage hosts)</p>
+   </li>
+   <li ixia_locid="9">
+    <p ixia_locid="10">An OAM network</p>
+   </li>
+   <li ixia_locid="11">
+    <p ixia_locid="12">One or more data networks</p>
+   </li>
+   <li ixia_locid="13">
+    <p ixia_locid="14">An optional PXE boot network</p>
+    <ul id="ul_j3d_w1r_kx">
+     <li ixia_locid="23">
+      <p ixia_locid="24">if the internal management network is required to be on a VLAN-tagged network</p>
+     </li>
+     <li ixia_locid="25">
+      <p ixia_locid="26">or, if the internal management network is shared with other equipment</p>
+     </li>
+    </ul>
+   </li>
+  </ul>
+  <p ixia_locid="15">On moderately loaded systems, the OAM and data networks can be consolidated on the management
+   or infrastructure interfaces.</p>
+  <note id="note_N10063_N1001F_N10001" ixia_locid="16">
+   <p ixia_locid="17">You can enable secure HTTPS connectivity on the OAM network during system
+    installation. For more information, see <ph ixia_locid="18" otherprops="printonly"><cite ixia_locid="19">Titanium Server System Administration: </cite>
+    </ph><cite ixia_locid="20"><ph ixia_locid="21"><xref href="mnh1464027762153.xml" ixia_locid="22"/>.</ph></cite></p>
+  </note>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="haq1461247495162" xml:lang="en-us">
+<!--Modification History        
+2016-04-21 created clone for 16.x -->
+    <title ixia_locid="234">Identifying the Software Version and Patch Level Using the CLI</title>
+    <shortdesc ixia_locid="235">You can view the the current software version and patch level from
+        the CLI. The system  type is also shown.</shortdesc>
+    <prolog>
+        <author ixia_locid="236">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="237">
+            <p ixia_locid="238">To find the software version from the CLI, use the <cmdname ixia_locid="239">system show</cmdname> command.
+                <codeblock ixia_locid="240"><systemoutput ixia_locid="241">~(keystone_admin)$ </systemoutput><userinput ixia_locid="242">system show</userinput>
+<systemoutput ixia_locid="243">+------------------+--------------------------------------+
+| Property         | Value                                |
++------------------+--------------------------------------+
+| name             | 57409bbc-c85c-4dbf-9eeb-49ee925c4cdf |
+| system_type      | Standard                             |
+| description      | None                                 |
+| location         | None                                 |
+| contact          | None                                 |
+| software_version | 16.00                                |
+| uuid             | c6977e1e-49da-4ed2-8c3d-7ec201d45613 |
+| created_at       | 2016-04-13T21:30:38.042086+00:00     |
+| updated_at       | 2016-04-13T21:30:40.429541+00:00     |
++------------------+--------------------------------------+
+</systemoutput></codeblock></p>
+            <p ixia_locid="268">To list applied patches from the CLI, use the <cmdname ixia_locid="245">sw-patch query</cmdname> command. </p>
+            <codeblock ixia_locid="269"><systemoutput ixia_locid="270">~(keystone_admin)$</systemoutput> <userinput ixia_locid="271">sudo sw-patch query</userinput>
+
+<systemoutput ixia_locid="272">   Patch ID                Release  Patch State
+=========================  =======  ===========
+SAMPLE_PATCH_15.06_a       15.12     Available</systemoutput>
+</codeblock>
+            <p ixia_locid="273">For more about working with patches, see <xref href="psa1410446455735.xml" ixia_locid="246"/></p>
+        </context>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jsh1473342213278" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="301">Configuring VLAN Interfaces Using the CLI</title>
+    <shortdesc ixia_locid="302">You can use the CLI to attach VLAN interfaces to
+        networks.</shortdesc>
+    <prolog>
+        <author ixia_locid="303">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001D_N1001A_N10001" ixia_locid="304">
+            <p ixia_locid="163">To create a VLAN interface and attach it to a network, use a command
+                of the following form:</p>
+            <codeblock ixia_locid="164"><systemoutput ixia_locid="166">~(keystone_admin)$ </systemoutput><userinput ixia_locid="168">system host-if-add <varname ixia_locid="170">hostname</varname> -V <varname ixia_locid="171">vlan_id</varname> \
+-nt <varname ixia_locid="172">networktype</varname> <varname ixia_locid="173">ifname</varname> <varname ixia_locid="175">ethname</varname> [-p <varname ixia_locid="257">providernetworklist</varname>]</userinput>
+</codeblock>
+            <p ixia_locid="176">where</p>
+            <parml>
+                <plentry ixia_locid="177">
+                    <pt ixia_locid="178">ifname</pt>
+                    <pd ixia_locid="179">
+                        <p ixia_locid="180">is a name for the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="181">
+                    <pt ixia_locid="182">vlan_id</pt>
+                    <pd ixia_locid="183">
+                        <p ixia_locid="184">is the VLAN identifier for the network</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="185">
+                    <pt ixia_locid="186">hostname</pt>
+                    <pd ixia_locid="187">
+                        <p ixia_locid="188">is the name or UUID of the host</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="189">
+                    <pt ixia_locid="190">networktype</pt>
+                    <pd ixia_locid="191">
+                        <p ixia_locid="192">is the type of network to attach to</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="193">
+                    <pt ixia_locid="194">ethname</pt>
+                    <pd ixia_locid="195">
+                        <p ixia_locid="196">is the name or UUID of the Ethernet interface to use</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="259">
+                    <pt ixia_locid="261">providernetworklist</pt>
+                    <pd ixia_locid="263">
+                        <p ixia_locid="265">is a list of provider networks, delimited by quotes and
+                            separated by spaces; for example, "provider-net-a provider-net-b". To
+                            specify a single provider network, omit the quotes. This parameter is
+                            required only if the <varname ixia_locid="270">networktype</varname> is
+                            set to <option ixia_locid="271">data</option>.</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="197">For example, to attach a VLAN interface named <nameliteral ixia_locid="198">infra0</nameliteral> with VLAN ID <nameliteral ixia_locid="199">22</nameliteral> to the infrastructure network, using Ethernet interface
+                    <nameliteral ixia_locid="200">enp0s8</nameliteral> on <nameliteral ixia_locid="201">storage-0</nameliteral>:</p>
+            <codeblock ixia_locid="165"><systemoutput ixia_locid="167">~(keystone_admin)$ </systemoutput><userinput ixia_locid="169">system host-if-add storage-0 -V 22 -nt infra infra0 vlan enp0s8</userinput>
+<systemoutput ixia_locid="300">+------------------+----------------------------------------+
+| Property         | Value                                  |
++------------------+----------------------------------------+
+| ifname           | infra0                                 |
+| networktype      | infra                                  |
+| iftype           | vlan                                   |
+| ports            | []                                     |
+| providernetworks | None                                   |
+| imac             | 08:00:27:f2:0d:68                      |
+| imtu             | 1500                                   |
+| aemode           | None                                   |
+| schedpolicy      | None                                   |
+| txhashpolicy     | None                                   |
+| uuid             | 8ca9854e-a18e-4a3c-8afe-f050da702fdf   |
+| ihost_uuid       | 3d207384-7d30-4bc0-affe-d68ab6a00a5b   |
+| vlan_id          | 22                                     |
+| uses             | [u'enp0s8']                            |
+| used_by          | []                                     |
+| created_at       | 2015-02-04T16:23:28.917084+00:00       |
+| updated_at       | None                                   |
++------------------+----------------------------------------+
+</systemoutput></codeblock>
+            <p ixia_locid="202">where</p>
+            <parml>
+                <plentry ixia_locid="203">
+                    <pt ixia_locid="204">ifname</pt>
+                    <pd ixia_locid="205">
+                        <p ixia_locid="206">is a name for the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="207">
+                    <pt ixia_locid="208">mtu</pt>
+                    <pd ixia_locid="209">
+                        <p ixia_locid="210">is the MTU for the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="211">
+                    <pt ixia_locid="212">aemode</pt>
+                    <pd ixia_locid="213">
+                        <p ixia_locid="214">is the link aggregation mode</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="215">
+                    <pt ixia_locid="216">policy</pt>
+                    <pd ixia_locid="217">
+                        <p ixia_locid="218">is the balanced tx distribution hash policy</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="219">
+                    <pt ixia_locid="220">hostname</pt>
+                    <pd ixia_locid="221">
+                        <p ixia_locid="222">is the name or UUID of the host</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="223">
+                    <pt ixia_locid="224">ethname1, ethname2</pt>
+                    <pd ixia_locid="225">
+                        <p ixia_locid="226">are the names or UUIDs of the member interfaces</p>
+                    </pd>
+                </plentry>
+            </parml>
+        </context>
+    </taskbody>
+</task-wr>

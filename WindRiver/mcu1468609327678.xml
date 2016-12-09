@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="mcu1468609327678" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="174">PCI SR-IOV Ethernet Interface Devices</title>
+ <shortdesc ixia_locid="175">A SR-IOV Ethernet interface is a physical PCI Ethernet NIC that implements
+  hardware-based virtualization mechanisms to expose multiple virtual network interfaces that can be
+  used by one or more virtual machines simultaneously.</shortdesc>
+ <prolog>
+  <author ixia_locid="176">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="5">The PCI-SIG Single Root I/O Virtualization and Sharing (SR-IOV) specification
+   defines a standardized mechanism to create individual virtual Ethernet devices from a single
+   physical Ethernet interface. For each exposed virtual Ethernet device, formally referred to as a
+    <term ixia_locid="116">Virtual Function</term> (VF), the SR-IOV interface provides separate
+   management memory space, work queues, interrupts resources, and DMA streams, while utilizing
+   common resources behind the host interface. Each VF therefore has direct access to the hardware
+   and can be considered to be an independent Ethernet interface.</p>
+  <p ixia_locid="118">When compared with a PCI Passthtrough Ethernet interface, a SR-IOV Ethernet
+   interface:</p>
+  <ul id="ul_tyq_ymg_rr">
+   <li ixia_locid="120">
+    <p ixia_locid="122">Provides benefits similar to those of a PCI Passthtrough Ethernet interface,
+     including lower latency packet processing.</p>
+   </li>
+   <li ixia_locid="124">
+    <p ixia_locid="126">Scales up more easily in a virtualized environment by providing multiple VFs
+     that can be attached to multiple virtual machine interfaces.</p>
+   </li>
+   <li ixia_locid="128">
+    <p ixia_locid="130">Shares the same limitations, including the lack of support for LAG, QoS,
+     ACL, and live migration.</p>
+   </li>
+   <li ixia_locid="30">
+    <p ixia_locid="132">Has the same requirements regarding the VLAN configuration of the access
+     switches.</p>
+   </li>
+   <li ixia_locid="134">
+    <p ixia_locid="29">Provides a similar configuration workflow when used on Titanium Server.</p>
+   </li>
+  </ul>
+  <p ixia_locid="136">It is suggested that you read <xref href="psa1413402160578.xml" ixia_locid="138"/> first. Most configuration steps are similar, with the difference that you use
+    <nameliteral ixia_locid="140">pci-sriov</nameliteral> instead of <nameliteral ixia_locid="141">pci-passthrough</nameliteral> when defining the network type of an interface.</p>
+  <p ixia_locid="168"><draft-comment author="jowens" ixia_locid="173">US64378 "interface" was
+    "device"</draft-comment>To review the current PCI passthrough and SR-IOV interface assignments
+    for a given provider network, see <ph ixia_locid="177" otherprops="printonly"><cite ixia_locid="178">Titanium Server System Administration: </cite></ph><cite ixia_locid="179"><ph ixia_locid="180"><xref href="jow1439301559036.xml" ixia_locid="181"/></ph></cite>.</p>
+  <p ixia_locid="142">In the following example a new virtual machine is launched by user
+    <nameliteral ixia_locid="17">user1</nameliteral> on tenant <nameliteral ixia_locid="18">tenant1</nameliteral>, with a VF interface connected to the tenant network <nameliteral ixia_locid="19">tenant1-net1</nameliteral> identified with VLAN ID 20.</p>
+ </conbody>
+</concept-wr>

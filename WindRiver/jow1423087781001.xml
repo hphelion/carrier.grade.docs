@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1423087781001" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Host Memory Provisioning</title>
+ <shortdesc ixia_locid="2">For each NUMA node on a host, you can adjust the amount of memory
+  reserved for platform use, and the size and number of memory pages allocated for use by
+  VMs.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+  <author ixia_locid="19">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="18">Memory not reserved for platform use is made available as VM memory. By
+   default, the VM memory is partitioned using 2 MiB huge pages. You can change this for individual
+   NUMA nodes to use a combination of 2 MiB, and 1 GiB huge pages. Using larger pages can reduce
+   page management overhead and improve system performance for systems with large amounts of virtual
+   memory and many running instances.</p>
+  <p ixia_locid="5">You can use the <cmdname ixia_locid="6">system host-memory-list</cmdname> and
+    <cmdname ixia_locid="7">system host-memory-show</cmdname> commands to see how much memory is
+   available for VMs. This information is also shown on the <uicontrol ixia_locid="14">Memory</uicontrol> tab of the <wintitle ixia_locid="15">Host Inventory</wintitle> page (see
+    <xref href="jow1404333795559.xml" ixia_locid="16"/>). </p>
+  <p ixia_locid="11">After setting the memory allocations for a host, you can save them as a <term ixia_locid="12">memory profile</term>, and then apply the profile to other hosts. For more
+      information, see <ph ixia_locid="188" otherprops="printonly"><cite ixia_locid="186">Titanium Server
+          Installation: </cite></ph><cite ixia_locid="189"><ph ixia_locid="190"><xref href="jow1404333787693.xml" ixia_locid="107"/></ph></cite>.</p>
+  <p ixia_locid="9">For individual VMs, you can specify which page size to use. For more
+   information, see <ph ixia_locid="182" otherprops="printonly"><cite ixia_locid="187">Titanium
+     Server Cloud Administration:</cite>
+   </ph><cite ixia_locid="184"><ph ixia_locid="185"><xref href="jow1424723681500.xml" ixia_locid="181"/></ph></cite>.</p>
+ </conbody>
+</concept-wr>

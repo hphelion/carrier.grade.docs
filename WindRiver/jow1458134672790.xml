@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1458134672790" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Resynchronizing a Host to the NTP Server</title>
+    <shortdesc ixia_locid="2">If host synchronization is lost for any reason, you must lock and then
+        unlock the host to restore the synchronization safely. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="6">CGTS-3867 topic added</draft-comment>If a large time
+                discrepancy (greater than 1000 seconds, or about 17 minutes) develops between the
+                clock time on a host and the time as reported by an NTP server, the
+                    <nameliteral ixia_locid="7">ntpd</nameliteral> service on the host stops, and Alarm 200.006
+                (&lt;hostname&gt; 'ntpd' process has failed) is logged in the Alarm Log and the
+                Customer Log. This can occur if the clock on the host is inadvertently set
+                incorrectly, or cannot access the NTP server for the correct time at initialization
+                and defaults to an incorrect time. </p>
+            <p ixia_locid="8">To recover, lock and then unlock the host. The time is automatically synchronized to
+                the NTP server when the host is unlocked.</p>
+            <note id="note_N10035_N1001F_N1001C_N10001" ixia_locid="9" type="caution">
+                <p ixia_locid="10">Do not attempt to recover by restarting the <nameliteral ixia_locid="11">ntpd</nameliteral>
+                    service. This can cause problems for other running services.</p>
+            </note>
+        </context>
+    </taskbody>
+</task-wr>

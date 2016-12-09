@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="nuc1473788478754" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Restrictions for Systems Using SDN</title>
+ <shortdesc ixia_locid="2">The use of software-defined networking for Layer 3 adds some restrictions
+  for Titanium Server host and network configurations. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="54"><draft-comment author="jowens" ixia_locid="5">US84057 new
+   topic</draft-comment>You can optionally enable Layer 3 management when you configure an SDN
+   controller. On systems where Layer 3 management is enabled, some restrictions apply.</p>
+  <section id="section_N1002E_N1001F_N10001" ixia_locid="55">
+   <title ixia_locid="56">Restrictions for Provider Network Configuration</title>
+   <ul id="ul_ldr_mz4_hx">
+    <li ixia_locid="57">
+     <p ixia_locid="58">Provider networks used to implement the external tenant network must be of type
+       <nameliteral ixia_locid="59">flat</nameliteral>.</p>
+    </li>
+    <li ixia_locid="60">
+     <p ixia_locid="61">Provider networks used to implement internal tenant networks must be of type
+       <nameliteral ixia_locid="62">vxlan</nameliteral>.</p>
+    </li>
+    <li ixia_locid="64">
+     <p ixia_locid="65">Only IPv4 backed VxLAN networks are supported. The system must not be
+      configured with IPv6 addressing when SDN networking is enabled.</p>
+    </li>
+    <li ixia_locid="66">
+     <p ixia_locid="67">Additional VxLAN attributes such as TTL, multicast group-address, and
+      port-number are ignored when SDN networking is enabled.</p>
+    </li>
+   </ul>
+  </section>
+  <section id="section_N10029_N1001C_N10001" ixia_locid="6">
+   <title ixia_locid="52">Restrictions for Host Configuration</title>
+   <ul id="ul_sdq_km1_hx">
+    <li ixia_locid="53">
+     <p ixia_locid="9">Each compute host must be configured with exactly one interface with a
+      network type of data-external.</p>
+     <p ixia_locid="10">The data-external interface can be configured against an Ethernet, AE or VLAN interface.</p>
+     <p ixia_locid="11">The data-external interface must be configured with a flat provider network.</p>
+    </li>
+    <li ixia_locid="12">
+     <p ixia_locid="13"> Interfaces with a network type of data can only be assigned a single IP address for the
+      purpose of VxLAN termination.</p>
+    </li>
+    <li ixia_locid="14">
+     <p ixia_locid="15">The data and data-external interfaces cannot be combined with any other
+      interface network type.</p>
+    </li>
+   </ul>
+  </section>
+  <section id="section_N10067_N1001C_N10001" ixia_locid="20">
+   <title ixia_locid="21">Restrictions for Network Configuration</title>
+   <ul id="ul_sjj_bn1_hx">
+    <li ixia_locid="22">
+     <p ixia_locid="23">DVR routers are not supported. This capability is inherent in the SDN layer 3 distributed
+      deployment model.</p>
+    </li>
+    <li ixia_locid="24">
+     <p ixia_locid="25">The metadata service is not accessible using the metadata HTTP proxy. To obtain metadata,
+      guests must be launched with the config-drive option. </p>
+    </li>
+    <li ixia_locid="28">
+     <p ixia_locid="29">VLAN transparent networks are not supported.</p>
+    </li>
+    <li ixia_locid="30">
+     <p ixia_locid="31">IPv6 is not supported.</p>
+    </li>
+    <li ixia_locid="32">
+     <p ixia_locid="33">For north-south routing, VMs must use floating IP addresses</p>
+    </li>
+    <li ixia_locid="34">
+     <p ixia_locid="35">For north-south routing, SNAT is not supported</p>
+    </li>
+    <li ixia_locid="36">
+     <p ixia_locid="37">Physical devices attached to a tenant network are accessible only if they
+      are managed by OpenStack or the SDN controller.</p>
+    </li>
+    <li ixia_locid="38">
+     <p ixia_locid="39">The following Titanium Server network extensions are not supported, since
+      they are not recognized by the OpenDaylight SDN controller:</p>
+     <ul id="ul_v3m_kn1_hx">
+      <li ixia_locid="40">
+       <p ixia_locid="41">QoS network policies</p>
+      </li>
+      <li ixia_locid="42">
+       <p ixia_locid="43">DNAT</p>
+      </li>
+      <li ixia_locid="44">
+       <p ixia_locid="45">Guest VLAN subnets</p>
+      </li>
+      <li ixia_locid="46">
+       <p ixia_locid="47">CPU scaling (due to a dependency on the metadata service)</p>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </section>
+ </conbody>
+</concept-wr>

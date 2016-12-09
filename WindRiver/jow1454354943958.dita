@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454354943958" xml:lang="en-us"><title ixia_locid="1">vSwitch Dimensioning: Throughput Benchmarks</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="87">The following diagram shows the test setup for the AVS throughput benchmarks for a
+            single guest VM. The test setup is an end-to-end test with bidirectional traffic through
+            the VM. </p>
+        <p ixia_locid="88">The following test configurations were used to measure the different VIF
+            models using two different guest NIC drivers performing Layer 2 switching. For details
+            of the different VIF models, see <xref href="jow1454354938702.dita" ixia_locid="89"/>.
+            In this test, vhost-user is automatically enabled as the virtio backend.</p>
+        <p ixia_locid="90">Test Configurations:</p>
+        <dl>
+            <dlentry ixia_locid="91">
+                <dt ixia_locid="92"><nameliteral ixia_locid="93">virtio-kernel</nameliteral></dt>
+                <dd ixia_locid="94">
+                    <p ixia_locid="95">virtio vif model with kernel layer2 bridging in the guest</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="96">
+                <dt ixia_locid="97"><nameliteral ixia_locid="98">avp-kernel</nameliteral></dt>
+                <dd ixia_locid="99">
+                    <p ixia_locid="100">avp vif model with kernel layer2 bridging in the guest</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="101">
+                <dt ixia_locid="102"><nameliteral ixia_locid="103">virtio-dpdk</nameliteral></dt>
+                <dd ixia_locid="104">
+                    <p ixia_locid="105">virtio vif model with DPDK based layer2 switching in the
+                        guest</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="106">
+                <dt ixia_locid="107"><nameliteral ixia_locid="108">avp-dpdk</nameliteral></dt>
+                <dd ixia_locid="109">
+                    <p ixia_locid="110">avp vif model with DPDK based layer2 switching in the
+                        guest</p>
+                </dd>
+            </dlentry>
+        </dl><fig id="fig_N10018_N10013_N10001" ixia_locid="111"><title ixia_locid="112">Guest Throughput Benchmark Test Configuration</title>
+            <image href="jow1454354942042.image" id="image_ghr_frc_w5" ixia_locid="113">
+                <alt ixia_locid="114">media/image1.png</alt>
+            </image></fig>
+        <section id="section_N1008C_N10016_N10001" ixia_locid="115">
+            <title ixia_locid="116">vSwitch Dimensioning: Test Details</title>
+            <p ixia_locid="117">The following description and chart captures the data throughput for
+                differing packet sizes using the AVS configuration configured against a single NUMA
+                node.</p>
+            <ul id="ul_upb_krc_w5">
+                <li ixia_locid="39">
+                    <p ixia_locid="40">System</p>
+                    <ul id="ul_jrl_kbr_wx">
+                        <li ixia_locid="41">
+                            <p ixia_locid="42">Manufacturer: Intel Corporation</p>
+                        </li>
+                        <li ixia_locid="43">
+                            <p ixia_locid="44">Product Name: S2600WT2R </p>
+                        </li>
+                        <li ixia_locid="45">
+                            <p ixia_locid="46">Version: H21573-366</p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="47">
+                    <p ixia_locid="48"> BIOS</p>
+                    <ul id="ul_eb2_rbr_wx">
+                        <li ixia_locid="49">
+                            <p ixia_locid="50">Vendor: Intel Corporation</p>
+                        </li>
+                        <li ixia_locid="51">
+                            <p ixia_locid="52">Version: SE5C610.86B.01.01.0016.033120161139</p>
+                        </li>
+                        <li ixia_locid="53">
+                            <p ixia_locid="54">Release Date: 03/31/2016</p>
+                        </li>
+                        <li ixia_locid="55">
+                            <p ixia_locid="56">Settings</p>
+                            <ul id="ul_o4h_1cr_wx">
+                                <li ixia_locid="57">
+                                    <p ixia_locid="58">Processor Configuration</p>
+                                    <ul id="ul_vlz_bcr_wx">
+                                        <li ixia_locid="59">
+                                            <p ixia_locid="60">: Hyper-Threading = Disabled </p>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li ixia_locid="61">
+                                    <p ixia_locid="62">Power &amp; Performance</p>
+                                    <ul id="ul_blp_2cr_wx">
+                                        <li ixia_locid="63">
+                                            <p ixia_locid="64">Policy = Performance </p>
+                                        </li>
+                                        <li ixia_locid="65">
+                                            <p ixia_locid="66">Workload = Balanced </p>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li ixia_locid="67">
+                                    <p ixia_locid="68">P-States</p>
+                                    <ul id="ul_fgy_jcr_wx">
+                                        <li ixia_locid="69">
+                                            <p ixia_locid="70">SpeedStep = Enabled </p>
+                                        </li>
+                                        <li ixia_locid="71">
+                                            <p ixia_locid="72">Turbo Boost = Enabled </p>
+                                        </li>
+                                        <li ixia_locid="73">
+                                            <p ixia_locid="74">Energy Efficient Turbo = Disabled
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li ixia_locid="75">
+                                    <p ixia_locid="76">C-States </p>
+                                    <ul id="ul_g2m_ncr_wx">
+                                        <li ixia_locid="77">
+                                            <p ixia_locid="78">CPU C-State = Disabled </p>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li ixia_locid="79">
+                                    <p ixia_locid="80">Acoustic and Performance </p>
+                                    <ul id="ul_np4_pcr_wx">
+                                        <li ixia_locid="81">
+                                            <p ixia_locid="82">Fan Profile = Performance</p>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="118">
+                    <p ixia_locid="119">CPU</p>
+                    <ul id="ul_py4_prc_w5">
+                        <li ixia_locid="120">
+                            <p ixia_locid="121">Intel(R) Xeon(R) CPU E5-2690 v4 @ 2.60GHz</p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="122">
+                    <p ixia_locid="123">RAM</p>
+                    <ul id="ul_lrl_rrc_w5">
+                        <li ixia_locid="10">
+                            <p ixia_locid="11">DDR4 @ 2133 MHz - 4 channels</p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="12">
+                    <p ixia_locid="13">Physical ports</p>
+                    <ul id="ul_vty_rrc_w5">
+                        <li ixia_locid="14">
+                            <p ixia_locid="15">2 Intel Corporation 82599ES 10-Gigabit Devices </p>
+                        </li>
+                        <li ixia_locid="83">
+                            <p ixia_locid="84">1 physical port per NIC per PCI slot </p>
+                        </li>
+                        <li ixia_locid="85">
+                            <p ixia_locid="86">PCI Express 3 8-lane slots</p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="16">
+                    <p ixia_locid="17">VM</p>
+                    <ul id="ul_jbn_src_w5">
+                        <li ixia_locid="18">
+                            <p ixia_locid="19">2 vCPUs performing L2 switching</p>
+                        </li>
+                        <li ixia_locid="20">
+                            <p ixia_locid="21">VM and AVS collocated on NUMA socket 0</p>
+                        </li>
+                        <li ixia_locid="22">
+                            <p ixia_locid="23">VM backed by 2M huge pages in host</p>
+                        </li>
+                        <li ixia_locid="24">
+                            <p ixia_locid="25">Two vSwitch cores measured</p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="26">
+                    <p ixia_locid="27">IXIA Test</p>
+                    <ul id="ul_d5p_src_w5">
+                        <li ixia_locid="28">
+                            <p ixia_locid="29">RFC2544 Bi-directional traffic @ 0.01% loss
+                                tolerance</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <fig id="fig_N1009B_N10013_N10001" ixia_locid="30">
+                <title ixia_locid="31">AVS throughput - % 20Gbe</title>
+                <image href="jow1454354944498.image" id="image_rvw_3rc_w5" ixia_locid="32">
+                    <alt ixia_locid="33">media/image2.png</alt>
+                </image>
+            </fig>
+            <fig id="fig_x5d_4ww_cy" ixia_locid="124">
+                <title ixia_locid="127">AVS average cut-through latency - IMIX fixed rates</title>
+                <image href="cuv1480544976502.image" id="image_j32_cxw_cy" ixia_locid="125">
+                    <alt ixia_locid="126">AVS Average Cut-through Latency - IMIX Fixed Rates</alt>
+                </image>
+            </fig>
+        </section></conbody></concept-wr>

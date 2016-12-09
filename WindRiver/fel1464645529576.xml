@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="fel1464645529576" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="202">Increasing Storage Space Allotments on the Controller Using the CLI</title>
+ <shortdesc ixia_locid="203">You can use the CLI to view or increase the storage allotments for a
+    controller.</shortdesc>
+ <prolog>
+  <author ixia_locid="204">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="206"><note id="note_N10025_N10022_N1001F_N10001" ixia_locid="209" type="caution">
+        <p ixia_locid="210"><draft-comment author="jowens" ixia_locid="205">US74975 remove material
+            that was also available in new concept topic; CGTS-4411 updated title from "Changing the
+            Storage. . ." to "Increasing the Storage. . .", added caution about decreasing
+            filesystem size</draft-comment>Decreasing the file system size is not supported, and can
+          result in synchronization failures requiring system re-installation. Do not attempt to
+          decrease the size of the file system. </p>
+      </note>Before proceeding, review the prerequisites given for <xref href="ers1464645579505.xml" ixia_locid="207"/>.</p>
+    <p ixia_locid="208">To view the existing storage configuration, use the following command.</p>
+  <codeblock ixia_locid="163"><systemoutput ixia_locid="195">~(keystone_admin)$ </systemoutput><userinput ixia_locid="170">system controllerfs-show</userinput>
+    <systemoutput ixia_locid="196">+---------------------+----------------------------------+
+| Property            | Value                            |
++---------------------+----------------------------------+
+| database_gib        | 10                               |
+| cgcs_gib            | 10                               |
+| backup_gib          | 30                               |
+| img_conversions_gib | 10                               |
+| created_at          | 2016-10-27T20:10:24.307707+00:00 |
+| updated_at          | None                             |
++---------------------+----------------------------------+</systemoutput></codeblock>
+  <p ixia_locid="84">To change an  allotment, use the following command syntax, where the allotments
+      are in GiB.</p>
+  <codeblock ixia_locid="91"><systemoutput ixia_locid="198">~(keystone_admin)$ </systemoutput><userinput ixia_locid="180">system controllerfs-modify \
+database_gib=<varname ixia_locid="95">database_allotment</varname> \
+image_gib=<varname ixia_locid="86">image_allotment</varname> \
+backup_gib=<varname ixia_locid="87">backup_allotment</varname> \
+img_conversions_gib=<varname ixia_locid="211">conversion_space_allotment</varname></userinput></codeblock>
+  <p ixia_locid="139">For example:</p>
+  <codeblock ixia_locid="212"><systemoutput ixia_locid="213">~(keystone_admin)$ </systemoutput><userinput ixia_locid="214">system controllerfs-modify \
+database_gib=10 image_gib=13 backup_gib=22 action=apply</userinput></codeblock>
+    <p ixia_locid="215"><draft-comment author="jowens" ixia_locid="228">CGTS-5828 correct command
+        syntax and use appropriate argument</draft-comment>On a system with controller storage, you
+      can modify the backend using a command similar to the following:</p>
+    <p ixia_locid="216">
+      <codeblock ixia_locid="217"><systemoutput ixia_locid="218">~(keystone_admin)$ </systemoutput><userinput ixia_locid="219">system storage-backend-modify lvm cinder_gib=<varname ixia_locid="220">cinder_storage_allotment</varname></userinput></codeblock>
+    </p>
+    <p ixia_locid="221">On a system with dedicated storage, you can modify the backend using a
+      command similar to the following:</p>
+    <p ixia_locid="222">
+      <codeblock ixia_locid="223"><systemoutput ixia_locid="224">~(keystone_admin)$ </systemoutput><userinput ixia_locid="225">system ceph-mon-modify <varname ixia_locid="226">controller</varname> ceph_mon_gib=<varname ixia_locid="227">ceph_mon_db_allotment</varname></userinput></codeblock>
+    </p>
+  <p ixia_locid="114">After changing the controller storage configuration, you must lock each
+      controller and re-install the Titanium Server software, even if you have already done so as
+      part of changing the controller disks. You can use the following command:</p>
+  <codeblock ixia_locid="109"><systemoutput ixia_locid="200">~(keystone_admin)]$ </systemoutput>system host-reinstall <varname ixia_locid="113">controller_name</varname></codeblock>
+  <p ixia_locid="115">Then you can unlock the controller to clear any <nameliteral ixia_locid="116">Configuration out-of-date </nameliteral>alarms. A controller swact is required to update both
+   controllers.</p>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="eia1465950280738" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Access and Security for Tenant Network Users</title>
+ <shortdesc ixia_locid="2">The Access and Security window provides controls for network protocol and
+  port security, SSH-based access to virtual machines, API access to services, and floating IP
+  address allocations.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">The Security Groups tab enables you to select and apply a security group when launching an
+   instance.</p>
+  <p ixia_locid="5">The Key Pairs tab enables you to select a key pair for the instance. A key pair
+   contains SSH credentials that will be added to the image when you launch it. Key Pairs provide
+   for secure login to guest images.</p>
+  <note id="note_N1002C_N1001F_N10001" ixia_locid="7">
+   <p ixia_locid="8"><draft-comment author="jowens" ixia_locid="9">US80866 added</draft-comment>Key
+    pairs are shown based on the logged-in user, not the selected project. For example, an
+     <nameliteral ixia_locid="10">admin</nameliteral> user examining the project <nameliteral ixia_locid="11">tenant1</nameliteral> cannot see key pairs for users associated
+     with<nameliteral ixia_locid="12"> tenant1</nameliteral>.</p>
+  </note>
+  <p ixia_locid="6">You can use floating IP addresses to expose VMs to an external network.</p>
+ </conbody>
+</concept-wr>

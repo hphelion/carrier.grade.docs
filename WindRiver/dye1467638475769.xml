@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="dye1467638475769" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="212">Adding SSD-backed Journals Using the CLI</title>
+    <shortdesc ixia_locid="213">You can use the command line to define SSD-backed
+        journals.</shortdesc>
+    <prolog>
+        <author ixia_locid="214">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="222">
+            <p ixia_locid="288"><draft-comment author="jowens" ixia_locid="224">US78837 updated for
+                    journals</draft-comment><draft-comment author="jmaran" ixia_locid="174">Changed
+                    this xref from inter-book to local. This topic only appears in the sys admin
+                    guide as does the target topic.</draft-comment>For more about SSD-backed
+                journals, see <xref href="tdw1466190608670.xml" ixia_locid="300"/>. </p>
+            <p ixia_locid="289">To use the Web administration interface, see <xref href="jra1467638430659.xml" ixia_locid="290"/>.</p>
+            <note id="note_N10043_N10022_N1001F_N10001" ixia_locid="171">
+                <p ixia_locid="172"><draft-comment author="jowens" ixia_locid="173">US84106
+                        added</draft-comment>SSD-backed journals cannot be used on a storage host
+                    assigned to the caching tier.</p>
+            </note>
+        </context>
+        <prereq id="prereq_N10039_N1001F_N10001" ixia_locid="227">
+            <p ixia_locid="291">A storage host with a solid-state drive (SSD) is required.</p>
+            <p ixia_locid="292">To create or edit an SSD-backed journal, you must lock the host. The
+                system must have at least two other unlocked hosts with Ceph monitors. (Ceph
+                monitors run on <nameliteral ixia_locid="143">controller-0</nameliteral>,
+                    <nameliteral ixia_locid="144">controller-1</nameliteral>, and <nameliteral ixia_locid="145">storage-0</nameliteral> only).</p>
+        </prereq>
+        <steps>
+            <step id="step_N10025_N10022_N1001F_N10001" ixia_locid="215">
+                <cmd ixia_locid="216">List the available physical disks.</cmd>
+                <info ixia_locid="217">
+                    <codeblock ixia_locid="79"><systemoutput ixia_locid="204">~(keystone_admin)$ </systemoutput><userinput ixia_locid="81">system host-disk-list storage-3</userinput>
+<systemoutput ixia_locid="205">
++-------+-------------+------------+-------------+----------+------+-----------+
+| uuid  | device_node | device_num | device_type | size_mib | rpm  | serial_id |
++-------+-------------+------------+-------------+----------+------+-----------+
+| ba7...| /dev/sda    | 2048       | HDD         | 51200    | Un...| VB7127 .. |
+| e87...| /dev/sdb    | 2064       | HDD         | 10240    | Un...| VB9987... |
+| ae8...| /dev/sdc    | 2080       | SSD         | 8192     | N/A  | VB14d7... |
++-------+-------------+------------+--------------+---------+------+-----------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N10065_N10042_N1001F_N10001" ixia_locid="229">
+                <cmd ixia_locid="230">Create a journal function. </cmd>
+                <info ixia_locid="231">
+                    <p ixia_locid="235">Use the <cmdname ixia_locid="236">system
+                            host-stor-add</cmdname> command:</p>
+                    <codeblock ixia_locid="237"><systemoutput ixia_locid="238">~(keystone_admin)$ </systemoutput><userinput ixia_locid="239">system host-stor-add <varname ixia_locid="240">host_name</varname> journal <varname ixia_locid="241">device_uuid</varname> </userinput></codeblock>
+                    <p ixia_locid="286">where <varname ixia_locid="243">host_name</varname> is the
+                        name of the storage host (for example, storage-3), and <varname ixia_locid="244">device_uuid</varname> identifies an SSD.</p>
+                    <p ixia_locid="287">For example:</p>
+                    <codeblock ixia_locid="245"><systemoutput ixia_locid="246">~(keystone_admin)$ </systemoutput><userinput ixia_locid="247">system host-stor-add storage-3 journal ae885ad3-8be7-4103-84eb-93892d7182da</userinput>
+<systemoutput ixia_locid="248">|------------------+--------------------------------------+
+| Property         | Value                                |
++------------------+--------------------------------------+
+| osdid            | None                                 |
+| state            | None                                 |
+| function         | journal                              |
+| journal_location | None                                 |
+| journal_size_mib | 0                                    |
+| journal_node     | None                                 |
+| uuid             | e639f1a2-e71a-4f65-8246-5cd0662d966b |
+| ihost_uuid       | 4eb90dc1-2b17-443e-b997-75bdd19e3eeb |
+| idisk_uuid       | ae8b1434-d8fa-42a0-ac3b-110e2e99c68e |
+| created_at       | 2016-06-02T20:12:35.382099+00:00     |
+| updated_at       | None                                 |
++------------------+--------------------------------------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N100DC_N10062_N1001F_N10001" ixia_locid="293">
+                <cmd ixia_locid="294">Update one or more OSDs to use the journal function.</cmd>
+                <info ixia_locid="295">
+                    <codeblock ixia_locid="279"><systemoutput ixia_locid="280">~(keystone_admin)$ </systemoutput><userinput ixia_locid="281">system host-stor-update <varname ixia_locid="282">osd_uuid</varname> \
+--journal-location <varname ixia_locid="283">journal_function_uuid</varname> [--journal-size <varname ixia_locid="284">size</varname>]</userinput>
+</codeblock>
+                </info>
+            </step>
+        </steps>
+        <postreq id="postreq_N10077_N1001F_N10001" ixia_locid="218">
+            <p ixia_locid="285">Unlock the host to make the changes take effect. <draft-comment author="jmaran" ixia_locid="301">Sometimes we use an inline element on these states (typically,
+                    &lt;nameliteral&gt;) and sometimes we don't. I think they are better untagged but
+                    I've left them alone for now because I may introduce more inconsistency until we
+                    have time to review all topics.</draft-comment>Wait for the host to be reported
+                as unlocked, online, and available in the hosts list.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

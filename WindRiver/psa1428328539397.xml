@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="psa1428328539397" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Guest VLANs</title>
+ <shortdesc ixia_locid="2"><draft-comment author="jmaran" ixia_locid="49">This is a lot for a short description.
+   Perhaps just move the second sentence into the body text. Or perhaps omit the "Together with the
+   capability to define multiple IP subnets on a single tenant network" and explain that
+   elsewhere.</draft-comment>Use guest VLANs to segregate IP traffic from a single virtual Ethernet
+  interface on a virtual machine into dedicated VLANs. Together with the capability to define
+  multiple IP subnets on a single tenant network, guest VLANs facilitate the transitioning of
+  existing guest applications to run on the Titanium Server virtualized network
+  environment.</shortdesc>
+ <prolog>
+  <author ixia_locid="33">Jim Owens</author>
+  <author ixia_locid="3">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">Guest VLANs are useful when guest applications rely on the capability to
+   configure a single virtual Ethernet interface with multiple, probably overlapping, IP addresses.
+   From the point of view of the guest, this is done by defining VLAN Ethernet interfaces, and
+   associating one or more IP addresses to them. If implementing overlapping IP addresses, typically
+   in support of VPN applications, the guest must use different VLAN IDs to separate traffic from
+   different VPNs.</p>
+  <p ixia_locid="5">For example, on a Linux guest, the virtual interfaces eth0.10:1, eth0.10:2, and
+   eth0.20 refer to the same eth0 physical interface with two virtual interfaces on VLAN ID 10, and
+   a single virtual interface on VLAN ID 20. A common scenario in a VLAN application is to allocate
+   distinct IP addresses from the same IP subnet to virtual interfaces on the same VLAN. In this
+   example, eth0.10:1 and eth0.10:2 could be assigned distinct IP addresses from the subnet
+   192.168.1.0/24, and eth0.20 an address from the subnet 192.168.2.0/24. In the case of a VPN
+   application, overlapping IP addresses are allowed to exist on eth0.20 and either eth0.10:1 or
+   eth0.10:2.</p>
+  <p ixia_locid="6">Titanium Server supports these deployment scenarios with the help of guest VLANs
+   which enable the transport of IP subnets traffic over VLAN-tagged Ethernet frames. To support the
+   example above, a tenant user would define the following two IP subnets, both on the same tenant
+   network, using guest VLAN IDs as follows:</p>
+  <ul id="ul_jn2_rdw_pr">
+   <li ixia_locid="7">
+    <p ixia_locid="8">Subnet 192.168.1.0/24 with guest VLAN ID set to 10</p>
+   </li>
+   <li ixia_locid="9">
+    <p ixia_locid="10">Subnet 192.168.2.0/24 with guest VLAN ID set to 20</p>
+   </li>
+  </ul>
+  <p ixia_locid="11">The subnet-to-VLAN_ID mapping can be one-to-one, as in this example, or
+   many-to-one. This means that tenant users can use a single VLAN ID of their choice to encapsulate
+   traffic from one or more IP subnets.</p>
+  <p ixia_locid="47">Alternately, tenant networks can be configured to use VLAN Transparent mode, in
+   which VLAN tagged guest packets are encapsulated within a provider network segment without
+   removing or modifying the guest VLAN tag. <draft-comment author="jmaran" ixia_locid="50">Another
+    xref that is local in the Tenant User's Guide and Cloud Admin guide but inter-book for the
+    planning guide. Leaving in local format. – JM: Reversed decision due to unusable link in
+    planning guide. Changed to inter-book format.</draft-comment>For more information, see <ph ixia_locid="51" otherprops="printonly"><cite ixia_locid="52">Titanium Server Tenant User's
+     Guide: </cite></ph><cite ixia_locid="53"><ph ixia_locid="54"><xref href="rst1442341292102.xml" ixia_locid="48"/></ph></cite>.</p>
+  <section id="section_N10086_N1001C_N10001" ixia_locid="28">
+   <title ixia_locid="29">Guest VLAN Implementation</title>
+   <p ixia_locid="30">Guest VLANs are implemented using available segmentation ranges from suitable provider
+    networks, just as it is done when new tenant networks are created. Therefore all network design
+    considerations regarding the configuration of L2 switches and the Neutron allocation strategy,
+    described in <xref href="jow1404333739174.xml" ixia_locid="31"/>, must be taken into consideration.</p>
+   <p ixia_locid="32">Additionally, note that the AVS will silently discard incoming VLAN-tagged VM traffic with
+    unknown VLAN IDs, that is, with VLAN IDs not defined as guest VLANs on the particular tenant
+    network.</p>
+  </section>
+ </conbody>
+</concept-wr>

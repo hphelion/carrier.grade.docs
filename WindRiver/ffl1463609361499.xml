@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ffl1463609361499" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Networks for a Titanium Server Multi-Region Environment</title>
+ <shortdesc ixia_locid="2">For a Titanium Server Region system, the network requirements depend in
+  part on the region configuration.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">Titanium Server Region systems act as components of larger network systems. The following
+   network configuration typically meets the requirements of such a system:</p>
+  <draft-comment author="jmaran" ixia_locid="23">Consider if the term "shared" really requires the quotes. Why is
+   this a special case of "shared"? Perhaps explain what "shared" means in this context prior to the
+   list and then remove the quotes. I changed the capitalized "MUST NOT" to use &lt;i&gt; (this is the
+   approved method of indicating emphasis, use sparingly).</draft-comment>
+  <ul id="ul_j2d_thb_1w">
+   <li ixia_locid="13">
+    <p ixia_locid="14">A PXE boot network (required)</p>
+   </li>
+   <li ixia_locid="5">
+    <p ixia_locid="6">An internal management network that is “shared” with other Regions</p>
+   </li>
+   <li ixia_locid="7">
+    <p ixia_locid="8">An infrastructure network, “shared” with other Regions (required for systems
+     with storage hosts)</p>
+   </li>
+   <li ixia_locid="9">
+    <p ixia_locid="10">An OAM network, optionally “shared” with other Regions</p>
+   </li>
+   <li ixia_locid="11">
+    <p ixia_locid="12">One or more DATA Networks that <i ixia_locid="24">must not</i> be “shared” with other
+     Regions</p>
+   </li>
+  </ul>
+  <p ixia_locid="15">On moderately loaded systems, the OAM and data networks can be consolidated on the management
+   or infrastructure interfaces.</p>
+  <note id="note_N10063_N1001F_N10001" ixia_locid="16">
+   <p ixia_locid="17">You can enable secure HTTPS connectivity on the OAM network during system
+    installation. For more information, see <ph ixia_locid="18" otherprops="printonly"><cite ixia_locid="19">Titanium Server System Administration: </cite>
+    </ph><cite ixia_locid="20"><ph ixia_locid="21"><xref href="mnh1464027762153.xml" ixia_locid="22"/>.</ph></cite></p>
+  </note>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="zjx1464641246986" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Specifying the Storage Type for VM Ephemeral Disks</title>
+    <shortdesc ixia_locid="2">You can specify the ephemeral storage type for virtual machines (VMs)
+        by using a flavor with the appropriate extra specification.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="358">
+            <p ixia_locid="378"><draft-comment author="jowens" ixia_locid="372">US69978, US68057
+                    rewrite for instance backing, and to reflect that remote storage is not used.
+                    Remove the prerequisite to configure a host to provide local storage, since this
+                    is now mandatory to unlock a host. US74975 upddate for Remote Storage Backed
+                    option.</draft-comment>Each new flavor is automatically assigned a Storage Type
+                extra spec that specifies, as the default, instantiation on compute hosts configured
+                for image-backed local storage (<option ixia_locid="380">Local CoW Image
+                    Backed</option>). You can change the extra spec to specify instantiation on
+                compute hosts configured for LVM-backed local storage (<option ixia_locid="379">Local LVM Backed</option>) or Ceph-backed remote storage, if this is available
+                    (<option ixia_locid="385">Remote Storage Backed</option>). Ceph-backed remote
+                storage is available only on systems configured with a Ceph storage backend.</p>
+            <p ixia_locid="374">The designated storage type is used for ephemeral disk and swap disk
+                space, and for the root disk if the virtual machine is launched using
+                boot-from-image. Local storage is allocated from the Local Volume Group on the host,
+                and does not persist when the instance is terminated. Remote storage is allocated
+                from a Ceph storage pool configured on the storage host resources, and persists
+                until the pool resources are reallocated for other purposes. The choice of storage
+                type affects migration behavior; <draft-comment author="jmaran" ixia_locid="405">The following xrefs
+                    are local when this topic appears in the sys admin guide but inter-book when it
+                    appears in the cloud admin guide.</draft-comment>for more information, see <ph ixia_locid="395" otherprops="printonly"><cite ixia_locid="396">Titanium Server
+                        System Administration: </cite></ph><cite ixia_locid="397"><ph ixia_locid="398"><xref href="ksh1464711502906.xml" ixia_locid="399"/></ph></cite>.</p>
+            <p ixia_locid="375"> If the instance is configured to boot from volume, the root disk is
+                implemented using persistent Cinder-based storage allocated from the controller (for
+                a system using LVM) or from storage hosts (for a system using Ceph).</p>
+            <p ixia_locid="376"> To specify the type of storage offered by a compute host, see <ph ixia_locid="400" otherprops="printonly"><cite ixia_locid="401">Titanium Server
+                        System Administration: </cite></ph><cite ixia_locid="402"><ph ixia_locid="403"><xref href="jow1426181291481.xml" ixia_locid="404"/></ph></cite>.</p>
+        </context>
+        <context id="context_N1002F_N1001F_N10001" ixia_locid="11">
+            <note conref="jow1426942555025.xml#jow1426942555025/note_local_storage_ephemeral" id="note_N10037_N10032_N1001F_N10001" ixia_locid="81"/>
+            <p ixia_locid="17">To change the storage type using the Web administration interface,
+                click <uicontrol ixia_locid="360">Edit</uicontrol> for the existing <nameliteral ixia_locid="361">Storage Type</nameliteral> extra specification, and select from
+                the <uicontrol ixia_locid="355">Storage</uicontrol> drop-down menu. <draft-comment author="jmaran" ixia_locid="406">The following xref is local when this topic appears in the cloud
+                    admin guide but inter-book when it appears in the sys admin
+                    guide.</draft-comment>To access the extra specification, see <ph ixia_locid="182" otherprops="printonly"><cite ixia_locid="183">Titanium Server
+                        Cloud Administration:</cite>
+                </ph><cite ixia_locid="184"><ph ixia_locid="185"><xref href="jow1429538642910.xml" ixia_locid="82"/></ph></cite>.</p>
+            <note id="note_N10064_N10042_N1001F_N10001" ixia_locid="362" type="caution">
+                <p ixia_locid="363">If the <nameliteral ixia_locid="364">Storage Type</nameliteral>
+                    extra spec is not specified, the VM can be instantiated on any host. To ensure
+                    that instantiated VMs use storage of a known type, do not delete this extra
+                    spec.</p>
+            </note>
+            <p ixia_locid="18">You can also specify the extra spec from the CLI by setting the
+                following parameter for a flavor:</p>
+            <codeblock ixia_locid="20"><userinput ixia_locid="22">aggregate_instance_extra_specs:storage=<varname ixia_locid="23">storage_type</varname></userinput></codeblock>
+            <p ixia_locid="24">where <varname ixia_locid="25">storage_type</varname> is one of the
+                following:</p>
+            <dl>
+                <dlentry ixia_locid="26">
+                    <dt ixia_locid="27"><option ixia_locid="407">local_lvm</option></dt>
+                    <dd ixia_locid="28">
+                        <p ixia_locid="29">Specifies hosts with LVM-backed local storage for use by
+                            the VM.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="387">
+                    <dt ixia_locid="388"><option ixia_locid="408">local_image</option></dt>
+                    <dd ixia_locid="389">
+                        <p ixia_locid="390">Specifies hosts with image-backed local storage for use
+                            by the VM.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="391">
+                    <dt ixia_locid="392"><option ixia_locid="409">remote</option></dt>
+                    <dd ixia_locid="393">
+                        <p ixia_locid="394">Specifies hosts with Ceph-backed remote storage for use
+                            by the VM.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="354">For example:</p>
+            <codeblock ixia_locid="321"><systemoutput ixia_locid="328">~(keystone_admin)$ </systemoutput><userinput ixia_locid="335">nova flavor-key <varname ixia_locid="346">flavor_name</varname> \
+set aggregate_instance_extra_specs:storage=local_image</userinput></codeblock>
+            <p ixia_locid="359">The local storage key is added by default on flavor creation and set
+                for <nameliteral ixia_locid="384">local_image</nameliteral> storage.</p>
+        </context>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003721212" xml:lang="en-us"><title ixia_locid="1">Standard Configuration with Controller Storage</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">Titanium Server supports a small-scale deployment option using Logical Volume
+            Manager/ Internet Small Computer System Interface (LVM/iSCSI) as a back end for Cinder
+            volumes on the controller nodes instead of using dedicated storage nodes. This
+            configuration uses dedicated physical disks in the controller node synchronized with the
+            other controller node. The primary disk is used by the platform and for Glance image
+            storage. The secondary disk is used for Cinder volumes. Because the primary and
+            secondary disks are single devices, this configuration does not scale to the capacity of
+            the Standard Configuration with Dedicated Storage, nor does it provide the same
+            performance and latencies for activities such as VM creation and deletion. The number of
+            compute nodes and VMs supported is limited by the Cinder/Glance storage backend
+            capacity, storage throughput, and VM launch time requirements. <xref format="dita" href="#jow1454003721212/fig_N10020_N10016_N10001" ixia_locid="10"/> shows a typical
+            deployment.</p><fig id="fig_N10020_N10016_N10001" ixia_locid="6"><title id="title__Toc441623497" ixia_locid="7">Standard Configuration with Controller
+                Storage</title>
+            <image href="ytv1476907395314.image" id="image_kxw_rxy_55" ixia_locid="8">
+                <alt ixia_locid="9">media/image2.emf</alt>
+            </image></fig></conbody></concept-wr>

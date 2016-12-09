@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="gfu1465307467334" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="201">Replacing Controller Hardware</title>
+    <shortdesc ixia_locid="202">You can replace controller hosts or hardware components while the
+        system is running.</shortdesc>
+    <prolog>
+        <author ixia_locid="203">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <!--cloned from "Managing Controller Nodes," renamed, and simplified for 16.x -->
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="204">
+            <p ixia_locid="205"><draft-comment author="jowens" ixia_locid="910">CGTS-3616 title changed to match
+                    similar topics</draft-comment>The Titanium Server system requires two
+                controllers. You can lock and remove one controller temporarily to replace faulty
+                hardware, including primary or secondary disks.</p>
+            <note id="note_N1002C_N10022_N1001F_N10001" ixia_locid="254">
+                <p ixia_locid="206">If you are replacing disks in order to increase the controller
+                    storage capacity, follow the instructions for <xref href="ers1464645579505.xml" ixia_locid="890"/>.</p>
+            </note>
+        </context>
+        <steps>
+            <step id="step_N1003D_N1003A_N1001C_N10001" ixia_locid="210">
+                <cmd ixia_locid="211">Lock the standby controller.</cmd>
+                <substeps conref="jow1426453628262.xml#jow1426453628262/substeps-lock-host" id="substeps_mbs_p3p_15">
+                    <substep ixia_locid="851">
+                        <cmd ixia_locid="852"/>
+                    </substep>
+                </substeps>
+                <stepresult ixia_locid="346">
+                    <p ixia_locid="853">The standby controller is shown as <nameliteral ixia_locid="854">Locked</nameliteral>,
+                            <nameliteral ixia_locid="855">Disabled</nameliteral>, and
+                            <nameliteral ixia_locid="856">Online</nameliteral>.</p>
+                </stepresult>
+            </step>
+            <step id="step_N100A4_N1003D_N1001F_N10001" ixia_locid="348">
+                <cmd ixia_locid="349">Delete the standby controller from the inventory.</cmd>
+                <info ixia_locid="350">
+                    <note id="note_N10081_N1007D_N10073_N1003D_N1001F_N10001" ixia_locid="857">
+                        <p ixia_locid="858">Ensure that the host is online, so that its disk is
+                            erased when it is deleted from the inventory. This ensures that the host
+                            boots from the network when it is powered up for re-installation. If the
+                            host is not online when it is deleted from the inventory, you may need
+                            to force a network boot during re-installation.</p>
+                    </note>
+                    <p ixia_locid="860">In the <nameliteral ixia_locid="65">Actions</nameliteral>
+                        column, open the drop-down list for the host, and select <uicontrol ixia_locid="59">Delete Host</uicontrol>.</p>
+                </info>
+                <stepresult ixia_locid="861">
+                    <p ixia_locid="862">The standby controller is removed from the <nameliteral ixia_locid="863">Hosts</nameliteral> list, and the Titanium Server
+                        software is removed from its hard drive.</p>
+                </stepresult>
+            </step>
+            <step id="step_N10080_N1003A_N1001C_N10001" ixia_locid="234">
+                <cmd ixia_locid="235">Power down the host manually and make any required hardware
+                    changes.</cmd>
+                <info ixia_locid="236">
+                    <p ixia_locid="237">Titanium Server does not provide controls for powering down
+                        a host. Use the BMC or other control unit.</p>
+                </info>
+            </step>
+            <step id="step_N100B9_N1003D_N1001F_N10001" ixia_locid="353">
+                <cmd ixia_locid="354">Reinstall the standby controller.</cmd><info ixia_locid="864">
+                    <note id="note_N100E4_N100D0_N100C7_N1003E_N10020_N10001" ixia_locid="887" type="caution">
+                        <p ixia_locid="906"><draft-comment author="jowens" ixia_locid="865">US78833
+                                / US77367 Add a caution to configure Ceph monitor location if
+                                necessary.</draft-comment>Before attempting to unlock the
+                            controller, be sure to specify the correct disk for the Ceph monitor, if
+                            required. This is necessary if Ceph storage has been added to a system
+                            with LVM-backed controller storage after installation, and the Ceph
+                            monitor has been assigned to a disk other than the <nameliteral ixia_locid="891">rootfs</nameliteral> disk. </p>
+                        <note id="note_N100EE_N100D7_N100D3_N100CA_N10046_N1001F_N10001" ixia_locid="920" type="caution">
+                            <p ixia_locid="907"><i ixia_locid="921">You must do this before unlocking the reinstalled
+                                    controller for the first time</i>. Otherwise, the controller
+                                reboots continuously on unlock, and must be installed again.</p>
+                        </note>
+                        <p ixia_locid="905"><draft-comment author="jowens" ixia_locid="911">CGTS-5109 changed
+                                commands</draft-comment>To specify the correct disk, use a command
+                            of the following form:</p>
+                        <codeblock ixia_locid="892"><systemoutput ixia_locid="893">~(keystone_admin)$ </systemoutput><userinput ixia_locid="894">system ceph-mon-modify <varname ixia_locid="912">controller_name</varname> device_node=<varname ixia_locid="913">diskUUID</varname></userinput></codeblock>
+                        <p ixia_locid="897">For example:</p>
+                        <codeblock ixia_locid="898"><systemoutput ixia_locid="914">~(keystone_admin)$ </systemoutput><userinput ixia_locid="915">system ceph-mon-show controller-1</userinput>
+<systemoutput ixia_locid="901">+--------------+--------------------------------------+
+| Property     |                                Value |
++--------------+--------------------------------------+
+| uuid         | ce4a1913-ce1f-4fda-90c0-c49f313d0adc |
+| device_node  | None                                 |
+| ceph_mon_gib | 30                                   |
+| created_at   | 2016-10-15T00:16:56.423442+00:00     |
+| updated_at   | None                                 |
++--------------+--------------------------------------+</systemoutput>
+<systemoutput ixia_locid="902">~(keystone_admin)$ </systemoutput><userinput ixia_locid="903">system ceph-mon-modify controller-1 \
+device_node=cbc483ad-d7cb-47a8-8622-8846d9444f27</userinput>
+<systemoutput ixia_locid="916"/>+--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | ce4a1913-ce1f-4fda-90c0-c49f313d0adc |
+| device_node  | /dev/sdc                             |
+| ceph_mon_gib | 30                                   |
+| created_at   | 2016-10-15T00:16:56.423442+00:00     |
+| updated_at   | None                                 |
++--------------+--------------------------------------+
+                            
+System configuration has changed.
+ please follow the administrator guide to complete configuring system.
+<systemoutput ixia_locid="917">~(keystone_admin)$ </systemoutput><userinput ixia_locid="918">system ceph-mon-show controller-1</userinput>
+<systemoutput ixia_locid="919">
++--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | ce4a1913-ce1f-4fda-90c0-c49f313d0adc |
+| device_node  | /dev/sdc                             |
+| ceph_mon_gib | 30                                   |
+| created_at   | 2016-10-15T00:16:56.423442+00:00     |
+| updated_at   | 2016-10-15T00:35:44.181413+00:00     |
++--------------+--------------------------------------+</systemoutput> </codeblock>
+                    </note>
+                    <p ixia_locid="574">For more informaton about reinstalling the controller,
+                            <draft-comment author="jmaran" ixia_locid="922">Updated the xref to point to 16.x docs.
+                        </draft-comment>see <ph ixia_locid="923" otherprops="printonly"><cite ixia_locid="909">Titanium Server Installation: </cite></ph><cite ixia_locid="924"><ph ixia_locid="925"><xref href="uid1473354209921.xml" ixia_locid="926"/></ph></cite>.</p>
+                </info>
+            </step>
+            <step id="step_N102BF_N1003D_N1001F_N10001" ixia_locid="808">
+                <cmd ixia_locid="809">If the same hardware change is required on both controllers,
+                    make the change to the other controller.</cmd>
+                <substeps id="substeps_cvx_x2q_b5">
+                    <substep ixia_locid="828">
+                        <cmd ixia_locid="829">Open the drop-down menu for the active controller and then select
+                                <uicontrol ixia_locid="811">Swact Host</uicontrol>.</cmd>
+                        <info ixia_locid="257">
+                            <p ixia_locid="885">Up to 20 minutes can be required to complete the
+                                swact.</p>
+                            <note id="note_N1032B_N10327_N1031B_N10317_N1030D_N1003D_N1001F_N10001" ixia_locid="830">
+                                <p ixia_locid="831">During the swact, access to the Web
+                                    administration interface is temporarily interrupted, and the
+                                    login screen is displayed. Wait for a few minutes, and then log
+                                    in. The new active controller is shown as <option ixia_locid="832">Degraded</option>, and then changed to
+                                        <nameliteral ixia_locid="833">Available</nameliteral>.</p>
+                            </note>
+                        </info>
+                        <stepresult ixia_locid="834">
+                            <p ixia_locid="835">The <nameliteral ixia_locid="836">Controller-Active</nameliteral> and
+                                    <nameliteral ixia_locid="837">Controller-Standby</nameliteral> personalities are
+                                updated in the Hosts List.</p>
+                            <fig id="fig_ugg_h2q_b5" ixia_locid="838">
+                                <image href="jow1448028437058.image" id="image_uqn_h2q_b5" ixia_locid="839">
+                                    <alt ixia_locid="840">TiS Hosts: controller-1 active</alt>
+                                </image>
+                            </fig>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="841">
+                        <cmd ixia_locid="842">Return to Step 1 and repeat the procedure for the new standby
+                            controller.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+        </steps>
+        <result id="result_N10147_N1001C_N10001" ixia_locid="252">
+            <p ixia_locid="253">The updated controllers are now in service.</p>
+        </result>
+    </taskbody>
+</task-wr>

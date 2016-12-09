@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003733944" xml:lang="en-us">
+    <title ixia_locid="1">Disk Throughput Dimensioning for LVM Storage</title>
+    <shortdesc ixia_locid="2"/>
+    <prolog>
+        <author ixia_locid="3">Craig Griffin</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="4">Two aspects of disk throughput should be considered when dimensioning the
+            secondary storage: VM creation from volumes times, and guest disk throughput.</p>
+        <p ixia_locid="5">The main factor in creation times for volumes and booting the VMs from the
+            volumes is disk throughput of the primary and secondary disks, since images are stored
+            and converted on the primary disk and copied to volumes on the secondary disk. The
+            storage device throughput, disk controller throughput, image size, and volume size all
+            contribute to the overall Volume+ VM creation times. Platform activity such as database
+            on the primary disk and logging also affects disk throughput and Volume + VM creation
+            times.</p>
+        <p ixia_locid="6">Since the primary and secondary disks are single devices, this configuration does not
+            scale as well as a dedicated storage configuration and as the following charts show, the
+            volume creation + VM boot times can be long when multiple volumes are created at the
+            same time.</p>
+        <p ixia_locid="7">The following data was obtained through benchmarking and measuring
+            simultaneous volume plus VM creation times. The data provides guidance in dimensioning
+            for throughput and for making decisions to use a dedicated storage configuration for
+            better performance. For more guidance in choosing a Dedicated Storage or Controller
+            Storage deployment, see <xref href="jow1454003751280.dita" ixia_locid="75"/>.</p>
+        <p ixia_locid="8">Wildcat Pass Reference Configuration:</p>
+        <ul>
+            <li ixia_locid="9">
+                <p ixia_locid="10">Intel® Server Board S2600WTT (Wildcat Pass)</p>
+            </li>
+            <li ixia_locid="11">
+                <p ixia_locid="12">Intel® Broadwell Processor - Intel(R) Xeon(R) CPU E5-2699 v4 @
+                    2.20GHz</p>
+            </li>
+            <li ixia_locid="13">
+                <p ixia_locid="14">Intel® C612 Chipset</p>
+            </li>
+            <li ixia_locid="15">
+                <p ixia_locid="16">480 GB Intel® SSDSC2BB24 SSDs for primary and secondary disk</p>
+            </li>
+            <li ixia_locid="71">
+                <p ixia_locid="72">Cinder configured for thin provisioning</p>
+            </li>
+        </ul>
+        <p ixia_locid="26">The following chart shows the times to create a volume and boot an image
+            for a number of tests with Centos 7 qcow2 images resulting in 8 GB raw image size and
+            using thin provisioning for Cinder on the reference configuration. Booting of a single
+            VM with a Cinder volume required about 1 minute. As more volumes and VMs are created in
+            parallel, the average Volume + M create time increases linearly.</p>
+        <p ixia_locid="27">If many VMs are being created, faster disk controllers and storage media
+            may be needed or the deployment model should be changed from a Controller Storage
+            configuration to a Dedicated Storage configuration. Based on this data, it is highly
+            recommended that no more than five VMs with volumes be created simultaneously when using
+            SSD disks, fewer if using SAS disks.</p>
+        <note id="note_N10084_N1001C_N10001" ixia_locid="73">
+            <p ixia_locid="74">The choice of thin or thick provisioning can affect VM/volume
+                creation times. For thin provisioning, volume creation and deletion can be
+                significantly faster. Thick provisioning requires disk copying and zeroizing the
+                entire advertised disk size and may take an order of magnitude longer for volumes to
+                create. Thin provisioning copies and zeroizes only the currently used disk space for
+                the volume and the configured volume size has no effect on volume creation or
+                deletion times.</p>
+        </note>
+        <fig id="fig_N10084_N10019_N10001" ixia_locid="28">
+            <title id="title__Toc441623499" ixia_locid="29">Volume Plus VM Create Times with Controller
+                Storage</title>
+            <image href="jow1454003732074.image" id="image_igs_wxy_55" ixia_locid="30">
+                <alt ixia_locid="31">media/image4.png</alt>
+            </image>
+        </fig>
+        <p ixia_locid="58"><draft-comment author="jowens" ixia_locid="66">CGTS-4987 I/O levels info
+                added</draft-comment>To avoid possible Cinder operation failures, VMs using a Cinder
+            LVM backend must operate within supported I/O levels . The Titanium Server overload
+            monitor raises a Major alarm if congestion is detected, and a Critical alarm if
+            acceptable I/O limits are exceeded. </p>
+        <p ixia_locid="59">Customers can avoid Cinder I/O congestion by using disk I/O quotas to
+            limit the amount of I/O their VMs can consume. For more information, see the following
+            references:</p>
+        <ul id="ul_cvs_qwj_3x">
+            <li ixia_locid="60">
+                <p ixia_locid="61"><xref format="html" href="http://ceph.com/planet/openstack-ceph-rbd-and-qos/" ixia_locid="62" scope="external">http://ceph.com/planet/openstack-ceph-rbd-and-qos/</xref></p>
+            </li>
+            <li ixia_locid="63">
+                <p ixia_locid="64"><xref format="html" href="http://docs.openstack.org/admin-guide/compute-flavors.html#compute-flavors" ixia_locid="65" scope="external">http://docs.openstack.org/admin-guide/compute-flavors.html#compute-flavors</xref>
+                    (disk tuning section) </p>
+            </li>
+        </ul>
+    </conbody>
+</concept-wr>

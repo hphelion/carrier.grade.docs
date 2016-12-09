@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003742576" xml:lang="en-us"><title ixia_locid="1">Primary Disk Requirements for Compute Nodes</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="48">The primary disk on the compute node is used by the platform. One or more
+            secondary disks are required for local VM storage. The primary disk cannot be used for
+            local VM storage.</p>
+        <section id="section_N1001D_N10016_N10001" ixia_locid="49">
+            <title ixia_locid="50">Disk Hardware Configuration</title>
+            <p ixia_locid="51">The primary disk on the compute node is used for boot, rootfs,
+                logging, and scratch storage. The minimum requirements for the primary disk is a 120
+                GB 10K RPM SAS disk but SSD is highly recommended. The primary disk is divided into
+                partitions according to the following table.</p>
+            <table id="table_N10020_N10019_N10001">
+                <title id="title__Toc441623516" ixia_locid="5">Compute Node Primary Disk Partitions
+                    and Sizes</title>
+                <tgroup cols="3">
+                    <colspec colname="1" colwidth="1728*"/>
+                    <colspec colname="2" colwidth="1360*"/>
+                    <colspec colname="3" colwidth="1610*"/>
+                    <thead>
+                        <row>
+                            <entry ixia_locid="6">
+                                <p ixia_locid="7">Partition</p>
+                            </entry>
+                            <entry ixia_locid="8">
+                                <p ixia_locid="9">Size</p>
+                            </entry>
+                            <entry ixia_locid="10">
+                                <p ixia_locid="11">Comments</p>
+                            </entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        
+                        <row>
+                            <entry ixia_locid="18">
+                                <p ixia_locid="19">rootfs</p>
+                            </entry>
+                            <entry ixia_locid="20">
+                                <p ixia_locid="21">19.5 GB</p>
+                            </entry>
+                            <entry ixia_locid="22">
+                                <p ixia_locid="23">Fixed</p>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry ixia_locid="24">
+                                <p ixia_locid="25">boot</p>
+                            </entry>
+                            <entry ixia_locid="26">
+                                <p ixia_locid="27">500 MB</p>
+                            </entry>
+                            <entry ixia_locid="28">
+                                <p ixia_locid="29">Fixed</p>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry ixia_locid="30">
+                                <p ixia_locid="31">scratch</p>
+                            </entry>
+                            <entry ixia_locid="32">
+                                <p ixia_locid="33">3.75 GB</p>
+                            </entry>
+                            <entry ixia_locid="34">
+                                <p ixia_locid="35">Fixed</p>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry ixia_locid="36">
+                                <p ixia_locid="37">log</p>
+                            </entry>
+                            <entry ixia_locid="38">
+                                <p ixia_locid="39">3.75 GB</p>
+                            </entry>
+                            <entry ixia_locid="40">
+                                <p ixia_locid="41">Fixed</p>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry ixia_locid="42">
+                                <p ixia_locid="43">platform</p>
+                            </entry>
+                            <entry ixia_locid="44">
+                                <p ixia_locid="45">2 GB</p>
+                            </entry>
+                            <entry ixia_locid="46">
+                                <p ixia_locid="47">Fixed</p>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section></conbody></concept-wr>

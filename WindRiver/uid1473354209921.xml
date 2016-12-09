@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="uid1473354209921" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Installing Software on<ph ixia_locid="828" product="tis_cpe">
+            Controller-1</ph><ph ixia_locid="1032" product="tis_lvm"> Controller-1  or a Compute
+            Host</ph><ph ixia_locid="1033" product="tis_ceph"> Controller-1 or a Compute or Storage
+            Host</ph></title>
+    <shortdesc ixia_locid="2">You must use <nameliteral ixia_locid="3">controller-0</nameliteral> to
+        install software on other hosts.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Jim Owens</author>
+        <author ixia_locid="5">Tom Towle</author>
+        <author ixia_locid="6">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10039_N10036_N10001" ixia_locid="830" product="tis_cpe">
+            <p ixia_locid="831">For a CPE system, the only additional host used is <nameliteral ixia_locid="832">controller-1</nameliteral>.</p>
+        </context>
+        <prereq conref="ifl1462548530418.xml#ifl1462548530418/prerequisites" id="prereq_N1002B_N10028_N10001" ixia_locid="7"/>
+        <steps id="steps_nvd_tz5_k4">
+            <step id="boot-node" ixia_locid="569">
+                <cmd ixia_locid="570">Power on the host.</cmd>
+                <info ixia_locid="571">
+                    <p ixia_locid="572"><note id="note_N10395_N10392_N1038E_N1037E_N100E2_N10029_N10001" ixia_locid="778" product="tis_nonregion">
+                            <p ixia_locid="779">To ensure you can correctly identify hosts as you
+                                install them, power on and configure each new node one at a
+                                time.</p>
+                        </note>With <nameliteral ixia_locid="573">controller-0</nameliteral>
+                        running, start the host.</p>
+                    <!-- p><nameliteral>controller-0</nameliteral> accepts the PXE request from the
+                        host node, configures the node's IP address, and pushes a network
+                        bootstrap program.</p -->
+                    <!-- draft-comment>Jim - too much detail?</draft-comment -->
+                    <p ixia_locid="574"><draft-comment author="jowens" ixia_locid="780">US63465
+                            branding removed from screen</draft-comment>The host boots from the
+                        network and then displays a message that it is waiting to be configured.</p>
+                    <fig id="fig_N100BC_N100A9_N100A1_N10091_N10024_N10001" ixia_locid="575">
+                        <image href="jow1404333500016.image" id="image_whb_vjd_gn" ixia_locid="576"/>
+                    </fig>
+                </info>
+            </step>
+            <step id="horizon-open-edit-host" ixia_locid="849">
+                <cmd ixia_locid="850">Open the Edit Host dialog box to begin provisioning the new
+                    host.</cmd>
+                <substeps id="substeps_cdx_ds4_k4">
+                    <substep id="open-hosts-list" ixia_locid="423">
+                        <cmd id="open-hosts-lists-cmd" ixia_locid="424">Display the available hosts
+                            in the system.</cmd>
+                        <info ixia_locid="43">
+                            <p ixia_locid="426">Select the <wintitle ixia_locid="429">Hosts</wintitle> tab on the <wintitle ixia_locid="1034">Host Inventory</wintitle>
+                                page, available from <menucascade ixia_locid="1035">
+                                    <uicontrol ixia_locid="45">Admin</uicontrol>
+                                    <uicontrol ixia_locid="427">Platform</uicontrol>
+                                    <uicontrol ixia_locid="428">Host Inventory</uicontrol>
+                                </menucascade> on the left-hand pane.</p>
+                            <p id="open-hosts-lists-new-node" ixia_locid="49"><draft-comment author="jowens" ixia_locid="826">US77470 update for new
+                                    UnProvisioned Hosts list.</draft-comment>The new node is listed
+                                in the <nameliteral ixia_locid="827">UnProvisioned
+                                    Hosts</nameliteral> list.</p>
+                            <fig id="fig_N10108_N100E4_N100D7_N100D3_N100CB_N10091_N10024_N10001" ixia_locid="431">
+                                <image href="aqw1462549098049.image" id="image_yld_2zd_gn" ixia_locid="432"/>
+                            </fig>
+                        </info>
+                    </substep>
+                    <substep id="click-edit-hosts" ixia_locid="790">
+                        <cmd ixia_locid="791">Click <uicontrol ixia_locid="58">Edit Host</uicontrol>
+                            for the new host.</cmd>
+                        <stepresult ixia_locid="792">
+                            <p ixia_locid="108">The <wintitle ixia_locid="131">Edit Host</wintitle>
+                                window appears.</p>
+                            <fig id="fig_N10129_N1011E_N10116_N100D3_N100CB_N10091_N10024_N10001" ixia_locid="59">
+                                <image href="jow1404333503033.image" id="image_wfz_h54_k4" ixia_locid="60"/>
+                            </fig>
+                        </stepresult>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="assign-personality" ixia_locid="854">
+                <cmd ixia_locid="855"><draft-comment author="jowens" ixia_locid="1015">US84106 and
+                        US85273 steps revised for personality subtypes; CGTS-5792 step
+                        conditionalized for different installation guides</draft-comment>Assign the
+                    appropriate personality to the host.</cmd>
+                <info ixia_locid="1046" product="tis_cpe">
+                    <p ixia_locid="1047">For a CPE system, select <nameliteral ixia_locid="1048">Controller</nameliteral>.</p>
+                </info>
+                <info ixia_locid="856" product="tis_std">
+                    <p ixia_locid="857">By default, the <option ixia_locid="949">Compute</option>
+                        personality is selected. Use the <uicontrol ixia_locid="858">Personality</uicontrol> drop-down menu to specify the type of host you
+                        are installing (<option ixia_locid="950">Controller</option> or <option ixia_locid="951">Storage</option>).</p>
+                    <note id="note_N1014B_N1012E_N1011D_N10052_N10038_N10001" ixia_locid="1029">
+                        <p ixia_locid="1030">The <option ixia_locid="1031">Storage</option> option
+                            is available only if an infrastructure network is present.</p>
+                    </note>
+                </info>
+                <stepresult ixia_locid="952">
+                    <p ixia_locid="953">The window is updated for the personality.</p>
+                    <p ixia_locid="873" product="tis_std">For a controller host:</p>
+                    <fig id="fig_d4q_jc2_px" ixia_locid="954">
+                        <image href="jow1447960401773.image" id="image_e4q_jc2_px" ixia_locid="955">
+                            <alt ixia_locid="956">TiS Edit Host: Personality Controller</alt>
+                        </image>
+                    </fig>
+                    <p ixia_locid="877" product="tis_ceph">For a storage host:</p>
+                    <fig id="fig_f4q_jc2_px" ixia_locid="957" product="tis_ceph">
+                        <image href="jow1404848586688.image" id="image_g4q_jc2_px" ixia_locid="958">
+                            <alt ixia_locid="959">TiS Edit Host: Personality Storage</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10175_N10052_N10038_N10001" ixia_locid="960">
+                <cmd ixia_locid="961">Complete the remaining fields on the <uicontrol ixia_locid="962">Host Info</uicontrol>
+                    tab.</cmd>
+                <info ixia_locid="963">
+                    <dl>
+                        <dlentry ixia_locid="964" product="tis_std">
+                            <dt ixia_locid="965"><uicontrol ixia_locid="966">Performance
+                                    Profile</uicontrol></dt>
+                            <dd ixia_locid="967">
+                                <p ixia_locid="1036">(shown only for a <uicontrol ixia_locid="969">Compute</uicontrol> personality) The performance
+                                    characteristic of the host. </p>
+                                <p ixia_locid="1037">Accept the default value (<option ixia_locid="972">Standard</option>). Other values are
+                                    reserved for future use.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="982" product="tis_std">
+                            <dt ixia_locid="983"><uicontrol ixia_locid="984">Host
+                                Name</uicontrol></dt>
+                            <dd ixia_locid="985">
+                                <p ixia_locid="986">(shown only for a <uicontrol ixia_locid="987">Compute</uicontrol> personality) An optional custom name
+                                    for the compute host. The name appears in the Host Inventory and
+                                    other places where the host is listed, and can be used in most
+                                    CLI commands to specify the host.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="988" product="tis_ceph">
+                            <dt ixia_locid="989"><uicontrol ixia_locid="990">Personality
+                                    Sub-Type</uicontrol></dt>
+                            <dd ixia_locid="991">
+                                <p ixia_locid="992">(shown only for a <uicontrol ixia_locid="993">Storage</uicontrol> personality) The role of the host in a
+                                    storage cluster. The following sub-types are available:</p>
+                                <dl>
+                                    <dlentry ixia_locid="994">
+                                        <dt ixia_locid="995"><option ixia_locid="996">Ceph
+                                                backing</option></dt>
+                                        <dd ixia_locid="997">
+                                            <p ixia_locid="998">Use this for a standard storage
+                                                configuration.</p>
+                                        </dd>
+                                    </dlentry>
+                                    <dlentry ixia_locid="999">
+                                        <dt ixia_locid="1000"><option ixia_locid="1001">Ceph
+                                                tiering</option></dt>
+                                        <dd ixia_locid="1002">
+                                            <p ixia_locid="1003">Use this when implementing a cache
+                                                tier.</p>
+                                            <note id="note_N101B0_N1019A_N10182_N10179_N1016D_N1010D_N10066_N1005C_N10059_N10039_N10001" ixia_locid="1016">
+                                                <p ixia_locid="1017">You cannot add a <nameliteral ixia_locid="1018">Ceph tiering</nameliteral> host
+                                                  until cache tiering is configured on the system.
+                                                  For more information, see <ph ixia_locid="1019" otherprops="printonly"><cite ixia_locid="1020">Titanium Server System Administration:
+                                                  </cite></ph><cite ixia_locid="1021"><ph ixia_locid="1022"><xref href="siv1474312502430.xml" ixia_locid="1023"/></ph></cite>. In addition, the system must
+                                                  already have a <nameliteral ixia_locid="1024">Ceph
+                                                  backing</nameliteral> host.</p>
+                                            </note>
+                                        </dd>
+                                    </dlentry>
+                                </dl>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="1009">
+                            <dt ixia_locid="1010"><uicontrol ixia_locid="1011">Location</uicontrol></dt>
+                            <dd ixia_locid="1012">
+                                <p ixia_locid="1013">An optional description of the host location
+                                    (for example, its site or rack position) to help manage large
+                                    systems.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </info>
+            </step>
+            <step id="horizon-set-optional-parameters" ixia_locid="879">
+                <cmd importance="optional" ixia_locid="892">Set the installation parameters for the
+                    node.</cmd>
+                <info ixia_locid="893">
+                    <note id="note_N107F3_N107F0_N107DF_N100F5_N10029_N10001" ixia_locid="894" type="caution">
+                        <p ixia_locid="895">If the host uses any console port other than
+                                <nameliteral ixia_locid="896">ttys0</nameliteral> for output
+                            display, you must change settings on the <uicontrol ixia_locid="897">Installation Parameters</uicontrol> tab to ensure that the host
+                            uses the correct port.</p>
+                    </note>
+                    <p ixia_locid="898">On the <uicontrol ixia_locid="899">Host Info</uicontrol>
+                        tab:</p>
+                    <ul id="ul_spk_jmx_mx">
+                        <li ixia_locid="900">
+                            <p ixia_locid="901">Type a physical <uicontrol ixia_locid="902">Location</uicontrol> for the node to help identify it.</p>
+                        </li>
+                        <li ixia_locid="903">
+                            <p ixia_locid="904"><draft-comment author="rstone" ixia_locid="905">US63466 adds </draft-comment>Specify whether to enable
+                                    <uicontrol ixia_locid="906">Serial Console Data Carrier
+                                    Detect</uicontrol>.</p>
+                            <p ixia_locid="907">Select this option to have any active console
+                                session automatically logged out when the serial console cable is
+                                disconnected. The server must support data carrier detect on the
+                                serial console port.</p>
+                        </li>
+                    </ul>
+                    <p ixia_locid="908">On the <uicontrol ixia_locid="909">Installation
+                            Parameters</uicontrol> tab:</p>
+                    <fig id="fig_wfs_qkx_mx" ixia_locid="910">
+                        <image href="jow1443358337894.image" id="image_xfs_qkx_mx" ixia_locid="911">
+                            <alt ixia_locid="912">TiS Edit Host Installation Parameters</alt>
+                        </image>
+                    </fig>
+                    <dl>
+                        <dlentry ixia_locid="913">
+                            <dt ixia_locid="914"><uicontrol ixia_locid="915">Boot
+                                Device</uicontrol></dt>
+                            <dd ixia_locid="916">
+                                <p ixia_locid="917">is the host device for boot partition, relative
+                                    to <filepath ixia_locid="918">/dev</filepath>. The default is
+                                        <option ixia_locid="919">sda</option>.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="1025">
+                            <dt ixia_locid="1026"><uicontrol ixia_locid="1027">Rootfs
+                                    Device</uicontrol></dt>
+                            <dd ixia_locid="1028">
+                                <p ixia_locid="924">is the host device for rootfs partition,
+                                    relative to<filepath ixia_locid="925"> /dev</filepath>. The
+                                    default is <option ixia_locid="926">sda</option>.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="927">
+                            <dt ixia_locid="928"><uicontrol ixia_locid="929">Installation
+                                    Output</uicontrol></dt>
+                            <dd ixia_locid="930">
+                                <p ixia_locid="931">is the format for console output on the host
+                                        (<option ixia_locid="932">text</option> or <option ixia_locid="933">graphical</option>). The default is <option ixia_locid="934">text</option>.</p>
+                                <note id="note_N108C1_N108A9_N1089D_N10858_N107F0_N107DF_N100F5_N10029_N10001" ixia_locid="935">
+                                    <p ixia_locid="936"><draft-comment author="jowens" ixia_locid="1038">CGTS-5076
+                                            graphical installation disabled</draft-comment>The
+                                            <option ixia_locid="937">graphical</option> option
+                                        currently has no effect. Text-based installation is used
+                                        regardless of this setting.</p>
+                                </note>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="940">
+                            <dt ixia_locid="941"><uicontrol ixia_locid="942">Console</uicontrol></dt>
+                            <dd ixia_locid="943">
+                                <p ixia_locid="1039">is the output device to use for message display
+                                    on the host (for example, <option ixia_locid="945">tty0</option>). The default is <option ixia_locid="946">ttys0,
+                                        115200</option>. </p>
+                                <note id="note_N103A9_N10396_N1038A_N10309_N10299_N1028E_N10057_N1003D_N10001" ixia_locid="1040">
+                                    <p ixia_locid="1041">This setting is <i ixia_locid="947">not</i>
+                                        updated automatically to reflect changes to the <uicontrol ixia_locid="948">Installation Output</uicontrol>
+                                        setting.</p>
+                                </note>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </info>
+            </step>
+            <step id="horizon-save-settings" ixia_locid="890">
+                <cmd ixia_locid="891">Save the settings.</cmd>
+                <substeps id="substeps_nkj_xkx_mx">
+                    <substep ixia_locid="67">
+                        <cmd id="cmd-save-personality" ixia_locid="68">Click <uicontrol ixia_locid="69">Save</uicontrol> to initialize and configure the new
+                            node.</cmd>
+                        <stepresult ixia_locid="109">
+                            <p id="p-save-personality" ixia_locid="562"><draft-comment author="jowens" ixia_locid="783">US63465 branding removed from
+                                    screen</draft-comment>The node is restarted automatically, and a
+                                display-device menu appears on the node console.</p>
+                            <fig id="fig_qkj_xkx_mx" ixia_locid="563">
+                                <image href="jow1412193160572.image" id="image_rkj_xkx_mx" ixia_locid="770">
+                                    <alt ixia_locid="771">Titanium Server Controller Node
+                                        Install</alt>
+                                </image>
+                            </fig>
+                        </stepresult>
+                    </substep>
+                    <substep id="wait_for_login_prompt" ixia_locid="116">
+                        <cmd ixia_locid="117">Wait while the node is configured and rebooted.</cmd>
+                        <info ixia_locid="118">
+                            <p ixia_locid="1042">Up to 20 minutes may be required for a reboot.</p>
+                            <p ixia_locid="1043">The time required to configure and reboot controller-1 depends on the
+                                secondary disk partition size. Larger partitions require more time
+                                for synchronization with controller-0. Fore more information on DRBD
+                                synchronization and tuning, see <xref href="gri1467382322806.xml" ixia_locid="1044"/>.</p>
+                            <p ixia_locid="1045">When the reboot is complete, the node is reported as
+                                    <uicontrol ixia_locid="123">Locked</uicontrol>, <uicontrol ixia_locid="802">Disabled</uicontrol>, and <uicontrol ixia_locid="127">Online</uicontrol>.</p>
+                            <note id="note_N10974_N1095C_N10953_N1091C_N1090C_N100F5_N10029_N10001" ixia_locid="120" type="caution">
+                                <p ixia_locid="121">To ensure a successful installation, wait for
+                                    the node to be reported as <uicontrol ixia_locid="803">Locked</uicontrol>, <uicontrol ixia_locid="126">Disabled</uicontrol>, and <uicontrol ixia_locid="128">Online</uicontrol>, and ensure that the login prompt
+                                    appears on the host console. If the process is interrupted
+                                    prematurely, the host installation can fail.</p>
+                            </note>
+                        </info>
+                        <stepresult ixia_locid="804">
+                            <p ixia_locid="805">On the host console, a login screen is
+                                displayed.</p>
+                            <note id="note_N10999_N10990_N10953_N1091C_N1090C_N100F5_N10029_N10001" ixia_locid="806">
+                                <p ixia_locid="807">You must change your password immediately. To
+                                    begin, provide the default password <nameliteral ixia_locid="808">wrsroot</nameliteral>. Then type a new
+                                    password and confirm it.</p>
+                            </note>
+                        </stepresult>
+                    </substep>
+                </substeps>
+                <stepresult id="node_locked_available_online" ixia_locid="110">
+                    <p ixia_locid="97">The host is now configured with a personality.</p>
+                </stepresult>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

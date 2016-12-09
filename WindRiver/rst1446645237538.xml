@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "../../system/dtd/client/wr_topic/generaltask-wr.dtd">
+<task-wr id="rst1446645237538" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Shutting Down a Titanium Cluster</title>
+    <shortdesc ixia_locid="2">You can perform a controlled shutdown of an entire Titanium cluster. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="rstone" ixia_locid="59">Topic added for
+                    CGTS-2886</draft-comment>This may be necessary if, for instance, you need to
+                physically move the underlying hardware.</p>
+        </context>
+        <steps>
+            <step id="step_N1002B_N10028_N1001C_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Swact to controller-0.</cmd>
+                <info ixia_locid="8">
+                    <p ixia_locid="9">From the <menucascade ixia_locid="10">
+                            <uicontrol ixia_locid="11">Admin</uicontrol>
+                            <uicontrol ixia_locid="12">Platform</uicontrol>
+                            <uicontrol ixia_locid="13">Host Inventory</uicontrol>
+                        </menucascade> page, on the <wintitle ixia_locid="94">Hosts</wintitle> tab, select
+                            <menucascade ixia_locid="14">
+                            <uicontrol ixia_locid="15">Edit Host</uicontrol>
+                            <uicontrol ixia_locid="16">Swact Host</uicontrol>
+                        </menucascade> for controller-0.</p>
+                </info>
+            </step>
+            <step id="step_N10063_N10028_N1001C_N10001" ixia_locid="19">
+                <cmd ixia_locid="20">Shut down all virtual machine instances. </cmd>
+                <info ixia_locid="21">
+                    <p ixia_locid="22">Shutdown procedures vary between operating systems. Follow
+                        the instructions provided in your operating system documentation.</p>
+                </info>
+            </step>
+            <step id="step_N10074_N10028_N1001C_N10001" ixia_locid="23">
+                <cmd ixia_locid="24">Lock and shut down each compute node. </cmd>
+                <substeps id="substeps_bnp_jsx_wt">
+                    <substep ixia_locid="25">
+                        <cmd ixia_locid="26">From the <menucascade ixia_locid="27">
+                                <uicontrol ixia_locid="28">Admin</uicontrol>
+                                <uicontrol ixia_locid="29">Platform</uicontrol>
+                                <uicontrol ixia_locid="30">Host Inventory</uicontrol>
+                            </menucascade> page, on the <wintitle ixia_locid="95">Hosts</wintitle> tab, select
+                                <menucascade ixia_locid="31">
+                                <uicontrol ixia_locid="32">Edit Host</uicontrol>
+                                <uicontrol ixia_locid="33">Lock Host</uicontrol>
+                            </menucascade>.</cmd>
+                    </substep>
+                    <substep ixia_locid="37">
+                        <cmd ixia_locid="38">From the terminal of the compute node, issue a
+                                <cmdname ixia_locid="39">shutdown</cmdname> command.</cmd>
+                        <stepxmp ixia_locid="60">
+                            <codeblock ixia_locid="64"><systemoutput ixia_locid="68"># </systemoutput><userinput ixia_locid="72">shutdown -hP now</userinput></codeblock>
+                        </stepxmp>
+                        <info ixia_locid="76">
+                            <p ixia_locid="77">Wait until the node is completely shut down before proceeding to the
+                                next step.</p>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N100CE_N10028_N1001C_N10001" ixia_locid="44">
+                <cmd ixia_locid="45">Lock and shut down <nameliteral ixia_locid="85">storage-1</nameliteral>.</cmd>
+                <info ixia_locid="78">
+                    <p ixia_locid="79">Wait for several minutes to ensure ceph has detected and
+                        reacted to the missing storage node. You can use <cmdname ixia_locid="80">ceph -s</cmdname> to verify that the OSDs on storage-1 are down.</p>
+                </info>
+            </step>
+            <step id="step_N100D7_N10028_N1001C_N10001" ixia_locid="46">
+                <cmd ixia_locid="47">Shut down <nameliteral ixia_locid="86">storage-0</nameliteral>.</cmd>
+                <info ixia_locid="48">
+                    <p ixia_locid="49">You cannot lock this storage node, because Ceph storage
+                        requires a quorum of two unlocked storage nodes and at least one unlocked
+                        controller.</p>
+                </info>
+                <stepxmp ixia_locid="61">
+                    <codeblock ixia_locid="65"><systemoutput ixia_locid="69"># </systemoutput><userinput ixia_locid="73">shutdown -hP now</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="81">
+                    <p ixia_locid="82">Wait until the node is completely shut down before proceeding to the next
+                        step.</p>
+                </info>
+            </step>
+            <step id="step_N1015E_N10034_N1001F_N10001" ixia_locid="90">
+                <cmd ixia_locid="91">On a cluster that uses controller storage, lock <nameliteral ixia_locid="92">controller-1</nameliteral>.</cmd>
+                <info ixia_locid="52">
+                    <note id="note_N1016D_N10169_N1015E_N10034_N1001F_N10001" ixia_locid="93">
+                        <p ixia_locid="53">This applies only to LVM-backed systems (systems without
+                            storage nodes). On a Ceph-backed system with dedicated storage nodes,
+                                <nameliteral ixia_locid="88">controller-1</nameliteral> cannot be
+                            locked.</p>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N100E8_N10028_N1001C_N10001" ixia_locid="50">
+                <cmd ixia_locid="51">Shut down <nameliteral ixia_locid="87">controller-1</nameliteral>.</cmd>
+                <stepxmp ixia_locid="62">
+                    <codeblock ixia_locid="66"><systemoutput ixia_locid="70"># </systemoutput><userinput ixia_locid="74">shutdown -hP now</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="83">
+                    <p ixia_locid="84">Wait until the node is completely shut down before proceeding to the next
+                        step.</p>
+                </info>
+            </step>
+            <step id="step_N100F9_N10028_N1001C_N10001" ixia_locid="54">
+                <cmd ixia_locid="55">Shut down <nameliteral ixia_locid="89">controller-0</nameliteral>. </cmd>
+                <stepxmp ixia_locid="63">
+                    <codeblock ixia_locid="67"><systemoutput ixia_locid="71"># </systemoutput><userinput ixia_locid="75">shutdown -hP now</userinput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+        <postreq id="postreq_N100FC_N1001C_N10001" ixia_locid="56">
+            <p ixia_locid="57">For information on restarting the cluster, see <xref href="rst1446645226638.xml" ixia_locid="58"/>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

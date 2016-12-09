@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="mts1464968384166" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="21">Installing the Titanium Server Secondary Region Software</title>
+    <shortdesc ixia_locid="22">You can install the Titanium Server Secondary Region software from the command
+        line of <nameliteral ixia_locid="29">controller-0</nameliteral>.</shortdesc>
+    <prolog>
+        <author ixia_locid="23">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N10021_N1001E_N10001" ixia_locid="8">
+            <p ixia_locid="9">The following items are required for installation:</p>
+            <ul id="ul_etd_52z_2s">
+                <li ixia_locid="11">
+                    <p ixia_locid="12">the Titanium Server installation software</p>
+                </li>
+                <li ixia_locid="13">
+                    <p ixia_locid="14">a Titanium Server license file</p>
+                </li>
+                <li ixia_locid="34">
+                    <p ixia_locid="36">optionally, a CA-signed digital certificate to support HTTPS
+                        access</p>
+                </li>
+            </ul>
+            <p ixia_locid="38">Before starting the installation, ensure that the Primary Region is
+                provisioned and available. </p>
+        </prereq>
+        <context id="context_N10064_N10024_N10001" ixia_locid="39">
+            <p ixia_locid="40">The following steps are required to install the Titanium Server Secondary Region
+                software:</p>
+        </context>
+        <steps>
+            <step id="step_N10029_N10026_N1001A_N10001" ixia_locid="26">
+                <cmd ixia_locid="27">Prepare the <nameliteral ixia_locid="28">region_config</nameliteral> file.</cmd>
+            </step>
+            <step id="step_N10036_N10026_N1001A_N10001" ixia_locid="31">
+                <cmd ixia_locid="33">Install and configure the first controller.</cmd>
+            </step>
+            <step id="step_N10041_N10026_N1001A_N10001" ixia_locid="35">
+                <cmd ixia_locid="37">Initialize and configure the second controller.</cmd>
+            </step>
+            <step id="step_N100A8_N10074_N10024_N10001" ixia_locid="42">
+                <cmd ixia_locid="43">(Optional) Initialize and configure the storage nodes.</cmd>
+            </step>
+            <step id="step_N1004C_N10026_N1001A_N10001" ixia_locid="19">
+                <cmd ixia_locid="20">Initialize and configure the compute nodes.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

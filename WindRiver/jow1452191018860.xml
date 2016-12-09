@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1452191018860" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Creating Cached RAW Boot Images</title>
+    <shortdesc ixia_locid="2">You can use cached RAW boot image files for faster volume creation on Ceph-backed
+        systems.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="25"><draft-comment author="jowens" ixia_locid="6">US68056 new topic;
+                    US69978 mention instance launch time</draft-comment>On systems using Ceph
+                storage, boot image files must be converted to RAW format before they can be used to
+                create volumes. You can accelerate volume creation in Titanium Server (and therefore
+                instance launch time) by caching the RAW images as they are created. The cached
+                images are maintained in the Glance image storage space and used for volume
+                creation, eliminating conversion time.</p>
+            <p ixia_locid="26"><draft-comment author="jowens" ixia_locid="27">CGTS-3944 document --wait
+                    option</draft-comment>By default, caching is performed in the background to
+                ensure low processing overhead. If multiple requests are made at the same time, they
+                are executed serially. You can use the<option ixia_locid="28"> --wait</option> option to override
+                background processing, so that the command does not return until the operation is
+                complete and the raw image is ready for use. If you include a time in seconds (for
+                    example,<option ixia_locid="29"> --wait 10</option>), the command returns after the time has
+                elapsed and reports the current status of the operation.</p>
+            <p ixia_locid="7"><draft-comment author="jowens" ixia_locid="30">CGTS-5305 visibility public was
+                    is-public= true; also, output updated </draft-comment>This feature is available
+                from the CLI only. To create a cache, include the <option ixia_locid="21">--cached-raw</option> option when creating an image, as shown in the following
+                example:</p>
+            <codeblock ixia_locid="9"><systemoutput ixia_locid="10">~(keystone_admin)$ </systemoutput><userinput ixia_locid="11">glance image-create --name "cirros" --visibility public \
+--disk-format=qcow2 --container-format=bare \
+--file /home/wrsroot/images/cirros.img --cache-raw</userinput>
+<systemoutput ixia_locid="12">+----------------------+--------------------------------------+
+| Property             | Value                                |
++----------------------+--------------------------------------+
+| Property 'cache_raw' | True                                 |
+| checksum             | 9ffe77b56668bf3fad95c64df4a8ac4f     |
+| container_format     | bare                                 |
+| created_at           | 2016-01-07T22:06:22.769563           |
+| deleted              | False                                |
+| deleted_at           | None                                 |
+| disk_format          | qcow2                                |
+| id                   | a5c6ef41-fe73-4d25-abbc-64380646e705 |
+| visibility           | public                               |
+| min_disk             | 0                                    |
+| min_ram              | 0                                    |
+| name                 | cirros                               |
+| owner                | f34e518e265a402aa53ce7c29475cab1     |
+| protected            | False                                |
+| size                 | 636485632                            |
+| status               | active                               |
+| updated_at           | 2016-01-07T22:06:39.225343           |
+| virtual_size         | None                                 |
++----------------------+--------------------------------------+
+</systemoutput></codeblock>
+            <p ixia_locid="13"><draft-comment author="jowens" ixia_locid="31">CGTS-5112 command updated with -v
+                    option</draft-comment>The cache size and status are included in the images list
+                for the CLI.</p>
+            <codeblock ixia_locid="14"><systemoutput ixia_locid="15">~(keystone_admin)$ </systemoutput><userinput ixia_locid="16">glance -v image-list</userinput>
+<systemoutput ixia_locid="17">+----...+--------+...+--------+------------+-----------+
+| ID ...| Name   |...| Status | Cache Size | Raw Cache |
++----...+--------+...+--------+------------+-----------+
+| a5c...| cirros |...| active | 5636485632 | Cached    |
++----...+--------+...+--------+------------+-----------+
+</systemoutput></codeblock>
+            <p ixia_locid="18">In the web administration interface, this list is shown on the
+                    <wintitle ixia_locid="19">Images</wintitle> page accessible from the
+                    <uicontrol ixia_locid="20">System</uicontrol> menu. </p>
+            <note id="note_N10073_N10022_N1001F_N10001" ixia_locid="22">
+                <p ixia_locid="23">Until image caching is complete, an image created using <option ixia_locid="24">--cached-raw</option> behaves as any regular uncached image.</p>
+            </note>
+        </context>
+    </taskbody>
+</task-wr>

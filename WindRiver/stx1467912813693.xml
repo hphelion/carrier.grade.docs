@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="stx1467912813693" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="90">Licensing and Authentication</title>
+ <shortdesc ixia_locid="91">Licenses and CA-certificates are initially specified at installation
+  time using the <uicontrol ixia_locid="93">config_controller</uicontrol> wizard and must be properly maintained and
+  updated.</shortdesc>
+ <prolog>
+  <author ixia_locid="92">Edward Knowlton</author>
+  <author ixia_locid="94">Randall Budd</author>
+ </prolog>
+ <conbody>
+  <section id="section_N10069_N1001C_N10001" ixia_locid="21">
+   <title ixia_locid="22">Updating a License </title>
+   <p ixia_locid="36">You can update a license by copying the new license file to a directory on the
+    active controller host, and then running the <cmdname ixia_locid="38">license-install</cmdname>
+    utility as shown in the following example:</p>
+   <codeblock ixia_locid="40"><systemoutput ixia_locid="42">$ </systemoutput><userinput ixia_locid="44">sudo /usr/sbin/license-install <varname ixia_locid="46">license_file</varname></userinput></codeblock>
+   <note id="note_N100AC_N10078_N1001F_N10001" ixia_locid="59" type="warning">
+    <p ixia_locid="60">Wind River recommends that you update licenses before they expire. Manual
+     recovery of VMs may be required if the license is upgraded after expiry. </p>
+   </note>
+  </section>
+  <section id="section_N100E9_N1001F_N10001" ixia_locid="86">
+   <title ixia_locid="87">Operational Behavior with Expired or Invalid Licenses</title>
+   <p ixia_locid="88">Titanium Server and Titanium Server CPE assume the operational behavior
+    described below when an expired or invalid license is detected. </p>
+   <p ixia_locid="89">Mismatched licenses are considered invalid. For example, a Titanium Server
+    license is considered an invalid license if the server is installed and provisioned as a
+    Titanium Server CPE product. </p>
+   <p ixia_locid="70">Expired and invalid licenses cause the following behavior: </p>
+   <ol id="ol_erl_snb_3v">
+    <li ixia_locid="71">
+     <p ixia_locid="72">A service log (401.003) is logged every 1 hour.</p>
+    </li>
+    <li ixia_locid="73">
+     <p ixia_locid="74">A service alarm (400.003) is triggered 8 hours after the expired or invalid
+      license is detected, and every 1 hour thereafter.</p>
+    </li>
+    <li ixia_locid="75">
+     <p ixia_locid="76">72 hours after the expired or invalid license is detected for the first
+      time, the controller stops service.</p>
+    </li>
+   </ol>
+  </section>
+  <section id="section_N100C0_N1001F_N10001" ixia_locid="53">
+   <title ixia_locid="55">Updating a digital certificate</title>
+   <p ixia_locid="37">You can update a CA-signed or self-signed certificate by copying the new
+    certificate to a directory on the active controller host, and then running the <cmdname ixia_locid="39">https-certificate-install</cmdname> utility as shown in the following
+    example:</p>
+   <codeblock ixia_locid="41"><systemoutput ixia_locid="43">$ </systemoutput><userinput ixia_locid="45">sudo /usr/sbin/https-certificate-install <varname ixia_locid="47">pem_file</varname></userinput></codeblock>
+  </section>
+ </conbody>
+</concept-wr>

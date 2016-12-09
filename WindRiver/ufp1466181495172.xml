@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ufp1466181495172" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Ceph-backed VM Storage</title>
+ <shortdesc ixia_locid="2">Titanium Server provides a flexible and scalable range of options for
+    Ceph-backed storage.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+    <draft-comment author="jowens" ixia_locid="17">US74975 add remote ephemeral storage; US85034
+      Swift / US84106 updates.</draft-comment>
+    <p ixia_locid="18">Systems configured for Ceph-backed storage use dedicated storage hosts to
+      provide storage resources for VMs. You can use these resources for VM swap, ephemeral, and
+      boot-from-image root disks (remote ephemeral storage) to support persistence for live
+      migration, cold migration, and evacuation. You can optionally enable additional Ceph resources
+      to support Openstack object storage (Swift) access through the Ceph Object Gateway, so that
+      Swift objects are accessible to VMs for use during operation.</p>
+    <p ixia_locid="9"><draft-comment author="jowens" ixia_locid="11">US77470 support up to four
+        storage replication groups</draft-comment>Titanium Server supports up to four pairs of
+      storage hosts for scalability. Allocations for ephemeral, image, object, and volume storage
+      are rebalanced dynamically to meet changing requirements.</p>
+    <p ixia_locid="19"><draft-comment author="jowens" ixia_locid="20">US84106 mention cache
+        tiering</draft-comment>Systems configured for Ceph-backed dedicated storage can use cache
+      tiering to improve performance for frequently-accessed data. For more information, see <ph ixia_locid="21" otherprops="printonly"><cite ixia_locid="22">Titanium Server System
+          Administration: </cite></ph><cite ixia_locid="23"><ph ixia_locid="24"><xref href="siv1474312502430.xml" ixia_locid="25"/></ph></cite>.</p>
+    <p ixia_locid="13"><draft-comment author="jowens" ixia_locid="14">US78833 / US77367 add Ceph
+        storage to LVM system</draft-comment>Systems configured for controller-based storage can be
+      extended to use Ceph storage. For more information, see <ph ixia_locid="26" otherprops="printonly"><cite ixia_locid="27">Titanium Server System Administration:
+        </cite></ph><cite ixia_locid="28"><ph ixia_locid="29"><xref href="cny1464872771057.xml" ixia_locid="30"/></ph></cite>.</p>
+ </conbody>
+</concept-wr>

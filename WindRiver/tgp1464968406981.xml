@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="tgp1464968406981" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Configuring Controller-0 for a Titanium Server Secondary Region</title>
+    <shortdesc ixia_locid="2">You must configure controller-0 for the Secondary Region as detailed
+        in these instructions. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N10021_N1001E_N10001" ixia_locid="8">
+            <p ixia_locid="9">For <nameliteral ixia_locid="182">controller-0</nameliteral> configuration, you require the
+                following:</p>
+            <ul id="ul_etd_52z_2s">
+                <li ixia_locid="205">
+                    <p ixia_locid="12">the Titanium Server installation software</p>
+                </li>
+                <li ixia_locid="13">
+                    <p ixia_locid="14">a Titanium Server license file</p>
+                </li>
+                <li ixia_locid="15">
+                    <p ixia_locid="16">a prepared region_config file </p>
+                </li>
+                <li ixia_locid="17">
+                    <p ixia_locid="189">optionally, a CA-signed digital certificate to support HTTPS access for REST
+                        API</p>
+                </li>
+            </ul>
+        </prereq>
+        <prereq id="prereq_N1002B_N10028_N10001" ixia_locid="166">
+            <p ixia_locid="169">Before installing the ISO image, ensure the following:</p>
+            <ul id="ul_p5w_hwh_g4">
+                <li ixia_locid="172">
+                    <p ixia_locid="175">The host meets the hardware requirements for a controller.
+                        For more information, see <cite ixia_locid="186">Titanium Server
+                            Installation: Hardware Requirements</cite>.</p>
+                </li>
+                <li ixia_locid="90">
+                    <p ixia_locid="183">You have terminal-server access to the host, so that you can
+                        monitor messages during initialization.</p>
+                </li>
+                <li ixia_locid="178">
+                    <p ixia_locid="181">The PXE boot, management, infrastructure, OAM, and board
+                        management networks are planned, set up, and connected. For more
+                        information, see <xref href="ach1469625944660.xml" ixia_locid="198"/>.</p>
+                </li>
+                <li ixia_locid="91">
+                    <p ixia_locid="92">All other hosts in the Titanium Server Secondary Region are powered
+                        off.</p>
+                </li>
+                <li ixia_locid="93">
+                    <p ixia_locid="94">You have reviewed the Release Notes for any additional
+                        information pertaining to installation. </p>
+                </li>
+            </ul>
+        </prereq><!-- we could conref this prereq except for the network name changes -->
+        <steps>
+            <step id="step_N1002A_N10027_N1001B_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Prepare a bootable USB flash drive to use for
+                    installation.</cmd>
+            </step>
+            <step id="step_N10071_N10063_N1001E_N10001" ixia_locid="20">
+                <cmd ixia_locid="21">Copy all additional required files to a second USB drive.</cmd>
+                <info ixia_locid="22">
+                    <p ixia_locid="23">A license file and a <filepath ixia_locid="24">region_config</filepath> file are required
+                        during installation and configuration.</p>
+                </info>
+            </step>
+            <step conref="jow1433000943390.xml#jow1433000943390/power_on_host" conrefend="jow1433000943390.xml#jow1433000943390/log_in" id="step_N10086_N10063_N1001E_N10001" ixia_locid="25">
+                <cmd ixia_locid="26"/>
+            </step>
+            <step id="step_N10090_N10063_N1001E_N10001" ixia_locid="27">
+                <cmd ixia_locid="28">Copy the additional required files to the
+                        <nameliteral ixia_locid="29">controller-0</nameliteral> hard disk.</cmd>
+                <info ixia_locid="30">
+                    <p ixia_locid="31">Connect the second USB flash drive and mount it, and then
+                        copy the license file and the <filepath ixia_locid="187">region_config</filepath> file to the
+                        controller hard disk. The recommended location is
+                            <filepath ixia_locid="188">/home/wrsroot</filepath>.</p>
+                </info>
+            </step>
+            <step id="step_N10103_N100AB_N1001F_N10001" ixia_locid="199">
+                <cmd ixia_locid="200">Apply any patches that may be needed. For more information, see <cite ixia_locid="201">Titanium
+                        Server Patching and Upgrading Platform Software</cite>. </cmd>
+            </step>
+            <step id="step_N100A5_N10063_N1001E_N10001" ixia_locid="32">
+                <cmd ixia_locid="33">Configure <nameliteral ixia_locid="34">controller-0</nameliteral> as a Titanium Server Secondary Region
+                    controller.</cmd>
+                <info ixia_locid="35">
+                    <p ixia_locid="36">Execute the following command:</p>
+                    <codeblock ixia_locid="37"><systemoutput ixia_locid="38">$ </systemoutput><userinput ixia_locid="39">sudo config_region [<varname ixia_locid="40">region_config_path</varname>]</userinput></codeblock>
+                    <p ixia_locid="41">where <varname ixia_locid="42">region_config_path</varname>
+                        is the full path to the <filepath ixia_locid="190">region_config</filepath>
+                        file. The default value is <filepath ixia_locid="44">/home/wrsroot/region_config</filepath>.</p>
+                </info>
+            </step>
+            <step id="step_N1012E_N100A1_N1001E_N10001" ixia_locid="184">
+                <cmd ixia_locid="185">Wait for the Linux prompt to return with no errors.</cmd>
+                <info ixia_locid="202">
+                    <note id="note_N1015B_N10158_N1014E_N100AB_N1001F_N10001" ixia_locid="203">
+                        <p ixia_locid="204">After this step, there are no further region-specific changes. </p>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N10148_N100A6_N1001E_N10001" ixia_locid="191">
+                <cmd ixia_locid="192">Delete the <nameliteral ixia_locid="196">region_config</nameliteral> file from
+                    the system.</cmd>
+                <info ixia_locid="194">
+                    <note id="note_N10052_N10022_N1001F_N10001" ixia_locid="195" type="caution">
+                        <p ixia_locid="19">The <nameliteral ixia_locid="197">region_config</nameliteral> file
+                            contains clear-text authentication data. For improved security, delete
+                            this file from the system immediately after use.</p>
+                    </note>
+                </info>
+            </step>
+        </steps>
+        <postreq id="postreq_N10195_N1001F_N10001" ixia_locid="206">
+            <p ixia_locid="207">To continue the installation and configuration of controller-1, storage nodes, and
+                compute hosts, refer to the Titanium Server installation guide that pertains to your
+                system, either <cite ixia_locid="10">Titanium Server Installation for Systems with
+                    Controller Storage</cite> or <cite ixia_locid="208">Titanium Server Installation
+                    for Systems with Dedicated Storage</cite>. </p>
+        </postreq>
+    </taskbody>
+</task-wr>

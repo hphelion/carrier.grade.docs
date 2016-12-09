@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333795559" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1">Memory Tab</title>
+    <shortdesc ixia_locid="2">The <uicontrol ixia_locid="3">Memory</uicontrol> tab on the <wintitle ixia_locid="4">Inventory Detail</wintitle> page displays host memory
+        details.</shortdesc>
+    <prolog>
+        <author ixia_locid="26">Jim Owens</author>
+        <author ixia_locid="5">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <fig id="fig_N10027_N10024_N10001" ixia_locid="6">
+            <image href="hid1474294941007.image" id="image_abm_dwq_3x" ixia_locid="30">
+                <alt ixia_locid="31">Host Inventory Compute Memory tab 16.x</alt>
+            </image>
+        </fig>
+        <p ixia_locid="8"><draft-comment author="jowens" ixia_locid="29">CGTS-5196 Usable Total was
+                VM total</draft-comment>The information is presented in three columns, as
+            follows:</p>
+        <dl>
+            <dlentry ixia_locid="9">
+                <dt ixia_locid="10">Memory</dt>
+                <dd ixia_locid="11">
+                    <p ixia_locid="12">Overall memory on the host.</p>
+                    <p ixia_locid="13">For a controller node it displays the total and available memory figures.</p>
+                    <p ixia_locid="14">For a compute node, as in the example above, it displays the
+                        amount of memory reserved for the platform (system software), and the usable
+                        total available for use by virtual machines. The usable total includes
+                        memory reserved for vSwitch huge pages.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="15">
+                <dt ixia_locid="16">vSwitch Huge Pages</dt>
+                <dd ixia_locid="17">
+                    <p ixia_locid="18">This column is relevant on compute nodes only.</p>
+                    <p ixia_locid="19">The size of the huge pages, and the total and available huge page figures.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="20">
+                <dt ixia_locid="21">VM Pages</dt>
+                <dd ixia_locid="22">
+                    <p ixia_locid="23">This column is relevant on compute nodes only.</p>
+                    <p ixia_locid="24">The size of the pages, and the total and available page
+                        figures. If changes to the huge page allocations are requested for a locked
+                        host, they are shown as <nameliteral ixia_locid="25">Pending</nameliteral>.</p>
+                </dd>
+            </dlentry>
+        </dl>
+    </conbody>
+    <related-links>
+        <link href="jow1423087781001.xml" ixia_locid="32"/>
+        <link href="jow1423088885963.xml" ixia_locid="33"/>
+        <link href="jow1423089015252.xml" ixia_locid="34"/>
+    </related-links>
+</concept-wr>

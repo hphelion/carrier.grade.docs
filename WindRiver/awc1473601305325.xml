@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="awc1473601305325" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Adding an SDN Controller Using the CLI</title>
+    <shortdesc ixia_locid="2">If you prefer, you can use the CLI to add an SDN Controller.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="6">US84057 new
+                    topic</draft-comment>The following CLI commands are available for managing SDN
+                controllers:</p>
+            <ul id="ul_dkn_vmv_mx">
+                <li ixia_locid="375">
+                    <p ixia_locid="376"><cmdname ixia_locid="377">system sdn-controller-add</cmdname></p>
+                </li>
+                <li ixia_locid="378">
+                    <p ixia_locid="379"><cmdname ixia_locid="380">system sdn-controller-modify</cmdname></p>
+                </li>
+                <li ixia_locid="381">
+                    <p ixia_locid="382"><cmdname ixia_locid="383">system sdn-controller-list</cmdname></p>
+                </li>
+                <li ixia_locid="384">
+                    <p ixia_locid="385"><cmdname ixia_locid="386">system sdn-controller-delete</cmdname></p>
+                </li>
+            </ul>
+        </context>
+        <prereq id="prereq_N10022_N1001F_N10001" ixia_locid="309">
+            <p ixia_locid="310">You can add SDN controllers only if SDN support is configured at
+                installation using the Configuration Controller Script.</p>
+        </prereq>
+        <steps>
+            <step conref="jow1404766496848.xml#jow1404766496848/source-nova-openrc" id="step_N10042_N1003F_N1001F_N10001" ixia_locid="311">
+                <cmd ixia_locid="312"/>
+            </step>
+            <step id="step_N1004B_N1003F_N1001F_N10001" ixia_locid="313">
+                <cmd ixia_locid="314">Use the <cmdname ixia_locid="315">system sdn-controller-add</cmdname> command to add a
+                    controller.</cmd>
+                <info ixia_locid="316">
+                    <codeblock ixia_locid="317"><systemoutput ixia_locid="318">~(keystone_admin)$ </systemoutput><userinput ixia_locid="319">system sdn-controller-add -a <varname ixia_locid="320">sdn-controller-url</varname> \
+-p <varname ixia_locid="321">sdn-controller-port</varname> -t <varname ixia_locid="322">transport-protocol</varname>[ --state <varname ixia_locid="353">admin-state</varname>]</userinput></codeblock>
+                </info>
+                <info ixia_locid="323">
+                    <p ixia_locid="324">where</p>
+                    <parml>
+                        <plentry ixia_locid="325">
+                            <pt ixia_locid="326"><varname ixia_locid="327">sdn-controller-url</varname></pt>
+                            <pd ixia_locid="328">
+                                <p ixia_locid="329">is the management IP address or FQDN of the SDN controller</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="330">
+                            <pt ixia_locid="331"><varname ixia_locid="332">sdn-controller-port</varname></pt>
+                            <pd ixia_locid="333">
+                                <p ixia_locid="334">is the listening port for he SDN controller for southbound OVSDB
+                                    protocol (for example, <nameliteral ixia_locid="335">6640</nameliteral> for
+                                    OpenDaylight)</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="354">
+                            <pt ixia_locid="355"><varname ixia_locid="338">transport-protocol</varname></pt>
+                            <pd ixia_locid="356">
+                                <p ixia_locid="357">is the transport protocol for the OVSDB connection</p>
+                                <ul id="ul_f2q_21s_gx">
+                                    <li ixia_locid="358">
+                                        <p ixia_locid="359"><option ixia_locid="360">TCP</option> (recommended for OpenDaylight) </p>
+                                    </li>
+                                    <li ixia_locid="361">
+                                        <p ixia_locid="362"><option ixia_locid="363">UDP</option></p>
+                                    </li>
+                                    <li ixia_locid="364">
+                                        <p ixia_locid="365"><option ixia_locid="366">TLS</option> (not currently supported)</p>
+                                    </li>
+                                </ul>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="367">
+                            <pt ixia_locid="368"><varname ixia_locid="369">admin-state</varname></pt>
+                            <pd ixia_locid="370">
+                                <p ixia_locid="371">is the administrative control state
+                                        (<option ixia_locid="372">enable</option> or <option ixia_locid="373">disable</option>). The
+                                    default is <option ixia_locid="374">enable</option>.</p>
+                            </pd>
+                        </plentry>
+                    </parml>
+                </info>
+                <stepresult ixia_locid="350">
+                    <codeblock ixia_locid="351"><systemoutput ixia_locid="352">+----------------------+--------------------------------------+
+| Property             | Value                                |
++----------------------+--------------------------------------+
+| uuid                 | 380fec8c-3768-4d41-8ac0-8c059245dcb0 |
+| administrative state | enabled                              |
+| ip address           | 192.168.12.30                        |
+| remote port          | 6640                                 |
+| transport mode       | TCP                                  |
++----------------------+--------------------------------------+</systemoutput></codeblock>
+                </stepresult>
+            </step>
+        </steps>
+        <postreq id="postreq_N10039_N1001B_N10001" ixia_locid="9">
+            <p ixia_locid="10">You must configure a connection to the SDN controller separately. See
+                    <xref href="fcq1473601345370.xml" ixia_locid="11"/>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

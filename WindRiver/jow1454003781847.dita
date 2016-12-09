@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003781847" xml:lang="en-us"><title ixia_locid="1">VMs and NUMA Nodes</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">By default, a VM contains a single virtual NUMA node that is mapped to an
+            available physical NUMA node on the compute node and the VM will only use memory from
+            the backing physical NUMA node. Titanium Server also supports VMs with multiple virtual
+            NUMA nodes to address VM scenarios where multiple NUMA nodes are needed.</p>
+        <ul id="ul_ggb_jsz_55">
+            <li ixia_locid="5">
+                <p ixia_locid="6">By default the virtual cores are distributed evenly amongst the virtual NUMA
+                    nodes. This can be overridden if needed.</p>
+            </li>
+            <li ixia_locid="7">
+                <p ixia_locid="8">By default memory is distributed evenly across the virtual NUMA nodes. This can
+                    be overridden by assigning memory to each virtual zone using extra specs or
+                    image properties.</p>
+            </li>
+            <li ixia_locid="9">
+                <p ixia_locid="10">By default the memory is allocated from the designated host
+                    physical NUMA node. This can be applied using a
+                        <nameliteral ixia_locid="13">strict</nameliteral> setting so the memory must come from the
+                    designated zone, or a <nameliteral ixia_locid="14">prefer</nameliteral> setting to allow the
+                    memory to come from another physical NUMA nodes to be used if necessary.</p>
+            </li>
+            <li ixia_locid="11">
+                <p ixia_locid="12">By default the virtual NUMA nodes are mapped to available
+                    physical zones. This may be overridden so that each virtual NUMA node can be
+                    mapped to specific physical NUMA nodes. For example, in <xref href="jow1454003781257.dita#jow1454003781257/numa_architecture" ixia_locid="15"/>, VNF3 can
+                    map one core virtual NUMA node to physical NUMA node 0 and the other to physical
+                    NUMA node 1 to directly access resources in each physical NUMA node.</p>
+            </li>
+        </ul></conbody></concept-wr>

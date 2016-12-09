@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1426181291481" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Managing Local Volume Groups</title>
+    <shortdesc ixia_locid="2">You can add, delete, and review local volume groups on a compute
+        host.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10042_N1001F_N10001" ixia_locid="16"/>
+        <prereq id="prereq_N1002D_N1001F_N10001" ixia_locid="10">
+            <p ixia_locid="11">Before you can modify the settings for a host, you must lock the
+                host: </p>
+            <codeblock ixia_locid="12"><systemoutput ixia_locid="13">~(keystone_admin)$ </systemoutput><userinput ixia_locid="14">system host-lock <varname ixia_locid="15">hostname</varname></userinput></codeblock>
+        </prereq>
+        <steps id="steps_bmc_3wc_n5">
+            <step id="step_N10175_N10171_N1001F_N10001" ixia_locid="671">
+                <cmd ixia_locid="672">Lock the host.</cmd>
+            </step>
+            <step id="step_N1017E_N10171_N1001F_N10001" ixia_locid="673">
+                <cmd ixia_locid="674">Open the <wintitle ixia_locid="675">Storage</wintitle> page for the host.</cmd>
+            </step>
+            <step id="step_N1018B_N10171_N1001F_N10001" ixia_locid="676">
+                <cmd ixia_locid="677">In the <nameliteral ixia_locid="678">Local Volume Groups</nameliteral> list, click the
+                        <uicontrol ixia_locid="679">Name</uicontrol> of the group
+                        (<nameliteral ixia_locid="680">nova-local</nameliteral>).</cmd>
+                <info ixia_locid="681">
+                    <p ixia_locid="682">The settings are accessible on the <uicontrol ixia_locid="683">Parameters</uicontrol> tab of
+                        the <wintitle ixia_locid="684">Local Volume Group Detail</wintitle> page.</p>
+                    <fig id="fig_b15_vxc_n5" ixia_locid="685">
+                        <image href="jow1443974983289.image" id="image_ay4_rwc_n5" ixia_locid="663">
+                            <alt ixia_locid="664">TiS Local Volume Group Detail Parameters tab</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

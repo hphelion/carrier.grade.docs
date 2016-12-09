@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="gji1472749306561" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="142">Installing the First Controller</title>
+    <shortdesc ixia_locid="143">The first step in installing Titanium Server is to install and configure the first
+        controller.</shortdesc>
+    <prolog>
+        <author ixia_locid="144">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="145">
+            <p ixia_locid="146">For an overview of methods, see <xref href="jow1443021521378.xml" ixia_locid="151"/>.</p>
+            <p ixia_locid="141">The configured host becomes <nameliteral ixia_locid="55">controller-0</nameliteral>.</p>
+            <note id="note_N10042_N10029_N10001" ixia_locid="56">
+                <p ixia_locid="57">For the configuration to run successfully, the management
+                    interface on <nameliteral ixia_locid="58">controller-0</nameliteral> must be
+                    connected and operational.</p>
+            </note>
+        </context>
+        <steps>
+            <step id="step_N10053_N10050_N1001C_N10001" ixia_locid="152">
+                <cmd ixia_locid="153"><draft-comment author="jowens" ixia_locid="134">US62850 mention PXE boot
+                        server:</draft-comment>Using an ISO image of the Titanium Server software
+                    from an external source, such as a USB flash drive or a DVD, or a PXE boot
+                    server, initialize the controller host.</cmd>
+                <info ixia_locid="154">
+                    <p ixia_locid="155">Initialization installs an operating system on the host's disk drive, and
+                        automatically boots the host from the drive.</p>
+                </info>
+            </step>
+            <step id="step_N10079_N1005A_N1001F_N10001" ixia_locid="169">
+                <cmd ixia_locid="170">Copy the installation files and any other required files to
+                        <nameliteral ixia_locid="171">controller-0</nameliteral>.</cmd>
+            </step>
+            <step id="step_N10086_N1005A_N1001F_N10001" ixia_locid="172">
+                <cmd ixia_locid="173">Apply any required software patches to
+                    <nameliteral ixia_locid="174">controller-0</nameliteral>.</cmd>
+            </step>
+            <step id="step_N1006B_N10050_N1001C_N10001" ixia_locid="156">
+                <cmd ixia_locid="157"><draft-comment author="jowens" ixia_locid="137">US62804 mention controller
+                        configuration input file:</draft-comment>Configure the host as a controller
+                    using the <filepath ixia_locid="158">config_controller</filepath>  command-line script. </cmd>
+                <info ixia_locid="159">
+                    <p ixia_locid="160">You can respond to the script interactively, or you can
+                        prepare and use a controller configuration input file. For more information,
+                        see <xref href="jow1441306845507.xml" ixia_locid="175"/>.</p>
+                </info>
+            </step>
+        </steps>
+        <postreq id="postreq_N1008C_N1001C_N10001" ixia_locid="161">
+            <p ixia_locid="163" product="tis_cpe">Use <nameliteral ixia_locid="164">controller-0</nameliteral> to initialize and configure the second
+                controller/compute node.</p>
+            <p ixia_locid="166" product="tis_std">Use <nameliteral ixia_locid="167">controller-0</nameliteral> to initialize and configure the remaining hosts (the
+                second controller node<ph ixia_locid="168" product="tis_ceph">, the storage
+                    nodes,</ph> and the compute nodes).</p>
+        </postreq>
+    </taskbody>
+</task-wr>

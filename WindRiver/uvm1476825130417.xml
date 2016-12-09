@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="uvm1476825130417" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">VM Configuration for Access to Swift Object Storage</title>
+ <shortdesc ixia_locid="2"/>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="5">US85034 new topic. If the
+        attachment and routing details are not beyond the scope of the documentation, we may want to
+        recast this as a task with steps for establishing the connection.</draft-comment>For access
+      to Swift storage, you must attach the VM to an external network with a route to the controller
+      OAM network. The VM uses a Swift client or Swift REST API to manage Swift containers and
+      objects, sending commands to the Titanium Server Swift endpoint public URL. The Swift API
+      service on the Titanium Server controller has access to the Swift containers and objects in
+      the Ceph storage pool over the infrastructure network.</p>
+ </conbody>
+</concept-wr>

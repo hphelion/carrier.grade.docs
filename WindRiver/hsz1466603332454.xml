@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="hsz1466603332454" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Overview of Titanium Server Upgrades</title>
+ <shortdesc ixia_locid="2">Titanium Server upgrades enable you to move Titanium software from one
+  release of Titanium Server to the next release of Titanium Server. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="33">Titanium Server software upgrade is a manual multi-step rolling-upgrade process, where Titanium
+   Server hosts are upgraded one at time while continuing to provide its hosting services to its
+   hosted applications. </p>
+  <p ixia_locid="34">Before starting the upgrades process, the system must be “patch current”, there must be no
+   alarms present on the system, the new software load must be imported and a valid license file for
+   the upgrade must be installed. </p>
+  <p ixia_locid="35">The upgrades process starts by upgrading the controllers. The standby controller is upgraded
+   first and involves loading the standby controller with the new release of software and migrating
+   all the Controller Services’ databases for the new release of software. Activity is switched to
+   the upgraded controller, running in a ‘compatibility’ mode where all inter-node messages are
+   using message formats from the old release of software. Before upgrading the second controller is
+   the point-of-no-return for an in-service abort of the upgrades process, see the following
+   section. The second controller is loaded with the new release of software and becomes the new
+   Standby controller. </p>
+  <p ixia_locid="36">If present, Storage Nodes are locked, upgraded and unlocked one at a time in order to respect
+   the 1:1 redundancy model of Titanium Server Storage Nodes.</p>
+  <p ixia_locid="37">Then Compute Nodes are locked, upgraded and unlocked one at a time in order to respect any
+   Service Group rules that may exist for VMs hosted by the Compute Nodes. When locking a Compute
+   Node, VMs are either live migrated, if possible, to another Compute Node or cold migrated to
+   another Compute Node. When upgrading the Compute Node, the Compute Node network boots/installs
+   the new software from the Active Controller. After unlocking the Compute Node, the Compute
+   Services are running in a ‘compatibility’ mode where all inter-node messages are using message
+   formats from the old release of software.</p>
+  <p ixia_locid="38">The final steps of the upgrades process is to activate and complete the upgrade process. This
+   basically involves disabling ‘compatibility’ modes on all hosts and clearing the Upgrade
+   Alarm.</p>
+  <draft-comment author="eknowlto" ixia_locid="4">US76710 and US76711 - TBD R3-S7</draft-comment>
+  <section id="section_N1002F_N1001F_N10001" ixia_locid="6">
+   <title ixia_locid="7">Rolling Back/Aborting an Upgrade</title>
+   <p ixia_locid="8">There are two cases for aborting an upgrade: </p>
+   <ul id="ul_dqp_brt_cx">
+    <li ixia_locid="9">
+     <p ixia_locid="10">Before controller-0 has been upgraded (that is, only controller-1 has been upgraded): In
+      this case the upgrade can be aborted and the system will remain in service during the abort.
+      For more information, see <xref href="apv1472471216502.xml" ixia_locid="11"/>.</p>
+    </li>
+    <li ixia_locid="12">
+     <p ixia_locid="13">After controller-0 has been upgraded (that is, both controllers have been upgraded): In this
+      case the upgrade can only be aborted with a complete outage and a re-install of all hosts.
+      This would only be done as a last resort, if there was absolutely no other way to recover the
+      system. For more information, see <xref href="dij1472220346346.xml" ixia_locid="14"/>.</p>
+    </li>
+   </ul>
+   <p ixia_locid="39">On Titanium Server CPE Systems, after the upgraded controller-1 is active, but before
+    controller-0 is upgraded, an inservice abort is possible, however, VMs that have been already
+    migrated to the upgraded controller-1 will be lost, including their disks. These VMs are only
+    recoverable if you have external backups for their data. </p>
+   <p ixia_locid="40">We do not support upgrade abort on CPE after controller-0 has been upgraded.</p>
+  </section>
+ </conbody>
+</concept-wr>

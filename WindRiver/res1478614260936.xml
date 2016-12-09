@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="res1478614260936" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Swift Dimensioning for Storage Nodes</title>
+ <shortdesc ixia_locid="2">Swift storage is not based on VMs but on the total number and size of the objects to be
+  stored.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Craig Griffin</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">To determine the disk capacity requirement for the Swift object pool, calculate the total
+   storage for Swift objects required to be supported plus some margin to handle growth.</p>
+  <sl>
+   <sli ixia_locid="5">Swift Storage Requirement = N * AvgObjectSize + Margin</sli>
+  </sl>
+  <p ixia_locid="6">Where:</p>
+  <sl>
+   <sli ixia_locid="7">N = Total number of volumes required</sli>
+   <sli ixia_locid="8">AvgObjectSize = Average size of swift objects on disk in GB</sli>
+   <sli ixia_locid="9">Margin = User-defined margin (recommend at least 25%, possibly more for object
+    storage)</sli>
+  </sl>
+  <p ixia_locid="10"> </p>
+ </conbody>
+</concept-wr>

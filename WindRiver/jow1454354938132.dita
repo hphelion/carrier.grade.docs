@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454354938132" xml:lang="en-us"><title ixia_locid="1">CPU Requirements and Placement</title><shortdesc ixia_locid="2">By default, two physical CPUs on NUMA Node 0 are assigned to AVS. This is
+        suitable for most applications, but can be changed to meet the throughput requirements of
+        the application.</shortdesc><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+        <p ixia_locid="4"> The number of physical CPU cores assigned to AVS can be decreased to one
+            for lower throughput applications to free up the number of available cores for the VMs,
+            or increased up to eight to maximize the available throughput to the application. In
+            addition to the total number of cores assigned to AVS, the specific NUMA node for that
+            allocation can also be specified. It is recommended to align the AVS core allocation to
+            the same NUMA node as the assigned physical NIC PCI NUMA node termination. The AVS core
+            assignments should be engineered to have the least amount of cores required to reach the
+            target throughput of the application to ensure there are sufficient CPU cores available
+            to the guest VMs for application processing.</p></conbody></concept-wr>

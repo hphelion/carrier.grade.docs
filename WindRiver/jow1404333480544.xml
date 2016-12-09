@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333480544" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+
+ -->
+    <title ixia_locid="1">Titanium Server Installation Overview</title>
+    <shortdesc ixia_locid="376">Installing Titanium Server involves loading and configuring the
+        software on a<ph ixia_locid="377" product="tis_cpe"> combined controller/compute</ph><ph ixia_locid="378" product="tis_std"> controller</ph> node, and then using this node to
+        load the software on a second <ph ixia_locid="379" product="tis_cpe"> combined
+            controller/compute node.</ph><ph ixia_locid="380" product="tis_std"> controller node,<ph ixia_locid="381" product="tis_ceph"> two storage nodes,</ph> and two or more compute
+            nodes.</ph></shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+        <author ixia_locid="4">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="77">Before installation, ensure that you are familiar with the Titanium
+            Server architecture, and that your hardware meets the minimum requirements. For more
+            information, refer to <cite ixia_locid="382">Titanium Server Planning</cite>.</p>
+        <p ixia_locid="85">Review the <cite ixia_locid="86">Wind River Titanium Server Release
+                Notes</cite> for any additional information pertaining to installation.</p>
+        <p ixia_locid="78">During installation, have ready the following items:</p>
+        <ul id="ul_bgn_frw_g4">
+            <li ixia_locid="8">
+                <draft-comment author="jowens" ixia_locid="95">US62850 mention PXE boot
+                    server</draft-comment>
+                <p ixia_locid="9">the Titanium Server ISO image on bootable media, or a PXE boot
+                    server</p>
+            </li>
+            <li ixia_locid="12">
+                <p ixia_locid="13">a configuration plan for use during the installation process</p>
+            </li>
+            <li ixia_locid="90">
+                <p ixia_locid="91">a license file</p>
+            </li>
+            <li ixia_locid="93">
+                <p ixia_locid="94"><draft-comment author="eknowlto" ixia_locid="375">CGTS-4255</draft-comment>(optional) a CA-signed certificate, for secure HTTPS
+                    access for REST API applications and the web server</p>
+            </li>
+            <li ixia_locid="103">
+                <draft-comment author="jowens" ixia_locid="104">US65292 mention firewall rules file</draft-comment>
+                <p ixia_locid="105">(optional) A firewall rules file, if you need to override or
+                    augment the Titanium Server default firewall settings. Normally this is not
+                    required. For more information, refer to <ph ixia_locid="383" otherprops="printonly"><cite ixia_locid="384">Titanium Server System Administration:</cite></ph><cite ixia_locid="385"><ph ixia_locid="386"><xref href="jow1443627833422.xml" ixia_locid="387"/></ph></cite>.</p>
+            </li>
+            <li ixia_locid="99">
+                <draft-comment author="jowens" ixia_locid="100">US62804 mention automated controller
+                    configuration</draft-comment>
+                <p ixia_locid="101">(optional) a controller configuration input file, if you want to
+                    use automated initial configuration</p>
+            </li>
+        </ul>
+        <p ixia_locid="80" product="tis_std"><draft-comment author="jowens" ixia_locid="97">US62850
+                mention PXE boot server. 20161006 xref nb</draft-comment> For help configuring a PXE
+            boot server, see <xref href="jow1440534908675.xml" ixia_locid="98"/>.</p>
+    </conbody>
+</concept-wr>

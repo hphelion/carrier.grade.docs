@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="mnh1464027762153" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Secure HTTPS External Connectivity</title>
+ <shortdesc ixia_locid="2">Titanium Server provides support for secure HTTPS external connections
+  for REST API access and Web server access.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <draft-comment author="eknowlto" ixia_locid="4">US78771 </draft-comment>
+  <section id="section_N1009D_N1001F_N10001" ixia_locid="29">
+   <title ixia_locid="30">Enabling HTTPS Access (optional)</title>
+   <draft-comment author="eknowlto" ixia_locid="90">CGTS-4255</draft-comment>
+   <p ixia_locid="91">To enable secure HTTPS access for REST API applications and the Web server, a
+    digital certificate is required during software installation. When secure HTTPS connectivity is
+    chosen, HTTP is disabled.</p>
+   <p ixia_locid="92">For evaluation purposes, you have the option to select a self-signed
+    certificate included with Titanium Server. For actual deployment, Wind River strongly recommends
+    that you use a CA-signed certificate. You must obtain the certificate and copy it to the
+    controller host before starting the controller configuration script. You can update the
+    certificate at any time after installation.</p>
+   <note id="note_N10046_N1002A_N1001F_N10001" ixia_locid="93">
+    <p ixia_locid="94"><draft-comment author="jowens" ixia_locid="95">CGTS-5418</draft-comment>If the self-signed certificate is in
+     use, remote clients must be configured to accept the certificate without verifying it
+     ("insecure" mode) in order to connect.</p>
+   </note>
+  </section>
+  <section id="section_N100AD_N1001F_N10001" ixia_locid="48">
+   <title ixia_locid="49">Installing a digital certificate</title>
+   <p ixia_locid="33">To install a CA-signed digital certificate, follow the procedure for
+    installing and configuring the Titanium Server system. During this procedure, you must copy the
+    certificate PEM file to the controller host before running the controller configuration
+    script.</p>
+  </section>
+  <section id="section_N100C0_N1001F_N10001" ixia_locid="53">
+   <title ixia_locid="55">Updating a digital certificate</title>
+   <p ixia_locid="37">After you have installed a digital certificate, whether CA-signed or
+    self-signed, you can update it by copying the new certificate to the active controller host, and
+    then running the <cmdname ixia_locid="39">https-certificate-install</cmdname> utility as shown
+    in the following example.</p>
+   <codeblock ixia_locid="41"><systemoutput ixia_locid="43">$ </systemoutput><userinput ixia_locid="45">sudo /usr/sbin/https-certificate-install <varname ixia_locid="47">pem_file</varname></userinput></codeblock>
+  </section>
+ </conbody>
+</concept-wr>

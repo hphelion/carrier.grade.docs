@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jra1467638430659" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Adding SSD-backed Journals</title>
+    <shortdesc ixia_locid="2">On storage hosts with SSDs, you can use SSD-backed Ceph journals for
+        improved I/O performance.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="134">
+            <p ixia_locid="135">If you prefer, you can use the CLI. For more information, see <xref href="dye1467638475769.xml" ixia_locid="155"/>.</p>
+            <p ixia_locid="156"><draft-comment author="jmaran" ixia_locid="174">Changed this xref from inter-book to
+                    local. This topic only appears in the sys admin guide as does the target
+                    topic.</draft-comment>For more information about SSD-backed journals, see <xref href="tdw1466190608670.xml" ixia_locid="170"/>.</p>
+            <note id="note_N10043_N10022_N1001F_N10001" ixia_locid="171">
+                <p ixia_locid="172"><draft-comment author="jowens" ixia_locid="173">US84106
+                        added</draft-comment>SSD-backed journals cannot be used on a storage host
+                    assigned to the caching tier.</p>
+            </note>
+        </context>
+        <prereq id="prereq_N10022_N1001F_N10001" ixia_locid="51">
+            <p ixia_locid="158"><draft-comment author="jowens" ixia_locid="61">US78837 updated
+                    procedure</draft-comment>A storage host with a solid-state drive (SSD) is
+                required.</p>
+            <p ixia_locid="159">To create or edit an SSD-backed journal, you must lock the host. The
+                system must have at least two other unlocked hosts with Ceph monitors. (Ceph
+                monitors run on <nameliteral ixia_locid="143">controller-0</nameliteral>,
+                    <nameliteral ixia_locid="144">controller-1</nameliteral>, and <nameliteral ixia_locid="145">storage-0</nameliteral> only).</p>
+        </prereq>
+        <steps>
+            <step conref="clv1462554732588.xml#clv1462554732588/lock-node" id="step_N10030_N1002D_N1001F_N10001" ixia_locid="59">
+                <cmd ixia_locid="60"/>
+            </step>
+            <step id="step_N10061_N10053_N1001F_N10001" ixia_locid="147">
+                <cmd ixia_locid="148">Open the <wintitle ixia_locid="149">Inventory Detail</wintitle> page for the host.</cmd>
+                <info ixia_locid="150">
+                    <p ixia_locid="151">To open the <wintitle ixia_locid="152">Inventory
+                            Detail</wintitle> page, click the name of the host on the <uicontrol ixia_locid="153">Hosts</uicontrol> tab of the <wintitle ixia_locid="154">Host Inventory</wintitle> page.</p>
+                </info>
+            </step>
+            <step id="step_N1005C_N1001F_N1001C_N10001" ixia_locid="17">
+                <cmd ixia_locid="18">Select the <uicontrol ixia_locid="19">Storage</uicontrol> tab
+                    to view the <uicontrol ixia_locid="20">Disks</uicontrol> and <uicontrol ixia_locid="21">Storage Functions</uicontrol> for the node.</cmd>
+                <info ixia_locid="22">
+                    <fig id="fig_N10071_N1006E_N1005B_N1001F_N1001C_N10001" ixia_locid="23">
+                        <image href="zxt1464875107673.image" id="image_ywt_n12_2w" ixia_locid="62">
+                            <alt ixia_locid="63">TiS 16 Storage tab for Storage Host</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N1006F_N1002D_N1001F_N10001" ixia_locid="64">
+                <cmd ixia_locid="65">Assign the SSD to use for Ceph journals.</cmd>
+                <info ixia_locid="66">
+                    <note id="note_N10085_N10076_N1006E_N1002D_N1001F_N10001" ixia_locid="70">
+                        <p ixia_locid="71">This option is available only if the storage host is
+                            equipped with at least one SSD.</p>
+                    </note>
+                </info>
+                <substeps id="substeps_zss_qq2_2w">
+                    <substep ixia_locid="72">
+                        <cmd ixia_locid="73">Click <uicontrol ixia_locid="74">Assign Storage
+                                Function</uicontrol> to open the <wintitle ixia_locid="75">Assign
+                                Storage Function</wintitle> dialog box.</cmd>
+                        <info ixia_locid="76">
+                            <fig id="fig_kt3_n52_2w" ixia_locid="77">
+                                <image href="wlx1464876289283.image" id="image_lt3_n52_2w" ixia_locid="78">
+                                    <alt ixia_locid="79">TiS Assign Storage Function dialog</alt>
+                                </image>
+                            </fig>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="80">
+                        <cmd ixia_locid="81">In the <uicontrol ixia_locid="82">Function</uicontrol>
+                            field, select <option ixia_locid="83">Journal</option>.</cmd>
+                        <stepresult ixia_locid="84">
+                            <p ixia_locid="85">A simplified dialog is displayed.</p>
+                            <fig id="fig_wpr_rr2_2w" ixia_locid="86">
+                                <image href="pzu1464883037926.image" id="image_ywx_rr2_2w" ixia_locid="87">
+                                    <alt ixia_locid="88">TiS Assign Storage Function dialog for
+                                        journal</alt>
+                                </image>
+                            </fig>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="89">
+                        <cmd ixia_locid="90">In the <uicontrol ixia_locid="91">Disks</uicontrol>
+                            field, select the SSD device.</cmd>
+                    </substep>
+                    <substep ixia_locid="92">
+                        <cmd ixia_locid="93">Click <uicontrol ixia_locid="94">Assign Storage
+                                Function</uicontrol>.</cmd>
+                        <stepresult ixia_locid="95">
+                            <p ixia_locid="96">The journal function is assigned to the SSD.</p>
+                            <fig id="fig_xyk_mt2_2w" ixia_locid="97">
+                                <image href="zfd1464884207881.image" id="image_kqq_h52_2w" ixia_locid="98">
+                                    <alt ixia_locid="99">Tis journal function listed</alt>
+                                </image>
+                            </fig>
+                        </stepresult>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10183_N10061_N1001F_N10001" ixia_locid="160">
+                <cmd ixia_locid="161">Assign the journal function for use by one or more OSDs.</cmd>
+                <info ixia_locid="162">
+                    <p ixia_locid="163">Use the <uicontrol ixia_locid="164">Edit</uicontrol> button
+                        for the OSD to open the <wintitle ixia_locid="175">Edit Storage Volume</wintitle> dialog box,
+                        and then select the <uicontrol ixia_locid="165">Journal</uicontrol> to use
+                        with the OSD.</p>
+                    <fig id="fig_ezd_nll_2w" ixia_locid="140">
+                        <image href="eew1464963403075.image" id="image_c1z_nll_2w" ixia_locid="141">
+                            <alt ixia_locid="142">TiS Edit Storage Volume dialog</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step conref="clv1462554732588.xml#clv1462554732588/unlock-node" id="step_N101EE_N1002D_N1001F_N10001" ixia_locid="132">
+                <cmd ixia_locid="133"/>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

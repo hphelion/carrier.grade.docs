@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="jow1454003713412" xml:lang="en-us">
+      <title ixia_locid="1">Deployment Options</title>
+      <shortdesc ixia_locid="2">Titanium Server supports four deployment models to provide a range
+            of options.</shortdesc>
+      <prolog>
+            <author ixia_locid="3">Craig Griffin</author>
+      </prolog>
+      <conbody>
+            <p ixia_locid="89">The deployment models include:</p>
+            <ul id="ul_axv_pcs_zw">
+                  <li ixia_locid="90">
+                        <p ixia_locid="15">Titanium Server Standard Solutions</p>
+                        <p ixia_locid="91">
+                              <ul id="ul_yq5_v41_rx">
+                                    <li ixia_locid="13">
+                                          <p ixia_locid="14">Titanium Server Standard Configuration
+                                                with Dedicated Storage</p>
+                                    </li>
+                                    <li ixia_locid="92">
+                                          <p ixia_locid="93">Titanium Server Standard Configuration
+                                                with Controller Storage</p>
+                                    </li>
+                                    <li ixia_locid="11">
+                                          <p ixia_locid="12">Titanium Server in Multi-Region
+                                                Environment</p>
+                                    </li>
+                              </ul>
+                        </p>
+                  </li>
+                  <li ixia_locid="94">
+                        <p ixia_locid="95">Titanium Server CPE</p>
+                  </li>
+            </ul>
+            <p ixia_locid="96">Each model supports the same functionality with different ranges of
+                  scalability and performance. The models are differentiated by where the
+                  controller, storage, and compute functions reside, with the largest configuration
+                  (Standard Configuration with Dedicated Storage) distributing these functions on
+                  different hosts and the smallest configuration (Titanium Server CPE) combining all
+                  three functions onto a single redundant pair of hosts. The Standard Configuration
+                  with Controller Storage resides between these two and combines controller and
+                  storage functionality onto a redundant pair of hosts supporting one or more
+                  compute nodes. A Titanium Server Multi-Region deployment is also supported, which
+                  provides a mechanism for scaling beyond the limits of a single Titanium Server
+                  cloud or region in some deployment models.</p>
+            <p ixia_locid="97">The following sections describe these configurations in more detail
+                  and provide guidelines on the appropriate use for each model.</p>
+            <p ixia_locid="48">The following table provides a guideline for deployment model
+                  scaling.</p>
+            <table id="table_N10024_N10019_N10001">
+                  <title id="title__Toc441623511" ixia_locid="98">Deployment Model Scaling</title>
+                  <tgroup cols="5">
+                        <colspec colname="1" colwidth="1915*"/>
+                        <colspec colname="2" colwidth="1915*"/>
+                        <colspec colname="3" colwidth="1915*"/>
+                        <colspec colname="4" colwidth="1915*"/>
+                        <colspec colname="5" colwidth="1916*"/>
+                        <thead>
+                              <row>
+                                    <entry ixia_locid="99"/>
+                                    <entry ixia_locid="100">
+                                          <p ixia_locid="101">Controller Nodes</p>
+                                    </entry>
+                                    <entry ixia_locid="102">
+                                          <p ixia_locid="72">Storage Nodes</p>
+                                    </entry>
+                                    <entry ixia_locid="73">
+                                          <p ixia_locid="74">Compute Nodes</p>
+                                    </entry>
+                                    <entry ixia_locid="75">
+                                          <p ixia_locid="76">VMs</p>
+                                    </entry>
+                              </row>
+                        </thead>
+                        <tbody>
+                              <row>
+                                    <entry ixia_locid="77">
+                                          <p ixia_locid="78">Standard Configuration with Dedicated
+                                                Storage</p>
+                                    </entry>
+                                    <entry ixia_locid="79">
+                                          <p ixia_locid="80">2</p>
+                                    </entry>
+                                    <entry ixia_locid="81">
+                                          <p ixia_locid="82">2‒8</p>
+                                    </entry>
+                                    <entry ixia_locid="83">
+                                          <p ixia_locid="84">100 </p>
+                                    </entry>
+                                    <entry ixia_locid="85">
+                                          <p ixia_locid="86">1000 (10 per node, max tested /
+                                                supported in this release, dependent on sufficient
+                                                vCPU, memory, and storage resources)</p>
+                                    </entry>
+                              </row>
+                              <row>
+                                    <entry ixia_locid="26">
+                                          <p ixia_locid="27">Standard Configuration with Controller
+                                                Storage</p>
+                                    </entry>
+                                    <entry ixia_locid="87">
+                                          <p ixia_locid="88">2</p>
+                                    </entry>
+                                    <entry ixia_locid="30">
+                                          <p ixia_locid="31">0</p>
+                                    </entry>
+                                    <entry ixia_locid="32">
+                                          <p ixia_locid="33">10 (typical due to controller storage
+                                                performance but not fixed)</p>
+                                    </entry>
+                                    <entry ixia_locid="34">
+                                          <p ixia_locid="35">100 (10 per node, dependent on
+                                                sufficient vCPU, memory, and storage resources, and
+                                                limited by controller disk capacity, throughput, and
+                                                boot times)</p>
+                                    </entry>
+                              </row>
+                              <row>
+                                    <entry ixia_locid="36">
+                                          <p ixia_locid="37">Titanium Server CPE</p>
+                                    </entry>
+                                    <entry ixia_locid="38">
+                                          <p ixia_locid="39">2 (with compute function)</p>
+                                    </entry>
+                                    <entry ixia_locid="40">
+                                          <p ixia_locid="41">0</p>
+                                    </entry>
+                                    <entry ixia_locid="42">
+                                          <p ixia_locid="43">0</p>
+                                    </entry>
+                                    <entry ixia_locid="44">
+                                          <p ixia_locid="45">20 (10 per node, dependent on
+                                                sufficient vCPU, memory, and storage resources)</p>
+                                    </entry>
+                              </row>
+                        </tbody>
+                  </tgroup>
+            </table>
+            <draft-comment author="jmaran" ixia_locid="47">Consider making the following a note. You
+                  may also want to use a &lt;sl&gt; for the features. It's hard to scan in sentence
+                  form. (JO done; also added en dashes)</draft-comment>
+            <note id="note_N10139_N1001C_N10001" ixia_locid="49">
+                  <p ixia_locid="46">The baseline used to create this table includes a heterogeneous
+                        mix of VMs and features, as follows:</p>
+                  <ul>
+                        <li ixia_locid="50"><p ixia_locid="61">1‒4 cores</p></li>
+                        <li ixia_locid="51"><p ixia_locid="62">1‒4 GB memory</p></li>
+                        <li ixia_locid="52"><p ixia_locid="63">600 MB and 3.6 GB images</p></li>
+                        <li ixia_locid="53"><p ixia_locid="64">1/2/4/10/20/40 GB volumes</p></li>
+                        <li ixia_locid="54"><p ixia_locid="65">single and multi-NUMA nodes</p></li>
+                        <li ixia_locid="55"><p ixia_locid="66">local storage and remote
+                              storage</p></li>
+                        <li ixia_locid="56"><p ixia_locid="67">launch via nova and heat</p></li>
+                        <li ixia_locid="57"><p ixia_locid="68">dedicated and shared CPU
+                              policies</p></li>
+                        <li ixia_locid="58">
+                              <p ixia_locid="69">VM scaling</p>
+                        </li>
+                        <li ixia_locid="59">
+                              <p ixia_locid="70">CPU scaling</p>
+                        </li>
+                        <li ixia_locid="60"><p ixia_locid="71">1‒3 network connections per
+                              VM</p></li>
+                  </ul>
+            </note>
+      </conbody>
+</concept>

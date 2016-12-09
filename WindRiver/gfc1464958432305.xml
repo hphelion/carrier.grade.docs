@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="gfc1464958432305" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Introduction to Regions</title>
+ <shortdesc ixia_locid="2">An OpenStack <term ixia_locid="15">region</term> is a discrete OpenStack system with its
+  own set of resources and its own set of services. Typically, some services are shared with other
+  OpenStack regions, notably the Keystone service. Other shared services may include Cinder and
+  Glance.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="6">Regions can be categorized into two types:</p>
+  <dl>
+   <dlentry ixia_locid="7">
+    <dt ixia_locid="8">Primary Region</dt>
+    <dd ixia_locid="9">
+     <p ixia_locid="10">In a Primary Region, all OpenStack services used by the region run locally.
+      This type of region typically provides shared services to other regions. </p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="11">
+    <dt ixia_locid="12">Secondary Region</dt>
+    <dd ixia_locid="13">
+     <p ixia_locid="14">In a Secondary Region, some OpenStack services used by the region run
+      locally, while others run in another region. This type of region makes use of shared services,
+      typically provided by the Primary Region.</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <section id="section_N10058_N10024_N10001" ixia_locid="16">
+   <title ixia_locid="17">Supported Multi-Region Configurations</title>
+   <draft-comment author="eknowlto" ixia_locid="18">US76710</draft-comment>
+   <p ixia_locid="19">Titanium Server supports several configurations for regions.</p>
+   <ul id="ul_pkx_w5w_tw">
+    <li ixia_locid="20">
+     <p ixia_locid="21">Titanium Server as Primary and Secondary Regions</p>
+     <ul id="ul_es4_dlb_ww">
+      <li ixia_locid="28">
+       <p ixia_locid="29">provides a mechanism for scaling a Titanium Server Cloud beyond the limits
+        of a single Titanium Server Cloud or Region</p>
+      </li>
+     </ul>
+    </li>
+    <li ixia_locid="24">
+     <p ixia_locid="25">Third-Party OpenStack Cloud as Primary Region and Titanium Server as
+      Secondary Region</p>
+     <ul id="ul_zlf_llb_ww">
+      <li ixia_locid="30">
+       <p ixia_locid="31">provides a mechanism to extend an existing Third Party OpenStack Cloud
+        with a Titanium Server Cloud, enabling users to incrementally add Titanium Server values
+        such as High Availability and High Performance Networking to an existing cloud solution</p>
+      </li>
+     </ul>
+    </li>
+    <!--<li ixia_locid="22"><p ixia_locid="23">Titanium Server as the Primary Region and Third-Party OpenStack Cloud as Secondary Region</p><ul id="ul_oy5_jlb_ww"><li ixia_locid="32"><p ixia_locid="33">allows a Third Party OpenStack Cloud to leverage Shared Services from the Titanium Server Cloud</p></li></ul></li>-->
+   </ul>
+   <note id="note_N10088_N10058_N10024_N10001" ixia_locid="26">
+    <p ixia_locid="27">Titanium Server CPE configurations are not supported as Primary or Secondary
+     Regions.</p>
+   </note>
+  </section>
+ </conbody>
+</concept-wr>

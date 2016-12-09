@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="qxb1473973490132" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">SDN Architecture for Titanium Server</title>
+ <shortdesc ixia_locid="2">Titanium Server uses the OAM network to connect to both the northbound
+  and southbound APIs of the SDN controllers.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="5">US84057 new topic. Do we need it?
+    Is it a candidate for the Troubleshooting Guide instead?</draft-comment>For northbound APIs,
+   Titanium Server includes Neutron plugins for supported SDN controllers. These plugins typically
+   use SDN controller-specific REST APIs to pass Neutron configuration data to the SDN controller.
+   For supported SDN controllers, see the <cite ixia_locid="7">Titanium Server Release Notes</cite>.</p>
+  <p ixia_locid="6">For southbound APIs, Titanium Server's accelerated vSwitch (AVS) supports both
+   the OVSDB and OpenFlow protocols. This allows SDN controllers to configure both vSwitch
+   interfaces and vSwitch flow rules to realize the required Neutron configuration.</p>
+ </conbody>
+</concept-wr>

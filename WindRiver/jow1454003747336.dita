@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003747336" xml:lang="en-us">
+    <title ixia_locid="1">LVM-backed Local Storage Capacity</title>
+    <shortdesc ixia_locid="2"/>
+    <prolog>
+        <author ixia_locid="3">Craig Griffin</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="4">When using an LVM backing store, the <nameliteral ixia_locid="32">nova-local</nameliteral>
+            volume group is broken into the Instance LV and free nova-local space. The Instances LV
+            is used for bookkeeping, libvirt, console data, and caching of images. Individual VM
+            volumes are expanded to raw volumes that are allocated out of the free space in the
+            nova-local volume group. </p>
+        <sl>
+            <sli ixia_locid="6">Local Storage Requirement = Instance Backing Storage Requirement +
+                Local Volume Storage Requirement</sli>
+        </sl>
+        <p ixia_locid="33">Where</p>
+        <sl id="ul_gwh_vvg_v5">
+            <sli ixia_locid="7"> Instance Backing Requirement – see below </sli>
+            <sli ixia_locid="9"> Local Volume Storage Requirement – see below </sli>
+        </sl>
+        <p ixia_locid="11">The Instance Backing Storage Requirement can be calculated as
+            follows:</p>
+        <sl>
+            <sli ixia_locid="13">Instance Backing Storage Requirement = N * AverageCachedImageSize +
+                Overhead + Margin</sli>
+        </sl>
+        <p ixia_locid="30">Where:</p>
+        <sl id="ul_lrf_yvg_v5">
+            <sli ixia_locid="14">N = Max number of cached image size (note – this accumulates over
+                time)</sli>
+            <sli ixia_locid="16">AvgCachedImageSize = Average volume size on disk in GB (note that
+                sparse files are used)</sli>
+            <sli ixia_locid="18">Overhead =Overhead for bookkeeping, console, and libvirt (recommend
+                10-20 GB)</sli>
+            <sli ixia_locid="20">Margin = User-defined margin (recommend at least 25%)</sli>
+        </sl>
+        <p ixia_locid="22">The local volume Storage Requirement can be calculated as follows:</p>
+        <sl>
+            <sli ixia_locid="24">Local Volume Storage Requirement = N * AverageVmVolumeSize +
+                Margin</sli>
+        </sl>
+        <p ixia_locid="31">Where:</p>
+        <sl id="ul_wyg_bwg_v5">
+            <sli ixia_locid="25">N = Max number of VMs expected to run on the Compute Node</sli>
+            <sli ixia_locid="27">AverageVmVolumeSize = Average volume size of raw volumes in
+                GB</sli>
+            <sli ixia_locid="29">Margin = User-defined margin (recommend at least 25%)</sli>
+        </sl>
+    </conbody>
+</concept-wr>

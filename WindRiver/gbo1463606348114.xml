@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="gbo1463606348114" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Networks for a Standard System with Controller Storage</title>
+ <shortdesc ixia_locid="2">For a system that uses controller storage, Wind River recommends an
+  intermediate network configuration.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">Titanium Server systems with controller storage use controller and compute hosts
+   only. Network loading is low to moderate, depending on the number of compute hosts and VMs. The
+   following network configuration typically meets the requirements of such a system:</p>
+  <ul id="ul_j2d_thb_1w">
+   <li ixia_locid="5">
+    <p ixia_locid="6">An internal management network</p>
+   </li>
+   <li ixia_locid="7">
+    <p ixia_locid="8">An OAM network, optionally consolidated on the management interface</p>
+   </li>
+   <li ixia_locid="9">
+    <p ixia_locid="10">Several data networks, which may optionally be consolidated on the management
+     interface or the OAM interface or both, depending on the number of compute hosts and VMs to be
+     supported</p>
+   </li>
+   <li ixia_locid="11">
+    <p ixia_locid="12">An optional infrastructure interface, if required to offload the management network for a
+     large number of compute hosts</p>
+   </li>
+   <li ixia_locid="20">
+    <p ixia_locid="21">Optionally, a PXE Boot Server to support controller-0 initialization</p>
+   </li>
+  </ul>
+  <note id="note_N10054_N1001F_N10001" ixia_locid="13">
+   <p ixia_locid="14">You can enable secure HTTPS connectivity on the OAM network during system
+    installation. For more information, see <ph ixia_locid="15" otherprops="printonly"><cite ixia_locid="16">Titanium Server System Administration: </cite>
+    </ph><cite ixia_locid="17"><ph ixia_locid="18"><xref href="mnh1464027762153.xml" ixia_locid="19"/>.</ph></cite></p>
+  </note>
+ </conbody>
+</concept-wr>

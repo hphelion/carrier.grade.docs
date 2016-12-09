@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1447789458498" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="221">Managing Hardware Profiles Using the CLI</title>
+    <shortdesc ixia_locid="222">As an alternative to the web administration interface, you can use
+        the CLI to work with hardware profiles.</shortdesc>
+    <prolog>
+        <author ixia_locid="223">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="224">
+            <p ixia_locid="225"><draft-comment author="jowens" ixia_locid="226">US66653 new topic,
+                    containing material assembled from existing topics.</draft-comment>For more
+                information about hardware profiles, see <xref href="jow1404333787693.xml" ixia_locid="236"/>.</p>
+        </context>
+        <section id="section_N10039_N1001F_N10001" ixia_locid="237">
+            <title ixia_locid="238">CPU Profiles</title>
+            <p ixia_locid="239"><draft-comment author="jowens" ixia_locid="338">US66653 I inferred
+                    the commands in this section from the existing memory section. I tested
+                    cpuprofile-list and it works.</draft-comment>The following command creates a CPU
+                profile:</p>
+            <codeblock ixia_locid="241"><systemoutput ixia_locid="242">~(keystone-admin)$ </systemoutput><userinput ixia_locid="243">system cpuprofile-add <varname ixia_locid="244">profile</varname> <varname ixia_locid="245">hostid</varname></userinput></codeblock>
+            <p ixia_locid="246">where <varname ixia_locid="247">profile</varname> is the name or
+                UUID of the profile, and <varname ixia_locid="248">hostid</varname> is the name or
+                UUID of the host from which to create the profile.</p>
+            <ul id="ul_ywf_dsn_c5">
+                <li ixia_locid="340">
+                    <p ixia_locid="341">To list CPU profiles:</p>
+                    <codeblock ixia_locid="251"><systemoutput ixia_locid="252">~(keystone-admin)$ </systemoutput><userinput ixia_locid="253">system cpuprofile-list</userinput></codeblock>
+                </li>
+                <li ixia_locid="342">
+                    <p ixia_locid="343">To show details for a CPU profile:</p>
+                    <codeblock ixia_locid="344"><systemoutput ixia_locid="345">~(keystone-admin)$ </systemoutput><userinput ixia_locid="346">system cpuprofile-show <varname ixia_locid="347">profile</varname></userinput></codeblock>
+                    <p ixia_locid="348">where <varname ixia_locid="349">profile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+                <li ixia_locid="350">
+                    <p ixia_locid="351">To delete a CPU profile:</p>
+                    <codeblock ixia_locid="352"><systemoutput ixia_locid="353">~(keystone-admin)$ </systemoutput><userinput ixia_locid="354">system cpuprofile-delete <varname ixia_locid="355">profile</varname></userinput></codeblock>
+                    <p ixia_locid="356">where <varname ixia_locid="357">cpuprofile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+                <li ixia_locid="358">
+                    <p ixia_locid="359">To apply a CPU profile:</p>
+                    <codeblock ixia_locid="360"><systemoutput ixia_locid="361">~(keystone-admin)$ </systemoutput><userinput ixia_locid="362">system host-apply-cpuprofile <varname ixia_locid="363">hostid</varname> <varname ixia_locid="364">profile</varname></userinput></codeblock>
+                    <p ixia_locid="365">where <varname ixia_locid="366">hostid</varname> is the name
+                        or UUID of the host, and <varname ixia_locid="367">profile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N1002E_N1001B_N10001" ixia_locid="227">
+            <title ixia_locid="228">Interface Profiles</title>
+            <p ixia_locid="280">The following command creates a new interface configuration profile
+                named <nameliteral ixia_locid="281">hp360-server</nameliteral>.</p>
+            <codeblock ixia_locid="199"><systemoutput ixia_locid="216">~(keystone_admin)$ </systemoutput><userinput ixia_locid="134">system ifprofile-add hp360-server compute-0</userinput></codeblock>
+            <ul id="ul_grj_t3t_25">
+                <li ixia_locid="368">
+                    <p ixia_locid="369"><draft-comment author="jowens" ixia_locid="432">US82332 updated interface
+                            names</draft-comment>To list interface profiles:</p>
+                    <codeblock ixia_locid="138"><systemoutput ixia_locid="217">~(keystone_admin)$ </systemoutput><userinput ixia_locid="140">system ifprofile-list</userinput>
+<systemoutput ixia_locid="218">+------+-----------------------+----------------------+-------------------...+
+| uuid | profilename           | port config          | interface config     |
++------+-----------------------+----------------------+-------------------...+
+| 21...| compute-if-profile    | enp0s3: 82540EM G... | enp0s3: infra | et...|
+|      |                       | Controller | Auto... | mgmt0: mgmt | ethe...|
+|      |                       | enp0s8: 82540EM G... | data( providernet-...|
+|      |                       | Controller | Auto... | eth1: data( provid...|
+|      |                       | bootp-IF eth0: Vi... | = 1500               |
+|      |                       | device | Auto Neg... |                      |
+|      |                       | Virtio network dev...|                      |
+|      |                       | Yes                  |                      |
++------+-----------------------+----------------------+----------------------+</systemoutput></codeblock>
+                </li>
+                <li ixia_locid="370">
+                    <p ixia_locid="371">To show details for an interface profile:</p>
+                    <codeblock ixia_locid="372"><systemoutput ixia_locid="373">~(keystone-admin)$ </systemoutput><userinput ixia_locid="374">system ifprofile-show <varname ixia_locid="375">profile</varname></userinput></codeblock>
+                    <p ixia_locid="376">where <varname ixia_locid="377">profile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+                <li ixia_locid="378">
+                    <p ixia_locid="379">To delete an interface profile:</p>
+                    <codeblock ixia_locid="380"><systemoutput ixia_locid="381">~(keystone-admin)$ </systemoutput><userinput ixia_locid="382">system ifprofile-delete <varname ixia_locid="383">profile</varname></userinput></codeblock>
+                    <p ixia_locid="384">where <varname ixia_locid="385">profile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+                <li ixia_locid="386">
+                    <p ixia_locid="387">To apply an interface profile:</p>
+                    <codeblock ixia_locid="388"><systemoutput ixia_locid="389">~(keystone-admin)$ </systemoutput><userinput ixia_locid="390">system host-apply-ifprofile <varname ixia_locid="391">hostid</varname> <varname ixia_locid="392">profile</varname></userinput></codeblock>
+                    <p ixia_locid="393">where <varname ixia_locid="394">hostid</varname> is the name
+                        or UUID of the host, and <varname ixia_locid="395">profile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N10063_N1001B_N10001" ixia_locid="229">
+            <title ixia_locid="230">Memory Profiles</title>
+            <p ixia_locid="283"><draft-comment author="jowens" ixia_locid="339">US66653 I inferred
+                    the other commands in this section from the existing
+                    memprofile-add.</draft-comment>The following command creates a memory
+                profile:</p>
+            <codeblock ixia_locid="284"><systemoutput ixia_locid="285">~(keystone-admin)$ </systemoutput><userinput ixia_locid="286">system memprofile-add <varname ixia_locid="287">profile</varname> <varname ixia_locid="288">hostid</varname></userinput></codeblock>
+            <p ixia_locid="289">where <varname ixia_locid="290">profile</varname> is the name or
+                UUID of the memory profile, and <varname ixia_locid="291">hostid</varname> is the
+                name or UUID of the host from which to create the profile.</p>
+            <ul id="ul_x1x_plr_5r">
+                <li ixia_locid="292">
+                    <p ixia_locid="293">To list memory profiles:</p>
+                    <codeblock ixia_locid="294"><systemoutput ixia_locid="295">~(keystone-admin)$ </systemoutput><userinput ixia_locid="296">system memprofile-list</userinput></codeblock>
+                </li>
+                <li ixia_locid="297">
+                    <p ixia_locid="298">To show details for a memory profile:</p>
+                    <codeblock ixia_locid="299"><systemoutput ixia_locid="300">~(keystone-admin)$ </systemoutput><userinput ixia_locid="301">system memprofile-show <varname ixia_locid="302">profile</varname></userinput></codeblock>
+                    <p ixia_locid="303">where <varname ixia_locid="304">profile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+                <li ixia_locid="305">
+                    <p ixia_locid="306">To delete a memory profile:</p>
+                    <codeblock ixia_locid="307"><systemoutput ixia_locid="308">~(keystone-admin)$ </systemoutput><userinput ixia_locid="309">system memprofile-delete <varname ixia_locid="310">profile</varname></userinput></codeblock>
+                    <p ixia_locid="311">where <varname ixia_locid="312">memoryprofile</varname> is
+                        the name or UUID of the profile.</p>
+                </li>
+                <li ixia_locid="313">
+                    <p ixia_locid="314">To apply a memory profile:</p>
+                    <codeblock ixia_locid="315"><systemoutput ixia_locid="316">~(keystone-admin)$ </systemoutput><userinput ixia_locid="317">system host-apply-memprofile <varname ixia_locid="318">hostid</varname> <varname ixia_locid="319">profile</varname></userinput></codeblock>
+                    <p ixia_locid="320">where <varname ixia_locid="321">hostid</varname> is the name
+                        or UUID of the host, and <varname ixia_locid="322">profile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N100F8_N1001B_N10001" ixia_locid="323">
+            <title ixia_locid="232">Storage Profiles</title>
+            <p ixia_locid="324">The following command creates a new storage profile named
+                    <nameliteral ixia_locid="325">hp360-storage</nameliteral>, based on the storage
+                configuration of the <nameliteral ixia_locid="326">storage-0</nameliteral> host.</p>
+            <codeblock ixia_locid="94"><systemoutput ixia_locid="208">~(keystone_admin)$ </systemoutput><userinput ixia_locid="96">system ifprofile-add hp360-storage storage-0</userinput></codeblock>
+            <ul id="ul_zbh_mkt_25">
+                <li ixia_locid="400">
+                    <p ixia_locid="401">To list storage profiles:</p>
+                    <codeblock ixia_locid="402"><systemoutput ixia_locid="403">~(keystone_admin)$ </systemoutput><userinput ixia_locid="404">system storprofile-list</userinput>
+<systemoutput ixia_locid="405">
++--------------+-------------------+-----------------+-------------+
+| uuid         | profilename       | disk config     | stor config |
++--------------+-------------------+-----------------+-------------+
+| 47c24b87-... | hp360-storage     | /dev/sdb: 12288 | : osd       |
++--------------+-------------------+-----------------+-------------+
+ </systemoutput></codeblock>
+                </li>
+                <li ixia_locid="406">
+                    <p ixia_locid="407">To show details for a storage profile:</p>
+                    <codeblock ixia_locid="408"><systemoutput ixia_locid="409">~(keystone-admin)$ </systemoutput><userinput ixia_locid="410">system storprofile-show <varname ixia_locid="411">profile</varname></userinput></codeblock>
+                    <p ixia_locid="412">where <varname ixia_locid="413">profile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+                <li ixia_locid="414">
+                    <p ixia_locid="415">To delete a storage profile:</p>
+                    <codeblock ixia_locid="416"><systemoutput ixia_locid="417">~(keystone-admin)$ </systemoutput><userinput ixia_locid="418">system storprofile-delete <varname ixia_locid="419">profile</varname></userinput></codeblock>
+                    <p ixia_locid="420">where <varname ixia_locid="421">profile</varname> is the
+                        name or UUID of the profile.</p>
+                </li>
+                <li ixia_locid="422">
+                    <p ixia_locid="423">To apply a storage profile:</p>
+                    <codeblock ixia_locid="424"><systemoutput ixia_locid="425">~(keystone-admin)$ </systemoutput><userinput ixia_locid="426">system host-apply-storprofile <varname ixia_locid="427">hostid</varname> <varname ixia_locid="428">profile</varname></userinput></codeblock>
+                    <p ixia_locid="429">where <varname ixia_locid="430">hostid</varname> is the name
+                        or UUID of the host, and <varname ixia_locid="431">profile</varname> is the
+                        name or UUID of the profile. The following command applies the <nameliteral ixia_locid="328">hp360-storage</nameliteral> profile to the <nameliteral ixia_locid="329">storage-1</nameliteral> host.</p>
+                    <p ixia_locid="104"> </p>
+                    <codeblock ixia_locid="106"><systemoutput ixia_locid="211">~(keystone_admin)$ </systemoutput><userinput ixia_locid="108">system host-apply-storprofile storage-1 hp360-storage</userinput></codeblock>
+                </li>
+            </ul>
+            <note conref="xew1477516815308.xml#xew1477516815308/storage-profile-restrictions" id="note_N10365_N1028F_N1001F_N10001" ixia_locid="433"/>
+        </section>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333739174" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <title ixia_locid="1">Tenant Networks</title>
+    <shortdesc ixia_locid="2">Tenant networks are logical networking entities visible to tenant users, and around
+  which working network topologies are built.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="26">Tenant networks need support from the physical layers to work as
+            intended. This means that the access L2 switches, providers' networks, and data
+            interface definitions on the compute nodes, must all be properly configured. In
+            particular, when using provider networks of the VLAN or VXLAN type, getting the proper
+            configuration in place requires additional planning. </p>
+        <p ixia_locid="27">For provider networks of the VLAN type, consider the following
+            guidelines:</p>
+        <ul id="ul_hqm_n2s_4n">
+            <li ixia_locid="134">
+                <p ixia_locid="135">All ports on the access L2 switches must be statically configured to support all the VLANs
+     defined on the provider networks they provide access to. The dynamic nature of the cloud might
+     force the set of VLANs in use by a particular L2 switch to change at any moment.</p>
+            </li>
+            <li ixia_locid="136">
+                <p ixia_locid="137">The set of VLANs used by each compute node is not fixed; it
+                    changes over time. The current VLAN set in use is determined by the
+                    configuration details of the tenant networks, and the scheduling on the compute
+                    nodes of the virtual machines that use them. This information is provided to the
+                    Neutron's AVS plugin, which then uses it to configure the AVS as required.</p>
+                <p ixia_locid="20">When a tenant creates a new network, the Neutron segmentation
+                    allocation strategy is to look first for an available segmentation identifier
+                    owned by the tenant. If none is available, the search continues over the
+                    available shared segmentation identifiers. The allocation process returns an
+                    error if no segmentation identifiers are available.</p>
+                <p ixia_locid="138">The VLAN ID assigned to a tenant network is fixed for as long as the tenant
+                    network is defined in the system. If for some reason the VLAN ID has to change,
+                    the tenant network must be deleted and recreated again.</p>
+            </li>
+            <li ixia_locid="139">
+                <p ixia_locid="140">Configuring a tenant network to have access to external networks
+                    (not just providing local networking) requires the following elements:</p>
+                <ul id="ul_vmr_tfs_4n">
+                    <li ixia_locid="141">
+                        <p ixia_locid="142">A physical router, and the provider network's access L2 switch, must be part of the same
+       Layer-2 network. Because this Layer 2 network uses a unique VLAN ID, this means also that the
+       router's port used in the connection must be statically configured to support the
+       corresponding VLAN ID.</p>
+                    </li>
+                    <li ixia_locid="143">
+                        <p ixia_locid="17">The router must be configured to be part of the same IP subnet that the tenant network is
+       intending to use.</p>
+                    </li>
+                    <li ixia_locid="18">
+                        <p ixia_locid="19">When configuring the IP subnet, the tenant must use the router's port IP address as its
+       external gateway.</p>
+                    </li>
+                    <li ixia_locid="21">
+                        <p ixia_locid="144">The tenant network must have the
+                                <option ixia_locid="157">external</option> flag set. Only the <nameliteral ixia_locid="146">admin</nameliteral> user can set this flag when the
+                            tenant network is created.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p ixia_locid="147">For provider networks of the VXLAN type, consider the following
+            guidelines:</p>
+        <ul id="ul_gwl_5fh_hr">
+            <li ixia_locid="4">
+                <p ixia_locid="148">Layer 3 routers used to interconnect compute nodes must be
+                    multicast-enabled, as required by the VXLAN protocol.</p>
+            </li>
+            <li ixia_locid="149">
+                <p ixia_locid="150">To minimize flooding of multicast packets, IGMP and MLD snooping
+                    is recommended on all Layer 2 switches. The AVS switch supports IGMP V1, V2 and
+                    V3, and MLD V1 and V2.</p>
+            </li>
+            <li ixia_locid="151">
+                <p ixia_locid="152">To support IGMP and MDL snooping, Layer 3 routers must be
+                    configured for IGMP and MDL querying.</p>
+            </li>
+            <li ixia_locid="153">
+                <p ixia_locid="11"><draft-comment author="jmaran" ixia_locid="158">The xref in this
+                        bullet point is correct but because this topic (Tenant Networks) appears in
+                        3 different bookmaps, the xref is, in one case, a local link (planning
+                        guide) and in the other two cases, an inter-book link (tenant user's guide
+                        and cloud admin). For now, leaving it as-is to err on the side of it being
+                        an inter-book link.</draft-comment>To accommodate VXLAN encapsulation, the
+                    MTU values for Layer 2 switches and compute node data interfaces must allow for
+                    additional headers. For more information, see <ph ixia_locid="49" otherprops="printonly"><cite ixia_locid="50">Titanium Server Planning:
+                        </cite></ph><cite ixia_locid="51"><ph ixia_locid="52"><xref href="jow1404333732592.xml" ixia_locid="53"/></ph></cite>.</p>
+            </li>
+            <li ixia_locid="13">
+                <p ixia_locid="154">To participate in a VXLAN network, the data interfaces on the
+                    compute nodes must be configured with IP addresses, and with route table entries
+                    for the destination subnets or the local gateway. For more information, see <ph ixia_locid="159" otherprops="printonly"><cite ixia_locid="160">Titanium Server
+                            System Administration: </cite></ph><cite ixia_locid="61"><ph ixia_locid="62"><xref href="jow1425584170078.xml" ixia_locid="63"/></ph></cite>, and <draft-comment author="jmaran" ixia_locid="161">The following xref is
+                        correct but the referenced topic also appears in the tenant user's guide and
+                        the cloud admin guide so it will sometimes actually appear in the same guide
+                        as this topic (as an internal link) and other times, it will be an
+                        inter-book link. This would mostly be an issue for PDF user's looking at
+                        hardcopy so I've left it pointing to the one document where it is not in the
+                        same book as this topic.</draft-comment><ph ixia_locid="162" otherprops="printonly"><cite ixia_locid="163">Titanium Server System
+                            Administration: </cite></ph><cite ixia_locid="164"><ph ixia_locid="165"><xref href="jow1425584215069.xml" ixia_locid="155"/></ph></cite>.</p>
+            </li>
+        </ul>
+        <p ixia_locid="156">In some circumstances, tenant networks can be configured to use VLAN
+            Transparent mode, in which VLAN tagged packets from the guest are encapsulated within a
+            provider network segment (VLAN) without removing or modifying the guest VLAN tag. For
+            more information, <draft-comment author="jmaran" ixia_locid="166">In the Tenant User's
+                Guide, the "VLAN Transparent" topic is a sub-topic of this topic (and is, therefore
+                an internal link) but in planning guide it is an inter-book link. I've left it
+                marked like an internal link for now based on Jim's guidance that the user's guide
+                is probably more heavily travelled than the planning guide. In electronic form, it
+                will resolve but it could be difficult for someone looking at a PDF hardcopy to find
+                - JM: Reversed decision due to link not resolving electronically in PDF, updating
+                formatting to be an interbook-link. Note that VLAN Transparent is also included in
+                the cloud admin guide.</draft-comment>see <ph ixia_locid="167" otherprops="printonly"><cite ixia_locid="168">Titanium Server Tenant User's Guide:
+                </cite></ph><cite ixia_locid="169"><ph ixia_locid="170"><xref href="rst1442341292102.xml" ixia_locid="48"/></ph></cite>. Alternately,
+            guest VLAN-tagged traffic can be supported by Titanium Server tenants explicitly
+            defining one or more VLAN-tagged IP subnets on a single tenant network. With this
+            approach, the guest VLAN-tagged IP subnets have access to all of the services of the
+            virtualized network infrastructure, such as DHCP, virtual routing, meta-data server,
+            etc. For more information, see <ph ixia_locid="54" otherprops="printonly"><cite ixia_locid="55">Titanium Server Introduction: </cite></ph><cite ixia_locid="56"><ph ixia_locid="57"><xref href="jow1404333560080.xml" ixia_locid="58"/></ph></cite>.</p>
+    </conbody>
+</concept-wr>

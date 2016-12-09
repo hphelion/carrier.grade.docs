@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="geu1462904599596" xml:lang="en-us">
+ <title ixia_locid="1">Storage Clusters (Replication Groups)</title>
+ <shortdesc ixia_locid="2">The storage hosts on Ceph systems are organized into clusters called
+      <term ixia_locid="34">replication groups</term>.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="36"><draft-comment author="jowens" ixia_locid="5">US77470 new topic. Horizon uses
+        "replication group" but the CLI uses "cluster."</draft-comment>Each replication group
+      contains two hosts, referred to as <term ixia_locid="16">peers</term>. Each peer independently
+      replicates the same data. For best performance, Wind River recommends a balanced storage
+      capacity, in which each peer has sufficient resources to meet the operational requirements of
+      the system.</p>
+    <p ixia_locid="37"> Allocations for ephemeral, image, volume, and object storage are rebalanced
+      dynamically to preserve redundancy and operational efficiency.</p>
+  <note id="note_N10042_N1001F_N10001" ixia_locid="32" type="caution">
+   <p ixia_locid="27">If one peer in a replication group is locked or goes out of service,
+        replication is suspended, and a warning is added to the alarms list. New data is written to
+        the unlocked peer only. </p>
+  </note>
+  <p ixia_locid="33">It is not possible to lock both peers in a replication group.</p>
+  <p ixia_locid="6">Replication groups are created automatically for each new storage pair. They are
+      shown on the <wintitle ixia_locid="35">Hosts Inventory</wintitle> page, in association with
+      the storage hosts. You can also use the following CLI commands to obtain information about
+      replication groups:</p>
+  <codeblock ixia_locid="7"><systemoutput ixia_locid="8">~(keystone_admin)$ </systemoutput><userinput ixia_locid="9">system cluster-list</userinput>
+<systemoutput ixia_locid="10">
++--------+-----------------+------+--------------+
+| uuid   | cluster_uuid    | type | name         |
++--------+-----------------+------+--------------+
+| 641... | 6414610c-482... | ceph | ceph_cluster |
+|        |                 |      |              |
++--------+-----------------+------+--------------+
+</systemoutput></codeblock>
+  <codeblock ixia_locid="17"><systemoutput ixia_locid="18">~(keystone_admin)$ </systemoutput><userinput ixia_locid="19">system cluster-show</userinput>
+   <systemoutput ixia_locid="20">
++--------------------+--------------------------------------- ...
+| Property           | Value                                  
++--------------------+---------------------------------------
+| uuid               | 6414610c-482b-4703-9c1d-7c97fefae5a0  
+| cluster_uuid       | 6414610c-482b-4703-9c1d-7c97fefae5a0  
+| type               | ceph                                 
+| name               | ceph_cluster                         
+| replication_groups | ["group-0:['storage-0', 'storage-1']",
++--------------------+--------------------------------------- ...
+   
+... ---------------------------------------+
+                                           |
+    ---------------------------------------+
+                                           |
+                                           |
+                                           |
+                                           |
+     "group-1:['storage-3', 'storage-2']"] |
+... ---------------------------------------+</systemoutput></codeblock>
+    <section id="section_N10078_N10022_N10001" ixia_locid="38">
+      <title ixia_locid="39">Storage Clusters and Cache Tiering</title>
+      <p ixia_locid="40">When cache tiering is enabled, two types of replication groups are shown:
+          <nameliteral ixia_locid="41">group-n</nameliteral> and <nameliteral ixia_locid="42">group-cache-n</nameliteral>, where <varname ixia_locid="46">n</varname> is the peer group number. You can
+        use this information to identify peer hosts and to determine in which tier they reside.</p>
+      <note id="note_N10090_N10078_N10022_N10001" ixia_locid="44">
+        <p ixia_locid="45">When adding a storage host, you must complete any incomplete peer group before starting a
+          new peer group in a different tier. You cannot have an odd number of hosts in either
+          tier.</p>
+      </note>
+    </section>
+ </conbody>
+</concept-wr>

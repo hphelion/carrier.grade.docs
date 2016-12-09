@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454354936432" xml:lang="en-us"><title ixia_locid="1">vSwitch Dimensioning</title><shortdesc ixia_locid="2">The Accelerated vSwitch (AVS) provides the virtual switching interconnect
+        between the physical network termination of the compute node and the virtual network
+        interfaces (vNICs) of the guest VMs.</shortdesc><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="22">There are several factors that contribute to the overall network performance:</p>
+        <ul id="ul_vmg_5pc_w5">
+            <li ixia_locid="23">
+                <p ixia_locid="24">The number of physical CPUs assigned to an AVS instance</p>
+            </li>
+            <li ixia_locid="25">
+                <p ixia_locid="26">The number of physical NICs assigned to an AVS instance</p>
+            </li>
+            <li ixia_locid="10">
+                <p ixia_locid="11">The number of virtual NICs scheduled on an AVS instance</p>
+            </li>
+            <li ixia_locid="12">
+                <p ixia_locid="13">The NUMA node placement of CPUs assigned to AVS relative to physical NICs and
+                    guest VM</p>
+            </li>
+            <li ixia_locid="14">
+                <p ixia_locid="15">The average packet size for the traffic being switched</p>
+            </li>
+            <li ixia_locid="20">
+                <p ixia_locid="21">The vif-model selected for the virtual NICs of the guest VM (for
+                    example, virtio or avp)</p>
+            </li>
+        </ul><p ixia_locid="16">The number of physical CPUs assigned to AVS can be configured against a compute
+            node through the CPU assignments for that host. To ensure sufficient cores are available
+            to host the guest VMs, configure only the minimum number of AVS cores required to meet
+            the target application throughput.</p><p ixia_locid="17">The physical NIC assignments are performed by configuring specific interfaces to
+            have a data network type. A physical NIC that has been assigned to AVS is detached from
+            the kernel device driver and assigned to AVS for accelerated packet switching.</p><p ixia_locid="18">The number of virtual NICs being serviced by a single AVS instance can affect
+            performance when there is contention for the CPU resources of a single compute host. If
+            there are special service level requirements for traffic throughput of a particular
+            guest VM, it is recommended to configure QoS policies of the tenant network for that VM
+            to ensure the guest VM with the higher service level requirements will get the necessary
+            resources. The QoS policies provide the capability to assign a weight to a tenant
+            network relative to other tenant networks, so that when CPU contention occurs, the
+            tenant network with the higher weight receives a higher percentage of CPU resources for
+            packet processing.</p><p ixia_locid="19">Finally, AVS performance is highly impacted by the average packet size of the
+            traffic being sent and received by the guest VM. If deploying an application that
+            requires the use of smaller packet sizes, then it may be necessary to increase the
+            number of assigned AVS cores to reach the target throughput capacity.</p>
+        <section id="section_N1006F_N10017_N10001" ixia_locid="27">
+            <title ixia_locid="28">Supported data NICs</title>
+            <p ixia_locid="29">For a list of supported NIC devices that can be configured as accelerated data
+                interfaces attached to AVS, refer to <ph ixia_locid="30" otherprops="printonly"><cite ixia_locid="31">Titanium Server Planning: </cite></ph><cite ixia_locid="32"><ph ixia_locid="33"><xref href="kdl1464894372485.dita" ixia_locid="34"/></ph></cite>.</p>
+        </section></conbody></concept-wr>

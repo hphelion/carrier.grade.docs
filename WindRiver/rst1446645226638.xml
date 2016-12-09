@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "../../system/dtd/client/wr_topic/generaltask-wr.dtd">
+<task-wr id="rst1446645226638" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Starting a Titanium Cluster</title>
+    <shortdesc ixia_locid="2">You can use a recommended procedure to restart an entire Titanium
+        cluster. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="rstone" ixia_locid="59">Topic added for
+                    CGTS-2886</draft-comment>This may be necessary, for instance, after the
+                underlying hardware has been shut down and physically moved.</p>
+        </context>
+        <steps>
+            <step id="step_N1002B_N10028_N1001C_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Power on <nameliteral ixia_locid="61">controller-0</nameliteral>. </cmd>
+                <info ixia_locid="8">
+                    <p ixia_locid="43">Ensure that the host is fully booted by logging in to a
+                        console, and confirm that it is unlocked from the output of the
+                            <cmdname ixia_locid="47">system host-list</cmdname> command before proceeding.</p>
+                </info>
+            </step>
+            <step id="step_N1003C_N10028_N1001C_N10001" ixia_locid="10">
+                <cmd ixia_locid="11">Power on <nameliteral ixia_locid="62">controller-1</nameliteral>.</cmd>
+                <info ixia_locid="12">
+                    <p ixia_locid="44">Ensure that the host is fully booted by logging in to a
+                        console, and confirm that it is unlocked from the output of the
+                            <cmdname ixia_locid="48">system host-list</cmdname> command before proceeding.</p>
+                </info>
+            </step>
+            <step id="step_N1004D_N10028_N1001C_N10001" ixia_locid="14">
+                <cmd ixia_locid="15">Power on <nameliteral ixia_locid="63">storage-0</nameliteral>.</cmd>
+                <info ixia_locid="16">
+                    <p ixia_locid="45">Ensure that the host is fully booted by logging in to a
+                        console, and confirm that it is unlocked from the output of the
+                            <cmdname ixia_locid="49">system host-list</cmdname> command before proceeding.</p>
+                </info>
+            </step>
+            <step id="step_N1005E_N10028_N1001C_N10001" ixia_locid="18">
+                <cmd ixia_locid="19">Power on and unlock <nameliteral ixia_locid="64">storage-1</nameliteral>.</cmd>
+                <info ixia_locid="20">
+                    <p ixia_locid="46">Ensure that the host is fully booted by logging in to a
+                        console before proceeding.</p>
+                </info>
+            </step>
+            <step id="step_N1006F_N10028_N1001C_N10001" ixia_locid="22">
+                <cmd ixia_locid="23">Power on and unlock each compute node.</cmd>
+                <substeps id="substeps_hjr_rfz_wt">
+                    <substep ixia_locid="24">
+                        <cmd ixia_locid="25">Follow the instructions for the node's hardware to power it up.</cmd>
+                    </substep>
+                    <substep ixia_locid="26">
+                        <cmd ixia_locid="27">On the <wintitle ixia_locid="60">Hosts</wintitle> tab of the
+                                <menucascade ixia_locid="28">
+                                <uicontrol ixia_locid="29">Admin</uicontrol>
+                                <uicontrol ixia_locid="30">Platform</uicontrol>
+                                <uicontrol ixia_locid="31">Host Inventory</uicontrol>
+                            </menucascade> page, select <menucascade ixia_locid="32">
+                                <uicontrol ixia_locid="33">Edit Host</uicontrol>
+                                <uicontrol ixia_locid="34">Unlock Host</uicontrol>
+                            </menucascade>.</cmd>
+                        <info ixia_locid="35">
+                            <fig id="fig_v3f_bsd_xt" ixia_locid="36">
+                                <image href="rst1446643548268.image" id="image_ijr_rfz_wt" ixia_locid="37"/>
+                            </fig>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N100B8_N10028_N1001C_N10001" ixia_locid="38">
+                <cmd ixia_locid="39">Start the virtual machines. </cmd>
+                <!--DOC WILL NOT BE READY FOR GA, COMMENTINGOUT REFERENCE - - - <info ixia_locid="40"><p ixia_locid="41">For more information on starting virtual machine instances, see <cite ixia_locid="42">Wind River Titanium Server Sample Installation and Configuration</cite>.</p></info>-->
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

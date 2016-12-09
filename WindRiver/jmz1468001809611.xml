@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jmz1468001809611" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Configuring Centralized Log Collection</title>
+    <shortdesc ixia_locid="2">To configure centralized log collection, you must set up a remote
+        server as a log server using a Titanium Server SDK utility, and then enable remote logging
+        on Titanium Server using the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="6">US77159 / US83068 new
+                    topic</draft-comment>For more information about the SDK, including an overview
+                of its components and how to access them, see the <cite ixia_locid="9">Titanium Server Software
+                    Development Kit</cite>.</p>
+        </context>
+        <steps>
+            <step id="step_N10031_N1002E_N1001C_N10001" ixia_locid="7">
+                <cmd ixia_locid="8">Set up a server to act as the log server.</cmd>
+                <info ixia_locid="10">
+                    <p ixia_locid="11">For more information, see <xref href="gld1467135445788.xml" ixia_locid="12"/>.</p>
+                </info>
+            </step>
+            <step id="step_N10052_N10038_N1001F_N10001" ixia_locid="13">
+                <cmd ixia_locid="14">Assign the log server an IP address accessible from the Titanium Server OAM
+                    network.</cmd>
+            </step>
+            <step id="step_N1005B_N10038_N1001F_N10001" ixia_locid="15">
+                <cmd ixia_locid="16">Run a script to configure the log server with an ELK stack and Titanium Server
+                    custom searches and filters.</cmd>
+                <info ixia_locid="17">
+                    <p ixia_locid="18">For more information, see <xref href="tal1467051884025.xml" ixia_locid="19"/>.</p>
+                </info>
+            </step>
+            <step id="step_N1006F_N10038_N1001F_N10001" ixia_locid="20">
+                <cmd ixia_locid="21">Enable remote logging on the Titanium Server system.</cmd>
+                <info ixia_locid="22">
+                    <p ixia_locid="23">For more informaton, see <xref href="xqe1467035030589.xml" ixia_locid="24"/>.</p>
+                </info>
+            </step>
+        </steps>
+        <!-- postreq id="postreq_N10082_N1001F_N10001" ixia_locid="25">
+            <p ixia_locid="26">For information about testing and troubleshooting the completed configuration, see
+                    <xref href="ylc1468001936064.xml" ixia_locid="27"/>.</p>
+        </postreq -->
+    </taskbody>
+</task-wr>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jnv1464873641816" xml:lang="en-us">
+<!--for 16.x
+        
+-->
+    <title ixia_locid="26">Creating Hardware Profiles from an Existing Host</title>
+    <shortdesc ixia_locid="27">You can save an existing host configuration as a hardware
+        profile.</shortdesc>
+    <prolog>
+        <author ixia_locid="28">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="29">
+            <p ixia_locid="253">For more information about hardware profiles, see <xref href="jow1404333787693.xml" ixia_locid="254"/>.</p>
+            <p ixia_locid="249"><draft-comment author="jowens" ixia_locid="31">US66653 new topic.
+                    Contains material moved from other topics.</draft-comment>If you prefer, you can
+                use the CLI to create hardware profiles from existing hosts. For more information,
+                see <xref href="jow1447789458498.xml" ixia_locid="250"/>.</p>
+            <p ixia_locid="255">As an alternative to using a configured host, you can define
+                hardware profiles using XML files. For more information see <xref href="jow1447789512474.xml" ixia_locid="252"/>.</p>
+        </context>
+        <prereq id="prereq_N1003C_N10024_N10001" ixia_locid="251">
+            <p ixia_locid="256">A host with the desired configuration is required. For information
+                about creating processor, interface, storage, or memory configurations on a host,
+                see <cite ixia_locid="310">Titanium Server System Administration: Inventory
+                    Detail</cite>. </p>
+        </prereq>
+        <steps id="steps_itz_wdn_c5">
+            <step conref="jow1426453628262.xml#jow1426453628262/step_N1002B_N10028_N1001C_N10001" id="step_N1005C_N10059_N10024_N10001" ixia_locid="221">
+                <cmd ixia_locid="222"/>
+            </step>
+            <step id="step_N10067_N10058_N10023_N10001" ixia_locid="231">
+                <cmd ixia_locid="232">On the Inventory Detail page, select the applicable tab and
+                    then open the dialog box for the type of hardware profile you want to
+                    create.</cmd>
+                <info ixia_locid="258">
+                    <fig id="fig_wwz_5z5_c5" ixia_locid="259">
+                        <image href="jow1448395326235.image" id="image_uw3_vz5_c5" ixia_locid="260">
+                            <alt ixia_locid="261">TiS Inventory Detail tabs</alt>
+                        </image>
+                    </fig>
+                    <ul id="ul_j2f_zt5_c5">
+                        <li ixia_locid="262">
+                            <p ixia_locid="263">To create a CPU profile, select the <uicontrol ixia_locid="264">Processor</uicontrol>
+                                tab, and then on the the <wintitle ixia_locid="265">CPU Assignments</wintitle> page,
+                                click <uicontrol ixia_locid="266">Create CPU Profile</uicontrol>.</p>
+                            <p ixia_locid="236">The <wintitle ixia_locid="237">Create CPU
+                                    Profile</wintitle> dialog box appears.</p>
+                            <fig id="fig_bfy_vx5_c5" ixia_locid="238">
+                                <image href="jow1404333764867.image" id="image_lfy_vx5_c5" ixia_locid="239"/>
+                            </fig>
+                        </li>
+                        <li ixia_locid="267">
+                            <p ixia_locid="268">To create a memory profile, select the <uicontrol ixia_locid="269">Memory</uicontrol>
+                                tab, and then on  the <wintitle ixia_locid="270">Memory</wintitle> page, click
+                                    <uicontrol ixia_locid="271">Create Memory Profile</uicontrol>.</p>
+                            <note id="note_N100C8_N100B5_N10086_N10073_N10069_N1005A_N1001F_N10001" ixia_locid="272">
+                                <p ixia_locid="273">The <uicontrol ixia_locid="274">Create Memory Profile</uicontrol> button is
+                                    available for compute hosts only.</p>
+                            </note>
+                            <p ixia_locid="275">The <wintitle ixia_locid="276">Create Memory
+                                    Profile</wintitle> dialog box appears.</p>
+                            <fig id="fig_cj1_byq_5r" ixia_locid="277">
+                                <image href="jow1429812100638.image" id="image_bk3_byq_5r" ixia_locid="278">
+                                    <alt ixia_locid="279">Create Memory Profile</alt>
+                                </image>
+                            </fig>
+                        </li>
+                        <li ixia_locid="280">
+                            <p ixia_locid="281">To create a storage profile from a storage host, select the
+                                    <uicontrol ixia_locid="282">Storage</uicontrol> tab, and then on the
+                                    <wintitle ixia_locid="283">Storage</wintitle> page, click <uicontrol ixia_locid="284">Create
+                                    Storage Profile</uicontrol>.</p>
+                            <note id="note_N10106_N100F3_N10086_N10073_N10069_N1005A_N1001F_N10001" ixia_locid="285">
+                                <p ixia_locid="286">The <uicontrol ixia_locid="287">Create Storage Profile</uicontrol> button is
+                                    available for storage hosts only.</p>
+                            </note>
+                            <p ixia_locid="288"><draft-comment author="jowens" ixia_locid="307">US78837 updated
+                                    screen shot</draft-comment> The <wintitle ixia_locid="289">Create Storage Profile</wintitle> dialog box appears.</p>
+                            <fig id="fig_N10052_N10047_N10027_N10023_N10020_N10001" ixia_locid="290">
+                                <image href="gmn1464874086331.image" id="image_ey2_gyd_2w" ixia_locid="308">
+                                    <alt ixia_locid="309">Create Storage Profile (16.x)</alt>
+                                </image>
+                            </fig>
+                        </li>
+                        <li ixia_locid="292">
+                            <p ixia_locid="293">To create an interface profile, select the
+                                    <uicontrol ixia_locid="294">Interfaces</uicontrol> tab, and then on the
+                                    <wintitle ixia_locid="295">Interfaces</wintitle> page, click <uicontrol ixia_locid="296">Create
+                                    Interface Profile</uicontrol>.</p>
+                            <p ixia_locid="11"> The <wintitle ixia_locid="12">Create Interface
+                                    Profile</wintitle> dialog box appears.</p>
+                            <fig id="fig_N10046_N1003B_N10026_N10023_N10020_N10001" ixia_locid="297">
+                                <image href="jow1404333531496.image" id="image_qrm_hwz_jn1" ixia_locid="298"/>
+                            </fig>
+                        </li>
+                    </ul>
+                </info>
+            </step>
+            <step id="step_N10062_N1002C_N1001C_N10001" ixia_locid="18">
+                <cmd ixia_locid="19">Provide a name for the profile.</cmd>
+            </step>
+            <step id="step_N1006B_N1002C_N1001C_N10001" ixia_locid="240">
+                <cmd ixia_locid="241">Click the applicable button (<uicontrol ixia_locid="303">Create CPU Profile</uicontrol>, <uicontrol ixia_locid="304">Create Memory
+                        Profile</uicontrol>, <uicontrol ixia_locid="305">Create Storage
+                        Profile</uicontrol>, or <uicontrol ixia_locid="306">Create Interface
+                        Profile</uicontrol>) to save the profile and close the dialog box.</cmd>
+                <stepresult ixia_locid="243">
+                    <p ixia_locid="244">The profile is created. To view it, select <menucascade ixia_locid="245">
+                            <uicontrol ixia_locid="246">Admin</uicontrol>
+                            <uicontrol ixia_locid="311">Platform</uicontrol>
+                            <uicontrol ixia_locid="247">Host Inventory</uicontrol>
+                        </menucascade>, and then select the applicable tab (<uicontrol ixia_locid="299">CPU Profiles</uicontrol>, <uicontrol ixia_locid="300">Interface Profiles</uicontrol>, <uicontrol ixia_locid="301">Storage
+                            Profiles</uicontrol>, or <uicontrol ixia_locid="302">Memory
+                            Profiles</uicontrol>) .</p>
+                </stepresult>
+            </step>
+        </steps>
+        <postreq id="postreq_N10094_N1001F_N10001" ixia_locid="47">
+            <p ixia_locid="226">To apply profiles to other hosts, see <xref href="jow1447789423653.xml" ixia_locid="48"/> .</p>
+        </postreq>
+    </taskbody>
+</task-wr>

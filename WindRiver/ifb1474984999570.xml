@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ifb1474984999570" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="330">Creating and Editing Flavors</title>
+    <shortdesc ixia_locid="322">You can create and edit flavors using the <wintitle ixia_locid="323">Flavors</wintitle> page of the web administration interface.</shortdesc>
+    <prolog>
+        <author ixia_locid="324">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10024_N10021_N10001" ixia_locid="325">
+            <p ixia_locid="247"><draft-comment author="jowens" ixia_locid="326">new topic for
+                    restructuring</draft-comment>You can create and edit flavors using the <wintitle ixia_locid="327">Flavors</wintitle> page of the web administration interface. To
+                access this page, select <menucascade ixia_locid="329">
+                    <uicontrol ixia_locid="250">Admin</uicontrol>
+                    <uicontrol ixia_locid="251">System</uicontrol>
+                    <uicontrol ixia_locid="252">Flavors</uicontrol>
+                </menucascade>.</p>
+            <ul id="ul_iln_ycv_tr">
+                <li ixia_locid="267">
+                    <p ixia_locid="248">To create a flavor, click the <uicontrol ixia_locid="253">Create Flavor</uicontrol> button. The <wintitle ixia_locid="5">Create
+                            Flavor</wintitle> window appears, as shown below:</p>
+                    <fig id="fig_N10027_N1001C_N10001" ixia_locid="6">
+                        <image href="jow1404333661555.image" id="image_tl3_33x_zn" ixia_locid="7" placement="inline"/>
+                    </fig>
+                    <p ixia_locid="254">The <wintitle ixia_locid="255">Create Flavor</wintitle>
+                        window has two tabs.</p>
+                    <dl>
+                        <dlentry ixia_locid="256">
+                            <dt ixia_locid="257"><uicontrol ixia_locid="258">Flavor
+                                    Information</uicontrol></dt>
+                            <dd ixia_locid="259">
+                                <p ixia_locid="260">defines basic information for the flavor</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="261">
+                            <dt ixia_locid="262"><uicontrol ixia_locid="269">Flavor
+                                    Access</uicontrol></dt>
+                            <dd ixia_locid="263">
+                                <p ixia_locid="264">controls which projects can see and use the
+                                    flavor</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </li>
+            </ul>
+            <p ixia_locid="331">You can set the following basic attributes when you create or edit a
+                flavor:</p>
+            <dl>
+                <dlentry ixia_locid="9">
+                    <dt ixia_locid="10">Name</dt>
+                    <dd ixia_locid="11">
+                        <p ixia_locid="12">The name to be associated with the flavor.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="13">
+                    <dt ixia_locid="14">ID</dt>
+                    <dd ixia_locid="15">
+                        <p ixia_locid="16">The object ID to associate with the flavor. In most
+                            situations you should leave the default value of <nameliteral ixia_locid="17">auto</nameliteral> for the system to auto-generate a
+                            unique ID.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="20">
+                    <dt ixia_locid="21">VCPUs</dt>
+                    <dd ixia_locid="22">
+                        <p ixia_locid="23">Number of virtual CPUs to be allocated to the virtual
+                            machine.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="57">
+                    <dt ixia_locid="58">RAM MB</dt>
+                    <dd ixia_locid="184">
+                        <p ixia_locid="186">Memory, in megabytes, to be allocated to the virtual
+                            machine.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="61">
+                    <dt ixia_locid="62">Root Disk GB</dt>
+                    <dd ixia_locid="63">
+                        <p ixia_locid="64">Specifies the virtual root disk size in gigabytes. This
+                            is an ephemeral disk to which the base image is copied. Use the value
+                                <nameliteral ixia_locid="242">0</nameliteral> to set the ephemeral
+                            disk size equal to the base image size. This value is ignored when
+                            booting from a Cinder volume.</p>
+                        <note id="note_N10144_N1001F_N10001" ixia_locid="278">
+                            <p ixia_locid="279"><draft-comment author="jowens" ixia_locid="280">CGTS-2832 updated. US69978 updated.</draft-comment>For
+                                information about storage allocation for the virtual root disk, see
+                                    <xref href="zjx1464641246986.xml" ixia_locid="318"/>.</p>
+                        </note>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="65">
+                    <dt ixia_locid="66">Ephemeral Disk GB</dt>
+                    <dd ixia_locid="67">
+                        <p ixia_locid="68">Specifies the size, in gigabytes, of a secondary
+                            ephemeral data disk. This is an empty, unformatted disk that exists only
+                            for the life time of the instance.</p>
+                        <note id="note_N1011F_N10116_N1010D_N10086_N1007D_N10071_N1006E_N10044_N10040_N10024_N10001" ixia_locid="282">
+                            <p ixia_locid="283"><draft-comment author="jowens" ixia_locid="284">CGTS-2832 updated. US69978 updated.</draft-comment>For
+                                information about storage allocation for the ephemeral disk, see
+                                    <xref href="zjx1464641246986.xml" ixia_locid="319"/>.</p>
+                        </note>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="332">
+                    <dt ixia_locid="333">Swap Disk MB</dt>
+                    <dd ixia_locid="334">
+                        <p ixia_locid="335">Ephemeral swap space, in megabytes, to be allocated to
+                            the instance.</p>
+                        <note id="note_N10149_N10140_N10137_N10086_N1007D_N10071_N1006E_N10044_N10040_N10024_N10001" ixia_locid="286">
+                            <p ixia_locid="287"><draft-comment author="jowens" ixia_locid="288">CGTS-2832 updated. US69978 updated.</draft-comment>For
+                                information about storage allocation for the swap disk, see <xref href="zjx1464641246986.xml" ixia_locid="320"/>.</p>
+                        </note>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="336">
+                    <dt ixia_locid="337">TX/RX Factor</dt>
+                    <dd ixia_locid="338">
+                        <draft-comment author="jowens" ixia_locid="339">
+                            <p ixia_locid="340">http://docs.openstack.org/admin-guide/cli-manage-flavors.html says,
+                                "Optional property that allows servers with a different bandwidth be
+                                created with the RXTX Factor. The default value is 1.0. That is, the
+                                new bandwidth is the same as that of the attached network. The RXTX
+                                Factor is available only for Xen or NSX [hypervisor] based systems."
+                                TiS is a KVM hypervisor based system.</p>
+                        </draft-comment>
+                        <p ixia_locid="341">(not applicable to Titanium Server)</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </context>
+        <section id="section_N10181_N10024_N10001" ixia_locid="290">
+            <title ixia_locid="291">Editing Flavors</title>
+            <p ixia_locid="292"><draft-comment author="jowens" ixia_locid="293">CGTS-3923 (PGA)
+                    changed former bullet to a section, and expanded for basic vs extra spec
+                    instructions</draft-comment>To edit the information or project access for an
+                existing flavor, open the <wintitle ixia_locid="294">Flavors</wintitle> page, and
+                then click <uicontrol ixia_locid="295">Edit Flavor</uicontrol> in the <uicontrol ixia_locid="296">Actions</uicontrol> column for the flavor.</p>
+            <p ixia_locid="297">To add extra specifications, click the <uicontrol ixia_locid="298">Flavor Name</uicontrol> to open the <wintitle ixia_locid="299">Flavor
+                    Detail</wintitle> page, and then select the <uicontrol ixia_locid="300">Extra
+                    Specs</uicontrol> tab. For more information, see <xref href="jow1429538642910.xml" ixia_locid="266"/>.</p>
+        </section>
+        <section id="section_N101B7_N10024_N10001" ixia_locid="301">
+            <title ixia_locid="302">Deleting Flavors</title>
+            <p ixia_locid="310"><draft-comment author="jowens" ixia_locid="304">CGTS-3923 (PGA)
+                    added section</draft-comment>To delete a flavor, first terminate any instances
+                that use the flavor. You can identify the instances to be terminated using the
+                following command:</p>
+            <codeblock ixia_locid="311"><systemoutput ixia_locid="312">~(keystone_admin)$ </systemoutput><userinput ixia_locid="313">nova list --all-tenants --flavor <varname ixia_locid="314">name</varname></userinput></codeblock>
+            <p ixia_locid="315">where <varname ixia_locid="316">name</varname> is the name of the
+                flavor.</p>
+            <p ixia_locid="317">Then, on the <wintitle ixia_locid="305">Flavors</wintitle> page,
+                open the drop-down menu in the <uicontrol ixia_locid="306">Actions</uicontrol>
+                column and select <uicontrol ixia_locid="307">Delete Flavor</uicontrol>.</p>
+            <note id="note_N101D5_N101B7_N10024_N10001" ixia_locid="308">
+                <p ixia_locid="309">Before you can delete a flavor, you must teminate any instances
+                    that use the flavor. </p>
+            </note>
+        </section>
+    </taskbody>
+</task-wr>

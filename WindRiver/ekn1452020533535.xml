@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ekn1452020533535" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Re-installing a System Using an Exported Host Configuration File</title>
+    <shortdesc ixia_locid="2">You can re-install a system using the host configuration file that is
+        generated using the <cmdname ixia_locid="4">host-bulk-export</cmdname> command.</shortdesc>
+    <prolog>
+        <author ixia_locid="5">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10029_N10026_N10001" ixia_locid="6">
+            <draft-comment author="eknowlto" ixia_locid="31">Disposition/Status: US67965 New Topic</draft-comment>
+        </context>
+        <prereq id="prereq_N10035_N10024_N10001" ixia_locid="32">
+            <p ixia_locid="33">For the following procedure, <nameliteral ixia_locid="34">controller-0</nameliteral> must be the
+                active controller. </p>
+        </prereq>
+        <section id="section_N10045_N10024_N10001" ixia_locid="35">
+            <title ixia_locid="36">Procedure</title>
+        </section>
+        <steps>
+            <step id="step_N10030_N1002D_N10026_N10001" ixia_locid="7">
+                <cmd ixia_locid="8">Create a host configuration file using the <cmdname ixia_locid="10">system host-bulk-export</cmdname> command, as described in
+                        <xref href="ekn1452016148428.xml" ixia_locid="37"/>.</cmd>
+            </step>
+            <step id="step_N10045_N1002D_N10026_N10001" ixia_locid="12">
+                <cmd ixia_locid="13">Copy the host configuration file to a USB drive or somewhere
+                    off the controller hard disk.</cmd>
+            </step>
+            <step id="step_N10052_N1002D_N10026_N10001" ixia_locid="15">
+                <cmd ixia_locid="16">Edit the host configuration file as needed, for example to
+                    specify power-on or BMC information. </cmd>
+            </step>
+            <step id="step_N1005F_N1002D_N10026_N10001" ixia_locid="18">
+                <cmd ixia_locid="19">Delete all the hosts except <nameliteral ixia_locid="20">controller-0</nameliteral> from the
+                    inventory.</cmd>
+            </step>
+            <step id="step_N1006C_N1002D_N10026_N10001" ixia_locid="21">
+                <cmd ixia_locid="22">Re-install the Titanium software on <nameliteral ixia_locid="23">controller-0</nameliteral>, which must be the active
+                    controller.</cmd>
+            </step>
+            <step id="step_N10079_N1002D_N10026_N10001" ixia_locid="24">
+                <cmd ixia_locid="25">Run <cmdname ixia_locid="26">config_controller</cmdname>.</cmd>
+            </step>
+            <step id="step_N10086_N1002D_N10026_N10001" ixia_locid="27">
+                <cmd ixia_locid="28">Follow the instructions for using the <cmdname ixia_locid="29">system host-bulk-add</cmdname> command, as detailed in <xref href="jow1441308518576.xml" ixia_locid="38"/>. </cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

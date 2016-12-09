@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ifr1474317936650" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Configuring Cache Tiering</title>
+    <shortdesc ixia_locid="2">You can configure the parameters for cache tiering from the command
+        line.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="417"><draft-comment author="jowens" ixia_locid="6">US84106 new
+                    topic</draft-comment>This procedure is required in order to add a Ceph tiering
+                storage host. </p>
+            <p ixia_locid="419">Basic information is provided here. For help selecting parameter
+                values for optimal performance, refer to the <cite ixia_locid="55">Titanium Server
+                    System Engineering Guidelines</cite>. For additional parameters and
+                configuration information, consult the public Ceph documentation.</p>
+        </context>
+        <steps>
+            <step id="step_N1004E_N1002D_N1001B_N10001" ixia_locid="15">
+                <cmd ixia_locid="16">Specify the number of hit sets to include for analysis.</cmd>
+                <info ixia_locid="19">
+                    <p ixia_locid="20">A hit set is a set of access requests used to identify frequently accessed
+                        objects.</p>
+                    <codeblock ixia_locid="21"><systemoutput ixia_locid="22">~(keystone_admin)$ </systemoutput><userinput ixia_locid="23">system service-parameter-add ceph cache_tiering \
+hit_set_count=<varname ixia_locid="24">count</varname></userinput>
+</codeblock>
+                    <p ixia_locid="25">where <varname ixia_locid="26">count</varname> is the number of hit sets to retain and use.
+                    </p>
+                </info>
+            </step>
+            <step id="step_N1006B_N1003D_N1001F_N10001" ixia_locid="27">
+                <cmd ixia_locid="28">Specify the length of time covered by each hit set.</cmd>
+                <info ixia_locid="29">
+                    <codeblock ixia_locid="30"><systemoutput ixia_locid="31">~(keystone_admin)$ </systemoutput><userinput ixia_locid="32">system service-parameter-add ceph cache_tiering \
+hit_set_period=<varname ixia_locid="33">period</varname></userinput>
+</codeblock>
+                    <p ixia_locid="388">where <varname ixia_locid="389">period</varname> is the duration in seconds. </p>
+                </info>
+            </step>
+            <step id="step_N10030_N1002D_N1001B_N10001" ixia_locid="7">
+                <cmd ixia_locid="8">Specify the filtering method for identifying frequently accessed
+                    objects.</cmd>
+                <info ixia_locid="9">
+                    <p ixia_locid="10">A filter is applied to the hit sets to determine which objects belong in the
+                        cache tier. Currently the only supported method is Bloom filtering.</p>
+                    <codeblock ixia_locid="36"><systemoutput ixia_locid="37">~(keystone_admin)$ </systemoutput><userinput ixia_locid="38">system service-parameter-add ceph cache_tiering \
+hit_set_type=bloom</userinput>
+<systemoutput ixia_locid="39">+----------+--------------------------------------+
+| Property | Value                                |
++----------+--------------------------------------+
+| uuid     | 2a9223d6-1e18-42de-bb06-7241ff8c5423 |
+| service  | ceph                                 |
+| section  | cache_tiering                        |
+| name     | hit_set_type                         |
+| value    | bloom                                |
++----------+--------------------------------------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <!-- The next step is not currently required. To comment it out, I had to hide internal double - ; I substituted double } --> 
+            <!-- step id="step_N100B6_N1003D_N1001F_N10001" ixia_locid="40">
+                <cmd ixia_locid="41"><draft-comment author="jowens" ixia_locid="416">I did not need to specify this
+                        in order to apply the service parameters. In fact, target_max_bytes was
+                        rejected as invalid for cache_tiering.</draft-comment>Specify when the cache
+                    is considered full and infrequently used objects can be flushed or
+                    evicted.</cmd>
+                <info ixia_locid="390">
+                    <p ixia_locid="43">You can specify the number of bytes or the number of objects, or both. For
+                        example, to enable object removal when the cache reaches one gibibyte, use
+                        the following command: </p>
+                    <codeblock ixia_locid="391"><systemoutput ixia_locid="392">~(keystone_admin)$ </systemoutput><userinput ixia_locid="393">system service-parameter-add ceph cache_tiering target_max_bytes=1000000000000</userinput>
+<systemoutput ixia_locid="47">+}}}}}}}}}}+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}+
+| Property | Value                                |
++}}}}}}}}}}+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}+
+| uuid     | 1efb7bb7-e545-4e4c-9b0f-9fa85a12a6ed |
+| service  | ceph                                 |
+| section  | cache_tiering                        |
+| name     | target_max_bytes                     |
+| value    | 1000000000000                        |
++}}}}}}}}}}+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}+</systemoutput></codeblock>
+                </info>
+            </step -->
+            <step id="step_N100EE_N10044_N1001F_N10001" ixia_locid="394">
+                <cmd ixia_locid="395">Specify the percentage of total available space used by
+                    modified objects that triggers flushing of modified objects to the storage pool. </cmd>
+                <info ixia_locid="397">
+                    <codeblock ixia_locid="398"><systemoutput ixia_locid="399">~(keystone_admin)$ </systemoutput><userinput ixia_locid="400">system service-parameter-add ceph cache_tiering \
+cache_target_dirty_ratio=<varname ixia_locid="401">dirty-ratio</varname></userinput>
+</codeblock>
+                    <p ixia_locid="402">where <varname ixia_locid="403">dirty-ratio</varname> is the
+                        percentage expressed as a decimal value (0.0 to 1.0).</p>
+                </info>
+            </step>
+            <step id="step_N10122_N10044_N1001F_N10001" ixia_locid="405">
+                <cmd ixia_locid="406">Specify the percentage of total available space used by
+                    unmodified objects that triggers eviction of unmodified objects from the cache. </cmd>
+                <info ixia_locid="408">
+                    <codeblock ixia_locid="409"><systemoutput ixia_locid="410">~(keystone_admin)$ </systemoutput><userinput ixia_locid="411">system service-parameter-add ceph cache_tiering \
+cache_target_full_ratio=<varname ixia_locid="412">full-ratio</varname></userinput>
+</codeblock>
+                    <p ixia_locid="413">where <varname ixia_locid="414">full-ratio</varname> is the
+                        percentage expressed as a decimal value (0.0 to 1.0). </p>
+                </info>
+            </step>
+            <step id="step_N100D8_N1003D_N1001F_N10001" ixia_locid="421">
+                <cmd ixia_locid="422">Enable the cache tiering feature.</cmd>
+                <info ixia_locid="423">
+                    <codeblock ixia_locid="424"><systemoutput ixia_locid="425">~(keystone_admin)$ </systemoutput><userinput ixia_locid="426">system service-parameter-modify ceph \
+cache_tiering feature_enabled=true</userinput>
+<systemoutput ixia_locid="427">+----------+--------------------------------------+
+| Property | Value                                |
++----------+--------------------------------------+
+| uuid     | 95881e60-4049-486e-9df2-f6de6f5819ce |
+| service  | ceph                                 |
+| section  | cache_tiering                        |
+| name     | feature_enabled                      |
+| value    | true                                 |
++----------+--------------------------------------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N1010F_N10044_N1001F_N10001" ixia_locid="435">
+                <cmd ixia_locid="436">Apply the service parameter changes.</cmd>
+                <info ixia_locid="437">
+                    <codeblock ixia_locid="438"><systemoutput ixia_locid="439">~(keystone_admin)$ </systemoutput><userinput ixia_locid="440">system service-parameter-apply ceph</userinput>
+<systemoutput ixia_locid="441">
+Applying ceph service parameters</systemoutput>
+                        </codeblock>
+                </info>
+                <stepresult ixia_locid="442">
+                    <p ixia_locid="443">A <nameliteral ixia_locid="444">Config out-of-date</nameliteral> alarm is raised. Wait for the
+                        alarm to clear.</p>
+                </stepresult>
+            </step>
+            <step id="step_N1016B_N1003E_N1001F_N10001" ixia_locid="445">
+                <cmd ixia_locid="446">Add storage hosts configured for Ceph caching.</cmd>
+                <info ixia_locid="447">
+                    <p ixia_locid="448">For help adding and configuring storage hosts, refer to <cite ixia_locid="449">Titanium Server
+                            Installation for Systems with Dedicated Storage</cite>.  For valid
+                        cluster configurations, see <xref href="hyq1477749742436.xml" ixia_locid="420"/>.</p>
+                </info>
+            </step>
+            <step id="step_N1013D_N1003E_N1001F_N10001" ixia_locid="428">
+                <cmd ixia_locid="429">Enable the cache.</cmd>
+                <info ixia_locid="430">
+                    <codeblock ixia_locid="431"><systemoutput ixia_locid="432">~(keystone_admin)$ </systemoutput><userinput ixia_locid="433">system service-parameter-modify ceph \
+cache_tiering cache_enabled=true</userinput>
+<systemoutput ixia_locid="434">+----------+--------------------------------------+
+| Property | Value                                |
++----------+--------------------------------------+
+| uuid     | 95881e60-4049-486e-9df2-f6de6f5819ce |
+| service  | ceph                                 |
+| section  | cache_tiering                        |
+| name     | cache_enabled                      |
+| value    | true                                 |
++----------+--------------------------------------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N101A6_N1003E_N1001F_N10001" ixia_locid="450">
+                <cmd ixia_locid="451">Apply the service parameter changes.</cmd>
+                <info ixia_locid="452">
+                    <codeblock ixia_locid="453"><systemoutput ixia_locid="454">~(keystone_admin)$ </systemoutput><userinput ixia_locid="455">system service-parameter-apply ceph</userinput>
+<systemoutput ixia_locid="456">
+Applying ceph service parameters</systemoutput>
+                        </codeblock>
+                </info>
+                <stepresult ixia_locid="457">
+                    <p ixia_locid="458">A <nameliteral ixia_locid="459">Config out-of-date</nameliteral> alarm is raised. Wait for the
+                        alarm to clear.</p>
+                </stepresult>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

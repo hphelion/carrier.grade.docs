@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003759920" xml:lang="en-us"><title ixia_locid="1">Cinder Dimensioning for Storage Nodes</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+        <p ixia_locid="4">To determine the logical disk capacity requirement for Cinder volumes
+            calculate the total storage for volumes required to be supported plus some margin to
+            handle growth. </p>
+        <sl>
+            <sli ixia_locid="22">Cinder Storage Requirement = N * AvgVolSize + Margin</sli>
+        </sl>
+        <p ixia_locid="24">Where:</p>
+        <sl id="ul_hns_txg_v5">
+            <sli ixia_locid="23">N = Total number of volumes required</sli>
+            <sli ixia_locid="9">AvgVolSize = Average volume size on disk in GB (note that sparse
+                files are used)</sli>
+            <sli ixia_locid="11">Margin = User-defined margin (recommend at least 25%)</sli>
+        </sl>
+        <note id="note_N1002F_N10013_N10001" ixia_locid="13">
+            <p ixia_locid="14">Volumes are stored as sparse files; therefore the volume size on disk
+                is based on how much disk space the VM uses, not the advertised volume size. The
+                average volume size on disk should reflect the maximum average amount in the volume
+                that the VM is expected to use over time. Furthermore, scheduling of volumes is
+                based on advertised volume sizes so if creating many volumes at the same time,
+                consider increasing the margin.</p>
+        </note>
+        <note id="note_N10036_N10013_N10001" ixia_locid="15">
+            <p ixia_locid="16">The number of volumes is not necessarily the same as the number of
+                VMs since VMs can have more than one volume and volumes can be created at different
+                times than the VMs.</p>
+        </note>
+        <p ixia_locid="17">Storage utilization is affected by the number of OSDs so this must also
+            be taken into account. For a reference deployment, 380 volumes with a distribution of 1,
+            2, 4, 10, 20, and 40 GB volumes averaging 12 GB were created. For 6 OSDs the actual disk
+            usage per Storage Node was 371 GB, or about 1 GB per volume since sparse files are used
+            to store the volumes. As the number of OSDs decreases, the actual storage utilization
+            increased to 600 GB for the same volumes with 6 OSDs, a 38% increase in disk usage. </p>
+        <fig id="fig_N1003F_N10013_N10001" ixia_locid="18">
+            <title id="title__Toc441623501" ixia_locid="19">Disk Usage versus number of OSDs for 15K
+                RPM SAS Disks.</title>
+            <image href="jow1454003758030.image" id="image_adm_1yy_55" ixia_locid="20">
+                <alt ixia_locid="21">media/image6.png</alt>
+            </image>
+        </fig>
+    </conbody></concept-wr>

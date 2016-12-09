@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003728154" xml:lang="en-us">
+    <title ixia_locid="1">Disk Hardware Configuration for System Storage</title>
+    <shortdesc ixia_locid="2"/>
+    <prolog>
+        <author ixia_locid="3">Craig Griffin</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="26">CGTS-3888 Add letters to
+                equations, move backup to last</draft-comment>For the controller node, a minimum 500
+            GB solid-state drive (SSD) is mandatory for capacity and performance. However, a
+            bottom-up calculation of the disk size requirement should be used to ensure 500 GB is
+            sufficient.</p>
+        <sl>
+            <sli ixia_locid="5">Total Primary Disk requirement = 39 GB (fixed platform) + D GB
+                (database) + X GB (images) + Y GB (Image Conversion) + B GB (backup)</sli>
+        </sl>
+        <p ixia_locid="25">Where:</p>
+        <sl>
+            <sli ixia_locid="19">
+                D = Database (see Database Dimensioning section)
+            </sli>
+            <sli ixia_locid="21">
+                X = Images (see Glance Backend Dimensioning section) 
+            </sli>
+            <sli ixia_locid="23"> Y = Conversion (see Dimensioning Section) </sli>
+            <sli ixia_locid="17"> B = Backup (see Backup Dimensioning section) </sli>
+        </sl>
+    </conbody>
+</concept-wr>

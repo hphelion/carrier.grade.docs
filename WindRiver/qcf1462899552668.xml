@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="qcf1462899552668" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1">Host Inventory</title>
+    <shortdesc ixia_locid="2">The <uicontrol ixia_locid="3">Hosts</uicontrol> tab on the <wintitle ixia_locid="4">Host Inventory</wintitle> page provides an overview of the current state
+        of all hosts in the Titanium Server cluster. From this tab, you can obtain detailed
+        information about the hosts, and execute maintenance operations.</shortdesc>
+    <prolog>
+        <author ixia_locid="352">Jim Owens</author>
+        <author ixia_locid="5">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="6"><draft-comment author="jowens" ixia_locid="369">US77470 updated screen
+                shot. Also, updated and simplified entries for Actions column.</draft-comment>A
+            sample <uicontrol ixia_locid="391">Hosts</uicontrol> tab is illustrated below:</p>
+        <fig id="fig_N1002B_N10024_N10001" ixia_locid="7">
+            <image href="aff1462901194122.image" id="image_rld_zwt_xv" ixia_locid="370">
+                <alt ixia_locid="371">Titanium Server Host Inventory tab</alt>
+            </image>
+        </fig>
+        <dl>
+            <dlentry ixia_locid="10">
+                <dt ixia_locid="11">Host Name</dt>
+                <dd ixia_locid="12">
+                    <p ixia_locid="13">The name assigned to the host. This is an active link
+                        pointing to the detailed inventory page for the host. For more information,
+                        see <xref href="jow1404333758794.xml" ixia_locid="14"/>.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="15">
+                <dt ixia_locid="16">Personality</dt>
+                <dd ixia_locid="17">
+                    <p ixia_locid="18">The personality of the host (controller, compute, or
+                        storage).</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="372">
+                <dt ixia_locid="373">Replication Group</dt>
+                <dd ixia_locid="374">
+                    <p ixia_locid="375"><draft-comment author="jowens" ixia_locid="376">US77470
+                            added</draft-comment>For a storage host, the group to which the host
+                        belongs. Data is replicated on each host in the group. For more information,
+                        see <xref href="geu1462904599596.xml" ixia_locid="377"/>.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="23">
+                <dt ixia_locid="24">Admin State</dt>
+                <dd ixia_locid="25">
+                    <p ixia_locid="26">The administrative state of the host:</p>
+                    <dl>
+                        <dlentry ixia_locid="27">
+                            <dt ixia_locid="28">Locked</dt>
+                            <dd ixia_locid="29">
+                                <p ixia_locid="30">The host is administratively prohibited from
+                                    performing services. This is the initial state for hosts
+                                    auto-discovered in the cluster.</p>
+                                <p ixia_locid="31">A controller node in this state is not functioning in HA mode, and it is not
+                  running any active controller services.</p>
+                                <p ixia_locid="32">Compute and storage nodes in this state do not provide any service. In
+                  particular, a locked compute node is not running any virtual machine instances,
+                  and no new ones will be scheduled to run on it.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="33">
+                            <dt ixia_locid="34">Unlocked</dt>
+                            <dd ixia_locid="35">
+                                <p ixia_locid="36">The host is administratively in service.</p>
+                                <p ixia_locid="37">A controller node in this state, and not in the
+                                    failed state, is active in its HA role, and is running the
+                                    assigned controller services.</p>
+                                <p ixia_locid="38">A compute node in this state, and not in the
+                                    failed state, is eligible for regular scheduling and maintenance
+                                    operations on virtual machines.</p>
+                                <p ixia_locid="276">A storage node in this state, and not in the failed state,
+                                    provides storage services.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="39">
+                <dt ixia_locid="40">Operational State</dt>
+                <dd ixia_locid="41">
+                    <p ixia_locid="42">The operational state of the host:</p>
+                    <dl>
+                        <dlentry ixia_locid="43">
+                            <dt ixia_locid="44">Disabled</dt>
+                            <dd ixia_locid="45">
+                                <p ixia_locid="46">Indicates that the host is not providing the
+                                    expected services. This can be due to the fact that it is in the
+                                    process of being unlocked, a failure has occurred, or it is
+                                    being automatically recovered due to a failure.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="47">
+                            <dt ixia_locid="48">Enabled</dt>
+                            <dd ixia_locid="49">
+                                <p ixia_locid="50">Indicates that the host is providing the expected
+                                    services, even if its operational environment is compromised. In
+                                    the latter case, the host is reported to be in the <i ixia_locid="51">Degraded</i> availability state, in which
+                                    case, state maintenance is constantly trying to recover the host
+                                    to the fully <i ixia_locid="52">Available</i> state through
+                                    in-service testing.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="53">
+                <dt ixia_locid="54">Availability State</dt>
+                <dd ixia_locid="55">
+                    <p ixia_locid="56">The availability state of the host. It can be in one of the
+                        following states:<draft-comment author="jmaran" ixia_locid="392">Should the states below be
+                            tagged &lt;i&gt; for consistency?</draft-comment></p>
+                    <dl>
+                        <dlentry ixia_locid="57">
+                            <dt ixia_locid="58">Offline</dt>
+                            <dd ixia_locid="59">
+                                <p ixia_locid="60">The host is known to Titanium Server, but is not
+                                    reachable for maintenance purposes.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="61">
+                            <dt ixia_locid="62">Online</dt>
+                            <dd ixia_locid="63">
+                                <p ixia_locid="64">The host is reachable and ready to be
+                                    unlocked.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="65">
+                            <dt ixia_locid="66">InTest</dt>
+                            <dd ixia_locid="67">
+                                <p ixia_locid="68">A transient state that occurs when transitioning
+                                    from locked, or from a <i ixia_locid="69">Failed</i> operational
+                                    state, to unlocked states. While in this state, the host is
+                                    executing a series of tests to validate its hardware and
+                                    software integrity.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="72">
+                            <dt ixia_locid="73">Available</dt>
+                            <dd ixia_locid="74">
+                                <p ixia_locid="75">The host is fully operational and providing
+                                    services.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="76">
+                            <dt ixia_locid="77">Degraded</dt>
+                            <dd ixia_locid="78">
+                                <p ixia_locid="79">The host is experiencing compromised operational
+                                    conditions, such as low memory, but is still providing the
+                                    expected services. Details about the compromised conditions are
+                                    available through the alarms subsystem. For more information,
+                                    see <xref href="ekn1458933172232.xml" ixia_locid="80"/>.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="81">
+                            <dt ixia_locid="82">Failed</dt>
+                            <dd ixia_locid="83">
+                                <p ixia_locid="84">A major fault has occurred and the host is no
+                                    longer providing any services. The Titanium Server maintenance
+                                    system automatically tries to recover hosts in this state.</p>
+                                <p ixia_locid="85">In the case of a compute node, any virtual
+                                    machines that were running before are immediately evacuated to
+                                    another enabled compute node with sufficient available
+                                    resources.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="313">
+                            <dt ixia_locid="314">Power-off</dt>
+                            <dd ixia_locid="315">
+                                <p ixia_locid="316">The host is known to have been powered off by a
+                                    previous maintenance action. </p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="86">
+                <dt ixia_locid="87">Uptime</dt>
+                <dd ixia_locid="88">
+                    <p ixia_locid="89">The uptime of the host, as reported by the system maintenance
+                        service.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="90">
+                <dt ixia_locid="91">Status</dt>
+                <dd ixia_locid="92">
+                    <p ixia_locid="93">An indicator of the immediate activity occurring on the host.
+                        It reports transitory steps such as booting, initializing, configuration out
+                        of date, and in-test, which a host goes through as it transitions from one
+                        administrative or availability state to another.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="94">
+                <dt ixia_locid="95">Actions</dt>
+                <dd ixia_locid="96">
+                    <p ixia_locid="379">The actions column presents an <uicontrol ixia_locid="378">Edit Host</uicontrol> button and a drop-down menu. </p>
+                    <p ixia_locid="380">The <uicontrol ixia_locid="381">Edit Host</uicontrol> button displays the
+                            <wintitle ixia_locid="103">Edit Host</wintitle> window as illustrated
+                        below for a compute node:</p>
+                    <draft-comment author="eknowlto" ixia_locid="355">US68398 - Edit Host screen
+                        updated for local storage profile</draft-comment>
+                    <fig id="fig_N101C5_N101BA_N101B1_N101AE_N101A7_N101A0_N1003B_N10024_N10001" ixia_locid="104">
+                        <image href="ekn1454008008443.image" id="image_czz_xgn_mt" ixia_locid="347">
+                            <alt ixia_locid="348">Edit Host interface profiles</alt>
+                        </image>
+                    </fig>
+                    <p ixia_locid="108">This is the same window you use to assign the host's
+                        personality when installing the Titanium Server software on the host.</p>
+                    <ul id="ul_izb_t2m_zv">
+                        <li ixia_locid="382">
+                            <p ixia_locid="106">The <uicontrol ixia_locid="383">Host
+                                    Info</uicontrol> tab provides access for modifying the host name
+                                (compute and storage nodes only) and applying profiles. For more
+                                about profiles, see <ph ixia_locid="393" otherprops="printonly"><cite ixia_locid="389">Titanium Server Installation:
+                                            </cite></ph><cite ixia_locid="394"><ph ixia_locid="395"><xref href="jow1404333787693.xml" ixia_locid="107"/></ph></cite>.</p>
+                        </li>
+                        <li ixia_locid="384">
+                            <p ixia_locid="349"><draft-comment author="jowens" ixia_locid="350">US62816 update for Installation Parameters
+                                tab</draft-comment>The <uicontrol ixia_locid="385">Installation
+                                    Parameters</uicontrol> tab provides access to installation
+                                settings. Changes take effect if the host is re-installed. For more
+                                information, see the <cite ixia_locid="351">Titanium Server
+                                    Installation</cite> document that pertains to your Titanium
+                                Server configuration.</p>
+                        </li>
+                        <li ixia_locid="386">
+                            <p ixia_locid="229">The <uicontrol ixia_locid="230">Board
+                                    Management</uicontrol> tab provides access to the management
+                                board configuration, if available on the host. For more information,
+                                see <ph ixia_locid="182" otherprops="printonly"><cite ixia_locid="390">Titanium Server Planning:</cite>
+                                </ph><cite ixia_locid="184"><ph ixia_locid="185"><xref href="jow1406727863674.xml" ixia_locid="277"/></ph></cite>.</p>
+                        </li>
+                    </ul>
+                    <p ixia_locid="387">Next to the <uicontrol ixia_locid="388">Edit Host</uicontrol> button is a drop-down menu used
+                        for maintenance operations. The available operations depend on the host type
+                        and state, and on whether the host is configured for board management. </p>
+                    <dl>
+                        <dlentry ixia_locid="137">
+                            <dt ixia_locid="138">Lock Host</dt>
+                            <dd ixia_locid="139">
+                                <p ixia_locid="140">Attempts to bring an unlocked host out of
+                                    service.</p>
+                                <p ixia_locid="141">On a controller node, the state transition only
+                                    succeeds if there are no services running in active mode on the
+                                    host.</p>
+                                <p ixia_locid="143"><draft-comment author="jowens" ixia_locid="353">US69978 removed note about migration support; replaced it
+                                        with xref to topic discussing migration
+                                        support.</draft-comment>On a compute node, the state
+                                    transition only succeeds if all currently running instances on
+                                    the host can be migrated to alternative compute nodes. Migration
+                                    of the virtual machine instances is initiated automatically by
+                                    Titanium Server as soon as the state transition is requested.
+                                    For more about migration behavior, see<draft-comment author="jmaran" ixia_locid="396">Updated to point to topic in 16.x
+                                        guide.</draft-comment>
+                                    <xref href="ksh1464711502906.xml" ixia_locid="397"/>.</p>
+                                <p ixia_locid="261">You can lock a host from the controller's
+                                    command line, as follows:</p>
+                                <codeblock ixia_locid="263"><systemoutput ixia_locid="340">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="267">system host-lock <varname ixia_locid="269">hostname</varname></userinput></codeblock>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="271">
+                            <dt ixia_locid="272">Forced Lock Host</dt>
+                            <dd ixia_locid="273">
+                                <p ixia_locid="320"><draft-comment author="jowens" ixia_locid="356">CGTS-3977 (PGA) emphasized cautionary
+                                    steps</draft-comment>Forces an unlocked host to be out of
+                                    service. </p>
+                                <note id="note_N1030B_N102FB_N102F2_N102AF_N102A6_N1029D_N10234_N10227_N1021E_N10050_N1002E_N10001" ixia_locid="357" type="caution">
+                                    <p ixia_locid="358">A force lock operation on a compute host
+                                        causes an immediate service outage on all hosted virtual
+                                        machines (VM failures). Before using a force lock on a
+                                        compute host, perform the following steps:</p>
+                                    <ol id="ol_hwz_n4l_zv">
+                                        <li ixia_locid="359">
+                                            <p ixia_locid="360">Try to lock the host normally using
+                                                  <uicontrol ixia_locid="361">Lock
+                                                Host</uicontrol>.</p>
+                                        </li>
+                                        <li ixia_locid="362">
+                                            <p ixia_locid="363">If the <uicontrol ixia_locid="364">Lock Host</uicontrol> attempt fails, manually
+                                                migrate all VMs running on the host, and then try
+                                                using <uicontrol ixia_locid="365">Lock
+                                                  Host</uicontrol> again.</p>
+                                        </li>
+                                    </ol>
+                                    <p ixia_locid="366"> Use a force lock only if the above steps
+                                        fail to lock the host. </p>
+                                </note>
+                                <p ixia_locid="367">You can also apply a force lock from the
+                                    controller's command line as follows:</p>
+                                <codeblock ixia_locid="295"><systemoutput ixia_locid="341">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="299">system host-lock --force <varname ixia_locid="301">hostname</varname></userinput></codeblock>
+                                <p ixia_locid="368">When you apply a force lock, the system displays
+                                    a warning message appropriate to the personality of the
+                                    host.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="144">
+                            <dt ixia_locid="145">Swact Host</dt>
+                            <dd ixia_locid="146">
+                                <p ixia_locid="147">This operation is available on controller nodes
+                                    only. It initiates a switch of the active/standby roles.</p>
+                                <p ixia_locid="303"><term ixia_locid="398">Swact</term> is an abbreviated form of the
+                                    term <term ixia_locid="399">Switch Active</term> (host). When selected, this
+                                    option forces the other controller to become the active one in
+                                    the HA cluster. This means that all active system services on
+                                    this controller move to standby operation, and that the
+                                    corresponding services on the other controller become
+                                    active.</p>
+                                <p ixia_locid="304">Use this option when you need to lock the
+                                    currently active controller, or do any kind of maintenance
+                                    procedures; for example, when updating hardware or replacing
+                                    faulty components.</p>
+                                <p ixia_locid="294">You can swact a host from the controller's
+                                    command line as follows:</p>
+                                <codeblock ixia_locid="296"><systemoutput ixia_locid="342">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="300">system host-swact --force <varname ixia_locid="302">hostname</varname></userinput></codeblock>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="115">
+                            <dt ixia_locid="116">Unlock Host</dt>
+                            <dd ixia_locid="117">
+                                <p ixia_locid="118">Brings a locked host into service. The first
+                                    step is to reset the target host to ensure that it starts from a
+                                    well-known state. The host is automatically configured, and any
+                                    required software patches are applied.</p>
+                                <p ixia_locid="119">The state transition only succeeds if all the
+                                    necessary configuration components for the host are already in
+                                    place. For example, the state transition is rejected on a
+                                    compute node for which no data interfaces are defined.</p>
+                                <p ixia_locid="246">You can unlock a host from the controller's
+                                    command line as follows:</p>
+                                <codeblock ixia_locid="249"><systemoutput ixia_locid="334">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="255">system host-unlock <varname ixia_locid="258">hostname</varname></userinput></codeblock>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="124">
+                            <dt ixia_locid="125">Reboot Host</dt>
+                            <dd ixia_locid="126">
+                                <p ixia_locid="127">Gracefully shuts down a locked host, ensuring
+                                    that all system processes are properly shut off first. The host
+                                    then reboots automatically.</p>
+                                <p ixia_locid="278">You can reboot a host from the controller's
+                                    command line as follows:</p>
+                                <codeblock ixia_locid="281"><systemoutput ixia_locid="337">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="287">system host-reboot <varname ixia_locid="290">hostname</varname></userinput></codeblock>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="128">
+                            <dt ixia_locid="129">Reinstall Host</dt>
+                            <dd ixia_locid="130">
+                                <p ixia_locid="131">Forces a full re-installation of the Titanium
+                                    Server software on a locked host. The host's hard drive is
+                                    erased, and the installation process is started afresh.</p>
+                                <note conref="rst1432737677834.xml#rst1432737677834/note_N10195_N10154_N1001F_N10001" id="note_N10195_N10154_N1001F_N10001" ixia_locid="345"/>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="120">
+                            <dt ixia_locid="121">Power Off Host</dt>
+                            <dd ixia_locid="122">
+                                <p ixia_locid="123">Gracefully powers off the host, ensuring that
+                                    all system processes are properly shut off first. This selection
+                                    is available if board management is configured on the system,
+                                    the host is equipped with an iLO module, and the host is in a
+                                    powered-on state. </p>
+                                <p ixia_locid="247">You can power off a host from the controller's
+                                    command line as follows:</p>
+                                <codeblock ixia_locid="250"><systemoutput ixia_locid="335">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="256">system host-power-off <varname ixia_locid="259">hostname</varname></userinput></codeblock>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="218">
+                            <dt ixia_locid="219">Power On Host</dt>
+                            <dd ixia_locid="220">
+                                <p ixia_locid="221">Powers on the host. This selection is available
+                                    if board management is configured on the system, the host is
+                                    equipped with an iLO module, and the host is in a powered-off
+                                    state.</p>
+                                <p ixia_locid="236">You can power on a host from the controller's
+                                    command line as follows:</p>
+                                <codeblock ixia_locid="237"><systemoutput ixia_locid="336">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="239">system host-power-on <varname ixia_locid="240">hostname</varname></userinput></codeblock>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="222">
+                            <dt ixia_locid="223">Reset Host</dt>
+                            <dd ixia_locid="224">
+                                <p ixia_locid="227">Performs an out-of-band reset, stopping and
+                                    restarting the host without ensuring that all system processes
+                                    are shut off first. This selection is available if board
+                                    management is configured on the system, the host is equipped
+                                    with an iLO module, and the host is in a powered-on state. </p>
+                                <p ixia_locid="226">Use this selection only if <uicontrol ixia_locid="228">Reboot Host</uicontrol> fails. </p>
+                                <p ixia_locid="279">You can reset a host from the controller's
+                                    command line as follows:</p>
+                                <codeblock ixia_locid="282"><systemoutput ixia_locid="338">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="288">system host-reset <varname ixia_locid="291">hostname</varname></userinput></codeblock>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="132">
+                            <dt ixia_locid="133">Delete Host</dt>
+                            <dd ixia_locid="134">
+                                <p ixia_locid="135">Removes the host from the inventory database,
+                                    and erases its hard drive.</p>
+                                <p ixia_locid="280">You can delete a host from the controller's
+                                    command line as follows:</p>
+                                <codeblock ixia_locid="283"><systemoutput ixia_locid="339">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="289">system host-delete <varname ixia_locid="292">hostname</varname></userinput></codeblock>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="322">
+                            <dt ixia_locid="323">Install Patches</dt>
+                            <dd ixia_locid="324">
+                                <p ixia_locid="325">Initiates any pending patching operations. Once
+                                    successfully executed, the host returns back to the locked
+                                    state. <draft-comment author="jmaran" ixia_locid="400">Added doc-level &lt;cite&gt;
+                                        reference.</draft-comment>See <ph ixia_locid="401" otherprops="printonly"><cite ixia_locid="402">Titanium Server Software Management:
+                                                </cite></ph><cite ixia_locid="403"><ph ixia_locid="404"><xref href="psa1410446455735.xml" ixia_locid="326"/></ph></cite> for details.</p>
+                                <p ixia_locid="327">This option is only available if there are
+                                    patching operations pending for the host.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </dd>
+            </dlentry>
+        </dl>
+    </conbody>
+</concept-wr>

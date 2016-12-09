@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="iek1473182726855" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Provisioning Storage on Controller-1 Using the CLI</title>    
+    <shortdesc ixia_locid="2">You can use the command-line interface to configure storage resources
+        on a host.</shortdesc>
+    <prolog>
+        <author ixia_locid="5">Jim Owens</author>
+        <author ixia_locid="6">Tom Towle</author>
+        <author ixia_locid="7">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <steps>
+            <step id="step_N101BE_N1008B_N10033_N10001" ixia_locid="463" product=" tis_lvm tis_cpe">
+                <cmd ixia_locid="464"><draft-comment author="jowens" dir="ltr" ixia_locid="465" translate="no">US64033 step added</draft-comment>Configure the Cinder
+                    storage on <nameliteral ixia_locid="466">controller-1</nameliteral>.</cmd>
+                <info ixia_locid="467">
+                    <p ixia_locid="469">Obtain the uuid of the physical disk to use for Cinder
+                        storage:</p>
+                    <codeblock ixia_locid="836"><systemoutput ixia_locid="837">~(keystone_admin)$ </systemoutput><userinput ixia_locid="838">system host-disk-list controller-1</userinput>
+<systemoutput ixia_locid="839">+--------------------------------------+-------------+------------+...
+| uuid                                 | device_node | device_num |...
++--------------------------------------+-------------+------------+...
+| e0bf6865-1080-4bb5-8f0c-9167a620da25 | /dev/sda    | 2048       |...
+| 12da99c4-8a33-4b5c-8ae6-8ab88504a1ac | /dev/sdb    | 2064       |...
++--------------------------------------+-------------+------------+...</systemoutput></codeblock>
+                    <p ixia_locid="474">Assign Cinder storage to the physical disk using a command
+                        of the following form:</p>
+                    <codeblock ixia_locid="475"><systemoutput ixia_locid="476">~(keystone_admin)$ </systemoutput><userinput ixia_locid="477">system host-stor-add controller-1 cinder <varname ixia_locid="478">uuid</varname></userinput>
+</codeblock>
+                    <p ixia_locid="479">For example, to assign Cinder storage on <nameliteral ixia_locid="480">/dev/sdb</nameliteral> in the example above:</p>
+                    <codeblock ixia_locid="481"><systemoutput ixia_locid="482">~(keystone_admin)$ </systemoutput><userinput ixia_locid="483">system host-stor-add controller-1 cinder 12da99c4-8a33-4b5c-8ae6-8ab88504a1ac</userinput>
+<systemoutput ixia_locid="484">+------------+--------------------------------------+
+| Property   | Value                                |
++------------+--------------------------------------+
+| osdid      | None                                 |
+| state      | None                                 |
+| function   | cinder                               |
+| uuid       | 2d362546-1be5-4c6f-95d3-d0731250986a |
+| ihost_uuid | e1c47086-3230-4b92-91d0-208c55130a52 |
+| idisk_uuid | 12da99c4-8a33-4b5c-8ae6-8ab88504a1ac |
+| created_at | 2015-12-10T15:58:27.713557+00:00     |
+| updated_at | None                                 |
++------------+--------------------------------------+</systemoutput>
+</codeblock>
+                    <note id="note_N10211_N101CE_N101BD_N1008B_N10033_N10001" ixia_locid="485">
+                        <p ixia_locid="486">You cannot assign Cinder storage on the <nameliteral ixia_locid="487">rootfs</nameliteral> disk (<nameliteral ixia_locid="488">/dev/sda</nameliteral>).</p>
+                    </note>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

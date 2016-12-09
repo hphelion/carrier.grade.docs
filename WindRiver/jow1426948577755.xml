@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1426948577755" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Network Interface Provisioning</title>
+ <shortdesc ixia_locid="2">Before you can unlock and use the compute or storage nodes, you must
+  configure the interfaces to attach them to networks.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="6">Some interfaces require manual provisioning before the nodes can be
+   unlocked.</p>
+  <ul id="ul_ecp_4fk_lr">
+   <li ixia_locid="41">
+    <p ixia_locid="42"><draft-comment author="jowens" ixia_locid="43">US64033 added</draft-comment>For the second controller node,
+     you must attach an interface to the OAM network, and to the infrastructure network if used,
+     before you can unlock the node.</p>
+   </li>
+   <li ixia_locid="10">
+    <draft-comment author="jowens" ixia_locid="37">US62814 added clause for compute node infra IP
+     static assignment to the compute nodes. (2015-10-26 A previous change under this comment,
+     indicating that you don't need to attach infra interfaces for the storage nodes, and that you
+     must assign them IP addresses if static addressing is in use, was incorrect and has been
+     removed.)</draft-comment>
+    <p ixia_locid="11">For a storage node, you must attach an interface to the infrastructure
+     network before you can unlock the node.</p>
+   </li>
+   <li ixia_locid="12">
+    <p ixia_locid="29">For a compute node, you must attach interfaces to provider networks before
+          you can unlock the node. The provider networks must be set up beforehand; <draft-comment author="jmaran" ixia_locid="193">This topic ("Network Interface Provisioning") appears
+            in the system admin guide and the installation guides. Updated the interbook reference
+            to point to system admin guide (was incorrectly pointing to cloud admin guide). However,
+            this is a local reference in the sys admin guide and interbook in the installation
+            guide. (JO For the Install Guide, a better reference would be  "Configuring Provider
+            Networks at Installation," which is in the Install Guide but not the Sys Admin. This is
+            another case where using relationship tables would help.)</draft-comment>for more
+          information, see <ph ixia_locid="188" otherprops="printonly"><cite ixia_locid="189">Titanium Server System Administration:</cite>
+          </ph><cite ixia_locid="190"><ph ixia_locid="191"><xref href="jow1404333519516.xml" ixia_locid="14"/></ph></cite> . </p>
+    <!-- p ixia_locid="29">For a compute node, you must attach interfaces to provider networks before
+     you can unlock the node. The provider networks must be set up beforehand; for more information,
+     see <cite ixia_locid="189">Titanium Server Cloud Administration: Configuring Provider
+      Networks</cite>. </p -->
+    <p ixia_locid="30">If the compute cluster uses an infrastructure network, you must attach an
+     interface to the infrastructure network before you can unlock the node. In addition, if the
+     infrastructure uses static addressing, you must assign an IP address to the interface using the
+      <cmdname ixia_locid="40">system host-addr-add</cmdname> command.</p>
+   </li>
+  </ul>
+  <p ixia_locid="145">Titanium Server supports three types of interfaces:<dl>
+    <dlentry ixia_locid="146">
+     <dt ixia_locid="147">Ethernet interfaces</dt>
+     <dd ixia_locid="148">
+      <p ixia_locid="149">These are created automatically for each port on the host. You must
+       configure Ethernet interfaces by specifying the network type. </p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="151">
+     <dt ixia_locid="152">aggregated Ethernet interfaces</dt>
+     <dd ixia_locid="153">
+      <p ixia_locid="154">For link protection, you can create an aggregated Ethernet interface with
+       two or more ports, and configure it with the network type.</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="156">
+     <dt ixia_locid="157">VLAN interfaces</dt>
+     <dd ixia_locid="158">
+      <p ixia_locid="159">To support multiple interfaces on the same physical Ethernet or aggregated
+       Ethernet interface, you can create VLAN interfaces and configure them with the network
+       type.</p>
+     </dd>
+    </dlentry>
+   </dl></p>
+  <p ixia_locid="15">The procedure for attaching an interface depends on the interface type.</p>
+    <draft-comment author="jmaran" ixia_locid="194">The xrefs in the &lt;ul&gt; appear in the sys admin guide and the
+      install guide so are always local for this topic.</draft-comment>
+  <ul id="ul_pcn_f5q_lr">
+   <li ixia_locid="16">
+    <p ixia_locid="17">To attach an Ethernet interface, see <xref href="jow1426949897008.xml" ixia_locid="18"/>.</p>
+   </li>
+   <li ixia_locid="19">
+    <p ixia_locid="20">To attach an aggregated Ethernet interface, see <xref href="jow1426951671346.xml" ixia_locid="21"/>.</p>
+   </li>
+   <li ixia_locid="22">
+    <p ixia_locid="23">To attach a VLAN interface, see <xref href="jow1426951757970.xml" ixia_locid="24"/>.</p>
+    <note id="note_N1007F_N10071_N1004F_N1001F_N10001" ixia_locid="34">
+     <p ixia_locid="35">To attach a data network to an existing management or infrastructure network
+      interface<!-- using a method that supports VLAN provider networks-->, see <xref href="jow1414000462559.xml" ixia_locid="36"/>.</p>
+    </note>
+   </li>
+  </ul>
+  <p ixia_locid="25">As an alternative, you can use the CLI to attach interfaces. See <xref href="jow1427029415968.xml" ixia_locid="26"/>.</p>
+  <p ixia_locid="128">Logical interfaces of network types <nameliteral ixia_locid="129">oam</nameliteral> and <nameliteral ixia_locid="130">mgmt</nameliteral> cannot be deleted. They
+   can only be modified to use different physical ports when required. </p>
+  <p ixia_locid="27">For more information on interfaces, see <ph ixia_locid="195" otherprops="printonly"><cite ixia_locid="192">Titanium Server Planning: </cite></ph><cite ixia_locid="196"><ph ixia_locid="197"><xref href="jow1404333731990.xml" ixia_locid="198"/></ph></cite>.</p>
+  <note id="note_N10095_N1001F_N10001" ixia_locid="31">
+   <p ixia_locid="32"><draft-comment author="jowens" ixia_locid="44">US64033 remove mention of infra
+          and OAM being fixed on "controllers"</draft-comment>On compute and storage nodes, the
+        Ethernet interface for the internal management network is attached automatically, to support
+        installation using PXE booting. On controller nodes, the interface for the internal
+        management network is attached according to the settings specified during the controller
+        configuration script. <draft-comment author="jmaran" ixia_locid="199">This topic ("Network
+          Interface Provisioning") appears in the system admin guide and the installation guides.
+          Updated the interbook reference to point to system installation guide. However, this is a
+          local reference in the installation guide and interbook in the system admin guide. (JO I
+          don't understand this comment, maybe misplaced?)</draft-comment>For more information, see
+          <ph ixia_locid="200" otherprops="printonly"><cite ixia_locid="201">Titanium Server
+            Installation: </cite></ph><cite ixia_locid="202"><ph ixia_locid="203"><xref href="ekn1460145735111.xml" ixia_locid="5"/></ph></cite>.</p>
+  </note>
+ </conbody>
+</concept-wr>

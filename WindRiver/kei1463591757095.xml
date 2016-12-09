@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="kei1463591757095" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Unsuppressing an Alarm Using the CLI</title>
+    <shortdesc ixia_locid="2">You can unsuppress an alarm using the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="55">Jim Owens</author>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <steps>
+            <step id="step_N10022_N1001F_N1001C_N10001" ixia_locid="4">
+                <cmd ixia_locid="5">Use the <cmdname ixia_locid="6">system
+                        event-unsuppress</cmdname> CLI command to unsuppress a currently suppressed
+                    alarm. <draft-comment author="eknowlto" ixia_locid="33">US79047-Alarm
+                        Suppression; (JO) CGTS-4967 add --nopaging, --uuid, --nowrap options,
+                        correct syntax to include --alarm_id</draft-comment></cmd>
+                <stepxmp ixia_locid="8">
+                    <codeblock ixia_locid="9"><systemoutput ixia_locid="34">~(keystone_admin)$ </systemoutput><userinput ixia_locid="10">system event-unsuppress [--nowrap] --alarm_id <varname ixia_locid="35">alarm-id</varname>[,<varname ixia_locid="36">alarm-id</varname>] \
+[--nopaging] [--uuid]</userinput></codeblock>
+                    <p ixia_locid="37">where</p>
+                    <parml>
+                        <plentry ixia_locid="38">
+                            <pt ixia_locid="39"><varname ixia_locid="40">alarm-id</varname></pt>
+                            <pd ixia_locid="41">
+                                <p ixia_locid="42">is the <nameliteral ixia_locid="43">Alarm
+                                        ID</nameliteral> of an alarm to unsuppress</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="56">
+                            <pt ixia_locid="57"><parmname ixia_locid="58">--nowrap</parmname></pt>
+                            <pd ixia_locid="59">
+                                <p ixia_locid="60">disables output wrapping</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="61">
+                            <pt ixia_locid="62"><parmname ixia_locid="63">--nopaging</parmname></pt>
+                            <pd ixia_locid="64">
+                                <p ixia_locid="65">disables paged output</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="49">
+                            <pt ixia_locid="50"><parmname ixia_locid="51">--uuid</parmname></pt>
+                            <pd ixia_locid="52">
+                                <p ixia_locid="53">includes the alarm UUIDs in the output</p>
+                            </pd>
+                        </plentry>
+                    </parml>
+                    <p ixia_locid="11">Alarm(s) with the specified <varname ixia_locid="12">alarm-id(s)</varname> will be
+                        unsuppressed.</p>
+                    <p ixia_locid="13">You can unsuppress all currently suppressed alarms using the following
+                        command:</p>
+                    <codeblock ixia_locid="14"><systemoutput ixia_locid="54">~(keystone_admin)$ </systemoutput><userinput ixia_locid="15">system event-unsuppress -all [--nopaging] [--uuid]</userinput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1414074138348" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="144">Replacing Storage Node Hardware</title>
+    <shortdesc ixia_locid="145">On systems that use a <nameliteral ixia_locid="16">Ceph</nameliteral> backend for Cinder storage, you can add or replace storage disks or
+        swap a storage node while the system is running, even if the storage resources are in active
+        use.</shortdesc>
+    <prolog>
+        <author ixia_locid="146">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10024_N10021_N10001" ixia_locid="147">
+            <p ixia_locid="148"><draft-comment author="jowens" ixia_locid="869">CGTS-3616 title changed to match
+                    similar topics</draft-comment>You can add disks to a storage node to increase
+                capacity, and you can replace a faulty host.</p>
+            <note id="note_N1002C_N10024_N10021_N10001" ixia_locid="149">
+                <p ixia_locid="150">The storage nodes in a Titanium Server system are paired to
+                    provide redundancy for High Availability. Wind River recommends a balanced
+                    storage capacity in which each host has sufficient independent resources to meet
+                    the operational requirements of the system.</p>
+            </note>
+        </context>
+        <steps>
+            <step id="step_N10039_N10036_N10021_N10001" ixia_locid="151">
+                <cmd ixia_locid="152">Lock the host to be modified or replaced.</cmd>
+                <info ixia_locid="76">
+                    <p ixia_locid="77">Open the <uicontrol ixia_locid="878">Hosts</uicontrol> tab on the <wintitle ixia_locid="873">Host Inventory</wintitle> page, available from
+                            <menucascade ixia_locid="874">
+                            <uicontrol ixia_locid="80">Admin</uicontrol>
+                            <uicontrol ixia_locid="875">Platform</uicontrol>
+                            <uicontrol ixia_locid="78">Host Inventory</uicontrol>
+                        </menucascade> in the left-hand pane.</p>
+                    <p ixia_locid="153">Click <menucascade ixia_locid="155">
+                            <uicontrol ixia_locid="156">More</uicontrol>
+                            <uicontrol ixia_locid="158">Lock Host</uicontrol>
+                        </menucascade> for the host. </p>
+                    <p ixia_locid="154">Wait for the procedure to be completed.</p>
+                </info>
+            </step>
+            <step id="step_N100A4_N1003D_N1001F_N10001" ixia_locid="348">
+                <cmd ixia_locid="349"><draft-comment author="jowens" ixia_locid="864">CGTS-3654 add
+                        step</draft-comment>Delete the host from the inventory.</cmd>
+                <info ixia_locid="350">
+                    <p ixia_locid="865">Wind River recommends that you delete the host and
+                        re-install to ensure that any resource changes, such as device name
+                        reassignments, are correctly recorded in the inventory.</p>
+                    <note id="note_N10081_N1007D_N10073_N1003D_N1001F_N10001" ixia_locid="857">
+                        <p ixia_locid="858">Ensure that the host is <nameliteral ixia_locid="859">Online</nameliteral> so that its disk is erased when it is deleted
+                            from the inventory. This ensures that the host boots from the network
+                            when it is powered up for re-installation. If the host is not online
+                            when it is deleted from the inventory, you may need to force a network
+                            boot during re-installation.</p>
+                    </note>
+                    <p ixia_locid="860">In the <nameliteral ixia_locid="65">Actions</nameliteral>
+                        column, open the drop-down list for the host, and select <uicontrol ixia_locid="59">Delete Host</uicontrol>.</p>
+                </info>
+                <stepresult ixia_locid="861">
+                    <p ixia_locid="862">The storage node is removed from the <nameliteral ixia_locid="863">Hosts</nameliteral> list, and the Titanium Server
+                        software is removed from its hard drive.</p>
+                </stepresult>
+            </step>
+            <step id="step_N1007C_N10036_N10021_N10001" ixia_locid="159">
+                <cmd ixia_locid="160">Power down the host and make any required hardware
+                    changes.</cmd>
+                <info ixia_locid="161">
+                    <p ixia_locid="162">This can involve replacing or adding disks, or replacing the
+                        host completely.</p>
+                </info>
+            </step>
+            <step id="step_N1008D_N10036_N10021_N10001" ixia_locid="163">
+                <cmd ixia_locid="164"><draft-comment author="jowens" ixia_locid="866">CGTS-3654
+                        revised step to call for re-installation and reconfiguration.
+                    </draft-comment>Install the modified host as a node on Titanium Server.</cmd>
+                <info ixia_locid="165">
+                    <p ixia_locid="867">To ensure that changes to the host are correctly recorded in
+                        the system inventory, perform a full initialization and configuration.
+                            <draft-comment author="jmaran" ixia_locid="877">Updated doc
+                            title.</draft-comment>For detailed instructions, refer to <cite ixia_locid="868">Titanium Server Installation</cite>.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="mgs1467915506589" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="293">Viewing Resource Usage for a Device Using the CLI</title>
+    <shortdesc ixia_locid="294">You can view PCI device usage from the the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="295">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="267">
+            <p ixia_locid="268">View device information using the following CLI commands:</p>
+            <codeblock ixia_locid="291"><systemoutput ixia_locid="225">~(keystone_admin)$ </systemoutput><userinput ixia_locid="226">nova device-list</userinput>
+<systemoutput ixia_locid="227">
++--------------------------------+-----------+-----------+...
+| Device Name                    | Device Id | Vendor Id |...
++--------------------------------+-----------+-----------+...
++ Coleto Creek PCIe Co-processor + 0443      + 8086      +...
++--------------------------------+-----------+-----------+...
+
+...--------------------+--------------+--------------------+--------------+
+... pci_pfs_configured | pci_pfs_used | pci_vfs_configured | pci_vfs_used |
+...--------------------+--------------+--------------------+--------------+
+... 0                  + 0            + 64                 + 1            +
+...--------------------+--------------+--------------------+--------------+
+</systemoutput></codeblock>
+            <codeblock ixia_locid="292"><systemoutput ixia_locid="228">~(keystone_admin)$ </systemoutput><userinput ixia_locid="229">nova device-show 0443</userinput>
+<systemoutput ixia_locid="230">+--------------------------------+-----------+-----------+-----------+...
+| Device Name                    | Device Id | Vendor Id | Host      |...
++--------------------------------+-----------+-----------+-----------+...
+| Coleto Creek PCIe Co-processor | 0443      | 8086      | compute-0 |...
+| Coleto Creek PCIe Co-processor | 0443      | 8086      | compute-1 |...
++--------------------------------+-----------+-----------+-----------+...
+
+...--------------------+--------------+--------------------+--------------+
+... pci_pfs_configured | pci_pfs_used | pci_vfs_configured | pci_vfs_used |
+...--------------------+--------------+--------------------+--------------+
+... 0                  | 0            | 32                 | 0            |
+... 0                  | 0            | 32                 | 1            |
+...--------------------+--------------+--------------------+--------------+
+</systemoutput></codeblock>
+            <p ixia_locid="231">where</p>
+            <parml>
+                <plentry ixia_locid="232">
+                    <pt ixia_locid="233">Device Name</pt>
+                    <pd ixia_locid="234">
+                        <p ixia_locid="235">is the name of the device, as listed in the system
+                            inventory</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="236">
+                    <pt ixia_locid="237">Device Id</pt>
+                    <pd ixia_locid="238">
+                        <p ixia_locid="239">is the ID of the device</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="240">
+                    <pt ixia_locid="241">Vendor Id</pt>
+                    <pd ixia_locid="242">
+                        <p ixia_locid="243">is the vendor ID of the device</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="244">
+                    <pt ixia_locid="245">Host</pt>
+                    <pd ixia_locid="246">
+                        <p ixia_locid="247">is the node hosting the device</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="248">
+                    <pt ixia_locid="249">pci_pfs_configured</pt>
+                    <pd ixia_locid="250">
+                        <p ixia_locid="251">is the number of PCI passthrough devices</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="252">
+                    <pt ixia_locid="253">pci_pfs_used</pt>
+                    <pd ixia_locid="254">
+                        <p ixia_locid="255">is the number of PCI passthrough devices allocated to
+                            instances</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="256">
+                    <pt ixia_locid="257">pci_vfs_configured</pt>
+                    <pd ixia_locid="258">
+                        <p ixia_locid="259">is the number of SR-IOV devices</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="260">
+                    <pt ixia_locid="261">pci_vfs_used</pt>
+                    <pd ixia_locid="262">
+                        <p ixia_locid="263">is the number of SR-IOV interfaces allocated to
+                            instances</p>
+                    </pd>
+                </plentry>
+            </parml>
+        </context>
+    </taskbody>
+</task-wr>

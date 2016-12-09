@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003745666" xml:lang="en-us"><title ixia_locid="1">Backing Considerations for Nova Ephemeral Block Storage</title><shortdesc ixia_locid="2">There are three options for Nova ephemeral block storage backends. </shortdesc><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+                <p ixia_locid="12">Nova ephemeral storage can be implemented using:</p>
+                <ul id="ul_ick_lgl_wx">
+                        <li ixia_locid="13">
+                                <p ixia_locid="14">Copy on Write (CoW) image on the compute node</p>
+                        </li>
+                        <li ixia_locid="15">
+                                <p ixia_locid="16">LVM on the compute node</p>
+                        </li>
+                        <li ixia_locid="17">
+                                <p ixia_locid="18">Remote storage using Ceph on storage nodes</p>
+                        </li>
+                </ul><p ixia_locid="4">This choice is available for each individual compute node, so more than one
+                        backing type can be used within the same cloud. Flavor extra specs can be
+                        used to indicate the type of local storage backing required by the VM.</p><p ixia_locid="5">The primary difference between LVM and CoW image as a backing store is that for
+                        LVM, raw volumes are fully allocated out of free nova local storage space up
+                        front, while for image the volumes are stored as sparse files in the
+                        instances partition and utilize local storage space only as required.
+                        Determining which backing store to use should take into account the
+                        following:</p>
+        <ul id="ul_uvs_4rz_55">
+            <li ixia_locid="6"><p ixia_locid="7">LVM backing is recommended for I/O intensive VMs because the VM writes are direct
+                                        to disk rather than to sparse files.</p></li>
+            <li ixia_locid="8">
+                <p ixia_locid="9">When cold-migrating VMs with LVM backing storage, the volume is
+                                        rebuilt on the new compute node and user data is lost. With
+                                        image backing storage, the local storage is block-migrated
+                                        and user data is preserved. Use image backing storage if
+                                        data must be preserved across a migration.</p>
+            </li>
+            <li ixia_locid="10"><p ixia_locid="11">VM launch times and associated local volume create times are much faster with
+                    CoW-image backed storage.</p></li>
+                        <li ixia_locid="21">
+                                <p ixia_locid="22">Live block migration is supported with CoW-image backed storage.
+                                        Use CoW-image backed storage if live migration is
+                                        required.</p>
+                        </li>
+                        <li ixia_locid="23">
+                                <p ixia_locid="24">Remote ephemeral storage must be used if live migration of
+                                        ephemeral, swap, and boot from image root disks is
+                                        required.</p>
+                        </li>
+        </ul></conbody></concept-wr>

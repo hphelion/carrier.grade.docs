@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="plq1473182403942" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Provisioning Network Interfaces on Controller-1</title>
+    <shortdesc ixia_locid="2">You must configure the network interfaces on a host before you can
+        unlock it.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Jim Owens</author>
+        <author ixia_locid="5">Tom Towle</author>
+        <author ixia_locid="6">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1002C_N10029_N10001" ixia_locid="819" product="tis_std">
+            <note id="note_N10030_N1002C_N10029_N10001" ixia_locid="820">
+                <p ixia_locid="821">You can use hardware profiles to save a configuration from one
+                    host and apply it to others. For more information, see <xref href="jow1404333787693.xml" ixia_locid="822"/>.</p>
+            </note>
+        </context>
+        <steps id="steps_nvd_tz5_k4">
+            <step id="step_N10077_N10073_N10029_N10001" ixia_locid="187" product="tis_cpe">
+                <cmd ixia_locid="188">Ensure that provider networks are available for the data
+                    interfaces. To create them, see <xref href="jow1431018516980.xml" ixia_locid="189"/>.</cmd>
+            </step>
+            <step conref="jow1426453628262.xml#jow1426453628262/step_N1002B_N10028_N1001C_N10001" id="step_N1002B_N10028_N1001C_N10001" ixia_locid="133">
+                <cmd ixia_locid="190"/>
+            </step>
+            <step id="step_N10034_N10028_N1001C_N10001" ixia_locid="191">
+                <cmd ixia_locid="192">Select the <uicontrol ixia_locid="137">Interfaces</uicontrol>
+                    tab.</cmd>
+                <stepresult ixia_locid="138">
+                    <fig id="fig_ypk_blk_lr" ixia_locid="139">
+                        <image href="wve1476451625149.image" id="image_hkt_3jq_px" ixia_locid="883">
+                            <alt ixia_locid="884">TiS Controller Interfaces tab (LVM), unprovisioned</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N1011A_N10048_N1002E_N10001" ixia_locid="413">
+                <cmd ixia_locid="414"><draft-comment author="jowens" dir="ltr" ixia_locid="751" translate="no">US64033 / US66592 step added</draft-comment>Attach the OAM
+                    network interface.</cmd>
+                <info ixia_locid="415">
+                    <p ixia_locid="416">You must manually configure the <nameliteral ixia_locid="418">controller-1</nameliteral> interface for the OAM
+                        network. .</p>
+                    <note id="note_N100A9_N1009B_N1008A_N10042_N10029_N10001" ixia_locid="827">
+                        <p ixia_locid="828">You must also configure any LAG interfaces in use, including those for
+                            the internal management network<ph ixia_locid="829" product="tis_std"> and PXE boot
+                                network</ph>. For more information, see <xref href="jow1426951671346.xml" ixia_locid="830"/>.</p>
+                    </note>
+                </info>
+                <substeps id="substeps_y2z_qhp_fx">
+                    <substep ixia_locid="831">
+                        <cmd ixia_locid="832">Click <nameliteral ixia_locid="833">Edit
+                                Interface</nameliteral> for the port connected to the OAM
+                            network.</cmd>
+                        <info ixia_locid="834">
+                            <p ixia_locid="835">The <wintitle ixia_locid="836">Edit
+                                    Interface</wintitle> dialog box appears.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="837">
+                        <cmd ixia_locid="838">In the <uicontrol ixia_locid="839">Network
+                                Type</uicontrol> list, select <uicontrol ixia_locid="840">oam</uicontrol>.</cmd>
+                        <info ixia_locid="841">
+                            <note id="note_N100F5_N100F1_N100DE_N100BC_N1008A_N10042_N10029_N10001" ixia_locid="842">
+                                <p ixia_locid="843">Ensure that <nameliteral ixia_locid="844">none</nameliteral> is <i ixia_locid="845">not</i> selected.
+                                    Clear it if necessary.</p>
+                            </note>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="846">
+                        <cmd ixia_locid="847">Specify the <uicontrol ixia_locid="848">Interface
+                                Type</uicontrol>.</cmd>
+                        <info ixia_locid="849">
+                            <p ixia_locid="850">For an OAM network interface, you can select an
+                                    <option ixia_locid="851">Ethernet</option>, <option ixia_locid="852">Aggregated Ethernet</option>, or <option ixia_locid="853">VLAN interface</option>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="854">
+                        <cmd ixia_locid="855">Click <uicontrol ixia_locid="856">Save</uicontrol> to
+                            save the selection and close the dialog box.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1018B_N10073_N10029_N10001" importance="optional" ixia_locid="237" product="tis_std">
+                <cmd ixia_locid="238">Configure the infrastructure interface.</cmd>
+                <info ixia_locid="239">
+                    <p ixia_locid="240">This step is required only for systems with an
+                        infrastructure network. For systems with controller storage, this is
+                        optional.</p>
+                </info>
+                <substeps id="substeps_lkb_lsp_dx">
+                    <substep ixia_locid="857">
+                        <cmd ixia_locid="858">Click <nameliteral ixia_locid="859">Edit
+                                Interface</nameliteral> for the port connected to the infrastructure
+                            network.</cmd>
+                        <info ixia_locid="860">
+                            <p ixia_locid="861">The <wintitle ixia_locid="862">Edit
+                                    Interface</wintitle> dialog box appears.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="863">
+                        <cmd ixia_locid="864">In the <uicontrol ixia_locid="865">Network
+                                Type</uicontrol> list, select <uicontrol ixia_locid="866">infra</uicontrol>.</cmd>
+                        <info ixia_locid="867">
+                            <note id="note_N101C9_N101C6_N101B7_N10199_N10189_N10073_N10029_N10001" ixia_locid="868">
+                                <p ixia_locid="869">Ensure that <nameliteral ixia_locid="870">none</nameliteral> is <i ixia_locid="871">not</i> selected.
+                                    Clear it if necessary.</p>
+                            </note>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="872">
+                        <cmd ixia_locid="873">Specify the <uicontrol ixia_locid="874">Interface
+                                Type</uicontrol>.</cmd>
+                        <info ixia_locid="875">
+                            <p ixia_locid="876">For an infrastructure interface, you can select an
+                                    <option ixia_locid="877">Ethernet</option>, <option ixia_locid="878">Aggregated Ethernet</option>, or <option ixia_locid="879">VLAN interface</option>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="880">
+                        <cmd ixia_locid="881">Click <uicontrol ixia_locid="882">Save</uicontrol> to
+                            save the selection and close the dialog box.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1045B_N1008E_N1002E_N10001" ixia_locid="362" product="tis_cpe">
+                <cmd ixia_locid="363">Attach the data interfaces.</cmd>
+                <substeps id="substeps_ufm_yrp_dx">
+                    <substep ixia_locid="194">
+                        <cmd ixia_locid="195">Click <nameliteral ixia_locid="196">Edit
+                                Interface</nameliteral> for a port connected to a data
+                            network.</cmd>
+                        <info ixia_locid="197">
+                            <p ixia_locid="198">The <wintitle ixia_locid="199">Edit
+                                    Interface</wintitle> dialog box appears.</p>
+                            <fig id="fig_vl5_rvp_dx" ixia_locid="23">
+                                <image href="jow1426954976474.image" id="image_wl5_rvp_dx" ixia_locid="24">
+                                    <alt ixia_locid="25">TiS Edit Interface</alt>
+                                </image>
+                            </fig>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="200">
+                        <cmd ixia_locid="201">In the <uicontrol ixia_locid="202">Network
+                                Type</uicontrol> list, select <uicontrol ixia_locid="203">data</uicontrol>.</cmd>
+                        <info ixia_locid="204">
+                            <note id="note_N10101_N100FE_N100EF_N100BE_N100B6_N10073_N10029_N10001" ixia_locid="205">
+                                <p ixia_locid="206">Ensure that <nameliteral ixia_locid="207">none</nameliteral> is <i ixia_locid="208">not</i> selected.
+                                    Clear it if necessary.</p>
+                            </note>
+                            <p ixia_locid="209">When data is selected, additional controls appear in
+                                the dialog box, so that you can select a provider network and enable
+                                or disable IPv4 and IPv6 addressing modes:</p>
+                            <ul id="ul_fqx_4xp_dx">
+                                <li ixia_locid="210">
+                                    <p ixia_locid="211">a <uicontrol ixia_locid="212">Provider
+                                            Networks</uicontrol> list</p>
+                                </li>
+                                <li ixia_locid="213">
+                                    <p ixia_locid="214"><uicontrol ixia_locid="215">IPv4 Addressing
+                                            Mode</uicontrol> options</p>
+                                </li>
+                                <li ixia_locid="216">
+                                    <p ixia_locid="217"><uicontrol ixia_locid="218">IPv6 Addressing
+                                            Mode</uicontrol> options</p>
+                                </li>
+                            </ul>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="219">
+                        <cmd ixia_locid="220">Specify the <uicontrol ixia_locid="221">Interface
+                                Type</uicontrol>.</cmd>
+                        <info ixia_locid="222">
+                            <p ixia_locid="223">This selection is set to <option ixia_locid="824">Ethernet</option>
+                                by default, and is active only if other choices are valid for the
+                                configuration. You can select <option ixia_locid="224">Ethernet</option>, <option ixia_locid="225">Aggregated
+                                    Ethernet</option>, or <option ixia_locid="226">VLAN</option>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="227">
+                        <cmd ixia_locid="228">Select a <uicontrol ixia_locid="229">Provider
+                                Network</uicontrol> to use with the data interface.</cmd>
+                    </substep>
+                    <substep importance="optional" ixia_locid="230">
+                        <cmd ixia_locid="231">Set the <uicontrol ixia_locid="232">IPv4 Addressing
+                                Mode</uicontrol> and <uicontrol ixia_locid="233">IPv6 Addressing
+                                Mode</uicontrol> for the interface.</cmd>
+                        <info ixia_locid="825">
+                            <p ixia_locid="826">These selections are active only if the interface is attached to a
+                                VXLAN provider network.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="234">
+                        <cmd ixia_locid="235">Click <uicontrol ixia_locid="236">Save</uicontrol> to
+                            save the selection and close the dialog box.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

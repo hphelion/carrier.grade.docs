@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="blc1462995053014" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Installing and Configuring the Remote CLI</title>
+    <shortdesc ixia_locid="2">You must extract the tar file and run the installation script before
+        using the remote CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="24">Jim Owens</author>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <draft-comment author="eknowlto" ixia_locid="18">US76645: Remote CLI SDK
+                Module.</draft-comment>
+        </context>
+        <steps>
+            <step id="step_N1002A_N10027_N1001C_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Extract the tar file <filepath ixia_locid="8">wrs-remote-clients-1.0.0.tgz</filepath> from the overall tar file
+                    downloaded from the WindShare site.</cmd>
+            </step>
+            <step id="step_N10043_N10030_N1001F_N10001" ixia_locid="21">
+                <cmd ixia_locid="22">Next, extract the files from <filepath ixia_locid="23">wrs-remote-clients-1.0.0.tgz</filepath>.</cmd>
+            </step>
+            <step id="step_N10037_N10027_N1001C_N10001" ixia_locid="9">
+                <cmd ixia_locid="10">Run <cmdname ixia_locid="11">install_clients.sh</cmdname> with
+                        <cmdname ixia_locid="19">sudo</cmdname> permissions.</cmd>
+                <stepxmp ixia_locid="12">
+                    <codeblock ixia_locid="13"><systemoutput ixia_locid="14">$</systemoutput> <userinput ixia_locid="15">sudo install_clients.sh</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="16">
+                    <p ixia_locid="17">To use the Titanium Server remote CLI client, you must
+                        establish Keystone credentials. You can use an open RC file to configure a
+                        shell with credentials. For more information, see <xref href="ahp1463003106115.xml" ixia_locid="20"/>.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

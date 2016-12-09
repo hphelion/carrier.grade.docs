@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333787180" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1">Storage Tab</title>
+    <shortdesc ixia_locid="2">The <uicontrol ixia_locid="3">Storage</uicontrol> tab on the <wintitle ixia_locid="4">Inventory Detail</wintitle> page presents storage details for a
+        host.</shortdesc>
+    <prolog>
+        <author ixia_locid="54">Jim Owens</author>
+        <author ixia_locid="5">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="8">The information is presented in one or more lists, as determined by the
+            host type.</p>
+        <section id="section_N10043_N1002D_N10001" ixia_locid="55">
+            <title ixia_locid="56">Disks</title>
+            <p ixia_locid="252">This list is presented for all host types. It lists all available
+                hardware devices used for storage. </p>
+            <fig id="fig_jzg_2jl_2w" ixia_locid="253">
+                <image href="bsa1464962126609.image" id="image_ofr_2jl_2w" ixia_locid="254">
+                    <alt ixia_locid="255">TiS Storage tab Disks list</alt>
+                </image>
+            </fig>
+            <p ixia_locid="256">For each device, the following information is included:</p>
+            <dl>
+                <dlentry ixia_locid="169">
+                    <dt ixia_locid="170">UUID</dt>
+                    <dd ixia_locid="171">
+                        <p ixia_locid="172">The unique identifier for the device.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="70">
+                    <dt ixia_locid="73">Node</dt>
+                    <dd ixia_locid="76">
+                        <p ixia_locid="79">The Linux device name.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="82">
+                    <dt ixia_locid="85">Type</dt>
+                    <dd ixia_locid="88">
+                        <p ixia_locid="91">The type of storage device (HDD or SSD). </p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="94">
+                    <dt ixia_locid="97">Size</dt>
+                    <dd ixia_locid="100">
+                        <p ixia_locid="103">The capacity of the device in MiB.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="205">
+                    <dt ixia_locid="206">RPM</dt>
+                    <dd ixia_locid="207">
+                        <p ixia_locid="208">The rotational speed of the device.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="173">
+                    <dt ixia_locid="174">Serial ID</dt>
+                    <dd ixia_locid="175">
+                        <p ixia_locid="176">The device's serial ID number.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="177">
+                    <dt ixia_locid="178">Model</dt>
+                    <dd ixia_locid="179">
+                        <p ixia_locid="180">The manufacturer's model for the device.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </section>
+        <section id="section_N100CF_N1002E_N10001" ixia_locid="181">
+            <title ixia_locid="182">Cinder Device</title>
+            <p ixia_locid="183"><draft-comment author="jowens" ixia_locid="184">US64033 added Cinder
+                    Device section</draft-comment>This list is present for controller hosts on a
+                system with controller storage. It lists the provisioning details for Cinder
+                storage. </p>
+            <fig id="fig_ayl_fjl_2w" ixia_locid="257">
+                <image href="wfl1464962163729.image" id="image_cwv_fjl_2w" ixia_locid="258">
+                    <alt ixia_locid="259">TiS Storage tab Cinder Device list</alt>
+                </image>
+            </fig>
+            <dl>
+                <dlentry ixia_locid="185">
+                    <dt ixia_locid="186">UUID</dt>
+                    <dd ixia_locid="187">
+                        <p ixia_locid="188">The unique identifier for the device.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="189">
+                    <dt ixia_locid="190">Function</dt>
+                    <dd ixia_locid="191">
+                        <p ixia_locid="192">The service that the device supports
+                                (<nameliteral ixia_locid="193">cinder</nameliteral>).</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="194">
+                    <dt ixia_locid="195">Disk UUID</dt>
+                    <dd ixia_locid="196">
+                        <p ixia_locid="197">The unique identifier for the disk associated with the
+                            device.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </section>
+        <section id="section_N100CC_N1002D_N10001" ixia_locid="138">
+            <title ixia_locid="139">Storage Functions</title>
+            <p ixia_locid="260">This list is presented for storage hosts. It shows a list of logical
+                storage functions (OSDs and Ceph journal functions) defined on available disks.</p>
+            <fig id="fig_t54_3jl_2w" ixia_locid="239">
+                <image href="yku1464962202662.image" id="image_tn1_jjl_2w" ixia_locid="240">
+                    <alt ixia_locid="241">TiS Storage tab Storage Functions list</alt>
+                </image>
+            </fig>
+            <p ixia_locid="261">For each volume, the following information is included:</p>
+            <dl>
+                <dlentry ixia_locid="41">
+                    <dt ixia_locid="42">UUID</dt>
+                    <dd ixia_locid="43">
+                        <p ixia_locid="44">The unique identifier for the storage volume.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="49">
+                    <dt ixia_locid="50">Function</dt>
+                    <dd ixia_locid="51">
+                        <p ixia_locid="52">The type of function (<nameliteral ixia_locid="53">osd</nameliteral> for object storage, or <nameliteral ixia_locid="213">journal</nameliteral> for Ceph journal
+                            storage).</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="159">
+                    <dt ixia_locid="160">OSD ID</dt>
+                    <dd ixia_locid="161">
+                        <p ixia_locid="162">For an OSD function, the identity of the associated Ceph
+                            object storage daemon.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="163">
+                    <dt ixia_locid="164">Disk UUID</dt>
+                    <dd ixia_locid="165">
+                        <p ixia_locid="166">The unique identifier for the disk associated with the
+                            storage volume.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="218">
+                    <dt ixia_locid="219">Journal Node</dt>
+                    <dd ixia_locid="220">
+                        <p ixia_locid="221">For an OSD function, the device where the associated
+                            Ceph journal is maintained.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="222">
+                    <dt ixia_locid="223">Journal MiB</dt>
+                    <dd ixia_locid="224">
+                        <p ixia_locid="225">For an OSD function, the size of the associated Ceph
+                            journal.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="226">
+                    <dt ixia_locid="227">Journal Location</dt>
+                    <dd ixia_locid="228">
+                        <p ixia_locid="229">For an OSD function, the unique identifier for the
+                            associated journal function, if applicable.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="141"><draft-comment author="jowens" ixia_locid="167">US66653 update
+                    Profiles xref</draft-comment>For information about creating storage volumes,
+                    <draft-comment author="jmaran" ixia_locid="262">Changed to live xref and corrected topic
+                    title.</draft-comment>see <xref href="zkn1464874715372.xml" ixia_locid="263"/>. <draft-comment author="jmaran" ixia_locid="264">Updated the following xref to interbook
+                    format.</draft-comment>For information about creating and applying storage
+                profiles, see <ph ixia_locid="265" otherprops="printonly"><cite ixia_locid="266">Titanium Server Installation: </cite></ph><cite ixia_locid="234"><ph ixia_locid="267"><xref href="jow1404333787693.xml" ixia_locid="168"/></ph></cite>.</p>
+        </section>
+        <section id="section_N10126_N1002D_N10001" ixia_locid="143">
+            <title ixia_locid="144">Local Volume Groups</title>
+            <p ixia_locid="145">This list is presented for compute nodes. It shows groups that
+                provide local storage for use by VMs. For more information, see <xref href="jow1426181291481.xml" ixia_locid="146"/>.</p>
+            <fig id="fig_wlx_jjl_2w" ixia_locid="244">
+                <image href="jlk1464962238133.image" id="image_osd_kjl_2w" ixia_locid="245">
+                    <alt ixia_locid="246">TiS Storage tab Local Volume Groups list</alt>
+                </image>
+            </fig>
+            <p ixia_locid="147">For each group, the following information is provided:</p>
+            <dl>
+                <dlentry ixia_locid="59">
+                    <dt ixia_locid="62">Name</dt>
+                    <dd ixia_locid="65">
+                        <p ixia_locid="68">The name assigned to the local volume group.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="71">
+                    <dt ixia_locid="74">State</dt>
+                    <dd ixia_locid="77">
+                        <p ixia_locid="80">The availability of the local volume group.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="83">
+                    <dt ixia_locid="86">Access</dt>
+                    <dd ixia_locid="89">
+                        <p ixia_locid="92">The access status of the volume group (<b ixia_locid="153">w</b>riteable,
+                                <b ixia_locid="154">r</b>eadonly, resi<b ixia_locid="155">z</b>eable, e<b ixia_locid="156">x</b>ported, <b ixia_locid="157">p</b>artial,
+                            or <b ixia_locid="158">c</b>lustered).</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="95">
+                    <dt ixia_locid="98">Size</dt>
+                    <dd ixia_locid="101">
+                        <p ixia_locid="104">The capacity of the device in bytes.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="107">
+                    <dt ixia_locid="110">Current Physical Volumes</dt>
+                    <dd ixia_locid="113">
+                        <p ixia_locid="116">The number of physical volumes that define the local
+                            volume group.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="119">
+                    <dt ixia_locid="124">Current Logical Volumes</dt>
+                    <dd ixia_locid="129">
+                        <p ixia_locid="134">The number of logical volumes contained by the local
+                            volume group.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="120">
+                    <dt ixia_locid="125">Actions</dt>
+                    <dd ixia_locid="130">
+                        <p ixia_locid="135">Available actions that can be performed on the local
+                            volume group.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </section>
+        <section id="section_N101C9_N1002D_N10001" ixia_locid="148">
+            <title ixia_locid="149">Physical Volumes</title>
+            <p ixia_locid="150">This list is presented for compute nodes. It shows physical volumes
+                that provide local storage for use by VMs. For more information, see <xref href="jow1426182435441.xml" ixia_locid="151"/>.</p>
+            <fig id="fig_pdv_ljl_2w" ixia_locid="249">
+                <image href="zli1464962273153.image" id="image_lkc_mjl_2w" ixia_locid="250">
+                    <alt ixia_locid="251">TiS Storage tab Physical Volumes list</alt>
+                </image>
+            </fig>
+            <p ixia_locid="152">For each group, the following information is provided:</p>
+            <dl>
+                <dlentry ixia_locid="60">
+                    <dt ixia_locid="63">Name</dt>
+                    <dd ixia_locid="66">
+                        <p ixia_locid="69">The device name associated with the physical volume.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="72">
+                    <dt ixia_locid="75">State</dt>
+                    <dd ixia_locid="78">
+                        <p ixia_locid="81">The availability of the physical volume.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="84">
+                    <dt ixia_locid="87">Type</dt>
+                    <dd ixia_locid="90">
+                        <p ixia_locid="93">The device type used for the physical volume.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="96">
+                    <dt ixia_locid="99">Disk UUID</dt>
+                    <dd ixia_locid="102">
+                        <p ixia_locid="105">The unique identifier of the disk used to implement the
+                            physical volume.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="108">
+                    <dt ixia_locid="111">Disk Device Node</dt>
+                    <dd ixia_locid="114">
+                        <p ixia_locid="117">The device used to implement the physical volume. </p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="121">
+                    <dt ixia_locid="126">LVM Logical Group Name</dt>
+                    <dd ixia_locid="131">
+                        <p ixia_locid="136">The name of the local volume group to which the physical
+                            volume belongs.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="122">
+                    <dt ixia_locid="127">Actions</dt>
+                    <dd ixia_locid="132">
+                        <p ixia_locid="137">Available actions that can be performed on the physical
+                            volume.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </section>
+    </conbody>
+    <related-links>
+        <link href="jow1426182435441.xml" ixia_locid="198"/>
+        <link href="wkp1467914488017.xml" ixia_locid="199"/>
+        <link href="jow1426181291481.xml" ixia_locid="200"/>
+        <link href="gub1467914462110.xml" ixia_locid="201"/>
+    </related-links>
+</concept-wr>

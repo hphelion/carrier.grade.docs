@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1440527541028" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Changing the Hyper-threading Status</title>
+    <shortdesc ixia_locid="2">The hyper-threading status is controlled by the BIOS settings of the
+        host. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <steps id="steps_v2v_cv3_dt">
+            <step conref="jow1404333506827.xml#jow1404333506827/lock-node" id="step_N10023_N1001F_N1001C_N10001" ixia_locid="4">
+                <cmd ixia_locid="5"/>
+            </step>
+            <step id="step_N1002C_N1001F_N1001C_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Edit the host BIOS settings to enable or disable
+                    hyper-threading.</cmd>
+                <info ixia_locid="8">
+                    <p ixia_locid="9">For more about editing the BIOS, refer to the documentation
+                        provided by the maker of the host computer. <note id="note_N10043_N1003F_N1003B_N10031_N10022_N1001F_N10001" ixia_locid="18">
+                            <draft-comment author="rstone" ixia_locid="19">CGTS-3047 adds note</draft-comment>
+                            <p ixia_locid="20">Changes to the host BIOS must be made while it is locked and the host
+                                must not be subsequently unlocked until it comes back online
+                                (locked-disabled-online), when the Inventory would have the updated
+                                Hyperthreading settings.</p>
+                        </note></p>
+                </info>
+                <substeps>
+                    <substep ixia_locid="21">
+                        <cmd ixia_locid="22">Boot the host in BIOS mode.</cmd>
+                    </substep>
+                    <substep ixia_locid="23">
+                        <cmd ixia_locid="24">Update the host BIOS settings to enable or disable
+                            hyper-threading.</cmd>
+                    </substep>
+                    <substep ixia_locid="25">
+                        <cmd ixia_locid="26">To apply the changes, allow the host to boot to a locked state with the
+                            updated hyper-threading settings.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step conref="jow1404333506827.xml#jow1404333506827/unlock-node" id="step_N1003D_N1001F_N1001C_N10001" ixia_locid="10">
+                <cmd ixia_locid="11"/>
+            </step>
+            <step id="step_N10046_N1001F_N1001C_N10001" ixia_locid="12">
+                <cmd ixia_locid="13">Confirm the hyper-threading status in Titanium Server.</cmd>
+                <info ixia_locid="14">
+                    <p ixia_locid="15">The hyper-threading status is reported on the <uicontrol ixia_locid="16">Processor</uicontrol> tab for the host. For more
+                        information, see <xref href="jow1404333768530.xml" ixia_locid="17"/>.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1452444710203" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="221">Exposing a Device for Use by VMs</title>
+    <shortdesc ixia_locid="222">You can expose PCI passthrough or SR-IOV devices so that they are accessible for use
+        by VMs.</shortdesc>
+    <prolog>
+        <author ixia_locid="223">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="224">
+            <p ixia_locid="225"><draft-comment author="jowens" ixia_locid="226">US64378 new
+                    topic</draft-comment>You can enable or disable exposure from the Web
+                administration interface or the CLI. You can also change the name of the device as
+                listed in the system inventory.</p>
+            <p ixia_locid="210">From the CLI, you can use the <cmdname ixia_locid="227">system
+                    host-device-modify</cmdname> command, as shown in the following example:</p>
+            <codeblock ixia_locid="228"><systemoutput ixia_locid="219">~(keystone_admin)$ </systemoutput><userinput ixia_locid="220">system host-device-modify --name="Encryption1" --enable=True compute-0</userinput></codeblock>
+        </context>
+        <prereq id="prereq_N10043_N1001C_N10001" ixia_locid="229">
+            <p ixia_locid="230">To edit a device, you must first lock the host.</p>
+        </prereq>
+        <steps>
+            <step id="step_N10050_N1004D_N1001C_N10001" ixia_locid="231">
+                <cmd ixia_locid="232">Lock the host.</cmd>
+            </step>
+            <step id="step_N10059_N1004D_N1001C_N10001" ixia_locid="233">
+                <cmd ixia_locid="234">Select the <uicontrol ixia_locid="235">Devices</uicontrol> tab on the <wintitle ixia_locid="236">Inventory
+                        Detail</wintitle> page for the host.</cmd>
+            </step>
+            <step id="step_N1006A_N1004D_N1001C_N10001" ixia_locid="237">
+                <cmd ixia_locid="238">Click <uicontrol ixia_locid="239">Edit Device</uicontrol>. </cmd>
+                <info ixia_locid="252">
+                    <fig id="fig_c2l_vq2_q5" ixia_locid="253">
+                        <image href="jow1452530556357.image" id="image_ezv_w1f_q5" ixia_locid="254">
+                            <alt ixia_locid="255">TiS Edit Device dialog box showing Coleto Creek</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N10077_N1004D_N1001C_N10001" ixia_locid="240">
+                <cmd ixia_locid="241">Update the information as required.</cmd>
+                <info ixia_locid="242">
+                    <parml>
+                        <plentry ixia_locid="246">
+                            <pt ixia_locid="247">Name</pt>
+                            <pd ixia_locid="248">
+                                <p ixia_locid="197">Sets the system inventory name for the
+                                    device.</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="249">
+                            <pt ixia_locid="250">Enabled</pt>
+                            <pd ixia_locid="251">
+                                <p ixia_locid="201">Controls whether the device is exposed for use
+                                    by VMs.</p>
+                            </pd>
+                        </plentry>
+                    </parml>
+                </info>
+            </step>
+        </steps>
+        <postreq id="postreq_N100AD_N1001C_N10001" ixia_locid="243">
+            <p ixia_locid="244">To access the device from a VM, see <ph ixia_locid="188" otherprops="printonly"><cite ixia_locid="189">Titanium Server Cloud
+                        Administration:</cite>
+                </ph><cite ixia_locid="190"><ph ixia_locid="191"><xref href="jow1452031857413.xml" ixia_locid="192"/></ph></cite>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

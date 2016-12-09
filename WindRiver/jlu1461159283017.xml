@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jlu1461159283017" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Displaying LLDP Neighbor Information Using the CLI</title>
+    <shortdesc ixia_locid="2">You can use CLI commands to view information about LLDP
+        neighbors.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1002F_N1002C_N10001" ixia_locid="6">
+            <draft-comment author="eknowlto" ixia_locid="30">US75530</draft-comment>
+            <p ixia_locid="7">The following commands are available for displaying LLDP neighbors: </p>
+        </context>
+        <section id="section_N10038_N1002C_N10001" ixia_locid="8">
+            <title ixia_locid="9">Viewing Host Neighbor List</title>
+            <p ixia_locid="10">To see the LLDP neighbors of a host:</p>
+            <codeblock ixia_locid="11"><systemoutput ixia_locid="12">$</systemoutput> <userinput ixia_locid="13">system host-lldp-neighbor-list <varname ixia_locid="31">host name|id</varname></userinput></codeblock>
+        </section>
+        <section id="section_N1004F_N1002C_N10001" ixia_locid="14">
+            <title ixia_locid="15">Viewing LLDP Neighbor Information</title>
+            <p ixia_locid="16">To view LLDP neighbor information:</p>
+            <codeblock ixia_locid="17"><systemoutput ixia_locid="18">$</systemoutput> <userinput ixia_locid="19">system lldp-neighbor-show <varname ixia_locid="32">neighbor uuid</varname></userinput></codeblock>
+        </section>
+        <section id="section_N10066_N1002C_N10001" ixia_locid="20">
+            <title ixia_locid="21">Example</title>
+            <p ixia_locid="22"><draft-comment author="jowens" ixia_locid="35">US82332 interface
+                    names</draft-comment>The following example shows the usage for these commands.
+                Use <cmdname ixia_locid="23">system host-lldp-neighbor-list</cmdname> to get the
+                neighbor IDs, then use the IDs with the <cmdname ixia_locid="24">system
+                    lldp-neighbor-show</cmdname> command to get details for a specific LLDP
+                neighbor. </p>
+            <codeblock ixia_locid="25" otherprops="wide"><systemoutput ixia_locid="26">$</systemoutput> <userinput ixia_locid="27">system host-lldp-neighbor-list controller-0</userinput>
+<systemoutput ixia_locid="33">
++--------------------------------------+----------+---------+----------+...
+| uuid                                 | local_po | remote_ | chassis_ |...
+|                                      | rt       | port    | id       |...
++--------------------------------------+----------+---------+----------+...
+| 081cc900-0569-47cb-95c9-dcb6b53c2a70 | enp0s10  | 08:00:2 | 08:00:27 |...
+|                                      |          | 7:6d:4a | :47:ec:e |...
+|                                      |          | :00     | a        |...
+|                                      |          |         |          |...
+|                                      |          |         |          |...
+| 68046495-9e09-4fe2-b8a4-ebc3daf728d7 | enp0s10  | 08:00:2 | 08:00:27 |...
+|                                      |          | 7:fd:2e | :23:f8:f |...
+|                                      |          | :9d     | 2        |...
+|                                      |          |         |          |...
+|                                      |          |         |          |...
+| 24832b54-6a71-4925-9353-51398b2248f6 | enp0s10  | 08:00:2 | 08:00:27 |...
+|                                      |          | 7:b9:93 | :4a:d9:2 |...
+|                                      |          | :8e     | 9        |...
+|                                      |          |         |          |...
+|                                      |          |         |          |...
+| da09d634-5dd8-4c9e-8620-933f6e910238 | enp0s10  | 08:00:2 | 08:00:27 |...
+|                                      |          | 7:4e:69 | :08:fc:f |...
+|                                      |          | :96     | 1        |...
+|                                      |          |         |          |...
+|                                      |          |         |          |...
+
+...--------------------------------------+--------------+--------------------+
+... system_name                          | system_descr | management_address |
+...                                      | iption       |                    |
+...--------------------------------------+--------------+--------------------+
+... compute-0:7ee03cf1-ac2b-             | Titanium     | 192.168.205.185, f |
+... 40f3-ae11-d68275df71c1               | Server       | e80::a00:27ff:fe6d |
+...                                      | version      | :4a00              |
+...                                      | 16.00        |                    |
+...                                      |              |                    |
+... compute-1:7ee03cf1-ac2b-             | Titanium     | 192.168.205.237, f |
+... 40f3-ae11-d68275df71c1               | Server       | e80::a00:27ff:fefd |
+...                                     | version      | :2e9d              |
+...                                      | 16.00        |                    |
+...                                      |              |                    |
+... storage-0:7ee03cf1-ac2b-             | Titanium     | 192.168.204.192, f |
+... 40f3-ae11-d68275df71c1               | Server       | e80::a00:27ff:fee6 |
+...                                      | version      | :efae              |
+...                                      | 16.00        |                    |
+...                                      |              |                    |
+... storage-1:7ee03cf1-ac2b-             | Titanium     | 192.168.204.222, f |
+... 40f3-ae11-d68275df71c1               | Server       | e80::a00:27ff:fe7e |
+...                                      | version      | :28d1              |
+...                                      | 16.00        |                    |
+...                                      |              |                    |</systemoutput>
+
+<systemoutput ixia_locid="28">$</systemoutput> <userinput ixia_locid="29">system lldp-neighbor-show 5742ce56-0420-42df-9096-d13b0a118521</userinput>
+<systemoutput ixia_locid="34">
++---------------------+-------------------------------------------------...+
+| Property            | Value                                              |
++---------------------+-------------------------------------------------...+
+| uuid                | 081cc900-0569-47cb-95c9-dcb6b53c2a70               |
+| host_uuid           | a0c44be2-6d3b-4ada-9748-7f8c92e62496               |
+| created_at          | 2016-06-24T17:25:12.280967+00:00                   |
+| updated_at          | None                                               |
+| uuid                | 081cc900-0569-47cb-95c9-dcb6b53c2a70               |
+| local_port          | enp0s10                                            |
+| chassis_id          | 08:00:27:47:ec:ea                                  |
+| port_identifier     | 08:00:27:6d:4a:00                                  |
+| ttl                 | 117                                                |
+| msap                | 08:00:27:47:ec:ea,08:00:27:6d:4a:00                |
+| system_description  | Titanium Server version 16.00                      |
+| system_name         | compute-0:7ee03cf1-ac2b-40f3-ae11-d68275df71c1     |
+| system_capabilities | router, station                                    |
+| management_address  | 192.168.205.185, fe80::a00:27ff:fe6d:4a00          |
+| port_description    | enp0s3                                             |
+| dot1_lag            | capable=y,enabled=n                                |
+| dot1_port_vid       | None                                               |
+| dot1_vlan_names     | None                                               |
+| dot1_proto_vids     | None                                               |
+| dot1_proto_ids      | None                                               |
+| dot3_mac_status     | auto-negotiation-capable=y,auto-negotiation-enabl..|
+| dot3_max_frame      | None                                               |
++---------------------+-------------------------------------------------...+
+</systemoutput></codeblock>
+        </section>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="hyg1467916541021" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="107">Changing the MTU for a Data Interface Using the CLI</title>
+    <shortdesc ixia_locid="108"><draft-comment author="jmaran" ixia_locid="111">May want to remove the Web
+            administration reference as this is the CLI topic (add xref in
+        body?)???</draft-comment>You can change the MTU value for a data interface from the Web
+        administration interface or the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="109">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10029_N10026_N10001" ixia_locid="52">
+            <p ixia_locid="105"><draft-comment author="jmaran" ixia_locid="112">The way this topic relates to its
+                    sibling topic for doing the same process with the Web interface is inconsistent
+                    with how it is handled for the other "Changing" topics in the "System
+                    Configuration Management" topic map (lav1466012726255). The other topics seem to
+                    have the CLI subordinate to the Web interface topic rather than parallel. I
+                    actually thing they are better parallel but the titles should be updated to be
+                    "Changing the MTU for a Data Interface Using the Web Interface" vs. just
+                    "Changing the MTU for a Data Interface".</draft-comment><draft-comment author="jowens" ixia_locid="106">CGTS-1306 procedure updated</draft-comment>The
+                MTU must be changed while all the compute hosts attached to the provider network are
+                locked.</p>
+            <p ixia_locid="53">You can use CLI commands to lock and unlock hosts, and to modify the
+                MTU on the hosts.</p>
+            <codeblock ixia_locid="80"><systemoutput ixia_locid="55">~(keystone_admin)$ </systemoutput><userinput ixia_locid="56">system host-lock <varname ixia_locid="57">nodeName</varname></userinput>
+<systemoutput ixia_locid="81">~(keystone_admin)$ </systemoutput><userinput ixia_locid="82">system host-if-modify <varname ixia_locid="29">nodeName</varname> <varname ixia_locid="83">ifname</varname> --imtu <varname ixia_locid="30">mtu_size</varname></userinput>
+<systemoutput ixia_locid="60">~(keystone_admin)$ </systemoutput><userinput ixia_locid="61">system host-unlock <varname ixia_locid="62">nodeName</varname></userinput></codeblock>
+            <p ixia_locid="84">Where:</p>
+            <parml>
+                <plentry ixia_locid="85">
+                    <pt ixia_locid="86"><varname ixia_locid="87">nodename</varname></pt>
+                    <pd ixia_locid="88">
+                        <p ixia_locid="89"> is the name of the host</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="90">
+                    <pt ixia_locid="91"><varname ixia_locid="92">ifname</varname></pt>
+                    <pd ixia_locid="93">
+                        <p ixia_locid="94"> is the name of the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="95">
+                    <pt ixia_locid="96"><varname ixia_locid="97">mtu_size</varname></pt>
+                    <pd ixia_locid="98">
+                        <p ixia_locid="99"> is the new MTU value</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="100"><draft-comment author="jowens" ixia_locid="110">US82332 interface
+                    names</draft-comment>For example:</p>
+            <codeblock ixia_locid="101"><systemoutput ixia_locid="102">~(keystone_admin)$ </systemoutput><userinput ixia_locid="103">system host-if-modify compute-0 enp0s8 --imtu 1496</userinput>
+</codeblock>
+            <note id="note_N10067_N10026_N10023_N10001" ixia_locid="63">
+                <p ixia_locid="64">You cannot set the MTU on a compute node interface to a value
+                    smaller than the largest MTU used on its provider networks.</p>
+            </note>
+        </context>
+    </taskbody>
+</task-wr>

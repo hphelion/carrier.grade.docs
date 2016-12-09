@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ekn1452016148428" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="15">Exporting Host Configurations</title>
+    <shortdesc ixia_locid="16">You can generate a host configuration file from a running
+        configuration for re-installation, upgrade, and maintenance purposes. </shortdesc>
+    <prolog>
+        <author ixia_locid="18">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10025_N10022_N10001" ixia_locid="19">
+            <draft-comment author="eknowlto" ixia_locid="60">Disposition/Status: US67965 New Topic</draft-comment>
+            <p ixia_locid="20">You use the <cmdname ixia_locid="21">system
+                    host-bulk-export</cmdname> command to generate the host configuration file. You
+                can then use this file as the basis for re-configuring the system in the case of a
+                system re-installation or upgrade using the <cmdname ixia_locid="23">system
+                    host-bulk-add</cmdname> command. </p>
+            <p ixia_locid="24">The <cmdname ixia_locid="25">host-bulk-export</cmdname> command
+                copies all settings (management MAC address, BM MAC address, and so on) into the
+                host configuration file. This enables you to leverage the non-interactive and bulk
+                installation and commissioning commands more easily.</p>
+            <ul id="ul_crx_nq5_q5">
+                <li ixia_locid="66">
+                    <p ixia_locid="67">Run the <cmdname ixia_locid="53">host-bulk-export</cmdname> command to create
+                        the host configuration file.</p>
+                    <p ixia_locid="32">The command syntax is shown below. </p>
+                    <codeblock ixia_locid="33"><userinput ixia_locid="35">system host-bulk-export [--filename <varname ixia_locid="61">FILENAME]</varname></userinput></codeblock>
+                    <ul id="ul_fxm_vq5_q5">
+                        <li ixia_locid="68">
+                            <p ixia_locid="62">Where <varname ixia_locid="63">FILENAME</varname> is
+                                the path and name of the output file. If the <parmname ixia_locid="64">--filename</parmname> option is not present, the
+                                default path <filepath ixia_locid="65">./hosts.xml</filepath> is
+                                used.</p>
+                            <p ixia_locid="54">The <cmdname ixia_locid="55">host-bulk-export</cmdname> command is an <nameliteral ixia_locid="56">admin</nameliteral> command. </p>
+                            <p ixia_locid="57">It can not be run by a tenant. </p>
+                            <p ixia_locid="58">It exports all hosts except <nameliteral ixia_locid="59">controller-0</nameliteral>. </p>
+                            <p ixia_locid="38">Certain information is not loaded into the host
+                                configuration file. </p>
+                            <ul id="ul_drj_x4v_45">
+                                <li ixia_locid="40">
+                                    <p ixia_locid="41">The power-on element is commented out. This
+                                        is because we can not know what you will want to do when you
+                                        run the <cmdname ixia_locid="42">host-bulk-add</cmdname>
+                                        utility to apply this configuration to another system. </p>
+                                </li>
+                                <li ixia_locid="43">
+                                    <p ixia_locid="44">For a system that does not have BMC
+                                        configured, the BMC elements will be left empty. </p>
+                                </li>
+                            </ul>
+                            <p ixia_locid="45">For details on the structure and elements of the XML
+                                bulk configuration file, see <xref href="ekn1460141591614.xml" ixia_locid="70"/>.</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <p ixia_locid="69">You can later use the generated host configuration file as the XML
+                file name argument for the <cmdname ixia_locid="50">system host-bulk-add</cmdname>
+                command to reconfigure the system during a system re-installation. For more
+                information, see <xref href="ekn1452020533535.xml" ixia_locid="51"/> and <xref href="jow1441308518576.xml" ixia_locid="71"/>.</p>
+        </context>
+    </taskbody>
+</task-wr>

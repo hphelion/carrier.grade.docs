@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="ekn1454422894049" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="4836">Interface Configuration Scenarios</title>
+  <shortdesc ixia_locid="4837">Titanium Server supports the use of consolidated interfaces for the management,
+    infrastructure, OAM, and data networks.</shortdesc>
+  <prolog>
+    <author ixia_locid="4838">Edward Knowlton</author>
+  </prolog>
+  <refbody>
+    <section id="section_if_scenarios" ixia_locid="275">
+      <title ixia_locid="276">Interface Configuration Scenarios</title>
+      <p ixia_locid="277">Some typical configurations are shown in the following table. For best
+        performance, Wind River recommends dedicated interfaces.</p>
+      <p ixia_locid="279">LAG is optional in all instances.</p>
+      <table colsep="1" frame="sides" id="table_if_scenarios" rowsep="1">
+        <tgroup cols="4">
+          <colspec colname="newCol1" colnum="1" colwidth="1*"/>
+          <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+          <colspec colname="c3" colnum="3" colwidth="1.0*"/>
+          <colspec colname="c4" colnum="4" colwidth="1.0*"/>
+          <thead>
+            <row>
+              <entry ixia_locid="379">
+                <p ixia_locid="380">Scenario</p>
+              </entry>
+              <entry ixia_locid="281">
+                <p ixia_locid="282">Controller</p>
+              </entry>
+              <entry ixia_locid="283">
+                <p ixia_locid="284">Storage</p>
+              </entry>
+              <entry ixia_locid="285">
+                <p ixia_locid="286">Compute</p>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <!-- Extra small -->
+            <row>
+              <entry ixia_locid="381">
+                <p ixia_locid="382">Extra Small</p>
+              </entry>
+              <entry ixia_locid="289">
+                <p ixia_locid="290">2x 1GE LAG:</p>
+                <ul id="ul_k4d_hvd_w5">
+                  <li ixia_locid="4788">
+                    <p ixia_locid="4789">Mgmt (untagged) </p>
+                  </li>
+                  <li ixia_locid="4790">
+                    <p ixia_locid="4791">OAM (tagged )</p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="293">
+                <p ixia_locid="294">N/A</p>
+              </entry>
+              <entry ixia_locid="295">
+                <p ixia_locid="296">2x 10GE LAG:<ul id="ul_ylt_3vd_w5">
+                    <li ixia_locid="4792">
+                      <p ixia_locid="4793">Mgmt (untagged) </p>
+                    </li>
+                    <li ixia_locid="4794">
+                      <p ixia_locid="4795">OAM (tagged )</p>
+                    </li>
+                  </ul></p>
+              </entry>
+            </row>
+            <!-- Small -->
+            <row>
+              <entry ixia_locid="383">
+                <p ixia_locid="384">Small</p>
+              </entry>
+              <entry ixia_locid="299">
+                <p ixia_locid="300">2x 10GE LAG:</p>
+                <ul id="ul_sfl_jvd_w5">
+                  <li ixia_locid="4796">
+                    <p ixia_locid="4797">Mgmt (untagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="301">2x 1GE LAG:</p>
+                <ul id="ul_egs_kvd_w5">
+                  <li ixia_locid="4798">
+                    <p ixia_locid="4799">OAM (tagged) </p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="302">
+                <p ixia_locid="303">N/A</p>
+              </entry>
+              <entry ixia_locid="304">
+                <p ixia_locid="305">2x 10GE LAG:</p>
+                <ul id="ul_msz_lvd_w5">
+                  <li ixia_locid="4800">
+                    <p ixia_locid="4801">Mgmt (untagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="306">2x 10GE LAG:</p>
+                <ul id="ul_shd_nvd_w5">
+                  <li ixia_locid="4802">
+                    <p ixia_locid="4803">Data (tagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="307">[ … more data interfaces … ]</p>
+              </entry>
+            </row>
+            <!-- Medium -->
+            <row>
+              <entry ixia_locid="385">
+                <p ixia_locid="386">Medium</p>
+              </entry>
+              <entry ixia_locid="310">
+                <p ixia_locid="311">2x 10GE LAG:</p>
+                <ul id="ul_mf1_qvd_w5">
+                  <li ixia_locid="4804">
+                    <p ixia_locid="4805">Mgmt (untagged) </p>
+                  </li>
+                  <li ixia_locid="4806">
+                    <p ixia_locid="4807">Infra (tagged)</p>
+                  </li>
+                </ul>
+                <p ixia_locid="313">2x 1GE LAG:</p>
+                <ul id="ul_z24_svd_w5">
+                  <li ixia_locid="4808">
+                    <p ixia_locid="4809">OAM (untagged) </p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="314">
+                <p ixia_locid="315">2x 10GE LAG:</p>
+                <ul id="ul_qfx_4vd_w5">
+                  <li ixia_locid="4810">
+                    <p ixia_locid="4811">Mgmt (untagged) </p>
+                  </li>
+                  <li ixia_locid="4812">
+                    <p ixia_locid="4813">Infra (tagged )</p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="316">
+                <p ixia_locid="317">2x 10GE LAG:</p>
+                <ul id="ul_an4_5vd_w5">
+                  <li ixia_locid="4814">
+                    <p ixia_locid="4815">Mgmt (untagged) </p>
+                  </li>
+                  <li ixia_locid="4816">
+                    <p ixia_locid="4817">Infra (tagged)</p>
+                  </li>
+                </ul>
+                <p ixia_locid="318">2x 10GE LAG</p>
+                <ul id="ul_atb_wvd_w5">
+                  <li ixia_locid="4818">
+                    <p ixia_locid="4819">Data (tagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="319">[ … more data interfaces … ]</p>
+              </entry>
+            </row>
+            <!-- Large -->
+            <row>
+              <entry ixia_locid="387">
+                <p ixia_locid="388">Large</p>
+              </entry>
+              <entry ixia_locid="322">
+                <p ixia_locid="323">2x 1GE LAG:</p>
+                <ul id="ul_zd1_zvd_w5">
+                  <li ixia_locid="4820">
+                    <p ixia_locid="4821">Mgmt (untagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="324">2x 10GE LAG:</p>
+                <ul id="ul_oy1_1wd_w5">
+                  <li ixia_locid="4822">
+                    <p ixia_locid="4823">Infra (tagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="325">2x 1GE LAG:</p>
+                <ul id="ul_ybc_bwd_w5">
+                  <li ixia_locid="4824">
+                    <p ixia_locid="4825">OAM (untagged) </p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="326">
+                <p ixia_locid="327">2x 1GE LAG</p>
+                <ul id="ul_k2x_bwd_w5">
+                  <li ixia_locid="4826">
+                    <p ixia_locid="4827">Mgmt (untagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="328">2x 10GE LAG:</p>
+                <ul id="ul_ryl_cwd_w5">
+                  <li ixia_locid="4828">
+                    <p ixia_locid="4829">Infra (tagged) </p>
+                  </li>
+                </ul>
+              </entry>
+              <entry ixia_locid="329">
+                <p ixia_locid="330">2x 1GE LAG</p>
+                <ul id="ul_enj_dwd_w5">
+                  <li ixia_locid="4830">
+                    <p ixia_locid="4831">Mgmt (untagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="331">2x 10GE LAG:</p>
+                <ul id="ul_ktw_dwd_w5">
+                  <li ixia_locid="4832">
+                    <p ixia_locid="4833">Infra (tagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="332">2x 10GE LAG:</p>
+                <ul id="ul_ijs_2wd_w5">
+                  <li ixia_locid="4834">
+                    <p ixia_locid="4835">Data (tagged) </p>
+                  </li>
+                </ul>
+                <p ixia_locid="333">[ … more data interfaces … ]</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </refbody>
+</reference-wr>

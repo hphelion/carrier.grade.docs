@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1439388437367" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Launching Virtual Machine Instances</title>
+    <shortdesc ixia_locid="2">You can launch a virtual machine from the web administration interface
+        or the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+        <author ixia_locid="138">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10027_N10024_N10001" ixia_locid="44">
+            <draft-comment author="rstone" ixia_locid="145">CGTS-1794 rewrites topic</draft-comment>
+            <p ixia_locid="45">You can launch a virtual machine from the CLI using the nova boot
+                command. For examples, see <xref href="ekn1453927130838.xml" ixia_locid="149"/>.</p>
+            <p ixia_locid="47">Note that not all of the options described in the following steps are required. For
+                example, it is possible to launch an instance without defining any post-creation
+                actions. Required tabs and fields are marked with an asterisk (*) in the web
+                interface.</p>
+        </context>
+        <steps>
+            <step id="step_N1003B_N10038_N10024_N10001" ixia_locid="48">
+                <cmd ixia_locid="49">Logged in as a user, navigate to <menucascade ixia_locid="50">
+                        <uicontrol ixia_locid="51">Project</uicontrol>
+                        <uicontrol ixia_locid="52">Compute</uicontrol>
+                        <uicontrol ixia_locid="53">Instances</uicontrol>
+                    </menucascade> and click <uicontrol ixia_locid="54">Launch
+                    Instance</uicontrol>.</cmd>
+            </step>
+            <step id="step_N10057_N10038_N10024_N10001" ixia_locid="55">
+                <cmd ixia_locid="56">Specify details about the instance.</cmd>
+                <info ixia_locid="57">
+                    <p ixia_locid="58">In the <wintitle ixia_locid="59">Launch Instance</wintitle>
+                        window, select the <wintitle ixia_locid="60">Details</wintitle> tab.</p>
+                    <p ixia_locid="61"><draft-comment author="jowens" ixia_locid="148">US69978 mention boot option,
+                            to support xref from new topic on Migration Outcomes for Instance
+                            Storage Options </draft-comment>These options define basic run-time
+                        attributes such as name, number of vCPUs, memory and storage, as well as the
+                        type of boot source to use (volume or image). For more information, see
+                            <xref format="html" href="http://docs.openstack.org/" ixia_locid="62" scope="external">http://docs.openstack.org/</xref>.</p>
+                    <p ixia_locid="36"><draft-comment author="jowens" ixia_locid="37">US65502 added;
+                            CGTS-2832 added NOTE to enable local storage for boot-from-image;
+                            US68057 removed NOTE since local storage is mandatory, and removed
+                            clause "If the system uses compute hosts with local storage"; US69978
+                            generalized from instances logical volume size to "storage space" and
+                            changed the xref.</draft-comment>Ensure that the storage space on the
+                        hosts is configured appropriately. For more information, see <ph ixia_locid="150" otherprops="printonly"><cite ixia_locid="151">Titanium Server System Administration:
+                            </cite></ph><cite ixia_locid="152"><ph ixia_locid="153"><xref href="uvy1462906813562.xml" ixia_locid="154"/></ph></cite>.</p>
+                    <note id="note_N1008B_N1007A_N1006F_N10041_N1001C_N10001" ixia_locid="30">
+                        <p ixia_locid="31">For fast instance booting, use a prepared Cinder volume,
+                            and set the <uicontrol ixia_locid="32">Instance Boot Source</uicontrol>
+                            to <nameliteral ixia_locid="33">Boot from Volume</nameliteral>. For more
+                            information, see <xref href="jow1439393204460.xml" ixia_locid="140"/>.</p>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N100BC_N10038_N10024_N10001" ixia_locid="64">
+                <cmd ixia_locid="65">Specify a server group.</cmd>
+                <info ixia_locid="66">
+                    <p ixia_locid="67">In the <wintitle ixia_locid="68">Launch Instance</wintitle> window, select the
+                        <wintitle ixia_locid="69">Server Group</wintitle> tab. </p>
+                    <p ixia_locid="70">Server groups is a mechanism to group virtual machines to which a common set
+                        of attributes is applied, such as affinity and anti-affinity behavior. At
+                        least one server group must exist to use this option. For more information,
+                        see <xref href="jow1404333660893.xml" ixia_locid="71"/>.</p>
+                </info>
+            </step>
+            <step id="step_N100DD_N10038_N10024_N10001" ixia_locid="72">
+                <cmd ixia_locid="73">Establish access security for the instance. </cmd>
+                <substeps id="substeps_enz_5kb_f5">
+                    <substep ixia_locid="74">
+                        <cmd ixia_locid="75">In the <wintitle ixia_locid="76">Launch
+                                Instance</wintitle> window, select the <wintitle ixia_locid="77">Access &amp; Security</wintitle> tab and associate the available
+                            tenant's keypair with this instance. A keypair contains SSH credentials
+                            that will be added to the image when you launch it. For information, see
+                            the <ph ixia_locid="155" otherprops="printonly"><cite ixia_locid="156">Titanium Server Tenant User's
+                                    Guide: </cite></ph><cite ixia_locid="157"><ph ixia_locid="158"><xref href="eia1465950280738.xml" ixia_locid="159"/></ph></cite>.</cmd>
+                    </substep>
+                    <substep ixia_locid="79">
+                        <cmd ixia_locid="80">Select a security group. Security groups are sets of firewall policies
+                            that determine which incoming network traffic is forwarded to the
+                            instance. For more information, see <xref href="jow1404333749374.xml" ixia_locid="81"/>.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1010B_N10038_N10024_N10001" ixia_locid="82">
+                <cmd ixia_locid="83">Specify which networks the image will use.</cmd>
+                <info ixia_locid="84">
+                    <p ixia_locid="85">In the <wintitle ixia_locid="86">Launch Instance</wintitle> window, select the
+                        <wintitle ixia_locid="87">Networking</wintitle> tab.</p>
+                    <p ixia_locid="88">You must choose at least one tenant network over which the instance will
+                        communicate. Click the blue <uicontrol ixia_locid="89">+</uicontrol> buttons on the
+                        <wintitle ixia_locid="90">Available Networks</wintitle> list to move the tenant networks
+                        to the <wintitle ixia_locid="91">Selected Networks</wintitle> list. For each interface, you
+                        can specify the driver type from a drop-down menu.</p>
+                    <note id="note_N1012D_N1010E_N10107_N10038_N10024_N10001" ixia_locid="92">
+                        <p ixia_locid="93">The order in which the networks are moved determines the order in which
+                            the virtual Ethernet interfaces eth0, eth1, eth2, and so on are
+                            assigned. </p>
+                    </note>
+                    <p ixia_locid="94">For more information on tenant networking concepts, see <xref href="jow1404333739174.xml" ixia_locid="95"/>.</p>
+                </info>
+            </step>
+            <step id="step_N10149_N10038_N10024_N10001" ixia_locid="97">
+                <cmd ixia_locid="98">Specify any post-creation actions to take.</cmd>
+                <info ixia_locid="99">
+                    <p ixia_locid="100">In the <wintitle ixia_locid="101">Launch Instance</wintitle> window, select the
+                        <wintitle ixia_locid="102">Post-Creation</wintitle> tab.</p>
+                    <p ixia_locid="103">You can load <term ixia_locid="146">user data</term> from file or add them
+                        via the web interface to perform post creation setup actions such as
+                        implementing a bridge on the instance. The following example implements a
+                        bridge.</p>
+                    <codeblock ixia_locid="141">#wrs-config
+FUNCTIONS="bridge"
+BRIDGE_PORTS="eth1,eth2.5"
+</codeblock>
+                    <note id="note_N1016C_N1014B_N10144_N10038_N10024_N10001" ixia_locid="107" type="caution">
+                        <p ixia_locid="108">The first line:</p>
+                        <codeblock ixia_locid="109">#wrs-config</codeblock>
+                        <p ixia_locid="110">is a mandatory comment. Without it, the rest of the input is ignored.</p>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N10192_N10038_N10024_N10001" ixia_locid="114">
+                <cmd ixia_locid="115">Set any advanced options.</cmd>
+                <info ixia_locid="116">
+                    <p ixia_locid="117">In the <wintitle ixia_locid="142">Launch Instance</wintitle> window, select the
+                        <wintitle ixia_locid="119">Advanced</wintitle> tab.</p>
+                    <p ixia_locid="120">You have the following disk partitioning options:</p>
+                    <dl>
+                        <dlentry ixia_locid="121">
+                            <dt ixia_locid="122"><uicontrol ixia_locid="123">Automatic</uicontrol></dt>
+                            <dd ixia_locid="124">
+                                <p ixia_locid="125">The entire disk will be treated as a single partition and
+                                    automatically resized.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="126">
+                            <dt ixia_locid="127"><uicontrol ixia_locid="128">Manual</uicontrol></dt>
+                            <dd ixia_locid="129">
+                                <p ixia_locid="130">Results in faster build times but requires manual
+                                    partitioning.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                    <p ixia_locid="131">You can set the minimum number of instances to launch.</p>
+                    <p ixia_locid="132">Enabling the <uicontrol ixia_locid="133">Configuration Drive</uicontrol> option will cause
+                        Titanium to write metadata to a special configuration drive that attaches to
+                        the instance when it boots, making the metadata available. For more
+                        information on configuration drives, see <xref format="html" href="http://docs.openstack.org/user-guide/cli_config_drive.html" ixia_locid="134" scope="external"/>.</p>
+                </info>
+            </step>
+            <step id="step_N101E9_N10038_N10024_N10001" ixia_locid="135">
+                <cmd ixia_locid="136">Click <uicontrol ixia_locid="137">Launch</uicontrol> to start the instance.</cmd>
+            </step>
+        </steps>
+    </taskbody> 
+</task-wr>

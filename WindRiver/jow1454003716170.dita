@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003716170" xml:lang="en-us"><title ixia_locid="1">Standard Configuration with Dedicated Storage</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">Deployment of Titanium Server with Dedicated Storage Nodes provides the highest
+            capacity (single region) and performance with scalability up to 100 compute nodes and
+            1,000 VMs, assuming sufficient CPU, memory and storage resources and a VM distribution
+            similar to that described in <xref href="jow1454003713412.dita" ixia_locid="27"/>. The differentiating
+            physical feature of this model is that the controller, storage, and compute
+            functionalities are deployed on separate physical hosts allowing controller nodes,
+            storage nodes, and compute nodes to scale independently from each other. </p><p ixia_locid="5">The following figure shows the nodes and logical networks supported in this
+            configuration.</p><fig id="fig_N10020_N10016_N10001" ixia_locid="6"><title id="title__Toc441623496" ixia_locid="7">Dedicated Storage Configuration</title>
+            <image href="bvs1476907028373.image" id="image_fp5_qxy_55" ixia_locid="8">
+                <alt ixia_locid="9">media/image1.emf</alt>
+            </image></fig><p ixia_locid="10">The controller nodes provide the control function for the system and two
+            controller nodes are required to provide active/standby redundancy. The controller nodes
+            can be sized in terms of the server and peripherals, for example, CPU cores/speed,
+            memory, storage, and network interfaces depending on requirements. Two to eight storage
+            nodes, deployed in pairs, provide the storage function for Glance images, Cinder
+            volumes, remote Nova ephemeral disks and Swift containers. Redundancy and scalability is
+            provided through the number of Ceph object storage device (OSD) pairs, with more OSDs
+            providing more capacity and better storage performance. OSD size and speed, optional SSD
+            Ceph journals, optional SSD Ceph cache tiering, CPU cores and speeds, memory, disk
+            controllers, and networking also impact the scalability and performance of the storage
+            function. This model supports up to 100 compute nodes, each of which can be sized
+            independently in terms of CPU cores/speed, memory, local storage, and interfaces. The
+            actual number of VMs supported may be limited by availability of compute node resources
+            and has been tested to 1000 VMs in a 100 compute node configuration.</p></conbody></concept-wr>

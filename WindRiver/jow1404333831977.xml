@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1404333831977" xml:lang="en-us">
+    <!-- Modification History
+
+ -->
+    <title ixia_locid="1">Known Problems and Limitations</title>
+    <shortdesc ixia_locid="2">You may encounter some known limitations when working with this release.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+        <author ixia_locid="4">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <section id="section_N10027_N10024_N10001" ixia_locid="163">
+            <title ixia_locid="164">Upgrades Notes / Limitations</title>
+            <ul id="ul_wgp_nmf_5x">
+                <li ixia_locid="165">
+                    <p ixia_locid="166">System must be fully provisioned before starting the
+                        upgrade</p>
+                </li>
+                <li ixia_locid="167">
+                    <p ixia_locid="168">Verify that installation parameters are correct on
+                        controller-0</p>
+                    <ul id="ul_a2q_r2l_5x">
+                        <li ixia_locid="184">
+                            <p ixia_locid="185">The installation parameters for controller-0 may have default values,
+                                which may be incorrect for your system. Before upgrading, ensure
+                                that the installation parameters for controller-0 are accurate for
+                                your configuration. The <cmdname ixia_locid="186">system host-show
+                                    controller-0</cmdname> command will display the installation
+                                parameters. The boot_device, rootfs_device, console, and
+                                install_output parameters may need to be updated. These values can
+                                be updated with the <cmdname ixia_locid="187">system host-update
+                                    controller-0</cmdname> command.</p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="169">
+                    <p ixia_locid="170">After upgrades, VMs using VIRTIO are not automatically updated to use
+                        vhost-user as a backend. The VMs have to be re-launched to make use of
+                        vhost-user. </p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N10071_N10024_N10001" ixia_locid="21">
+            <title ixia_locid="22">Interface or interface consolidation limitations</title>
+            <ul id="ul_sj1_ynh_wr">
+                <li ixia_locid="141">
+                    <p ixia_locid="142">Consolidation of a management or PXE boot interface over a
+                        bonded data interface is not supported.</p>
+                </li>
+                <li ixia_locid="143">
+                    <p ixia_locid="144">Consolidation of a data VLAN over a bonded management or PXE
+                        boot interface is not supported.</p>
+                </li>
+                <li ixia_locid="145">
+                    <p ixia_locid="146">Consolidation of a management VLAN over a bonded data interface is not
+                        supported.</p>
+                </li>
+                <li ixia_locid="77">
+                    <p ixia_locid="78"><draft-comment author="jowens" ixia_locid="188">CGTS-5862
+                            corrections</draft-comment>Stacked VLANs are not supported. On a
+                        consolidated management or infrastructure interface, a VLAN provider network
+                        must be associated directly with the untagged interface. A flat provider
+                        network can be associated with an untagged interface, or with a
+                        data-external VLAN interface in an SDN Layer 3 configuration. Only a VXLAN
+                        provider network can be associated with a consolidated VLAN data
+                        interface.</p>
+                </li>
+                <li ixia_locid="171">
+                    <p ixia_locid="172">Unaccelerated data interfaces are only supported over
+                        ethernet interfaces without interface consolidation or LAG. </p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N1008F_N10024_N10001" ixia_locid="27">
+            <title ixia_locid="28">Mellanox limitations</title>
+            <ul id="ul_g3t_q4h_wr">
+                <li ixia_locid="29">
+                    <p ixia_locid="30">For a Mellanox CX3, all ports must be used either for data
+                        interfaces, or for non-data interfaces. It is not possible to use some ports
+                        for data interfaces and others for non-data interfaces on the same Mellanox
+                        CX3 NIC.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N100B3_N10024_N10001" ixia_locid="113">
+            <title ixia_locid="114">Other limitations</title>
+            <ul id="ul_tpg_2zb_pt">
+                <li ixia_locid="173">
+                    <p ixia_locid="174">Setting promisc mode on/off on a Fortville port causes the
+                        link to go down, then come back up. This may result in a host reboot if the
+                        port in question is used for the management interface. This is a known
+                        driver issue. </p>
+                </li>
+                <li ixia_locid="175">
+                    <p ixia_locid="176"><cmdname ixia_locid="177">vhost-user</cmdname> is not
+                        supported for VM's backed by 4K memory pages. </p>
+                </li>
+                <li ixia_locid="178">
+                    <p ixia_locid="179">The maximum swift file upload from horizon is limited by the
+                        free space in the /scratch filesystem. </p>
+                </li>
+                <li ixia_locid="180">
+                    <p ixia_locid="181">Only 10 VMs with ephermeral and swap disks can be launched
+                        in parallel.  </p>
+                </li>
+                <li ixia_locid="182">
+                    <p ixia_locid="183">Initial swift container creation fails intermittently. Try
+                        the operation again. </p>
+                </li>
+                <li ixia_locid="149">
+                    <p ixia_locid="150">Host aggregrates for provider networks are not deleted
+                        automatically upon the deletion of the last provider network in the
+                        aggregate group.</p>
+                </li>
+                <li ixia_locid="151">
+                    <p ixia_locid="152">When using two NUMA nodes for the guest, the flavor must
+                        specify an even number of vCPUs, or specify the number of vCPUs for each
+                        NUMA node.</p>
+                </li>
+                <li ixia_locid="153">
+                    <p ixia_locid="154">A resize operation fails when attempting to resize an
+                        instance to a flavor if the number of vCPUs cannot be evenly divided across
+                        the number of virtual NUMA nodes</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept-wr>

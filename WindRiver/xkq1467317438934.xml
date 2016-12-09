@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="xkq1467317438934" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Storage Functions: OSDs and SSD-backed Journals</title>
+ <shortdesc ixia_locid="2">Disks on storage hosts are assigned <term ixia_locid="9">storage functions</term> in
+  Titanium Server to provide either OSD storage or Ceph journal storage.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="10"><draft-comment author="jowens" ixia_locid="5">US78837 added
+    topic</draft-comment>Rotational disks on storage hosts are always assigned as object storage
+   devices (OSDs) to provide storage for VM disks. Solid-state disks (SSDs) can be assigned as OSDs,
+   or as <term ixia_locid="11">journal functions</term> to provide space for Ceph transaction journals associated
+   with OSDs. </p>
+  <p ixia_locid="12">On systems configured for cache tiering, the hosts in the caching tier always
+   use SSDs for high performance. The SSDs in this tier must be assigned as OSDs; they cannot be
+   used for journal functions.</p>
+  <p ixia_locid="6">To assign storage-host disks as OSDs, see <xref href="zkn1464874715372.xml" ixia_locid="7"/>. To create SSD-backed journals, see <xref href="jra1467638430659.xml" ixia_locid="8"/>.</p>
+ </conbody>
+</concept-wr>

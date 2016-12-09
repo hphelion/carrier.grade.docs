@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="jow1447789563721" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Profile File Format</title>
+  <shortdesc ixia_locid="2">Profile files are defined using XML with schema-based
+		validation.</shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+			<p ixia_locid="9"><draft-comment author="jowens" ixia_locid="6">US66653 new
+					topic.</draft-comment>You can define multiple profiles in a single file. If the
+				file contains invalid XML, the entire file is rejected. If the XML is valid, then
+				each profile is validated separately for correct data types.</p>
+			<p ixia_locid="10">The following example is provided for convenience. For a more comprehensive
+				reference, you can find the schema at
+					<filepath ixia_locid="11">/etc/sysinv/profileSchema.xsd</filepath> on a controller node.</p>
+      <codeblock ixia_locid="7">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;  
+&lt;profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="profileSchema.xsd"&gt;
+&lt;!-- This is a sample profiles file that defines:
+     - a CPU profile
+     - a memory profile
+     - a storage profile
+     - an interface profile
+     Valid nodes, attributes, structures, and data types are controlled 
+     using profileSchema.xsd.
+--&gt;   	 
+	&lt;cpuProfile name="cpu-2x10"&gt;
+	&lt;!--  This section defines the available processors, 
+	      and assigns cores for platform or vSwitch use.
+	      Any remaining cores are available for guest VMs. --&gt; 
+		&lt;processor&gt;
+			&lt;!-- Number of physical processors (sockets) on the server: --&gt;
+			&lt;numberOfProcessor&gt;2&lt;/numberOfProcessor&gt;
+			&lt;!-- Number of physical cores in each processor: --&gt;
+			&lt;coresPerProcessor&gt;10&lt;/coresPerProcessor&gt;					
+			&lt;!-- Hyperthreading status of the server.
+			     This reflects the setting in the BIOS, and is used to adjust
+                 reports. If hyperThreading is set to true, then reports for
+                 the profile are adjusted to list assigned logical cores
+                 instead of assigned physical cores. For example, if physical
+                 core 0 is assigned for platform use and hyperThreading is set
+                 to true, then in profile reports, processors 0-1 are shown as
+                 assigned for platform use.  --&gt;			
+			&lt;hyperThreading&gt;false&lt;/hyperThreading&gt;
+		&lt;/processor&gt;
+		
+		&lt;platformCores&gt;
+		  &lt;!-- Number of physical cores assigned for platform use on each processor.
+			     The index indicates the physical processor (0, 1, and so on). 
+			     If a processor is not listed here, none of its cores are assigned
+                 for platform use. --&gt;		     
+			&lt;processor index="0" numberOfCores="1"&gt;&lt;/processor&gt;			
+		&lt;/platformCores&gt;
+    
+		&lt;vswitchCores&gt;
+		  &lt;!-- Number of physical cores assigned for vSwitch use on each processor.
+		       NOTE: This section applies to compute nodes only.		       
+		       The index indicates the physical processor (0, 1, and so on).
+			   If a processor is not listed here, none of its cores are assigned
+               for vSwitch use. --&gt;
+			&lt;processor index="0" numberOfCores="2"&gt;&lt;/processor&gt;
+		&lt;/vswitchCores&gt;
+	
+	&lt;/cpuProfile&gt;
+
+	&lt;memoryProfile name="mem-profile"&gt;
+		&lt;!-- This section assigns NUMA node memory for platform or huge page use.
+		     Any remaining memory is available for guest VM use. --&gt;	   	     
+		&lt;numberOfProcessor&gt;2&lt;/numberOfProcessor&gt;
+		  &lt;!-- Number of physical processors (in effect, NUMA nodes) 
+               on the server --&gt;		
+
+		&lt;platformReservedMiB&gt;
+			&lt;!-- Memory in MiB assigned for platform use.
+			     The index indicates the physical processor (0, 1, and so on). --&gt;
+			&lt;processor index="0" size="4000"&gt;&lt;/processor&gt;
+			&lt;processor index="1" size="2000"&gt;&lt;/processor&gt;
+		&lt;/platformReservedMiB&gt;
+		
+		&lt;vmHugePages2M&gt;
+			&lt;!-- Number of 2M huge pages to reserve for guest VMs.
+			     NOTE: This section applies to compute nodes only.
+			     The index indicates the physical processor (0, 1, and so on). --&gt;
+			&lt;processor index="0" size="29096"&gt;&lt;/processor&gt;
+			&lt;processor index="1" size="30129"&gt;&lt;/processor&gt;
+		&lt;/vmHugePages2M&gt;
+
+		&lt;vmHugePages1G&gt;
+			&lt;!-- Number of 1G huge pages to reserve for guest VMs.
+			     NOTE: This section applies to compute nodes only.
+			     The index indicates the physical processor (0, 1, and so on). --&gt;
+			&lt;processor index="0" size="0"&gt;&lt;/processor&gt;
+			&lt;processor index="1" size="0"&gt;&lt;/processor&gt;
+		&lt;/vmHugePages1G&gt;
+	&lt;/memoryProfile&gt;
+
+  &lt;storageProfile name="storage-profile"&gt;
+			&lt;!-- This section assigns storage resources.
+			     For each device (@node), a volume function and minimum size
+                 are specified. --&gt;
+	    &lt;disk node="/dev/sdb" size="228936" volumeFunc="osd" /&gt;
+    	&lt;disk node="/dev/sdc" size="228936" volumeFunc="osd" /&gt;
+  &lt;/storageProfile&gt;
+
+	&lt;interfaceProfile name="if-hp380-profile"&gt;		
+		&lt;!-- This section assigns interfaces. Valid interface types are:
+		       ethernetInterface
+		       vlanInterface
+		       aeInterface --&gt;		      
+		&lt;ethernetInterface ifName="eth0"  mtu="1500" &gt;	
+		&lt;!--  An Ethernet interface is assigned an MTU (@mtu) and an arbitrary name
+              (@ifName). All Ethernet interfaces require a child node (port)
+              to identify the physical port. Ethernet Interfaces attached to
+              networks use an additional child node (networks) to identify 
+              the networks.--&gt;		
+		   &lt;port name="eth0" pciAddress="0000:03:00.0" class="Ethernet controller" device="NetXtreme BCM5719 Gigabit Ethernet PCIe" /&gt;
+		   &lt;!-- The physical port is identified using either the PCI slot address
+                (recommended), or the physical port name. If both are provided, 
+                the PCI address is used. The class and device are required.
+		        pciAddress: PCI address of the Ethernet port, in the form
+			                  XXXX:XX:XX.X
+			                  where 'X' represents a hexadecimal digit.
+		        class:      PCI class. Valid values are:
+			                    Ethernet controller
+			                    Network controller
+			      device:     Name of the device --&gt;
+		&lt;/ethernetInterface&gt;
+		&lt;ethernetInterface ifName="data0"  mtu="1500" &gt;
+			&lt;port name="eth1" pciAddress="0000:03:00.1" class="Ethernet controller" device="NetXtreme BCM5719 Gigabit Ethernet PCIe" /&gt;
+			&lt;networks&gt;
+			&lt;!-- An interface may be attached to more than one network
+                (combined interface). Only mgmt/data or infra/data networks
+                 can be combined on an interface. Each network is described
+                 using a child node. Valid child nodes for ethernetInterface are:
+			       mgmtNetwork
+			       infraNetwork
+			       dataNetwork
+			       oamNetwork
+			       pciPassthrough
+			       pciSriov --&gt;
+				&lt;dataNetwork&gt;
+					&lt;!-- A data network must be attached to one or more
+                         provider networks.--&gt;
+					&lt;providerNetworks&gt;
+						&lt;providerNetwork name="group0-data0" /&gt;
+						&lt;providerNetwork name="group0-data0b" /&gt;
+					&lt;/providerNetworks&gt;
+					&lt;!-- A data network can support IPv4 or IPv6 IP address
+			             assignment for VXLAN applications, using different
+                         assignment modes.
+               Valid modes for IPv4 are:
+                 disabled
+                 pool
+                 dhcp
+                 static
+               Valid modes for IPv6 are:
+                 disabled
+                 pool
+                 dhcp
+                 static
+                 auto
+                 link-local
+					     For additional information about pool mode, 
+					     see the example for vlanINterface ifname="vlan11" below.   --&gt;
+					&lt;ipv4 mode="disabled"&gt;&lt;/ipv4&gt;					
+					&lt;ipv6 mode="link-local"&gt;&lt;/ipv6&gt;
+				&lt;/dataNetwork&gt;
+		  &lt;/networks&gt;
+		&lt;/ethernetInterface&gt;
+
+		&lt;ethernetInterface ifName="eth2"  mtu="1500" &gt;
+            &lt;port name="eth2" pciAddress="0000:03:00.2" class="Ethernet controller" device="NetXtreme BCM5719 Gigabit Ethernet PCIe" /&gt;
+		&lt;/ethernetInterface&gt;
+
+		&lt;ethernetInterface ifName="passthrough-0"  mtu="1500" &gt;
+		   &lt;port name="eth3" pciAddress="0000:03:00.3" class="Ethernet controller" device="NetXtreme BCM5719 Gigabit Ethernet PCIe" /&gt;
+            &lt;networks&gt;
+                &lt;pciPassthrough&gt;
+                    &lt;providerNetworks&gt;
+                        &lt;providerNetwork name="data1" /&gt;
+                    &lt;/providerNetworks&gt;
+                &lt;/pciPassthrough&gt;
+            &lt;/networks&gt;
+		&lt;/ethernetInterface&gt;
+	
+		&lt;ethernetInterface ifName="eth4"  mtu="1600" &gt;
+		   &lt;port name="eth4" pciAddress="0000:04:00.0" class="Ethernet controller" device="82599ES 10-Gigabit SFI/SFP+ Network Connection" /&gt;
+		&lt;/ethernetInterface&gt;
+	
+		&lt;ethernetInterface ifName="eth5"  mtu="1500" &gt;
+		  &lt;port name="eth5" pciAddress="0000:04:00.1" class="Ethernet controller" device="82599ES 10-Gigabit SFI/SFP+ Network Connection" /&gt;
+            &lt;networks&gt;
+                &lt;mgmtNetwork/&gt;
+            &lt;/networks&gt;
+		&lt;/ethernetInterface&gt;
+	
+		&lt;ethernetInterface ifName="data1"  mtu="1500" &gt;
+		  &lt;port name="eth6" pciAddress="0000:07:00.0" class="Ethernet controller" device="82599ES 10-Gigabit SFI/SFP+ Network Connection" /&gt;
+		  &lt;networks&gt;
+			&lt;dataNetwork&gt;
+			  &lt;providerNetworks&gt;
+				  &lt;providerNetwork name="group0-data1" /&gt;
+			  &lt;/providerNetworks&gt;
+			  &lt;ipv4 mode="disabled"&gt;&lt;/ipv4&gt;
+			  &lt;ipv6 mode="disabled"&gt;&lt;/ipv6&gt;
+			&lt;/dataNetwork&gt;
+		  &lt;/networks&gt;
+		&lt;/ethernetInterface&gt;
+	
+		&lt;ethernetInterface ifName="eth7"  mtu="1500" &gt;
+			&lt;port name="eth7" pciAddress="0000:07:00.1" class="Ethernet controller" device="82599ES 10-Gigabit SFI/SFP+ Network Connection" /&gt;
+		&lt;/ethernetInterface&gt;
+
+		&lt;vlanInterface ifName="infra0" interface="eth4" vlanId="303" mtu="1500"&gt;
+		&lt;!-- Each VLAN interface is assigned an MTU, an Ethernet interface,
+             a VLAN ID, and an arbitrary name.
+		     interface: The Ethernet interface referenced here must be defined
+		                in the interfaceProfile section 
+		                using an ethernetInterface or aeInterface node.
+			            It is referenced using its @ifName.
+			   vlanId:  valid values are between 1 and 4094 inclusive           
+		     VLAN Interfaces attached to networks use an additional child node (networks)
+		     to identify the networks. --&gt;	
+  	  &lt;networks&gt;
+  	  &lt;!-- An interface may be attached to more than one network (combined interface).
+			     Only mgmt/data or infra/data can be combined. 
+			     Each network is described using a child node.
+			     Valid child nodes for vlanInterface are:
+			       mgmtNetwork
+			       infraNetwork
+			       dataNetwork
+			       oamNetwork --&gt;
+			  &lt;infraNetwork/&gt;
+		  &lt;/networks&gt;
+		&lt;/vlanInterface&gt;
+		
+		&lt;aeInterface ifName="ae0" mtu="1500"&gt;
+		&lt;!--  Each Aggregated Ethernet interface is assigned an MTU and an 
+              arbitrary name (@ifName). All Aggregated Ethernet interfaces require
+		      - a child node (interfaces) to identify the individual Ethernet
+                interfaces used.
+		      - a child node (aeMode) to identify the link aggregation mode. --&gt;		      
+			&lt;interfaces&gt;
+			  &lt;!-- The Ethernet interfaces referenced here must be defined 
+			       in the interfaceProfile section using ethernetInterface nodes.
+			       They are referenced using their @ifName. --&gt;
+				&lt;interface name="eth0"/&gt;
+				&lt;interface name="eth2" /&gt;
+			&lt;/interfaces&gt;			
+			&lt;aeMode&gt;
+				&lt;!--valid aggregated Ethernet mode values are:
+				      activeStandby
+				      balanced
+				      ieee802.3ad
+				    For balanced or ieee802.3ad mode, txPolicy is required. 
+				    Valid txPolicy values are:
+					    layer3+4
+					    layer2
+					    layer2+3 --&gt;
+				&lt;ieee802.3ad txPolicy="layer3+4" /&gt;
+			&lt;/aeMode&gt;
+		&lt;/aeInterface&gt;
+
+
+		&lt;vlanInterface ifName="vlan11" interface="ae0" vlanId="11" mtu="1600"&gt;
+		  &lt;networks&gt;
+			&lt;dataNetwork&gt;              
+			  &lt;providerNetworks&gt;
+			   	&lt;providerNetwork name="group0-ext0" /&gt;
+			  &lt;/providerNetworks&gt;
+			  &lt;ipv4 mode="pool"&gt;                  
+           &lt;pool name="pool-1" /&gt;
+           &lt;!-- name: The name of an IP address pool defined in Titanium Server. 
+                      This is not validated until the profile is applied to a host. --&gt;
+        &lt;/ipv4&gt;
+			  &lt;ipv6 mode="pool"&gt;
+           &lt;pool name="pool-2" /&gt;
+        &lt;/ipv6&gt;
+			&lt;/dataNetwork&gt;
+		  &lt;/networks&gt;
+		&lt;/vlanInterface&gt;
+		
+  &lt;/interfaceProfile&gt;
+&lt;/profiles&gt;
+        
+      </codeblock>
+    </section>
+  </refbody>
+</reference-wr>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1445966231060" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Using IP Address Pools for Data Interfaces</title>
+    <shortdesc ixia_locid="2">You can create pools of IP addresses for use with data
+        interfaces.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="95">
+            <p ixia_locid="96"><draft-comment author="jowens" ixia_locid="6">US65058 new
+                    topic</draft-comment>As an alternative to manually adding static IP addresses to
+                data interfaces for use with VXLANs, you can define pools of IP addresses and
+                associate them with one or more data interfaces. Each pool consists of one or more
+                contiguous ranges of IPv4 or IPv6 addresses. When a data interface is associated
+                with a pool, its IP address is allocated from the pool. The allocation may be either
+                random or sequential, depending on the settings for the pool.</p>
+            <p ixia_locid="48">You can use the web administration interface or the CLI to create and manage address
+                pools. For information about using the CLI, see <xref href="jow1445966287915.xml" ixia_locid="49"/>.</p>
+        </context>
+        <prereq id="prereq_N1001F_N1001C_N10001" ixia_locid="97">
+            <p ixia_locid="98">To make interface changes, you must lock the compute node first.</p>
+        </prereq>
+        <steps>
+            <step id="step_N1004C_N10049_N1001F_N10001" ixia_locid="99">
+                <cmd ixia_locid="100">Lock the compute node.</cmd>
+            </step>
+            <step conref="jow1451997330805.xml#jow1451997330805/step_open_Sys_Config_pane" id="step_N10057_N10049_N1001F_N10001" ixia_locid="102">
+                <cmd ixia_locid="103"/>
+            </step>
+            <step id="step_N10048_N1003C_N1001F_N10001" ixia_locid="52">
+                <cmd ixia_locid="43">Select the <uicontrol ixia_locid="47">Address Pools</uicontrol>
+                    tab.</cmd>
+                <info ixia_locid="53">
+                    <fig id="fig_scq_fxy_5t" ixia_locid="54">
+                        <image href="jow1445971002260.image" id="image_hgj_ryy_5t" ixia_locid="55">
+                            <alt ixia_locid="56">Tis System Inventory: Address Pools</alt>
+                        </image>
+                    </fig>
+                    <p ixia_locid="57">You can use the controls on the <wintitle ixia_locid="58">Address Pools</wintitle> page to
+                        create, update, or delete address pools.</p>
+                </info>
+            </step>
+            <step id="step_N10073_N1003C_N1001F_N10001" ixia_locid="59">
+                <cmd ixia_locid="60">To create an address pool, click <uicontrol ixia_locid="61">Create Address Pool</uicontrol> and
+                    complete the dialog box.</cmd>
+                <info ixia_locid="62">
+                    <fig id="fig_hj2_gzy_5t" ixia_locid="63">
+                        <image href="jow1445971475692.image" id="image_s2l_4zy_5t" ixia_locid="64">
+                            <alt ixia_locid="65">Tis Create Address Pool dialog box</alt>
+                        </image>
+                    </fig>
+                    <dl>
+                        <dlentry ixia_locid="66">
+                            <dt ixia_locid="67"><uicontrol ixia_locid="68">Name</uicontrol></dt>
+                            <dd ixia_locid="69">
+                                <p ixia_locid="70">A name used for selecting the pool during data
+                                    interface setup.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="71">
+                            <dt ixia_locid="72"><uicontrol ixia_locid="73">Network Address</uicontrol></dt>
+                            <dd ixia_locid="74">
+                                <p ixia_locid="75">The subnet for the range (for example,
+                                        <nameliteral ixia_locid="76">192.168.1.0/24</nameliteral>). </p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="77">
+                            <dt ixia_locid="78"><uicontrol ixia_locid="79">Allocation Order</uicontrol></dt>
+                            <dd ixia_locid="80">
+                                <p ixia_locid="81">The order for assigning addresses. You can select
+                                        <nameliteral ixia_locid="82">Sequential</nameliteral> or
+                                        <nameliteral ixia_locid="83">Random</nameliteral> from the drop-down
+                                    list.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="84">
+                            <dt ixia_locid="85"><uicontrol ixia_locid="86">Address Range</uicontrol></dt>
+                            <dd ixia_locid="87">
+                                <p ixia_locid="88">One or more ranges, where the start and end IP
+                                    address of each range is separated by a dash, and the ranges are
+                                    separated by commas (for example, <nameliteral ixia_locid="89">192.168.1.10-192.168.1.20,
+                                        192.168.1.35-192.168.1.45</nameliteral>). If no range is
+                                    specified, the full range is used.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </info>
+            </step>
+        </steps>
+        <postreq id="postreq_N100EE_N1001F_N10001" ixia_locid="90">
+            <p ixia_locid="91">You can select an address pool by name when setting up the <uicontrol ixia_locid="92">IPv4 Addressing Mode </uicontrol>or <uicontrol ixia_locid="93">IPv6 Addressing Mode</uicontrol> for a data interface. For more information,
+                see <xref href="jow1426955886080.xml" ixia_locid="101"/>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

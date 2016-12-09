@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "../../system/dtd/client/wr_topic/generaltask-wr.dtd">
+<task-wr id="rst1448489015877" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Changing the MTU for a Data Interface</title>
+    <shortdesc ixia_locid="2"><draft-comment author="jmaran" ixia_locid="109">You mention the CLI in this short
+            description but that is a separate topic. Should "or the CLI" be
+            removed???</draft-comment>You can change the MTU value for a data interface from the Web
+        administration interface or the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="51">Jim Owens</author>
+        <author ixia_locid="5">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N10069_N10026_N10001" ixia_locid="65">
+            <p ixia_locid="104">All hosts attached to the provider network must be locked before you
+                make changes to any of them.</p>
+        </prereq>
+        <steps id="steps_hfm_5nb_p5">
+            <step id="step_N10029_N10026_N1001B_N10001" ixia_locid="67">
+                <cmd ixia_locid="7">Lock all hosts attached to the provider network.</cmd>
+                <substeps id="substeps_gx5_1bc_kt">
+                    <substep ixia_locid="8">
+                        <cmd ixia_locid="9">From <menucascade ixia_locid="68">
+                                <uicontrol ixia_locid="110">Admin</uicontrol>
+                                <uicontrol ixia_locid="11">Platform</uicontrol>
+                                <uicontrol ixia_locid="12">Host Inventory</uicontrol>
+                            </menucascade>, select the <uicontrol ixia_locid="13">Hosts</uicontrol>
+                            tab.</cmd>
+                    </substep>
+                    <substep ixia_locid="14">
+                        <cmd ixia_locid="15">From the <uicontrol ixia_locid="16">Edit</uicontrol>
+                            menu for the standby controller, select <uicontrol ixia_locid="17">Lock
+                                Host</uicontrol>.</cmd>
+                        <info ixia_locid="18"/>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1006D_N10026_N1001B_N10001" ixia_locid="69">
+                <cmd ixia_locid="70">On all the hosts, edit the interface to change the MTU
+                    value.</cmd>
+                <substeps id="substeps_jks_chy_kt">
+                    <substep ixia_locid="42">
+                        <cmd ixia_locid="43">Click the  name of the host, and then select the
+                                <uicontrol ixia_locid="44">Interfaces</uicontrol> tab and click
+                                <uicontrol ixia_locid="45">Edit</uicontrol> for the interface you
+                            want to change.</cmd>
+                    </substep>
+                    <substep ixia_locid="71">
+                        <cmd ixia_locid="72">In the <wintitle ixia_locid="73">Edit
+                                Interface</wintitle> dialog, edit the <uicontrol ixia_locid="74">MTU</uicontrol> field, and then click <uicontrol ixia_locid="50">Save</uicontrol>. </cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10076_N10026_N1001B_N10001" ixia_locid="23">
+                <cmd ixia_locid="24">Unlock all the hosts.</cmd>
+                <info ixia_locid="25">
+                    <p ixia_locid="75">From the <uicontrol ixia_locid="76">Edit</uicontrol> menu for
+                        the host, select <uicontrol ixia_locid="77">Unlock Host</uicontrol>.</p>
+                </info>
+                <stepresult ixia_locid="107">
+                    <p ixia_locid="108">The network MTU is updated with the new value.</p>
+                </stepresult>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

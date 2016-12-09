@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="lmr1461005987943" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">LLDP Overview</title>
+ <shortdesc ixia_locid="2">Titanium Server supports the Link Layer Discovery Protocol
+    (LLDP).</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+  <metadata/>
+ </prolog>
+ <conbody>
+    <draft-comment author="eknowlto" ixia_locid="11">US75530</draft-comment>
+  <p ixia_locid="6">The Link Layer Discovery Protocol (LLDP), defined in the <cite ixia_locid="12">IEEE 802.1AB
+    Station and Media Access Control Connectivity Discovery</cite> specification, enables devices
+   attached to the network to advertise their properties to other devices on the same network. </p>
+    <p ixia_locid="13">Titanium Server supports both the sending and receiving of LLDP messages on all physical
+      interfaces.</p>
+    <p ixia_locid="14">LLDP neighbor information is displayed in the <wintitle ixia_locid="15">LLDP</wintitle> tab of the <wintitle ixia_locid="16">Inventory Detail</wintitle> window, or
+      through system CLI commands. </p>
+    <p ixia_locid="17">LLDP information can be used to verify cabling to the next hop device
+      (typically the Top-of-Rack switch).</p>
+  <note id="note_N10037_N1002C_N10001" ixia_locid="8">
+   <p ixia_locid="9">The neighboring device must be capable of, and enabled for, transmitting LLDP
+        frames.</p>
+   <p ixia_locid="10">Devices differ in the level of information sent in an LLDP packet data unit
+        (PDU). This can often be configured on the neighboring device. Refer to the documentation
+        for the device for specific information.</p>
+  </note>
+ </conbody>
+</concept-wr>

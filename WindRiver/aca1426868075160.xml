@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="aca1426868075160" xml:lang="en-us">
+<!-- Modification History
+Draft Template. ACASE March 20, 2015
+ -->
+ <title ixia_locid="1">wrs-snmp-mib—SNMP MIBs</title>
+ <shortdesc ixia_locid="2">This component documents the Wind River Enterprise SNMP Management
+  Information Base (MIB) for system alarms management on a Titanium Server deployment.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Annemarie Case</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4"> Support for SNMP is implemented as follows:</p>
+  <ul id="ul_bj2_b5d_sr">
+   <li ixia_locid="5">
+    <p ixia_locid="6">Access is disabled by default and must be enabled manually from the command-line
+     interface.</p>
+   </li>
+   <li ixia_locid="7">
+    <p ixia_locid="8">It is available using the controller node's floating OAM IP address, over the
+     standard UDP port 161.</p>
+   </li>
+   <li ixia_locid="9">
+    <p ixia_locid="10">The supported version is SNMPv2c.</p>
+   </li>
+   <li ixia_locid="11">
+    <p ixia_locid="12">Access is read-only for all SNMP communities.</p>
+   </li>
+   <li ixia_locid="13">
+    <p ixia_locid="14">All SNMP communities have access to the entire OID tree. There is no support for VIEWS.</p>
+   </li>
+   <li ixia_locid="15">
+    <p ixia_locid="16">The supported SNMP operations are GET, GETNEXT, GETBULK, and SNMPv2c-TRAP2. The SNMP SET
+     operation is not supported.</p>
+   </li>
+  </ul>
+ </conbody>
+</concept-wr>

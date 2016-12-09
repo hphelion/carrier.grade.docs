@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="bbn1462540980862" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Applying the Controller Configuration</title>
+    <shortdesc ixia_locid="2">You can configure <nameliteral ixia_locid="3">controller-0</nameliteral> by running a script from
+        the Linux command line.</shortdesc>
+    <prolog>
+        <author ixia_locid="542">Jim Owens</author>
+        <author ixia_locid="5">Pedro Sanchez</author>
+        <author ixia_locid="6">Tom Towle</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10031_N1002E_N10001" ixia_locid="396">
+            <p ixia_locid="397"><draft-comment author="jowens" dir="ltr" ixia_locid="398" translate="no">US62804 mention controller configuration file</draft-comment>You
+                can perform the configuration interactively, as described in this section, or you
+                can use a prepared configuration file.</p>
+            <p ixia_locid="283" product="tis_cpe">The compute function on <nameliteral ixia_locid="284">controller-0</nameliteral> must be configured before the
+                    <nameliteral ixia_locid="285">controller-1</nameliteral> configuration is
+                started.</p>
+        </context>
+        <prereq id="prereq_N1002B_N10028_N10001" ixia_locid="7">
+            <p ixia_locid="8">Before running the configuration script:</p>
+            <ul id="ul_hk2_wmr_g4">
+                <li ixia_locid="9">
+                    <p ixia_locid="10">Ensure that <nameliteral ixia_locid="144">controller-0</nameliteral> has been initialized. For more information,
+                        see <xref href="jow1404333490251.xml" ixia_locid="12"/>.</p>
+                </li>
+                <li ixia_locid="145">
+                    <p ixia_locid="146">Ensure that the management interface is connected and
+                        operational.</p>
+                </li>
+                <li ixia_locid="801" product="tis_cpe">
+                    <p ixia_locid="802">Ensure that the data interfaces are connected and operational.</p>
+                </li>
+                <li ixia_locid="797">
+                    <p ixia_locid="798">Copy the license file and other optional files to <nameliteral ixia_locid="799">controller-0</nameliteral>.</p>
+                </li>
+                <li ixia_locid="202">
+                    <p ixia_locid="203">Install system software patches if there are any available from Wind
+                        River.</p>
+                </li>
+                <li ixia_locid="13">
+                    <p ixia_locid="795">Prepare a configuration plan to use as a reference. For more
+                        information, see <ph ixia_locid="809" otherprops="printonly"><cite ixia_locid="810">Titanium Server Planning: </cite></ph><cite ixia_locid="811"><ph ixia_locid="812"><xref href="uvy1462906813562.xml" ixia_locid="813"/></ph></cite>.</p>
+                </li>
+            </ul>
+        </prereq>
+        <steps>
+            <step id="step_N10058_N10055_N10028_N10001" ixia_locid="16">
+                <cmd ixia_locid="17">Start the controller configuration script.</cmd>
+                <stepxmp ixia_locid="18">
+                    <codeblock ixia_locid="19"><systemoutput ixia_locid="509">$ </systemoutput><userinput ixia_locid="21">sudo config_controller</userinput>
+<systemoutput ixia_locid="510">Titanium Server Configuration
+======================================
+Enter Q at any prompt to abort...</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="531">
+                    <p ixia_locid="532">You can optionally supply the name of a configuration file
+                        as a parameter.</p>
+                </info>
+            </step>
+            <step id="step_N10072_N10055_N10028_N10001" ixia_locid="23">
+                <cmd ixia_locid="24">Configure the controller options as requested by the configuration script. </cmd>
+                <info ixia_locid="25">
+                    <p ixia_locid="541">If you are using a configuration file, this step is not
+                        applicable.</p>
+                    <p ixia_locid="804">For information about the options, see <xref href="ekn1460145735111.xml" ixia_locid="806"/>.</p>
+                    <note id="note_N1007B_N10078_N10071_N10055_N10028_N10001" ixia_locid="534">
+                        <p ixia_locid="535">The configuration is applied only after all options have been specified.
+                            You can safely abort the configuration process at any time by pressing
+                            the <nameliteral ixia_locid="28">Q</nameliteral> key.</p>
+                    </note>
+                </info>
+                <stepresult ixia_locid="77">
+                    <p ixia_locid="78">After a few minutes, the message 
+                        <b ixia_locid="79">Configuration was applied</b>
+                    
+                        appears.</p>
+                </stepresult>
+            </step>
+            <step id="step_N1023D_N10087_N1002E_N10001" ixia_locid="162">
+                <cmd ixia_locid="163">Change to the Keystone <nameliteral ixia_locid="164">admin</nameliteral> account.</cmd>
+                <info ixia_locid="177">
+                    <p ixia_locid="253">Use the <cmdname ixia_locid="512">source</cmdname> command to become the Keystone
+                            <nameliteral ixia_locid="513">admin</nameliteral> user.</p>
+                    <codeblock ixia_locid="514"><systemoutput ixia_locid="515">$ </systemoutput><userinput ixia_locid="516">source /etc/nova/openrc</userinput>
+<systemoutput ixia_locid="517">~(keystone_admin)$ </systemoutput></codeblock>
+                </info>
+            </step>
+            
+            <step id="step_N101C3_N10055_N10028_N10001" ixia_locid="89">
+                <cmd ixia_locid="90">Verify that the Titanium Server controller services are running.</cmd>
+                <stepxmp ixia_locid="375">
+                    <codeblock ixia_locid="376"><systemoutput ixia_locid="377">~(keystone_admin)$ </systemoutput><userinput ixia_locid="378">nova service-list</userinput>
+<systemoutput ixia_locid="379">+------------------+--------------+--------+---------+-------+ ...
+| Binary           | Host         | Zone   | Status  | State | ...
++------------------+--------------+--------+---------+-------+ ...
+| nova-conductor   | controller-0 | int... | enabled | up    | ...
+| nova-cert        | controller-0 | int... | enabled | up    | ...
+| nova-consoleauth | controller-0 | int... | enabled | up    | ...
+| nova-scheduler   | controller-0 | int... | enabled | up    | ...
++------------------+--------------+--------+---------+-------+ ...</systemoutput>
+</codeblock>
+                    <note id="note_N103F7_N103E1_N103D7_N10093_N1002E_N10001" ixia_locid="400" product="tis_cpe">
+                        <p ixia_locid="401">For a Titanium Server CPE configuration, the
+                                <nameliteral ixia_locid="382">nova-compute</nameliteral> service is
+                            also listed.</p>
+                    </note>
+                </stepxmp>
+            </step>
+            <step id="step_N10407_N10093_N1002E_N10001" ixia_locid="383" product="tis_cpe">
+                <cmd ixia_locid="384">Verify that the controller and compute subfunctions are
+                    present. </cmd>
+                <stepxmp ixia_locid="385">
+                    <codeblock ixia_locid="387"><systemoutput ixia_locid="388">~(keystone_admin)$ </systemoutput><userinput ixia_locid="389">system host-show 1 | grep subfunctions</userinput>
+<systemoutput ixia_locid="390">| personality     | controller,compute</systemoutput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N101DE_N10055_N10028_N10001" ixia_locid="96">
+                <cmd ixia_locid="97">Verify that <nameliteral ixia_locid="98">controller-0</nameliteral> is in the state
+                        <nameliteral ixia_locid="99">unlocked-enabled-available</nameliteral>.</cmd>
+                <stepxmp ixia_locid="100">
+                    <codeblock ixia_locid="101"><systemoutput ixia_locid="684">~(keystone_admin)$ </systemoutput><userinput ixia_locid="103">system host-list</userinput>
+<systemoutput ixia_locid="519">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10200_N10055_N10028_N10001" importance="optional" ixia_locid="105">
+                <cmd ixia_locid="106">Synchronize the RAID array.</cmd>
+                <info ixia_locid="107">
+                    <p ixia_locid="108">Normally, the RAID array is already synchronized. If you need to synchronize
+                        the RAID array manually, do so now. You may be able to do this by pressing a
+                        button on the unit, or using a special key combination on the console
+                        keyboard. For details, consult the OEM documentation for the RAID.</p>
+                </info>
+            </step>
+            <step id="step_N10212_N10055_N10028_N10001" ixia_locid="109" product="tis_std">
+                <cmd ixia_locid="110">Using a Web browser, navigate to the OAM floating IP address
+                    to verify that the Titanium Server web administration interface is
+                    available.</cmd>
+                <info ixia_locid="111">
+                    <p ixia_locid="112">To identify the OAM floating IP address, consult your
+                        configuration plan.</p>
+                </info>
+                <stepresult ixia_locid="114">
+                    <p ixia_locid="573">The <wintitle ixia_locid="574">Wind River Titanium
+                            Server</wintitle> login screen appears.</p>
+                    <fig id="fig_N10228_N1021D_N1020A_N10055_N10028_N10001" ixia_locid="575">
+                        <title ixia_locid="576">Wind River Titanium Server login screen</title>
+                        <image href="jow1404333491396.image" id="image_t5q_4b1_dn" ixia_locid="577" placement="inline"/>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10244_N10055_N10028_N10001" ixia_locid="578" product="tis_std">
+                <cmd ixia_locid="579">Log in using the cloud <nameliteral ixia_locid="580">admin</nameliteral> account.</cmd>
+                <stepresult ixia_locid="581">
+                    <p ixia_locid="582">The <wintitle ixia_locid="583">Wind River Titanium
+                            Server</wintitle> web administration interface appears.</p>
+                    <fig id="fig_N10251_N10246_N1023B_N10055_N10028_N10001" ixia_locid="184">
+                        <title ixia_locid="186">Wind River Titanium Server web administration
+                            interface</title>
+                        <image href="jow1404333493002.image" id="image_pzt_1ts_g4" ixia_locid="192" placement="inline"/>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N1026E_N10055_N10028_N10001" ixia_locid="584" product="tis_std">
+                <cmd ixia_locid="194">In the left-hand pane, select <menucascade ixia_locid="807">
+                        <uicontrol ixia_locid="585">Admin</uicontrol>
+                        <uicontrol ixia_locid="808">Platform</uicontrol>
+                        <uicontrol ixia_locid="196">Host Inventory</uicontrol>
+                    </menucascade>, and then select the <uicontrol ixia_locid="133">Hosts</uicontrol> tab.</cmd>
+                <stepresult ixia_locid="198">
+                    <p ixia_locid="135"><draft-comment author="jowens" dir="ltr" ixia_locid="794" translate="no">US77470 updated screen</draft-comment><nameliteral ixia_locid="200">Controller-0</nameliteral> is reported in the hosts
+                        inventory list.</p>
+                    <fig id="fig_N10281_N10277_N10264_N10055_N10028_N10001" ixia_locid="182">
+                        <image href="jmc1462543311057.image" id="image_qdm_xtp_wv" ixia_locid="792" placement="inline">
+                            <alt ixia_locid="793">Host Inventory (controller-0 only)</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+        </steps>
+        <result id="result_N1028D_N10028_N10001" ixia_locid="190">
+            <p ixia_locid="140">The host <nameliteral ixia_locid="141">controller-0</nameliteral> is
+                now installed.<ph ixia_locid="805" product="tis_cpe"> It must be provisioned with network interfaces
+                    and storage resources.</ph></p>
+        </result>
+        <postreq id="postreq_N106BD_N1002E_N10001" ixia_locid="525">
+            <p ixia_locid="558">The config_controller file is no longer required. For improved
+                security, delete it.</p>
+            <p ixia_locid="677"><draft-comment author="rstone" dir="ltr" ixia_locid="678" translate="no">CGTS-3175 added</draft-comment>After running <cmdname ixia_locid="4">config_controller</cmdname>, you must obtain the ssh fingerprint
+                of the server in order to verify its identity when connecting via ssh. For more
+                information, see <ph ixia_locid="814" otherprops="printonly"><cite ixia_locid="815">Titanium Server System Administration: </cite></ph><cite ixia_locid="816"><ph ixia_locid="817"><xref href="rst1449264554094.xml" ixia_locid="818"/></ph></cite>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

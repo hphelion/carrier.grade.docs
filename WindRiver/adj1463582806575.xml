@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="adj1463582806575" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="12">The Infrastructure Network</title>
+ <shortdesc ixia_locid="13">This network supplements the management network. It is required for Ceph-backed systems,
+  and optional for other systems.</shortdesc>
+ <prolog>
+  <author ixia_locid="14">Jim Owens</author>
+  <author ixia_locid="15">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="10">As with the internal management network, the infrastructure network must be
+   implemented as a single, dedicated, Layer 2 broadcast domain for the exclusive use of each
+   Titanium Server cluster. Sharing of this network by more than one Titanium Server cluster is only
+   supported in a Multi-Region Configuration.</p>
+  <p ixia_locid="11">The infrastructure network can be implemented as a 10 Gb Ethernet network. In
+   its absence, all infrastructure traffic is carried over the internal management network.</p>
+ </conbody>
+</concept-wr>

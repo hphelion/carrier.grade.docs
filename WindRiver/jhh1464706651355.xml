@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jhh1464706651355" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="210">Ceph Storage Pools</title>
+ <shortdesc ixia_locid="211">On a system that uses a Ceph storage backend, storage pools for images,
+    volumes, ephemeral data, and object data are configured on the storage hosts.</shortdesc>
+ <prolog>
+  <author ixia_locid="212">Jim Owens</author>
+ </prolog>
+ <conbody>
+    <p ixia_locid="213"><draft-comment author="jowens" ixia_locid="214">US74975 Added as a separate
+        concept topic, to provide common information for the CLI and Horizon task topics. US84057
+        updated for object pool</draft-comment>Titanium Server uses four pools:</p>
+    <p ixia_locid="224"><ul id="ul_z5w_xwp_dw">
+        <li ixia_locid="216">
+          <p ixia_locid="217">Cinder Volume Storage pool</p>
+        </li>
+        <li ixia_locid="218">
+          <p ixia_locid="219">Glance Image Storage pool</p>
+        </li>
+        <li ixia_locid="226">
+          <p ixia_locid="227">Nova Ephemeral Disk Storage pool</p>
+        </li>
+        <li ixia_locid="228">
+          <p ixia_locid="229">Swift Object Storage pool</p>
+        </li>
+      </ul>These pools share the available Ceph storage provided by the storage host resources.</p>
+    <p ixia_locid="225">Initial quotas for each pool are defined during system installation. Within
+      the bounds of these quotas, storage for each of the pools is allocated dynamically as
+      required. To optimize resource usage, you can adjust the quota on each pool. The sum of the
+      quotas must equal the total available space in gibibytes (GiB).</p>
+    <p ixia_locid="174"><draft-comment author="jowens" ixia_locid="209">US74975 changed "Glance
+        Image Pool" to "pool" throughout, and reworded. REWORDING NEEDS REVIEW</draft-comment>If you
+      set a quota to <nameliteral ixia_locid="175">0</nameliteral>, the quota is deactivated. The
+      pool size is not restricted, and can grow to fill the entire available storage space.</p>
+    <p ixia_locid="177">If you set the quota to less than its current size, new space allocation
+      requests are served only after the pool size drops below the new ceiling. </p>
+    <p ixia_locid="178">If you set quotas so that the total value exceeds the available Ceph
+      storage, restrictions on all allocation requests are removed.</p>
+  <p ixia_locid="222">To view and change the size of the storage pools, see <xref href="gut1462475554017.xml" ixia_locid="223"/>.</p>
+  <note id="note_N10032_N10021_N1001E_N10001" ixia_locid="198">
+   <p ixia_locid="195"><draft-comment author="jowens" ixia_locid="196">US77470 mention adding
+          storage hosts</draft-comment>To increase the available storage, you can also add storage
+        hosts, up to a maximum of four pairs. For instructions, see <ph ixia_locid="182" otherprops="printonly"><cite ixia_locid="183">Titanium Server Installation for Ceph-backed
+            Systems:</cite>
+        </ph><cite ixia_locid="184"><ph ixia_locid="185"><xref href="uid1473354209921.xml" ixia_locid="230">Installing Software on Controller-1 or a Compute or Storage
+        Host</xref></ph></cite>.</p>
+  </note>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333564380" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+
+ -->
+    <title ixia_locid="1">Network Requirements</title>
+    <shortdesc ixia_locid="2">Titanium Server uses several different types of networks, depending on
+        the size of the system and the features in use.</shortdesc>
+    <prolog>
+        <author ixia_locid="53">Jim Owens</author>
+        <author ixia_locid="3">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="55">Available networks include the PXE boot network, the internal management
+            network, the OAM network, the infrastructure network, the board management network, and
+            one or more provider networks.</p>
+        <p ixia_locid="56">The internal management network is required by all systems for internal
+            communication; the OAM network is required for external control access; and at least one
+            provider network is required for use by VMs. The need for other networks is determined
+            by the system configuration (CPE, standard with controller storage, or standard with
+            dedicated storage), the number of hosts supported, the expected system loads, and the
+            availability of features such as Integrated Lights Out (iLO) board management.</p>
+        <p ixia_locid="57">You can optionally consolidate more than one network on a single physical interface.  For
+            more information, see <xref href="jow1423173019489.xml" ixia_locid="58"/>.</p>
+        <note id="note_N10022_N1001F_N10001" ixia_locid="48">
+            <p conref="jow1419267499106.xml#jow1419267499106/multicast_in_use" ixia_locid="49"/>
+        </note>
+    </conbody>
+</concept-wr>

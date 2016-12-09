@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="ekn1460483451637" xml:lang="en-us">
+    <!-- Modification History
+  
+  2014-06-27 updated title, added items for EAR2
+
+ -->
+    <title ixia_locid="1">Changes in This Release</title>
+    <shortdesc ixia_locid="2">This release of Titanium Server includes a number of performance
+        enhancements and additions to functionality. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+        <author ixia_locid="4">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <section id="section_N10027_N10024_N10001" ixia_locid="22">
+            <title ixia_locid="6">Enhancements</title>
+            <draft-comment author="jowens" ixia_locid="21">to be added for 16.x release: US84057 SDN
+                capability</draft-comment>
+            <draft-comment author="eknowlto" ixia_locid="7">US74948: Move Glance API to
+                infra</draft-comment>
+            <ul id="ul_ofx_nlf_5x">
+                <li ixia_locid="29">
+                    <p ixia_locid="30">
+                        <b ixia_locid="246">Platform</b>
+                    </p>
+                    <ul id="ul_z1q_bgf_5x">
+                        <li ixia_locid="31">
+                            <p ixia_locid="32">New host OS based on CentOS 7</p>
+                        </li>
+                        <li ixia_locid="33">
+                            <p ixia_locid="34">OpenStack up-versioned to Mitaka </p>
+                        </li>
+                        <li ixia_locid="35">
+                            <p ixia_locid="36">DPDK up-versioned to DPDK 2.2</p>
+                        </li>
+                        <li ixia_locid="37">
+                            <p ixia_locid="261">Support for UEFI boot</p>
+                            <ul id="ul_mr4_h55_5x">
+                                <li ixia_locid="262">
+                                    <p ixia_locid="263">Improved hardware feature support over
+                                        traditional BIOS booting</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="264">
+                            <p ixia_locid="44">Support for Patching Orchestration </p>
+                        </li>
+                        <li ixia_locid="43">
+                            <ul id="ul_bbq_bgf_5x">
+                                <li ixia_locid="45">
+                                    <p ixia_locid="46">Automated installation of patches across the
+                                        Titanium Server system, while migrating VMs or stopping and
+                                        starting them to maintain hosting service</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="50">
+                            <p ixia_locid="51">Support for In-Service Patches</p>
+                            <ul id="ul_cbq_bgf_5x">
+                                <li ixia_locid="52">
+                                    <p ixia_locid="53">Depending on patch changes, may be applied to
+                                        a running system without locking or rebooting hosts </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="54">
+                            <p ixia_locid="55">Support for in-service software upgrade of Titanium
+                                Software from one major release to the next major release</p>
+                            <ul id="ul_dbq_bgf_5x">
+                                <li ixia_locid="56">
+                                    <p ixia_locid="57">Manages upgrades of all platform software:
+                                        host OS, OS packages, OpenStack and Titanium Server-specific
+                                        features</p>
+                                </li>
+                                <li ixia_locid="58">
+                                    <p ixia_locid="59">Executes a rolling upgrade of Titanium
+                                        Software across all nodes of system</p>
+                                </li>
+                                <li ixia_locid="60">
+                                    <p ixia_locid="61">Manages API compatibility between nodes at
+                                        release N and release N+1</p>
+                                </li>
+                                <li ixia_locid="62">
+                                    <p ixia_locid="63">Deals transparently with database schema
+                                        changes and database data conversion </p>
+                                </li>
+                                <li ixia_locid="64">
+                                    <p ixia_locid="65">Live-migrates hosted applications during
+                                        upgrade for deployed VMs that can support it (otherwise uses
+                                        cold migration) </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="68">
+                            <p ixia_locid="69">Support for multi-region OpenStack cloud deployments </p>
+                            <ul id="ul_ebq_bgf_5x">
+                                <li ixia_locid="70">
+                                    <p ixia_locid="71">Support for multi-region Titanium Server
+                                        deployment </p>
+                                </li>
+                                <li ixia_locid="74">
+                                    <p ixia_locid="75">Support for multi-region mixed 3rd-party or
+                                        open-source OpenStack cloud and Titanium Server
+                                        deployment</p>
+                                    <ul id="ul_gbq_bgf_5x">
+                                        <li ixia_locid="76">
+                                            <p ixia_locid="77">Support for extending an existing
+                                                3rd-Party or open-source OpenStack cloud using a
+                                                Secondary Region Titanium Server deployment, to
+                                                leverage Titanium Server extensions incrementally in
+                                                an integrated fashion</p>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="80">
+                    <p ixia_locid="81">
+                        <b ixia_locid="247">Increased Scalability</b>
+                    </p>
+                    <ul id="ul_hbq_bgf_5x">
+                        <li ixia_locid="82">
+                            <p ixia_locid="83">Supports a maximum configuration of up to 100 compute
+                                nodes per system </p>
+                            <ul id="ul_ibq_bgf_5x">
+                                <li ixia_locid="84">
+                                    <p ixia_locid="85">2x controller nodes </p>
+                                </li>
+                                <li ixia_locid="86">
+                                    <p ixia_locid="87">8x storage nodes </p>
+                                </li>
+                                <li ixia_locid="88">
+                                    <p ixia_locid="89">100x compute nodes </p>
+                                    <ul id="ul_jbq_bgf_5x">
+                                        <li ixia_locid="90">
+                                            <p ixia_locid="91">Average of 10 VMs per compute node </p>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="92">
+                            <p ixia_locid="93">For multi-region configurations, please discuss use
+                                cases with Wind River. </p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="94">
+                    <p ixia_locid="95"><b ixia_locid="248">Security</b>
+                    </p>
+                    <ul id="ul_kbq_bgf_5x">
+                        <li ixia_locid="96">
+                            <p ixia_locid="97">Support for Remote CLI </p>
+                            <ul id="ul_lbq_bgf_5x">
+                                <li ixia_locid="98">
+                                    <p ixia_locid="99">Support for using Titanium Server-extended
+                                        OpenStack CLIs remotely</p>
+                                </li>
+                                <li ixia_locid="100">
+                                    <p ixia_locid="101">controller SSH login privileges no longer
+                                        required for CLI access </p>
+                                </li>
+                                <li ixia_locid="104">
+                                    <p ixia_locid="105">HTTP and HTTPS modes supported </p>
+                                </li>
+                                <li ixia_locid="102">
+                                    <p ixia_locid="103">Delivered as SDK module with installer
+                                        script for installation on remote server </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="106">
+                            <p ixia_locid="107"> Improved operator-command audit logging </p>
+                            <ul id="ul_mbq_bgf_5x">
+                                <li ixia_locid="108">
+                                    <p ixia_locid="109">All non-passive operator commands on system
+                                        are now logged </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="110">
+                            <p ixia_locid="111">Improved login authentication logging </p>
+                            <ul id="ul_nbq_bgf_5x">
+                                <li ixia_locid="112">
+                                    <p ixia_locid="113">All login attempts (success and failure) are
+                                        logged, including horizon logins and ssh logins as well as
+                                        internal local LDAP and internal database login attempts </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="116">
+                            <p ixia_locid="117">Improved user and password management </p>
+                            <ul id="ul_obq_bgf_5x">
+                                <li ixia_locid="118">
+                                    <p ixia_locid="119">Temporary lockout of Horizon user after a
+                                        configurable number of failed login attempts</p>
+                                </li>
+                                <li ixia_locid="120">
+                                    <p ixia_locid="121">Increased complexity requirements on Linux
+                                        user passwords ( minimum length, at least one number, at
+                                        least one capital letter, and at least one special
+                                        character) </p>
+                                </li>
+                                <li ixia_locid="122">
+                                    <p ixia_locid="123">wrsroot password aging (in addition to
+                                        already supported non-wrsroot Linux user-password aging) </p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="124">
+                    <p ixia_locid="125"><b ixia_locid="249">Fault and Performance Management </b></p>
+                    <ul id="ul_dk1_wjf_5x">
+                        <li ixia_locid="126">
+                            <p ixia_locid="127">Merged alarm history and log list in Horizon, CLI
+                                and REST API </p>
+                            <ul id="ul_ek1_wjf_5x">
+                                <li ixia_locid="128">
+                                    <p ixia_locid="129">Provides a more usable single list of
+                                        customer historical events (set/clear customer alarms and
+                                        customer logs) </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="130">
+                            <p ixia_locid="131">Horizon global alarm banner </p>
+                            <ul id="ul_fk1_wjf_5x">
+                                <li ixia_locid="132">
+                                    <p ixia_locid="133">Alarm counts visible on every Horizon page </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="134">
+                            <p ixia_locid="135">Provider Network Topology view</p>
+                            <ul id="ul_gk1_wjf_5x">
+                                <li ixia_locid="136">
+                                    <p ixia_locid="137">Graphically displays host provider network
+                                        topology </p>
+                                </li>
+                                <li ixia_locid="138">
+                                    <p ixia_locid="139">Includes alarm information for visualizing
+                                        and diagnosing issues</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="140">
+                            <p ixia_locid="141">Alarm Suppression </p>
+                            <ul id="ul_hk1_wjf_5x">
+                                <li ixia_locid="142">
+                                    <p ixia_locid="143">Provides ability to suppress notifications
+                                        for particular Alarm IDs </p>
+                                </li>
+                                <li ixia_locid="144">
+                                    <p ixia_locid="145">Suppressed alarms are hidden in the Active
+                                        Alarm and Historical Events lists, and not included in
+                                        global alarm banner counts </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="146">
+                            <p ixia_locid="147">Remote ELK-based log server support </p>
+                            <ul id="ul_ik1_wjf_5x">
+                                <li ixia_locid="148">
+                                    <p ixia_locid="149">Support for pushing system logs, including
+                                        expert-level troubleshooting logs, customer logs, and
+                                        alarms, to an external centralized ELK-based log server</p>
+                                </li>
+                                <li ixia_locid="150">
+                                    <p ixia_locid="151">Allows leveraging of Elastic ELK Stack Tools
+                                        for fast and easy analysis of logs, report generation, and
+                                        so on </p>
+                                </li>
+                                <li ixia_locid="152">
+                                    <p ixia_locid="153">SDK module provided for simple sample
+                                        installation of ELK server on a remote server</p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="154">
+                    <p ixia_locid="155"><b ixia_locid="265">Storage</b>
+                    </p>
+                    <ul id="ul_jk1_wjf_5x">
+                        <li ixia_locid="156">
+                            <p ixia_locid="157">Support for adding CEPH after installation </p>
+                        </li>
+                        <li ixia_locid="158">
+                            <p ixia_locid="159">Support for remote ephemeral storage (Nova storage)
+                                using CEPH as the backend </p>
+                        </li>
+                        <li ixia_locid="160">
+                            <p ixia_locid="161">Support for up to eight storage nodes </p>
+                            <ul id="ul_kk1_wjf_5x">
+                                <li ixia_locid="162">
+                                    <p ixia_locid="163">Deployed in 1:1 node pairs </p>
+                                </li>
+                                <li ixia_locid="164">
+                                    <p ixia_locid="165">Up to eight OSDs per node</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="166">
+                            <p ixia_locid="167">Support for CEPH SSD-backed journals for improved
+                                speed; transparent to VMs </p>
+                            <ul id="ul_lk1_wjf_5x">
+                                <li ixia_locid="168">
+                                    <p ixia_locid="169">Uses large, less-expensive, slower SATA or
+                                        SAS disks as OSDs, and partitions on separate fast SSD disks
+                                        for journalling and as a small cache </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="170">
+                            <p ixia_locid="171">Support for Ceph cache tiering for a larger-scale
+                                cache solution and enhanced speed improvements; transparent to VMs </p>
+                            <ul id="ul_mk1_wjf_5x">
+                                <li ixia_locid="172">
+                                    <p ixia_locid="173">Uses dedicated pairs of SSD-populated
+                                        storages nodes as a Ceph cache in front of standard
+                                        SATA/SAS-populated storage nodes </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="174">
+                            <p ixia_locid="175">Support for Glance using higher-speed infrastructure
+                                network, if present, for improved performance on image operations </p>
+                        </li>
+                        <li ixia_locid="176">
+                            <p ixia_locid="177">Support for SWIFT Object Storage services, using
+                                Ceph as the backend </p>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="178">
+                    <p ixia_locid="179"><b ixia_locid="250">Networking</b>
+                    </p>
+                    <ul id="ul_nk1_wjf_5x">
+                        <li ixia_locid="180">
+                            <p ixia_locid="181">AVS support for vhost-user </p>
+                            <ul id="ul_ok1_wjf_5x">
+                                <li ixia_locid="182">
+                                    <p ixia_locid="183">Improved networking performance for VMs with
+                                        standard virtio NICs using vhost-user, with optional
+                                        multi-queue support for virtio interfaces</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="184">
+                            <p ixia_locid="185">Improved distributed scheduling of neutron routers </p>
+                            <ul id="ul_pk1_wjf_5x">
+                                <li ixia_locid="186">
+                                    <p ixia_locid="187">More intelligent scheduling of routers and
+                                        DHCP agents across compute nodes </p>
+                                </li>
+                                <li ixia_locid="254">
+                                    <p ixia_locid="255">Improved balancing algorithm and dynamic
+                                        re-balancing on change to state or number of compute nodes </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="190">
+                            <p ixia_locid="191">Link Layer Discover Protocol (LLDP) peer discovery
+                                and reporting to verify cabling to the next hop device (for example,
+                                TOR switch) </p>
+                            <ul id="ul_qk1_wjf_5x">
+                                <li ixia_locid="192">
+                                    <p ixia_locid="193">AVS now supports sending and receiving of
+                                        LLDP messages on all physical interfaces </p>
+                                </li>
+                                <li ixia_locid="194">
+                                    <p ixia_locid="195">LLDP information (far-end switch name,
+                                        far-end switch port, and so on) received by each compute
+                                        node interface is displayed in Horizon Inventory panels and
+                                        system CLI </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="196">
+                            <p ixia_locid="197">Automated provider network connectivity tests and
+                                alarms to identify provider network connectivity issues between
+                                compute nodes </p>
+                        </li>
+                        <li ixia_locid="198">
+                            <p ixia_locid="199">Support for SDN networking technology </p>
+                            <ul id="ul_rk1_wjf_5x">
+                                <li ixia_locid="200">
+                                    <p ixia_locid="201">See detailed SDN Support section in
+                                        subsequent section of these Release Notes. </p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="202">
+                    <p ixia_locid="203"><b ixia_locid="251">VM Scheduling and Support </b></p>
+                    <ul id="ul_sk1_wjf_5x">
+                        <li ixia_locid="204">
+                            <p ixia_locid="205">Compute Node platform utilization-aware VM
+                                scheduling </p>
+                            <ul id="ul_tk1_wjf_5x">
+                                <li ixia_locid="206">
+                                    <p ixia_locid="207">VM Scheduling now considers the CPU loading
+                                        and memory utilization of the platform</p>
+                                </li>
+                                <li ixia_locid="208">
+                                    <p ixia_locid="209">Prevents scheduling a VM on a host whose
+                                        platform cores or memory are over-utilized </p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ixia_locid="210">
+                    <p ixia_locid="211"><b ixia_locid="252">Usability</b>
+                    </p>
+                    <ul id="ul_uk1_wjf_5x">
+                        <li ixia_locid="253">
+                            <p ixia_locid="218">Customer documentation has been restructured to
+                                offer documents with improved focus</p>
+                        </li>
+                        <li ixia_locid="266">
+                            <p ixia_locid="267">GUI panel and tab organization revised for improved usability</p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N1044B_N10024_N10001" ixia_locid="219">
+            <title ixia_locid="220">Deprecation Notices</title>
+            <dl>
+                <dlentry ixia_locid="221">
+                    <dt ixia_locid="222"><b ixia_locid="268">Interface consolidation</b>
+                    </dt>
+                    <dd ixia_locid="223">
+                        <ul id="ul_m4c_5kf_5x">
+                            <li ixia_locid="224">
+                                <p ixia_locid="225">The following interface consolidation
+                                    combinations on the same physical or LAG interface are
+                                    deprecated in R3 (that is, they are still supported in R3, but
+                                    support is planned to be removed in R4): </p>
+                                <ul id="ul_n4c_5kf_5x">
+                                    <li ixia_locid="226">
+                                        <p ixia_locid="227"> OAM + MGMT + INFRA + DATA </p>
+                                    </li>
+                                    <li ixia_locid="228">
+                                        <p ixia_locid="229"> OAM + MGMT + DATA </p>
+                                    </li>
+                                    <li ixia_locid="230">
+                                        <p ixia_locid="231"> OAM + INFRA + DATA </p>
+                                    </li>
+                                    <li ixia_locid="232">
+                                        <p ixia_locid="233"> MGMT + INFRA + DATA </p>
+                                    </li>
+                                    <li ixia_locid="234">
+                                        <p ixia_locid="235"> OAM + DATA </p>
+                                    </li>
+                                    <li ixia_locid="236">
+                                        <p ixia_locid="237"> INFRA + DATA </p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li ixia_locid="238">
+                                <p ixia_locid="239">Support continues for the following interface
+                                    consolidation combinations on the same physical or LAG
+                                    interface: </p>
+                                <ul id="ul_o4c_5kf_5x">
+                                    <li ixia_locid="240">
+                                        <p ixia_locid="241"> OAM + MGMT </p>
+                                    </li>
+                                    <li ixia_locid="242">
+                                        <p ixia_locid="243"> MGMT + INFRA </p>
+                                    </li>
+                                    <li ixia_locid="244">
+                                        <p ixia_locid="245"> OAM + MGMT + INFRA </p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </dd>
+                </dlentry>
+            </dl>
+            <dl>
+                <dlentry ixia_locid="256">
+                    <dt ixia_locid="257"><b ixia_locid="269">Keystone CLI</b></dt>
+                    <dd ixia_locid="258">
+                        <ul id="ul_twf_bgr_5x">
+                            <li ixia_locid="259">
+                                <p ixia_locid="260">The keystone CLI has been deprecated and is no
+                                    longer supported for Identity v3. Use the Openstack unified CLI
+                                    instead.</p>
+                            </li>
+                        </ul>
+                    </dd>
+                </dlentry>
+            </dl>
+        </section>
+        <section id="section_N10042_N10024_N10001" ixia_locid="23">
+            <title ixia_locid="24">A Note on SDN Support in this Release</title>
+            <p ixia_locid="25">Titanium Server provides an OpenFlow v1.3 interface for integration
+                in data centers that use software defined networking (SDN) as the networking
+                backbone.</p>
+            <p ixia_locid="26">This feature is provided for evaluation purposes.</p>
+            <p ixia_locid="27">Wind River Systems is willing to partner on Titanium Server with
+                carrier-grade Open DayLight SDN controllers to provide an evaluation to SDN /
+                OpenStack lead adopters.</p>
+        </section>
+    </conbody>
+</concept-wr>

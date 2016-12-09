@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="agz1464098695113" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Copying the License and Optional Files to Controller-0 </title>
+    <shortdesc ixia_locid="2">To configure <nameliteral ixia_locid="785">controller-0</nameliteral>
+        for use, a license file and other optional files are required. You must copy these files to
+        the host.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <steps>
+            <step id="step_N1002A_N10027_N10024_N10001" ixia_locid="786">
+                <cmd ixia_locid="787">Establish a method for transferring files to the host.</cmd>
+                <info ixia_locid="788">
+                    <p ixia_locid="789">You can transfer files using a network connection or an
+                        attached drive (typically a USB flash drive).</p>
+                </info>
+                <choices id="choices_rhp_5hk_by">
+                    <choice ixia_locid="790">
+                        <p ixia_locid="791">To establish a network connection, connect the controller to the OAM
+                            network as follows:</p>
+                        <codeblock ixia_locid="239"><systemoutput ixia_locid="466">$ </systemoutput><userinput ixia_locid="467">sudo ip addr add <varname ixia_locid="215">OAM_IP_address/mask</varname> dev <varname ixia_locid="218">port</varname></userinput>
+<systemoutput ixia_locid="468">$ </systemoutput><userinput ixia_locid="316">sudo ip link set <varname ixia_locid="319">port</varname> up</userinput>
+<systemoutput ixia_locid="469">$ </systemoutput><userinput ixia_locid="317">sudo ip route add default via <varname ixia_locid="320">gateway_addr</varname></userinput></codeblock>
+                        <p ixia_locid="223">For the controller-0 port and IP address, refer to your
+                            OAM network plan.</p>
+                        <p ixia_locid="225">For example:</p>
+                        <codeblock ixia_locid="241"><systemoutput ixia_locid="261">$ </systemoutput><userinput ixia_locid="470">sudo ip addr add 10.10.10.3/24 dev eth0</userinput>
+<systemoutput ixia_locid="471">$ </systemoutput><userinput ixia_locid="472">sudo ip link set eth0 up</userinput>
+<systemoutput ixia_locid="473">$ </systemoutput><userinput ixia_locid="318">sudo ip route add default via 10.10.10.1</userinput></codeblock>
+                        <p ixia_locid="792">Then connect a server containing the license file to the OAM network.</p>
+                    </choice>
+                    <choice ixia_locid="793">
+                        <p ixia_locid="794">To use a USB drive, attach the USB flash drive to one of the available
+                            USB ports on the controller. </p>
+                        <p ixia_locid="795">The controller automounts the USB flash drive if it is properly
+                            formatted. To determine the mount point so that you can copy from the
+                            correct drive, use the following command: </p>
+                        <codeblock ixia_locid="771"><systemoutput ixia_locid="772">$ </systemoutput><userinput ixia_locid="773">mount | grep /media</userinput>
+<systemoutput ixia_locid="774">/dev/sdc on /media/sdc type iso9660 (ro,relatime)</systemoutput></codeblock>
+                        <p ixia_locid="775">In this example the USB drive is mounted on <filepath ixia_locid="776">/media/sdc</filepath>. The path may be different on
+                            your controller.</p>
+                    </choice>
+                </choices>
+            </step>
+            <step id="step_N10102_N10031_N1001E_N10001" ixia_locid="201">
+                <cmd ixia_locid="568">Copy the Titanium Server license file to <filepath ixia_locid="569">/home/wrsroot/license.lic</filepath> on the
+                    controller.</cmd>
+                <info ixia_locid="245">
+                    <p ixia_locid="246">This is the default path offered during controller
+                        configuration. If you prefer, you can copy the file to a different path, and
+                        specify the path during configuration.</p>
+                </info>
+                <choices id="choices_wbh_cjk_by">
+                    <choice ixia_locid="796">
+                        <p ixia_locid="797">For an OAM network connection, use an <cmdname ixia_locid="798">scp</cmdname> command similar to the following:</p>
+                        <codeblock ixia_locid="475"><systemoutput ixia_locid="476">$ </systemoutput><userinput ixia_locid="477">scp <varname ixia_locid="478">username</varname>@<varname ixia_locid="479">sourcehost</varname>:<varname ixia_locid="480">sourcepath</varname>/license.lic /home/wrsroot</userinput></codeblock>
+                    </choice>
+                    <choice ixia_locid="799">
+                        <p ixia_locid="800">For a USB drive, use a <cmdname ixia_locid="801">cp</cmdname> command
+                            similar to the following:</p>
+                        <codeblock ixia_locid="778"><systemoutput ixia_locid="779">$ </systemoutput><userinput ixia_locid="780">cp /media/sdc/license.lic /home/wrsroot</userinput></codeblock>
+                    </choice>
+                </choices>
+            </step>
+            <step id="step_N1015F_N10092_N1002E_N10001" importance="optional" ixia_locid="343">
+                <cmd ixia_locid="344">Copy a digital certificate file to the controller node. </cmd>
+                <info ixia_locid="345">
+                    <p ixia_locid="346">If you require secure REST API access using HTTPS, copy a
+                        CA-signed digital certificate (PEM file) to a directory on the controller.
+                        The recommended path is <filepath ixia_locid="350">/home/wrsroot</filepath>.
+                        This is the default path offered during controller configuration. If you
+                        prefer, you can copy the file to a different path, and specify the path
+                        during configuration.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

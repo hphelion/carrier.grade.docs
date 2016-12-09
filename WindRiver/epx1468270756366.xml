@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="epx1468270756366" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Using the Remote Log Server</title>
+    <shortdesc ixia_locid="2">The remote log server uses ELK, a popular open-source log analytics
+        engine that includes Kibana for web-based presentation and analysis.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="20"><draft-comment author="jowens" ixia_locid="9">US77159 / US83068 new
+                    topic</draft-comment>More information about Kibana and ELK, including
+                documentation and tutorials, is widely available on the Internet.</p>
+            <p ixia_locid="21"> For more information about deploying a remote log server, see <xref href="xpb1466798497176.xml" ixia_locid="19"/>.</p>
+            <note id="note_N10036_N10022_N1001F_N10001" ixia_locid="22">
+                <p ixia_locid="23">If Titanium Server loses connectivity with the remote server, an alarm message is
+                    raised.</p>
+            </note>
+        </context>
+        <steps>
+            <step id="step_N1002E_N1002B_N1001C_N10001" ixia_locid="7">
+                <cmd ixia_locid="8">Use a browser to open Kibana on the log server.</cmd>
+                <info ixia_locid="10">
+                    <p ixia_locid="11">Use the form <filepath ixia_locid="12">http://<varname ixia_locid="24">ip_addr</varname>:5601</filepath>, where
+                            <varname ixia_locid="25">ip_addr</varname> is the IP address of the remote log
+                        server.</p>
+                </info>
+            </step>
+            <step id="step_N10070_N10042_N1001F_N10001" ixia_locid="26">
+                <cmd ixia_locid="27">Use the controls in Kibana to view or analyze logs from Titanium Server.</cmd>
+                <info ixia_locid="28">
+                    <p ixia_locid="29">For help using Kibana, refer to the public documentation on the Internet.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

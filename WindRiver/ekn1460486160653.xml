@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ekn1460486160653" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Overview of Provider Network Connectivity Tests</title>
+ <shortdesc ixia_locid="2">These tests check the connectivity between compute nodes over each
+  segment of each provider network. </shortdesc>
+ <prolog>
+  <author ixia_locid="3"/>
+ </prolog>
+ <conbody>
+  <draft-comment author="eknowlto" ixia_locid="14">US75531</draft-comment>
+  <p ixia_locid="4">This enables you to verify that a provider network is configured correctly
+   before launching VMs on the network.</p>
+  <p ixia_locid="5">Audits run both periodically, and when triggered by provider network or host
+   events, in order to test the connectivity over each network segment. They can also be manually
+   requested using the CLI. </p>
+  <p ixia_locid="6">The tests for each network type are as follows:</p>
+  <ul id="ul_nlc_dqy_pv">
+   <li ixia_locid="7">
+    <p ixia_locid="8">Flat: Ping between compute nodes on the network.</p>
+   </li>
+   <li ixia_locid="9">
+    <p ixia_locid="10">VLAN: Ping between compute nodes over each VLAN segment assigned to the
+     provider network.</p>
+   </li>
+   <li ixia_locid="11">
+    <p ixia_locid="12">VXLAN: Ping for each segmentation range assigned to the provider network.</p>
+   </li>
+  </ul>
+  <p ixia_locid="13">For each individual test, one ping is sent with a size of 64 bytes, and another is sent with
+   the MTU of the provider network. Each of those pings is sent from each node to 2 elected masters,
+   and the results are reported to neutron-server.</p>
+  <p ixia_locid="15">If a failure occurs on an audit run, an alarm is raised with details of the
+   provider network connectivity failure. </p>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="qoo1462900506294" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="347">The Life Cycle of a Host</title>
+ <shortdesc ixia_locid="348">The life cycle of a host is the set of state transitions the host goes
+  through as its current state changes.</shortdesc>
+ <prolog>
+  <author ixia_locid="349">Jim Owens</author>
+  <author ixia_locid="350">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="351">The host states in Titanium Server are based on the <cite ixia_locid="352">ITU
+    X.731 State Management Function Specification for Open Systems</cite>. </p>
+  <p ixia_locid="353">The current state of a host is determined by the allowed combinations of the
+   administrative, operational, and availability states at any given time. The following figure
+   illustrates the life cycle of a host.</p>
+  <fig id="fig_N1029C_N10290_N10024_N10001" ixia_locid="154">
+   <title ixia_locid="155">The Life Cycle of a Host</title>
+   <image href="jow1404333788253.image" id="image_szm_1lq_n4" ixia_locid="156" placement="inline"/>
+  </fig>
+  <p ixia_locid="157">In this figure:</p>
+  <ul id="ul_opf_4lq_n4">
+   <li ixia_locid="158">
+    <p ixia_locid="159">The administrative states, locked and unlocked, are presented in two
+     columns.</p>
+   </li>
+   <li ixia_locid="160">
+    <p ixia_locid="161">The operational states, disabled and enabled, are presented in two rows.</p>
+   </li>
+   <li ixia_locid="162">
+    <p ixia_locid="163">The availability states are presented as elements inside the
+     administrative/operational matrix.</p>
+   </li>
+  </ul>
+  <p ixia_locid="164">The description that follows uses the availability states only, because for
+   each state the corresponding administrative and operational states can be read directly from the
+   figure.</p>
+  <draft-comment author="jmaran" ixia_locid="354">I'm not sure about the use of italics for the states. I'm not
+   correcting it now but I think nameliteral might be better.</draft-comment>
+  <p ixia_locid="165">The life cycle of a new host starts when it is discovered by the active
+   controller on the internal management network. A new host is initially reported as
+   <i ixia_locid="355">Offline</i>. As an exception, the first controller, <nameliteral ixia_locid="167">controller-0</nameliteral>, is automatically set to <i ixia_locid="356">Available</i> during initial
+   commissioning. The following are the available transitions; numbers are attached to them for
+   easier reference:</p>
+  <dl>
+   <dlentry ixia_locid="169">
+    <dt ixia_locid="170">(1) <i ixia_locid="357">Offline</i> to <i ixia_locid="358">Online</i></dt>
+    <dd ixia_locid="173">
+     <p ixia_locid="174">This transition takes place once the administrator configures the host name
+      and personality of the host. During the transition, the Titanium Server software is installed
+      and the host reboots. The transition concludes when the controller establishes maintenance and
+      inventory connectivity with the new host.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="175">
+    <dt ixia_locid="176">(2) <i ixia_locid="177">Online</i> to <i ixia_locid="178">InTest</i>
+    </dt>
+    <dd ixia_locid="179">
+     <p ixia_locid="180">This transition takes place when the administrator requests to move the
+      host from the locked to the unlocked administrative states. The host reboots first. After it
+      finishes booting, it establishes maintenance communication and enters the transient
+       <draft-comment author="jmaran" ixia_locid="359">Why is it tagged nameliteral here when you have been using
+       italics?</draft-comment><nameliteral ixia_locid="181">InTest</nameliteral> state. While in
+      this state, the configuration is applied, and a set of hardware and software tests are
+      executed to ensure the integrity of the host.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="182">
+    <dt ixia_locid="183">(3) <i ixia_locid="184">InTest</i> to <i ixia_locid="185">Available</i>, <i ixia_locid="186">Degraded</i>, or <i ixia_locid="187">Failed</i>
+    </dt>
+    <dd ixia_locid="188">
+     <p ixia_locid="189">The transition is initiated automatically after the activities in the
+      transient state <nameliteral ixia_locid="190">inTest</nameliteral> are complete. Depending on
+      the outcome, the host goes into one the three states.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="191">
+    <dt ixia_locid="192">(4) <i ixia_locid="193">Failed</i> to <i ixia_locid="194">InTest</i>
+    </dt>
+    <dd ixia_locid="195">
+     <p ixia_locid="196">This is a value-added maintenance transition that the <draft-comment author="jmaran" ixia_locid="360">high availability (HA)???</draft-comment>HA framework executes automatically
+      to recover failed hosts.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="197">
+    <dt ixia_locid="198">(5) <i ixia_locid="199">Available</i> to/from <i ixia_locid="200">Degraded</i>, <i ixia_locid="346">Available</i> to <i ixia_locid="202">Failed</i>, and <i ixia_locid="203">Degraded</i> to <i ixia_locid="204">Failed</i>
+    </dt>
+    <dd ixia_locid="205">
+     <p ixia_locid="206">These are transitions that can occur at any time due to changes on the
+      operational state and faults on unlocked hosts.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="207">
+    <dt ixia_locid="208">(6) <i ixia_locid="209">Available</i>, <i ixia_locid="210">Degraded</i>, or
+      <i ixia_locid="211">Failed</i>, to <i ixia_locid="212">Offline</i>
+    </dt>
+    <dd ixia_locid="213">
+     <p ixia_locid="214">These are maintenance transitions that take place automatically to reflect
+      the operational state of a host.</p>
+     <p ixia_locid="215">On a compute node in <i ixia_locid="216">Available</i> or <i ixia_locid="217">Degraded</i> state, the transition triggers the migration of the active
+      instances to another available compute node.</p>
+    </dd>
+   </dlentry>
+  </dl>
+ </conbody>
+</concept-wr>

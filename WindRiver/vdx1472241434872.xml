@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="vdx1472241434872" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Preparing for Upgrade</title>
+ <shortdesc ixia_locid="2">You should complete these preparations before starting an
+  upgrade.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <ul id="ul_ezb_b11_cx">
+   <li ixia_locid="4">
+    <p ixia_locid="5">Apply patches to the currently running release to make sure that the system is
+     patch current. </p>
+   </li>
+   <li ixia_locid="6">
+    <p ixia_locid="7">Perform a full backup to allow recovery. </p>
+   </li>
+   <li ixia_locid="25">
+    <p ixia_locid="26">Transfer the new release software load to controller-0 (or onto a USB stick);
+     controller-0 must be active.</p>
+   </li>
+   <li ixia_locid="27">
+    <p ixia_locid="28">Transfer the new release software license file to controller-0, (or onto a
+     USB stick).</p>
+   </li>
+   <li ixia_locid="29">
+    <p ixia_locid="30">Unlock all hosts. </p>
+    <ul id="ul_pf4_j45_qx">
+     <li ixia_locid="31">
+      <p ixia_locid="32">All nodes must be unlocked. The upgrade cannot be started when there are
+       locked nodes (the health check prevents it).</p>
+     </li>
+    </ul>
+   </li>
+   <li ixia_locid="33">
+    <p ixia_locid="34">Resolve all Active Alarms on the system.</p>
+    <ul id="ul_fcx_f45_qx">
+     <li ixia_locid="8">
+      <p ixia_locid="9">Check the system health to determine if there are any alarms. Any alarms
+       should be cleared. </p>
+      <codeblock ixia_locid="10"><systemoutput ixia_locid="11">$</systemoutput> <userinput ixia_locid="12">system health-query controller-0</userinput></codeblock>
+      <p ixia_locid="24">Clear any alarms in the system before beginning the upgrade. </p>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="znn1463582982634" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="25">The OAM Network</title>
+ <shortdesc ixia_locid="26">This network provides for control access.</shortdesc>
+ <prolog>
+  <author ixia_locid="27">Jim Owens</author>
+  <author ixia_locid="28">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="14">You should ensure that the following services are available on the OAM
+   Network:</p>
+  <dl>
+   <dlentry ixia_locid="15">
+    <dt ixia_locid="16">DNS Service</dt>
+    <dd ixia_locid="17">
+     <p ixia_locid="18">Needed to facilitate the name resolution of servers reachable on the OAM
+      Network. </p>
+     <p ixia_locid="19">Titanium Server can operate without a configured DNS service. However, a DNS
+      service should be in place to ensure that links to external references in the current and
+      future versions of the Web administration interface work as expected.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="20">
+    <dt ixia_locid="21">NTP Service</dt>
+    <dd ixia_locid="22">
+     <p ixia_locid="23">The Network Time Protocol (NTP) can be optionally used by the Titanium
+      Server controller nodes to synchronize their local clocks with a reliable external time
+      reference. However, Wind River strongly recommends that this service be available, among other
+      things, to ensure that system-wide log reports present a unified view of the day-to-day
+      operations.</p>
+     <p ixia_locid="24">The Titanium Server compute nodes and storage nodes always use the
+      controller nodes as the de-facto time server for the entire Titanium Server cluster. </p>
+    </dd>
+   </dlentry>
+  </dl>
+ </conbody>
+</concept-wr>

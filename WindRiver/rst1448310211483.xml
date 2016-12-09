@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="rst1448310211483" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1">Traps</title>
+    <shortdesc ixia_locid="2">Titanium Server supports SNMP traps. Traps send unsolicited
+        information to monitoring software when significant events occur..</shortdesc>
+    <prolog>
+        <author ixia_locid="295">Jim Owens</author>
+        <author ixia_locid="3">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="296"><draft-comment author="jowens" ixia_locid="297">CGTS-1956 minor
+            changes</draft-comment>The following traps are defined.</p>
+        <ul id="ul_p1j_tvn_c5">
+            <li ixia_locid="152">
+                <p ixia_locid="153"><nameliteral ixia_locid="154">wrsAlarmCritical</nameliteral></p>
+            </li>
+            <li ixia_locid="155">
+                <p ixia_locid="156"><nameliteral ixia_locid="157">wrsAlarmMajor</nameliteral></p>
+            </li>
+            <li ixia_locid="158">
+                <p ixia_locid="159"><nameliteral ixia_locid="160">wrsAlarmMinor</nameliteral></p>
+            </li>
+            <li ixia_locid="161">
+                <p ixia_locid="162"><nameliteral ixia_locid="163">wrsAlarmWarning</nameliteral></p>
+            </li>
+            <li ixia_locid="164">
+                <p ixia_locid="165"><nameliteral ixia_locid="166">wrsAlarmMessage</nameliteral></p>
+            </li>
+            <li ixia_locid="167">
+                <p ixia_locid="168"><nameliteral ixia_locid="169">wrsAlarmClear</nameliteral></p>
+            </li>
+            <li ixia_locid="170">
+                <p ixia_locid="171"><nameliteral ixia_locid="172">wrsAlarmHierarchicalClear</nameliteral></p>
+            </li>
+        </ul>
+        <note id="note_N10092_N10024_N10001" ixia_locid="298">
+            <p ixia_locid="290">Customer Logs always result in <nameliteral ixia_locid="291">wrsAlarmMessage</nameliteral> traps.</p>
+        </note>
+        <p ixia_locid="174">For Critical, Major, Minor, Warning, and Message traps, all variables in
+            the active alarm table are included as <term ixia_locid="175">varbinds</term>.</p>
+        <p ixia_locid="176">For the Clear trap, <term ixia_locid="177">varbinds</term> include only
+            the <varname ixia_locid="178">AlarmID</varname>, <varname ixia_locid="179">EntityInstanceID</varname>, <varname ixia_locid="180">DateAndTime</varname>, and
+                <varname ixia_locid="181">ReasonText</varname> variables.</p>
+        <p ixia_locid="182">For the HierarchicalClear trap, <term ixia_locid="183">varbinds</term>
+            include only the <varname ixia_locid="184">EntityInstanceID</varname>, <varname ixia_locid="185">DateAndTime</varname>, and <varname ixia_locid="186">ReasonText</varname> variables.</p>
+        <p ixia_locid="289">For all alarms, the Notification Type is based on the severity of the
+            trap or alarm. This is done to facilitate the interaction with most SNMP trap viewers
+            which typically use the Notification Type to drive the coloring of traps, that is, red
+            for critical, yellow for minor, and so on. </p>
+    </conbody>
+</concept-wr>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333777760" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1">Interfaces Tab</title>
+    <shortdesc ixia_locid="2">The <uicontrol ixia_locid="3">Interfaces</uicontrol> tab on the
+            <wintitle ixia_locid="4">Inventory Detail</wintitle> page presents details about the
+        logical L2 network interfaces on a node.</shortdesc>
+    <prolog>
+        <author ixia_locid="159">Jim Owens</author>
+        <author ixia_locid="5">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="208">The following example is for an unlocked controller node:</p>
+        <fig id="fig_N10027_N10024_N10001" ixia_locid="6">
+            <image href="jow1404333771094.image" id="image_v3c_dc1_m4" ixia_locid="7"/>
+        </fig>
+        <p ixia_locid="8"><draft-comment author="jowens" ixia_locid="160">US66653 info about
+                creating a profile removed to another topic; US82332 updated interface
+                names</draft-comment>In this example, the node has three allocated interfaces. The
+            interfaces <nameliteral ixia_locid="135">enp0s3</nameliteral>, connecting to the OAM
+            network, and <nameliteral ixia_locid="136">enp0s8</nameliteral> connecting to the
+            internal management network, reflect the allocation given when the node was
+            provisioned.</p>
+        <p ixia_locid="11">On a configured compute node, the <uicontrol ixia_locid="12">Interfaces</uicontrol> tab presents additional logical interfaces. The following
+            example is for a locked node:</p>
+        <fig id="fig_N10047_N10024_N10001" ixia_locid="13">
+            <image href="jow1404333772968.image" id="image_xyx_c21_m4" ixia_locid="14"/>
+        </fig>
+        <p ixia_locid="15"><draft-comment author="jowens" ixia_locid="170">CGTS-2934 updated text to
+                match screen shot</draft-comment>In this example, the node has four allocated
+            interfaces: <nameliteral ixia_locid="165">enp0s3</nameliteral> connecting to the
+            infrastructure network, <nameliteral ixia_locid="16">mgmt0</nameliteral> connecting to
+            the internal management network, and <nameliteral ixia_locid="17">eth0</nameliteral> and
+                <nameliteral ixia_locid="18">eth1</nameliteral> connecting to the provider networks
+                <nameliteral ixia_locid="19">providernet-a</nameliteral> and <nameliteral ixia_locid="20">providernet-b</nameliteral>, respectively. The interface
+                <nameliteral ixia_locid="21">mgmt0</nameliteral> is auto-provisioned as part of the
+            automated software installation process on the compute node. It can be modified but not
+            deleted.</p>
+        <note id="note_N10098_N1002E_N10001" ixia_locid="169">
+            <p ixia_locid="166"><draft-comment author="jowens" ixia_locid="167">US71812 added NUMA
+                    mesh info:</draft-comment>For data interfaces, you can optimize vSwitch
+                processing of packets to and from physical ports by using only ports that are
+                connected to processors with vSwitch cores. For more information, see <ph ixia_locid="193" otherprops="printonly"><cite ixia_locid="194">Titanium Server
+                        Cloud Administration:</cite>
+                </ph><cite ixia_locid="195"><ph ixia_locid="196"><xref href="jow1453828152714.xml" ixia_locid="214"/></ph></cite>.</p>
+        </note>
+        <p ixia_locid="22">Information about interfaces is presented in several columns, as follows:</p>
+        <dl>
+            <dlentry ixia_locid="23">
+                <dt ixia_locid="24">Name</dt>
+                <dd ixia_locid="25">
+                    <p ixia_locid="26">The name given to the logical L2 interface.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="31">
+                <dt ixia_locid="32">Network Type</dt>
+                <dd ixia_locid="33">
+                    <p ixia_locid="34">The type of network the logical network interface is connected to. The options are:</p>
+                    <ul id="ul_rtx_4g1_m4">
+                        <li ixia_locid="35">
+                            <p ixia_locid="36"><option ixia_locid="209">data</option>, for a compute node data
+                                interface</p>
+                        </li>
+                        <li ixia_locid="41">
+                            <p ixia_locid="42"><option ixia_locid="210">infra</option>, for the optional
+                                infrastructure network</p>
+                        </li>
+                        <li ixia_locid="38">
+                            <p ixia_locid="39"><option ixia_locid="211">mgmt</option>, for the internal management
+                                network</p>
+                        </li>
+                        <li ixia_locid="44">
+                            <p ixia_locid="45"><option ixia_locid="212">oam</option>, for the OAM network</p>
+                        </li>
+                        <li ixia_locid="131">
+                            <p ixia_locid="132"><option ixia_locid="213">pci-passthrough</option>, for a PCI
+                                passthrough interface</p>
+                        </li>
+                    </ul>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="47">
+                <dt ixia_locid="48">Type</dt>
+                <dd ixia_locid="49">
+                    <p ixia_locid="50">Ethernet, or aggregated Ethernet (LAG).</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="137">
+                <dt ixia_locid="139">Vlan ID</dt>
+                <dd ixia_locid="141">
+                    <p ixia_locid="143">The VLAN ID of the network listed in the <nameliteral ixia_locid="153">Network Type</nameliteral> column, if the network uses
+                        a shared interface. For more information about shared interfaces, see <ph ixia_locid="198" otherprops="printonly"><cite ixia_locid="199">Titanium
+                                Server Planning:</cite>
+                        </ph><cite ixia_locid="200"><ph ixia_locid="201"><xref href="jow1423173019489.xml" ixia_locid="202"/></ph></cite>.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="138">
+                <dt ixia_locid="140">Port(s)</dt>
+                <dd ixia_locid="142">
+                    <p ixia_locid="144">The physical ports on top of which the logical interface is
+                        built. Multiple ports are displayed when the logical interface uses LAG.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="145">
+                <dt ixia_locid="146">Uses</dt>
+                <dd ixia_locid="147">
+                    <p ixia_locid="148">The interface used by the network listed in the
+                            <nameliteral ixia_locid="155">Network Type</nameliteral> column, if the network uses a
+                        shared interface. The VLAN ID of the network is shown in the
+                            <nameliteral ixia_locid="156">Vlan ID</nameliteral> field.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="149">
+                <dt ixia_locid="150">Used By</dt>
+                <dd ixia_locid="151">
+                    <p ixia_locid="152">The networks that share the interface using VLAN tagging, if
+                        the interface is shared. For more information about shared interfaces, see
+                            <ph ixia_locid="203" otherprops="printonly"><cite ixia_locid="204">Titanium Server Planning:</cite>
+                        </ph><cite ixia_locid="205"><ph ixia_locid="206"><xref href="jow1423173019489.xml" ixia_locid="207"/></ph></cite>.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="55">
+                <dt ixia_locid="56">Provider Networks</dt>
+                <dd ixia_locid="57">
+                    <p ixia_locid="58">This option is relevant for compute nodes only, and for interfaces of the
+              <nameliteral ixia_locid="59">data</nameliteral> network type. It lists the provider networks
+            associated with the data interface.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="60">
+                <dt ixia_locid="61">Attributes</dt>
+                <dd ixia_locid="62">
+                    <draft-comment author="rstone" ixia_locid="158">US60503 changes</draft-comment>
+                    <p ixia_locid="63">Details including the current MTU size for the interface and
+                        whether the interface is DPDK-accelerated.</p>
+                </dd>
+            </dlentry>
+            <dlentry ixia_locid="64">
+                <dt ixia_locid="65">Actions</dt>
+                <dd ixia_locid="66">
+                    <p ixia_locid="67">On a locked node, you can modify a logical interface, and
+                        execute management operations on it. This is implemented using the
+                            <uicontrol ixia_locid="68">Edit Interface</uicontrol> and <uicontrol ixia_locid="69">More</uicontrol> buttons. These buttons are not
+                        available when the node is unlocked.</p>
+                </dd>
+            </dlentry>
+        </dl>
+    </conbody>
+</concept-wr>

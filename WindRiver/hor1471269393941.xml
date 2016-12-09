@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="hor1471269393941" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Installing Titanium Server as the Secondary Region</title>
+    <shortdesc ixia_locid="2">Installation of Titanium Server as a Secondary Region is the same
+        regardless of whether the Primary Region is Titanium Server or OpenStack Cloud. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="36">Installaton of Titanium Server as a Secondary Region uses a <cmdname ixia_locid="37">config_region</cmdname> script which is analogous to the
+                    <cmdname ixia_locid="38">config_controller</cmdname> script used for initial
+                installation, except with extended functionality required for setting up service
+                sharing with the Primary Region. </p>
+            <p ixia_locid="39">The <cmdname ixia_locid="40">config_region</cmdname> script only
+                supports file input for system configuration data; again, this is like the
+                configuration file that is supported by the <cmdname ixia_locid="41">config_controller</cmdname> script.</p>
+            <p ixia_locid="42">The region config file uses key-value pairs in standard INI format.
+                It can be created manually or you can use the Titanium <filepath ixia_locid="25">config_gui</filepath> provided with the SDK to create the file. </p>
+            <p ixia_locid="43">The contents of the file are used as input to the <cmdname ixia_locid="26">config_region</cmdname> script, which is used to configure the
+                first controller on the Titanium Server Secondary Region. For more information,
+                refer to <xref href="tgp1464968406981.xml" ixia_locid="34"/> and the remaining
+                sections in <cite ixia_locid="35">Installing the Titanium Server Secondary Region
+                    Software</cite>.  Also, see the example <filepath ixia_locid="44">config_region</filepath> file
+                in <xref href="fvx1477333266590.xml" ixia_locid="45"/>.</p>
+        </context>
+    </taskbody>
+</task-wr>

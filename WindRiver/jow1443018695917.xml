@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1443018695917" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="25">Methods for Adding and Configuring Hosts</title>
+ <shortdesc ixia_locid="2">Titanium Server supports more than one way of adding and configuring
+  hosts.</shortdesc>
+ <prolog>
+  <author ixia_locid="26">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <draft-comment author="jowens" ixia_locid="6">US62814 new topic</draft-comment>
+  <p ixia_locid="65" product="tis_cpe">After initializing and configuring an active controller, you
+   can add and configure a backup controller as follows:</p>
+  <p ixia_locid="66" product="tis_std">After initializing and configuring an active controller, you
+   can add and configure a backup controller and additional compute or storage hosts as follows:</p>
+  <ul id="ul_xvc_fmk_lt">
+   <li ixia_locid="27">
+    <p ixia_locid="28">Using the web administration interface (Horizon).</p>
+    <p ixia_locid="29">With this method, you power on a new host, causing it to be auto-discovered
+     and added to the system inventory, and then you use the Host Inventory in the web
+     administration interface to assign a personality. For detailed instructions, see <xref href="uid1473354209921.xml" ixia_locid="61"/>.</p>
+   </li>
+   <li ixia_locid="42">
+    <p ixia_locid="43">Using the <cmdname ixia_locid="16">system host-update</cmdname> command.</p>
+    <p ixia_locid="18">With this method, you power on a new host, causing it to be auto-discovered
+     and added to the system inventory, and then you use <cmdname ixia_locid="44">system
+      host-update</cmdname> to assign a personality. For detailed instructions, see <xref href="lpu1473354591768.xml" ixia_locid="62"/>.</p>
+   </li>
+   <li ixia_locid="39">
+    <p ixia_locid="40">Using the <cmdname ixia_locid="11">system host-add</cmdname> command.</p>
+    <p ixia_locid="13">With this method, you add one or more host entries to the system inventory,
+     assigning a personality, MAC address, IP address, and so on for each host, and then you power
+     on the hosts, causing them to to be recognized and configured according to the system inventory
+      entry.<ph ixia_locid="67" product="tis_std"> For more information, see <xref href="jow1442870328643.xml" ixia_locid="63"/>.</ph></p>
+   </li>
+   <li ixia_locid="54" product="tis_std">
+    <p ixia_locid="55">Using the <cmdname ixia_locid="56">system host-bulk-add</cmdname> command</p>
+    <p ixia_locid="23">With this method, you define multiple hosts in an XML manifest, specifying
+     personality, MAC address, IP address, and so on for each host, and then you use use <cmdname ixia_locid="57">system host-bulk-add</cmdname> to add them to the system inventory and
+     optionally power them on. For more information, see <xref href="jow1441308518576.xml" ixia_locid="64"/>.</p>
+   </li>
+  </ul>
+  <p ixia_locid="58" product="tis_std">After adding a compute host or storage host, you can apply
+    <term ixia_locid="59">hardware profiles</term> to complete the host configuration. For more
+   information, see <xref href="jow1404333787693.xml" ixia_locid="60"/>.</p>
+ </conbody>
+</concept-wr>

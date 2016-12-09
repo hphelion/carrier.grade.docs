@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ogs1472848054884" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Unlocking Storage Nodes Using the CLI</title>
+    <shortdesc ixia_locid="116">Unlocked storage nodes are required as part of a Ceph quorum.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N10023_N10020_N10001" ixia_locid="110">
+            <p ixia_locid="90">In order to unlock a storage node, you must attach its infrastructure
+                interface and configure object storage devices (OSDs). You can then unlock the node
+                using the web administration interface.</p>
+        </prereq>
+        <steps id="steps_x33_52z_dx">
+            <step id="step_N10244_N1006E_N10020_N10001" ixia_locid="142">
+                <cmd ixia_locid="143">Use the <cmdname ixia_locid="591">system host-unlock</cmdname> command to
+                    unlock the host.</cmd>
+                <stepxmp ixia_locid="145">
+                    <codeblock ixia_locid="590"><systemoutput ixia_locid="217">~(keystone_admin)$ </systemoutput><userinput ixia_locid="148">system host-unlock storage-0</userinput>
+<systemoutput ixia_locid="218">+----------------+--------------------------------------+
+| Property       | Value                                |
++----------------+--------------------------------------+
+| administrative | unlocked                             |
+| availability   | offline                              |
+| created_at     | 2014-06-19T18:22:09.561079+00:00     |
+| hostname       | storage-0                            |
+| id             | 4                                    |
+| invProvision   | provisioned                          |
+| location       | {}                                   |
+| mgmt_ip        | 192.168.204.5                        |
+| mgmt_mac       | 08:00:27:dc:b8:4b                    |
+| operational    | disabled                             |
+| personality    | storage                              |
+| serialId       | None                                 |
+| updated_at     | 2014-06-19T19:10:21.622719+00:00     |
+| uuid           | eb9fffd7-c859-419e-951b-30950dd8505c |
++----------------+--------------------------------------+</systemoutput>
+</codeblock>
+                </stepxmp>
+                <stepresult ixia_locid="150">
+                    <p ixia_locid="151">The unlocking operation moves <nameliteral ixia_locid="152">storage-0</nameliteral> into the intermediate <nameliteral ixia_locid="153">in-test</nameliteral> availability state first, and
+                        then into the final <nameliteral ixia_locid="154">available</nameliteral>
+                        state.</p>
+                    <note id="note_N1026A_N10257_N1023A_N1006E_N10020_N10001" ixia_locid="155">
+                        <p ixia_locid="156">The unlock operation will fail if the storage volumes
+                            (and the infrastructure interface, if an infrastructure network is
+                            present) have not been configured beforehand.</p>
+                    </note>
+                </stepresult>
+            </step>
+            <step id="step_N10280_N1006E_N10020_N10001" ixia_locid="157">
+                <cmd ixia_locid="158">Verify that the <nameliteral ixia_locid="159">storage-0</nameliteral> host is operational.</cmd>
+                <stepxmp ixia_locid="160">
+                    <codeblock ixia_locid="161"><systemoutput ixia_locid="219">~(keystone_admin)$ </systemoutput><userinput ixia_locid="163">system host-list</userinput>
+<systemoutput ixia_locid="220">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | unlocked       | enabled     | available    |
+| 3  | storage-0    | storage     | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="165">
+                    <p ixia_locid="166"><nameliteral ixia_locid="167">Storage-0</nameliteral> moves
+                        into the <nameliteral ixia_locid="168">available</nameliteral> state within
+                        a few minutes following the unlock command.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003782417" xml:lang="en-us"><title ixia_locid="1">Dedicated or Shared CPU Policy for VMs</title><shortdesc ixia_locid="2">Two CPU policies are supported for VMs: Dedicated and Shared. These modes
+        are controlled using extra specifications in the flavor definition.</shortdesc><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="5">The Shared CPU Policy is designed to maximize resource utilization for
+            applications that do not have strict performance requirements, such as management
+            applications. The shared VM virtual cores can be scheduled to run on any available
+            physical core on the host up to an overcommit ratio of 16:1 virtual CPUs to a single
+            core (this is not configurable). Available physical cores are any cores that are not
+            reserved by the platform or dedicated to other VMs. VNF4 and VNF5 in the example figure
+            are VMs with shared CPU policy.</p><p ixia_locid="6">The dedicated VM policy maps the VM virtual cores to cores on the compute node.
+            This policy is mandatory for VMs that require carrier-grade performance and determinism
+            and for VMs that use CPU scaling. Dedicating cores to VMs prevents resources from being
+            overcommitted and prevents VM latency and throughput of the guest kernel from being not
+            affected by scheduling of other VMs. Dedicated cores must be used for
+            performance-critical VMs or performance targets will not be met. VNF1 and VNF2 in the
+            example figure are examples of dedicated VMs.</p><p ixia_locid="7">Some VMs have both a high-performance data plane and a low performance control or
+            management plane. A good example of this is a DPDK-based application. For mixed-mode VMs
+            such as this the dedicated CPU policy can be supplemented to designate one virtual core
+            as shared physical CPU. This optimizes resources by allowing the control plane virtual
+            CPU to share its physical CPU with other VM control planes while maintaining the data
+            plane cores as dedicated cores, thus providing the maximum performance for the data
+            plane. To use this mode, a Shared CPU must be designated on the host (the core connected
+            to VNF 4, VNF 5, and VNF 6 in <xref href="jow1454003781257.dita#jow1454003781257/numa_architecture" ixia_locid="8"/>)
+            and a flavor extra spec must define which virtual CPU core to use the shared host CPU.
+            VNF 6 in the same figure is an example of a dedicated VM with a shared virtual CPU.</p></conbody></concept-wr>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1445866870690" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="150">Configuring Port-based DNAT on a Virtual Router</title>
+    <shortdesc ixia_locid="151">You can use port-based destination network address translation
+        (DNAT), also known as port forwarding, to support externally-initiated connections to
+        multiple VMs using a single external IP address.</shortdesc>
+    <prolog>
+        <author ixia_locid="152">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="153">
+            <p ixia_locid="82"><draft-comment author="jowens" ixia_locid="83">US62989 new
+                    topic</draft-comment>As with SNAT (source network address translation),
+                port-based DNAT uses a network address translation table to translate between IP
+                addresses and ports used on an internal network, and the gateway IP address of a
+                router attached to an external network. With port-based DNAT, internally initiated
+                connections are not required to establish or maintain table entries.</p>
+            <p ixia_locid="218">As an alternative to the web administration interface, you can use the CLI. For more
+                information, see <xref href="jow1445606856056.xml" ixia_locid="219"/>.</p>
+        </context>
+        <prereq id="prereq_N10126_N1001C_N10001" ixia_locid="148">
+            <p ixia_locid="149">Before you can use port-based DNAT, you must enable SNAT to activate
+                support for network address translation tables. For more information, see <xref href="jow1438192116883.xml" ixia_locid="154"/>.</p>
+            <p ixia_locid="155">Before you can add an entry, a VM IP address is required. IP
+                addresses are assigned to instances when they are launched, and preserved until they
+                are deleted.</p>
+        </prereq>
+        <steps>
+            <step id="step_N10047_N10044_N1001C_N10001" ixia_locid="156">
+                <cmd ixia_locid="157">On the <uicontrol ixia_locid="158">Admin</uicontrol> menu of the web administration interface,
+                    in the <uicontrol ixia_locid="159">System</uicontrol> section, select
+                        <uicontrol ixia_locid="160">Routers</uicontrol>.</cmd>
+            </step>
+            <step id="step_N1005C_N10044_N1001C_N10001" ixia_locid="161">
+                <cmd ixia_locid="162">On the <wintitle ixia_locid="163">Routers</wintitle> page, click the <uicontrol ixia_locid="164">Name</uicontrol>
+                    of the router to be configured for port-based DNAT.</cmd>
+                <info ixia_locid="165">
+                    <fig id="fig_ltk_r3q_5t" ixia_locid="166">
+                        <image href="jow1445868655585.image" id="image_j35_r3q_5t" ixia_locid="167">
+                            <alt ixia_locid="168">TiS Routers page</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N10081_N10044_N1001C_N10001" ixia_locid="169">
+                <cmd ixia_locid="170">On the <wintitle ixia_locid="171">Router Details</wintitle> page, select the <uicontrol ixia_locid="172">Port
+                        Forwarding</uicontrol> tab.</cmd>
+                <info ixia_locid="173">
+                    <fig id="fig_bc1_2jq_5t" ixia_locid="174">
+                        <image href="jow1445868866622.image" id="image_agk_2jq_5t" ixia_locid="175">
+                            <alt ixia_locid="176">Tis Router Details page: Port Forwarding tab</alt>
+                        </image>
+                    </fig>
+                </info>
+                <choices id="choices_osl_gjq_5t">
+                    <choice ixia_locid="177">
+                        <p ixia_locid="178">To add a rule, click <uicontrol ixia_locid="179">Add Rule</uicontrol>, and then complete
+                            the <wintitle ixia_locid="180">Add Port Forwarding Rule</wintitle> dialog box.</p>
+                        <fig id="fig_a4p_pjq_5t" ixia_locid="181">
+                            <image href="jow1445869201828.image" id="image_jkq_tjq_5t" ixia_locid="182">
+                                <alt ixia_locid="183">TiS Add Port Forwarding Rule dialog</alt>
+                            </image>
+                        </fig>
+                    </choice>
+                </choices>
+                <info ixia_locid="184">
+                    <dl>
+                        <dlentry ixia_locid="185">
+                            <dt ixia_locid="186">IP Address</dt>
+                            <dd ixia_locid="187">
+                                <p ixia_locid="188">The IP address of the VM. You can select existing addresses from
+                                    the drop-down list.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="189">
+                            <dt ixia_locid="190">Private Port</dt>
+                            <dd ixia_locid="191">
+                                <p ixia_locid="192">The port to use on the VM IP address.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="193">
+                            <dt ixia_locid="194">Public Port</dt>
+                            <dd ixia_locid="195">
+                                <p ixia_locid="196">The port on the external gateway interface of the router.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="197">
+                            <dt ixia_locid="198">Protocol</dt>
+                            <dd ixia_locid="199">
+                                <p ixia_locid="200">The applicable protocol for the rule. Select from the drop-down
+                                    list.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="201">
+                            <dt ixia_locid="202">Description</dt>
+                            <dd ixia_locid="203">
+                                <p ixia_locid="204">An optional text description of the rule.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="205">
+                            <dt ixia_locid="206">Router Name</dt>
+                            <dd ixia_locid="207">
+                                <p ixia_locid="208">The name of the router (shown for information only).</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="209">
+                            <dt ixia_locid="210">Router ID</dt>
+                            <dd ixia_locid="211">
+                                <p ixia_locid="212">The UUID of the router (shown for information only).</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </info>
+            </step>
+            <step id="step_N10189_N10051_N1001F_N10001" ixia_locid="220">
+                <cmd ixia_locid="221">Click <uicontrol ixia_locid="222">Add Rule</uicontrol> to apply the settings.</cmd>
+                <stepresult ixia_locid="223">
+                    <p ixia_locid="214">The new rule is displayed.</p>
+                    <fig id="fig_fct_gdy_wt" ixia_locid="215">
+                        <image href="jow1446579272572.image" id="image_zsg_qdy_wt" ixia_locid="216">
+                            <alt ixia_locid="217">TiS Port Forwarding Rules with example rule</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

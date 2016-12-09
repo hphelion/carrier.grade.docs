@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1447789423653" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="224">Applying Hardware Profiles</title>
+    <shortdesc ixia_locid="225">You can apply hardware profiles to a host to simplify the process of
+        configuring the host.</shortdesc>
+    <prolog>
+        <author ixia_locid="226">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="227">
+            <note conref="xew1477516815308.xml#xew1477516815308/storage-profile-restrictions" id="note_N10027_N10022_N1001F_N10001" ixia_locid="255"/>
+            <p ixia_locid="230"><draft-comment author="jowens" ixia_locid="229">US66653 new topic.
+                    Uses material moved from other topics.</draft-comment>For more information about
+                hardware profiles, see <xref href="jow1404333787693.xml" ixia_locid="231"/>.</p>
+        </context>
+        <context id="context_N10037_N1001F_N10001" ixia_locid="232">
+            <p ixia_locid="233">If you prefer, you can work with profiles using the CLI. For more information, see
+                    <xref href="jow1447789458498.xml" ixia_locid="234"/>.</p>
+        </context>
+        <steps id="steps_fng_cln_c5">
+            <step conref="jow1426453628262.xml#jow1426453628262/lock_host" id="step_N10048_N10044_N1001F_N10001" ixia_locid="235">
+                <cmd ixia_locid="236"/>
+            </step>
+            <step id="step_N10051_N10044_N1001F_N10001" ixia_locid="237">
+                <cmd ixia_locid="238">Click <uicontrol ixia_locid="239">Edit Host</uicontrol>.</cmd>
+                <stepresult ixia_locid="240">
+                    <p ixia_locid="241">The <wintitle ixia_locid="242">Edit Host</wintitle> dialog box appears.</p>
+                    <fig id="fig_N100A3_N10073_N10060_N10023_N10020_N10001" ixia_locid="35">
+                        <image href="jow1448994881376.image" id="image_xgb_vlt_25" ixia_locid="253">
+                            <alt ixia_locid="254">Edit Host with storage profile</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10078_N10044_N1001F_N10001" ixia_locid="243">
+                <cmd ixia_locid="244">Select one or more profiles to apply to the host.</cmd>
+                <info ixia_locid="245">
+                    <note id="note_N10080_N1007D_N10076_N10044_N1001F_N10001" ixia_locid="246">
+                        <p ixia_locid="247">The selected profiles must be applicable for the host
+                            personality. For example, a storage profile created from a storage host
+                            is applicable only to other storage hosts.</p>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N1008E_N10044_N1001F_N10001" ixia_locid="248">
+                <cmd ixia_locid="249">Click <uicontrol ixia_locid="250">Save</uicontrol> to apply the profiles and close the dialog
+                    box.</cmd>
+                <stepresult ixia_locid="251">
+                    <p ixia_locid="252">The profiles are applied, and a confirmation message is displayed.</p>
+                </stepresult>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

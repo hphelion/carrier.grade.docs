@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1423169316542" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Ethernet Interface Configuration</title>
+ <shortdesc ixia_locid="2">You can review and modify the configuration for physical or virtual
+  Ethernet interfaces using the Web administration interface or the CLI.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+   <title ixia_locid="5">Physical Ethernet Interfaces</title>
+   <p ixia_locid="36">The physical Ethernet interfaces on Titanium Server nodes are configured to
+    use the following networks: </p>
+   <ul id="ul_lk1_b4j_zq">
+    <li ixia_locid="38">
+     <p ixia_locid="39">the internal management network</p>
+    </li>
+    <li ixia_locid="40">
+     <p ixia_locid="101">the external OAM network</p>
+    </li>
+    <li ixia_locid="42">
+     <p ixia_locid="43">the infrastructure network, if present</p>
+    </li>
+    <li ixia_locid="44">
+     <p ixia_locid="45">one or more data networks</p>
+    </li>
+   </ul>
+   <p ixia_locid="37">A single interface can optionally be configured to support more than one
+    network using VLAN tagging (see <xref href="jow1423173019489.xml" ixia_locid="46"/>). In
+    addition, the management or infrastructure interfaces, or both, can be configured with an
+    additional data network (see <ph ixia_locid="103" otherprops="printonly"><cite ixia_locid="104">Titanium Server System Administration: </cite></ph><cite ixia_locid="105"><ph ixia_locid="106"><xref href="jow1414000462559.xml" ixia_locid="107"/></ph></cite>).</p>
+   <p ixia_locid="94">On the controller nodes, all Ethernet interfaces are configured automatically
+    when the nodes are initialized, based on the information provided in the controller
+    configuration script (see <ph ixia_locid="109" otherprops="printonly"><cite ixia_locid="445">Titanium Server Installation: </cite></ph><cite ixia_locid="110"><ph ixia_locid="111"><xref href="ekn1460145735111.xml" ixia_locid="112"/></ph></cite>). On compute and storage nodes,
+    the Ethernet interfaces for the internal management network are configured automatically. The
+    remaining interfaces require manual configuration. </p>
+   <note id="note_N10071_N10022_N1001F_N10001" ixia_locid="95">
+    <p ixia_locid="96"> If a network attachment uses LAG, the corresponding interfaces on the
+     storage and compute nodes must also be configured manually to specify the interface type.</p>
+   </note>
+   <p ixia_locid="25">You can review and modify physical interface configurations from the Web
+    administration interface or the CLI. For more information, see <ph ixia_locid="114" otherprops="printonly"><cite ixia_locid="115">Titanium Server System Administration:
+     </cite></ph><cite ixia_locid="116"><ph ixia_locid="117"><xref href="jow1414000462559.xml" ixia_locid="118"/></ph></cite>. </p>
+   <p ixia_locid="26"><draft-comment author="jowens" ixia_locid="99">US66653 update xref for
+     profiles</draft-comment>You can also save the interface configurations for a particular node to
+    use as a <term ixia_locid="126">profile</term> or template when setting up other nodes. For more information, see
+     <ph ixia_locid="127" otherprops="printonly"><cite ixia_locid="128">Titanium Server Installation: </cite></ph><cite ixia_locid="129"><ph ixia_locid="130"><xref href="jow1404333787693.xml" ixia_locid="100"/></ph></cite>.</p>
+  </section>
+  <section id="section_N10059_N1001C_N10001" ixia_locid="17">
+   <title ixia_locid="18">Virtual Ethernet Interfaces</title>
+   <p ixia_locid="33">The virtual Ethernet interfaces for guest VMs running on Titanium Server are
+    defined when an instance is launched. They connect the VM to <term ixia_locid="20">tenant
+     networks</term>, which are virtual networks defined over <term ixia_locid="21">provider
+     networks</term>, which in turn are abstractions associated with physical interfaces assigned to
+    data networks on the compute
+     nodes.<!-- Several virtual interface driver options are available. For
+    more information about launching instances and connecting their virtual Ethernet interfaces,
+     <draft-comment author="jmaran" ixia_locid="131">Need to redirect or remove the following
+    xrefs.</draft-comment>see the <cite ixia_locid="22">Titanium Server Reference Deployment
+     Scenarios</cite>. The chapters on <cite ixia_locid="23">Deploying the Bridging Scenario</cite>
+    and <cite ixia_locid="24">Deploying the Routing Scenario</cite> contain detailed examples for
+    defining virtual Ethernet interfaces. --><draft-comment author="jowens" ixia_locid="131">xref to RDS</draft-comment></p>
+   <p ixia_locid="9">The following virtual network interfaces are available:</p>
+   <ul conref="jow1439489784564.xml#jow1439489784564/supported_vNIC" id="ul_amy_z5z_zs">
+    <li ixia_locid="102"/>
+   </ul>
+   <ul id="ul_mgc_xnp_nn">
+    <li ixia_locid="27">
+     <p ixia_locid="28">Unmodified guests can use Linux networking and virtio drivers. This provides
+      a mechanism to bring existing applications into the production environment immediately.</p>
+     <p ixia_locid="443"><draft-comment author="jowens" ixia_locid="432">US79271
+       added</draft-comment>For virtio interfaces, Titanium Server supports <nameliteral ixia_locid="434">vhost-user</nameliteral> transparently by default. This allows QEMU and AVS
+      to share virtio queues through shared memory, resulting in improved performance over standard
+      virtio. The transparent implementation provides a simplified alternative to the open-source
+      AVP kernel and AVP-PMD drivers included with Titanium Server. The availability of <nameliteral ixia_locid="444">vhost-user</nameliteral> also offers additional performance enhancements
+      through optional multi-queue support for virtio interfaces.</p>
+    </li>
+    <li ixia_locid="29">
+     <p ixia_locid="30">For backwards compatibility, Guest OS can still be configured to leverage
+      the open-source Accelerated Virtual Port (AVP-KMOD) drivers available at <xref format="html" href="https://github.com/Wind-River/titanium-server" ixia_locid="425" scope="external" type=""/>. Prior to the availability of vhost-user, AVP-KMOD ports provided increased
+      throughput over the original plain virtio drivers when connected to the AVS.</p>
+    </li>
+    <li ixia_locid="446">
+     <p ixia_locid="32">For the highest performance, guest applications can be modified to make use
+      of Intel DPDK libraries, and the open-source AVP-PMD poll-mode drivers available at <xref format="html" href="https://github.com/Wind-River/titanium-server" ixia_locid="426" scope="external" type=""/>, to connect with the AVS Switch.</p>
+    </li>
+   </ul>
+   <p ixia_locid="253"><draft-comment author="jowens" ixia_locid="396">US62989 mention
+     DNAT</draft-comment>In addition to AVS, Titanium Server incorporates DPDK-Accelerated Neutron
+    Virtual Router L3 Forwarding (AVR). Accelerated forwarding is used for directly attached tenant
+    networks and subnets, as well as for gateway, SNAT, DNAT, and floating IP functionality.</p>
+   <p ixia_locid="351">Titanium Server also supports direct guest access to NICs using PCI
+    passthrough or SR-IOV, with enhanced NUMA scheduling options compared to standard OpenStack.
+    This offers very high performance, but because access is not managed by Titanium Server or the
+    vSwitch process, there is no support for live migration, Titanium Server-provided LAG, host
+    interface monitoring, QoS, or ACL. If VLANs are used, they must be managed by the guests.</p>
+   <p ixia_locid="412"><draft-comment author="jowens" ixia_locid="405">US64378 added
+     para</draft-comment>For further performance improvements, Titanium Server supports direct
+    access to PCI-based hardware accelerators, such as the Coleto Creek encryption accelerator from
+    Intel. Titanium Server manages the allocation of SR-IOV VFs to VMs, and provides intelligent
+    scheduling to optimize NUMA node affinity.</p>
+  </section>
+ </conbody>
+</concept-wr>

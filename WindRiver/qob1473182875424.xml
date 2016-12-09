@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="qob1473182875424" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Unlocking Controller-1 Using the CLI</title>    
+    <shortdesc ixia_locid="2">You must initialize and configure a redundant controller (<nameliteral ixia_locid="3">controller-1</nameliteral>) using the <nameliteral ixia_locid="4">controller-0</nameliteral> command-line interface.</shortdesc>
+    <prolog>
+        <author ixia_locid="5">Jim Owens</author>
+        <author ixia_locid="6">Tom Towle</author>
+        <author ixia_locid="7">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1007D_N1002E_N10001" ixia_locid="282">
+            <p ixia_locid="357" product="tis_std">The network interfaces and storage disks must be
+                configured before <nameliteral ixia_locid="358">controller-1</nameliteral> can be
+                unlocked.</p>
+            <p ixia_locid="283" product="tis_cpe">The OAM interface, data interfaces and storage for
+                the compute function must be configured before <nameliteral ixia_locid="285">controller-1</nameliteral> can be unlocked.</p>
+        </context>
+        <steps>
+            <step id="step_N10189_N10066_N1002C_N10001" ixia_locid="388">
+                <cmd ixia_locid="389">On the <nameliteral ixia_locid="91">controller-0</nameliteral>
+                    console, unlock <nameliteral ixia_locid="92">controller-1</nameliteral>.</cmd>
+                <stepxmp ixia_locid="93">
+                    <codeblock ixia_locid="94"><systemoutput ixia_locid="149">~(keystone_admin)$ </systemoutput><userinput ixia_locid="96">system host-unlock controller-1</userinput>
+<systemoutput ixia_locid="150">+----------------+--------------------------------------+
+| Property       | Value                                |
++----------------+--------------------------------------+
+| administrative | unlocked                             |
+| availability   | offline                              |
+| created_at     | 2014-01-06T15:54:40.313688+00:00     |
+| hostname       | controller-1                         |
+| id             | 2                                    |
+| invProvision   | provisioned                          |
+| location       | {}                                   |
+| mgmt_ip        | 192.168.204.4                        |
+| mgmt_mac       | 08:00:27:1f:5e:e4                    |
+| operational    | disabled                             |
+| personality    | controller                           |
+| serialId       | None                                 |
+| updated_at     | 2014-01-06T17:07:10.987257+00:00     |
+| uuid           | 4e83bc2f-57d4-4508-9550-564d74dc32d4 |
++----------------+--------------------------------------+</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="98">
+                    <p ixia_locid="99"><nameliteral ixia_locid="100">controller-1</nameliteral> moves into the
+                            <nameliteral ixia_locid="101">intest</nameliteral> availability state, and then into the
+                            <nameliteral ixia_locid="102">available</nameliteral> state. This may take several
+                        minutes.</p>
+                </info>
+                <substeps id="substeps_o4y_zdz_l4">
+                    <substep ixia_locid="103">
+                        <cmd ixia_locid="104">On the <nameliteral ixia_locid="105">controller-0</nameliteral> console, verify that <nameliteral ixia_locid="106">controller-1</nameliteral> is in the <nameliteral ixia_locid="107">intest</nameliteral> availability state.</cmd>
+                        <stepxmp ixia_locid="108">
+                            <codeblock ixia_locid="109"><systemoutput ixia_locid="151">~(keystone_admin)$ </systemoutput><userinput ixia_locid="111">system host-list</userinput>
+<systemoutput ixia_locid="152">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | unlocked       | disabled    | intest       |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                        </stepxmp>
+                        <info ixia_locid="113">
+                            <p ixia_locid="114"><nameliteral ixia_locid="164">Controller-1</nameliteral> moves into the <nameliteral ixia_locid="116">intest</nameliteral> availability state within
+                                30 seconds following the unlocking command.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="117">
+                        <cmd ixia_locid="118">On the <nameliteral ixia_locid="119">controller-0</nameliteral> console, verify that <nameliteral ixia_locid="120">controller-1</nameliteral> moves to the
+                                <nameliteral ixia_locid="121">available</nameliteral> state.</cmd>
+                        <stepxmp ixia_locid="122">
+                            <codeblock ixia_locid="123"><systemoutput ixia_locid="153">~(keystone_admin)$ </systemoutput><userinput ixia_locid="125">system host-list</userinput>
+<systemoutput ixia_locid="154">+----+--------------+-------------+----------------+-------------+--------------+
+| id | hostname     | personality | administrative | operational | availability |
++----+--------------+-------------+----------------+-------------+--------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    |
+| 2  | controller-1 | controller  | unlocked       | enabled     | available    |
++----+--------------+-------------+----------------+-------------+--------------+</systemoutput></codeblock>
+                        </stepxmp>
+                        <info ixia_locid="127">
+                            <p ixia_locid="128"><nameliteral ixia_locid="129">Controller-1</nameliteral> moves into the <nameliteral ixia_locid="130">available</nameliteral> state within two to
+                                three minutes following the unlock command.</p>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+        </steps>
+        <result id="result_N10221_N1002C_N10001" ixia_locid="131">
+            <p ixia_locid="132"><nameliteral ixia_locid="133">Controller-1</nameliteral> is enabled.
+                It works with <nameliteral ixia_locid="134">controller-0</nameliteral> to form a
+                single high-availability cluster.</p>
+            <note id="note_N103FA_N103E7_N10033_N10001" ixia_locid="355">
+                <p ixia_locid="356">Controller-0 and controller-1 use IP multicast messaging for
+                    synchronization. If loss of synchronization occurs a few minutes after
+                    controller-1 becomes available, ensure that the switches and other devices on
+                    the management, infrastructure, and OAM networks are configured with appropriate
+                    settings. For example, consider that IGMP snooping may interfere with IP
+                    multicast messaging in some scenarios.</p>
+            </note>
+        </result>
+    </taskbody>
+</task-wr>

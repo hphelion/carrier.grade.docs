@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="rst1441912501217" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="327">Isolating an Untrusted Guest</title>
+    <shortdesc ixia_locid="328">You can isolate the network resources used and accessible by a
+        potentially untrusted virtual machine instance. </shortdesc>
+    <prolog>
+        <author ixia_locid="329">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="330">
+            <p ixia_locid="342"><draft-comment author="rstone" ixia_locid="341">Topic added for:
+                    US60525</draft-comment>This ensures that the untrusted virtual machine cannot
+                exhaust or corrupt shared network resources and impact the operation or performance
+                of other virtual machines hosted on the same compute node. Note that network
+                resource isolation comes at a slight degradation of network performance for this
+                guest. </p>
+            <p ixia_locid="339">Set this option to true when you want to isolate the network
+                resources used and accessible by an untrusted guest instance from all other
+                instances running on the host. Set it to false to turn isolation off. If this extra
+                spec is not set, then the instance's NICs use of network resources are not isolated.  </p>
+            <p ixia_locid="17">To add this extra spec to a flavor using the web administration
+                interface, use the <uicontrol ixia_locid="314">NIC Isolation</uicontrol> selection
+                in the <uicontrol ixia_locid="316">Create Flavor Extra Spec</uicontrol> drop-down
+                menu. To access this menu, see <xref href="jow1429538642910.xml" ixia_locid="318"/>.
+                This enables isolation of a virtual machine instance's NICs’ use of network
+                resources from all other physical or virtual interfaces on the host. If this extra
+                spec is not set, then the instance's network interfaces are not isolated. </p>
+        </context>
+        <prereq id="prereq_N10031_N1001F_N10001" ixia_locid="338">
+            <p ixia_locid="340">To use this feature, the compute host must have sufficient 2 MB huge
+                pages available for isolated NIC creation. For example, a guest with 3 NICs would
+                require that 48 MB of 2 MB huge pages be available on its host. Isolated guests will
+                only be launched on hosts that meet this requirement. For more information on using
+                huge pages, see <ph ixia_locid="343" otherprops="printonly"><cite ixia_locid="344">Titanium Server System Administration: </cite></ph><cite ixia_locid="345"><ph ixia_locid="346"><xref href="jow1423087781001.xml" ixia_locid="347"/></ph></cite>.</p>
+        </prereq>
+        <steps>
+            <step id="step_N1003F_N1003C_N1001C_N10001" ixia_locid="332">
+                <cmd ixia_locid="333">Set this option using the CLI:</cmd>
+                <stepxmp ixia_locid="334">
+                    <codeblock ixia_locid="335"><systemoutput ixia_locid="326">~(keystone_admin)$ </systemoutput><userinput ixia_locid="336">nova flavor-key flavorName set hw:wrs:nic_isolation=true</userinput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

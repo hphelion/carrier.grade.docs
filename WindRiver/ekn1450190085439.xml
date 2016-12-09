@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ekn1450190085439" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Tuning DRBD Sync Settings</title>
+    <shortdesc ixia_locid="2">You may need to adjust the DRBD sync rate for slower drives. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <steps>
+            <step id="step_N10048_N10045_N1001C_N10001" ixia_locid="12">
+                <cmd ixia_locid="13">To view the configuration status of controllers and to see the
+                    parameters that govern the Distributed Replicated Block Device (DRBD) sync rate,
+                    run the <cmdname ixia_locid="29">drbdsync-show</cmdname> command.</cmd>
+                <stepxmp ixia_locid="14">
+                    <codeblock ixia_locid="15"><userinput ixia_locid="16">system drbdsync-show</userinput>
+<systemoutput ixia_locid="17">+--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 0833c9ba-ecb4-409c-886a-7430ab9d01d3 |
+| isystem_uuid | bfc37360-4cae-4c2f-a1e8-ec9548f5e995 |
+| created_at   | 2015-12-02T15:12:12.532684+00:00     |
+| updated_at   | 2015-12-02T15:12:25.580281+00:00     |
+| link_util    | 40                                   |
+| num_parallel | 3                                    |
+| rtt_ms       | 0.2                                  |
++--------------+--------------------------------------+
+
++----+--------------+-------------+----------------+-------------+--------------+---------------+
+| id | hostname     | personality | administrative | operational | availability | config_status |
++----+--------------+-------------+----------------+-------------+--------------+---------------+
+| 1  | controller-0 | controller  | unlocked       | enabled     | available    | None          |
+| 2  | controller-1 | controller  | unlocked       | enabled     | degraded     | None          |
++----+--------------+-------------+----------------+-------------+--------------+---------------+
+</systemoutput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10060_N10045_N1001C_N10001" ixia_locid="18">
+                <cmd ixia_locid="19">Use the <cmdname ixia_locid="31">drbdsync-modify</cmdname>
+                    command to modify the DRBD sync rate by setting the link utilization
+                    percentage.</cmd>
+                <info ixia_locid="32">
+                    <p ixia_locid="33">Issuing this command pushes the DRBD reconfiguration to controllers, and
+                        takes approximately one minute to complete. Upon completion, the new
+                        settings have an immediate throttling effect. This command is accepted as
+                        long as controller configuration is not already in progress. You can issue
+                        the command when the DRBD re-sync operation is underway (for example, when
+                        you want to slow the sync down). </p>
+                </info>
+                <stepxmp ixia_locid="20">
+                    <p ixia_locid="34">Help information for the command is as follows:</p>
+                    <codeblock ixia_locid="21"><userinput ixia_locid="22">system help drbdsync-modify
+</userinput>
+<systemoutput ixia_locid="23">usage: system drbdsync-modify [--util &lt;percent&gt;]
+
+Modify DRBD sync rate parameters.
+
+Optional arguments:
+  --util &lt;percent&gt;  Engineered percentage of link utilization for DRBD sync.
+</systemoutput>
+</codeblock>
+                    <p ixia_locid="24">The following is an example execution of the <cmdname ixia_locid="35">drbdsync-modify</cmdname> command:</p>
+                    <codeblock ixia_locid="26"><userinput ixia_locid="27">system drbdsync-modify --util 40
+</userinput>
+<systemoutput ixia_locid="28">+--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | 0833c9ba-ecb4-409c-886a-7430ab9d01d3 |
+| isystem_uuid | bfc37360-4cae-4c2f-a1e8-ec9548f5e995 |
+| created_at   | 2015-12-02T15:12:12.532684+00:00     |
+| updated_at   | 2015-12-02T15:12:25.580281+00:00     |
+| link_util    | 40                                   |
+| num_parallel | 3                                    |
+| rtt_ms       | 0.2                                  |
++--------------+--------------------------------------+
+waiting for hosts: controller-0, controller-1 to finish configuring . . . . . .
+DRBD configuration finished.
+</systemoutput>
+</codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

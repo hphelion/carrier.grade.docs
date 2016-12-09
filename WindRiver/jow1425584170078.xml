@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1425584170078" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Managing Data Interface Static IP Addresses Using the CLI</title>
+    <shortdesc ixia_locid="2">If you prefer, you can create and manage static addresses for data
+        interfaces using the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="6">
+            <p ixia_locid="7"><draft-comment author="jowens" ixia_locid="82">US65058 topic title and position
+                    adjusted to work with new address pools material</draft-comment>For more
+                infomation about using static addresses for data interfaces, see <xref href="jow1443038432894.xml" ixia_locid="81"/>.</p>
+        </context>
+        <prereq id="prereq_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5">To make interface changes, you must lock the compute node first.</p>
+        </prereq>
+        <steps id="steps_zkx_d1h_hr">
+            <step id="step_N1003C_N10038_N1001F_N10001" ixia_locid="8">
+                <cmd ixia_locid="9">Lock the compute node.</cmd>
+            </step>
+            <step id="step_N10045_N10038_N1001F_N10001" ixia_locid="10">
+                <cmd ixia_locid="11">Set the interface to support an IPv4 or IPv6 address, or both. </cmd>
+                <info ixia_locid="12">
+                    <codeblock ixia_locid="13"><systemoutput ixia_locid="14">~(keystone_admin)$ </systemoutput><userinput ixia_locid="15">system host-if-modify <varname ixia_locid="16">node</varname> <varname ixia_locid="17">ifname</varname> --ipv4-mode=<varname ixia_locid="18">ipv4mode</varname> --ipv6-mode=<varname ixia_locid="19">ipv6mode</varname></userinput></codeblock>
+                    <p ixia_locid="20">where</p>
+                    <parml>
+                        <plentry ixia_locid="21">
+                            <pt ixia_locid="22">node</pt>
+                            <pd ixia_locid="23">
+                                <p ixia_locid="24">is the name or UUID of the compute node</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="25">
+                            <pt ixia_locid="26">ifname</pt>
+                            <pd ixia_locid="27">
+                                <p ixia_locid="28">is the name of the interface</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="29">
+                            <pt ixia_locid="30">ipv4mode</pt>
+                            <pd ixia_locid="31">
+                                <p ixia_locid="32">is either <nameliteral ixia_locid="33">disabled</nameliteral> or<nameliteral ixia_locid="34">
+                                        static</nameliteral></p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="35">
+                            <pt ixia_locid="36">ipv6mode</pt>
+                            <pd ixia_locid="37">
+                                <p ixia_locid="38">is either <nameliteral ixia_locid="39">disabled</nameliteral> or<nameliteral ixia_locid="40">
+                                        static</nameliteral></p>
+                            </pd>
+                        </plentry>
+                    </parml>
+                </info>
+            </step>
+            <step id="step_N100C0_N10038_N1001F_N10001" ixia_locid="41">
+                <cmd ixia_locid="42">Add an IPv4 or IPv6 address to the interface.</cmd>
+                <info ixia_locid="43">
+                    <codeblock ixia_locid="44"><systemoutput ixia_locid="45">~(keystone_admin)$ </systemoutput><userinput ixia_locid="46">system host-addr-add <varname ixia_locid="47">node</varname> <varname ixia_locid="48">ifname</varname> <varname ixia_locid="49">ip_address</varname> <varname ixia_locid="50">prefix</varname></userinput></codeblock>
+                    <p ixia_locid="51">where</p>
+                    <parml>
+                        <plentry ixia_locid="52">
+                            <pt ixia_locid="53">node</pt>
+                            <pd ixia_locid="54">
+                                <p ixia_locid="55">is the name or UUID of the compute node</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="56">
+                            <pt ixia_locid="57">ifname</pt>
+                            <pd ixia_locid="58">
+                                <p ixia_locid="59">is the name of the interface</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="60">
+                            <pt ixia_locid="61">ip_address</pt>
+                            <pd ixia_locid="62">
+                                <p ixia_locid="63">is an IPv4 or IPv6 address</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="64">
+                            <pt ixia_locid="65">prefix</pt>
+                            <pd ixia_locid="66">
+                                <p ixia_locid="67">is the netmask length for the address</p>
+                            </pd>
+                        </plentry>
+                    </parml>
+                    <p ixia_locid="68">To delete an address, use the following commands:</p>
+                    <codeblock ixia_locid="69"><systemoutput ixia_locid="70">~(keystone_admin)$ </systemoutput><userinput ixia_locid="71">system host-addr-list <varname ixia_locid="83">hostname/ID</varname></userinput></codeblock>
+                    <p ixia_locid="72">This displays the UUIDs of existing addresses, as shown in
+                        this example below.</p>
+                    <codeblock ixia_locid="84">
+<systemoutput ixia_locid="85">~(keystone_admin)$</systemoutput> <userinput ixia_locid="86">system host-addr-list compute-0</userinput>
+<systemoutput ixia_locid="87">
++--------------------------------------+--------+------------------------------------+--------+ 
+| uuid                                 | ifname | address                            | prefix | 
++--------------------------------------+--------+------------------------------------+--------+ 
+| 290629f6-41e5-48d9-8b4c-cca1f459d2d2 | ae0    | 2605:6400:2:fed5:22:e7c7:2700:e5c3 | 112    |
+| 5de0e0bf-21fc-4532-b33b-bf07eaedf82e | ae0    | 2605:6400:2:fed5:22:e7c7:27b9:e5c3 | 122    |
+| e78923d7-3ccf-4332-a28e-04a56be7b616 | ae0    | 192.168.61.70                      | 27     |
++--------------------------------------+--------+------------------------------------+--------+</systemoutput></codeblock>
+                    <codeblock ixia_locid="73"><systemoutput ixia_locid="74">~(keystone_admin)$ </systemoutput><userinput ixia_locid="75">system host-addr-delete <varname ixia_locid="76">uuid</varname></userinput></codeblock>
+                    <p ixia_locid="77">where <nameliteral ixia_locid="78">uuid</nameliteral> is the UUID of the address.</p>
+                </info>
+            </step>
+            <step id="step_N10152_N10038_N1001F_N10001" ixia_locid="79">
+                <cmd ixia_locid="80">Unlock the compute node and wait for it to become available.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

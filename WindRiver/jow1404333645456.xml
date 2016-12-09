@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333645456" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+   -->
+    <title ixia_locid="1">Resource Usage</title>
+    <shortdesc ixia_locid="2">Usage of system resources is monitored by Ceilometer, the standard
+        OpenStack mechanism for collecting and distributing performance monitoring samples from the
+        cluster. The Titanium Server cluster extends Ceilometer with improved reports and new tools
+        to facilitate offline analysis of the collected data.</shortdesc>
+    <prolog>
+        <author ixia_locid="249">Jim Owens</author>
+        <author ixia_locid="3">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="4">Performance Monitor (PM) samples are periodically collected from different
+            resources such as hosts, virtual machine instances, AVS, and others. They include CPU
+            and memory utilization, network traffic counters, storage space, and several more. By
+            default the samples are stored in a database which is used for reporting activities such
+            as:</p>
+        <ul id="ul_pfp_vlr_j4">
+            <li ixia_locid="5">
+                <p ixia_locid="6">command line queries and graphical charts</p>
+            </li>
+            <li ixia_locid="7">
+                <p ixia_locid="8">triggering of threshold alarms</p>
+            </li>
+            <li ixia_locid="9">
+                <p ixia_locid="10">triggering of threshold actions. The most common example is Heat actions to scale up and
+          down a resource.</p>
+            </li>
+        </ul>
+        <p ixia_locid="11">The Ceilometer database is periodically cleaned in order to contain its size and prevent the
+      overuse of storage resources on the controller nodes.</p>
+        <p ixia_locid="12">The Ceilometer implementation in Titanium Server improves on several
+            aspects. They are described in the following sections.</p>
+        <section id="section_N10048_N1001C_N10001" ixia_locid="13">
+            <title ixia_locid="14">Optimized Ceilometer Filters</title>
+            <p ixia_locid="15">The Ceilometer implementation in Titanium Server is specially tuned
+                to allow time-sensitive actions, such as Heat autoscaling, to take place in response
+                to relatively high-frequency sample rates of system events. The size of both the
+                Ceilometer database and the CSV files are maintained under control at all times,
+                while still enabling the required system actions to take place in real-time.</p>
+        </section>
+    </conbody>
+</concept-wr>

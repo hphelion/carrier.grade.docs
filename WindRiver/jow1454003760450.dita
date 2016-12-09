@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003760450" xml:lang="en-us"><title ixia_locid="1">Storage Throughput for Storage Nodes</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="16">There are two dimensions of storage performance that should be considered:
+            overall disk throughput, and throughput available for guest disk read/write. Overall
+            throughput contributes to volume creation/VM boot times. Guest disk throughput is
+            throughput available to the VMs for disk operations and is expressed in terms of I/O
+            operations per second (IOPS) and data throughput.</p>
+        <section id="section_N1001D_N10016_N10001" ixia_locid="17">
+            <title ixia_locid="18">Overall Throughput</title>
+            <p ixia_locid="19">Raw throughput of the Ceph cluster contributes to large operations
+                such as volume creation. Throughput can be increased by increasing the number of
+                OSDs (parallelism) and the raw speed of the individual OSDs. </p>
+            <p ixia_locid="5">The key performance parameters impacted by throughput is volume create
+                times and to a lesser degree VM boot times. The volume creation/boot times in turn
+                are affected by the volume sizes and the number of simultaneous volume creation/boot
+                operations and background disk operations of VMs already running.</p>
+        </section>
+        <section id="section_N10030_N10016_N10001" ixia_locid="20">
+            <title ixia_locid="21">VM Guest Disk Throughput</title>
+            <p ixia_locid="22">To determine the guest throughput requirements, evaluate the disk I/O
+                requirements for the VMs. The key parameters to evaluate are IOPS and throughput.
+                The number of OSDs, disk speed and type, and disk controllers should be chosen to
+                comfortably meet the disk requirement. If this is not done, high disk utilization
+                will degrade VM disk performance through increased latencies as well as increase
+                volume creation/deletion and boot times.</p>
+            <sl>
+                <sli ixia_locid="6">Guest IOPS Requirement = N * AvgIopsPerVM + Margin</sli>
+                <sli ixia_locid="7">Guest Throughput Requirement = N * AvgThroughputPerVM +
+                    Margin</sli>
+            </sl>
+            <p ixia_locid="15">Where:</p>
+            <sl id="ul_xlj_yxg_v5">
+                <sli ixia_locid="8">N = number of VMs</sli>
+                <sli ixia_locid="10">AvgIopsPerVM = Average Logical Disk I/O throughput in IOPS for
+                    a VM</sli>
+                <sli ixia_locid="12">AvgThroughputPerVM = Average Logical Disk I/O throughput in
+                    MB/second for a VM</sli>
+                <sli ixia_locid="14">Margin = User-defined margin (for example, additional
+                    25%)</sli>
+            </sl>
+        </section></conbody></concept-wr>

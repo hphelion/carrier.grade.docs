@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003746776" xml:lang="en-us"><title ixia_locid="1">CoW-Image Backed Local Storage Capacity</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+        <p ixia_locid="4">When using CoW-image backing storage, the entire nova-local volume group
+            is allocated to the Instances Logical Volume (LV) mapped to /etc/nova/instances. VMs
+            volumes are stored as sparse files in the Instances LV.</p>
+        <sl>
+            <sli ixia_locid="6">Local Storage Requirement = N * AvgImageSize + Overhead +
+                Margin</sli>
+        </sl>
+        <p ixia_locid="14">Where:</p>
+        <sl id="ul_lmf_4vg_v5">
+            <sli ixia_locid="7">N = Total number of VMs expected on compute node</sli>
+            <sli ixia_locid="9">AvgImageSize = average size of all sparse VM volumes on expected on
+                compute node (qcow2 files)</sli>
+            <sli ixia_locid="11">Overhead =Overhead for bookkeeping, console, and libvirt (recommend
+                10‒20 GB)</sli>
+            <sli ixia_locid="13">Margin = User-defined margin (recommend at least 25%)</sli>
+        </sl>
+    </conbody></concept-wr>

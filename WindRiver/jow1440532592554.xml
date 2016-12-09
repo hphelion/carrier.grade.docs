@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1440532592554" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Initializing Controller-0 from a PXE Boot Server</title>
+    <shortdesc ixia_locid="2">You can initialize controller-0 from a configured PXE boot
+        server.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="11"><draft-comment author="jowens" dir="ltr" ixia_locid="8" translate="no">US62850 new
+                    topic</draft-comment>To set up a PXE boot server, see <xref href="jow1440534908675.xml" ixia_locid="12"/>.</p>
+        </context>
+        <prereq conref="jow1433000943390.xml#jow1433000943390/prereq_N1002B_N10028_N10001" id="prereq_N10034_N1001F_N10001" ixia_locid="9"/>
+        <steps>
+            <step id="step_N1002B_N10028_N1001C_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Start the controller node.</cmd>
+                <info ixia_locid="13">
+                    <p ixia_locid="14">The installer welcome screen appears.</p>
+                    <fig id="fig_ict_xsv_ft" ixia_locid="15">
+                        <image href="jow1441299039850.image" id="image_fkt_x5v_ft" ixia_locid="18" placement="inline">
+                            <alt ixia_locid="19">TiS controller PXE boot screen</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N1007A_N10046_N1001F_N10001" ixia_locid="20">
+                <cmd ixia_locid="21">Select the type of installation and the display device to be used during
+                    installation, and then press <uicontrol ixia_locid="22">Enter</uicontrol>. </cmd>
+                <info ixia_locid="23">
+                    <dl>
+                        <dlentry ixia_locid="24">
+                            <dt ixia_locid="25"><uicontrol ixia_locid="26">Boot from hard drive</uicontrol> (default)</dt>
+                            <dd ixia_locid="27">
+                                <p ixia_locid="28"><draft-comment author="jowens" dir="ltr" ixia_locid="29" translate="no">How do you prepare the local hard
+                                        drive for this?</draft-comment>Starts the controller from a
+                                    local hard drive. You can use this option to install the
+                                    Titanium Server software from a prepared local hard drive.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="30">
+                            <dt ixia_locid="31"><uicontrol ixia_locid="32">Serial Kickstart Controller Install</uicontrol></dt>
+                            <dd ixia_locid="33">
+                                <p ixia_locid="34">Installs the controller from the network, using the serial port
+                                    to display messages.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="35">
+                            <dt ixia_locid="36"><uicontrol ixia_locid="37">Graphics Text Controller Node Install</uicontrol></dt>
+                            <dd ixia_locid="38">
+                                <p ixia_locid="39">Installs the controller from the network, using text mode to
+                                    display messages.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="40" product="tis_cpe">
+                            <dt ixia_locid="41"><uicontrol ixia_locid="42">Serial Kickstart Controller and Compute
+                                    Install</uicontrol></dt>
+                            <dd ixia_locid="43">
+                                <p ixia_locid="44">For a Titanium Server CPE configuration, installs
+                                    the controller and compute functions from the network, using the
+                                    serial port to display messages.</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="45" product="tis_cpe">
+                            <dt ixia_locid="46"><uicontrol ixia_locid="47">Graphics Text Controller and Compute
+                                Install</uicontrol></dt>
+                            <dd ixia_locid="48">
+                                <p ixia_locid="49">For a Titanium Server CPE configuration, installs
+                                    the controller and compute functions from the network, using
+                                    text mode to display messages.</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                    <p ixia_locid="50">If you do not change the selection, the default is applied automatically
+                        after a few seconds.</p>
+                </info>
+                <stepresult conref="jow1433000943390.xml#jow1433000943390/installer_welcome_screen" ixia_locid="62"/>
+            </step>
+            <step conref="jow1433000943390.xml#jow1433000943390/select_installation_type" id="step_N10119_N1003F_N1001F_N10001" ixia_locid="63">
+                <cmd ixia_locid="64"/>
+            </step>
+            <step id="step_N100F6_N10046_N1001F_N10001" ixia_locid="51">
+                <cmd ixia_locid="52">Monitor the installation until it is complete.</cmd>
+                <info ixia_locid="53">
+                    <p conref="jow1433000943390.xml#jow1433000943390/grub_displayed" ixia_locid="54"/>
+                </info>
+            </step>
+            <step conref="jow1433000943390.xml#jow1433000943390/log_in" id="step_N10107_N10046_N1001F_N10001" ixia_locid="55">
+                <cmd ixia_locid="56"/>
+            </step>
+        </steps>
+        <result id="result_N10136_N1001F_N10001" ixia_locid="57">
+            <p ixia_locid="58">Controller-0 is initialized with the Titanium Server software, and is ready for
+                configuration.</p>
+        </result>
+        <postreq id="postreq_N1013F_N1001F_N10001" ixia_locid="59">
+            <note id="note_N10143_N1013F_N1001F_N10001" ixia_locid="60" type="caution">
+                <p ixia_locid="61">After controller-0 is initialized, you must disconnect the PXE
+                    boot server from the Titanium Server internal management network or PXE Boot
+                    network. This is required to prevent boot server conflicts for the remaining
+                    nodes.</p>
+            </note>
+        </postreq>
+    </taskbody>
+</task-wr>

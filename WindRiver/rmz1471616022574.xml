@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="rmz1471616022574" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Operator Command Logging</title>
+ <shortdesc ixia_locid="2">Titanium Server logs all operator commands. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+    <draft-comment author="eknowlto" ixia_locid="40">US70388</draft-comment>
+  <p ixia_locid="5">The logs include the timestamp, tenant name (if applicable), user name, command executed, and
+   command success or failure status.</p>
+  <p ixia_locid="6">These log files use a <filepath ixia_locid="7">*-api.log</filepath> filen ame
+      convention and can be found under the <filepath ixia_locid="8">/var/log</filepath>
+      directory.</p>
+  <p ixia_locid="9">Each OpenStack component that generates its own API log files (for example,
+      Nova, Neutron, Cinder, and so forth) and each Titanium Server-specific component and patching
+      system follow this convention. </p>
+  <p ixia_locid="10">These log files can be examined locally on the Controllers by inspecting the
+    <filepath ixia_locid="11">*-api.log</filepath> files under the <filepath ixia_locid="12">/var/log</filepath> directory. Logs can
+   also be examined on a remote log server, if the remote logging feature is configured. </p>
+  <p ixia_locid="13">The one exception to this is <filepath ixia_locid="14">patching-api.log</filepath>. For patching robustness reasons, the Titanium Server patching
+      system uses minimal system facilities and does not use syslog, therefore its logs do not
+      appear on the remote log server. </p>
+  <p ixia_locid="15">For example, for the Titanium Server system command, whenever a REST API call
+      is made that is either a:</p>
+  <ul id="ul_jhn_ll1_1x">
+   <li ixia_locid="16">
+    <p ixia_locid="17">POST - usually means creating something </p>
+   </li>
+   <li ixia_locid="18">
+    <p ixia_locid="19"> PATCH - usually means partially updating (modifying) something</p>
+   </li>
+   <li ixia_locid="20">
+    <p ixia_locid="21"> PUT - usually means fully updating (modifying) something</p>
+   </li>
+   <li ixia_locid="22">
+    <p ixia_locid="23"> DELETE - usually means deleting something</p>
+   </li>
+  </ul>
+  <p ixia_locid="24">Titanium Server logs these events into a new log file called
+    <filepath ixia_locid="25">/var/log/sysinv-api.log</filepath>.</p>
+  <p ixia_locid="26">If the <cmdname ixia_locid="27">sysinv</cmdname> command only issues a GET REST
+      call, it is not logged.</p>
+  <p ixia_locid="28">For example: </p>
+  <p ixia_locid="29"><cmdname ixia_locid="30">system event-list</cmdname> - is not logged because
+      this performs a sysinv REST GET call</p>
+  <p ixia_locid="31"><cmdname ixia_locid="32">system event-show</cmdname><varname ixia_locid="33">xx</varname> - is not logged because this performs a sysinv REST GET call</p>
+  <p ixia_locid="34"><cmdname ixia_locid="35">system modify description="A TEST"</cmdname> - is
+      logged to <filepath ixia_locid="36">sysinv-api.log</filepath> because it issues a REST POST
+      call</p>
+  <p ixia_locid="37"><cmdname ixia_locid="38">system snmp-comm-delete "TEST_COMMUNITY1"</cmdname> -
+      is logged to <filepath ixia_locid="39">sysinv-api.log</filepath> because it issues a REST
+      DELETE call</p>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="nlb1475506937644" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Displaying Provider Network Information Using the CLI</title>
+    <shortdesc ixia_locid="2">You can display information about provider networks from the CLI. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="60"><draft-comment author="jowens" ixia_locid="94">US75601 separate CLI
+                    topic spawned.</draft-comment>To view information for a provider network from
+                the CLI, use the following command:</p>
+            <codeblock ixia_locid="86"><systemoutput ixia_locid="87">~(keystone_admin)$ </systemoutput><userinput ixia_locid="88">neutron providernet-show <varname ixia_locid="64">providernet</varname></userinput>
+</codeblock>
+            <p ixia_locid="65">where <varname ixia_locid="66">providernet</varname> is the name or
+                UUID of the provider network.</p>
+            <p ixia_locid="67">For example:</p>
+            <codeblock ixia_locid="68"><systemoutput ixia_locid="69">~(keystone_admin)$ </systemoutput><userinput ixia_locid="70">neutron providernet-show group0-data0</userinput>
+</codeblock>
+            <draft-comment author="jowens" ixia_locid="35">Need to create output to match screen
+                shot. Output may need updating for VLAN Transparent info (US60634)</draft-comment>
+            <draft-comment author="jowens" ixia_locid="36">Add commands for viewing seg ranges and
+                tenant networks associated with the provider network (as shown in the GUI display)?
+                This is outside the scope of US55723, but appropriate for this new topic, which was
+                created because of it. The Install Guide has this info in Configuring Provider
+                Networks (and [same] Using the CLI).  </draft-comment>
+            <p ixia_locid="89">You can use the following command to retrieve the names of the
+                provider networks:</p>
+            <codeblock ixia_locid="90"><systemoutput ixia_locid="91">~(keystone_admin)$ </systemoutput><userinput ixia_locid="92">neutron providernet-list</userinput>
+</codeblock>
+        </context>
+    </taskbody>
+</task-wr>

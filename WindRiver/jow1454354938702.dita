@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454354938702" xml:lang="en-us"><title ixia_locid="1">Guest Interface Model Considerations</title><shortdesc ixia_locid="2">There are several VIF models that can be assigned to virtual NICs of the
+        guest. The VIF model depends on the networking requirements of the application and the
+        support for the different drivers available.</shortdesc><prolog>
+        <author ixia_locid="4">Matt Peters</author><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+        <section id="section_N1001E_N1001B_N10001" ixia_locid="5">
+            <title ixia_locid="6">virtio - Paravirtualized I/O Network Driver (default)</title>
+            <p ixia_locid="7">The virtio interface model can be leveraged by guests that have the
+                virtio-net driver available. In order to further enhance the performance of virtio
+                based devices, the network traffic for these devices is handled by AVS directly,
+                bypassing QEMU/KVM using a feature of QEMU called vhost-user. Vhost-user
+                significantly reduces the overhead of exchanging network traffic with the guest, and
+                is therefore suitable for most network based applications while still providing
+                compatibility to standard device drivers. To ensure vhost-user can be leveraged, the
+                guest must be backed by huge pages (4K pages cannot be used). In addition,
+                vhost-user can only be leveraged if QEMU itself can leverage KVM to utilize hardware
+                virtualization features. In the absence of these conditions, virtio network traffic
+                must be exchanged via QEMU which greatly reduces the network performance of this
+                interface model.</p>
+        </section>
+        <section id="section_N1002B_N1001B_N10001" ixia_locid="8">
+            <title ixia_locid="9"> avp - Accelerated Virtual Port</title>
+            <p ixia_locid="10">To maximize networking performance, it is recommended to use the AVP
+                kernel or AVP DPDK PMD drivers to leverage the AVP VIF model. The custom drivers are
+                available on the following github repo: <xref format="html" href="https://github.com/Wind-River/titanium-server" ixia_locid="11" scope="external">https://github.com/Wind-River/titanium-server</xref>. The AVP
+                operates in poll mode only; therefore it is highly suited for DPDK based
+                applications. In the AVP kernel driver, the same polling operation is performed but
+                is scheduled by the Linux kernel as a kernel thread before handing off to the
+                application in the guest. This permits high throughput at higher traffic rates, but
+                may have an impact on latency when running at lower traffic rates if packet latency
+                is a concern for the guest application. </p>
+        </section>
+        <section id="section_N1003F_N1001B_N10001" ixia_locid="12">
+            <title ixia_locid="13">Emulated Network Devices</title>
+            <p ixia_locid="14">For guests that are unable to leverage accelerated drivers, several
+                emulated devices (for example, <nameliteral ixia_locid="15">e1000</nameliteral>) are
+                available to provide the necessary network attachment. Since the devices are
+                emulated, and therefore suffer from poor performance, they should only be used when
+                no other driver is available.</p>
+        </section></conbody></concept-wr>

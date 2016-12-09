@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1452031857413" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Accessing a PCI Device from a VM</title>
+    <shortdesc ixia_locid="2">You can specify whether a VM has access to exposed PCI passthrough or
+        PCI SR-IOV devices.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N1010D_N1001F_N10001" ixia_locid="92">
+            <p ixia_locid="93">To use PCI passthrough or SR-IOV devices, you must have Intel-VTx and
+                Intel VT-d features enabled in the BIOS.</p>
+        </prereq>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="46"><draft-comment author="jowens" ixia_locid="6">US64378 new
+                    topic</draft-comment>For PCI-passthrough or SR-IOV devices other than NICs that
+                are exposed for VM use, you can manage access for individual VMs using <nameliteral ixia_locid="47">PCI Alias</nameliteral> extra specifications. <draft-comment author="jmaran" ixia_locid="120">I don't understand the formatting for the following x-refs. Why
+                    are you using &lt;ph&gt; with it set to print only. You don't seem to be using this
+                    construction consistently for topics outside of this document.
+                </draft-comment>To review the available advanced devices for a host, see <ph ixia_locid="110" otherprops="printonly"><cite ixia_locid="111">Titanium Server
+                        System Administration: </cite></ph><cite ixia_locid="112"><ph ixia_locid="113"><xref href="jow1452023307712.xml" ixia_locid="114"/></ph></cite>. To expose a device, see <ph ixia_locid="115" otherprops="printonly"><cite ixia_locid="116">Titanium Server System
+                        Administration: </cite></ph><cite ixia_locid="117"><ph ixia_locid="118"><xref href="jow1452444710203.xml" ixia_locid="119"/></ph></cite>.</p>
+            <note id="note_N1003F_N10022_N1001F_N10001" ixia_locid="50">
+                <p ixia_locid="51">NIC devices that support PCI passthrough or SR-IOV are always exposed to VMs, and
+                    are managed and displayed separately.  For more information, see <xref href="psa1413402160578.xml" ixia_locid="52"/> and <xref href="psa1428687672712.xml" ixia_locid="53"/>.</p>
+            </note>
+            <p ixia_locid="54"> If no <nameliteral ixia_locid="8">PCI Alias</nameliteral> extra spec
+                is added for a device, then by default the device is not available to the guest. If
+                a <nameliteral ixia_locid="55">PCI Alias</nameliteral> is added, then the Nova scheduler attempts to
+                schedule the VM on a host containing the device.  If no suitable compute node is
+                available, the error<nameliteral ixia_locid="56"> No valid host was found</nameliteral> is
+                reported.</p>
+            <note conref="jow1453048538675.xml#jow1453048538675/note_N10013_N10011_N10001" id="note_N10075_N10022_N1001F_N10001" ixia_locid="96"/>
+            <p ixia_locid="57">If a suitable compute node is available, then the scheduler attempts
+                to instantiate the VM in a NUMA node with direct access to the device, subject to
+                the <nameliteral ixia_locid="58">PCI NUMA Affinity</nameliteral> extra
+                specification.</p>
+            <p ixia_locid="60">To add this extra spec to a flavor using the web administration interface, use the
+                    <uicontrol ixia_locid="61">PCI Alias</uicontrol> selection in the <uicontrol ixia_locid="62">Create Flavor Extra
+                    Spec</uicontrol> drop-down menu. To access this menu, see <xref href="jow1429538642910.xml" ixia_locid="45"/>.</p>
+            <p ixia_locid="63"><draft-comment author="jowens" ixia_locid="109">CGTS-3989 (PGA) number of devices
+                    shown as optional in syntax</draft-comment>You can also specify the extra spec
+                from the CLI using a command of the following form:</p>
+            <codeblock ixia_locid="64"><systemoutput ixia_locid="65">~(keystone_admin)$ </systemoutput><userinput ixia_locid="66">nova flavor-key <varname ixia_locid="67">flavor_name</varname> \
+set pci_passthrough:alias=<varname ixia_locid="25">device_type</varname>[:<varname ixia_locid="26">number_of_devices</varname>]</userinput></codeblock>
+            <p ixia_locid="27">where </p>
+            <parml>
+                <plentry ixia_locid="68">
+                    <pt ixia_locid="69"><varname ixia_locid="70">flavor_name</varname></pt>
+                    <pd ixia_locid="71">
+                        <p ixia_locid="72">is the name of the flavor</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="73">
+                    <pt ixia_locid="74"><varname ixia_locid="75">device_type</varname></pt>
+                    <pd ixia_locid="76">
+                        <p ixia_locid="77">is the advanced PCI-passthrough or SR-IOV-capable
+                            hardware to expose to the VM</p>
+                        <note id="note_N100E2_N100D9_N100CD_N100B3_N10022_N1001F_N10001" ixia_locid="97">
+                            <p ixia_locid="98"><draft-comment author="jowens" ixia_locid="99">CGTS-3989 (PGA) added to avoid
+                                    confusion</draft-comment>The parameter
+                                    <parmname ixia_locid="100">pci_passthrough:alias</parmname> is used to expose
+                                both PCI passthrough devices and SR-IOV devices.</p>
+                        </note>
+                        <p ixia_locid="101">The following options are available:</p>
+                        <ul id="ul_ojp_nls_gv">
+                            <li ixia_locid="105">
+                                <p ixia_locid="106"><option ixia_locid="107">qat-vf</option></p>
+                                <p ixia_locid="81"><draft-comment author="jowens" ixia_locid="102">CGTS-3989 (PGA) stress SR-IOV access only</draft-comment>
+                                    Exposes an Intel AV-ICE02 VPN Acceleration Card for SR-IOV
+                                    access. For more information, see <xref href="jow1452359646498.xml" ixia_locid="82"/>.</p>
+                                <note id="note_N10119_N10105_N100FC_N100F9_N100D9_N100CD_N100B3_N10022_N1001F_N10001" ixia_locid="103">
+                                    <p ixia_locid="104">Due to driver limitations, PCI passthrough
+                                        access for the Intel AV-ICE02 VPN Acceleration Card
+                                            (<option ixia_locid="108">qat-pf</option> option) is not supported.</p>
+                                </note>
+                            </li>
+                        </ul>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="83">
+                    <pt ixia_locid="84"><varname ixia_locid="85">number_of_devices</varname></pt>
+                    <pd ixia_locid="86">
+                        <p ixia_locid="87">is the number of SR-IOV devices to expose to the VM</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="34">For example, to make two QuickAssist SR-IOV devices available to a
+                guest:</p>
+            <codeblock ixia_locid="88"><systemoutput ixia_locid="89">~(keystone_admin)$ </systemoutput><userinput ixia_locid="90">nova flavor-key <varname ixia_locid="91">flavor_name</varname> set pci_passthrough:alias=qat-vf:2</userinput></codeblock>
+        </context>
+    </taskbody>
+</task-wr>

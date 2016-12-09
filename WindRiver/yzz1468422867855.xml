@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="yzz1468422867855" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="353">Setting the CPU Scaling Range Using the CLI</title>
+    <shortdesc ixia_locid="354">You can define the maximum and minimum CPU resources available to an instance by
+        using a flavor using the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="355">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <ul id="ul_vsn_b2w_3q">
+                <li ixia_locid="37">
+                    <p ixia_locid="38">To set the maximum number of VCPUs for an instance, define a
+                        flavor with the required number of vCPUs.</p>
+                </li>
+                <li ixia_locid="40">
+                    <p ixia_locid="39">To set the minimum number of vCPUs, edit the flavor to
+                        include an Extra Spec. The minimum cannot be less than one.</p>
+                </li>
+            </ul>
+            <p ixia_locid="101">You can use the web administration interface or the CLI to edit the
+                flavor. The CLI parameter for setting the minimum number of CPUs is as follows:</p>
+            <codeblock ixia_locid="102">hw:wrs:min_vcpus=<varname ixia_locid="103">min</varname></codeblock>
+            <p ixia_locid="104">where <nameliteral ixia_locid="105">min</nameliteral> is the minimum
+                number of CPUs.</p>
+            <p ixia_locid="313">For example:</p>
+            <codeblock ixia_locid="320"><systemoutput ixia_locid="327">~(keystone_admin)$ </systemoutput><userinput ixia_locid="334">nova flavor-key <varname ixia_locid="345">flavor_name</varname> set hw:wrs:min_vcpus=<varname ixia_locid="352">integer_value</varname></userinput></codeblock>
+            <p ixia_locid="8">For complete information about working with flavors, see <xref href="jow1404333663095.xml" ixia_locid="10"/>.</p>
+        </context>
+    </taskbody>
+</task-wr>

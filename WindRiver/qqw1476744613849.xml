@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="qqw1476744613849" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Configuring Swift Object Storage</title>
+    <shortdesc ixia_locid="2">On systems with dedicated storage hosts, you can configure Swift
+        object storage for use by VMs at any time after installation.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="6">US85034 new
+                    topic</draft-comment>For more information, see <xref href="xqu1476743228690.xml" ixia_locid="7"/>.</p>
+        </context>
+        <prereq id="prereq_N10038_N1001F_N10001" ixia_locid="8">
+            <p ixia_locid="9">Storage hosts are required to support Swift.</p>
+            <p ixia_locid="10">The storage cluster must be healthy for Swift support to be configured.</p>
+        </prereq>
+        <steps>
+            <step conref="jow1404766496848.xml#jow1404766496848/source-nova-openrc" id="step_N10048_N10045_N1001F_N10001" ixia_locid="11">
+                <cmd ixia_locid="12"/>
+            </step>
+            <step id="step_N10051_N10045_N1001F_N10001" ixia_locid="13">
+                <cmd ixia_locid="14">Ensure that the Ceph storage backend is configured.</cmd>
+                <info ixia_locid="15">
+                    <codeblock ixia_locid="55"><systemoutput ixia_locid="56">~(keystone_admin)$ </systemoutput><userinput ixia_locid="57">system storage-backend-list</userinput>
+<systemoutput ixia_locid="58">+---------+------------+------+
+| backend | state      | task |
++---------+------------+------+
+| ceph    | configured | None |
++---------+------------+------+
+                        </systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N10078_N10049_N1001F_N10001" ixia_locid="59">
+                <cmd ixia_locid="60">Ensure that the Ceph cluster is healthy.</cmd>
+                <info ixia_locid="61">
+                    <codeblock ixia_locid="62"><systemoutput ixia_locid="63">~(keystone_admin)$ </systemoutput><userinput ixia_locid="64">ceph -s</userinput>
+<systemoutput ixia_locid="65">
+    cluster 720283dd-f14e-40d7-a3b5-ec0ca3ccde95
+    health HEALTH_WARN
+           too many PGs per OSD (2100 &gt; max 2048)
+    monmap e1: 3 mons at {controller-0=192.168.205.3:6789/0,controller-1=192.168.205.4:6789/0,storage-0=192.168.205.5:6789/0}
+           election epoch 14, quorum 0,1,2 controller-0,controller-1,storage-0
+    osdmap e33: 2 osds: 2 up, 2 in
+     pgmap v869: 2100 pgs, 10 pools, 1970 MB data, 1409 objects
+           4058 MB used, 14351 MB / 18409 MB avail
+               2100 active+clean</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N1006B_N10045_N1001F_N10001" ixia_locid="20">
+                <cmd ixia_locid="21">Add a Ceph Object Gateway backend. </cmd>
+                <info ixia_locid="22">
+                    <p ixia_locid="23">The Ceph Object Gateway (RADOS Gateway) supports Swift client or Swift REST
+                        API access.</p>
+                    <codeblock ixia_locid="24"><systemoutput ixia_locid="25">~(keystone_admin)$ </systemoutput><userinput ixia_locid="26">system storage-backend-modify ceph object_gateway=true</userinput>
+<systemoutput ixia_locid="27">+----------------------+----------------------------------+
+| Property             | Value                            |
++----------------------+----------------------------------+
+| cinder_pool_gib      | 0                                |
+| glance_pool_gib      | 8                                |
+| ephemeral_pool_gib   | 0                                |
+| object_pool_gib      | 0                                |
+| ceph_total_space_gib | 17                               |
+| object_gateway       | True                             |
+| created_at           | 2016-09-21T18:19:17.981485+00:00 |
+| updated_at           | 2016-09-22T13:57:40.165109+00:00 |
++----------------------+----------------------------------+
+
+System configuration has changed.
+Please follow the administrator guide to complete configuring the system.</systemoutput></codeblock>
+                </info>
+                <stepresult ixia_locid="28">
+                    <p ixia_locid="29"><nameliteral ixia_locid="30">Config out-of-date</nameliteral> alarms are raised on both
+                        controllers.</p>
+                </stepresult>
+            </step>
+            <step id="step_N10094_N10045_N1001F_N10001" ixia_locid="31">
+                <cmd ixia_locid="32">Confirm that the new backend is queued for configuration.</cmd>
+                <info ixia_locid="66">
+                    <codeblock ixia_locid="67"><systemoutput ixia_locid="68">~(keystone_admin)$ </systemoutput><userinput ixia_locid="69">system storage-backend-list</userinput>
+<systemoutput ixia_locid="70">+---------+------------+--------------------+
+| backend | state      | task               |
++---------+------------+--------------------+
+| ceph    | configured | add-object-gateway |
++---------+------------+--------------------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N100AE_N10045_N1001F_N10001" ixia_locid="38">
+                <cmd ixia_locid="39">Lock and unlock the controllers to make the configuration take effect.</cmd>
+                <info ixia_locid="40"/>
+                <substeps conref="jow1451997330805.xml#jow1451997330805/substeps_zyf_rsz_5p" id="substeps_qh4_hmt_qx">
+                    <substep ixia_locid="42">
+                        <cmd ixia_locid="43"/>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10112_N10049_N1001F_N10001" ixia_locid="71">
+                <cmd ixia_locid="72">At the command line, confirm that object storage is configured.</cmd>
+                <info ixia_locid="73">
+                    <codeblock ixia_locid="74"><systemoutput ixia_locid="75">~(keystone_admin)$ </systemoutput><userinput ixia_locid="76">system storage-backend-list</userinput>
+<systemoutput ixia_locid="77">+---------+------------|------+
+| backend | state      | task |
++----------------------+------+
+| ceph    | configured | none |
++---------+------------|------+</systemoutput></codeblock>
+                </info>
+            </step>
+        </steps>
+        <result id="result_N100C8_N1001F_N10001" ixia_locid="44">
+            <p ixia_locid="45">Swift storage is configured on the system.</p>
+            <p ixia_locid="46">In the Web administration interface, the <uicontrol ixia_locid="47">Object Store</uicontrol> selection is added to the Project menu. Allow about
+                two minutes for this update to be propagated, and then log into the Web
+                administration interface again. <fig id="fig_nnv_4wt_qx" ixia_locid="48">
+                    <image href="cpb1476802503379.image" id="image_bnq_cxt_qx" ixia_locid="49">
+                        <alt ixia_locid="50">TiS Object Store selection</alt>
+                    </image>
+                </fig><note id="note_N100E6_N100D0_N100C8_N1001F_N10001" ixia_locid="51">
+                    <p ixia_locid="52"><draft-comment author="jowens" ixia_locid="53">CGTS-5209
+                            added</draft-comment>The <uicontrol ixia_locid="54">Object
+                            Store</uicontrol> selection does not appear until the next time you log
+                        in to the Web administration interface.</p>
+                </note></p>
+        </result>
+    </taskbody>
+</task-wr>

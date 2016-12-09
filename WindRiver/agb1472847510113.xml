@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="agb1472847510113" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="270">Provisioning Network Interfaces on a Storage Host</title>
+    <shortdesc ixia_locid="2">You must configure the network interfaces on a host before you can
+        unlock it.</shortdesc>
+    <prolog>
+        <author ixia_locid="271">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10020_N1001D_N10001" ixia_locid="272">
+            <p ixia_locid="92">Titanium Server automatically creates an Ethernet interface for each
+                port it detects on the compute node during software installation. You must manually
+                create any required interfaces of other types, including Aggregated Ethernet and
+                VLAN, and then edit them to attach them to networks.</p>
+            <p ixia_locid="174">For a storage host, you must manually attach interfaces for the
+                infrastructure network.</p>
+            <p ixia_locid="183">You must also configure LAG for any interfaces that use it. For more
+                information, see <xref href="jow1426951671346.xml" ixia_locid="830"/>.</p>
+            <draft-comment author="rstone" ixia_locid="177">CGTS-2211 adds</draft-comment>
+            <p ixia_locid="178">The details for attaching an interface depend on the network
+                configuration (for example, whether shared interfaces are used). A simple example is
+                provided here for convenience. For more information, see <xref href="jow1426948577755.xml" ixia_locid="179"/>.</p>
+            <note id="note_N1006B_N1002C_N10029_N10001" ixia_locid="267">
+                <p ixia_locid="268">You can use hardware profiles to save a configuration from one
+                    host and apply it to others. For more information, see <xref href="jow1404333787693.xml" ixia_locid="269"/>
+                </p>
+            </note>
+        </context>
+        <prereq id="prereq_N10066_N10029_N10001" ixia_locid="184">
+            <p ixia_locid="185">The Titanium Server software must be installed on the host.</p>
+            <p ixia_locid="186">To configure the data interfaces on a compute host, provider
+                networks are required.</p>
+        </prereq>
+        <steps>
+            <step conref="jow1426453628262.xml#jow1426453628262/step_N1002B_N10028_N1001C_N10001" id="step_N1002B_N10028_N1001C_N10001" ixia_locid="133">
+                <cmd ixia_locid="190"/>
+            </step>
+            <step id="step_N10034_N10028_N1001C_N10001" ixia_locid="191">
+                <cmd ixia_locid="192">Select the <uicontrol ixia_locid="137">Interfaces</uicontrol>
+                    tab.</cmd>
+                <stepresult ixia_locid="138">
+                    <fig id="fig_ypk_blk_lr" ixia_locid="139">
+                        <image href="jow1426954731455.image" id="image_onc_hlk_lr" ixia_locid="140">
+                            <alt ixia_locid="141">Compute node default interfaces</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N1018B_N10073_N10029_N10001" importance="optional" ixia_locid="237">
+                <cmd ixia_locid="238">Configure the infrastructure interface.</cmd>
+                <info ixia_locid="239"/>
+                <substeps id="substeps_lkb_lsp_dx">
+                    <substep ixia_locid="241">
+                        <cmd ixia_locid="242">Click <nameliteral ixia_locid="243">Edit
+                                Interface</nameliteral> for the port connected to the infrastructure
+                            network.</cmd>
+                        <info ixia_locid="244">
+                            <p ixia_locid="245">The <wintitle ixia_locid="246">Edit
+                                    Interface</wintitle> dialog box appears.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="247">
+                        <cmd ixia_locid="248">In the <uicontrol ixia_locid="249">Network
+                                Type</uicontrol> list, select <uicontrol ixia_locid="250">infra</uicontrol>.</cmd>
+                        <info ixia_locid="251">
+                            <note id="note_N101C9_N101C6_N101B7_N10199_N10189_N10073_N10029_N10001" ixia_locid="252">
+                                <p ixia_locid="253">Ensure that <nameliteral ixia_locid="254">none</nameliteral> is <i ixia_locid="255">not</i> selected.
+                                    Clear it if necessary.</p>
+                            </note>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="256">
+                        <cmd ixia_locid="257">Specify the <uicontrol ixia_locid="258">Interface
+                                Type</uicontrol>.</cmd>
+                        <info ixia_locid="259">
+                            <p ixia_locid="260">For an infrastructure interface, you can select an
+                                    <option ixia_locid="261">Ethernet</option>, <option ixia_locid="262">Aggregated Ethernet</option>, or <option ixia_locid="263">VLAN interface</option>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="264">
+                        <cmd ixia_locid="265">Click <uicontrol ixia_locid="266">Save</uicontrol> to
+                            save the selection and close the dialog box.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1014D_N1007F_N1001D_N10001" ixia_locid="273">
+                <cmd ixia_locid="94">If using LAG to attach to the internal management network,
+                    change the <uicontrol ixia_locid="95">Interface Type</uicontrol> for the
+                    internal management network interface to <nameliteral ixia_locid="96">aggregated
+                        ethernet</nameliteral><!--, and add a second interface-->. For more
+                    information, see <xref href="jow1414000462559.xml" ixia_locid="97"/>.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

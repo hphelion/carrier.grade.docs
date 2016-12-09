@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1443819658894" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Suppressing Sensor Actions</title>
+    <shortdesc ixia_locid="2">You can suppress the configured <nameliteral ixia_locid="101">Action</nameliteral> for individual sensors or groups of sensors</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="20"><draft-comment author="jowens" ixia_locid="6">US64069 new
+                    topic</draft-comment>If a sensor is faulty, or is generating frequent minor
+                alarms for a known condition that cannot be addressed immediately, you can prevent
+                it from generating further alarms. Suppressed sensors are still audited, and their
+                status is reported in the <nameliteral ixia_locid="103">Sensors</nameliteral>
+                list.</p>
+            <p ixia_locid="21">For more information about sensors and sensor groups, see <xref href="jow1443819549360.xml" ixia_locid="7"/>.</p>
+            <p ixia_locid="23">To use the command-line interface, see <xref href="jow1443819706243.xml" ixia_locid="24"/>.</p>
+        </context>
+        <steps id="steps_zdg_53f_4t">
+            <step conref="jow1426453628262.xml#jow1426453628262/step_N1002B_N10028_N1001C_N10001" id="step_N10047_N10043_N1001F_N10001" ixia_locid="54">
+                <cmd ixia_locid="55"/>
+            </step>
+            <step id="step_N10056_N10040_N1001F_N10001" ixia_locid="14">
+                <cmd ixia_locid="15">Select the <uicontrol ixia_locid="16">Sensors</uicontrol>
+                    tab.</cmd>
+            </step>
+            <step id="step_N1006F_N10045_N1001F_N10001" ixia_locid="25">
+                <cmd ixia_locid="26">Use the controls on the <uicontrol ixia_locid="104">Sensors</uicontrol> tab to
+                    suppress actions for individual sensors or sensor groups.</cmd>
+                <choices id="choices_ezl_jvf_4t">
+                    <choice ixia_locid="28">
+                        <p ixia_locid="29">To suppress actions for a group of sensors, open the
+                                <uicontrol ixia_locid="30">Actions</uicontrol> menu for the group,
+                            and then select <uicontrol ixia_locid="31">Suppress
+                                SensorGroup</uicontrol>.</p>
+                        <fig id="fig_fks_2wf_4t" ixia_locid="32">
+                            <image href="jow1443890971677.image" id="image_z5f_vwf_4t" ixia_locid="33">
+                                <alt ixia_locid="34">TiS Suppress SensorGroup</alt>
+                            </image>
+                        </fig>
+                    </choice>
+                    <choice ixia_locid="35">
+                        <p ixia_locid="36">To suppress actions for an individual sensor, locate the
+                            sensor in the <nameliteral ixia_locid="37">Sensors</nameliteral> list,
+                            and click <uicontrol ixia_locid="19">Suppress Sensor</uicontrol>.</p>
+                        <fig id="fig_aqx_vwf_4t" ixia_locid="38">
+                            <image href="jow1443890898358.image" id="image_ltm_wwf_4t" ixia_locid="39">
+                                <alt ixia_locid="40">TiS Suppress Sensor</alt>
+                            </image>
+                        </fig>
+                    </choice>
+                </choices>
+            </step>
+        </steps>
+        <result id="result_N100C2_N1001F_N10001" ixia_locid="41">
+            <p ixia_locid="42">The <nameliteral ixia_locid="43">Suppression</nameliteral> field in
+                the list is updated to show that actions are suppressed for the sensor.</p>
+        </result>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="slp1472850251319" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Provisioning Storage on Controller-1</title>
+    <shortdesc ixia_locid="2">You must configure the storage disks on a host before you can unlock
+        it.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Jim Owens</author>
+        <author ixia_locid="5">Tom Towle</author>
+        <author ixia_locid="6">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1002C_N10029_N10001" ixia_locid="815" product="tis_std">
+            <note id="note_N10031_N1002C_N10029_N10001" ixia_locid="816">
+                <p ixia_locid="817">You can use hardware profiles to save a configuration from one
+                    host and apply it to others. For more information, see <xref href="jow1404333787693.xml" ixia_locid="818"/>.</p>
+            </note>
+        </context>
+        <steps id="steps_nvd_tz5_k4">
+            <step conref="jow1426453628262.xml#jow1426453628262/step_N1002B_N10028_N1001C_N10001" id="step_N1002B_N10028_N1001C_N10001" ixia_locid="133">
+                <cmd ixia_locid="190"/>
+            </step>
+            <step id="step_N1003B_N1002C_N10029_N10001" ixia_locid="814">
+                <cmd ixia_locid="819"><draft-comment author="jowens" ixia_locid="820">need to ensure this is the
+                        correct screen shot; it was taken from the compute host
+                        topic.</draft-comment>Select the <uicontrol ixia_locid="821">Storage</uicontrol> tab.</cmd>
+                <info ixia_locid="822">
+                    <fig id="fig_cxd_d2q_dx" ixia_locid="823">
+                        <image href="nzy1476450570167.image" id="image_if4_phq_px" ixia_locid="828">
+                            <alt ixia_locid="829">Controller Storage tab, unprovisioned</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N10154_N10048_N1002E_N10001" ixia_locid="423" product="tis_lvm tis_cpe">
+                <cmd ixia_locid="424"><draft-comment author="jowens" dir="ltr" ixia_locid="676" translate="no">US64033 step added</draft-comment>Configure the Cinder
+                    storage on <nameliteral ixia_locid="425">controller-1</nameliteral>.<!-- By doing this before adding nova-local, we avoid the need for a special Local Volumes Group shot without a cinder volume in the next step. However, we have to include the substep for visiting the storage page here. --></cmd>
+                <info ixia_locid="426"/>
+                <substeps id="substeps_zgg_gxs_25">
+                    <substep ixia_locid="686">
+                        <cmd ixia_locid="687">Click <uicontrol ixia_locid="757">Create Cinder
+                                Device</uicontrol>..</cmd>
+                        <info ixia_locid="690">
+                            <p ixia_locid="761">The Create Cinder Device dialog box appears.</p>
+                            <fig id="fig_b4w_11j_f5" ixia_locid="762">
+                                <image href="jow1449520349709.image" id="image_fpp_5tl_g5" ixia_locid="763" placement="inline">
+                                    <alt ixia_locid="764">TiS Create Cinder Device dialog box for
+                                        controller-1</alt>
+                                </image>
+                            </fig>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="765">
+                        <cmd ixia_locid="766">Using the <uicontrol ixia_locid="767">Disks</uicontrol> drop-down menu, select a disk to provide cinder
+                            storage. </cmd>
+                    </substep>
+                </substeps>
+                <stepresult ixia_locid="768">
+                    <p ixia_locid="769">The disk is added to the Cinder Device list.</p>
+                    <fig id="fig_mpd_wbj_f5" ixia_locid="770">
+                        <image href="jow1449520732514.image" id="image_c55_g5l_g5" ixia_locid="771" placement="inline">
+                            <alt ixia_locid="772">TiS Cinder Device list with one disk</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N106AF_N100AA_N1002E_N10001" ixia_locid="773" product="tis_cpe">
+                <cmd ixia_locid="774"><draft-comment author="jowens" dir="ltr" ixia_locid="775" translate="no">US68057 added; US69978 reworked</draft-comment>Add a local
+                    volume group to provide local storage for the compute function.</cmd>
+                <substeps id="substeps_jsv_k4h_f5">
+                    <substep ixia_locid="601">
+                        <cmd ixia_locid="602">On the <wintitle ixia_locid="603">Storage</wintitle>
+                            page, add a <nameliteral ixia_locid="604">nova-local</nameliteral>
+                            Volume Group.</cmd>
+                        <info ixia_locid="605">
+                            <p ixia_locid="606">Click <uicontrol ixia_locid="607">Add Local Volume
+                                    Group</uicontrol>.</p>
+                            <fig id="fig_gk3_mqh_f5" ixia_locid="826">
+                                <image href="jow1449521080044.image" id="image_ssg_l5l_g5" ixia_locid="776" placement="inline">
+                                    <alt ixia_locid="777">TiS Local Volume Groups for
+                                        controller/compute-1 default</alt>
+                                </image>
+                            </fig>
+                            <p ixia_locid="611">The Create Local Volume Group dialog box appears,
+                                set by default to add a<nameliteral ixia_locid="612">
+                                    nova-local</nameliteral> group.</p>
+                            <fig id="fig_bqr_sqh_f5" ixia_locid="613">
+                                <image href="jow1449681858859.image" id="image_cbm_chz_g5" ixia_locid="778" placement="inline">
+                                    <alt ixia_locid="779">TiS Create Local Volume Group for
+                                        controller-1</alt>
+                                </image>
+                            </fig>
+                            <p ixia_locid="616">Click <uicontrol ixia_locid="617">Create Local
+                                    Volume Group</uicontrol>.</p>
+                        </info>
+                        <stepresult ixia_locid="618">
+                            <p ixia_locid="619">The <nameliteral ixia_locid="620">nova-local</nameliteral> group is added to the <nameliteral ixia_locid="621">Local Volume Groups</nameliteral> list.</p>
+                        </stepresult>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10790_N100AA_N1002E_N10001" ixia_locid="780" product="tis_cpe">
+                <cmd ixia_locid="781"><draft-comment author="jowens" dir="ltr" ixia_locid="782" translate="no">US68057 added; US69978 reworked; CGTS-3558 emphasize non-root
+                        disk for local storage</draft-comment>Assign a physical volume for the local
+                    volume group.</cmd>
+                <substeps id="substeps_ktw_ymm_j5">
+                    <substep ixia_locid="622">
+                        <cmd ixia_locid="623">Click <uicontrol ixia_locid="625">Add Physical
+                                Volume</uicontrol>.</cmd>
+                        <info ixia_locid="50">
+                            <fig id="fig_wgx_ymm_j5" ixia_locid="627">
+                                <image href="jow1449165318154.image" id="image_e3m_55h_f5" ixia_locid="628" placement="inline">
+                                    <alt ixia_locid="629">TiS Physical Volumes default for combined
+                                        node</alt>
+                                </image>
+                            </fig>
+                            <fig id="fig_k3x_ymm_j5" ixia_locid="54">
+                                <image href="jow1449682154649.image" id="image_t3p_5hz_g5" ixia_locid="783" placement="inline">
+                                    <alt ixia_locid="784">TiS Create Physical Volume for
+                                        controller-1</alt>
+                                </image>
+                            </fig>
+                            <p ixia_locid="632">The <wintitle ixia_locid="633">Create Physical
+                                    Volume</wintitle> dialog box appears, with the <uicontrol ixia_locid="634">Local Volume Group</uicontrol> automatically
+                                set to <nameliteral ixia_locid="62">nova-local</nameliteral>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="635">
+                        <cmd ixia_locid="636">Using the <uicontrol ixia_locid="58">Disks</uicontrol>
+                            drop-down menu, select a non-root disk to provide storage. </cmd>
+                        <info ixia_locid="637">
+                            <p ixia_locid="638">You can add any number of non-root disks to the
+                                    <nameliteral ixia_locid="639">nova-local</nameliteral> group,
+                                limited only by the number of disks available.</p>
+                            <note id="note_N1036B_N1035D_N1034F_N102FD_N102EB_N10048_N1002E_N10001" ixia_locid="827" type="caution">
+                                <p ixia_locid="830">Always use non-root disks for
+                                        <nameliteral ixia_locid="831">nova-local</nameliteral> storage. Use of the
+                                    root disk for this purpose is not a supported configuration.</p>
+                            </note>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="640">
+                        <cmd ixia_locid="641">Click <uicontrol ixia_locid="642">Create Physical
+                                Volume</uicontrol>.</cmd>
+                        <stepresult ixia_locid="643">
+                            <p ixia_locid="644">The disk assignment is added to the <nameliteral ixia_locid="645">Physical Volumes</nameliteral> list.</p>
+                        </stepresult>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10832_N100AA_N1002E_N10001" ixia_locid="785" product="tis_cpe">
+                <cmd ixia_locid="699"><draft-comment author="jowens" dir="ltr" ixia_locid="700" translate="no">US68057 added; US69987 reworked</draft-comment>Allocate
+                    resources on the physical volume for the local volume group.</cmd>
+                <substeps id="substeps_ovf_zmm_j5">
+                    <substep ixia_locid="646">
+                        <cmd ixia_locid="647">In the <nameliteral ixia_locid="655">Local Volume
+                                Groups</nameliteral> list, click <uicontrol ixia_locid="656">nova-local</uicontrol> to open the Local Volume Group Detail
+                            page.</cmd>
+                        <info ixia_locid="649">
+                            <fig id="fig_xhp_thn_j5" ixia_locid="657">
+                                <image href="jow1443974043719.image" id="image_h3p_thn_j5" ixia_locid="658" placement="inline">
+                                    <alt ixia_locid="659">TiS Local Volume Group Detail</alt>
+                                </image>
+                            </fig>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="787">
+                        <cmd ixia_locid="788">Select the <uicontrol ixia_locid="661">Parameters</uicontrol> tab.</cmd>
+                        <info ixia_locid="704">
+                            <fig id="fig_h3v_khn_j5" ixia_locid="662">
+                                <image href="jow1443974983289.image" id="image_bjv_khn_j5" ixia_locid="663" placement="inline">
+                                    <alt ixia_locid="664">TiS Local Volume Group Detail Parameters
+                                        tab</alt>
+                                </image>
+                            </fig>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="705">
+                        <cmd ixia_locid="706"><draft-comment author="jowens" dir="ltr" ixia_locid="723" translate="no">US69978 new step</draft-comment>Select the <parmname ixia_locid="724">Instance Backing</parmname> type.</cmd>
+                        <info ixia_locid="707">
+                            <p ixia_locid="708">Click <nameliteral ixia_locid="709">Edit</nameliteral> for the <parmname ixia_locid="710">Instance
+                                    Backing</parmname> setting.</p>
+                            <fig id="fig_mlp_53n_j5" ixia_locid="711">
+                                <image href="jow1450466925538.image" id="image_cxw_1jn_j5" ixia_locid="712" placement="inline">
+                                    <alt ixia_locid="713">TiS Edit Local Volume Group Parameter:
+                                        Instance Backing</alt>
+                                </image>
+                            </fig>
+                            <parml>
+                                <plentry ixia_locid="714">
+                                    <pt ixia_locid="715">LVM backed</pt>
+                                    <pd ixia_locid="717">
+                                        <p ixia_locid="718">Local storage for instances is provided
+                                            using LVM RAW disks to optimize run-time I/O
+                                            performance. </p>
+                                    </pd>
+                                </plentry>
+                                <plentry ixia_locid="719">
+                                    <pt ixia_locid="720">CoW Image backed</pt>
+                                    <pd ixia_locid="722">
+                                        <p ixia_locid="725">Local storage for instances is provided
+                                            using copy-on-write (CoW) image files to optimize launch
+                                            and delete performance. This is the default. </p>
+                                    </pd>
+                                </plentry>
+                            </parml>
+                            <p ixia_locid="726">For more information about the <parmname ixia_locid="789">Instance Backing</parmname> type, see <ph ixia_locid="832" otherprops="printonly"><cite ixia_locid="833">Titanium Server System Administration:</cite></ph><cite ixia_locid="834"><ph ixia_locid="835"><xref href="jow1443470081421.xml" ixia_locid="836"/></ph></cite>.</p>
+                            <p ixia_locid="791">After making your selection, click <uicontrol ixia_locid="792">Save</uicontrol> to return to the Parameters
+                                tab. </p>
+                        </info>
+                        <stepresult ixia_locid="669">
+                            <p ixia_locid="793">The <wintitle ixia_locid="671">Parameters</wintitle>
+                                list is updated to show the corresponding value (<nameliteral ixia_locid="794">lvm</nameliteral> or <nameliteral ixia_locid="795">image</nameliteral>). </p>
+                            <p ixia_locid="796">If the <parmname ixia_locid="797">Instance
+                                    Backing</parmname> parameter is set to <nameliteral ixia_locid="798">image</nameliteral>, the <parmname ixia_locid="799">Instances LV Size</parmname> parameter is no
+                                longer shown. </p>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="800">
+                        <cmd ixia_locid="801">If you are using LVM-backed storage, specify the
+                                <parmname ixia_locid="802">Instances LV Size</parmname>.</cmd>
+                        <info ixia_locid="803">
+                            <note id="note_N10964_N10961_N10956_N1085D_N10832_N100AA_N1002E_N10001" ixia_locid="804">
+                                <p ixia_locid="805">The <parmname ixia_locid="744">Instances LV
+                                        Size</parmname> parameter is available only if the <parmname ixia_locid="745">Instance Backing</parmname> is set to
+                                        <nameliteral ixia_locid="746">lvm</nameliteral>. </p>
+                            </note>
+                            <p ixia_locid="747">Click <uicontrol ixia_locid="666">Edit</uicontrol>,
+                                and then set the <uicontrol ixia_locid="128">Instances Logical
+                                    Volume Size</uicontrol>.<fig id="fig_l4g_zmm_j5" ixia_locid="667">
+                                    <image href="jow1443975258969.image" id="image_fpg_zmm_j5" ixia_locid="130" placement="inline">
+                                        <alt ixia_locid="668">TiS Edit Local Volume Group Parameter
+                                            dialog</alt>
+                                    </image>
+                                </fig></p>
+                            <p ixia_locid="132">If the total space in the volume group is less than
+                                80GB (81920 MiB), then you must allocate at least 2048 MiB. If it is
+                                greater or equal than 80GB (81920 MiB), then you must allocate at
+                                least 5120 MiB. The actual size is limited to ensure at least 50%
+                                free space in the volume group for creating disks for launched
+                                instances. The dialog box provides an acceptable parameter range for
+                                convenience.</p>
+                            <p ixia_locid="748">For more information, see <ph ixia_locid="837" otherprops="printonly"><cite ixia_locid="838">Titanium Server
+                                        System Administration:</cite></ph><cite ixia_locid="839"><ph ixia_locid="840"><xref href="jow1443470081421.xml" ixia_locid="841"/></ph></cite>.</p>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="tti1478613939895" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Ephemeral Dimensioning for Storage Nodes</title>
+ <shortdesc ixia_locid="2">To determine the logical disk capacity requirement for ephemeral volumes
+  for virtual machines specifically configured to use ephemeral volumes on the storage nodes,
+  calculate the total storage for ephemeral volumes required to be supported plus some margin to
+  handle growth.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Craig Griffin</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">This does not include VMs and ephemeral volumes that use the default ephemeral
+   storage on the compute nodes.</p>
+  <sl>
+   <sli ixia_locid="5">Ephemeral Storage Requirement = N * AvgVolSize + Margin</sli>
+  </sl>
+  <p ixia_locid="6">Where:</p>
+  <sl>
+   <sli ixia_locid="7">N = Total number of volumes required</sli>
+   <sli ixia_locid="8">AvgVolSize = Average volume size on disk in GB (note that sparse files are used)</sli>
+   <sli ixia_locid="9">Margin = User-defined margin (recommend at least 25%)</sli>
+  </sl>
+ </conbody>
+</concept-wr>

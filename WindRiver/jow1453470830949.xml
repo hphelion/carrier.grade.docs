@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1453470830949" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Creating LDAP Linux Accounts for OpenStack Users</title>
+    <shortdesc ixia_locid="2">Titanium Server includes a script for creating LDAP Linux accounts
+        with built-in Keystone user support.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="6">US70961 new topic;
+                    US71877 clarified vs LDAP Keystone accounts</draft-comment>The <cmdname ixia_locid="7">ldapusersetup</cmdname> command provides an interactive method
+                for setting up LDAP Linux user accounts with access to OpenStack commands. You can
+                assign a limited shell or a bash shell.</p>
+            <p ixia_locid="8">Users have the option to provide Keystone credentials at login, and
+                can establish or change Keystone credentials at any time during a session. Keystone
+                credentials persist for the duration of the session.</p>
+        </context>
+        <prereq id="prereq_N10036_N1001C_N10001" ixia_locid="9">
+            <p ixia_locid="10">For convenience, identify the user's Keystone account user name in
+                Titanium Server.</p>
+        </prereq>
+        <steps>
+            <step id="step_N10042_N1003F_N1001C_N10001" ixia_locid="11">
+                <cmd ixia_locid="12">Log in as <nameliteral ixia_locid="13">wrsroot</nameliteral>,
+                    and start the <cmdname ixia_locid="14">ldapusersetup</cmdname> script.</cmd>
+                <info ixia_locid="15">
+                    <codeblock ixia_locid="16"><systemoutput ixia_locid="17">controller-0: ~$ </systemoutput><userinput ixia_locid="18">sudo ldapusersetup</userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N10060_N1003F_N1001C_N10001" ixia_locid="19">
+                <cmd ixia_locid="20">Follow the interactive steps in the script.</cmd>
+                <substeps id="substeps_rd2_y4h_t5">
+                    <substep ixia_locid="43">
+                        <cmd ixia_locid="44">Provide a user name.</cmd>
+                        <info ixia_locid="21">
+                            <codeblock ixia_locid="22"><systemoutput ixia_locid="23">Enter username to add to LDAP: </systemoutput></codeblock>
+                            <p ixia_locid="25">For convenience, use the same name as the one
+                                assigned for the user's Keystone account. (This example uses
+                                    <nameliteral ixia_locid="45">user1</nameliteral>). When the LDAP
+                                user logs in and establishes Keystone credentials, the LDAP user
+                                name is offered as the default Keystone user name.</p>
+                        </info>
+                        <stepresult ixia_locid="46">
+                            <codeblock ixia_locid="47"><systemoutput ixia_locid="48">Successfully added user user1 to LDAP
+Successfully set password for user user1
+</systemoutput></codeblock>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="49">
+                        <cmd ixia_locid="50">Specify whether to provide a limited shell or a bash shell.</cmd>
+                        <info ixia_locid="51">
+                            <codeblock ixia_locid="52"><systemoutput ixia_locid="53">
+Select Login Shell option # [2]:
+1) Bash
+2) Lshell</systemoutput></codeblock>
+                            <p ixia_locid="75">To provide a limited shell with access to the
+                                OpenStack CLI only, specify the <option ixia_locid="76">Lshell</option> option. </p>
+                            <p ixia_locid="77">If you select <option ixia_locid="78">Bash</option>,
+                                you are offered the option to add the user to the sudoer list:</p>
+                            <codeblock ixia_locid="79"><systemoutput ixia_locid="80">Add user1 to sudoer list? (yes/No):</systemoutput></codeblock>
+                        </info>
+                    </substep>
+                    <substep importance="optional" ixia_locid="54">
+                        <cmd ixia_locid="55">Specify a secondary user group for this LDAP user.</cmd>
+                        <info ixia_locid="56">
+                            <codeblock ixia_locid="29"><systemoutput ixia_locid="30">Add user1 to secondary user group (yes/No):</systemoutput></codeblock>
+                        </info>
+                    </substep>
+                    <substep importance="optional" ixia_locid="57">
+                        <cmd ixia_locid="58">Change the password duration.</cmd>
+                        <info ixia_locid="59">
+                            <codeblock ixia_locid="60"><systemoutput ixia_locid="61">Enter days after which user password must be changed [90]:</systemoutput></codeblock>
+                        </info>
+                        <stepresult ixia_locid="62">
+                            <codeblock ixia_locid="35"><systemoutput ixia_locid="36">Successfully modified user entry uid=ldapuser1, ou=People, dc=cgcs, dc=local in LDAP
+Updating password expiry to 90 days</systemoutput></codeblock>
+                        </stepresult>
+                    </substep>
+                    <substep importance="optional" ixia_locid="63">
+                        <cmd ixia_locid="64">Change the warning period before the password
+                            expires.</cmd>
+                        <info ixia_locid="65">
+                            <codeblock ixia_locid="66"><systemoutput ixia_locid="67">Enter days before password is to expire that user is warned [2]:</systemoutput></codeblock>
+                        </info>
+                        <stepresult ixia_locid="68">
+                            <codeblock ixia_locid="69"><systemoutput ixia_locid="70">Updating password expiry to 2 days</systemoutput></codeblock>
+                        </stepresult>
+                    </substep>
+                </substeps>
+                <stepresult ixia_locid="71">
+                    <p ixia_locid="72">On completion of the script, the command prompt is displayed.</p>
+                    <codeblock ixia_locid="73"><systemoutput ixia_locid="74">controller-0: ~$</systemoutput></codeblock>
+                </stepresult>
+            </step>
+        </steps>
+        <result id="result_N100A7_N1001C_N10001" ixia_locid="40">
+            <p ixia_locid="41">The LDAP account is created. For information about the user login process, see <xref href="jow1453475444828.xml" ixia_locid="42"/>.</p>
+        </result>
+    </taskbody>
+</task-wr>

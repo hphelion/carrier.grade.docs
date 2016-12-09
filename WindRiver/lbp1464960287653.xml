@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="lbp1464960287653" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Services Requiring Keystone Tenant and User Provisioning</title>
+  <shortdesc ixia_locid="2">Some services on the Titanium Server Secondary Region must have a
+    service tenant and user provisioned in the Primary Region. </shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+      <p ixia_locid="150">The services listed below require a service tenant and user configured in
+        Keystone on the Primary Region. </p>
+      <p ixia_locid="148">The service names and types are optional parameters in the
+          <filepath ixia_locid="149">region_config</filepath> file. Use of different service names or types in the
+        region_config will be rejected.  For more information, refer to <xref href="vqz1472582405090.xml" ixia_locid="151"/>.</p>
+      <ul id="ul_fy4_mvy_2s">
+        <li ixia_locid="6">
+          <p ixia_locid="7">ceilometer</p>
+        </li>
+        <li ixia_locid="8">
+          <p ixia_locid="9">heat</p>
+        </li>
+        <li ixia_locid="12">
+          <p ixia_locid="13">neutron</p>
+        </li>
+        <li ixia_locid="14">
+          <p ixia_locid="15">nova</p>
+        </li>
+        <li ixia_locid="16">
+          <p ixia_locid="17">nfv</p>
+        </li>
+        <li ixia_locid="20">
+          <p ixia_locid="21">patching</p>
+        </li>
+        <li ixia_locid="22">
+          <p ixia_locid="23">sysinv</p>
+        </li>
+      </ul>
+      <p ixia_locid="5">The following services must have configured Keystone endpoints.</p>
+      <p ixia_locid="54">The service names and types are optional parameters in the region_config
+        file. Use of different service names or types in the <filepath ixia_locid="55">region_config</filepath> will be rejected. For more information, refer to <xref href="vqz1472582405090.xml" ixia_locid="152"/>.</p>
+      <table id="table_wcv_rmb_dx">
+        <tgroup cols="3">
+          <colspec colname="col1" colnum="1"/>
+          <colspec colname="col2" colnum="2"/>
+          <colspec colname="col3" colnum="3"/>
+          <tbody>
+            <row>
+              <entry ixia_locid="56">
+                <p ixia_locid="57">Service Name</p>
+              </entry>
+              <entry ixia_locid="153">
+                <p ixia_locid="59">Service Type </p>
+              </entry>
+              <entry ixia_locid="60">
+                <p ixia_locid="61">Description </p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="62">
+                <p ixia_locid="63">aodh</p>
+              </entry>
+              <entry ixia_locid="64">
+                <p ixia_locid="65">alarming</p>
+              </entry>
+              <entry ixia_locid="66">
+                <p ixia_locid="67">OpenStack Alarming Service</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="68">
+                <p ixia_locid="69">ceilometer</p>
+              </entry>
+              <entry ixia_locid="70">
+                <p ixia_locid="71">metering</p>
+              </entry>
+              <entry ixia_locid="72">
+                <p ixia_locid="73">Openstack Metering Service</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="74">
+                <p ixia_locid="75">cinder</p>
+              </entry>
+              <entry ixia_locid="76">
+                <p ixia_locid="77">volume</p>
+              </entry>
+              <entry ixia_locid="78">
+                <p ixia_locid="79">Cinder Service</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="80">
+                <p ixia_locid="81">cinderv2</p>
+              </entry>
+              <entry ixia_locid="82">
+                <p ixia_locid="83">volumev2 </p>
+              </entry>
+              <entry ixia_locid="84">
+                <p ixia_locid="85">Cinder Service v2</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="92">
+                <p ixia_locid="93">heat</p>
+              </entry>
+              <entry ixia_locid="94">
+                <p ixia_locid="95">orchestration</p>
+              </entry>
+              <entry ixia_locid="96">
+                <p ixia_locid="97">Openstack Orchestration Service</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="98">
+                <p ixia_locid="99">heat-cfn </p>
+              </entry>
+              <entry ixia_locid="100">
+                <p ixia_locid="101">cloudformation</p>
+              </entry>
+              <entry ixia_locid="102">
+                <p ixia_locid="103">Openstack Cloudformation Service</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="104">
+                <p ixia_locid="105">patching</p>
+              </entry>
+              <entry ixia_locid="106">
+                <p ixia_locid="107">patching</p>
+              </entry>
+              <entry ixia_locid="108">
+                <p ixia_locid="109">Patching Service</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="110">
+                <p ixia_locid="111">nova</p>
+              </entry>
+              <entry ixia_locid="112">
+                <p ixia_locid="113">compute</p>
+              </entry>
+              <entry ixia_locid="114">
+                <p ixia_locid="115">Openstack Compute Service</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="122">
+                <p ixia_locid="123">neutron</p>
+              </entry>
+              <entry ixia_locid="124">
+                <p ixia_locid="125">network</p>
+              </entry>
+              <entry ixia_locid="126">
+                <p ixia_locid="127">Neutron Networking Service</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="128">
+                <p ixia_locid="129">glance</p>
+              </entry>
+              <entry ixia_locid="130">
+                <p ixia_locid="131">image</p>
+              </entry>
+              <entry ixia_locid="132">
+                <p ixia_locid="133">OpenStack Image Service</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="134">
+                <p ixia_locid="135">sysinv</p>
+              </entry>
+              <entry ixia_locid="136">
+                <p ixia_locid="137">platform</p>
+              </entry>
+              <entry ixia_locid="138">
+                <p ixia_locid="139">SysInvService</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="140">
+                <p ixia_locid="141">vim</p>
+              </entry>
+              <entry ixia_locid="142">
+                <p ixia_locid="143">nfv</p>
+              </entry>
+              <entry ixia_locid="144">
+                <p ixia_locid="145">Virtual Infrastructure Manager</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </refbody>
+</reference-wr>

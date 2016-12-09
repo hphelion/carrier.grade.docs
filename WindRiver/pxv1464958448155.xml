@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="pxv1464958448155" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Primary Region</title>
+ <shortdesc ixia_locid="2">The Primary Region can be either a Titanium Server Cloud or a Third Party
+  OpenStack Cloud. In either case, the primary region shares one or more OpenStack services with the
+  Secondary Region(s). </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <draft-comment author="eknowlto" ixia_locid="23">US76710</draft-comment>
+  <p ixia_locid="14">For a Titanium Server Primary Region, the following shared services are
+   provided:</p>
+  <ul id="ul_l2h_mbg_fs">
+   <li ixia_locid="15">
+    <p ixia_locid="16">Keystone (identity) service</p>
+   </li>
+   <li ixia_locid="17">
+    <p ixia_locid="18">Cinder (block storage) service</p>
+   </li>
+   <li ixia_locid="21">
+    <p ixia_locid="22">Glance (image) service</p>
+   </li>
+  </ul>
+  <p ixia_locid="10">The Primary Region’s Keystone service must be configured with a tenant, users,
+   services, and service endpoints for both the Primary Region services and the Secondary Region
+   services.</p>
+ </conbody>
+</concept-wr>

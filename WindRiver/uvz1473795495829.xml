@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="uvz1473795495829" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Provisioning Controller-0</title>
+    <shortdesc ixia_locid="2">On a Titanium Server CPE system, you must provision data interfaces
+        and local storage resources for the compute function.</shortdesc>
+    <prolog>
+        <author ixia_locid="542">Jim Owens</author>
+        <author ixia_locid="5">Pedro Sanchez</author>
+        <author ixia_locid="6">Tom Towle</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10031_N1002E_N10001" ixia_locid="396"/>
+        <steps>
+            <step id="step_N10212_N10055_N10028_N10001" ixia_locid="109">
+                <cmd ixia_locid="110">Using a Web browser, navigate to the OAM floating IP address
+                    to verify that the Titanium Server web administration interface is
+                    available.</cmd>
+                <info ixia_locid="111">
+                    <p ixia_locid="112">To identify the OAM floating IP address, consult your
+                        configuration plan.</p>
+                </info>
+                <stepresult ixia_locid="114">
+                    <p ixia_locid="573">The <wintitle ixia_locid="574">Wind River Titanium Server</wintitle> login
+                        screen appears.</p>
+                    <fig id="fig_N10228_N1021D_N1020A_N10055_N10028_N10001" ixia_locid="575">
+                        <title ixia_locid="576">Wind River Titanium Server login screen</title>
+                        <image href="jow1404333491396.image" id="image_t5q_4b1_dn" ixia_locid="577" placement="inline"/>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10244_N10055_N10028_N10001" ixia_locid="578">
+                <cmd ixia_locid="579">Log in using the cloud <nameliteral ixia_locid="580">admin</nameliteral> account.</cmd>
+                <stepresult ixia_locid="581">
+                    <p ixia_locid="582">The <wintitle ixia_locid="583">Wind River Titanium Server</wintitle> web
+                        administration interface appears.</p>
+                    <fig id="fig_N10251_N10246_N1023B_N10055_N10028_N10001" ixia_locid="184">
+                        <title ixia_locid="186">Wind River Titanium Server web administration
+                            interface</title>
+                        <image href="jow1404333493002.image" id="image_pzt_1ts_g4" ixia_locid="192" placement="inline"/>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N1026E_N10055_N10028_N10001" ixia_locid="584">
+                <cmd ixia_locid="194">In the left-hand pane, select <menucascade ixia_locid="805">
+                        <uicontrol ixia_locid="585">Admin</uicontrol>
+                        <uicontrol ixia_locid="806">Platform</uicontrol>
+                        <uicontrol ixia_locid="196">Host Inventory</uicontrol>
+                    </menucascade>, and then select the <uicontrol ixia_locid="133">Hosts</uicontrol> tab.</cmd>
+                <stepresult ixia_locid="198">
+                    <p ixia_locid="135"><draft-comment author="jowens" dir="ltr" ixia_locid="794" translate="no">US77470 updated
+                            screen</draft-comment><nameliteral ixia_locid="200">Controller-0</nameliteral> is reported in the hosts inventory list.</p>
+                    <fig id="fig_N10281_N10277_N10264_N10055_N10028_N10001" ixia_locid="182">
+                        <image href="jmc1462543311057.image" id="image_qdm_xtp_wv" ixia_locid="792" placement="inline">
+                            <alt ixia_locid="793">Host Inventory (controller-0 only)</alt>
+                        </image>
+                    </fig>
+                    <note id="note_N10624_N1060A_N105F1_N100AA_N1002E_N10001" ixia_locid="680" product="tis_cpe">
+                        <p ixia_locid="682">For a Titanium Server CPE configuration, the
+                                <nameliteral ixia_locid="683">Status</nameliteral> shows "Compute
+                            config required."</p>
+                    </note>
+                </stepresult>
+            </step>
+            <step id="step_N1045B_N1008E_N1002E_N10001" ixia_locid="286" product="tis_cpe">
+                <cmd ixia_locid="287"><draft-comment author="jowens" dir="ltr" ixia_locid="586" translate="no">US68057 this step restructured to accommodate new storage
+                        steps</draft-comment>Configure the data interfaces on <nameliteral ixia_locid="288">controller-0</nameliteral>.</cmd>
+                <info ixia_locid="587">
+                    <p ixia_locid="588">For the compute function to be configured, the data
+                        interfaces must be attached to provider networks.</p>
+                </info>
+                <substeps id="substeps_u5p_fth_yr">
+                    <substep ixia_locid="289">
+                        <cmd ixia_locid="290">Create the required provider networks.</cmd>
+                        <info ixia_locid="291">
+                            <p ixia_locid="292">For detailed instructions, see <xref href="jow1431018516980.xml" ixia_locid="804"/>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="299">
+                        <cmd ixia_locid="300">Using the CLI, attach the data interfaces to the
+                            provider networks.</cmd>
+                        <info ixia_locid="301">
+                            <p ixia_locid="520">The Titanium Server CPE configuration allows you to
+                                define data interfaces on the unlocked <nameliteral ixia_locid="298">controller-0</nameliteral> from the CLI during initial setup.
+                                (You cannot do this from the web administration interface.)</p>
+                            <p ixia_locid="562">For details, see <xref href="jow1427029415968.xml" ixia_locid="563"/>.</p>
+                        </info>
+                        <stepxmp ixia_locid="685">
+                            <p ixia_locid="686">For example, to attach an ethernet interface
+                                    named<nameliteral ixia_locid="687"> eth3</nameliteral> to a data
+                                network configured with provider network <nameliteral ixia_locid="688">providernet-a</nameliteral>:</p>
+                            <codeblock ixia_locid="689"><systemoutput ixia_locid="690">~(keystone_admin)$ </systemoutput><userinput ixia_locid="691">system host-if-modify -n eth3 -nt data controller-0 eth3 -p providernet-a</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N106AF_N100AA_N1002E_N10001" ixia_locid="692" product="tis_cpe">
+                <cmd ixia_locid="693"><draft-comment author="jowens" dir="ltr" ixia_locid="694" translate="no">US68057 added; US69978 reworked</draft-comment>Add a local
+                    volume group to provide local storage for the compute function.</cmd>
+                <substeps id="substeps_jsv_k4h_f5">
+                    <substep ixia_locid="592">
+                        <cmd ixia_locid="593">In the Hosts lists, click the host name
+                                (<nameliteral ixia_locid="594">controller-0</nameliteral>).</cmd>
+                        <stepresult ixia_locid="595">
+                            <p ixia_locid="596">The <wintitle ixia_locid="597">Inventory Detail</wintitle> page for the host
+                                appears.</p>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="598">
+                        <cmd ixia_locid="599">Click the <uicontrol ixia_locid="600">Storage</uicontrol> tab.</cmd>
+                    </substep>
+                    <substep ixia_locid="601">
+                        <cmd ixia_locid="602">On the <wintitle ixia_locid="603">Storage</wintitle> page, add a
+                                <nameliteral ixia_locid="604">nova-local</nameliteral> Volume Group.</cmd>
+                        <info ixia_locid="605">
+                            <p ixia_locid="606">Click <uicontrol ixia_locid="607">Add Local Volume Group</uicontrol>.</p>
+                            <fig id="fig_gk3_mqh_f5" ixia_locid="608">
+                                <image href="jow1449163370118.image" id="image_myt_mqh_f5" ixia_locid="609" placement="inline">
+                                    <alt ixia_locid="610">TiS Local Volume Groups default for combined node</alt>
+                                </image>
+                            </fig>
+                            <p ixia_locid="611">The Create Local Volume Group dialog box appears,  set by default to
+                                add a<nameliteral ixia_locid="612"> nova-local</nameliteral> group.</p>
+                            <fig id="fig_bqr_sqh_f5" ixia_locid="613">
+                                <image href="jow1449163675683.image" id="image_h45_crh_f5" ixia_locid="614" placement="inline">
+                                    <alt ixia_locid="615">TiS Create Local Volume Group for combined node</alt>
+                                </image>
+                            </fig>
+                            <p ixia_locid="616">Click <uicontrol ixia_locid="617">Create Local Volume Group</uicontrol>.</p>
+                        </info>
+                        <stepresult ixia_locid="618">
+                            <p ixia_locid="619">The <nameliteral ixia_locid="620">nova-local</nameliteral> group is added to the
+                                    <nameliteral ixia_locid="621">Local Volume Groups</nameliteral> list.</p>
+                        </stepresult>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10790_N100AA_N1002E_N10001" ixia_locid="695" product="tis_cpe">
+                <cmd ixia_locid="696"><draft-comment author="jowens" dir="ltr" ixia_locid="697" translate="no">US68057 added; US69978 reworked; CGTS-3558 emphasize non-root
+                        disk for local storage</draft-comment>Assign a physical volume for the local
+                    volume group.</cmd>
+                <substeps id="substeps_ktw_ymm_j5">
+                    <substep ixia_locid="622">
+                        <cmd ixia_locid="623">Click <uicontrol ixia_locid="625">Add Physical
+                                Volume</uicontrol>.</cmd>
+                        <info ixia_locid="50">
+                            <fig id="fig_wgx_ymm_j5" ixia_locid="627">
+                                <image href="jow1449165318154.image" id="image_a3x_ymm_j5" ixia_locid="628" placement="inline">
+                                    <alt ixia_locid="629">TiS Physical Volumes default for combined
+                                        node</alt>
+                                </image>
+                            </fig>
+                            <fig id="fig_k3x_ymm_j5" ixia_locid="54">
+                                <image href="jow1449164986306.image" id="image_ojx_ymm_j5" ixia_locid="630" placement="inline">
+                                    <alt ixia_locid="631">TiS Create Physical Volume for combined
+                                        node</alt>
+                                </image>
+                            </fig>
+                            <p ixia_locid="632">The <wintitle ixia_locid="633">Create Physical
+                                    Volume</wintitle> dialog box appears, with the <uicontrol ixia_locid="634">Local Volume Group</uicontrol> automatically
+                                set to <nameliteral ixia_locid="62">nova-local</nameliteral>.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="635">
+                        <cmd ixia_locid="636">Using the <uicontrol ixia_locid="58">Disks</uicontrol>
+                            drop-down menu, select a non-root disk to provide storage. </cmd>
+                        <info ixia_locid="637">
+                            <p ixia_locid="638">You can add any number of non-root disks to the
+                                    <nameliteral ixia_locid="639">nova-local</nameliteral> group,
+                                limited only by the number of disks available.</p>
+                            <note id="note_N108AF_N108A1_N10893_N10841_N1082F_N100AA_N1002E_N10001" ixia_locid="789" type="caution">
+                                <p ixia_locid="790">Always use non-root disks for
+                                        <nameliteral ixia_locid="791">nova-local</nameliteral> storage. Use of the
+                                    root disk for this purpose is not a supported configuration.</p>
+                            </note>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="640">
+                        <cmd ixia_locid="641">Click <uicontrol ixia_locid="642">Create Physical
+                                Volume</uicontrol>.</cmd>
+                        <stepresult ixia_locid="643">
+                            <p ixia_locid="644">The disk assignment is added to the <nameliteral ixia_locid="645">Physical Volumes</nameliteral> list.</p>
+                        </stepresult>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10832_N100AA_N1002E_N10001" ixia_locid="698" product="tis_cpe">
+                <cmd ixia_locid="699"><draft-comment author="jowens" dir="ltr" ixia_locid="700" translate="no">US68057 added; US69987 reworked</draft-comment>Allocate
+                    resources on the physical volume for the local volume group.</cmd>
+                <substeps id="substeps_ovf_zmm_j5">
+                    <substep ixia_locid="646">
+                        <cmd ixia_locid="647">In the <nameliteral ixia_locid="655">Local Volume
+                                Groups</nameliteral> list, click <uicontrol ixia_locid="656">nova-local</uicontrol> to open the Local Volume Group Detail
+                            page.</cmd>
+                        <info ixia_locid="649">
+                            <fig id="fig_xhp_thn_j5" ixia_locid="657">
+                                <image href="jow1443974043719.image" id="image_h3p_thn_j5" ixia_locid="658" placement="inline">
+                                    <alt ixia_locid="659">TiS Local Volume Group Detail</alt>
+                                </image>
+                            </fig>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="702">
+                        <cmd ixia_locid="703">Select the <uicontrol ixia_locid="661">Parameters</uicontrol>
+                            tab.</cmd>
+                        <info ixia_locid="704">
+                            <fig id="fig_h3v_khn_j5" ixia_locid="662">
+                                <image href="jow1443974983289.image" id="image_bjv_khn_j5" ixia_locid="663" placement="inline">
+                                    <alt ixia_locid="664">TiS Local Volume Group Detail Parameters
+                                        tab</alt>
+                                </image>
+                            </fig>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="705">
+                        <cmd ixia_locid="706"><draft-comment author="jowens" dir="ltr" ixia_locid="723" translate="no">US69978 new
+                                step</draft-comment>Select the <parmname ixia_locid="724">Instance Backing</parmname>
+                            type.</cmd>
+                        <info ixia_locid="707">
+                            <p ixia_locid="708">Click <nameliteral ixia_locid="709">Edit</nameliteral> for the <parmname ixia_locid="710">Instance
+                                    Backing</parmname> setting.</p>
+                            <fig id="fig_mlp_53n_j5" ixia_locid="711">
+                                <image href="jow1450466925538.image" id="image_cxw_1jn_j5" ixia_locid="712" placement="inline">
+                                    <alt ixia_locid="713">TiS Edit Local Volume Group Parameter: Instance
+                                        Backing</alt>
+                                </image>
+                            </fig>
+                            <parml>
+                                <plentry ixia_locid="714">
+                                    <pt ixia_locid="715">LVM backed</pt>
+                                    <pd ixia_locid="717">
+                                        <p ixia_locid="718">Local storage for instances is provided
+                                            using LVM RAW disks to optimize run-time I/O
+                                            performance.</p>
+                                    </pd>
+                                </plentry>
+                                <plentry ixia_locid="719">
+                                    <pt ixia_locid="720">CoW Image backed</pt>
+                                    <pd ixia_locid="722">
+                                        <p ixia_locid="725">Local storage for instances is provided
+                                            using copy-on-write (CoW) image files to optimize launch
+                                            and delete performance.  This is the default. </p>
+                                    </pd>
+                                </plentry>
+                            </parml>
+                            <p ixia_locid="726">For more information about the <parmname ixia_locid="727">Instance Backing</parmname> type, see <ph ixia_locid="807" otherprops="printonly"><cite ixia_locid="808">Titanium Server System
+                                        Administration:</cite></ph><cite ixia_locid="809"><ph ixia_locid="810"><xref href="jow1443470081421.xml" ixia_locid="811"/></ph></cite>.</p>
+                            <p ixia_locid="729">After making your selection, click <uicontrol ixia_locid="730">Save</uicontrol> to
+                                return to the Parameters tab. </p>
+                        </info>
+                        <stepresult ixia_locid="669">
+                            <p ixia_locid="731">The <wintitle ixia_locid="671">Parameters</wintitle>
+                                list is updated to show the corresponding value
+                                    (<nameliteral ixia_locid="732">lvm</nameliteral> or
+                                    <nameliteral ixia_locid="733">image</nameliteral>). </p>
+                            <p ixia_locid="734">If the <parmname ixia_locid="735">Instance Backing</parmname>
+                                parameter is set to <nameliteral ixia_locid="736">image</nameliteral>, the
+                                    <parmname ixia_locid="737">Instances LV Size</parmname> parameter is no longer
+                                shown. </p>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="738">
+                        <cmd ixia_locid="739">If you are using LVM-backed storage, specify the <parmname ixia_locid="740">Instances LV
+                                Size</parmname>.</cmd>
+                        <info ixia_locid="741">
+                            <note id="note_N10964_N10961_N10956_N1085D_N10832_N100AA_N1002E_N10001" ixia_locid="742">
+                                <p ixia_locid="743">The <parmname ixia_locid="744">Instances LV Size</parmname>
+                                    parameter is available only if the <parmname ixia_locid="745">Instance
+                                        Backing</parmname> is set to <nameliteral ixia_locid="746">lvm</nameliteral>.
+                                </p>
+                            </note>
+                            <p ixia_locid="747">Click <uicontrol ixia_locid="666">Edit</uicontrol>,
+                                and then set the <uicontrol ixia_locid="128">Instances Logical
+                                    Volume Size</uicontrol>.<fig id="fig_l4g_zmm_j5" ixia_locid="667">
+                                    <image href="jow1443975258969.image" id="image_fpg_zmm_j5" ixia_locid="130" placement="inline">
+                                        <alt ixia_locid="668">TiS Edit Local Volume Group Parameter
+                                            dialog</alt>
+                                    </image>
+                                </fig></p>
+                            <p ixia_locid="132">If the total space in the volume group is less than
+                                80GB (81920 MiB), then you must allocate at least 2048 MiB. If it is
+                                greater or equal than 80GB (81920 MiB), then you must allocate at
+                                least 5120 MiB. The actual size is limited to ensure at least 50%
+                                free space in the volume group for creating disks for launched
+                                instances. The dialog box provides an acceptable parameter range for
+                                convenience.</p>
+                            <p ixia_locid="748">For more information, see <ph ixia_locid="812" otherprops="printonly"><cite ixia_locid="813">Titanium Server System
+                                            Administration:</cite></ph><cite ixia_locid="814"><ph ixia_locid="815"><xref href="jow1443470081421.xml" ixia_locid="816"/></ph></cite>.</p>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N10855_N100AA_N1002E_N10001" ixia_locid="672" product="tis_cpe">
+                <cmd ixia_locid="305"><draft-comment author="jowens" dir="ltr" ixia_locid="673" translate="no">US68057 restructured to accommodate new storage
+                        steps</draft-comment>Apply the compute-function interface and storage
+                    configuration.</cmd>
+                <info ixia_locid="306">
+                    <p ixia_locid="307">At the command prompt, type the following command:</p>
+                    <codeblock ixia_locid="308"><systemoutput ixia_locid="309">~(keystone_admin)$ </systemoutput><userinput ixia_locid="310">system compute-config-complete</userinput></codeblock>
+                </info>
+                <stepresult ixia_locid="311">
+                    <p ixia_locid="312">The configuration is applied and the host is rebooted. </p>
+                    <note id="note_N10882_N10879_N10854_N100AA_N1002E_N10001" ixia_locid="674">
+                        <p ixia_locid="675">The web administration interface connection is lost, and must be
+                            refreshed after the host has rebooted.</p>
+                    </note>
+                </stepresult>
+            </step>
+            <step id="step_N106CD_N100AA_N1002E_N10001" ixia_locid="553">
+                <cmd ixia_locid="554">If you used a configuration file with the script, delete the
+                    file from the rebooted host.</cmd>
+                <info ixia_locid="555">
+                    <note id="note_N106DA_N106D6_N106CD_N100AA_N1002E_N10001" ixia_locid="556" type="caution">
+                        <p ixia_locid="557">The configuration file contains clear-text
+                            authentication data. For improved security, delete this file from the
+                            system after use.</p>
+                    </note>
+                </info>
+            </step>
+        </steps>
+        <result id="result_N1028D_N10028_N10001" ixia_locid="190">
+            <p ixia_locid="140">The host <nameliteral ixia_locid="141">controller-0</nameliteral> is
+                now fully operational.<ph ixia_locid="803" product="tis_std"> It can be used to initialize all other
+                    hosts in the Titanium Server cluster.</ph></p>
+            <note id="note_N105D7_N105C8_N1002E_N10001" ixia_locid="391" product="tis_cpe">
+                <p ixia_locid="392">You can verify that the <nameliteral ixia_locid="393">nova-compute</nameliteral> service is running on the controller by using
+                    the <cmdname ixia_locid="394">nova service-list</cmdname> command.</p>
+            </note>
+        </result>
+    </taskbody>
+</task-wr>

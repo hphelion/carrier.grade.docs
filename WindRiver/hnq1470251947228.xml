@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="hnq1470251947228" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Upgrading Titanium Server Software</title>
+    <shortdesc ixia_locid="2">You can upgrade a Titanium Server configuration with a new release of
+        Titanium Server platform software. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N10022_N1001F_N10001" ixia_locid="283">
+            <p ixia_locid="284">This procedure assumes that controller-0 is the active controller. </p>
+        </prereq>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="287">While the upgrade is in progress, Nova CLI commands must specify
+                micro version 2.24; for example, <cmdname ixia_locid="288">nova
+                    --os-compute-api-version 2.24</cmdname>.</p>
+            <p ixia_locid="289">The microversion must be specified after the controllers have been
+                upgraded, that is, when the controllers are running 16.10 but any of the computes
+                are running 15.12. This is necessary if you decide to live migrate via the CLI.</p>
+            <draft-comment author="eknowlto" ixia_locid="5">US76710 and US76711 - TBD R3-S7</draft-comment>
+            <note id="note_N1003A_N1002D_N1001F_N10001" ixia_locid="285">
+                <p ixia_locid="286">Live-migrate of instances from 16.10 to 15.12 compute nodes is
+                    not supported.</p>
+            </note>
+        </context>
+        <steps>
+            <step id="step_N10033_N10030_N1001F_N10001" ixia_locid="70">
+                <cmd ixia_locid="71">Install the license file for the release you are upgrading to, for example,
+                    16.00. </cmd>
+                <stepxmp ixia_locid="72">
+                    <codeblock ixia_locid="73"><systemoutput ixia_locid="74">$</systemoutput> <userinput ixia_locid="75">sudo license-install <varname ixia_locid="76">full_path_to_license_file</varname></userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10030_N1002D_N1001B_N10001" ixia_locid="7">
+                <cmd ixia_locid="8">Run the <cmdname ixia_locid="77">load-import</cmdname> command
+                    on controller-0 to import the new release. </cmd>
+                <stepxmp ixia_locid="10">
+                    <codeblock ixia_locid="11"><systemoutput ixia_locid="12">$</systemoutput> <userinput ixia_locid="13">system load-import ~/bootimage.iso</userinput> 
+<systemoutput ixia_locid="78">+--------------------+-----------+
+| Property           | Value     |
++--------------------+-----------+
+| id                 | 2         |
+| state              | importing |
+| software_version   | 16.00     |
+| compatible_version | 15.12     |
+| required_patches   |           |
++--------------------+-----------+
+</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="79">
+                    <p ixia_locid="80">The <cmdname ixia_locid="81">load-import</cmdname> must be
+                        done on controller-0. </p>
+                    <p ixia_locid="82">You must provide the the full path to the ISO image. </p>
+                </info>
+            </step>
+            <step id="step_N10087_N10030_N1001F_N10001" ixia_locid="83">
+                <cmd ixia_locid="84">Check to ensure the load was successfully imported. </cmd>
+                <stepxmp ixia_locid="85">
+                    <codeblock ixia_locid="86"><systemoutput ixia_locid="87">$</systemoutput> <userinput ixia_locid="88">system load-list
+</userinput>
+<systemoutput ixia_locid="89">+----+----------+------------------+
+| id | state    | software_version |
++----+----------+------------------+
+| 1  | active   | 15.12            |
+| 2  | imported | 16.00            |
++----+----------+------------------+
+</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100A2_N10030_N1001F_N10001" ixia_locid="90">
+                <cmd ixia_locid="91">Apply any required patches. </cmd>
+                <info ixia_locid="92">
+                    <p ixia_locid="198">Typically, there may be a patch that is required to be applied prior to a
+                        software upgrade. </p>
+                    <p ixia_locid="93">For more information, see <xref href="psa1410446455735.xml" ixia_locid="94"/>.</p>
+                </info>
+            </step>
+            <step id="step_N100B7_N10030_N1001F_N10001x" ixia_locid="95">
+                <cmd ixia_locid="96">Check the system health status for the upgrade to see if there are any system
+                    alarms.</cmd>
+                <stepxmp ixia_locid="97">
+                    <codeblock ixia_locid="98"><systemoutput ixia_locid="99">$</systemoutput> <userinput ixia_locid="100">system health-query-upgrade
+</userinput>
+<systemoutput ixia_locid="101">System Health:
+All hosts are unlocked/enabled: [OK]
+All hosts have current configurations: [OK]
+All hosts are patch current: [OK]
+No alarms: [Fail]
+[2] alarms found
+Required patches are applied: [OK]
+License valid for upgrade: [OK]</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="102">
+                    <p ixia_locid="199">By default, the upgrade process cannot be run and is not
+                        recommended to be run with Active Alarms present. However, if the Alarms are
+                        of severity Minor or Warning, a <cmdname ixia_locid="200">--force</cmdname>
+                        option can be used on the <cmdname ixia_locid="201">system
+                            upgrade-start</cmdname> command to force the upgrade process to start,
+                        if you feel these alarms will not be an issue over the upgrade process. This
+                        cannot be done for Alarms of severity Major or Critical.</p>
+                    <note id="note_N10109_N100F1_N100D0_N10030_N1001F_N10001" ixia_locid="195">
+                        <p ixia_locid="196">It is strongly recommended that you clear your system of
+                            any and all alarms before doing an upgrade. While the <nameliteral ixia_locid="197">-force</nameliteral> option is available to run the
+                            upgrade, it is a best practice to clear any alarms. </p>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N10050_N10030_N1001F_N10001" ixia_locid="14">
+                <cmd ixia_locid="15">Run the <cmdname ixia_locid="107">upgrade-start</cmdname>
+                    command on controller-0. </cmd>
+                <stepxmp ixia_locid="16">
+                    <codeblock ixia_locid="17"><systemoutput ixia_locid="18">$</systemoutput> <userinput ixia_locid="19">system upgrade-start</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="108">
+                    <note id="note_N1013C_N10138_N10117_N10030_N1001F_N10001" ixia_locid="202">
+                        <p ixia_locid="203">You must ensure that controller-0 has been locked/unlocked at least once
+                            (not the active controller) before starting the upgrade.</p>
+                    </note>
+                    <p ixia_locid="109">The <cmdname ixia_locid="110">upgrade-start</cmdname> must
+                        be done on controller-0. </p>
+                    <p ixia_locid="204">As part of the upgrade, the upgrade process checks the health of the system
+                        and validates that the system is ready for an upgrade. </p>
+                    <p ixia_locid="205">The upgrade process checks that no alarms are active before starting an
+                        upgrade. (Minor and warning alarms can be ignored with the command
+                            <cmdname ixia_locid="206">system upgrade-start -force</cmdname>). </p>
+                    <note id="note_N1015B_N10138_N10117_N10030_N1001F_N10001" ixia_locid="207">
+                        <p ixia_locid="208">Use the command <cmdname ixia_locid="209">system
+                                upgrade-start --force</cmdname> to force the upgrades process to
+                            start even if Alarms of severity Minor and/or Warning exist. This should
+                            ONLY be done if you feel these alarms will not be an issue over the
+                            upgrades process.</p>
+                    </note>
+                    <p ixia_locid="210">On systems with Ceph storage, it also checks that the Ceph cluster is
+                        healthy. </p>
+                    <p ixia_locid="211">For CPE systems, it ensures that no instances are running on controller-1. </p>
+                    <p ixia_locid="212">After <cmdname ixia_locid="213">upgrade-start</cmdname> is
+                        executed and until controller-0 is upgraded, no VM migrations are permitted.
+                        CPE upgrades allow VM migration after controller-1 is active. </p>
+                </info>
+                <info ixia_locid="20">
+                    <p ixia_locid="21">This will make a copy of the system data to be used in the upgrade.
+                        Configuration changes are not allowed after this point, until the upgrade is
+                        completed. </p>
+                </info>
+            </step>
+            <step id="step_N1012A_N10030_N1001F_N10001" ixia_locid="114">
+                <cmd ixia_locid="115">Run the <cmdname ixia_locid="116">host-upgrade-list</cmdname> command to view the current status
+                    of each node. </cmd>
+                <stepxmp ixia_locid="117">
+                    <codeblock ixia_locid="118"><systemoutput ixia_locid="119">$</systemoutput> <userinput ixia_locid="120">system host-upgrade-list
+</userinput>
+<systemoutput ixia_locid="121">+----+--------------+-------------+-----------------+----------------+
+| id | hostname     | personality | running_release | target_release |
++----+--------------+-------------+-----------------+----------------+
+| 1  | controller-0 | controller  | 15.12           | 15.12          |
+| 2  | controller-1 | controller  | 15.12           | 15.12          |
+| 3  | compute-0    | compute     | 15.12           | 15.12          |
+| 4  | compute-1    | compute     | 15.12           | 15.12          |
++----+--------------+-------------+-----------------+----------------+</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N1006F_N10030_N1001F_N10001" ixia_locid="22">
+                <cmd ixia_locid="214">Lock the standby controller, controller-1.</cmd>
+                <stepxmp ixia_locid="215">
+                    <codeblock ixia_locid="216"><systemoutput ixia_locid="217">$</systemoutput> <userinput ixia_locid="218">system host-lock controller-1</userinput>
+</codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10167_N10030_N1001F_N10001" ixia_locid="124">
+                <cmd ixia_locid="125">Upgrade the standby controller, controller-1.</cmd>
+                <stepxmp ixia_locid="126">
+                    <codeblock ixia_locid="127"><systemoutput ixia_locid="128">$</systemoutput><userinput ixia_locid="129">system host-upgrade controller-1</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="270">
+                    <note id="note_N101F2_N101EF_N101D4_N10030_N1001F_N10001" ixia_locid="271">
+                        <draft-comment author="eknowlto" ixia_locid="272">CGTS-5689</draft-comment>
+                        <p ixia_locid="281">Please note that branding tarballs created for previous releases of
+                            Titanium Server are not forward-compatible, and must be recreated to
+                            accommodate the latest branding styles present in Horizon.</p>
+                        <p ixia_locid="273">If you have previously created any customized Horizon branding, then you
+                            need to do the following:</p>
+                        <ul id="ul_t3l_5ph_sx">
+                            <li ixia_locid="274">
+                                <p ixia_locid="275">After upgrading controller-1, copy the new branding tarball to
+                                        <filepath ixia_locid="276">/opt/platform/config/16.10/branding/</filepath> on
+                                    controller-0 and delete the existing tarball in that location.
+                                </p>
+                            </li>
+                            <li ixia_locid="277">
+                                <p ixia_locid="278">Horizon services will not start on controller-1 if there is prior
+                                    branding applied and this step is skipped. </p>
+                            </li>
+                            <li ixia_locid="282">
+                                <p ixia_locid="279">For more information about custom branding, see
+                                    the <cite ixia_locid="280">Titanium Server Software Development
+                                        Kit</cite>.</p>
+                            </li>
+                        </ul>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N1017F_N10030_N1001F_N10001" ixia_locid="130">
+                <cmd ixia_locid="131">Query the hosts' running release and target release status. </cmd>
+                <stepxmp ixia_locid="132">
+                    <codeblock ixia_locid="133"><systemoutput ixia_locid="134">$</systemoutput> <userinput ixia_locid="135">system host-upgrade-list</userinput>
+<systemoutput ixia_locid="136">+----+--------------+-------------+-----------------+----------------+
+| id | hostname     | personality | running_release | target_release |
++----+--------------+-------------+-----------------+----------------+
+| 1  | controller-0 | controller  | 16.00           | 16.00          |
+| 2  | controller-1 | controller  | 16.00           | 16.00          |
+| 3  | compute-0    | compute     | 15.12           | 15.12          |
+| 4  | compute-1    | compute     | 15.12           | 15.12          |
++----+--------------+-------------+-----------------+----------------+</systemoutput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N101C8_N10030_N1001F_N10001" ixia_locid="149">
+                <cmd ixia_locid="150">Wait for data-migration-complete and controller-1 to come online.</cmd>
+                <stepxmp ixia_locid="151">
+                    <codeblock ixia_locid="152"><systemoutput ixia_locid="153">$</systemoutput> <userinput ixia_locid="154">system upgrade-show
+</userinput>
+<systemoutput ixia_locid="155">+--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | cab7517b-51fc-4fe5-9493-ccc2664de78e |
+| state        | data-migration-complete              |
+| from_release | 15.12                                |
+| to_release   | 16.00                                |
++--------------+--------------------------------------+</systemoutput></codeblock>
+                </stepxmp>
+                <info ixia_locid="219">
+                    <p ixia_locid="220">The upgrading of controller-1 and the data migration can take an hour or
+                        more.</p>
+                </info>
+            </step>
+            <step id="step_N10086_N10030_N1001F_N10001" ixia_locid="221">
+                <cmd ixia_locid="222">Unlock standby controller-1.</cmd>
+                <stepxmp ixia_locid="156">
+                    <codeblock ixia_locid="157"><systemoutput ixia_locid="158">$</systemoutput> <userinput ixia_locid="159">system host-unlock controller-1</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="160">
+                    <p ixia_locid="161">Wait for the <nameliteral ixia_locid="162">400.001</nameliteral> Services-related alarm to
+                        clear.</p>
+                </info>
+            </step>
+            <step id="step_N1008F_N10030_N1001F_N10001" ixia_locid="30">
+                <cmd ixia_locid="31">Swact to standby controller-1. </cmd>
+                <stepxmp ixia_locid="163">
+                    <codeblock ixia_locid="164"><systemoutput ixia_locid="165">$</systemoutput> <userinput ixia_locid="166">system host-swact controller-0</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="32">
+                    <p ixia_locid="33">At this point controller-1 is running the new release, while the rest of the
+                        system is running the previous release.  </p>
+                    <p ixia_locid="223">After controller-1 is active on CPE systems, upgrade-abort requires restoring
+                        VM instances (complete outage). </p>
+                </info>
+            </step>
+            <step id="step_N1022B_N10030_N1001F_N10001" ixia_locid="167">
+                <cmd ixia_locid="168">Lock controller-0. </cmd>
+                <stepxmp ixia_locid="290">
+                    <codeblock ixia_locid="291"><systemoutput ixia_locid="292">$</systemoutput> <userinput ixia_locid="293">system host-lock controller-0</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100A0_N10030_N1001F_N10001" ixia_locid="34">
+                <cmd ixia_locid="35">Upgrade controller-0. </cmd>
+                <stepxmp ixia_locid="36">
+                    <note id="note_N102B3_N102AF_N102A5_N10030_N1001F_N10001" ixia_locid="224">
+                        <p ixia_locid="225">Executing this command is the “point of no return” for an inservice abort
+                            of the upgrades process. If you abort the upgrade procedure after this
+                            point, a full system re-installation will be required. </p>
+                        <p ixia_locid="226">We do not support upgrade abort on CPE after controller-0 has been
+                            upgraded.</p>
+                    </note>
+                    <codeblock ixia_locid="37"><systemoutput ixia_locid="38">$</systemoutput> <userinput ixia_locid="39">system host-upgrade controller-0</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N1034F_N10055_N1001F_N10001" ixia_locid="294">
+                <cmd ixia_locid="295">Unlock controller-0.</cmd>
+                <stepxmp ixia_locid="296">
+                    <codeblock ixia_locid="297"><systemoutput ixia_locid="298">$</systemoutput> <userinput ixia_locid="299">system host-unlock controller-0</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100B7_N10030_N1001F_N10001" ixia_locid="40">
+                <cmd ixia_locid="41">If using Ceph storage backend, upgrade the storage nodes one at
+                    a time. </cmd>
+                <info ixia_locid="265">
+                    <p ixia_locid="266">Wait for all alarms to clear after the unlock before proceeding to the next
+                        storage host.</p>
+                </info>
+                <substeps id="substeps_xtb_yd4_qx">
+                    <substep ixia_locid="227">
+                        <cmd ixia_locid="228">Lock storage-0.</cmd>
+                        <stepxmp ixia_locid="229">
+                            <codeblock ixia_locid="230"><systemoutput ixia_locid="231">$</systemoutput> <userinput ixia_locid="232">system host-lock storage-0</userinput>
+</codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="233">
+                        <cmd ixia_locid="234">Upgrade storage-0. </cmd>
+                        <stepxmp ixia_locid="42">
+                            <codeblock ixia_locid="43"><systemoutput ixia_locid="44">$</systemoutput> <userinput ixia_locid="45">system host-upgrade storage-0</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="235">
+                        <cmd ixia_locid="236">Unlock storage-0.</cmd>
+                        <stepxmp ixia_locid="237">
+                            <codeblock ixia_locid="238"><systemoutput ixia_locid="239">$</systemoutput> <userinput ixia_locid="240">system host-unlock storage-0</userinput>
+</codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="241">
+                        <cmd ixia_locid="242">Repeat the above steps for each storage host.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N100CE_N10030_N1001F_N10001" ixia_locid="46">
+                <cmd ixia_locid="47">Upgrade compute hosts, one at a time. </cmd>
+                <info ixia_locid="267">
+                    <p ixia_locid="268">Wait for all alarms to clear after the unlock before proceeding to the next
+                        compute host.</p>
+                </info>
+                <substeps id="substeps_c5g_dkt_qx">
+                    <substep ixia_locid="243">
+                        <cmd ixia_locid="244">Lock compute-0.</cmd>
+                        <stepxmp ixia_locid="245">
+                            <codeblock ixia_locid="246"><systemoutput ixia_locid="247">$</systemoutput> <userinput ixia_locid="248">system host-lock compute-0</userinput>
+</codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="249">
+                        <cmd ixia_locid="250">Upgrade compute-0.</cmd>
+                        <stepxmp ixia_locid="48">
+                            <codeblock ixia_locid="49"><systemoutput ixia_locid="175">$</systemoutput> <userinput ixia_locid="176">system host-upgrade compute-0</userinput></codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="251">
+                        <cmd ixia_locid="252">Unlock compute-0.</cmd>
+                        <stepxmp ixia_locid="253">
+                            <codeblock ixia_locid="254"><systemoutput ixia_locid="255">$</systemoutput> <userinput ixia_locid="256">system host-unlock compute-0</userinput>
+</codeblock>
+                        </stepxmp>
+                    </substep>
+                    <substep ixia_locid="257">
+                        <cmd ixia_locid="258">Repeat the above steps for each compute host.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N100E5_N10030_N1001F_N10001" ixia_locid="52">
+                <cmd ixia_locid="53">Activate the upgrade. </cmd>
+                <stepxmp ixia_locid="54">
+                    <codeblock ixia_locid="55"><systemoutput ixia_locid="56">$</systemoutput> <userinput ixia_locid="57">system upgrade-activate</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="259">
+                    <p ixia_locid="260">During the running of the <cmdname ixia_locid="261">upgrade-activate</cmdname> command, new configurations are applied to
+                        the controller and compute hosts. <nameliteral ixia_locid="262">250.001</nameliteral> (<varname ixia_locid="26">hostname</varname>
+                        <nameliteral ixia_locid="27">Configuration is out-of-date</nameliteral>)
+                        alarms are raised for those nodes and are cleared as the configurations are
+                        applied. The upgrade state goes from <nameliteral ixia_locid="263">activating</nameliteral> to <nameliteral ixia_locid="264">activation-complete</nameliteral> once this is done.</p>
+                </info>
+            </step>
+            <step id="step_N102C3_N10030_N1001F_N10001" ixia_locid="178">
+                <cmd ixia_locid="179">Make controller-0 the active controller.</cmd>
+                <stepxmp ixia_locid="180">
+                    <codeblock ixia_locid="181"><systemoutput ixia_locid="182">$</systemoutput> <userinput ixia_locid="183">system host-swact controller-1</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100FC_N10030_N1001F_N10001" ixia_locid="58">
+                <cmd ixia_locid="59">Complete the upgrade. </cmd>
+                <stepxmp ixia_locid="184">
+                    <codeblock ixia_locid="185"><systemoutput ixia_locid="186">$</systemoutput> <userinput ixia_locid="187">system upgrade-complete</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10113_N10030_N1001F_N10001" ixia_locid="64">
+                <cmd ixia_locid="65">Delete the previous, old release load. </cmd>
+                <stepxmp ixia_locid="66">
+                    <codeblock ixia_locid="67"><systemoutput ixia_locid="68">$</systemoutput> <userinput ixia_locid="69">system load-delete <varname ixia_locid="269">loadID</varname></userinput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

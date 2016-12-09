@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="nme1476961099718" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Sample Commands for Swift API Access from a VM</title>
+  <shortdesc ixia_locid="2">Some Swift API command examples using <cmdname ixia_locid="3">curl</cmdname> are provided for reference.</shortdesc>
+  <prolog>
+    <author ixia_locid="4">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N10023_N10020_N10001" ixia_locid="5">
+      <p ixia_locid="7">
+        <draft-comment author="jowens" ixia_locid="8">US85034 new topic.  (Move to VNF Integration
+          doc?)</draft-comment>
+      </p>
+<codeblock ixia_locid="6"># show account stat (swift stat):
+curl -i $publicURL -I -H "X-Auth-Token: $token"; echo
+
+# show account details and list containers in JSON format (swift list):
+curl -i $publicURL?format=json -X GET -H "X-Auth-Token: $token"; echo
+
+# Create a container test1:
+curl -i $publicURL/test1 -X PUT -H "Content-Length: 0" -H "X-Auth-Token: $token"; echo
+
+# show containter
+curl -i $publicURL/test1 -X GET -H "X-Auth-Token: $token"; echo
+
+#upload a text file hello.txt which has length of 22 (output from ls –l) bytes.
+curl -i $publicURL/test1/hello.txt -X PUT -H "Content-Length: 22" -H "Content-Type: text/html; charset=UTF-8" -H "X-Auth-Token: $token" -T hello.txt
+
+#upload a binary file CentOS-7-x86_64-GenericCloud.raw.tar.gz which has length of 358387943 (output from ls –l) bytes.
+curl -i $publicURL/test1/CentOS-7-x86_64-GenericCloud.raw.tar.gz -X PUT -H "Content-Length: 358387943" -H "X-Auth-Token: $token" -T CentOS-7-x86_64-GenericCloud.raw.tar.gz;date
+
+#download a text file and print out to console:
+curl $publicURL/test1/hello.txt -X GET -H "X-Auth-Token: $token"
+
+#download a binary file and save it to a local file with same name:
+curl $publicURL/test1/CentOS-7-x86_64-GenericCloud.raw.tar.gz -X GET -H "X-Auth-Token: $token" &gt; CentOS-7-x86_64-GenericCloud.raw.tar.gz
+
+      </codeblock>
+    </section>
+  </refbody>
+</reference-wr>

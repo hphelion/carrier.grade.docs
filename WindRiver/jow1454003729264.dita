@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003729264" xml:lang="en-us"><title ixia_locid="1">Backup Dimensioning</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody>
+        <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="11">CGTS-3888 Add letters to equations, move
+                backup to last</draft-comment>Backup storage must be dimensioned to allow for
+            backing up the database and images. Use the following equation to calculate the minimum
+            backup storage allocation:</p>
+        <sl>
+            <sli ixia_locid="6">B = Backup Storage = D GB (database) + X GB (images) + 20 GB
+                (overhead)</sli>
+        </sl>
+        <p ixia_locid="10">Where:</p>
+        <sl id="ul_sgh_wtg_v5">
+            <sli ixia_locid="7">D = Database (see Database Dimensioning section)</sli>
+            <sli ixia_locid="9">X = Images (see Glance Backend Dimensioning section)</sli>
+        </sl>
+    </conbody></concept-wr>

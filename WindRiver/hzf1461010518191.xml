@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="hzf1461010518191" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="427">High-performance Networking</title>
+ <shortdesc ixia_locid="428">Titanium Server provides significantly improved network performance over the default
+  open source OpenStack solution.</shortdesc>
+ <prolog>
+  <author ixia_locid="429">Jim Owens</author>
+    <author ixia_locid="430">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="26">At the center of Titanium Server Networking is a DPDK-Accelerated Virtual L2
+      Switch (AVS), running on the compute node hosts. It provides connectivity between virtual
+      machines on the same or different compute nodes, and between virtual machines and external
+      networks. AVS supports a variety of network connectivity options with the hosted virtual
+      machines: </p>
+  <ul id="ul_mgc_xnp_nn">
+      <li ixia_locid="27">
+        <p ixia_locid="28">Unmodified guests can use Linux networking and virtio drivers. This
+          provides a mechanism to bring existing applications into the production environment
+          immediately.</p>
+        <p ixia_locid="443"><draft-comment author="jowens" ixia_locid="432">US79271
+            added</draft-comment>For virtio interfaces, Titanium Server supports <nameliteral ixia_locid="434">vhost-user</nameliteral> transparently by default. This allows QEMU and
+          AVS to share virtio queues through shared memory, resulting in improved performance over
+          standard virtio.</p>
+      </li>
+   <li ixia_locid="29">
+    <p ixia_locid="30">For backward compatibility, Accelerated Virtual Port (AVP-KMOD) drivers are
+          also supported.</p>
+   </li>
+   <li ixia_locid="31">
+    <p ixia_locid="32">For the highest performance, guest applications can be modified to make use
+          of Intel DPDK libraries and open-source AVP-PMD poll-mode drivers.</p>
+   </li>
+  </ul>
+  <p ixia_locid="253"><draft-comment author="jowens" ixia_locid="396">US62989 mention
+        DNAT</draft-comment>In addition to AVS, Titanium Server incorporates DPDK-Accelerated
+      Neutron Virtual Router L3 Forwarding (AVR). Accelerated forwarding is used for directly
+      attached tenant networks and subnets, as well as for gateway, SNAT, DNAT, and floating IP
+      functionality.</p>
+  <p ixia_locid="351">Titanium Server also supports direct guest access to NICs using PCI
+      passthrough or SR-IOV, with enhanced NUMA scheduling options compared to standard
+      OpenStack.</p>
+  <p ixia_locid="412"><draft-comment author="jowens" ixia_locid="405">US64378 added
+    para</draft-comment>For further performance improvements, Titanium Server supports direct access
+   to PCI-based hardware accelerators, such as the Coleto Creek encryption accelerator from Intel.
+   Titanium Server manages the allocation of SR-IOV VFs to VMs, and provides intelligent scheduling
+   to optimize NUMA node affinity.</p>
+    <p ixia_locid="448">For more information, see <ph ixia_locid="449" otherprops="printonly"><cite ixia_locid="450">Titanium Server
+        Planning:</cite></ph><cite ixia_locid="451"><ph ixia_locid="452"><xref href="jow1423169316542.xml" ixia_locid="453"/></ph></cite></p>
+    <section id="section_N10092_N10024_N10001" ixia_locid="445">
+      <title ixia_locid="446">High Performance Networking Drivers</title>
+      <p ixia_locid="447">The Titanium Server SDK provides high-performance AVS-compatible
+        networking drivers, including accelerated kernel network drivers and accelerated DPDK
+        network drivers.</p>
+    </section>
+ </conbody>
+</concept-wr>

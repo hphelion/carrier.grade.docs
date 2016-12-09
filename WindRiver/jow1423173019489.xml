@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1423173019489" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Shared (VLAN) Ethernet Interfaces</title>
+ <shortdesc ixia_locid="2">The management, OAM, infrastructure, and data networks can share Ethernet
+    or aggregated Ethernet interfaces using VLAN tagging.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+    <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="73">US82332 updated for new interface
+        names</draft-comment>The OAM, infrastructure, and data networks can use VLAN tagging,
+      allowing them to share an Ethernet or aggregated Ethernet interface with other networks. The
+      internal management network can also be implemented as a VLAN-tagged network on the interface
+      used for PXE booting.</p>
+    <note id="note_N1002C_N1001F_N10001" ixia_locid="70">
+      <p ixia_locid="71">You cannot configure a data VLAN or add a data network on an aggregated
+        Ethernet interface.</p>
+    </note>
+    <p ixia_locid="6">For a system using all four networks, the following arrangements are
+      possible:</p>
+    <ul id="ul_y5k_zg2_zq">
+      <li ixia_locid="7">
+        <p ixia_locid="8">One interface for the internal management network, another interface for
+          the OAM network, a third for the infrastructure network, and one or more additional
+          interfaces for data networks.</p>
+      </li>
+      <li ixia_locid="9">
+        <p ixia_locid="10">One interface for the internal management network, and a second interface
+          for either the OAM or infrastructure network, with the remaining networks implemented
+          using VLAN tagging on either interface.</p>
+      </li>
+      <li ixia_locid="11">
+        <p ixia_locid="12">One interface for the internal management network, and a second carrying
+          the OAM and infrastructure networks, both implemented using VLAN tagging, with data
+          networks implemented on either or both interfaces using VLAN tagging.</p>
+      </li>
+      <li ixia_locid="13">
+        <p ixia_locid="14">One interface for the internal management network, with the OAM,
+          infrastructure, and data networks also implemented on it using VLAN tagging.</p>
+      </li>
+    </ul>
+    <note id="note_N100E6_N1001F_N10001" ixia_locid="66">
+      <p ixia_locid="67"><draft-comment author="jowens" ixia_locid="88">CGTS-5862
+          corrections</draft-comment>Data networks implemented using VLAN tagging are not compatible
+        with VLAN-based provider networks. (Stacked VLANs are not supported.) To use a VLAN provider
+        network on a shared ethernet interface, you can edit a management or infrastructure
+        interface to attach also to a data network, and then select the VLAN provider network for
+        the consolidated interface. For more information, see the network type discussion in <ph ixia_locid="77" otherprops="printonly"><cite ixia_locid="78">Titanium Server System
+            Administration: </cite></ph><cite ixia_locid="79"><ph ixia_locid="80"><xref href="jow1426955886080.xml" ixia_locid="81"/></ph></cite>. </p>
+    </note>
+    <p ixia_locid="68">Options to share an interface using VLAN tagging are presented during the
+      configuration controller script. To attach an interface to other networks after configuration,
+      you can edit the interface.</p>
+    <p ixia_locid="82">For more information about configuring VLAN interfaces, see <ph ixia_locid="83" otherprops="printonly"><cite ixia_locid="84">Titanium Server System Administration:
+        </cite></ph><cite ixia_locid="85"><ph ixia_locid="86"><xref href="jow1426951757970.xml" ixia_locid="87"/></ph></cite>
+    </p>
+  </conbody>
+</concept-wr>

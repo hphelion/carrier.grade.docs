@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1445966287915" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Managing IP Address Pools Using the CLI</title>
+    <shortdesc ixia_locid="2"> You can create and manage address pools using CLI
+        commands.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="155">
+            <p ixia_locid="148">For more information about address pools, see <xref href="jow1445966231060.xml" ixia_locid="87"/>.</p>
+        </context>
+        <prereq id="prereq_N1001F_N1001C_N10001" ixia_locid="149">
+            <p ixia_locid="150">To make interface changes, you must lock the compute node first.</p>
+        </prereq>
+        <section id="section_N1003C_N1001F_N10001" ixia_locid="156">
+            <title ixia_locid="157">Creating an Address Pool</title>
+            <p ixia_locid="88">To create an address pool, use a command of the following form:</p>
+            <codeblock ixia_locid="89"><systemoutput ixia_locid="90">~(keystone_admin)$ </systemoutput><userinput ixia_locid="91">system addrpool-add <varname ixia_locid="92">name</varname> <varname ixia_locid="93">network</varname> <varname ixia_locid="164">prefix</varname> \
+[-- order <varname ixia_locid="95">assign_order</varname>] [--ranges <varname ixia_locid="96">addr_ranges</varname>]</userinput></codeblock>
+            <p ixia_locid="97">where:</p>
+            <dl>
+                <dlentry ixia_locid="98">
+                    <dt ixia_locid="99"><varname ixia_locid="100">name</varname></dt>
+                    <dd ixia_locid="101">
+                        <p ixia_locid="102">is a name used to select the pool during data interface
+                            setup</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="103">
+                    <dt ixia_locid="104"><varname ixia_locid="105">network</varname></dt>
+                    <dd ixia_locid="106">
+                        <p ixia_locid="107">is the subnet and mask for the range (for example,
+                                <nameliteral ixia_locid="108">192.168.1.0</nameliteral>) </p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="109">
+                    <dt ixia_locid="110"><varname ixia_locid="111">prefix</varname></dt>
+                    <dd ixia_locid="112">
+                        <p ixia_locid="113">is the subnet mask, expressed in network prefix length
+                            notation (for example, <nameliteral ixia_locid="114">24</nameliteral>)</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="115">
+                    <dt ixia_locid="116"><varname ixia_locid="117">assign_order</varname></dt>
+                    <dd ixia_locid="118">
+                        <p ixia_locid="119">is the order in which to assign addresses from the pool
+                                (<option ixia_locid="120">random</option> or <option ixia_locid="121">sequential</option>). The default is <option ixia_locid="154">random</option>. </p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="122">
+                    <dt ixia_locid="123"><varname ixia_locid="124">addr_ranges</varname></dt>
+                    <dd ixia_locid="125">
+                        <p ixia_locid="126">is a set of IP address ranges to use for assignment,
+                            where the start and end IP address of each range is separated by a dash,
+                            and the ranges are separated by commas (for example, <nameliteral ixia_locid="127">192.168.1.10-192.168.1.20,
+                                192.168.1.35-192.168.1.45</nameliteral>). If no range is specified,
+                            the full range is used.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+        </section>
+        <section id="section_N10109_N1001F_N10001" ixia_locid="158">
+            <title ixia_locid="159">Listing Address Pools</title>
+            <p ixia_locid="128">To list existing address pools, use a command of the following
+                form:</p>
+            <codeblock ixia_locid="129"><systemoutput ixia_locid="130">~(keystone_admin)$ </systemoutput><userinput ixia_locid="131">system addrpool-show <varname ixia_locid="132">uuid</varname></userinput></codeblock>
+            <p ixia_locid="133">where <varname ixia_locid="134">uuid</varname> is the universally
+                unique identifier for the pool.</p>
+        </section>
+        <section id="section_N10131_N1001F_N10001" ixia_locid="160">
+            <title ixia_locid="161">Modifying an Address Pool</title>
+            <p ixia_locid="135">To modify an address pool, use a command of the following form:</p>
+            <codeblock ixia_locid="136"><systemoutput ixia_locid="137">~(keystone_admin)$ </systemoutput><userinput ixia_locid="138">system addrpool-modify <varname ixia_locid="139">uuid</varname> [--name <varname ixia_locid="140">name</varname>] \
+[-- order <varname ixia_locid="141">assign_order</varname>] [--ranges <varname ixia_locid="142">addr_ranges</varname>]</userinput></codeblock>
+        </section>
+        <section id="section_N1015F_N1001F_N10001" ixia_locid="162">
+            <title ixia_locid="163">Deleting an Address Pool</title>
+            <p ixia_locid="143">To delete an address pool, use a command of the following form:</p>
+            <codeblock ixia_locid="144"><systemoutput ixia_locid="145">~(keystone_admin)$ </systemoutput>system addrpool-delete <varname ixia_locid="146">uuid</varname></codeblock>
+        </section>
+        <postreq id="postreq_N10158_N1001F_N10001" ixia_locid="151">
+            <p ixia_locid="152">To use address pools with data interfaces, see <xref href="jow1445966231060.xml" ixia_locid="165"/>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

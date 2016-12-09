@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1426182435441" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Managing Physical Volumes on a Compute Host</title>
+    <shortdesc ixia_locid="2">You can add, delete, and review physical volumes on a compute
+        host.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="6"><draft-comment author="jowens" ixia_locid="82">US68057 replace local
+                    cross-reference with Install Guide citation</draft-comment>Physical volumes
+                provide storage using local disks. You can use the Web administration or the CLI to
+                manage them. <draft-comment author="jmaran" ixia_locid="97">Updated doc title in
+                    xref.</draft-comment>For more information, see the instructions for configuring
+                a compute node in <cite ixia_locid="81">Titanium Server Installation</cite>.</p>
+            <p ixia_locid="45">As each physical volume is created, it is added to an existing local volume
+                group.</p>
+        </context>
+        <prereq id="prereq_N1002D_N1001F_N10001" ixia_locid="8">
+            <p ixia_locid="9">Before you can modify the settings for a host, you must lock the host: </p>
+            <codeblock ixia_locid="10"><systemoutput ixia_locid="11">~(keystone_admin)$ </systemoutput><userinput ixia_locid="12">system host-lock <varname ixia_locid="13">hostname</varname></userinput></codeblock>
+            <p ixia_locid="35">Before you can add a physical volume, a local volume group must exist on the host. To
+                create one, see <xref href="jow1426181291481.xml" ixia_locid="36"/></p>
+        </prereq>
+        <context id="context_N10042_N1001F_N10001" ixia_locid="14">
+            <p ixia_locid="15">The following CLI commands are available for managing physical volumes.</p>
+            <codeblock ixia_locid="16"><systemoutput ixia_locid="17">~(keystone_admin)$ </systemoutput><userinput ixia_locid="18">system host-pv-add <varname ixia_locid="19">hostname</varname> <varname ixia_locid="37">groupname</varname> <varname ixia_locid="20">disk_uuid</varname></userinput></codeblock>
+            <p ixia_locid="83">where:</p>
+            <ul id="ul_lvz_lp1_t5">
+                <li ixia_locid="84">
+                    <p ixia_locid="85">
+                        <nameliteral ixia_locid="39">groupname</nameliteral> is the name of the
+                        local volume group to which the physical volume is added.</p>
+                    <note id="note_N1007A_N1004F_N1001F_N10001" ixia_locid="40">
+                        <p ixia_locid="41">The only valid <nameliteral ixia_locid="42">groupname</nameliteral> is <nameliteral ixia_locid="43">nova-local</nameliteral>.</p>
+                    </note>
+                </li>
+                <li ixia_locid="86">
+                    <p ixia_locid="87"><nameliteral ixia_locid="88">disk_uuid</nameliteral> is the identifier of the disk to
+                        use.</p>
+                    <note id="note_N100BC_N100B2_N1008B_N10062_N1001F_N10001" ixia_locid="89" type="caution">
+                        <p ixia_locid="90"><draft-comment author="jowens" ixia_locid="91">CGTS-3558
+                                add non-root disk caution</draft-comment>For <nameliteral ixia_locid="92">nova-local</nameliteral> storage, use of the root
+                            disk is not a supported configuration.</p>
+                    </note>
+                </li>
+            </ul>
+            <p ixia_locid="46">When <nameliteral ixia_locid="47">disk_uuid</nameliteral> indicates
+                the root disk, the physical volume uses a system-designated partition on the root
+                disk. For any other disk, the physical volume uses the entire disk.</p>
+            <codeblock ixia_locid="21"><systemoutput ixia_locid="22">~(keystone_admin)$ </systemoutput><userinput ixia_locid="23">system host-pv-delete <varname ixia_locid="24">hostname</varname> <varname ixia_locid="44">nova-local</varname> <varname ixia_locid="25">disk_uuid</varname></userinput></codeblock>
+            <codeblock ixia_locid="26"><systemoutput ixia_locid="27">~(keystone_admin)$ </systemoutput><userinput ixia_locid="28">system host-pv-list <varname ixia_locid="29">hostname</varname></userinput></codeblock>
+            <codeblock ixia_locid="30"><systemoutput ixia_locid="31">~(keystone_admin)$ </systemoutput><userinput ixia_locid="32">system host-pv-show <varname ixia_locid="33">hostname</varname></userinput></codeblock>
+            <note id="note_N1011E_N10062_N1001F_N10001" ixia_locid="93">
+                <p ixia_locid="94">Commands related to physical volumes, such as <cmdname ixia_locid="95">system host-pv-list</cmdname>, apply to compute hosts only.
+                    They are intended for use when provisioning noval local storage. You can use
+                        <cmdname ixia_locid="96">system host-disk-list</cmdname> to obtain disk
+                    information for any type of node.</p>
+            </note>
+        </context>
+    </taskbody>
+</task-wr>

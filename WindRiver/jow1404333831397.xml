@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1404333831397" xml:lang="en-us">
+    <!-- Modification History
+
+ -->
+    <title ixia_locid="1">Usage Caveats</title>
+    <shortdesc ixia_locid="2">There are some usage issues you should be aware of when working with this
+  release.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+        <author ixia_locid="4">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <section id="section_N10027_N10024_N10001" ixia_locid="54">
+            <title ixia_locid="55">15.12 ini files are not forward compatible with 16.10</title>
+            <p ixia_locid="56">Files must be updated to include two new mandatory keys:
+                MULTICAST_CIDR for MGMT_NETWORK &amp; OAM_NETWORK. The VERSION field must be updated
+                to 16.10. </p>
+        </section>
+        <section id="section_N10034_N10024_N10001" ixia_locid="57">
+            <title ixia_locid="58">For HP ProLiant GEN 9 Servers</title>
+            <p ixia_locid="59">For HP ProLiant GEN 9 servers, turn off RMRR requests in the BIOS
+                before installing or upgrading to this software release. Contact the hardware vendor
+                for more details on the upgrade procedure. </p>
+        </section>
+        <section id="section_N10041_N10024_N10001" ixia_locid="60">
+            <title ixia_locid="61">The minimum firmware version required for Fortville NICs is NVM version
+                5.04</title>
+            <p ixia_locid="62">Please upgrade the firmware before installing or upgrading to this
+                software release. Contact the hardware vendor for more details on the upgrade
+                procedure.</p>
+        </section>
+        <section id="section_N1004E_N10024_N10001" ixia_locid="63">
+            <title ixia_locid="64">Swift Containers and Objects are not saved as part of Backup</title>
+            <p ixia_locid="65"> Contact Wind River for a manual procedure to re-create swift stores post restore.
+            </p>
+        </section>
+        <section id="section_N1005B_N10024_N10001" ixia_locid="66">
+            <title ixia_locid="67">The auto recovery property in the image metadata is
+                ignored</title>
+            <p ixia_locid="68">To turn auto recovery off for instances booting from volume, set the
+                auto recovery property in the flavor instead. </p>
+        </section>
+        <section id="section_N10053_N10024_N10001" ixia_locid="21">
+            <title ixia_locid="22">VMs reported as ACTIVE before compute nodes are recovered</title>
+            <p ixia_locid="36">During a system recovery (for example, after a site power outage),
+                when the controller is available but before the compute nodes are available, the
+                Nova service shows an <nameliteral ixia_locid="37">Active</nameliteral> status for VMs . Until the
+                compute nodes are available, this should be an <nameliteral ixia_locid="38">Error</nameliteral>
+                status.</p>
+        </section>
+        <section id="section_N10081_N10024_N10001" ixia_locid="39">
+            <title ixia_locid="40">Mismatch of interface settings in LAG group</title>
+            <p ixia_locid="41">If the interfaces in a LAG group have mismatched speed or duplex settings, they are
+                marked as incompatible by the system. To prevent this, ensure both interfaces in a
+                LAG group use the same speed and duplex settings.</p>
+        </section>
+        <section id="section_N1008E_N10024_N10001" ixia_locid="42">
+            <title ixia_locid="43">A node must be re-installed after MAC address change on
+                management interface</title>
+            <p ixia_locid="44"><draft-comment author="jowens" ixia_locid="53">US82332 updated
+                    interface names</draft-comment>Any change to the management interface
+                configuration that results in a change of MAC address requires the node to be
+                re-installed. The management interface MAC address can change if the physical
+                Ethernet port is changed (for example, from enpos8 to enpos9), or if a LAG
+                configuration is changed in a way that removes the Ethernet port associated with the
+                LAG MAC address (for example, if the interface originally used for PXE boot is
+                removed or replaced).</p>
+        </section>
+        <section id="section_N10071_N10024_N10001" ixia_locid="45">
+            <title ixia_locid="46">Neutron security groups are not stateful for ICMP
+                protocol</title>
+            <p ixia_locid="47">If a security group does not explicitly allow ingress for ICMP, then
+                incoming responses to outgoing packets using ICMP are blocked. This is in contrast
+                to the OpenStack implementation, where response packets are allowed regardless of
+                ingress rules. </p>
+        </section>
+        <section id="section_N10071_N10024_N10001x" ixia_locid="48">
+            <title ixia_locid="49">Hypervisor CPU usage is reported using special notation </title>
+            <p ixia_locid="50">Partial vcpu notation (y.x) is adopted to show shared and dedicated vpcu model usage
+                on the same compute node.</p>
+        </section>
+    </conbody>
+</concept-wr>

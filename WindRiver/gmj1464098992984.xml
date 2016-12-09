@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="gmj1464098992984" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="789">Applying Patches at Titanium Server Installation</title>
+    <shortdesc ixia_locid="790">To ensure that the Titanium Server software is fully up to date,
+        apply any patches immediately after installing the software.</shortdesc>
+    <prolog>
+        <author ixia_locid="791">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="805">
+            <p ixia_locid="796"><draft-comment author="jowens" dir="ltr" ixia_locid="797" translate="no">CGTS-4484</draft-comment>Patches are located on WindShare (<xref format="html" href="https://windshare.windriver.com/" ixia_locid="798" scope="external">https://windshare.windriver.com/</xref>) under <menucascade ixia_locid="799">
+                    <uicontrol ixia_locid="800">Products</uicontrol>
+                    <uicontrol ixia_locid="801">Titanium Server 2</uicontrol>
+                    <uicontrol ixia_locid="802">Browse Titanium Server Downloads</uicontrol>
+                    <uicontrol ixia_locid="803">Patches</uicontrol>
+                </menucascade> and are labeled <filepath ixia_locid="804">*.patch</filepath>. </p>
+            <p ixia_locid="484">For more information about obtaining and using patches, refer to
+                    <cite ixia_locid="321">Titanium Server Software Management: Managing Software
+                    Patches</cite>.</p>
+        </context>
+        <steps>
+            <step id="step_N10066_N10063_N1001F_N10001" ixia_locid="806">
+                <cmd ixia_locid="263">Copy the patches from a connected server.</cmd>
+                <info ixia_locid="486">
+                    <codeblock ixia_locid="487"><systemoutput ixia_locid="268">$ </systemoutput> <userinput ixia_locid="229">scp <varname ixia_locid="217">username</varname>@<varname ixia_locid="221">sourcehost</varname>:<varname ixia_locid="231">sourcepath</varname>/<varname ixia_locid="488">patchfile</varname> /home/wrsroot</userinput></codeblock>
+                    <p ixia_locid="785">Use the following command, adjusting the media mount point
+                        as needed, if you are using a USB flash drive instead:</p>
+                    <codeblock ixia_locid="786"><systemoutput ixia_locid="787">$ </systemoutput><userinput ixia_locid="788">cp /media/sdc/patchfile /home/wrsroot</userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N100A7_N10063_N1001F_N10001" ixia_locid="807">
+                <cmd ixia_locid="490">Upload the patches to the patch storage area.</cmd>
+                <info ixia_locid="491">
+                    <codeblock ixia_locid="492"><systemoutput ixia_locid="269">$ </systemoutput><userinput ixia_locid="323">sudo sw-patch upload ./<varname ixia_locid="493">patchfile</varname></userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N100C6_N10063_N1001F_N10001" ixia_locid="808">
+                <cmd ixia_locid="494">Apply the patches.</cmd>
+                <info ixia_locid="278">
+                    <draft-comment author="rstone" ixia_locid="464">US62817 changed wrs-patch -&gt;
+                        sw-patch</draft-comment>
+                    <codeblock ixia_locid="495"><systemoutput ixia_locid="496">$ </systemoutput><userinput ixia_locid="325">sudo sw-patch apply --all</userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N100E9_N10063_N1001F_N10001" ixia_locid="809">
+                <cmd ixia_locid="497">Install the patches locally.</cmd>
+                <info ixia_locid="498">
+                    <draft-comment author="rstone" ixia_locid="465">US62817 changed wrs-patch -&gt;
+                        sw-patch</draft-comment>
+                    <codeblock ixia_locid="499"><systemoutput ixia_locid="500">$ </systemoutput><userinput ixia_locid="501">sudo sw-patch install-local</userinput></codeblock>
+                </info>
+                <stepresult ixia_locid="502">
+                    <p ixia_locid="503">This command applies and installs all applied patches on
+                            <nameliteral ixia_locid="754">controller-0</nameliteral>.</p>
+                    <note id="note_N1025B_N10254_N1023C_N101CA_N101B1_N10031_N1001E_N10001" ixia_locid="504">
+                        <p ixia_locid="505">You must reboot the controller to ensure that it is
+                            running with the software fully patched.</p>
+                    </note>
+                </stepresult>
+            </step>
+            <step id="step_N10126_N10063_N1001F_N10001" ixia_locid="810">
+                <cmd ixia_locid="427">Execute the following command to reboot <nameliteral ixia_locid="755">controller-0</nameliteral>.</cmd>
+                <stepxmp ixia_locid="756">
+                    <codeblock ixia_locid="757"><systemoutput ixia_locid="758">$ </systemoutput><userinput ixia_locid="759">sudo shutdown -r now</userinput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+        <result id="result_N10142_N1001F_N10001" ixia_locid="811">
+            <p ixia_locid="508">Patch installation is complete.</p>
+        </result>
+    </taskbody>
+</task-wr>

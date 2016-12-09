@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jyw1477424451910" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Patch Orchestration Capabilities</title>
+ <shortdesc ixia_locid="2">Titanium Server supports patch orchestration, which allows an entire Titanium Server
+  system to be patched with a single operation.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4"/>
+  <p ixia_locid="5">Patch orchestration can be configured and run through the CLI, the Horizon GUI
+   or the VIM REST API.</p>
+  <p ixia_locid="6">Patch orchestration will automatically iterate through all nodes of the system and install the
+   applied patch(es) to each node; first the Controller Nodes, then the Storage Nodes and finally
+   the Compute Nodes. During the patching of Compute Nodes, the migration of VMs off of Compute
+   Nodes being patched, is managed automatically by Patch Orchestration. The Controller Nodes are
+   always patched in serial, however the Storage Nodes and Compute Nodes can configurably be patched
+   in parallel in order to reduce the overall time of installing the patch.</p>
+  <p ixia_locid="7"> Patch orchestration can install 1 or more applied patches at the same time, and can install
+   Reboot-Required Patches and/or In-Service Patches at the same time. Patch orchestration will only
+   lock/unlock (that is, reboot) a node to install a patch if at least 1 Reboot-Required patch has
+   been applied. </p>
+ </conbody>
+</concept-wr>

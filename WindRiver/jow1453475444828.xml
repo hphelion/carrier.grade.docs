@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1453475444828" xml:lang="en-us">
+<!-- Modification History
+(JO 2016-01-22 might be more appropriately cast as a reference topic)
+        
+-->
+    <title ixia_locid="1">Establishing Keystone Credentials from a Linux Account</title>
+    <shortdesc ixia_locid="2">The preferred method for establishing OpenStack Keystone credentials
+        is to log in to an LDAP account created using <cmdname ixia_locid="3">ldapusersetup</cmdname>.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10023_N10020_N10001" ixia_locid="5">
+            <p ixia_locid="98"><draft-comment author="jowens" ixia_locid="7">US70961 new topic;
+                    US80866 / US80857 updated prompts </draft-comment>For more information about
+                    <cmdname ixia_locid="99">ldapusersetup</cmdname>, see <xref href="jow1453470830949.xml" ixia_locid="100"/>.</p>
+            <p ixia_locid="101">User accounts created using <cmdname ixia_locid="8">ldapusersetup</cmdname> have access to the OpenStack CLI as part of the shell.
+                To list the available commands, type <nameliteral ixia_locid="80">?</nameliteral> at
+                the command line:</p>
+            <codeblock ixia_locid="81"><systemoutput ixia_locid="82">user1@controller-0:~$ </systemoutput><userinput ixia_locid="83">?</userinput>
+<systemoutput ixia_locid="84">
+awk         cinder  echo    glance  history   ls     neutron    pwd   source
+cat         clear   env     grep    keystone  lsudo  nova       rm    system
+cd          cp      exit    heat    ll        man    openstack  scp   vim 
+ceilometer  cut     export  help    lpath     env    passwd     sftp</systemoutput></codeblock>
+            <p ixia_locid="9">When a user logs in to an account of this type, they are prompted to
+                store Keystone credentials for the duration of the session:</p>
+            <codeblock ixia_locid="10"><systemoutput ixia_locid="11">Pre-store Keystone user credentials for this session? (y/N):</systemoutput><userinput ixia_locid="12">y</userinput></codeblock>
+            <p ixia_locid="13">This invokes a script to obtain the credentials. The user can invoke
+                the same script at any time during the session as follows:</p>
+            <codeblock ixia_locid="15"><systemoutput ixia_locid="86">user1@controller-0:~$ </systemoutput>source ~/lshell_env_setup</codeblock>
+            <p ixia_locid="78">Any OpenStack credentials created by the script persist for the
+                duration of the session. This includes credentials added by previous invocations of
+                the script in the same session.</p>
+        </context>
+        <section id="section_N10079_N10020_N10001" ixia_locid="27">
+            <title ixia_locid="28">The Keystone Credentials Script</title>
+            <p ixia_locid="29">The Keystone credentials script offers the LDAP user name as the
+                default Keystone user name:</p>
+            <codeblock ixia_locid="102"><systemoutput ixia_locid="103">Enter Keystone username [user1]:</systemoutput></codeblock>
+            <p ixia_locid="104">
+                <draft-comment author="jowens" ixia_locid="105">US80866 new prompt</draft-comment>
+            </p>
+            <codeblock ixia_locid="106"><systemoutput ixia_locid="107">Enter Keystone user domain name:</systemoutput></codeblock>
+            <p ixia_locid="96">It requires the name of the tenant for which the user requires access: </p>
+            <codeblock ixia_locid="33"><systemoutput ixia_locid="34">Enter Project name:</systemoutput><userinput ixia_locid="35">tenant1</userinput></codeblock>
+            <note id="note_N1009E_N1007B_N10020_N10001" ixia_locid="37">
+                <p ixia_locid="38">The Keystone user must be a member of the OpenStack tenant. This
+                    is configured using OpenStack.</p>
+            </note>
+            <p ixia_locid="108">
+                <draft-comment author="jowens" ixia_locid="109">US80866 new prompt</draft-comment>
+            </p>
+            <codeblock ixia_locid="110"><systemoutput ixia_locid="111">Enter Project domain name:</systemoutput></codeblock>
+            <p ixia_locid="97">It also requires the Keystone user password: </p>
+            <codeblock ixia_locid="39"><systemoutput ixia_locid="40">Enter Keystone password:</systemoutput></codeblock>
+            <p ixia_locid="90">When the script is run during login, it sets the default <nameliteral ixia_locid="91">Keystone Region
+                    Name</nameliteral> and <nameliteral ixia_locid="92">Keystone Authentication URL</nameliteral>. </p>
+            <codeblock ixia_locid="42"><systemoutput ixia_locid="43">Selecting default Keystone Region Name: RegionOne
+Selecting default Keystone Authentication URL: http://192.168.204.2:5000/v2.0/
+To re-configure your environment run "source ~/lshell_env_setup" in your shell
+
+Keystone credentials preloaded!</systemoutput></codeblock>
+            <p ixia_locid="93">If the script is run from the shell after login, it provides an
+                option to change the <nameliteral ixia_locid="94">Keystone Region Name</nameliteral>
+                and <nameliteral ixia_locid="95">Keystone Authentication URL</nameliteral>.</p>
+        </section>
+        <section id="section_N100B5_N10020_N10001" ixia_locid="44">
+            <title ixia_locid="45">Alternative Methods for Establishing Keystone Credentials</title>
+            <p ixia_locid="46">You can also establish Keystone credentials using the following
+                methods:</p>
+            <ul id="ul_scj_rch_t5">
+                <li ixia_locid="47">
+                    <p ixia_locid="48">Download an OpenStack RC file (<filepath ixia_locid="49">openrc.sh</filepath>) from the Web administration interface, and use it
+                        to source the required environment. For more information, refer to <xref format="html" href="http://docs.openstack.org" ixia_locid="50" scope="external"/>.</p>
+                </li>
+                <li ixia_locid="51">
+                    <p ixia_locid="52">Add the required environment variables manually:</p>
+                    <dl>
+                        <dlentry ixia_locid="112">
+                            <dt ixia_locid="113"><macro ixia_locid="141">OS_USERNAME</macro></dt>
+                            <dd ixia_locid="115">
+                                <p ixia_locid="116">the Keystone user name</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="117">
+                            <dt ixia_locid="118"><macro ixia_locid="142">OS_USER_DOMAIN_NAME</macro></dt>
+                            <dd ixia_locid="120">
+                                <p ixia_locid="121"><draft-comment author="jowens" ixia_locid="122">US80866 new</draft-comment>the default domain for the
+                                    user</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="58">
+                            <dt ixia_locid="59"><macro ixia_locid="143">OS_PROJECT_NAME</macro></dt>
+                            <dd ixia_locid="61">
+                                <p ixia_locid="62">the tenant name</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="123">
+                            <dt ixia_locid="124"><macro ixia_locid="144">OS_PROJECT_DOMAIN_NAME</macro></dt>
+                            <dd ixia_locid="126">
+                                <p ixia_locid="127"><draft-comment author="jowens" ixia_locid="128">US80866 new</draft-comment>the default domain for the
+                                    project</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="63">
+                            <dt ixia_locid="64"><macro ixia_locid="145">OS_PASSWORD</macro></dt>
+                            <dd ixia_locid="66">
+                                <p ixia_locid="67">a clear text representation of the Keystone password</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="68">
+                            <dt ixia_locid="69"><macro ixia_locid="146">OS_AUTH_URL</macro></dt>
+                            <dd ixia_locid="71">
+                                <p ixia_locid="72">the Keystone Authentication URL</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="129">
+                            <dt ixia_locid="130"><macro ixia_locid="147">OS_IDENTITY_API_VERSION</macro></dt>
+                            <dd ixia_locid="132">
+                                <p ixia_locid="133"><draft-comment author="jowens" ixia_locid="134">US80866
+                                        new</draft-comment>the identity API version</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="135">
+                            <dt ixia_locid="136"><macro ixia_locid="148">OS_INTERFACE</macro></dt>
+                            <dd ixia_locid="138">
+                                <p ixia_locid="139"><draft-comment author="jowens" ixia_locid="140">US80866
+                                        new</draft-comment>the interface</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="73">
+                            <dt ixia_locid="74"><macro ixia_locid="149">OS_REGION_NAME</macro></dt>
+                            <dd ixia_locid="76">
+                                <p ixia_locid="77">the Keystonre Region Name</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                    <p ixia_locid="89">For security and reliability, add all of the variables.</p>
+                </li>
+                <li ixia_locid="87">
+                    <p ixia_locid="88">Provide credentials as command-line options.</p>
+                    <codeblock ixia_locid="22"><systemoutput ixia_locid="23">user1@controller-0:~$ </systemoutput><userinput ixia_locid="24">system --os-username admin --os-password seeCaution host-list </userinput>
+</codeblock>
+                    <note id="note_N10070_N10023_N10020_N10001" ixia_locid="25" type="caution">
+                        <p ixia_locid="26">Wind River does not recommend using the command-line
+                            option to provide OpenStack credentials. It creates a security risk,
+                            because the supplied credentials are visible in the command-line
+                            history.</p>
+                    </note>
+                </li>
+            </ul>
+        </section>
+    </taskbody>
+</task-wr>

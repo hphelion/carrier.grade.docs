@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="azv1475662775494" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Configuring Patch Orchestration</title>
+    <shortdesc ixia_locid="2">You can configure patch orchestration using the web administration
+        interface. </shortdesc>
+    <prolog>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001D_N1001A_N10001" ixia_locid="4">
+            <p ixia_locid="5">The patch orchestration interface is found in the web administration
+                interface on the <wintitle ixia_locid="10">Patch Orchestration</wintitle> tab,
+                available from <menucascade ixia_locid="105">
+                    <uicontrol ixia_locid="106">Admin</uicontrol>
+                    <uicontrol ixia_locid="8">Platform</uicontrol>
+                    <uicontrol ixia_locid="9">Software Management</uicontrol>
+                </menucascade> in the left-hand pane.</p>
+        </context>
+        <steps>
+            <step id="step_N1003F_N1003C_N1001F_N10001" ixia_locid="108">
+                <cmd ixia_locid="85">Upload and apply your patches as described in <xref href="psa1410446455735.xml" ixia_locid="86"/> (do not use <cmdname ixia_locid="87">host-install</cmdname> to install the
+                    patches on any hosts). </cmd>
+            </step>
+            <step id="step_N10029_N10026_N1001A_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Select <menucascade ixia_locid="107">
+                        <uicontrol ixia_locid="88">Platform</uicontrol>
+                        <uicontrol ixia_locid="89">Software Management</uicontrol>
+                    </menucascade>, then select the <uicontrol ixia_locid="90">Patch
+                        Orchestration</uicontrol> tab. </cmd>
+            </step>
+            <step id="step_N1004A_N1003C_N1001F_N10001" ixia_locid="11">
+                <cmd ixia_locid="12">Click the <uicontrol ixia_locid="91">Create Strategy</uicontrol> button. </cmd>
+                <stepresult ixia_locid="13">
+                    <p ixia_locid="109">The Create Strategy dialog appears. </p>
+                    <fig id="fig_uby_pqv_4x" ixia_locid="14">
+                        <image href="tjo1475694801909.image" id="image_ss1_1y5_qx" ixia_locid="92">
+                            <alt ixia_locid="93">Patch Orchestration Strategy Create</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10062_N1003C_N1001F_N10001" ixia_locid="94">
+                <cmd ixia_locid="17">Create a patch strategy by specifying settings for the
+                    parameters in the <wintitle ixia_locid="110">Create Strategy</wintitle> dialog box. </cmd>
+                <info ixia_locid="95">
+                    <ul id="ul_m3h_3nr_nx">
+                        <li ixia_locid="19">
+                            <p ixia_locid="20"><nameliteral ixia_locid="96">controller-apply-type</nameliteral>: </p>
+                            <ul id="ul_n3h_3nr_nx">
+                                <li ixia_locid="21">
+                                    <p ixia_locid="22">serial (default): controllers will be patched
+                                        one at a time (standby controller first) </p>
+                                </li>
+                                <li ixia_locid="23">
+                                    <p ixia_locid="24">ignore: controllers will not be patched </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="25">
+                            <p ixia_locid="26"><nameliteral ixia_locid="97">storage-apply-type</nameliteral>: </p>
+                            <ul id="ul_o3h_3nr_nx">
+                                <li ixia_locid="27">
+                                    <p ixia_locid="28">serial (default): storage hosts will be
+                                        patched one at a time </p>
+                                </li>
+                                <li ixia_locid="29">
+                                    <p ixia_locid="30">parallel: storage hosts will be patched in
+                                        parallel, ensuring that only one storage node in each
+                                        redundancy group is patched at a time. </p>
+                                </li>
+                                <li ixia_locid="31">
+                                    <p ixia_locid="32">ignore: storage hosts will not be patched
+                                    </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="33">
+                            <p ixia_locid="34"><nameliteral ixia_locid="98">compute-apply-type</nameliteral>: </p>
+                            <ul id="ul_p3h_3nr_nx">
+                                <li ixia_locid="35">
+                                    <p ixia_locid="36">serial (default): compute hosts will be
+                                        patched one at a time </p>
+                                </li>
+                                <li ixia_locid="37">
+                                    <p ixia_locid="38">parallel: compute hosts will be patched in
+                                        parallel, ensuring that: </p>
+                                    <ul id="ul_q3h_3nr_nx">
+                                        <li ixia_locid="39">
+                                            <p ixia_locid="40">At most half of the hosts in a host
+                                                aggregate will be patched at the same time. </p>
+                                        </li>
+                                        <li ixia_locid="41">
+                                            <p ixia_locid="42">For instances in server groups with
+                                                anti-affinity policies (including best effort), only
+                                                a single instance in the server group will be
+                                                impacted at a time. </p>
+                                        </li>
+                                        <li ixia_locid="43">
+                                            <p ixia_locid="44">At most, 10 compute hosts will be
+                                                patched at the same time. </p>
+                                        </li>
+                                    </ul>
+                                    <note id="note_N10160_N10134_N10126_N10119_N100BD_N100B9_N100AA_N10046_N1001F_N10001" ixia_locid="138">
+                                        <p ixia_locid="139"><b ixia_locid="140">Warning:</b> Using
+                                            the <cmdname ixia_locid="141">stop-start</cmdname>
+                                            option will result in an outage for each instance, as it
+                                            is stopped while the compute host is
+                                            locked/patched/unlocked. In order to ensure this does
+                                            not impact service, instances MUST be grouped into
+                                            anti-affinity (or anti-affinity best effort) server
+                                            groups, which will ensure that only a single instance in
+                                            each server group is stopped at a time.</p>
+                                    </note>
+                                </li>
+                                <li ixia_locid="45">
+                                    <p ixia_locid="46">ignore: compute hosts will not be patched
+                                    </p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li ixia_locid="47">
+                            <p ixia_locid="48"><nameliteral ixia_locid="99">default-instance-action</nameliteral>: </p>
+                            <ul id="ul_r3h_3nr_nx">
+                                <li ixia_locid="49">
+                                    <p ixia_locid="100">stop-start (default): instances will be
+                                        stopped before a host is patched (applies to reboot patching
+                                        only) </p>
+                                    <note id="note_N1015F_N10156_N10152_N10146_N10099_N10096_N1008C_N1003C_N1001F_N10001" ixia_locid="142">
+                                        <p ixia_locid="143"><b ixia_locid="144">Warning:</b> Using the <cmdname ixia_locid="145">stop-start</cmdname> option will
+                                            result in an outage for each instance, as it is stopped
+                                            while the compute host is locked/patched/unlocked. In
+                                            order to ensure this does not impact service, instances
+                                            MUST be grouped into anti-affinity (or anti-affinity
+                                            best effort) server groups, which will ensure that only
+                                            a single instance in each server group is stopped at a
+                                            time.</p>
+                                    </note>
+                                </li>
+                                <li ixia_locid="52">
+                                    <p ixia_locid="123">migrate: instances will be migrated off a
+                                        host before it is patched (applies to reboot patching
+                                        only).</p>
+                                    <note id="note_N1013B_N10137_N10133_N10120_N10117_N10073_N1006A_N10066_N1001F_N10001" ixia_locid="114">
+                                        <p ixia_locid="124">This option can only be used with the
+                                            serial <nameliteral ixia_locid="103">compute-apply-type</nameliteral>. </p>
+                                    </note>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </info>
+            </step>
+            <step id="step_N101E5_N10046_N1001F_N10001" ixia_locid="115">
+                <cmd ixia_locid="116">Click <uicontrol ixia_locid="117">Create Strategy</uicontrol>
+                    to save the patch orchestration strategy. </cmd>
+                <info ixia_locid="118">
+                    <p ixia_locid="63">Examine the patch strategy. Pay careful attention to: </p>
+                    <ul id="ul_t3h_3nr_nx">
+                        <li ixia_locid="64">
+                            <p ixia_locid="65">The sets of hosts that will be patched together in
+                                each stage. </p>
+                        </li>
+                        <li ixia_locid="66">
+                            <p ixia_locid="67">The sets of instances that will be impacted in each
+                                stage. </p>
+                        </li>
+                    </ul>
+                </info>
+                <info ixia_locid="125">
+                    <p ixia_locid="55">The patch strategy has one or more stages, with each stage
+                        consisting of one or more hosts to be patched at the same time. Each stage
+                        is split into steps (for example, <cmdname ixia_locid="82">query-alarms</cmdname>, <cmdname ixia_locid="111">lock-hosts</cmdname>,
+                            <cmdname ixia_locid="112">sw-patch-hosts</cmdname>). Note the following
+                        about stages: </p>
+                    <ul id="ul_s3h_3nr_nx">
+                        <li ixia_locid="56">
+                            <p ixia_locid="57">Controller hosts are patched first, followed by
+                                storage hosts and then compute hosts. </p>
+                        </li>
+                        <li ixia_locid="58">
+                            <p ixia_locid="59">Compute hosts with no instances are patched before
+                                compute hosts with instances. </p>
+                        </li>
+                        <li ixia_locid="60">
+                            <p ixia_locid="61">The final step in each stage is "system-stabilize,"
+                                which waits for a period of time (up to several minutes) and ensures
+                                that the system is free of alarms. This ensures that the patch
+                                orchestrator does not continue to patch more hosts if the patch
+                                application has caused an issue resulting in an alarm. </p>
+                        </li>
+                    </ul>
+                </info>
+            </step>
+            <step id="step_N10214_N10046_N1001F_N10001" ixia_locid="119">
+                <cmd ixia_locid="120">Click the <uicontrol ixia_locid="126">Apply Strategy</uicontrol> button to
+                    apply the patch-strategy. You can optionally apply a single stage at a time by
+                    clicking the <uicontrol ixia_locid="127">Apply Stage</uicontrol> button. </cmd>
+                <info ixia_locid="121">
+                    <p ixia_locid="128">When applying a single stage, you can only apply the next stage; you cannot
+                        skip stages.</p>
+                </info>
+            </step>
+            <step id="step_N10244_N10046_N1001F_N10001" ixia_locid="129">
+                <cmd ixia_locid="130">Optional: To abort the patch, click the <uicontrol ixia_locid="131">Abort Strategy</uicontrol> button. </cmd>
+                <info ixia_locid="132">
+                    <ul id="ul_pwx_xc4_sx">
+                        <li ixia_locid="70">
+                            <p ixia_locid="71">While a patch-strategy is being applied, it can be
+                                aborted. This results in: </p>
+                            <ul id="ul_u3h_3nr_nx">
+                                <li ixia_locid="72">
+                                    <p ixia_locid="73">The current step will be allowed to complete.
+                                    </p>
+                                </li>
+                                <li ixia_locid="74">
+                                    <p ixia_locid="75">If necessary an abort phase will be created
+                                        and applied, which will attempt to: </p>
+                                    <ul id="ul_v3h_3nr_nx">
+                                        <li ixia_locid="76">
+                                            <p ixia_locid="77">unlock any hosts that were locked
+                                            </p>
+                                        </li>
+                                        <li ixia_locid="78">
+                                            <p ixia_locid="79">start any instances that were stopped
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <note id="note_N10293_N1024F_N10244_N10046_N1001F_N10001" ixia_locid="133">
+                        <p ixia_locid="134">If a patch-strategy is aborted after hosts were locked, but before they
+                            were patched, the hosts will not be unlocked, as this would result in
+                            the patches being installed. You must either install the patches on the
+                            hosts or remove the patches before unlocking the hosts and restarting
+                            any instances that had been stopped by patch orchestration.</p>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N1029F_N10046_N1001F_N10001" ixia_locid="135">
+                <cmd ixia_locid="136">Delete the patch-strategy. </cmd>
+                <info ixia_locid="137">
+                    <p ixia_locid="81">After a patch strategy has been applied (or aborted) it must
+                        be deleted before another patch strategy can be created. If a patch strategy
+                        application fails, you must address the issue that caused the failure, then
+                        delete and re-create the strategy before attempting to apply it again. </p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

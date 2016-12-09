@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1452023307712" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Devices Tab</title>
+ <shortdesc ixia_locid="2">The <uicontrol ixia_locid="3">Devices</uicontrol> tab on the <wintitle ixia_locid="4">Inventory Detail</wintitle> page presents  details for non-NIC PCI devices that
+  can be made available for use by VMs.</shortdesc>
+ <prolog>
+  <author ixia_locid="5">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="232"><draft-comment author="jowens" ixia_locid="7">US64378 new topic. TBD: Are
+    supported devices listed in the Release Notes or the New Hardware table?</draft-comment>All
+   non-NIC PCI devices that can be exposed to a guest are listed. They are automatically detected by
+   the system, and cannot be manually added or deleted.</p>
+  <fig id="fig_m43_mp2_q5" ixia_locid="258">
+   <image href="jow1452525276914.image" id="image_u2r_mp2_q5" ixia_locid="259">
+    <alt ixia_locid="260">TiS Inventory Detail: Devices tab</alt>
+   </image>
+  </fig>
+  <note id="note_N10038_N10029_N10001" ixia_locid="221">
+   <p ixia_locid="222">PCI passthrough and SR-IOV Ethernet interfaces are listed separately. For more information,
+    see <xref href="jow1439301559036.xml" ixia_locid="223"/>.</p>
+  </note>
+  <p ixia_locid="261">The following information is presented:</p>
+  <draft-comment author="jmaran" ixia_locid="264">This is present as a parameter list which isn't in keeping with any
+   of the other tab topics. Leaving for now but, if this is similar to the lists in the other tab
+   topics, you should standardize on a similar format.</draft-comment>
+  <parml>
+   <plentry ixia_locid="237">
+    <pt ixia_locid="238">Name</pt>
+    <pd ixia_locid="239">
+     <p ixia_locid="185">The name of the device, as identified by the system inventory.</p>
+    </pd>
+   </plentry>
+   <plentry ixia_locid="240">
+    <pt ixia_locid="241">Address</pt>
+    <pd ixia_locid="242">
+     <p ixia_locid="189">The PCI address of the device.</p>
+    </pd>
+   </plentry>
+   <plentry ixia_locid="243">
+    <pt ixia_locid="244">Device Id</pt>
+    <pd ixia_locid="245">
+     <p ixia_locid="91">The ID of the device, assigned by the vendor. </p>
+    </pd>
+   </plentry>
+   <plentry ixia_locid="246">
+    <pt ixia_locid="247">Device Name</pt>
+    <pd ixia_locid="248">
+     <p ixia_locid="103">The name of the device, as identified by the host's Linux kernel.</p>
+    </pd>
+   </plentry>
+   <plentry ixia_locid="249">
+    <pt ixia_locid="250">Numa Node</pt>
+    <pd ixia_locid="251">
+     <p ixia_locid="176">The NUMA node of the device.</p>
+    </pd>
+   </plentry>
+   <plentry ixia_locid="252">
+    <pt ixia_locid="253">Enabled</pt>
+    <pd ixia_locid="254">
+     <p ixia_locid="180">Whether exposure to VMs is enabled for the device.</p>
+    </pd>
+   </plentry>
+  </parml>
+  <p ixia_locid="234">To view usage information for individual devices, see <xref href="jow1452030200804.xml" ixia_locid="235"/>. To specify whether a device is exposed to VMs,
+   see <xref href="jow1452444710203.xml" ixia_locid="236"/>.<draft-comment author="jmaran" ixia_locid="265">I haven't
+    been marking it but sometimes the Related Links section at the bottom of the topic is just a
+    rehash of the inline links. I don't know if this is a good practice. Something to
+    consider...</draft-comment></p>
+  <p ixia_locid="233">For a list of devices supported by Titanium Server, refer to the Release
+   Notes.</p>
+  <section id="section_N100F6_N10029_N10001" ixia_locid="202">
+   <title ixia_locid="203">CLI Commands for Managing Devices</title>
+   <p ixia_locid="224">The following commands are available for managing PCI devices on a host:</p>
+   <draft-comment author="jmaran" ixia_locid="266">The following could be a &lt;dl&gt;</draft-comment>
+   <ul id="ul_khs_wk4_45">
+    <li ixia_locid="204">
+     <p ixia_locid="205"><cmdname ixia_locid="225">system host-device-list</cmdname></p>
+     <p ixia_locid="226">Lists the devices for a host.</p>
+    </li>
+    <li ixia_locid="206">
+     <p ixia_locid="207"><cmdname ixia_locid="227">system host-device-show</cmdname></p>
+     <p ixia_locid="228">Lists the device at a specific PCI address on a host.</p>
+    </li>
+    <li ixia_locid="208">
+     <p ixia_locid="209"><cmdname ixia_locid="229">system host-device-modify</cmdname></p>
+     <p ixia_locid="230">Provides for exposing a device to VMs.</p>
+    </li>
+   </ul>
+   <p ixia_locid="231">For example:</p>
+   <codeblock ixia_locid="214"><systemoutput ixia_locid="215">~(keystone_admin)$ </systemoutput><userinput ixia_locid="216">system host-device-list compute-0</userinput>
+<systemoutput ixia_locid="217">~(keystone_admin)$ </systemoutput><userinput ixia_locid="218">system host-device-show compute-0 0000:09:00.0</userinput>
+<systemoutput ixia_locid="219">~(keystone_admin)$ </systemoutput><userinput ixia_locid="220">system host-device-modify --name="Encryption1" --enable=True compute-0</userinput></codeblock>
+  </section>
+ </conbody>
+ <related-links>
+  <link href="jow1452030200804.xml" ixia_locid="262"/>
+  <link href="jow1452444710203.xml" ixia_locid="263"/>
+ </related-links>
+</concept-wr>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="qcj1465221711259" xml:lang="en-us">
+<!-- 16.x version
+        
+-->
+    <title ixia_locid="1">Configuring an LDAP Identity Service for Keystone Users</title>
+    <shortdesc ixia_locid="2">You can configure Titanium Server to support LDAP authentication for
+        Keystone users.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="65"><draft-comment author="jowens" ixia_locid="6">US71877 new
+                    topic</draft-comment>For more information about Keystone authentication, see
+                    <xref href="jow1453573276553.xml" ixia_locid="118"/>.</p>
+        </context>
+        <prereq id="prereq_N10032_N1001C_N10001" ixia_locid="8">
+            <p ixia_locid="9">To configure the LDAP identity service for Keystone, you must become
+                the <nameliteral ixia_locid="10">admin</nameliteral> user using the CLI.</p>
+        </prereq>
+        <steps id="steps_avg_lvr_bx">
+            <step id="step_N10042_N1003F_N1001C_N10001" ixia_locid="11">
+                <cmd ixia_locid="12">Confirm the current identity service.</cmd>
+                <info ixia_locid="13">
+                    <codeblock ixia_locid="14"><systemoutput ixia_locid="15">~(keystone_admin)$ </systemoutput><userinput ixia_locid="16">system service-parameter-list</userinput>
+<systemoutput ixia_locid="17">
++------+----------+------------+--------+---------------------------------------------+
+| uuid | service  | section    | name   | value                                       |
++------+----------+------------+--------+---------------------------------------------+
+| a6...| identity | identity   | driver | keystone.identity.backends.sql.Identity     |
+| ac...| identity | assignment | driver | keystone.assignment.backends.sql.Assignment |
++------+----------+------------+--------+---------------------------------------------+</systemoutput></codeblock>
+                    <p ixia_locid="18">By default, Titanium Server uses the SQL identity
+                        service.</p>
+                </info>
+            </step>
+            <step id="step_N10060_N1003F_N1001C_N10001" ixia_locid="19">
+                <cmd ixia_locid="20">Add the URL of the LDAP server to the current identity
+                    service.</cmd>
+                <info ixia_locid="21">
+                    <codeblock ixia_locid="72"><systemoutput ixia_locid="73">~(keystone_admin)$ </systemoutput><userinput ixia_locid="74">system service-parameter-add identity ldap url=ldap://abc.com</userinput>
+<systemoutput ixia_locid="25">+----------+--------------------------------------+
+| Property | Value                                |
++----------+--------------------------------------+
+| uuid     | b78e73ee-43df-4a27-964c-9a17dce6037f |
+| service  | identity                             |
+| section  | ldap                                 |
+| name     | url                                  |
+| value    | ldap://abc.com                       |
++----------+--------------------------------------+</systemoutput>
+</codeblock>
+                </info>
+                <stepresult ixia_locid="26">
+                    <p ixia_locid="27">This raises <nameliteral ixia_locid="28">250.001</nameliteral> configuration alarms against both
+                        controllers.</p>
+                    <codeblock ixia_locid="29"><systemoutput ixia_locid="30">~(keystone_admin)$ </systemoutput><userinput ixia_locid="31">system alarm-list</userinput>
+<systemoutput ixia_locid="32">+------+----------+--------------------------------------------+...
+| UUID | Alarm ID | Reason Text                                |...
++------+----------+--------------------------------------------+...
+| 34...| 250.001  | controller-0 Configuration is out-of-date. |...
++----- +----------+--------------------------------------------+...</systemoutput></codeblock>
+                </stepresult>
+            </step>
+            <step id="step_N10105_N1004D_N1001F_N10001" ixia_locid="83">
+                <cmd ixia_locid="84"><draft-comment author="jowens" ixia_locid="110">CGTS-4885 add
+                        step</draft-comment>Add the DN suffix of the LDAP server.</cmd>
+                <info ixia_locid="85">
+                    <codeblock ixia_locid="86"><systemoutput ixia_locid="87">~(keystone_admin)$ </systemoutput><userinput ixia_locid="88">system service-parameter-add identity ldap suffix="dc=abc,dc=com"</userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N10093_N1003F_N1001C_N10001" ixia_locid="33">
+                <cmd ixia_locid="34">Change the driver parameter from <option ixia_locid="122">sql</option> to
+                        <option ixia_locid="123">ldap</option>.</cmd>
+                <info ixia_locid="37">
+                    <codeblock ixia_locid="38"><systemoutput ixia_locid="39">~(keystone_admin)$ </systemoutput><userinput ixia_locid="40">system service-parameter-modify identity identity driver=keystone.identity.backends.ldap.Identity</userinput>
+<systemoutput ixia_locid="41">+----------+------------------------------------------+
+| Property | Value                                    |
++----------+------------------------------------------+
+| uuid     | a62c8aba-89e6-444f-a538-76802bbc5075     |
+| service  | identity                                 |
+| section  | identity                                 |
+| name     | driver                                   |
+| value    | keystone.identity.backends.ldap.Identity |
++----------+------------------------------------------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N100E3_N1004D_N1001F_N10001" ixia_locid="75">
+                <cmd ixia_locid="76"><draft-comment author="jowens" ixia_locid="109">CGTS-4885 add
+                        step</draft-comment>Add a user name and password for querying the LDAP
+                    server.</cmd>
+                <info ixia_locid="77">
+                    <p ixia_locid="78">Specify an LDAP account with appropriate privileges.</p>
+                    <codeblock ixia_locid="79"><systemoutput ixia_locid="80">~(keystone_admin)$ </systemoutput><userinput ixia_locid="81">system service-parameter-add identity ldap \
+user="cn=admin,dc=abc,dc=com" password="<varname ixia_locid="82">admin-password</varname>"</userinput>
+
+</codeblock>
+                </info>
+            </step>
+            <step id="step_N1011E_N1004D_N1001F_N10001" ixia_locid="89">
+                <cmd ixia_locid="90"><draft-comment author="jowens" ixia_locid="111">CGTS-4885 add
+                        step</draft-comment>Configure secure access to the LDAP server.</cmd>
+                <info ixia_locid="91">
+                    <p ixia_locid="92">Keystone provides Transport Layer Security support for secure
+                        access. The following commands enable support, provide the path and name of
+                        a certificate, and specify that a certificate is required for access:</p>
+                    <note id="note_N1014F_N10146_N10135_N1004E_N1001F_N10001" ixia_locid="114">
+                        <p ixia_locid="115">If the certificate authority is not included in those
+                            bundled with the default Linux distribution, the LDAP server certificate
+                            cannot be validated and the <parmname ixia_locid="116">tls_req_cert</parmname> parameter must be set to <option ixia_locid="117">never</option>.</p>
+                    </note>
+                    <codeblock ixia_locid="93"><systemoutput ixia_locid="94">~(keystone_admin)$ </systemoutput><userinput ixia_locid="95">system service-parameter-add identity ldap use_tls=True</userinput>
+<systemoutput ixia_locid="96">~(keystone_admin)$ </systemoutput><userinput ixia_locid="97">system service-parameter-add identity ldap \
+tls_cacertfile="/etc/keystone/ssl/certs/cacert.pem"</userinput>
+<systemoutput ixia_locid="98">~(keystone_admin)$ </systemoutput><userinput ixia_locid="99">system service-parameter-add identity ldap \
+tls_cacertdir="/etc/keystone/ssl/certs"</userinput>
+<systemoutput ixia_locid="100">~(keystone_admin)$ </systemoutput><userinput ixia_locid="101">system service-parameter-add identity ldap tls_req_cert="demand"</userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N100B5_N1003F_N1001C_N10001" ixia_locid="42">
+                <cmd ixia_locid="43">Apply the service-parameter changes.</cmd>
+                <info ixia_locid="44">
+                    <codeblock ixia_locid="45"><systemoutput ixia_locid="46">~(keystone_admin)$ </systemoutput><userinput ixia_locid="47">system service-parameter-apply identity</userinput>
+<systemoutput ixia_locid="48">Applying identity service parameters</systemoutput></codeblock>
+                </info>
+                <stepresult ixia_locid="49">
+                    <p ixia_locid="50">This causes Keystone to reload the configuration file and use
+                        the LDAP Identity service. Changes to the <nameliteral ixia_locid="52">keystone.openstack.common.service</nameliteral> child processes are
+                        logged in the <filepath ixia_locid="53">/var/log/keystone/keystone-all.log</filepath> file.</p>
+                </stepresult>
+            </step>
+            <step id="step_N100E3_N1003F_N1001C_N10001" ixia_locid="54">
+                <cmd ixia_locid="55">Confirm that the <nameliteral ixia_locid="56">250.001</nameliteral> alarms against the controllers are cleared.</cmd>
+                <info ixia_locid="57">
+                    <codeblock ixia_locid="58"><systemoutput ixia_locid="59">~(keystone_admin)$ </systemoutput><userinput ixia_locid="60">system alarm-history-list -l 2</userinput>
+<systemoutput ixia_locid="61">
+...------------------+------ ...+----------+...------------------------------+...
+...                  | Alarm ...| Alarm ID |...                              |...
+...------------------+------ ...+----------+...------------------------------+...
+... T19:21:02.334671 | clear ...| 250.001  |...Configuration is out-of-date. |...
+... T19:20:25.168683 | set   ...| 250.001  |...Configuration is out-of-date. |...
+...------------------+-------...+----------+...------------------------------+...</systemoutput></codeblock>
+                </info>
+            </step>
+        </steps>
+        <postreq id="postreq_N101AF_N1001F_N10001" ixia_locid="102">
+            <p ixia_locid="106">
+                <draft-comment author="jowens" ixia_locid="112">CGTS-4885 add xrefs to new
+                    topics</draft-comment>
+            </p>
+            <p ixia_locid="104">To enable LDAP users in Keystone, see <xref href="npl1472144660413.xml" ixia_locid="119"/>.</p>
+            <p ixia_locid="103">Depending on the LDAP identity service you are using and the
+                features you require, additional mandatory or optional parameters may be needed. For
+                a sample configuration, see <xref href="uep1472144816412.xml" ixia_locid="120"/>. For more
+                information, refer to the LDAP identity service documentation. </p>
+            <p ixia_locid="108">For general configuration commands, see <xref href="jow1453577548979.xml" ixia_locid="121"/> .</p>
+        </postreq>
+    </taskbody>
+</task-wr>

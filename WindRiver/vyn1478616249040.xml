@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="vyn1478616249040" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Ceph Journaling and Cache Tiering</title>
+ <shortdesc ixia_locid="2"/>
+ <prolog>
+  <author ixia_locid="3">Craig Griffin</author>
+ </prolog>
+ <conbody>
+  <section id="section_N1001E_N1001B_N10001" ixia_locid="4">
+   <title ixia_locid="5">Journal Functions</title>
+   <p ixia_locid="6">Each OSD on a storage node has an associated Ceph transaction journal that tracks changes to
+    be committed to disk for data storage and replication, and if required, for data recovery. By
+    default, it is collocated on the OSD, which typically uses slower but less expensive hard disk
+    drive-backed storage. For faster commits and improved reliability, the journals can be assigned
+    to a dedicated SSD on the storage node. Wind River strongly recommends configuring the journal
+    function on a dedicated SSD if hard disks are used as OSDs. If SSDs are used, the journal can be
+    collocated with the OSD with no performance impact.</p>
+  </section>
+  <section id="section_N1002B_N1001B_N10001" ixia_locid="7">
+   <title ixia_locid="8">Cache Tiering</title>
+   <p ixia_locid="9">Ceph cache tiering uses dedicated Ceph-caching storage hosts equipped with more expensive SSDs
+    that provide high-speed Ceph-caching storage using SSDs in front of a set of Ceph-backing
+    storage hosts using slower hard disk drive-based storage. Data is migrated to the cache tier
+    when it is needed, maintained there for read-write operations, and removed when it is no longer
+    required. Modified objects are removed to the storage tier (flushed), and unmodified objects are
+    discarded (evicted). These operations are managed automatically by the Ceph objecter, which
+    determines which tier to use for an object, and the cache tiering agent, which handles data
+    migration between the tiers.</p>
+   <p ixia_locid="10">Cache tiering is beneficial to performance for systems where the same few data
+    objects are accessed frequently and can have a detrimental performance for some workloads,
+    especially those that access a large number of objects. Cache tiering must also be configured
+    with a sufficiently large cache tier to avoid cache thrashing. Wind River recommends configuring
+    cache tiering only if the storage workload is known to benefit from cache tiering; otherwise
+    performance may be degraded.</p>
+   <note id="note_N1003B_N1002B_N1001B_N10001" ixia_locid="11">
+    <p ixia_locid="12">To ensure that cache tiering is appropriate for the requirements, review the public Ceph
+     documentation for caveats surrounding the use of this feature at <xref format="html" href="http://docs.ceph.com/docs/master/rados/operations/cache-tiering/?highlight=tier#aword-of-caution" ixia_locid="13" scope="external">http://docs.ceph.com/docs/master/rados/operations/cache-tiering/?highlight=tier#aword-of-caution</xref>.</p>
+   </note>
+  </section>
+ </conbody>
+</concept-wr>

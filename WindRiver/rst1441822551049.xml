@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="rst1441822551049" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="466">Specifying a Live Migration Timeout</title>
+    <shortdesc ixia_locid="467">Live migrations can take a long time to complete for reasons such as
+        high levels of guest activity, network latency, and so on. You can specify the number of
+        seconds to wait for a live migration to complete. </shortdesc>
+    <prolog>
+        <author ixia_locid="468">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="469">
+            <p ixia_locid="487"><draft-comment author="rstone" ixia_locid="491">Topic created for
+                    US60539</draft-comment>If no value is set, the default is 800 seconds.</p>
+            <p ixia_locid="455">If the value is exceeded, the migration is canceled and a customer
+                log entry is created. The counter starts when the migration begins. The minimum
+                timeout value is 120 seconds and the maximum is 800 seconds. <draft-comment author="rstone" ixia_locid="523">Following sentence to be confirmed. (JO updated
+                    the sentence 2015-12-10, pending CGTS-2903)</draft-comment>To disable the live
+                migration timeout feature, set this value to 0 using the
+                CLI.<!-- For more information, see <xref
+                    href="jow1404333655771.xml" ixia_locid="465"/>. -->
+            </p>
+            <note id="note_N10044_N10029_N10026_N10001" ixia_locid="524">
+                <p ixia_locid="525">NOVA maintains an internal timer which guards a complete lack of
+                    VM instance live migration progress for longer than 150 seconds. If this timer
+                    expires, the live migration will be canceled; regardless of the value of the
+                    live migration maximum timeout.</p>
+            </note>
+            <p ixia_locid="526">A live migration timeout can be configured as an extra spec on a
+                flavor, such that any VM instance created with the flavor will inherit the specified
+                timeout value. Alternatively, a live migration timeout can be configured as
+                meta-data on an image, such that any VM instance created based on this Image will
+                have the specified timeout value. If the timeout value is provisioned in both the
+                flavor and the image, the smaller value is used.</p>
+            <p ixia_locid="527">To set this option using the web administration interface:</p>
+            <ul id="ul_xy2_v3y_lt">
+                <li ixia_locid="528">
+                    <p ixia_locid="488">As <term ixia_locid="529">admin</term>, use the <uicontrol ixia_locid="489">Live Migration Timeout</uicontrol> selection in the <uicontrol ixia_locid="490">Create Flavor Extra Spec</uicontrol> drop-down menu. To
+                        access this menu, see <xref href="jow1429538642910.xml" ixia_locid="470"/>.</p>
+                </li>
+            </ul>
+            <p ixia_locid="530">or</p>
+            <ul id="ul_sbp_djy_lt">
+                <li ixia_locid="531">
+                    <p ixia_locid="532">As either <term ixia_locid="517">admin</term> or a tenant, select
+                            <menucascade ixia_locid="518">
+                            <uicontrol ixia_locid="519">System</uicontrol>
+                            <uicontrol ixia_locid="520">Images</uicontrol>
+                            <uicontrol ixia_locid="521">Edit Image</uicontrol>
+                            <uicontrol ixia_locid="522">Update Metadata</uicontrol>
+                        </menucascade> for the desired images and add an entry with:</p>
+                    <codeblock ixia_locid="533">hw_wrs_live_migration_timeout=<varname ixia_locid="534">seconds</varname></codeblock>
+                </li>
+            </ul>
+        </context>
+    </taskbody>
+</task-wr>

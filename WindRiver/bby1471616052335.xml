@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="bby1471616052335" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Operator Login/Authentication Logging</title>
+ <shortdesc ixia_locid="2">Titanium server logs all operator login and authentication attempts. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <draft-comment author="eknowlto" ixia_locid="28">US82829</draft-comment>
+  <p ixia_locid="5">For security purposes, all login attempts (success and failure) are logged.</p>
+  <p ixia_locid="6">This includes Horizon logins, SSH logins, and so forth, as well as internal
+   local LDAP login attempts and internal database login attempts. </p>
+  <ul id="ul_vg4_bkz_zw">
+   <li ixia_locid="7">
+    <p ixia_locid="8">The logs include timestamp, user name, remote IP Address, and the number of
+     failed login attempts (if applicable). </p>
+   </li>
+  </ul>
+  <p ixia_locid="9">These log files can be found under the <filepath ixia_locid="10">/var/log</filepath> directory, and
+   include:</p>
+  <ul id="ul_wg4_bkz_zw">
+   <li ixia_locid="11">
+    <p ixia_locid="12"><filepath ixia_locid="29">/var/log/auth.log</filepath></p>
+   </li>
+   <li ixia_locid="13">
+    <p ixia_locid="14"><filepath ixia_locid="30">/var/log/horizon.log</filepath></p>
+   </li>
+   <li ixia_locid="15">
+    <p ixia_locid="16"><filepath ixia_locid="31">/var/log/pmond.log</filepath></p>
+   </li>
+   <li ixia_locid="17">
+    <p ixia_locid="18"><filepath ixia_locid="32">/var/log/hostwd.log</filepath>
+    </p>
+   </li>
+   <li ixia_locid="19">
+    <p ixia_locid="20"><filepath ixia_locid="33">/var/log/sysinv.log</filepath></p>
+   </li>
+   <li ixia_locid="21">
+    <p ixia_locid="22"><filepath ixia_locid="34">/var/log/user.log</filepath></p>
+   </li>
+  </ul>
+  <p ixia_locid="23">You can examine these log files locally on the controllers by inspecting the
+   files under the <filepath ixia_locid="25">/var/log</filepath> directory. Logs can also be
+   examined on a remote log server, if the remote logging feature is configured. </p>
+ </conbody>
+</concept-wr>

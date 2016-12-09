@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ekn1459956900981" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="297">SNMP Event Table</title>
+ <shortdesc ixia_locid="296">Titanium Server supports SNMP active and historical alarms, and
+  customer logs, in an event table. </shortdesc>
+ <prolog>
+  <author ixia_locid="298">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="244">The event table contains historical alarms (<term ixia_locid="113">sets</term>
+   and <term ixia_locid="114">clears</term>) alarms and customer logs. It does not contain active
+   alarms. Each entry in the table includes the following variables:</p>
+  <ul id="ul_y1w_4lk_qq">
+   <li ixia_locid="115">
+    <p ixia_locid="116"><varname ixia_locid="117">UUID</varname></p>
+   </li>
+   <li ixia_locid="118">
+    <p ixia_locid="119"><varname ixia_locid="120">EventID</varname></p>
+   </li>
+   <li ixia_locid="299">
+    <p ixia_locid="300"><varname ixia_locid="301">State</varname></p>
+   </li>
+   <li ixia_locid="121">
+    <p ixia_locid="122"><varname ixia_locid="123">EntityInstanceID</varname></p>
+   </li>
+   <li ixia_locid="124">
+    <p ixia_locid="125"><varname ixia_locid="126">DateAndTime</varname></p>
+   </li>
+   <li ixia_locid="127">
+    <p ixia_locid="128"><varname ixia_locid="129">EventSeverity</varname></p>
+   </li>
+   <li ixia_locid="130">
+    <p ixia_locid="131"><varname ixia_locid="132">ReasonText</varname></p>
+   </li>
+   <li ixia_locid="133">
+    <p ixia_locid="134"><varname ixia_locid="135">EventType</varname></p>
+   </li>
+   <li ixia_locid="136">
+    <p ixia_locid="137"><varname ixia_locid="138">ProbableCause</varname></p>
+   </li>
+   <li ixia_locid="139">
+    <p ixia_locid="140"><varname ixia_locid="293">ProposedRepairAction</varname></p>
+   </li>
+   <li ixia_locid="142">
+    <p ixia_locid="143"><varname ixia_locid="144">ServiceAffecting</varname></p>
+   </li>
+   <li ixia_locid="145">
+    <p ixia_locid="146"><varname ixia_locid="147">SuppressionAllowed</varname></p>
+   </li>
+  </ul>
+  <note id="note_N100D2_N1001F_N10001" ixia_locid="302">
+   <p ixia_locid="303">The previous SNMP Historical Alarm Table and the SNMP Customer Log Table are still supported
+    but marked as deprecated in the MIB.</p>
+  </note>
+ </conbody>
+</concept-wr>

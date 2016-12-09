@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="rvf1468259586307" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="255">On-Line Ceilometer Reports</title>
+ <shortdesc ixia_locid="256">You can generate on-line Ceilometer reports.</shortdesc>
+ <prolog>
+  <author ixia_locid="257">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <section id="section_N1006E_N1001C_N10001" ixia_locid="21">
+   <p ixia_locid="23">On-line, on-demand, Ceilometer reports in Titanium Server benefit from several
+    improvements over the stock OpenStack reporting tool, including:</p>
+   <ul id="ul_lfg_pdz_j4">
+    <li ixia_locid="24">
+     <p ixia_locid="25">optimized Ceilometer database queries</p>
+    </li>
+    <li ixia_locid="26">
+     <p ixia_locid="27">improved naming of menu entries on pull-down menus</p>
+    </li>
+    <li ixia_locid="28">
+     <p ixia_locid="29">use of brief meter descriptions and human-readable legends on the charts</p>
+    </li>
+   </ul>
+   <p ixia_locid="30">Additionally, all database queries are user-initiated, as opposed to
+    event-initiated. This provides a different user workflow, whereby all required report parameters
+    and filters are configured first, before the database query is executed.</p>
+   <p ixia_locid="250"><draft-comment author="jowens" ixia_locid="251">US64389 material broken out
+     to separate topic:</draft-comment>To use on-line Ceilometer reports, see <xref href="jow1446663451951.xml" ixia_locid="252"/>.</p>
+  </section>
+  <section id="section_N103F2_N1001F_N10001" ixia_locid="203">
+   <title ixia_locid="204">Retention Period</title>
+   <p ixia_locid="205"><draft-comment author="jowens" ixia_locid="254">This could be updated to
+     point to new tasks about setting the retention period from Horizon or the
+    CLI.</draft-comment>Performance samples are kept in the database for a limited period of time
+    known as the <term ixia_locid="206">retention period</term>. Its default value is 86400 seconds,
+    or 24 hours.</p>
+   <p ixia_locid="207">Click the <uicontrol ixia_locid="208">Edit Retention Period</uicontrol>
+    button in the <uicontrol ixia_locid="209">Retention Period</uicontrol> tab, available from
+     <uicontrol ixia_locid="258">Admin</uicontrol><menucascade ixia_locid="259">
+     <uicontrol ixia_locid="260">Platform</uicontrol>
+     <uicontrol ixia_locid="261">System Configuration</uicontrol>
+    </menucascade>,  to modify the current value. You must ensure that the configured value is equal
+    or higher than the period over which you intend to gather statistics.</p>
+   <fig id="fig_bxn_cnx_5t" ixia_locid="246">
+    <image href="jow1445954025845.image" id="image_pmv_jnx_5t" ixia_locid="247">
+     <alt ixia_locid="248">TiS Resource Usage: Retention Period tab</alt>
+    </image>
+   </fig>
+   <p ixia_locid="210">You can also control the retention period from the CLI. To view the current
+    settings, use the following command.</p>
+   <codeblock ixia_locid="211"><systemoutput ixia_locid="231">~(keystone_admin)$ </systemoutput><userinput ixia_locid="213">system pm-show</userinput></codeblock>
+   <p ixia_locid="214">To change the retention period from the CLI, use the following command
+    syntax.</p>
+   <codeblock ixia_locid="215"><systemoutput ixia_locid="232">~(keystone_admin)$ </systemoutput><userinput ixia_locid="217">system pm-modify retention_secs=<varname ixia_locid="218">retention_period</varname></userinput></codeblock>
+   <p ixia_locid="219">For example:</p>
+   <codeblock ixia_locid="220"><systemoutput ixia_locid="233">~(keystone_admin)$ </systemoutput><userinput ixia_locid="222">system pm-modify retention_secs=172800</userinput></codeblock>
+   <note id="note_N1041B_N103CD_N1001F_N10001" ixia_locid="223">
+    <p ixia_locid="224">Changes to the retention period cause <nameliteral ixia_locid="225">250.001
+      Configuration out-of-date</nameliteral> alarms to be raised briefly for the controller nodes.
+     During this period, the status <nameliteral ixia_locid="226">Config out-of-date</nameliteral>
+     is displayed for the controller nodes on the <wintitle ixia_locid="227">Host</wintitle> tab of
+     the <wintitle ixia_locid="228">Host Inventory</wintitle> page. These alarms are resolved and
+     cleared automatically after a few seconds.</p>
+   </note>
+  </section>
+ </conbody>
+</concept-wr>

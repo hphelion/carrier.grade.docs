@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="vow1472586534885" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Horizon Web Administration Interface</title>
+ <shortdesc ixia_locid="2">The Titanium Server Horizon web administration interface on any Region’s
+  Controller provides menu access to both the Primary and Secondary Regions. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <draft-comment author="eknowlto" ixia_locid="4">US76711 </draft-comment>
+  <p ixia_locid="5">On Titanium Server-Primary Horizon, you can select from the Region menu, which lists all
+   Secondary regions. </p>
+  <p ixia_locid="6">Switching regions changes the set of endpoints that the Horizon web
+   administration interface uses to communicate with. </p>
+  <p ixia_locid="7">Any Titanium Server Horizon deployment in the cloud can control any Titanium Server or pristine
+   Openstack region. </p>
+  <note id="note_N10032_N1001C_N10001" ixia_locid="8">
+   <p ixia_locid="9">Users are redirected to the home page if they are on a Titanium Server specific panel during a
+    switch to a pristine Openstack Cloud. </p>
+  </note>
+  <p ixia_locid="10">In a Titanium Server-Primary to Titanium Server-Secondary configuration, Horizon will still be
+   started in both the Primary and Secondary regions. This means that: </p>
+  <ul id="ul_wyk_lm3_dx">
+   <li ixia_locid="11">
+    <p ixia_locid="12">users can access Titanium Server-Primary Horizon via http://<varname ixia_locid="16">tis_primary_ip_address</varname></p>
+   </li>
+   <li ixia_locid="13">
+    <p ixia_locid="14">users can access Titanium Server-Secondary Horizon via http://<varname ixia_locid="17">tis_secondary_ip_address</varname></p>
+   </li>
+  </ul>
+  <draft-comment author="eknowlto" ixia_locid="15">Need Regions system for screen caps.</draft-comment>
+ </conbody>
+</concept-wr>

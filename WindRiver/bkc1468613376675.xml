@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="bkc1468613376675" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="149">Creating Tenant Networks Using the CLI</title>
+    <shortdesc ixia_locid="150">You can use CLI commands to set up tenant networks.</shortdesc>
+    <prolog>
+        <author ixia_locid="151"/>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="46">
+            <p ixia_locid="47">To create a tenant network using the CLI, use the following
+                command:</p>
+            <codeblock ixia_locid="48"><systemoutput ixia_locid="49">~(keystone_admin)$ </systemoutput><userinput ixia_locid="45">neutron net-create --tenant-id <varname ixia_locid="50">UUID</varname> \
+--provider:physical_network=<varname ixia_locid="51">network</varname> \
+--provider:network_type=<varname ixia_locid="52">type</varname> \
+--provider:segmentation_id=<varname ixia_locid="53">segment</varname> \
+--shared --router:external --admin-state-down \
+--vlan-transparent=<varname ixia_locid="119">state</varname> \
+<varname ixia_locid="54">name</varname></userinput></codeblock>
+            <p ixia_locid="55">where</p>
+            <parml>
+                <plentry ixia_locid="56">
+                    <pt ixia_locid="57">UUID</pt>
+                    <pd ixia_locid="58">
+                        <p ixia_locid="59">is the UUID of the tenant network</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="60">
+                    <pt ixia_locid="61">network</pt>
+                    <pd ixia_locid="62">
+                        <p ixia_locid="63">is the provider network to use</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="64">
+                    <pt ixia_locid="65">type</pt>
+                    <pd ixia_locid="66">
+                        <p ixia_locid="67">is the type of network to create, this can be one of
+                            flat, vlan or vxlan</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="68">
+                    <pt ixia_locid="69">segment</pt>
+                    <pd ixia_locid="70">
+                        <p ixia_locid="71">is the provider network segment ID to use. <draft-comment author="rstone" ixia_locid="148">CGTS-2526 adds</draft-comment>You
+                            must be logged in as Admin to use this parameter and it must be used in
+                            conjunction with <varname ixia_locid="146">network</varname> and
+                                <varname ixia_locid="147">type</varname>.</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="120">
+                    <pt ixia_locid="121">state</pt>
+                    <pd ixia_locid="122">
+                        <p ixia_locid="123">is either "True" or "False", indicating if this tenant
+                            network will attempt to use VLAN Transparent mode. For more information,
+                            see <xref href="rst1442341292102.xml" ixia_locid="124"/>.</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="72">
+                    <pt ixia_locid="73">name</pt>
+                    <pd ixia_locid="74">
+                        <p ixia_locid="75">is the name of the tenant network</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="76">To create a tenant subnet using the CLI, use the following
+                command:</p>
+            <codeblock ixia_locid="77"><systemoutput ixia_locid="78">~(keystone_admin)$ </systemoutput><userinput ixia_locid="79">neutron subnet-create --tenant-id <varname ixia_locid="29">UUID</varname> \
+--name <varname ixia_locid="80">name</varname> --gateway <varname ixia_locid="81">gateway</varname> --disable-dhcp external-net <varname ixia_locid="82">externalIP</varname></userinput></codeblock>
+            <p ixia_locid="125">where</p>
+            <parml>
+                <plentry ixia_locid="83">
+                    <pt ixia_locid="84">UUID</pt>
+                    <pd ixia_locid="85">
+                        <p ixia_locid="86">is the ID of the tenant network the subnet is being
+                            created for</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="87">
+                    <pt ixia_locid="88">name</pt>
+                    <pd ixia_locid="89">
+                        <p ixia_locid="90">is the name of the subnet</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="91">
+                    <pt ixia_locid="92">gateway</pt>
+                    <pd ixia_locid="93">
+                        <p ixia_locid="94">is the IP address of the gateway</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="95">
+                    <pt ixia_locid="96">address</pt>
+                    <pd ixia_locid="97">
+                        <p ixia_locid="98">is the IP address/bitmap of the external network</p>
+                    </pd>
+                </plentry>
+            </parml>
+        </context>
+    </taskbody>
+</task-wr>

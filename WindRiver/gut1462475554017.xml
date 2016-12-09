@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="gut1462475554017" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="50">Changing Ceph Storage Pool Sizes</title>
+    <shortdesc ixia_locid="51">You can use the Web administration interface to adjust the storage
+        pool quotas on a Ceph-based system.</shortdesc>
+    <prolog>
+        <author ixia_locid="52">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="24">
+            <p ixia_locid="212"><draft-comment author="jowens" ixia_locid="161">US68056 new topic;
+                    US74975 updated for volume and ephemeral pools</draft-comment>For more
+                information about storage pools, see <xref href="jhh1464706651355.xml" ixia_locid="213"/>.</p>
+            <p ixia_locid="214">If you prefer, you can use the CLI to make changes; see <xref href="hhz1463773967575.xml" ixia_locid="211"/>.</p>
+        </context>
+        <prereq id="prereq_N1002B_N1001D_N10001" ixia_locid="65">
+            <p ixia_locid="67">Before changing storage pool sizes, review the <wintitle ixia_locid="215">Fault
+                    Management</wintitle> page and ensure that any existing system alarms are
+                cleared.</p>
+        </prereq>
+        <steps id="steps_xfh_24z_5p">
+            <step conref="jow1451997330805.xml#jow1451997330805/step_open_Sys_Config_pane" id="step_N10042_N1003E_N1001E_N10001" ixia_locid="168">
+                <cmd ixia_locid="169"/>
+            </step>
+            <step id="step_N1004A_N10028_N1001C_N10001" ixia_locid="31">
+                <cmd ixia_locid="32">Select the <uicontrol ixia_locid="216">Ceph Storage Pools</uicontrol> tab.</cmd>
+                <stepresult ixia_locid="34">
+                    <p ixia_locid="35">The <wintitle ixia_locid="104">Ceph Storage Pools</wintitle>
+                        page appears, showing the currently defined pools and their sizes.</p>
+                    <fig id="fig_t3s_4mz_5p" ixia_locid="36">
+                        <image href="ryi1463411295786.image" id="image_tbv_hvk_zv" ixia_locid="200">
+                            <alt ixia_locid="201">Ceph Storage Pools display for Titanium Server 16</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10070_N10028_N1001C_N10001" ixia_locid="39">
+                <cmd ixia_locid="40">Click <uicontrol ixia_locid="41">Edit size of Ceph storage
+                        pools</uicontrol>.</cmd>
+                <stepresult ixia_locid="42">
+                    <p ixia_locid="43">The <wintitle ixia_locid="44">Edit size of Ceph Storage
+                            Pools</wintitle> dialog box appears.</p>
+                    <fig id="fig_tmw_qnz_5p" ixia_locid="45">
+                        <image href="tbl1463411352771.image" id="image_zgt_3vk_zv" ixia_locid="202">
+                            <alt ixia_locid="203">Ceph Storage Pools Edit dialog for Titanium Server 16</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N1009A_N10028_N1001C_N10001" ixia_locid="48">
+                <cmd ixia_locid="49">Edit the pool settings as required.</cmd>
+                <info ixia_locid="207">
+                    <note id="note_N100D0_N100CD_N100C1_N1003E_N1001E_N10001" ixia_locid="173">
+                        <p ixia_locid="174">A value of <nameliteral ixia_locid="217">0</nameliteral> deactivates the
+                            quota. The Glance Image Pool size is not restricted in any way when its
+                            value is configured to <nameliteral ixia_locid="176">0</nameliteral> and
+                            can grow to fill the entire available storage space. </p>
+                        <p ixia_locid="177">Setting a Glance Image Pool size that is less than the
+                            current storage space allocated to the Glance Image Pool does not have
+                            an adverse effect on the system; space allocation requests are served
+                            only after the pool size drops under the new ceiling. </p>
+                        <p ixia_locid="178">Setting the Glance Image Pool size bigger than all
+                            existing Ceph storage space removes restrictions on all allocation
+                            requests. </p>
+                        <p ixia_locid="179">In the event that the storage system/Ceph is
+                            unavailable, the <uicontrol ixia_locid="180">Save</uicontrol> action
+                            fails and an error message is displayed. The old value is used when Ceph
+                            becomes available again.</p>
+                    </note>
+                </info>
+            </step>
+            <step id="step_N100C1_N1003E_N1001E_N10001" ixia_locid="170">
+                <cmd ixia_locid="171">Click <uicontrol ixia_locid="70">Save</uicontrol>.</cmd>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ach1469625944660" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Network Requirements for Multi-Region Configurations</title>
+ <shortdesc ixia_locid="2">There are specific network requirements for multi-region configurations.
+   <draft-comment author="eknowlto" ixia_locid="3">US76710</draft-comment></shortdesc>
+ <prolog>
+  <author ixia_locid="4">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <ul id="ul_oqy_gpc_ww">
+   <li ixia_locid="55">
+    <p ixia_locid="56">All regions should have their own (isolated) untagged network for network-booting nodes. In
+     the case of Titanium Server, this would be the pxeboot network.</p>
+   </li>
+   <li ixia_locid="57">
+    <p ixia_locid="58">All regions MUST share the OpenStack management network.</p>
+    <ul id="ul_kp3_2rc_ww">
+     <li ixia_locid="59">
+      <p ixia_locid="60">In the case of Titanium Server, when using a pxeboot network, the management network must
+       be a VLAN-tagged network on the same logical interface as the pxeboot network.</p>
+     </li>
+    </ul>
+   </li>
+   <li ixia_locid="70">
+    <p ixia_locid="61">If Cinder and Glance are shared services, then all regions MUST share the
+     OpenStack storage network; in the case of Titanium Server, this is the infrastructure
+     network.</p>
+   </li>
+  </ul>
+  <ul id="ul_pqy_gpc_ww">
+   <li ixia_locid="62">
+    <p ixia_locid="63">The following networks may or may not be shared, depending on deployment preference:</p>
+    <ul id="ul_lr3_k5c_ww">
+     <li ixia_locid="64">
+      <p ixia_locid="65">OAM Network </p>
+     </li>
+     <li ixia_locid="66">
+      <p ixia_locid="67">BMC Network</p>
+     </li>
+    </ul>
+   </li>
+   <li ixia_locid="68">
+    <p ixia_locid="69">The ‘data’ networks MUST NOT be shared across regions as Neutron is NOT a
+     Shared Service so Provider Networks and Tenant Networks are independently managed by each
+     region’s Neutron Service.</p>
+   </li>
+  </ul>
+ </conbody>
+</concept-wr>

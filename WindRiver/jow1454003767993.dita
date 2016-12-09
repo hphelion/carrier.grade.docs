@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003767993" xml:lang="en-us"><title ixia_locid="1">SAS-Based Dimensioning for Storage Nodes</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">This section provides benchmarking information from a reference deployment of
+            storage nodes with 300 GB SAS disks that can be used to determine an optimum number of
+            OSDs based on throughput and capacity requirements. This is a reference only and results
+            will vary depending on selection of server, storage media type and speed (SAS, SSD),
+            disk controllers, and so on, and the choice of Storage Node platform should be done
+            based on system-level behaviors rather than individual components.</p><p ixia_locid="5">Storage Node hardware configuration:</p><ul><li ixia_locid="6"><p ixia_locid="7">Dual Ivy Bridge processor  - Intel Xeon® CPU E5-2690 v2 @ 3.00GHz</p></li><li ixia_locid="8"><p ixia_locid="9">Intel® Server Board S2600IP4 (Iron Pass)</p></li><li ixia_locid="10"><p ixia_locid="11">Intel® C606 Chipset </p></li><li ixia_locid="12"><p ixia_locid="13">Intel® 82599 NIC on Infrastructure Interface</p></li><li ixia_locid="14"><p ixia_locid="15">Ceph OSDs – 10 OSDs<ul>
+                        <li ixia_locid="16">
+                            <p ixia_locid="17">Disk Model Number: HP EH0300FBQDD (SAS) </p>
+                        </li>
+                        <li ixia_locid="18">
+                            <p ixia_locid="19">300GB Capacity</p>
+                        </li>
+                        <li ixia_locid="20">
+                            <p ixia_locid="21">2.5” disk, 15K RPM </p>
+                        </li>
+                        <li ixia_locid="22">
+                            <p ixia_locid="23">Sector size (logical/physical): 512B/512B</p>
+                        </li>
+                    </ul></p></li><li ixia_locid="24"><p ixia_locid="25">VM image sizes:  1GB and 3.6 GB</p></li>
+            <li ixia_locid="48">
+                <p ixia_locid="49">Ceph journaling enabled</p>
+                <ul id="ul_cdd_mkq_wx">
+                    <li ixia_locid="50">
+                        <p ixia_locid="51">INTEL SSDSC2BB24 240 GB SSD</p>
+                    </li>
+                </ul>
+            </li><li ixia_locid="26"><p ixia_locid="27">Cinder volume sizes:  Distribution of 1, 2, 4, 10, 20, and 40GB</p></li><li ixia_locid="28"><p ixia_locid="29">Placement Group = 512</p></li></ul><p ixia_locid="42">The following figure shows data for creation of VMs and Cinder volumes on SAS
+            disks. A portion of the creation time is volume creation and volume creation is
+            sensitive to disk throughput. Peak throughputs of 700 KB/s were observed during the
+            benchmarking.</p><p ixia_locid="43">Volume plus VM create times were measured while running <nameliteral ixia_locid="52">bonnie++</nameliteral> on existing VMs as a background storage load
+            in parallel with volume plus VM creation. The effect of running 40 and 80 VMs running
+                <nameliteral ixia_locid="53">bonnie++</nameliteral> in parallel with the VM plus
+            volume creates is shown in <xref format="dita" href="#jow1454003767993/fig_N10090_N10013_N10001" ixia_locid="54"/>. As shown, there is some impact of the background load but it is not
+            extensive.</p><fig id="fig_N10090_N10013_N10001" ixia_locid="44"><title id="title__Toc441623504" ixia_locid="45">VM Boot Times with Volume Creation for 15K RPM SAS Disks.</title>
+            <image href="jow1454003766030.image" id="image_z3q_cyy_55" ixia_locid="46">
+                <alt ixia_locid="47">media/image9.png</alt>
+            </image></fig></conbody></concept-wr>

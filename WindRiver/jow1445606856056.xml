@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1445606856056" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="78">Configuring Port-based DNAT Using the CLI</title>
+    <shortdesc ixia_locid="79">If you prefer, you can use the command-line interface to configure
+        port-based DNAT for external access to VMs. </shortdesc>
+    <prolog>
+        <author ixia_locid="80">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="81">
+            <p ixia_locid="82"><draft-comment author="jowens" ixia_locid="83">US62989 new
+                    topic</draft-comment>For more about using port-based DNAT, including
+                instructions for using the web administration interface, see <xref href="jow1445866870690.xml" ixia_locid="150"/>.</p>
+            <p ixia_locid="84">To add a network translation table entry, use a command of the
+                following form:</p>
+            <codeblock ixia_locid="85"><systemoutput ixia_locid="86">~(keystone_admin)$ </systemoutput><userinput ixia_locid="87">neutron portforwarding-create <varname ixia_locid="88">router</varname> --inside-addr <varname ixia_locid="89">addr</varname> \
+--inside-port <varname ixia_locid="90">inside_port</varname> --outside-port <varname ixia_locid="91">outside_port</varname> --protocol <varname ixia_locid="92">protocol_type</varname> \
+[--description <varname ixia_locid="93">desc</varname>]</userinput></codeblock>
+            <p ixia_locid="94">where<dl>
+                    <dlentry ixia_locid="95">
+                        <dt ixia_locid="96">router</dt>
+                        <dd ixia_locid="97">
+                            <p ixia_locid="98">is the name of the virtual router</p>
+                        </dd>
+                    </dlentry>
+                    <dlentry ixia_locid="99">
+                        <dt ixia_locid="100">addr</dt>
+                        <dd ixia_locid="101">
+                            <p ixia_locid="102">is the IP address of the VM interface connected to
+                                the virtual router</p>
+                        </dd>
+                    </dlentry>
+                    <dlentry ixia_locid="103">
+                        <dt ixia_locid="104">inside_port</dt>
+                        <dd ixia_locid="105">
+                            <p ixia_locid="106">is a port on the VM IP address</p>
+                        </dd>
+                    </dlentry>
+                    <dlentry ixia_locid="107">
+                        <dt ixia_locid="108">outside_port</dt>
+                        <dd ixia_locid="109">
+                            <p ixia_locid="110">is the port on the external gateway interface of the router</p>
+                        </dd>
+                    </dlentry>
+                    <dlentry ixia_locid="111">
+                        <dt ixia_locid="112">protocol_type</dt>
+                        <dd ixia_locid="113">
+                            <p ixia_locid="114">is the protocol (<option ixia_locid="115">tcp</option>, <option ixia_locid="116">udp</option>,
+                                    <option ixia_locid="117">udp-lite</option>, <option ixia_locid="118">sctp</option>, or
+                                    <option ixia_locid="119">dccp</option>)</p>
+                        </dd>
+                    </dlentry>
+                    <dlentry ixia_locid="120">
+                        <dt ixia_locid="121">desc</dt>
+                        <dd ixia_locid="122">
+                            <p ixia_locid="123">is an optional text description of the entry</p>
+                        </dd>
+                    </dlentry>
+                </dl></p>
+            <p ixia_locid="152">To obtain the VM IP address, use the <cmdname ixia_locid="153">nova
+                    show</cmdname> command and provide the instance UUID. </p>
+            <p ixia_locid="154">For example:</p>
+            <codeblock ixia_locid="125"><systemoutput ixia_locid="155">~(keystone_admin)$ </systemoutput><userinput ixia_locid="156">nova show 915ea4da-1dd8-44ad-8a5b-375b9af6237f | grep network</userinput>
+<systemoutput ixia_locid="157">| internal-net network          | 10.1.1.2       |
+| tenant1-mgmt-net network      | 192.168.102.3  | 
+| tenant1-net network           | 172.31.1.2     |
+...</systemoutput>
+<systemoutput ixia_locid="126">~(keystone_admin)$ </systemoutput><userinput ixia_locid="127">neutron portforwarding-create tenant1-router \
+--inside-addr 192.168.102.3 --inside-port 1234 \
+--outside-port 5678 --protocol tcp --description port_forwarding_rule</userinput>
+<systemoutput ixia_locid="128">Created a new portforwarding:
++--------------+--------------------------------------+
+| Field        | Value                                |
++--------------+--------------------------------------+
+| description  | port_forwarding_rule                 | 
+| id           | c5cbf9a8-b041-4ce4-bb55-5527722eebf8 |
+| inside_addr  | 192.168.102.3                        |
+| inside_port  | 1234                                 | 
+| outside_port | 5678                                 |
+| port_id      | 76f0b669-f493-4e5a-8302-4baeadab90c6 |
+| protocol     | tcp                                  | 
+| router_id    | 722f8091-157b-488d-8372-0e1315d5177d |
+| tenant_id    | b75b40702c054c78b8cf22860e2ded51     |
++--------------+--------------------------------------+
+</systemoutput></codeblock>
+            <p ixia_locid="129">To modify an entry, use a command of the following form:</p>
+            <codeblock ixia_locid="130"><systemoutput ixia_locid="131">~(keystone_admin)$ </systemoutput><userinput ixia_locid="132">neutron portforwarding-update <varname ixia_locid="133">router</varname> [--inside-addr <varname ixia_locid="134">addr</varname>] \
+[--inside-port <varname ixia_locid="135">inside_port</varname>] [--outside-port <varname ixia_locid="136">outside_port</varname>] \
+[--protocol <varname ixia_locid="137">protocol_type</varname>] [--description <varname ixia_locid="138">desc</varname>]</userinput></codeblock>
+            <p ixia_locid="139">To view entries for a virtual router, use a command of the following
+                form:</p>
+            <codeblock ixia_locid="140"><systemoutput ixia_locid="141">~(keystone_admin)$ </systemoutput><userinput ixia_locid="142">neutron portforwarding-show <varname ixia_locid="143">router_uuid</varname></userinput></codeblock>
+            <p ixia_locid="144">To view entries for all routers, use the following command:</p>
+            <codeblock ixia_locid="145"><systemoutput ixia_locid="146">~(keystone_admin)$ </systemoutput><userinput ixia_locid="147">neutron portforwarding-list</userinput></codeblock>
+        </context>
+        <prereq id="prereq_N10126_N1001C_N10001" ixia_locid="148">
+            <p ixia_locid="149">Before you can use port-based DNAT, you must enable SNAT to activate
+                support for network address translation tables. For more information, see <xref href="jow1438192116883.xml" ixia_locid="151"/>.</p>
+        </prereq>
+    </taskbody>
+</task-wr>

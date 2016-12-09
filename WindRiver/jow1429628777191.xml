@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1429628777191" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Virtual Routers</title>
+ <shortdesc ixia_locid="2">Virtual routers provide internal and external network connectivity for
+  tenants.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4"> The user associated with a tenant can add a designated number of virtual
+   routers (Neutron routers) to the tenant. The maximum number is specified in the quotas for the
+   tenant. </p>
+  <p ixia_locid="5">The virtual router automatically provides a connection to system services
+   required by the tenant, such as the metadata service that supplies instances with user data. You
+   can configure the virtual routers with interfaces to tenant networks to provide internal and
+   external connectivity.</p>
+  <p ixia_locid="6">A virtual router can be implemented as a centralized router, or a distributed
+   virtual router (DVR).</p>
+  <p ixia_locid="47">Only the <nameliteral ixia_locid="49">admin</nameliteral> user can specify a
+   distributed router. For other tenants, this choice is not available, and a centralized router is
+   implemented by default. The <nameliteral ixia_locid="50">admin</nameliteral> user can change a
+   centralized router to a distributed router on behalf of other tenants (<draft-comment author="jmaran" ixia_locid="58">Another xref where it will (in the Tenant User's Guide or Cloud
+    Admin guide) be a local xref (in fact, a sub-topic of this topic) but, from the planning guide
+    it is inter-book. Leaving it as a local reference. It will resolve in electronic forms of the
+    planning guide but in print, it will be hard to track down. – JM: Reversed decision due to
+    electronic links not resolving in the PDF.</draft-comment>see <ph ixia_locid="65" otherprops="printonly"><cite ixia_locid="66">Titanium Server Tenant User's Guide: </cite></ph><cite ixia_locid="67"><ph ixia_locid="68"><xref href="jow1429637676342.xml" ixia_locid="51"/></ph></cite>).</p>
+  <dl>
+   <dlentry ixia_locid="7">
+    <dt ixia_locid="8">Centralized</dt>
+    <dd ixia_locid="9">
+     <p ixia_locid="10">A centralized virtual router is instantiated on a single compute node. All traffic using the
+      router must pass through the compute node.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="11">
+    <dt ixia_locid="12">Distributed</dt>
+    <dd ixia_locid="13">
+     <p ixia_locid="14">A distributed virtual router is instantiated in a distributed manner across
+      multiple hosts. Distributed virtual routers provide more efficient routing than standard
+      virtual routers for east-west (tenant-to-tenant) or floating IP address traffic. Local traffic
+      is routed within the local host, while external L3 traffic is routed directly between the
+      local host and the gateway router.</p>
+     <p ixia_locid="16">To implement the distributed model, a centralized-portion of the router is
+      still deployed on one host. The centralized portion manages north-south (external network)
+      traffic and source network address translation (SNAT) traffic, as well as agents deployed on
+      other hosts. The agents offload the centralized router for east-west (tenant-to-tenant)
+      routing and floating IP network address translation.</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <draft-comment author="rstone" ixia_locid="55">CGTS-3054 adds para</draft-comment>
+  <p ixia_locid="56">In some cases, the use of virtual routers on the tenant networks can result in
+   multiple default routes for a virtual machine (VM). If this happens, you can establish
+   alternative VM access to the metadata server; see <xref href="psa1412702861873.xml#psa1412702861873/accessing_metadata_server" ixia_locid="57"/>.</p>
+  <draft-comment author="jmaran" ixia_locid="59">The xrefs in the following two sentences are local
+   in the Tenant User's Guide and Cloud Admin guide but not in the planning guide. Leaving in local
+   xref form. – JM: Reversed decision due to unresolved links in PDF. Changing to inter-book
+   format.</draft-comment>
+  <p ixia_locid="77">You can enable SNAT on a virtual router. For more information, see <ph ixia_locid="78" otherprops="printonly"><cite ixia_locid="79">Titanium Server Tenant User's
+     Guide: </cite></ph><cite ixia_locid="80"><ph ixia_locid="81"><xref href="jow1438192116883.xml" ixia_locid="54"/></ph></cite>.</p>
+  <p ixia_locid="82">You can also enable DNAT on a virtual router. For more information, see <ph ixia_locid="83" otherprops="printonly"><cite ixia_locid="84">Titanium Server Tenant User's
+     Guide: </cite></ph><cite ixia_locid="85"><ph ixia_locid="86"><xref href="jow1445866870690.xml" ixia_locid="87"/></ph></cite>.</p>
+  <p ixia_locid="20">To add a virtual router, see <ph ixia_locid="73" otherprops="printonly"><cite ixia_locid="74">Titanium Server
+     Tenant User's Guide: </cite></ph><cite ixia_locid="75"><ph ixia_locid="76"><xref href="jow1429629394435.xml" ixia_locid="18"/></ph></cite>. <draft-comment author="jmaran" ixia_locid="60">The following xref will be local
+    for the cloud admin guide but inter-book for the tenant user's guide and planning guide. Using
+    inter-book format for now. </draft-comment>To create interfaces, see <ph ixia_locid="61" otherprops="printonly"><cite ixia_locid="62">Titanium Server Cloud Administration:
+    </cite></ph><cite ixia_locid="63"><ph ixia_locid="64"><xref href="jow1429631834947.xml" ixia_locid="19"/></ph></cite>.</p>
+  <!-- "I wouldn't talk about Accelerated DVR until we do it" - Greg -->
+  <!--  <p>An Accelerated DVR (to be made available in a later release) is implemented adjacent to the AVS
+   switch on each host to provide DPDK-accelerated east-west andL3 forwarding. North-South L3
+   Forwarding and SNAT may also be accelerated by implementing the centralized-portion of the router
+   as a VM configured to use multiple dedicated cores, instead of sharing the single platform core
+   with TiS and OpenStack Agents.</p> -->
+ </conbody>
+</concept-wr>

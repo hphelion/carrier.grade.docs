@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="ksh1464711502906" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">VM Storage Settings for Migration, Resize, or Evacuation</title>
+  <shortdesc ixia_locid="2">The migration, resize, or evacuation behavior for an instance depends on
+    the instance boot configuration and the type of ephemeral storage used.</shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+      <p ixia_locid="11"><draft-comment author="jowens" ixia_locid="6">US69978 topic added. US74975:
+          a)  updated row  "From Cinder Volume (no local disks) to remove LVM/CoW distinction. b)
+          Added row "From Cinder volume (w/ remote Ephemeral or Swap".  Do we need rows for
+          boot-from-image with remote ephemeral storage? Does the Local Disk Resize column need any
+          work now that we have remote ephemeral disks?  </draft-comment>The following table
+        summarizes the boot and local storage configurations needed to support various
+        behaviors.</p>
+      <p ixia_locid="15"> </p>
+      <table id="table_wmf_qdh_v5" pgwide="1" rowsep="1">
+        <tgroup cols="7">
+          <colspec colname="col1" colnum="1" colwidth="150*"/>
+          <colspec colname="col2" colnum="2" colwidth="70*"/>
+          <colspec colname="col3" colnum="3" colwidth="100*"/>
+          <colspec colname="col4" colnum="4" colwidth="100*"/>
+          <colspec colname="col5" colnum="5" colwidth="100*"/>
+          <colspec colname="col6" colnum="6" colwidth="100*"/>
+          <colspec colname="col7" colnum="7" colwidth="100*"/>
+          <thead><row>
+            <entry ixia_locid="199">
+              <p ixia_locid="200">Instance Boot Type and Ephemeral and Swap Disks from flavor</p>
+            </entry>
+            <entry ixia_locid="201">
+              <p ixia_locid="202">Local Storage Backing</p>
+            </entry>
+            <entry ixia_locid="203">
+              <p ixia_locid="204">Live Migration with Block Migration</p>
+            </entry>
+            <entry ixia_locid="205">
+              <p ixia_locid="206">Live Migration w/o Block Migration</p>
+            </entry>
+            <entry ixia_locid="207">
+              <p ixia_locid="208">Cold Migration</p>
+            </entry>
+            <entry ixia_locid="209">
+              <p ixia_locid="210">Local Disk Resize</p>
+            </entry>
+            <entry ixia_locid="211">
+              <p ixia_locid="212">Evacuation</p>
+            </entry>
+          </row>
+            </thead>
+          <tbody>          
+            
+            <row>
+              <entry ixia_locid="213">
+                <p ixia_locid="214">From Cinder Volume (no local disks)</p>
+              </entry>
+              <entry ixia_locid="215">
+                <p ixia_locid="216">N/A</p>
+              </entry>
+              
+              <entry ixia_locid="217">
+                <p ixia_locid="218">N</p>
+              </entry>
+              <entry ixia_locid="219">
+                <p ixia_locid="220">Y</p>
+              </entry>
+              <entry ixia_locid="221">
+                <p ixia_locid="222">Y</p>
+              </entry>
+              <entry ixia_locid="223">
+                <p ixia_locid="224">N/A</p>
+              </entry>
+              <entry ixia_locid="225">
+                <p ixia_locid="226">Y</p>
+              </entry>
+            </row>
+            
+            
+            <row>
+              <entry ixia_locid="616">
+                <p ixia_locid="186">From Cinder Volume (w/ remote Ephemeral and/or Swap)</p>
+              </entry>
+              <entry ixia_locid="187">
+                <p ixia_locid="188">N/A</p>
+              </entry>
+              
+              <entry ixia_locid="189">
+                <p ixia_locid="190">N</p>
+              </entry>
+              <entry ixia_locid="191">
+                <p ixia_locid="192">Y</p>
+              </entry>
+              <entry ixia_locid="193">
+                <p ixia_locid="194">Y</p>
+              </entry>
+              <entry ixia_locid="195">
+                <p ixia_locid="196">N/A</p>
+              </entry>
+              <entry ixia_locid="197">
+                <p ixia_locid="198">Y</p>
+              </entry>
+            </row>
+            
+            <row>
+              <entry ixia_locid="69" morerows="1">
+                <p ixia_locid="70">From Cinder Volume (w/ local Ephemeral and/or Swap)</p>
+              </entry>
+              <entry ixia_locid="227">
+                <p ixia_locid="228">LVM</p>
+              </entry>
+              
+              <entry ixia_locid="229">
+                <p ixia_locid="230">N</p>
+              </entry>
+              <entry ixia_locid="231">
+                <p ixia_locid="232">N</p>
+              </entry>
+              <entry ixia_locid="233">
+                <p ixia_locid="234">Y</p>
+                <p ixia_locid="235"> Ephemeral/Swap data loss </p>
+              </entry>
+              <entry ixia_locid="236">
+                <p ixia_locid="237">Y</p>
+                <p ixia_locid="238"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="239">
+                <p ixia_locid="240">Y</p>
+                <p ixia_locid="241"> Ephemeral/Swap data loss</p>
+              </entry>
+            </row>
+            <row>
+              
+              <entry ixia_locid="242">
+                <p ixia_locid="243">CoW</p>
+              </entry>
+              <entry ixia_locid="244">
+                <p ixia_locid="245">N</p>
+              </entry>
+              <entry ixia_locid="246">
+                <p ixia_locid="247">N</p>
+              </entry>
+              <entry ixia_locid="248">
+                <p ixia_locid="249">Y</p>
+              </entry>
+              <entry ixia_locid="250">
+                <p ixia_locid="251">Y</p>
+              </entry>
+              <entry ixia_locid="252">
+                <p ixia_locid="253">Y</p>
+                <p ixia_locid="254"> Ephemeral/Swap data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="255" morerows="1">
+                <p ixia_locid="256">From Glance Image (all flavor disks are local)</p>
+              </entry>
+              <entry ixia_locid="257">
+                <p ixia_locid="258">LVM</p>
+              </entry>
+              
+              <entry ixia_locid="259">
+                <p ixia_locid="260">N</p>
+              </entry>
+              <entry ixia_locid="261">
+                <p ixia_locid="262">N</p>
+              </entry>
+              <entry ixia_locid="263">
+                <p ixia_locid="264">Y</p>
+                <p ixia_locid="265"> Local disk data loss</p>
+              </entry>
+              <entry ixia_locid="266">
+                <p ixia_locid="267">Y</p>
+                <p ixia_locid="268"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="269">
+                <p ixia_locid="270">Y</p>
+                <p ixia_locid="271"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              
+              <entry ixia_locid="272">
+                <p ixia_locid="273">CoW</p>
+              </entry>
+              <entry ixia_locid="274">
+                <p ixia_locid="275">Y</p>
+              </entry>
+              <entry ixia_locid="276">
+                <p ixia_locid="277">N</p>
+              </entry>
+              <entry ixia_locid="278">
+                <p ixia_locid="279">Y</p>
+              </entry>
+              <entry ixia_locid="280">
+                <p ixia_locid="281">Y</p>
+              </entry>
+              <entry ixia_locid="282">
+                <p ixia_locid="283">Y</p>
+                <p ixia_locid="284"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="285" morerows="1">
+                <p ixia_locid="286">From Glance Image (all flavor disks are local + attached Cinder Volumes)</p>
+              </entry>
+              <entry ixia_locid="287">
+                <p ixia_locid="288">LVM</p>
+              </entry>
+              
+              <entry ixia_locid="289">
+                <p ixia_locid="290">N</p>
+              </entry>
+              <entry ixia_locid="291">
+                <p ixia_locid="292">N</p>
+              </entry>
+              <entry ixia_locid="293">
+                <p ixia_locid="294">Y</p>
+                <p ixia_locid="295"> Local disk data loss</p>
+              </entry>
+              <entry ixia_locid="296">
+                <p ixia_locid="297">Y</p>
+                <p ixia_locid="298"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="299">
+                <p ixia_locid="300">Y</p>
+                <p ixia_locid="301"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              
+              <entry ixia_locid="302">
+                <p ixia_locid="303">CoW</p>
+              </entry>
+              <entry ixia_locid="304">
+                <p ixia_locid="305">N</p>
+              </entry>
+              <entry ixia_locid="306">
+                <p ixia_locid="307">N</p>
+              </entry>
+              <entry ixia_locid="308">
+                <p ixia_locid="309">Y</p>
+              </entry>
+              <entry ixia_locid="310">
+                <p ixia_locid="311">Y</p>
+              </entry>
+              <entry ixia_locid="312">
+                <p ixia_locid="313">Y</p>
+                <p ixia_locid="314"> Local disk data loss</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <note id="note_N10033_N10022_N1001F_N10001" ixia_locid="12">
+        <p ixia_locid="13">The <nameliteral ixia_locid="14">Local Storage Backing</nameliteral> is a
+          consideration only for instances that use local ephemeral or swap disks.</p>
+      </note>
+      <p ixia_locid="5">The boot configuration for an instance is determined by the
+          <nameliteral ixia_locid="619">Instance Boot Source</nameliteral> selected at launch. For more information,
+        see <ph ixia_locid="182" otherprops="printonly"><cite ixia_locid="183">Titanium Server
+            Tenant User's Guide: </cite></ph><cite ixia_locid="184"><ph ixia_locid="617"><xref href="jow1439388437367.xml" ixia_locid="8"/></ph></cite>. </p>
+      <p ixia_locid="9">The type of ephemeral-disk storage backing used by an instance is determined
+        by a flavor extra specification. <draft-comment author="jmaran" ixia_locid="618">The
+          following xref topic appears in sys admin guide and cloud admin guide. In sys admin guide
+          it is a local reference for this topic. From the planning guide, it is an inter-book
+          reference. Leaving in local format for now. – JM: Reversed decision due to unusable links
+          resulting in the planning guide. Changed to use inter-book format.</draft-comment>For more
+        information, see <ph ixia_locid="620" otherprops="printonly"><cite ixia_locid="621">Titanium Server System Administration:
+          </cite></ph><cite ixia_locid="622"><ph ixia_locid="623"><xref href="zjx1464641246986.xml" ixia_locid="10"/></ph></cite>.</p>
+      <!-- table id="table_kbv_r5x_fw" pgwide="1" rowsep="1">
+        <title ixia_locid="315">DRAFT table outlining proposed modification; behaviour details
+          TBD</title>
+        <tgroup cols="7">
+          <colspec colname="col1" colnum="1" colwidth="150*"/>
+          <colspec colname="col2" colnum="2" colwidth="70*"/>
+          <colspec colname="col3" colnum="3" colwidth="100*"/>
+          <colspec colname="col4" colnum="4" colwidth="100*"/>
+          <colspec colname="col5" colnum="5" colwidth="100*"/>
+          <colspec colname="col6" colnum="6" colwidth="100*"/>
+          <colspec colname="col7" colnum="7" colwidth="100*"/>
+          <thead>
+            <row>
+              <entry ixia_locid="316">
+                <p ixia_locid="317">Instance Boot Source</p>
+              </entry>
+              <entry ixia_locid="318">
+                <p ixia_locid="319">Storage Type</p>
+              </entry>
+              <entry ixia_locid="320">
+                <p ixia_locid="321">Live Migration with Block Migration</p>
+              </entry>
+              <entry ixia_locid="322">
+                <p ixia_locid="323">Live Migration w/o Block Migration</p>
+              </entry>
+              <entry ixia_locid="324">
+                <p ixia_locid="325">Cold Migration</p>
+              </entry>
+              <entry ixia_locid="326">
+                <p ixia_locid="327">Ephemeral Disk Resize</p>
+              </entry>
+              <entry ixia_locid="328">
+                <p ixia_locid="329">Evacuation</p>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry ixia_locid="330" morerows="3">
+                <p ixia_locid="331">Boot from image</p>
+              </entry>
+              <entry ixia_locid="332">
+                <p ixia_locid="333">(no ephemeral or swap disks)</p>
+              </entry>
+              <entry ixia_locid="334">
+                <p ixia_locid="335">N</p>
+              </entry>
+              <entry ixia_locid="336">
+                <p ixia_locid="337">N</p>
+              </entry>
+              <entry ixia_locid="338">
+                <p ixia_locid="339">Y</p>
+                <p ixia_locid="340"> Local disk data loss</p>
+              </entry>
+              <entry ixia_locid="341">
+                <p ixia_locid="342">Y</p>
+                <p ixia_locid="343"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="344">
+                <p ixia_locid="345">Y</p>
+                <p ixia_locid="346"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="347">
+                <p ixia_locid="348">Local LVM</p>
+              </entry>
+              <entry ixia_locid="349">
+                <p ixia_locid="350">N</p>
+              </entry>
+              <entry ixia_locid="351">
+                <p ixia_locid="352">N</p>
+              </entry>
+              <entry ixia_locid="353">
+                <p ixia_locid="354">Y</p>
+                <p ixia_locid="355"> Local disk data loss</p>
+              </entry>
+              <entry ixia_locid="356">
+                <p ixia_locid="357">Y</p>
+                <p ixia_locid="358"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="359">
+                <p ixia_locid="360">Y</p>
+                <p ixia_locid="361"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="362">
+                <p ixia_locid="363">Local CoW</p>
+              </entry>
+              <entry ixia_locid="364">
+                <p ixia_locid="365">Y</p>
+              </entry>
+              <entry ixia_locid="366">
+                <p ixia_locid="367">N</p>
+              </entry>
+              <entry ixia_locid="368">
+                <p ixia_locid="369">Y</p>
+              </entry>
+              <entry ixia_locid="370">
+                <p ixia_locid="371">Y</p>
+              </entry>
+              <entry ixia_locid="372">
+                <p ixia_locid="373">Y</p>
+                <p ixia_locid="374"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="375">
+                <p ixia_locid="376">Remote</p>
+              </entry>
+              <entry ixia_locid="377">
+                <p ixia_locid="378">Y</p>
+              </entry>
+              <entry ixia_locid="379">
+                <p ixia_locid="380">N</p>
+              </entry>
+              <entry ixia_locid="381">
+                <p ixia_locid="382">Y</p>
+              </entry>
+              <entry ixia_locid="383">
+                <p ixia_locid="384">Y</p>
+              </entry>
+              <entry ixia_locid="385">
+                <p ixia_locid="386">Y</p>
+                <p ixia_locid="387"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="388" morerows="3">
+                <p ixia_locid="389">Boot from snapshot</p>
+              </entry>
+              <entry ixia_locid="390">
+                <p ixia_locid="391">(no ephemeral or swap disks)</p>
+              </entry>
+              <entry ixia_locid="392">
+                <p ixia_locid="393">N</p>
+              </entry>
+              <entry ixia_locid="394">
+                <p ixia_locid="395">N</p>
+              </entry>
+              <entry ixia_locid="396">
+                <p ixia_locid="397">Y</p>
+                <p ixia_locid="398"> Local disk data loss</p>
+              </entry>
+              <entry ixia_locid="399">
+                <p ixia_locid="400">Y</p>
+                <p ixia_locid="401"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="402">
+                <p ixia_locid="403">Y</p>
+                <p ixia_locid="404"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="405">
+                <p ixia_locid="406">Local LVM</p>
+              </entry>
+              <entry ixia_locid="407">
+                <p ixia_locid="408">N</p>
+              </entry>
+              <entry ixia_locid="409">
+                <p ixia_locid="410">N</p>
+              </entry>
+              <entry ixia_locid="411">
+                <p ixia_locid="412">Y</p>
+                <p ixia_locid="413"> Local disk data loss</p>
+              </entry>
+              <entry ixia_locid="414">
+                <p ixia_locid="415">Y</p>
+                <p ixia_locid="416"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="417">
+                <p ixia_locid="418">Y</p>
+                <p ixia_locid="419"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="420">
+                <p ixia_locid="421">Local CoW</p>
+              </entry>
+              <entry ixia_locid="422">
+                <p ixia_locid="423">Y</p>
+              </entry>
+              <entry ixia_locid="424">
+                <p ixia_locid="425">N</p>
+              </entry>
+              <entry ixia_locid="426">
+                <p ixia_locid="427">Y</p>
+              </entry>
+              <entry ixia_locid="428">
+                <p ixia_locid="429">Y</p>
+              </entry>
+              <entry ixia_locid="430">
+                <p ixia_locid="431">Y</p>
+                <p ixia_locid="432"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="433">
+                <p ixia_locid="434">Remote</p>
+              </entry>
+              <entry ixia_locid="435">
+                <p ixia_locid="436">Y</p>
+              </entry>
+              <entry ixia_locid="437">
+                <p ixia_locid="438">N</p>
+              </entry>
+              <entry ixia_locid="439">
+                <p ixia_locid="440">Y</p>
+              </entry>
+              <entry ixia_locid="441">
+                <p ixia_locid="442">Y</p>
+              </entry>
+              <entry ixia_locid="443">
+                <p ixia_locid="444">Y</p>
+                <p ixia_locid="445"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="446" morerows="3">
+                <p ixia_locid="447">Boot from volume</p>
+              </entry>
+              <entry ixia_locid="448">
+                <p ixia_locid="449">(no ephemeral or swap disks)</p>
+              </entry>
+              <entry ixia_locid="450">
+                <p ixia_locid="451">N</p>
+              </entry>
+              <entry ixia_locid="452">
+                <p ixia_locid="453">Y</p>
+              </entry>
+              <entry ixia_locid="454">
+                <p ixia_locid="455">Y</p>
+              </entry>
+              <entry ixia_locid="456">
+                <p ixia_locid="457">N/A</p>
+              </entry>
+              <entry ixia_locid="458">
+                <p ixia_locid="459">Y</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="460">
+                <p ixia_locid="461">Local LVM</p>
+              </entry>
+              <entry ixia_locid="462">
+                <p ixia_locid="463">N</p>
+              </entry>
+              <entry ixia_locid="464">
+                <p ixia_locid="465">N</p>
+              </entry>
+              <entry ixia_locid="466">
+                <p ixia_locid="467">Y</p>
+                <p ixia_locid="468"> Ephemeral/Swap data loss </p>
+              </entry>
+              <entry ixia_locid="469">
+                <p ixia_locid="470">Y</p>
+                <p ixia_locid="471"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="472">
+                <p ixia_locid="473">Y</p>
+                <p ixia_locid="474"> Ephemeral/Swap data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="475">
+                <p ixia_locid="476">Local CoW</p>
+              </entry>
+              <entry ixia_locid="477">
+                <p ixia_locid="478">N</p>
+              </entry>
+              <entry ixia_locid="479">
+                <p ixia_locid="480">N</p>
+              </entry>
+              <entry ixia_locid="481">
+                <p ixia_locid="482">Y</p>
+              </entry>
+              <entry ixia_locid="483">
+                <p ixia_locid="484">Y</p>
+              </entry>
+              <entry ixia_locid="485">
+                <p ixia_locid="486">Y</p>
+                <p ixia_locid="487"> Ephemeral/Swap data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="488">
+                <p ixia_locid="489">Remote</p>
+              </entry>
+              <entry ixia_locid="490">
+                <p ixia_locid="491">N</p>
+              </entry>
+              <entry ixia_locid="492">
+                <p ixia_locid="493">Y</p>
+              </entry>
+              <entry ixia_locid="494">
+                <p ixia_locid="495">Y</p>
+              </entry>
+              <entry ixia_locid="496">
+                <p ixia_locid="497"/>
+              </entry>
+              <entry ixia_locid="498">
+                <p ixia_locid="499">Y</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="500" morerows="3">
+                <p ixia_locid="501">Boot from volume snapshot (creates a new volume)</p>
+              </entry>
+              <entry ixia_locid="502">
+                <p ixia_locid="503">(no ephemeral or swap disks)</p>
+              </entry>
+              <entry ixia_locid="504">
+                <p ixia_locid="505">N</p>
+              </entry>
+              <entry ixia_locid="506">
+                <p ixia_locid="507">N</p>
+              </entry>
+              <entry ixia_locid="508">
+                <p ixia_locid="509">Y</p>
+                <p ixia_locid="510"> Local disk data loss</p>
+              </entry>
+              <entry ixia_locid="511">
+                <p ixia_locid="512">Y</p>
+                <p ixia_locid="513"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="514">
+                <p ixia_locid="515">Y</p>
+                <p ixia_locid="516"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="517">
+                <p ixia_locid="518">Local CoW</p>
+              </entry>
+              <entry ixia_locid="519">
+                <p ixia_locid="520">N</p>
+              </entry>
+              <entry ixia_locid="521">
+                <p ixia_locid="522">N</p>
+              </entry>
+              <entry ixia_locid="523">
+                <p ixia_locid="524">Y</p>
+              </entry>
+              <entry ixia_locid="525">
+                <p ixia_locid="526">Y</p>
+              </entry>
+              <entry ixia_locid="527">
+                <p ixia_locid="528">Y</p>
+                <p ixia_locid="529"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="530">
+                <p ixia_locid="531">Local LVM</p>
+              </entry>
+              <entry ixia_locid="532">
+                <p ixia_locid="533">N</p>
+              </entry>
+              <entry ixia_locid="534">
+                <p ixia_locid="535">N</p>
+              </entry>
+              <entry ixia_locid="536">
+                <p ixia_locid="537">Y</p>
+                <p ixia_locid="538"> Ephemeral/Swap data loss </p>
+              </entry>
+              <entry ixia_locid="539">
+                <p ixia_locid="540">Y</p>
+                <p ixia_locid="541"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="542">
+                <p ixia_locid="543">Y</p>
+                <p ixia_locid="544"> Ephemeral/Swap data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="545">
+                <p ixia_locid="546">Remote</p>
+              </entry>
+              <entry ixia_locid="547">
+                <p ixia_locid="548">N</p>
+              </entry>
+              <entry ixia_locid="549">
+                <p ixia_locid="550">N</p>
+              </entry>
+              <entry ixia_locid="551">
+                <p ixia_locid="552">Y</p>
+              </entry>
+              <entry ixia_locid="553">
+                <p ixia_locid="554">Y</p>
+              </entry>
+              <entry ixia_locid="555">
+                <p ixia_locid="556">Y</p>
+                <p ixia_locid="557"> Ephemeral/Swap data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="558" morerows="3">
+                <p ixia_locid="559">Boot from image (creates a new volume)</p>
+              </entry>
+              <entry ixia_locid="560">
+                <p ixia_locid="561">(no ephemeral or swap disks)</p>
+              </entry>
+              <entry ixia_locid="562">
+                <p ixia_locid="563">N</p>
+              </entry>
+              <entry ixia_locid="564">
+                <p ixia_locid="565">N</p>
+              </entry>
+              <entry ixia_locid="566">
+                <p ixia_locid="567">Y</p>
+                <p ixia_locid="568"> Local disk data loss</p>
+              </entry>
+              <entry ixia_locid="569">
+                <p ixia_locid="570">Y</p>
+                <p ixia_locid="571"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="572">
+                <p ixia_locid="573">Y</p>
+                <p ixia_locid="574"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="575">
+                <p ixia_locid="576">Local CoW</p>
+              </entry>
+              <entry ixia_locid="577">
+                <p ixia_locid="578">N</p>
+              </entry>
+              <entry ixia_locid="579">
+                <p ixia_locid="580">N</p>
+              </entry>
+              <entry ixia_locid="581">
+                <p ixia_locid="582">Y</p>
+              </entry>
+              <entry ixia_locid="583">
+                <p ixia_locid="584">Y</p>
+              </entry>
+              <entry ixia_locid="585">
+                <p ixia_locid="586">Y</p>
+                <p ixia_locid="587"> Local disk data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="588">
+                <p ixia_locid="589">Local LVM</p>
+              </entry>
+              <entry ixia_locid="590">
+                <p ixia_locid="591">N</p>
+              </entry>
+              <entry ixia_locid="592">
+                <p ixia_locid="593">N</p>
+              </entry>
+              <entry ixia_locid="594">
+                <p ixia_locid="595">Y</p>
+                <p ixia_locid="596"> Ephemeral/Swap data loss </p>
+              </entry>
+              <entry ixia_locid="597">
+                <p ixia_locid="598">Y</p>
+                <p ixia_locid="599"> Data loss if to new node</p>
+              </entry>
+              <entry ixia_locid="600">
+                <p ixia_locid="601">Y</p>
+                <p ixia_locid="602"> Ephemeral/Swap data loss</p>
+              </entry>
+            </row>
+            <row>
+              <entry ixia_locid="603">
+                <p ixia_locid="604">Remote</p>
+              </entry>
+              <entry ixia_locid="605">
+                <p ixia_locid="606">N</p>
+              </entry>
+              <entry ixia_locid="607">
+                <p ixia_locid="608">N</p>
+              </entry>
+              <entry ixia_locid="609">
+                <p ixia_locid="610">Y</p>
+              </entry>
+              <entry ixia_locid="611">
+                <p ixia_locid="612">Y</p>
+              </entry>
+              <entry ixia_locid="613">
+                <p ixia_locid="614">Y</p>
+                <p ixia_locid="615"> Ephemeral/Swap data loss</p>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table -->
+    </section>
+  </refbody>
+</reference-wr>

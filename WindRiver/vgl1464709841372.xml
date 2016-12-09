@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="vgl1464709841372" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="386">Controller Storage</title>
+ <shortdesc ixia_locid="387">The active controller provides storage for the Titanium Server system,
+  and if the system is configured for LVM-backed controller storage, for VM images and persistent
+  volumes.</shortdesc>
+ <prolog>
+  <author ixia_locid="388">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="389"><draft-comment author="jowens" ixia_locid="390">US74975 created concept topic
+    to support task topics for Horizon and CLI; added Ceph Mon Storage</draft-comment>Controller
+   hosts provide the following types of storage:</p>
+  <dl>
+   <dlentry ixia_locid="224">
+    <dt ixia_locid="225">Database storage</dt>
+    <dd ixia_locid="226">
+     <p ixia_locid="108">the storage allotment for the OpenStack database</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="227">
+    <dt ixia_locid="228">Image storage</dt>
+    <dd ixia_locid="229">
+     <p ixia_locid="112">for a system that provides LVM-backed controller storage for VMs, the size
+      of the partition to use for image storage</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="230">
+    <dt ixia_locid="231">Backup storage</dt>
+    <dd ixia_locid="232">
+     <p ixia_locid="116">the storage allotment for backup operations</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="376">
+    <dt ixia_locid="377">Volume storage</dt>
+    <dd ixia_locid="378">
+     <p ixia_locid="379"><draft-comment author="jowens" ixia_locid="380">CGTS-3736 The GUI says
+       "Cinder storage" but the config script says "Volume storage"</draft-comment>for a system that
+      provides LVM-backed controller storage for VMs, the storage allotment for all Cinder volumes
+      used by guest instances; also called <term ixia_locid="402">Cinder storage</term></p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="391">
+    <dt ixia_locid="392">Image Conversion Space</dt>
+    <dd ixia_locid="393">
+     <p ixia_locid="394"><draft-comment author="jowens" ixia_locid="395">CGTS-3736
+              added</draft-comment>the storage allotment for image caching and temporary image
+            conversion</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="396">
+    <dt ixia_locid="397">Ceph Mon Storage</dt>
+    <dd ixia_locid="398">
+     <p ixia_locid="399"><draft-comment author="jowens" ixia_locid="400">US74975
+              added</draft-comment>for a system using Ceph storage, the storage allotment on the
+            controller for Ceph monitoring</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <note id="note_N10096_N10022_N1001F_N10001" ixia_locid="210">
+   <p ixia_locid="119">For clusters using a Ceph backend, volume storage and image storage are
+        allotted on storage nodes, not on the controller node. To change the Cinder volume storage
+        for a Ceph backend, see <xref href="jow1414074138348.xml" ixia_locid="239"/>.</p>
+  </note>
+  <p ixia_locid="25">The storage allotments are configured initially during software installation.
+   You can change them using the Web administration interface or the CLI. For more information, see
+    <xref href="ers1464645579505.xml" ixia_locid="401"/>).</p>
+  <p ixia_locid="247">To accommodate changes, there must be enough disk space on the controller,
+   including headroom needed to complete the operation. The headroom required is 45 GiB on the
+   primary disk for a cluster using controller storage with an LVM backend, or 65 GiB for a cluster
+   using dedicated storage with a Ceph backend. This is in addition to the space required for any
+   new allotments. The requested changes are checked against available space on the affected disks;
+   if there is not enough, the changes are disallowed.</p>
+  <p ixia_locid="403">To provide more space, you can replace the affected disk or disks. Database,
+   image, and backup storage use space on the primary disk. Cinder volume storage (on a cluster with
+   an LVM backend) uses space on a disk selected by device node number during controller
+   configuration. The replacement disk must occupy the same device node number. Changes to the
+   Cinder volume storage can also affect the primary disk because of the headroom requirement. </p>
+  <p ixia_locid="404"><draft-comment author="jowens" ixia_locid="405">US78833 / US77367 mention that
+    ceph mon storage can use a secondary disk</draft-comment>Ceph monitor storage uses the primary
+   disk by default. If a Ceph backend is added to an existing system, and there is insufficient
+   space on the primary disk for the requested Ceph monitor storage, you can specify a secondary
+   disk. Note that this requires a controller re-installation.</p>
+  <p ixia_locid="304"><draft-comment author="jowens" ixia_locid="346">US64033 removed caution that
+    controller configurations must be identical</draft-comment>To pass the disk-space checks, any
+   replacement disks must be installed before the allotments are changed.</p>
+ </conbody>
+</concept-wr>

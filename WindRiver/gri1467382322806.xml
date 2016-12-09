@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="gri1467382322806" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="36">DRBD Sync Settings</title>
+ <shortdesc ixia_locid="37">DRBD sync settings are set to a default value but can be changed as needed to enhance
+  performance.</shortdesc>
+ <prolog>
+  <author ixia_locid="39">Jim Owens</author>
+  <author ixia_locid="38">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="30">The Distributed Replicated Block Device (DRBD) sync rate for the controllers is
+   set initially to a default value of 40% of the link capacity rate reported by the user during
+   controller configuration. This allows bandwidth for other traffic on the network. If the default
+   value causes unwanted interruptions or delays for other processes, you can lower it to provide
+   more bandwidth. Calculations for an optimal bandwidth must consider not only the actual link
+   capacity, but also disk performance, network propagation speeds, and other relevant factors. </p>
+  <p ixia_locid="31">Peak utilization occurs as the controller disks are synchronized initially
+   during installation or re-installation. For large media, this can continue for an hour or more.
+   During this time the controllers are functional, but they are reported as <nameliteral ixia_locid="32">Degraded</nameliteral>, and <nameliteral ixia_locid="33">lock</nameliteral> and
+    <nameliteral ixia_locid="34">swact</nameliteral> operations are unavailable. </p>
+  <p ixia_locid="35">After initial synchronization, utilization drops to levels required for
+   incremental updates, and bandwidth requirements are not normally significant with respect to
+   other processes. </p>
+  <p ixia_locid="40">DRBD file system synchronization uses the infrastructure interface if
+   configured, otherwise, it uses the management interface. It is configured to use a variable
+   resync rate: various parameters are derived from the available link bandwidth, and it assumes
+   that several file systems sync in parallel. The default setting is 40% of available DRBD
+   replication link bandwidth. This utilization setting may be modified using the following
+   command:</p>
+  <codeblock ixia_locid="41"><systemoutput ixia_locid="42">~(keystone_admin)$ </systemoutput><userinput ixia_locid="43">system drbdsync-modify --util <varname ixia_locid="44">percent</varname></userinput></codeblock>
+  <p ixia_locid="45"> </p>
+ </conbody>
+</concept-wr>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1411482049845" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="183">VM Network Interface Options</title>
+ <shortdesc ixia_locid="184">Titanium Server supports a variety of standard and
+  performance-optimized network interface drivers in addition to the standard OpenStack
+  choices.</shortdesc>
+ <prolog>
+  <author ixia_locid="185">Jim Owens</author>
+  <author ixia_locid="187">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <ul id="ul_mgc_xnp_nn">
+   <li ixia_locid="27">
+    <p ixia_locid="28">Unmodified guests can use Linux networking and virtio drivers. This provides
+     a mechanism to bring existing applications into the production environment immediately.</p>
+    <p ixia_locid="443"><draft-comment author="jowens" ixia_locid="432">US79271 added</draft-comment>For virtio
+     interfaces, Titanium Server supports <nameliteral ixia_locid="434">vhost-user</nameliteral>
+     transparently by default. This allows QEMU and AVS to share virtio queues through shared
+     memory, resulting in improved performance over standard virtio. The transparent implementation
+     provides a simplified alternative to the open-source AVP kernel and AVP-PMD drivers included
+     with Titanium Server. The availability of <nameliteral ixia_locid="444">vhost-user</nameliteral> also offers
+     additional performance enhancements through optional multi-queue support for virtio
+     interfaces.</p>
+    <note id="note_N10056_N10038_N10034_N1002B_N10027_N10024_N10001" ixia_locid="437">
+     <p ixia_locid="438">The virtio devices on a VM cannot use vhost-user for enhanced performance
+      if either of the following is true:<ul id="ul_pnj_tvr_kx">
+       <li ixia_locid="439">
+        <p ixia_locid="440">The VM is not backed by huge pages.</p>
+       </li>
+       <li ixia_locid="441">
+        <p ixia_locid="442">The VM is live-migrated from an older platform that does not support
+         vhost-user.</p>
+       </li>
+      </ul></p>
+    </note>
+   </li>
+   <li ixia_locid="29">
+    <p ixia_locid="30">For backwards compatibility, Guest OS can still be configured to leverage the
+     open-source Accelerated Virtual Port (AVP-KMOD) drivers available at <xref format="html" href="https://github.com/Wind-River/titanium-server" ixia_locid="425" scope="external" type=""/>. Prior to the availability of vhost-user, AVP-KMOD ports provided increased throughput over
+     the original plain virtio drivers when connected to the AVS.</p>
+   </li>
+   <li ixia_locid="31">
+    <p ixia_locid="32">For the highest performance, guest applications can be modified to make use
+     of Intel DPDK libraries, and the open-source AVP-PMD poll-mode drivers available at <xref format="html" href="https://github.com/Wind-River/titanium-server" ixia_locid="426" scope="external" type=""/>, to connect with the AVS Switch.</p>
+   </li>
+  </ul>
+ </conbody>
+</concept-wr>

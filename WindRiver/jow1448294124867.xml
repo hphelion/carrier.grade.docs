@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1448294124867" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="147">CPU Profiles</title>
+ <shortdesc ixia_locid="148">A CPU profile is a named assignment of processors and cores to specific
+  types of processing functions.</shortdesc>
+ <prolog>
+  <author ixia_locid="150">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <draft-comment author="jowens" ixia_locid="149">US66653 new topic created to hold existing
+   content, formerly held as section</draft-comment>
+  <p ixia_locid="16">Each CPU profile assigns cores to one or more of the following types of
+   functions:</p>
+  <dl>
+   <dlentry ixia_locid="17">
+    <dt ixia_locid="18">Platform</dt>
+    <dd ixia_locid="19">
+     <p ixia_locid="20">System functions handling maintenance, inventory, and VM hosting for the
+      host. Platform functions are always present on all types of hosts in the cluster.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="139">
+    <dt ixia_locid="141">vSwitch</dt>
+    <dd ixia_locid="143">
+     <p ixia_locid="145">AVS functions dedicated to handling various networking tasks for VMs (L2
+      switching, L3 routing, QoS, SNAT, floating IP addresses, and so on). They exist on the compute
+      nodes only.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="140">
+    <dt ixia_locid="142">Shared</dt>
+    <dd ixia_locid="144">
+     <p ixia_locid="146">Functions handling low-load or non-real-time virtual machine tasks,
+      implemented on a shared physical CPU in a compute node.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="25">
+    <dt ixia_locid="26">Virtual Machines</dt>
+    <dd ixia_locid="27">
+     <p ixia_locid="28">Functions handling virtual machines. They exist on the compute nodes
+      only.</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <p ixia_locid="29">On controller and storage nodes, all cores are automatically assigned to
+   platform functions, as they are the only ones available. On compute nodes, which always run a
+   number of functions of all types, a default CPU allocation is done automatically when the system
+   software is initially installed.</p>
+  <!-- 2015-07-10 According to Juhn King (in connection with US58452), a Titanium Server CPE is allocated two CPUs by default. -->
+  <p ixia_locid="30">CPU profiles are shown on the <uicontrol ixia_locid="31">CPU
+    Profiles</uicontrol> tab on the <wintitle ixia_locid="32">Host Inventory</wintitle> page.</p>
+  <fig id="fig_N1009C_N1004C_N10020_N10001" ixia_locid="33">
+   <image href="jow1404333761616.image" id="image_a1p_t2r_l4" ixia_locid="34"/>
+  </fig>
+  <p ixia_locid="35">This example lists one CPU profile, named <nameliteral ixia_locid="36">cpuprf1</nameliteral>, with the following processor and core allocation:</p>
+  <table frame="all" id="table_s32_fdr_l4">
+   <title ixia_locid="37">CPU Allocation Example</title>
+   <tgroup cols="2">
+    <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+    <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+    <thead>
+     <row>
+      <entry ixia_locid="38">
+       <p ixia_locid="39">Function Type</p>
+      </entry>
+      <entry ixia_locid="40">
+       <p ixia_locid="41">CPU Allocation</p>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry ixia_locid="42">
+       <p ixia_locid="43">Platform</p>
+      </entry>
+      <entry ixia_locid="44">
+       <p ixia_locid="45">Processor 0, core 0</p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="46">
+       <p ixia_locid="47">vSwitch</p>
+      </entry>
+      <entry ixia_locid="48">
+       <p ixia_locid="49">Processor 0, cores 1 and 2</p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="50">
+       <p ixia_locid="51">Virtual Machines</p>
+      </entry>
+      <entry ixia_locid="52">
+       <p ixia_locid="53">Processor 0, cores 3 to 9</p>
+       <p ixia_locid="54">Processor 1, cores 10 to 19</p>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </table>
+  <p ixia_locid="55">To delete CPU profiles, select the check boxes next to the profile names, and
+   then click <uicontrol ixia_locid="56">Delete CPU Profiles</uicontrol>. This does not affect hosts
+   where the profiles have already been applied.</p>
+ </conbody>
+</concept-wr>

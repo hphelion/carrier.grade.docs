@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1440534908675" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="4">Configuring a PXE Boot Server</title>
+    <shortdesc ixia_locid="5">You can optionally set up a PXE Boot Server to support <nameliteral ixia_locid="3">controller-0</nameliteral> initialization. </shortdesc>
+    <prolog>
+        <author ixia_locid="6">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10024_N10021_N10001" ixia_locid="7">
+            <p ixia_locid="20"><draft-comment author="jowens" ixia_locid="9">US62850 new topic. This
+                    covers Option 1 provided in the source material. </draft-comment>Titanium Server
+                includes a setup script to simplify configuring a PXE boot server. If you prefer,
+                you can manually apply a custom configuration; for more information, see <xref href="jow1442253584837.xml" ixia_locid="93"/>.</p>
+            <p ixia_locid="8">The PXE boot server serves a <term ixia_locid="94">bootloader</term>
+                file (<nameliteral ixia_locid="95">pxelinux.o</nameliteral>) to the requesting
+                client from a TFTP directory. Typically the TFTP root directory is used as the TFTP
+                directory. Access to the root directory requires admin privileges; if security is a
+                concern for network booting, you can to use a subdirectory of the root directory as
+                the TFTP directory.</p>
+            <p ixia_locid="96">The bootloader runs on the client, and reads boot parameters,
+                including the location of the kernel and initial ramdisk image files, from a <term ixia_locid="97">bootfile</term>. The bootfile is called <filepath ixia_locid="98">pxeboot.cfg</filepath>. It is located in the <filepath ixia_locid="99">pxelinux.cfg</filepath> subdirectory of the TFTP directory.</p>
+            <p ixia_locid="100">To find the bootfile, the bootloader searches symbolic links
+                contained in the <filepath ixia_locid="101">pxelinux.cfg</filepath> directory. You
+                can optionally shorten the search by creating an appropriate symlink for the
+                requesting client.</p>
+        </context>
+        <prereq id="prereq_N10039_N10024_N10001" ixia_locid="12">
+            <p ixia_locid="13">Use a Linux workstation as the PXE Boot server.</p>
+            <ul id="ul_mrz_jlj_dt">
+                <li ixia_locid="14">
+                    <p ixia_locid="15">On the workstation, install the packages required to support
+                        DHCP, TFTP, and Apache.</p>
+                </li>
+                <li ixia_locid="16">
+                    <p ixia_locid="17">Configure DHCP, TFTP, and Apache. For details, refer to the documentation
+                        included with the packages.</p>
+                </li>
+                <li ixia_locid="18">
+                    <p ixia_locid="19">Start the DHCP, TFTP, and Apache services.</p>
+                </li>
+                <li ixia_locid="34">
+                    <p ixia_locid="35">Connect the PXE boot server to the Titanium Server management
+                        or PXE boot network.</p>
+                </li>
+            </ul>
+        </prereq>
+        <steps>
+            <step id="step_N10036_N10033_N10021_N10001" ixia_locid="10">
+                <cmd ixia_locid="11">Copy the ISO image from the source (product DVD, USB device, or
+                    WindShare) to a temporary location on the PXE boot server.</cmd>
+                <info ixia_locid="21">
+                    <p ixia_locid="22">This example assumes that the copied image file is <filepath ixia_locid="23">tmp/TS-host-installer-1.0.iso</filepath>. </p>
+                </info>
+            </step>
+            <step id="step_N10085_N1006B_N10024_N10001" ixia_locid="24">
+                <cmd ixia_locid="25"><draft-comment author="jowens" ixia_locid="108">CGTS-4924 add missing mount
+                        point</draft-comment>Mount the ISO image and make it executable.</cmd>
+                <stepxmp ixia_locid="26">
+                    <codeblock ixia_locid="27"><systemoutput ixia_locid="28">$ </systemoutput><userinput ixia_locid="29">mount -o loop /tmp/TS-host-installer-1.0.iso /media/iso</userinput>
+<systemoutput ixia_locid="30">$ </systemoutput><userinput ixia_locid="31">mount -o remount,exec,dev /media/iso</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N100A2_N1006B_N10024_N10001" ixia_locid="32">
+                <cmd ixia_locid="33">Set up the PXE boot configuration.</cmd>
+                <info ixia_locid="37">
+                    <p ixia_locid="38">The ISO image includes a setup script, which you can run to complete the
+                        configuration.</p>
+                    <codeblock ixia_locid="39"><systemoutput ixia_locid="40">$ </systemoutput><userinput ixia_locid="41">/media/iso/pxeboot_setup.sh -u http://<varname ixia_locid="42">ip-addr</varname>/<varname ixia_locid="43">symlink</varname> -t <varname ixia_locid="44">tftp-boot-dir</varname></userinput></codeblock>
+                    <p ixia_locid="45">where</p>
+                    <parml>
+                        <plentry ixia_locid="46">
+                            <pt ixia_locid="47">ip-addr</pt>
+                            <pd ixia_locid="48">
+                                <p ixia_locid="49">is the Apache listening address.</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="50">
+                            <pt ixia_locid="51">symlink</pt>
+                            <pd ixia_locid="52">
+                                <p ixia_locid="53">is the name of a user-created symbolic link under
+                                    the Apache document root directory, pointing to the directory
+                                    specified by <varname ixia_locid="54">tftp-boot-dir</varname>.</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="55">
+                            <pt ixia_locid="56">tftp-boot-dir</pt>
+                            <pd ixia_locid="57">
+                                <p ixia_locid="58">is the path from which the bootloader is served.
+                                    This is formed from the configured TFTP root directory, plus an
+                                    optional subdirectory.</p>
+                                <note id="note_N1011A_N10113_N1010C_N100E5_N100C6_N100BC_N1007A_N10024_N10001" ixia_locid="59">
+                                    <p ixia_locid="60">You must provide the full bootloader path,
+                                        including the optional subdirectory, in the DHCP "filename"
+                                        option.</p>
+                                </note>
+                            </pd>
+                        </plentry>
+                    </parml>
+                </info>
+                <stepxmp ixia_locid="63">
+                    <p ixia_locid="64">For example:</p>
+                    <codeblock ixia_locid="65"><systemoutput ixia_locid="66">$ </systemoutput><userinput ixia_locid="67">/media/iso/pxeboot_setup.sh -u http://128.24.41.18/lab /export/pxeboot/ottawa/site-1</userinput></codeblock>
+                </stepxmp>
+                <stepresult ixia_locid="68">
+                    <p ixia_locid="69">The script creates the directory specified by <varname ixia_locid="70">tftp-boot-dir</varname>. </p>
+                </stepresult>
+            </step>
+            <step id="step_N10153_N1007A_N10024_N10001" importance="optional" ixia_locid="72">
+                <cmd ixia_locid="73">To shorten the bootloader search for the bootfile, create a
+                    symbolic link under the pxelinux.cfg subdirectory of the PXE boot directory,
+                    referencing the MAC address of the controller PXE boot interface. </cmd>
+                <info ixia_locid="75">
+                    <p ixia_locid="103"/>
+                    <p ixia_locid="76">To locate the bootfile, the bootloader searches symbolic
+                        links in the <filepath ixia_locid="104">pxelinux.cfg</filepath>
+                        subdirectory. It starts by looking for a name that corresponds to the MAC
+                        address of the requesting client. To speed the search process, define this
+                        symlink using a command of the following form:</p>
+                    <codeblock ixia_locid="77"><systemoutput ixia_locid="78">$ </systemoutput><userinput ixia_locid="79">ln -s ../pxeboot.cfg ${TFTP_DIR}/pxelinux.cfg/<varname ixia_locid="80">mac-address</varname></userinput></codeblock>
+                    <p ixia_locid="87">where <varname ixia_locid="88">mac-address</varname> is the
+                        MAC address of the client PXE boot interface, represented in lower case
+                        hexadecimal digits with dash separators. For example, to represent the MAC
+                        address <nameliteral ixia_locid="84">01:00:1e:67:54:aa:ee</nameliteral>, use
+                            <nameliteral ixia_locid="83">01-00-1e-67-54-aa-ee</nameliteral>.</p>
+                    <p ixia_locid="106">If this symlink is not present, the bootloader continues the
+                        search using a standard algorithm. If no better match is found, it looks for
+                        a symlink with the name <filepath ixia_locid="107">default</filepath>.</p>
+                </info>
+            </step>
+        </steps>
+        <result id="result_N10186_N10024_N10001" ixia_locid="85">
+            <p ixia_locid="86">After running the script, you can boot the first controller over the
+                PXE boot network. For more information, see <xref href="jow1440532592554.xml" ixia_locid="91"/>.</p>
+            <p ixia_locid="92">.</p>
+        </result>
+    </taskbody>
+</task-wr>

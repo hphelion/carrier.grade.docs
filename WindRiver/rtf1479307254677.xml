@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="rtf1479307254677" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="106">Supported Networks and Interface Configurations</title>
+ <shortdesc ixia_locid="107">The same logical networks are supported in all configurations. Actual network
+  requirements and recommendations vary depending on the configuration.</shortdesc>
+ <prolog>
+  <author ixia_locid="108">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="109"><draft-comment author="jmaran" ixia_locid="92">Consider using a definition list &lt;dl&gt; for
+    the following. (JO currently not enough content for a &lt;dl&gt; – do you mean we should add
+    definitions?)</draft-comment>The following networks are supported in Titanium Server:</p>
+  <ul id="ul_zfn_dsw_yx">
+   <li ixia_locid="93">
+    <p ixia_locid="94">External Operations and Maintenance (OAM) network (controller nodes only)
+    </p>
+   </li>
+   <li ixia_locid="95">
+    <p ixia_locid="96">Internal Management network (all nodes)</p>
+   </li>
+   <li ixia_locid="97">
+    <p ixia_locid="98">Optional pxeboot Network (all nodes)</p>
+   </li>
+   <li ixia_locid="99">
+    <p ixia_locid="100">Infrastructure Network</p>
+   </li>
+   <li ixia_locid="101">
+    <p ixia_locid="102">Optional Board Management Network</p>
+   </li>
+   <li ixia_locid="103">
+    <p ixia_locid="104">Provider Network(s) (all compute nodes)</p>
+   </li>
+  </ul>
+  <p ixia_locid="105">Logical interfaces can be dedicated to single or link aggregated interfaces
+   for maximum performance and isolation or combined in various combinations with other logical
+   interfaces onto a common physical interface or a link aggregated interface and separated into
+   isolated L2 LAN segments in the top-of-rack switch.</p>
+ </conbody>
+</concept-wr>

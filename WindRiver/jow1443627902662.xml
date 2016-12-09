@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="jow1443627902662" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Firewall Rules File Format</title>
+  <shortdesc ixia_locid="2">Titanium Server supports custom OAM firewall rules compatible with the
+    Linux <nameliteral ixia_locid="7">Netfilter</nameliteral> framework.</shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+      <p ixia_locid="16"><draft-comment author="jowens" ixia_locid="6">US65292 new
+          topic</draft-comment>The custom rules are applied using
+          <cmdname ixia_locid="21">iptables-restore</cmdname> or <draft-comment author="jmaran" ixia_locid="22">Updated this to be
+          ip6tables-restore (it was formerly identical to the last option,
+          iptables-restore)</draft-comment><cmdname ixia_locid="23">ip6tables-restore</cmdname>. They must be in a
+        format supported by <cmdname ixia_locid="24">iptables-save</cmdname> or
+        <cmdname ixia_locid="25">ip6tables-save</cmdname>.</p>
+      <note id="note_N1004C_N10027_N10024_N10001" ixia_locid="19">
+        <p ixia_locid="20">The file format must use Linux line endings.  DOS line endings are not supported. </p>
+      </note>
+      <p ixia_locid="17">The following example illustrates how to add rules before and after the
+        default rules.</p>
+      <codeblock ixia_locid="13">*filter
+-A INPUT-custom-pre -p tcp -m tcp --dport 9000 -m comment \
+--comment "example pre entry" -j ACCEPT
+-A INPUT-custom-post -p tcp -m tcp --dport 9001 -m comment \
+--comment "example post entry" -j ACCEPT 
+COMMIT</codeblock>
+      <p ixia_locid="14">For more information about the Titanium Server firewall, see <xref href="jow1443627833422.xml" ixia_locid="18"/>. For general information about <nameliteral ixia_locid="15">Netfilter</nameliteral>, refer to the Internet or other public sources.</p>
+    </section>
+  </refbody>
+</reference-wr>

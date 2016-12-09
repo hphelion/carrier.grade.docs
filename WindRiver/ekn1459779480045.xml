@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ekn1459779480045" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="213">Deleting an Alarm</title>
+    <shortdesc ixia_locid="214">You can delete an alarm when it is not automatically cleared. </shortdesc>
+    <prolog>
+        <author ixia_locid="215">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="216">
+            <p ixia_locid="108">Manually deleting an alarm should not be done unless it is
+                absolutely clear that there is no reason for the alarm to be active.</p>
+        </context>
+        <section id="section_N10029_N1001C_N10001" ixia_locid="217">
+            <p ixia_locid="218">You can use the command <cmdname ixia_locid="219">system
+                    alarm-delete</cmdname> to manually delete an alarm that remains active for no
+                apparent reason, which may happen in rare conditions. Alarms usually clear
+                automatically when the trigger condition is corrected. </p>
+            <ul id="ul_znz_lgr_nv">
+                <li ixia_locid="220">
+                    <p ixia_locid="221">To delete an alarm, use the <cmdname ixia_locid="222">system
+                            alarm-delete</cmdname> command as shown
+                        below:<codeblock ixia_locid="102"><systemoutput ixia_locid="212">~(keystone_admin)$ </systemoutput><userinput ixia_locid="106">system alarm-delete 4ab5698a-19cb-4c17-bd63-302173fef62c</userinput></codeblock></p>
+                </li>
+            </ul>
+        </section>
+    </taskbody>
+</task-wr>

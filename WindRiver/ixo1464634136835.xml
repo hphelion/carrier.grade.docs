@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ixo1464634136835" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="89">Block Storage for Virtual Machines</title>
+ <shortdesc ixia_locid="90">Virtual machines use Titanium Server storage resources for root and
+  ephemeral disks. </shortdesc>
+ <prolog>
+  <author ixia_locid="91">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="81"><draft-comment author="jowens" ixia_locid="71">US68057, US69978 updated
+    section; US74975 updated for Ceph-backed remote ephemeral storage; US85034 add "Disk" to title
+    to distinguish from new "Object Storage for Virtual Machines" topic</draft-comment>You can
+   allocate root disk storage for virtual machines using the following:</p>
+  <ul id="ul_d1c_j5k_s5">
+   <li ixia_locid="82">
+    <p ixia_locid="83">a Cinder volume</p>
+   </li>
+   <li ixia_locid="111">
+    <p ixia_locid="112">ephemeral storage; one of</p>
+    <ul id="ul_pgb_2j3_tw">
+     <li ixia_locid="113">
+      <p ixia_locid="93">ephemeral local storage on compute nodes, backed by LVM</p>
+     </li>
+     <li ixia_locid="114">
+      <p ixia_locid="95">ephemeral local storage on compute nodes, backed by image file</p>
+     </li>
+     <li ixia_locid="115">
+      <p ixia_locid="97">ephemeral remote storage on storage nodes, backed by Ceph</p>
+     </li>
+    </ul>
+   </li>
+  </ul>
+  <p ixia_locid="88">The use of a Cinder volume or ephemeral storage is determined by the <uicontrol ixia_locid="72">Instance Boot Source</uicontrol> setting when an instance is launched. <option ixia_locid="109">Boot from volume</option> results in the use of a Cinder volume, while <option ixia_locid="110">Boot from image</option> results in the use of ephemeral storage</p>
+  <p ixia_locid="664">Cinder-backed persistent storage for virtual machines is provided using either
+   Ceph-backed OSD disks on high-availability storage hosts, or LVM-backed, DRBD-synchronized
+   controller secondary disks on systems that do not use storage hosts.</p>
+  <p ixia_locid="665"><draft-comment author="jowens" ixia_locid="666">CGTS-4963 describe thin and
+    thick provisioning alternatives</draft-comment>For a controller-based LVM Cinder backend, you
+   can configure Titanium Server at installation to use thin or thick provisioning. Thin
+   provisioning allocates space for the volume dynamically on the underlying physical disk. Thick
+   provisioning creates a fixed-size volume. Thin provisioning offers support for fast secure
+   deletion, but requires longer volume creation times. You can improve volume creation times by
+   using SSDs for the underlying disks.</p>
+  <note id="note_N102D4_N102A4_N10296_N1008F_N10063_N1005F_N10023_N10020_N10001" ixia_locid="662" type="caution">
+   <p ixia_locid="663">The choice of thick or thin provisioning cannot be changed after
+    installation. </p>
+  </note>
+  <p ixia_locid="98">Ephemeral storage for virtual machines, including swap disk storage, ephemeral
+   disk storage, and root disk storage if the <uicontrol ixia_locid="73">Instance Boot
+    Source</uicontrol> is set to <option ixia_locid="74">Boot from Image</option>, is by default
+   provided locally on the compute nodes where the VMs are instantiated (local ephemeral storage).
+   On Ceph systems, you can change this configuration to use storage node resources instead (remote
+   ephemeral storage).</p>
+  <p ixia_locid="99">On each individual compute host, you can configure the ephemeral storage to
+   use:</p>
+  <ul id="ul_oqs_lyj_dw">
+   <li ixia_locid="100">
+    <p ixia_locid="101">a local LVM-based backend, to optimize run-time I/O performance</p>
+   </li>
+   <li ixia_locid="102">
+    <p ixia_locid="103">a CoW (Copy on Write) sparse-image-format backend, to optimize launch and delete
+     performance</p>
+   </li>
+   <li ixia_locid="104">
+    <p ixia_locid="105">a Ceph backend (on a system with storage nodes), to optimize migration capabilities</p>
+   </li>
+  </ul>
+  <p ixia_locid="106">The ephemeral storage type is defined during installation, and can be modified
+   using the Web administration interface or the CLI. <draft-comment author="jmaran" ixia_locid="667">The following xref is local in the system admin guide but inter-book from the
+    planning guide. Leaving with local formatting for now. – JM: Reversed decision due to unusable
+    link in planning guide. Changed to inter-book format. Also updated the topic reference to point
+    to the new revised topic (formerly, there were two topics with the same title, Jim resolved
+    issue).</draft-comment>For more information, see <ph ixia_locid="668" otherprops="printonly"><cite ixia_locid="669">Titanium Server System Administration: </cite></ph><cite ixia_locid="670"><ph ixia_locid="671"><xref href="jow1426181291481.xml" ixia_locid="672"/></ph></cite> .</p>
+  <note conref="jow1426942555025.xml#jow1426942555025/note_local_storage_ephemeral" id="note_N10130_N1007C_N10024_N10001" ixia_locid="62"/>
+  <p ixia_locid="107">The choice of storage type affects migration behavior. For more information, see <xref href="ksh1464711502906.xml" ixia_locid="108"/>.</p>
+ </conbody>
+</concept-wr>

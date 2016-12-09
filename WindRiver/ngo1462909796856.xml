@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="ngo1462909796856" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Overview of Remote CLI SDK Module</title>
+ <shortdesc ixia_locid="2">The Titanium Server remote CLI software package provides a set of CLI
+  commands that can be installed on a remote workstation and used to manage Titanium Server
+  remotely.</shortdesc>
+ <prolog>
+  <author ixia_locid="48">Jim Owens</author>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <draft-comment author="eknowlto" ixia_locid="32">US76645: Remote CLI SDK Module</draft-comment>
+  <p ixia_locid="34">This package is delivered in Titanium Server’s <nameliteral ixia_locid="41">wrs-remote-clients</nameliteral> SDK Module and is installable on any Ubuntu or CentOS host.
+   The host must have network connectivity to the OAM IP address of the Titanium Server system in
+   order to execute remote CLI commands against that Titanium Server system. The Titanium Server
+   remote CLI module supports both an admin role user and a non-admin role user. It also provides
+   support for both HTTP and HTTPS access, and Keystone authentication. This enables access to the
+   Titanium Server CLI without requiring the user to have SSH login access to Titanium Server
+   controllers.</p>
+  <note id="note_N1003D_N10028_N10001" ixia_locid="61">
+   <p ixia_locid="62"><draft-comment author="jowens" ixia_locid="63">CGTS-5418 discuss insecure
+     access</draft-comment>For HTTPS access, if Titanium Server uses the self-signed digital
+    certificate included for demonstration purposes, then CLI commands from the remote client must
+    be used in insecure mode (typically by including an <option ixia_locid="64">--insecure</option>
+    option) to accept the certificate without verifying it.</p>
+  </note>
+  <p ixia_locid="5">CLI clients supported by Titanium Server’s remote CLI access include: </p>
+  <ul id="ul_lkh_jzl_zv">
+   <li ixia_locid="6">
+    <p ixia_locid="7">Nova</p>
+   </li>
+   <li ixia_locid="8">
+    <p ixia_locid="9">Neutron</p>
+   </li>
+   <li ixia_locid="10">
+    <p ixia_locid="11">Cinder</p>
+   </li>
+   <li ixia_locid="12">
+    <p ixia_locid="13">Glance</p>
+   </li>
+   <li ixia_locid="14">
+    <p ixia_locid="15">Keystone</p>
+   </li>
+   <li ixia_locid="16">
+    <p ixia_locid="17">Ceilometer</p>
+   </li>
+   <li ixia_locid="18">
+    <p ixia_locid="19">Heat</p>
+   </li>
+   <li ixia_locid="20">
+    <p ixia_locid="21">System</p>
+   </li>
+   <li ixia_locid="22">
+    <p ixia_locid="23">OpenStack (the new OpenStack all-in-one CLI Client)</p>
+   </li>
+  </ul>
+  <p ixia_locid="35">The remote CLI module does not support the Titanium Server patching CLI Client. </p>
+  <p ixia_locid="40">In addition to being able to send CLI commands to a Titanium Server OpenStack
+   system or region, the Remote Titanium Server CLI Client can also be used to send CLI commands to
+   open-source OpenStack and/or non-Titanium Server OpenStack systems or regions. </p>
+  <note id="note_N100A1_N1001F_N10001" ixia_locid="42">
+   <p ixia_locid="43">The Titanium Server remote CLI client and the open-source OpenStack remote CLI
+    client cannot be installed on the same host; only one CLI client or the other can be installed
+    on a host. </p>
+  </note>
+  <section id="section_N10073_N1001C_N10001" ixia_locid="24">
+   <title ixia_locid="25">Authentication</title>
+   <p ixia_locid="26">All CLI commands within the Titanium Server remote CLI client are
+    authenticated through Keystone. Authentication can be specified using the CLI, or retrieved from
+    a shell environment. For convenience, you can download an RC file from the Titanium Server web
+    administration interface and use it to export authentication parameters into the Linux shell.
+    For more information, see <xref href="ahp1463003106115.xml" ixia_locid="53"/>.</p>
+  </section>
+ </conbody>
+</concept-wr>

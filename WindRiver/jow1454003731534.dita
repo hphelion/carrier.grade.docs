@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003731534" xml:lang="en-us">
+    <title ixia_locid="1">Disk Hardware Configuration for LVM Storage</title>
+    <shortdesc ixia_locid="2"/>
+    <prolog>
+        <author ixia_locid="3">Craig Griffin</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="4">The minimum hardware disk configuration for a configuration using LVM for
+            image/volume storage is a 500 GB serial-attached SCSI (SAS) disk at 10K revolutions per
+            minute (RPM) but SSD is highly recommended. Depending on the number of VM volumes
+            expected, which may be greater than the number of VMs deployed, additional storage may
+            be required. To determine the disk capacity requirement for LVM, multiply the number of
+            instances for each type of VM by the volume size for the type.</p>
+        <sl>
+                <sli ixia_locid="15">Secondary Disk Size Requirement = N * AvgVolSize + Margin</sli>
+            </sl>
+        <p ixia_locid="17">Where:</p> <sl id="ul_zhp_cvg_v5">
+                <sli ixia_locid="16">N = maximum number of volumes to be supported</sli>
+                <sli ixia_locid="9">AvgVolSize = Average volume size on disk</sli>
+                <sli ixia_locid="11">Margin = User-defined margin (recommend at least 25%)</sli>
+            </sl>
+        <note id="note_N10044_N10019_N10001" ixia_locid="13">
+            <p ixia_locid="14">Thin and thick provisioning are supported for volume storage. With
+                thin provisioning, the volume size on disk is based on how much disk space the VM
+                currently uses, not the advertised volume size. Titanium Server does not support
+                overcommit of storage, so for capacity dimensioning, thin and thick provisioning are
+                equivalent.</p>
+        </note>
+    </conbody>
+</concept-wr>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="rst1443102141092" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Changing a Management Interface to Aggregated</title>
+    <shortdesc ixia_locid="2">When compute and storage nodes are provisioned, the Ethernet interface
+        used for PXE boot is automatically assigned to the internal management network.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Ron Stone</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10025_N10022_N10001" ixia_locid="51">
+            <p ixia_locid="6">To configure a management LAG interface you first need to remove the
+                internal management network type from the existing management Ethernet interface and
+                then add a new <draft-comment author="jmaran" ixia_locid="54">aggregated Ethernet? Spell out
+                    here?</draft-comment>AE interface, specifying the <option ixia_locid="7">mgmt</option> network type, <option ixia_locid="8">ae</option> interface type,
+                    <option ixia_locid="9">802.3 AE</option> mode, transmit hash policy and the
+                slave interfaces.</p>
+        </context>
+        <prereq id="prereq_N10043_N10026_N10001" ixia_locid="49">
+            <p ixia_locid="50">The node must be locked to edit an interface.</p>
+        </prereq>
+        <section id="section_N10047_N1001F_N10001" ixia_locid="52">
+            <p ixia_locid="10">From the command line, you must first delete and then recreate the
+                management interface.</p>
+            <codeblock ixia_locid="11"><systemoutput ixia_locid="12">~(keystone_admin)$ </systemoutput><userinput ixia_locid="13">system host-if-modify -nt none <varname ixia_locid="14">node</varname> <varname ixia_locid="15">interface</varname></userinput></codeblock>
+            <p ixia_locid="16">where:</p>
+            <parml>
+                <plentry ixia_locid="17">
+                    <pt ixia_locid="18">node</pt>
+                    <pd ixia_locid="19">
+                        <p ixia_locid="20">is the name of the node from which to delete an
+                            interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="21">
+                    <pt ixia_locid="22">interface</pt>
+                    <pd ixia_locid="23">
+                        <p ixia_locid="24">is the Ethernet interface to delete</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="25">You must then create the new interface.</p>
+            <codeblock ixia_locid="26"><systemoutput ixia_locid="27">~(keystone_admin)$ </systemoutput><userinput ixia_locid="28">system host-if-add -nt mgmt -a 802.3ad -x layer2 <varname ixia_locid="29">node</varname> <varname ixia_locid="30">interface</varname> ae none <varname ixia_locid="31">ports</varname></userinput></codeblock>
+            <p ixia_locid="32">where</p>
+            <parml>
+                <plentry ixia_locid="33">
+                    <pt ixia_locid="34">node</pt>
+                    <pd ixia_locid="35">
+                        <p ixia_locid="36">is the name of the node</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="37">
+                    <pt ixia_locid="38">interface</pt>
+                    <pd ixia_locid="39">
+                        <p ixia_locid="40">is the name to be assigned to the interface</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="41">
+                    <pt ixia_locid="42">ports</pt>
+                    <pd ixia_locid="43">
+                        <p ixia_locid="44">are the Ethernet ports to assign </p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="45"><draft-comment author="jowens" ixia_locid="53">US82332 updated interface
+                    names</draft-comment>For example:</p>
+            <codeblock ixia_locid="46"><systemoutput ixia_locid="47">~(keystone_admin)$ </systemoutput><userinput ixia_locid="48">system host-if-add -nt mgmt -a 802.3ad -x layer2 compute-0 bond0 ae none enp0s8 enp0s9</userinput></codeblock>
+        </section>
+        
+<!-- RS: Commenting out until able to confirm UI & grab screen
+            <steps>
+            <step id="step_N100DF_N100DC_N10022_N10001" ixia_locid="51">
+                <cmd ixia_locid="52">List existing interfaces on the node. </cmd>
+                <info ixia_locid="53">
+                    <p ixia_locid="54">From <menucascade ixia_locid="55">
+                        <uicontrol ixia_locid="56">System</uicontrol>
+                        <uicontrol ixia_locid="57">Inventory</uicontrol>
+                        <uicontrol ixia_locid="58"/>
+                        <uicontrol ixia_locid="59"/>
+                    </menucascade> select the <uicontrol ixia_locid="60">Hosts</uicontrol> tab.</p>
+                </info>
+            </step>
+            <step id="step_N10106_N100DC_N10022_N10001" ixia_locid="61">
+                <cmd ixia_locid="62">From the <wintitle ixia_locid="63">Inventory Detail</wintitle>, open the
+                    <uicontrol ixia_locid="64">Interfaces</uicontrol> tab and click <uicontrol ixia_locid="65">Edit</uicontrol>
+                    for the interface you wish to change.</cmd>
+            </step>
+            <step id="step_N1011B_N100DC_N10022_N10001" ixia_locid="66">
+                <cmd ixia_locid="67">Un-check the current network type, select <uicontrol ixia_locid="68">none</uicontrol> as the
+                    network type, and click <uicontrol ixia_locid="69">Save</uicontrol>.</cmd>
+                <info ixia_locid="70">
+                    <fig id="fig_N1012B_N10128_N10119_N100DC_N10022_N10001" ixia_locid="71">
+                        <image href="rst1443030764664.image" ixia_locid="72"/>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N1013A_N100DC_N10022_N10001" ixia_locid="73">
+                <cmd ixia_locid="74">Edit the interface as follows. </cmd>
+                <info ixia_locid="75">
+                    <p ixia_locid="76">AE interface, specifying the <option ixia_locid="77">mgmt</option> network type,
+                            <option ixia_locid="78">ae</option> interface type, <option ixia_locid="79">802.3 AE</option> mode,
+                        transmit hash policy and the slave interfaces.</p>
+                </info>
+            </step>
+        </steps>-->
+    </taskbody>
+</task-wr>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1404333736797" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <title ixia_locid="1">Internal Management Network Planning</title>
+    <shortdesc ixia_locid="2">The internal management network is a private network, visible only to
+        the hosts in the cluster.</shortdesc>
+    <prolog>
+        <author ixia_locid="12">Jim Owens</author>
+        <author ixia_locid="3">Pedro Sanchez</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="4">You must consider the following guidelines:</p>
+        <ul id="ul_gqd_gj2_4n">
+            <li ixia_locid="13">
+                <p ixia_locid="14">By default, the internal management network is used for PXE
+                    booting of new hosts, and therefore must be untagged. It is also limited to
+                    IPv4, because the Titanium Server installer does not support IPv6 UEFI booting.
+                    If, for deployment reasons, the internal management network needs to be on a
+                    VLAN-tagged network, or if it must support IPv6, you can configure the optional
+                    untagged PXE boot network for PXE booting of new hosts using IPv4.</p>
+            </li>
+            <li ixia_locid="28">
+                <p ixia_locid="29">The internal management network and the infrastructure network
+                    must use the same IP version (IPv4 or IPv6).</p>
+            </li>
+            <li ixia_locid="7">
+                <draft-comment author="jmaran" ixia_locid="614">In the next sentence, should this be
+                    "Gb"?</draft-comment>
+                <p ixia_locid="8">You can use any 1 G or 10 G interface on the hosts to connect to
+                    this network, provided that the interface supports network booting and can be
+                    configured from the BIOS as the primary boot device.</p>
+            </li>
+            <li ixia_locid="613">
+                <p ixia_locid="24">The infrastructure network is automatically assigned the same
+                    type of IP address assignment as the internal management network (dynamic or
+                    static).</p>
+            </li>
+            <li ixia_locid="18">
+                <p ixia_locid="19">If static IP address assignment is used, you must use the
+                        <cmdname ixia_locid="21">system host-add</cmdname> command to add new hosts,
+                    and to assign IP addresses manually. New hosts are <i ixia_locid="610">not</i>
+                    automatically added to the inventory when they are powered on, and they display
+                    the following message on the host
+                    console:<codeblock ixia_locid="611"><systemoutput ixia_locid="612">This system has been configured with static management
+and infrastructure IP address allocation. This requires
+that the node be manually provisioned in System
+Inventory using the 'system host-add' CLI, GUI, or
+sysinv-api equivalent.</systemoutput></codeblock>
+                </p>
+            </li>
+            <li ixia_locid="9">
+                <p ixia_locid="10">For the IPv4 address plan, use a private IPv4 subnet as specified
+                    in RFC 1918. This  helps prevent unwanted cross-network traffic on this
+                    network.</p>
+                <p ixia_locid="11">It is suggested that you use the default subnet and addresses provided by the controller
+     configuration script.</p>
+            </li>
+            <li ixia_locid="25">
+                <p ixia_locid="26">You can assign a range of addresses on the management subnet for
+                    use by Titanium Server. If you do not assign a range, Titanium Server takes
+                    ownership of all available addresses.</p>
+            </li>
+            <li ixia_locid="15">
+                <p conref="jow1419267499106.xml#jow1419267499106/multicast_in_use" ixia_locid="16"/>
+            </li>
+            <li ixia_locid="615">
+                <p ixia_locid="616"><draft-comment author="jowens" ixia_locid="617">CGTS-5681 added</draft-comment>For multi-region
+                    deployments, you can define a restricted multicast addressing range on the
+                    management network during system installation. Addresses for affected services
+                    are allocated automatically from the range.  The same range also applies to the
+                    infrastructure network.</p>
+            </li>
+        </ul>
+    </conbody>
+</concept-wr>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="tal1467051884025" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Configuring the Remote Log Server</title>
+    <shortdesc ixia_locid="2">The Titanium Server SDK includes a script for configuring a server as
+        a remote log server using an ELK stack. You can use this if you are unfamiliar with ELK, or
+        do not already have an ELK installation.</shortdesc>
+    <prolog>
+        <author ixia_locid="13">Jim Owens</author>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="4">
+            <p ixia_locid="55"><draft-comment author="jowens" ixia_locid="17">US77159 / US83068 new
+                    topic</draft-comment>The script installs a basic ELK stack for log collection
+                and presentation, and configures it to receive logs from Titanium Server at a
+                specified address and port. </p>
+            <p ixia_locid="56"><draft-comment author="jowens" ixia_locid="57">US80148 TLS option and
+                    note</draft-comment>For added security, you can enable TLS during installation,
+                specifying a private key and a certificate installed on the remote log server.</p>
+            <note id="note_N1004C_N10027_N10024_N10001" ixia_locid="61">
+                <p ixia_locid="62">Currently the Remote Log Server certificate received by Titanium
+                    Server on negotiating a TLS connection is not authenticated, but is used for
+                    encryption.</p>
+            </note>
+            <p ixia_locid="5">For more information about using the SDK, see the <cite ixia_locid="18">Titanium Server Software Development Kit</cite>.</p>
+        </context>
+        <prereq id="prereq_N10043_N10024_N10001" ixia_locid="28">
+            <p ixia_locid="29">For log server specifications, see <xref href="gld1467135445788.xml" ixia_locid="30"/>.</p>
+            <p ixia_locid="33">You must set up a network interface with an appropriate IP address on
+                the server.</p>
+        </prereq>
+        <steps>
+            <step id="step_N1002E_N1002B_N1001B_N10001" ixia_locid="7">
+                <cmd ixia_locid="8">Ensure that the remote server can access the Titanium Server OAM
+                    network.</cmd>
+            </step>
+            <step id="step_N10055_N10047_N10024_N10001" ixia_locid="19">
+                <cmd ixia_locid="20">Extract the Remote Log Server <nameliteral ixia_locid="54">tar</nameliteral>
+                    file included with the SDK.</cmd>
+                <stepxmp ixia_locid="34">
+                    <codeblock ixia_locid="35"><systemoutput ixia_locid="36">$</systemoutput> <userinput ixia_locid="37">tar xfv wrs-install-log-server-1.0.0.tgz</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10083_N10058_N10024_N10001" ixia_locid="38">
+                <cmd ixia_locid="39">Change to the extracted directory.</cmd>
+                <stepxmp ixia_locid="40">
+                    <codeblock ixia_locid="41"><systemoutput ixia_locid="42">$</systemoutput> <userinput ixia_locid="43">cd install-log-server</userinput></codeblock>
+                </stepxmp>
+            </step>
+            <step id="step_N10043_N10035_N10022_N10001" ixia_locid="14">
+                <cmd ixia_locid="15"><draft-comment author="jowens" ixia_locid="64">US80148 update for transport and
+                        TLS certificate options</draft-comment>Run the script to configure the log
+                    server.</cmd>
+                <info ixia_locid="44">
+                    <p ixia_locid="65">The <filepath ixia_locid="46">install-log-server.sh</filepath> script
+                        installs an ELK stack on the server.</p>
+                    <codeblock ixia_locid="66"><systemoutput ixia_locid="67">$</systemoutput> <userinput ixia_locid="68">./install-log-server.sh -i <varname ixia_locid="69">ip-address</varname> [-p <varname ixia_locid="70">port</varname>] \
+[-u] [-t [-k <varname ixia_locid="71">privatekey</varname> -c <varname ixia_locid="72">certificate</varname>]]</userinput></codeblock>
+                    <p ixia_locid="73">where</p>
+                    <parml>
+                        <plentry ixia_locid="74">
+                            <pt ixia_locid="75"><varname ixia_locid="76">ip-address</varname></pt>
+                            <pd ixia_locid="77">
+                                <p ixia_locid="78">is the listening IP address</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="79">
+                            <pt ixia_locid="80"><varname ixia_locid="81">port</varname></pt>
+                            <pd ixia_locid="82">
+                                <p ixia_locid="83">is the listening port. The default value is 514.</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="84">
+                            <pt ixia_locid="85"><parmname ixia_locid="86">-u</parmname></pt>
+                            <pd ixia_locid="87">
+                                <p ixia_locid="88">enables UDP connections on the remote logging server. This can be
+                                    used along with the <option ixia_locid="89">-t</option> option to enable both
+                                    UDP and TCP.</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="90">
+                            <pt ixia_locid="91"><parmname ixia_locid="92">-t</parmname></pt>
+                            <pd ixia_locid="93">
+                                <p ixia_locid="94">enables TCP connections on the remote logging server. This can be
+                                    used along with the <option ixia_locid="95">-u</option> option to enable both
+                                    TCP and UDP.</p>
+                                <note id="note_N10157_N1014C_N10143_N10106_N100D8_N100C8_N1007B_N10024_N10001" ixia_locid="96">
+                                    <p ixia_locid="97">The -t option can be used together with the
+                                            <option ixia_locid="98">-k</option> and <option ixia_locid="99">-c</option> options to
+                                        enable TLS.</p>
+                                </note>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="100">
+                            <pt ixia_locid="101"><varname ixia_locid="102">privatekey</varname></pt>
+                            <pd ixia_locid="103">
+                                <p ixia_locid="104">is the name of a private key file installed on the remote log
+                                    server</p>
+                            </pd>
+                        </plentry>
+                        <plentry ixia_locid="105">
+                            <pt ixia_locid="106"><varname ixia_locid="107">certificate</varname></pt>
+                            <pd ixia_locid="108">
+                                <p ixia_locid="109">is the name of a certificate file installed on the remote log
+                                    server</p>
+                            </pd>
+                        </plentry>
+                    </parml>
+                    <p ixia_locid="45">For example:</p>
+                </info>
+                <stepxmp ixia_locid="50">
+                    <codeblock ixia_locid="110"><systemoutput ixia_locid="111">$</systemoutput> <userinput ixia_locid="112">./install-log-server.sh -i 128.224.186.92</userinput></codeblock>
+                </stepxmp>
+            </step>
+        </steps>
+        <postreq id="postreq_N1008F_N10024_N10001" ixia_locid="26">
+            <p ixia_locid="31">To begin using the log server, you must enable remote logging on the
+                Titanium Server system. For more information, see <xref href="xqe1467035030589.xml" ixia_locid="32"/>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

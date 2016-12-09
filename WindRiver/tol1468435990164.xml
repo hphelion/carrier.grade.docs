@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="tol1468435990164" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="548">Disabling Instance Auto Recovery Using the CLI</title>
+    <shortdesc ixia_locid="549">You can disable auto recovery of failed virtual machine instances using the
+        CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="550">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <steps id="steps_nfw_4sr_pw">
+            <step id="step_N1003F_N1003C_N1001C_N10001" ixia_locid="496">
+                <cmd ixia_locid="472">To set the option from the command line do one of the
+                    following.</cmd>
+                <choices id="choices_cdc_hl5_ht">
+                    <choice ixia_locid="497">
+                        <p ixia_locid="498">As <term ixia_locid="524">admin</term>, add an extra
+                            spec to a flavor:</p>
+                        <codeblock ixia_locid="499"><systemoutput ixia_locid="500">~(keystone)admin)$ </systemoutput><userinput ixia_locid="502">nova flavor-key <varname ixia_locid="503">flavorName</varname> set sw:wrs:auto_recovery=<varname ixia_locid="536">value</varname></userinput></codeblock>
+                        <draft-comment author="rstone" ixia_locid="546">CGTS-2962
+                            adds</draft-comment>
+                        <p ixia_locid="537">where <varname ixia_locid="538">value</varname> is
+                                <parmname ixia_locid="539">false</parmname> to disable instance auto
+                            recovery or <parmname ixia_locid="540">true</parmname> to enable it.</p>
+                    </choice>
+                    <choice ixia_locid="504">
+                        <p ixia_locid="505">As <term ixia_locid="525">admin</term> or a tenant:</p>
+                        <codeblock ixia_locid="506"><systemoutput ixia_locid="501">~(keystone)admin)$ </systemoutput><userinput ixia_locid="507">glance image-update --property sw_wrs_auto_recovery=<varname ixia_locid="541">value</varname> <varname ixia_locid="508">imageName</varname></userinput></codeblock>
+                        <draft-comment author="rstone" ixia_locid="547">CGTS-2962
+                            adds</draft-comment>
+                        <p ixia_locid="542">where <varname ixia_locid="543">value</varname> is
+                                <parmname ixia_locid="544">false</parmname> to disable instance auto
+                            recovery or <parmname ixia_locid="545">true</parmname> to enable it.</p>
+                    </choice>
+                </choices>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ekn1459529623210" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="75">Viewing the Event Log Using the CLI</title>
+    <shortdesc ixia_locid="76">You can use CLI commands to work with historical alarms and logs in
+        the event log. </shortdesc>
+    <prolog>
+        <author ixia_locid="77">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N1001F_N1001C_N10001" ixia_locid="78">
+            <draft-comment author="eknowlto" ixia_locid="79">US70391: "FM: Merge Query/Display of Historical Alarms
+                and Customer Logs"</draft-comment>
+            <draft-comment author="jowens" ixia_locid="131">US79047 updated for --include-suppress
+                option</draft-comment>
+            <p ixia_locid="80">You must be logged in with administrative privileges.</p>
+            <p ixia_locid="73">To acquire Keystone <nameliteral ixia_locid="74">admin</nameliteral>
+                credentials, use the following command:</p>
+            <codeblock ixia_locid="9"><systemoutput ixia_locid="10">$ </systemoutput><userinput ixia_locid="11">source /etc/nova/openrc</userinput></codeblock>
+        </prereq>
+        <section id="section_N10045_N1001C_N10001" ixia_locid="81">
+            <ul id="ul_y4q_ydw_mv">
+                <li ixia_locid="82">
+                    <p ixia_locid="83">Use the <cmdname ixia_locid="84">system event-list</cmdname>
+                        command to view historical alarms and logs. By default, only unsuppressed
+                        events are shown. For more about event suppression, see <xref href="ykp1463508800049.xml" ixia_locid="132"/></p>
+                    <p ixia_locid="85">The syntax of the command is:</p>
+                    <codeblock ixia_locid="86">system event-list [-q &lt;QUERY&gt;] [-l &lt;NUMBER&gt;] [--alarms] [--logs] [--include-suppress]</codeblock>
+                    <p ixia_locid="87">Optional arguments: </p>
+                    <p ixia_locid="88"><nameliteral ixia_locid="89">-q &lt;QUERY&gt;</nameliteral>, <nameliteral ixia_locid="90">--query
+                            &lt;QUERY&gt;</nameliteral> - key[op]data_type::value; list. data_type is
+                        optional, but if supplied must be string, integer, float, or boolean. </p>
+                    <p ixia_locid="91"><nameliteral ixia_locid="92">-l &lt;NUMBER&gt;</nameliteral>, <nameliteral ixia_locid="93">--limit
+                            &lt;NUMBER&gt;</nameliteral>- Maximum number of event logs to return. </p>
+                    <p ixia_locid="94"><nameliteral ixia_locid="95">--alarms</nameliteral> - Show alarms only. </p>
+                    <p ixia_locid="133"><nameliteral ixia_locid="134">--logs</nameliteral> - Show logs only.</p>
+                    <p ixia_locid="135"><nameliteral ixia_locid="136">--include-suppress</nameliteral>
+                        - Show suppressed alarms as well as unsuppressed alarms.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_N1008B_N1001C_N10001" ixia_locid="98">
+            <title ixia_locid="99">Examples</title>
+            <p ixia_locid="101">The default usage, shown here, views all unsuppressed alarms and
+                logs, but uses the <nameliteral ixia_locid="102">-l</nameliteral> option to limit
+                the output to five entries. </p>
+            <p ixia_locid="126">The output of the command is split in three parts below for
+                presentation purposes only.</p>
+            <codeblock ixia_locid="103" outputclass="wide"><systemoutput ixia_locid="104">[wrsroot@controller-0 ~(keystone_admin)]$</systemoutput> <userinput ixia_locid="105">system event-list -l 5</userinput>
+<systemoutput ixia_locid="106">+--------------------+----------------------------+-------+--------------
+| UUID               | Time Stamp                 | State | Event Log ID 
++--------------------+----------------------------+-------+--------------
+| 313c8279-0ec4-49...| 2016-03-08T18:01:28.912411 | log   | 200.022      
+| 7f2acb58-95af-42...| 2016-03-08T18:01:28.695433 | log   | 200.022      
+| eb0dfd57-77e1-42...| 2016-03-08T18:01:23.490504 | set   | 200.004      
+| 20cb1439-7f84-41...| 2016-03-08T18:01:23.474510 | set   | 200.005      
+| dd529673-5988-43...| 2016-03-08T18:01:21.255716 | set   | 200.005      
++--------------------+----------------------------+-------+--------------
+
++------------------------------------------------------------------------
+| Reason Text
++------------------------------------------------------------------------
+| controller-1 is 'disabled-failed' to the system
+| controller-1 is now 'disabled'
+| controller-1 ... failure. Host is being auto recovered by Reboot.
+| controller-1 ... critical 'Management Network' communication failure.
+| controller-1 ... exceeded its lower alarming threshold.
++------------------------------------------------------------------------
+
++--------------------------------------+----------------+
+| Entity Instance ID                   | Severity       |
++--------------------------------------+----------------+
+| host=controller-1.status=failed      | not-applicable |
+| host=controller-1.state=disabled     | not-applicable |
+| host=controller-1                    | critical       |
+| host=controller-1.network=Management | critical       |
+| host=controller-1.network=Management | major          |
++--------------------------------------+----------------+
+[wrsroot@controller-0 ~(keystone_admin)]$  </systemoutput></codeblock>
+            <p ixia_locid="129"/>
+            <p ixia_locid="108">In the following example, the <cmdname ixia_locid="109">system
+                    event-list</cmdname> command shows alarms only; the <nameliteral ixia_locid="110">State</nameliteral> column indicates either <nameliteral ixia_locid="111">set</nameliteral> or <nameliteral ixia_locid="112">clear</nameliteral>.</p>
+            <p ixia_locid="127">The output of the command is split in three parts below for
+                presentation purposes only.</p>
+            <codeblock ixia_locid="113" outputclass="wide"><systemoutput ixia_locid="114">[wrsroot@controller-0 ~(keystone_admin)]$</systemoutput> <userinput ixia_locid="115">system event-list -l 5 --alarms</userinput> 
+<systemoutput ixia_locid="116">+--------------------+----------------------------+-------+--------------
+| UUID               | Time Stamp                 | State | Event Log ID 
++--------------------+----------------------------+-------+--------------
+| eb0dfd57-77e1-42...| 2016-03-08T18:01:23.490504 | set   | 200.004      
+| 20cb1439-7f84-41...| 2016-03-08T18:01:23.474510 | set   | 200.005      
+| dd529673-5988-43...| 2016-03-08T18:01:21.255716 | set   | 200.005      
+| 33592561-520f-49...| 2016-03-08T18:01:09.433405 | set   | 400.002      
+| 92f743b4-8e3e-4d...| 2016-03-08T18:01:09.418902 | set   | 400.002      
++--------------------+----------------------------+-------+--------------
+
++------------------------------------------------------------------------
+| Reason Text
++------------------------------------------------------------------------
+| controller-1 ... failure. Host is being auto recovered by Reboot.
+| controller-1 ... 'Management Network' communication failure.
+| controller-1 ... failures that have exceeded lower alarming threshold.
+| Service group oam-services loss of redundancy; ...
+| Service group controller-services loss of redundancy; ...
++-------------------------------------------------------------------------
+
++-------------------------------------------------------------+----------+
+| Entity Instance ID                                          | Severity |
++-------------------------------------------------------------+----------+
+| host=controller-1                                           | critical |
+| host=controller-1.network=Management                        | critical |
+| host=controller-1.network=Management                        | major    |
+| service_domain=controller.service_group=oam-services        | major    |
+| service_domain=controller.service_group=controller-services | major    |
++-------------------------------------------------------------+----------+
+
+[wrsroot@controller-0 ~(keystone_admin)]$</systemoutput></codeblock>
+            <p ixia_locid="130"/>
+            <p ixia_locid="118">In this example, the <cmdname ixia_locid="119">system
+                    event-list</cmdname> command shows logs only; the <nameliteral ixia_locid="120">State</nameliteral> column indicates <nameliteral ixia_locid="121">log</nameliteral>.</p>
+            <p ixia_locid="128">The output of the command is split in three parts below for
+                presentation purposes only.</p>
+            <codeblock ixia_locid="122" outputclass="wide"><systemoutput ixia_locid="123">[wrsroot@controller-0 ~(keystone_admin)]$</systemoutput> <userinput ixia_locid="124">system event-list -l 5 --logs</userinput>  
+<systemoutput ixia_locid="125">+---------------------+----------------------------+-------+--------------
+| UUID                | Time Stamp                 | State | Event Log ID 
++---------------------+----------------------------+-------+--------------
+| 980a6f11-4c1a-4f... | 2016-03-08T18:02:02.113072 | log   | 200.022
+| 313c8279-0ec4-49... | 2016-03-08T18:01:28.912411 | log   | 200.022
+| 7f2acb58-95af-42... | 2016-03-08T18:01:28.695433 | log   | 200.022
+| 932e20eb-74a8-4e... | 2016-03-08T18:01:09.064913 | log   | 401.002
+| a89a468c-0629-42... | 2016-03-08T18:01:08.831612 | log   | 401.002
++---------------------+----------------------------+-------+--------------
+
++-------------------------------------------------------------------------
+| Reason Text
++-------------------------------------------------------------------------
+| controller-1 is now 'offline'
+| controller-1 is 'disabled-failed' to the system
+| controller-1 is now 'disabled'
+| Service group oam-services loss of redundancy; expected 1 standby...
+| Service group controller-services loss of redundancy; expected 1 standby 
++-------------------------------------------------------------------------
+
++-------------------------------------------------------------+----------------+
+| Entity Instance ID                                          | Severity       |
++-------------------------------------------------------------+----------------+
+| host=controller-1.status=offline                            | not-applicable |
+| host=controller-1.status=failed                             | not-applicable |
+| host=controller-1.state=disabled                            | not-applicable |
+| service_domain=controller.service_group=oam-services        | critical       |
+| service_domain=controller.service_group=controller-services | critical       |
++-------------------------------------------------------------+----------------+
+
+[wrsroot@controller-0 ~(keystone_admin)]$</systemoutput></codeblock>
+        </section>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1448561585231" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="356">Specifying Host CPU Threading Policies for a VM</title>
+    <shortdesc ixia_locid="357">You can control the use of host CPU multithreading for a VM using
+            <nameliteral ixia_locid="386">CPU Policy</nameliteral> and <nameliteral ixia_locid="387">CPU Thread Policy</nameliteral> extra specifications or image metadata.</shortdesc>
+    <prolog>
+        <author ixia_locid="358">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="359">
+            <p ixia_locid="363"><draft-comment author="jowens" ixia_locid="369">CGTS-3057 rewritten
+                    topic; US64370 updated for CPU Threads Policy; CGTS-3808 added image metadata
+                    information; re-titled topic; updated short description (first sentence in
+                    topic); introduced section headings for "Specifying CPU Policies"; CGTS-5144 add
+                    sections for each policy, list valid values</draft-comment>When a virtual
+                machine is launched, each of its virtual CPU threads is scheduled for processing on
+                a physical or logical core. The <nameliteral ixia_locid="206">CPU
+                    Policy</nameliteral>, in conjunction with the <nameliteral ixia_locid="388">CPU
+                    Thread Policy</nameliteral>, determines whether the core can be over-committed
+                (that is, used to execute multiple threads).</p>
+            <note id="note_N10058_N10022_N1001F_N10001" ixia_locid="360">
+                <p ixia_locid="361">For CPU scaling, the <nameliteral ixia_locid="426">CPU
+                        Policy</nameliteral> must be set to <option ixia_locid="362">Dedicated</option>. If the <nameliteral ixia_locid="589">CPU Thread
+                        Policy</nameliteral> is also present, the <nameliteral ixia_locid="590">CPU
+                        Thread Policy</nameliteral>  must be set to <option ixia_locid="428">Isolate</option> or <option ixia_locid="584">Prefer</option>.</p>
+            </note>
+        </context>
+        <section id="section_N10071_N10029_N10001" ixia_locid="591">
+            <title ixia_locid="592">CPU Policy</title>
+            <p ixia_locid="593">The following settings are available for the <nameliteral ixia_locid="594">CPU
+                    Policy</nameliteral>:<dl>
+                    <dlentry ixia_locid="595">
+                        <dt ixia_locid="596"><option ixia_locid="597">Dedicated</option></dt>
+                        <dd ixia_locid="598">
+                            <p ixia_locid="599">When the <nameliteral ixia_locid="600">CPU
+                                    Policy</nameliteral> is set to <option ixia_locid="601">Dedicated</option>, each virtual CPU thread is scheduled to run
+                                as a <term ixia_locid="461">pinned</term> vCPU on a dedicated core
+                                on the compute node.</p>
+                        </dd>
+                    </dlentry>
+                    <dlentry ixia_locid="602">
+                        <dt ixia_locid="603"><option ixia_locid="604">Shared</option></dt>
+                        <dd ixia_locid="605">
+                            <p ixia_locid="606">When the <nameliteral ixia_locid="607">CPU
+                                    Policy</nameliteral> is set to <option ixia_locid="608">Shared</option>, each virtual CPU thread is scheduled to run as
+                                a <term ixia_locid="462">floating</term> vCPU on any available core
+                                on the compute node, subject to an over-commit limit. The OpenStack
+                                virtual CPU over-commit ratio is 16:1, which means that up to 16
+                                virtual CPU threads can share a single core.</p>
+                        </dd>
+                    </dlentry>
+                </dl></p>
+            <p ixia_locid="448"><draft-comment author="jowens" ixia_locid="449">CGTS-3537 added para
+                    as TiS differentiator</draft-comment>In contrast to the standard OpenStack
+                implementation, instances with <option ixia_locid="450">Dedicated</option> and
+                    <option ixia_locid="451">Shared</option> policies can safely be instantiated on
+                the same host. Instances with <option ixia_locid="452">Shared</option> policies are
+                prevented from using threads on host CPUs assigned to instances with <option ixia_locid="453">Dedicated</option> policies. The availability of host CPUs for
+                shared use is updated as pinned CPUs are assigned or released. This ensures optimal
+                processor time for dedicated applications, as well as efficient use of CPUs on the
+                hosts.</p>
+            <p ixia_locid="454"><draft-comment author="jowens" ixia_locid="455">CGTS-3628 /
+                    CGTS-3537 added explanation of vcpus_used count; CGTS-4039 add reference to nova
+                    hypervisor-show</draft-comment>To support this model, one host CPU is reserved
+                for each increment of 16 floating vCPUs. This is reflected in the vCPU usage
+                statistics for the host, as given by the <cmdname ixia_locid="571">nova
+                    hypervisor-show</cmdname> command in Titanium Server. Each pinned vCPU is
+                reported as using one host CPU, and each floating vCPU is reported as using 1/16 of
+                a host CPU. For example, on a compute node that is hosting five dedicated and four
+                floating vCPUs, the CPU usage (the <nameliteral ixia_locid="459">vcpus_used</nameliteral> value) is shown as <nameliteral ixia_locid="460">5.25</nameliteral>, providing an indication of the total CPU utilization for
+                the host.</p>
+            <p ixia_locid="364">The default <nameliteral ixia_locid="381">CPU Policy</nameliteral>
+                setting is <option ixia_locid="367">Shared</option>. You can change this by adding
+                the <nameliteral ixia_locid="382">CPU Policy</nameliteral> extra spec and setting it
+                to <option ixia_locid="383">Dedicated</option>. When you do so using the web
+                administration interface, the non-default policy <nameliteral ixia_locid="366">Dedicated</nameliteral> is offered for convenience.</p>
+            <p ixia_locid="189">The <nameliteral ixia_locid="211">Dedicated</nameliteral> setting is
+                recommended for Carrier-Grade requirements to prevent over-commitment of host
+                resources, and to minimize the impact that scheduling events may have on the latency
+                and throughput responses of the guest kernel.</p>
+            <note id="note_N10013_N10011_N10001" ixia_locid="2" type="caution">
+                <p ixia_locid="3"><draft-comment author="jowens" ixia_locid="4">CGTS-3436 added;
+                        CGTS-3808 specifed "the CPU Policy setting" (was "this extra
+                        spec")</draft-comment> When the <nameliteral ixia_locid="486">CPU
+                        Policy</nameliteral> setting is used, an eligible host NUMA node is required
+                    for each virtual NUMA node in the instance. If this requirement cannot be met,
+                    the instantiation fails. For more information, see <ph ixia_locid="566" otherprops="printonly"><cite ixia_locid="567">Titanium Server Cloud
+                            Operation: </cite></ph><cite ixia_locid="568"><ph ixia_locid="569"><xref href="ilv1467810214383.xml" ixia_locid="570"/></ph></cite>.</p>
+            </note>
+        </section>
+        <section id="section_N1015A_N10029_N10001" ixia_locid="609">
+            <title ixia_locid="610">CPU Thread Policy</title>
+            <p ixia_locid="443"> To manage how sibling threads are utilitized under the <nameliteral ixia_locid="647">CPU Policy</nameliteral>, you can add a <nameliteral ixia_locid="611">CPU Thread Policy</nameliteral> extra specification. The
+                    <nameliteral ixia_locid="389">CPU Thread Policy</nameliteral> controls the use
+                of sibling pairs. If this extra spec is not present, then by default the use of
+                sibling pairs by the VM is not enforced. This is equivalent to the
+                    <nameliteral ixia_locid="648">prefer</nameliteral> setting.</p>
+            <p ixia_locid="612"> The following settings are available for the <nameliteral ixia_locid="613">CPU
+                    Thread Policy</nameliteral>:</p>
+            <dl>
+                <dlentry ixia_locid="614">
+                    <dt ixia_locid="615"><option ixia_locid="616">Isolate</option></dt>
+                    <dd ixia_locid="617">
+                        <p ixia_locid="618">When you add the <nameliteral ixia_locid="619">CPU
+                                Thread Policy</nameliteral> extra spec, the <option ixia_locid="620">Isolate</option> policy is offered. This policy enforces the use of
+                            only one hyperthreaded sibling in each dedicated core, optimizing
+                            processor cycles. </p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="621">
+                    <dt ixia_locid="622"><option ixia_locid="623">Require</option></dt>
+                    <dd ixia_locid="624">
+                        <p ixia_locid="631"><draft-comment author="jowens" ixia_locid="632">US80866 host must support
+                                hyperthreading</draft-comment>You can change the <nameliteral ixia_locid="633">CPU Thread Policy</nameliteral> to <option ixia_locid="634">Require</option> to enforce the use of both
+                            siblings by the VM, optimizing resource allocations. For instantiation,
+                            a host that supports hyperthreading must be available.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="627">
+                    <dt ixia_locid="628"><option ixia_locid="629">Prefer</option></dt>
+                    <dd ixia_locid="630">
+                        <p ixia_locid="635"><draft-comment author="jowens" ixia_locid="636">US80866
+                                added</draft-comment>You can change the <nameliteral ixia_locid="637">CPU Thread Policy</nameliteral> to <option ixia_locid="638">Prefer</option> to prefer the use of siblings if
+                            available. Otherwise the VM can use non-sibling threads.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <note id="note_N100C5_N1002C_N10029_N10001" ixia_locid="439">
+                <ul id="ul_dh1_zgw_45">
+                    <li ixia_locid="440">
+                        <p ixia_locid="432">The <nameliteral ixia_locid="433">CPU Thread
+                                Policy</nameliteral> is incompatible with the <nameliteral ixia_locid="434">Shared VCPU ID</nameliteral> extra specification.
+                            Do not use both in the same flavor.</p>
+                    </li>
+                    <li ixia_locid="441">
+                        <p ixia_locid="424">The <option ixia_locid="425">Require</option> setting
+                            for the <nameliteral ixia_locid="436">CPU Thread Policy</nameliteral>
+                            effectively causes the VM to require threads in multiples of two. It is
+                            therefore not compatible with CPU scaling, which assumes increments of
+                            one.</p>
+                    </li>
+                </ul>
+            </note>
+        </section>
+        <section id="section_N1016E_N10029_N10001" ixia_locid="572">
+            <title ixia_locid="319">Specifying CPU Policies as Flavor Extra Specs</title>
+            <p ixia_locid="573"><draft-comment author="jowens" ixia_locid="585">US80866 ...thread_policy was
+                    ...threads_policy, multiple places</draft-comment>You can specify dedicated or
+                shared CPU policies for a flavor using extra specifications.</p>
+            <p ixia_locid="323"><draft-comment author="jowens" ixia_locid="324">section created from
+                    topic for restructuring</draft-comment>The <nameliteral ixia_locid="586">CPU Policy</nameliteral>
+                and <nameliteral ixia_locid="587">CPU Thread Policy</nameliteral> selections in the <uicontrol ixia_locid="588">Create
+                    Flavor Extra Spec</uicontrol> drop-down menu control these policies. To access
+                this menu, see <xref href="jow1429538642910.xml" ixia_locid="318"/>.</p>
+        </section>
+        <section id="section_N1018D_N10029_N10001" ixia_locid="574">
+            <title ixia_locid="575">Specifying CPU Policies as Flavor Extra Specs Using the
+                CLI</title>
+            <p ixia_locid="576">You can specify dedicated or shared CPU policies for a flavor using the CLI.</p>
+            <p ixia_locid="537"><draft-comment author="jowens" ixia_locid="577">section created from
+                    topic for restructuring</draft-comment>To add the <nameliteral ixia_locid="492">CPU Policy</nameliteral> extra spec to a flavor using the CLI, use the
+                following command:</p>
+            <codeblock ixia_locid="493"><systemoutput ixia_locid="494">~(keystone_admin)$ </systemoutput><userinput ixia_locid="495">nova flavor-key <varname ixia_locid="496">flavor_name</varname> set hw:cpu_policy=<varname ixia_locid="497">policy</varname></userinput></codeblock>
+            <p ixia_locid="538">where <varname ixia_locid="539">policy</varname> is either <option ixia_locid="540">dedicated</option> or <option ixia_locid="541">shared</option>.
+                If any other value is supplied, the policy is set to <nameliteral ixia_locid="542">dedicated</nameliteral>.</p>
+            <p ixia_locid="503">To add the <nameliteral ixia_locid="504">CPU Thread
+                    Policy</nameliteral> to a flavor using the CLI, use the following command:</p>
+            <codeblock ixia_locid="505"><systemoutput ixia_locid="506">~(keystone_admin)$ </systemoutput><userinput ixia_locid="507">nova flavor-key <varname ixia_locid="508">flavor_name</varname> set hw:cpu_thread_policy=<varname ixia_locid="509">thread_policy</varname></userinput></codeblock>
+            <p ixia_locid="543"><draft-comment author="jowens" ixia_locid="639">US80866 add prefer
+                    option</draft-comment>where <varname ixia_locid="544">thread_policy</varname> is
+                either <option ixia_locid="640">isolate</option>, <option ixia_locid="641">require</option>, or <option ixia_locid="642">prefer</option>. Any other value is rejected with
+                an error message.</p>
+        </section>
+        <section id="section_N1020D_N10029_N10001" ixia_locid="578">
+            <title ixia_locid="579">Specifying CPU Policies as Image Metadata</title>
+            <p ixia_locid="580">You can specify dedicated or shared CPU policies for an image by adding metadata.</p>
+            <p ixia_locid="516"><draft-comment author="jowens" ixia_locid="581">section created from
+                    topic for restructuring</draft-comment>You can use the following commands:</p>
+            <codeblock ixia_locid="582"><systemoutput ixia_locid="518">~(keystone_admin)$ </systemoutput><userinput ixia_locid="519">nova image-meta <varname ixia_locid="520">image_name</varname> set hw_cpu_policy=<varname ixia_locid="521">policy</varname></userinput></codeblock>
+            <p ixia_locid="548">where <varname ixia_locid="549">policy</varname> is either <option ixia_locid="550">dedicated</option> or <option ixia_locid="583">shared</option>.
+                Other values are ignored.</p>
+            <codeblock ixia_locid="553"><systemoutput ixia_locid="522">~(keystone_admin)$ </systemoutput><userinput ixia_locid="523">nova image-meta <varname ixia_locid="524">image_name</varname> set hw_cpu_thread_policy=<varname ixia_locid="525">thread_policy</varname></userinput></codeblock>
+            <p ixia_locid="554"><draft-comment author="jowens" ixia_locid="643">US80866 add prefer
+                    option</draft-comment>where <varname ixia_locid="555">thread_policy</varname> is
+                either  <option ixia_locid="644">isolate</option>, <option ixia_locid="645">require</option>, or <option ixia_locid="646">prefer</option>. Other values are ignored.</p>
+            <p ixia_locid="526">You can update the CPU policies for an image using the following
+                commands:</p>
+            <codeblock ixia_locid="558"><systemoutput ixia_locid="528">~(keystone_admin)$ </systemoutput><userinput ixia_locid="529">glance image-update --property hw_cpu_policy=<varname ixia_locid="530">policy</varname> <varname ixia_locid="531">image_name</varname></userinput></codeblock>
+            <codeblock ixia_locid="564"><systemoutput ixia_locid="532">~(keystone_admin)$ </systemoutput><userinput ixia_locid="533">glance image-update --property hw_cpu_thread_policy=<varname ixia_locid="534">thread_policy</varname> <varname ixia_locid="535">image_name</varname></userinput></codeblock>
+        </section>
+    </taskbody>
+</task-wr>

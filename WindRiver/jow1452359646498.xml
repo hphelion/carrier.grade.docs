@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1452359646498" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="10">SR-IOV Encryption Acceleration</title>
+ <shortdesc ixia_locid="11">Titanium Server supports PCI SR-IOV access for encryption acceleration.</shortdesc>
+ <prolog>
+  <author ixia_locid="12">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="13"><draft-comment author="jowens" ixia_locid="6">US64378 new
+    topic.</draft-comment><draft-comment author="jowens" ixia_locid="25"> CGTS-3989 (PGA) clarify SR-IOV
+    only</draft-comment>Titanium Server supports SR-IOV access for the Intel AV-ICE02 VPN
+   Acceleration Card, based on the Intel Coleto Creek 8925/8950 chipset with <tm ixia_locid="14" tmtype="tm">QuickAssist</tm> technology. (Due to driver limitations, PCI passthrough access is
+   not currently supported.) If this card is present on an available host, you can provide VMs with
+   access to one or more SR-IOV devices to improve performance for encrypted communications.</p>
+  <note id="note_N1002F_N1001C_N10001" ixia_locid="15" type="caution">
+   <p ixia_locid="16">Live migration is not supported for instances using SR-IOV devices.</p>
+  </note>
+  <p ixia_locid="23">To expose the device to VMs, see <ph ixia_locid="26" otherprops="printonly"><cite ixia_locid="27">Titanium Server System Administration: </cite></ph><cite ixia_locid="28"><ph ixia_locid="29"><xref href="jow1452444710203.xml" ixia_locid="30"/></ph></cite>. To provide a VM with access to this device, see <ph ixia_locid="31" otherprops="printonly"><cite ixia_locid="32">Titanium Server Cloud Administration: </cite></ph><cite ixia_locid="33"><ph ixia_locid="34"><xref href="jow1452031857413.xml" ixia_locid="20"/></ph></cite>.</p>
+  <note id="note_N1004E_N1001C_N10001" ixia_locid="21">
+   <p ixia_locid="22">To use PCI passthrough or SR-IOV devices, you must have Intel VT-x and Intel
+    VT-d features enabled in the BIOS.</p>
+  </note>
+ </conbody>
+</concept-wr>

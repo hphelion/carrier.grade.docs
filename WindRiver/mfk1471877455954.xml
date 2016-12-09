@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="mfk1471877455954" xml:lang="en-us">
+<!-- This version for main trunk (16.x) -->
+ <title ixia_locid="1">Password Recovery for Linux User Accounts</title>
+ <shortdesc ixia_locid="2">You can reset the password for a Linux user if required. The procedure depends on the
+  class of user.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+   <title ixia_locid="5">Linux System Users </title>
+   <p ixia_locid="6"><draft-comment author="jowens" ixia_locid="7">CGTS-3963 new
+     topic</draft-comment>This class includes the <nameliteral ixia_locid="8">wrsroot</nameliteral>
+    account, and optionally other Linux system user accounts created to support a multi-admin
+    scenario. If another Linux system account is available, you can use it to reset the password for
+    this type of account as follows: </p>
+   <codeblock ixia_locid="11"><systemoutput ixia_locid="12">$ </systemoutput><userinput ixia_locid="13">sudo passwd <varname ixia_locid="14">user</varname> <varname ixia_locid="15">temp_password</varname></userinput>
+<systemoutput ixia_locid="59">$ </systemoutput><userinput ixia_locid="60">sudo chage -d 0 <varname ixia_locid="61">user</varname></userinput></codeblock>
+   <p ixia_locid="16">where <varname ixia_locid="17">user</varname> is the user name of the account
+        to be reset (for, example, <nameliteral ixia_locid="18">wrsroot</nameliteral>) and <varname ixia_locid="19">temp_password</varname> is a temporary password. The <cmdname ixia_locid="62">chage</cmdname> command forces immediate expiration, so that the user must
+        change the password at first login.</p>
+   <p ixia_locid="20">If no other Linux system user accounts have been created, then password
+    recovery for <nameliteral ixia_locid="21">wrsroot</nameliteral> is not possible, and you must
+    reinstall the Titanium Server software.</p>
+  </section>
+  <section id="section_N10066_N1001C_N10001" ixia_locid="22">
+   <title ixia_locid="23">LDAP System Users</title>
+   <p ixia_locid="24">This class includes users created using LDAP utilities.</p>
+   <p ixia_locid="25">You can reset the password for an LDAP account as follows: </p>
+   <codeblock ixia_locid="26"><systemoutput ixia_locid="27">$ </systemoutput><userinput ixia_locid="28">sudo ldapmodifyuser <varname ixia_locid="29">user</varname> replace userPassword <varname ixia_locid="30">temp_password</varname></userinput>
+<systemoutput ixia_locid="63">$ </systemoutput><userinput ixia_locid="64">sudo ldapmodifyuser <varname ixia_locid="65">user</varname> replace shadowLastChange 0</userinput></codeblock>
+   <p ixia_locid="31">where <varname ixia_locid="32">user</varname> is the user name, and <varname ixia_locid="33">temp_password</varname> is a temporary password. The second command forces
+        a password change on first login.</p>
+  </section>
+  <section id="section_N10093_N1001C_N10001" ixia_locid="34">
+   <title ixia_locid="35">Keystone Admin User</title>
+   <p ixia_locid="36">This class includes the OpenStack <nameliteral ixia_locid="37">admin</nameliteral> user.</p>
+   <p ixia_locid="39">You can reset the Keystone admin user password as follows:</p>
+   <codeblock ixia_locid="40"><systemoutput ixia_locid="41">$ </systemoutput><userinput ixia_locid="42">sudo keyring set CGCS admin</userinput>
+<systemoutput ixia_locid="43">$ Password for 'admin' in 'CGCS':</systemoutput><userinput ixia_locid="44"><varname ixia_locid="45">temp_password</varname></userinput></codeblock>
+      <p ixia_locid="66">The Keystone admin user can change the password at any time using either
+    the Identity panel in Horizon, or the <cmdname ixia_locid="67">keystone
+     user-password-update</cmdname> command.</p>
+  </section>
+  <section id="section_N100BE_N1001C_N10001" ixia_locid="46">
+   <title ixia_locid="47">Keystone Tenant Users</title>
+   <p ixia_locid="48">This class includes OpenStack non-admin users (tenant users).</p>
+   <p ixia_locid="50">You can reset the Keystone admin user password from the OpenStack CLI as follows:</p>
+   <codeblock ixia_locid="51"><systemoutput ixia_locid="52">~(keystone_admin)$ </systemoutput><userinput ixia_locid="53">keystone user-password-update --pass sudo <varname ixia_locid="54">temp_password</varname> <varname ixia_locid="55">user</varname></userinput></codeblock>
+   <p ixia_locid="56">where <varname ixia_locid="57">user</varname> is the user name and <varname ixia_locid="58">temp_password</varname> is a temporary password.</p>
+  </section>
+ </conbody>
+</concept-wr>

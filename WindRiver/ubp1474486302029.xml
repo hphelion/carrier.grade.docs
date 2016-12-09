@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ubp1474486302029" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Deleting Interfaces</title>
+    <shortdesc ixia_locid="2">You can delete an interface using the Web administration interface or
+        the CLI.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10023_N10020_N10001" ixia_locid="5">
+            <note id="note_N10027_N10022_N1001F_N10001" ixia_locid="38">
+                <p ixia_locid="39">You cannot delete an interface of type <nameliteral ixia_locid="40">Ethernet</nameliteral>. You can only designate it as unused
+                    by setting its network type to <nameliteral ixia_locid="41">none</nameliteral>.</p>
+            </note>
+            <p ixia_locid="42"><draft-comment author="jowens" ixia_locid="7">CGTS-4798 new
+                    topic</draft-comment>From the Web administration interface, you can delete an
+                interface from the <uicontrol ixia_locid="58">Interface</uicontrol> tab of the
+                    <wintitle ixia_locid="59">Host Inventory</wintitle> page.</p>
+            <fig id="fig_hcp_wc4_jx" ixia_locid="43">
+                <image href="ejy1474571364493.image" id="image_bvy_wc4_jx" ixia_locid="44">
+                    <alt ixia_locid="45">TiS Delete Interface</alt>
+                </image>
+            </fig>
+            <p ixia_locid="46">From the CLI, you can use the <cmdname ixia_locid="8">system
+                    host-if-delete</cmdname> command.</p>
+            <codeblock ixia_locid="47"><systemoutput ixia_locid="48">~(keystone_admin)</systemoutput><userinput ixia_locid="49">system host-if-delete <varname ixia_locid="12">host</varname> <varname ixia_locid="13">interface</varname></userinput></codeblock>
+            <p ixia_locid="14">where</p>
+            <parml>
+                <plentry ixia_locid="15">
+                    <pt ixia_locid="16"><varname ixia_locid="17">host</varname></pt>
+                    <pd ixia_locid="18">
+                        <p ixia_locid="19">is the hostname or ID of the host</p>
+                    </pd>
+                </plentry>
+                <plentry ixia_locid="20">
+                    <pt ixia_locid="21"><varname ixia_locid="22">interface</varname></pt>
+                    <pd ixia_locid="23">
+                        <p ixia_locid="24">is the name or UUID of the interface</p>
+                    </pd>
+                </plentry>
+            </parml>
+            <p ixia_locid="50">For example, to delete an aggregated Ethernet interface named
+                    <nameliteral ixia_locid="51">eth1a</nameliteral> on <nameliteral ixia_locid="52">compute-0</nameliteral>:</p>
+            <codeblock ixia_locid="53"><systemoutput ixia_locid="54">~(keystone_admin)$ </systemoutput><userinput ixia_locid="55">system host-if-delete compute-0 eth1a </userinput>
+<systemoutput ixia_locid="56">Deleted interface: host compute-0 if eth1a</systemoutput></codeblock>
+        </context>
+        <section id="section_N100DC_N1001F_N10001" ixia_locid="60">
+            <title ixia_locid="61">Marking an Ethernet Interface as Unused</title>
+            <p ixia_locid="32">You cannot delete an Ethernet interface. You can mark an Ethernet
+                interface as unused by setting the interface type to <nameliteral ixia_locid="34">none</nameliteral> from the Web administration interface, or from the CLI using
+                the <cmdname ixia_locid="33">system host-if-modify</cmdname> command.</p>
+            <p ixia_locid="25">For example, to designate the <nameliteral ixia_locid="26">eth1</nameliteral> Ethernet interface on <nameliteral ixia_locid="27">compute-0</nameliteral> as unused:</p>
+            <codeblock ixia_locid="28"><systemoutput ixia_locid="29">~(keystone_admin)$ </systemoutput><userinput ixia_locid="30">system host-if-modify -nt none compute-0 eth1</userinput>
+<systemoutput ixia_locid="57">+------------------+--------------------------------------+
+| Property         | Value                                |
++------------------+--------------------------------------+
+| ifname           | eth1                                 |
+| networktype      | None                                 |
+| iftype           | ethernet                             |
+| ports            | [u'eth1']                            |
+| providernetworks | None                                 |
+| imac             | 08:00:27:91:f9:b6                    |
+| imtu             | 1500                                 |
+| aemode           | None                                 |
+| schedpolicy      | None                                 |
+| txhashpolicy     | None                                 |
+| uuid             | 87dd1d4b-1e38-4f6c-a692-4c4199a3ef0e |
+| ihost_uuid       | 3b659824-eac3-4446-af73-f4a519e8ab30 |
+| vlan_id          | None                                 |
+| uses             | []                                   |
+| used_by          | []                                   |
+| created_at       | 2016-09-22T18:24:08.092296+00:00     |
+| updated_at       | 2016-09-22T18:36:46.333354+00:00     |
+| sriov_numvfs     | 0                                    |
+| ipv4_mode        | None                                 |
+| ipv6_mode        | None                                 |
+| accelerated      | [u'True']                            |
++------------------+--------------------------------------+</systemoutput></codeblock>
+        </section>
+    </taskbody>
+</task-wr>

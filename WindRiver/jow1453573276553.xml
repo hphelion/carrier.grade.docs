@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1453573276553" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Keystone Account Authentication</title>
+ <shortdesc ixia_locid="2">OpenStack tenants and users are authenticated by the OpenStack Keystone identity
+  service.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4"><draft-comment author="jowens" ixia_locid="5">US71877 new
+   topic</draft-comment>For tenant and user authentication, OpenStack supports a mixed backend that
+   can use both SQL for local Keystone accounts and LDAP for centrally managed Keystone accounts. By
+   default, Titanium Server uses the SQL identity service, and maintains the SQL database on the
+   controller. For centrally managed acccounts, you can add an LDAP identity service for Keystone
+   user accounts, and use a remote LDAP server backend. To add the LDAP identity service, see <xref href="qcj1465221711259.xml" ixia_locid="68"/>.</p>
+  <note id="note_N10027_N10022_N1001F_N10001" ixia_locid="62" type="caution">
+   <p ixia_locid="63">To ensure that all OpenStack users are managed by the LDAP identity service,
+    you must configure the service <i ixia_locid="64">before</i> creating the OpenStack users.</p>
+  </note>
+  <p ixia_locid="7">Titanium Server implements Keystone LDAP authentication using the Keystone API
+   v2, preserving compatibility with earlier OpenStack releases. The implementation provides for
+   LDAP user account management, while maintaining the SQL backend for service accounts to simplify
+   the configuration process. All authentication requests are handled first by the SQL service. If
+   no entry is found, they are referred to the LDAP service.</p>
+  <note id="note_N10049_N1001F_N10001" ixia_locid="69">
+   <p ixia_locid="66"><draft-comment author="jowens" ixia_locid="67">CGTS-5153 / US89717 add
+     note</draft-comment>By default, a Keystone token expires after one hour. You can increase the
+    expiration time if required. For more information, see <xref href="rtt1479843799021.xml" ixia_locid="70"/>.</p>
+  </note>
+ </conbody>
+</concept-wr>

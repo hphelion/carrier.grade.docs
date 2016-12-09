@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="ndr1472578864787" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Provisioning Interfaces on a Compute Host Using the CLI</title>
+    <shortdesc ixia_locid="2">You can use the <nameliteral ixia_locid="3">controller-0</nameliteral>
+        command-line interface to configure network interfaces on a host.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Jim Owens</author>
+        <author ixia_locid="5">Tom Towle</author>
+        <author ixia_locid="6">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10031_N1002E_N10001" ixia_locid="700">
+            <p ixia_locid="696">The details for attaching an interface depend on the network
+                configuration (for example, whether shared interfaces are used). A simple example is
+                provided here.  For more information, see <xref href="jow1427029415968.xml" ixia_locid="701"/>.</p>
+        </context>
+        <prereq id="prereq_N10066_N10029_N10001" ixia_locid="184">
+            <p ixia_locid="185">The Titanium Server software must be installed on the host.</p>
+            <p ixia_locid="186">To configure the data interfaces on a compute host, provider
+                networks are required.</p>
+        </prereq>
+        <steps>
+            <step id="step_N10077_N10073_N10029_N10001" ixia_locid="187">
+                <cmd ixia_locid="188">Ensure that provider networks are available for the data
+                    interfaces. For more information, see <xref href="jow1404333555748.xml" ixia_locid="702"/>.</cmd>
+            </step>
+            <step id="step_N101A4_N10083_N1002E_N10001" ixia_locid="225">
+                <cmd ixia_locid="226">Provision the data interfaces.</cmd>
+                <info ixia_locid="703">
+                    <p ixia_locid="330">For example, to attach an interface named <nameliteral ixia_locid="331">enp0s9</nameliteral> to a VLAN provider network named
+                            <nameliteral ixia_locid="332">providernet-a</nameliteral>, using
+                        Ethernet interface <nameliteral ixia_locid="333">enp0s9</nameliteral>
+                            on<nameliteral ixia_locid="334"> compute-0</nameliteral>:</p>
+                    <codeblock ixia_locid="335"><systemoutput ixia_locid="336">~(keystone_admin)$ </systemoutput><userinput ixia_locid="337">system host-if-modify -n enp0s9 \
+-nt data compute-0 enp0s9 -p providernet-a</userinput>
+<systemoutput ixia_locid="338">+------------------+----------------------------------------+
+| Property         | Value                                  |
++------------------+----------------------------------------+
+| ifname           | enp0s9                                 |
+| networktype      | data                                   |
+| iftype           | ethernet                               |
+| ports            | [u'enp0s9']                            |
+| providernetworks | providernet-a                          |
+| imac             | 08:00:27:66:38:c6                      |
+| imtu             | 1500                                   |
+| aemode           | None                                   |
+| schedpolicy      | None                                   |
+| txhashpolicy     | None                                   |
+| uuid             | 4ff97cc5-8e59-4763-9a85-c4be3996ddbe   |
+| ihost_uuid       | 327b2136-ffb6-4cd5-8fed-d2ec545302aa   |
+| vlan_id          | None                                   |
+| uses             | []                                     |
+| used_by          | []                                     |
+| created_at       | 2015-12-23T13:04:49.768322+00:00       |
+| updated_at       | 2015-12-23T16:16:19.540661+00:00       |
+| sriov_numvfs     | 0                                      |
+| ipv4_mode        | disabled                               |
+| ipv6_mode        | disabled                               |
+| accelerated      | [u'True']                              |
++------------------+----------------------------------------+
+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N101B8_N10083_N1002E_N10001" ixia_locid="230">
+                <cmd ixia_locid="231">If the cluster uses an infrastructure network, provision an
+                    infrastructure interface.</cmd>
+                <info ixia_locid="704">
+                    <p ixia_locid="197">For example, to attach a VLAN interface named <nameliteral ixia_locid="198">infra0</nameliteral> with VLAN ID <nameliteral ixia_locid="199">22</nameliteral> to the infrastructure network, using
+                        Ethernet interface <nameliteral ixia_locid="200">enp0s8</nameliteral> on
+                            <nameliteral ixia_locid="201">storage-0</nameliteral>:</p>
+                    <codeblock ixia_locid="165"><systemoutput ixia_locid="167">~(keystone_admin)$ </systemoutput><userinput ixia_locid="169">system host-if-add storage-0 -V 22 -nt infra infra0 vlan enp0s8</userinput>
+<systemoutput ixia_locid="300">+------------------+----------------------------------------+
+| Property         | Value                                  |
++------------------+----------------------------------------+
+| ifname           | infra0                                 |
+| networktype      | infra                                  |
+| iftype           | vlan                                   |
+| ports            | []                                     |
+| providernetworks | None                                   |
+| imac             | 08:00:27:f2:0d:68                      |
+| imtu             | 1500                                   |
+| aemode           | None                                   |
+| schedpolicy      | None                                   |
+| txhashpolicy     | None                                   |
+| uuid             | 8ca9854e-a18e-4a3c-8afe-f050da702fdf   |
+| ihost_uuid       | 3d207384-7d30-4bc0-affe-d68ab6a00a5b   |
+| vlan_id          | 22                                     |
+| uses             | [u'enp0s8']                            |
+| used_by          | []                                     |
+| created_at       | 2015-02-04T16:23:28.917084+00:00       |
+| updated_at       | None                                   |
++------------------+----------------------------------------+
+</systemoutput></codeblock>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

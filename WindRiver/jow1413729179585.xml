@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr domains="(topic concept concept-wr)                            (topic hi-d)                            (topic indexing-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1413729179585" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">System Configuration Management Using the CLI</title>
+ <shortdesc ixia_locid="2">You can use the CLI to make changes to the system configuration after
+  installation.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="4">For information about the types of configuration changes you can make, and
+   guidelines for implementing them on an operational system, see <xref href="jow1413726521641.xml" ixia_locid="5"/>. During some configuration changes, system alarms are raised; for help viewing
+   them from the CLI, see <xref href="ekn1459528555380.xml" ixia_locid="117"/>.</p>
+  <p ixia_locid="136">To make configuration changes using the CLI, you must log in as user
+    <nameliteral ixia_locid="177">wrsroot</nameliteral> to the active controller and source the
+   script <filepath ixia_locid="179">/etc/nova/openrc</filepath> to obtain Keystone administrative
+   privileges. <draft-comment author="jmaran" ixia_locid="180">Updated following xref. Now local to this document
+    (new ID).</draft-comment>For details, see <xref href="ekn1460051057968.xml" ixia_locid="181"/>.<!--See <ph ixia_locid="182" otherprops="printonly"><cite ixia_locid="183">Titanium Server Cloud Administration:</cite> </ph><cite ixia_locid="184"><ph ixia_locid="185"><xref href="jow1404333563834.xml" ixia_locid="181"/></ph></cite> for details.--></p>
+
+  <p ixia_locid="102">With the exception of the DNS Server Configuration, the configuration changes
+   described in this section require that you lock and unlock the indicated hosts after the
+   configuration change is made. For more information about locking and unlocking hosts, see <xref href="qcf1462899552668.xml" ixia_locid="103"/>.</p>
+ </conbody>
+</concept-wr>

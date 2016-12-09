@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003753530" xml:lang="en-us"><title ixia_locid="1">Storage Node Networking Requirements</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">The management and infrastructure interfaces are logical interfaces that can be mapped to physical interfaces or shared physical interfaces using VLANs for separation.  The following management/infrastructure interface combinations are supported.  Link aggregation of all interfaces is recommended for high availability.</p>
+        <ul id="ul_jlx_zrz_55">
+            <li ixia_locid="5">
+                <p ixia_locid="6">1 GbE management network and 10 GbE infrastructure network</p>
+            </li>
+            <li ixia_locid="7">
+                <p ixia_locid="8">10 GbE management network and no infrastructure network
+                    (recommended configuration)</p>
+            </li>
+            <li ixia_locid="9">
+                <p ixia_locid="10">10 GbE network with management and infrastructure VLANs</p>
+            </li>
+        </ul><p ixia_locid="11">If the storage node supports a board management via an iLO management interface,
+            the Board Management Controller (BMC) module’s Ethernet port can be connected to a
+            dedicated private network. For controller node communication with the BMC modules, a
+            VLAN on the internal management logical interface is configured on the board management
+            network. It is recommended, but not required, to use the OAM network for controller
+            access to the board management network.</p></conbody></concept-wr>

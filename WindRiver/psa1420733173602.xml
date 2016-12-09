@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="psa1420733173602" xml:lang="en-us">
+<!-- Modification History
+  Draft template 08/07/2014      
+-->
+    <title ixia_locid="199">Installing Reboot-Required Patches Using the Web Administration
+        Interface</title>
+    <shortdesc ixia_locid="200">You can use the web administration interface to upload, delete,
+        apply, and remove patches.</shortdesc>
+    <prolog>
+        <author ixia_locid="201">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="202">
+            <p ixia_locid="329">This section presents an example patching workflow using a single
+                patch. The main steps of the procedure are: </p>
+            <ul id="ul_mbr_wsr_s5">
+                <li ixia_locid="330">
+                    <p ixia_locid="331">Upload the patch(es).</p>
+                </li>
+                <li ixia_locid="332">
+                    <p ixia_locid="333">Lock the host(s).</p>
+                </li>
+                <li ixia_locid="334">
+                    <p ixia_locid="335">Install patches; any unlocked nodes will reject the
+                        request.</p>
+                </li>
+                <li ixia_locid="336">
+                    <p ixia_locid="337">Unlock the host(s). Unlocking the host(s) automatically
+                        triggers a reboot.</p>
+                </li>
+            </ul>
+        </context>
+        <steps>
+            <step id="step_N1002B_N10028_N1001C_N10001" ixia_locid="204">
+                <cmd ixia_locid="205">Log in to the web administration interface as the
+                        <nameliteral ixia_locid="206">admin</nameliteral> user.</cmd>
+            </step>
+            <step id="step_open_Sys_Config_pane" ixia_locid="26">
+                <cmd ixia_locid="27">In the Titanium Server Web administration interface, open the
+                        <wintitle ixia_locid="160">Software Management on</wintitle> page.</cmd>
+                <info ixia_locid="28">
+                    <p ixia_locid="29">The <wintitle ixia_locid="30">Software Management</wintitle>
+                        page is available from <menucascade ixia_locid="166">
+                            <uicontrol ixia_locid="19">Admin</uicontrol>
+                            <uicontrol ixia_locid="167">Platform</uicontrol>
+                            <uicontrol ixia_locid="168">Software Management</uicontrol>
+                        </menucascade> in the left-hand pane.</p>
+                </info>
+            </step>
+            <step id="step_N10038_N10028_N1001C_N10001" ixia_locid="207">
+                <cmd ixia_locid="208">Select the <wintitle ixia_locid="209">Patches</wintitle> page
+                    to see the current patch status.</cmd>
+                <info ixia_locid="210"/>
+                <stepresult ixia_locid="216">
+                    <p ixia_locid="217">The <wintitle ixia_locid="218">Patches</wintitle> page shows
+                        the current status of all patches uploaded to the system. If there are no
+                        patches, an empty Patch Table is displayed.</p>
+                </stepresult>
+            </step>
+            <step id="step_N1007A_N10028_N1001C_N10001" ixia_locid="222">
+                <cmd ixia_locid="223">Upload the patch file to the patch storage area.</cmd>
+                <info ixia_locid="224">
+                    <p ixia_locid="225">Click the <uicontrol ixia_locid="226">Upload
+                            Patch</uicontrol> button to display an upload window from which you can
+                        browse your workstation's file system to select the patch file. Click the
+                            <uicontrol ixia_locid="227">Upload Patch</uicontrol> button once the
+                        selection is done.</p>
+                </info>
+                <stepresult ixia_locid="228">
+                    <p ixia_locid="229">The patch file is transferred to the Active Controller and
+                        is copied to the patch storage area, but it has yet to be applied to the
+                        cluster. This is reflected in the <wintitle ixia_locid="230">Patches</wintitle> page as illustrated below.</p>
+                    <fig id="fig_yrl_jf3_rq" ixia_locid="231">
+                        <image href="ekn1453231798771.image" id="image_uv3_4f3_rq" ixia_locid="232">
+                            <alt ixia_locid="233">Titanium Server patches available</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N100B0_N10028_N1001C_N10001" ixia_locid="234">
+                <cmd ixia_locid="235">Apply the patch.</cmd>
+                <info ixia_locid="236">
+                    <p ixia_locid="237">Click the <uicontrol ixia_locid="238">Apply
+                            Patch</uicontrol> button associated with the patch. Alternatively,
+                        select the patch first using the selection boxes on the left, and then click
+                        the <uicontrol ixia_locid="239">Apply Patches</uicontrol> button at the top.
+                        You can use this selection process to apply all patches, or a selected
+                        subset, in a single operation.</p>
+                </info>
+                <stepresult ixia_locid="240">
+                    <p ixia_locid="241">The <wintitle ixia_locid="242">Patches</wintitle> page is updated to report the patch to be in
+                        the <i ixia_locid="243">Partial-Apply</i> state.</p>
+                    <fig id="fig_kmj_ng3_rq" ixia_locid="244">
+                        <image href="ekn1453232666204.image" id="image_z2n_qg3_rq" ixia_locid="245">
+                            <alt ixia_locid="246">Titanium Server patches partial-apply</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10107_N10028_N1001C_N10001" ixia_locid="253">
+                <cmd ixia_locid="254">Install the patch on <nameliteral ixia_locid="255">controller-0</nameliteral>.</cmd>
+                <substeps id="substeps_gvv_wh3_rq">
+                    <substep ixia_locid="338">
+                        <cmd ixia_locid="339">Select the <uicontrol ixia_locid="340">Hosts</uicontrol> tab. </cmd>
+                        <stepresult ixia_locid="341">
+                            <p ixia_locid="247">The <uicontrol ixia_locid="342">Hosts</uicontrol>
+                                tab on the <wintitle ixia_locid="249">Host Inventory</wintitle> page
+                                reflects the new status of the hosts with respect to the new patch
+                                state. As shown below, both controllers are now reported as not
+                                patch current and requiring reboot.</p>
+                            <fig id="fig_ix5_dh3_rq" ixia_locid="250">
+                                <image href="ekn1453233538504.image" id="image_lvt_gh3_rq" ixia_locid="251">
+                                    <alt ixia_locid="252">Titanium Server patch host not patch current</alt>
+                                </image>
+                            </fig>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="343">
+                        <cmd ixia_locid="344">Transfer active services to the standby controller by
+                            selecting the <uicontrol ixia_locid="345">Swact Host</uicontrol> option
+                            from the <uicontrol ixia_locid="346">Edit Host</uicontrol> button
+                            associated with the active controller host.</cmd>
+                        <info ixia_locid="347">
+                            <note id="note_N10187_N10184_N10174_N1013B_N1012C_N10055_N1001F_N10001" ixia_locid="348">
+                                <p ixia_locid="349">Access to the web administration interface may be lost briefly
+                                    during the active controller transition. You may have to log in
+                                    again.</p>
+                            </note>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="350">
+                        <cmd ixia_locid="351">Select the <option ixia_locid="352">Lock Host</option>
+                            option from the <uicontrol ixia_locid="353">Edit Host</uicontrol> button
+                            associated with <nameliteral ixia_locid="354">controller-0</nameliteral>.</cmd>
+                    </substep>
+                    <substep ixia_locid="355">
+                        <cmd ixia_locid="356">Next, select the <option ixia_locid="357">Install
+                                Patches</option> option from the <uicontrol ixia_locid="358">Edit
+                                Host</uicontrol> button associated with <nameliteral ixia_locid="359">controller-0</nameliteral> to install the
+                            patch.</cmd>
+                        <info ixia_locid="278">
+                            <p ixia_locid="286">A confirmation window is presented giving you a last
+                                opportunity to cancel the operation before proceeding.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="360">
+                        <cmd ixia_locid="361">Select the <option ixia_locid="362">Unlock Host</option> option from
+                            the <uicontrol ixia_locid="363">Edit Host</uicontrol> button associated
+                            with controller-0.</cmd>
+                    </substep>
+                </substeps>
+            </step>
+            <step id="step_N1020A_N10028_N1001C_N10001" ixia_locid="307">
+                <cmd ixia_locid="308">Repeat the steps above with <nameliteral ixia_locid="364">controller-1</nameliteral> to install the patch on <nameliteral ixia_locid="365">controller-1</nameliteral>.</cmd>
+            </step>
+            <step id="step_N1022B_N10028_N1001C_N10001" ixia_locid="315">
+                <cmd ixia_locid="316">Verify the state of the patch.</cmd>
+                <info ixia_locid="317">
+                    <p ixia_locid="318">Visit the <wintitle ixia_locid="319">Patches</wintitle> page
+                        again. The patch is now in the <i ixia_locid="320">Applied</i> state.</p>
+                </info>
+            </step>
+        </steps>
+        <result id="result_N1024E_N1001C_N10001" ixia_locid="324">
+            <p ixia_locid="325">The patch is applied now, and all affected hosts have been
+                updated.</p>
+            <p ixia_locid="326">Patches can be removed using the <uicontrol ixia_locid="327">Remove
+                    Patches</uicontrol> button from the <wintitle ixia_locid="328">Patches</wintitle> page. The workflow is similar to the one presented in this
+                section, with the exception that patches are being removed from each host instead of
+                being applied.</p>
+        </result>
+    </taskbody>
+</task-wr>

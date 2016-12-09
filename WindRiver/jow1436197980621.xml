@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1436197980621" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="34">Specifying Best Effort for PCI NUMA Node Affinity</title>
+    <shortdesc ixia_locid="35">You can select whether to require direct NUMA-node access to a PCI
+        interface when instantiating a VM. </shortdesc>
+    <prolog>
+        <author ixia_locid="36">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="37">
+            <p ixia_locid="38">By default, when a VM is configured to use an SR-IOV or
+                PCI-passthrough interface, the VM is affined to a NUMA node that has direct hardware
+                access to the physical PCI interface. If none is available, the instantiation fails. </p>
+            <p ixia_locid="40">You can set an extra spec so that if the requirement cannot be
+                satisifed, the VM is instantiated on another NUMA node with mediated access to the
+                interface.</p>
+            <p ixia_locid="42">To add this extra spec to a flavor using the web administration
+                interface, use the <nameliteral ixia_locid="43">PCI NUMA Affinity</nameliteral>
+                selection in the <nameliteral ixia_locid="44">Create Flavor Extra Spec</nameliteral>
+                drop-down menu. To access this menu, see <xref href="jow1429538642910.xml" ixia_locid="45"/>.</p>
+            <p ixia_locid="46">You can also specify the extra spec from the CLI by setting the following parameter
+                for a flavor:</p>
+            <codeblock ixia_locid="47"><userinput ixia_locid="22">hw:wrs:pci_numa_affinity=<varname ixia_locid="23">pci_affinity</varname></userinput></codeblock>
+            <p ixia_locid="24">where <varname ixia_locid="25">pci_affinity</varname> is one of the
+                following:</p>
+            <dl>
+                <dlentry ixia_locid="26">
+                    <dt ixia_locid="27">strict</dt>
+                    <dd ixia_locid="28">
+                        <p ixia_locid="29">(default) Requires a host NUMA node with direct access to
+                            a PCI interface. For a VM configured to use multiple NUMA nodes, at
+                            least one host NUMA node must have direct PCI access.  If these
+                            conditions cannot be satisfied, the instantiation fails.</p>
+                    </dd>
+                </dlentry>
+                <dlentry ixia_locid="30">
+                    <dt ixia_locid="31">prefer</dt>
+                    <dd ixia_locid="32">
+                        <p ixia_locid="33">Prefers a host NUMA node with direct access to a PCI
+                            interface. If none is available, another NUMA node can be used.</p>
+                    </dd>
+                </dlentry>
+            </dl>
+            <p ixia_locid="48">For more information about using PCI interfaces, see <xref href="psa1413402160578.xml" ixia_locid="49"/> and <xref href="psa1428687672712.xml" ixia_locid="50"/>.</p>
+        </context>
+    </taskbody>
+</task-wr>

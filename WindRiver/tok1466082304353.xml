@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="tok1466082304353" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">About Tenants (Projects) and Users</title>
+ <shortdesc ixia_locid="2">Tenants and users are system resources managed by the OpenStack Keystone
+  service.</shortdesc>
+ <prolog>
+  <author ixia_locid="3">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <section id="section_N101EC_N1001C_N10001" ixia_locid="112">
+   <p ixia_locid="114"/>
+   <p ixia_locid="116">Tenants are the core resource structure on which all end user services are
+    managed. They are isolated resource containers consisting of networks, storage volumes, images,
+    virtual machines, authentication keys, and users.</p>
+   <p ixia_locid="117">When Titanium Server is deployed, two default tenants are created:
+     <nameliteral ixia_locid="118">admin</nameliteral> and <nameliteral ixia_locid="119">services</nameliteral>. They are used to group resources to be associated with the
+     <nameliteral ixia_locid="120">admin</nameliteral> user and the cloud services,
+    respectively.</p>
+   <note id="note_N10211_N101ED_N1001C_N10001" ixia_locid="121">
+    <p ixia_locid="122">Earlier versions of OpenStack used the term <term ixia_locid="138">project</term> instead of <term ixia_locid="139">tenant</term>. Because of this legacy
+     terminology, the Web administration interface uses both terms, and some command-line tools use
+      <nameliteral ixia_locid="125">--project_id</nameliteral> when a tenant ID is expected.</p>
+   </note>
+   <p ixia_locid="126">Users are system resources that can operate on one or more tenants, within
+    the constraints of a particular role. For each user, the Keystone service maintains a list of
+    (tenant, role) tuples, which are used to determine the tenants the user can operate on, and the
+    role the user should play on each of them.</p>
+   <p ixia_locid="127">In the default installation of Titanium Server, several users are already
+    defined. Each of the OpenStack services, such as Nova and Neutron, exist as system users. They
+    all operate on the default tenant <nameliteral ixia_locid="128">services</nameliteral>.</p>
+   <p ixia_locid="129">The Keystone <nameliteral ixia_locid="130">admin</nameliteral> user is
+    associated with the <nameliteral ixia_locid="131">admin</nameliteral> tenant. This user has
+    administrator privileges for creating, modifying, and deleting OpenStack resources, including
+    creating other tenants and users.</p>
+  </section>
+ </conbody>
+</concept-wr>

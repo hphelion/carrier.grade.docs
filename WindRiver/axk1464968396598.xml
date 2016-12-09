@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="axk1464968396598" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Preparing the region_config File</title>
+    <shortdesc ixia_locid="2">This file is required during Titanium Server region
+        configuration.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="155">Installaton of Titanium Server as a Secondary Region uses a
+                    <cmdname ixia_locid="156">config_region</cmdname> script which is analogous to the
+                    <cmdname ixia_locid="157">config_controller</cmdname> script used for initial installation,
+                except with extended functionality required for setting up services sharing with the
+                Primary Region. </p>
+            <p ixia_locid="158">The <cmdname ixia_locid="159">config_region</cmdname> script only
+                supports file input for system configuration data; again, this is like the
+                configuration file that is supported by the <cmdname ixia_locid="160">config_controller</cmdname> script.</p>
+            <p ixia_locid="147">The region config file uses key-value pairs in standard INI format.
+                It can be created manually or you can use the Titanium <filepath ixia_locid="25">config_gui</filepath> provided with the SDK to create it. The contents of the
+                file are used as input to the <cmdname ixia_locid="26">config_region</cmdname>
+                script, which is used to configure the first controller on the Titanium Server
+                Secondary Region.</p>
+            <p ixia_locid="148">A ‘write-enabled’ mode exists in the region configure file, called
+                CREATE In [REGION_2_SERVICES]. When CREATE is set to Y, the expected endpoints,
+                services tenant, services, and users will be created if they are not already present
+                in the shared keystone. </p>
+            <p ixia_locid="149">When CREATE is set to Y, password fields in the REGION_2_SERVICES
+                section are optional; when not present a random password will be generated where
+                necessary. </p>
+            <p ixia_locid="150">Optional services Glance and Cinder are configured to be shared if
+                they are under [SHARED_SERVICES], but not if they are under [REGION_2_SERVICES] (in
+                which case they require password fields if CREATE is not Y). </p>
+            <p ixia_locid="30">When CREATE is not present or is set to N, the primary region
+                Keystone needs to be configured manually using OpenStack commands.</p>
+            <p ixia_locid="152">For more information on the services that must be provisioned, see
+                    <xref href="lbp1464960287653.xml" ixia_locid="154"/>.</p>
+            <p ixia_locid="151">For more information on the <filepath ixia_locid="55">region_config</filepath> file, see <xref href="vqz1472582405090.xml" ixia_locid="146"/>.</p>
+        </context>
+    </taskbody>
+</task-wr>

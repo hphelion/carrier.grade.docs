@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ekn1453927130838" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="245">Launching Virtual Machine Instances Using the CLI</title>
+    <shortdesc ixia_locid="246">You can use the CLI to launch virtual machine instances.</shortdesc>
+    <prolog>
+        <author ixia_locid="247">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="248">
+            <p ixia_locid="249">You use the CLI command <cmdname ixia_locid="250">nova
+                    boot</cmdname>, with various options, to launch virtual machine instances. These
+                options include standard Open Stack options as well as Titanium Server specific
+                options.</p>
+            <draft-comment author="eknowlto" ixia_locid="251">Disposition/Status: New topic - inspired by
+                US70040</draft-comment>
+        </context>
+        <prereq id="prereq_N10033_N1001C_N10001" ixia_locid="252">
+            <p ixia_locid="253">To launch an instance, you must first set up required resources, such as tenants and
+                tenant networks with IP subnets, management IP subnets, virtual routers, and so
+                forth. For more information, see <xref href="jow1453573205413.xml" ixia_locid="254"/>.</p>
+        </prereq>
+        <section id="section_N10040_N1001C_N10001" ixia_locid="255">
+            <ul id="ul_rkx_qmy_55">
+                <li ixia_locid="256">
+                    <p ixia_locid="257">Launch instances on the tenants as described in the following examples.</p>
+                    <ul id="ul_hxd_tmy_55">
+                        <li ixia_locid="258">
+                            <p ixia_locid="122">The following example launches an instance named
+                                    <nameliteral ixia_locid="123">tenant1-kernel-bridging</nameliteral>, using a Linux
+                                bridge.</p>
+                            <codeblock ixia_locid="125"><systemoutput ixia_locid="242">~(keystone_user1)$ </systemoutput><userinput ixia_locid="127">nova boot --poll --key_name=tenant1-controller-0 \
+--block_device_mapping vda=<varname ixia_locid="202">${vol_UUID}</varname>:::0 \
+--user-data=/usr/share/userdata/linux-bridge.txt \
+--flavor=100 \   
+--nic net-id=${<varname ixia_locid="128">tenant1_mgmt_net_UUID</varname>},vif-model=virtio \
+--nic net-id=${<varname ixia_locid="129">tenant1_net_UUID</varname>},vif-model=avp \
+--nic net-id=${<varname ixia_locid="130">internal_net_UUID</varname>},vif-model=avp  \
+tenant1-kernel-bridging</userinput></codeblock>
+                            <note id="note_N10080_N10053_N1004F_N10048_N10044_N10040_N1001C_N10001" ixia_locid="131" type="caution">
+                                <p ixia_locid="132">The order in which the network interfaces are
+                                    selected determines how they are enumerated for the instance.
+                                    This example uses the following order: <nameliteral ixia_locid="133">eth0</nameliteral> (<nameliteral ixia_locid="134">tenant1-mgmt-net</nameliteral>) of the
+                                    virtio type, and <nameliteral ixia_locid="135">eth1</nameliteral> (<nameliteral ixia_locid="136">tenant1-net</nameliteral>) and <nameliteral ixia_locid="137">eth2</nameliteral> (<nameliteral ixia_locid="138">internal-net</nameliteral>) of the avp
+                                    type..</p>
+                            </note>
+                        </li>
+                        <li ixia_locid="259">
+                            <p ixia_locid="208">The following example launches an instance named
+                                    <nameliteral ixia_locid="210">tenant1-dpdk-bridging</nameliteral>, using an AVP virtual
+                                network interface, and the DPDK-accelerated virtual switch.</p>
+                            <codeblock ixia_locid="214"><systemoutput ixia_locid="243">~(keystone_user1)$ </systemoutput><userinput ixia_locid="218">nova boot --poll --key_name=tenant1-controller-0 \
+--block_device_mapping vda=<varname ixia_locid="220">${vol_UUID}</varname>:::0 \
+--user-data=/usr/share/userdata/linux-dpdk-vswitch.txt \
+--flavor=101 \   
+--nic net-id=${<varname ixia_locid="222">tenant1_mgmt_net_UUID</varname>},vif-model=virtio \
+--nic net-id=${<varname ixia_locid="224">tenant1_net_UUID</varname>},vif-model=avp \
+--nic net-id=${<varname ixia_locid="226">internal_net_UUID</varname>},vif-model=avp  \
+tenant1-dpdk-bridging</userinput></codeblock>
+                        </li>
+                        <li ixia_locid="268">
+                            <p ixia_locid="269">The following example launches an instance named
+                                    <nameliteral ixia_locid="270">tenant1-vnic</nameliteral>, using AVP virtual
+                                network interfaces and a Linux router, and assigns virtual NIC
+                                interfaces. </p>
+                            <codeblock ixia_locid="271"><systemoutput ixia_locid="272">~(keystone_user1)$ </systemoutput><userinput ixia_locid="273">nova boot --poll --key_name=tenant1-controller-0 \
+--block_device_mapping vda=<varname ixia_locid="274">${vol_UUID}</varname>:::0 \
+--user-data=/usr/share/userdata/tenant1-linux-router.txt \
+--flavor=101 \   
+--nic net-id=${<varname ixia_locid="275">tenant1_mgmt_net_UUID</varname>},vif-model=virtio vif-pci-address=0000:00:09.0\
+--nic net-id=${<varname ixia_locid="276">tenant1_net_UUID</varname>},vif-model=avp vif-pci-address=0000:02:01.0\
+--nic net-id=${<varname ixia_locid="277">internal_net_UUID</varname>},vif-model=avp vif-pci-address=0000:02:02.0 \
+tenant1-vnic</userinput></codeblock>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <result id="result_N10136_N1001C_N10001" ixia_locid="149">
+            <p ixia_locid="150">The instances are now running. Each one establishes a bridge or
+                router between the last two interfaces in the command line.</p>
+        </result>
+    </taskbody>
+</task-wr>

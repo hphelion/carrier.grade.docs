@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="uep1472144816412" xml:lang="en-us">
+<!-- 16.x version
+ 
+-->
+ <title ixia_locid="1">Sample Configuration for LDAP-backed Keystone</title>
+ <shortdesc ixia_locid="2">For guidance, a sample service parameter configuration is presented,
+  based on the OpenLDAP Server.</shortdesc>
+ <prolog>
+ <author ixia_locid="3"/>
+ </prolog>
+ <refbody>
+ <section id="section_N1001E_N1001B_N10001" ixia_locid="4">
+ <p ixia_locid="5">
+ <draft-comment author="jowens" ixia_locid="6">CGTS-4885 new topic</draft-comment>
+ </p>
+ <codeblock ixia_locid="7">BASEDN=dc=openstack,dc=org
+LDAPHOST=ldapserver-example.openstack.org
+LDAPUSER=admin
+LDAPPW=badpassword
+
+
+# mandatory server configuration
+system service-parameter-add identity ldap url="ldap://${LDAPHOST}" user="cn=${LDAPUSER},${BASEDN}" password="${LDAPPW}" suffix="${BASEDN}"
+
+# DN values will be defaulted to Users suffix
+# system service-parameter-add identity ldap user_tree_dn="ou=Users,${BASEDN}"
+
+# openldap requires an emulated user enabled attribute which is a groupOfNames object with members for each enabled user
+system service-parameter-add identity ldap user_enabled_emulation=true
+
+# DN can be derived from user_tree_dn assuming CN is enabled_users
+system service-parameter-add identity ldap user_enabled_emulation_dn="cn=enabled_users,ou=Users,${BASEDN}"
+
+# members attribute is a required parameter, use dummy
+system service-parameter-add identity ldap use_dumb_member=true
+
+# enable user default_project_id
+system service-parameter-add identity ldap user_attribute_ignore=tenants
+system service-parameter-add identity ldap user_default_project_id_attribute=departmentNumber
+
+# modify identity backend to LDAP driver
+system service-parameter-modify identity identity driver="keystone.identity.backends.ldap.Identity"
+
+# modify to use TLS (set tls_req_cert to never to prevent cert validation error if using self-signed certificate or unknown root CA)
+system service-parameter-add identity ldap use_tls=true tls_cacertdir=/etc/ssl/certs tls_req_cert=never
+
+# modify to use connection pool (pool defaults not updated)
+system service-parameter-add identity ldap use_pool=true
+
+# modify to use authentication pool (pool defaults not updated)
+system service-parameter-add identity ldap use_auth_pool=true
+
+# list all parameters
+system service-parameter-list
+
+# apply the changes
+system service-parameter-apply identity </codeblock>
+</section>
+ </refbody>
+</reference-wr>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="lsv1468258386967" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="254">CSV Performance Monitoring Backend</title>
+ <shortdesc ixia_locid="255">Titanium Server provides access to performance measurement samples in the form of
+  comma-separated values (CSV) files. </shortdesc>
+ <prolog>
+  <author ixia_locid="256">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <section id="section_N101AA_N1001C_N10001" ixia_locid="96">
+   <p ixia_locid="98"><draft-comment author="jowens" ixia_locid="261">CGTS-5902 Meters column and description
+     removed</draft-comment><draft-comment author="jowens" ixia_locid="253">This could be updated to
+     point to new tasks about setting up pipelines and retrieving data from them, for both Horizon
+     and the CLI.</draft-comment>They provide the following benefits:</p>
+   <ul id="ul_dnc_dpz_j4">
+    <li ixia_locid="99">
+     <p ixia_locid="100">off-line permanent storage of large samples history</p>
+    </li>
+    <li ixia_locid="101">
+     <p ixia_locid="102">enables the use of off-line tools for data analysis, accounting, and
+      archiving</p>
+    </li>
+   </ul>
+   <p ixia_locid="103">The CSV files are expected to be retrieved from the controllers using any
+    suitable file transfer client application such as SFTP or SCP. This can be done manually by the
+    system administrator, or automatically by an operations and support server (OSS/BSS) configured
+    with the appropriate login credentials.</p>
+   <p ixia_locid="104">Recording of samples and management of CSV files is done through special
+    Ceilometer pipelines available from the <uicontrol ixia_locid="106">Pipelines</uicontrol> tab
+    available from <menucascade ixia_locid="257">
+     <uicontrol ixia_locid="258">Admin</uicontrol>
+     <uicontrol ixia_locid="259">Platform</uicontrol>
+     <uicontrol ixia_locid="260">System Configuration</uicontrol>
+    </menucascade>, as illustrated below:</p>
+   <fig id="fig_N101DC_N101AB_N1001C_N10001" ixia_locid="107">
+    <image href="jow1404333642494.image" id="image_dkk_ptz_j4" ixia_locid="108" placement="inline"/>
+   </fig>
+   <p ixia_locid="109">Click the button <uicontrol ixia_locid="110">Update Settings</uicontrol> to
+    configure the behavior of a pipeline. The <wintitle ixia_locid="111">Edit Pipeline</wintitle>
+    window is presented as follows:</p>
+   <fig id="fig_N101F4_N101AB_N1001C_N10001" ixia_locid="112">
+    <image href="jow1404333644008.image" id="image_ckk_gvz_j4" ixia_locid="113" placement="inline"/>
+   </fig>
+   <p ixia_locid="114">The following fields are available:</p>
+   <dl>
+    <dlentry ixia_locid="115">
+     <dt ixia_locid="116">Name</dt>
+     <dd ixia_locid="117">
+      <p ixia_locid="118">A read-only field displaying the name of the pipeline</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="123">
+     <dt ixia_locid="124">Location</dt>
+     <dd ixia_locid="125">
+      <p ixia_locid="126">The absolute path to the CSV file on the controller.</p>
+      <p ixia_locid="235">You should use a path below <filepath ixia_locid="236">/opt/cgcs</filepath>. Otherwise, if the active controller fails, the <filepath ixia_locid="237">csv</filepath> files will not be available on the backup controller</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="127">
+     <dt ixia_locid="128">Enabled</dt>
+     <dd ixia_locid="129">
+      <p ixia_locid="130">A check box used to enable or disable the pipeline.</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="131">
+     <dt ixia_locid="132">Max Bytes</dt>
+     <dd ixia_locid="133">
+      <p ixia_locid="134">The maximum size, in bytes, of a CSV file. The default value is 10 MB.</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="137">
+     <dt ixia_locid="138">Backup Count</dt>
+     <dd ixia_locid="139">
+      <p ixia_locid="140">The number of concurrent backup CSV files to maintain in a rotation ring,
+       including the currently active file. When a CSV file reaches its maximum size, it is renamed
+       as a backup file, and a new CSV file is opened for writing. Backup files older than the size
+       of the rotation ring are automatically removed.</p>
+     </dd>
+    </dlentry>
+    <dlentry ixia_locid="141">
+     <dt ixia_locid="142">Compress Backups</dt>
+     <dd ixia_locid="143">
+      <p ixia_locid="144">A check box used to select whether or not to compress backup files in the
+       rotation ring.</p>
+     </dd>
+    </dlentry>
+   </dl>
+  </section>
+ </conbody>
+</concept-wr>

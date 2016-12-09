@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="gbm1464889281296" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="212">Provisioning Storage on a Storage Host Using the CLI</title>
+    <shortdesc ixia_locid="213">You can use the command line to define object storage devices (OSDs)
+        on storage hosts.</shortdesc>
+    <prolog>
+        <author ixia_locid="214">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="222">
+            <p ixia_locid="289"><draft-comment author="jowens" ixia_locid="224">US78837 updated for
+                    journals</draft-comment><draft-comment author="jmaran" ixia_locid="314">The next
+                    xref is local when this topic is in the sys admin guide but not when it is in
+                    the installation guide.</draft-comment>For more about OSDs, see <ph ixia_locid="294" otherprops="printonly"><cite ixia_locid="295">Titanium Server
+                        System Administration: </cite></ph><cite ixia_locid="296"><ph ixia_locid="297"><xref href="tdw1466190608670.xml" ixia_locid="298"/></ph></cite>. </p>
+            <p ixia_locid="290">To use the Web administration interface, see <xref href="zkn1464874715372.xml" ixia_locid="226"/>.</p>
+        </context>
+        <prereq id="prereq_N10039_N1001F_N10001" ixia_locid="227">
+            <p ixia_locid="228">To create or edit an OSD, you must lock the storage host. The system
+                must have at least two other unlocked hosts with Ceph monitors. (Ceph monitors run
+                on <nameliteral ixia_locid="143">controller-0</nameliteral>, <nameliteral ixia_locid="144">controller-1</nameliteral>, and <nameliteral ixia_locid="145">storage-0</nameliteral> only).</p>
+        </prereq>
+        <steps>
+            <step id="step_N10025_N10022_N1001F_N10001" ixia_locid="215">
+                <cmd ixia_locid="216">List the available physical disks.</cmd>
+                <info ixia_locid="217">
+                    <codeblock ixia_locid="79"><systemoutput ixia_locid="204">~(keystone_admin)$ </systemoutput><userinput ixia_locid="81">system host-disk-list storage-3</userinput>
+<systemoutput ixia_locid="205">
++-------+-------------+------------+-------------+----------+------+-----------+
+| uuid  | device_node | device_num | device_type | size_mib | rpm  | serial_id |
++-------+-------------+------------+-------------+----------+------+-----------+
+| ba7...| /dev/sda    | 2048       | HDD         | 51200    | Un...| VB7127 .. |
+| e87...| /dev/sdb    | 2064       | HDD         | 10240    | Un...| VB9987... |
+| ae8...| /dev/sdc    | 2080       | SSD         | 8192     | N/A  | VB14d7... |
++-------+-------------+------------+--------------+---------+------+-----------+</systemoutput></codeblock>
+                </info>
+            </step>
+            <step id="step_N10146_N1006E_N10020_N10001" ixia_locid="75">
+                <cmd ixia_locid="76">Create a storage function (an OSD).</cmd>
+                <info ixia_locid="77">
+                    <note id="note_N1015D_N10146_N1013F_N1006E_N10020_N10001" ixia_locid="84">
+                        <p ixia_locid="85">You cannot add a storage function to the root disk
+                                (<filepath ixia_locid="86">/dev/sda</filepath> in this example).</p>
+                    </note>
+                    <codeblock ixia_locid="256"><systemoutput ixia_locid="257">~(keystone_admin)$ </systemoutput><userinput ixia_locid="258">system host-stor-add <varname ixia_locid="259">host_name</varname> <varname ixia_locid="260">device_uuid</varname> \
+[--journal-location <varname ixia_locid="261">journal_uuid</varname>] [--journal-size <varname ixia_locid="262">size</varname>] </userinput></codeblock>
+                    <p ixia_locid="263">where <varname ixia_locid="264">device_uuid</varname> identifies an OSD. For example:</p>
+                    <codeblock ixia_locid="265"><systemoutput ixia_locid="266">~(keystone_admin)$ </systemoutput><userinput ixia_locid="267">system host-stor-add storage-3 e8751efe-6101-4d1c-a9d3-7b1a16871791</userinput>
+<systemoutput ixia_locid="268">+------------------+--------------------------------------+
+| Property         | Value                                |
++------------------+--------------------------------------+
+| osdid            | 3                                    |
+| state            | None                                 |
+| function         | osd                                  |
+| journal_location | e639f1a2-e71a-4f65-8246-5cd0662d966b |
+| journal_size_mib | 1024                                 |
+| journal_node     | /dev/sdc1                            |
+| uuid             | fc7b2d29-11bf-49a9-b4a9-3bc9a973077d |
+| ihost_uuid       | 4eb90dc1-2b17-443e-b997-75bdd19e3eeb |
+| idisk_uuid       | e871b3a9-b436-47b0-b33b-88ce6dcbd967 |
+| created_at       | 2016-06-02T20:23:40.298387+00:00     |
+| updated_at       | 2016-06-02T20:23:40.522195+00:00     |
++------------------+--------------------------------------+
+</systemoutput></codeblock>
+                    <p ixia_locid="269">In this example, an SSD-backed journal function is
+                        available. For more about SSD-backed journals, <draft-comment author="jmaran" ixia_locid="315">The next xref is local when this topic
+                            is in the sys admin guide but not when it is in the installation
+                            guide.</draft-comment>see <ph ixia_locid="299" otherprops="printonly"><cite ixia_locid="300">Titanium Server System Administration:
+                            </cite></ph><cite ixia_locid="301"><ph ixia_locid="302"><xref href="xkq1467317438934.xml" ixia_locid="303"/></ph></cite>. The
+                        Ceph journal for the OSD is automatically created on the journal function
+                        using a default size of 1024 MiB. You can use the <option ixia_locid="270">--journal-size</option> option to specify a different size in MiB.</p>
+                    <p ixia_locid="271">If multiple journal functions exist (corresponding to
+                        multiple dedicated SSDs), then you must include the <option ixia_locid="272">--journal-location</option> option and specify the journal function to
+                        use for the OSD. You can obtain the UUIDs for journal functions using the
+                            <cmdname ixia_locid="288">system host-stor-list</cmdname> command:</p>
+                    <codeblock ixia_locid="273"><systemoutput ixia_locid="274">~(keystone_admin)$ </systemoutput><userinput ixia_locid="275">system host-stor-list storage-3</userinput>
+<systemoutput ixia_locid="276">+--------------------------------------+----------+-------+--------------...
+| uuid                                 | function | osdid | capabilities 
+|                                      |          |       |              
++--------------------------------------+----------+-------+--------------...
+| e639f1a2-e71a-4f65-8246-5cd0662d966b | journal  | None  | {}           
+| fc7b2d29-11bf-49a9-b4a9-3bc9a973077d | osd      | 3     | {}           
++--------------------------------------+----------+-------+--------------...
+
+...+--------------------------------------+-------------+------------------+
+   | idisk_uuid                           | journal_nod | journal_size_mib |
+   |                                      | e           |                  |
+... +--------------------------------------+-------------+------------------+
+   | ae8b1434-d8fa-42a0-ac3b-110e2e99c68e | None        | 0                |
+   | e871b3a9-b436-47b0-b33b-88ce6dcbd967 | /dev/sdc1   | 1024             |
+... +--------------------------------------+-------------+------------------+
+</systemoutput></codeblock>
+                    <p ixia_locid="292">If no journal function exists when the storage function is
+                        created, the Ceph journal for the OSD is collocated on the OSD. </p>
+                    <p ixia_locid="293">If an SSD is available on the host, you can add a journal
+                        function. <draft-comment author="jmaran" ixia_locid="316">The next xref is
+                            local when this topic is in the sys admin guide but not when it is in
+                            the installation guide.</draft-comment>For more information, see <ph ixia_locid="304" otherprops="printonly"><cite ixia_locid="305">Titanium
+                                Server System Administration: </cite></ph><cite ixia_locid="306"><ph ixia_locid="307"><xref href="dye1467638475769.xml" ixia_locid="308"/></ph></cite>. You can update the OSD to use a journal on the SSD
+                        by referencing the journal function UUID, as follows:</p>
+                    <codeblock ixia_locid="279"><systemoutput ixia_locid="280">~(keystone_admin)$ </systemoutput><userinput ixia_locid="281">system host-stor-update <varname ixia_locid="282">osd_uuid</varname> \
+--journal-location <varname ixia_locid="283">journal_function_uuid</varname> [--journal-size <varname ixia_locid="284">size</varname>]</userinput>
+</codeblock>
+                </info>
+            </step>
+        </steps>
+        <postreq id="postreq_N10077_N1001F_N10001" ixia_locid="218">
+            <p ixia_locid="285">Unlock the host to make the changes take effect. Wait for the host to be reported as
+                unlocked, online, and available in the hosts list.</p>
+            <p ixia_locid="219"><draft-comment author="jowens" ixia_locid="221">US66653 profile info
+                    moved, replaced by xref</draft-comment>You can re-use the same settings with
+                other storage nodes by creating and applying a storage profile. <draft-comment author="jmaran" ixia_locid="249">The following xref is local when this topic
+                    appears in the installation guide but inter-book when it appears in the system
+                    admin guide.</draft-comment>See <ph ixia_locid="309" otherprops="printonly"><cite ixia_locid="310">Titanium Server Installation: </cite></ph><cite ixia_locid="311"><ph ixia_locid="312"><xref href="jow1447789458498.xml" ixia_locid="313"/></ph></cite>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

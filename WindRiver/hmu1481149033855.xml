@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="hmu1481149033855" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="300">Upgrade Procedure Summary</title>
+ <shortdesc ixia_locid="301">You can use this summary of the upgrade procedure to keep track of your place in the
+  process and track the steps you have completed.</shortdesc>
+ <prolog>
+  <author ixia_locid="302">Edward Knowlton</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="303">The detailed upgrade procedure is spread out over multiple pages. Because an upgrade can take
+   multiple hours, or overnight, spanning multiple days, you are likely to step away at points
+   during the process. You can use this summary checklist to keep track of each step as it is
+   completed, so that when you return you will have a reminder of where you are in the process.</p>
+  <table colsep="1" frame="all" id="table_u5g_3j1_fy" rowsep="1">
+   <title ixia_locid="304">Upgrade Summary</title>
+   <tgroup cols="3">
+    <colspec colname="c1" colnum="1" colwidth="1*"/>
+    <colspec colname="c2" colnum="2" colwidth="7.18*"/>
+    <colspec colname="c3" colnum="3" colwidth="1.79*"/>
+    <thead>
+     <row>
+      <entry ixia_locid="305">
+       <p ixia_locid="306">Step</p>
+      </entry>
+      <entry ixia_locid="307">
+       <p ixia_locid="308">Command/Task</p>
+      </entry>
+      <entry ixia_locid="309">
+       <p ixia_locid="310">Status</p>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry ixia_locid="311">
+       <p ixia_locid="312">1</p>
+      </entry>
+      <entry ixia_locid="313">
+       <codeblock ixia_locid="314"><systemoutput ixia_locid="74">$</systemoutput> <userinput ixia_locid="75">sudo license-install <varname ixia_locid="76">full_path_to_license_file</varname></userinput></codeblock>
+      </entry>
+      <entry ixia_locid="315">
+       <p ixia_locid="407">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="318">
+       <p ixia_locid="319">2</p>
+      </entry>
+      <entry ixia_locid="320">
+       <codeblock ixia_locid="11"><systemoutput ixia_locid="408">$</systemoutput> <userinput ixia_locid="409">source /etc/nova/openrc</userinput>
+<systemoutput ixia_locid="410">$</systemoutput> <userinput ixia_locid="13">system load-import ~/bootimage.iso</userinput> 
+<systemoutput ixia_locid="78">+--------------------+-----------+
+| Property           | Value     |
++--------------------+-----------+
+| id                 | 2         |
+| state              | importing |
+| software_version   | 16.00     |
+| compatible_version | 15.12     |
+| required_patches   |           |
++--------------------+-----------+
+</systemoutput></codeblock>
+      </entry>
+      <entry ixia_locid="321">
+       <p ixia_locid="411">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="323">
+       <p ixia_locid="324">3</p>
+      </entry>
+      <entry ixia_locid="325">
+       <codeblock ixia_locid="86"><systemoutput ixia_locid="87">$</systemoutput> <userinput ixia_locid="88">system load-list
+</userinput>
+<systemoutput ixia_locid="89">+----+----------+------------------+
+| id | state    | software_version |
++----+----------+------------------+
+| 1  | active   | 15.12            |
+| 2  | imported | 16.00            |
++----+----------+------------------+
+</systemoutput></codeblock>
+      </entry>
+      <entry ixia_locid="326">
+       <p ixia_locid="412">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="327">
+       <p ixia_locid="328">4</p>
+      </entry>
+      <entry ixia_locid="329">
+       <p ixia_locid="330">Apply any required patches. </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="331">
+       <p ixia_locid="332">5</p>
+      </entry>
+      <entry ixia_locid="333">
+       <codeblock ixia_locid="98"><systemoutput ixia_locid="99">$</systemoutput> <userinput ixia_locid="100">system health-query-upgrade
+</userinput>
+<systemoutput ixia_locid="101">System Health:
+All hosts are unlocked/enabled: [OK]
+All hosts have current configurations: [OK]
+All hosts are patch current: [OK]
+No alarms: [Fail]
+[2] alarms found
+Required patches are applied: [OK]
+License valid for upgrade: [OK]</systemoutput></codeblock>
+      </entry>
+      <entry ixia_locid="334">
+       <p ixia_locid="413">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="335">
+       <p ixia_locid="336">6</p>
+      </entry>
+      <entry ixia_locid="337">
+       <p ixia_locid="338">On controller-0:</p>
+       <codeblock ixia_locid="17"><systemoutput ixia_locid="18">$</systemoutput> <userinput ixia_locid="19">system upgrade-start</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="339">
+       <p ixia_locid="414">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="340">
+       <p ixia_locid="341">7</p>
+      </entry>
+      <entry ixia_locid="342">
+       <codeblock ixia_locid="118"><systemoutput ixia_locid="119">$</systemoutput> <userinput ixia_locid="120">system host-upgrade-list
+</userinput>
+<systemoutput ixia_locid="121">+----+--------------+-------------+-----------------+----------------+
+| id | hostname     | personality | running_release | target_release |
++----+--------------+-------------+-----------------+----------------+
+| 1  | controller-0 | controller  | 15.12           | 15.12          |
+| 2  | controller-1 | controller  | 15.12           | 15.12          |
+| 3  | compute-0    | compute     | 15.12           | 15.12          |
+| 4  | compute-1    | compute     | 15.12           | 15.12          |
++----+--------------+-------------+-----------------+----------------+</systemoutput></codeblock>
+      </entry>
+      <entry ixia_locid="343">
+       <p ixia_locid="415">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="344">
+       <p ixia_locid="345">8</p>
+      </entry>
+      <entry ixia_locid="346">
+       <codeblock ixia_locid="216"><systemoutput ixia_locid="217">$</systemoutput> <userinput ixia_locid="218">system host-lock controller-1</userinput>
+</codeblock>
+      </entry>
+      <entry ixia_locid="347">
+       <p ixia_locid="416">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="348">
+       <p ixia_locid="349">9</p>
+      </entry>
+      <entry ixia_locid="350">
+       <codeblock ixia_locid="127"><systemoutput ixia_locid="128">$</systemoutput><userinput ixia_locid="129">system host-upgrade controller-1</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="351">
+       <p ixia_locid="417">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="352">
+       <p ixia_locid="353">10</p>
+      </entry>
+      <entry ixia_locid="354">
+       <codeblock ixia_locid="133"><systemoutput ixia_locid="134">$</systemoutput> <userinput ixia_locid="135">system host-upgrade-list</userinput>
+<systemoutput ixia_locid="136">+----+--------------+-------------+-----------------+----------------+
+| id | hostname     | personality | running_release | target_release |
++----+--------------+-------------+-----------------+----------------+
+| 1  | controller-0 | controller  | 16.00           | 16.00          |
+| 2  | controller-1 | controller  | 16.00           | 16.00          |
+| 3  | compute-0    | compute     | 15.12           | 15.12          |
+| 4  | compute-1    | compute     | 15.12           | 15.12          |
++----+--------------+-------------+-----------------+----------------+</systemoutput></codeblock>
+      </entry>
+      <entry ixia_locid="355">
+       <p ixia_locid="418">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="356">
+       <p ixia_locid="357">11</p>
+      </entry>
+      <entry ixia_locid="358">
+       <codeblock ixia_locid="152"><systemoutput ixia_locid="153">$</systemoutput> <userinput ixia_locid="154">system upgrade-show
+</userinput>
+<systemoutput ixia_locid="155">+--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | cab7517b-51fc-4fe5-9493-ccc2664de78e |
+| state        | data-migration-complete              |
+| from_release | 15.12                                |
+| to_release   | 16.00                                |
++--------------+--------------------------------------+</systemoutput></codeblock>
+      </entry>
+      <entry ixia_locid="359">
+       <p ixia_locid="419">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="360">
+       <p ixia_locid="361">12</p>
+      </entry>
+      <entry ixia_locid="362">
+       <codeblock ixia_locid="157"><systemoutput ixia_locid="158">$</systemoutput> <userinput ixia_locid="159">system host-unlock controller-1</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="363">
+       <p ixia_locid="420">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="364">
+       <p ixia_locid="365">13</p>
+      </entry>
+      <entry ixia_locid="366">
+       <codeblock ixia_locid="164"><systemoutput ixia_locid="165">$</systemoutput> <userinput ixia_locid="166">system host-swact controller-0</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="367">
+       <p ixia_locid="421">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="368">
+       <p ixia_locid="369">14</p>
+      </entry>
+      <entry ixia_locid="370">
+       <codeblock ixia_locid="291"><systemoutput ixia_locid="292">$</systemoutput> <userinput ixia_locid="293">system host-lock controller-0</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="371">
+       <p ixia_locid="422">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="372">
+       <p ixia_locid="373">15</p>
+      </entry>
+      <entry ixia_locid="374">
+       <codeblock ixia_locid="37"><systemoutput ixia_locid="38">$</systemoutput> <userinput ixia_locid="39">system host-upgrade controller-0</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="375">
+       <p ixia_locid="423">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="376">
+       <p ixia_locid="377">16</p>
+      </entry>
+      <entry ixia_locid="378">
+       <codeblock ixia_locid="297"><systemoutput ixia_locid="298">$</systemoutput> <userinput ixia_locid="299">system host-unlock controller-0</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="424">
+       <p ixia_locid="425">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="380">
+       <p ixia_locid="381">17 </p>
+      </entry>
+      <entry ixia_locid="382">
+       <p ixia_locid="383">If using Ceph storage backend, upgrade the storage nodes one at a time.</p>
+       <codeblock ixia_locid="230"><systemoutput ixia_locid="231">$</systemoutput> <userinput ixia_locid="232">system host-lock storage-0</userinput>
+</codeblock>
+       <codeblock ixia_locid="43"><systemoutput ixia_locid="44">$</systemoutput> <userinput ixia_locid="45">system host-upgrade storage-0</userinput></codeblock>
+       <codeblock ixia_locid="238"><systemoutput ixia_locid="239">$</systemoutput> <userinput ixia_locid="240">system host-unlock storage-0</userinput>
+</codeblock>
+       <p ixia_locid="384">Repeat the above commands for each storage host.</p>
+      </entry>
+      <entry ixia_locid="426">
+       <p ixia_locid="427">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="385">
+       <p ixia_locid="386">18</p>
+      </entry>
+      <entry ixia_locid="387">
+       <p ixia_locid="388">Upgrade compute hosts, one at a time.</p>
+       <codeblock ixia_locid="246"><systemoutput ixia_locid="247">$</systemoutput> <userinput ixia_locid="248">system host-lock compute-0</userinput>
+</codeblock>
+       <codeblock ixia_locid="49"><systemoutput ixia_locid="175">$</systemoutput> <userinput ixia_locid="176">system host-upgrade compute-0</userinput></codeblock>
+       <codeblock ixia_locid="254"><systemoutput ixia_locid="255">$</systemoutput> <userinput ixia_locid="256">system host-unlock compute-0</userinput>
+</codeblock>
+       <p ixia_locid="389">Repeat the above commands for each compute host.</p>
+      </entry>
+      <entry ixia_locid="390">
+       <p ixia_locid="428">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="391">
+       <p ixia_locid="392">19</p>
+      </entry>
+      <entry ixia_locid="393">
+       <codeblock ixia_locid="55"><systemoutput ixia_locid="56">$</systemoutput> <userinput ixia_locid="57">system upgrade-activate</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="394">
+       <p ixia_locid="429">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="395">
+       <p ixia_locid="396">20</p>
+      </entry>
+      <entry ixia_locid="397">
+       <codeblock ixia_locid="181"><systemoutput ixia_locid="182">$</systemoutput> <userinput ixia_locid="183">system host-swact controller-1</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="398">
+       <p ixia_locid="430">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="399">
+       <p ixia_locid="400">21</p>
+      </entry>
+      <entry ixia_locid="401">
+       <codeblock ixia_locid="185"><systemoutput ixia_locid="186">$</systemoutput> <userinput ixia_locid="187">system upgrade-complete</userinput></codeblock>
+      </entry>
+      <entry ixia_locid="402">
+       <p ixia_locid="431">Done:  </p>
+      </entry>
+     </row>
+     <row>
+      <entry ixia_locid="403">
+       <p ixia_locid="404">22</p>
+      </entry>
+      <entry ixia_locid="405">
+       <codeblock ixia_locid="67"><systemoutput ixia_locid="68">$</systemoutput> <userinput ixia_locid="69">system load-delete <varname ixia_locid="269">loadID</varname></userinput></codeblock>
+      </entry>
+      <entry ixia_locid="406">
+       <p ixia_locid="432">Done:  </p>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </table>
+ </conbody>
+</concept-wr>

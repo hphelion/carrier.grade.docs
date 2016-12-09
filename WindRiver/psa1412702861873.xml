@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="psa1412702861873" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Managed and Unmanaged Subnets</title>
+ <shortdesc ixia_locid="2">Use the <option ixia_locid="92">System Managed Subnet</option> and <option ixia_locid="93">Enable
+   DHCP</option> subnet attributes to determine how IP addresses are allocated and offered on an IP
+  subnet.</shortdesc>
+ <prolog>
+  <author ixia_locid="4">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="60">With the proper configuration in place, DHCP services can be provided by the built-in Neutron
+   DHCP server, by a standalone server available from an external network infrastructure, or by
+   both.</p>
+  <p ixia_locid="5">When creating a new IP subnet for a tenant network you can specify the following
+   attributes:</p>
+  <dl>
+   <dlentry ixia_locid="6">
+    <dt ixia_locid="7">System Managed Subnet</dt>
+    <dd ixia_locid="8">
+     <p ixia_locid="9">When this attribute is enabled, the subnet is <term ixia_locid="61">system
+       managed</term>. The Neutron service automatically allocates an IP address from the address
+      allocation pools defined for the subnet to any new virtual machine (VM) instance with a
+      virtual Ethernet interface attached to the tenant network. Once allocated, the pair (MAC
+      address, IP address) is registered in the Neutron database as part of the overall registration
+      process for the new virtual machine.</p>
+     <p ixia_locid="11">When the system managed subnet attribute is disabled, the subnet is <term ixia_locid="12">unmanaged</term>. No automatic allocation of IP addresses takes place, and
+      the Neutron DHCP service for the subnet is disabled. Allocation of IP addresses for new
+      virtual machines must be done at boot time using the CLI or the API interfaces.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="13">
+    <dt ixia_locid="14">Enable DHCP</dt>
+    <dd ixia_locid="15">
+     <p ixia_locid="16">When this attribute is enabled, a virtual DHCP server becomes available when
+      the subnet is created. It uses the (MAC address, IP address) pairs registered in the Neutron
+      database to offer IP addresses in response to DHCP discovery requests broadcast on the subnet.
+      DHCP discovery requests from unknown MAC addresses are ignored.</p>
+     <p ixia_locid="17">The Neutron DHCP server can only be enabled on system managed subnets.  DHCP services for
+      unmanaged subnets, if required, must be provisioned by external, non-Neutron, DHCP
+      servers.</p>
+     <p ixia_locid="18">When the DHCP attribute is disabled, all DHCP and DNS services, and all
+      static routes, if any, must be provisioned externally.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="19">
+    <dt ixia_locid="20">Allocation Pools</dt>
+    <dd ixia_locid="21">
+     <p ixia_locid="22">This a list attribute where each element in the list specifies an IP address
+      range, or address pool, in the subnet address space that can be used for dynamic offering of
+      IP addresses. By default there is a single allocation pool comprised of the entire subnet's IP
+      address space, with the exception of the default gateway's IP address.</p>
+     <p ixia_locid="59">An external, non-Neutron, DHCP server can be attached to a system managed subnet to support
+      specific deployment needs as required. For example, it can be configured to offer IP addresses
+      on ranges outside the Neutron allocation pools to service physical devices attached to the
+      tenant network, such as testing equipment and servers.</p>
+     <p ixia_locid="23">Allocation pools can only be specified on system managed subnets.</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <section id="accessing_metadata_server" ixia_locid="39">
+   <p ixia_locid="63"> The method used to access the server depends on your deployment scenario.</p>
+   <ul id="ul_wg3_c5s_25">
+    <li ixia_locid="79">
+     <p ixia_locid="81">If the VM is attached to a tenant network with a virtual router then the
+      metadata server is reachable using the virtual router as the route gateway. </p>
+    </li>
+    <li ixia_locid="80">
+     <p ixia_locid="82">If the VM instance is attached to multiple tenant networks, each with access
+      to a virtual router, then any of the virtual routers provides access to the metadata server.
+      However, installing multiple default routes on the VM might impact the VM's ability to route
+      packets back to external networks.</p>
+    </li>
+    <li ixia_locid="66">
+     <p ixia_locid="67">If the VM is attached to a tenant network that does not have a virtual
+      router then the a route to the metadata server can be retrieved from the Neutron DHCP service,
+      provided that this service is enabled. If DHCP is enabled on a tenant network, then the VM can
+      use DHCP option 121, Classless Static Route, to retrieve the metadata server static route
+      information, which uses the DHCP server's address as the gateway.</p>
+     <p ixia_locid="68">Note that when using DHCP option 121, the answer from the DHCP server will
+      also include other applicable static routes. They include: </p>
+     <ul id="ul_l14_2vh_f5">
+      <li ixia_locid="83">
+       <p ixia_locid="84">any static routes configured when the IP subnet was created</p>
+      </li>
+      <li ixia_locid="85">
+       <p ixia_locid="86">default route to the subnet gateway IP address, if one is configured on
+        the subnet </p>
+      </li>
+      <li ixia_locid="87">
+       <p ixia_locid="88">on-link routes for all other subnets on the same network and same guest
+        VLAN</p>
+      </li>
+     </ul>
+    </li>
+   </ul>
+   <p ixia_locid="77"> The DHCP service only responds to option 121 is there are no virtual routers
+    on the network.</p>
+   <p ixia_locid="78">The following requirements must be satisfied in order for a guest application
+    to access the metadata service:</p>
+   <ul id="ul_dyn_vbd_sp">
+    <li ixia_locid="45">
+     <p ixia_locid="47">There is a route table entry to route traffic destined to the
+      169.254.169.254 address via a Neutron router, or via a suitable static route to the
+      169.254.169.254 address.</p>
+    </li>
+    <li ixia_locid="48">
+     <p ixia_locid="49">The metadata server knows about the virtual machine instance associated with
+      the MAC and IP addresses of the virtual Ethernet interface issuing the metadata service
+      request. This is necessary for the metadata server to be able to validate the request, and to
+      identify the virtual machine's specific data to be returned.</p>
+     <p ixia_locid="50">On system managed subnets, the Neutron service has all address information
+      associated with the virtual machines in its database.</p>
+     <p ixia_locid="89">On unmanaged subnets, you must tell the Neutron service the IP address of
+      the network interface issuing the metadata service requests. </p>
+     <draft-comment author="eknowlto" ixia_locid="90">hiding this, but don't want to lose it until I know it's
+      somewhere else pertinent.<p ixia_locid="91">This can only be done using the command line or
+       API interfaces when instantiating the virtual machine, as illustrated
+       below:</p><codeblock ixia_locid="52"><systemoutput ixia_locid="53">$ </systemoutput><userinput ixia_locid="54">nova boot \
+--nic net-id=<varname ixia_locid="55">net-uuid</varname>,vif-model=avp,v4-fixed-ip=172.18.0.1 \
+my-new-vm</userinput></codeblock><p ixia_locid="56">In this simplified example, the option <option ixia_locid="57">v4-fixed-ip</option> tells Neutron what the IP address for this interface should be. The
+       interface's MAC address is automatically generated by Nova.</p></draft-comment>
+    </li>
+   </ul>
+  </section>
+ </conbody>
+</concept-wr>

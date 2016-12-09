@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003781257" xml:lang="en-us"><title ixia_locid="1">VM Scheduling and Placement</title><shortdesc ixia_locid="2"/><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">Titanium Server provides many features for controlling the scheduling and
+            placement of VMs to provide multiple tiers of performance depending on requirements and
+            to optimize resources where performance is not as critical.</p><p ixia_locid="5">An important part of understanding the capabilities is the understanding the Intel processor architecture.  The following figure shows an example 8-core dual socket deployment with default configuration of the cores (core 0 reserved for the platform and AVS running only on socket 0 and using two cores).  Hyperthreading is not shown.  PCIe busses on each socket connect to devices such as NICs.</p><fig id="fig_N10020_N10016_N10001" ixia_locid="20"><title id="title__Toc441623508" ixia_locid="21">Dual Socket NUMA Example</title>
+            <image href="jow1454003774475.image" id="image_ov2_fyy_55" ixia_locid="22">
+                <alt ixia_locid="9">media/image13.png</alt>
+            </image></fig><p ixia_locid="10">The memory layout and socket interconnect using Quick Path Interconnect (QPI) play a critical role in performance and therefore VM placement decisions.  All memory is accessible by applications (including VMs) on either socket but throughput and access times are dependent on whether the memory accessed is local to the socket or to memory attached to the other socket.  The term used to describe this is Non-Uniform Memory Access (NUMA) because memory access times are different depending on the location of the memory being accessed.  A NUMA node is defined as a socket and its directly connected memory.   For maximum performance, all memory accesses associated with a VM must be within the same NUMA node, including AVS, NICs, and PCIe devices.  The penalty for accessing memory in another NUMA node through the QPI bus is demonstrated may be 50% or more as shown in the following example chart of relative networking throughput for inter-NUMA node versus intra-NUMA node access.</p><fig id="fig_N1003A_N10016_N10001" ixia_locid="23"><title id="title__Toc441623509" ixia_locid="12">Throughput Impact with Intra-NUMA Node
+                Access</title>
+            <image href="jow1454003776443.image" id="image_a3q_fyy_55" ixia_locid="13">
+                <alt ixia_locid="14">media/image14.png</alt>
+            </image></fig><p ixia_locid="15">The following reference figure with VMs will be used as examples for the
+            deployment discussion in the following subsections. For details on implementing the
+            features described, refer to <ph ixia_locid="24" otherprops="printonly"><cite ixia_locid="25">Titanium Server Cloud Administration: </cite></ph><cite ixia_locid="26"><ph ixia_locid="27"><xref href="daz1474639350002.xml" ixia_locid="28"/></ph></cite>.</p><fig id="numa_architecture" ixia_locid="16"><title id="title__Toc441623510" ixia_locid="17">NUMA Architecture with VMs</title>
+            <image href="jow1454003778887.image" id="image_sz1_gyy_55" ixia_locid="18">
+                <alt ixia_locid="19">media/image15.png</alt>
+            </image></fig></conbody></concept-wr>

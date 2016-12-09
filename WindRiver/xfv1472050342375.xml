@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="xfv1472050342375" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="77">Adding Virtual Routers Using the CLI</title>
+    <shortdesc ixia_locid="78">As an alternative to the web administration interface, you can use CLI commands to
+        add a virtual router. First, become the appropriate keystone user.</shortdesc>
+    <prolog>
+        <author ixia_locid="79"/>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001E_N1001B_N10001" ixia_locid="80">
+            <p ixia_locid="74">You must be logged in as the <nameliteral ixia_locid="8">admin</nameliteral> user.</p>
+            <p ixia_locid="12">To create a router from the CLI, use the <cmdname ixia_locid="13">neutron router-create</cmdname> command. For example: </p>
+            <codeblock ixia_locid="14">
+<systemoutput ixia_locid="15">~(keystone_admin)$ </systemoutput><userinput ixia_locid="16">neutron router-create <varname ixia_locid="17">router_name</varname> --distributed=True</userinput></codeblock>
+            <p ixia_locid="75">Where <varname ixia_locid="19">router_name</varname> is a name
+                assigned to the router.</p>
+            <p ixia_locid="76">This example creates a distributed virtual router. If the <option ixia_locid="20">--distributed</option> option is omitted, the default setting
+                (centralized) is used.</p>
+        </context>
+    </taskbody>
+</task-wr>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003750160" xml:lang="en-us"><title ixia_locid="1">Disk Throughput Dimensioning for Local Storage</title><shortdesc ixia_locid="2">The primary impact of disk throughput is on VM boot times (including local
+        volume creation) and guest disk throughput. </shortdesc><prolog><author ixia_locid="3">Craig Griffin</author></prolog><conbody><p ixia_locid="4">The following figure provides VM boot time data from local storage for two compute
+            nodes with 10K RPM SAS and booting a CentOS 7 image. The compute node was configured to
+            boot from the CoW image. The results are the same when the image is expanded to 10 GB,
+            20GB, or 40 GB. As shown, boot times for local storage VMs increase linearly with the
+            number of VMs. The time can be impacted by the image size and by how many compute nodes
+            the load is spread across (there were two nodes in this configuration). SSD disks are
+            highly recommended for best boot times and if multiple VMs are being launched
+            simultaneously. Use of LVM storage backing instead of image storage backing will
+            significantly increase the boot times (and delete times) for large volumes, for example
+            10 GB or larger.</p><fig id="fig_N1001C_N10016_N10001" ixia_locid="5"><title id="title__Toc441623500" ixia_locid="6">VM Create Times for Local Storage – SAS Disks on
+                compute node.</title>
+            <image href="jow1454003747886.image" id="image_ypc_zxy_55" ixia_locid="7">
+                <alt ixia_locid="8">media/image5.png</alt>
+            </image></fig><p ixia_locid="9">Guest disk reads/writes when using local storage should be considered in deploying
+            the compute node storage. Use of local storage for VMs is recommended for VMs that have
+            high rates of disk storage access and do not require remote storage because the storage
+            access is local to the compute node. LVM backing storage may also provide better
+            performance than image backing storage, although image backing storage improves over
+            time for long-lived VMs. SSD storage for the secondary disk provides significantly
+            better throughput than SAS disks. Storage QoS is recommended to better guarantee
+            predictable performance.</p></conbody></concept-wr>

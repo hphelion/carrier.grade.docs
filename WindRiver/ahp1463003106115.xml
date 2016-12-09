@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ahp1463003106115" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Using an Open RC File for Remote CLI Access</title>
+    <shortdesc ixia_locid="2">You can generate an Open RC file to configure a shell for remote CLI
+        access.</shortdesc>
+    <prolog>
+        <author ixia_locid="32">Jim Owens</author>
+        <author ixia_locid="3">Edward Knowlton</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <draft-comment author="eknowlto" ixia_locid="16">US76645: Remote CLI SDK Module</draft-comment>
+            <p ixia_locid="33"> To generate an Open RC file for a given user, you must be logged in as the
+                appropriate user and tenant.</p>
+        </context>
+        <steps>
+            <step id="step_N1003B_N10038_N10023_N10001" ixia_locid="34">
+                <cmd ixia_locid="35">Log into the Titanium Server Web administration interface as
+                    the applicable user.</cmd>
+            </step>
+            <step id="step_N10044_N10038_N10023_N10001" ixia_locid="36">
+                <cmd ixia_locid="37">Select the appropriate tenant.</cmd>
+            </step>
+            <step id="step_N10032_N1002F_N1001C_N10001" ixia_locid="8">
+                <cmd ixia_locid="9">In the Web administration interface page, select <uicontrol ixia_locid="10">Project </uicontrol> &gt;<uicontrol ixia_locid="23">Compute</uicontrol>&gt;<uicontrol ixia_locid="11">Access &amp; Security
+                    </uicontrol> &gt;<uicontrol ixia_locid="12">API Access</uicontrol>.</cmd>
+            </step>
+            <step id="step_N10047_N1002F_N1001C_N10001" ixia_locid="13">
+                <cmd ixia_locid="14">Click <uicontrol ixia_locid="15">Download OpenStack RC
+                        File</uicontrol>.</cmd>
+            </step>
+            <step id="step_N10067_N1003A_N1001F_N10001" ixia_locid="17">
+                <cmd ixia_locid="18">To obtain authentication, source the RC file.</cmd>
+                <stepxmp ixia_locid="19">
+                    <codeblock ixia_locid="20"><systemoutput ixia_locid="21">$</systemoutput> <userinput ixia_locid="22">source tenantName-openrc.sh</userinput></codeblock>
+                </stepxmp>
+                <info ixia_locid="38">
+                    <p ixia_locid="45">This establishes a shell with access to the Titanium Server
+                        command-line interface. It sets the tenant name, user name, and other shell
+                        parameters (including the Titanium Server URL), and prompts for the
+                        password. It also prompts for the optional CA Certificate if using HTTPS.
+                            <draft-comment author="jmaran" ixia_locid="47">Updated doc title.</draft-comment>For
+                        more information about certificates, see <cite ixia_locid="31">Titanium
+                            Server Installation</cite>. </p>
+                    <p ixia_locid="46">From within the shell, you can issue OpenStack commands
+                        directly to the Titanium Server CLI. </p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

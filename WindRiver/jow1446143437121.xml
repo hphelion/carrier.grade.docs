@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="jow1446143437121" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Supported Performance Meters</title>
+  <shortdesc ixia_locid="2">Titanium Server includes performance meters for various OpenStack and platform
+    services.</shortdesc>
+  <prolog>
+    <author ixia_locid="3">Jim Owens</author>
+  </prolog>
+  <refbody>
+    <!-- to obtain information, try ceilometer meter-list  -->
+    <section id="section_N1001E_N1001B_N10001" ixia_locid="4">      
+      <title ixia_locid="5">Nova Meters</title>      
+      <simpletable>
+        <sthead>        
+          <stentry ixia_locid="6"><p ixia_locid="7">Name</p></stentry>
+          <stentry ixia_locid="8"><p ixia_locid="9">Type</p></stentry>
+          <stentry ixia_locid="10"><p ixia_locid="11">Unit</p></stentry>
+          <stentry ixia_locid="12"><p ixia_locid="13">Resource</p></stentry>
+          <stentry ixia_locid="16"><p ixia_locid="17">Note</p></stentry>
+        </sthead>
+        <strow>
+          <stentry ixia_locid="18"><p ixia_locid="19">instance</p></stentry>
+          <stentry ixia_locid="20"><p ixia_locid="21">Gauge</p></stentry>
+          <stentry ixia_locid="22"><p ixia_locid="23">instance</p></stentry>
+          <stentry ixia_locid="24"><p ixia_locid="25">inst ID</p></stentry>
+          <stentry ixia_locid="28"><p ixia_locid="29">Duration of instance</p></stentry>
+        </strow>
+        <strow>    
+          <stentry ixia_locid="30"><p ixia_locid="31">instance:&lt;type&gt;</p></stentry>
+          <stentry ixia_locid="32"><p ixia_locid="33">Gauge</p></stentry>
+          <stentry ixia_locid="34"><p ixia_locid="35">instance</p></stentry>
+          <stentry ixia_locid="36"><p ixia_locid="37">inst ID</p></stentry>
+          <stentry ixia_locid="40"><p ixia_locid="41">Duration of instance &lt;type&gt; (openstack types)</p></stentry>
+        </strow>
+        <strow>    
+          <stentry ixia_locid="42"><p ixia_locid="43">memory</p></stentry>
+          <stentry ixia_locid="44"><p ixia_locid="45">Gauge</p></stentry>
+          <stentry ixia_locid="46"><p ixia_locid="47">MB</p></stentry>
+          <stentry ixia_locid="48"><p ixia_locid="49">inst ID</p></stentry>
+          <stentry ixia_locid="52"><p ixia_locid="53">Volume of RAM in MB</p></stentry>
+        </strow>
+        <strow>    
+          <stentry ixia_locid="54"><p ixia_locid="55">cpu</p></stentry>
+          <stentry ixia_locid="56"><p ixia_locid="57">Cumulative</p></stentry>
+          <stentry ixia_locid="58"><p ixia_locid="59">ns</p></stentry>
+          <stentry ixia_locid="60"><p ixia_locid="61">inst ID</p></stentry>
+          <stentry ixia_locid="64"><p ixia_locid="65">CPU time used</p></stentry>
+        </strow>
+        <strow>    
+          <stentry ixia_locid="66"><p ixia_locid="67">cpu_util</p></stentry>
+          <stentry ixia_locid="68"><p ixia_locid="69">Gauge</p></stentry>
+          <stentry ixia_locid="70"><p ixia_locid="71">%</p></stentry>
+          <stentry ixia_locid="72"><p ixia_locid="73">inst ID</p></stentry>
+          <stentry ixia_locid="76"><p ixia_locid="77">Average CPU utilisation</p></stentry>
+        </strow>
+        <strow>    
+          <stentry ixia_locid="78"><p ixia_locid="79">vcpus</p></stentry>
+          <stentry ixia_locid="80"><p ixia_locid="81">Gauge</p></stentry>
+          <stentry ixia_locid="82"><p ixia_locid="83">vcpu</p></stentry>
+          <stentry ixia_locid="84"><p ixia_locid="85">inst ID</p></stentry>
+          <stentry ixia_locid="88"><p ixia_locid="89">Number of VCPUs</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="90"><p ixia_locid="91">disk.read.requests</p></stentry>
+          <stentry ixia_locid="92"><p ixia_locid="93">Cumulative</p></stentry>
+          <stentry ixia_locid="94"><p ixia_locid="95">request</p></stentry>
+          <stentry ixia_locid="96"><p ixia_locid="97">inst ID</p></stentry>
+          <stentry ixia_locid="100"><p ixia_locid="101">Number of read requests</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="102"><p ixia_locid="103">disk.write.requests</p></stentry>
+          <stentry ixia_locid="104"><p ixia_locid="105">Cumulative</p></stentry>
+          <stentry ixia_locid="106"><p ixia_locid="107">request</p></stentry>
+          <stentry ixia_locid="108"><p ixia_locid="109">inst ID</p></stentry>
+          <stentry ixia_locid="112"><p ixia_locid="113">Number of write requests</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="114"><p ixia_locid="115">disk.read.bytes</p></stentry>
+          <stentry ixia_locid="116"><p ixia_locid="117">Cumulative</p></stentry>
+          <stentry ixia_locid="118"><p ixia_locid="119">B</p></stentry>
+          <stentry ixia_locid="120"><p ixia_locid="121">inst ID</p></stentry>
+          <stentry ixia_locid="124"><p ixia_locid="125">Volume of read in B</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="126"><p ixia_locid="127">disk.write.bytes</p></stentry>
+          <stentry ixia_locid="128"><p ixia_locid="129">Cumulative</p></stentry>
+          <stentry ixia_locid="130"><p ixia_locid="131">B</p></stentry>
+          <stentry ixia_locid="132"><p ixia_locid="133">inst ID</p></stentry>
+          <stentry ixia_locid="136"><p ixia_locid="137">Volume of write in B</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="138"><p ixia_locid="139">disk.root.size</p></stentry>
+          <stentry ixia_locid="140"><p ixia_locid="141">Gauge</p></stentry>
+          <stentry ixia_locid="142"><p ixia_locid="143">GB</p></stentry>
+          <stentry ixia_locid="144"><p ixia_locid="145">inst ID</p></stentry>
+          <stentry ixia_locid="148"><p ixia_locid="149">Size of root disk in GB</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="150"><p ixia_locid="151">disk.ephemeral.size</p></stentry>
+          <stentry ixia_locid="152"><p ixia_locid="153">Gauge</p></stentry>
+          <stentry ixia_locid="154"><p ixia_locid="155">GB</p></stentry>
+          <stentry ixia_locid="156"><p ixia_locid="157">inst ID</p></stentry>
+          <stentry ixia_locid="160"><p ixia_locid="161">Size of ephemeral disk in GB</p></stentry>
+        </strow>
+      </simpletable>
+    </section>
+    <section id="section_N10234_N1001B_N10001" ixia_locid="162">
+      <title ixia_locid="163">Neutron Meters</title>
+      <simpletable>
+        <sthead>
+          <stentry ixia_locid="164"><p ixia_locid="165">Name</p></stentry>
+          <stentry ixia_locid="166"><p ixia_locid="167">Type</p></stentry>
+          <stentry ixia_locid="168"><p ixia_locid="169">Unit</p></stentry>
+          <stentry ixia_locid="170"><p ixia_locid="171">Resource</p></stentry>
+          <stentry ixia_locid="174"><p ixia_locid="175">Note</p></stentry>
+        </sthead>
+        <strow>
+          <stentry ixia_locid="176"><p ixia_locid="177">network</p></stentry>
+          <stentry ixia_locid="178"><p ixia_locid="179">Gauge</p></stentry>
+          <stentry ixia_locid="180"><p ixia_locid="181">network</p></stentry>
+          <stentry ixia_locid="182"><p ixia_locid="183">netw ID</p></stentry>
+          <stentry ixia_locid="186"><p ixia_locid="187">Duration of network</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="188"><p ixia_locid="189">network.create</p></stentry>
+          <stentry ixia_locid="190"><p ixia_locid="191">Delta</p></stentry>
+          <stentry ixia_locid="192"><p ixia_locid="193">network</p></stentry>
+          <stentry ixia_locid="194"><p ixia_locid="195">netw ID</p></stentry>
+          <stentry ixia_locid="198"><p ixia_locid="199">Creation requests for this network</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="200"><p ixia_locid="201">network.update</p></stentry>
+          <stentry ixia_locid="202"><p ixia_locid="203">Delta</p></stentry>
+          <stentry ixia_locid="204"><p ixia_locid="205">network</p></stentry>
+          <stentry ixia_locid="206"><p ixia_locid="207">netw ID</p></stentry>
+          <stentry ixia_locid="210"><p ixia_locid="211">Update requests for this network</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="212"><p ixia_locid="213">subnet</p></stentry>
+          <stentry ixia_locid="214"><p ixia_locid="215">Gauge</p></stentry>
+          <stentry ixia_locid="216"><p ixia_locid="217">subnet</p></stentry>
+          <stentry ixia_locid="218"><p ixia_locid="219">subnt ID</p></stentry>
+          <stentry ixia_locid="222"><p ixia_locid="223">Duration of subnet</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="224"><p ixia_locid="225">subnet.create</p></stentry>
+          <stentry ixia_locid="226"><p ixia_locid="227">Delta</p></stentry>
+          <stentry ixia_locid="228"><p ixia_locid="229">subnet</p></stentry>
+          <stentry ixia_locid="230"><p ixia_locid="231">subnt ID</p></stentry>
+          <stentry ixia_locid="234"><p ixia_locid="235">Creation requests for this subnet</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="236"><p ixia_locid="237">subnet.update</p></stentry>
+          <stentry ixia_locid="238"><p ixia_locid="239">Delta</p></stentry>
+          <stentry ixia_locid="240"><p ixia_locid="241">subnet</p></stentry>
+          <stentry ixia_locid="242"><p ixia_locid="243">subnt ID</p></stentry>
+          <stentry ixia_locid="246"><p ixia_locid="247">Update requests for this subnet</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="248"><p ixia_locid="249">port</p></stentry>
+          <stentry ixia_locid="250"><p ixia_locid="251">Gauge</p></stentry>
+          <stentry ixia_locid="252"><p ixia_locid="253">port</p></stentry>
+          <stentry ixia_locid="254"><p ixia_locid="255">port ID</p></stentry>
+          <stentry ixia_locid="258"><p ixia_locid="259">Duration of port</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="260"><p ixia_locid="261">port.create</p></stentry>
+          <stentry ixia_locid="262"><p ixia_locid="263">Delta</p></stentry>
+          <stentry ixia_locid="264"><p ixia_locid="265">port</p></stentry>
+          <stentry ixia_locid="266"><p ixia_locid="267">port ID</p></stentry>
+          <stentry ixia_locid="270"><p ixia_locid="271">Creation requests for this port</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="272"><p ixia_locid="273">port.update</p></stentry>
+          <stentry ixia_locid="274"><p ixia_locid="275">Delta</p></stentry>
+          <stentry ixia_locid="276"><p ixia_locid="277">port</p></stentry>
+          <stentry ixia_locid="278"><p ixia_locid="279">port ID</p></stentry>
+          <stentry ixia_locid="282"><p ixia_locid="283">Update requests for this port</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="284"><p ixia_locid="285">router</p></stentry>
+          <stentry ixia_locid="286"><p ixia_locid="287">Gauge</p></stentry>
+          <stentry ixia_locid="288"><p ixia_locid="289">router</p></stentry>
+          <stentry ixia_locid="290"><p ixia_locid="291">rtr ID</p></stentry>
+          <stentry ixia_locid="294"><p ixia_locid="295">Duration of router</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="296"><p ixia_locid="297">router.create</p></stentry>
+          <stentry ixia_locid="298"><p ixia_locid="299">Delta</p></stentry>
+          <stentry ixia_locid="300"><p ixia_locid="301">router</p></stentry>
+          <stentry ixia_locid="302"><p ixia_locid="303">rtr ID</p></stentry>
+          <stentry ixia_locid="306"><p ixia_locid="307">Creation requests for this router</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="308"><p ixia_locid="309">router.update</p></stentry>
+          <stentry ixia_locid="310"><p ixia_locid="311">Delta</p></stentry>
+          <stentry ixia_locid="312"><p ixia_locid="313">router</p></stentry>
+          <stentry ixia_locid="314"><p ixia_locid="315">rtr ID</p></stentry>
+          <stentry ixia_locid="318"><p ixia_locid="319">Update requests for this router</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="320"><p ixia_locid="321">ip.floating</p></stentry>
+          <stentry ixia_locid="322"><p ixia_locid="323">Gauge</p></stentry>
+          <stentry ixia_locid="324"><p ixia_locid="325">ip</p></stentry>
+          <stentry ixia_locid="326"><p ixia_locid="327">ip ID</p></stentry>
+          <stentry ixia_locid="330"><p ixia_locid="331">Duration of floating ip</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="332"><p ixia_locid="333">ip.floating.create</p></stentry>
+          <stentry ixia_locid="334"><p ixia_locid="335">Delta</p></stentry>
+          <stentry ixia_locid="336"><p ixia_locid="337">ip</p></stentry>
+          <stentry ixia_locid="338"><p ixia_locid="339">ip ID</p></stentry>
+          <stentry ixia_locid="342"><p ixia_locid="343">Creation requests for this floating ip</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="344"><p ixia_locid="345">ip.floating.update</p></stentry>
+          <stentry ixia_locid="346"><p ixia_locid="347">Delta</p></stentry>
+          <stentry ixia_locid="348"><p ixia_locid="349">ip</p></stentry>
+          <stentry ixia_locid="350"><p ixia_locid="351">ip ID</p></stentry>
+          <stentry ixia_locid="354"><p ixia_locid="355">Update requests for this floating ip</p></stentry>
+        </strow>
+      </simpletable>
+    </section>
+    <section id="section_N104C2_N1001B_N10001" ixia_locid="356">
+      <title ixia_locid="357">Glance Meters</title>
+      <simpletable>
+        <sthead>
+          <stentry ixia_locid="358"><p ixia_locid="359">Name</p></stentry>
+          <stentry ixia_locid="360"><p ixia_locid="361">Type</p></stentry>
+          <stentry ixia_locid="362"><p ixia_locid="363">Unit</p></stentry>
+          <stentry ixia_locid="364"><p ixia_locid="365">Resource</p></stentry>
+          <stentry ixia_locid="368"><p ixia_locid="369">Note</p></stentry>
+        </sthead>
+        <strow>
+          <stentry ixia_locid="370"><p ixia_locid="371">image</p></stentry>
+          <stentry ixia_locid="372"><p ixia_locid="373">Gauge</p></stentry>
+          <stentry ixia_locid="374"><p ixia_locid="375">image</p></stentry>
+          <stentry ixia_locid="376"><p ixia_locid="377">image ID</p></stentry>
+          <stentry ixia_locid="380"><p ixia_locid="381">Image polling -&gt; it (still) exists</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="382"><p ixia_locid="383">image.size</p></stentry>
+          <stentry ixia_locid="384"><p ixia_locid="385">Gauge</p></stentry>
+          <stentry ixia_locid="386"><p ixia_locid="387">B</p></stentry>
+          <stentry ixia_locid="388"><p ixia_locid="389">image ID</p></stentry>
+          <stentry ixia_locid="392"><p ixia_locid="393">Uploaded image size</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="394"><p ixia_locid="395">image.update</p></stentry>
+          <stentry ixia_locid="396"><p ixia_locid="397">Delta</p></stentry>
+          <stentry ixia_locid="398"><p ixia_locid="399">image</p></stentry>
+          <stentry ixia_locid="400"><p ixia_locid="401">image ID</p></stentry>
+          <stentry ixia_locid="404"><p ixia_locid="405">Number of update on the image</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="406"><p ixia_locid="407">image.upload</p></stentry>
+          <stentry ixia_locid="408"><p ixia_locid="409">Delta</p></stentry>
+          <stentry ixia_locid="410"><p ixia_locid="411">image</p></stentry>
+          <stentry ixia_locid="412"><p ixia_locid="413">image ID</p></stentry>
+          <stentry ixia_locid="416"><p ixia_locid="417">Number of upload of the image</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="418"><p ixia_locid="419">image.delete</p></stentry>
+          <stentry ixia_locid="420"><p ixia_locid="421">Delta</p></stentry>
+          <stentry ixia_locid="422"><p ixia_locid="423">image</p></stentry>
+          <stentry ixia_locid="424"><p ixia_locid="425">image ID</p></stentry>
+          <stentry ixia_locid="428"><p ixia_locid="429">Number of delete on the image</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="430"><p ixia_locid="431">image.download</p></stentry>
+          <stentry ixia_locid="432"><p ixia_locid="433">Delta</p></stentry>
+          <stentry ixia_locid="434"><p ixia_locid="435">B</p></stentry>
+          <stentry ixia_locid="436"><p ixia_locid="437">image ID</p></stentry>
+          <stentry ixia_locid="440"><p ixia_locid="441">Image is downloaded</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="442"><p ixia_locid="443">image.serve</p></stentry>
+          <stentry ixia_locid="444"><p ixia_locid="445">Delta</p></stentry>
+          <stentry ixia_locid="446"><p ixia_locid="447">B</p></stentry>
+          <stentry ixia_locid="448"><p ixia_locid="449">image ID</p></stentry>
+          <stentry ixia_locid="452"><p ixia_locid="453">Image is served out</p></stentry>
+        </strow>
+      </simpletable>
+      
+    </section>
+    <section id="section_N10610_N1001B_N10001" ixia_locid="454">
+      <title ixia_locid="455">Cinder Meters</title>
+      <simpletable>
+        <sthead>
+          <stentry ixia_locid="456"><p ixia_locid="457">Name</p></stentry>
+          <stentry ixia_locid="458"><p ixia_locid="459">Type</p></stentry>
+          <stentry ixia_locid="460"><p ixia_locid="461">Unit</p></stentry>
+          <stentry ixia_locid="462"><p ixia_locid="463">Resource</p></stentry>
+          <stentry ixia_locid="466"><p ixia_locid="467">Note</p></stentry>
+        </sthead>
+        <strow>
+          <stentry ixia_locid="468"><p ixia_locid="469">volume</p></stentry>
+          <stentry ixia_locid="470"><p ixia_locid="471">Gauge</p></stentry>
+          <stentry ixia_locid="472"><p ixia_locid="473">volume</p></stentry>
+          <stentry ixia_locid="474"><p ixia_locid="475">vol ID</p></stentry>
+          <stentry ixia_locid="478"><p ixia_locid="479">Duration of volume</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="480"><p ixia_locid="481">volume.size</p></stentry>
+          <stentry ixia_locid="482"><p ixia_locid="483">Gauge</p></stentry>
+          <stentry ixia_locid="484"><p ixia_locid="485">GB</p></stentry>
+          <stentry ixia_locid="486"><p ixia_locid="487">vol ID</p></stentry>
+          <stentry ixia_locid="490"><p ixia_locid="491">Size of volume</p></stentry>
+        </strow>
+      </simpletable>
+    </section>
+    <section id="section_N10696_N1001B_N10001" ixia_locid="492">
+      <title ixia_locid="493">AVS vSwitch Meters</title>
+      <simpletable>
+        <sthead>
+          <stentry ixia_locid="494"><p ixia_locid="495">Name</p></stentry>
+          <stentry ixia_locid="496"><p ixia_locid="497">Type</p></stentry>
+          <stentry ixia_locid="498"><p ixia_locid="499">Unit</p></stentry>
+          <stentry ixia_locid="500"><p ixia_locid="501">Resource</p></stentry>
+          <stentry ixia_locid="504"><p ixia_locid="505">Note</p></stentry>
+        </sthead>
+        <strow>
+          <stentry ixia_locid="506"><p ixia_locid="507"> avg.vswitch.engine.util</p></stentry>
+          <stentry ixia_locid="508"><p ixia_locid="509"> gauge</p></stentry>
+          <stentry ixia_locid="510"><p ixia_locid="511">%</p></stentry>
+          <stentry ixia_locid="512"><p ixia_locid="513">node ID</p></stentry>
+          <stentry ixia_locid="516"><p ixia_locid="517">average cpu utilization of vswitch DPDK engines</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="518"><p ixia_locid="519"> avg.vswitch.port.receive.bytes</p></stentry>
+          <stentry ixia_locid="520"><p ixia_locid="521"> cumulative</p></stentry>
+          <stentry ixia_locid="522"><p ixia_locid="523">B</p></stentry>
+          <stentry ixia_locid="524"><p ixia_locid="525">node.port ID</p></stentry>
+          <stentry ixia_locid="528"><p ixia_locid="529"># of bytes received on a particular port (physical or virtual)</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="530"><p ixia_locid="531"> avg.vswitch.port.receive.packets</p></stentry>
+          <stentry ixia_locid="532"><p ixia_locid="533"> cumulative</p></stentry>
+          <stentry ixia_locid="534"><p ixia_locid="535">packet</p></stentry>
+          <stentry ixia_locid="536"><p ixia_locid="537">node.port ID</p></stentry>
+          <stentry ixia_locid="540"><p ixia_locid="541"># of packets received on a particular port (physical or virtual)</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="542"><p ixia_locid="543"> avg.vswitch.port.receive.util</p></stentry>
+          <stentry ixia_locid="544"><p ixia_locid="545"> gauge</p></stentry>
+          <stentry ixia_locid="546"><p ixia_locid="547">%</p></stentry>
+          <stentry ixia_locid="548"><p ixia_locid="549">node.port ID</p></stentry>
+          <stentry ixia_locid="552"><p ixia_locid="553">rx link utilization</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="554"><p ixia_locid="555"> avg.vswitch.port.transmit.bytes</p></stentry>
+          <stentry ixia_locid="556"><p ixia_locid="557"> cumulative</p></stentry>
+          <stentry ixia_locid="558"><p ixia_locid="559">B</p></stentry>
+          <stentry ixia_locid="560"><p ixia_locid="561">node.port ID</p></stentry>
+          <stentry ixia_locid="564"><p ixia_locid="565"># of bytes transmitted on a particular port (physical or virtual)</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="566"><p ixia_locid="567">avg.vswitch.port.transmit.packets</p></stentry>
+          <stentry ixia_locid="568"><p ixia_locid="569"> cumulative</p></stentry>
+          <stentry ixia_locid="570"><p ixia_locid="571">packet</p></stentry>
+          <stentry ixia_locid="572"><p ixia_locid="573">node.port ID</p></stentry>
+          <stentry ixia_locid="576"><p ixia_locid="577"># of packets transmitted on a particular port (physical or virtual)</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="578"><p ixia_locid="579">avg.vswitch.port.transmit.util</p></stentry>
+          <stentry ixia_locid="580"><p ixia_locid="581"> gauge</p></stentry>
+          <stentry ixia_locid="582"><p ixia_locid="583">%</p></stentry>
+          <stentry ixia_locid="584"><p ixia_locid="585">node.port ID</p></stentry>
+          <stentry ixia_locid="588"><p ixia_locid="589">tx link utilization</p></stentry>
+        </strow>
+      </simpletable>
+      <note id="note_N108AE_N10740_N1001F_N10001" ixia_locid="876">
+        <draft-comment author="eknowlto" ixia_locid="877">CGTS-5763</draft-comment>
+        <p ixia_locid="878">The averaging for <filepath ixia_locid="879">avg.vswitch.*</filepath>
+          stats is done over 300 second (5 minutes). Statistics are kept up to the retention period
+          configured (default is 24 hours). </p>
+        <p ixia_locid="880">For the non-average vSwitch a combination of meter name plus resource id
+          is kept on a 10 cyclic basis and are collected every 30 seconds. All non-average vSwitch
+          statistics will be removed based on the retention period configured (default is 24 hours).
+          The internal implementation of these requires the user to use the <option ixia_locid="881">–m</option>
+          <varname ixia_locid="882">&lt;meter-name&gt;</varname> parameter. </p>
+      </note>
+    </section>
+    <section id="section_N107E4_N1001B_N10001" ixia_locid="640">
+      <title ixia_locid="641">Platform Meters</title>
+      <simpletable>
+        <sthead>
+          <stentry ixia_locid="642"><p ixia_locid="643">Name</p></stentry>
+          <stentry ixia_locid="644"><p ixia_locid="645">Type</p></stentry>
+          <stentry ixia_locid="646"><p ixia_locid="647">Unit</p></stentry>
+          <stentry ixia_locid="648"><p ixia_locid="649">Resource</p></stentry>
+          <stentry ixia_locid="652"><p ixia_locid="653">Note</p></stentry>
+        </sthead>
+        <strow>
+          <stentry ixia_locid="654"><p ixia_locid="655">platform.cpu.util</p></stentry>
+          <stentry ixia_locid="656"><p ixia_locid="657"> gauge</p></stentry>
+          <stentry ixia_locid="658"><p ixia_locid="659">%</p></stentry>
+          <stentry ixia_locid="660"><p ixia_locid="661">node ID</p></stentry>
+          <stentry ixia_locid="664"><p ixia_locid="665">average cpu utilization of core dedicated to platform</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="666"><p ixia_locid="667">platform.mem.util</p></stentry>
+          <stentry ixia_locid="668"><p ixia_locid="669"> gauge</p></stentry>
+          <stentry ixia_locid="670"><p ixia_locid="671">%</p></stentry>
+          <stentry ixia_locid="672"><p ixia_locid="673">node ID</p></stentry>
+          <stentry ixia_locid="676"><p ixia_locid="677">average memory utilization of memory dedicated to platform</p></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="678"><p ixia_locid="679">platform.fs.util</p></stentry>
+          <stentry ixia_locid="680"><p ixia_locid="681"> gauge</p></stentry>
+          <stentry ixia_locid="682"><p ixia_locid="683">%</p></stentry>
+          <stentry ixia_locid="684"><p ixia_locid="685">node ID</p></stentry>
+          <stentry ixia_locid="688"><p ixia_locid="689">average filesystem utilization of local file system dedicated to platform</p></stentry>
+        </strow>
+      </simpletable> 
+    </section>
+    <section id="section_N107E4_N1001B_N10002" ixia_locid="690">
+      <title ixia_locid="691">Intelligent Platform Management Interface (IPMI) Meters</title>
+      <p ixia_locid="692"><draft-comment author="Jim Owens" ixia_locid="693">US64389 section added</draft-comment>
+        <note id="note_N10983_N10978_N1096E_N1001F_N10001" ixia_locid="874">
+          <p ixia_locid="875">Sample meters are shown.  The available meters depend on the hardware platform.</p>
+        </note></p>
+      <simpletable>
+        <sthead>
+          <stentry ixia_locid="694"><p ixia_locid="695">Name</p></stentry>
+          <stentry ixia_locid="696"><p ixia_locid="697">Type</p></stentry>
+          <stentry ixia_locid="698"><p ixia_locid="699">Unit</p></stentry>
+          <stentry ixia_locid="700"><p ixia_locid="701">Resource</p></stentry>
+          <stentry ixia_locid="704"><p ixia_locid="705">Note</p></stentry>
+        </sthead>
+        <strow>
+          <stentry ixia_locid="706"><p ixia_locid="707">hardware.ipmi.temperature</p></stentry>
+          <stentry ixia_locid="708"><p ixia_locid="850">gauge</p></stentry>
+          <stentry ixia_locid="710"><p ixia_locid="711">C</p></stentry>
+          <stentry ixia_locid="712"><p ixia_locid="851">node ID</p></stentry>
+          <stentry ixia_locid="716"><p ixia_locid="717"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="718"><p ixia_locid="719">hardware.ipmi.current</p></stentry>
+          <stentry ixia_locid="720">
+            <p ixia_locid="852">gauge</p>
+          </stentry>
+          <stentry ixia_locid="722"><p ixia_locid="723">A</p></stentry>
+          <stentry ixia_locid="724">
+            <p ixia_locid="853">node ID</p>
+          </stentry>
+          <stentry ixia_locid="728"><p ixia_locid="729"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="730"><p ixia_locid="731">hardware.ipmi.fan</p></stentry>
+          <stentry ixia_locid="732">
+            <p ixia_locid="854">gauge</p>
+          </stentry>
+          <stentry ixia_locid="734"><p ixia_locid="735">RPM</p></stentry>
+          <stentry ixia_locid="736">
+            <p ixia_locid="855">node ID</p>
+          </stentry>
+          <stentry ixia_locid="740"><p ixia_locid="741"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="742"><p ixia_locid="743">hardware.ipmi.voltage</p></stentry>
+          <stentry ixia_locid="744">
+            <p ixia_locid="856">gauge</p>
+          </stentry>
+          <stentry ixia_locid="746"><p ixia_locid="747">V</p></stentry>
+          <stentry ixia_locid="748">
+            <p ixia_locid="857">node ID</p>
+          </stentry>
+          <stentry ixia_locid="752"><p ixia_locid="753"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="754"><p ixia_locid="755">hardware.ipmi.node.temperature</p></stentry>
+          <stentry ixia_locid="756">
+            <p ixia_locid="858">gauge</p>
+          </stentry>
+          <stentry ixia_locid="758"><p ixia_locid="759">C</p></stentry>
+          <stentry ixia_locid="760">
+            <p ixia_locid="859">node ID</p>
+          </stentry>
+          <stentry ixia_locid="764"><p ixia_locid="765"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="766"><p ixia_locid="767">hardware.ipmi.node.outlet_temperature</p></stentry>
+          <stentry ixia_locid="768">
+            <p ixia_locid="860">gauge</p>
+          </stentry>
+          <stentry ixia_locid="770"><p ixia_locid="771">C</p></stentry>
+          <stentry ixia_locid="772">
+            <p ixia_locid="861">node ID</p>
+          </stentry>
+          <stentry ixia_locid="776"><p ixia_locid="777"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="778"><p ixia_locid="779">hardware.ipmi.node.power</p></stentry>
+          <stentry ixia_locid="780">
+            <p ixia_locid="862">gauge</p>
+          </stentry>
+          <stentry ixia_locid="782"><p ixia_locid="783">W</p></stentry>
+          <stentry ixia_locid="784">
+            <p ixia_locid="863">node ID</p>
+          </stentry>
+          <stentry ixia_locid="788"><p ixia_locid="789"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="790"><p ixia_locid="791">hardware.ipmi.node.airflow</p></stentry>
+          <stentry ixia_locid="792">
+            <p ixia_locid="864">gauge</p>
+          </stentry>
+          <stentry ixia_locid="794"><p ixia_locid="795">CFM</p></stentry>
+          <stentry ixia_locid="796">
+            <p ixia_locid="865">node ID</p>
+          </stentry>
+          <stentry ixia_locid="800"><p ixia_locid="801"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="802"><p ixia_locid="803">hardware.ipmi.node.cups</p></stentry>
+          <stentry ixia_locid="804">
+            <p ixia_locid="866">gauge</p>
+          </stentry>
+          <stentry ixia_locid="806"><p ixia_locid="807">CUPS</p></stentry>
+          <stentry ixia_locid="808">
+            <p ixia_locid="867">node ID</p>
+          </stentry>
+          <stentry ixia_locid="812"><p ixia_locid="813"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="814"><p ixia_locid="815">hardware.ipmi.node.cpu_util</p></stentry>
+          <stentry ixia_locid="816">
+            <p ixia_locid="868">gauge</p>
+          </stentry>
+          <stentry ixia_locid="818"><p ixia_locid="819">%</p></stentry>
+          <stentry ixia_locid="820">
+            <p ixia_locid="869">node ID</p>
+          </stentry>
+          <stentry ixia_locid="824"><p ixia_locid="825"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="826"><p ixia_locid="827">hardware.ipmi.node.mem_util</p></stentry>
+          <stentry ixia_locid="828">
+            <p ixia_locid="870">gauge</p>
+          </stentry>
+          <stentry ixia_locid="830"><p ixia_locid="831">%</p></stentry>
+          <stentry ixia_locid="832">
+            <p ixia_locid="871">node ID</p>
+          </stentry>
+          <stentry ixia_locid="836"><p ixia_locid="837"/></stentry>
+        </strow>
+        <strow>
+          <stentry ixia_locid="838"><p ixia_locid="839">hardware.ipmi.node.io_util</p></stentry>
+          <stentry ixia_locid="840">
+            <p ixia_locid="872">gauge</p>
+          </stentry>
+          <stentry ixia_locid="842"><p ixia_locid="843">%</p></stentry>
+          <stentry ixia_locid="844">
+            <p ixia_locid="873">node ID</p>
+          </stentry>
+          <stentry ixia_locid="848"><p ixia_locid="849"/></stentry>
+        </strow>
+      </simpletable> 
+    </section>
+  </refbody>
+</reference-wr>

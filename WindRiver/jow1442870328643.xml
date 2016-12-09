@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr ditaarch:DITAArchVersion="1.2" domains="(topic task task-wr)                            (topic hi-d)                             (topic pr-d)                             (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="jow1442870328643" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Adding Hosts Using the host-add Command</title>
+    <shortdesc ixia_locid="2">You can add hosts to the system inventory using the command
+        line.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="jowens" dir="ltr" ixia_locid="6" translate="no">US62814 new topic</draft-comment>There are several ways to add hosts to
+                Titanium Server; for an overview, see <xref href="jow1443018695917.xml" ixia_locid="618"/>. Instead
+                of powering up each host and then defining its personality and other characteristics
+                interactively, you can use the <cmdname ixia_locid="613">system host-add</cmdname>
+                command to define hosts before you power them up. This can be useful for scripting
+                an initial setup.</p>
+            <note id="note_N1003D_N10022_N1001F_N10001" ixia_locid="614">
+                <p ixia_locid="615"><draft-comment author="jowens" dir="ltr" ixia_locid="616" translate="no">CGTS-3053 added note</draft-comment>On systems
+                    that use static IP address assignment on the management network, new hosts must
+                    be added to the inventory manually and assigned an IP address using the <cmdname ixia_locid="617">system host-add</cmdname> command. If a host is not added
+                    successfully,  the host console displays the following message at
+                    power-on:<codeblock ixia_locid="611"><systemoutput ixia_locid="612">This system has been configured with static management
+and infrastructure IP address allocation. This requires
+that the node be manually provisioned in System
+Inventory using the 'system host-add' CLI, GUI, or
+sysinv-api equivalent.</systemoutput></codeblock>
+                </p>
+            </note>
+        </context>
+        <steps>
+            <step conref="jow1404333506062.xml#jow1404333506062/step_N1007C_N10079_N1002E_N10001" id="step_N10083_N10080_N1001C_N10001" ixia_locid="28">
+                <cmd ixia_locid="29"/>
+            </step>
+            <step id="step_N1008C_N10080_N1001C_N10001" ixia_locid="30">
+                <cmd ixia_locid="31">With <nameliteral ixia_locid="32">controller-0</nameliteral> running, start the host.</cmd>
+                <info ixia_locid="33">
+                    <p ixia_locid="34">The host is booted and configured with a personality.</p>
+                </info>
+            </step>
+        </steps>
+        <postreq id="postreq_N100A0_N1001C_N10001" ixia_locid="35">
+            <p ixia_locid="36">After adding the host, you must provision it according to the
+                requirements of the personality. For more information, see <xref href="jow1404333484592.xml" ixia_locid="619"/>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

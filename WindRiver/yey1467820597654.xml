@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="yey1467820597654" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="428">Improved VM Execution Environment</title>
+ <shortdesc ixia_locid="429">Titanium Server provides an improved execution environment for better and more
+  predictable virtual machine performance.</shortdesc>
+ <prolog>
+  <author ixia_locid="430">Jim Owens</author>
+  <author ixia_locid="431">Pedro Sanchez</author>
+ </prolog>
+ <conbody>
+    <draft-comment author="jmaran" ixia_locid="438">This execution environment is "improved"
+      compared to what? A previous release? Other similar available commercial products? [jowens:]
+      All the topics in the chapter describe improvements over native OpenStack. </draft-comment>
+  <p ixia_locid="427"> Enhancements to the execution environment include:</p>
+  <ul id="ul_rx5_gfs_nn">
+   <li ixia_locid="432">
+    <draft-comment author="jowens" ixia_locid="433">US78238 bullet added; CGTS-5780 70% memory was
+          80%</draft-comment>
+    <p ixia_locid="434">Platform resource utilization monitoring, to ensure that VMs can be
+          scheduled on a host only if the host OS is using no more than 80% of the CPU or 70% of the
+          memory allotted for platform use.</p>
+   </li>
+   <li ixia_locid="92">
+    <p ixia_locid="93">Low-latency, bounded delivery of virtual interrupts, and availability of
+     low-latency high resolution timers. This is done by leveraging the optimized kernel and
+     KVM/QEMU implementations of the Wind River Open Virtualization Platform (OVP).</p>
+   </li>
+   <li ixia_locid="94">
+    <p ixia_locid="95">Option to allocate 2 MB or 1 GB huge memory pages to reduce swapping and TLB
+     lookup misses.</p>
+   </li>
+   <li ixia_locid="96">
+    <p ixia_locid="97">Improved resource tracking of VMs that use dedicated CPUs, to ensure
+     successful migration and evacuation.</p>
+   </li>
+   <li ixia_locid="99">
+    <p ixia_locid="100">Support for affining guest NUMA nodes to specific host NUMA nodes.</p>
+   </li>
+   <li ixia_locid="204">
+    <p ixia_locid="205">Capability to specify specific CPU models to be used by a virtual machine in
+     order to leverage advanced features of the CPU architecture.</p>
+   </li>
+   <li ixia_locid="406">
+    <draft-comment author="jowens" ixia_locid="407">US64378 added</draft-comment>
+    <p ixia_locid="408">Support for PCI passthrough and SR-IOV access to Ethernet interfaces</p>
+   </li>
+   <li ixia_locid="413">
+    <draft-comment author="jowens" ixia_locid="414">US64378 added</draft-comment>
+    <p ixia_locid="415">Support for SR-IOV access to PCI-based encryption acceleration</p>
+   </li>
+      <li ixia_locid="435">
+        <draft-comment author="jowens" ixia_locid="436">US79271 added</draft-comment>
+        <p ixia_locid="437">Improved performance for standard virtio NICs using vhost-user, with
+          optional multi-queue support for virtio interfaces</p>
+      </li>
+   <li ixia_locid="439">
+    <draft-comment author="jowens" ixia_locid="440">US68056 added</draft-comment>
+    <p ixia_locid="441">Option to use cached RAW images for accelerated Cinder volume creation</p>
+   </li>
+      <li ixia_locid="442">
+        <draft-comment author="jowens" ixia_locid="443">CGTS-4963 added</draft-comment>
+        <p ixia_locid="444">Option to use thin provisioning on all controller-based LVM Cinder
+          volumes for faster deletion and secure deletion support, or thick provisioning for faster
+          volume creation and faster initial disk writes</p>
+      </li>
+   <li ixia_locid="419">
+    <draft-comment author="jowens" ixia_locid="420">US69978 added</draft-comment>
+    <p ixia_locid="421">Copy-on-write (CoW) image-based local ephemeral storage backing for instance
+     launch and delete optimization</p>
+   </li>
+  </ul>
+ </conbody>
+</concept-wr>

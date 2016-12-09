@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept-wr id="jow1454003786887" xml:lang="en-us">
+    <title ixia_locid="1">Maximum Number of Subnets</title>
+    <shortdesc ixia_locid="2"/>
+    <prolog>
+        <author ixia_locid="5">Matt Peters</author>
+        <author ixia_locid="3">Craig Griffin</author>
+    </prolog>
+    <conbody>
+        <p ixia_locid="4">Up to 850 subnets are supported across the system. The networks must be
+            partitioned such that no more than 250 subnets are supported by any given compute node.
+            This limit also applies to DHCP servers and virtual routers.</p>
+        <p ixia_locid="6">The system will redistribute DHCP servers and virtual routers across the available
+            compute nodes, assuming they meet the provider network requirements for the given
+            network attachments of the subnet.</p>
+        <p ixia_locid="7">The scheduling of DHCP servers and virtual routers will ensure they are evenly
+            distributed amongst the available compute nodes when they are configured and when new
+            hosts become available. The redistribution is performed periodically; therefore the
+            servers and routers will be rescheduled if an imbalance is detected.</p>
+        <p ixia_locid="8">The distribution of DHCP servers and virtual routers helps to mitigate the impact of
+            compute host failures by reducing the scope of the rescheduling of the failed services,
+            in addition to allowing for higher throughput capabilities for North-South traffic due
+            to the distributed nature of the routing function across all compute hosts.</p>
+    </conbody>
+</concept-wr>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="ers1464645579505" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="100">Increasing Storage Space Allotments on the Controller</title>
+    <shortdesc ixia_locid="101">You can increase the allotments for controller-based storage at any
+        time after installation.</shortdesc>
+    <prolog>
+        <author ixia_locid="102">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="24">
+            <note id="note_N10027_N10022_N1001F_N10001" ixia_locid="397" type="caution">
+                <p ixia_locid="398"><draft-comment author="jowens" ixia_locid="376">US74975 moved
+                        conceptual info to a new concept topic; mention Ceph Mon Storage in
+                        connection with screen shots (2 pl); CGTS-4411 updated title from "Changing
+                        the Storage. . ." to "Increasing the Storage. . .", added caution about
+                        decreasing filesystem size</draft-comment>Decreasing the file system size is
+                    not supported, and can result in synchronization failures requiring system
+                    re-installation. Do not attempt to decrease the size of the file system. </p>
+            </note>
+            <p ixia_locid="389">For more about controller-based storage, see <xref href="vgl1464709841372.xml" ixia_locid="390"/>.</p>
+            <p ixia_locid="391">If you prefer, you can use the CLI; see <xref href="fel1464645529576.xml" ixia_locid="384"/>.</p>                                            
+        </context>
+        <prereq id="prereq_N10022_N1001F_N10001" ixia_locid="211">
+            <p ixia_locid="212">Before changing storage allotments, prepare as follows:</p>
+            <ul id="ul_p3d_2h5_vp">
+                <li ixia_locid="213">
+                    <p ixia_locid="214">Calculate your system storage requirements using the <cite ixia_locid="249">Titanium Server System Engineering Guidelines</cite>.
+                        Include the headroom required for changes to the storage space
+                        allotments.</p>
+                </li>
+                <li ixia_locid="385">
+                    <p ixia_locid="386">Record the current configuration settings in case they need
+                        to be restored (for example, because of an unexpected interruption during
+                        changes to the system configuration). Consult the configuration plan for
+                        your system.</p>
+                </li>
+                <li ixia_locid="387">
+                    <p ixia_locid="388">Ensure that the BIOS boot settings for the host are
+                        appropriate for a reinstall operation. Changes to the storage allotments
+                        require a re-installation of the Titanium Server host software on the
+                        controllers, even if the primary disk is not replaced.</p>
+                </li>
+            </ul>
+        </prereq>
+        <steps>
+            <step id="step_N100F4_N100F1_N1001F_N10001" ixia_locid="253">
+                <cmd ixia_locid="254">If necessary, install replacement disks in the controllers.</cmd>
+                <info ixia_locid="255">
+                    <p ixia_locid="256">If you do not need to replace disks, you can skip this step.
+                        To determine whether you need to replace disks, calculate your storage
+                        requirements using the <cite ixia_locid="250">Titanium Server System
+                            Engineering Guidelines</cite>. Be sure to include the headroom required
+                        on the primary disk.</p>
+                    <p ixia_locid="257">To replace disks in the controllers, see <xref href="gfu1465307467334.xml" ixia_locid="392"/>.</p>
+                </info>
+            </step>
+            <step id="step_N101EF_N100F1_N1001F_N10001" ixia_locid="26">
+                <cmd ixia_locid="27">Edit the disk storage allotments.</cmd>
+                <substeps id="substeps_kvh_bh5_4q">
+                    <substep ixia_locid="306">
+                        <cmd ixia_locid="307">In the Titanium Server Web administration interface,
+                            open the <wintitle ixia_locid="137">System Configuration</wintitle>
+                            pane.</cmd>
+                        <info ixia_locid="308">
+                            <p ixia_locid="29"> The <wintitle ixia_locid="30">System
+                                    Configuration</wintitle> pane is available from <menucascade ixia_locid="394">
+                                    <uicontrol ixia_locid="395">Admin</uicontrol>
+                                    <uicontrol ixia_locid="396">Platform</uicontrol>
+                                    <uicontrol ixia_locid="20">System Configuration</uicontrol>
+                                </menucascade> in the left-hand pane.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="309">
+                        <cmd ixia_locid="310">Select the <uicontrol ixia_locid="399">Controller
+                                Filesystem</uicontrol> tab.</cmd>
+                        <stepresult ixia_locid="34">
+                            <p ixia_locid="35"><draft-comment author="jowens" ixia_locid="375">CGTS-3736 screen shots
+                                    updated for Image Conversion Space </draft-comment>The <wintitle ixia_locid="123">Controller Filesystem</wintitle> page appears,
+                                showing the currently defined storage allotments.</p>
+                            <fig id="fig_t3s_4mz_5p" ixia_locid="36">
+                                <image href="jow1413850529975.image" id="image_gtf_dwc_vp" ixia_locid="124">
+                                    <alt ixia_locid="125">Controller filesystem page</alt>
+                                </image>
+                            </fig>
+                            <note id="note_N100F5_N100CD_N100BF_N10093_N10089_N10062_N1001F_N10001" ixia_locid="377">
+                                <p ixia_locid="378"><nameliteral ixia_locid="379">Cinder
+                                        Storage</nameliteral> is shown only for systems with
+                                    controller storage.</p>
+                                <p ixia_locid="380"><nameliteral ixia_locid="381">Ceph Mon
+                                        Storage</nameliteral> is shown only for systems with
+                                    dedicated storage.</p>
+                            </note>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="311">
+                        <cmd ixia_locid="40">Click <uicontrol ixia_locid="41">Edit
+                                Filesystem</uicontrol>.</cmd>
+                        <stepresult ixia_locid="42">
+                            <p ixia_locid="43">The <wintitle ixia_locid="44">Edit Controller
+                                    Filesystem</wintitle> dialog box appears.</p>
+                            <fig id="fig_tmw_qnz_5p" ixia_locid="45">
+                                <image href="jow1413850558829.image" id="image_khj_nwc_vp" ixia_locid="126">
+                                    <alt ixia_locid="127">Edit Controller Filesystem dialog</alt>
+                                </image>
+                            </fig>
+                            <note id="note_N10146_N10124_N10115_N100B7_N1001F_N10001" ixia_locid="138">
+                                <p ixia_locid="139">The <uicontrol ixia_locid="245">Cinder storage
+                                        (GiB)</uicontrol> field is present only for systems with
+                                    controller storage.</p>
+                                <p ixia_locid="382">A <nameliteral ixia_locid="383">Ceph Mon Storage
+                                        (GiB) </nameliteral> field (not shown) is present for
+                                    systems with dedicated storage.</p>
+                            </note>
+                        </stepresult>
+                    </substep>
+                    <substep ixia_locid="312">
+                        <cmd ixia_locid="49">Replace the storage allotments as required.</cmd>
+                    </substep>
+                    <substep ixia_locid="313">
+                        <cmd ixia_locid="69">Click <uicontrol ixia_locid="70">Save</uicontrol>.</cmd>
+                    </substep>
+                </substeps>
+                <info ixia_locid="71">
+                    <p ixia_locid="72">This raises major alarms against the controllers
+                            (<nameliteral ixia_locid="314">250.001 Configuration
+                            out-of-date</nameliteral>). You can view the alarms on the
+                            <wintitle ixia_locid="393">Fault Management</wintitle> page. In addition, the status
+                            <nameliteral ixia_locid="141">Config out-of-date</nameliteral> is shown
+                        for the controllers in the <wintitle ixia_locid="142">Hosts</wintitle>
+                        list.</p>
+                </info>
+            </step>
+            <step id="step_N100BF_N1002B_N1001D_N10001" ixia_locid="57">
+                <cmd ixia_locid="86">Lock the standby controller. </cmd>
+            </step>
+            <step id="step_N102CD_N100F1_N1001F_N10001" ixia_locid="292">
+                <cmd ixia_locid="293">Re-install the Titanium Server software on the standby
+                    controller.</cmd>
+                <info ixia_locid="316">
+                    <fig id="fig_s21_snr_35" ixia_locid="347">
+                        <image href="jow1450207664685.image" id="image_lsk_snr_35" ixia_locid="348">
+                            <alt ixia_locid="349">TiS Reinstall Host (Config out of date)</alt>
+                        </image>
+                    </fig>
+                    <p ixia_locid="317">This step is required to update the system configuration,
+                        even if you have already re-installed the Titanium Server software as part
+                        of the disk replacement procedure.</p>
+                </info>
+                <stepresult ixia_locid="360">
+                    <p ixia_locid="361">The host is restarted and the operating system is
+                        re-installed; then the host is rebooted to the system prompt.</p>
+                    <p ixia_locid="362">Wait for the standby controller to be reported as
+                            <nameliteral ixia_locid="352">Locked</nameliteral>, <nameliteral ixia_locid="353">Disabled</nameliteral>, and <nameliteral ixia_locid="354">Online</nameliteral>.</p>
+                </stepresult>
+            </step>
+            <step id="step_N102D6_N100F1_N1001F_N10001" ixia_locid="294">
+                <cmd ixia_locid="295">Unlock the standby controller.</cmd>
+                <info ixia_locid="318">
+                    <p ixia_locid="355">Wait for the standby controller to be reported as
+                            <nameliteral ixia_locid="356">Unlocked</nameliteral>, <nameliteral ixia_locid="357">Enabled</nameliteral>, and <nameliteral ixia_locid="358">Available</nameliteral>.</p>
+                    <p ixia_locid="359">The <nameliteral ixia_locid="363">Config out-of-date</nameliteral> status
+                        against the standby controller is cleared.</p>
+                </info>
+            </step>
+            <step id="step_N102DF_N100F1_N1001F_N10001" ixia_locid="296">
+                <cmd ixia_locid="297">Swact the controllers.</cmd>
+                <info ixia_locid="364">
+                    <p ixia_locid="365">Open the drop-down menu for the active controller and select <uicontrol ixia_locid="366">Swact
+                            Host</uicontrol>.</p>
+                </info>
+                <info ixia_locid="367">
+                    <p ixia_locid="368">A <nameliteral ixia_locid="369">Swact: Request</nameliteral> is reported, followed by
+                            <nameliteral ixia_locid="370">Swact: In Progress</nameliteral>.</p>
+                    <p ixia_locid="371">During the swact, the Web administration interface is
+                        disconnected. Wait a few minutes for the swact to finish, and then log in
+                        again to resume the procedure.</p>
+                </info>
+                <stepresult ixia_locid="372">
+                    <p ixia_locid="373">Under some circumstances, the <nameliteral ixia_locid="374">Config out-of-date</nameliteral> message for the new standby controller
+                        can be cleared by the swact. A host re-installation is still required to
+                        complete the procedure. </p>
+                </stepresult><!--2015-12-29 (US64033) I observed that the message was cleared immediately after the swact, but could not elicit a definitive confirmation of the expected behaviour.-->
+            </step>
+            <step id="step_N10284_N100F2_N1001F_N10001" ixia_locid="320">
+                <cmd ixia_locid="321">Lock the new standby controller.</cmd>
+            </step>
+            <step id="step_N102E8_N100F1_N1001F_N10001" ixia_locid="298">
+                <cmd ixia_locid="299">Re-install the Titanium Server software on the
+                    controller.</cmd>
+            </step>
+            <step id="step_N102F1_N100F1_N1001F_N10001" ixia_locid="300">
+                <cmd ixia_locid="301">Unlock the controller.</cmd>
+            </step>
+            <step id="step_N1025E_N100B7_N1001F_N10001" ixia_locid="156">
+                <cmd ixia_locid="157">Confirm that the <nameliteral ixia_locid="158">250.001
+                        Configuration out-of-date</nameliteral> alarms are cleared for both
+                    controllers.</cmd>
+            </step>
+        </steps>
+        <postreq id="postreq_N10323_N1001F_N10001" ixia_locid="243">
+            <p ixia_locid="244">After making these changes, ensure that the configuration plan for
+                your system is updated with the new storage allotments and disk sizes.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

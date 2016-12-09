@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Reference//EN" "reference-wr.dtd">
+<reference-wr id="jem1464901298578" xml:lang="en-us">
+<!-- Modification History
+    
+-->
+  <title ixia_locid="1">Storage-related CLI Commands</title>
+  <shortdesc ixia_locid="2">You can use CLI commands when working with storage.</shortdesc>
+  <prolog>
+    <author ixia_locid="67">Jim Owens</author>
+    <author ixia_locid="3">Edward Knowlton</author>
+  </prolog>
+  <refbody>
+    <section id="section_N1001F_N1001C_N10001" ixia_locid="4">
+      <title ixia_locid="5">Modify CEPH Monitor Volume Size</title>
+      <p ixia_locid="51">You can change the space allotted for the Ceph monitor, if required. For
+        considerations affecting Ceph monitor storage, refer to the <cite ixia_locid="52">Titanium
+          Server Systems Engineering Guidelines</cite>.</p>
+      <draft-comment author="eknowlto" ixia_locid="50">US77367 / US78833 Add CEPH after config
+        controller ; US85034 / CGTS-5109 change command</draft-comment>
+      <codeblock ixia_locid="6"><systemoutput ixia_locid="75">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="8">system ceph-mon-modify <varname ixia_locid="53">controller</varname> ceph_mon_gib=<varname ixia_locid="71">size</varname></userinput></codeblock>
+      <p ixia_locid="55">where <varname ixia_locid="56">partition_size</varname> is the size in GiB
+        to use for the Ceph monitor. The value must be between 20 and 40 GiB.</p>
+      <codeblock ixia_locid="10"><systemoutput ixia_locid="76">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="12">system ceph-mon-modify controller-0 ceph-mon-gib=20</userinput>
+<systemoutput ixia_locid="13">
++--------------------------------------+---------+-------+--------------+
+| uuid                                 | device_ | ceph_ | hostname     |
+|                                      | node    | mon_g |              |
+|                                      |         | ib    |              |
++--------------------------------------+---------+-------+--------------+
+| 3007f58c-c212-480a-8cde-e3e8922ec3da | None    | 35    | controller-0 |
+| 4346814a-df7b-4de2-b70c-a02eafd6280f | None    | 35    | controller-1 |
++--------------------------------------+---------+-------+--------------+
+
+NOTE: ceph_mon_gib for both controllers are changed. 
+
+System configuration has changed.
+Please follow the administrator guide to complete configuring system.</systemoutput></codeblock>
+    </section>
+    <section id="section_N10044_N1001C_N10001" ixia_locid="14">
+      <title ixia_locid="15">List Storage Backend</title>
+      <p ixia_locid="16">You can use this command to list the storage backend types installed on a
+        system.</p>
+      <codeblock ixia_locid="17"><systemoutput ixia_locid="77">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="19">system storage-backend-list</userinput>
+<systemoutput ixia_locid="20">
++---------+------------+------+
+| backend | state      | task |
++---------+------------+------+
+| lvm     | configured | None |
++---------+------------+------+
+| ceph    | configured | None |
++---------+------------+------+</systemoutput></codeblock><note id="note_N10091_N10071_N1001F_N10001" ixia_locid="57">
+        <p ixia_locid="58">The value <nameliteral ixia_locid="59">rbd</nameliteral> (RADOS block device) indicates a Ceph backend
+          for Glance images. </p>
+      </note>
+    </section>
+    <section id="section_N1005E_N1001C_N10001" ixia_locid="21">
+      <title ixia_locid="22">Display File System</title>
+      <p ixia_locid="23">You can use the <cmdname ixia_locid="68">system controllerfs show</cmdname>
+        command to view the storage space allotments on a host.</p>
+      <codeblock ixia_locid="78"><systemoutput ixia_locid="79">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="80">system controllerfs-show</userinput>
+<systemoutput ixia_locid="81">+---------------------+----------------------------------+
+| Property            | Value                            |
++---------------------+----------------------------------+
+| database_gib        | 10                               |
+| cgcs_gib            | 10                               |
+| backup_gib          | 30                               |
+| img_conversions_gib | 10                               |
+| created_at          | 2016-10-27T20:10:24.307707+00:00 |
+| updated_at          | None                             |
++---------------------+----------------------------------+</systemoutput></codeblock>
+      <p ixia_locid="82">For a system with controller storage:</p>
+      <codeblock ixia_locid="83"><systemoutput ixia_locid="84">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="85">system storage-backend-show lvm</userinput>
+<systemoutput ixia_locid="86">+---------------+----------------------------------+
+| Property      | Value                            |
++---------------+----------------------------------+
+| cinder_device | /dev/sdb                         |
+| cinder_gib    | 110                              |
+| created_at    | 2016-10-27T20:10:24.304134+00:00 |
+| updated_at    | None                             |
++---------------+----------------------------------+</systemoutput></codeblock>
+      <p ixia_locid="87">For a system with dedicated storage:</p>
+      <codeblock ixia_locid="88"><systemoutput ixia_locid="89">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="90">system ceph-mon-show controller-0</userinput>
+<systemoutput ixia_locid="91">+--------------+--------------------------------------+
+| Property     | Value                                |
++--------------+--------------------------------------+
+| uuid         | cc038848-a3ff-4039-9637-9242d499b243 |
+| device_node  | None                                 |
+| ceph_mon_gib | 20                                   |
+| created_at   | 2016-09-27T20:44:28.452379+00:00     |
+| updated_at   | None                                 |
++--------------+--------------------------------------+</systemoutput></codeblock>
+    </section>
+    <section id="section_N10086_N1001C_N10001" ixia_locid="32">
+      <title ixia_locid="33">List Glance Images</title>
+      <p ixia_locid="34"><draft-comment author="jowens" ixia_locid="70">CGTS-5112 command updated with -v
+          option</draft-comment>You can use this command to identify the storage backend type for
+        Glance images. (The column headers in the following example have been modified slightly to
+        fit the page.)</p>
+      <codeblock ixia_locid="35"><systemoutput ixia_locid="92">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="37">glance -v image-list</userinput>
+<systemoutput ixia_locid="38">+----+------+-------+--------+-----------+------+--------+------------+-----------+
+| ID | Name | Store | Disk   | Container | Size | Status | Cache Size | Raw Cache |
+|    |      |       | Format | Format    |      |        |            |           | 
++----+------+-------+--------+-----------+------+--------+------------+-----------+
+| .. | img1 | rbd   | raw    | bare      | 1432 | active |            |           |
+| .. | img2 | file  | raw    | bare      | 1432 | active |            |           |
++----+------+-------+--------+-----------+------+--------+------------+-----------+
+</systemoutput>
+</codeblock>
+      <note id="note_N100F0_N100CE_N1001F_N10001" ixia_locid="60">
+        <p ixia_locid="61">The value <nameliteral ixia_locid="62">rbd</nameliteral> indicates a Ceph backend. </p>
+      </note>
+    </section>
+    <section id="section_N100A1_N1001C_N10001" ixia_locid="39">
+      <title ixia_locid="40">Show Glance Image</title>
+      <p ixia_locid="41">You can use this command to obtain information about a Glance image.</p>
+      <codeblock ixia_locid="45"><systemoutput ixia_locid="93">~(keystone_admin)$ </systemoutput> <userinput ixia_locid="47">glance image-show <varname ixia_locid="48">&lt;image-id&gt;</varname></userinput>
+<systemoutput ixia_locid="49">+------------------+--------------------------------------+
+| Property         | Value                                |
++------------------+--------------------------------------+
+| checksum         | c11edf9e31b416c46125600ddef1a8e8     |
+| name             | ubuntu-14.014.img                    |
+   .  .   .
+| store            | rbd                                  |
+| owner            | 05be70a23c81420180c51e9740dc730a     |
++------------------+--------------------------------------+
+</systemoutput></codeblock>
+      <p ixia_locid="63">The Glance <nameliteral ixia_locid="42">store</nameliteral> value can be
+        either <option ixia_locid="72">file</option> or <option ixia_locid="73">rbd</option>. The <option ixia_locid="74">rbd</option> value
+        indicates a Ceph backend.</p>
+    </section>
+  </refbody>
+</reference-wr>

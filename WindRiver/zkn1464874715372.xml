@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="zkn1464874715372" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Provisioning Storage on a Storage Host</title>
+    <shortdesc ixia_locid="2">You can define object storage devices (OSDs) on storage hosts to
+        provide VM disk storage.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="134">
+            <p ixia_locid="223"><draft-comment author="jowens" ixia_locid="224">US78837 updated for
+                    journals</draft-comment><draft-comment author="jmaran" ixia_locid="247">The next
+                    xref is local when this topic is in the sys admin guide but not when it is in
+                    the installation guide.</draft-comment>For more about OSDs, see <ph ixia_locid="233" otherprops="printonly"><cite ixia_locid="234">Titanium Server
+                        System Administration: </cite></ph><cite ixia_locid="235"><ph ixia_locid="236"><xref href="tdw1466190608670.xml" ixia_locid="232"/></ph></cite>. </p>
+            <p ixia_locid="135">If you prefer, you can use the CLI. See <xref href="gbm1464889281296.xml" ixia_locid="136"/>.</p>
+        </context>
+        <prereq id="prereq_N10022_N1001F_N10001" ixia_locid="51">
+            <p ixia_locid="52"><draft-comment author="jowens" ixia_locid="61">US78837 updated
+                    procedure</draft-comment>To create or edit an OSD, you must lock the storage
+                host. The system must have at least two other unlocked hosts with Ceph monitors.
+                (Ceph monitors run on <nameliteral ixia_locid="143">controller-0</nameliteral>,
+                    <nameliteral ixia_locid="144">controller-1</nameliteral>, and <nameliteral ixia_locid="145">storage-0</nameliteral> only).</p>
+        </prereq>
+        <steps>
+            <step conref="clv1462554732588.xml#clv1462554732588/lock-node" id="step_N10030_N1002D_N1001F_N10001" ixia_locid="59">
+                <cmd ixia_locid="60"/>
+            </step>
+            <step id="step_N10061_N10053_N1001F_N10001" ixia_locid="147">
+                <cmd ixia_locid="148">Open the <wintitle ixia_locid="149">Inventory Detail</wintitle> page for the host.</cmd>
+                <info ixia_locid="150">
+                    <p ixia_locid="151">To open the <wintitle ixia_locid="152">Inventory Detail</wintitle> page, click the name of the
+                        host on the <uicontrol ixia_locid="153">Hosts</uicontrol> tab of the <wintitle ixia_locid="154">System
+                            Inventory</wintitle> page.</p>
+                </info>
+            </step>
+            <step id="step_N1005C_N1001F_N1001C_N10001" ixia_locid="17">
+                <cmd ixia_locid="18">Select the <uicontrol ixia_locid="19">Storage</uicontrol> tab
+                    to view the disks and storage functions for the node.</cmd>
+                <info ixia_locid="22">
+                    <fig id="fig_N10071_N1006E_N1005B_N1001F_N1001C_N10001" ixia_locid="23">
+                        <image href="zxt1464875107673.image" id="image_ywt_n12_2w" ixia_locid="62">
+                            <alt ixia_locid="63">TiS 16 Storage tab for Storage Host</alt>
+                        </image>
+                    </fig>
+                </info>
+            </step>
+            <step id="step_N10118_N1002D_N1001F_N10001" ixia_locid="100">
+                <cmd ixia_locid="101">Add an OSD storage device.</cmd>
+                <substeps id="substeps_zf4_k52_2w">
+                    <substep ixia_locid="102">
+                        <cmd ixia_locid="103">Click <uicontrol ixia_locid="104">Assign Storage
+                                Function</uicontrol> to open the <wintitle ixia_locid="105">Assign
+                                Storage Function</wintitle> dialog box.</cmd>
+                        <info ixia_locid="106">
+                            <fig id="fig_qq3_s52_2w" ixia_locid="107">
+                                <image href="bse1464884816923.image" id="image_x2q_1w2_2w" ixia_locid="108">
+                                    <alt ixia_locid="109">TiS Assign Storage Function (journal available)</alt>
+                                </image>
+                            </fig>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="110">
+                        <cmd ixia_locid="111">In the <uicontrol ixia_locid="112">Disks</uicontrol> field, select the OSD to use for
+                            storage.</cmd>
+                        <info ixia_locid="137">
+                            <p ixia_locid="138">You cannot use the rootfs disk (<nameliteral ixia_locid="139">dev/sda</nameliteral>)
+                                for storage functions.</p>
+                        </info>
+                    </substep>
+                    <substep ixia_locid="113">
+                        <cmd importance="optional" ixia_locid="114">If applicable, specify the size of the Ceph
+                            journal.</cmd>
+                        <info ixia_locid="115">
+                            <p ixia_locid="116">If an SSD-backed Ceph journal is available, the
+                                    <uicontrol ixia_locid="117">Journal</uicontrol> for the OSD is
+                                automatically set to use the SSD device assigned for journals. For
+                                more about SSD-backed Ceph journals, <draft-comment author="jmaran" ixia_locid="248">The following xref is local in the sys admin guide but
+                                    inter-book when this topic appears in the installation
+                                    guide.</draft-comment>see <ph ixia_locid="237" otherprops="printonly"><cite ixia_locid="238">Titanium Server
+                                        System Administration: </cite></ph><cite ixia_locid="239"><ph ixia_locid="240"><xref href="jra1467638430659.xml" ixia_locid="241"/></ph></cite>. You can optionally
+                                adjust the <uicontrol ixia_locid="118">Journal Size</uicontrol>. For
+                                sizing considerations, refer to the <cite ixia_locid="146">Titanium
+                                    Server System Engineering Guidelines</cite>.</p>
+                            <p ixia_locid="120">If no journal function is configured on the host,
+                                then the <uicontrol ixia_locid="121">Journal</uicontrol> is set to
+                                    <uicontrol ixia_locid="122">Collocated with OSD</uicontrol>, and
+                                the <uicontrol ixia_locid="123">Journal Size</uicontrol> is set to a
+                                default value. These settings cannot be changed.</p>
+                        </info>
+                    </substep>
+                </substeps>
+                <stepresult ixia_locid="127">
+                    <p ixia_locid="128">The storage function is added.</p>
+                    <fig id="fig_w42_ly2_2w" ixia_locid="129">
+                        <image href="caf1464886132887.image" id="image_o3x_ly2_2w" ixia_locid="130">
+                            <alt ixia_locid="131">TiS Storage Function showing enabled Edit button</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step conref="clv1462554732588.xml#clv1462554732588/unlock-node" id="step_N101EE_N1002D_N1001F_N10001" ixia_locid="132">
+                <cmd ixia_locid="133"/>
+            </step>
+        </steps>
+        <postreq id="postreq_N100F2_N1001F_N10001" ixia_locid="55">
+            <p ixia_locid="56"><draft-comment author="jowens" ixia_locid="58">US66653 profile steps
+                    removed; xref added</draft-comment>You can re-use the same settings with other
+                storage nodes by creating and applying a storage profile. <draft-comment author="jmaran" ixia_locid="249">The following xref is local when this topic appears in the
+                    installation guide but inter-book when it appears in the system admin
+                    guide.</draft-comment>See <ph ixia_locid="242" otherprops="printonly"><cite ixia_locid="243">Titanium Server Installation:</cite></ph><cite ixia_locid="244"><ph ixia_locid="245"><xref href="jow1404333787693.xml" ixia_locid="246"/></ph></cite>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>

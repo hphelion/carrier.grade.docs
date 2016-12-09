@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="cbk1474581099366" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Enabling Multi-queue Support for virtio NICs </title>
+    <shortdesc ixia_locid="2">You can enable multi-queue support for enhanced throughput on virtio
+        interfaces by setting a property on the associated image.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="4">
+            <p ixia_locid="5"><draft-comment author="jowens" ixia_locid="12">US79271 new
+                    topic</draft-comment>When multi-queue support is enabled, guests can scale the
+                network performance as the number of guest vCPUs increases. This is because the
+                vCPUs can transmit and receive packets in parallel as they each have their own
+                queues. Without multi-queue, there is only one receive and transmit queue shared
+                amongst all the vCPUs. </p>
+        </context>
+        <steps>
+            <step id="step_N1002B_N10028_N1001C_N10001" ixia_locid="6">
+                <cmd ixia_locid="7">Use the <cmdname ixia_locid="13">glance image-update</cmdname>
+                    command to update the property for the image.</cmd>
+                <info ixia_locid="8">
+                    <codeblock ixia_locid="9"><systemoutput ixia_locid="10">~(keystone_admin)$</systemoutput><userinput ixia_locid="11">glance image update \
+--property vw_vif_multiqueue_enabled=True <varname ixia_locid="14">image_name</varname></userinput></codeblock>
+                    <p ixia_locid="15">where<varname ixia_locid="16"> image_name</varname> is the name of the image.</p>
+                </info>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

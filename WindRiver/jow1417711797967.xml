@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1417711797967" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="1">Licensing Requirements</title>
+ <shortdesc ixia_locid="2">To install and use Titanium Server, you require a license from Wind
+  River. </shortdesc>
+ <prolog>
+  <author ixia_locid="3">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <dl>
+   <dlentry ixia_locid="78">
+    <dt ixia_locid="79">Titanium Server Evaluation License</dt>
+    <dd ixia_locid="80">
+     <p ixia_locid="81">You can use an evaluation license to try out Titanium Server. This is a fully functional,
+      time-limited license, provided for evaluation purposes only.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="9">
+    <dt ixia_locid="10">Titanium Server Product License</dt>
+    <dd ixia_locid="11">
+     <p ixia_locid="12">You can use a product license to operate Titanium Server for your business requirements.
+     </p>
+    </dd>
+   </dlentry>
+  </dl>
+  <draft-comment author="eknowlto" ixia_locid="77">US75548 Titanium Server CPE - new details added
+   for licensing</draft-comment>
+  <dl>
+   <dlentry ixia_locid="82">
+    <dt ixia_locid="83">Titanium Server CPE Evaluation License</dt>
+    <dd ixia_locid="84">
+     <p ixia_locid="85">You can use an evaluation license to try out Titanium Server CPE. This is a
+      fully functional, time-limited license, provided for evaluation purposes only.</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <dl>
+   <dlentry ixia_locid="61">
+    <dt ixia_locid="62">Titanium Server CPE Product License</dt>
+    <dd ixia_locid="63">
+     <p ixia_locid="64">You can use a Titanium Server CPE product license to install Titanium Server CPE. </p>
+    </dd>
+   </dlentry>
+  </dl>
+  <p ixia_locid="13">For complete information about Wind River licenses and licensing terms, contact your Wind River
+   sales representative.</p>
+  <section id="section_N1004B_N1001C_N10001" ixia_locid="14">
+   <title ixia_locid="15">Obtaining a License</title>
+   <p ixia_locid="16">To obtain a license, contact your Wind River sales representative. The license
+    is sent to the contact email address you provide when you make a request or place an order. </p>
+  </section>
+  <section id="section_N10058_N1001C_N10001" ixia_locid="17">
+   <title ixia_locid="18">Installing a License </title>
+   <p ixia_locid="32">To install a license initially, follow the procedure for installing and configuring the
+    Titanium Server system. During this procedure, you must copy the license file to a designated
+    license directory on the controller host. The default designated directory is
+     <filepath ixia_locid="34">/home/wrsroot</filepath>; you can specify a different one during installation.</p>
+  </section>
+  <section id="section_N10069_N1001C_N10001" ixia_locid="21">
+   <title ixia_locid="22">Updating a License </title>
+   <p ixia_locid="36">After you have installed a license, you can update it by copying the new license file to the
+    designated license directory on the active controller host, and then running the
+     <cmdname ixia_locid="38">license-install</cmdname> utility as shown in the following example.</p>
+   <codeblock ixia_locid="40"><systemoutput ixia_locid="42">$ </systemoutput><userinput ixia_locid="44">sudo /usr/sbin/license-install <varname ixia_locid="46">license_file</varname></userinput></codeblock>
+   <draft-comment author="rstone" ixia_locid="56">CGTS-2291 adds note and warning</draft-comment>
+   <note id="note_N100AC_N10078_N1001F_N10001" ixia_locid="59" type="warning">
+    <p ixia_locid="60">Wind River recommends that you update licenses before they expire. Manual
+     recovery of VMs may be required if the license is upgraded after expiry. </p>
+   </note>
+  </section>
+  <section id="section_N100E9_N1001F_N10001" ixia_locid="86">
+   <title ixia_locid="87">Operational Behavior with Expired or Invalid Licenses</title>
+   <p ixia_locid="88">Titanium Server and Titanium Server CPE assume the operational behavior
+    described below when an expired or invalid license is detected. </p>
+   <p ixia_locid="89">Mismatched licenses are considered invalid. For example, a Titanium Server
+    license is considered an invalid license if the server is installed and provisioned as a
+    Titanium Server CPE product. </p>
+   <p ixia_locid="70">Expired and invalid licenses cause the following behavior: </p>
+   <ol id="ol_erl_snb_3v">
+    <li ixia_locid="71">
+     <p ixia_locid="72">A service log (401.003) is logged every 1 hour.</p>
+    </li>
+    <li ixia_locid="73">
+     <p ixia_locid="74">A service alarm (400.003) is triggered 8 hours after the expired or invalid
+      license is detected, and every 1 hour thereafter.</p>
+    </li>
+    <li ixia_locid="75">
+     <p ixia_locid="76">72 hours after the expired or invalid license is detected for the first
+      time, the controller stops service.</p>
+    </li>
+   </ol>
+  </section>
+ </conbody>
+</concept-wr>

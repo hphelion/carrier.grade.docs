@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="psa1413402160578" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Configuring PCI Passthrough Ethernet Interfaces</title>
+    <shortdesc ixia_locid="2">A <term ixia_locid="3">passthrough</term> Ethernet interface is a physical PCI Ethernet NIC on a
+        compute node to which a virtual machine is granted direct access. This minimizes packet
+        processing delays but at the same time demands special operational
+        considerations.</shortdesc>
+    <prolog>
+        <author ixia_locid="148">Jim Owens</author>
+        <author ixia_locid="4">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N10065_N10020_N10001" ixia_locid="20">
+            <note id="note_N10096_N10082_N10029_N10001" ixia_locid="156">
+                <p ixia_locid="157"><draft-comment author="jowens" ixia_locid="163">US64378
+                        "devices" was "interfaces"</draft-comment>To use PCI passthrough or SR-IOV
+                    devices, you must have Intel VT-x and Intel VT-d features enabled in the
+                    BIOS.</p>
+            </note>
+            <p ixia_locid="21">The exercise assumes that the underlying provider network
+                    <nameliteral ixia_locid="22">providernet-b</nameliteral> exists already, and
+                that VLAN ID 10 is a valid segmentation ID assigned to <nameliteral ixia_locid="23">tenant1</nameliteral>.</p>
+        </prereq>
+        <steps>
+            <step id="step_N10079_N10076_N10020_N10001" ixia_locid="24">
+                <cmd ixia_locid="25">Log in as the <nameliteral ixia_locid="26">admin</nameliteral> user to the web management
+                    interface.</cmd>
+            </step>
+            <step id="step_N1009B_N10088_N10024_N10001" ixia_locid="116">
+                <cmd ixia_locid="117">Lock the compute node you want to configure.</cmd>
+            </step>
+            <step id="step_N10086_N10076_N10020_N10001" ixia_locid="27">
+                <cmd ixia_locid="28">Configure the Ethernet interface to be used as a PCI
+                    passthrough interface.</cmd>
+                <info ixia_locid="118">
+                    <p ixia_locid="119"><draft-comment author="jowens" ixia_locid="164">US82332
+                            updated interface names</draft-comment>Select <menucascade ixia_locid="172">
+                            <uicontrol ixia_locid="32">Admin</uicontrol>
+                            <uicontrol ixia_locid="173">Platform</uicontrol>
+                            <uicontrol ixia_locid="31">Host Inventory</uicontrol>
+                        </menucascade> from the left-hand pane, click the <uicontrol ixia_locid="33">Hosts</uicontrol> tab, click the name of the compute node where the PCI
+                        interface is available, click the <uicontrol ixia_locid="34">Interfaces</uicontrol> tab, and finally click the <uicontrol ixia_locid="36">Edit Interface</uicontrol> button associated with the
+                        interface you want to configure. Fill in the window as illustrated
+                        below:</p>
+                    <fig id="fig_hfk_cfh_rr" ixia_locid="120">
+                        <image href="psa1428772332800.image" id="image_whc_5kh_rr" ixia_locid="122">
+                            <alt ixia_locid="123">TiS Edit PCI Passthrough Interface</alt>
+                        </image>
+                    </fig>
+                    <p ixia_locid="124">In this example, Ethernet interface <nameliteral ixia_locid="42">enp0s3</nameliteral> is assigned the network type <term ixia_locid="43">pci-passthrough</term>, and configured as connected to
+                        provider network <nameliteral ixia_locid="44">providernet-b</nameliteral>.
+                        Click the <uicontrol ixia_locid="45">Save</uicontrol> button to proceed.</p>
+                    <p ixia_locid="46">The interface can also be configured from the CLI as
+                        illustrated below:</p>
+                    <codeblock ixia_locid="108"><systemoutput ixia_locid="111">~(keystone_admin)$ </systemoutput><userinput ixia_locid="115">system host-if-modify \
+-nt pci-passthrough -p group0-data0 compute-0 enp0s3</userinput></codeblock>
+                </info>
+            </step>
+            <step id="step_N100E9_N10076_N10020_N10001" ixia_locid="51">
+                <cmd ixia_locid="52">Create the <nameliteral ixia_locid="53">net0</nameliteral>
+                    tenant network</cmd>
+                <info ixia_locid="54">
+                    <p ixia_locid="55">Select <menucascade ixia_locid="174">
+                            <uicontrol ixia_locid="11">Admin</uicontrol>
+                            <uicontrol ixia_locid="50">System</uicontrol>
+                            <uicontrol ixia_locid="12">Networks</uicontrol>
+                        </menucascade>, select the <wintitle ixia_locid="175">Networks</wintitle>
+                        tab, and then click <uicontrol ixia_locid="59">Create Network</uicontrol>.
+                        Fill in the <wintitle ixia_locid="60">Create Network</wintitle> dialog  box
+                        as illustrated below. You must ensure that:</p>
+                    <ul id="ul_pcn_vb4_tp">
+                        <li ixia_locid="61">
+                            <p ixia_locid="62"><draft-comment author="jowens" ixia_locid="165">US82332 updated shot to use same physical network as previous
+                                    screen. CGTS-4786 updated shot with cleared External Network
+                                    box.</draft-comment>The <nameliteral ixia_locid="63">tenant1</nameliteral> tenant has access to the tenant network,
+                                either assigning it as the owner, as in the illustration (using
+                                    <uicontrol ixia_locid="107">Project</uicontrol>), or by enabling
+                                the shared flag.</p>
+                        </li>
+                        <li ixia_locid="64">
+                            <p ixia_locid="65">The segmentation ID is set to 10. </p>
+                        </li>
+                    </ul>
+                    <fig id="fig_kwr_hd4_tp" ixia_locid="176">
+                        <image href="psa1413406273455.image" id="image_ofd_kd4_tp" ixia_locid="177" placement="inline">
+                            <alt ixia_locid="68">Creating a tenant network for use with PCI
+                                passthrough devices</alt>
+                        </image>
+                    </fig>
+                    <p ixia_locid="69">Click the <uicontrol ixia_locid="70">Create Network</uicontrol> button to proceed.</p>
+                </info>
+            </step>
+            <step id="step_N10144_N10076_N10020_N10001" ixia_locid="71">
+                <cmd ixia_locid="72">Configure the access switch.</cmd>
+                <info ixia_locid="73">
+                    <p ixia_locid="104"><draft-comment author="jowens" ixia_locid="166">US82332 updated interface
+                            names</draft-comment>Configure the physical port on the access switch
+                        used to connect to Ethernet interface <nameliteral ixia_locid="75">enp0s3</nameliteral> as an access port with default VLAN ID of 10.
+                        Traffic across the connection is therefore untagged, and effectively
+                        integrated into the targeted tenant network.</p>
+                    <p ixia_locid="76">You can also use a trunk port on the access switch so that it
+                        handles tagged packets as well. However, this opens the possibility for
+                        guest applications to join other tenant networks using tagged packets with
+                        different VLAN IDs, which might compromise the security of the system. See <ph ixia_locid="167" otherprops="printonly"><cite ixia_locid="168">Titanium Server Planning: </cite></ph><cite ixia_locid="169"><ph ixia_locid="170"><xref href="jow1404333739778.xml" ixia_locid="171"/></ph></cite> for other details regarding the
+                        configuration of the access switch.</p>
+                </info>
+            </step>
+            <step id="step_N101A0_N10088_N10024_N10001" ixia_locid="125">
+                <cmd ixia_locid="126">Unlock the compute node.</cmd>
+            </step>
+            <step id="step_N1015D_N10076_N10020_N10001" ixia_locid="77">
+                <cmd ixia_locid="78">Launch the virtual machine.</cmd>
+                <substeps id="substeps_snp_klt_tp">
+                    <substep ixia_locid="79">
+                        <cmd ixia_locid="80">Log in as user <nameliteral ixia_locid="81">user1</nameliteral> to the web management
+                            interface.</cmd>
+                    </substep>
+                    <substep ixia_locid="82">
+                        <cmd ixia_locid="83">Configure the network interfaces for the new virtual machine.</cmd>
+                        <info ixia_locid="84">
+                            <p ixia_locid="85">Open the <wintitle ixia_locid="86">Launch
+                                    Instance</wintitle> dialog by clicking the <uicontrol ixia_locid="87">Launch Interface</uicontrol> button on the
+                                    <wintitle ixia_locid="88">Instances</wintitle> window. Configure
+                                the necessary options for the new virtual machine. In particular,
+                                click the <uicontrol ixia_locid="89">Networking</uicontrol> tab and
+                                add a PCI passthrough interface on the tenant network <nameliteral ixia_locid="90">net0</nameliteral>, as illustrated below. Add
+                                other network interfaces as needed.</p>
+                            <fig id="fig_yxy_t1g_tp" ixia_locid="91">
+                                <image href="psa1413311389905.image" id="image_dbb_4dg_tp" ixia_locid="93" placement="inline">
+                                    <alt ixia_locid="94">Assigning Passthrough PCI Ethernet
+                                        Devices</alt>
+                                </image>
+                            </fig>
+                            <p ixia_locid="95">Click the <uicontrol ixia_locid="96">Launch</uicontrol> button to proceed.</p>
+                            <p ixia_locid="97">Passthrough interfaces can be attached from the CLI when booting a
+                                new virtual machine, as illustrated below:</p>
+                            <codeblock ixia_locid="98"><systemoutput ixia_locid="114">~(keystone_admin)$ </systemoutput><userinput ixia_locid="100">nova boot \
+--nic net-id=704e9f3b,vif-model=pci-passthrough \
+--flavor small --image cust-guest my-new-vm</userinput></codeblock>
+                            <note id="note_N10230_N101DF_N101D6_N101C3_N101B9_N1008C_N10028_N10001" ixia_locid="149">
+                                <p ixia_locid="150">By default, a VM that requires a PCI passthrough
+                                    interface is instantiated only if a host NUMA node with a
+                                    directly attached PCI interface is available. You can specify
+                                    best-effort instantiation by using an extra specification. For
+                                    more information, see <xref href="jow1436197980621.xml" ixia_locid="151"/>.</p>
+                            </note>
+                        </info>
+                    </substep>
+                </substeps>
+            </step>
+        </steps>
+        <result id="result_N101C1_N10020_N10001" ixia_locid="101">
+            <p ixia_locid="102">The new virtual machine instance is up now. It has a PCI passthrough
+                connection to the <nameliteral ixia_locid="103">net0</nameliteral> tenant network
+                identified with VLAN ID 10.</p>
+        </result>
+        <postreq conref="jow1439307476374.xml#jow1439307476374/postreq_N1023B_N10024_N10001" id="postreq_N10262_N10029_N10001" ixia_locid="155"/>
+    </taskbody>
+</task-wr>

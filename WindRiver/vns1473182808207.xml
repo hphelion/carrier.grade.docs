@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr domains="(topic task task-wr)                            (topic hi-d)                            (topic pr-d)                            (topic sw-d)                            (topic ui-d)                            (topic wr-sw-d)                            (topic xml-d)   " id="vns1473182808207" xml:lang="en-us" xmlns:ditaarch="http://dita.oasis-open.org/architecture/2005/">
+    <!-- Modification History
+        
+-->
+    <title ixia_locid="1">Unlocking Controller-1</title>
+    <shortdesc ixia_locid="2">You must unlock both controller nodes to provide
+        redundancy.</shortdesc>
+    <prolog>
+        <author ixia_locid="4">Jim Owens</author>
+        <author ixia_locid="5">Tom Towle</author>
+        <author ixia_locid="6">Pedro Sanchez</author>
+    </prolog>
+    <taskbody>
+        <prereq id="prereq_N1002C_N10029_N10001" ixia_locid="359">
+            <p ixia_locid="357" product="tis_std">The network interfaces and storage disks must be
+                configured before <nameliteral ixia_locid="358">controller-1</nameliteral> can be
+                unlocked.</p>
+            <p ixia_locid="283" product="tis_cpe">The OAM interface, data interfaces and storage for
+                the compute function must be configured before <nameliteral ixia_locid="285">controller-1</nameliteral> can be unlocked.</p>
+        </prereq>
+        <steps id="steps_nvd_tz5_k4">
+            <step conref="clv1462554732588.xml#clv1462554732588/unlock-node" id="step_N1009C_N10030_N10028_N10001" ixia_locid="33">
+                <cmd ixia_locid="34"/>
+            </step>
+        </steps>
+        <result id="result_N100F4_N1002E_N10001" ixia_locid="307">
+            <p ixia_locid="308">Both controllers are now available, with one active and one
+                redundant.</p>
+            <note id="note_N103FA_N103E7_N10033_N10001" ixia_locid="355">
+                <p ixia_locid="356">Controller-0 and controller-1 use IP multicast messaging for
+                    synchronization. If loss of synchronization occurs a few minutes after
+                    controller-1 becomes available, ensure that the switches and other devices on
+                    the management, infrastructure, and OAM networks are configured with appropriate
+                    settings. For example, consider that IGMP snooping may interfere with IP
+                    multicast messaging in some scenarios.</p>
+            </note>
+        </result>
+    </taskbody>
+</task-wr>

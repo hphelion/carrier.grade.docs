@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River Concept//EN" "concept-wr.dtd">
+<concept-wr id="jow1448294174784" xml:lang="en-us">
+<!-- Modification History
+
+ -->
+ <title ixia_locid="111">Interface Profiles</title>
+ <shortdesc ixia_locid="112">An interface profile is a named configuration of Ethernet ports and interfaces on a
+  host.</shortdesc>
+ <prolog>
+  <author ixia_locid="113">Jim Owens</author>
+ </prolog>
+ <conbody>
+  <p ixia_locid="61"><draft-comment author="jowens" ixia_locid="114">US66653 new topic created to hold existing
+    content, formerly held as section</draft-comment>Each interface profile assigns the
+   following:</p>
+  <dl>
+   <dlentry ixia_locid="62">
+    <dt ixia_locid="63">Ethernet Ports</dt>
+    <dd ixia_locid="64">
+     <p ixia_locid="65">The list of physical Ethernet ports that have been allocated to connect to a
+      network.</p>
+    </dd>
+   </dlentry>
+   <dlentry ixia_locid="66">
+    <dt ixia_locid="67">Interfaces</dt>
+    <dd ixia_locid="68">
+     <p ixia_locid="69">Logical L2 interfaces defined on top of physical Ethernet ports.</p>
+    </dd>
+   </dlentry>
+  </dl>
+  <p ixia_locid="70"><draft-comment author="jowens" ixia_locid="115">US82332 updated interface
+    names</draft-comment>Interface profiles are shown on the <uicontrol ixia_locid="71">Interface
+    Profiles</uicontrol> tab on the <wintitle ixia_locid="72">Host Inventory</wintitle> page.</p>
+  <fig id="fig_N10174_N10138_N10020_N10001" ixia_locid="73">
+   <image href="jow1404333769085.image" id="image_svc_jgr_l4" ixia_locid="74"/>
+  </fig>
+  <p ixia_locid="75">This example lists two interface profiles, as follows:</p>
+  <table frame="all" id="table_gxd_hmr_l4">
+   <title ixia_locid="76">Interface Profiles</title>
+   <tgroup cols="3">
+    <colspec colname="c1" colnum="1" colwidth="1.0*"/>
+    <colspec colname="c2" colnum="2" colwidth="1.0*"/>
+
+    <thead>
+     <row>
+      <entry ixia_locid="77">
+       <p ixia_locid="78">Profile Name</p>
+      </entry>
+      <entry ixia_locid="79">
+       <p ixia_locid="80">Ports</p>
+      </entry>
+      <entry ixia_locid="81">
+       <p ixia_locid="82">Interfaces</p>
+      </entry>
+     </row>
+    </thead>
+    <tbody>
+     <row>
+      <entry ixia_locid="83">
+       <p ixia_locid="84">compute-if-profile</p>
+      </entry>
+      <entry ixia_locid="141">
+       <p ixia_locid="142">enp0s3, enp0s8, eth0, eth1</p>
+      </entry>
+      <entry ixia_locid="143">
+       <p ixia_locid="144">enp0s3 on infrastructure network</p>
+       <p ixia_locid="118">mgmt0 on internal management network</p>
+       <p ixia_locid="89">eth0 on providernet-a</p>
+       <p ixia_locid="90">eth1 on providernet-b</p>
+      </entry>
+     </row>
+     
+     <row>
+      <entry ixia_locid="128">
+       <p ixia_locid="129">storage-if-profile</p>
+      </entry>
+      <entry ixia_locid="145">
+       <p ixia_locid="146">enp0s3, enp0s8, enp0s9</p>
+      </entry>
+      <entry ixia_locid="147">
+       <p ixia_locid="148">enp0s3 unused</p>
+       <p ixia_locid="134">mgmt0 on internal management network</p>
+       <p ixia_locid="135">enp0s9 on infrastructure network</p>
+      </entry>
+     </row>
+    </tbody>
+   </tgroup>
+  </table>
+  <p ixia_locid="98">The interface profile <nameliteral ixia_locid="99">compute-if-profile</nameliteral> is appropriate for a compute node. It lists four physical
+   ports, allocated to connect to a network. It also lists four logical L2 interfaces:</p>
+  <ul id="ul_evb_d4r_l4">
+   <li ixia_locid="137">
+    <p ixia_locid="138">enp0s3, allocated to connect to the infrastructure network</p>
+   </li>
+   <li ixia_locid="139">
+    <p ixia_locid="140">mgmt0, allocated to connect to the internal management network</p>
+   </li>
+   <li ixia_locid="102">
+    <p ixia_locid="103">a data interface associating port eth0 with the provider network
+     providernet-a.</p>
+   </li>
+   <li ixia_locid="104">
+    <p ixia_locid="105">a data interface associating port eth1 with the provider network
+     providernet-b.</p>
+   </li>
+  </ul>
+  <p ixia_locid="106">The interface profile <nameliteral ixia_locid="107">storage-if-profile</nameliteral> is appropriate for a storage node. It lists three physical
+   ports, and three logical L2 interfaces. Two logical interfaces connect the
+    <nameliteral ixia_locid="149">enp0s8</nameliteral> and <nameliteral ixia_locid="150">enp0s9</nameliteral> ports to the internal
+   management and infrastructure networks respectively. A third logical interface is unused.</p>
+  <p ixia_locid="55">To delete interface profiles, select the check boxes next to the profile names,
+   and then click <uicontrol ixia_locid="56">Delete Interface Profiles</uicontrol>. This does not
+   affect hosts where the profiles have already been applied.</p>
+ </conbody>
+</concept-wr>

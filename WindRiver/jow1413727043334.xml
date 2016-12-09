@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="jow1413727043334" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="50">Changing the NTP Server Configuration</title>
+    <shortdesc ixia_locid="51">You can change the NTP server addresses defined for Titanium Server
+        at any time after installation.</shortdesc>
+    <prolog>
+        <author ixia_locid="52"/>
+    </prolog>
+    <taskbody>
+        <context id="context_N1001F_N1001C_N10001" ixia_locid="24">
+            <p ixia_locid="25">During software installation, Titanium Server is configured with up
+                to three NTP server IP addresses. You change these addresses using the Web
+                administration interface or the CLI.</p>
+        </context>
+        <prereq id="prereq_N1002B_N1001D_N10001" ixia_locid="65">
+            <p ixia_locid="67">Before changing NTP server addresses, review the <wintitle ixia_locid="171">Fault
+                    Management</wintitle> page and ensure that any existing system alarms are
+                cleared.</p>
+            <note id="note_N1002F_N1002B_N1001D_N10001" ixia_locid="66" type="caution">
+                <p ixia_locid="159">For the Titanium Server system to use FQDN servers instead of
+                    IPv4 servers, at least one valid DNS server must be specified.</p>
+            </note>
+        </prereq>
+        <steps id="steps_xfh_24z_5p">
+            <step conref="jow1451997330805.xml#jow1451997330805/step_open_Sys_Config_pane" id="step_N10047_N10043_N1001E_N10001" ixia_locid="163">
+                <cmd ixia_locid="164"/>
+            </step>
+            <step id="step_N1004A_N10028_N1001C_N10001" ixia_locid="31">
+                <cmd ixia_locid="32">Select the <wintitle ixia_locid="33">NTP</wintitle> tab.</cmd>
+                <stepresult ixia_locid="34">
+                    <p ixia_locid="35">The <wintitle ixia_locid="104">NTP</wintitle> page appears, showing the
+                        currently defined NTP servers and their IP addresses.</p>
+                    <fig id="fig_t3s_4mz_5p" ixia_locid="36">
+                        <image href="jow1413850406811.image" id="image_kll_h4z_5p" ixia_locid="53">
+                            <alt ixia_locid="54">NTP page</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10070_N10028_N1001C_N10001" ixia_locid="39">
+                <cmd ixia_locid="40">Click <uicontrol ixia_locid="41">Edit NTP</uicontrol>.</cmd>
+                <stepresult ixia_locid="42">
+                    <p ixia_locid="43">The <wintitle ixia_locid="44">Edit NTP</wintitle> dialog box
+                        appears.</p>
+                    <fig id="fig_tmw_qnz_5p" ixia_locid="45">
+                        <image href="jow1413850437240.image" id="image_vcx_j4z_5p" ixia_locid="55">
+                            <alt ixia_locid="56">Edit NTP dialog</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N1009A_N10028_N1001C_N10001" ixia_locid="48">
+                <cmd ixia_locid="49">Replace the NTP Server IP addresses or names with different
+                    ones as required.</cmd>
+                <info ixia_locid="161">
+                    <p ixia_locid="162">If you specify the NTP servers using FQDNs, you must have at
+                        least one valid DNS server defined on your system. You must use IP addresses
+                        otherwise.</p>
+                </info>
+            </step>
+            <step conref="jow1451997330805.xml#jow1451997330805/step_save_change" id="step_N100C9_N10043_N1001E_N10001" ixia_locid="165">
+                <cmd ixia_locid="166"/>
+            </step>
+            <step conref="jow1451997330805.xml#jow1451997330805/step_clear_config_out_of_date_alarms" id="step_N100D2_N10043_N1001E_N10001" ixia_locid="167">
+                <cmd ixia_locid="168"/>
+            </step>
+            <step conref="jow1451997330805.xml#jow1451997330805/step_confirm_alarms_cleared" id="step_N100DB_N10043_N1001E_N10001" ixia_locid="169">
+                <cmd ixia_locid="170"/>
+            </step>
+        </steps>
+    </taskbody>
+</task-wr>

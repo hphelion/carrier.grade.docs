@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task-wr PUBLIC "-//WindRiver.com//DTD DITA 1.2 Wind River General Task//EN" "task-wr.dtd">
+<task-wr id="nxm1473601269565" xml:lang="en-us">
+<!-- Modification History
+        
+-->
+    <title ixia_locid="1">Adding an SDN Controller</title>
+    <shortdesc ixia_locid="2">On a system configured for software-defined networking (SDN), you can
+        add SDN controllers from the web administration interface.</shortdesc>
+    <prolog>
+        <author ixia_locid="3">Jim Owens</author>
+    </prolog>
+    <taskbody>
+        <context id="context_N10022_N1001F_N10001" ixia_locid="357">
+            <p ixia_locid="358">At least one configured SDN controller is required before you can unlock compute
+                nodes. </p>
+        </context>
+        <prereq id="prereq_N10022_N1001F_N10001" ixia_locid="309">
+            <p ixia_locid="310"><draft-comment author="jowens" ixia_locid="359">US84057 new topic</draft-comment>This
+                feature is available only if SDN support is configured at installation using the
+                Configuration Controller Script.</p>
+        </prereq>
+        <steps>
+            <step id="step_N1002E_N1002B_N1001F_N10001" ixia_locid="311">
+                <cmd ixia_locid="307">On the System Configuration page, select the <wintitle ixia_locid="137">System Controllers</wintitle> tab.</cmd>
+                <info ixia_locid="308">
+                    <note id="note_N1003F_N1003B_N1002E_N1002B_N1001F_N10001" ixia_locid="312">
+                        <p ixia_locid="313"> This tab is shown only on systems configured for
+                            SDN.</p>
+                    </note>
+                    <p ixia_locid="314">The <wintitle ixia_locid="30">System
+                            Configuration</wintitle> pane is available from <menucascade ixia_locid="360">
+                            <uicontrol ixia_locid="361">Admin</uicontrol>
+                            <uicontrol ixia_locid="362">Platform</uicontrol>
+                            <uicontrol ixia_locid="363">System Configuration</uicontrol>
+                        </menucascade> in the left-hand pane.</p>
+                </info>
+                <stepresult ixia_locid="315">
+                    <fig id="fig_pwt_35r_gx" ixia_locid="316">
+                        <image href="kzs1473688593141.image" id="image_rcn_1vr_gx" ixia_locid="317">
+                            <alt ixia_locid="318">SDN Controllers list (empty)</alt>
+                        </image>
+                    </fig>
+                </stepresult>
+            </step>
+            <step id="step_N10074_N1002B_N1001F_N10001" ixia_locid="319">
+                <cmd ixia_locid="320">Click <uicontrol ixia_locid="321">Create SDN Controller</uicontrol>.</cmd>
+                <stepresult ixia_locid="322">
+                    <p ixia_locid="323">The <wintitle ixia_locid="324">Create an SDN Controller</wintitle> dialog box appears.</p>
+                </stepresult>
+            </step>
+            <step id="step_N1008D_N1002B_N1001F_N10001" ixia_locid="325">
+                <cmd ixia_locid="326">Specify basic information for this SDN controller.</cmd>
+                <info ixia_locid="327">
+                    <fig id="fig_i5l_kvr_gx" ixia_locid="328">
+                        <image href="usp1473688829334.image" id="image_ojc_lvr_gx" ixia_locid="329">
+                            <alt ixia_locid="330">Create an SDN Controller dialog box</alt>
+                        </image>
+                    </fig>
+                    <dl>
+                        <dlentry ixia_locid="331">
+                            <dt ixia_locid="332">SDN Controller Host</dt>
+                            <dd ixia_locid="333">
+                                <p ixia_locid="334">the IP address of the SDN controller</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="335">
+                            <dt ixia_locid="336">SDN Controller Port #</dt>
+                            <dd ixia_locid="337">
+                                <p ixia_locid="338">the port to use for SDN control communications</p>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="339">
+                            <dt ixia_locid="340">SDN Control channel transport mode</dt>
+                            <dd ixia_locid="341">
+                                <p ixia_locid="342">the transport type to use for communications
+                                        (<option ixia_locid="343">TCP</option>, <option ixia_locid="344">UDP</option>, or
+                                        <option ixia_locid="345">TLS</option>)</p>
+                                <note id="note_N10108_N100F0_N100E7_N100BC_N100A5_N1009B_N1002D_N1001F_N10001" ixia_locid="355">
+                                    <p ixia_locid="356">TLS is not currently supported.</p>
+                                </note>
+                            </dd>
+                        </dlentry>
+                        <dlentry ixia_locid="346">
+                            <dt ixia_locid="347">SDN Controller administrative state</dt>
+                            <dd ixia_locid="348">
+                                <p ixia_locid="349">the availability of the SDN controller for administrative control
+                                    from Titanium Server (enabled or disabled)</p>
+                            </dd>
+                        </dlentry>
+                    </dl>
+                </info>
+            </step>
+            <step id="step_N100FA_N1002B_N1001F_N10001" ixia_locid="350">
+                <cmd ixia_locid="351">Click <uicontrol ixia_locid="352">Create Controller</uicontrol>.</cmd>
+            </step>
+        </steps>
+        <result id="result_N10103_N1001F_N10001" ixia_locid="353">
+            <p ixia_locid="354">The SDN controller is added to the list of SDN controllers available to Titanium
+                Server.</p>
+        </result>
+        <postreq id="postreq_N10039_N1001B_N10001" ixia_locid="9">
+            <p ixia_locid="10">You must configure a connection to the SDN controller separately. See
+                    <xref href="fcq1473601345370.xml" ixia_locid="11"/>.</p>
+        </postreq>
+    </taskbody>
+</task-wr>
