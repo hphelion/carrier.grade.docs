@@ -67,28 +67,28 @@
       <p>Helion OpenStack 4.0 offers various deployment options. You can refer to the <xref
           href="../carrier-grade-base-4.0-with-WR-index.dita#topic2685">deployment guides</xref> to
         explore more about the available options that match your requirement. With any selected
-        deployment option, it is still REQUIRED that you apply a specific branding by including a
-        Horizon Bundle during installation and configuration of controller-0.</p>
+        deployment option, it is still REQUIRED that you apply a specific Horizon Bundle ( a tarball
+        used for branding) during installation and configuration of controller-0.</p>
       <p>For more information on creating the Horizon Bundle, see the instructions in the
           <filepath>hos_theme_v1.1.tgz</filepath> in the HP Helion OpenStack Carrier Grade SDK
         tarball.</p>
       <p>This component contains instructions and examples for adding custom bundle to the Horizon
         GUI. You can modify the existing style sheet, font, and image files to develop your own
-        branding, and then apply the branding by installing a tarball that includes the modified
-        files along with a manifest.</p>
+        bundle, and then apply the bundle by installing it that includes the modified files along
+        with a manifest.</p>
       <p>The Horizon Bundle can be applied at various stages. The steps for each stage are described
         below.</p>
-      <note id="note_N1002B_N1001F_N1001C_N10001">The recommended method is to install the tarball
+      <note id="note_N1002B_N1001F_N1001C_N10001">The recommended method is to install the bundle
         before running the controller configuration script.</note>
       <ol id="ol_dqr_vtg_2y">
         <li>Log into the active controller using the CLI.</li>
-        <li>Delete any previous tarball from the <filepath>/opt/branding</filepath> directory.</li>
+        <li>Delete any previous bundle from the <filepath>/opt/branding</filepath> directory.</li>
         <li>Copy the new Horizon Bundle <b>hcg4_horizon001_patch001.tgz</b> to the
             <filepath>/opt/branding</filepath> directory. </li>
         <li>Install the bundle. <p>To install the bundle as part of initial system configuration,
             run the configuration controller script. </p><p>If you have already run the controller
             configuration script, you can install the bundle as follows:</p><ol id="ol_eqr_vtg_2y">
-            <li>Ensure that any previous tarballs are deleted from the
+            <li>Ensure that any previous bundle is deleted from the
                 <filepath>/opt/branding</filepath> directory.</li>
             <li>Ensure that the new bundle is copied to the <filepath>/opt/branding</filepath>
               directory.</li>
