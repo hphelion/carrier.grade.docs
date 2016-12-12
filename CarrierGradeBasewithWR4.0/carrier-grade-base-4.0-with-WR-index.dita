@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" ><topic xml:lang="en-us" id="topic2685">
-<title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 4.0 : Deployment Overview</title>
+<title>HPE Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 4.0 : Installation Overview</title>
 <prolog>
   <metadata>
     <othermeta name="layout" content="default"/>
@@ -18,84 +18,122 @@
       leading open source cloud computing platform.</p>
     <p>HPE Helion OpenStack Carrier Grade provides communications service providers (CSPs) with an
       open source based cloud platform that meets their demanding reliability requirements.</p>
+    <section>The following documentation has been organized to help you locate information for
+      specific types of activities, such as installation, administration, operations, and VNF
+      integration. It further provides guidelines and rules to assist the cloud architects,
+      installers, and administrators in deploying the HPE Helion OpenStack Carrier Grade (HCG)
+      4.0.</section>
     <section id="installing-hp-openstack-carrier-grade"><title>Installing HPE OpenStack Carrier
-        Grade</title>This section describes the process for installing HPE Helion OpenStack Carrier
-      Grade 4.0.<p>Before you perform the installation of HPE Helion OpenStack Carrier Grade 4.0,
-        please read the following important information about the HPE Helion OpenStack Carrier Grade
-        4.0 installation.</p><p>
-        <note type="important">(READ THIS FIRST)<p>This document describes various deployment
-            options available with Helion OpenStack Carrier Grade 4.0. <ul id="ul_vrv_zmn_2y">
-              <li> Irrespective of any deployment option that you select, <b>you need to apply a
-                  branding tarball for installing the cloud</b>. For more information, refer to the
-                  <xref
+        Grade 4.0</title>This section describes various installation options that are available with
+      HCG 4.0. Irrespective of any option that you select, to install HCG 4.0 successfully, you need
+      to perform three important steps. Failure to follow these recommendations will likely
+      compromise reliability and performance:<p>
+        <note type="important">(READ THIS FIRST)<p>
+            <ul id="ul_vrv_zmn_2y">
+              <li><b>STEP 1</b> - Download the installation packages.</li>
+              <li><b>STEP 2 - </b><b>You need to apply a Horizon Bundle for installing the
+                cloud</b>. For more information on STEP 1 and STEP 2, refer to the <xref
                   href="CGHRelNotes/HPE-Helion-Open-Stack-Carrier-Grade-4.0-cloud-installation.dita#topic_gs1_2hg_2y/custom-branding"
                   >cloud installation</xref> section. </li>
-              <li>Follow the deployment guides:<p>HPE Helion OpenStack Carrier Grade 4.0installation
-                  for cpe systems.pdf</p><p> HPE Helion OpenStack Carrier Grade 4.0 installation for
-                  systems with controller storage.pdf</p><p> HPE Helion OpenStack Carrier Grade
-                  4.0installation for systems with dedicated storage.pdf</p><p>HPE Helion OpenStack
-                  Carrier Grade 4.0 for regions.pdf</p><p>HPE Helion OpenStack Carrier Grade 4.0
-                  software defined networking.pdf</p></li>
-              <li>Learn more about what's new in this release by referring to the release notes (HPE
-                Helion OpenStack Carrier Grade 4.0 release notes.pdf).</li>
-            </ul></p></note>
+              <li><b>STEP 3</b> - To complete the installation, follow the instructions in the
+                installation guides given below:<ul id="ul_hxz_hpc_fy">
+                  <li><p><b>HPE Helion OpenStack Carrier Grade 4.0 installation for CPE
+                      systems</b></p>This document provides information and instructions for
+                    installing and configuring HCG 4.0 server for CPE systems (Customer Premises
+                    Equipment). CPE is intended for small applications only. It runs on two physical
+                    nodes. Each node provides both the controller and compute functions.
+                        <p><b>Reference Link </b>- HPE Helion OpenStack Carrier Grade 4.0
+                      installation for cpe systems.pdf</p></li>
+                  <li><p><b>HPE Helion OpenStack Carrier Grade 4.0 installation for systems with
+                        controller storage</b></p><p>This document provides information and
+                      instructions for installing HCG 4.0 server configurations for controller
+                      storage systems that are initially deployed using LVM-backed block storage on
+                      controller nodes. The server uses two controller nodes and (n) compute nodes
+                      (minimum two recommended for redundancy). Persistent storage for VMs is
+                      implemented on the controller nodes. </p><b>Reference Link </b>- HPE Helion
+                    OpenStack Carrier Grade 4.0 installation for systems with controller
+                    storage.pdf</li>
+                  <li>
+                    <p><b>HPE Helion OpenStack Carrier Grade 4.0 installation for systems with
+                        dedicated storage</b></p>
+                    <p>This document provides information and instructions for installing and
+                      configuring HCG 4.0 for dedicated storage systems that uses two controller
+                      nodes, (n) compute nodes, and a storage cluster consisting of up to eight
+                      storage nodes (paired for redundancy). Persistent storage for VMs is
+                      implemented on the storage cluster, offering greater scalability. </p>
+                    <p><b>Reference Link </b>- HPE Helion OpenStack Carrier Grade 4.0 installation
+                      for systems with dedicated storage.pdf</p>
+                  </li>
+                  <li>
+                    <p><b>HPE Helion OpenStack Carrier Grade 4.0 for regions</b></p>
+                    <p>This document provides installation and configuration information for
+                      deploying HCG 4.0 Server in any of the supported Regions configurations. </p>
+                    <p><b>Reference Link </b>- HPE Helion OpenStack Carrier Grade 4.0 for
+                      regions.pdf</p>
+                  </li>
+                </ul></li>
+            </ul>
+          </p></note>
       </p></section>
     <section id="learnabout">
       <title>Learning about HPE Helion OpenStack Carrier Grade</title>
       <p>Use the following links to review some high-level overview information about HPE Helion
-        OpenStack Carrier Grade:</p>
+        OpenStack Carrier Grade 4.0:</p>
       <ul>
+        <li><b>HPE Helion OpenStack Carrier Grade 4.0 release notes</b><p>This document provides a
+            brief summary of new features in the current release, as well as information about known
+            anomalies or usage caveats.</p><p><b>Reference Link</b> - HPE Helion OpenStack Carrier
+            Grade 4.0 release notes.pdf</p></li>
+        <li><b>HPE Helion OpenStack Carrier Grade 4.0 introduction</b><p>This document gives an
+            introduction to HCG 4.0 Server and provides an overview of system capabilities,
+            information on planning, and recommended workflows. </p><p><b>Reference Link</b> - HPE
+            Helion OpenStack Carrier Grade 4.0 introduction.pdf</p></li>
         <li>
-          <p>HPE Helion OpenStack Carrier Grade 4.0 introduction.pdf</p>
+          <p><b>HPE Helion OpenStack Carrier Grade 4.0 planning</b></p>
+          <p>This document helps you plan out your HCG 4.0 Server installation, ensuring that you
+            are fully prepared once you start your installation and configuration.</p>
+          <p><b>Reference Link</b> - HPE Helion OpenStack Carrier Grade 4.0 planning.pdf </p>
         </li>
         <li>
-          <p>HPE Helion OpenStack Carrier Grade 4.0 planning.pdf </p>
-        </li>
-        <li> HPE Helion OpenStack Carrier Grade 4.0 system engineering guidelines.pdf</li>
+          <b>HPE Helion OpenStack Carrier Grade 4.0 system engineering guidelines</b><p>This
+            document provides engineering guidelines, rules, and system parameters to assist cloud
+            architects,installers, and administrators in deploying and scaling the Titanium Server
+            system to meet application specific requirements</p><b>Reference Link</b> - HPE Helion
+          OpenStack Carrier Grade 4.0 system engineering guidelines.pdf</li>
       </ul>
     </section>
-    <section id="getstart">
+    <section id="getting-started">
       <title>Getting started with HPE Helion OpenStack Carrier Grade</title>
       <p>Use the following links and tools to begin working with HPE Helion OpenStack Carrier
         Grade:</p>
-      <ul>
-        <li>
-          <p>HPE Helion OpenStack Carrier Grade 4.0 system administration.pdf</p>
-        </li>
-        <li>
-          <p>HPE Helion OpenStack Carrier Grade 4.0 cloud administration.pdf</p>
-        </li>
-        <li>
-          <p>HPE Helion OpenStack Carrier Grade 4.0 users guide.pdf</p>
-        </li>
-        <li>
-          <p>HPE Helion OpenStack Carrier Grade 4.0 vnf integration.pdf</p>
-        </li>
-        <li>
-          <p>HPE Helion OpenStack Carrier Grade 4.0 software management .pdf</p>
-        </li>
-        <li> HPE Helion OpenStack Carrier Grade 4.0 software development kit.pdf <p/><p>
-            <b>Administrator Guides </b></p> These are addressed to HPE Helion OpenStack Carrier
-          Grade administrators responsible for the following areas: <ul id="ul_dzx_pjv_2y">
-            <li>
-              <p>Creating and maintaining resources used by end users (tenants), such as virtual
-                machines, storage pools, network objects, and access credentials.</p>
-            </li>
-            <li>
-              <p>Operating and maintaining components of the HPE Helion OpenStack Carrier Grade
-                product, such as clusters, nodes, system software, licensing files, and backup and
-                restore facilities</p>
-            </li>
-          </ul> The Administer Guide also contains specific tasks, such as logging, backup/restore,
-          switch configuration, and configuring a multiple data center environment.
-            <p/><b>Operations Guide</b><p>The Operations Guide or the user guide introduces the
-            Horizon interface with specific information on how to use Horizon to operate HPE Helion
-            OpenStack Carrier Grade on a day-to-day basis. </p>
-          <b>API and SDK Reference </b><p>The API and SDK reference provides links to supported API
-            and custom OpenStack API extensions. The page also links to the HPE Helion OpenStack
-            Carrier Grade Software Development Kit (SDK) documentation.</p><p/>
-        </li>
-        
+      <ul id="ul_ixk_ml2_gy">
+        <li><p><b>HPE Helion OpenStack Carrier Grade 4.0 system administration</b></p>This document
+          provides information pertaining to ongoing administration of a HCG 4.0 Server system,
+          including information for managing the physical nodes and physical
+              networks.<p><b>Reference Link</b> - HPE Helion OpenStack Carrier Grade 4.0 system
+            administration.pdf</p></li>
+        <li><p><b>HPE Helion OpenStack Carrier Grade 4.0 cloud administration</b></p><p>This guide
+            provides information on topics that an OpenStack administrator would be responsible for,
+            except for the management of the physical nodes and physical networks, which is covered
+            in the System Administration guide. </p><b>Reference Link</b> - HPE Helion OpenStack
+          Carrier Grade 4.0 cloud administration.pdf</li>
+        <li><p><b>HPE Helion OpenStack Carrier Grade 4.0 users guide</b></p>This document provides
+          information about the operational actions that a tenant user can take. <p><b>Reference
+              Link</b> - HPE Helion OpenStack Carrier Grade 4.0 users guide.pdf</p></li>
+        <li><p><b>HPE Helion OpenStack Carrier Grade 4.0 vnf integration</b></p>This guide provides
+          information to help you integrate your VNFs into a HCG 4.0 Server system. <p><b>Reference
+              Link</b> - HPE Helion OpenStack Carrier Grade 4.0 vnf integration.pdf</p></li>
+        <li><p><b>HPE Helion OpenStack Carrier Grade 4.0 software management</b></p>This document
+          provides instructions for applying patches and software upgrades to HCG 4.0 Server hosts.
+              <p><b>Reference Link</b> - HPE Helion OpenStack Carrier Grade 4.0 software management
+            .pdf</p></li>
+        <li><b> HPE Helion OpenStack Carrier Grade 4.0 software development kit </b><p>The HCG 4.0
+            Server Software Development Kit (SDK) provides drivers, daemons, API libraries,and
+            configuration files that you can include in a guest image to leverage the extended
+            capabilities of HCG 4.0 Server.These components can be used to enhance or extend the
+            networking features of the applications and to access the virtual machine (VM)
+            management capabilities of HCG 4.0 Server.</p><p><b>Reference Link</b> - <b> </b>HPE
+            Helion OpenStack Carrier Grade 4.0 software development kit.pdf </p><p> </p></li>
       </ul>
     </section>
   </body>
