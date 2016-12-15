@@ -5,9 +5,9 @@
   <body>
     <section id="kvm-install-overview">
       <p>Start with this document for complete instructions on how to install your HPE Helion
-        OpenStack cloud, including prerequisites and cloud deployment options.</p>
+        OpenStack cloud, including prerequisites and cloud installation options.</p>
       <p>
-        <b>Step 1 : Prerequisites / Pre-Installation Checklist </b></p>
+        <b>Step 1 : Prerequisites Checklist </b></p>
       <p><xref href="#topic_gs1_2hg_2y/packages" format="dita">Downloading the installation packages
         </xref></p>
       <p><b>Step 2 : </b><b>Cloud Installation</b></p>
@@ -15,15 +15,14 @@
           Bundle</xref></p>
     </section>
     <section id="packages"><title>Download the installation packages </title><p>Before you get
-        started, learn how the Helion OpenStack Carrier Grade 4.0 cloud is configured, deployed, and
-        managed in the <xref
-          href="../carrier-grade-base-4.0-with-WR-index.dita#topic2685/learnabout">Installation
-          Overview</xref> section.</p>To download the installation packages, perform the following
-        steps:<p>Launch the Software Updates and Licensing site to download the installation
-        packages:</p><p> In a browser, navigate to the <xref
-          href="http://www.hpe.com/downloads/software" format="html" scope="external">Software
-          Updates &amp; Licensing</xref> site. You must obtain a Service Agreement ID (SAID) in
-        order to download these files. </p><ol id="ul_lvg_jb2_xs">
+        started, learn how the Helion OpenStack Carrier Grade 4.0 cloud is configured, installed,
+        and managed in the <xref
+          href="../carrier-grade-base-4.0-with-WR-index.dita#topic2685/learnabout">Overview</xref>
+        section.</p>To download the installation packages, perform the following steps:<p>Launch the
+        'Software Updates and Licensing' site to download the installation packages:</p><p> In a
+        browser, navigate to the <xref href="http://www.hpe.com/downloads/software" format="html"
+          scope="external">Software Updates &amp; Licensing</xref> site. You must obtain a Service
+        Agreement ID (SAID) in order to download these files. </p><ol id="ul_lvg_jb2_xs">
         <li>Click <b>Sign In</b> to log in using your account. <p><image
               href="../../media/carrier.grade.docs/CGH-2-install-download-patches.png" width="200"
               id="image_jvd_q55_qv"/></p></li>
@@ -36,10 +35,15 @@
               updates</b>.<p><image
               href="../../media/carrier.grade.docs/2.1/CGH-21-install-download-patches-select.png"
               width="400" id="image_i2v_wcm_2w"/></p></li>
-        <li>On the product list page, locate the product version and then click <b>Get
-          Software</b>corresponding to it.<p><image href="../Images/HCG-WR-get-software-patch-final-draft-1.png" width="700" id="image_q4w_b2m_2w"/></p></li>
+        <li>On the product list page, locate the required product version and then click <b>Get
+            Software</b>corresponding to it. (The image below is shown as an example). <p><image
+              href="../Images/HCG-WR-get-software-patch-final-draft-1.png" width="700"
+              id="image_q4w_b2m_2w"/></p></li>
         <li>Select the required file <b>Helion OpenStack Carrier Grade 4.0 (Z7550-02110.iso</b>)
-          from the <b>Downloads</b> list and click <b>Download</b> to continue. <p><image href="../Images/HCG-WR-get-software-patch-final-draft-2.png" width="700" id="image_dv5_zdm_sv"/></p></li>
+          from the <b>Downloads</b> list and click <b>Download</b> to continue. (The image below is
+          shown as an example). <p><image
+              href="../Images/HCG-WR-get-software-patch-final-draft-2.png" width="700"
+              id="image_dv5_zdm_sv"/></p></li>
         <li>The file and its related contents are downloaded.</li>
         <li>When you extract the file, you will see the following files and folders dowloaded with
             it:<ul id="ul_lmq_rk5_2y">
@@ -49,29 +53,22 @@
             <li>Mandatory Patches Folder ( Contains Patch Files with MD5 File, and SIG File and
               Readme Text File)<p><image href="../Images/HCG-WR-installer-tar-file-2.png"
                   width="700" id="image_mml_zq5_2y"/></p></li>
-          </ul><note> When you download and extract an installer or a patch file from the portal,
-            you will see a MD5 file extracted along with the patch file. For validating the
-            integrity of the downloaded file, you can run the MD5 checksum verification on the
-            downloaded patch file and verify if the fingerprint ( the generated value) of the file
-            matches the version available on the server or the portal.</note></li>
+          </ul><note> When you download and extract a file from the portal, you will see a MD5 file
+            extracted along with it. For validating the integrity of the downloaded file, you can
+            run the MD5 checksum verification on the downloaded patch file and verify if the
+            fingerprint ( the generated value) of the file matches the version available on the
+            server or the portal.</note></li>
       </ol></section>
-    <section>After the download proces is complete, you now have all the required files to proceed
+    <section>After the download process is complete, you now have all the required files to proceed
       with the cloud installation below:</section>
     <section id="custom-branding">
       <title>Applying the Horizon Bundle</title>
       <p>Helion OpenStack Carrier Grade 4.0 offers various installation options. You can refer to
         the <xref href="../carrier-grade-base-4.0-with-WR-index.dita#topic2685">installation
           guides</xref> to explore more about the available options that match your requirement.
-        With any selected option, it is still REQUIRED that you apply a specific Horizon Bundle (a
-        tar file used to change the look and feel of the Horizon UI) during installation and
+        With any selected option, it is REQUIRED that you apply a specific Horizon Bundle (a tar
+        file used to change the look and feel of the Horizon UI) during installation and
         configuration of controller-0.</p>
-      <p>For more information on creating the Horizon Bundle, see the instructions in the
-          <filepath>hos_theme_v1.1.tgz</filepath> in the HP Helion OpenStack Carrier Grade SDK tar
-        file.</p>
-      <p>This component contains instructions and examples for adding a custom bundle to the Horizon
-        GUI. You can modify the existing style sheet, font, and image files to develop your own
-        bundle, and then apply the bundle by installing it, that includes the modified files along
-        with a manifest.</p>
       <p>The Horizon Bundle can be applied at various stages. The steps for each stage are described
         below.</p>
       <note id="note_N1002B_N1001F_N1001C_N10001">The recommended method is to install the bundle
@@ -79,7 +76,7 @@
       <ol id="ol_dqr_vtg_2y">
         <li>Log into the active controller using the CLI.</li>
         <li>Delete any previous bundle from the <filepath>/opt/branding</filepath> directory.</li>
-        <li>Copy the new Horizon Bundle <b>hcg4_horizon001_patch001.tgz</b> to the
+        <li>Copy the Horizon Bundle <b>hcg4_horizon001_patch001.tgz</b> to the
             <filepath>/opt/branding</filepath> directory. </li>
         <li>Install the bundle. <p>To install the bundle as part of initial system configuration,
             run the configuration controller script. </p><p>If you have already run the controller
