@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic xml:lang="en-us" id="HCG4.0_installation">
+  <title><ph conkeyref="HCG-conrefs/product-title"/>Installation</title>
+  <body>
+    <section id="installing-hp-openstack-carrier-grade">
+      <title>Installing <keyword keyref="kw-hcg-phrase"/></title>
+      <p>This section describes various installation options that are available with <keyword
+        keyref="kw-hcg-phrase"/>. Irrespective of any option that you select, to install <keyword
+          keyref="kw-hcg-phrase"/> successfully, you need to perform three important steps. Failure
+        to follow these recommendations will likely compromise reliability and performance:</p><p>
+          <note type="important">(READ THIS FIRST)<p>
+            <ul id="ul_vrv_zmn_2y">
+              <li><b>STEP 1</b> - Download the installation packages.</li>
+              <li><b>STEP 2 - </b><b>You need to apply a Horizon Bundle for installing the
+                cloud</b>. For more information on STEP 1 and STEP 2, refer to the <xref
+                  href="CGHRelNotes/HPE-Helion-Open-Stack-Carrier-Grade-4.0-cloud-installation.dita#topic_gs1_2hg_2y/custom-branding"
+                  >cloud installation</xref> section. </li>
+              <li><b>STEP 3</b> - To complete the installation, follow the instructions in the
+                installation guides given below:<ul id="ul_hxz_hpc_fy">
+                  <li><p><b><keyword keyref="kw-hcg-phrase"/> installation for CPE
+                    systems</b></p>This document provides information and instructions for
+                    installing and configuring <keyword keyref="kw-hcg-phrase"/> for CPE systems
+                    (Customer Premises Equipment). CPE is intended for small applications only. It
+                    runs on two physical nodes. Each node provides both the controller and compute
+                    functions. <p><b>Reference Link</b>- <xref
+                      href="https://docs.hpcloud.com/pdf/static/HCG/4.0/Helion_OpenStack_Carrier_Grade_4.0_installation_for_cpe_systems.pdf"
+                      scope="external" format="pdf"><keyword keyref="kw-hcg-phrase"/> installation
+                      for cpe systems</xref></p></li>
+                  <li><p><b><keyword keyref="kw-hcg-phrase"/> installation for systems with
+                    controller storage</b></p><p>This document provides information and
+                      instructions for installing <keyword keyref="kw-hcg-phrase"/> configurations
+                      for controller storage systems that are initially deployed using LVM-backed
+                      block storage on controller nodes. The uses two controller nodes and (n)
+                      compute nodes (minimum two recommended for redundancy). Persistent storage for
+                      VMs is implemented on the controller nodes.</p>
+                    <p><b>Reference Link </b>- <xref
+                      href="https://docs.hpcloud.com/pdf/static/HCG/4.0/Helion_OpenStack_Carrier_Grade_4.0_installation_for_systems_with_controller_storage.pdf"
+                      scope="external" format="pdf"><keyword keyref="kw-hcg-phrase"/> installation
+                      for systems with controller storage</xref></p></li>
+                  <li>
+                    <p><b><keyword keyref="kw-hcg-phrase"/> installation for systems with dedicated
+                      storage</b></p>
+                    <p>This document provides information and instructions for installing and
+                      configuring <keyword keyref="kw-hcg-phrase"/> for dedicated storage systems
+                      that uses two controller nodes, (n) compute nodes, and a storage cluster
+                      consisting of up to eight storage nodes (paired for redundancy). Persistent
+                      storage for VMs is implemented on the storage cluster, offering greater
+                      scalability. </p>
+                    <p><b>Reference Link </b>- <xref
+                      href="https://docs.hpcloud.com/pdf/static/HCG/4.0/Helion_OpenStack_Carrier_Grade_4.0_installation_for_systems_with_dedicated_storage.pdf"
+                      scope="external" format="pdf"><keyword keyref="kw-hcg-phrase"/> installation
+                      for systems with dedicated storage</xref></p>
+                  </li>
+                  <li>
+                    <p><b><keyword keyref="kw-hcg-phrase"/> for regions</b></p>
+                    <p>This document provides installation and configuration information for
+                      deploying <keyword keyref="kw-hcg-phrase"/> in any of the supported Regions
+                      configurations. </p>
+                    <p><b>Reference Link </b>- <xref
+                      href="https://docs.hpcloud.com/pdf/static/HCG/4.0/Helion_OpenStack_Carrier_Grade_4.0_for_regions.pdf"
+                      scope="external" format="pdf"><keyword keyref="kw-hcg-phrase"/> for
+                      regions</xref></p>
+                  </li>
+                </ul></li>
+            </ul>
+          </p></note>
+        </p>
+    </section>
+  </body>
+</topic>
