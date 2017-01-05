@@ -16,26 +16,28 @@
   <body>
     <bodydiv>
       <p><b>Patch Highlights</b></p>
-      <ul id="ul_um4_5cs_dx">
-        <li>This WR patch <codeph>[TS_HP_15_Custom_PATCH_0019.patch]</codeph> can be applied on Pre
-          or Post Cloud Deployment. </li>
+      <bodydiv>
+        <ul id="ul_twk_xzd_my">
+          <li>This KVM patch <codeph>[TS_HP_15_Custom_PATCH_0020.patch]</codeph> can be applied on
+            Pre or Post Cloud Deployment. </li>
+        </ul>
+      </bodydiv>
+      <ul id="ul_uwk_xzd_my">
+        <li>Pre Cloud Deployment means config_region is not run on the Controller-0 in the KVM
+          region. Post Cloud Deployment means the KVM region is already configured and running.</li>
+        <li>It is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies. </li>
+        <li>This WR Patch 20 addresses the following issues in KVM region:<ul id="ul_vwk_xzd_my">
+            <li> Corruption of UDP Packet reassembling when using NAT (floating IP) on TiS Virtual
+              Router. </li>
+          </ul></li>
       </ul>
-    </bodydiv>
-    <ul id="ul_tm4_5cs_dx">
-      <li>Pre Cloud Deployment means config_region is not run on the Controller-0 in the KVM region.
-        Post Cloud Deployment means the KVM region is already configured and running.</li>
-      <li>It is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies. </li>
-      <li>This WR Patch 19 addresses the following issues in KVM region:<ul id="ul_mt1_zw4_3x">
-          <li> High latency/downtime seen during live migration of VMs using virtio. </li>
-          <li>VMs go to an error state and the iSCSI initiator/credentials did not match.</li>
-        </ul></li>
-    </ul>
-    <bodydiv>
-      <note type="caution">Do not install patch from Horizon. Install ONLY from CLI. The nodes go to
-        unstable state if patch is installed from Horizon and the nodes have to be recovered during
-        that time. </note>
-      <note> You can use the CLI on the active KVM controller: <codeph>sudo sw-patch query</codeph>
-        to see if the patch has been deployed properly.</note>
+      <bodydiv>
+        <note type="caution">Do not install patch from Horizon. Install ONLY from CLI. The nodes go
+          to unstable state if patch is installed from Horizon and the nodes have to be recovered
+          during that time. </note>
+        <note> You can use the CLI on the active KVM controller: <codeph>sudo sw-patch
+            query</codeph> to see if the patch has been deployed properly.</note>
+      </bodydiv>
     </bodydiv>
       <section>
       <title>Prerequisites</title>
@@ -82,6 +84,8 @@
               (<codeph>HCG 2.0 WR017 Patch042)</codeph></xref></li>
         <li><xref href="CGH-2-patches-wr-018-043.dita#topic10581pdpkvm530">KVM Custom Patch 18
               (<codeph>HCG 2.0 WR018 Patch043)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-019-044.dita#topic10581pdpkvm530">KVM Custom Patch 19
+              (<codeph>HCG 2.0 WR019 Patch044)</codeph></xref></li>
       </ul>
     </section>
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
@@ -90,7 +94,7 @@
         <b>Start the patch download</b></p>
       <ol id="ol_eyd_y4m_pw">
         <li>Select the required patch file (e.g.<b
-            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/044"
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/045"
           />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
               href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
               width="400" id="image_wdr_yxz_pw"/></p></li>
@@ -117,16 +121,16 @@
           <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
           <li>Copy the patch file to the <codeph>/tmp/patches</codeph> directory: <ul
               id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0019.patch</codeph></li>
+              <li><codeph>TS_HP_15_Custom_PATCH_0020.patch</codeph></li>
             </ul></li>
           <li>Execute the following command to upload the patch to the database:
-            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0019.patch </codeblock></li>
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0020.patch </codeblock></li>
           <li>Execute the following command to check if the patch is available for
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
                 id="image_tft_ncg_x5"/></p></li>
           <li>Execute the following command to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0019
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0020
 [The patch state of the patch will be in "Partial-Apply" state]</codeblock></li>
           <li>Execute the following command to check the current state of all the
             hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Now "Patch Current" state of the
@@ -165,7 +169,7 @@
             <codeblock>system host-patch-reboot compute-1</codeblock></li>
           <li>Repeat the previous step for each compute node that participates in the cloud. <p>
               <note>Use the <codeph>sudo sw-patch query-hosts</codeph> command to check if all the
-                nodes are unlocked and the <b>patch 19</b> is in <codeph>Applied</codeph> state.
+                nodes are unlocked and the <b>patch 20</b> is in <codeph>Applied</codeph> state.
               </note>
             </p></li>
         </ol></section>
