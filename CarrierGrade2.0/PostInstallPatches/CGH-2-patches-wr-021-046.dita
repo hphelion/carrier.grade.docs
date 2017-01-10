@@ -2,7 +2,7 @@
 <!DOCTYPE topic
   PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
 <topic xml:lang="en-us" id="topic10581pdpkvm530">
-  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 20 </title>
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 21 </title>
   <prolog>
     <metadata>
       <othermeta name="layout" content="default"/>
@@ -18,7 +18,7 @@
       <p><b>Patch Highlights</b></p>
       <bodydiv>
         <ul id="ul_twk_xzd_my">
-          <li>This KVM patch <codeph>[TS_HP_15_Custom_PATCH_0020.patch]</codeph> can be applied on
+          <li>This KVM patch <codeph>[TS_HP_15_Custom_PATCH_0021.patch]</codeph> can be applied on
             Pre or Post Cloud Deployment. </li>
         </ul>
       </bodydiv>
@@ -26,9 +26,9 @@
         <li>Pre Cloud Deployment means config_region is not run on the Controller-0 in the KVM
           region. Post Cloud Deployment means the KVM region is already configured and running.</li>
         <li>It is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies. </li>
-        <li>This WR Patch 20 addresses the following issues in KVM region:<ul id="ul_vwk_xzd_my">
-            <li> Corruption of UDP Packet reassembling when using NAT (floating IP) on TiS Virtual
-              Router. </li>
+        <li>This WR Patch 21 addresses the following issues in KVM region:<ul id="ul_vwk_xzd_my">
+            <li> Port RCU kernel enhancements from 15.12 to 15.09 for increased performance. </li>
+            <li>BL460c Gen9 Broadwell compute nodes crash after unlock. </li>
           </ul></li>
       </ul>
       <bodydiv>
@@ -42,7 +42,7 @@
       <section>
       <title>Prerequisites</title>
       <ol id="ol_u4x_xvx_2x">
-        <li> This patch requires the previous 19 KVM patches to be applied. If you are installing
+        <li> This patch requires the previous 20 KVM patches to be applied. If you are installing
           all the KVM patches for the first time, load all the patches in sequence by following the
           steps provided below.</li>
       </ol>
@@ -86,6 +86,8 @@
               (<codeph>HCG 2.0 WR018 Patch043)</codeph></xref></li>
         <li><xref href="CGH-2-patches-wr-019-044.dita#topic10581pdpkvm530">KVM Custom Patch 19
               (<codeph>HCG 2.0 WR019 Patch044)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-020-045.dita#topic10581pdpkvm530">KVM Custom Patch 20
+              (<codeph>HCG 2.0 WR020 Patch045)</codeph></xref></li>
       </ul>
     </section>
     <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
@@ -94,12 +96,12 @@
         <b>Start the patch download</b></p>
       <ol id="ol_eyd_y4m_pw">
         <li>Select the required patch file (e.g.<b
-            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/045"
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/046"
           />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
               href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
               width="400" id="image_wdr_yxz_pw"/></p></li>
         <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
-            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0020.patch</codeph> and readme
+            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0021.patch</codeph> and readme
           files are available.<note>The tar files specified under <b>Download filename</b>on the
               <b>Software Licensing</b> site are listed separately for HCG_2.0 and HCG_2.1 versions
             but when downloaded and extracted both the versions refer to a common tar file in the
@@ -121,16 +123,16 @@
           <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
           <li>Copy the patch file to the <codeph>/tmp/patches</codeph> directory: <ul
               id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0020.patch</codeph></li>
+              <li><codeph>TS_HP_15_Custom_PATCH_0021.patch</codeph></li>
             </ul></li>
           <li>Execute the following command to upload the patch to the database:
-            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0020.patch </codeblock></li>
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0021.patch </codeblock></li>
           <li>Execute the following command to check if the patch is available for
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
                 id="image_tft_ncg_x5"/></p></li>
           <li>Execute the following command to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0020
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0021
 [The patch state of the patch will be in "Partial-Apply" state]</codeblock></li>
           <li>Execute the following command to check the current state of all the
             hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Now "Patch Current" state of the
@@ -169,8 +171,7 @@
             <codeblock>system host-patch-reboot compute-1</codeblock></li>
           <li>Repeat the previous step for each compute node that participates in the cloud. <p>
               <note>Use the <codeph>sudo sw-patch query-hosts</codeph> command to check if all the
-                nodes are unlocked and the <b>patch 20</b> is in <codeph>Applied</codeph> state.
-              </note>
+                nodes are unlocked and the <b>patch 21</b> is in <codeph>Applied</codeph> state. </note>
             </p></li>
         </ol></section>
     </bodydiv>
