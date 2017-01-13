@@ -151,10 +151,9 @@ ifconfig eth0 up</codeblock></li>
               </tbody>
             </tgroup>
           </table><p>
-            <note type="caution">Do not install KVM<b> patch 14-15, patch 16 </b>, <b>patch 17</b> ,
-                <b>patch 18</b>, and <b>patch 19</b> from Horizon. Install ONLY from CLI. The nodes
-              go to unstable state if patch is installed from Horizon and the nodes have to be
-              recovered during that time. </note>
+            <note type="caution">There is a recent recommendation that you should not install KVM
+              patches from Horizon. Install ONLY from CLI. The nodes go to unstable state if patch
+              is installed from Horizon and the nodes have to be recovered during that time. </note>
           </p></li>
         <li>After downloading the <b>.tar.gz</b> files, ensure the associated patch files with
             <b>.patch</b> extension are extracted from it.<p>An example of how to use 'tar' command
@@ -171,8 +170,9 @@ ifconfig eth0 up</codeblock></li>
             added to the database.</p></li>
         <li>Execute the following command to load all registered patches into the patch
           repository:<codeblock>sudo sw-patch apply --all</codeblock></li>
-        <li>The output from this command will be displayed as the following:
-          <codeblock>root@localhost:~# sw-patch apply --all 
+        <li>The output from this command will be displayed as the following: <note>As you install
+            more patches in future, the list below in the system is also
+          updated.</note><codeblock>root@localhost:~# sw-patch apply --all 
             TS_HP_15_Custom_PATCH_0001 is now in the repo 
             TS_HP_15_Custom_PATCH_0002 is now in the repo
             TS_HP_15_Custom_PATCH_0003 is now in the repo
@@ -193,7 +193,7 @@ ifconfig eth0 up</codeblock></li>
             is complete</i> message. This will take few minutes and you will be prompted for
           reboot.</li>
         <li>Reboot the controller:<codeblock>sudo reboot</codeblock></li>
-        <li>Continue setting up controller-0 and the rest of the cloud as normal.<p/></li>
+        <li>Continue setting up controller-0 and the rest of the cloud as normal.</li>
       </ol></section>
     <section id="cloud">
       <title>Step 3: Configure the KVM Region cloud</title>
