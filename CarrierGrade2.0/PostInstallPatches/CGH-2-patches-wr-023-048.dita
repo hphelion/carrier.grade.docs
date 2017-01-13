@@ -104,7 +104,7 @@
               href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
               width="400" id="image_wdr_yxz_pw"/></p></li>
         <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
-            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0022.patch</codeph> and readme
+            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0023.patch</codeph> and readme
           files are available.<note>The tar files specified under <b>Download filename</b>on the
               <b>Software Licensing</b> site are listed separately for HCG_2.0 and HCG_2.1 versions
             but when downloaded and extracted both the versions refer to a common tar file in the
@@ -126,16 +126,16 @@
           <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
           <li>Copy the patch file to the <codeph>/tmp/patches</codeph> directory: <ul
               id="ul_ald_spz_35">
-              <li><codeph>TS_HP_15_Custom_PATCH_0022.patch</codeph></li>
+              <li><codeph>TS_HP_15_Custom_PATCH_0023.patch</codeph></li>
             </ul></li>
           <li>Execute the following command to upload the patch to the database:
-            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0022.patch </codeblock></li>
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0023.patch </codeblock></li>
           <li>Execute the following command to check if the patch is available for
               installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
                 href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
                 id="image_tft_ncg_x5"/></p></li>
           <li>Execute the following command to apply the
-            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0022
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0023
 [The patch state of the patch will be in "Partial-Apply" state]</codeblock></li>
           <li>Execute the following command to check the current state of all the
             hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Now "Patch Current" state of the
@@ -174,7 +174,7 @@
             <codeblock>system host-patch-reboot compute-1</codeblock></li>
           <li>Repeat the previous step for each compute node that participates in the cloud. <p>
               <note>Use the <codeph>sudo sw-patch query-hosts</codeph> command to check if all the
-                nodes are unlocked and the <b>patch 22</b> is in <codeph>Applied</codeph> state. </note>
+                nodes are unlocked and the <b>patch 23</b> is in <codeph>Applied</codeph> state. </note>
             </p></li>
         </ol></section>
     </bodydiv>
