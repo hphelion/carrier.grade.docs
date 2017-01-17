@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//OASIS//DTD DITA Topic//EN" "http://docs.oasis-open.org/dita/v1.1/OS/dtd/topic.dtd" >
+<topic xml:lang="en-us" id="topic10581pdpkvm530">
+  <title>HP Helion <tm tmtype="reg">OpenStack</tm> Carrier Grade 2.0: Deploy the KVM Region Patch 24 </title>
+  <prolog>
+    <metadata>
+      <othermeta name="layout" content="default"/>
+      <othermeta name="product-version" content="HP Helion OpenStack Carreir Grade 1.1"/>
+      <othermeta name="role" content="Storage Administrator"/>
+      <othermeta name="role" content="Storage Architect"/>
+      <othermeta name="role" content="Michael B"/>
+      <othermeta name="product-version1" content="HP Helion OpenStack Carreir Grade 1.1"/>
+    </metadata>
+  </prolog>
+  <body>
+    <bodydiv>
+      <bodydiv>
+        <p><b>Patch Highlights</b></p>
+        <ul id="ul_jfd_4lx_4y">
+          <li>This KVM patch <codeph>[TS_HP_15_Custom_PATCH_0024.patch]</codeph> can be applied on
+            Pre or Post Cloud Deployment. </li>
+        </ul>
+      </bodydiv>
+      <ul id="ul_kfd_4lx_4y">
+        <li>Pre Cloud Deployment means config_region is not run on the Controller-0 in the KVM
+          region. Post Cloud Deployment means the KVM region is already configured and running.</li>
+        <li>It is applicable for Denver, Tahoe, Memphis and Sacramento cloud topologies. </li>
+        <li>This WR Patch 24 addresses the following issues in KVM region:<ul id="ul_lfd_4lx_4y">
+            <li>VM Crash: bdrv_error_action: Assertion 'error >= 0' [ Problem can be seen only in
+              very rare Race conditions ].</li>
+            <li>Avs-agent frequently going down - Too many open files.</li>
+          </ul></li>
+      </ul>
+      <bodydiv>
+        <note type="caution">Do not install patch from Horizon. Install ONLY from CLI. The nodes go
+          to unstable state if patch is installed from Horizon and the nodes have to be recovered
+          during that time. </note>
+        <note> You can use the CLI on the active KVM controller: <codeph>sudo sw-patch
+            query</codeph> to see if the patch has been deployed properly.</note>
+      </bodydiv>
+    </bodydiv>
+      <section>
+      <title>Prerequisites</title>
+      <ol id="ol_u4x_xvx_2x">
+        <li> This patch requires the previous 23 KVM patches to be applied. If you are installing
+          all the KVM patches for the first time, load all the patches in sequence by following the
+          steps provided below.</li>
+      </ol>
+      <ul id="ul_cqr_spt_jv">
+        <li><xref href="CGH-2-patches-kvm-custom.dita#topic10581pdpk">KVM Region Custom Patch
+              (<codeph>HCG 2.0 WR002 Patch005</codeph>)</xref>
+        </li>
+        <li><xref href="CGH-2-patches-pci-bus.dita#topic10581pdpp">PCI Bus Patch (<codeph>HCG 2.0
+              WR003 Patch007</codeph>)</xref>
+        </li>
+        <li><xref href="CGH-2-patches-wr-3-017.dita#topic10581pdpkvm3">KVM Custom Patch 3
+              (<codeph>HCG 2.0 WR004 Patch017</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-4-019.dita#topic10581pdpkvm4">KVM Custom Patch 4
+              (<codeph>HCG 2.0 WR005 Patch019</codeph>)</xref>
+        </li>
+        <li><xref href="CGH-2-patches-wr-5-025.dita#topic10581pdpkvm5">KVM Custom Patch 5
+              (<codeph>HCG 2.0 WR006 Patch025</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-7-027.dita#topic10581pdpkvm7">KVM Custom Patch 6
+              (<codeph>HCG 2.0 WR007 Patch027</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-8-029.dita#topic10581pdpkvm8">KVM Custom Patch 7
+              (<codeph>HCG 2.0 WR008 Patch029</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-9-030.dita#topic10581pdpkvm530">KVM Custom Patch 8
+              (<codeph>HCG 2.0 WR009 Patch030</codeph>)</xref></li>
+        <li><xref href="CGH-2-patches-wr-10-032.dita#topic10581pdpkvm530">KVM Custom Patch 9
+              (<codeph>HCG 2.0 WR010 Patch032)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-11-033.dita#topic10581pdpkvm530">KVM Custom Patch 10
+              (<codeph>HCG 2.0 WR011 Patch033)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-12-035.dita#topic10581pdpkvm530">KVM Custom Patch 11
+              (<codeph>HCG 2.0 WR012 Patch035)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-13-036.dita#topic10581pdpkvm530">KVM Custom Patch 12
+              (<codeph>HCG 2.0 WR013 Patch036)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-14-038.dita">KVM Custom Patch 13 (<codeph>HCG 2.0 WR014
+              Patch038)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-014_wr-015-040.dita#topic10581pdpkvm530">KVM Custom Patch
+            14-15 (<codeph>HCG 2.0 WR014_WR015 Patch040)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-016-041.dita#topic10581pdpkvm530">KVM Custom Patch 16
+              (<codeph>HCG 2.0 WR016 Patch041)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-017-042.dita#topic10581pdpkvm530">KVM Custom Patch 17
+              (<codeph>HCG 2.0 WR017 Patch042)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-018-043.dita#topic10581pdpkvm530">KVM Custom Patch 18
+              (<codeph>HCG 2.0 WR018 Patch043)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-019-044.dita#topic10581pdpkvm530">KVM Custom Patch 19
+              (<codeph>HCG 2.0 WR019 Patch044)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-020-045.dita#topic10581pdpkvm530">KVM Custom Patch 20
+              (<codeph>HCG 2.0 WR020 Patch045)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-021-046.dita" format="xml">KVM Custom Patch 21 (<codeph>HCG
+              2.0 WR021 Patch046)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-022-047.dita" format="xml">KVM Custom Patch 22 (<codeph>HCG
+              2.0 WR022 Patch047)</codeph></xref></li>
+        <li><xref href="CGH-2-patches-wr-023-048.dita" format="xml">KVM Custom Patch 23 (<codeph>HCG
+              2.0 WR023 Patch048)</codeph></xref></li>
+      </ul>
+    </section>
+    <section conref="CGH-2-post-install-patching.dita#topic10581pdp/launch"/>
+    <section>
+      <p>
+        <b>Start the patch download</b></p>
+      <ol id="ol_eyd_y4m_pw">
+        <li>Select the required patch file (e.g.<b
+            conref="../Installation/prereqs/carrier-grade-install-download.dita#topic7148cgid/049"
+          />) from the <b>Downloads</b> list and then click <b>Download</b>. <p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-1.png"
+              width="400" id="image_wdr_yxz_pw"/></p></li>
+        <li>Un-tar the downladed files (compressed patch files with extension <b>tar.gz</b> and
+            <b>.tar</b>) until the <codeph>TS_HP_15_Custom_PATCH_0024.patch</codeph> and readme
+          files are available.<note>The tar files specified under <b>Download filename</b>on the
+              <b>Software Licensing</b> site are listed separately for HCG_2.0 and HCG_2.1 versions
+            but when downloaded and extracted both the versions refer to a common tar file in the
+            readme. </note></li>
+        <li>Check if the MD5 checksum verification file is extracted along with the patch
+              file.<p><image
+              href="../../media/carrier.grade.docs/CGH-2-software-licensing-patches-select-2.png"
+              width="400" id="image_w3v_zj5_pw"/></p><note>For validating the integrity of the
+            downloaded file, you can run the MD5 checksum verification on the downloaded patch file
+            and verify if the fingerprint of the file matches the version available on the
+            server.</note></li>
+      </ol>
+    </section>
+    <bodydiv id="install">
+      <section><title>Install the patch</title><p><b>Patch the standby controller</b></p><ol
+          id="ol_bcm_yg4_j5">
+          <li>SSH into active controller in the KVM region. <p>For example:
+                <codeph>controller-0</codeph> (active controller).</p></li>
+          <li>Create a directory for the patch:<codeblock>mkdir -p /tmp/patches</codeblock></li>
+          <li>Copy the patch file to the <codeph>/tmp/patches</codeph> directory: <ul
+              id="ul_ald_spz_35">
+              <li><codeph>TS_HP_15_Custom_PATCH_0024.patch</codeph></li>
+            </ul></li>
+          <li>Execute the following command to upload the patch to the database:
+            <codeblock>sudo sw-patch upload /tmp/patches/TS_HP_15_Custom_PATCH_0024.patch </codeblock></li>
+          <li>Execute the following command to check if the patch is available for
+              installation:<codeblock>sudo sw-patch query</codeblock><p>For example:</p><p><image
+                href="../../media/carrier.grade.docs/CGH-2-patch17-qry.ptch-avail.png" width="500"
+                id="image_tft_ncg_x5"/></p></li>
+          <li>Execute the following command to apply the
+            patch:<codeblock>sudo sw-patch apply TS_HP_15_Custom_PATCH_0024
+[The patch state of the patch will be in "Partial-Apply" state]</codeblock></li>
+          <li>Execute the following command to check the current state of all the
+            hosts:<codeblock>sudo sw-patch query-hosts</codeblock>Now "Patch Current" state of the
+            nodes will be seen as "<b>No</b>" and "Reboot Required" as "<b>Yes</b>". For
+                example:<p><image href="../../media/carrier.grade.docs/CGH-2-patch17-qry-host.png"
+                id="image_j4z_gyf_x5" width="500"/></p></li>
+          <li>Execute the following command to source the <codeph>openrc</codeph>
+            file:<codeblock>source /etc/nova/openrc or sudo -i</codeblock></li>
+          <li>Execute the following command to patch and reboot the standby controller:
+              <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+                <codeph>controller-1</codeph> is the standby controller and
+                <codeph>controller-0</codeph> is the active
+              controller:</p><codeblock>system host-patch-reboot controller-1</codeblock><p>Wait
+              until the standby controller node comes up after patching and is in <b>Available</b>
+              state. This can be verified using<codeph> system host-list</codeph> command. </p></li>
+          <li>Execute the following command to switch the active controller from the specified
+            controller: <codeblock>system host-swact controller-# </codeblock><p>For example, if the
+              active controller is
+              <codeph>controller-0</codeph>:<codeblock>system host-swact controller-0</codeblock></p><p>This
+              command makes <codeph>controller-1</codeph> the active controller and makes
+                <codeph>controller-0</codeph> the standby.</p></li>
+          <li>Exit the SSH session. </li>
+        </ol><b>Patch the new standby controller</b><p>Log onto the newly active controller and
+          patch the standby controller.</p><ol id="ol_ovz_4s4_j5">
+          <li>SSH into the newly active controller. <p>For example:
+              <codeph>controller-1</codeph>.</p></li>
+          <li>Execute the following command: <codeblock>source /etc/nova/openrc</codeblock></li>
+          <li>Execute the following command to patch and reboot the standby controller:
+              <codeblock>system host-patch-reboot &lt;controller-#></codeblock><p>For example if
+                <codeph>controller-0</codeph> is the standby
+            controller:</p><codeblock>system host-patch-reboot controller-0</codeblock></li>
+        </ol><p><b>Patch the compute nodes</b></p><ol id="ol_urk_5qz_3w">
+          <li>Execute the following command to patch and reboot the <codeph>compute-0</codeph>:
+            <codeblock>system host-patch-reboot compute-0</codeblock></li>
+          <li>Execute the following command to patch and reboot <codeph>compute-1</codeph>:
+            <codeblock>system host-patch-reboot compute-1</codeblock></li>
+          <li>Repeat the previous step for each compute node that participates in the cloud. <p>
+              <note>Use the <codeph>sudo sw-patch query-hosts</codeph> command to check if all the
+                nodes are unlocked and the <b>patch 24</b> is in <codeph>Applied</codeph> state. </note>
+            </p></li>
+        </ol></section>
+    </bodydiv>
+    <section>
+      <title>Next Step</title>
+      <p><xref href="CGH-2-post-install-patching.dita#topic10581pdp/kvm">Return to Post-Installation
+          Patches</xref></p>
+    </section>
+    
+      
+  </body>
+</topic>
