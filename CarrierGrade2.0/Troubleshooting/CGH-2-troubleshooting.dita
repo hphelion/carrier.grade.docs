@@ -17,6 +17,7 @@
     <p>This topic describes all the known issues that you might encounter:</p>
     <section>
       <ul id="ul_xzh_nmc_mt">
+        <li><xref href="#topic10581c2t/Logstash" format="dita">Logstash Issue</xref></li>
         <li><xref href="#topic10581c2t/Ejabberd" format="dita">Ejabberd service failed</xref></li>
         <li><xref href="#topic10581c2t/launching" format="dita">Launching an image failed and error
             message displayed </xref>
@@ -41,6 +42,48 @@
       <p>Also see <xref href="CGH-2-troubleshooting-install.dita#topic10581c2ti">Installation
           Troubleshooting</xref>. </p>
     </section>
+    <section id= "Logstash">
+      <title> Logstash Issue </title>
+      <p><b>System Behavior/Message</b></p>
+    
+        <p>Unable to log into horizon, Keystone service goes down or glance image upload timed out.
+        </p>
+      
+      <p><b>Cause </b>
+      </p>
+        <p>HOS controller consumes 100% utilized disk space from unusual amount of indices
+            <codeph>in /var/lib/elasticsearch</codeph>. </p>
+      
+      <p><b>Resolution</b></p>
+    
+        <p>Change DAYS parameter to DAYS=3 <codeph>in /var/lib/hlm/elastic_cleanup.sh</codeph> and
+          run manually. This deletes the indices that are older than 3 days old, also ensure the
+          Host IP is correct.<note>This returns the system to a healthy state. Ensure to
+            troubleshoot the logs for potential issues before running
+              <codeph>elastic_cleanup.sh</codeph>.</note></p>
+      
+      <codeblock>root@BASE-CCP-T1-M3-NETCLM:~# cat /var/lib/hlm/elastic_cleanup.sh
+        #!/bin/bash
+        1.ElasticSearch API host
+        HOST=http://10.6.1.11:9201
+        1.Days the indicates you want to keep
+        #DAYS=8
+        DAYS=3
+        
+        eHOST=$(echo $HOST | sed "s/\//\\\\\//g")
+        
+        msg=$(curl "$HOST/_cat/indices?v" 2>/dev/null | \
+        awk 'NR>1 
+        {print $2} 
+        ' | \
+        sort -r | \
+        sed -ne "$DAYS,\$ s/^/$eHOST\//p" | \
+        xargs curl -XDELETE 2>&amp;1);
+        
+        if printf – '%s' "$msg" | egrep -q – "curl: no URL specified!"; \
+        then echo "no files to cleanup!"; \
+        else echo "$msg"; fi;</codeblock> </section>
+    
         
     <section id="Ejabberd"><title>Ejabberd service failed</title><p><b>System
         Behavior/Message</b></p><p>Ejabberd service failed after running for sometime or during the
